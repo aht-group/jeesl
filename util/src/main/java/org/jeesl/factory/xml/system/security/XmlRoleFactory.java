@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.system.security;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -17,8 +18,6 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.model.xml.system.security.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription, 
 							C extends JeeslSecurityCategory<L,D>,

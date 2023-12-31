@@ -3,6 +3,7 @@ package org.jeesl.util.db.updater;
 import java.util.List;
 import java.util.Objects;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -16,8 +17,6 @@ import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class JeeslDbGraphicUpdater <G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<?,?,GT,G>>
 {

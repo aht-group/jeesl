@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
@@ -25,8 +26,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.label.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class EjbLabelEntityFactory<L extends JeeslLang,D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,

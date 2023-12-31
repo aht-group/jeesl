@@ -11,6 +11,7 @@ import java.util.Map;
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.lang3.StringUtils;
 import org.exlp.util.io.JsonUtil;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.processor.JobCodeProcessor;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
@@ -54,8 +55,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDescription,
 											CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,

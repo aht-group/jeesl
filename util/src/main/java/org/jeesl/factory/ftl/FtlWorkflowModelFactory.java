@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
 import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowStageNotification;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowDocument;
 import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowProcess;
@@ -15,8 +16,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class FtlWorkflowModelFactory <L extends JeeslLang, D extends JeeslDescription,
 										WP extends JeeslWorkflowProcess<L,D,?,WS>,

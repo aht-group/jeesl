@@ -13,6 +13,7 @@ import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.api.rest.i.io.JeeslIoMavenRestInterface;
 import org.jeesl.controller.handler.io.log.LoggedExit;
@@ -55,8 +56,6 @@ import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 
 public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface

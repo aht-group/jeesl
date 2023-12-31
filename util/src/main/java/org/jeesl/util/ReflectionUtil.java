@@ -20,9 +20,8 @@ import javax.persistence.Table;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.exlp.util.io.StringUtil;
 
 @Named
 public class ReflectionUtil

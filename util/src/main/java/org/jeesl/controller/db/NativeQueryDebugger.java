@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.commons.dbutils.DbUtils;
+import org.exlp.util.io.StringUtil;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class NativeQueryDebugger
 {

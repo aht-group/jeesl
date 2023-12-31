@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
@@ -33,7 +34,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 import net.sf.exlp.util.io.ObjectIO;
-import net.sf.exlp.util.io.StringUtil;
 
 public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 										R extends JeeslSecurityRole<?,?,C,V,U,A>,

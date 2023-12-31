@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.exception.jsf.JeeslSessionInitialisationException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class JeeslSessionContextHandler <CTX extends JeeslSecurityContext<?,?>>
 {

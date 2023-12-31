@@ -11,6 +11,7 @@
 	<composite:interface>
 		<composite:attribute name="bean" required="false" default="#{adminIoReportBean}"/>
 		<composite:attribute name="localeKeys" required="false" default="#{appTranslationBean.langKeys}"/>
+		<composite:attribute name="locales" required="false" default="#{appLabelBean.locales}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -65,7 +66,7 @@
 						<p:outputLabel value="#{msg.jeeslIoReportXmlExample}"/>
 						<p:inputText autocomplete="off" value="#{cc.attrs.bean.report.xmlExample}" />
 					</p:panelGrid>
-					<aht:tabTranslationEditor value="#{cc.attrs.bean.report}" withDescription="true" keys="#{cc.attrs.localeKeys}" />
+					<j:tabTranslationEditor value="#{cc.attrs.bean.report}" withDescription="true" locales="#{cc.attrs.locales}" />
 				</p:panel>
 			</h:form>
 		</j:slot>
@@ -114,7 +115,7 @@
 							<f:selectItems value="#{cc.attrs.bean.implementations}" var="i" itemLabel="#{i.name[userBean.localeCode].lang}" itemValue="#{i}"/>
 						</p:selectOneMenu>
 					</p:panelGrid>
-					<aht:tabTranslationEditor value="#{cc.attrs.bean.sheet}" withDescription="true" keys="#{cc.attrs.localeKeys}" />
+					<j:tabTranslationEditor value="#{cc.attrs.bean.sheet}" withDescription="true" locales="#{cc.attrs.locales}" />
 				</p:panel>
 			</h:form>
 		</j:slot>
@@ -169,7 +170,7 @@
 							<f:selectItems value="#{cc.attrs.bean.styles}" var="i" itemLabel="#{i.name[userBean.localeCode].lang}" itemValue="#{i}"/>
 						</p:selectOneMenu>
 					</p:panelGrid>
-					<aht:tabTranslationEditor value="#{cc.attrs.bean.group}" withDescription="true" keys="#{cc.attrs.localeKeys}" />
+					<j:tabTranslationEditor value="#{cc.attrs.bean.group}" withDescription="true" locales="#{cc.attrs.locales}" />
 				</p:panel>
 			</h:form>
 		</j:slot>
@@ -250,7 +251,7 @@
 						
 					</p:panelGrid>
 					<p:panelGrid id="pgColumnData" columns="2" columnClasses="jeeslGrid50,jeeslGrid50">
-						<aht:tabTranslationEditor value="#{cc.attrs.bean.column}" withDescription="true" keys="#{cc.attrs.localeKeys}" />
+						<j:tabTranslationEditor value="#{cc.attrs.bean.column}" withDescription="true" locales="#{cc.attrs.locales}" />
 						
 						<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 							<p:panelGrid id="pgWidth" columns="3" columnClasses="jeeslGrid40,jeeslGrid40,jeeslGrid20">
@@ -361,8 +362,8 @@
 						<p:inputText value="#{cc.attrs.bean.row.queryCell}"/>
 					</p:panelGrid>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60" >
-						<aht:tabTranslationEditor value="#{cc.attrs.bean.row}" withDescription="true"
-							labelTranslation="#{msg.Name}" labelDescription="#{msg.Description}" keys="#{cc.attrs.localeKeys}" />
+						<j:tabTranslationEditor value="#{cc.attrs.bean.row}" withDescription="true"
+							labelTranslation="#{msg.Name}" labelDescription="#{msg.Description}" locales="#{cc.attrs.locales}" />
 						<p:panelGrid id="pgType" columns="2" columnClasses="jeeslGrid40,jeeslGrid60" rendered="#{cc.attrs.bean.row.type.code ne 'jrxml'}">
 							<p:outputLabel value="#{msg.jeeslIoReportOffsetRows}"/>
 							<p:inputText value="#{cc.attrs.bean.row.offsetRows}"/>

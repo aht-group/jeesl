@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.cache.JeeslCmsCacheBean;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
@@ -60,7 +61,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-import net.sf.exlp.util.io.StringUtil;
 
 public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										CAT extends JeeslIoCmsCategory<L,D,CAT,?>,

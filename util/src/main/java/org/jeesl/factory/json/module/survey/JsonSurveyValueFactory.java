@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
@@ -12,8 +13,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.module.survey.JsonSurveyValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class JsonSurveyValueFactory
 {

@@ -2,6 +2,7 @@ package org.jeesl.web.mbean.prototype.system.locale;
 
 import java.io.Serializable;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
@@ -53,7 +54,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
-import net.sf.exlp.util.io.StringUtil;
 
 public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,

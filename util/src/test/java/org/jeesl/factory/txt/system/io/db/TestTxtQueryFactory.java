@@ -1,6 +1,7 @@
 package org.jeesl.factory.txt.system.io.db;
 
 import org.jeesl.JeeslBootstrap;
+import org.jeesl.factory.txt.io.db.TxtSqlQueryFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

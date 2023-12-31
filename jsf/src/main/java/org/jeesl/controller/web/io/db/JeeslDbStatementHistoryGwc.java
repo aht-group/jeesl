@@ -16,7 +16,7 @@ import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementGroupFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementGroupFactory;
-import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
+import org.jeesl.factory.txt.io.db.TxtSqlQueryFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.web.io.db.JeeslIoDbStatementHistoryCallback;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;

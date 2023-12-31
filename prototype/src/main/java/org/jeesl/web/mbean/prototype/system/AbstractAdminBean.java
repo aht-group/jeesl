@@ -2,6 +2,7 @@ package org.jeesl.web.mbean.prototype.system;
 
 import java.io.Serializable;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
@@ -15,8 +16,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>> implements Serializable
 {
@@ -75,17 +74,6 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription,
 		
 		localeCodes = EjbCodeFactory.toListCode(lp.getLocales()).toArray(new String[lp.getLocales().size()]);
 	}
-	
-//	@Deprecated //Use initJeeslAdmin instead
-//	private void initAdmin(String[] langs, final Class<L> cL, final Class<D> cD, JeeslFacesMessageBean bMessage)
-//	{
-//		this.localeCodes=langs;
-//		this.langs=langs;
-//		this.bMessage=bMessage;
-//		
-//		efLang = EjbLangFactory.instance(cL);
-//		efDescription = EjbDescriptionFactory.instance(cD);
-//	}
 	
 	//Security Handling
 	protected boolean uiAllowAdd; public boolean isUiAllowAdd() {return uiAllowAdd;}

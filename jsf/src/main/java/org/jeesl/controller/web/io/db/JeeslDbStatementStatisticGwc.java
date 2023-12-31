@@ -14,7 +14,7 @@ import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
-import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
+import org.jeesl.factory.txt.io.db.TxtSqlQueryFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementColumn;

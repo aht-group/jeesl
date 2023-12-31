@@ -1,4 +1,4 @@
-package org.jeesl.factory.txt.system.io.db;
+package org.jeesl.factory.txt.io.db;
 
 import java.util.ArrayList;
 import java.util.HashSet;

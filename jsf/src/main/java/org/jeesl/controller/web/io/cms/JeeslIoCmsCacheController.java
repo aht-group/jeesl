@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.cache.JeeslCmsCacheBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.controller.provider.GenericLocaleProvider;
@@ -32,7 +33,6 @@ import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslIoCmsCacheController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,

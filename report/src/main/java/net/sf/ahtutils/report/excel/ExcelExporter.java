@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.factory.xls.system.io.report.XlsRowFactory;
 import org.jeesl.factory.xls.system.io.report.XlsSheetFactory;
 import org.jeesl.model.xml.io.locale.status.Lang;
@@ -39,7 +40,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
-import net.sf.exlp.util.io.StringUtil;
 
 @Deprecated // Use JeeslExcelDomainExporter
 public class ExcelExporter

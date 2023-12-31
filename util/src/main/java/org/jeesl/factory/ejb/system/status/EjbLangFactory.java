@@ -73,6 +73,17 @@ public class EjbLangFactory<L extends JeeslLang> implements Serializable
 		}
 		return map;
 	}
+	
+	public <LOC extends JeeslLocale<L,?,LOC,?>> Map<String,L> build(JeeslLocaleProvider<LOC> lp)
+	{
+		Map<String,L> map = new HashMap<String,L>();
+		logger.info("build Map<String,L> for "+lp.getLocales().size());
+		for(LOC loc : lp.getLocales())
+		{
+			map.put(loc.getCode(), this.createLang(loc.getCode(),""));
+		}
+		return map;
+	}
 
 	public <LOC extends JeeslLocale<L,?,LOC,?>> Map<String,L> buildEmpty(List<LOC> locales)
 	{

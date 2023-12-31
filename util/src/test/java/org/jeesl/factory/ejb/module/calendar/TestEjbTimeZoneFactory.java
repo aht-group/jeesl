@@ -7,6 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.processor.TimeZoneProcessor;
@@ -16,8 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class TestEjbTimeZoneFactory extends AbstractJeeslUtilTest
 {

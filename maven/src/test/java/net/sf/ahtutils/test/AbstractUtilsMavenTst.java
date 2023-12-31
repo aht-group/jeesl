@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractUtilsMavenTst
@@ -71,11 +71,11 @@ public class AbstractUtilsMavenTst
 		{
 			FileUtils.copyFile(fActual, fExpected);
 			logger.info("*********************");
-			System.out.println(StringIO.loadTxt(fActual));
+			System.out.println(StringUtil.readFile(fActual));
 		}
 		
-		String expected = StringIO.loadTxt(fExpected);
-		String actual = StringIO.loadTxt(fActual);
+		String expected = StringUtil.readFile(fExpected);
+		String actual = StringUtil.readFile(fActual);
 		Assertions.assertEquals("Texts are different",expected, actual);
 	}
 	

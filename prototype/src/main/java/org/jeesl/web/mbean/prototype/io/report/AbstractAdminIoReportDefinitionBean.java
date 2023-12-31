@@ -32,6 +32,7 @@ import org.jeesl.factory.xml.system.io.report.XmlReportFactory;
 import org.jeesl.factory.xml.system.io.report.XmlReportsFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -156,9 +157,10 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	}
 	
 	protected void postConstructReportDefinition(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport,
-												JeeslFacade fRest,JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage)
+												JeeslFacade fRest,
+												JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage)
 	{
-		super.initSuperReport(bTranslation,bMessage,fReport);
+		super.initSuperReport(lp,bMessage,fReport);
 		this.fRest=fRest;
 		
 		efReport = fbReport.report();
@@ -302,8 +304,8 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassSheet()));}
 		sheet = efSheet.build(report.getWorkbook());
-		sheet.setName(efLang.createEmpty(localeCodes));
-		sheet.setDescription(efDescription.createEmpty(localeCodes));
+		sheet.setName(efLang.build(lp));
+		sheet.setDescription(efDescription.build(lp));
 		uiHelper.check(sheet);
 		reset(false,false,true,true,true);
 	}
@@ -377,8 +379,8 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassGroup()));}
 		group = efGroup.build(sheet,groups);
-		group.setName(efLang.createEmpty(localeCodes));
-		group.setDescription(efDescription.createEmpty(localeCodes));
+		group.setName(efLang.build(lp));
+		group.setDescription(efDescription.build(lp));
 		reset(false,false,true,false,true);
 		uiHelper.check(group);
 	}
@@ -447,8 +449,8 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassColumn()));}
 		column = efColumn.build(group,columns);
-		column.setName(efLang.createEmpty(localeCodes));
-		column.setDescription(efDescription.createEmpty(localeCodes));
+		column.setName(efLang.build(lp));
+		column.setDescription(efDescription.build(lp));
 	}
 	
 	public void selectColumn()
@@ -526,8 +528,8 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassRow()));}
 		row = efRow.build(sheet);
-		row.setName(efLang.createEmpty(localeCodes));
-		row.setDescription(efDescription.createEmpty(localeCodes));
+		row.setName(efLang.build(lp));
+		row.setDescription(efDescription.build(lp));
 		reset(false,false,false,true,true);
 	}
 	

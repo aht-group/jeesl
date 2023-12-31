@@ -116,6 +116,18 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 		return map;
 	}
 	
+	public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> build(JeeslLocaleProvider<LOC> lp)
+	{
+		Map<String,D> map = new HashMap<String,D>();
+		logger.info("build Map<String,L> for "+lp.getLocales().size());
+		for(LOC loc : lp.getLocales())
+		{
+			try {map.put(loc.getCode(), this.create(loc.getCode(),""));}
+			catch (JeeslConstraintViolationException e) {e.printStackTrace();}
+		}
+		return map;
+	}
+	
 	public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> buildEmpty(List<LOC> locales)
 	{
 		return createEmpty(TxtStatusFactory.toCodes(locales).toArray(new String[0]));

@@ -21,6 +21,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.factory.builder.system.ReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
@@ -56,7 +57,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,

@@ -2,11 +2,10 @@ package org.jeesl.factory.txt.system.locale;
 
 import java.util.Map;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class TxtLangsFactory
 {

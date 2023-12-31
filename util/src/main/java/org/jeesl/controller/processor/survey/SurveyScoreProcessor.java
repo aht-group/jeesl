@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyQuestionFactory;
@@ -14,8 +15,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.util.filter.ejb.module.survey.EjbSurveyAnswerFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class SurveyScoreProcessor <SECTION extends JeeslSurveySection<?,?,?,SECTION,QUESTION>,
 									QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,?,?,?,?>,

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.commons.io.FileUtils;
+import org.exlp.util.io.StringUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -122,7 +123,7 @@ public class AbstractUtilsDocTest
 	
 	private void assertText(File fExpected, String actual)
 	{
-		String expected = StringIO.loadTxt(fExpected);		
+		String expected = StringUtil.readFile(fExpected);		
 		Assertions.assertEquals("Texts are different",expected, actual);
 	}
 	
@@ -131,11 +132,11 @@ public class AbstractUtilsDocTest
 		if(saveReference)
 		{
 			FileUtils.copyFile(fActual, fExpected);
-			System.out.println(StringIO.loadTxt(fActual));
+			System.out.println(StringUtil.readFile(fActual));
 		}
 		
-		String expected = StringIO.loadTxt(fExpected);
-		String actual = StringIO.loadTxt(fActual);
+		String expected = StringUtil.readFile(fExpected);
+		String actual = StringUtil.readFile(fActual);
 		Assertions.assertEquals("Texts are different",expected, actual);
 	}
 	

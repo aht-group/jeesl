@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
+import org.exlp.util.io.StringUtil;
 import org.jeesl.JeeslUtilTestBootstrap;
 import org.junit.After;
 import org.junit.Assert;
@@ -71,7 +72,7 @@ public class TestSignedRequestFactory extends AbstractFileProcessingTest
 	{
 		setRefFile("txt",dstDirNameDec);
 		logger.debug(fTest.getAbsolutePath());
-		String inRaw = StringIO.loadTxt(fTest);
+		String inRaw = StringUtil.readFile(fTest);
 		srf.decode(inRaw);
 		String testPayload = srf.getTxtPayload();
 		if(saveReference)
@@ -80,7 +81,7 @@ public class TestSignedRequestFactory extends AbstractFileProcessingTest
 		}
 		else
 		{
-			String refPayload = StringIO.loadTxt(fRef);
+			String refPayload = StringUtil.readFile(fRef);
 			Assert.assertEquals(refPayload.trim(),testPayload.trim());
 		}	
 	}
@@ -92,7 +93,7 @@ public class TestSignedRequestFactory extends AbstractFileProcessingTest
 	{
 		setRefFile("xml",dstDirNameReq);
 		logger.debug(fTest.getAbsolutePath());
-		String inRaw = StringIO.loadTxt(fTest);
+		String inRaw = StringUtil.readFile(fTest);
 		SignedRequest actual = srf.decode(inRaw);
 		if(saveReference)
 		{
