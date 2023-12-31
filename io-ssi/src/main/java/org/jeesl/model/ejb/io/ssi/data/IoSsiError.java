@@ -67,13 +67,13 @@ public class IoSsiError implements JeeslIoSsiError<IoLang,IoDescription,IoSsiCon
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 
+	@Override public boolean equals(Object object){return (object instanceof IoSsiError) ? id == ((IoSsiError) object).getId() : (object == this);}
+	@Override public int hashCode() {return new HashCodeBuilder(21,43).append(id).toHashCode();}
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}
-
-	@Override public boolean equals(Object object){return (object instanceof IoSsiError) ? id == ((IoSsiError) object).getId() : (object == this);}
-	@Override public int hashCode() {return new HashCodeBuilder(21,43).append(id).toHashCode();}
 }
