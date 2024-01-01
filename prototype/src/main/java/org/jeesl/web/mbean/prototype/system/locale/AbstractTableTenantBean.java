@@ -6,7 +6,7 @@ import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
-import org.jeesl.controller.provider.GenericLocaleProvider;
+import org.jeesl.controller.provider.ListLocaleProvider;
 import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -104,7 +104,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		this.fGraphic=fGraphic;
 		this.realm=realm;
 
-		lp = new GenericLocaleProvider<>(bTranslation.getLocales());
+		lp = new ListLocaleProvider<>(bTranslation.getLocales());
 		graphicTypes = fGraphic.allOrderedPositionVisible(fbSvg.getClassGraphicType());
 		graphicStyles = fGraphic.allOrderedPositionVisible(fbSvg.getClassFigureStyle());
 	}

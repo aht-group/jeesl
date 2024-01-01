@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.jeesl.api.bean.cache.JeeslHelpCacheBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
-import org.jeesl.controller.provider.GenericLocaleProvider;
+import org.jeesl.controller.provider.ListLocaleProvider;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
@@ -107,7 +107,7 @@ public abstract class AbstractHelpCacheBean <L extends JeeslLang,D extends Jeesl
 				try
 				{
 					LOC locale = fCms.fByCode(fbCms.getClassLocale(), localeCode);
-					GenericLocaleProvider<LOC> lp = new GenericLocaleProvider<>();
+					ListLocaleProvider<LOC> lp = new ListLocaleProvider<>();
 					lp.setLocales(Arrays.asList(locale));
 					
 					S eSection = help.getSection();

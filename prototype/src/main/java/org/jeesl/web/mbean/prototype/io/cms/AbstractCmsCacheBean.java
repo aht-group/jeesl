@@ -10,7 +10,7 @@ import java.util.Map;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.cache.JeeslCmsCacheBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
-import org.jeesl.controller.provider.GenericLocaleProvider;
+import org.jeesl.controller.provider.ListLocaleProvider;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.interfaces.controller.JeeslCmsRenderer;
@@ -127,7 +127,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 				try
 				{
 					LOC locale = fCms.fByCode(fbCms.getClassLocale(), localeCode);
-					GenericLocaleProvider<LOC> lp = new GenericLocaleProvider<LOC>();
+					ListLocaleProvider<LOC> lp = new ListLocaleProvider<LOC>();
 					lp.setLocales(Arrays.asList(locale));
 					
 					ofxSection = ofx.build(lp,localeCode,section);
@@ -156,7 +156,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 			try
 			{
 				LOC locale = fCms.fByCode(fbCms.getClassLocale(), localeCode);
-				GenericLocaleProvider<LOC> lp = new GenericLocaleProvider<>();
+				ListLocaleProvider<LOC> lp = new ListLocaleProvider<>();
 				lp.setLocales(Arrays.asList(locale));
 
 				return ofx.build(lp,localeCode,element);

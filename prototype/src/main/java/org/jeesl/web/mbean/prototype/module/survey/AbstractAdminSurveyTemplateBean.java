@@ -13,7 +13,7 @@ import org.jeesl.api.facade.module.survey.JeeslSurveyAnalysisFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.controller.handler.ui.helper.UiHelperSurvey;
-import org.jeesl.controller.provider.GenericLocaleProvider;
+import org.jeesl.controller.provider.ListLocaleProvider;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -491,7 +491,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void selectOption()
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(option));}
-		GenericLocaleProvider<LOC> lp = GenericLocaleProvider.instance(sbhLocale.getList());
+		ListLocaleProvider<LOC> lp = ListLocaleProvider.instance(sbhLocale.getList());
 		option = efLang.persistMissingLangs(fCore, lp, option);
 		option = efDescription.persistMissingLangs(fCore, sbhLocale.getList(), option);
 	}

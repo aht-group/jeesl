@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
@@ -30,12 +31,14 @@ public class EjbMarkupFactory<LOC extends JeeslLocale<?,?,LOC,?>,
     {
         return new EjbMarkupFactory<>(cM);
     }
-    private EjbMarkupFactory(final Class<M> cM)
+    protected EjbMarkupFactory(final Class<M> cM)
     {
         this.cM = cM;
     }
 
     public Map<String,M> build(LOC locale, MT type) {return this.build(Arrays.asList(locale), type);}
+    
+    public Map<String,M> build(JeeslLocaleProvider<LOC> lp, MT type) {return this.build(lp.getLocales(), type);}
 	public Map<String,M> build(List<LOC> locales, MT type)
 	{
 		Map<String,M> map = new HashMap<>();
@@ -47,7 +50,7 @@ public class EjbMarkupFactory<LOC extends JeeslLocale<?,?,LOC,?>,
 		return map;
 	}
 	
-	private M single(LOC loc, MT type)
+	protected M single(LOC loc, MT type)
 	{
 		M markup = null;
 		try
