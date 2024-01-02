@@ -5,8 +5,8 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.jeesl.controller.db.shell.mysql.MySqlShellCommands;
-import org.jeesl.controller.db.shell.postgres.PostgreSqlShellCommands;
+import org.jeesl.controller.io.db.shell.mysql.MySqlShellCommands;
+import org.jeesl.controller.io.db.shell.postgres.PostgreSqlShellCommands;
 import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
 
 import net.sf.exlp.exception.ExlpUnsupportedOsException;

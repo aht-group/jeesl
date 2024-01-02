@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-import org.jeesl.controller.db.updater.JeeslDbDescriptionUpdater;
-import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbDescriptionUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbLangUpdater;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestUsecaseImport;
-import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbCodeEjbUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

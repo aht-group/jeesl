@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.io.StringUtil;
+import org.jeesl.controller.io.db.xml.UtilsDbXmlSeedUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.db.Db;
 import org.jeesl.model.xml.io.locale.status.Translations;
@@ -16,7 +17,6 @@ import org.openfuxml.renderer.latex.OfxMultiLangLatexWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.db.xml.UtilsDbXmlSeedUtil;
 import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory.Code;

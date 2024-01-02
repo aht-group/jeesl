@@ -3,12 +3,11 @@ package net.sf.ahtutils.report.revert.excel.strategies;
 import java.util.Hashtable;
 
 import org.jeesl.api.controller.ImportStrategy;
+import org.jeesl.controller.io.db.xml.UtilsIdMapper;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.util.ReflectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.db.xml.UtilsIdMapper;
 
 public class LoadByMappedNameStrategy implements ImportStrategy {
 	

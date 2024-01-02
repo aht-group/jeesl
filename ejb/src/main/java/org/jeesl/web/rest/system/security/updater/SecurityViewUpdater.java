@@ -3,7 +3,7 @@ package org.jeesl.web.rest.system.security.updater;
 import java.util.Objects;
 
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbCodeEjbUpdater;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

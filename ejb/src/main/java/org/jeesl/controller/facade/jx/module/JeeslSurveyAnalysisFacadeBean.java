@@ -17,8 +17,8 @@ import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.survey.JeeslSurveyAnalysisFacade;
 import org.jeesl.api.facade.system.JeeslJobFacade;
-import org.jeesl.controller.db.NativeQueryDebugger;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.io.db.NativeQueryDebugger;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;

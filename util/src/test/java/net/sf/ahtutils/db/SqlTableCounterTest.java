@@ -4,10 +4,9 @@ import java.io.File;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.controller.io.db.sql.SqlTableCounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.db.sql.SqlTableCounter;
 
 public class SqlTableCounterTest
 {

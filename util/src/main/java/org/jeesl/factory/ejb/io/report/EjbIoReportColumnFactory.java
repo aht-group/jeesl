@@ -8,8 +8,8 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
-import org.jeesl.controller.db.updater.JeeslDbDescriptionUpdater;
-import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbDescriptionUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbLangUpdater;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

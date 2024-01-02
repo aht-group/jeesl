@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbLangUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;

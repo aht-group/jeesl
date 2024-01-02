@@ -2,8 +2,8 @@ package org.jeesl.factory.ejb.io.report;
 
 import java.util.UUID;
 
-import org.jeesl.controller.db.updater.JeeslDbDescriptionUpdater;
-import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbDescriptionUpdater;
+import org.jeesl.controller.io.db.updater.JeeslDbLangUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.facade.JeeslFacade;
