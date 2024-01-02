@@ -26,19 +26,15 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-@Deprecated
+
 public class XmlMailSender extends AbstractMailSender
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlMailSender.class);
 	
-	private FreemarkerEngine fme;
-	
-	public XmlMailSender(String smtpHost) {this(null,smtpHost);}
-	public XmlMailSender(FreemarkerEngine fme, String smtpHost){this(fme,smtpHost,25);}
-	public XmlMailSender(FreemarkerEngine fme, String smtpHost, int smtpPort)
+	public XmlMailSender(String smtpHost) {this(smtpHost,25);}
+	public XmlMailSender(String smtpHost, int smtpPort)
 	{
 		super(smtpHost,smtpPort);
-		this.fme=fme;
 	}
 
 	public void send(Mails mails) throws MessagingException, UnsupportedEncodingException
@@ -62,83 +58,5 @@ public class XmlMailSender extends AbstractMailSender
 		mcc.buildContent(mail);
 		
 		Transport.send(msg);
-	}
-
-	public void send(Document doc) throws UnsupportedEncodingException, MessagingException, UtilsProcessingException, UtilsMailException
-	{
-		buildSession();
-		MimeMessage message = new MimeMessage(session);
-		MimeMessageCreator mmc = new MimeMessageCreator(message);
-		
-		Header header = getHeader(doc.getRootElement());
-		if(overrideOnlyTo!=null)
-		{
-			header.setBcc(null);
-			header.setCc(null);
-			header.getTo().getEmailAddress().clear();
-			header.getTo().getEmailAddress().add(overrideOnlyTo);
-		}
-		else
-		{
-			if(Objects.isNull(header.getBcc())) {header.setBcc(new Bcc());}
-			header.getBcc().getEmailAddress().addAll(alwaysBcc);
-		}
-		mmc.createHeader(header);
-		
-		Mail mail = getMailAndDetachAtt(doc.getRootElement());
-		
-		if(Objects.isNull(mail.getLang()))
-		{
-			mail.setLang("de");
-			logger.warn("No @lang is set in this mail! Setting to "+mail.getLang());
-		}
-		
-		FreemarkerMimeContentCreator mcc = new FreemarkerMimeContentCreator(message, fme);
-		mcc.createContent(doc,mail);
-		
-		connect();
-		logger.trace("SENDING ...");
-		transport.sendMessage(message, message.getAllRecipients());
-		logger.trace("SENT");
-	}
-	
-	private Header getHeader(Element root) throws UtilsProcessingException
-	{
-		logger.trace("Parsing header");
-		for(Object o: root.getContent())
-		{
-			Element e = (Element)o;
-			if(e.getName().equals("header"))
-			{
-				logger.warn("This should be avaoided, see UTILS-200");
-				return JDomUtil.toJaxb(e, Header.class);
-			}
-		}
-		Element mail = root.getChild("mail", nsMail);
-		if(mail!=null)
-		{
-			Element header = mail.getChild("header", nsMail);
-			if(header!=null){return JDomUtil.toJaxb(header, Header.class);}
-		}
-		logger.info(mail.toString());
-		throw new UtilsProcessingException("No <header> (or <mail><header/></mail>) Element found");
-	}
-	
-	private Mail getMailAndDetachAtt(Element root) throws UtilsProcessingException
-	{
-		logger.trace("Parsing Mail");
-		for(Content content: root.getContent())
-		{
-			Element e = (Element)content;
-			if(e.getName().equals("mail"))
-			{
-//				for(Element att : e.getChildren("attachment", nsMail))
-				{
-		//			att.detach();
-				}
-				return JDomUtil.toJaxb(e, Mail.class);
-			}
-		}
-		throw new UtilsProcessingException("No <mail> Element found");
 	}
 }

@@ -63,7 +63,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 		Multipart mpAlternative = new MimeMultipart("alternative");
 		mpAlternative.addBodyPart(buildTxt(mail));	   
 	    
-	    if(ObjectUtils.isEmpty(mail.getAttachment())&& ObjectUtils.isEmpty(mail.getImage()))
+	    if(ObjectUtils.isEmpty(mail.getAttachment()) && ObjectUtils.isEmpty(mail.getImage()))
 	    {
 	    	message.setContent(mpAlternative);
 	    }
