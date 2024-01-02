@@ -1,4 +1,4 @@
-package org.jeesl.mail.msg;
+package org.jeesl.controller.io.mail.msg;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;

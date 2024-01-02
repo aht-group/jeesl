@@ -17,7 +17,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
-import org.jeesl.controller.mail.AbstractSmtpSpooler;
+import org.jeesl.controller.io.mail.AbstractSmtpSpooler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

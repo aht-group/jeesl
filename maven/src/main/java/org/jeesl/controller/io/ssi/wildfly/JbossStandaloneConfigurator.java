@@ -1,7 +1,6 @@
 package org.jeesl.controller.io.ssi.wildfly;
 
 import java.io.IOException;
-import java.net.InetAddress;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.as.controller.client.ModelControllerClient;
@@ -11,21 +10,20 @@ import org.jboss.dmr.ModelNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Deprecated
 public class JbossStandaloneConfigurator
 {
 	final static Logger logger = LoggerFactory.getLogger(JbossStandaloneConfigurator.class);
 	
 	private final ModelControllerClient client;
-	private final String eapVersion;
 	
-	public JbossStandaloneConfigurator(String eapVersion, InetAddress host, int port)
-	{
-		this(eapVersion, ModelControllerClient.Factory.create(host,9990));
-	}
+//	private JbossStandaloneConfigurator(String eapVersion, InetAddress host, int port)
+//	{
+//		this(eapVersion, ModelControllerClient.Factory.create(host,9990));
+//	}
 	
 	public JbossStandaloneConfigurator(String eapVersion, ModelControllerClient client)
 	{
-		this.eapVersion=eapVersion;
 		this.client=client;
 	}
 	
@@ -245,6 +243,4 @@ public class JbossStandaloneConfigurator
 		request.get("user-name").set(username);
 		request.get("password").set(password);
 	}
-	
-	
 }

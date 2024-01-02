@@ -25,14 +25,11 @@ public class CliJbossStandaloneConfigurator
 	final static Logger logger = LoggerFactory.getLogger(CliJbossStandaloneConfigurator.class);
 	
 	ModelControllerClient client;
-	JbossStandaloneConfigurator jbossStandalone;
 	
 	public CliJbossStandaloneConfigurator() throws UnknownHostException
 	{
 		logger.info("c");
 		client = ModelControllerClient.Factory.create(InetAddress.getByName("127.0.0.1"), 9990);
-		
-		jbossStandalone = new JbossStandaloneConfigurator("7.3",client);
 	}
 	
 	public void driverExists() throws IOException
@@ -55,15 +52,6 @@ public class CliJbossStandaloneConfigurator
 		request.get("dependencies").set("javax.api,javax.transaction.api");
 	
 		client.execute(new OperationBuilder(request).build());
-		
-//		boolean postgresExists = jbossStandalone.dsExists("postgres");
-//		logger.info("dsExists: "+postgresExists);
-//		if(!postgresExists)
-//		{
-//			jbossStandalone.createPostgresDriver();
-//			logger.info("After Create: "+jbossStandalone.dsExists("postgres"));
-//		}
-//		client.close();
 	}
 	
 	public void infinispan() throws IOException, MojoExecutionException

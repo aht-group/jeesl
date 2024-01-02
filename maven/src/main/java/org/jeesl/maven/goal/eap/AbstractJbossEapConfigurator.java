@@ -111,24 +111,20 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	
     	try
     	{
-    		ModelControllerClient client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);
-    		JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,eapVersion,jbossDir);
-    		JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(eapVersion,client);
-    		
         	String key = config.getString("eap.configurations");
     	    super.getLog().info("Keys: "+key);
     	    String[] keys = key.split("-");
     	    
-    	    this.dbFiles(keys,config,jbossModule);
+    	    this.dbFiles(keys,config);
     	    this.dbDrivers(keys,config);
     	    this.dbDs(keys,config);
-    	    this.caches(keys,config,jbossConfig);
+    	    this.caches(keys,config);
     	}
     	catch (UnknownHostException e) {throw new MojoExecutionException(e.getMessage());}
     	catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
     }
     
-    protected void dbFiles(String[] keys, Configuration config, JbossModuleConfigurator jbConfigurator) throws IOException
+    protected void dbFiles(String[] keys, Configuration config) throws IOException
     {
     	logger.info("Module Configuration");
     	for(String key : keys)
@@ -136,19 +132,9 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     		String type = config.getString("db."+key+".type");
     		if(dsConfigurators.containsKey(type))
     		{
-    			dsConfigurators.get(type).addModule();;
+    			dsConfigurators.get(type).addModule();
     		}
     		else {logger.error("No Configurator for "+type);}
-    		
-//    		AbstractEapDsConfigurator.DbType dbType = AbstractEapDsConfigurator.DbType.valueOf(config.getString("db."+key+".type"));
-//        	switch(dbType)
-//        	{
-//	        	case mariadb: if(!setFiles.contains(dbType)) {jbConfigurator.mariaDB();} break;
-//        		case mysql: if(!setFiles.contains(dbType)) {jbConfigurator.mysql();} break;
-//        		case postgresql: if(!setFiles.contains(dbType)) {jbConfigurator.postgres(); jbConfigurator.hibernate();} break;
-//        	}
-//        	log.add(dbType.toString());
-//			setFiles.add(dbType);
     	}
     }
     
@@ -179,7 +165,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	}
     }
     
-    protected void caches(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException, Exception
+    protected void caches(String[] keys, Configuration config) throws IOException, Exception
     {
     	logger.info("Cache Configuration");
     	if(Objects.nonNull(cacheConfigurator))

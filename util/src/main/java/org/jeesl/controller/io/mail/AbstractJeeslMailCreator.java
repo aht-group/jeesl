@@ -1,4 +1,4 @@
-package org.jeesl.mail;
+package org.jeesl.controller.io.mail;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.mail.EmailAddress;

@@ -1,4 +1,4 @@
-package org.jeesl.controller.mail;
+package org.jeesl.controller.io.mail;
 
 import java.util.Objects;
 
@@ -7,8 +7,8 @@ import javax.mail.MessagingException;
 import org.apache.commons.cli.Option;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
+import org.jeesl.controller.io.mail.smtp.TextMailSender;
 import org.jeesl.factory.txt.system.io.mail.core.TxtMailFactory;
-import org.jeesl.mail.smtp.TextMailSender;
 import org.jeesl.model.xml.io.mail.Attachment;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;

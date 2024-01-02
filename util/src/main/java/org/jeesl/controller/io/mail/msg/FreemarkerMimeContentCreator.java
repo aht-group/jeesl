@@ -1,4 +1,4 @@
-package org.jeesl.mail.msg;
+package org.jeesl.controller.io.mail.msg;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jdom2.Document;
-import org.jeesl.controller.mail.freemarker.FreemarkerEngine;
+import org.jeesl.controller.io.mail.freemarker.FreemarkerEngine;
 import org.jeesl.exception.processing.UtilsMailException;
 import org.jeesl.model.xml.io.mail.Attachment;
 import org.jeesl.model.xml.io.mail.Image;

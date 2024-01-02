@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoTemplateFacade;
-import org.jeesl.controller.mail.AbstractJeeslMail;
+import org.jeesl.controller.io.mail.AbstractJeeslMail;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.builder.io.IoTemplateFactoryBuilder;
 import org.jeesl.factory.txt.system.security.TxtUserFactory;

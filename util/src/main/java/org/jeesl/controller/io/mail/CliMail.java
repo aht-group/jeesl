@@ -1,4 +1,4 @@
-package org.jeesl.mail;
+package org.jeesl.controller.io.mail;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package org.jeesl.controller.mail;
+package org.jeesl.controller.io.mail;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.api.facade.io.JeeslIoTemplateFacade;
-import org.jeesl.controller.mail.freemarker.FreemarkerIoTemplateEngine;
+import org.jeesl.controller.io.mail.freemarker.FreemarkerIoTemplateEngine;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;

@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jeesl.AbstractJeeslUtilTest;
-import org.jeesl.controller.mail.freemarker.FreemarkerEngine;
+import org.jeesl.controller.io.mail.freemarker.FreemarkerEngine;
 import org.jeesl.exception.processing.UtilsDeveloperException;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;

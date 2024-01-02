@@ -1,4 +1,4 @@
-package org.jeesl.mail.imap;
+package org.jeesl.controller.io.mail.imap;
 
 import java.util.Properties;
 

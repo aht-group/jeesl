@@ -9,14 +9,14 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.JeeslBootstrap;
-import org.jeesl.controller.mail.freemarker.FreemarkerEngine;
+import org.jeesl.controller.io.mail.freemarker.FreemarkerEngine;
+import org.jeesl.controller.io.mail.smtp.XmlMailSender;
 import org.jeesl.exception.processing.UtilsMailException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.xml.io.mail.XmlAttachmentFactory;
 import org.jeesl.factory.xml.io.mail.XmlHeaderFactory;
 import org.jeesl.factory.xml.io.mail.XmlMailFactory;
 import org.jeesl.factory.xml.system.util.text.XmlExampleFactory;
-import org.jeesl.mail.smtp.XmlMailSender;
 import org.jeesl.model.xml.io.mail.Header;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;

@@ -1,4 +1,4 @@
-package org.jeesl.mail.smtp;
+package org.jeesl.controller.io.mail.smtp;
 
 import java.io.UnsupportedEncodingException;
 
@@ -6,8 +6,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.jeesl.mail.msg.MimeMessageCreator;
-import org.jeesl.mail.msg.XmlMimeContentCreator;
+import org.jeesl.controller.io.mail.msg.MimeMessageCreator;
+import org.jeesl.controller.io.mail.msg.XmlMimeContentCreator;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

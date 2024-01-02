@@ -1,4 +1,4 @@
-package org.jeesl.mail.smtp;
+package org.jeesl.controller.io.mail.smtp;
 
 import java.util.ArrayList;
 import java.util.List;

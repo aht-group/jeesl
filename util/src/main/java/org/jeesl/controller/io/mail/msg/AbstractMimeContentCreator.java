@@ -1,4 +1,4 @@
-package org.jeesl.mail.msg;
+package org.jeesl.controller.io.mail.msg;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

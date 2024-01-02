@@ -1,4 +1,4 @@
-package org.jeesl.mail.smtp;
+package org.jeesl.controller.io.mail.smtp;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Objects;
@@ -11,12 +11,12 @@ import javax.mail.internet.MimeMessage;
 import org.jdom2.Content;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jeesl.controller.mail.freemarker.FreemarkerEngine;
+import org.jeesl.controller.io.mail.freemarker.FreemarkerEngine;
+import org.jeesl.controller.io.mail.msg.FreemarkerMimeContentCreator;
+import org.jeesl.controller.io.mail.msg.MimeMessageCreator;
+import org.jeesl.controller.io.mail.msg.XmlMimeContentCreator;
 import org.jeesl.exception.processing.UtilsMailException;
 import org.jeesl.exception.processing.UtilsProcessingException;
-import org.jeesl.mail.msg.FreemarkerMimeContentCreator;
-import org.jeesl.mail.msg.MimeMessageCreator;
-import org.jeesl.mail.msg.XmlMimeContentCreator;
 import org.jeesl.model.xml.io.mail.Bcc;
 import org.jeesl.model.xml.io.mail.Header;
 import org.jeesl.model.xml.io.mail.Mail;
