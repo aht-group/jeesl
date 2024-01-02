@@ -494,11 +494,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		}
 		catch (ClassNotFoundException e){e.printStackTrace();}
 	}
-	
-	public Entity downloadRestJx(String code) throws UtilsConfigurationException
-	{
-		return JeeslLabelEntityController.rest(code).exportRevisionEntity(code);
-	}
 
 	public void addMapping() throws JeeslNotFoundException
 	{
