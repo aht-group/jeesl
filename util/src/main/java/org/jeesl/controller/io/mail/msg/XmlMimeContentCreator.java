@@ -25,38 +25,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 	{
 		this.message=message;
 	}
-	
-	@Deprecated public void createContent(Mail mail) throws MessagingException
-	{		
-		JaxbUtil.trace(mail);
-		Multipart mpAlternative = new MimeMultipart("alternative");
-		mpAlternative.addBodyPart(createTxt(mail));	   
-	    
-	    if(ObjectUtils.isEmpty(mail.getAttachment()) && ObjectUtils.isEmpty(mail.getImage()))
-	    {
-	    	message.setContent(mpAlternative);
-	    }
-	    else
-	    {
-	    	Multipart mixed = new MimeMultipart("mixed");
-	    	
-	        MimeBodyPart wrap = new MimeBodyPart();
-	        wrap.setContent(mpAlternative);    // HERE'S THE KEY
-	        mixed.addBodyPart(wrap);
-	       
-	        for(Attachment attachment : mail.getAttachment())
-	        {
-	        	mixed.addBodyPart(createBinary(attachment));
-	        }
-	        for(Image image : mail.getImage())
-	        {
-	        	logger.warn("Untested here");
-	        	mixed.addBodyPart(createImage(image));
-	        }
-	        message.setContent(mixed);
-	    }
-	}
-	
+
 	public void buildContent(Mail mail) throws MessagingException
 	{		
 		JaxbUtil.trace(mail);
@@ -86,22 +55,6 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 	        }
 	        message.setContent(mixed);
 	    }
-	}
-	
-	@Deprecated private MimeBodyPart createTxt(Mail mail) throws MessagingException
-	{
-		MimeBodyPart txt = new MimeBodyPart();
-	
-		if(ObjectUtils.isNotEmpty(mail.getAttachment()))
-		{
-			txt.setContent(mail.getExample()+System.lineSeparator(), "text/plain; charset=\"ISO-8859-1\"");
-		}
-		else
-		{
-			txt.setContent(mail.getExample(), "text/plain; charset=\"ISO-8859-1\"");
-		}
-		
-		return txt;
 	}
 	
 	private MimeBodyPart buildTxt(Mail mail) throws MessagingException

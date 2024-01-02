@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoTemplateFacade;
 import org.jeesl.controller.io.mail.AbstractJeeslMail;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.builder.io.IoTemplateFactoryBuilder;
 import org.jeesl.factory.txt.system.security.TxtUserFactory;
@@ -155,7 +156,7 @@ public class AbstractlIoTemplateHandler<L extends JeeslLang,D extends JeeslDescr
 		if(bean!=null)
 		{
 			try {bean.sendIoMailsFromTemplateHandler();}
-			catch (UtilsProcessingException | IOException | TemplateException e) {e.printStackTrace();}
+			catch (UtilsProcessingException | IOException | TemplateException | JeeslNotFoundException e) {e.printStackTrace();}
 		}
 	}
 }

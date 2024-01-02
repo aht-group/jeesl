@@ -19,25 +19,45 @@ public class XmlAttachmentFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlEmailAddressFactory.class);
 	
+	private static String mimePdf = "application/pdf";
+	
 	public static Attachment create(File f) throws IOException, MagicParseException, MagicMatchNotFoundException, MagicException
 	{
 		FileInputStream fis = new FileInputStream(f);
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
-		String mimeType = Magic.getMagicMatch(f, false).getMimeType();
-		return create(f.getName(), mimeType, data);
+		String mimeType = Magic.getMagicMatch(f,false).getMimeType();
+		return build(f.getName(), mimeType, data);
 	}
 	
 	public static Attachment build(String fileName, String mime, InputStream is) throws IOException
     {
-		return create(fileName,mime,IOUtils.toByteArray(is));
+		return build(fileName,mime,IOUtils.toByteArray(is));
     }
 	
-    public static Attachment create(String fileName, String mime, byte[] data)
+    public static Attachment build(String fileName, String mime, byte[] data)
     {
 		org.exlp.model.xml.io.File file = new org.exlp.model.xml.io.File();
     	file.setName(fileName);
     	file.setMime(mime);
+    	
+    	Attachment attachment = new Attachment();
+    	attachment.setData(data);
+    	attachment.setFile(file);
+    	
+    	return attachment;
+    }
+    
+    public static Attachment build(String name, byte[] data)
+    {
+		org.exlp.model.xml.io.File file = new org.exlp.model.xml.io.File();
+    	file.setName(name);
+    	
+    	if(name.endsWith(".pdf")) {file.setMime(XmlAttachmentFactory.mimePdf);}
+    	else
+    	{
+    		logger.warn("No MIME");
+    	}
     	
     	Attachment attachment = new Attachment();
     	attachment.setData(data);

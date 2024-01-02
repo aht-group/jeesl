@@ -1,38 +1,25 @@
 package org.jeesl.controller.io.mail.smtp;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Objects;
 
 import javax.mail.MessagingException;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.jdom2.Content;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jeesl.controller.io.mail.freemarker.FreemarkerEngine;
-import org.jeesl.controller.io.mail.msg.FreemarkerMimeContentCreator;
 import org.jeesl.controller.io.mail.msg.MimeMessageCreator;
 import org.jeesl.controller.io.mail.msg.XmlMimeContentCreator;
-import org.jeesl.exception.processing.UtilsMailException;
-import org.jeesl.exception.processing.UtilsProcessingException;
-import org.jeesl.model.xml.io.mail.Bcc;
-import org.jeesl.model.xml.io.mail.Header;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JDomUtil;
-
 
 public class XmlMailSender extends AbstractMailSender
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlMailSender.class);
 	
 	public XmlMailSender(String smtpHost) {this(smtpHost,25);}
-	public XmlMailSender(String smtpHost, int smtpPort)
+	private XmlMailSender(String smtpHost, int smtpPort)
 	{
 		super(smtpHost,smtpPort);
 	}
