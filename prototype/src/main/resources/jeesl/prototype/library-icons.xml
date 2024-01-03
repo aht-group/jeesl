@@ -6,10 +6,11 @@
     <io:file code="jeeslArrowRight" name="ui/control/arrow/blue/right.svg"/>
     <io:file code="jeeslUpload" name="ui/control/browser/upload.svg"/>
     <io:file code="jeeslDownload" name="ui/control/browser/download.svg"/>
-    <io:file code="jeeslFilter" name="ui/control/calc/filter.svg"/>
     <io:file code="jeeslZip" name="ui/control/browser/zip.svg"/>
+    <io:file code="jeeslFilter" name="ui/control/calc/filter.svg"/>
     <io:file code="jeeslCalcMinus" name="ui/control/calc/minus.svg"/>
     <io:file code="jeeslCalcPlus" name="ui/control/calc/plus.svg"/>
+    <io:file code="jeeslAi" name="ui/control/calc/ai.svg"/>
     <io:file code="jeeslTafu0" name="ui/module/tafu/calendar0.svg"/>
     <io:file code="jeeslTafu1" name="ui/module/tafu/calendar1.svg"/>
     <io:file code="jeeslTafu2" name="ui/module/tafu/calendar2.svg"/>
