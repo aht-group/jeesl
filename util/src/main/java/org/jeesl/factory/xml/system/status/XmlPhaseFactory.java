@@ -2,7 +2,6 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.io.locale.XmlLabelFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -18,7 +17,6 @@ public class XmlPhaseFactory<L extends JeeslLang, D extends JeeslDescription, S 
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlPhaseFactory.class);
 		
-	private String localeCode;
 	private Phase q;
 	
 	private XmlLabelFactory<L> xfLabel;
@@ -27,7 +25,6 @@ public class XmlPhaseFactory<L extends JeeslLang, D extends JeeslDescription, S 
 	
 	public XmlPhaseFactory(String localeCode, Phase q)
 	{
-		this.localeCode=localeCode;
 		this.q=q;
 		
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}

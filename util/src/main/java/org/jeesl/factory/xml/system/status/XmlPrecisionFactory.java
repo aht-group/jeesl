@@ -2,7 +2,6 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.io.locale.XmlLabelFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -17,7 +16,6 @@ public class XmlPrecisionFactory<L extends JeeslLang, D extends JeeslDescription
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlPrecisionFactory.class);
 	
-	private String localeCode;
 	private Precision q;
 	
 	private XmlLabelFactory<L> xfLabel;
@@ -27,7 +25,6 @@ public class XmlPrecisionFactory<L extends JeeslLang, D extends JeeslDescription
 	public XmlPrecisionFactory(Precision q){this(null,q);}
 	public XmlPrecisionFactory(String localeCode, Precision q)
 	{
-		this.localeCode=localeCode;
 		this.q=q;
 		
 		if(Objects.nonNull(q.getLabel())) {xfLabel = new XmlLabelFactory<>(localeCode);}

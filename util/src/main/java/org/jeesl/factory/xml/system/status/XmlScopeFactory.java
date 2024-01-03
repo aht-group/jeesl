@@ -16,7 +16,6 @@ public class XmlScopeFactory<L extends JeeslLang, D extends JeeslDescription,S e
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlScopeFactory.class);
 	
-	private String localeCode;
 	private Scope q;
 
 	private XmlLabelFactory<L> xfLabel;
@@ -26,7 +25,6 @@ public class XmlScopeFactory<L extends JeeslLang, D extends JeeslDescription,S e
 	public XmlScopeFactory(Scope q){this(null,q);}
 	public XmlScopeFactory(String localeCode, Scope q)
 	{
-		this.localeCode=localeCode;
 		this.q=q;
 		
 		if(Objects.nonNull(q.getLabel())) {xfLabel = new XmlLabelFactory<>(localeCode);}
