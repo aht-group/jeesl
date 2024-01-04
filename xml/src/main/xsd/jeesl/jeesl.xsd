@@ -22,15 +22,6 @@
 	<xsd:import namespace="http://www.jeesl.org/workflow"					schemaLocation="module/workflow.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/revision"					schemaLocation="io/revision.xsd"/>
 	
-	<xsd:element name="container">
-        <xsd:complexType>
-        	<xsd:sequence>
-                <xsd:element ref="us:status" maxOccurs="unbounded"/>
-                <xsd:element ref="us:type" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    
 	<xsd:element name="querySurvey">
 		<xsd:complexType>
 			<xsd:sequence>
