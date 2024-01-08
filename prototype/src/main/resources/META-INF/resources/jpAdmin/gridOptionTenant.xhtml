@@ -15,6 +15,7 @@
 		
 		<composite:attribute name="graphicTypes" required="false" default="#{appIoGraphicBean.graphicTypes}"/>
 		<composite:attribute name="graphicStyles" required="false" default="#{appIoGraphicBean.shapes}"/>
+		<composite:attribute name="locales" required="false" default="#{appLabelBean.locales}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -22,11 +23,12 @@
 	<j:row>
 		<j:slot id="sCategories" width="2">
 			<h:form id="fCategories">
-				<p:dataTable var="c" value="#{cc.attrs.bean.categories}" rowKey="#{c.id}"
+				<p:dataTable styleClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.bean.categories}" rowKey="#{c.id}"
 						selection="#{cc.attrs.bean.category}" selectionMode="single">
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCategory}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail"/>
 					<p:column>
-						<f:facet name="header">#{msg.jeeslOptionTables}</f:facet>
+						<f:facet name="header"><jtp:label entity="TenantStatus" code="listOf"/></f:facet>
 						<h:outputText value="#{msg[c.code]}" rendered="#{empty cc.attrs.bean.mapEntity[c]}"/>
 						<h:outputText value="#{cc.attrs.bean.mapEntity[c].name[localeCode].lang}" rendered="#{not empty cc.attrs.bean.mapEntity[c]}"/>
 					</p:column>
@@ -35,7 +37,7 @@
 		</j:slot>
 		<j:slot id="sCategory" width="6">
 			<h:form id="fEntity" rendered="#{(not empty cc.attrs.bean.entity)}">
-				<p:panel id="pLang" header="#{cc.attrs.bean.entity.name[localeCode].lang}" styleClass="jeeslPanel">
+				<p:panel id="pLang" header="#{cc.attrs.bean.entity.name[localeCode].lang}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.downloadDescription()}" update=":#{cc.id}:fEntity" rendered="false"/>
 					</f:facet>
@@ -45,12 +47,13 @@
 				</p:panel>
 			</h:form>
 			<h:form id="fCategory" rendered="#{not empty cc.attrs.bean.category}">
-				<p:dataTable var="s" value="#{cc.attrs.bean.items}" draggableRows="true"
-			          selection="#{cc.attrs.bean.status}" selectionMode="single" rowKey="#{s.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="s" value="#{cc.attrs.bean.items}" draggableRows="true"
+			        	selection="#{cc.attrs.bean.status}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 			          	<j:dtHeader title="#{not empty cc.attrs.bean.mapEntity[cc.attrs.bean.category] ? cc.attrs.bean.mapEntity[cc.attrs.bean.category].name[localeCode].lang : msg[cc.attrs.bean.category.code]}">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail" library="jeeslGfx"/>
-			          		<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.downloadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.supportsDownload}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail" />
+			          		<j:svg type="jeeslDownload" listener="#{cc.attrs.bean.downloadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.supportsDownload}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorder()}" update="@form"/>
@@ -83,11 +86,11 @@
 		</j:slot>
 		<j:slot id="sDetail" width="4">
 			<h:form id="fDetail" rendered="#{not empty cc.attrs.bean.status}">
-				<p:panel id="pLang" header="#{msg.jeeslDetails}" styleClass="jeeslPanel">
+				<p:panel id="pLang" header="#{msg.jeeslDetails}" styleClass="jeesl-panel">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.save()}"   update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.uiAllowSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm()}"     update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.save()}"   update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rm()}"     update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					
@@ -111,7 +114,7 @@
 						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.supportsLocked}" value="#{cc.attrs.bean.status.locked}" />
 								
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.status}" locales="#{cc.attrs.bean.locales}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.status}" locales="#{cc.attrs.locales}" withDescription="true"/>
 					
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{cc.attrs.bean.graphic.type.code eq 'symbol'}">
 						<p:outputLabel value="#{msg.aupGraphicStyle}"/>

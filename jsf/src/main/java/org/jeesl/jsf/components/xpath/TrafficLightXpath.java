@@ -1,6 +1,7 @@
 package org.jeesl.jsf.components.xpath;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.el.ValueExpression;
 import javax.faces.component.FacesComponent;
@@ -25,7 +26,9 @@ public class TrafficLightXpath extends AbstractXpath
 {	
 	final static Logger logger = LoggerFactory.getLogger(TrafficLightXpath.class);
 	private static enum Properties {value,xpath,xpathref,column,style,styleClass}
-		
+
+	private static boolean debugOnInfo = false;
+	
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
 	{
@@ -64,24 +67,35 @@ public class TrafficLightXpath extends AbstractXpath
 			catch (JXPathNotFoundException ex){}
 		}
 		
-		try
+		Object value = null;
+		
+		try {value = xpathContext.getValue(xpath);}
+		catch (JXPathNotFoundException ex){}
+		
+		if(debugOnInfo)
 		{
-			Object value = xpathContext.getValue(xpath);
-//			StringBuilder sbDebug = new StringBuilder();
-//			sbDebug.append("Object: Type "+value.getClass().getName());
-//			sbDebug.append(" ");
-//			if(value!=null) {sbDebug.append(" ").append(value.toString());} else {sbDebug.append("NULL");}
-//			logger.warn(sbDebug.toString());
-			
+			StringBuilder sbDebug = new StringBuilder();
+			sbDebug.append("Object: ");
+			if(Objects.nonNull(value))
+			{
+				sbDebug.append(" Type "+value.getClass().getName());
+				sbDebug.append(" ").append(value.toString());
+			}
+			else {sbDebug.append("NULL");}
+			logger.warn(sbDebug.toString());
+		}
+		
+		if(Objects.nonNull(value))
+		{
 			Object oColumn = ComponentAttribute.getObject(Properties.column,null,context,this);
-			if(oColumn!=null && JeeslReportColumn.class.isAssignableFrom(oColumn.getClass()))
+			if(Objects.nonNull(oColumn) && JeeslReportColumn.class.isAssignableFrom(oColumn.getClass()))
 			{
 				JeeslReportColumn c = (JeeslReportColumn)oColumn;
-//				logger.info(c.getClass().getName()+" "+c.toString()+" "+c.getCode());
-				if(c.getDataType()!=null)
+				if(debugOnInfo) {logger.info(c.getClass().getName()+" "+c.toString()+" "+c.getCode());}
+				if(Objects.nonNull(c.getDataType()))
 				{
 					JeeslStatus dt = c.getDataType();
-//					logger.info("   DataType  code:"+dt.getCode()+" style:"+dt.getStyle()+" symbol:"+dt.getSymbol());
+					if(debugOnInfo) {logger.info("   DataType  code:"+dt.getCode()+" style:"+dt.getStyle()+" symbol:"+dt.getSymbol());}
 					
 					if(dt.getCode().startsWith("numberDouble"))
 					{
@@ -115,10 +129,7 @@ public class TrafficLightXpath extends AbstractXpath
 				}
 				else{logger.warn("DataType of "+JeeslReportColumn.class.getSimpleName()+" NULL");}
 				
-				if(c.getStyleCell()!=null)
-				{
-					CssAlignmentFactory.appendTextCenter(sbStyle);
-				}
+				if(Objects.nonNull(c.getStyleCell())){CssAlignmentFactory.appendTextCenter(sbStyle);}
 				else {CssAlignmentFactory.appendTextCenter(sbStyle);}
 			}
 			else
@@ -127,11 +138,12 @@ public class TrafficLightXpath extends AbstractXpath
 				logger.warn("Fallback, column==null or not assignable");
 				sbValue.append(value);
 			}
+	
+			if(sbStyle.length()>0) {context.getResponseWriter().writeAttribute(Properties.style.toString(), sbStyle.toString(), null);}
+	
+			context.getResponseWriter().write(sbValue.toString());
 		}
-		catch (JXPathNotFoundException ex){}
 		
-		if(sbStyle.length()>0) {context.getResponseWriter().writeAttribute(Properties.style.toString(), sbStyle.toString(), null);}
-		context.getResponseWriter().write(sbValue.toString());
 		for(UIComponent uic : this.getChildren())
 		{
 			uic.encodeAll(context);
