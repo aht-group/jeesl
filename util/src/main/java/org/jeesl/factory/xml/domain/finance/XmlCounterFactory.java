@@ -18,18 +18,11 @@ public class XmlCounterFactory
 		return xml;
 	}
 	
-	public static <E extends Enum<E>> Counter build(E code, double counter)
-	{
-		return create(code.toString(),Double.valueOf(counter).intValue());
-	}
-	public static <E extends Enum<E>> Counter build(E code, int counter)
-	{
-		return create(code.toString(),counter);
-	}
-	public static <E extends Enum<E>> Counter build(E code, long counter)
-	{
-		return create(code.toString(),Long.valueOf(counter).intValue());
-	}
+	public static <E extends Enum<E>> Counter build(E code, double counter) {return create(code.toString(),Double.valueOf(counter).intValue());}
+	public static <E extends Enum<E>> Counter build(E code, int counter) {return create(code.toString(),counter);}
+	public static <E extends Enum<E>> Counter build(E code, long counter) {return create(code.toString(),Long.valueOf(counter).intValue());}
+	
+	public static <C extends EjbWithCode> Counter build(C code, int counter) {return create(code.getCode(),counter);}
 	
 	public static <E extends Enum<E>> void add(Figures figures, E code, Long value)
 	{

@@ -23,4 +23,10 @@ public class TxtBooleanFactory
 		if(value) {return "Yes";}
 		else {return "No";}
 	}
+	
+	public static int zeroOne(boolean value)
+	{
+		if(value) {return 1;}
+		else {return 0;}
+	}
 }
