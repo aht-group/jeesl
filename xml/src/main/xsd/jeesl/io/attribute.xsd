@@ -21,6 +21,7 @@
 			<xsd:attribute name="code" type="xsd:string"/>
 			<xsd:attribute name="label" type="xsd:string"/>
 			<xsd:attribute name="bool" type="xsd:boolean"/>
+			<xsd:attribute name="valueInteger" type="xsd:int"/>
 		</xsd:complexType>    
     </xsd:element>
     <xsd:element name="option">
