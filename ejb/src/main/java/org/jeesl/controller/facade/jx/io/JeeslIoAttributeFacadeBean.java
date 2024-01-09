@@ -1,6 +1,7 @@
 package org.jeesl.controller.facade.jx.io;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -177,7 +178,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		return tQ.getResultList();
 	}
 	
-	@Override public List<DATA> fAttributeData(CRITERIA criteria, List<CONTAINER> containers)
+	@Override public List<DATA> fAttributeData(CRITERIA criteria, Collection<CONTAINER> containers)
 	{
 		if(ObjectUtils.isEmpty(containers)) {return new ArrayList<>();}
 		

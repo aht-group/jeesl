@@ -1,5 +1,6 @@
 package org.jeesl.api.facade.io;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -39,7 +40,7 @@ public interface JeeslIoAttributeFacade <R extends JeeslTenantRealm<?,?,R,?>,
 	<RREF extends EjbWithId> List<SET> fAttributeSets(R realm, RREF rref, List<CAT> categories);
 	
 	List<DATA> fAttributeData(CONTAINER container);
-	List<DATA> fAttributeData(CRITERIA criteria, List<CONTAINER> containers);
+	List<DATA> fAttributeData(CRITERIA criteria, Collection<CONTAINER> containers);
 	List<DATA> fAttributeData(EjbAttributeQuery<CRITERIA,CONTAINER,DATA> query);
 	
 	DATA fAttributeData(CRITERIA criteria, CONTAINER container) throws JeeslNotFoundException;
