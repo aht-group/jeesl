@@ -126,6 +126,4 @@ public class JeeslRmmvRoleController <L extends JeeslLang, D extends JeeslDescri
 		logger.debug(fbRmmv.getClassTreeElement().getSimpleName()+" "+list.size());
 		TreeHelper.buildTree(tree,list,treePath);
 	}
-	
-	
 }
