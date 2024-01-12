@@ -1,11 +1,11 @@
 package org.jeesl.controller.handler.module.survey;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.api.bean.JeeslSurveyBean;
@@ -22,6 +22,8 @@ import org.jeesl.factory.ejb.module.survey.EjbSurveyMatrixFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyAnswerFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveySectionFactory;
+import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandler;
+import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandlerCallback;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
@@ -56,7 +58,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 							DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
 							OPTION extends JeeslSurveyOption<L,D>,
 							CORRELATION extends JeeslSurveyCorrelation<DATA>>
-	implements Serializable
+	implements JeeslSurveyHandler<SECTION>
 {
 	final static Logger logger = LoggerFactory.getLogger(SurveyHandler.class);
 	private static final long serialVersionUID = 1L;
@@ -65,6 +67,8 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	private final JeeslFacesMessageBean bMessage;
 	private final JeeslSurveyBean<?,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION,?> bSurvey;
+	
+	private final JeeslSurveyHandlerCallback<SECTION> callback;
 	
 	private final SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION> condition; public SurveyConditionalHandler<TEMPLATE, SECTION, QUESTION, CONDITION, ANSWER, OPTION> getCondition() {return condition;}
 	private final SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> validation; public SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> getValidation() {return validation;}
@@ -77,7 +81,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	private final EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix;
 	private final EjbSurveyDataFactory<SURVEY,DATA,CORRELATION> efData;
 	private final TxtSurveySectionFactory<?,?,SECTION> tfSection;
-	private final TxtSurveyAnswerFactory<?,?,ANSWER,MATRIX,OPTION> tfAnswer;
+	private final TxtSurveyAnswerFactory<?,?,QUESTION,ANSWER,MATRIX,OPTION> tfAnswer;
 	
 	private List<OPTION> districts; public List<OPTION> getDistricts() {return districts;} public void setDistricts(List<OPTION> districts) {this.districts = districts;}
 
@@ -100,14 +104,15 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	public static boolean debug = true;
 	private boolean debugOnInfo;
-	public static int debugDelay = 1000;
 	
-	public SurveyHandler(JeeslFacesMessageBean bMessage,
+	public SurveyHandler(JeeslSurveyHandlerCallback<SECTION> callback,
+							JeeslFacesMessageBean bMessage,
 			final JeeslSurveyCoreFacade<?,?,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fSurvey,
 			JeeslSurveyBean<?,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION,?> bSurvey,
 			
 			final SurveyCoreFactoryBuilder<L,D,?,SURVEY,?,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION,?> fBSurvey)
 	{
+		this.callback=callback;
 		this.bMessage=bMessage;
 		this.fSurvey=fSurvey;
 		this.bSurvey=bSurvey;
@@ -135,7 +140,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 		
 		activeSections = new HashSet<SECTION>();
 		
-		debugOnInfo = false;
+		debugOnInfo = true;
 	}
 	
 	public void reset()
@@ -155,20 +160,25 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	{
 		buildControls(survey);
 		if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"buildControls");}
+		surveyData = null;
 		
 		showAssessment = true;
-		if(debugOnInfo){logger.info("prepare fData()");try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
+		if(debugOnInfo){logger.info("prepare fData()");}
 		try
 		{
-			surveyData = fSurvey.fData(correlation);
-			if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"fSurvey.fData(..)");}
+			if(Objects.nonNull(correlation))
+			{
+				surveyData = fSurvey.fData(correlation);
+				if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"fSurvey.fData(..)");}
+			}
 		}
-		catch (JeeslNotFoundException e)
+		catch (JeeslNotFoundException e) {}
+		
+		if(Objects.isNull(surveyData))
 		{
 			surveyData = efData.build(survey,correlation);
 			if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"efData.build(..)");}
 		}
-//		jogger.ofxMilestones(System.out);
 		
 		template = survey.getTemplate();
 		condition.init(template);
@@ -217,7 +227,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 		{
 			List<SECTION> filterSection = null;
 			if(activeSections!=null && !activeSections.isEmpty()){filterSection = new ArrayList<SECTION>(activeSections);}
-			if(debugOnInfo){logger.warn("fAnswers for "+filterSection.size()+" "+JeeslSurveySection.class.getSimpleName()+": "+tfSection.codes(filterSection));try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
+			if(debugOnInfo){logger.warn("fAnswers for "+filterSection.size()+" "+JeeslSurveySection.class.getSimpleName()+": "+tfSection.codes(filterSection));}
 			answers = efAnswer.toMapQuestion(fSurvey.fAnswers(surveyData, true, filterSection));
 		}
 
@@ -304,8 +314,15 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	public void save(CORRELATION correlation, SECTION section) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(activeSection!=null) {activeSection=fSurvey.find(cSection,activeSection);}
-		if(debugOnInfo){logger.warn("save");try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
-		logger.info("Saving "+correlation.toString()+ " "+answers.size()+" answers  CORR.saved: "+EjbIdFactory.isSaved(correlation));
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Saving ");
+		sb.append(" Correlation:").append(correlation.getId()).append(" (saved?").append(EjbIdFactory.isSaved(correlation)).append(")");
+		sb.append(" with "); if(Objects.nonNull(answers)) {sb.append(answers.size());} sb.append(" answers");
+		sb.append(" data:"); if(Objects.nonNull(surveyData)) {sb.append(surveyData.getId());} else {sb.append("NULL");}
+		sb.append(" section:"); if(Objects.nonNull(section)) {sb.append(section.getId());} else {sb.append("NULL");}
+		sb.append(" ").append(this.toString());
+		logger.info(sb.toString());
 		
 		surveyData.setCorrelation(correlation);
 		surveyData = fSurvey.saveData(surveyData);
@@ -314,43 +331,50 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 		for(ANSWER a : answers.values())
 		{
 			a.setData(surveyData);
-			if(efAnswer.belongsToSection(a, section, true));
+			if(efAnswer.belongsToSection(a,section, true))
 			{
 				answersToSave.add(a);
-				if(debugOnInfo){logger.warn("\tQueing "+JeeslSurveyAnswer.class.getSimpleName()+" for Save: "+tfAnswer.build(a));}
+//				if(debugOnInfo)
+				{
+					logger.warn("\tQueing "+JeeslSurveyAnswer.class.getSimpleName()+" for Save: "+tfAnswer.build(a));
+				}
 			}
-			
 		}
 		
 		validation.evaluateList(answersToSave);
 		if(validation.isHasErrors())
 		{
-			if(debugOnInfo){logger.warn("Has Errors "+validation.getErrors().size());try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
+			if(debugOnInfo) {logger.warn("Has Errors "+validation.getErrors().size()); }
 			return ;
 		}
 		
-		if(debugOnInfo){logger.warn("Starting to save "+answersToSave.size()+" "+JeeslSurveyAnswer.class.getSimpleName());try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
+		if(debugOnInfo){logger.warn("Starting to save "+answersToSave.size()+" "+JeeslSurveyAnswer.class.getSimpleName());}
 		fSurvey.save(answersToSave);
 		
-		reloadAnswers(false);
-		
-		List<MATRIX> matrixToSave = new ArrayList<MATRIX>();
+//		this.reloadAnswers(false);
+		// Deactivated the reload in favor of just putting the answers to the map
+		for(ANSWER a : answersToSave) {answers.put(a.getQuestion(), a);}
+
+		List<MATRIX> matrixToSave = new ArrayList<>();
 		for(ANSWER a : answers.values())
 		{
 			if(BooleanComparator.active(a.getQuestion().getShowMatrix()) && efAnswer.belongsToSection(a, section, true))
 			{
 				for(MATRIX m : matrix.values(a.getQuestion().getId()))
 				{
-					if(m.getOption()!=null){m.setOption(bSurvey.getMapOptionId().get(m.getOption().getId()));}
+					if(Objects.nonNull(m.getOption())) {m.setOption(bSurvey.getMapOptionId().get(m.getOption().getId()));}
 					m.setAnswer(a);
 					matrixToSave.add(m);
 				}
 			}
 		}
-		if(debugOnInfo){logger.warn("Save Matrix");try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
-		fSurvey.save(matrixToSave);
+		if(!matrixToSave.isEmpty())
+		{
+			if(debugOnInfo){logger.warn("Save Matrix");}
+			fSurvey.save(matrixToSave);
+			if(debugOnInfo){logger.warn("Load Matrix");}
+		}
 		
-		if(debugOnInfo){logger.warn("Load Matrix");try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
 		
 		List<ANSWER> listAnswers = new ArrayList<ANSWER>(answers.values());
 		logger.info("Loading ... for "+listAnswers.size());
@@ -362,7 +386,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 			matrix.put(m.getAnswer().getQuestion().getId(),m.getRow().getId(),m.getColumn().getId(),m);
 		}
 		
-		if(bMessage!=null){bMessage.growlSaved(section);}
+		if(Objects.nonNull(bMessage)) {bMessage.growlSaved(section);}
 	}
 	
 	public void updateAnswer(ANSWER answer)
@@ -381,7 +405,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	public void onSectionChange()
 	{
-		if(debugOnInfo){logger.warn("onSectionChange "+(activeSection!=null));try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
+		if(debugOnInfo){logger.warn("onSectionChange "+(activeSection!=null));}
 		activeSection = fSurvey.find(cSection,activeSection);
 		activeSections.clear();
 		activeSections.add(activeSection);
@@ -400,5 +424,19 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	public String multiKey(ANSWER a)
 	{
 		return "x";
+	}
+	
+	public void saveSection(SECTION section) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(Objects.isNull(callback)) {logger.error("Callback is NULL");}
+		else {callback.saveSection(this,section);}
+	}
+	
+	@Override public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("Handler: ");
+		if(Objects.nonNull(template)) {sb.append("Template: ").append(template.getId()).append("-").append(template.getVersion().getId());}
+		return sb.toString();
 	}
 }

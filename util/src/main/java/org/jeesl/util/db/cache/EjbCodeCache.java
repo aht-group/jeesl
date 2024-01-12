@@ -69,6 +69,10 @@ public class EjbCodeCache <T extends EjbWithCode>
 	{
 		return this.equals(ejb,a) || this.equals(ejb,b);
 	}
+	public <E extends Enum<E>> boolean equalsOr(T ejb, E a, E b, E c)
+	{
+		return this.equals(ejb,a) || this.equals(ejb,b) || this.equals(ejb,c);
+	}
 	
 	public boolean equals(T ejb, String code)
 	{

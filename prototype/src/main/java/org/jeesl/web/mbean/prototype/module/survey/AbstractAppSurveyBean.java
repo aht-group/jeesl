@@ -148,8 +148,8 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 	public void refreshUnits(){units=fSurvey.allOrderedPositionVisible(fbTemplate.getClassUnit());}
 	
 	private List<SS> surveyStatus;
-	public List<SS> getSurveyStatus(){return surveyStatus;}
-	public void reloadSurveyStatus(){surveyStatus=fSurvey.allOrderedPositionVisible(ffSurvey.getClassSurveyStatus());}
+	public List<SS> getSurveyStatus() {return surveyStatus;}
+	public void reloadSurveyStatus() {surveyStatus=fSurvey.allOrderedPositionVisible(ffSurvey.getClassSurveyStatus());}
 	
 	private final List<QE> elements;
 	@Override public List<QE> getElements(){return elements;}

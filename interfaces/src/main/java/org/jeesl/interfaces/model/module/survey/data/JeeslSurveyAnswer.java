@@ -9,6 +9,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.simple.JeeslSurveySimpleAnswer;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslSurveyAnswer<L extends JeeslLang, D extends JeeslDescription,
@@ -16,7 +17,9 @@ public interface JeeslSurveyAnswer<L extends JeeslLang, D extends JeeslDescripti
 									MATRIX extends JeeslSurveyMatrix<L,D,?,OPTION>,
 									DATA extends JeeslSurveyData<L,D,?,?,?>,
 									OPTION extends JeeslSurveyOption<L,D>>
-			extends Serializable,EjbWithId,EjbSaveable,JeeslSurveySimpleAnswer
+			extends Serializable,EjbWithId,EjbSaveable,
+					EjbWithParentAttributeResolver,
+					JeeslSurveySimpleAnswer
 {
 	public enum Attributes{data,question,option,valueBoolean}
 	

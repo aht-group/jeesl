@@ -1,8 +1,6 @@
 package org.jeesl.web.mbean.prototype.module.survey;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.jeesl.api.bean.JeeslSurveyBean;
@@ -17,6 +15,8 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
+import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandler;
+import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandlerCallback;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.domain.JeeslDomain;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;
@@ -93,7 +93,7 @@ public abstract class AbstractSurveyEntryBean <L extends JeeslLang, D extends Je
 						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
 						CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
 					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE,CACHE>
-					implements Serializable
+					implements JeeslSurveyHandlerCallback<SECTION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSurveyEntryBean.class);
@@ -133,7 +133,7 @@ public abstract class AbstractSurveyEntryBean <L extends JeeslLang, D extends Je
 			logger.info(AbstractLogMessage.reloaded(fbCore.getClassSurvey(), sbhSurvey.getList()));
 		}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
-		handler = fbCore.handler(bMessage,fCore,bSurvey);
+		handler = fbCore.handler(this,bMessage,fCore,bSurvey);
 	}
 	
 	protected abstract void prepareCorrelation();
@@ -159,6 +159,12 @@ public abstract class AbstractSurveyEntryBean <L extends JeeslLang, D extends Je
 		}
 		
 		logger.info("Show Assessment: Allow:"+handler.isAllowAssessment()+" Show:"+handler.isShowAssessment());
+	}
+	
+	@Override public void saveSection(JeeslSurveyHandler<SECTION> handler, SECTION section) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		this.saveData(section);
+		
 	}
 	
 	public void saveData(SECTION section) throws JeeslConstraintViolationException, JeeslLockingException

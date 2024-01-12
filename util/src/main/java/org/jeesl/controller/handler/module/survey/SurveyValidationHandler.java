@@ -82,10 +82,10 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 	{
 		for(SECTION section : cache.getSections(template))
 		{
-			logger.info(section.toString());
+			logger.trace(section.toString());
 			for(QUESTION question : cache.getQuestions(section))
 			{
-				logger.info("\t"+question.toString());
+				logger.trace("\t"+question.toString());
 				initQuestion(question);
 			}
 		}
@@ -168,7 +168,7 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 		{
 			SurveyValidator validator = validators.get(v);
 			boolean validationResult = validator.validate(answer);
-			logger.info(v.getPosition()+" Valid Entry: "+validationResult);
+			logger.trace(v.getPosition()+" Valid Entry: "+validationResult);
 			if(!validationResult)
 			{
 				if(!errors.containsKey(question)) {errors.put(question,new ArrayList<D>());}
@@ -179,8 +179,7 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 		return false;
 	}
 	
-	boolean hasErrors;
-	public boolean isHasErrors() {return !errors.isEmpty();}
+	boolean hasErrors; public boolean isHasErrors() {return !errors.isEmpty();}
 
 	public void debug()
 	{
@@ -198,7 +197,7 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 				for(QUESTION qt : triggers.get(q)){l.add(qt.getCode());}
 				sb.append(" [ ").append(StringUtils.join(l, ",")).append(" ]");
 			}
-			logger.info(sb.toString());
+			logger.trace(sb.toString());
 		}
 	}
 }

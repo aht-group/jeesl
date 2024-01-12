@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
+	xmlns:aupAdm="http://ahtutils.sourceforge.net/prototype/admin"
+	
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="question" required="true"/>
+		<composite:attribute name="handler" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<h:panelGroup rendered="#{cc.attrs.question.showText  and (not cc.attrs.question.showMatrix)}">
+			<p:inputText  value="#{cc.attrs.handler.answers[cc.attrs.question].valueText}" rendered="#{cc.attrs.handler.showDataFields}" required="#{cc.attrs.question.mandatory}"/>
+			<h:outputText value="#{cc.attrs.handler.answers[cc.attrs.question].valueText}" rendered="#{not cc.attrs.handler.showDataFields}"/>
+		</h:panelGroup>
+				
+		<h:panelGroup rendered="#{cc.attrs.question.showEmptyOption and cc.attrs.question.showSelectOne and (not cc.attrs.question.showMatrix)}">
+			<p:selectOneMenu id="categoryS1NoSelection" value="#{cc.attrs.handler.answers[cc.attrs.question].option}" effect="fade"
+							 rendered="#{cc.attrs.handler.showDataFields}"
+							 required="#{cc.attrs.question.mandatory}">
+				<f:selectItem itemLabel="--" noSelectionOption="true"/>
+				<f:selectItems value="#{appSurveyBean.mapOption[cc.attrs.question]}" var="o" itemLabel="#{o.name[localeCode].lang}" itemValue="#{o}"/>
+				<p:ajax process="@form" listener="#{cc.attrs.handler.updateAnswer(cc.attrs.handler.answers[cc.attrs.question])}" update="@form"/>
+			</p:selectOneMenu>
+			<h:outputText value="#{cc.attrs.handler.answers[cc.attrs.question].option.name[localeCode].lang}" rendered="#{not cc.attrs.handler.showDataFields}"/>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{(not cc.attrs.question.showEmptyOption) and cc.attrs.question.showSelectOne and (not cc.attrs.question.showMatrix)}">
+			<p:selectOneMenu id="categoryS1" value="#{cc.attrs.handler.answers[cc.attrs.question].option}" effect="fade"
+							 rendered="#{cc.attrs.handler.showDataFields}"
+							 required="#{cc.attrs.question.mandatory}">		
+				<f:selectItems value="#{appSurveyBean.mapOption[cc.attrs.question]}" var="o" itemLabel="#{o.name[localeCode].lang}" itemValue="#{o}"/>
+				<p:ajax process="@form" listener="#{cc.attrs.handler.updateAnswer(cc.attrs.handler.answers[cc.attrs.question])}" update="@form"/>
+			</p:selectOneMenu>
+			<h:outputText value="#{cc.attrs.handler.answers[cc.attrs.question].option.name[localeCode].lang}" rendered="#{not cc.attrs.handler.showDataFields}"/>
+		</h:panelGroup>
+			
+		<p:selectBooleanCheckbox rendered="#{cc.attrs.question.showBoolean and (not cc.attrs.question.showMatrix)}" value="#{cc.attrs.handler.answers[cc.attrs.question].valueBoolean}" />
+				
+		<p:inputText id="naturalNumber" rendered="#{cc.attrs.question.showInteger and (not cc.attrs.question.showMatrix)}" value="#{cc.attrs.handler.answers[cc.attrs.question].valueNumber}" required="#{cc.attrs.question.mandatory}"/>
+		<p:inputText id="number" rendered="#{cc.attrs.question.showDouble and (not cc.attrs.question.showMatrix)}" value="#{cc.attrs.handler.answers[cc.attrs.question].valueDouble}" required="#{cc.attrs.question.mandatory}"/>
+				
+		<jtp:inputDate rendered="#{cc.attrs.question.showDate and (not cc.attrs.question.showMatrix)}" value="#{cc.attrs.handler.answers[cc.attrs.question].valueDate}" required="#{cc.attrs.question.mandatory}"/>
+								
+		<p:selectManyMenu showCheckbox="true" rendered="#{cc.attrs.question.showSelectMulti and (not cc.attrs.question.showMatrix)}"
+							value="#{cc.attrs.handler.districts}" var="o">
+			<f:selectItems value="#{appSurveyBean.mapOption[cc.attrs.question]}" var="opt" itemLabel="#{opt.name[localeCode].lang}" itemValue="#{opt.id}" />
+			<p:column>
+				<h:outputText value="#{o.name[localeCode].lang}" />
+			</p:column>
+		</p:selectManyMenu>
+				
+		<p:dataTable rendered="#{cc.attrs.question.showMatrix}" var="r" value="#{appSurveyBean.matrixRows[cc.attrs.question]}">
+			<p:column styleClass="jeeslBold">
+				<h:outputText value="#{r.name[localeCode].lang}"/>
+			</p:column>
+			<p:columns var="c" value="#{appSurveyBean.matrixCols[cc.attrs.question]}">
+				<f:facet name="header">
+					<h:outputText value="#{c.name[localeCode].lang}" />
+				</f:facet>
+				<p:selectBooleanCheckbox  value="#{cc.attrs.handler.matrix.m[cc.attrs.question.id].m[r.id][c.id].valueBoolean}" rendered="#{cc.attrs.question.showBoolean}"/>
+				<p:inplace emptyLabel="-" rendered="#{cc.attrs.question.showInteger}">
+					<h:inputText   value="#{cc.attrs.handler.matrix.m[cc.attrs.question.id].m[r.id][c.id].valueNumber}" />
+				</p:inplace>
+				<p:inplace emptyLabel="-" rendered="#{cc.attrs.question.showDouble}">
+					<h:inputText   value="#{cc.attrs.handler.matrix.m[cc.attrs.question.id].m[r.id][c.id].valueDouble}" />
+				</p:inplace>
+				<p:inplace emptyLabel="-" rendered="#{cc.attrs.question.showText}">
+					<h:inputText   value="#{cc.attrs.handler.matrix.m[cc.attrs.question.id].m[r.id][c.id].valueText}" />
+				</p:inplace>
+				<h:selectOneMenu value="#{cc.attrs.handler.matrix.m[cc.attrs.question.id].m[r.id][c.id].option}" rendered="#{cc.attrs.question.showSelectOne}" styleClass="w100">
+					<f:selectItems value="#{appSurveyBean.matrixCells[cc.attrs.question]}" var="o" itemLabel="#{o.name[localeCode].lang}" itemValue="#{o}"/>
+				</h:selectOneMenu>
+			</p:columns>
+		</p:dataTable>
+		
+		<h:panelGroup rendered="#{cc.attrs.question.showRemark}">
+			<p:inputTextarea id="remarkIta" rows="2" styleClass="w100"  value="#{cc.attrs.handler.answers[cc.attrs.question].remark}" rendered="#{cc.attrs.handler.showDataFields}"/>
+			<p:watermark for="remarkIta" value="Remark" id="watermark" rendered="#{cc.attrs.handler.showDataFields}"/>
+			<h:outputText value="#{cc.attrs.handler.answers[cc.attrs.question].remark}" rendered="#{not cc.attrs.handler.showDataFields}"/>
+		</h:panelGroup>
+	</composite:implementation>
+</html>

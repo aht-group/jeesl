@@ -25,6 +25,7 @@ import org.jeesl.factory.txt.module.survey.TxtSurveyAnswerFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyQuestionFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveySectionFactory;
+import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandlerCallback;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
@@ -152,7 +153,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	}
 	
 	public TxtSurveyQuestionFactory<L,D,QUESTION,OPTION> txtQuestion(String localeCode) {return new TxtSurveyQuestionFactory<>(localeCode);}
-	public TxtSurveyAnswerFactory<L,D,ANSWER,MATRIX,OPTION> txtAnswer() {return new TxtSurveyAnswerFactory<>();}
+	public TxtSurveyAnswerFactory<L,D,QUESTION,ANSWER,MATRIX,OPTION> txtAnswer() {return new TxtSurveyAnswerFactory<>();}
 	
 	public TxtOptionFactory<L,D,OPTION> txtOption(String localeCode) {return new TxtOptionFactory<L,D,OPTION>(localeCode);}
 	
@@ -163,9 +164,9 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 		return new SurveyScoreProcessor<>(ejbQuestion(),ejbFilterAnswer());
 	}
 	
-	public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(JeeslFacesMessageBean bMessage, final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey, JeeslSurveyBean<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> bSurvey)
+	public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage, final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey, JeeslSurveyBean<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> bSurvey)
 	{
-		return new SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION>(bMessage,fSurvey,bSurvey,this);
+		return new SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION>(callback,bMessage,fSurvey,bSurvey,this);
 	}
 	
 	public SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION> conditional(JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)

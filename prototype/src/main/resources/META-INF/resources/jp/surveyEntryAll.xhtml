@@ -25,9 +25,9 @@
 					rendered="#{cc.attrs.handler.showAssessment}">
 				<f:facet name="header"><j:pHeader prefix="#{cc.attrs.panelHeaderPrefix}" title="#{section.code}: #{section.name[localeCode].lang}"/></f:facet>
 				<f:facet name="actions">
-					<j:icon id="btSave" type="jeeslSave" tooltip="#{msg.jeeslSurveyTtSaveSection}"
+					<j:svg type="jeeslSave" id="btSave" tooltip="#{msg.jeeslSurveyTtSaveSection}"
 							rendered="#{cc.attrs.handler.showDataSave}"
-							listener="#{cc.attrs.bean.saveData(section)}" update="@form"/>
+							listener="#{cc.attrs.handler.saveSection(section)}" update="@form"/>
 					<p:blockUI trigger="btSave:link" block="pQuestions"/>
 				</f:facet>
 				<p:panelGrid columns="1" columnClasses="jeeslGrid100">
@@ -55,7 +55,7 @@
 							</ui:fragment>
 						</h:panelGroup>
 						<h:panelGroup>
-							<jtp:surveyAnswer question="#{q}" surveyHandler="#{cc.attrs.handler}"/>
+							<jp:surveyAnswer question="#{q}" handler="#{cc.attrs.handler}"/>
 							<h:panelGroup rendered="#{not empty cc.attrs.handler.validation.errors[q]}">
 								<br/>
 								<ui:repeat var="e" value="#{cc.attrs.handler.validation.errors[q]}" id="repeatErrors">
