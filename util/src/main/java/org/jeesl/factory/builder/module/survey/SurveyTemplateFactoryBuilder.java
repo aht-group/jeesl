@@ -107,10 +107,7 @@ public class SurveyTemplateFactoryBuilder<L extends JeeslLang, D extends JeeslDe
 		return new EjbSurveyScoreFactory<QUESTION,SCORE>(cScore);
 	}
 	
-	public EjbSurveyTemplateFactory<L,D,TEMPLATE,TS,TC,SECTION,QUESTION> template()
-	{
-		return new EjbSurveyTemplateFactory<L,D,TEMPLATE,TS,TC,SECTION,QUESTION>(cTemplate);
-	}
+	public EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> template() {return new EjbSurveyTemplateFactory<>(cTemplate);}
 	
 	public EjbSurveyTemplateVersionFactory<VERSION> version()
 	{
@@ -145,8 +142,5 @@ public class SurveyTemplateFactoryBuilder<L extends JeeslLang, D extends JeeslDe
 		return new EjbSurveyValidationAlgorithmFactory<VALGORITHM>(cValgorithm);
 	}
 	
-	public TxtSurveyTemplateFactory<TEMPLATE> txtTemplate(String localeCode)
-	{
-		return new TxtSurveyTemplateFactory<TEMPLATE>(localeCode);
-	}
+	public TxtSurveyTemplateFactory<TEMPLATE,VERSION> txtTemplate(String localeCode) {return new TxtSurveyTemplateFactory<>(localeCode);}
 }

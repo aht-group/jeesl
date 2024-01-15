@@ -63,11 +63,22 @@
 		<!-- JEESL Modles -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-io-ssi</artifactId>
+    		<artifactId>jeesl-io-cms</artifactId>
+    		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-ssi</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-system-security</artifactId>
     		<scope>provided</scope>
 		</dependency>
 	
@@ -76,6 +87,20 @@
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- OpenAI -->
+		<dependency>
+			<groupId>com.theokanning.openai-gpt3-java</groupId>
+			<artifactId>service</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- Apache Tika -->
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-core</artifactId>
+ 			<scope>compile</scope>
 		</dependency>
 		
 		<!-- JSON Jackson -->

@@ -375,10 +375,9 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 			if(debugOnInfo){logger.warn("Load Matrix");}
 		}
 		
-		
-		List<ANSWER> listAnswers = new ArrayList<ANSWER>(answers.values());
+		List<ANSWER> listAnswers = new ArrayList<>(answers.values());
 		logger.info("Loading ... for "+listAnswers.size());
-		List<MATRIX> cellList = fSurvey.fCells(listAnswers);
+		List<MATRIX> cellList = fSurvey.fCells(EjbIdFactory.toSaved(listAnswers));
 		logger.info("Got: "+cellList.size());
 		
 		for(MATRIX m : cellList)

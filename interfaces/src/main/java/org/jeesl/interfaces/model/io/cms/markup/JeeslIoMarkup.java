@@ -9,7 +9,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoMarkup <T extends JeeslIoMarkupType<?,?,T,?>>  extends Serializable,EjbSaveable 
-{	
+{
+	public static String unknwonLanguage = "unknown";
+	
 	T getType();
 	void setType(T type);
 	

@@ -109,6 +109,13 @@ public class EjbIdFactory
 		return map;
 	}
 	
+	public static <T extends EjbWithId> List<T> toSaved(List<T> list)
+	{
+		List<T> result = new ArrayList<>();
+		for(T t : list) {if(EjbIdFactory.isSaved(t)) {result.add(t);}}
+		return result;
+	}
+	
 	public static <T extends EjbWithId> void setNextNegativeId(T ejb, List<T> list)
 	{
 		Set<Long> existing = new HashSet<Long>(EjbIdFactory.toIds(list));

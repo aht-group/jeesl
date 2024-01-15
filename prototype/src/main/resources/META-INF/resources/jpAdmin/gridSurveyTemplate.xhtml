@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+	
+	
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 	xmlns:aupAdmin="http://ahtutils.sourceforge.net/prototype/admin"
@@ -30,14 +29,15 @@
 	</composite:interface>
 	
 <composite:implementation>
-	<aup:grid id="grid">
-		<aht:row id="row1" rendered="#{cc.attrs.showComponent}">
-			<aht:slot id="sTemplate" width="3">
+	<jp:grid id="grid">
+		<j:row id="row1" rendered="#{cc.attrs.showComponent}">
+			<j:slot id="sTemplate" width="3">
 				<h:form id="fCategory" rendered="#{cc.attrs.withCategory}">
-					<p:dataTable var="category" value="#{cc.attrs.bean.categories}" rowKey="#{category.id}"
+					<p:dataTable styleClass="jeesl-datatable"
+							var="category" value="#{cc.attrs.bean.categories}" rowKey="#{category.id}"
 								 selection="#{cc.attrs.bean.category}" selectionMode="single">
 						<f:facet name="header">
-							<j:dtHeader title="#{msg.jeeslSurveyCategory}"/>
+							<j:dtHeader entity="SurveyTemplateCategory" code="listOf"/>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:row1" listener="#{cc.attrs.bean.selectCategory()}"/>
 						<p:column>
@@ -46,11 +46,12 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fVersions" rendered="#{cc.attrs.withVersion}">
-					<p:dataTable var="version" value="#{cc.attrs.bean.versions}" rowKey="#{version.id}"
-								 selection="#{cc.attrs.bean.version}" selectionMode="single">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="version" value="#{cc.attrs.bean.versions}" rowKey="#{version.id}"
+							selection="#{cc.attrs.bean.version}" selectionMode="single">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jpSurveyTemplateVersions}">
-		                         <j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addVersion()}" update=":#{cc.id}:row1"/>
+		                         <j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addVersion()}" update=":#{cc.id}:row1"/>
 		                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:row1" listener="#{cc.attrs.bean.selectVersion()}"/>
@@ -63,11 +64,12 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fSections" rendered="#{not empty cc.attrs.bean.template}">
-					<p:dataTable var="s" value="#{cc.attrs.bean.sections}" rowKey="#{s.id}"
-                                 selection="#{cc.attrs.bean.section}" selectionMode="single" draggableRows="true">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="s" value="#{cc.attrs.bean.sections}" rowKey="#{s.id}"
+                            selection="#{cc.attrs.bean.section}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.aupSurveySections}">
-	                    		<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:row1"/>
+	                    		<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:row1"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSections()}" update="@form"/>
@@ -83,11 +85,12 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fSchemes" rendered="#{cc.attrs.withSchemes and (not empty cc.attrs.bean.template)}">
-					<p:dataTable var="scheme" value="#{cc.attrs.bean.schemes}" rowKey="#{scheme.id}"
-								 selection="#{cc.attrs.bean.scheme}" selectionMode="single">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="scheme" value="#{cc.attrs.bean.schemes}" rowKey="#{scheme.id}"
+							selection="#{cc.attrs.bean.scheme}" selectionMode="single">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveySchemes}">
-								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
+								<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
@@ -101,11 +104,11 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fScheme" >
-					<p:panel header="#{msg.jeeslSurveyScheme}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.scheme}">
+					<p:panel header="#{msg.jeeslSurveyScheme}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.scheme}">
 						<f:facet name="actions">
-							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
-							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
-							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
+							<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
+							<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
+							<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 							<p:outputLabel value="#{msg.jeeslCode}"/>
@@ -117,8 +120,9 @@
 					</p:panel>
 				</h:form>
 				<h:form id="fSets" rendered="#{cc.attrs.withOptionSets and (not empty cc.attrs.bean.template)}">
-					<p:dataTable var="os" value="#{cc.attrs.bean.optionSets}" rowKey="#{os.id}"
-                                 selection="#{cc.attrs.bean.optionSet}" selectionMode="single" draggableRows="true">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="os" value="#{cc.attrs.bean.optionSets}" rowKey="#{os.id}"
+                            selection="#{cc.attrs.bean.optionSet}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyOptionSets}">
 								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid"/>
@@ -139,15 +143,28 @@
 		                  </p:column>
 					</p:dataTable>
 				</h:form>
-			</aht:slot>
-			<aht:slot id="sCenter" width="5" >
+			</j:slot>
+			<j:slot id="sCenter" width="5" >
 				<h:form id="fVersion" rendered="#{not empty cc.attrs.bean.version}">
-					<p:panel header="#{msg.jpSurveyTemplateVersion}" styleClass="jeeslPanel">
+					<p:panel header="#{msg.jpSurveyTemplateVersion}" styleClass="jeesl-panel">
 						<f:facet name="actions">
-							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveVersion()}" update=":#{cc.id}:row1"/>
-							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteVersion()}" update=":#{cc.id}:row1" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
+							<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveVersion()}" update=":#{cc.id}:row1"/>
+							<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteVersion()}" update=":#{cc.id}:row1" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						
+							<jtp:label entity="SurveyTemplateVersion" code="id"/>
+							<ui:fragment>
+								<h:outputText value="#{appLabelBean.entities['SurveyTemplate'][localeCode].lang}:#{cc.attrs.bean.version.template.id}"/>
+								<h:outputText value=" "/>
+								<h:outputText value="#{appLabelBean.entities['SurveyTemplateVersion'][localeCode].lang}:#{cc.attrs.bean.version.id}"/>
+								<h:outputText value=" "/>
+								<h:outputText value="#{appLabelBean.entities['SurveyTemplateCategory'][localeCode].lang}:#{cc.attrs.bean.version.template.category.id}"/>
+							</ui:fragment>
+							
+							<jtp:label entity="SurveyTemplate" code="category"/>
+							<h:outputText value="#{cc.attrs.bean.version.template.category.name[localeCode].lang}"/>
+						
 							<p:outputLabel value="#{msg.jeeslName}"/>
 							<p:inputText value="#{cc.attrs.bean.version.name[cc.attrs.bean.sbhLocale.selection.code].lang}" />
 							<p:outputLabel value="#{msg.jeeslDate}"/>
@@ -170,7 +187,7 @@
 					</p:panel>
 				</h:form>
 				<h:form id="fSection" rendered="#{not empty cc.attrs.bean.section}">
-					<p:panel header="#{msg.jeeslSurveySection}" styleClass="jeeslPanel">
+					<p:panel header="#{msg.jeeslSurveySection}" styleClass="jeesl-panel">
 						<f:facet name="actions">
 							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveSection()}" update=":#{cc.id}:row1"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:row1" rendered="#{(cc.attrs.bean.section.id gt 0) and (cc.attrs.bean.questions.isEmpty())}"/>
@@ -215,9 +232,9 @@
 					</p:panel>
 				</h:form>
 				<h:form id="fSet" rendered="#{not empty cc.attrs.bean.optionSet}">
-					<p:panel header="#{msg.jeeslSurveyOptionSet}" styleClass="jeeslPanel">
+					<p:panel header="#{msg.jeeslSurveyOptionSet}" styleClass="jeesl-panel">
 						<f:facet name="actions">
-							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:row1"/>
+							<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:row1"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmSet()}" update=":#{cc.id}:row1"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -235,8 +252,9 @@
 					</p:panel>
 				</h:form>
 				<h:form id="fQuestions" rendered="#{(not empty cc.attrs.bean.section) and (cc.attrs.bean.section.id gt 0)}">
-					<p:dataTable var="q" value="#{cc.attrs.bean.questions}" rowKey="#{q.id}"
-                                 selection="#{cc.attrs.bean.question}" selectionMode="single" draggableRows="true">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="q" value="#{cc.attrs.bean.questions}" rowKey="#{q.id}"
+                            selection="#{cc.attrs.bean.question}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.aupSurveyQuestions}">
 								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addQuestion()}" update=":#{cc.id}:sQuestion"/>
@@ -254,12 +272,12 @@
 	                   </p:column>
 					</p:dataTable>
 				</h:form>
-			</aht:slot>
-			<aht:slot id="sQuestion" width="4" >
+			</j:slot>
+			<j:slot id="sQuestion" width="4" >
 				<h:form id="fQuestion" rendered="#{not empty cc.attrs.bean.question}">
-					<p:panel header="#{msg.jeeslSurveyQuestion} #{cc.attrs.bean.question.id}" styleClass="jeeslPanel">
+					<p:panel header="#{msg.jeeslSurveyQuestion} #{cc.attrs.bean.question.id}" styleClass="jeesl-panel">
 						<f:facet name="actions">
-							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveQuestion()}" update=":#{cc.id}:row1"/>
+							<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveQuestion()}" update=":#{cc.id}:row1"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmQuestion()}" update=":#{cc.id}:row1"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -348,8 +366,9 @@
 					</p:panel>
 				</h:form>
 				<h:form id="fOptions" rendered="#{(not empty cc.attrs.bean.question) and (cc.attrs.bean.question.id gt 0)}">
-					<p:dataTable var="o" value="#{cc.attrs.bean.options}" rowKey="#{o.id}" rendered="#{cc.attrs.withOptions or cc.attrs.withMultiOptions}"
-                                 selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="o" value="#{cc.attrs.bean.options}" rowKey="#{o.id}" rendered="#{cc.attrs.withOptions or cc.attrs.withMultiOptions}"
+                            selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyOptions}">
                           		<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
@@ -373,8 +392,9 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fSetOptions" rendered="#{(not empty cc.attrs.bean.optionSet) and (cc.attrs.bean.optionSet.id gt 0)}">
-					<p:dataTable var="o" value="#{cc.attrs.bean.options}" rowKey="#{o.id}" rendered="#{cc.attrs.withOptions or cc.attrs.withMultiOptions}"
-                                 selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="o" value="#{cc.attrs.bean.options}" rowKey="#{o.id}" rendered="#{cc.attrs.withOptions or cc.attrs.withMultiOptions}"
+                            selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyOptions}">
                        			<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
@@ -398,7 +418,7 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fOption" >
-					<p:panel header="#{msg.jeeslSurveyOption} #{cc.attrs.bean.option.id}" styleClass="jeeslPanel" rendered="#{(not empty cc.attrs.bean.question) and (not empty cc.attrs.bean.option)}">
+					<p:panel header="#{msg.jeeslSurveyOption} #{cc.attrs.bean.option.id}" styleClass="jeesl-panel" rendered="#{(not empty cc.attrs.bean.question) and (not empty cc.attrs.bean.option)}">
 						<f:facet name="actions">
 							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveQuestionOption()}" update=":#{cc.id}:sQuestion"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.delQuestionOption()}" update=":#{cc.id}:sQuestion"/>
@@ -435,7 +455,7 @@
 					</p:panel>
 				</h:form>
 				<h:form id="fSetOption" >
-					<p:panel header="#{msg.jeeslSurveyOption}" styleClass="jeeslPanel" rendered="#{(not empty cc.attrs.bean.optionSet) and (not empty cc.attrs.bean.option)}">
+					<p:panel header="#{msg.jeeslSurveyOption}" styleClass="jeesl-panel" rendered="#{(not empty cc.attrs.bean.optionSet) and (not empty cc.attrs.bean.option)}">
 						<f:facet name="actions">
 							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveSetOption()}" update=":#{cc.id}:sQuestion"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.delSetOption()}" update=":#{cc.id}:sQuestion"/>
@@ -472,8 +492,9 @@
 					</p:panel>
 				</h:form>
 				<h:form id="fScores" rendered="#{cc.attrs.withSchemes and (not empty cc.attrs.bean.question) and (cc.attrs.bean.question.id gt 0)}">
-					<p:dataTable var="score" value="#{cc.attrs.bean.scores}" rowKey="#{scores.id}"
-								 selection="#{cc.attrs.bean.score}" selectionMode="single">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="score" value="#{cc.attrs.bean.scores}" rowKey="#{scores.id}"
+							selection="#{cc.attrs.bean.score}" selectionMode="single">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyScores}">
 								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
@@ -494,7 +515,7 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fScore" >
-					<p:panel header="#{msg.jeeslSurveyScore}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.score}">
+					<p:panel header="#{msg.jeeslSurveyScore}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.score}">
 						<f:facet name="actions">
 							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
 							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
@@ -514,10 +535,10 @@
 						</p:panelGrid>
 					</p:panel>
 				</h:form>
-				
 				<h:form id="fConditions" rendered="#{cc.attrs.withCondition and (not empty cc.attrs.bean.question) and (cc.attrs.bean.question.id gt 0)}">
-					<p:dataTable var="condition" value="#{cc.attrs.bean.conditions}" rowKey="#{condition.id}"
-								 selection="#{cc.attrs.bean.condition}" selectionMode="single" draggableRows="true">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="condition" value="#{cc.attrs.bean.conditions}" rowKey="#{condition.id}"
+							selection="#{cc.attrs.bean.condition}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyConditions}">
 								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
@@ -544,7 +565,7 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fCondition" >
-					<p:panel header="#{msg.jeeslSurveyCondition}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.condition}">
+					<p:panel header="#{msg.jeeslSurveyCondition}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.condition}">
 						<f:facet name="actions">
 							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
 							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
@@ -573,10 +594,10 @@
 						</p:panelGrid>
 					</p:panel>
 				</h:form>
-				
 				<h:form id="fValidations" rendered="#{cc.attrs.withValidation and (not empty cc.attrs.bean.question) and (cc.attrs.bean.question.id gt 0)}">
-					<p:dataTable var="validation" value="#{cc.attrs.bean.validations}" rowKey="#{validation.id}"
-								 selection="#{cc.attrs.bean.validation}" selectionMode="single" draggableRows="true">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="validation" value="#{cc.attrs.bean.validations}" rowKey="#{validation.id}"
+							selection="#{cc.attrs.bean.validation}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyValidations}">
 								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
@@ -596,7 +617,7 @@
 					</p:dataTable>
 				</h:form>
 				<h:form id="fValidation" >
-					<p:panel header="#{msg.jeeslSurveyValidation}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.validation}">
+					<p:panel header="#{msg.jeeslSurveyValidation}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.validation}">
 						<f:facet name="actions">
 							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
 							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
@@ -620,8 +641,8 @@
 						</p:panelGrid>
 					</p:panel>
 				</h:form>
-			</aht:slot>
-		</aht:row>
-	</aup:grid>
+			</j:slot>
+		</j:row>
+	</jp:grid>
 </composite:implementation>
 </html>

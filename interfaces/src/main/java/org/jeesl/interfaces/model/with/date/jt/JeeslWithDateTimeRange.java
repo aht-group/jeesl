@@ -6,9 +6,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslWithDateTimeRange extends EjbWithId
 {
-	public LocalDateTime getStartDate();
-	public void setStartDate(LocalDateTime startDate);
+	LocalDateTime getStartDate();
+	void setStartDate(LocalDateTime startDate);
 	
-	public LocalDateTime getEndDate();
-	public void setEndDate(LocalDateTime endDate);
+	LocalDateTime getEndDate();
+	void setEndDate(LocalDateTime endDate);
 }

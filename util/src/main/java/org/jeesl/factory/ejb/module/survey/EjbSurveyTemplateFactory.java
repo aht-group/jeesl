@@ -3,9 +3,11 @@ package org.jeesl.factory.ejb.module.survey;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateCategory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateStatus;
+import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateVersion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -15,12 +17,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbSurveyTemplateFactory<L extends JeeslLang, D extends JeeslDescription,
-				TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,?,TS,TC,SECTION,?,?>,
-				TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-				TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
-				SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-				QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,?,?,?,?,?>
-				>
+								TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,?,TS,TC,SECTION,?,?>,
+								VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
+								TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
+								TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
+								SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
+								QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,?,?,?,?,?>
+								>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbSurveyTemplateFactory.class);
 	
@@ -31,12 +34,12 @@ public class EjbSurveyTemplateFactory<L extends JeeslLang, D extends JeeslDescri
         this.cTemplate = cTemplate;
 	}
     
-	public TEMPLATE build(TC category,TS status, Template xTemplate)
+	public TEMPLATE build(TC category, TS status, Template xTemplate)
 	{
 		return build(category,status,xTemplate.getDescription().getValue());
 	}
 	
-	public TEMPLATE build(TC category,TS status, String name)
+	public TEMPLATE build(TC category, TS status, String name)
 	{
 		TEMPLATE ejb = null;
 		try
@@ -81,5 +84,10 @@ public class EjbSurveyTemplateFactory<L extends JeeslLang, D extends JeeslDescri
 		template.getSections().clear();
 		template.setSections(sections);
 		return template;
+	}
+	
+	public void converter(JeeslFacade facade, TEMPLATE template)
+	{
+//		if(Objects.nonNull(template.getVersion())) {template.setVersion(null);
 	}
 }

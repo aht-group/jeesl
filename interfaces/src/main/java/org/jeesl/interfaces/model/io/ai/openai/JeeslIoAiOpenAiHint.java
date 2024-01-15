@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.ai;
+package org.jeesl.interfaces.model.io.ai.openai;
 
 import java.io.Serializable;
 
@@ -18,7 +18,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 @DownloadJeeslData
-public interface JeeslIoAiOpenAiModel <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslIoAiOpenAiHint <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,

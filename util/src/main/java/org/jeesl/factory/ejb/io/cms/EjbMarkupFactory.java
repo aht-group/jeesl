@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -24,10 +25,7 @@ public class EjbMarkupFactory<LOC extends JeeslLocale<?,?,LOC,?>,
 
     final Class<M> cM;
 
-    public static <LOC extends JeeslLocale<?,?,LOC,?>,
-					M extends JeeslIoMarkup<MT>,
-					MT extends JeeslIoMarkupType<?,?,MT,?>>
-    		EjbMarkupFactory<LOC,M,MT> instance(final Class<M> cM)
+    public static <LOC extends JeeslLocale<?,?,LOC,?>,M extends JeeslIoMarkup<MT>,MT extends JeeslIoMarkupType<?,?,MT,?>> EjbMarkupFactory<LOC,M,MT> instance(final Class<M> cM)
     {
         return new EjbMarkupFactory<>(cM);
     }
@@ -50,13 +48,15 @@ public class EjbMarkupFactory<LOC extends JeeslLocale<?,?,LOC,?>,
 		return map;
 	}
 	
-	protected M single(LOC loc, MT type)
+	public M single(LOC loc, MT type, String conent) {M m = single(loc,type); m.setContent(conent); return m;}
+	public M single(LOC loc, MT type)
 	{
 		M markup = null;
 		try
 		{
 			markup = cM.newInstance();
-			markup.setLkey(loc.getCode());
+			if(Objects.nonNull(loc)) {markup.setLkey(loc.getCode());} else {markup.setLkey(JeeslIoMarkup.unknwonLanguage);}
+			
 			markup.setType(type);
 			markup.setContent("");
 		}

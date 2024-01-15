@@ -39,7 +39,7 @@ import net.sf.exlp.util.DateUtil;
 
 public class XmlSurveyQuery
 {
-	public static enum Key {exTemplate,rTemplate,exSurveys,exSurvey,surveyAnswers,rSection}
+	public static enum Key {rTemplate,exSurveys,exSurvey,surveyAnswers}
 	
 	private static Map<Key,Query> mQueries;
 	
@@ -52,7 +52,6 @@ public class XmlSurveyQuery
 			Query q = new Query();
 			switch(key)
 			{
-				case exTemplate: q.setTemplate(exTemplate());break;
 				case rTemplate: q.setTemplate(rTemplate());break;
 				case exSurvey: q.setSurvey(exSurvey());break;
 				case exSurveys: q.setSurveys(exSurveys());break;
@@ -278,14 +277,14 @@ public class XmlSurveyQuery
 		return xml;
 	}
 	
-	private static Question question()
+	public static Question question()
 	{
 		Question xml = XmlQuestionFactory.id();
 		xml.setCode("");
 		return xml;
 	}
 	
-	private static Answer answer()
+	public static Answer answer()
 	{
 		Answer xml = XmlAnswerFactory.id();
 		xml.setValueBoolean(true);

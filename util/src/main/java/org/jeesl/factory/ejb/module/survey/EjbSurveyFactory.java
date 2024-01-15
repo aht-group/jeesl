@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
+import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
@@ -75,5 +77,13 @@ public class EjbSurveyFactory<L extends JeeslLang, D extends JeeslDescription,
 		Map<Long,SURVEY> map = new HashMap<Long,SURVEY>();
 		for(SURVEY s : surveys) {map.put(s.getId(),s);}
 		return map;
+	}
+	
+	public void converter(JeeslFacade facade, SURVEY ejb)
+	{
+		if(Objects.nonNull(ejb))
+		{
+//			if(Objects.nonNull(ejb.getTemplate())) {ejb.setTemplate(facade);
+		}
 	}
 }
