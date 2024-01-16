@@ -7,7 +7,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface OpEntitySelection <T extends EjbWithId> extends OpEntityHandler
+public interface OpEntitySelection <T extends EjbWithId> extends OpSelectionHandler
 {
 	public static final long serialVersionUID=1;
 

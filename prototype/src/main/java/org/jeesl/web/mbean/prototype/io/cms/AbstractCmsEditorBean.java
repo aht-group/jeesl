@@ -27,7 +27,7 @@ import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.OutputXpathPattern;
-import org.jeesl.interfaces.controller.handler.op.OpEntityHandler;
+import org.jeesl.interfaces.controller.handler.op.OpSelectionHandler;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsCategory;
@@ -322,7 +322,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
     }
     
 	@SuppressWarnings("unchecked")
-	@Override public void addOpEntity(OpEntityHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void addOpEntity(OpSelectionHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addOpEntity(item));}
 		if(fbCms.getClassLocale().isAssignableFrom(item.getClass()))
@@ -337,7 +337,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 		}
 	}
 	@SuppressWarnings("unchecked")
-	@Override public void rmOpEntity(OpEntityHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void rmOpEntity(OpSelectionHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.rmOpEntity(item));}
 		if(fbCms.getClassLocale().isAssignableFrom(item.getClass()))
