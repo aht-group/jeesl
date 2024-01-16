@@ -26,7 +26,7 @@
 						<jtp:symbolizer value="#{t.status}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="TafuTask" code="task"/></f:facet>
+						<f:facet name="header"><jtp:label entity="TafuTask"/></f:facet>
 						<h:outputText value="#{t.name}"/>
 					</p:column>
 			   	</p:dataTable>
@@ -100,7 +100,6 @@
 					<ui:repeat var="p" value="#{cc.attrs.ctrl.postpone}">
 						<jp:icon value="#{p}" listener="#{cc.attrs.ctrl.postpone(p)}" update=":#{cc.id}:grid"/>
 					</ui:repeat>
-					
 				</ui:fragment>
 				
 				<jtp:label entity="TafuTask" code="recordDue"/>
