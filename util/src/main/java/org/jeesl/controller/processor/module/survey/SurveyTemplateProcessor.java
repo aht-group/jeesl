@@ -1,4 +1,4 @@
-package org.jeesl.controller.processor.survey;
+package org.jeesl.controller.processor.module.survey;
 
 import java.util.Iterator;
 

@@ -1,4 +1,4 @@
-package org.jeesl.controller.processor.survey.validation;
+package org.jeesl.controller.processor.module.survey.validation;
 
 import org.jeesl.interfaces.controller.processor.SurveyValidator;
 import org.jeesl.interfaces.model.json.module.survey.SurveyValidatorConfiguration;

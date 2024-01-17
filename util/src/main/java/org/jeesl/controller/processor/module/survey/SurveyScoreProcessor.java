@@ -1,9 +1,10 @@
-package org.jeesl.controller.processor.survey;
+package org.jeesl.controller.processor.module.survey;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.exlp.util.io.StringUtil;
 import org.jeesl.controller.processor.finance.AmountRounder;
@@ -92,5 +93,13 @@ public class SurveyScoreProcessor <SECTION extends JeeslSurveySection<?,?,?,SECT
 		}
 
 		return AmountRounder.two(result.doubleValue());
+	}
+	
+	public void calculateScore(QUESTION q, ANSWER a)
+	{
+		if(Objects.nonNull(q) && BooleanComparator.active(q.getCalculateScore()))
+		{
+			logger.info("Calculate Score");
+		}
 	}
 }

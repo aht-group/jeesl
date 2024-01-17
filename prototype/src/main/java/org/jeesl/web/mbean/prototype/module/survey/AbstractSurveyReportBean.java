@@ -15,7 +15,7 @@ import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.handler.module.survey.SurveyAnalysisCacheHandler;
-import org.jeesl.controller.processor.survey.analysis.SurveySelectOneProcessor;
+import org.jeesl.controller.processor.module.survey.analysis.SurveySelectOneProcessor;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;

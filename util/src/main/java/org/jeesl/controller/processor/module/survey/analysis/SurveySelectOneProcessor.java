@@ -1,4 +1,4 @@
-package org.jeesl.controller.processor.survey.analysis;
+package org.jeesl.controller.processor.module.survey.analysis;
 
 import org.jeesl.api.bean.JeeslSurveyBean;
 import org.jeesl.controller.handler.module.survey.SurveyAnalysisCacheHandler;

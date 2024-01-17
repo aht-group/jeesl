@@ -8,7 +8,7 @@ import org.jeesl.controller.handler.module.survey.SurveyConditionalHandler;
 import org.jeesl.controller.handler.module.survey.SurveyHandler;
 import org.jeesl.controller.handler.module.survey.SurveyOptionHandler;
 import org.jeesl.controller.handler.module.survey.SurveyValidationHandler;
-import org.jeesl.controller.processor.survey.SurveyScoreProcessor;
+import org.jeesl.controller.processor.module.survey.SurveyScoreProcessor;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyAnswerFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyCorrelationFactory;
