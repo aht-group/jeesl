@@ -92,13 +92,13 @@ public class JeeslSurveyAnalysisFacadeBean <L extends JeeslLang, D extends Jeesl
 				TOOLT extends JeeslStatus<L,D,TOOLT>,
 				TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
 				TOOLCACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
-	extends JeeslFacadeBean implements JeeslSurveyAnalysisFacade<SURVEY,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,TOOLT>
+	extends JeeslFacadeBean implements JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,TOOLT>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyAnalysisFacadeBean.class);
 	
 	@SuppressWarnings("unused")
-	private JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,TOOLCACHE,?,?,?,?> fJob;
+	private JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,TOOLCACHE,?,?,?,?> fJob;
 	
 	private final SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,TOOLT,TOOLCACHETEMPLATE> fbAnalyis;
 	private final EjbSurveyAnalysisToolFactory <L,D,AQ,TOOL,TOOLT> efTool;

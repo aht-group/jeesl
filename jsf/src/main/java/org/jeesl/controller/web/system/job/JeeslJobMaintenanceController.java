@@ -36,7 +36,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslJobMaintenanceController.class);
 	
-	protected JeeslJobFacade<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob;
+	protected JeeslJobFacade<?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob;
 	protected final JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?> fbJob;
 	
 	private final Comparator<MNI> cpInfo;
@@ -63,7 +63,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 		infos = new ArrayList<>();
 	}
 	
-	public void postConstructJobMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslJobFacade<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob)
+	public void postConstructJobMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslJobFacade<?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fJob=fJob;

@@ -52,36 +52,24 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-public class SurveyAnalysisCacheHandler<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
-										SURVEY extends JeeslSurvey<L,D,?,TEMPLATE,DATA>,
-										
-										VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
-										TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,ANALYSIS>,
-										VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-										TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-										TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
-										SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-										QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,?,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
-										CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
-										QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-										SCORE extends JeeslSurveyScore<L,D,?,QUESTION>,
-										UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
-										ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
-										MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
-										DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
-										OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
-										OPTION extends JeeslSurveyOption<L,D>,
+public class SurveyAnalysisCacheHandler<SURVEY extends JeeslSurvey<?,?,?,?,DATA>,
+										SECTION extends JeeslSurveySection<?,?,?,SECTION,QUESTION>,
+										QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,?,OPTIONS,OPTION,AQ>,
+										MATRIX extends JeeslSurveyMatrix<?,?,?,OPTION>,
+										DATA extends JeeslSurveyData<?,?,SURVEY,?,CORRELATION>,
+										OPTIONS extends JeeslSurveyOptionSet<?,?,?,OPTION>,
+										OPTION extends JeeslSurveyOption<?,?>,
 										CORRELATION extends JeeslSurveyCorrelation<DATA>,
-										DOMAIN extends JeeslDomain<L,DENTITY>,
-										QUERY extends JeeslDomainQuery<L,D,DOMAIN,PATH>,
-										PATH extends JeeslDomainPath<L,D,QUERY,DENTITY,DATTRIBUTE>,
-										DENTITY extends JeeslRevisionEntity<L,D,?,?,DATTRIBUTE,?>,
-										DATTRIBUTE extends JeeslRevisionAttribute<L,D,DENTITY,?,?>,
-										ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,DATTRIBUTE>,
-										AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
-										TOOL extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,DATTRIBUTE,AQ,ATT>,
-										ATT extends JeeslStatus<L,D,ATT>,
-										TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
+										DOMAIN extends JeeslDomain<?,DENTITY>,
+										QUERY extends JeeslDomainQuery<?,?,DOMAIN,PATH>,
+										PATH extends JeeslDomainPath<?,?,QUERY,DENTITY,DATTRIBUTE>,
+										DENTITY extends JeeslRevisionEntity<?,?,?,?,DATTRIBUTE,?>,
+										DATTRIBUTE extends JeeslRevisionAttribute<?,?,DENTITY,?,?>,
+										ANALYSIS extends JeeslSurveyAnalysis<?,?,?,DOMAIN,DENTITY,DATTRIBUTE>,
+										AQ extends JeeslSurveyAnalysisQuestion<?,?,QUESTION,ANALYSIS>,
+										TOOL extends JeeslSurveyAnalysisTool<?,?,?,QUERY,DATTRIBUTE,AQ,ATT>,
+										ATT extends JeeslStatus<?,?,ATT>,
+										TOOLCACHETEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 										CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
 	implements Serializable
 {
@@ -90,13 +78,13 @@ public class SurveyAnalysisCacheHandler<L extends JeeslLang, D extends JeeslDesc
 
 	private static boolean debugOnInfo = true;
 	
-	private final JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
-	private final JeeslSurveyAnalysisFacade<SURVEY,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis;
+	private final JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
+	private final JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis;
 	
 	private TOOLCACHETEMPLATE jobTemplate;
 
-	public SurveyAnalysisCacheHandler(JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
-			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis)
+	public SurveyAnalysisCacheHandler(JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
+			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis)
 	{
 		this.fJob=fJob;
 		this.fAnalysis=fAnalysis;

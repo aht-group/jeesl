@@ -32,20 +32,19 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.util.query.system.JeeslJobQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
-public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
-								TEMPLATE extends JeeslJobTemplate<L,D,CATEGORY,TYPE,PRIORITY,EXPIRE>,
-								CATEGORY extends JeeslJobCategory<L,D,CATEGORY,?>,
-								TYPE extends JeeslJobType<L,D,TYPE,?>,
-								EXPIRE extends JeeslJobExpiration<L,D,EXPIRE,?>,
+public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,TYPE,PRIORITY,EXPIRE>,
+								CATEGORY extends JeeslJobCategory<?,?,CATEGORY,?>,
+								TYPE extends JeeslJobType<?,?,TYPE,?>,
+								EXPIRE extends JeeslJobExpiration<?,?,EXPIRE,?>,
 								JOB extends JeeslJob<TEMPLATE,PRIORITY,STATUS,USER>,
-								PRIORITY extends JeeslJobPriority<L,D,PRIORITY,?>,
+								PRIORITY extends JeeslJobPriority<?,?,PRIORITY,?>,
 								FEEDBACK extends JeeslJobFeedback<JOB,FT,USER>,
-								FT extends JeeslJobFeedbackType<L,D,FT,?>,
-								STATUS extends JeeslJobStatus<L,D,STATUS,?>,
-								ROBOT extends JeeslJobRobot<L,D>,
+								FT extends JeeslJobFeedbackType<?,?,FT,?>,
+								STATUS extends JeeslJobStatus<?,?,STATUS,?>,
+								ROBOT extends JeeslJobRobot<?,?>,
 								CACHE extends JeeslJobCache<TEMPLATE,CONTAINER>,
-								MNT extends JeeslJobMaintenance<L,D,MNT,?>,
-								MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
+								MNT extends JeeslJobMaintenance<?,?,MNT,?>,
+								MNI extends JeeslJobMaintenanceInfo<?,STATUS,MNT>,
 								CONTAINER extends JeeslFileContainer<?,?>,
 								USER extends JeeslSimpleUser
 								>

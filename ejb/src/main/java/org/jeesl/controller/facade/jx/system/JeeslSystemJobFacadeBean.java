@@ -75,7 +75,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 									USER extends JeeslSimpleUser
 									>
 					extends JeeslFacadeBean
-					implements JeeslJobFacade<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER>
+					implements JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER>
 {
 	private static final long serialVersionUID = 1L;
 

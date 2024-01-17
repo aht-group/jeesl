@@ -33,7 +33,7 @@ public class JeeslJobRobotController <L extends JeeslLang, D extends JeeslDescri
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslJobRobotController.class);
 	
-	private JeeslJobFacade<L,D,?,?,?,?,JOB,?,?,?,STATUS,ROBOT,?,?,?,?,?> fJob;
+	private JeeslJobFacade<?,?,?,?,JOB,?,?,?,STATUS,ROBOT,?,?,?,?,?> fJob;
 	protected final JobFactoryBuilder<L,D,?,?,?,?,JOB,?,?,?,STATUS,ROBOT,?,?,?,?> fbJob;
 	
 	private List<ROBOT> robots; public List<ROBOT> getRobots() {return robots;}
@@ -50,7 +50,7 @@ public class JeeslJobRobotController <L extends JeeslLang, D extends JeeslDescri
 		efRobot = fbJob.robot();
 	}
 	
-	public void postConstructJobMaintenance(JeeslJobFacade<L,D,?,?,?,?,JOB,?,?,?,STATUS,ROBOT,?,?,?,?,?> fJob,
+	public void postConstructJobMaintenance(JeeslJobFacade<?,?,?,?,JOB,?,?,?,STATUS,ROBOT,?,?,?,?,?> fJob,
 											JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);

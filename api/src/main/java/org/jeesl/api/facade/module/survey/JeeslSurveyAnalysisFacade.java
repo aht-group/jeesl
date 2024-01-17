@@ -35,16 +35,9 @@ import org.jeesl.model.json.JsonFlatFigures;
 import org.jeesl.model.json.module.survey.JsonSurveyValue;
 import org.jeesl.model.json.module.survey.JsonSurveyValues;
 
-public interface JeeslSurveyAnalysisFacade <SURVEY extends JeeslSurvey<?,?,?,?,DATA>,
-											
-											
-											QUESTION extends JeeslSurveyQuestion<?,?,?,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
-											QE extends JeeslSurveyQuestionElement<?,?,QE,?>,
-											SCORE extends JeeslSurveyScore<?,?,?,QUESTION>,
-											UNIT extends JeeslSurveyQuestionUnit<?,?,UNIT,?>,
-											ANSWER extends JeeslSurveyAnswer<?,?,QUESTION,MATRIX,DATA,OPTION>,
-											MATRIX extends JeeslSurveyMatrix<?,?,ANSWER,OPTION>,
-											DATA extends JeeslSurveyData<?,?,SURVEY,ANSWER,CORRELATION>,
+public interface JeeslSurveyAnalysisFacade <SURVEY extends JeeslSurvey<?,?,?,?,DATA>,		
+											QUESTION extends JeeslSurveyQuestion<?,?,?,?,?,?,?,?,OPTIONS,OPTION,AQ>,
+											DATA extends JeeslSurveyData<?,?,SURVEY,?,CORRELATION>,
 											OPTIONS extends JeeslSurveyOptionSet<?,?,?,OPTION>,
 											OPTION extends JeeslSurveyOption<?,?>,
 											CORRELATION extends JeeslSurveyCorrelation<DATA>,
@@ -55,7 +48,7 @@ public interface JeeslSurveyAnalysisFacade <SURVEY extends JeeslSurvey<?,?,?,?,D
 											DATTRIBUTE extends JeeslRevisionAttribute<?,?,DENTITY,?,?>,
 											ANALYSIS extends JeeslSurveyAnalysis<?,?,?,DOMAIN,DENTITY,DATTRIBUTE>,
 											AQ extends JeeslSurveyAnalysisQuestion<?,?,QUESTION,ANALYSIS>,
-											TOOL extends JeeslSurveyAnalysisTool<?,?,QE,QUERY,DATTRIBUTE,AQ,TOOLT>,
+											TOOL extends JeeslSurveyAnalysisTool<?,?,?,QUERY,DATTRIBUTE,AQ,TOOLT>,
 											TOOLT extends JeeslStatus<?,?,TOOLT>>
 	extends JeeslFacade
 {

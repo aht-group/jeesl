@@ -52,14 +52,14 @@ public class SystemJobRestService <L extends JeeslLang,D extends JeeslDescriptio
 {
 	final static Logger logger = LoggerFactory.getLogger(SystemJobRestService.class);
 	
-	private JeeslJobFacade<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER> fJob;
+	private JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER> fJob;
 	
 	private final Class<CATEGORY> cCategory;
 	private final Class<TYPE> cType;
 	private final Class<STATUS> cStatus;
 	private final Class<FT> cFeedbackType;
 	
-	private SystemJobRestService(JeeslJobFacade<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER> fJob, final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<TYPE> cType, final Class<FT> cFeedbackType, final Class<STATUS> cStatus)
+	private SystemJobRestService(JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER> fJob, final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<TYPE> cType, final Class<FT> cFeedbackType, final Class<STATUS> cStatus)
 	{
 		super(fJob,cL,cD);
 		this.fJob=fJob;
@@ -87,7 +87,7 @@ public class SystemJobRestService <L extends JeeslLang,D extends JeeslDescriptio
 					USER extends JeeslSimpleUser
 					>
 	SystemJobRestService<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER>
-		factory(JeeslJobFacade<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER> fJob,final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<TYPE> cType, final Class<FT> cFeedbackType, final Class<STATUS> cStatus)
+		factory(JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER> fJob,final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<TYPE> cType, final Class<FT> cFeedbackType, final Class<STATUS> cStatus)
 	{
 		return new SystemJobRestService<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER>(fJob,cL,cD,cCategory,cType,cFeedbackType,cStatus);
 	}

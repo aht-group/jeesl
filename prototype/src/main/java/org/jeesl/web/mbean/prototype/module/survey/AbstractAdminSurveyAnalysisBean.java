@@ -152,9 +152,9 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 	protected void initSuperAnalysis(String userLocale, JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
 			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
-			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
+			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
 			JeeslIoDomainFacade<L,D,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,?,?> fDomain,
-			JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
+			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 		super.initSuperSurvey(lp,bMessage,fTemplate,fCore,fAnalysis,bSurvey);

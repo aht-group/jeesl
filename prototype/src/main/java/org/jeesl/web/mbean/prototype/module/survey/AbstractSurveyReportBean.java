@@ -118,7 +118,7 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 	final static Logger logger = LoggerFactory.getLogger(AbstractSurveyReportBean.class);
 
 	@SuppressWarnings("unused") //Required for future improvements
-	private JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
+	private JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
 	
 	private McOptionDataSetFactory<OPTION> mfOption;	
 	private final EjbSurveyDomainQueryFactory<L,D,DOMAIN,QUERY,PATH> efDomainQuery;
@@ -175,8 +175,8 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 	protected void initSuperReport(String userLocale,JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fCore,
 			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
-			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis,
-			JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
+			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis,
+			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey,
 			JeeslReportAggregationLevelFactory tfName)
 	{
