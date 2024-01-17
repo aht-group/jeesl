@@ -2,13 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	
-	
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
-	xmlns:aupAdmin="http://ahtutils.sourceforge.net/prototype/admin"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
@@ -388,6 +383,10 @@
 						<p:column>
 							<f:facet name="header">#{msg.jeeslName}</f:facet>
 							<h:outputText value="#{o.name[cc.attrs.bean.sbhLocale.selection.code].lang}" />
+						</p:column>
+						<p:column rendered="#{cc.attrs.bean.question.showScore}">
+							<f:facet name="header"><jtp:label entity="SurveyOption" code="score"/></f:facet>
+							<h:outputText value="#{o.score}" />
 						</p:column>
 					</p:dataTable>
 				</h:form>

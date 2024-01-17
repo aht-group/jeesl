@@ -32,10 +32,10 @@ public interface JeeslSurveyBean<L extends JeeslLang, D extends JeeslDescription
 					SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
 					SS extends JeeslSurveyStatus<L,D,SS,?>,
 					SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-					TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
+					TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,?,SECTION,OPTIONS,?>,
 					VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 					TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-					TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
+					
 					SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
 					QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
 					CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
