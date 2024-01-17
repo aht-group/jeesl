@@ -35,32 +35,28 @@ import org.jeesl.model.json.JsonFlatFigures;
 import org.jeesl.model.json.module.survey.JsonSurveyValue;
 import org.jeesl.model.json.module.survey.JsonSurveyValues;
 
-public interface JeeslSurveyAnalysisFacade <L extends JeeslLang, D extends JeeslDescription,
-											SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
-											SS extends JeeslSurveyStatus<L,D,SS,?>,
-											SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-											TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,?,?,SECTION,OPTIONS,ANALYSIS>,
-											VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-											SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-											QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
-											QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-											SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-											UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
-											ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
-											MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
-											DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
-											OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
-											OPTION extends JeeslSurveyOption<L,D>,
+public interface JeeslSurveyAnalysisFacade <SURVEY extends JeeslSurvey<?,?,?,?,DATA>,
+											
+											
+											QUESTION extends JeeslSurveyQuestion<?,?,?,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
+											QE extends JeeslSurveyQuestionElement<?,?,QE,?>,
+											SCORE extends JeeslSurveyScore<?,?,?,QUESTION>,
+											UNIT extends JeeslSurveyQuestionUnit<?,?,UNIT,?>,
+											ANSWER extends JeeslSurveyAnswer<?,?,QUESTION,MATRIX,DATA,OPTION>,
+											MATRIX extends JeeslSurveyMatrix<?,?,ANSWER,OPTION>,
+											DATA extends JeeslSurveyData<?,?,SURVEY,ANSWER,CORRELATION>,
+											OPTIONS extends JeeslSurveyOptionSet<?,?,?,OPTION>,
+											OPTION extends JeeslSurveyOption<?,?>,
 											CORRELATION extends JeeslSurveyCorrelation<DATA>,
-											DOMAIN extends JeeslDomain<L,DENTITY>,
-											QUERY extends JeeslDomainQuery<L,D,DOMAIN,PATH>,
-											PATH extends JeeslDomainPath<L,D,QUERY,DENTITY,DATTRIBUTE>,
-											DENTITY extends JeeslRevisionEntity<L,D,?,?,DATTRIBUTE,?>,
-											DATTRIBUTE extends JeeslRevisionAttribute<L,D,DENTITY,?,?>,
-											ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,DATTRIBUTE>,
-											AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
-											TOOL extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,DATTRIBUTE,AQ,TOOLT>,
-											TOOLT extends JeeslStatus<L,D,TOOLT>>
+											DOMAIN extends JeeslDomain<?,DENTITY>,
+											QUERY extends JeeslDomainQuery<?,?,DOMAIN,PATH>,
+											PATH extends JeeslDomainPath<?,?,QUERY,DENTITY,DATTRIBUTE>,
+											DENTITY extends JeeslRevisionEntity<?,?,?,?,DATTRIBUTE,?>,
+											DATTRIBUTE extends JeeslRevisionAttribute<?,?,DENTITY,?,?>,
+											ANALYSIS extends JeeslSurveyAnalysis<?,?,?,DOMAIN,DENTITY,DATTRIBUTE>,
+											AQ extends JeeslSurveyAnalysisQuestion<?,?,QUESTION,ANALYSIS>,
+											TOOL extends JeeslSurveyAnalysisTool<?,?,QE,QUERY,DATTRIBUTE,AQ,TOOLT>,
+											TOOLT extends JeeslStatus<?,?,TOOLT>>
 	extends JeeslFacade
 {
 	TOOL load(TOOL tool);

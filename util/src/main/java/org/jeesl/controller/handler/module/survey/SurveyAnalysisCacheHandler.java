@@ -53,11 +53,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class SurveyAnalysisCacheHandler<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
-										SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
-										SS extends JeeslSurveyStatus<L,D,SS,?>,
-										SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
+										SURVEY extends JeeslSurvey<L,D,?,TEMPLATE,DATA>,
+										
 										VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
-										TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,ANALYSIS>,
+										TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,ANALYSIS>,
 										VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 										TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 										TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
@@ -65,7 +64,7 @@ public class SurveyAnalysisCacheHandler<L extends JeeslLang, D extends JeeslDesc
 										QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,?,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
 										CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 										QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-										SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
+										SCORE extends JeeslSurveyScore<L,D,?,QUESTION>,
 										UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 										ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 										MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
@@ -92,12 +91,12 @@ public class SurveyAnalysisCacheHandler<L extends JeeslLang, D extends JeeslDesc
 	private static boolean debugOnInfo = true;
 	
 	private final JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
-	private final JeeslSurveyAnalysisFacade<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis;
+	private final JeeslSurveyAnalysisFacade<SURVEY,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis;
 	
 	private TOOLCACHETEMPLATE jobTemplate;
 
 	public SurveyAnalysisCacheHandler(JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
-			JeeslSurveyAnalysisFacade<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis)
+			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis)
 	{
 		this.fJob=fJob;
 		this.fAnalysis=fAnalysis;
