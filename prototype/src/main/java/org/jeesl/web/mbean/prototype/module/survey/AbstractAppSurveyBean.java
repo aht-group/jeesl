@@ -69,7 +69,7 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 						ATT extends JeeslStatus<L,D,ATT>,
 						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>>
 					implements Serializable,
-			JeeslSurveyBean<SURVEY,TEMPLATE,VERSION,TS,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,CORRELATION,ATT>
+			JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppSurveyBean.class);

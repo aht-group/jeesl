@@ -164,7 +164,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 		return new SurveyScoreProcessor<>(ejbQuestion(),ejbFilterAnswer());
 	}
 	
-	public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage, final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey, JeeslSurveyBean<SURVEY,TEMPLATE,VERSION,TS,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,CORRELATION,ATT> bSurvey)
+	public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage, final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey, JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 		return new SurveyHandler<>(callback,this,bMessage,fSurvey,bSurvey,bSurvey);
 	}

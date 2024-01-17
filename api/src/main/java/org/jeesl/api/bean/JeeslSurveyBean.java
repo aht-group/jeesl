@@ -22,21 +22,19 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 public interface JeeslSurveyBean<
 					SURVEY extends JeeslSurvey<?,?,?,TEMPLATE,?>,
-					TEMPLATE extends JeeslSurveyTemplate<?,?,?,TEMPLATE,VERSION,TS,?,SECTION,OPTIONS,?>,
-					VERSION extends JeeslSurveyTemplateVersion<?,?,TEMPLATE>,
-					TS extends JeeslSurveyTemplateStatus<?,?,TS,?>,
+					TEMPLATE extends JeeslSurveyTemplate<?,?,?,TEMPLATE,?,?,?,SECTION,OPTIONS,?>,
+
 					
 					SECTION extends JeeslSurveySection<?,?,TEMPLATE,SECTION,QUESTION>,
-					QUESTION extends JeeslSurveyQuestion<?,?,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
+					QUESTION extends JeeslSurveyQuestion<?,?,SECTION,CONDITION,VALIDATION,QE,?,?,OPTIONS,OPTION,?>,
 					CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 					VALIDATION extends JeeslSurveyValidation<?,?,QUESTION,?>, //TODO tk  add VALG
 					QE extends JeeslSurveyQuestionElement<?,?,QE,?>,
-					SCORE extends JeeslSurveyScore<?,?,?,QUESTION>,
-					UNIT extends JeeslSurveyQuestionUnit<?,?,UNIT,?>,
+					
 					
 					OPTIONS extends JeeslSurveyOptionSet<?,?,TEMPLATE,OPTION>,
 					OPTION extends JeeslSurveyOption<?,?>,
-					CORRELATION extends JeeslSurveyCorrelation<?>,
+					
 					ATT extends JeeslStatus<?,?,ATT>>
 				extends JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION>
 {	
