@@ -3,7 +3,7 @@ package org.jeesl.factory.graph;
 import java.io.File;
 import java.io.IOException;
 
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.mc.graph.GraphWorkflowFactory;
 import org.jeesl.model.xml.module.workflow.Workflow;
 import org.metachart.factory.xml.graph.XmlClusterFactory;
@@ -56,7 +56,7 @@ public class TestWorkflowGraphFactory
 	
 	public static void main(String[] args) throws Exception
     {
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		
 		TestWorkflowGraphFactory test = new TestWorkflowGraphFactory();
 		test.workflow();

@@ -1,8 +1,6 @@
 package net.sf.ahtutils.factory.txt.sync;
 
-import net.sf.ahtutils.test.AbstractJeeslTest;
-
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.factory.txt.system.sync.TxtDataUpdateFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
@@ -11,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.test.AbstractJeeslTest;
 
 public class TestTxtDataUpdateFactory extends AbstractJeeslTest
 {
@@ -46,7 +46,7 @@ public class TestTxtDataUpdateFactory extends AbstractJeeslTest
     
 	public static void main (String[] args) throws Exception
 	{
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		
 		TestTxtDataUpdateFactory test = new TestTxtDataUpdateFactory();
 		test.init();

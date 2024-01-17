@@ -1,7 +1,7 @@
 package org.jeesl.controller.exlp.gc;
 
 import org.apache.commons.configuration.Configuration;
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,7 @@ public class CliGcLogProcessor
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = JeeslUtilTestBootstrap.init();
+		Configuration config = JeeslBootstrap.init();
 		
 		CliGcLogProcessor cli = new CliGcLogProcessor(config);
 		cli.jboss();

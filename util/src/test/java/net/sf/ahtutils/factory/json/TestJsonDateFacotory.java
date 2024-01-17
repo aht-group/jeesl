@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import org.jeesl.AbstractJeeslUtilTest;
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.json.util.JsonDateFactory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -78,7 +78,7 @@ public class TestJsonDateFacotory extends AbstractJeeslUtilTest
        
 	public static void main (String[] args) throws Exception
 	{
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		
 		TestJsonDateFacotory test = new TestJsonDateFacotory();
 		test.yearQuarterMonthWeekDay();

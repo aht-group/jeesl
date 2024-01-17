@@ -3,7 +3,7 @@ package net.sf.ahtutils.db;
 import java.io.File;
 
 import org.apache.commons.configuration.Configuration;
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.io.db.sql.SqlTableCounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class SqlTableCounterTest
 	
     public static void main(String[] args) throws Exception
     {
-    	Configuration config = JeeslUtilTestBootstrap.init();
+    	Configuration config = JeeslBootstrap.init();
     	
     	File db1 = new File(config.getString(cDb1));
     	File db2 = new File(config.getString(cDb2));

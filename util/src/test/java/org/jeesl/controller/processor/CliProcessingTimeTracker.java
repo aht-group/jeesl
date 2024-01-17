@@ -1,6 +1,6 @@
 package org.jeesl.controller.processor;
 
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class CliProcessingTimeTracker
 	
 	public static void main(String[] args) throws Exception
 	{
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		CliProcessingTimeTracker cli = new CliProcessingTimeTracker();
 		
 		cli.basic();

@@ -2,6 +2,7 @@ package org.jeesl;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.jeesl.controller.handler.io.log.LoggerBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +20,11 @@ public class JeeslBootstrap
 	
 	public static Configuration init(String configFile)
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.path("jeesl/util/config");
-		loggerInit.init();
+		LoggerBootstrap.instance("log4j2-jeesl.xml").path("jeesl/system/io/log").init();
+		
+//		LoggerInit loggerInit = new LoggerInit("log4j.xml");
+//		loggerInit.path("jeesl/util/config");
+//		loggerInit.init();
 						
 		ConfigLoader.addString(configFile);
 		Configuration config = ConfigLoader.init();					

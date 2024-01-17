@@ -1,7 +1,7 @@
 package org.jeesl.controller.report.domain.finance;
 
 import org.jeesl.AbstractJeeslUtilTest;
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.xml.domain.finance.XmlSignatureFactory;
 import org.jeesl.factory.xml.domain.finance.XmlSignaturesFactory;
 import org.jeesl.model.xml.module.finance.Signature;
@@ -42,7 +42,7 @@ public class TestSignatureReport extends AbstractJeeslUtilTest
 	
 	public static void main(String[] args) throws Exception
     {
-    	JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
     	JaxbUtil.info(TestSignatureReport.structure());
     }
 }

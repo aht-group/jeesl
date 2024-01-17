@@ -13,7 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.configuration.Configuration;
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -125,7 +125,7 @@ public class CliSmtpMailSender
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = JeeslUtilTestBootstrap.init();
+		Configuration config = JeeslBootstrap.init();
 
 		CliSmtpMailSender cli = new CliSmtpMailSender(config);
 //		cli.authenticate(config.getString(ConfigKey.netSmtpUser), config.getString(ConfigKey.netSmtpPwd));

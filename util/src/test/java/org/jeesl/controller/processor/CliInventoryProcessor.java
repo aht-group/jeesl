@@ -1,6 +1,6 @@
 package org.jeesl.controller.processor;
 
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.processor.pcinventory.PcInventoryPostProcessor;
 import org.jeesl.controller.processor.pcinventory.PcInventoryProcessor;
 import org.jeesl.model.xml.module.inventory.Inventory;
@@ -16,7 +16,7 @@ public class CliInventoryProcessor
 	
 	public static void main(String[] args) throws Exception
 	{
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		
 		Inventory inventory = new Inventory();
 		String s = StringIO.loadTxt("src/test/resources/data/txt/inventory.txt");

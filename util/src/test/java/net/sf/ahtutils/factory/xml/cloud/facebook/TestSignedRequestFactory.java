@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -109,7 +109,7 @@ public class TestSignedRequestFactory extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException
     {
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		TestSignedRequestFactory.initStatic();	
 		
 		boolean saveReference = true;

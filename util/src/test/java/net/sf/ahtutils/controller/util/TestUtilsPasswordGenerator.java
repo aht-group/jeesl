@@ -1,6 +1,6 @@
 package net.sf.ahtutils.controller.util;
 
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.txt.system.security.user.TxtPasswordGenerator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class TestUtilsPasswordGenerator
 	
 	public static void main (String[] args) throws Exception
 	{
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		logger.debug("Test");
 		TestUtilsPasswordGenerator test = new TestUtilsPasswordGenerator();
 		test.direct();

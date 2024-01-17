@@ -1,6 +1,6 @@
 package net.sf.ahtutils.factory.txt;
 
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.txt.module.calendar.TxtPeriodJodaFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class TestTxtPeriodFactory extends AbstractJeeslTest
        
 	public static void main (String[] args) throws Exception
 	{
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		
 		TestTxtPeriodFactory test = new TestTxtPeriodFactory();
 		test.init();

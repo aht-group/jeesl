@@ -1,13 +1,13 @@
 package net.sf.ahtutils.test.reflection;
 
-import net.sf.ahtutils.test.AbstractJeeslTest;
-import net.sf.ahtutils.xml.aht.Aht;
-
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.test.AbstractJeeslTest;
+import net.sf.ahtutils.xml.aht.Aht;
 
 public class TestClassForName extends AbstractJeeslTest
 {
@@ -29,7 +29,7 @@ public class TestClassForName extends AbstractJeeslTest
 	
 	public static void main(String args[]) throws Exception
     {
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		
 		TestClassForName test = new TestClassForName();
 		test.test();

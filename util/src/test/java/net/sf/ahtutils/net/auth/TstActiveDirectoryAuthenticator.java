@@ -1,6 +1,6 @@
 package net.sf.ahtutils.net.auth;
 
-import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.JeeslBootstrap;
 import org.jeesl.util.db.ActiveDirectoryAuthenticator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class TstActiveDirectoryAuthenticator
 	
 	public static void main (String[] args) throws Exception
 	{
-		JeeslUtilTestBootstrap.init();
+		JeeslBootstrap.init();
 		TstActiveDirectoryAuthenticator test = new TstActiveDirectoryAuthenticator();
 		test.direct();
 	}
