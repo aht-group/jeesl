@@ -89,6 +89,7 @@ $border: $border-width solid $border-colour;
 				content: '';
 				display: block;
 				position: absolute;
+				transition: border-color $transition-duration linear;
 				width: calc(100% - 2 * #{$wide-spacing});
 			}
 		}
@@ -159,6 +160,10 @@ $border: $border-width solid $border-colour;
 
 .jeesl-greyscale {
 	filter: grayscale(1);
+}
+
+.jeesl-block {
+	display: block;
 }
 
 .ui-corner-all {
@@ -400,6 +405,42 @@ $border: $border-width solid $border-colour;
 	
 	.ui-button {
 		width: auto;
+	}
+}
+
+.jeesl-input-container {
+	display: flex;
+	
+	.ui-inputtext, .ui-inputtextarea {
+		flex-shrink: 1;
+		width: 0;
+	}
+	
+	.ui-commandlink {
+		flex-grow: 1;
+		height: auto;
+		margin: 0 0 0 6px;
+		padding: 0;
+		
+		> img {
+			height: auto;
+			width: 100%;
+		}
+	}
+	
+	.ui-button {
+		align-items: center;
+		display: flex;
+		flex-grow: 1;
+		flex-shrink: 0;
+		justify-content: center;
+		margin: 0 0 0 6px;
+		overflow: hidden;
+		padding: 0 $slim-spacing;
+		
+		.ui-button-text {
+			padding: 0;
+		}
 	}
 }
 
@@ -1283,6 +1324,24 @@ img.jeesl-icon, .jeesl-icon img {
 	}
 	
 	> .ui-inputtextarea, > .ui-inputtext, > .jeesl-input-label {
+		&:first-child {
+			border-radius: $border-radius-left;
+		}
+		
+		&:last-child {
+			border-radius: $border-radius-right;
+		}
+	}
+}
+
+.jeesl-button-group {
+	.ui-button {
+		border-radius: 0;
+		
+		&:not(:first-child) {
+			margin-left: -$border-width;
+		}
+		
 		&:first-child {
 			border-radius: $border-radius-left;
 		}

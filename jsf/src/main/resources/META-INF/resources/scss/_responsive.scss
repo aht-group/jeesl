@@ -8,7 +8,7 @@ $enable-pointer-cursor-for-buttons: true;
 @import '_responsiveCommon';
 @import '_responsiveCharts';
 
-@mixin overlay() {
+@mixin pseudo-overlay() {
 	bottom: 0;
 	content: '';
 	left: 0;
@@ -18,7 +18,7 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 @mixin background-overlay($background-color) {
-	@include overlay;
+	@include pseudo-overlay;
 	
 	background: $background-color;
 	opacity: 0;
@@ -438,7 +438,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 					
 			.jeesl-overlay-container {
-//				@include overlay;
+//				@include pseudo-overlay;
 
 				visibility: hidden;
 				pointer-events: all;
@@ -504,7 +504,7 @@ $enable-pointer-cursor-for-buttons: true;
 							transition: height .2s linear;
 							
 							.jeesl-field-tip-content {
-								@include overlay;
+								@include pseudo-overlay;
 								
 								bottom: auto;
 								box-shadow: none;
@@ -575,11 +575,11 @@ $enable-pointer-cursor-for-buttons: true;
 	height: auto;
 	
 	img {
-		height: 12px;
+		height: $header-icon-height;
 		padding: 0 4px;
 			
 		@media (max-width: 768px) {
-			height: 29px;
+			height: $header-icon-height-mobile;
 			padding: 0 $ls-element-padding-vertical;
 		}
 	}
@@ -602,12 +602,15 @@ $enable-pointer-cursor-for-buttons: true;
 		margin: 0;
 		padding: $half-spacing 0;
 		transition: background .2s linear;
+		width: auto;
 
 		@media (max-width: 768px) {
+			align-items: stretch;
 			padding: 7px 0 6px;
 			
 			&:before {
 			    border-left: $border;
+			    height: auto;
 			}
 		}
 		
@@ -621,12 +624,19 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	.jeesl-icon-select {
+		align-items: center;
 		box-shadow: inherit;
 		z-index: 1;
 		
+		@media (max-width: 768px) {
+			min-height: $header-icon-height-mobile;
+			position: unset;
+		}
+		
 		.ui-selectonemenu-label {
 			background: transparent;
-			padding: 0 !important;
+			min-height: $header-icon-height;
+			padding: 7px 0 6px !important;
 		}
 		
 		.ui-selectonemenu-trigger {
@@ -637,6 +647,47 @@ $enable-pointer-cursor-for-buttons: true;
 			left: auto !important;
 			right: 0;
 			text-align: center;
+			
+			@media (max-width: 768px) {
+				border-radius: 0;
+			}
+			
+			table.ui-selectonemenu-items {
+				width: 100%;
+				
+				@media (max-width: 768px) {
+					.ui-selectonemenu-item.ui-selectonemenu-row {
+						&.ui-state-highlight > td:after {
+							border-color: $dark-colour;
+						}
+						
+						&.ui-state-hover {
+							background: $white-100;
+						}
+						
+						> td {
+							height: $ls-element-height-mobile;
+							padding: $regular-spacing $wide-spacing;
+							position: relative;
+							text-align: left;
+							
+							&:after {
+								border-bottom: $separator-thickness-mobile solid $bright-grey;
+								bottom: 0;
+								content: '';
+								display: block;
+								position: absolute;
+								transition: border-color $transition-duration linear;
+								width: calc(100% - 2 * #{$wide-spacing});
+							}
+							
+							&:hover:after {
+								border-color: $dark-colour;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -654,6 +705,10 @@ $enable-pointer-cursor-for-buttons: true;
 				display: flex;
 				flex-direction: row-reverse;
 				height: 100%;
+			}
+			
+			.jeesl-icon-select {
+				min-width: auto !important;
 			}
 			
 			@include jeesl-titlebar-actions;
@@ -832,6 +887,7 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.p-col {
 				&.ui-outputlabel {
+					flex-grow: 0;
 					word-break: break-all;
 					
 					@media (max-width: 768px) {
@@ -856,10 +912,20 @@ $enable-pointer-cursor-for-buttons: true;
 							transform: none;
 						}
 					}
+					
+					&.p-md-0 {
+						padding-right: 0;
+						
+						+ .p-col {
+							padding-left: 0;
+						}
+					}
 				}
 				
 				&:not(.ui-outputlabel) {
 					overflow-wrap: anywhere;
+					
+					flex-grow: 1;
 					
 					@media (max-width: 768px) {
 						line-height: normal;
@@ -868,12 +934,11 @@ $enable-pointer-cursor-for-buttons: true;
 						// Overriding inline css
 						width: 100% !important;
 					}
-					
-					@for $i from 1 to 13 {
-						&.p-col-count-#{$i} {
-							width: math.div(75, $i) * 1%;
-						}
-					}
+//					@for $i from 1 to 13 {
+//						&.p-col-count-#{$i} {
+//							width: math.div(75, $i) * 1%;
+//						}
+//					}
 
 					> .ui-inputfield, .ui-selectonemenu, .ui-spinner, .ui-selectcheckboxmenu, .ui-selectmanybutton, .ui-chips {
 						border-radius: $border-radius;
@@ -887,15 +952,21 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 					
-					> span:not(.jeesl-input-container, .ui-autocomplete) {
+					> span:not(.jeesl-input-container, .jeesl-datepicker, .ui-autocomplete) {
 						border-radius: $border-radius;
-						display: inline-block;
 						padding: 0;
+						
+						&:not(.jeesl-block) {
+							display: inline-block;
+						
+							@media (max-width: 768px) {
+								display: flex;
+							}
+						}
 						
 						@media (max-width: 768px) {
 							align-items: center;
 							background: $light-grey;
-							display: flex;
 							padding: $regular-spacing;
 							
 							&.jeesl-center {
@@ -908,45 +979,46 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 					
-					> .jeesl-input-container {
-						display: flex;
-						
-						.ui-inputtext, .ui-inputtextarea {
-							flex-shrink: 1;
-//							width: 85%;
-							width: auto;
-							
-//							&:last-child {
+//					> .jeesl-input-container {
+//						display: flex;
+//						
+//						.ui-inputtext, .ui-inputtextarea {
+//							flex-shrink: 1;
+////							width: 85%;
+//							width: auto;
+//							
+////							&:last-child {
+////								width: 100%;
+////							}
+//						}
+//						
+//						.ui-commandlink {
+//							flex-grow: 1;
+//							height: auto;
+//							margin: 0 0 0 6px;
+//							padding: 0;
+//							
+//							> img {
+//								height: auto;
 //								width: 100%;
 //							}
-						}
-						
-						.ui-commandlink {
-							flex-grow: 1;
-							height: auto;
-							margin: 0 0 0 6px;
-							padding: 0;
-							
-							> img {
-								height: auto;
-								width: 100%;
-							}
-						}
-						
-						.ui-button {
-							align-items: center;
-							display: flex;
-							flex-grow: 1;
-							justify-content: center;
-							margin: 0 0 0 6px;
-							overflow: hidden;
-							padding: 0;
-							
-							.ui-button-text {
-								padding: 0;
-							}
-						}
-					}
+//						}
+//						
+//						.ui-button {
+//							align-items: center;
+//							display: flex;
+//							flex-grow: 1;
+//							flex-shrink: 0;
+//							justify-content: center;
+//							margin: 0 0 0 6px;
+//							overflow: hidden;
+//							padding: 0 $slim-spacing;
+//							
+//							.ui-button-text {
+//								padding: 0;
+//							}
+//						}
+//					}
 					
 					> .ui-button {
 						width: auto;
@@ -1361,11 +1433,20 @@ $enable-pointer-cursor-for-buttons: true;
 	&.jeesl-editor {
 		.ui-panel-content {
 			overflow: visible;
-	
+
 			@include jeesl-ck-editor;
 			
 			>.jeesl-ck-editor:last-child {
 				border-radius: $border-radius-bottom;
+			}
+			
+			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+				border-top-width: $border-width;
+				
+				&:last-child {
+					border-right-width: $border-width;
+					border-top-right-radius: $border-radius;
+				}
 			}
 		}
 		
@@ -1899,6 +1980,65 @@ $enable-pointer-cursor-for-buttons: true;
 			margin: 5px 0 0;
 			border-width: 4px 0 0;
 		}
+	}
+
+	.pvtUi {
+		width: 100%;
+		
+		> tr {
+			&:first-child > td {
+				border-top: 0;
+			}
+			
+			&:nth-child(2) {
+				border-bottom: $header-underline;
+			}
+			
+			> td {
+				&:first-child {
+					border-left: 0;
+				}
+				
+				&:last-child {
+					border-right: 0;
+				}
+			}
+		}
+		
+		.pvtVals {
+			text-align: left;
+			
+			.pvtAggregator {
+				margin-bottom: 0;
+			}
+		}
+		
+		.pvtAxisContainer, .pvtVals, .pvtAxisLabel, .pvtColLabel, .pvtTotalLabel, .pvtRowLabel {
+			background: $panel-header-gradient;
+			box-shadow: $highlight-shadow;
+		}
+		
+		.pvtRendererArea {
+			padding: $regular-spacing $regular-spacing 0;
+			
+			.pvtTable {
+				width: 100%;
+			}
+		}
+	}
+		
+	.pvtUi, .pvtTable {
+		th:not(.pvtAxisLabel, .pvtColLabel, .pvtTotalLabel, .pvtRowLabel) {
+			background: transparent;
+		}
+		
+		th, td {
+			border-color: $border-colour;
+		}
+	}
+	
+	.pvt-button {
+		margin: $regular-spacing;
 	}
 }
 
@@ -2566,7 +2706,7 @@ body, .ui-widget {
 				}
 				
 				&:before {
-					@include overlay();
+					@include pseudo-overlay();
 					
 					background: linear-gradient(to bottom, $dark-colour, transparent);
 //				    content: '';
@@ -2867,7 +3007,7 @@ body, .ui-widget {
 			}
 			
 			.jeesl-overlay-container {
-//				@include overlay;
+//				@include pseudo-overlay;
 
 				background: $medium-colour;
 				border: none;
@@ -3002,7 +3142,7 @@ body, .ui-widget {
 								}
 								
 								.jeesl-field-tip-content {
-									@include overlay;
+									@include pseudo-overlay;
 									
 									bottom: auto;
 									display: block;
@@ -4267,6 +4407,10 @@ body, .ui-widget {
 }
 
 .jeesl-input-grid {
+	&:not(:last-child) {
+		margin-bottom: $regular-spacing;
+	}
+	
 	.p-field {
 		.p-col {
 			@include icon-default-size;
@@ -4304,7 +4448,7 @@ body, .ui-widget {
 				}
 				
 				.jeesl-ck-editor {
-					border: $border;
+//					border: $border;
 					border-radius: $border-radius;
 					margin: 0;
 				}
@@ -4433,6 +4577,61 @@ body, .ui-widget {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0; 
 		margin-bottom: 0;
+	}
+}
+
+.jeesl-captcha-img {
+	border-radius: $border-radius;
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
+	
+	&:before {
+		@include pseudo-overlay;
+		
+		border: $border;
+		border-radius: inherit;
+	}
+	
+	> img {
+		border-radius: #{1 + $border-radius};
+	}
+}
+
+.jeesl-ai-chat-message {
+	display: flex;
+	flex-direction: column;
+	padding: $half-spacing $wide-spacing;
+	
+	.ui-outputlabel {
+		align-items: center;
+		display: flex;
+		padding: $half-spacing 0 $slim-spacing;
+		
+		&:before {
+			align-items: center;
+			background: $dark-colour;
+			border-radius: 50%;
+			color: $white-100;
+			display: flex;
+			font-size: 10px;
+			justify-content: center;
+			margin-right: $half-spacing;
+			height: $wide-spacing;
+			width: $wide-spacing;
+		}
+		
+		&.jeesl-ai-chat-request:before {
+			content: 'Q';
+		}
+		
+		&.jeesl-ai-chat-response:before {
+			content: 'A';
+		}
+	}
+	
+	.jeesl-ai-chat-text {
+		padding: 0 #{$half-spacing + $wide-spacing};
 	}
 }
 
