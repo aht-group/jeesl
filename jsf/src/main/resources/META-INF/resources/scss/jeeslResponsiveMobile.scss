@@ -844,11 +844,53 @@ html, body, .ui-widget {
 		margin: $ls-element-padding-vertical 0;
 	}
 		
-	.pf-action-icon, .jeesl-action-icon {
+	.pf-action-icon, .jeesl-action-icon, .jeesl-icon-select .ui-selectonemenu-label {
+		align-items: stretch;
 		padding: $ls-element-padding-vertical 0;
 		
 		&:before {
 		    border-left: $border;
+		    height: auto;
+		}
+	}
+	
+	.jeesl-icon-select {
+		min-height: calc(#{$element-height-mobile} - 2 * #{$ls-element-padding-vertical});
+		position: unset;
+		
+		.ui-selectonemenu-panel {
+			border-radius: 0;
+			
+			table.ui-selectonemenu-items .ui-selectonemenu-item.ui-selectonemenu-row {
+				&.ui-state-highlight > td:after {
+					border-color: $dark-color;
+				}
+				
+				&.ui-state-hover {
+					background: $white-100;
+				}
+				
+				> td {
+					height: $ls-element-height-mobile;
+					padding: $regular-spacing $wide-spacing;
+					position: relative;
+					text-align: left;
+					
+					&:after {
+						border-bottom: $separator-thickness-mobile solid $bright-grey;
+						bottom: 0;
+						content: '';
+						display: block;
+						position: absolute;
+						transition: border-color $transition-duration linear;
+						width: calc(100% - 2 * #{$wide-spacing});
+					}
+					
+					&:hover:after {
+						border-color: $dark-colour;
+					}
+				}
+			}
 		}
 	}
 }
@@ -984,11 +1026,15 @@ html, body, .ui-widget {
 					width: 100%;
 				}
 				
-				> span:not(.jeesl-input-container) {
+				> span:not(.jeesl-input-container, jeesl-datepicker, .ui-autocomplete) {
 					align-items: center;
 					background: $light-grey;
 					display: flex;
 					padding: $regular-spacing;
+					
+					&:not(.jeesl-block) {
+						display: flex;
+					}
 							
 					&.jeesl-center {
 						justify-content: center;
@@ -1242,8 +1288,20 @@ html, body, .ui-widget {
 		thead th {
 			height: $element-height-mobile;
 			
-			&.ui-sortable-column .ui-column-title {
-				margin-right: 16px;
+			&.ui-sortable-column {
+				.ui-column-title {
+					margin-right: 16px;
+				}
+				
+				.ui-icon {
+					&.ui-icon-triangle-1-s {
+						top: 8px;
+					}
+					
+					&.ui-icon-triangle-1-n {
+						top: -3px;
+					}
+				}
 			}
 			
 			&.ui-filter-column .ui-column-title {

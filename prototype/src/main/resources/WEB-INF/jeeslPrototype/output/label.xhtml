@@ -22,7 +22,7 @@
 	<c:set var="field" value="#{field}"/>
 	<c:set var="validated" value="#{validated}"/>
 
-	<p:outputLabel rendered="#{rendered}" styleClass="#{mandatory ? 'mandatory' : ''}">
+	<p:outputLabel rendered="#{rendered}" styleClass="#{mandatory ? 'mandatory' : ''} #{not empty styleClass ? styleClass : ''}">
         <!-- <c:if test="#{id}"><f:attribute name="id" value="olwithOverlay"/></c:if >-->
 		<!-- <c:if test="#{not empty id}"><f:attribute name="id" value="#{id}_ol"/></c:if> -->
         

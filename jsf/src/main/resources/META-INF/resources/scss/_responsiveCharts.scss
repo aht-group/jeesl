@@ -13,3 +13,24 @@
 		}
 	}
 }
+
+.highcharts-button {
+	&.highcharts-button-hover .highcharts-button-box {
+		fill: $bright-colour;
+		stroke: $bright-colour;
+		transition: fill $transition-duration linear, stroke $transition-duration linear;
+	}
+	
+	text {
+		fill: $white-100 !important;
+		font-family: $font-family-base;
+		font-weight: 700 !important;
+		text-decoration: none !important;
+		transform: translateY(1px);
+	}
+	
+	.highcharts-button-box {
+		fill: $dark-colour;
+		stroke: $dark-colour;
+	}
+}

@@ -1154,6 +1154,12 @@ html, body, .ui-widget {
 .jeesl-datatable table thead th.ui-sortable-column .ui-column-title {
   margin-right: 16px;
 }
+.jeesl-datatable table thead th.ui-sortable-column .ui-icon.ui-icon-triangle-1-s {
+  top: 8px;
+}
+.jeesl-datatable table thead th.ui-sortable-column .ui-icon.ui-icon-triangle-1-n {
+  top: -3px;
+}
 .jeesl-datatable table thead th.ui-filter-column .ui-column-title {
   margin-bottom: 84px;
 }
