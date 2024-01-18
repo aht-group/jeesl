@@ -26,6 +26,7 @@ import org.jeesl.factory.txt.module.survey.TxtSurveySectionFactory;
 import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandler;
 import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandlerCallback;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
+import org.jeesl.interfaces.controller.processor.module.survey.JeeslScoreProcessor;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateCategory;
@@ -73,13 +74,12 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	private final JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache;
 	
 	private final JeeslSurveyHandlerCallback<SECTION> callback;
-	
+	private JeeslScoreProcessor<ANSWER> scoreProcessor; public void setScoreProcessor(JeeslScoreProcessor<ANSWER> scoreProcessor) {this.scoreProcessor = scoreProcessor;}
+
 	private final SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION> condition; public SurveyConditionalHandler<TEMPLATE, SECTION, QUESTION, CONDITION, ANSWER, OPTION> getCondition() {return condition;}
 	private final SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> validation; public SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> getValidation() {return validation;}
 
 	private final Class<SECTION> cSection;
-
-	
 	
 	private final EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION> efAnswer;
 	private final EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix;
@@ -339,6 +339,8 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 			a.setData(surveyData);
 			if(efAnswer.belongsToSection(a,section, true))
 			{
+				if(Objects.nonNull(a.getOption())) {a.setOption(bSurvey.getMapOptionId().get(a.getOption().getId()));}
+				if(Objects.nonNull(scoreProcessor)) {scoreProcessor.calculateScore(a);}
 				answersToSave.add(a);
 //				if(debugOnInfo)
 				{

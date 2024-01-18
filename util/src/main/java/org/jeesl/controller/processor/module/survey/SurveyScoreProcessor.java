@@ -10,7 +10,9 @@ import org.exlp.util.io.StringUtil;
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyQuestionFactory;
+import org.jeesl.interfaces.controller.processor.module.survey.JeeslScoreProcessor;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.util.filter.ejb.module.survey.EjbSurveyAnswerFilter;
@@ -18,8 +20,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SurveyScoreProcessor <SECTION extends JeeslSurveySection<?,?,?,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,?,?,?,?>,
-									ANSWER extends JeeslSurveyAnswer<?,?,QUESTION,?,?,?>>
+									QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,?,?,OPTION,?>,
+									ANSWER extends JeeslSurveyAnswer<?,?,QUESTION,?,?,OPTION>,
+									OPTION extends JeeslSurveyOption<?,?>>
+				implements JeeslScoreProcessor<ANSWER>
 {
 	final static Logger logger = LoggerFactory.getLogger(SurveyScoreProcessor.class);
 	
@@ -100,6 +104,21 @@ public class SurveyScoreProcessor <SECTION extends JeeslSurveySection<?,?,?,SECT
 		if(Objects.nonNull(q) && BooleanComparator.active(q.getCalculateScore()))
 		{
 			logger.info("Calculate Score");
+		}
+	}
+
+	@Override public void calculateScore(ANSWER answer)
+	{
+		logger.info("Calculate Score for "+answer.toString());
+		if(Objects.nonNull(answer.getQuestion()) && BooleanComparator.active(answer.getQuestion().getShowScore()) && BooleanComparator.active(answer.getQuestion().getCalculateScore()))
+		{
+			if(BooleanComparator.active(answer.getQuestion().getShowSelectOne()) && Objects.nonNull(answer.getOption()))
+			{
+				logger.info("Question: "+answer.getQuestion().getId());
+				logger.info("Option: "+answer.getOption().getId());
+				logger.info("Score: "+answer.getOption().getScore());
+				answer.setScore(answer.getOption().getScore());
+			}
 		}
 	}
 }

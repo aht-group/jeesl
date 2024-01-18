@@ -38,9 +38,10 @@
 				<p:panelGrid columns="3" columnClasses="#{section.columnClasses}">
 					<jtp:label entity="SurveyQuestion"/>
 					<jtp:label entity="SurveyAnswer"/>
+					<jtp:label entity="SurveyAnswer" code="score"/>
 				</p:panelGrid>
 				<ui:repeat var="q" value="#{appSurveyBean.mapQuestion[section]}" id="repeatQuestions">
-					<p:panelGrid columns="2" columnClasses="#{section.columnClasses}" rendered="#{q.visible and cc.attrs.handler.condition.rendered[q]}">
+					<p:panelGrid columns="3" columnClasses="#{section.columnClasses}" rendered="#{q.visible and cc.attrs.handler.condition.rendered[q]}">
 						<h:panelGroup>
 							<ui:fragment>
 								<h:outputText value="#{q.code}" styleClass="jeeslBold" rendered="#{section.showCode}"/>
@@ -62,6 +63,9 @@
 									<h:outputText value="#{e.lang}" styleClass="error-message"/>
 								</ui:repeat>
 							</h:panelGroup>
+						</h:panelGroup>
+						<h:panelGroup>
+							<h:outputText value="#{cc.attrs.handler.answers[q].score}"/>
 						</h:panelGroup>
 					</p:panelGrid>
 				</ui:repeat>
