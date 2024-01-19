@@ -920,6 +920,14 @@ $enable-pointer-cursor-for-buttons: true;
 							padding-left: 0;
 						}
 					}
+					
+					.jeesl-icon {
+						order: -1;
+						
+						@media (max-width: 768px) {
+							height: $grid-label-icon-height-mobile;
+						}
+					}
 				}
 				
 				&:not(.ui-outputlabel) {
