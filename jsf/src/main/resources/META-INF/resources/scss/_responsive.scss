@@ -4598,40 +4598,56 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-ai-chat-message {
-	display: flex;
-	flex-direction: column;
-	padding: $half-spacing $wide-spacing;
-	
-	.ui-outputlabel {
-		align-items: center;
+.jeesl-panel-ai-chat {
+	.jeesl-ai-chat-message {
 		display: flex;
-		padding: $half-spacing 0 $slim-spacing;
+		flex-direction: column;
 		
-		&:before {
+		.ui-outputlabel {
 			align-items: center;
-			background: $dark-colour;
-			border-radius: 50%;
-			color: $white-100;
 			display: flex;
-			font-size: 10px;
-			justify-content: center;
-			margin-right: $half-spacing;
-			height: $wide-spacing;
-			width: $wide-spacing;
+			padding: $half-spacing 0 $slim-spacing;
+			
+			&:before {
+				align-items: center;
+				background: $dark-colour;
+				border-radius: 50%;
+				color: $white-100;
+				display: flex;
+				font-size: 10px;
+				justify-content: center;
+				margin-right: $half-spacing;
+				height: $wide-spacing;
+				width: $wide-spacing;
+			}
+			
+			&.jeesl-ai-chat-request:before {
+				content: 'Q';
+			}
+			
+			&.jeesl-ai-chat-response:before {
+				content: 'A';
+			}
 		}
 		
-		&.jeesl-ai-chat-request:before {
-			content: 'Q';
-		}
-		
-		&.jeesl-ai-chat-response:before {
-			content: 'A';
+		.jeesl-ai-chat-text {
+			padding: 0 #{$half-spacing + $wide-spacing};
 		}
 	}
 	
-	.jeesl-ai-chat-text {
-		padding: 0 #{$half-spacing + $wide-spacing};
+	.jeesl-input-container {
+		margin: $regular-spacing #{-$regular-spacing} #{-$half-spacing};
+		
+		.ui-inputfield {
+			border-radius: 0 0 0 $border-radius;
+			width: 85%;
+		}
+		
+		.ui-button {
+			border-width: $border-width 0 0 $border-width;
+			border-radius: 0 0 $border-radius;
+			margin: 0;
+		}
 	}
 }
 
