@@ -374,47 +374,6 @@
 	
 	<build>
 		<plugins>
-			<!--
-         	<plugin>
-				<groupId>org.jeesl</groupId>
-				<artifactId>jeesl-maven</artifactId>
-				<version>0.3.0-SNAPSHOT</version>
-				<executions>
- 					<execution>
-						<id>createCssGrid</id>
-						<phase>process-resources</phase> 
-						<goals>
-							<goal>createCssGrid</goal>
-						</goals>
-						<configuration>
-							<log>INFO</log>
-	              			<vcsTest>${project.basedir}/src/main/resources/META-INF/resources/ahtUtilsCss/auGrid.css</vcsTest>
-	              		</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			-->
-			
-			<plugin>
-				<groupId>io.github.cleydyr</groupId>
-				<artifactId>dart-sass-maven-plugin</artifactId>
-				<version>1.1.0</version>
-				<executions>
-					<execution>
-						<id>generate-css-using-sass</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile-sass</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<inputFolder>${basedir}/src/main/resources/META-INF/resources/scss</inputFolder>
-					<outputFolder>${basedir}/src/main/resources/META-INF/resources/css</outputFolder>
-					<update>true</update>
-					<noSourceMap>true</noSourceMap>
-				</configuration>
-			</plugin>
 			<plugin>
 		        <groupId>org.codehaus.mojo</groupId>
 			    <artifactId>versions-maven-plugin</artifactId>
@@ -493,6 +452,7 @@
 			<id>sass</id>
 			<build>
 				<plugins>
+					<!--
 				    <plugin>
 			            <groupId>org.codehaus.mojo</groupId>
 			            <artifactId>exec-maven-plugin</artifactId>
@@ -505,12 +465,32 @@
 									<executable>sass</executable>
 									<arguments>
 										<argument>./src/main/resources/META-INF/resources/scss:src/main/webapp/resources/css</argument>
-										<argument>--no-source-map</argument>
+										<argument> - - no-source-map</argument>
 									</arguments>
 					            </configuration>
 				            </execution>
 				        </executions>
-			        </plugin>
+			        </plugin> -->
+			        <plugin>
+						<groupId>io.github.cleydyr</groupId>
+						<artifactId>dart-sass-maven-plugin</artifactId>
+						<version>1.1.0</version>
+						<executions>
+							<execution>
+								<id>generate-css-using-sass</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>compile-sass</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<inputFolder>${basedir}/src/main/resources/META-INF/resources/scss</inputFolder>
+							<outputFolder>${basedir}/src/main/resources/META-INF/resources/css</outputFolder>
+							<update>true</update>
+							<noSourceMap>true</noSourceMap>
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
