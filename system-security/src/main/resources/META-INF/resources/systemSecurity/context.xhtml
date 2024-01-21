@@ -5,26 +5,24 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="ctrl" required="true"/>
 	</composite:interface>
-	
-	<!-- This is deprecated, use j2: -->
-	
+
 	<composite:implementation>
 <jp:grid id="grid">
 	<j:row>
 		<j:slot id="sViews" width="7">
 			<h:form id="fRoles">
-				<p:dataTable var="c" value="#{cc.attrs.bean.contexts}" styleClass="jeesl-datatable"
-						selection="#{cc.attrs.bean.context}" selectionMode="single" rowKey="#{c.id}" draggableRows="true"
+				<p:dataTable var="c" value="#{cc.attrs.ctrl.contexts}" styleClass="jeesl-datatable"
+						selection="#{cc.attrs.ctrl.context}" selectionMode="single" rowKey="#{c.id}" draggableRows="true"
 						>
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityContext" code="listOf">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addContext()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.ctrl.addContext()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectContext()}" update=":#{cc.id}:grid"/>
-					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderContexts()}" update="@form"/>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.ctrl.selectContext()}" update=":#{cc.id}:grid"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderContexts()}" update="@form"/>
 					<p:column>
 						<h:outputText value="#{c.position}" />  
 		            </p:column>
@@ -45,55 +43,58 @@
 			</h:form>
 		</j:slot>
 		<j:slot id="sRole" width="5">
-			<h:form id="fRole" rendered="#{not empty cc.attrs.bean.context}">
+			<h:form id="fRole" rendered="#{not empty cc.attrs.ctrl.context}">
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SecurityContext"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveContext()}" update=":#{cc.id}:grid" />
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteContext()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveContext()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteContext()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<j:inputGrid>
 						
 						<jtp:label entity="SecurityContext" code="code"/>
-						<p:inputText value="#{cc.attrs.bean.context.code}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.code}"/>
 						
 					</j:inputGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.context}" withDescription="true" />
+					<j:tabTranslationEditor value="#{cc.attrs.ctrl.context}" withDescription="true" />
 					<j:inputGrid>
 						
 						<jtp:label entity="SecurityContext" code="serverName"/>
-						<p:inputText value="#{cc.attrs.bean.context.serverName}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.serverName}"/>
 						
 						<jtp:label entity="SecurityContext" code="pageTitle"/>
-						<p:inputText value="#{cc.attrs.bean.context.pageTitle}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.pageTitle}"/>
 						
 						<jtp:label entity="SecurityContext" code="pageHeadline"/>
-						<p:inputText value="#{cc.attrs.bean.context.pageHeadline}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.pageHeadline}"/>
 						
 						<jtp:label entity="SecurityContext" code="pagePrefix"/>
-						<p:inputText value="#{cc.attrs.bean.context.pagePrefix}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.pagePrefix}"/>
 						
 						<jtp:label entity="SecurityContext" code="pageCss"/>
-						<p:inputText value="#{cc.attrs.bean.context.pageCss}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.pageCss}"/>
 						
 						<jtp:label entity="SecurityContext" code="pageLogo"/>
-						<p:inputText value="#{cc.attrs.bean.context.pageLogo}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.pageLogo}"/>
+						
+						<jtp:label entity="SecurityContext" code="pageFavIcon"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.pageFavIcon}"/>
 						
 						<jtp:label entity="SecurityContext" code="pageBackground"/>
-						<p:inputText value="#{cc.attrs.bean.context.pageBackground}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.pageBackground}"/>
 						
 						<jtp:label entity="SecurityContext" code="linkImpressum"/>
-						<p:inputText value="#{cc.attrs.bean.context.linkImpressum}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.linkImpressum}"/>
 						
 						<jtp:label entity="SecurityContext" code="emailAddress"/>
-						<p:inputText value="#{cc.attrs.bean.context.emailAddress}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.emailAddress}"/>
 						
 						<jtp:label entity="SecurityContext" code="emailName"/>
-						<p:inputText value="#{cc.attrs.bean.context.emailName}"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.emailName}"/>
 						
 						<jtp:label entity="SecurityContext" code="contextId"/>
-						<p:inputText value="#{cc.attrs.bean.nnb.a}"/>
+						<p:inputText value="#{cc.attrs.ctrl.nnb.a}"/>
 					</j:inputGrid>
 				</p:panel>	
 				

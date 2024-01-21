@@ -1,0 +1,2 @@
+create table IoAiChatCompletion (id  bigserial not null, endDate timestamp, startDate timestamp, tokensCompletion int4 not null, tokensPrompt int4 not null, author_id int8, markupCompletion_id int8, markupUser_id int8, model_id int8, thread_id int8, primary key (id));
+create table IoAiChatThread (id  bigserial not null, record timestamp, topic varchar(255), user_id int8, primary key (id));

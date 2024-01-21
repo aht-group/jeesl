@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS public.securitycontext ADD COLUMN pageFavIcon character varying(255) COLLATE pg_catalog."default";

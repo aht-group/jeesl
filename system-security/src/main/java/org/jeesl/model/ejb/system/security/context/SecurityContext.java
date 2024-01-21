@@ -78,6 +78,10 @@ public class SecurityContext implements JeeslSecurityContext<IoLang,IoDescriptio
 	@Override public String getPageCss() {return pageCss;}
 	@Override public void setPageCss(String pageCss) {this.pageCss = pageCss;}
 
+	private String pageFavIcon;
+	@Override public String getPageFavIcon() {return pageFavIcon;}
+	@Override public void setPageFavIcon(String pageFavIcon) {this.pageFavIcon = pageFavIcon;}
+	
 	private String pageLogo;
 	@Override public String getPageLogo() {return pageLogo;}
 	@Override public void setPageLogo(String pageLogo) {this.pageLogo = pageLogo;}
