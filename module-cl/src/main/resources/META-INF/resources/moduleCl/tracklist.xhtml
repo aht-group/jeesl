@@ -24,7 +24,7 @@
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addList()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>	
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectList()}" update=":#{cc.id}:sList"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectList()}" update=":#{cc.id}:fList :#{cc.id}:sList"/>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="ClTrackList" code="endDate"/></f:facet>
 						<jp:outputDate value="#{l.endDate}"/>
@@ -36,10 +36,8 @@
 					</p:column>
 			   	</p:dataTable>
 			</h:form>
-		</j:slot>
-		<j:slot id="sList" width="7">
-			<h:form id="fKey" rendered="#{not empty cc.attrs.ctrl.list}">
-				<p:panel styleClass="jeesl-panel">
+			<h:form id="fList" >
+				<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.ctrl.list}">
 					<f:facet name="header"><j:pHeader entity="ClTrackList"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelList()}" update=":#{cc.id}:grid" />
@@ -76,6 +74,9 @@
 					<jtp:inputMulti value="#{cc.attrs.ctrl.list}" withDescription="false" locales="#{cc.attrs.ctrl.locales}"/>
 				</p:panel>
 			</h:form>
+		</j:slot>
+		<j:slot id="sList" width="7">
+			
 			<h:form id="fMagnet">
 				<p:dataTable widgetVar="wvChecklists" styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.ehMagnet.allow}"
 							var="cl" value="#{cc.attrs.ctrl.checkLists}">
