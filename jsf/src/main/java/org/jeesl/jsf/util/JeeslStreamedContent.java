@@ -89,4 +89,13 @@ public class JeeslStreamedContent
 		catch (Exception e) {e.printStackTrace();}
 		return null;
 	}
+	public static DefaultStreamedContent csv(InputStream is, String fileName)
+	{
+		try
+		{
+			return DefaultStreamedContent.builder().stream(() -> is).contentType(JeeslCsvReport.mimeType).name(fileName).build();
+		}
+		catch (Exception e) {e.printStackTrace();}
+		return null;
+	}
 }

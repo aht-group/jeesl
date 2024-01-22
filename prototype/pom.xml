@@ -107,23 +107,19 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- <version>12.0.0</version> -->
 		<dependency>  
    			<groupId>org.primefaces</groupId>  
    			<artifactId>primefaces</artifactId>
-   			
    			<scope>provided</scope>
 		</dependency>
 		<dependency>  
    			<groupId>org.primefaces.extensions</groupId>  
    			<artifactId>primefaces-extensions</artifactId>
-   			
    			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
 			<artifactId>resources-ckeditor</artifactId>
-			
 			<scope>provided</scope>
 		</dependency>
 		
