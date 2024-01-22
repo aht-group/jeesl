@@ -96,22 +96,6 @@
 	   		<artifactId>jsf-api</artifactId>
 	   		<scope>provided</scope>
 		</dependency>
-		<dependency>  
-   			<groupId>org.primefaces</groupId>  
-   			<artifactId>primefaces</artifactId>
-   			<scope>provided</scope>
-		</dependency>
-		<dependency>  
-   			<groupId>org.primefaces.extensions</groupId>  
-   			<artifactId>primefaces-extensions</artifactId>
-   			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.primefaces.extensions</groupId>
-			<artifactId>resources-ckeditor</artifactId>
-			<version>8.0</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -122,6 +106,27 @@
 			<artifactId>javax.el-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- <version>12.0.0</version> -->
+		<dependency>  
+   			<groupId>org.primefaces</groupId>  
+   			<artifactId>primefaces</artifactId>
+   			
+   			<scope>provided</scope>
+		</dependency>
+		<dependency>  
+   			<groupId>org.primefaces.extensions</groupId>  
+   			<artifactId>primefaces-extensions</artifactId>
+   			
+   			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>resources-ckeditor</artifactId>
+			
+			<scope>provided</scope>
+		</dependency>
+		
 		
 		<dependency>
 		    <groupId>org.ocpsoft.rewrite</groupId>
