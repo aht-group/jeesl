@@ -1,6 +1,7 @@
 package org.jeesl.factory.xls.system.io.report;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -121,7 +122,7 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 		
 		JeeslReportLayout.Data dt = xfStyle.getDataType(ioColumn);
 		CellStyle style = xfStyle.get(JeeslReportLayout.Style.cell,ioColumn);
-		try {add(xlsRow, columnNr, context, query, style, dt);}
+		try {this.add(xlsRow, columnNr, context, query, style, dt);}
 		catch (JXPathInvalidSyntaxException e)
 		{
 			logger.error(JXPathInvalidSyntaxException.class.getSimpleName()+" at "+ioColumn.getGroup().getPosition()+" "+ioColumn.getPosition());;
@@ -150,11 +151,12 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 	
 	private void add(Row xlsRow, MutableInt columnNr, JXPathContext context, String query, CellStyle style, JeeslReportLayout.Data dt)
 	{
-//		logger.info(columnNr.intValue()+" "+query);
+//		logger.info(columnNr.intValue()+" dataType:"+dt+" "+query);
 		try
 		{
 			Object value = context.getValue(query);
-			if(value!=null)
+//			logger.info(columnNr.intValue()+" "+value);
+			if(Objects.nonNull(value))
 			{
 //				logger.info(dt+" "+value.toString()+" "+value.getClass().getSimpleName());
 				try
@@ -175,14 +177,26 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 				}
 				catch (ClassCastException e)
 				{
-					logger.error("Row: "+xlsRow+" Column:"+columnNr);
+//					logger.error("Row: "+xlsRow+" Column:"+columnNr);
 					e.printStackTrace();
 				}
 			}
-			else {columnNr.add(1);}
+			else
+			{
+//				logger.warn(dt+" value is null");
+				columnNr.add(1);
+			}
 		}
-		catch(JXPathNotFoundException e){columnNr.add(1);}
-		catch(JXPathException e){columnNr.add(1);}
+		catch(JXPathNotFoundException e)
+		{
+//			e.printStackTrace();
+			columnNr.add(1);
+		}
+		catch(JXPathException e)
+		{
+//			e.printStackTrace();
+			columnNr.add(1);
+		}
 	}
 	
 	public void label(Row xlsRow, MutableInt columnNr, ROW ioRow)

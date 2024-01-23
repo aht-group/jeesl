@@ -180,7 +180,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 				{
 					case label: xfRow.label(sheet, rowNr, ioRow); break;
 					case labelValue: xfRow.labelValue(sheet, rowNr, ioRow, context); break;
-					case table: applyTable(jeeslReport,context,sheet,rowNr,ioSheet,ioRow,columns,mapDynamicGroups,xfRow,xfCell); break;
+					case table: this.applyTable(jeeslReport,context,sheet,rowNr,ioSheet,ioRow,columns,mapDynamicGroups,xfRow,xfCell); break;
 					case template: applyTemplate(sheet,rowNr,ioSheet,ioRow,xfCell); break;
 					default: break;
 				}
@@ -211,7 +211,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			JeeslReportSelectorTransformation<L,D,REPORT,TRANSFORMATION> jr = ((JeeslReportSelectorTransformation<L,D,REPORT,TRANSFORMATION>)jeeslReport);
 			transformation = JeeslReportSetting.Transformation.valueOf(jr.getReportSettingTransformation().getCode());
 		}
-		logger.info("Tranformation:"+transformation+" instanceof:"+(jeeslReport instanceof JeeslReportSelectorTransformation));
+		logger.debug("Tranformation:"+transformation+" instanceof:"+(jeeslReport instanceof JeeslReportSelectorTransformation));
 		
 		Figures tree = null;
 		Figures treeHeader = null;
@@ -270,7 +270,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		@SuppressWarnings("unchecked")
 		Iterator<Pointer> iterator = context.iteratePointers(ioSheet.getQueryTable());
-		logger.info("Beginning iteration");
+		logger.debug("Beginning iteration");
         while (iterator.hasNext())
         {
         	Row xlsRow = sheet.createRow(rowNr.intValue());
@@ -301,7 +301,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			}
 			rowNr.add(1);
         }
-        logger.info("Completed iteration");
+        logger.debug("Completed iteration");
 	}
 	
 	private void applyTreeTable(Figures tree, Figures treeHeader, Sheet sheet, MutableInt rowNr, SHEET ioSheet, List<COLUMN> columns, XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell, JeeslReportSetting.Transformation transformation)
