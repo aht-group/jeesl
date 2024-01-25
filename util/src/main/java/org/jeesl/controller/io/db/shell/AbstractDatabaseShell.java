@@ -54,7 +54,7 @@ public class AbstractDatabaseShell
 		this.operation=operation;
 		this.xmlConfig=xmlConfig;
 		
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		
 		configurationParamter = XmlParametersFactory.build();
 		

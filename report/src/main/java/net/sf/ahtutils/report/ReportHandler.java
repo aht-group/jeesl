@@ -84,7 +84,7 @@ public class ReportHandler
 	public ReportHandler(String reportFile) throws ReportException
 	{
 		logger.info("Initializing report handling system");
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		configFileLocation = reportFile.substring(0, reportFile.lastIndexOf("/")) +"/";
 		
 		try
@@ -156,7 +156,7 @@ public class ReportHandler
 	public ReportHandler(Reports reports) throws ReportException
 	{
 		logger.info("Initializing report handling system with given reports object");
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		
 		this.reports = reports;
 		

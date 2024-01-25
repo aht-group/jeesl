@@ -13,6 +13,6 @@ public class AbstractWordCli
 	
 	public AbstractWordCli() 
 	{
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 	}
 }

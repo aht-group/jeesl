@@ -109,13 +109,13 @@ public class JeeslMsgBuilder
 
 	public JeeslMsgBuilder(Configuration config)
 	{
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		baseMsg = new File(config.getString(UtilsDocumentation.keyBaseMsgDir));
 		logger.info("Using msg.dir ("+UtilsDocumentation.keyBaseMsgDir+"): "+baseMsg.getAbsolutePath());
 	}
 	public JeeslMsgBuilder(org.apache.commons.configuration2.Configuration config)
 	{
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		baseMsg = new File(config.getString(UtilsDocumentation.keyBaseMsgDir));
 		logger.info("Using msg.dir ("+UtilsDocumentation.keyBaseMsgDir+"): "+baseMsg.getAbsolutePath());
 	}
