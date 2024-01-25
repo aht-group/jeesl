@@ -35,7 +35,7 @@ public class ReportUtilTemplate
 	final static Logger logger = LoggerFactory.getLogger(ReportUtilXls.class);
 	
 	private String reportRoot;
-	private MultiResourceLoader mrl = new MultiResourceLoader();
+	private MultiResourceLoader mrl = MultiResourceLoader.instance();
 	
 	public ReportUtilTemplate(String reportRoot) throws FileNotFoundException{
 		this.reportRoot = reportRoot;

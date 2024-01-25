@@ -5,10 +5,10 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
+		<composite:attribute name="type"		required="true"/>
 		<composite:attribute name="styleClass"	required="false" default="pf-action-icon"/>
 		<composite:attribute name="disabled"	required="false" default="true"/>
 		<composite:attribute name="value"		required="true"  shortDescription="Has to point to a bean method returning a org.primefaces.model.StreamedContent"/>
-		<composite:attribute name="type"		required="true"/>
 		<composite:attribute name="onclick"		required="false"/>
         <composite:attribute name="tooltip"		required="false" default=""/>
 		<composite:attribute name="library"		required="false" default="" shortDescription="Can be explictly set, otherwise a redirection is checked in AppIconBean, then a fallback to jeeslGfx is used."/>

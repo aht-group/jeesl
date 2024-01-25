@@ -41,8 +41,11 @@ public class LoggerBootstrap
 		{
 			sb.setLength(0);
 			sb.append(path+File.separatorChar+log4j2Name);
+			
+//			System.out.println("MRL "+MultiResourceLoader.instance().isAvailable(sb.toString()));
+			
 			Configurator.initialize(null, sb.toString());
-			logger.info("Activated with "+sb.toString());
+//			logger.info("Activated with "+sb.toString());
 		}
 		
 	}

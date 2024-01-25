@@ -1,7 +1,14 @@
 package org.jeesl.factory.ejb.io.fr;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
+import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,5 +50,19 @@ public class EjbIoFrContainerFactory<STORAGE extends JeeslFileStorage<?,?,?,?,?>
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		
 		return ejb;
+	}
+	
+	public <W extends JeeslWithFileRepositoryContainer<CONTAINER>> List<CONTAINER> toListContainer(List<W> owners)
+	{
+		List<CONTAINER> list = new ArrayList<>();
+		for(W owner : owners) {if(Objects.nonNull(owner.getFrContainer())) {list.add(owner.getFrContainer());}}
+		return list;
+	}
+	
+	public <W extends JeeslWithFileRepositoryContainer<CONTAINER>> BidiMap<W,CONTAINER> toBidiMapContainer(List<W> owners)
+	{
+		BidiMap<W,CONTAINER> map = new DualHashBidiMap<>();
+		for(W owner : owners) {if(Objects.nonNull(owner.getFrContainer())) {map.put(owner,owner.getFrContainer());}}
+		return map;
 	}
 }

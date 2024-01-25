@@ -103,6 +103,11 @@ public class JeeslCliOptionHandler
 	{
 //		System.out.println(log4jPaths[0]+"/"+loggingProfile);
 		LoggerBootstrap.instance(loggingProfile).path(log4jPaths[0]).init();
+//		LoggerBootstrap.instance().path(log4jPaths[0]).init();
+		System.out.println("Log4j2 SUCCESS");
+		logger.error("Log4j2 initialized (on error)");
+		logger.warn("Log4j2 initialized (on warn)");
+		logger.info("Log4j2 initialized (on info)");
 	}
 	
 	public org.exlp.interfaces.system.property.Configuration config1Wrapper(CommandLine line, String defaultConfig) {return ConfigLoader.wrap(config1(line,defaultConfig));}
@@ -127,7 +132,7 @@ public class JeeslCliOptionHandler
 				}
 			}
 			
-			MultiResourceLoader mrl = new MultiResourceLoader();
+			MultiResourceLoader mrl = MultiResourceLoader.instance();
 			if(!mrl.isAvailable(configFile))
 			{
 				logger.error("Specified configuration does not exist: "+configFile);
@@ -165,7 +170,7 @@ public class JeeslCliOptionHandler
 				}
 			}
 			
-			MultiResourceLoader mrl = new MultiResourceLoader();
+			MultiResourceLoader mrl = MultiResourceLoader.instance();
 			if(!mrl.isAvailable(configFile))
 			{
 				logger.error("Specified configuration does not exist: "+configFile);
@@ -202,7 +207,7 @@ public class JeeslCliOptionHandler
 				}
 			}
 			
-			MultiResourceLoader mrl = new MultiResourceLoader();
+			MultiResourceLoader mrl = MultiResourceLoader.instance();
 			if(!mrl.isAvailable(configFile))
 			{
 				logger.error("Specified configuration does not exist: "+configFile);

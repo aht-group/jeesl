@@ -29,7 +29,7 @@ public class ScriptExecutor
     {
          // Prepare the command line
 
-        MultiResourceLoader mrl = new MultiResourceLoader();
+        MultiResourceLoader mrl = MultiResourceLoader.instance();
         File tempScriptFile = createScriptFile(mrl.searchIs(scriptFile));
 
         logger.trace("Loaded script " +scriptFile + " from Resources and created temporary script " +tempScriptFile.getAbsolutePath() +" for execution.");
@@ -64,7 +64,7 @@ public class ScriptExecutor
     {
          // Prepare the command line
 
-        MultiResourceLoader mrl = new MultiResourceLoader();
+        MultiResourceLoader mrl = MultiResourceLoader.instance();
         File tempScriptFile = createScriptFile(mrl.searchIs(scriptFile));
 
         logger.trace("Loaded script " +scriptFile + " from Resources and created temporary script " +tempScriptFile.getAbsolutePath() +" for execution.");

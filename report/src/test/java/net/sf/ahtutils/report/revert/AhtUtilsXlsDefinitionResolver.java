@@ -102,7 +102,7 @@ public class AhtUtilsXlsDefinitionResolver implements UtilsXlsDefinitionResolver
 		else
 		{
 			// Initialize the MultiResourceLoader for use with filesystem or classpath resources
-			MultiResourceLoader mrl = new MultiResourceLoader();
+			MultiResourceLoader mrl = MultiResourceLoader.instance();
 
 			// Load the reports.xml definition from given source
 			Reports       reports       = null;

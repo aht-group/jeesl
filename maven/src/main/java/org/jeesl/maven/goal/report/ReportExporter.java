@@ -61,7 +61,7 @@ public class ReportExporter extends AbstractMojo
 			getLog().info("Loading example data from XML file: " +exampleXML);
 			Document document = null;
 			
-			MultiResourceLoader mrl = new MultiResourceLoader();
+			MultiResourceLoader mrl = MultiResourceLoader.instance();
 			getLog().info("XML available: "+mrl.isAvailable(exampleXML));
 			
 			try

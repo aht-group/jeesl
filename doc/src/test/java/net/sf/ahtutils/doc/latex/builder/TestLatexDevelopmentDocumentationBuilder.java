@@ -21,7 +21,7 @@ public class TestLatexDevelopmentDocumentationBuilder extends AbstractUtilsDocTe
 	public void init()
 	{	
 		super.initOfx();
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
         b = new UtilsLatexDevelopmentDocumentationBuilder(null,null,null,cp);
 	}
 

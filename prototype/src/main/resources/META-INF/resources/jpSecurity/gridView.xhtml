@@ -22,7 +22,8 @@
 			<h:form id="fCategories">
 				<p:dataTable styleClass="jeesl-datatable"
 						var="c" value="#{cc.attrs.ctrl.categories}" 
-					 	selection="#{cc.attrs.ctrl.category}" draggableRows="true" selectionMode="single" rowKey="#{c.id}">
+					 	selection="#{cc.attrs.ctrl.category}" draggableRows="true" selectionMode="single" rowKey="#{c.id}"
+					 	paginator="true" rows="20" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityCategory" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addCategory()}" update=":#{cc.id}:grid"/>

@@ -95,7 +95,7 @@ public class JeeslListingCopy
 	public JeeslListingCopy(String prefix,File baseDoc)
 	{
 		this.prefix=prefix;
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		dirListing = new File(baseDoc,"listing");
 		logger.info("Using base.dir ("+UtilsDocumentation.keyBaseLatexDir+"): "+baseDoc.getAbsolutePath());
 		logger.info("Using listing.dir (base.dir/listing): "+dirListing.getAbsolutePath());

@@ -30,7 +30,7 @@ public class JbossModuleConfigurator
 		this.product=product;
 		this.version=version;
 		jbossBaseDir = new File(jbossDir);
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 	}
 	
 	public void postgres() throws IOException

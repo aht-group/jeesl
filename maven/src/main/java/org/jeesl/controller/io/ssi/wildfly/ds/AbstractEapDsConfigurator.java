@@ -33,7 +33,7 @@ public class AbstractEapDsConfigurator
 	{
 		this.client=client;
 		
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 	}
 	
 	protected File buildMobuleMain(String packageId)

@@ -54,7 +54,7 @@ public class ReportUtilCreator
     private Boolean productive;
     private String abstractTestclass;
     
-    private MultiResourceLoader mrl = new MultiResourceLoader();
+    private MultiResourceLoader mrl = MultiResourceLoader.instance();
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void execute() throws JRException, TemplateException, IOException, ExlpXpathNotFoundException, ExlpXpathNotUniqueException, ParserConfigurationException, SAXException, ClassNotFoundException
