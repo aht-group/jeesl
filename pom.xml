@@ -8,7 +8,7 @@
 		<version>0.3.2-SNAPSHOT</version>
 		<relativePath>../bom/parent8</relativePath>
 	</parent>
-	     
+
 	<groupId>org.jeesl</groupId>
 	<artifactId>jeesl</artifactId>
 	<packaging>pom</packaging>
