@@ -42,6 +42,8 @@ public class IoCmsSection implements JeeslIoCmsSection<IoLang,IoCmsSection>
 	private IoCmsSection section;
 	@Override public IoCmsSection getSection() {return section;}
 	@Override public void setSection(IoCmsSection section) {this.section = section;}
+	@Override public IoCmsSection getParent() {return this.getSection();}
+	@Override public void setParent(IoCmsSection parent) {this.setSection(parent);}
 
 	private String code;
 	@Override public String getCode() {return code;}

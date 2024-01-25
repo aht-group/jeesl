@@ -404,9 +404,9 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		
 		Join<ANSWER,DATA> jData = answer.join(JeeslSurveyAnswer.Attributes.data.toString());
 		predicates.add(jData.in(datas));
-			
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
 		cQ.select(answer);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 //		cQ.orderBy(cB.asc(eSectionPosition),cB.asc(eQuestionPosition),cB.asc(eAnswerId));
 		
 		TypedQuery<ANSWER> tQ = em.createQuery(cQ);
