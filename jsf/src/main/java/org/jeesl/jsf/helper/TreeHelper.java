@@ -21,9 +21,15 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class TreeHelper
+public final class TreeHelper <P extends EjbWithParentId<P>>
 {
 	final static Logger logger = LoggerFactory.getLogger(TreeHelper.class);
+	
+	public static <P extends EjbWithParentId<P>> TreeHelper<P> instance() {return new TreeHelper<>();}
+	public TreeHelper()
+	{
+		
+	}
 	
 	private static TreeNode getAncestor(@NotNull TreeNode decendant, int ancestryLevel)
 	{
@@ -35,12 +41,7 @@ public abstract class TreeHelper
 		}
 		return ancestor;
 	}
-	
-	private static int getDepth(TreeNode root)
-	{
-		return 1 + root.getChildren().stream().map(child -> getDepth(child)).max(Integer::compare).orElse(0);
-	}
-	
+		
 	public static <T extends EjbWithParentAttributeResolver> void buildTree(JeeslFacade facade, TreeNode parent, List<T> objects, Class<T> type)
 	{
 		for(T o : objects)
@@ -55,24 +56,24 @@ public abstract class TreeHelper
 		}
 	}
 	
-	public static TreeNode findNode(TreeNode node, Expression<TreeNode> expression)
-	{
-		if (node == null) { return null; }
-		
-		if (expression.condition(node))
-		{
-			return node;
-		}
-		for (TreeNode child : node.getChildren())
-		{
-			TreeNode n = findNode(child, expression);
-			if (n != null)
-			{
-				return n;
-			}
-		}
-		return null;
-	}
+//	private TreeNode findNode(TreeNode node, Expression<TreeNode> expression)
+//	{
+//		if (node == null) { return null; }
+//		
+//		if (expression.condition(node))
+//		{
+//			return node;
+//		}
+//		for (TreeNode child : node.getChildren())
+//		{
+//			TreeNode n = findNode(child, expression);
+//			if (n != null)
+//			{
+//				return n;
+//			}
+//		}
+//		return null;
+//	}
 	
 	public static List<TreeNode> findNodes(TreeNode node, Expression<TreeNode> expression)
 	{
@@ -99,9 +100,13 @@ public abstract class TreeHelper
 		node.getChildren().forEach(child -> forEach(child, functor, breakExpression));
 	}
 	
-	public static void setExpansion(TreeNode startNode, boolean expand)
+	public void setExpansion(TreeNode startNode, boolean expand)
 	{
 		setExpansion(startNode, expand, getDepth(startNode));
+	}
+	private int getDepth(TreeNode root)
+	{
+		return 1 + root.getChildren().stream().map(child -> getDepth(child)).max(Integer::compare).orElse(0);
 	}
 	
 	public static void setExpansion(TreeNode startNode, boolean expand, int reach)
