@@ -52,6 +52,8 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 	private JeeslItsCacheBean<L,D,R,RREF,IS> bItsCache;
 
 	protected final ItsFactoryBuilder<L,D,R,C,O,I,IS,T,TT> fbIssue;
+
+	private final TreeHelper<I> thIssue;
 	
 	private TreeNode tree; public TreeNode getTree() {return tree;}
     private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
@@ -65,6 +67,8 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 	{
 		super(fbIssue.getClassL(),fbIssue.getClassD());	
 		this.fbIssue=fbIssue;
+		
+		thIssue  = TreeHelper.instance();
 	}
 
 	protected void postConstructIssue(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
@@ -93,7 +97,7 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 	@SuppressWarnings("unchecked")
 	protected void reloadTree()
 	{
-		List<Long> expandedNodes = TreeHelper.findNodes(this.tree, node -> node.isExpanded()).stream().map(node -> (I)node.getData()).filter(data -> data != null).map(data -> data.getId()).collect(Collectors.toList());
+		List<Long> expandedNodes = thIssue.findNodes(this.tree, node -> node.isExpanded()).stream().map(node -> (I)node.getData()).filter(data -> data != null).map(data -> data.getId()).collect(Collectors.toList());
 		
 		
 		if(bItsCache.getMapStatus().containsKey(rref) && !bItsCache.getMapStatus().isEmpty())
@@ -107,7 +111,7 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 		this.issue = null;
 		TreeHelper.buildTree(this.fIssue, this.tree, this.fIssue.allForParent(this.fbIssue.getClassIssue(), this.root), this.fbIssue.getClassIssue());
 		
-		TreeHelper.findNodes(this.tree, node -> node.getData() != null && expandedNodes.contains(((I)node.getData()).getId())).forEach(node -> node.setExpanded(true));
+		thIssue.findNodes(this.tree, node -> node.getData() != null && expandedNodes.contains(((I)node.getData()).getId())).forEach(node -> node.setExpanded(true));
 	}
 	
 	private void reset(boolean rIssue)

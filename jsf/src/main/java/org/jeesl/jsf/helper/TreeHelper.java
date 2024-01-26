@@ -45,7 +45,7 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		}
 	}
 
-	public static List<TreeNode> findNodes(TreeNode node, Expression<TreeNode> expression)
+	public List<TreeNode> findNodes(TreeNode node, Expression<TreeNode> expression)
 	{
 		List<TreeNode> nodes = new ArrayList<TreeNode>();
 		if (node == null) { return nodes; }
