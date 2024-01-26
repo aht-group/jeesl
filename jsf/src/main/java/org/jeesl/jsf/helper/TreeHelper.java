@@ -28,7 +28,7 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 	public static <P extends EjbWithParentId<P>> TreeHelper<P> instance() {return new TreeHelper<>();}
 	private TreeHelper()
 	{
-		
+
 	}
 		
 	public static <T extends EjbWithParentAttributeResolver> void buildTree(JeeslFacade facade, TreeNode parent, List<T> objects, Class<T> type)
