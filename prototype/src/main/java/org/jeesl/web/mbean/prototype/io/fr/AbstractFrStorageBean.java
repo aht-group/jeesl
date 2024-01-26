@@ -13,6 +13,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoFileRepositoryFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
@@ -79,10 +80,10 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 		thCount.setComparatorProviderB(jcpB);
 	}
 	
-	protected void postConstructFrStorage(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+	protected void postConstructFrStorage(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 											JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr)
 	{
-		super.initJeeslAdmin(bTranslation,bMessage);
+		super.initJeeslAdmin(lp,bMessage);
 		this.fFr=fFr;
 		fth = new JeeslFileTypeHandler<>(fbFr,fFr);
 		typeUnknown = fFr.fByEnum(fbFr.getClassType(), JeeslFileType.Code.unknown);
@@ -121,8 +122,8 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 		reset(true);
 		STYPE type = null; if(!sbhStorageType.getList().isEmpty()) {type = sbhStorageType.getList().get(0);}
 		storage = fbFr.ejbStorage().build(type);
-		storage.setName(efLang.createEmpty(localeCodes));
-		storage.setDescription(efDescription.createEmpty(localeCodes));
+		storage.setName(efLang.build(lp));
+		storage.setDescription(efDescription.build(lp));
 	}
 	
 	public void saveStorage() throws JeeslConstraintViolationException, JeeslLockingException
@@ -145,8 +146,8 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 	public void selectStorage()
 	{
 		storage = fFr.find(fbFr.getClassStorage(), storage);
-		storage = efLang.persistMissingLangs(fFr, localeCodes, storage);
-		storage = efDescription.persistMissingLangs(fFr, localeCodes, storage);
+		storage = efLang.persistMissingLangs(fFr, lp, storage);
+		storage = efDescription.persistMissingLangs(fFr, lp, storage);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(storage));}
 		reset(false);
 	}
