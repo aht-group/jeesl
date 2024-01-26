@@ -26,20 +26,9 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 	final static Logger logger = LoggerFactory.getLogger(TreeHelper.class);
 	
 	public static <P extends EjbWithParentId<P>> TreeHelper<P> instance() {return new TreeHelper<>();}
-	public TreeHelper()
+	private TreeHelper()
 	{
 		
-	}
-	
-	private static TreeNode getAncestor(@NotNull TreeNode decendant, int ancestryLevel)
-	{
-		TreeNode ancestor = decendant;
-		for (int i = 0; i < ancestryLevel; i++)
-		{
-			ancestor = ancestor.getParent();
-			if (ancestor == null) { break; }
-		}
-		return ancestor;
 	}
 		
 	public static <T extends EjbWithParentAttributeResolver> void buildTree(JeeslFacade facade, TreeNode parent, List<T> objects, Class<T> type)
@@ -55,25 +44,6 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 			}
 		}
 	}
-	
-//	private TreeNode findNode(TreeNode node, Expression<TreeNode> expression)
-//	{
-//		if (node == null) { return null; }
-//		
-//		if (expression.condition(node))
-//		{
-//			return node;
-//		}
-//		for (TreeNode child : node.getChildren())
-//		{
-//			TreeNode n = findNode(child, expression);
-//			if (n != null)
-//			{
-//				return n;
-//			}
-//		}
-//		return null;
-//	}
 	
 	public static List<TreeNode> findNodes(TreeNode node, Expression<TreeNode> expression)
 	{
@@ -92,7 +62,7 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		return nodes;
 	}
 	
-	public static void forEach(TreeNode node, Functor<TreeNode> functor, Expression<TreeNode> breakExpression)
+	private void forEach(TreeNode node, Functor<TreeNode> functor, Expression<TreeNode> breakExpression)
 	{
 		if (node == null || breakExpression.condition(node)) { return; }
 		
@@ -109,19 +79,30 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		return 1 + root.getChildren().stream().map(child -> getDepth(child)).max(Integer::compare).orElse(0);
 	}
 	
-	public static void setExpansion(TreeNode startNode, boolean expand, int reach)
+	public void setExpansion(TreeNode startNode, boolean expand, int reach)
 	{
 		forEach(startNode, node -> node.setExpanded(expand), node -> getAncestor(node, reach) == startNode);
 	}
 	
-	public static TreeNode getNode(TreeNode tree, String dragId, int position)
+	private TreeNode getAncestor(@NotNull TreeNode decendant, int ancestryLevel)
+	{
+		TreeNode ancestor = decendant;
+		for (int i = 0; i < ancestryLevel; i++)
+		{
+			ancestor = ancestor.getParent();
+			if (ancestor == null) { break; }
+		}
+		return ancestor;
+	}
+	
+	public TreeNode getNode(TreeNode tree, String dragId, int position)
     {
     	String[] elements = dragId.split(":");
     	String[] index = elements[position].split("_");
     	return getNode(tree.getChildren(),index,0);
     }
     
-    private static TreeNode getNode(List<TreeNode> nodes, String[] index, int level)
+    private TreeNode getNode(List<TreeNode> nodes, String[] index, int level)
     {
     	Integer position = Integer.valueOf(index[level]);
     	TreeNode n = nodes.get(position);

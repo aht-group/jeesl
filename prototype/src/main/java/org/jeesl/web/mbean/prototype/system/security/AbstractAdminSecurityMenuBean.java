@@ -377,7 +377,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 		Object data = ddEvent.getData();
 		if(debugOnInfo) {if(data==null) {logger.info("data = null");} else {logger.info("Data "+data.getClass().getSimpleName());}}
 
-		TreeNode n = TreeHelper.getNode(helpTree,ddEvent.getDragId(),3);
+		TreeNode n = thSection.getNode(helpTree,ddEvent.getDragId(),3);
 		DS section = (DS)n.getData();
 		logger.info(section.toString());
 

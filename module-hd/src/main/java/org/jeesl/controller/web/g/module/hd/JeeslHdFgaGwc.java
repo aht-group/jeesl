@@ -279,7 +279,7 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		Object data = ddEvent.getData();
 		if(debugOnInfo) {if(data==null) {logger.info("data = null");} else{logger.info("Data "+data.getClass().getSimpleName());}}
 		
-		TreeNode n = TreeHelper.getNode(helpTree,ddEvent.getDragId(),3);
+		TreeNode n = thSection.getNode(helpTree,ddEvent.getDragId(),3);
 		SEC section = (SEC)n.getData();
 		logger.info(section.toString());
 		
