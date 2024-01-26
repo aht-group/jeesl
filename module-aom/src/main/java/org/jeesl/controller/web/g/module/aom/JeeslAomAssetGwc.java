@@ -97,6 +97,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
+	private final TreeHelper<ASSET> treeHelper;
 	private final EjbAssetFactory<REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE> efAsset;
 	private final EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC> efEvent;
 	
@@ -136,6 +137,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		sbhEventType = new SbMultiHandler<>(fbAsset.getClassEventType(),this);
 		lazyEvents = new AssetEventLazyModel<>(fbAsset.cpEvent(EjbEventComparator.Type.recordDesc),thfEventType,sbhEventType);
 		
+		treeHelper = TreeHelper.instance();
 		efAsset = fbAsset.ejbAsset();
 		efEvent = fbAsset.ejbEvent();
 		
@@ -241,7 +243,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	public void expandTree()
 	{
-		TreeHelper.setExpansion(this.node != null ? this.node : this.tree, true);
+		treeHelper.setExpansion(this.node != null ? this.node : this.tree, true);
 	}
 	
 	public void expandTree(int levels)
@@ -257,7 +259,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	public void collapseTree()
 	{
-		TreeHelper.setExpansion(this.tree,  false);
+		treeHelper.setExpansion(this.tree,  false);
 	}
 	
 	public boolean isExpanded()

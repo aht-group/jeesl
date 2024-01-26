@@ -53,6 +53,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 
 	protected JeeslAmFacade<L,D,LOC,REALM,ACTIVITY,PROJ> fAm;
 
+	private final TreeHelper<ACTIVITY> thActivity;
 
 	protected String[] amLocales; public String[] getAmLocales() {return amLocales;}
 
@@ -77,6 +78,8 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 	{
 		super(fbAm.getClassL(),fbAm.getClassD());
 		this.fbAm=fbAm;
+		
+		thActivity = TreeHelper.instance();
 
 		efProject = fbAm.ejbProject();
 		efActivity = fbAm.ejbActivity();
@@ -248,12 +251,12 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 
 	public void expandTree()
 	{
-		TreeHelper.setExpansion(this.node != null ? this.node : this.tree, true);
+		thActivity.setExpansion(this.node != null ? this.node : this.tree, true);
 	}
 
 	public void collapseTree()
 	{
-		TreeHelper.setExpansion(this.tree,  false);
+		thActivity.setExpansion(this.tree,  false);
 	}
 
 	public boolean isExpanded()

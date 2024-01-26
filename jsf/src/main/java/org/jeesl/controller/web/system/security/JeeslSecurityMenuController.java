@@ -32,9 +32,7 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
@@ -79,6 +77,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
+	private final TreeHelper<M> treeHelper;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
 	private List<V> opViews; public List<V> getOpViews(){return opViews;}
@@ -107,6 +106,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		sbhContext = new SbSingleHandler<>(fbSecurity.getClassContext(),this);
 
 		efMenu = fbSecurity.ejbMenu();
+		treeHelper = TreeHelper.instance();
+		
 		helps = new ArrayList<>();
 		documents = new ArrayList<>();
 	}
@@ -273,8 +274,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		}
 	}
 
-	public void expandTree() {TreeHelper.setExpansion(this.node!=null ? this.node : this.tree, true);}
-	public void collapseTree() {TreeHelper.setExpansion(this.tree,  false);}
+	public void expandTree() {treeHelper.setExpansion(this.node!=null ? this.node : this.tree, true);}
+	public void collapseTree() {treeHelper.setExpansion(this.tree,  false);}
 	public boolean isExpanded() {return this.tree != null && this.tree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
     public void onNodeCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
@@ -352,8 +353,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		}
 	}
 
-	public void expandHelp(){TreeHelper.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
-	public void collapseHelp() {TreeHelper.setExpansion(this.helpTree,  false);}
+	public void expandHelp(){treeHelper.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+	public void collapseHelp() {treeHelper.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}

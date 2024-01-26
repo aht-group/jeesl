@@ -78,6 +78,8 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
+	private final TreeHelper<M> thMenu;
+	private final TreeHelper<DS> thSection;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
 	protected final SbSingleHandler<CTX> sbhContext; public SbSingleHandler<CTX> getSbhContext() {return sbhContext;}
@@ -103,6 +105,9 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 
 		sbhContext = new SbSingleHandler<CTX>(fbSecurity.getClassContext(),this);
 
+		thMenu = TreeHelper.instance();
+		thSection = TreeHelper.instance();
+		
 		efMenu = fbSecurity.ejbMenu();
 		helps = new ArrayList<>();
 		documents = new ArrayList<>();
@@ -268,8 +273,8 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 		}
 	}
 
-	public void expandTree() {TreeHelper.setExpansion(this.node!=null ? this.node : this.tree, true);}
-	public void collapseTree() {TreeHelper.setExpansion(this.tree,  false);}
+	public void expandTree() {thMenu.setExpansion(this.node!=null ? this.node : this.tree, true);}
+	public void collapseTree() {thMenu.setExpansion(this.tree,  false);}
 	public boolean isExpanded() {return this.tree != null && this.tree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
     public void onNodeCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
@@ -344,8 +349,8 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 		}
 	}
 
-	public void expandHelp(){TreeHelper.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
-	public void collapseHelp() {TreeHelper.setExpansion(this.helpTree,  false);}
+	public void expandHelp(){thSection.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+	public void collapseHelp() {thSection.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}

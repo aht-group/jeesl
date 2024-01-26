@@ -91,6 +91,8 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	private String currentLocaleCode;
 	protected String[] cmsLocales; public String[] getCmsLocales() {return cmsLocales;}
 	
+	private final TreeHelper<S> thSection;
+	
 	protected final EjbIoCmsFactory<L,D,CAT,CMS,V,S,C,MT,LOC> efCms;
 	private final EjbIoCmsSectionFactory<L,S,FM> efS;
 	private final EjbIoCmsElementFactory<L,S,E> efElement;
@@ -125,6 +127,8 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	{
 		super(fbCms.getClassL(),fbCms.getClassD());
 		this.fbCms=fbCms;
+		
+		thSection = TreeHelper.instance();
 		
 		efCms = fbCms.ejbCms();
 		efS = fbCms.ejbSection();
@@ -436,12 +440,12 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	
 	public void expandTree()
 	{
-		TreeHelper.setExpansion(this.node != null ? this.node : this.tree, true);
+		thSection.setExpansion(this.node != null ? this.node : this.tree, true);
 	}
 	
 	public void collapseTree()
 	{
-		TreeHelper.setExpansion(this.tree,  false);
+		thSection.setExpansion(this.tree,  false);
 	}
 	
 	public boolean isExpanded()
