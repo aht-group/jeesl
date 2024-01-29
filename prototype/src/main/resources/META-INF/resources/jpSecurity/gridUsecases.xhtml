@@ -72,11 +72,11 @@
 			
 			<p:dataTable rendered="#{not empty cc.attrs.bean.usecase}" styleClass="jeesl-datatable"
 						var="r" value="#{cc.attrs.bean.roles}" >
-				<f:facet name="header"><j:dtHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
+				<f:facet name="header"><j:dtHeader entity="SecurityUsecase" code="appliedToRoles"/></f:facet>
 				<p:column><h:outputText value="#{r.category.position}.#{r.position}" /></p:column>  
 	         	<p:column>
 	         		<f:facet name="header"><jtp:label entity="SecurityRole" code="category"/></f:facet>
-					<h:outputText value="#{r.name[localeCode].lang}" />  
+					<h:outputText value="#{r.category.name[localeCode].lang}" />  
 				</p:column>
 	         	<p:column>
 	         		<f:facet name="header"><jtp:label entity="SecurityRole"/></f:facet>
