@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math3.util.Combinations;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 public class TxtIoSsiSimilarityFactory
 {
-
-	
 	public static List<String> permutations(String input)
 	{
 		List<String> result = new ArrayList<>();
@@ -42,7 +41,6 @@ public class TxtIoSsiSimilarityFactory
         if (left == right)
         {
         	result.add(String.join(" ", permutation));
-//            System.out.println(Arrays.toString(permutation));
         }
         else
         {
@@ -50,9 +48,21 @@ public class TxtIoSsiSimilarityFactory
             {
                 swap(permutation, left, i);
                 permute(array, permutation, left + 1, right, result);
-                swap(permutation, left, i); // Zurücksetzen für die nächste Iteration
+                swap(permutation, left, i); // Reset  for next iteration
             }
         }
+    }
+    
+    public static double minimumLevenshteinDistance(String reference, List<String> permutations)
+    {
+    	double distance = 1;
+		for(String s : permutations)
+		{
+			int distanceLevenshtein = LevenshteinDistance.getDefaultInstance().apply(reference.toLowerCase(), s.toLowerCase());
+			double normalizedDistance = (double) distanceLevenshtein / Math.max(reference.length(), s.length());
+			if(normalizedDistance<distance) {distance=normalizedDistance;}
+		}
+		return distance;
     }
     
     private static void swap(String[] array, int i, int j)
