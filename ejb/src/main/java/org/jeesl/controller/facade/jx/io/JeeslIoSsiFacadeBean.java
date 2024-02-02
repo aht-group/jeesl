@@ -55,7 +55,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									ATTRIBUTE extends JeeslIoSsiAttribute<CTX,ENTITY>,
 									DATA extends JeeslIoSsiData<CTX,STATUS,ERROR,JOB>,
 									STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
-									ERROR extends JeeslIoSsiError<L,D,CTX>,
+									ERROR extends JeeslIoSsiError<L,D,CTX,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 									JOB extends JeeslJobStatus<L,D,JOB,?>,

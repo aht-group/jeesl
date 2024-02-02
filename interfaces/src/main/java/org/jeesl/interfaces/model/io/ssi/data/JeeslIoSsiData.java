@@ -17,7 +17,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 									STATUS extends JeeslStatus<?,?,STATUS>,
-									ERROR extends JeeslIoSsiError<?,?,CTX>,
+									ERROR extends JeeslIoSsiError<?,?,CTX,?>,
 									JOB extends JeeslJobStatus<?,?,JOB,?>>
 		extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithParentAttributeResolver,
 						EjbWithMigrationJob1<JOB>

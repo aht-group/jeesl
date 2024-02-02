@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
@@ -18,7 +19,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoSsiError<L extends JeeslLang, D extends JeeslDescription,
-							CTX extends JeeslIoSsiContext<?,?>
+							CTX extends JeeslIoSsiContext<?,?>,
+							G extends JeeslGraphic<?,?,?>
 >
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable, EjbWithParentAttributeResolver,
 					EjbWithNonUniqueCode,EjbWithPosition,

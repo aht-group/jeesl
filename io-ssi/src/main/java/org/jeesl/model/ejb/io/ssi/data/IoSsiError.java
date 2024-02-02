@@ -22,13 +22,14 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
+import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
 @Table(name="IoSsiError",uniqueConstraints=@UniqueConstraint(columnNames={"context_id","code"}))
 @EjbErNode(name="IoSsiError")
-public class IoSsiError implements JeeslIoSsiError<IoLang,IoDescription,IoSsiContext>
+public class IoSsiError implements JeeslIoSsiError<IoLang,IoDescription,IoSsiContext,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 

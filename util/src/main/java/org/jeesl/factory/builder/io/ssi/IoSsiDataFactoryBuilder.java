@@ -22,11 +22,11 @@ import org.slf4j.LoggerFactory;
 
 public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								CONTEXT extends JeeslIoSsiContext<SYSTEM,ENTITY>,
-								ATTRIBUTE extends JeeslIoSsiAttribute<CONTEXT,ENTITY>,
-								DATA extends JeeslIoSsiData<CONTEXT,STATUS,?,?>,
+								CTX extends JeeslIoSsiContext<SYSTEM,ENTITY>,
+								ATTRIBUTE extends JeeslIoSsiAttribute<CTX,ENTITY>,
+								DATA extends JeeslIoSsiData<CTX,STATUS,?,?>,
 								STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
-								ERROR extends JeeslIoSsiError<L,D,CONTEXT>,
+								ERROR extends JeeslIoSsiError<L,D,CTX,?>,
 								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 								CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 								JOB extends JeeslJobStatus<L,D,JOB,?>>
@@ -37,7 +37,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 	final static Logger logger = LoggerFactory.getLogger(IoSsiDataFactoryBuilder.class);
 	
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSystem(){return cSystem;}
-	private final Class<CONTEXT> cMapping; public Class<CONTEXT> getClassMapping(){return cMapping;}
+	private final Class<CTX> cMapping; public Class<CTX> getClassMapping(){return cMapping;}
 	private final Class<ATTRIBUTE> cAttribute; public Class<ATTRIBUTE> getClassAttribute(){return cAttribute;}
 	private final Class<DATA> cData; public Class<DATA> getClassData(){return cData;}
 	private final Class<STATUS> cStatus; public Class<STATUS> getClassStatus(){return cStatus;}
@@ -48,7 +48,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 	
 	public IoSsiDataFactoryBuilder(final Class<L> cL, final Class<D> cD,
 								final Class<SYSTEM> cSystem,
-								final Class<CONTEXT> cMapping,
+								final Class<CTX> cMapping,
 								final Class<ATTRIBUTE> cAttribute,
 								final Class<DATA> cData,
 								final Class<STATUS> cLink,
@@ -69,10 +69,10 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 		this.cJob=cJob;
 	}
 
-	public EjbIoSsiMappingFactory<SYSTEM,CONTEXT,ENTITY> ejbMapping() {return new EjbIoSsiMappingFactory<>(this);}
-	public EjbIoSsiAttributeFactory<CONTEXT,ATTRIBUTE,ENTITY> ejbAttribute() {return new EjbIoSsiAttributeFactory<>(cAttribute);}
-	public EjbIoSsiDataFactory<CONTEXT,DATA,STATUS> ejbData() {return new EjbIoSsiDataFactory<>(cData);}
-	public EjbIoSsiErrorFactory<CONTEXT,ERROR> efError() {return new EjbIoSsiErrorFactory<>(cError);}
+	public EjbIoSsiMappingFactory<SYSTEM,CTX,ENTITY> ejbMapping() {return new EjbIoSsiMappingFactory<>(this);}
+	public EjbIoSsiAttributeFactory<CTX,ATTRIBUTE,ENTITY> ejbAttribute() {return new EjbIoSsiAttributeFactory<>(cAttribute);}
+	public EjbIoSsiDataFactory<CTX,DATA,STATUS> ejbData() {return new EjbIoSsiDataFactory<>(cData);}
+	public EjbIoSsiErrorFactory<CTX,ERROR> efError() {return new EjbIoSsiErrorFactory<>(cError);}
 	
-	public TxtIoSsiMappingFactory<SYSTEM,CONTEXT,ENTITY> txtMapping(String localeCode) {return new TxtIoSsiMappingFactory<>(localeCode);}
+	public TxtIoSsiMappingFactory<SYSTEM,CTX,ENTITY> txtMapping(String localeCode) {return new TxtIoSsiMappingFactory<>(localeCode);}
 }

@@ -6,8 +6,8 @@ import org.jeesl.factory.ejb.util.EjbPositionFactory;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 
-public class EjbIoSsiErrorFactory <CONTEXT extends JeeslIoSsiContext<?,?>,
-									ERROR extends JeeslIoSsiError<?,?,CONTEXT>>
+public class EjbIoSsiErrorFactory <CTX extends JeeslIoSsiContext<?,?>,
+									ERROR extends JeeslIoSsiError<?,?,CTX,?>>
 {
 	private final Class<ERROR> cError;
 
@@ -16,7 +16,7 @@ public class EjbIoSsiErrorFactory <CONTEXT extends JeeslIoSsiContext<?,?>,
         this.cError = cError;
 	}
 	
-	public ERROR build(CONTEXT context, List<ERROR> list)
+	public ERROR build(CTX context, List<ERROR> list)
 	{
 		ERROR ejb = null;
 		try

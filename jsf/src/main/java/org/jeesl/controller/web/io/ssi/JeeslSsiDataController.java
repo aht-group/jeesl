@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
 public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 										DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
 										STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
-										ERROR extends JeeslIoSsiError<?,?,CTX>,
+										ERROR extends JeeslIoSsiError<?,?,CTX,?>,
 										JOB extends JeeslJobStatus<?,?,JOB,?>,
 										JSON extends Object>
 //									extends AbstractJeeslWebController<L,D,LOC>

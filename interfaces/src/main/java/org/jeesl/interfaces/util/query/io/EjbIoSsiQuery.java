@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 							STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
-							ERROR extends JeeslIoSsiError<?,?,CTX>>
+							ERROR extends JeeslIoSsiError<?,?,CTX,?>>
 		extends AbstractEjbQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoSsiQuery.class);
