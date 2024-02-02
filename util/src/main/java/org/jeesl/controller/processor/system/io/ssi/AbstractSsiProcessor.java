@@ -87,8 +87,6 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
-			
-			
 		}
 		catch (JeeslNotFoundException e) {throw new RuntimeException(e);}
 	}

@@ -27,7 +27,8 @@
 		<f:facet name="actions">
 			<j:svg type="jeeslCancel" listener="#{dialogBean.save()}" update="@form"/>
 		</f:facet>
-			<p:dataTable id="dtOpEntity" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
+			<p:dataTable id="dtOpEntity" styleClass="jeesl-datatable"
+					var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
 				 	selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
 				 	rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.addEntity()}"

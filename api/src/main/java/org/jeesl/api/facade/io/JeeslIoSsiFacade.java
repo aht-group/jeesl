@@ -56,8 +56,8 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	JsonTuples2<CTX,STATUS> tpcContextStatus(List<CTX> list);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,B> tpMappingB(Class<B> classB, CTX mapping, A a);
 
-	Long cSsiData(EjbIoSsiQuery<CTX,STATUS> query);
-	List<DATA> fSsiData(EjbIoSsiQuery<CTX,STATUS> query);
+	Long cSsiData(EjbIoSsiQuery<CTX,STATUS,ERROR> query);
+	List<DATA> fSsiData(EjbIoSsiQuery<CTX,STATUS,ERROR> query);
 	List<DATA> fIoSsiData(CTX mapping, List<STATUS> links);
 	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a);
 	List<DATA> fSsiDataWithJob1(CTX mapping, STATUS link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);

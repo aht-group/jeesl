@@ -23,6 +23,7 @@ import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.web.io.ssi.JeeslIoSsiDataCallback;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -39,6 +40,7 @@ import org.slf4j.LoggerFactory;
 public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 										DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
 										STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
+										ERROR extends JeeslIoSsiError<?,?,CTX>,
 										JOB extends JeeslJobStatus<?,?,JOB,?>,
 										JSON extends Object>
 //									extends AbstractJeeslWebController<L,D,LOC>
@@ -48,7 +50,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiDataController.class);
 	
-	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,JOB,?> fSsi;
+	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,ERROR,?,?,JOB,?> fSsi;
 	private final IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData;
 	private final JeeslIoSsiDataCallback callback;
 	
@@ -85,7 +87,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		datas = new ArrayList<>();
 	}
 
-	public void postConstructSsiData(JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,JOB,?> fSsi)
+	public void postConstructSsiData(JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,ERROR,?,?,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
 		logger.trace(callback.getClass().getName());
@@ -121,7 +123,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	public List<DATA> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
 	{
 		datas.clear(); mapJson.clear();
-		EjbIoSsiQuery<CTX,STATUS> query = new EjbIoSsiQuery<>();
+		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
 		query.setMaxResults(pageSize);
 		query.id2(refB);
