@@ -8,6 +8,7 @@
 		<composite:attribute name="bean" required="true"/>
 		<composite:attribute name="localeKeys" required="false" default="#{appTranslationBean.langKeys}"/>
 		<composite:attribute name="withCode" required="false" default="false"/>
+		<composite:attribute name="withCategoryIcon" required="false" default="false"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -35,6 +36,7 @@
 			     	</p:column>
 			      	<p:column rendered="#{cc.attrs.bean.sbhCat.hasMore}">
 			      		<f:facet name="header"><jtp:label entity="IoAttributeCriteria" code="category"/></f:facet>
+			      		<jtp:symbolizer value="#{c.category2}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
 						<h:outputText value="#{c.category2.name[localeCode].lang}"/>
 			     	</p:column>
 					<p:column>

@@ -7,6 +7,7 @@
 	<composite:interface>
 		<composite:attribute name="bean" required="true"/>
 		<composite:attribute name="localeKeys" required="false" default="#{appTranslationBean.langKeys}"/>
+		<composite:attribute name="withCategoryIcon" required="false" default="false"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -28,6 +29,7 @@
 						<h:outputText value="#{s.category2.position}.#{s.position}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslCategory}" rendered="#{cc.attrs.bean.sbhCat.hasMore}">  
+						<jtp:symbolizer value="#{s.category2}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
 						<h:outputText value="#{s.category2.name[localeCode].lang}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslIoAttributeSet}">  
@@ -88,8 +90,9 @@
 						<h:graphicImage rendered="#{i.tableHeader}" name="12/ui/system/io/attribute/table.png"  library="jeeslPrototypeGfx"/>
 				    </p:column>
 					<p:column>
-						<jtp:symbolizer value="#{i.criteria.type}" marginRight="5"/>
+						<jtp:symbolizer value="#{i.criteria.category2}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
 						<h:outputText value="#{i.criteria.name[localeCode].lang}"/>
+						<jtp:symbolizer value="#{i.criteria.type}" marginLeft="5"/>
 					</p:column>
 					<p:column>
 						<h:outputText value="#{i.criteria.code}"/>
