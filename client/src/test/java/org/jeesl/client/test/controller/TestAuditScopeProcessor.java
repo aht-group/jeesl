@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
@@ -32,7 +33,6 @@ import net.sf.ahtutils.factory.xml.audit.XmlRevisionFactory;
 import net.sf.ahtutils.factory.xml.audit.XmlRevisionsFactory;
 import net.sf.ahtutils.factory.xml.audit.XmlScopeFactory;
 import net.sf.ahtutils.test.AbstractJeeslTest;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestAuditScopeProcessor extends AbstractJeeslTest
 {

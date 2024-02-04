@@ -1,5 +1,6 @@
 package org.jeesl.client.test.factory.ejb;
 
+import org.exlp.util.io.log.LoggerInit;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.model.ejb.system.locale.Status;
@@ -15,8 +16,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.LoggerInit;
 
 public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
 {

@@ -2,14 +2,13 @@ package org.jeesl.factory.xml.system.io.db;
 
 import java.sql.Timestamp;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.model.xml.io.db.Query;
 import org.jeesl.model.xml.io.db.Time;
 import org.jeesl.model.xml.io.db.Times;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class XmlQueryFactory
 {

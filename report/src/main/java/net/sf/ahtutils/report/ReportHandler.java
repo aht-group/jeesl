@@ -18,6 +18,7 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Namespace;
 import org.jeesl.model.xml.io.report.Jr;
 import org.jeesl.model.xml.io.report.Media;
@@ -36,7 +37,6 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRTemplate;

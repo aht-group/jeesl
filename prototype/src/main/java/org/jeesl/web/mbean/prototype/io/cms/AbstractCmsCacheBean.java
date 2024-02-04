@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.bean.cache.JeeslCmsCacheBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.controller.provider.ListLocaleProvider;
@@ -32,8 +33,6 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										CAT extends JeeslIoCmsCategory<L,D,CAT,?>,

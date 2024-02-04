@@ -2,6 +2,8 @@ package org.jeesl.client.test.factory.word;
 
 import java.io.IOException;
 
+import org.exlp.util.io.log.LoggerInit;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.doc.word.EntityWordRenderer;
 import org.jeesl.model.xml.io.label.Entities;
 import org.jeesl.model.xml.io.label.Entity;
@@ -10,9 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aspose.words.Document;
-
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestEntityWordRederer extends AbstractWordCli
 {

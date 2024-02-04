@@ -4,14 +4,13 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.system.status.XmlSourceFactory;
 import org.jeesl.factory.xml.system.util.text.XmlReferenceFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.model.xml.io.db.query.QueryTs;
 import org.jeesl.model.xml.module.ts.Transaction;
 import org.jeesl.model.xml.system.security.User;
-
-import net.sf.exlp.util.DateUtil;
 
 public class XmlTsQuery
 {

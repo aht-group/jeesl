@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.factory.xml.system.security.XmlRoleFactory;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
@@ -25,7 +26,6 @@ import net.sf.ahtutils.doc.word.WordResponsibilityMatrixFactory;
 import net.sf.ahtutils.test.AbstractUtilsDocTest;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.ahtutils.xml.project.Responsibilities;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestResponsibilityMatrixFactory extends AbstractUtilsDocTest
 {

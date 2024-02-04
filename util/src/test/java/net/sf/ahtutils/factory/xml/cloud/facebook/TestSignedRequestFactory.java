@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.JeeslBootstrap;
 import org.junit.After;
 import org.junit.Assert;
@@ -20,7 +21,6 @@ import net.sf.ahtutils.controller.factory.xml.cloud.facebook.SignedRequestFactor
 import net.sf.ahtutils.test.AbstractFileProcessingTest;
 import net.sf.ahtutils.xml.cloud.facebook.SignedRequest;
 import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestSignedRequestFactory extends AbstractFileProcessingTest

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.module.survey.XmlAnswerFactory;
 import org.jeesl.factory.xml.module.survey.XmlCorrelationFactory;
 import org.jeesl.factory.xml.module.survey.XmlDataFactory;
@@ -35,7 +36,6 @@ import org.jeesl.model.xml.module.survey.Template;
 
 import net.sf.ahtutils.factory.xml.status.XmlUnitFactory;
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.exlp.util.DateUtil;
 
 public class XmlSurveyQuery
 {

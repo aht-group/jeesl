@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.exlp.interfaces.system.property.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Comment;
 import org.jdom2.Document;
 import org.jdom2.output.Format;
@@ -20,7 +21,6 @@ import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.exlp.util.io.FileIO;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslMsgBuilder
 {

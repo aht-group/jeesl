@@ -17,6 +17,8 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.exlp.util.io.config.ExlpCentralConfigPointer;
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jeesl.controller.io.ssi.wildfly.JbossModuleConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.JbossStandaloneConfigurator;
@@ -30,8 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.io.ExlpCentralConfigPointer;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractJbossEapConfigurator extends AbstractMojo
 {

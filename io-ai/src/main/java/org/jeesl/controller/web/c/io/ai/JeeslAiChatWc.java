@@ -19,6 +19,7 @@ import org.jeesl.interfaces.controller.web.io.ai.JeeslIoAiChatCallback;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.model.ejb.io.ai.openai.IoAiChatCompletion;
 import org.jeesl.model.ejb.io.ai.openai.IoAiChatThread;
+import org.jeesl.model.ejb.io.ai.openai.IoOpenAiHint;
 import org.jeesl.model.ejb.io.ai.openai.IoOpenAiModel;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkupType;
@@ -48,24 +49,20 @@ public class JeeslAiChatWc implements Serializable
 	
 	private EjbCodeCache<IoMarkupType> cacheType;
 	
-	private final List<IoAiChatCompletion> completions;
+	private final List<IoAiChatCompletion> completions; public List<IoAiChatCompletion> getCompletions() {return completions;}
 	
-	public List<IoAiChatCompletion> getCompletions() {
-		return completions;
-	}
 	private IoOpenAiModel model;
 	private SecurityUser user; public SecurityUser getUser() {return user;}
 	private IoAiChatThread thread; public IoAiChatThread getThread() {return thread;} public void setThread(IoAiChatThread thread) {this.thread = thread;}
 	private IoAiChatCompletion completion; public IoAiChatCompletion getCompletion() {return completion;} public void setCompletion(IoAiChatCompletion completion) {this.completion = completion;}
 	
 	private String userPrompt;  public String getUserPrompt() {return userPrompt;} public void setUserPrompt(String userPrompt) {this.userPrompt = userPrompt;}
-	private String systemPrompt;
-
+	private String systemPrompt; public String getSystemPrompt() {return systemPrompt;} public void setSystemPrompt(String systemPrompt) {this.systemPrompt = systemPrompt;}
+	
 	public static JeeslAiChatWc instance(JeeslIoAiChatCallback callback) {return new JeeslAiChatWc(callback);}
 	private JeeslAiChatWc(JeeslIoAiChatCallback callback)
 	{
 		this.callback = callback;
-		
 		
 		efMarkup = EjbMarkupFactory.instance(IoMarkup.class);
 		cacheType = EjbCodeCache.instance(IoMarkupType.class);
@@ -84,9 +81,9 @@ public class JeeslAiChatWc implements Serializable
 		cacheType.facade(facade);
 		
 		gpt = OpenAiChatCompletionHandler.instance(credential).model(model);
-		
 	}
 	public JeeslAiChatWc thread(IoAiChatThread thread) {this.thread=thread; this.selectThread(); return this;}
+	public JeeslAiChatWc extraHints(IoLocale locale, List<IoOpenAiHint> hints) {gpt.extraHints(locale,hints); return this;} 
 	
 	private void reset(boolean rCompletions)
 	{
@@ -98,7 +95,6 @@ public class JeeslAiChatWc implements Serializable
 		logger.info(AbstractLogMessage.selectEntity(thread));
 		this.reset(true);
 		thread = EjbAiThreadFactory.build(user);
-		
 	}
 	
 	public void selectThread()
@@ -120,6 +116,8 @@ public class JeeslAiChatWc implements Serializable
 	public void complete() throws IOException, SAXException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(Objects.isNull(thread)) {thread = facade.save(EjbAiThreadFactory.build(user));}
+		if(EjbIdFactory.isUnSaved(thread)) {thread = facade.save(thread);}
+		
 		completion = EjbAiCompleteFactory.build(thread,model,user);
 		
 		ChatCompletionResult result = gpt.result(systemPrompt,userPrompt);
@@ -132,6 +130,8 @@ public class JeeslAiChatWc implements Serializable
 		
 		completion = facade.save(completion);
 		EjbIdFactory.replaceOrAdd(completions,completion);
+		
+		callback.chatRequestCompleted();
 	}
 	
 	public void voidCallback() {}

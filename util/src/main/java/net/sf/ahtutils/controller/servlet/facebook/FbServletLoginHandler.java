@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 import net.sf.ahtutils.controller.factory.xml.cloud.facebook.SignedRequestFactory;
 import net.sf.ahtutils.xml.cloud.facebook.App;
 import net.sf.ahtutils.xml.cloud.facebook.SignedRequest;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

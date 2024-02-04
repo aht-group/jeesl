@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.dev.qa.XmlGroupFactory;
 import org.jeesl.factory.xml.dev.qa.XmlGroupsFactory;
 import org.jeesl.factory.xml.dev.qa.XmlResultFactory;
@@ -29,7 +30,6 @@ import org.jeesl.util.query.xml.system.SecurityQuery;
 
 import net.sf.ahtutils.factory.xml.status.XmlStatementFactory;
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.exlp.util.DateUtil;
 
 public class QaQuery
 {

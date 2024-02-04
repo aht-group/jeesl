@@ -1,9 +1,8 @@
 package org.jeesl;
 
+import org.exlp.util.io.log.LoggerInit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.LoggerInit;
 
 public class JeeslMavenBootstrap
 {

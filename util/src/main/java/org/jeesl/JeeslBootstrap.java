@@ -2,11 +2,10 @@ package org.jeesl;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.exlp.util.io.log.LoggerInit;
 import org.jeesl.controller.handler.io.log.LoggerBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.LoggerInit;
 
 public class JeeslBootstrap
 {

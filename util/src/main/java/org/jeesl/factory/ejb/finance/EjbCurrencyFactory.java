@@ -1,9 +1,8 @@
 package org.jeesl.factory.ejb.finance;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.model.module.currency.UtilsCurrency;

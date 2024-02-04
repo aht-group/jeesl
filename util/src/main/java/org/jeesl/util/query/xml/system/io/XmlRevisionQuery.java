@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.system.io.revision.XmlRelationFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlRevisionFactory;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
@@ -18,8 +19,6 @@ import org.jeesl.model.xml.io.label.Relation;
 import org.jeesl.model.xml.io.label.Revision;
 import org.jeesl.model.xml.system.security.User;
 import org.jeesl.util.query.xml.XmlStatusQuery;
-
-import net.sf.exlp.util.DateUtil;
 
 
 public class XmlRevisionQuery

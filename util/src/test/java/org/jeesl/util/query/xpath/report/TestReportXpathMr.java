@@ -1,5 +1,6 @@
 package org.jeesl.util.query.xpath.report;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.model.xml.io.report.Jr;
 import org.jeesl.model.xml.io.report.Report;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestReportXpathMr extends AbstractJeeslUtilTest
 {

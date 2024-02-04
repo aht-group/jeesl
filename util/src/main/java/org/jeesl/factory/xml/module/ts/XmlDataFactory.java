@@ -9,12 +9,11 @@ import java.util.GregorianCalendar;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.model.xml.module.ts.Data;
 import org.jeesl.model.xml.module.ts.Points;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class XmlDataFactory
 {

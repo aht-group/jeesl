@@ -1,10 +1,11 @@
 package org.jeesl.factory.xml.module.inventory.pc;
 
 import java.util.Date;
+
+import org.exlp.util.system.DateUtil;
 import org.jeesl.model.xml.module.inventory.pc.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.sf.exlp.util.DateUtil;
 
 public class XmlUpdateFactory
 {

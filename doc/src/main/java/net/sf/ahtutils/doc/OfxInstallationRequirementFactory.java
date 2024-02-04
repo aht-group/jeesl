@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.factory.xml.list.XmlListFactory2;
 import org.openfuxml.factory.xml.list.XmlListItemFactory;
 import org.openfuxml.model.xml.core.list.List;

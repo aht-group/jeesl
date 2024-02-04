@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.exlp.model.xml.io.Dir;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslIcon;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -17,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.jsf.filter.UtilsStatusFilter;
 import net.sf.exlp.interfaces.util.xml.JaxbInterface;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractIconBean implements Serializable
 {

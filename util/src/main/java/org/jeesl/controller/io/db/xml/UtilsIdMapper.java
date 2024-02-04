@@ -7,8 +7,7 @@ import java.util.Objects;
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.io.ssi.sync.Mapper;
 import org.jeesl.model.xml.io.ssi.sync.Mappings;
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.xml.system.io.sync.XmlMapperFactory;
 import org.slf4j.Logger;

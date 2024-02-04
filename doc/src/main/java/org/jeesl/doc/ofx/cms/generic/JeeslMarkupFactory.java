@@ -1,6 +1,7 @@
 package org.jeesl.doc.ofx.cms.generic;
 
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jsoup.Jsoup;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
@@ -10,8 +11,6 @@ import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.transform.XhtmlTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslMarkupFactory <M extends JeeslIoMarkup<T>,
 								T extends JeeslIoMarkupType<?,?,T,?>>

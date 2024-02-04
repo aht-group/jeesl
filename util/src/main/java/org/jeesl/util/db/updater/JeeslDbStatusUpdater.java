@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -29,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Aht;
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescription, 
 									S extends JeeslStatus<L,D,S>,

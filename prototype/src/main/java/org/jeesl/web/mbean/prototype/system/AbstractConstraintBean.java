@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
@@ -35,7 +36,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.factory.xml.system.XmlConstraintFactory;
 import net.sf.ahtutils.factory.xml.system.XmlConstraintScopeFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescription,
 									ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,

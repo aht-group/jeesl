@@ -25,5 +25,5 @@ public interface JeeslIoAiOpenAiHint <L extends JeeslLang, D extends JeeslDescri
 							JeeslStatus<L,D,S>,EjbWithCodeGraphic<G>,
 							JeeslStatusFixedCode,JeeslStatusWithSymbol,EjbWithSymbol
 {	
-	public static enum Code{embeddingAda2};
+	public static enum Code{outputXhtml};
 }

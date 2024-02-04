@@ -10,8 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.output.Format;
 import org.jeesl.exception.processing.UtilsDeveloperException;

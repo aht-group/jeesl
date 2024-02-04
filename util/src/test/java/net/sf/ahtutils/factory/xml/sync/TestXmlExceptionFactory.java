@@ -1,8 +1,8 @@
 package net.sf.ahtutils.factory.xml.sync;
 
 import net.sf.ahtutils.test.AbstractFileProcessingTest;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionFactory;

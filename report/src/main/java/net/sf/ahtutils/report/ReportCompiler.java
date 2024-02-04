@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.JDOMException;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.model.xml.io.report.Jr;

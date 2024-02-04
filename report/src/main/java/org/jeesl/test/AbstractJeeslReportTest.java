@@ -11,6 +11,8 @@ import java.util.Objects;
 
 import org.apache.commons.io.IOUtils;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
+import org.exlp.util.io.log.LoggerInit;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.interfaces.controller.report.format.JeeslXlsReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.model.xml.io.report.Info;
@@ -34,9 +36,7 @@ import net.sf.ahtutils.report.ReportHandler;
 import net.sf.ahtutils.report.exception.ReportException;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractJeeslReportTest
 {

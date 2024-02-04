@@ -1,10 +1,10 @@
 package org.jeesl.controller.processor;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.JDOMException;
 import org.w3c.dom.Document;
 
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class FtlW3cProcessor
 {	

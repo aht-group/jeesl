@@ -19,6 +19,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslLogFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -35,8 +36,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.EjbDiaryQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									LOG extends JeeslJournalBook<SCOPE,ITEM>,

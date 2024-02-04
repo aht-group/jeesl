@@ -3,9 +3,9 @@ package org.jeesl;
 import java.io.File;
 
 import net.sf.ahtutils.test.AbstractJeeslTest;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.io.log.LoggerInit;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
