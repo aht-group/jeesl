@@ -3,8 +3,7 @@ package org.jeesl.util.query.xml;
 import java.util.Date;
 
 import org.exlp.model.xml.io.Dir;
-
-import net.sf.exlp.util.DateUtil;
+import org.exlp.util.system.DateUtil;
 
 public class IoQuery
 {	

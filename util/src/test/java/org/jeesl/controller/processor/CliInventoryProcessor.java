@@ -1,5 +1,6 @@
 package org.jeesl.controller.processor;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.processor.pcinventory.PcInventoryPostProcessor;
 import org.jeesl.controller.processor.pcinventory.PcInventoryProcessor;
@@ -8,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliInventoryProcessor
 {

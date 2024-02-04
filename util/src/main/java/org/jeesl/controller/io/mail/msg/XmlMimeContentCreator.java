@@ -7,13 +7,12 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.mail.Attachment;
 import org.jeesl.model.xml.io.mail.Image;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XmlMimeContentCreator extends AbstractMimeContentCreator
 {

@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.system.io.revision;
 import java.util.Date;
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.interfaces.model.io.label.revision.envers.JeeslRevision;
 import org.jeesl.interfaces.model.io.label.revision.envers.JeeslRevisionContainer;
@@ -11,8 +12,6 @@ import org.jeesl.model.xml.io.label.Revision;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class XmlRevisionFactory <REV extends JeeslRevision,
 								USER extends JeeslUser<?>,

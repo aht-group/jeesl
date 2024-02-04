@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.module.calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
@@ -17,8 +18,6 @@ import org.jeesl.model.xml.module.calendar.Item;
 import org.jeesl.util.query.xml.module.XmlCalendarQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescription,
 									CALENDAR extends JeeslCalendar<ZONE,CT>,

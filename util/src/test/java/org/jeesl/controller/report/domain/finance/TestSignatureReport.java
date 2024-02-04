@@ -1,5 +1,6 @@
 package org.jeesl.controller.report.domain.finance;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.xml.domain.finance.XmlSignatureFactory;
@@ -8,8 +9,6 @@ import org.jeesl.model.xml.module.finance.Signature;
 import org.jeesl.model.xml.module.finance.Signatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestSignatureReport extends AbstractJeeslUtilTest
 {

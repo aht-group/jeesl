@@ -12,11 +12,11 @@ import java.util.Collection;
 import java.util.List;
 
 import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
 import org.exlp.model.xml.io.Dir;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translation;

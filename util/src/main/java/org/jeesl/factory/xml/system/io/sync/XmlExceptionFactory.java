@@ -4,8 +4,7 @@ package org.jeesl.factory.xml.system.io.sync;
 import java.util.Date;
 import java.util.Objects;
 
-import net.sf.exlp.util.DateUtil;
-
+import org.exlp.util.system.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

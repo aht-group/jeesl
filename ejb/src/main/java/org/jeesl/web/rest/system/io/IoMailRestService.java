@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.exlp.util.jx.JaxbUtil;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRestExport;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRestImport;
@@ -30,8 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,

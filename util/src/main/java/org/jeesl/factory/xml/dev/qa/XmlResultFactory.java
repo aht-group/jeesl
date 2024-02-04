@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.dev.qa;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.system.security.XmlStaffFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -28,7 +29,6 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaStaff;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
-import net.sf.exlp.util.DateUtil;
 
 public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 							C extends JeeslSecurityCategory<L,D>,

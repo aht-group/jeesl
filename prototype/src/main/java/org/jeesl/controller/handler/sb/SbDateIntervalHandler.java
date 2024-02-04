@@ -7,11 +7,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class SbDateIntervalHandler implements Serializable
 {

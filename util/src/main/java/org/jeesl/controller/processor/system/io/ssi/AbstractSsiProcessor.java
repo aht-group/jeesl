@@ -40,7 +40,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 										ATTRIBUTE extends JeeslIoSsiAttribute<CONTEXT,ENTITY>,
 										DATA extends JeeslIoSsiData<CONTEXT,STATUS,ERROR,JOB>,
 										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
-										ERROR extends JeeslIoSsiError<L,D,CONTEXT>,
+										ERROR extends JeeslIoSsiError<L,D,CONTEXT,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 										JOB extends JeeslJobStatus<L,D,JOB,?>,
@@ -87,8 +87,6 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
-			
-			
 		}
 		catch (JeeslNotFoundException e) {throw new RuntimeException(e);}
 	}

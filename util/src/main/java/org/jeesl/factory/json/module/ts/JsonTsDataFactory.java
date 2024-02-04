@@ -4,13 +4,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.model.json.module.ts.JsonTsData;
 import org.jeesl.model.json.module.ts.JsonTsSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 {

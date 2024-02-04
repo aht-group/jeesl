@@ -44,7 +44,7 @@ public class TxtTokenFactory
 	
 	public static int toContextWindow(IoOpenAiModel model)
 	{
-		if(model.getSymbol().equals("gpt-3.5-turbo-1106")) {return 4096;}
+		if(model.getSymbol().equals("gpt-3.5-turbo-16k")) {return 16385;}
 		else if(model.getSymbol().equals("gpt-4-1106-preview")) {return 128000;}
 		
 		return 4000;

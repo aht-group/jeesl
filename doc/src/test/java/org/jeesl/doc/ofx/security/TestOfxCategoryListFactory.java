@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.DefaultConfigurationBuilder;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangFactory;
@@ -28,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 {

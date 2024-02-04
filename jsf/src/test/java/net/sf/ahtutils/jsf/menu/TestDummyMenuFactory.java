@@ -1,5 +1,6 @@
 package net.sf.ahtutils.jsf.menu;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.system.navigation.Menu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.test.AbstractAhtUtilsJsfTst;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestDummyMenuFactory extends AbstractAhtUtilsJsfTst
 {

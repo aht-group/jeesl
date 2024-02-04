@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -21,8 +22,6 @@ import org.jeesl.model.xml.io.mail.Attachment;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 						CATEGORY extends JeeslStatus<L,D,CATEGORY>,

@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.db.revision.Change;
 import org.jeesl.model.xml.io.db.revision.Revision;
 import org.jeesl.model.xml.io.db.revision.Scope;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AuditScopeProcessor
 {

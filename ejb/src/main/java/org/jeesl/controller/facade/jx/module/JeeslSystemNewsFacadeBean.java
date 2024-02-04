@@ -13,6 +13,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.system.JeeslSystemNewsFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -24,8 +25,6 @@ import org.jeesl.interfaces.model.with.date.ju.EjbWithValidUntil;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class JeeslSystemNewsFacadeBean<L extends JeeslLang,D extends JeeslDescription,
 										CATEGORY extends JeeslSystemNewsCategory<L,D,CATEGORY,?>,

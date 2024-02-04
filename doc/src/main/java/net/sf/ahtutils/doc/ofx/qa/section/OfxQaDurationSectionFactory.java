@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.module.dev.qa.Category;
@@ -23,7 +24,6 @@ import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaDurationGroupTable;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaDurationFrSummaryTable;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaDurationFrCategoryTable;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxQaDurationSectionFactory extends AbstractUtilsOfxDocumentationFactory
 {

@@ -3,6 +3,7 @@ package net.sf.ahtutils.doc.ofx.security.section;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
@@ -24,7 +25,6 @@ import net.sf.ahtutils.doc.DocumentationCommentBuilder;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityRoleTableFactory;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxSecurityRolesSectionFactory extends AbstractUtilsOfxDocumentationFactory
 {

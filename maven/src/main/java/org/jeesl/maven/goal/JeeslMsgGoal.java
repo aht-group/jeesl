@@ -10,10 +10,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.exlp.model.xml.io.Dir;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.txt.system.locale.TranslationFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 @Mojo(name="msgBundle2")
 public class JeeslMsgGoal extends AbstractMojo

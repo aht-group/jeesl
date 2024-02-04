@@ -3,14 +3,13 @@ package org.jeesl.factory.ejb.io.mail.core;
 import java.util.Date;
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class EjbIoMailFactory <CATEGORY extends JeeslStatus<?,?,CATEGORY>,
 								MAIL extends JeeslIoMail<?,?,CATEGORY,STATUS,RETENTION,?>,

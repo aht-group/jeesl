@@ -1,7 +1,6 @@
 package org.jeesl.test;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 
 public class JeeslAssert

@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.rest.rs.jx.io.label.JeeslIoLabelRest;
 import org.jeesl.api.rest.rs.jx.io.label.JeeslRevisionRestImport;
 import org.jeesl.model.xml.io.label.Diagram;
@@ -29,7 +30,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.interfaces.util.ConfigKey;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractErDiagram
 {

@@ -2,8 +2,8 @@ package net.sf.ahtutils.monitor;
 
 import net.sf.ahtutils.interfaces.rest.UtilsMonitoringRest;
 import net.sf.ahtutils.test.UtilsMonitorTestBootstrap;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;

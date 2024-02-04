@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.module.ts;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.factory.xml.system.status.XmlSourceFactory;
 import org.jeesl.factory.xml.system.util.text.XmlReferenceFactory;
@@ -17,8 +18,6 @@ import org.jeesl.model.xml.io.locale.status.Source;
 import org.jeesl.model.xml.module.ts.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class XmlTransactionFactory<L extends JeeslLang,D extends JeeslDescription,
 								   TRANSACTION extends JeeslTsTransaction<SOURCE,?,USER,?>,

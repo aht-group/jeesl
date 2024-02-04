@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
 import org.jeesl.controller.handler.io.log.LoggedExit;
+import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
 import org.slf4j.Logger;
@@ -46,7 +47,7 @@ public class AbstractSsiXlsMapper
 		{
 			String key = row.getCell(colIndex).getStringCellValue().trim();
 			logger.trace("i:"+colIndex+" "+key);
-			logger.trace(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex)+" "+key);
+			logger.info(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex)+" "+key);
 			mapColumnIndex.put(colIndex,key);
 			if(mapColumnCode.containsKey(key)) {logger.warn("Already exists: "+key);}
 			mapColumnCode.put(key,colIndex);
@@ -105,5 +106,15 @@ public class AbstractSsiXlsMapper
 			}
 		}
 		return null;
+	}
+	
+	public String toString(Row row, String header) throws UtilsConfigurationException
+	{
+		int index = mapColumnCode.get(header);
+//		logger.info("Header "+header+" has index: "+index);
+//		for(int i=0;i<8;i++) {logger.info(row.getCell(i).getStringCellValue().trim());}
+		String value = row.getCell(index).getStringCellValue().trim();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value;
 	}
 }

@@ -1,10 +1,10 @@
 package org.jeesl.factory.xml.io.mail;
 
 import net.sf.ahtutils.interfaces.model.system.mail.UtilsMailTracker;
-import net.sf.exlp.util.DateUtil;
 
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;

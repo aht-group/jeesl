@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.DefaultConfigurationBuilder;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangFactory;
@@ -27,7 +28,6 @@ import net.sf.ahtutils.controller.factory.ofx.lang.AbstractOfxStatusFactoryTest;
 import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 {

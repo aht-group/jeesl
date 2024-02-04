@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,6 @@ import net.sf.ahtutils.doc.latex.writer.TestLatexTranslationStatFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxLangStatisticTableFactory;
 import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestOfxLangStatisticTableFactory extends AbstractOfxStatusFactoryTest
 {

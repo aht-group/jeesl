@@ -19,6 +19,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -54,8 +55,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.util.query.system.JeeslJobQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
-
-import net.sf.exlp.util.DateUtil;
 
 public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescription,
 									TEMPLATE extends JeeslJobTemplate<L,D,CATEGORY,TYPE,PRIORITY,EXPIRE>,

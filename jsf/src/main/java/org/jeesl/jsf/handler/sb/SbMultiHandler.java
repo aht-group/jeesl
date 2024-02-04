@@ -29,7 +29,6 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	private final List<T> selected; public List<T> getSelected() {return selected;}
 	private Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
 	
-	
 	public static <T extends EjbWithId> SbMultiHandler<T> instance(final Class<T> cT, SbToggleBean bean) {return new SbMultiHandler<>(cT,bean);}
 	
 	public SbMultiHandler(final Class<T> cT, List<T> list){this(cT,list,null);}

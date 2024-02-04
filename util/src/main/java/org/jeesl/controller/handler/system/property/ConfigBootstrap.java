@@ -10,12 +10,11 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.tree.NodeCombiner;
 import org.apache.commons.configuration2.tree.UnionCombiner;
+import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-
-import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 
 public class ConfigBootstrap
 {

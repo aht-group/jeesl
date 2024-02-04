@@ -3,6 +3,7 @@ package net.sf.ahtutils.factory.json;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.json.util.JsonDateFactory;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.model.json.date.JsonDateYQM;
 import net.sf.ahtutils.model.json.date.JsonDateYQMW;
 import net.sf.ahtutils.model.json.date.JsonDateYQMWD;
-import net.sf.exlp.util.DateUtil;
 
 public class TestJsonDateFacotory extends AbstractJeeslUtilTest
 {

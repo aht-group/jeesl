@@ -3,6 +3,7 @@ package org.jeesl.util.query.xpath.report;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.model.xml.io.report.Media;
 import org.jeesl.model.xml.system.io.report.TestXmlMedia;
@@ -15,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestReportXpathMedia extends AbstractJeeslUtilTest
 {

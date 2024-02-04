@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.report.Element;
 import org.jeesl.model.xml.io.report.Field;
 import org.jeesl.model.xml.io.report.Jr;
@@ -18,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.design.JRDesignBand;
 import net.sf.jasperreports.engine.design.JRDesignExpression;

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.exlp.model.xml.io.Dir;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.txt.system.locale.TranslationFactory;
@@ -19,8 +20,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractTranslationBean<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>>
 									implements Serializable,JeeslTranslationBean<L,D,LOC>

@@ -13,7 +13,6 @@ import net.sf.ahtutils.xml.cloud.facebook.App;
 import net.sf.ahtutils.xml.cloud.facebook.Token;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.xml.xpath.NetXpath;
 
 import org.apache.http.HttpEntity;
@@ -22,6 +21,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.exlp.util.system.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

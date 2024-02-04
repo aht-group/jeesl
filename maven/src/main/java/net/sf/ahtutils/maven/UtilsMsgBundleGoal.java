@@ -3,8 +3,6 @@ package net.sf.ahtutils.maven;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -14,6 +12,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.exlp.model.xml.io.Dir;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.txt.system.locale.TranslationFactory;
 import org.jeesl.maven.goal.JeeslMsgGoal;

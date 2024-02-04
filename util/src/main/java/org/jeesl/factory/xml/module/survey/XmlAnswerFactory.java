@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.module.survey;
 
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
@@ -31,7 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.exlp.util.DateUtil;
 
 public class XmlAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
 								SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,

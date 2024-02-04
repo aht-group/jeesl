@@ -17,6 +17,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -59,8 +60,6 @@ import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.DateUtil;
 
 public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									AX extends JeeslWorkflowContext<L,D,AX,?>,

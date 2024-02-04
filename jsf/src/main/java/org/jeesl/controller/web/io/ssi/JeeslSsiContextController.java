@@ -41,7 +41,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										CONTEXT extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
-										ERROR extends JeeslIoSsiError<L,D,CONTEXT>,
+										ERROR extends JeeslIoSsiError<L,D,CONTEXT,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>>
 						extends AbstractJeeslLocaleWebController<L,D,LOC>
 						implements Serializable

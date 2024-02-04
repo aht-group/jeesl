@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.io.db.xml.UtilsDbXmlSeedUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.db.Db;
@@ -21,7 +22,6 @@ import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory.Code;
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class LatexStatusWriter extends AbstractDocumentationLatexWriter
 {	

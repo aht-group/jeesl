@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.interfaces.model.marker.qualifier.EjbErAttributes;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -18,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.ofx.admin.er.OfxClassAttributesTableFactory;
 import net.sf.exlp.util.io.ClassUtil;
 import net.sf.exlp.util.io.dir.RecursiveFileFinder;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class ErAttributesProcessor
 {

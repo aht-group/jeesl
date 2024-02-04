@@ -8,11 +8,11 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.io.report.Reports;
 
 import net.sf.ahtutils.report.ReportUtilTemplate;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;

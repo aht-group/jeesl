@@ -1,6 +1,6 @@
 package org.jeesl.connectors.tools;
 
-import net.sf.exlp.util.io.LoggerInit;
+import org.exlp.util.io.log.LoggerInit;
 
 /**
  *

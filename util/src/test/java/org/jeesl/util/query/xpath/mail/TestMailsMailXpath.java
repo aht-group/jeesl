@@ -1,5 +1,6 @@
 package org.jeesl.util.query.xpath.mail;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.factory.xml.io.mail.XmlMailFactory;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
@@ -12,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestMailsMailXpath
 {

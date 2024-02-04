@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
-
+import org.exlp.util.io.log.LoggerInit;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

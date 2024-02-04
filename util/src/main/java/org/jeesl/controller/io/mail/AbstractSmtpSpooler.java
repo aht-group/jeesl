@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.mail.MessagingException;
 
 import org.apache.commons.cli.Option;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.controller.io.mail.smtp.TextMailSender;
@@ -14,8 +15,6 @@ import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractSmtpSpooler
 {

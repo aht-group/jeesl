@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
@@ -36,7 +37,6 @@ import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityActionTableFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentationFactory
 {

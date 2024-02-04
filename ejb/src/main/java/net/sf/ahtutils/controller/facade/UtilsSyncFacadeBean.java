@@ -12,6 +12,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.core.JeeslSyncFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -20,8 +21,6 @@ import org.jeesl.interfaces.model.io.db.JeeslSync;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-
-import net.sf.exlp.util.DateUtil;
 
 public class UtilsSyncFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 									STATUS extends JeeslStatus<L,D,STATUS>,

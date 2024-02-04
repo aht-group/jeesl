@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.report.Info;
 import org.jeesl.model.xml.io.report.Info.Title;
 import org.junit.Before;
@@ -15,7 +16,6 @@ import org.w3c.dom.Element;
 
 import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
 import net.sf.exlp.util.xml.DomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestDomUtil extends AbstractAhtUtilsReportTest
 {
