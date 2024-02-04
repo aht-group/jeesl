@@ -7,7 +7,6 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
@@ -22,7 +21,7 @@ public interface JeeslRevisionAttribute<L extends JeeslLang, D extends JeeslDesc
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										RER extends JeeslStatus<L,D,RER>,
 										RAT extends JeeslStatus<L,D,RAT>>
-		extends Serializable,EjbRemoveable,EjbPersistable,JeeslStatusWithSymbol,EjbWithId,
+		extends Serializable,EjbRemoveable,EjbPersistable,EjbWithId,
 				EjbWithCode,EjbWithPosition,
 				EjbWithLang<L>,EjbWithDescription<D>
 {

@@ -9,7 +9,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
@@ -23,7 +22,7 @@ public interface JeeslIoAiOpenAiModel <L extends JeeslLang, D extends JeeslDescr
 										G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 							JeeslStatus<L,D,S>,EjbWithCodeGraphic<G>,
-							JeeslStatusFixedCode,JeeslStatusWithSymbol,EjbWithSymbol
+							JeeslStatusFixedCode,EjbWithSymbol
 {	
 	public static enum Code{embeddingAda2,gpt35};
 }
