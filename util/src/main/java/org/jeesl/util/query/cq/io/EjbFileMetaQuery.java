@@ -1,4 +1,4 @@
-package org.jeesl.util.query.ejb.system.io;
+package org.jeesl.util.query.cq.io;
 
 import java.util.ArrayList;
 import java.util.List;

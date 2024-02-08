@@ -11,7 +11,7 @@ import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Parent;
 import org.jeesl.model.xml.io.locale.status.Status;
@@ -60,7 +60,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 		if(Objects.nonNull(q.getId())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getStyle())) {xml.setStyle(ejb.getStyle());}
 		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
-		if(Objects.nonNull(q.getSymbol()) && (ejb instanceof JeeslStatusWithSymbol)){xml.setSymbol(ejb.getSymbol());}
+		if(Objects.nonNull(q.getSymbol()) && (ejb instanceof EjbWithSymbol)){xml.setSymbol(ejb.getSymbol());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}

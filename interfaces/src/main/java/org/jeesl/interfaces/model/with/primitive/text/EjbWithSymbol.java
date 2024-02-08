@@ -4,6 +4,4 @@ public interface EjbWithSymbol
 {
 	String getSymbol();
 	void setSymbol(String symbol);
-	
-//	void x();
 }

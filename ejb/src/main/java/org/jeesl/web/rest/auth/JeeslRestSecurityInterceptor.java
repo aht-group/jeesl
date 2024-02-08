@@ -24,6 +24,4 @@ public abstract class JeeslRestSecurityInterceptor
     {
     	return JeeslRestBasicAuthenticator.decode(authorizationHeader);
     }
-    
-    
 }

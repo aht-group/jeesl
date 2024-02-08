@@ -23,9 +23,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithColour;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithLocked;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
@@ -138,7 +138,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	
 	protected void updateUiForCategory()
 	{
-		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(optionClass);
+		supportsSymbol = EjbWithSymbol.class.isAssignableFrom(optionClass);
 		supportsLocked = EjbWithLocked.class.isAssignableFrom(optionClass);
 		supportsDownload = JeeslInterfaceAnnotationQuery.isAnnotationPresent(DownloadJeeslData.class,optionClass);
 		supportsColour = JeeslStatusWithColour.class.isAssignableFrom(optionClass);

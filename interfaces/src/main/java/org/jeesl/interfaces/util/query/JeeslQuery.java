@@ -7,6 +7,7 @@ import java.util.List;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.model.ejb.io.db.CqDate;
+import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 
@@ -33,6 +34,7 @@ public interface JeeslQuery extends Serializable
 	void setMaxResults(Integer maxResults);
 	
 	List<String> getRootFetches();
+	List<CqFetch> getGraphFetches();
 	
 	List<CqOrdering> getOrderings();
 	List<CqLiteral> getLiterals();

@@ -42,15 +42,12 @@
 		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationPort"/></f:facet>
 						<h:outputText value="#{p.destinationPort}" />  
 		            </p:column>
+		      
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationHost"/></f:facet>
 						<h:outputText value="#{p.destinationHost.name[localeCode].lang}" />  
 		            </p:column>
-		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationHost"/></f:facet>
-						<h:outputText value="#{p.destinationHost.name[localeCode].lang}" />  
-		            </p:column>
-					<p:column>
+					<p:column styleClass="jeesl-center">
 		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="service"/></f:facet>
 						<jtp:symbolizer value="#{p.service}" />  
 		            </p:column>

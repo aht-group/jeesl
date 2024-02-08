@@ -33,8 +33,9 @@ public class EjbIdCache <T extends EjbWithId> implements JeeslIdCache<T>
 		map = new HashMap<>();
 	}
 	
-	public T ejb(long id)
+	public T ejb(Long id)
 	{
+		if(Objects.isNull(id)) {return null;}
 		if(!map.containsKey(id) && fUtils!=null)
 		{
 			try

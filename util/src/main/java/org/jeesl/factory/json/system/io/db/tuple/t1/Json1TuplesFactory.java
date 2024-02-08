@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Tuple;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -33,7 +35,10 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	private JsonTuples1<A> tuples; public JsonTuples1<A> get1Tuples() {return tuples;} public void set1Tuples(JsonTuples1<A> tuples) {this.tuples = tuples;}
 
 	public static <A extends EjbWithId> Json1TuplesFactory<A> instance(Class<A> cA) {return new Json1TuplesFactory<>(cA);}
-	public Json1TuplesFactory(Class<A> cA) {this(null,cA);}
+	public Json1TuplesFactory(Class<A> cA)
+	{
+		this(null,cA);
+	}
 	
 	@Deprecated //This should not be used, the Facade should be activated manually (via the query.isTupleLoad() or later in the TupleHandler
 	private Json1TuplesFactory(JeeslFacade fUtils, Class<A> cA)
@@ -199,13 +204,14 @@ public class Json1TuplesFactory <A extends EjbWithId>
 			setA.add(t.getId1());
 		}
 		
-		if(fUtils==null)
+		if(Objects.isNull(fUtils))
 		{	// A object is created and the corresponding id is set
 			for(JsonTuple1<A> t : json.getTuples())
 			{
 				try
 				{
-					t.setEjb1(cA.newInstance()); t.getEjb1().setId(t.getId1());
+					t.setEjb1(cA.newInstance());
+					t.getEjb1().setId(t.getId1());
 				}
 				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
 			}
