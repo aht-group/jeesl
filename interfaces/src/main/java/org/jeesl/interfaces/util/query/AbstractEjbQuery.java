@@ -10,6 +10,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.CqDate;
+import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.slf4j.Logger;
@@ -127,6 +128,11 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	private List<CqOrdering> orderings;
 	@Override public List<CqOrdering> getOrderings() {return orderings;}
 	protected void addOrdering(CqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
+	
+	//GraphFetch
+	private List<CqFetch> graphFetches;
+	@Override public List<CqFetch> getGraphFetches() {return graphFetches;}
+	protected void addGraphFetch(CqFetch fetch) {if(Objects.isNull(graphFetches)) {graphFetches = new ArrayList<>();} graphFetches.add(fetch);}
 	
 	private String sortBy; //@Override public String getSortBy() {return sortBy;}
 	private boolean sortAscending; //@Override public boolean isSortAscending() {return sortAscending;}

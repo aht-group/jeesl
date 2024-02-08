@@ -17,6 +17,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoFrFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryAmazonS3;
@@ -180,6 +181,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 
 	@Override public <OWNER extends JeeslWithFileRepositoryContainer<CONTAINER>> List<META> fIoFrMetas(Class<OWNER> c, List<OWNER> owners)
 	{
+		if(ObjectUtils.isEmpty(owners)) {return new ArrayList<>();}
 		
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<META> cQ = cB.createQuery(fbFile.getClassMeta());

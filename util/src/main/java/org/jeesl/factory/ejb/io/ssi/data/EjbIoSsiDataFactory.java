@@ -39,6 +39,12 @@ public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiContext<?,?>,
 		return ejb;
 	}
 	
+	public void resetError(DATA data)
+	{
+		data.setError(null);
+		data.setRemark(null);
+	}
+	
 	public void updateJson(DATA data, Object json)
 	{
 		data.setJson(null);
