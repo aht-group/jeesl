@@ -22,6 +22,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-eap73</artifactId>
+				<version>${maven.version.jeesl.bom}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -81,15 +88,31 @@
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 			<scope>provided</scope>
-			<version>2.0.2.redhat-00001</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.servlet</groupId>
 			<artifactId>jboss-servlet-api_4.0_spec</artifactId>
-			<version>2.0.0.Final-redhat-00001</version>
 			<scope>provided</scope>
 		</dependency>
-		 
+		<dependency>
+			<groupId>jakarta.inject</groupId>
+			<artifactId>jakarta.inject-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- JavaEE -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!--
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
@@ -101,7 +124,7 @@
             		<artifactId>jaxrs-api</artifactId>
             	</exclusion>
             </exclusions>
-        </dependency>
+        </dependency> -->
       
         <!-- XML -->
         <dependency>
@@ -133,6 +156,11 @@
         -->
       
         <!-- JSF  -->
+        <dependency> 
+			<groupId>org.jboss.spec.javax.faces</groupId>
+			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>

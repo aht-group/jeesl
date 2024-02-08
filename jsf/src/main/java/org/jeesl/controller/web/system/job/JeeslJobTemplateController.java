@@ -23,7 +23,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
-import org.jeesl.util.query.cq.EjbJobQuery;
+import org.jeesl.util.query.cq.system.EjbJobQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
