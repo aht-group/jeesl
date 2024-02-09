@@ -105,6 +105,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	
 	//Literals
 	protected List<CqLiteral> literals; @Override public List<CqLiteral> getLiterals() {return literals;}
+	protected void addLiteral(CqLiteral literal) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(literal);}
 	
 	//Strings
 	private String string1;

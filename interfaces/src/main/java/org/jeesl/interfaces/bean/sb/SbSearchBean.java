@@ -4,13 +4,12 @@ import java.io.Serializable;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.controller.handler.JeeslHandler;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface SbSearchBean extends Serializable
 {
-	void selectSbSearch(JeeslHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException;
+	void selectSbSearch(JeeslHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException, JeeslNotFoundException;
 	void applySbSearch(JeeslHandler handler);
-	
-//	@Deprecated void triggerSbSearch();
 }

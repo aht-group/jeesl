@@ -2,9 +2,11 @@ package org.jeesl.jsf.handler.sb;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.bean.sb.SbSearchBean;
 import org.jeesl.interfaces.controller.handler.JeeslAutoCompleteHandler;
 import org.jeesl.interfaces.controller.handler.JeeslHandler;
@@ -18,7 +20,7 @@ public class SbSearchHandler <T extends EjbWithId> implements JeeslHandler
 	private static final long serialVersionUID = 1L;
 
 	private final SbSearchBean bean;
-	private final JeeslAutoCompleteHandler<T> acHandler;
+	private JeeslAutoCompleteHandler<T> acHandler; public SbSearchHandler<T> acHandler(JeeslAutoCompleteHandler<T> acHandler) {this.acHandler=acHandler; return this;}
 	
 	private final Class<T> c;
 	
@@ -27,11 +29,11 @@ public class SbSearchHandler <T extends EjbWithId> implements JeeslHandler
 	private String searchText; public String getSearchText() {return this.searchText;} public void setSearchText(String searchText) {this.searchText = searchText;}
 	private T selection; public T getSelection() {return selection;} public void setSelection(T selected) {this.selection = selected;}
 	
-	public SbSearchHandler(Class<T> c, SbSearchBean bean, JeeslAutoCompleteHandler<T> acHandler)
+	public static <T extends EjbWithId> SbSearchHandler<T> instance(Class<T> c, SbSearchBean bean) {return new SbSearchHandler<>(c,bean);}
+	private SbSearchHandler(Class<T> c, SbSearchBean bean)
 	{
 		this.c=c;
 		this.bean=bean;
-		this.acHandler=acHandler;
 		
 		list = new ArrayList<>();
 		
@@ -48,14 +50,14 @@ public class SbSearchHandler <T extends EjbWithId> implements JeeslHandler
 	{
 		logger.trace("handle search event: " + SbSearchHandler.class.getSimpleName());
 		this.reset();
-		if(searchText != "")
+		if(Objects.nonNull(searchText))
 		{
-			list.addAll(acHandler.autoCompleteListByQuery(c,searchText));
-//			bean.triggerSbSearch();
+			if(Objects.nonNull(acHandler)) {list.addAll(acHandler.autoCompleteListByQuery(c,searchText));}
+			else {logger.warn(JeeslAutoCompleteHandler.class.getSimpleName()+" is NULL");}
 		}
 	}
 	
-	public void selectSbSearch(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSearch(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException, JeeslNotFoundException
 	{
 		logger.info("selectSbSearch");
 		bean.selectSbSearch(this,item);
