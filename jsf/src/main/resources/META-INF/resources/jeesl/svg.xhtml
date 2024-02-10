@@ -30,8 +30,9 @@
 		<composite:attribute name="confirmNo" required="false" default="#{appLabelBean.descriptions['JeeslCrudDialog']['confirmNo'][localeCode].lang}"/>
 		
 		<composite:attribute name="tooltip" required="false" shortDescription="Text for a tooltip which can either directly entered here or with a EL binding."/>
-		<composite:attribute name="ttEntity" required="false" shortDescription="A tooltip utilizing the labeling engine (together with ttCode)"/>
-		<composite:attribute name="ttCode" required="false" shortDescription="A tooltip utilizing the description of the engine (together with ttEntity)"/>
+		<composite:attribute name="ttEntity" required="false" shortDescription="A tooltip utilizing the labeling engine (together with ttCode)."/>
+		<composite:attribute name="ttCode" required="false" shortDescription="A tooltip utilizing the description of the engine (together with ttEntity)."/>
+		<composite:attribute name="ttValue" required="false" shortDescription="A tooltip using common attributes of the entity (multiLang,multiDescription)"/>
 		
 	</composite:interface>
 
@@ -60,10 +61,6 @@
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
 						<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
 					</h:graphicImage>
-					<p:tooltip for="image2" rendered="#{(not empty cc.attrs.tooltip) or ((not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode))}" showDelay="1500" hideEvent="mouseleave click">
-						<c:if test="#{not empty cc.attrs.tooltip}"><f:attribute name="value" value="#{cc.attrs.tooltip}"/></c:if>
-						<c:if test="#{(not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)}"><f:attribute name="value" value="#{appLabelBean.descriptions[cc.attrs.ttEntity][cc.attrs.ttCode][localeCode].lang}"/></c:if>
-					</p:tooltip>
 				</p:commandLink>
 			</c:if>
 			
@@ -87,10 +84,7 @@
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
 						<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
 					</h:graphicImage>
-					<p:tooltip for="image2" rendered="#{(not empty cc.attrs.tooltip) or ((not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode))}" showDelay="1500" hideEvent="mouseleave click">
-						<c:if test="#{not empty cc.attrs.tooltip}"><f:attribute name="value" value="#{cc.attrs.tooltip}"/></c:if>
-						<c:if test="#{(not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)}"><f:attribute name="value" value="#{appLabelBean.descriptions[cc.attrs.ttEntity][cc.attrs.ttCode][localeCode].lang}"/></c:if>
-					</p:tooltip>
+					
 				</p:commandLink>
 			</c:if>	
 		</c:if>
@@ -103,14 +97,12 @@
 								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
 							)}"
 							>
-					<h:graphicImage id="image2">
-						<f:attribute name="height" value="#{cc.attrs.height}"/>
-						<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
-						<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
-						<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
-					</h:graphicImage>
-					<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1000" hideEvent="mouseleave click"/>
-					<p:tooltip for="image2" rendered="#{(not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)}" value="#{appLabelBean.descriptions[cc.attrs.ttEntity][cc.attrs.ttCode][localeCode].lang}" showDelay="1000" hideEvent="mouseleave click"/>
+				<h:graphicImage id="image2">
+					<f:attribute name="height" value="#{cc.attrs.height}"/>
+					<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
+					<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
+					<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
+				</h:graphicImage>
 			</p:commandLink>
 			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" header="#{cc.attrs.confirmHeader}" message="#{cc.attrs.confirmMessage}">
 				<p:commandButton id="linkConfirm" 
@@ -129,6 +121,13 @@
 			</p:confirmDialog>
 		
 		</c:if>
+		
+		<p:tooltip for="image2" rendered="#{(not empty cc.attrs.tooltip) or ((not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)) or (not empty cc.attrs.ttValue)}" showDelay="1500" hideEvent="mouseleave click">
+			<c:if test="#{not empty cc.attrs.tooltip}"><f:attribute name="value" value="#{cc.attrs.tooltip}"/></c:if>
+			<c:if test="#{(not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)}"><f:attribute name="value" value="#{appLabelBean.descriptions[cc.attrs.ttEntity][cc.attrs.ttCode][localeCode].lang}"/></c:if>
+			<c:if test="#{cc.attrs.ttValue eq 'multiLang'}"><f:attribute name="value" value="#{cc.attrs.value.name[localeCode].lang}"/></c:if>
+			<c:if test="#{cc.attrs.ttValue eq 'multiDescription'}"><f:attribute name="value" value="#{cc.attrs.value.description[localeCode].lang}"/></c:if>
+		</p:tooltip>
 		
 	</composite:implementation>
 </html>
