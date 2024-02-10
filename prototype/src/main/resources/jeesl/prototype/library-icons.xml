@@ -24,14 +24,15 @@
     <io:file code="jeeslDelete" name="ui/control/crud/delete.svg"/>
     <io:file code="jeeslCancel" name="ui/control/crud/cancel.svg"/>
     <io:file code="jeeslSave" name="ui/control/crud/save.svg"/>
-    <io:file code="jeeslReset" name="ui/control/crud/reset.svg"/>
     <io:file code="jeeslClean" name="ui/control/crud/clean.svg"/>
     <io:file code="jeeslCut" name="ui/control/crud/cut.svg"/>
     <io:file code="jeeslClone" name="ui/control/crud/clone.svg"/>
-    <io:file code="jeeslSearch" name="ui/control/crud/search.svg"/>
-    <io:file code="jeeslReload" name="ui/control/crud/reload.svg"/>
     <io:file code="jeeslEdit" name="ui/control/edit/pencil.svg"/>
+    <io:file code="jeeslReset" name="ui/control/action/reset.svg"/>
     <io:file code="jeeslMagnet" name="ui/control/edit/magnet.svg"/>
+    <io:file code="jeeslSearch" name="ui/control/action/search.svg"/>
+    <io:file code="jeeslReload" name="ui/control/action/reload.svg"/>
+    <io:file code="jeeslDropZone" name="ui/control/action/drop.svg"/>
     <io:file code="jeeslAddressBook" name="ui/system/person/addressbook.svg"/>
     <io:file code="jeeslFavorite" name="ui/system/favorite.svg"/>
     <io:file code="ejbUnsaved" name="ui/info/ejb/unsaved.svg"/>
@@ -41,8 +42,9 @@
     <io:file code="jeeslMegaphone" name="/ui/info/megaphone.svg"/>
     <io:file code="jeeslWarn" name="/ui/info/warn.svg"/>
     <io:file code="jeeslFrozen" name="/ui/info/frozen.svg"/>
-    <io:file code="jeeslRevision" name="ui/io/revision/envers/revision.svg"/>
+    <io:file code="jeeslProject" name="/ui/info/project.svg"/>
     <io:file code="jeeslOnlineHelp" name="ui/info/help.svg"/>
+    <io:file code="jeeslRevision" name="ui/io/revision/envers/revision.svg"/>
     <io:file code="jeeslRevisionMod" name="ui/io/revision/envers/mod.svg"/>
     <io:file code="jeeslRevisionAdd" name="ui/io/revision/envers/add.svg"/>
     <io:file code="jeeslRevisionDel" name="ui/io/revision/envers/del.svg"/>
