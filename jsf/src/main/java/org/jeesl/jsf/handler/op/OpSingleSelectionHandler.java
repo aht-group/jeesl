@@ -47,7 +47,7 @@ public class OpSingleSelectionHandler <T extends EjbWithId> implements OpSelecti
 	public void selectItem() throws JeeslLockingException, JeeslConstraintViolationException, JeeslNotFoundException
 	{
 		if(Objects.nonNull(bSingle)) {bSingle.callbackOpSelection(this,item);}
-		if(Objects.nonNull(bMany)) {bMany.callbackOpSelection(null, item);}
+		if(Objects.nonNull(bMany)) {bMany.callbackOpSelection(this, item);}
 		item = null;
 	}
 }
