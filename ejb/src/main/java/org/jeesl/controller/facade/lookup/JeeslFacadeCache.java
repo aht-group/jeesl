@@ -17,15 +17,18 @@ public class JeeslFacadeCache implements JeeslFacadeLookup
 	
 	private JeeslFacadeLookup lookup;
 	private Map<Class<?>,Object> map;
+	private String localeCode; @Override public String getLocaleCode() {return localeCode;}
 	
 	public JeeslFacadeCache(JeeslFacadeLookup lookup)
 	{
 		this.lookup=lookup;
+		localeCode = "en";
 	}
 	
 	public JeeslFacadeCache()
 	{
 		map = new HashMap<Class<?>,Object>();
+		localeCode = "en";
 	}
 	
 	public <F> void add(Class<?> c, F facade)

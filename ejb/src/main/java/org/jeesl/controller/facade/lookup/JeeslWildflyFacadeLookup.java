@@ -25,6 +25,7 @@ public class JeeslWildflyFacadeLookup implements JeeslFacadeLookup
 	
 	private String appName;
 	private String moduleName;
+	private String localeCode; @Override public String getLocaleCode() {return localeCode;}
 	private final Properties properties = new Properties();
 
 	public JeeslWildflyFacadeLookup(String appName, String moduleName)
@@ -43,6 +44,7 @@ public class JeeslWildflyFacadeLookup implements JeeslFacadeLookup
 	{
 		this.appName=appName;
 		this.moduleName=moduleName;
+		localeCode = "en";
 		
 		Security.addProvider(new JBossSaslProvider());
 		
