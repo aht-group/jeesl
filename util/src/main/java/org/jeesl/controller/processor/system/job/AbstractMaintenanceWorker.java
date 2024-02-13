@@ -6,6 +6,7 @@ import java.util.Queue;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.interfaces.controller.processor.system.job.SystemMaintenanceRunnable;
 import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -32,8 +33,8 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
 	}
 	
 	@Override
-	 public void run()
-	 {   
+	public void run()
+	{   
 		while(active)
 		{
 			T p = queue.poll();
@@ -43,7 +44,10 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
    			{
    				this.handle(p);
    			}
-   			catch (JeeslConstraintViolationException | JeeslLockingException | JeeslNotFoundException e) {e.printStackTrace();}
+   			catch (JeeslConstraintViolationException | JeeslLockingException | JeeslNotFoundException e) {e.printStackTrace();} catch (UtilsProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
    		}
 			else
    			{
@@ -54,5 +58,5 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
 		logger.info("Shutting down "+id);
 	}
 	
-	protected abstract void handle(T t) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException;
+	protected abstract void handle(T t) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException, UtilsProcessingException;
 }

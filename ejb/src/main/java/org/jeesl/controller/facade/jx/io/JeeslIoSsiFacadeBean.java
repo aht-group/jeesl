@@ -467,7 +467,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 
-	@Override public List<DATA> fSsiDataWithJob1(CTX mapping, STATUS link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
+	@Override public List<DATA> fSsiDataWithJob1(CTX mapping, STATUS status, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -481,15 +481,15 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eJob),cB.equal(eJob,job)));}
 		else {predicates.add(cB.equal(eJob,job));}
 		
-		if(link!=null)
+		if(Objects.nonNull(status))
 		{
 			Expression<STATUS> eLink = ejb.get(JeeslIoSsiData.Attributes.link.toString());
-			predicates.add(cB.equal(eLink, link));
+			predicates.add(cB.equal(eLink, status));
 		}
 		
-		if(refA!=null) {predicates.add(cB.equal(ejb.get(JeeslIoSsiData.Attributes.refA.toString()),refA));}
-		if(refB!=null) {predicates.add(cB.equal(ejb.get(JeeslIoSsiData.Attributes.refB.toString()),refB));}
-		if(refC!=null) {predicates.add(cB.equal(ejb.get(JeeslIoSsiData.Attributes.refC.toString()),refC));}
+		if(Objects.nonNull(refA)) {predicates.add(cB.equal(ejb.get(JeeslIoSsiData.Attributes.refA.toString()),refA));}
+		if(Objects.nonNull(refB)) {predicates.add(cB.equal(ejb.get(JeeslIoSsiData.Attributes.refB.toString()),refB));}
+		if(Objects.nonNull(refC)) {predicates.add(cB.equal(ejb.get(JeeslIoSsiData.Attributes.refC.toString()),refC));}
 		
 		cQ.select(ejb);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
