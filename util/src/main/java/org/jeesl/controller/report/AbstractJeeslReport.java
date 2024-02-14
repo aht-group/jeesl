@@ -22,7 +22,6 @@ import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.xls.system.io.report.XlsFactory;
 import org.jeesl.interfaces.controller.handler.JeeslProgressHandler;
-import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.controller.report.JeeslReport;
 import org.jeesl.interfaces.factory.txt.JeeslReportAggregationLevelFactory;
@@ -41,6 +40,7 @@ import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDescription,
+public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDescription, USER extends JeeslSimpleUser,
 											CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 											REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 											IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
@@ -81,7 +81,6 @@ public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDes
 					implements JeeslReport<REPORT>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslReport.class);
-	protected JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger=jogger;}
 	
 	protected final boolean alwaysFalse = false;
 	protected boolean debugOnInfo;

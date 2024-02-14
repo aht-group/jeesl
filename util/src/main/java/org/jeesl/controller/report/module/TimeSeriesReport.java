@@ -40,6 +40,7 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -88,11 +89,11 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 						DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
 						POINT extends JeeslTsDataPoint<DATA,MP>,
 						SAMPLE extends JeeslTsSample,
-						USER extends EjbWithId, 
+						USER extends JeeslSimpleUser, 
 						WS extends JeeslStatus<L,D,WS>,
 						QAF extends JeeslStatus<L,D,QAF>
 						>
-					extends AbstractJeeslReport<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>
+					extends AbstractJeeslReport<L,D,USER,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>
 //implements JeeslReportHeader//,JeeslFlatReport,JeeslXlsReport
 {
 	final static Logger logger = LoggerFactory.getLogger(TimeSeriesReport.class);
@@ -126,10 +127,7 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 		for(DATA data : tsData)
 		{
 			xTs.getData().add(XmlDataFactory.build(data.getRecord(),data.getValue()));
-		}
-		
-//		xml.getTimeSeries().add(xTs);
-		
+		}		
 		return xml;
 	}
 	

@@ -38,7 +38,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 							LOOP extends JeeslIoLogLoop<LOG>,
 							EVENT extends JeeslIoLogEvent<LOG>,
 							USER extends JeeslSimpleUser>
-				implements JeeslLogger
+				implements JeeslLogger<USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(LoggerHandler.class);
