@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoAiFacade;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.ejb.io.ai.openai.EjbAiOpenAiModelFactory;
@@ -73,6 +74,19 @@ public class JeeslAiOpenAiModellWc implements Serializable
 	{
 		logger.info(AbstractLogMessage.saveEntity(model));
 		EjbAiOpenAiModelFactory.converter(fAi,model);
+		
+		if(BooleanComparator.active(model.getFallback()))
+		{
+			for(IoAiOpenAiModel m : fAi.allForParent(IoAiOpenAiModel.class,model.getGeneration()))
+			{
+				if(!m.equals(model) && BooleanComparator.active(m.getFallback()))
+				{
+					m.setFallback(null);
+					fAi.save(m);
+				}
+			}
+		}
+		
 		model = fAi.save(model);
 		this.reloadModels();
 	}
