@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.jeesl.model.ejb.io.ai.openai.IoAiChatCompletion;
 import org.jeesl.model.ejb.io.ai.openai.IoAiChatThread;
-import org.jeesl.model.ejb.io.ai.openai.IoOpenAiModel;
+import org.jeesl.model.ejb.io.ai.openai.IoOpenAiGeneration;
 import org.jeesl.model.ejb.system.security.user.SecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ public class EjbAiCompleteFactory
 {	
 	final static Logger logger = LoggerFactory.getLogger(EjbAiCompleteFactory.class);
 		
-	public static IoAiChatCompletion build(IoAiChatThread thread, IoOpenAiModel model, SecurityUser author)
+	public static IoAiChatCompletion build(IoAiChatThread thread, IoOpenAiGeneration model, SecurityUser author)
 	{
 		IoAiChatCompletion ejb = new IoAiChatCompletion();
 		ejb.setStartDate(LocalDateTime.now());

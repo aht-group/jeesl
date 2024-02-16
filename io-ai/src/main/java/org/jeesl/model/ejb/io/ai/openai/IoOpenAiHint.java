@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.ai.openai.JeeslIoAiOpenAiHint;
-import org.jeesl.interfaces.model.io.ai.openai.JeeslIoAiOpenAiModel;
+import org.jeesl.interfaces.model.io.ai.openai.JeeslIoAiOpenAiGeneration;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -25,7 +25,7 @@ public class IoOpenAiHint extends IoStatus implements JeeslIoAiOpenAiHint<IoLang
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(JeeslIoAiOpenAiModel.Code c : JeeslIoAiOpenAiModel.Code.values()){fixed.add(c.toString());}
+		for(JeeslIoAiOpenAiGeneration.Code c : JeeslIoAiOpenAiGeneration.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 	

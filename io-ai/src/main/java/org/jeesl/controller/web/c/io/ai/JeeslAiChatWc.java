@@ -20,7 +20,7 @@ import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.model.ejb.io.ai.openai.IoAiChatCompletion;
 import org.jeesl.model.ejb.io.ai.openai.IoAiChatThread;
 import org.jeesl.model.ejb.io.ai.openai.IoOpenAiHint;
-import org.jeesl.model.ejb.io.ai.openai.IoOpenAiModel;
+import org.jeesl.model.ejb.io.ai.openai.IoOpenAiGeneration;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkupType;
 import org.jeesl.model.ejb.io.locale.IoLocale;
@@ -51,7 +51,7 @@ public class JeeslAiChatWc implements Serializable
 	
 	private final List<IoAiChatCompletion> completions; public List<IoAiChatCompletion> getCompletions() {return completions;}
 	
-	private IoOpenAiModel model;
+	private IoOpenAiGeneration model;
 	private SecurityUser user; public SecurityUser getUser() {return user;}
 	private IoAiChatThread thread; public IoAiChatThread getThread() {return thread;} public void setThread(IoAiChatThread thread) {this.thread = thread;}
 	private IoAiChatCompletion completion; public IoAiChatCompletion getCompletion() {return completion;} public void setCompletion(IoAiChatCompletion completion) {this.completion = completion;}
@@ -72,7 +72,7 @@ public class JeeslAiChatWc implements Serializable
 		userPrompt = "";
 	}
 	
-	public void postConstruct(JeeslIoAiFacade facade, IoSsiCredential credential, IoOpenAiModel model, SecurityUser user)
+	public void postConstruct(JeeslIoAiFacade facade, IoSsiCredential credential, IoOpenAiGeneration model, SecurityUser user)
 	{
 		this.facade=facade;
 		this.model=model;

@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.txt.io.ai.TxtTokenFactory;
 import org.jeesl.model.ejb.io.ai.openai.IoOpenAiHint;
-import org.jeesl.model.ejb.io.ai.openai.IoOpenAiModel;
+import org.jeesl.model.ejb.io.ai.openai.IoOpenAiGeneration;
 import org.jeesl.model.ejb.io.locale.IoLocale;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiCredential;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class OpenAiChatCompletionHandler
 
 	private OpenAiService service;	public OpenAiChatCompletionHandler service(OpenAiService service) {this.service=service; return this;}
 	
-	private IoOpenAiModel model; public OpenAiChatCompletionHandler model(IoOpenAiModel model) {this.model=model; return this;}
+	private IoOpenAiGeneration model; public OpenAiChatCompletionHandler model(IoOpenAiGeneration model) {this.model=model; return this;}
 	private final List<IoOpenAiHint> hints;
 	
 	private IoLocale locale;
@@ -37,7 +37,7 @@ public class OpenAiChatCompletionHandler
 	private OpenAiChatCompletionHandler(IoSsiCredential credential)
 	{		
 		service = new OpenAiService(credential.getToken(),Duration.ofSeconds(300));
-		model = new IoOpenAiModel(); model.setSymbol("gpt-3.5-turbo-1106");
+		model = new IoOpenAiGeneration(); model.setSymbol("gpt-3.5-turbo-1106");
 		
 		hints = new ArrayList<>();
 	}
