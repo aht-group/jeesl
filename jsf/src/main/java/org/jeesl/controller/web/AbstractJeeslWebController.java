@@ -5,10 +5,11 @@ import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractJeeslWebController implements Serializable
+public class AbstractJeeslWebController<USER extends JeeslSecurityUser> implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslWebController.class);
@@ -16,7 +17,7 @@ public class AbstractJeeslWebController implements Serializable
 	protected JeeslFacesMessageBean bMessage;
 	
 	protected boolean debugOnInfo;
-	protected JeeslLogger jogger;
+	protected JeeslLogger<USER> jogger;
 	
 	public enum SecurityActionSuffix {developer}
 	public enum SecurityActionSuffixDeprecated {Developer}
@@ -26,7 +27,7 @@ public class AbstractJeeslWebController implements Serializable
 		debugOnInfo = false;
 	}
 	
-	public void activateDebuggingOnInfo(JeeslLogger jogger)
+	public void activateDebuggingOnInfo(JeeslLogger<USER> jogger)
 	{
 		this.debugOnInfo=true;
 		this.jogger=jogger;

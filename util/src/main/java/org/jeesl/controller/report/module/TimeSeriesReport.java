@@ -40,7 +40,7 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -89,7 +89,7 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 						DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
 						POINT extends JeeslTsDataPoint<DATA,MP>,
 						SAMPLE extends JeeslTsSample,
-						USER extends JeeslSimpleUser, 
+						USER extends JeeslSecurityUser, 
 						WS extends JeeslStatus<L,D,WS>,
 						QAF extends JeeslStatus<L,D,QAF>
 						>

@@ -3,17 +3,17 @@ package org.jeesl.controller.handler.system.io.log;
 import java.io.OutputStream;
 
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DebugJeeslLogger <USER extends JeeslSimpleUser> implements JeeslLogger<USER>
+public class DebugJeeslLogger <USER extends JeeslSecurityUser> implements JeeslLogger<USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(DebugJeeslLogger.class);
 	
 
-	public static <USER extends JeeslSimpleUser> JeeslLogger<USER> instance(Class<?> c) {return new DebugJeeslLogger<>(c);}
+	public static <USER extends JeeslSecurityUser> JeeslLogger<USER> instance(Class<?> c) {return new DebugJeeslLogger<>(c);}
 	private DebugJeeslLogger(Class<?> c)
 	{
 		

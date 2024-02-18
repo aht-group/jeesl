@@ -42,7 +42,7 @@ import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDescription, USER extends JeeslSimpleUser,
+public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDescription, USER extends JeeslSecurityUser,
 											CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 											REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 											IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,

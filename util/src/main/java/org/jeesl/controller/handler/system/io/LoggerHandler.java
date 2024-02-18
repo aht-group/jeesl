@@ -1,6 +1,7 @@
 package org.jeesl.controller.handler.system.io;
 
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -24,7 +25,7 @@ import org.jeesl.interfaces.model.io.logging.JeeslIoLogRetention;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLogStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
@@ -37,8 +38,8 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 							MILESTONE extends JeeslIoLogMilestone<LOG>,
 							LOOP extends JeeslIoLogLoop<LOG>,
 							EVENT extends JeeslIoLogEvent<LOG>,
-							USER extends JeeslSimpleUser>
-				implements JeeslLogger<USER>
+							USER extends JeeslSecurityUser>
+				implements Serializable,JeeslLogger<USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(LoggerHandler.class);
@@ -97,7 +98,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		sb.append("Starting logging in ").append(c.getSimpleName());
 		sb.append(": ").append(log);
 		if(Objects.nonNull(message)) {sb.append(" (").append(message).append(")");}
-		if(Objects.nonNull(user)) {sb.append(" by ").append(user.getEmail());}
+		if(Objects.nonNull(user)) {sb.append(" by ").append(user);}
 		return sb.toString();
 	}
 	

@@ -5,13 +5,13 @@ import java.io.Serializable;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.with.date.jt.JeeslWithDateTimeRange;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslIoLog<STATUS extends JeeslIoLogStatus<?,?,STATUS,?>,
 								RETENTION extends JeeslIoLogRetention<?,?,RETENTION,?>,
-								USER extends JeeslSimpleUser
+								USER extends JeeslSecurityUser
 								>
 		extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 		JeeslWithDateTimeRange
