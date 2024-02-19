@@ -26,6 +26,8 @@ public class JeeslEap61FacadeLookup implements JeeslFacadeLookup
 	
 	private String appName;
 	private String moduleName;
+	private String localeCode; @Override public String getLocaleCode() {return localeCode;}
+
 	private final Properties properties;
 	
 	public JeeslEap61FacadeLookup(String appName, String moduleName)
@@ -44,6 +46,7 @@ public class JeeslEap61FacadeLookup implements JeeslFacadeLookup
 	{
 		this.appName=appName;
 		this.moduleName=moduleName;
+		localeCode = "en";
 		
 		properties = new Properties();
 		Security.addProvider(new JBossSaslProvider());

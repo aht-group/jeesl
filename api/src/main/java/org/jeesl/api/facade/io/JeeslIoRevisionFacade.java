@@ -21,6 +21,7 @@ import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMappin
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
 
 public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescription,
@@ -44,6 +45,7 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 	RS load(Class<RS> cScope, RS scope);
 	RE load(Class<RE> cEntity, RE entity);
 
+	List<RE> findLabelEntities(JeeslIoLabelQuery<RE> query);
 	List<RE> findLabelEntities(RC categories, ERD diagram);
 	List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes);
 

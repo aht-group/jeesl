@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
-public class TxtStatusFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
+public class TxtStatusFactory <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>>
 {
 	private final String localeCode;
 	
@@ -19,9 +19,9 @@ public class TxtStatusFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 		this.localeCode=localeCode;
 	}
 	
-	public static <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription> TxtStatusFactory<S,L,D> factory(String localeCode)
+	public static <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>> TxtStatusFactory<L,D,S> factory(String localeCode)
 	{
-		return new TxtStatusFactory<S,L,D>(localeCode);
+		return new TxtStatusFactory<L,D,S>(localeCode);
 	}
 	
 	public String debug(S status)

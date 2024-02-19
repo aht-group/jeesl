@@ -17,6 +17,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
@@ -44,6 +45,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
+import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
 import org.jeesl.util.query.sql.SqlNativeQueryHelper;
 import org.jeesl.util.query.sql.SqlRevisionQueries;
@@ -115,6 +118,37 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		return allForOrParents(fbRevision.getClassScope(),ppCategory);
 	}
 
+	@Override public List<RE> findLabelEntities(JeeslIoLabelQuery<RE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
+		Root<RE> root = cQ.from(fbRevision.getClassEntity());
+		
+		if(ObjectUtils.isNotEmpty(query.getLiterals()))
+		{
+			for(CqLiteral lit : query.getLiterals())
+			{
+				if(lit.getPath().equals(CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)))
+				{
+					Expression<String> literal = cB.upper(cB.literal("%"+lit.getLiteral()+"%"));
+					Expression<String> eJscn = root.get(JeeslRevisionEntity.Attributes.jscn.toString());
+					
+					switch(lit.getType())
+					{
+						case CONTAINS: predicates.add(cB.like(cB.upper(eJscn),literal)); break;
+						default: logger.error("NYI "+lit.toString());
+					}
+				}
+				else {logger.warn("NYI: "+lit.toString());}
+			}
+		}
+		
+		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		return em.createQuery(cQ).getResultList();
+	}
 	@Override public List<RE> findLabelEntities(RC category, ERD diagram)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();

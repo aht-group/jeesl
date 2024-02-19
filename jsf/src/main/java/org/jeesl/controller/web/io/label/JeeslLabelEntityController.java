@@ -28,7 +28,10 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.io.label.EjbLabelAttributeFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelMappingEntityFactory;
+import org.jeesl.interfaces.bean.sb.SbSearchBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.controller.handler.JeeslAutoCompleteHandler;
+import org.jeesl.interfaces.controller.handler.JeeslHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.io.label.JeeslIoLabelEntityCallback;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
@@ -47,11 +50,15 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.jsf.handler.sb.SbSearchHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
+import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
+import org.jeesl.util.query.cq.io.EjbIoLabelQuery;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +78,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 											RAT extends JeeslStatus<L,D,RAT>,
 											ERD extends JeeslRevisionDiagram<L,D,RC>>
 		extends AbstractJeeslLocaleWebController<L,D,LOC>
-		implements SbSingleBean
+		implements SbSingleBean,SbSearchBean,JeeslAutoCompleteHandler<RE>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslLabelEntityController.class);
@@ -85,6 +92,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	
 	private JeeslLabelBean<RE> bLabel;
 	
+	protected final SbSearchHandler<RE> sbhSearch; public SbSearchHandler<RE> getSbhSearch() {return sbhSearch;}
 	protected final SbSingleHandler<RC> sbhCategory; public SbSingleHandler<RC> getSbhCategory() {return sbhCategory;}
 	protected final SbSingleHandler<ERD> sbhDiagram; public SbSingleHandler<ERD> getSbhDiagram() {return sbhDiagram;}
 	
@@ -123,6 +131,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		
 		cpEntity = fbRevision.cpEjbEntity(LabelEntityComparator.Type.position);
 		
+		sbhSearch = SbSearchHandler.instance(fbRevision.getClassEntity(),this).acHandler(this);
 		sbhCategory = new SbSingleHandler<>(fbRevision.getClassCategory(),this);
 		sbhDiagram = new SbSingleHandler<>(fbRevision.getClassDiagram(),this);
 		
@@ -690,5 +699,28 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		else {logger.warn("NYI "+iFqcn);}
 		
 		return url.toString();
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void selectSbSearch(JeeslHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException, JeeslNotFoundException
+	{
+		this.entity = (RE)item;
+		this.selectEntity();
+	}
+
+	@Override
+	public void applySbSearch(JeeslHandler handler) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<RE> autoCompleteListByQuery(Class<RE> c, String query)
+	{
+		JeeslIoLabelQuery<RE> q = new EjbIoLabelQuery<>();
+		q.add(CqLiteral.contains(query,CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)));
+		return fRevision.findLabelEntities(q);
 	}
 }

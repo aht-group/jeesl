@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+		
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sModels" width="8">
+			<h:form id="fModels">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="m" value="#{cc.attrs.ctrl.models}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.model}" selectionMode="single" rowKey="#{m.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoAiOpenAiModel" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addModel()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderKeys()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectModel()}" update=":#{cc.id}:sModel"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoAiOpenAiModel" code="id"/></f:facet>
+						<h:outputText value="#{m.id}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoAiOpenAiModel" code="fallback"/></f:facet>
+						<j:duoCheckmark value="#{m.fallback}" showFalse="false"/>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoAiOpenAiModel" code="code"/></f:facet>
+						<h:outputText value="#{m.code}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoAiOpenAiModel" code="generation"/></f:facet>
+						<h:outputText value="#{m.generation.name[localeCode].lang}"/>
+					</p:column>
+					
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sModel" width="4">
+			<h:form id="fModel" rendered="#{not empty cc.attrs.ctrl.model}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoAiOpenAiModel"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelModel()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveModel()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteModel()}" update=":#{cc.id}:grid" />
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="IoAiOpenAiModel" code="record"/>
+						<p:inputText value="#{cc.attrs.ctrl.model.code}"/>
+						
+						<jtp:label entity="IoAiOpenAiModel" code="generation"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.model.generation}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.generations}" var="g" itemLabel="#{g.name[localeCode].lang}" itemValue="#{g}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoAiOpenAiModel" code="fallback"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.ctrl.model.fallback}"/>
+						
+						<jtp:label entity="IoAiOpenAiModel" code="contextWindow"/>
+						<p:inputText value="#{cc.attrs.ctrl.model.contextWindow}"/>
+						
+						<jtp:label entity="IoAiOpenAiModel" code="responseToken"/>
+						<p:inputText value="#{cc.attrs.ctrl.model.responseToken}"/>
+						
+						<jtp:label entity="IoAiOpenAiModel" code="record"/>
+						<p:calendar value="#{cc.attrs.ctrl.model.record}" pattern="#{appSettingsBean.patternDate}"/>
+					</j:inputGrid>
+							
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

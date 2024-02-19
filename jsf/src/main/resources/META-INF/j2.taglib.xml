@@ -27,6 +27,12 @@
             <resource-id>ioAi/deepl.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>gridIoAiOpenAiModel</tag-name>
+        <component>
+            <resource-id>ioAi/openaiModel.xhtml</resource-id>
+        </component>
+	</tag>
   
 	<tag>
         <tag-name>gridIoCryptoKey</tag-name>

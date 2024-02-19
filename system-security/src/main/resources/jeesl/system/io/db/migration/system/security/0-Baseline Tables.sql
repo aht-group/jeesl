@@ -8,7 +8,7 @@ create table SecurityAreaJtLang (area_id int8 not null, lang_id int8 not null, p
 create table SecurityCategory (id  bigserial not null, code varchar(255), documentation boolean, position int4 not null, type varchar(255), visible boolean not null, primary key (id));
 create table SecurityCategoryJtDescription (category_id int8 not null, description_id int8 not null, primary key (category_id, description_id));
 create table SecurityCategoryJtLang (category_id int8 not null, lang_id int8 not null, primary key (category_id, lang_id));
-create table SecurityContext (id  bigserial not null, code varchar(255), contextId int8, emailAddress varchar(255), emailName varchar(255), linkImpressum varchar(255), pageBackground varchar(255), pageCss varchar(255), pageHeadline varchar(255), pageLogo varchar(255), pagePrefix varchar(255), pageTitle varchar(255), position int4 not null, serverName varchar(255), primary key (id));
+create table SecurityContext (id  bigserial not null, code varchar(255), contextId int8, emailAddress varchar(255), emailName varchar(255), linkImpressum varchar(255), pageBackground varchar(255), pageCss varchar(255), pageFavIcon varchar(255), pageHeadline varchar(255), pageLogo varchar(255), pagePrefix varchar(255), pageTitle varchar(255), position int4 not null, serverName varchar(255), primary key (id));
 create table SecurityContextJtDescription (context_id int8 not null, description_id int8 not null, primary key (context_id, description_id));
 create table SecurityContextJtLang (context_id int8 not null, lang_id int8 not null, primary key (context_id, lang_id));
 create table SecurityHelp (id  bigserial not null, position int4 not null, visible boolean not null, document_id int8, section_id int8, view_id int8, primary key (id));

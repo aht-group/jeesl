@@ -2,13 +2,13 @@ package org.jeesl.interfaces.controller.processor;
 
 import java.util.List;
 
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiContext<?,?>,
 										DATA extends JeeslIoSsiData<MAPPING,?,?,?>,
-										JSON extends Object
-										>
+										JSON extends Object>
 {
 	
 	MAPPING getMapping();
@@ -28,4 +28,8 @@ public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiContext<?,?>,
 	void linkData(List<DATA> datas);
 	void ignoreData(List<DATA> datas);
 	void unignoreData(List<DATA> datas);
+	
+	void applyRefA(EjbWithId ejb, DATA data);
+	void applyRefB(EjbWithId ejb, DATA data);
+	void applyRefC(EjbWithId ejb, DATA data);
 }

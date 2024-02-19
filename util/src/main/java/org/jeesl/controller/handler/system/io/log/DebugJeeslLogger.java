@@ -3,16 +3,17 @@ package org.jeesl.controller.handler.system.io.log;
 import java.io.OutputStream;
 
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DebugJeeslLogger implements JeeslLogger
+public class DebugJeeslLogger <USER extends JeeslSecurityUser> implements JeeslLogger<USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(DebugJeeslLogger.class);
 	
 
-	public static JeeslLogger instance(Class<?> c) {return new DebugJeeslLogger(c);}
+	public static <USER extends JeeslSecurityUser> JeeslLogger<USER> instance(Class<?> c) {return new DebugJeeslLogger<>(c);}
 	private DebugJeeslLogger(Class<?> c)
 	{
 		
@@ -35,9 +36,11 @@ public class DebugJeeslLogger implements JeeslLogger
 	@Override public String milestone(String milestone, String message, Integer elements) {return milestone;}
 	
 	@Override public <E extends Enum<E>> String loopStart(E code) {return code.toString();}
+	@Override public <E extends Enum<E>> String loopEnd(E code) {return code.toString();}
 	@Override public <E extends Enum<E>> String loopEnd(E code, Integer elements) {return code.toString();}
 	
 	@Override public void ofxMilestones(OutputStream os) {}
 
 	@Override public void ofxLoops(OutputStream os) {}
+	
 }

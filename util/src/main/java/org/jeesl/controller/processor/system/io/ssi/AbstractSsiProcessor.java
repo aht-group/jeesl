@@ -28,6 +28,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.util.db.cache.EjbNonUniquieCodeCache;
 import org.slf4j.Logger;
@@ -230,5 +231,21 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		ERROR error = cacheError.ejb(code);
 		if(Objects.isNull(data.getError())) {data.setError(error);}
 		sb.append(" ").append(String.format(error.getDescription().get(localeCode).getLang(),substitutions));
+	}
+	
+	@Override public void applyRefA(EjbWithId ejb, DATA data)
+	{
+		if(!this.getClassA().isAssignableFrom(ejb.getClass())) {throw new RuntimeException("Wrong Class for refA provided");}
+		data.setRefA(ejb.getId());
+	}
+	@Override public void applyRefB(EjbWithId ejb, DATA data)
+	{
+		if(!this.getClassB().isAssignableFrom(ejb.getClass())) {throw new RuntimeException("Wrong Class for refB provided");}
+		data.setRefB(ejb.getId());
+	}
+	@Override public void applyRefC(EjbWithId ejb, DATA data)
+	{
+		if(!this.getClassC().isAssignableFrom(ejb.getClass())) {throw new RuntimeException("Wrong Class for refC provided");}
+		data.setRefC(ejb.getId());
 	}
 }

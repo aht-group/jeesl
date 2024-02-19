@@ -43,9 +43,9 @@ public class IoAiChatCompletion implements JeeslIoAiOpenAiCompletion<IoAiChatThr
 
 	@NotNull @ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoAiChatCompletion_model"))
-	private IoOpenAiModel model;
-	public IoOpenAiModel getModel() {return model;}
-	public void setModel(IoOpenAiModel model) {this.model = model;}
+	private IoOpenAiGeneration model;
+	public IoOpenAiGeneration getModel() {return model;}
+	public void setModel(IoOpenAiGeneration model) {this.model = model;}
 
 	private LocalDateTime startDate;
 	@Override public LocalDateTime getStartDate() {return startDate;}

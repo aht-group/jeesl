@@ -32,6 +32,7 @@ public interface JeeslIcon <L extends JeeslLang, D extends JeeslDescription,
 	public enum Arrow{jeeslArrowLeft}
 	public enum Information{jeeslMegaphone}
 	public enum Code{jeeslWorkflow}
+	public enum Security{jeeslSecurityUser}
 	
 	public static final String jeeslLibIcons = "jeesl/prototype/library-icons.xml";
 }

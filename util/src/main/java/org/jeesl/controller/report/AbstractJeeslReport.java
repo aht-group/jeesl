@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.exlp.util.io.JsonUtil;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
+import org.jeesl.controller.handler.system.io.log.DebugJeeslLogger;
 import org.jeesl.controller.processor.JobCodeProcessor;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -41,6 +42,7 @@ import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -56,7 +58,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDescription,
+public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDescription, USER extends JeeslSecurityUser,
 											CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 											REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 											IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
@@ -81,12 +83,12 @@ public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDes
 					implements JeeslReport<REPORT>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslReport.class);
-	protected JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger=jogger;}
 	
 	protected final boolean alwaysFalse = false;
 	protected boolean debugOnInfo;
 	protected boolean developmentMode; public void activateDevelopmenetMode() {developmentMode=true;}
-
+	protected JeeslLogger<USER> jogger; public void setJogger(JeeslLogger<USER> jogger) {this.jogger=jogger;}
+	
 	protected String localeCode;
 	protected String jobCode; public String getJobCode() {return jobCode;}
 	protected String jobName; public String getJobName() {return jobName;}
@@ -142,6 +144,8 @@ public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDes
 		this.localeCode=localeCode;
 		debugOnInfo = false;
 		developmentMode = false;
+		
+		jogger = DebugJeeslLogger.instance(this.getClass());
 		
 		efLang = EjbLangFactory.instance(fbReport.getClassL());
 		efGroup = fbReport.group();

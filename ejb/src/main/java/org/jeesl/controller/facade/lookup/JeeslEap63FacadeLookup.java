@@ -25,6 +25,7 @@ public class JeeslEap63FacadeLookup implements JeeslFacadeLookup
 	
 	private String appName;
 	private String moduleName;
+	private String localeCode; @Override public String getLocaleCode() {return localeCode;}
 
 	private String host;
 	private int port;
@@ -51,6 +52,7 @@ public class JeeslEap63FacadeLookup implements JeeslFacadeLookup
 		this.port=port;
 		this.username=username;
 		this.password=password;
+		localeCode = "en";
 		
 		if(this.host==null){this.host="localhost";}
 		logger.trace("Using "+host+":"+this.port);
