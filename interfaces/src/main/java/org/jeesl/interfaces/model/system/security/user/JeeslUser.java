@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 
 public interface JeeslUser <R extends JeeslSecurityRole<?,?,?,?,?,?>>
 					extends EjbPersistable,EjbSaveable,EjbRemoveable,
-							JeeslSimpleUser
+							JeeslSimpleUser,JeeslSecurityUser
 {
 	public enum Attributes{firstName,lastName,roles}
 		

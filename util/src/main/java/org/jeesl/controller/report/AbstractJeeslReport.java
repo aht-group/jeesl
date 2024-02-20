@@ -87,7 +87,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 	protected final boolean alwaysFalse = false;
 	protected boolean debugOnInfo;
 	protected boolean developmentMode; public void activateDevelopmenetMode() {developmentMode=true;}
-	protected JeeslLogger<USER> jogger; public void setJogger(JeeslLogger<USER> jogger) {this.jogger=jogger;}
+	protected JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger=jogger;}
 	
 	protected String localeCode;
 	protected String jobCode; public String getJobCode() {return jobCode;}
