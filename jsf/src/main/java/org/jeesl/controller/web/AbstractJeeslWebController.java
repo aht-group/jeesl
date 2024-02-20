@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
-import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
