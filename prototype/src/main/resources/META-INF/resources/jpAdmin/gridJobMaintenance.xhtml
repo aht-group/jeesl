@@ -13,8 +13,9 @@
 	<j:row>
 		<j:slot id="sMaintenances" width="4">
 			<h:form id="fMaintenances">
-				<p:dataTable var="m" value="#{cc.attrs.ctrl.maintenances}"
-								selection="#{cc.attrs.ctrl.maintenance}" selectionMode="single" rowKey="#{m.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="m" value="#{cc.attrs.ctrl.maintenances}"
+						selection="#{cc.attrs.ctrl.maintenance}" selectionMode="single" rowKey="#{m.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemJobMaintenance" code="listOf"/>
 					</f:facet>
@@ -32,8 +33,9 @@
 		</j:slot>
 		<j:slot id="sInfos" width="4">
 			<h:form id="fInfos" rendered="#{not empty cc.attrs.ctrl.maintenance}">
-				<p:dataTable var="i" value="#{cc.attrs.ctrl.infos}"
-							selection="#{cc.attrs.ctrl.info}" selectionMode="single" rowKey="#{i.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="i" value="#{cc.attrs.ctrl.infos}"
+						selection="#{cc.attrs.ctrl.info}" selectionMode="single" rowKey="#{i.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemJobMaintenanceInfo" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addInfo()}" update=":#{cc.id}:sInfos :#{cc.id}:sInfo"/>

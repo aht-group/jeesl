@@ -18,7 +18,7 @@ public interface JeeslJobMaintenance <L extends JeeslLang, D extends JeeslDescri
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
-							JeeslStatus<L,D,S>,JeeslStatusFixedCode
+							JeeslStatus<L,D,S>
 {
 //	public static enum Code{none,email,box}
 }

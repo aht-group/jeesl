@@ -50,12 +50,13 @@
     <io:file code="jeeslRevisionDel" name="ui/io/revision/envers/del.svg"/>
     <io:file code="jeeslEmail" name="ui/io/mail/email.svg"/>
     <io:file code="jeeslEmailSend" name="ui/io/mail/send.svg"/>
+    <io:file code="jeeslHome" name="ui/system/home.svg"/>
+    <io:file code="jeeslPageArea" name="ui/system/area.svg"/>
     <io:file code="jeeslPrint" name="ui/system/print.svg"/>
     <io:file code="jeeslWorkflow" name="ui/control/wizard/workflow.svg"/>
     <io:file code="jeeslSbLogging" name="ui/io/logging/sbLogging.svg"/>
     <io:file code="jeeslLink" name="ui/system/link.svg"/>
     <io:file code="jeeslLanguageSelect" name="ui/system/language-select.svg"/>
-    <io:file code="jeeslHome" name="ui/system/home.svg"/>
     <io:file code="jeeslWizard" name="ui/control/wizard/wand.svg"/>
     <io:file code="jeeslSecurityKey" name="ui/system/security/key.svg"/>
     <io:file code="jeeslSecurityUser" name="ui/system/security/user.svg"/>
