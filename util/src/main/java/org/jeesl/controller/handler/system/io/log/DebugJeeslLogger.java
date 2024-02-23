@@ -7,13 +7,13 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DebugJeeslLogger <USER extends JeeslSecurityUser> implements JeeslLogger<USER>
+public class DebugJeeslLogger <USER extends JeeslSecurityUser> implements JeeslLogger
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(DebugJeeslLogger.class);
 	
 
-	public static <USER extends JeeslSecurityUser> JeeslLogger<USER> instance(Class<?> c) {return new DebugJeeslLogger<>(c);}
+	public static <USER extends JeeslSecurityUser> JeeslLogger instance(Class<?> c) {return new DebugJeeslLogger<>(c);}
 	private DebugJeeslLogger(Class<?> c)
 	{
 		

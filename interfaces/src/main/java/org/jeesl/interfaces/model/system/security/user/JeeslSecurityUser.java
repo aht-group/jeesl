@@ -6,8 +6,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslSecurityUser extends EjbWithId//<R extends JeeslSecurityRole<?,?,?,?,?,?>>
+public interface JeeslSecurityUser extends EjbWithId
 {
-	public enum Fm {fmPwdChanged}
 //	void x();
 }

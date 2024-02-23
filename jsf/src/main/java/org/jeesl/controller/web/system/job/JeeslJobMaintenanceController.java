@@ -43,7 +43,8 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 	
 	private final EjbJobMaintenanceInfoFactory<STATUS,MNT,MNI> efInfo;
 	
-	private final List<STATUS> stati; public List<STATUS> getStati(){return stati;}
+	private final List<STATUS> stati; public List<STATUS> getStati() {return stati;}
+	private final List<STATUS> statusHeader; public List<STATUS> getStatusHeader() {return statusHeader;}
 	private final List<MNT> maintenances; public List<MNT> getMaintenances(){return maintenances;}
 	private final List<MNI> infos; public List<MNI> getInfos(){return infos;}
 	
@@ -58,6 +59,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 		cpInfo = fbJob.comparatorInfo(JobMaintenanceInfoComparator.Type.statusPosition);
 		efInfo = fbJob.ejbMaintenanceInfo();
 		
+		statusHeader = new ArrayList<>();
 		stati = new ArrayList<>();
 		maintenances = new ArrayList<>();
 		infos = new ArrayList<>();
@@ -67,9 +69,18 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fJob=fJob;
-	
+		
 		stati.addAll(fJob.all(fbJob.getClassStatus()));
 		maintenances.addAll(fJob.allOrderedPosition(fbJob.getClassMaintenance()));
+		
+		try
+		{
+			STATUS zeroStatus = fbJob.getClassStatus().newInstance();
+			zeroStatus.setId(0);
+			statusHeader.add(zeroStatus);
+		}
+		catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+		statusHeader.addAll(stati);
 		
 		if(debugOnInfo)
 		{

@@ -34,8 +34,8 @@ public class SystemJob implements JeeslJob<SystemJobTemplate,SystemJobPriority,S
 	@Override public String resolveParentAttribute() {return JeeslJob.Attributes.template.toString();}
 	@ManyToOne
 	private SystemJobTemplate template;
-	public SystemJobTemplate getTemplate() {return template;}
-	public void setTemplate(SystemJobTemplate template) {this.template = template;}
+	@Override public SystemJobTemplate getTemplate() {return template;}
+	@Override public void setTemplate(SystemJobTemplate template) {this.template = template;}
 
 	@Basic @Column(columnDefinition="text")
 	private String code;

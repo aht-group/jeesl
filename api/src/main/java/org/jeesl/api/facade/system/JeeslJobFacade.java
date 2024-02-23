@@ -26,8 +26,6 @@ import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob3;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob4;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob5;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.util.query.system.JeeslJobQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
@@ -38,7 +36,7 @@ public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,
 								EXPIRE extends JeeslJobExpiration<?,?,EXPIRE,?>,
 								JOB extends JeeslJob<TEMPLATE,PRIORITY,STATUS,USER>,
 								PRIORITY extends JeeslJobPriority<?,?,PRIORITY,?>,
-								FEEDBACK extends JeeslJobFeedback<JOB,FT,USER>,
+								FEEDBACK extends JeeslJobFeedback<FT,USER>,
 								FT extends JeeslJobFeedbackType<?,?,FT,?>,
 								STATUS extends JeeslJobStatus<?,?,STATUS,?>,
 								ROBOT extends JeeslJobRobot<?,?>,

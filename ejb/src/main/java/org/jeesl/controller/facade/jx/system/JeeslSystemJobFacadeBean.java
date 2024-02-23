@@ -63,7 +63,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 									EXPIRE extends JeeslJobExpiration<L,D,EXPIRE,?>,
 									JOB extends JeeslJob<TEMPLATE,PRIORITY,STATUS,USER>,
 									PRIORITY extends JeeslJobPriority<L,D,PRIORITY,?>,
-									FEEDBACK extends JeeslJobFeedback<JOB,FT,USER>,
+									FEEDBACK extends JeeslJobFeedback<FT,USER>,
 									FT extends JeeslJobFeedbackType<L,D,FT,?>,
 									STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 									ROBOT extends JeeslJobRobot<L,D>,

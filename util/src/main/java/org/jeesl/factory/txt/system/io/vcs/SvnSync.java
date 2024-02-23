@@ -2,10 +2,9 @@ package org.jeesl.factory.txt.system.io.vcs;
 
 import java.io.File;
 
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class SvnSync 
 {

@@ -3,9 +3,7 @@ package org.jeesl.interfaces.controller.handler.system.io;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
-
-public interface JeeslLogger <USER extends JeeslSecurityUser> extends Serializable
+public interface JeeslLogger extends Serializable
 {
 	void reset();
 	boolean isActive();

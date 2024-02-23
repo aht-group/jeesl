@@ -11,35 +11,38 @@
 	<composite:implementation>
 <jp:grid id="grid">
 	<j:row>
-		<j:slot id="sMaintenances" width="4">
+		<j:slot id="sMaintenances" width="8">
 			<h:form id="fMaintenances">
-				<p:dataTable var="m" value="#{cc.attrs.ctrl.maintenances}"
-								selection="#{cc.attrs.ctrl.maintenance}" selectionMode="single" rowKey="#{m.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="m" value="#{cc.attrs.ctrl.maintenances}"
+						selection="#{cc.attrs.ctrl.maintenance}" selectionMode="single" rowKey="#{m.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemJobMaintenance" code="listOf"/>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectMaintenance()}" update=":#{cc.id}:sInfos :#{cc.id}:sInfo"/>
-			      	<p:column>
-			      		<f:facet name="header"><jtp:label entity="SystemJobMaintenance" code="code"/></f:facet>
-			      		<h:outputText value="#{m.code}"/>
-			     	</p:column>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectMaintenance()}" update=":#{cc.id}:sInfo"/>
 			      	<p:column>
 			      		<f:facet name="header"><jtp:label entity="SystemJobMaintenance" code="name"/></f:facet>
 			      		<h:outputText value="#{m.name[localeCode].lang}"/>
 			     	</p:column>
+			     	<p:columns var="status" value="#{cc.attrs.ctrl.statusHeader}" columnIndexVar="colIndex" styleClass="jeesl-right">
+						<f:facet name="header">
+							<jtp:symbolizer value="#{status}" rendered="#{status.id gt 0}"/>
+						</f:facet>
+					</p:columns>
 		       	</p:dataTable>
 			</h:form>
 		</j:slot>
-		<j:slot id="sInfos" width="4">
+		<j:slot id="sInfo" width="4">
 			<h:form id="fInfos" rendered="#{not empty cc.attrs.ctrl.maintenance}">
-				<p:dataTable var="i" value="#{cc.attrs.ctrl.infos}"
-							selection="#{cc.attrs.ctrl.info}" selectionMode="single" rowKey="#{i.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="i" value="#{cc.attrs.ctrl.infos}"
+						selection="#{cc.attrs.ctrl.info}" selectionMode="single" rowKey="#{i.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemJobMaintenanceInfo" code="listOf">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addInfo()}" update=":#{cc.id}:sInfos :#{cc.id}:sInfo"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addInfo()}" update=":#{cc.id}:sInfo"/>
 						</j:dtHeader>
 						</f:facet>
-						<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectInfo()}" update=":#{cc.id}:sInfos :#{cc.id}:sInfo"/>
+						<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectInfo()}" update=":#{cc.id}:fInfo"/>
 				      	<p:column>
 				      		<f:facet name="header"><jtp:label entity="SystemJobStatus" code="code"/></f:facet>
 				      		<jtp:symbolizer value="#{i.status}"/>
@@ -50,15 +53,13 @@
 				     	</p:column>
 		       	</p:dataTable>
 			</h:form>
-		</j:slot>
-		<j:slot id="sInfo" width="4">
-			<h:form id="fInfo" rendered="#{not empty cc.attrs.ctrl.info}">
-				<p:panel styleClass="jeesl-panel">
+			<h:form id="fInfo">
+				<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.ctrl.info}">
 					<f:facet name="header"><j:pHeader entity="SystemJobMaintenanceInfo"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelInfo()}" update=":#{cc.id}:sInfos :#{cc.id}:sInfo"/>
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveInfo()}" update=":#{cc.id}:sInfos :#{cc.id}:sInfo"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteInfo()}" update=":#{cc.id}:sInfos :#{cc.id}:sInfo" rendered="#{cc.attrs.ctrl.info.id gt 0}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelInfo()}" update=":#{cc.id}:sInfo"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveInfo()}" update=":#{cc.id}:sInfo"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteInfo()}" update=":#{cc.id}:sInfo" rendered="#{cc.attrs.ctrl.info.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 					
