@@ -3,12 +3,12 @@ package org.jeesl.factory.ejb.system.job;
 import java.util.Date;
 import java.util.Objects;
 
+import org.jeesl.interfaces.model.system.feedback.JeeslJobFeedback;
+import org.jeesl.interfaces.model.system.feedback.JeeslJobFeedbackType;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
 import org.jeesl.interfaces.model.system.job.core.JeeslJob;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobPriority;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
-import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
-import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedbackType;
 import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobRobot;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobCategory;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;

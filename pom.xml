@@ -60,6 +60,7 @@
 		<module>system-constraint</module>
 
 		<module>system-feedback</module>
+		<module>system-filter</module>
 		<module>system-job</module>
 		<module>system-property</module>
 		<module>system-security</module>

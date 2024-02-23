@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
+import org.jeesl.interfaces.model.system.feedback.JeeslJobFeedback;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.system.security.user.SecurityUser;
 

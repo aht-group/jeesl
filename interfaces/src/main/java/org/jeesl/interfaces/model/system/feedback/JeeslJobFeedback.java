@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.job.feedback;
+package org.jeesl.interfaces.model.system.feedback;
 
 import java.io.Serializable;
 
