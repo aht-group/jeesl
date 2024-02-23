@@ -9,6 +9,7 @@ import org.apache.commons.lang.WordUtils;
 import org.exlp.cmd.file.ShellCmdChmod;
 import org.exlp.model.xml.config.Parameter;
 import org.exlp.model.xml.config.Parameters;
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.jdom2.Document;
 import org.jeesl.interfaces.controller.db.UtilsDbShell;
 import org.slf4j.Logger;
@@ -22,7 +23,6 @@ import net.sf.exlp.shell.os.OsArchitectureUtil;
 import net.sf.exlp.shell.os.OsBashFile;
 import net.sf.exlp.shell.spawn.Spawn;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class AbstractDatabaseShell
 {
