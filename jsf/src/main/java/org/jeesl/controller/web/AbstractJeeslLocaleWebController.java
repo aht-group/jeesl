@@ -11,13 +11,11 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractJeeslLocaleWebController <L extends JeeslLang, D extends JeeslDescription,
 												LOC extends JeeslLocale<L,D,LOC,?>
-//,USER extends JeeslSecurityUser
 												>
 						extends AbstractJeeslWebController
 						implements Serializable

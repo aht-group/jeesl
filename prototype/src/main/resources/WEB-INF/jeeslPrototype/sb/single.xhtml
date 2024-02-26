@@ -5,8 +5,9 @@
 
 	<c:set var="rendered" value="#{not empty rendered ? rendered : true}" />
 	<c:set var="hascallback" value="#{not empty oncomplete}" />
+	<c:set var="orientation" value="#{empty orientation ? 'right' : orientation}" />
 
-	<jp:sbItem orientation="right" childs="#{handler.list}" styleClass="jeesl-menu-bar-dropdown" rendered="#{rendered and (not empty handler.selection)}">
+	<jp:sbItem orientation="#{orientation}" childs="#{handler.list}" styleClass="jeesl-menu-bar-dropdown" rendered="#{rendered and (not empty handler.selection)}">
 		<f:facet name="label">
 			<jtp:symbolizer rendered="#{not empty icon}" value="#{icon}" styleClass="jeesl-menu-bar-button-icon"/>
 			<jtp:symbolizer rendered="#{not empty icon2}" value="#{icon2}" styleClass="jeesl-menu-bar-button-icon"/>

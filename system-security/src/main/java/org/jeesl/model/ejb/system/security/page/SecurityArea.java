@@ -81,6 +81,7 @@ public class SecurityArea implements JeeslSecurityArea<IoLang,IoDescription,Secu
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("[").append(id).append("]");
+		sb.append(" ").append(code);
 		return sb.toString();
 	}
 }

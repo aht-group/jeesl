@@ -207,7 +207,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 		return allowDomain;
 	}
 	
-	protected void checkIcon(){noActions = actions.size()==0;}
+	protected void checkIcon() {noActions = actions.size()==0;}
 	
 	@Override public <E extends Enum<E>> boolean allowSuffixCode(E actionCode)
 	{
@@ -274,6 +274,14 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 		for(AR a : areas)
 		{
 			if(a.getCode().equals(code.toString())) {mapArea.put(a.getCode(),value);}
+		}
+	}
+	public <E extends Enum<E>> void toggleAreas(List<AR> togged, boolean value)
+	{
+		for(AR a : areas) {mapArea.put(a.getCode(),false);}
+		for(AR a : togged)
+		{
+			mapArea.put(a.getCode(),value);
 		}
 	}
 	public <E extends Enum<E>> void toggleArea(E code)

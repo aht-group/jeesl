@@ -3,6 +3,7 @@ package org.jeesl.jsf.handler.sb;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.exlp.util.io.StringUtil;
@@ -13,6 +14,7 @@ import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,7 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	private static final long serialVersionUID = 1L;
 
 	private final Class<T> cT;
-	private final SbToggleBean bean; 
+	private final SbToggleBean callback; 
 	
 	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); this.list.addAll(list);}
 	private final List<T> selected; public List<T> getSelected() {return selected;}
@@ -31,13 +33,12 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	
 	public static <T extends EjbWithId> SbMultiHandler<T> instance(final Class<T> cT, SbToggleBean bean) {return new SbMultiHandler<>(cT,bean);}
 	
-	public SbMultiHandler(final Class<T> cT, List<T> list){this(cT,list,null);}
 	public SbMultiHandler(final Class<T> cT, SbToggleBean bean){this(cT,new ArrayList<T>(),bean);}
-	public SbMultiHandler(final Class<T> cT, List<T> list, SbToggleBean bean)
+	public SbMultiHandler(final Class<T> cT, List<T> list, SbToggleBean callback)
 	{
 		this.cT=cT;
 		this.list=list;
-		this.bean=bean;
+		this.callback=callback;
 		map = new ConcurrentHashMap<T,Boolean>();
 		selected = new ArrayList<T>();
 		refresh();
@@ -130,7 +131,21 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 				}
 			}
 		}
-		else {logger.error(cT.getSimpleName()+" is not a "+EjbWithCode.class.getSimpleName());}
+		if(EjbWithNonUniqueCode.class.isAssignableFrom(cT))
+		{
+			for(T t : list)
+			{
+				EjbWithNonUniqueCode c = (EjbWithNonUniqueCode)t;
+				for(E code : codes)
+				{
+					if(c.getCode().equals(code.toString()))
+					{
+						map.put(t,value);
+					}
+				}
+			}
+		}
+		else {logger.error(cT.getSimpleName()+" is not a "+EjbWithCode.class.getSimpleName()+" or "+EjbWithNonUniqueCode.class.getSimpleName());}
 		refresh();
 	}
 	
@@ -150,7 +165,7 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	
 	public void callbackToggledToBean()
 	{
-		try {if(bean!=null){bean.toggled(this,cT);}}
+		try {if(Objects.nonNull(callback)) {callback.toggled(this,cT);}}
 		catch (JeeslLockingException e) {e.printStackTrace();}
 		catch (JeeslConstraintViolationException e) {e.printStackTrace();}
 	}
