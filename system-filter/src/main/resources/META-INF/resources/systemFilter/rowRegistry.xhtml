@@ -13,55 +13,64 @@
 		<composite:attribute name="withMultiLang" required="false" default="false"/>
 		
 		<composite:attribute name="updateStatusBar" required="false" default=":fStatusBar"/>
+		
+		<composite:facet name="config" required="false"/>
 	</composite:interface>
 	
 	<composite:implementation>
-	<j:slot id="sFilters" width="5">
-		<h:form id="fMissions">
-			<p:dataTable styleClass="jeesl-datatable"
-					var="f" value="#{cc.attrs.handler.sbh.list}"
-					selection="#{cc.attrs.handler.filter}" selectionMode="single" rowKey="#{f.id}"
-					rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
-				<f:facet name="header">
-                      <j:dtHeader entity="SystemFilter" code="listOf">
-                          <j:svg type="jeeslAdd" listener="#{cc.attrs.handler.addFilter()}" update=":#{cc.id}:sFilters :#{cc.id}:sFilter"/>
-                          
-                      </j:dtHeader>
-				</f:facet>
-                <p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFilter()}" update=":#{cc.id}:sFilter"/>
-				<p:column>
-					<f:facet name="header"><jtp:label entity="SystemFilter" code="position"/></f:facet>
-					<h:outputText value="#{f.position}"/>
-				</p:column>
-				<p:column>
-					<f:facet name="header"><jtp:label entity="SystemFilter" code="name"/></f:facet>
-					<h:outputText value="#{f.name[localeCode].lang}"/>
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</j:slot>
-	<j:slot id="sFilter" width="7">
-		<h:form id="fRole" rendered="#{not empty cc.attrs.handler.filter}">
-			<p:panel styleClass="jeesl-panel">
-				<f:facet name="header"><j:pHeader entity="SystemFilter"/></f:facet>
-				<f:facet name="actions">
-					<j:svg type="jeeslSave" listener="#{cc.attrs.handler.saveFilter()}" update="#{cc.attrs.updateStatusBar} :#{cc.id}:sFilters :#{cc.id}:sFilter" />
-					<j:svg type="jeeslDelete" listener="#{cc.attrs.handler.deleteFilter()}" update=":#{cc.id}:sFilters :#{cc.id}:sFilter"/>
-				</f:facet>
-				<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-				<j:inputGrid>
-					
-					<jtp:label entity="SystemFilter" code="code"/>
-					<h:outputText value="#{cc.attrs.handler.filter.id}"/>
-					
-					<jtp:label entity="SystemFilter" code="name" rendered="#{not cc.attrs.withMultiLang}"/>
-					<p:inputText value="#{cc.attrs.handler.singleLang}" rendered="#{not cc.attrs.withMultiLang}"/>
-					
-				</j:inputGrid>
-				<j:tabTranslationEditor value="#{cc.attrs.handler.filter}" withDescription="false" rendered="#{cc.attrs.withMultiLang}"/>
-				<f:facet name="footer"><jtp:pFooterLast value="#{cc.attrs.handler.filter}"/></f:facet>
-			</p:panel>
-		</h:form>
-	</j:slot>
+	<j:row id="rowFilterRegistry">
+		<j:slot id="sFilters" width="4">
+			<h:form id="fMissions">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="f" value="#{cc.attrs.handler.sbh.list}"
+						selection="#{cc.attrs.handler.filter}" selectionMode="single" rowKey="#{f.id}"
+						rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+					<f:facet name="header">
+	                      <j:dtHeader entity="SystemFilter" code="listOf">
+	                          <j:svg type="jeeslAdd" listener="#{cc.attrs.handler.addFilter()}" update=":#{cc.id}:sFilters :#{cc.id}:sFilter :#{cc.id}:sConfig"/>
+	                          
+	                      </j:dtHeader>
+					</f:facet>
+	                <p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFilter()}" update=":#{cc.id}:sFilter :#{cc.id}:sConfig"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="SystemFilter" code="position"/></f:facet>
+						<h:outputText value="#{f.position}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="SystemFilter" code="name"/></f:facet>
+						<h:outputText value="#{f.name[localeCode].lang}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sFilter" width="4">
+			<h:form id="fRole" rendered="#{not empty cc.attrs.handler.filter}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="SystemFilter"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.handler.saveFilter()}" update="#{cc.attrs.updateStatusBar} :#{cc.id}:sFilters :#{cc.id}:sFilter" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.handler.deleteFilter()}" update=":#{cc.id}:sFilters :#{cc.id}:sFilter :#{cc.id}:sConfig"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						
+						<jtp:label entity="SystemFilter" code="id"/>
+						<h:outputText value="#{cc.attrs.handler.filter.id}"/>
+						
+						<jtp:label entity="SystemFilter" code="name" rendered="#{not cc.attrs.withMultiLang}"/>
+						<p:inputText value="#{cc.attrs.handler.singleLang}" rendered="#{not cc.attrs.withMultiLang}"/>
+						
+					</j:inputGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.handler.filter}" withDescription="false" rendered="#{cc.attrs.withMultiLang}"/>
+					<f:facet name="footer"><jtp:pFooterLast value="#{cc.attrs.handler.filter}"/></f:facet>
+				</p:panel>
+			</h:form>
+		</j:slot>
+		<j:slot id="sConfig" width="4">
+			<c:if test="#{not empty cc.facets.config}">
+				<composite:renderFacet name="config"/>
+			</c:if>
+		</j:slot>
+	</j:row>
 	</composite:implementation>
 </html>

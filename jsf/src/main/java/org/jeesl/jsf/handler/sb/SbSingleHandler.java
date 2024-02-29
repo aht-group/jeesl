@@ -89,18 +89,21 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 		{
 			previous.setId(-1);
 			selection = null;
-			if(bean!=null){bean.selectSbSingle(null);}
+			if(Objects.nonNull(bean)) {bean.selectSbSingle(null);}
 		}
-		else if(Objects.nonNull(c) && c.isAssignableFrom(item.getClass()))
+		else
 		{
 			if(selection!=null) {previous.setId(selection.getId());}
 			selection=(T)item;
-			StringBuilder sb = new StringBuilder();
-			sb.append(this.getClass().getSimpleName());
-			sb.append(" selected with:").append(selection.toString());
-			sb.append(" Previous:").append(previous.getId());
-			if(debugOnInfo) {logger.info(sb.toString());}
-			if(bean!=null){bean.selectSbSingle(item);}
+			if(debugOnInfo)
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.append(this.getClass().getSimpleName());
+				sb.append(" selected with:").append(selection.toString());
+				sb.append(" Previous:").append(previous.getId());
+				logger.info(sb.toString());
+			}
+			if(Objects.nonNull(bean)) {bean.selectSbSingle(item);}
 		}
 	}
 

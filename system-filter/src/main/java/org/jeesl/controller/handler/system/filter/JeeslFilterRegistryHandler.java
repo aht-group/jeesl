@@ -53,8 +53,7 @@ public class JeeslFilterRegistryHandler implements JeeslFilterHandler,SbSingleBe
 	{
 		this.callback=callback;
 		
-		sbh = new SbSingleHandler<>(this);
-		sbh.setDebugOnInfo(true);
+		sbh = new SbSingleHandler<>(SystemFilter.class,this);
 		
 		efLang = EjbLangFactory.instance(IoLang.class);
 		
@@ -78,7 +77,8 @@ public class JeeslFilterRegistryHandler implements JeeslFilterHandler,SbSingleBe
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.selectEntity(item));
-		if(Objects.nonNull(callback)) {callback.applyFilter(this,(SystemFilter)item);}
+		filter = (SystemFilter)item;
+		if(Objects.nonNull(callback)) {callback.applyFilter(this,filter);}
 	}
 	
 	private void reloadFilters()
@@ -112,5 +112,11 @@ public class JeeslFilterRegistryHandler implements JeeslFilterHandler,SbSingleBe
 		filter = fFilter.save(filter);
 		this.reloadFilters();
 		if(Objects.nonNull(callback)) {callback.storeFilter(this, filter);}
+	}
+	
+	public void applyDefault()
+	{
+		sbh.setDefault();
+		if(sbh.isSelected() && Objects.nonNull(callback)) {callback.applyFilter(this,sbh.getSelection());}
 	}
 }
