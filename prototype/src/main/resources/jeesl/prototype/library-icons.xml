@@ -33,8 +33,9 @@
     <io:file code="jeeslSearch" name="ui/control/action/search.svg"/>
     <io:file code="jeeslReload" name="ui/control/action/reload.svg"/>
     <io:file code="jeeslDropZone" name="ui/control/action/drop.svg"/>
-    <io:file code="jeeslAddressBook" name="ui/system/person/addressbook.svg"/>
     <io:file code="jeeslFavorite" name="ui/system/favorite.svg"/>
+    <io:file code="jeeslAddressBook" name="ui/system/entity/address.svg"/>
+    <io:file code="jeeslEntityCompany" name="ui/system/entity/company.svg"/>
     <io:file code="ejbUnsaved" name="ui/info/ejb/unsaved.svg"/>
     <io:file code="ejbInvisible" name="ui/info/ejb/invisible.svg"/>
     <io:file code="jeeslInfo" name="/ui/info/info.svg"/>
