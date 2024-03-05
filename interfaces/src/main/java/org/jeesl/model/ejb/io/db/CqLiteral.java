@@ -33,4 +33,5 @@ public class CqLiteral implements Serializable
 	}
 	
 	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
+	public static String pathMl(Serializable...attributes) {return CqOrdering.path(attributes)+"[localeCode].lang";}
 }
