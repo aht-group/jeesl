@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.util.query.io;
+package org.jeesl.util.query.ejb.io;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.model.ejb.io.db.CqId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

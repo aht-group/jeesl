@@ -14,7 +14,7 @@ import org.jeesl.model.ejb.io.db.CqOrdering;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslQuery extends Serializable
+public interface JeeslQuery extends Serializable,JeeslCoreQuery
 {
 	void reset();
 	void debug(boolean debug);
@@ -23,16 +23,13 @@ public interface JeeslQuery extends Serializable
 	public String getLocaleCode();
 	
 	boolean isTupleLoad();
-	
 	void setTupleLoad(boolean tupleLoad);
 	
 	boolean isDistinct();
 	void setDistinct(boolean distinct);
 
-	Integer getFirstResult();
 	void setFirstResult(Integer firstResult);
 
-	Integer getMaxResults();
 	void setMaxResults(Integer maxResults);
 	
 	List<String> getRootFetches();

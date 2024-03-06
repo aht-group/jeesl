@@ -17,8 +17,6 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbIoSsiQuery;
-import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
@@ -59,7 +57,7 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	JsonTuples2<CTX,STATUS> tpcContextStatus(List<CTX> list);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,B> tpMappingB(Class<B> classB, CTX mapping, A a);
 
-	Long cSsiData(EjbIoSsiQuery<CTX,STATUS,ERROR> query);
+	Long cSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
 	List<DATA> fSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
 	List<DATA> fIoSsiData(CTX mapping, List<STATUS> links);
 	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a);
