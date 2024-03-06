@@ -71,6 +71,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 
 	private Long refA; public <A extends EjbWithId> void setRefA(A a) {this.refA = a.getId();}
 	private Long refB; public <B extends EjbWithId> void setRefB(B b) {this.refB = b.getId();}
+	private Long refC; public <C extends EjbWithId> void setRefC(C c) {this.refC = c.getId();}
 
 	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback,
 						IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData)
@@ -96,10 +97,14 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	public void reloadStatistics()
 	{
 		thStatus.clear();
-		JsonTuples1<STATUS> tStatus = fSsi.tpcIoSsiStatusForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB));
-		JsonUtil.info(tStatus);
-		thStatus.init(tStatus);
-		thStatus.initListA(fSsi);
+		
+		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
+		query.id1(refA);
+		query.id2(refB);
+		query.id3(refC);
+		if(Objects.nonNull(context)) {query.add(context);}
+		
+		thStatus.init(fSsi.tpIoSsiStatus(query));
 		
 		JsonTuples2<STATUS,JOB> tJob = fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB));
 		JsonUtil.info(tJob);
@@ -117,6 +122,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		callback.ssiDataFilterChanged();
+		this.reloadStatistics();
 	}
 	
 	@Override
@@ -126,9 +132,12 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
 		query.setMaxResults(pageSize);
+		query.id1(refA);
 		query.id2(refB);
+		query.id3(refC);
 		if(Objects.nonNull(context)) {query.add(context);}
 		if(sbhStatus.hasSelected()) {query.addStatus(sbhStatus.getSelected());}
+		query.debug(true);
 		
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 		super.setRowCount(fSsi.cSsiData(query).intValue());

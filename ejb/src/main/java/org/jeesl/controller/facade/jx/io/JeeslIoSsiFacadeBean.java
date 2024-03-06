@@ -297,6 +297,24 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
+	@Override public JsonTuples1<STATUS> tpIoSsiStatus(EjbIoSsiQuery<CTX,STATUS,ERROR> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<DATA> ejb = cQ.from(fbSsi.getClassData());
+		
+		Expression<Long> cCount = cB.count(ejb);
+		Path<STATUS> pStatus = ejb.get(JeeslIoSsiData.Attributes.link.toString());
+		
+		cQ.groupBy(pStatus.get("id"));
+		cQ.multiselect(pStatus.get("id"),cCount);
+		cQ.where(cB.and(pSsiData(cB, ejb,query)));
+		
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,query.isTupleLoad());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
+	
 	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<ERROR> tpcIoSsiErrorContext(CTX context, A a, B b)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -531,29 +549,13 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		if(Objects.nonNull(query.getId2()))
-		{
-			Expression<Long> eRef2 = ejb.get(JeeslIoSsiData.Attributes.refB.toString());
-			predicates.add(cB.equal(eRef2,query.getId2()));
-		}
+		if(Objects.nonNull(query.getId1())) {predicates.add(cB.equal(ejb.<Long>get(JeeslIoSsiData.Attributes.refA.toString()),query.getId1()));}
+		if(Objects.nonNull(query.getId2())) {predicates.add(cB.equal(ejb.<Long>get(JeeslIoSsiData.Attributes.refB.toString()),query.getId2()));}
+		if(Objects.nonNull(query.getId3())) {predicates.add(cB.equal(ejb.<Long>get(JeeslIoSsiData.Attributes.refC.toString()),query.getId3()));}
 		
-		if(ObjectUtils.isNotEmpty(query.getContexts()))
-		{
-			Path<CTX> pCtx = ejb.join(JeeslIoSsiData.Attributes.mapping.toString());
-			predicates.add(pCtx.in(query.getContexts()));
-		}
-		
-		if(ObjectUtils.isNotEmpty(query.getStatus()))
-		{
-			Path<STATUS> pStatus = ejb.get(JeeslIoSsiData.Attributes.link.toString());
-			predicates.add(pStatus.in(query.getStatus()));
-		}
-		
-		if(ObjectUtils.isNotEmpty(query.getErrors()))
-		{
-			Path<ERROR> pError = ejb.get(JeeslIoSsiData.Attributes.error.toString());
-			predicates.add(pError.in(query.getErrors()));
-		}
+		if(ObjectUtils.isNotEmpty(query.getContexts())) {predicates.add(ejb.<CTX>get(JeeslIoSsiData.Attributes.mapping.toString()).in(query.getContexts()));}
+		if(ObjectUtils.isNotEmpty(query.getStatus())) {predicates.add(ejb.<STATUS>get(JeeslIoSsiData.Attributes.link.toString()).in(query.getStatus()));}
+		if(ObjectUtils.isNotEmpty(query.getErrors())){predicates.add(ejb.<ERROR>get(JeeslIoSsiData.Attributes.error.toString()).in(query.getErrors()));}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
