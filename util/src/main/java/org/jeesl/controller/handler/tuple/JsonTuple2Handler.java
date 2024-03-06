@@ -125,6 +125,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		tuples2.addAll(tuples.getTuples());
 		return this;
 	}
+	
 	public void append(JsonTuples2<A,B> tuples)
 	{
 		if(Objects.nonNull(tuples))

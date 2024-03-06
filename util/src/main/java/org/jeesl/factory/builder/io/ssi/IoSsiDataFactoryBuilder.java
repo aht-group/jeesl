@@ -4,7 +4,7 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiAttributeFactory;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiDataFactory;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiErrorFactory;
-import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiMappingFactory;
+import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiContextFactory;
 import org.jeesl.factory.txt.io.ssi.data.TxtIoSsiMappingFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -69,7 +69,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 		this.cJob=cJob;
 	}
 
-	public EjbIoSsiMappingFactory<SYSTEM,CTX,ENTITY> ejbMapping() {return new EjbIoSsiMappingFactory<>(this);}
+	public EjbIoSsiContextFactory<SYSTEM,CTX,ENTITY> ejbContext() {return new EjbIoSsiContextFactory<>(this);}
 	public EjbIoSsiAttributeFactory<CTX,ATTRIBUTE,ENTITY> ejbAttribute() {return new EjbIoSsiAttributeFactory<>(cAttribute);}
 	public EjbIoSsiDataFactory<CTX,DATA,STATUS> ejbData() {return new EjbIoSsiDataFactory<>(cData);}
 	public EjbIoSsiErrorFactory<CTX,ERROR> efError() {return new EjbIoSsiErrorFactory<>(cError);}

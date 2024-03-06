@@ -60,7 +60,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	protected final EjbCodeCache<JOB> cacheJob; //public EjbCodeCache<JOB> getCacheJob() {return cacheJob;}
 	protected final EjbNonUniquieCodeCache<ERROR> cacheError;
 	
-	protected CONTEXT mapping; @Override public CONTEXT getMapping() {return mapping;}
+	protected CONTEXT context; @Override public CONTEXT getMapping() {return context;}
 	private final String localeCode;
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
@@ -74,7 +74,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		this.initMappings();
 		
 		cacheError = EjbNonUniquieCodeCache.instance();
-		cacheError.addAll(fSsi.allForParent(fbSsi.getClassError(),mapping));
+		cacheError.addAll(fSsi.allForParent(fbSsi.getClassError(),context));
 		
 		jec = BucketSizeCounter.instance();
 		cacheLink = EjbCodeCache.instance(fbSsi.getClassStatus()).facade(fSsi);
@@ -87,7 +87,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	{
 		try
 		{
-			mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
+			context = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
 		}
 		catch (JeeslNotFoundException e) {throw new RuntimeException(e);}
 	}
@@ -96,7 +96,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	{
 		StringBuilder sb = new StringBuilder(); String alias=null; boolean newLine=false;
 		SqlFactory.deleteFrom(sb,fbSsi.getClassData(),alias,newLine);
-		SqlFactory.where(sb,alias,false,JeeslIoSsiData.Attributes.mapping,mapping, newLine);
+		SqlFactory.where(sb,alias,false,JeeslIoSsiData.Attributes.mapping,context, newLine);
 		SqlFactory.semicolon(sb,newLine);
 		return sb.toString();
 	}

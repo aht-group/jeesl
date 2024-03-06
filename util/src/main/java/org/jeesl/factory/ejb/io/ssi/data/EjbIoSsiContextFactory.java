@@ -6,32 +6,31 @@ import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 
-public class EjbIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
-										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
+public class EjbIoSsiContextFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
+										CONTEXT extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {
-	private final IoSsiDataFactoryBuilder<?,?,SYSTEM,MAPPING,?,?,?,?,ENTITY,?,?> fbSsi;
+	private final IoSsiDataFactoryBuilder<?,?,SYSTEM,CONTEXT,?,?,?,?,ENTITY,?,?> fbSsi;
 
-	public EjbIoSsiMappingFactory(IoSsiDataFactoryBuilder<?,?,SYSTEM,MAPPING,?,?,?,?,ENTITY,?,?> fbSsi)
+	public EjbIoSsiContextFactory(IoSsiDataFactoryBuilder<?,?,SYSTEM,CONTEXT,?,?,?,?,ENTITY,?,?> fbSsi)
 	{
         this.fbSsi = fbSsi;
 	}
 	
-	public MAPPING build(SYSTEM system)
+	public CONTEXT build(SYSTEM system)
 	{
-		MAPPING ejb = null;
+		CONTEXT ejb = null;
 		try
 		{
 			ejb = fbSsi.getClassMapping().newInstance();
 			ejb.setSystem(system);
-	       
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		return ejb;
 	}
 	
-	public void converter(JeeslFacade facade, MAPPING ejb)
+	public void converter(JeeslFacade facade, CONTEXT ejb)
 	{
 		if(ejb.getSystem()!=null) {ejb.setSystem(facade.find(fbSsi.getClassSystem(),ejb.getSystem()));}
 		if(ejb.getClassA()!=null) {ejb.setClassA(facade.find(fbSsi.getClassEntity(),ejb.getClassA()));}
