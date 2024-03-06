@@ -15,6 +15,7 @@ public interface EjbIoMavenQuery <
 //			extends AbstractEjbQuery
 {
 	boolean isDistinct();
+//	void x();
 	
 	//Fetches
 	List<String> getRootFetches();

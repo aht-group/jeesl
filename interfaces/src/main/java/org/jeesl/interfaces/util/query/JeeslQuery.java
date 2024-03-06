@@ -8,8 +8,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.ejb.io.db.CqLiteral;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
@@ -22,6 +23,7 @@ public interface JeeslQuery extends Serializable
 	public String getLocaleCode();
 	
 	boolean isTupleLoad();
+	
 	void setTupleLoad(boolean tupleLoad);
 	
 	boolean isDistinct();
@@ -39,6 +41,7 @@ public interface JeeslQuery extends Serializable
 	List<CqOrdering> getOrderings();
 	List<CqLiteral> getLiterals();
 	List<CqDate> getLocalDates();
+	List<CqId> getIds();
 	
 //	boolean isSortAscending();
 //	void sort(String sortBy, boolean sortAscending);
