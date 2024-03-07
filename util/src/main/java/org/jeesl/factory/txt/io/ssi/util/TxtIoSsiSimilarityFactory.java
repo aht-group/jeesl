@@ -15,6 +15,7 @@ public class TxtIoSsiSimilarityFactory
 	
 	public static List<String> permutations(String input)
 	{
+		logger.info("Permutations of "+input);
 		List<String> result = new ArrayList<>();
 		if(Objects.isNull(input)) {return result;}
 		
