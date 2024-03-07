@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.job.core;
+package org.jeesl.interfaces.model.io.mail.link;
 
 import java.io.Serializable;
 
@@ -8,19 +8,16 @@ import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-@DownloadJeeslData
-public interface JeeslJobStatus <L extends JeeslLang, D extends JeeslDescription,
-									S extends JeeslStatus<L,D,S>,
-									G extends JeeslGraphic<?,?,?>>
-		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
-					JeeslStatus<L,D,S>,JeeslStatusFixedCode
-{
-	public static enum Code{queue,deferred,constraint,timeout,working,completed,failed,obsolete};
+public interface JeeslLinkType <L extends JeeslLang, D extends JeeslDescription,
+								S extends JeeslStatus<L,D,S>,
+								G extends JeeslGraphic<?,?,?>>
+					extends Serializable,EjbPersistable,
+								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
+{	
+
 }

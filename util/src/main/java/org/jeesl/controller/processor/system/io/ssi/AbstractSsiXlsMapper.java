@@ -45,6 +45,7 @@ public class AbstractSsiXlsMapper
 		mapColumnCode.clear();
 		for(int colIndex=indexStart;colIndex<=indexEnd;colIndex++)
 		{
+//			logger.info(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex));
 			String key = row.getCell(colIndex).getStringCellValue().trim();
 			logger.trace("i:"+colIndex+" "+key);
 			logger.info(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex)+" "+key);

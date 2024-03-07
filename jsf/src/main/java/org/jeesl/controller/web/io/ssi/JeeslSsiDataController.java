@@ -27,10 +27,11 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbIoSsiQuery;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -71,6 +72,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 
 	private Long refA; public <A extends EjbWithId> void setRefA(A a) {this.refA = a.getId();}
 	private Long refB; public <B extends EjbWithId> void setRefB(B b) {this.refB = b.getId();}
+	private Long refC; public <C extends EjbWithId> void setRefC(C c) {this.refC = c.getId();}
 
 	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback,
 						IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData)
@@ -96,10 +98,14 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	public void reloadStatistics()
 	{
 		thStatus.clear();
-		JsonTuples1<STATUS> tStatus = fSsi.tpcIoSsiStatusForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB));
-		JsonUtil.info(tStatus);
-		thStatus.init(tStatus);
-		thStatus.initListA(fSsi);
+		
+		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
+		if(Objects.nonNull(refA)) {query.add(CqId.isValue(refA,CqId.path(JeeslIoSsiData.Attributes.refA)));}
+		if(Objects.nonNull(refB)) {query.add(CqId.isValue(refB,CqId.path(JeeslIoSsiData.Attributes.refB)));}
+		if(Objects.nonNull(refC)) {query.add(CqId.isValue(refC,CqId.path(JeeslIoSsiData.Attributes.refC)));}
+		if(Objects.nonNull(context)) {query.add(context);}
+		
+		thStatus.init(fSsi.tpIoSsiStatus(query));
 		
 		JsonTuples2<STATUS,JOB> tJob = fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB));
 		JsonUtil.info(tJob);
@@ -117,6 +123,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		callback.ssiDataFilterChanged();
+		this.reloadStatistics();
 	}
 	
 	@Override
@@ -126,9 +133,12 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
 		query.setMaxResults(pageSize);
-		query.id2(refB);
+		if(Objects.nonNull(refA)) {query.add(CqId.isValue(refA,CqId.path(JeeslIoSsiData.Attributes.refA)));}
+		if(Objects.nonNull(refB)) {query.add(CqId.isValue(refB,CqId.path(JeeslIoSsiData.Attributes.refB)));}
+		if(Objects.nonNull(refC)) {query.add(CqId.isValue(refC,CqId.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
 		if(sbhStatus.hasSelected()) {query.addStatus(sbhStatus.getSelected());}
+		query.debug(true);
 		
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 		super.setRowCount(fSsi.cSsiData(query).intValue());

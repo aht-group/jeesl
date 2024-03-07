@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.interfaces.model.with.date.jt.JeeslWithDateTimeRange;
+import org.jeesl.interfaces.model.with.date.jt.JeeslWithTimeRange;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
@@ -19,7 +19,7 @@ public interface JeeslIoAiOpenAiCompletion  <T extends JeeslIoAiOpenAiThread<USE
 											USER extends JeeslSimpleUser>
 					extends Serializable,EjbSaveable,
 							EjbWithParentAttributeResolver,
-								JeeslWithDateTimeRange
+								JeeslWithTimeRange
 {	
 	public static enum Attributes{thread};
 	

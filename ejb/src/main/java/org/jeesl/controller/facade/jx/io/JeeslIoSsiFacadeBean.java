@@ -42,7 +42,8 @@ import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbIoSsiQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
+import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.slf4j.Logger;
@@ -265,35 +266,53 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and id="+ejb.getId()+" not unique");}
 	}
 	
-	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpcIoSsiStatusForContext(mapping,null,null);}
-	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpcIoSsiStatusForContext(mapping,a,null);}
-	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpcIoSsiStatusForContext(CTX mapping, A a, B b)
+//	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpcIoSsiStatusForContext(mapping,null,null);}
+//	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpcIoSsiStatusForContext(mapping,a,null);}
+//	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpcIoSsiStatusForContext(CTX mapping, A a, B b)
+//	{
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+//		Root<DATA> data = cQ.from(fbSsi.getClassData());
+//		
+//		Expression<Long> cCount = cB.count(data);
+//		
+//		Path<STATUS> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
+//		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
+//		predicates.add(jMapping.in(mapping));
+//		
+//		Path<Long> pA = data.get(JeeslIoSsiData.Attributes.refA.toString());
+//		if(a==null) {predicates.add(cB.isNull(pA));}
+//		else {predicates.add(cB.equal(pA,a.getId()));}
+//		
+//		Path<Long> pB = data.get(JeeslIoSsiData.Attributes.refB.toString());
+//		if(b==null) {predicates.add(cB.isNull(pB));}
+//		else {predicates.add(cB.equal(pB,b.getId()));}
+//		
+//		cQ.groupBy(pLink.get("id"));
+//		cQ.multiselect(pLink.get("id"),cCount);
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//	       
+//		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+//		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,true);
+//		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+//	}
+	
+	@Override public JsonTuples1<STATUS> tpIoSsiStatus(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
 	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
-		Root<DATA> data = cQ.from(fbSsi.getClassData());
+		Root<DATA> ejb = cQ.from(fbSsi.getClassData());
 		
-		Expression<Long> cCount = cB.count(data);
+		Expression<Long> cCount = cB.count(ejb);
+		Path<STATUS> pStatus = ejb.get(JeeslIoSsiData.Attributes.link.toString());
 		
-		Path<STATUS> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
-		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
-		predicates.add(jMapping.in(mapping));
+		cQ.groupBy(pStatus.get("id"));
+		cQ.multiselect(pStatus.get("id"),cCount);
+		cQ.where(cB.and(pSsiData(cB,ejb,query)));
 		
-		Path<Long> pA = data.get(JeeslIoSsiData.Attributes.refA.toString());
-		if(a==null) {predicates.add(cB.isNull(pA));}
-		else {predicates.add(cB.equal(pA,a.getId()));}
-		
-		Path<Long> pB = data.get(JeeslIoSsiData.Attributes.refB.toString());
-		if(b==null) {predicates.add(cB.isNull(pB));}
-		else {predicates.add(cB.equal(pB,b.getId()));}
-		
-		cQ.groupBy(pLink.get("id"));
-		cQ.multiselect(pLink.get("id"),cCount);
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,true);
+		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,query.getTupleLoad());
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
@@ -500,7 +519,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return tQ.getResultList();
 	}
 
-	@Override public Long cSsiData(EjbIoSsiQuery<CTX,STATUS,ERROR> query)
+	@Override public Long cSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cQ = cB.createQuery(Long.class);
@@ -511,7 +530,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 
 		return em.createQuery(cQ).getSingleResult();
 	}
-	@Override public List<DATA> fSsiData(EjbIoSsiQuery<CTX,STATUS,ERROR> query)
+	@Override public List<DATA> fSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
@@ -526,34 +545,35 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		return tQ.getResultList();
 	}
-	
-	private Predicate[] pSsiData(CriteriaBuilder cB, Root<DATA> ejb, EjbIoSsiQuery<CTX,STATUS,ERROR> query)
+
+	private Predicate[] pSsiData(CriteriaBuilder cB, Root<DATA> ejb, JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		if(Objects.nonNull(query.getId2()))
+		if(ObjectUtils.isNotEmpty(query.getIds()))
 		{
-			Expression<Long> eRef2 = ejb.get(JeeslIoSsiData.Attributes.refB.toString());
-			predicates.add(cB.equal(eRef2,query.getId2()));
+			for(CqId cq : query.getIds())
+			{
+				Expression<Long> eId = null;
+				if(cq.getPath().equals(CqId.path(JeeslIoSsiData.Attributes.refA))) {eId = ejb.get(JeeslIoSsiData.Attributes.refA.toString());}
+				else if(cq.getPath().equals(CqId.path(JeeslIoSsiData.Attributes.refB))) {eId = ejb.get(JeeslIoSsiData.Attributes.refB.toString());}
+				else if(cq.getPath().equals(CqId.path(JeeslIoSsiData.Attributes.refC))) {eId = ejb.get(JeeslIoSsiData.Attributes.refC.toString());}
+				if(Objects.isNull(eId)) {logger.error("NYI "+cq.toString());}
+				else
+				{
+					switch(cq.getType())
+					{
+						case IsValue: predicates.add(cB.equal(eId,cq.getId())); break;
+						case IsNull: predicates.add(cB.isNull(eId)); break;
+						default: logger.error("NYI "+cq.toString());
+					}
+				}
+			}
 		}
 		
-		if(ObjectUtils.isNotEmpty(query.getContexts()))
-		{
-			Path<CTX> pCtx = ejb.join(JeeslIoSsiData.Attributes.mapping.toString());
-			predicates.add(pCtx.in(query.getContexts()));
-		}
-		
-		if(ObjectUtils.isNotEmpty(query.getStatus()))
-		{
-			Path<STATUS> pStatus = ejb.get(JeeslIoSsiData.Attributes.link.toString());
-			predicates.add(pStatus.in(query.getStatus()));
-		}
-		
-		if(ObjectUtils.isNotEmpty(query.getErrors()))
-		{
-			Path<ERROR> pError = ejb.get(JeeslIoSsiData.Attributes.error.toString());
-			predicates.add(pError.in(query.getErrors()));
-		}
+		if(ObjectUtils.isNotEmpty(query.getIoSsiContexts())) {predicates.add(ejb.<CTX>get(JeeslIoSsiData.Attributes.mapping.toString()).in(query.getIoSsiContexts()));}
+		if(ObjectUtils.isNotEmpty(query.getIoSsiStatus())) {predicates.add(ejb.<STATUS>get(JeeslIoSsiData.Attributes.link.toString()).in(query.getIoSsiStatus()));}
+		if(ObjectUtils.isNotEmpty(query.getIoSsiErrors())){predicates.add(ejb.<ERROR>get(JeeslIoSsiData.Attributes.error.toString()).in(query.getIoSsiErrors()));}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

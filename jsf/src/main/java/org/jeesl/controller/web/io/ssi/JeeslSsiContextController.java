@@ -18,6 +18,7 @@ import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
+import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiContextFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.cache.io.ssi.JeeslIoSsiContextCache;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
@@ -57,6 +58,8 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	private JeeslIoSsiContextCache<CONTEXT,STATUS> cache; 
 	private final Comparator<CONTEXT> cpContext;
 	
+	private final EjbIoSsiContextFactory<SYSTEM,CONTEXT,ENTITY> efContext;
+	
 	private final JsonTuple1Handler<CONTEXT> thContext; public JsonTuple1Handler<CONTEXT> getThContext() {return thContext;}
 	private final JsonTuple1Handler<ERROR> thError; public JsonTuple1Handler<ERROR> getThError() {return thError;}
 	private final JsonTuple2Handler<CONTEXT,STATUS> thStatus; public JsonTuple2Handler<CONTEXT,STATUS> getThStatus() {return thStatus;}
@@ -74,6 +77,8 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	{
 		super(fbSsi.getClassL(),fbSsi.getClassD());
 		this.fbSsi=fbSsi;
+		
+		efContext = fbSsi.ejbContext();
 		
 		systems = new ArrayList<>();
 		contexts = new ArrayList<>();
@@ -141,6 +146,8 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	
 	public void countNumbers()
 	{
+		efContext.converter(fSsi, context);
+		thStatus.clearFrom(context);
 		JsonTuples2<CONTEXT,STATUS> tuples = fSsi.tpcContextStatus(Arrays.asList(context));
 		if(Objects.nonNull(cache))
 		{
@@ -159,12 +166,12 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	public void addContext()
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSsi.getClassMapping()));
-		context = fbSsi.ejbMapping().build(null);
+		context = fbSsi.ejbContext().build(null);
 	}
 	
 	public void saveContext() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		fbSsi.ejbMapping().converter(fSsi,context);
+		efContext.converter(fSsi,context);
 		context = fSsi.save(context);
 		EjbIdFactory.replace(contexts,context);
 	}

@@ -187,12 +187,11 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 					case table: this.applyTable(ioReport,context,wb,ioSheet,sheet,sheetNr,ioRow,rowNr,columns,mapDynamicGroups,xfRow,xfCell); break;
 					case template: applyTemplate(sheet,rowNr,ioSheet,ioRow,xfCell); break;
 					default: break;
-				}
-				
-				logger.info(rowNr.getValue().toString());
-				
+				}	
 			}
 			xfColumn.adjustWidth(sheet, columns);
+			
+			logger.info(rowNr.getValue().toString());
 			
 //			applyHeader(sheet,ioSheet,report);
 //			exportSheet(sheet,report,ioSheet,null);
@@ -294,7 +293,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			MutableInt columnNr = new MutableInt(0);
 			for(COLUMN ioColumn : ioColumns)
 			{
-//				logger.info(tfColumn.position(ioColumn)+" "+columnNr.intValue()+" "+ioColumn.getGroup().getQueryColumns());
+//				logger.info(rowNr.getValue()+" "+tfColumn.position(ioColumn)+" "+columnNr.intValue()+" "+ioColumn.getGroup().getQueryColumns());
 				
 				if(ioColumn.getGroup().getQueryColumns()==null || ioColumn.getGroup().getQueryColumns().trim().isEmpty())
 				{

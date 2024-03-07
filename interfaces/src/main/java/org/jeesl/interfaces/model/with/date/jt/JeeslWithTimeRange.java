@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslWithDateTimeRange extends EjbWithId
+public interface JeeslWithTimeRange extends EjbWithId
 {
 	LocalDateTime getStartDate();
 	void setStartDate(LocalDateTime startDate);

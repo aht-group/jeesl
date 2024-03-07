@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
+import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	
 	private boolean tupleLoad;
 	@Override public boolean isTupleLoad() {return tupleLoad;}
+	public Boolean getTupleLoad() {return tupleLoad;}
 	@Override public void setTupleLoad(boolean tupleLoad) {this.tupleLoad = tupleLoad;}
 
 	private boolean distinct;
@@ -52,7 +54,10 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public Integer getMaxResults() {return maxResults;}
 	@Override public void setMaxResults(Integer maxResults) {this.maxResults = maxResults;}
 	
-	//Ids
+	//IDs
+	protected List<CqId> ids; @Override public List<CqId> getIds() {return ids;}
+	protected void addId(CqId literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
+	
 	protected Long id1;
 	public Long getId1() {return id1;}
 	

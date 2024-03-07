@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.io.cms.markup.w.JeeslWithMarkupMulti;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.with.date.jt.JeeslWithValidFromDate;
+import org.jeesl.interfaces.model.with.date.jt.JeeslWithDateValidFrom;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
@@ -22,7 +22,7 @@ public interface JeeslClCheckItem <L extends JeeslLang,
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					EjbWithParentAttributeResolver,EjbWithPositionVisible,
 					EjbWithLang<L>,
-					JeeslWithValidFromDate
+					JeeslWithDateValidFrom
 					,JeeslWithMarkupMulti<M>
 					
 {

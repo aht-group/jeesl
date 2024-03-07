@@ -2,20 +2,27 @@ package org.jeesl.factory.txt.io.ssi.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.math3.util.Combinations;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TxtIoSsiSimilarityFactory
 {
+	final static Logger logger = LoggerFactory.getLogger(TxtIoSsiSimilarityFactory.class);
+	
 	public static List<String> permutations(String input)
 	{
+//		logger.info("Permutations of "+input);
 		List<String> result = new ArrayList<>();
+		if(Objects.isNull(input)) {return result;}
 		
 		String[] array = input.split(" ");
 		
 		Combinations combinations = new Combinations(array.length,array.length);
-        for (int[] combinationIndices : combinations)
+        for(int[] combinationIndices : combinations)
         {
             permuteAndPrint(array, combinationIndices, result);
         }
@@ -47,7 +54,7 @@ public class TxtIoSsiSimilarityFactory
             for (int i = left; i <= right; i++)
             {
                 swap(permutation, left, i);
-                permute(array, permutation, left + 1, right, result);
+                permute(array, permutation, left+1, right, result);
                 swap(permutation, left, i); // Reset  for next iteration
             }
         }
@@ -71,5 +78,4 @@ public class TxtIoSsiSimilarityFactory
         array[i] = array[j];
         array[j] = temp;
     }
-
 }

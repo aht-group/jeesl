@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslWithValidFromDate extends EjbWithId
+public interface JeeslWithDateValidFrom extends EjbWithId
 {	
 //	SQL: validFrom date NOT NULL,
 	
