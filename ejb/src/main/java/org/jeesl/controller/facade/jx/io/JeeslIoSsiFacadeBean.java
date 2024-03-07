@@ -46,7 +46,6 @@ import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
-import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -267,37 +266,37 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and id="+ejb.getId()+" not unique");}
 	}
 	
-	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpcIoSsiStatusForContext(mapping,null,null);}
-	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpcIoSsiStatusForContext(mapping,a,null);}
-	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpcIoSsiStatusForContext(CTX mapping, A a, B b)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
-		Root<DATA> data = cQ.from(fbSsi.getClassData());
-		
-		Expression<Long> cCount = cB.count(data);
-		
-		Path<STATUS> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
-		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
-		predicates.add(jMapping.in(mapping));
-		
-		Path<Long> pA = data.get(JeeslIoSsiData.Attributes.refA.toString());
-		if(a==null) {predicates.add(cB.isNull(pA));}
-		else {predicates.add(cB.equal(pA,a.getId()));}
-		
-		Path<Long> pB = data.get(JeeslIoSsiData.Attributes.refB.toString());
-		if(b==null) {predicates.add(cB.isNull(pB));}
-		else {predicates.add(cB.equal(pB,b.getId()));}
-		
-		cQ.groupBy(pLink.get("id"));
-		cQ.multiselect(pLink.get("id"),cCount);
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-	       
-		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,true);
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
-	}
+//	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpcIoSsiStatusForContext(mapping,null,null);}
+//	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpcIoSsiStatusForContext(mapping,a,null);}
+//	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpcIoSsiStatusForContext(CTX mapping, A a, B b)
+//	{
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+//		Root<DATA> data = cQ.from(fbSsi.getClassData());
+//		
+//		Expression<Long> cCount = cB.count(data);
+//		
+//		Path<STATUS> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
+//		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
+//		predicates.add(jMapping.in(mapping));
+//		
+//		Path<Long> pA = data.get(JeeslIoSsiData.Attributes.refA.toString());
+//		if(a==null) {predicates.add(cB.isNull(pA));}
+//		else {predicates.add(cB.equal(pA,a.getId()));}
+//		
+//		Path<Long> pB = data.get(JeeslIoSsiData.Attributes.refB.toString());
+//		if(b==null) {predicates.add(cB.isNull(pB));}
+//		else {predicates.add(cB.equal(pB,b.getId()));}
+//		
+//		cQ.groupBy(pLink.get("id"));
+//		cQ.multiselect(pLink.get("id"),cCount);
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//	       
+//		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+//		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,true);
+//		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+//	}
 	
 	@Override public JsonTuples1<STATUS> tpIoSsiStatus(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
 	{

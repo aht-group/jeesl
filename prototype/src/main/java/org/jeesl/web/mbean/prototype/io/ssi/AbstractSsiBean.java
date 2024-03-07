@@ -22,13 +22,16 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.model.ejb.io.db.CqId;
+import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,10 +40,11 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
-										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
-										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-										DATA extends JeeslIoSsiData<MAPPING,LINK,?,JOB>,
-										LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
+										CONTEXT extends JeeslIoSsiContext<SYSTEM,ENTITY>,
+										ATTRIBUTE extends JeeslIoSsiAttribute<CONTEXT,ENTITY>,
+										DATA extends JeeslIoSsiData<CONTEXT,STATUS,ERROR,JOB>,
+										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
+										ERROR extends JeeslIoSsiError<L,D,CONTEXT,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 										JOB extends JeeslJobStatus<L,D,JOB,?>,
@@ -52,13 +56,13 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiBean.class);
 	
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi;
 	
-	protected JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB,HOST> fSsi;
+	protected JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,HOST> fSsi;
 	
-	protected final SbMultiHandler<LINK> sbhLink; public SbMultiHandler<LINK> getSbhLink() {return sbhLink;}
-	protected final JsonTuple1Handler<LINK> thLink; public JsonTuple1Handler<LINK> getThLink() {return thLink;}
-	protected SsiMappingProcessor<MAPPING,DATA,JSON> ssiProcessor;
+	protected final SbMultiHandler<STATUS> sbhLink; public SbMultiHandler<STATUS> getSbhLink() {return sbhLink;}
+	protected final JsonTuple1Handler<STATUS> thLink; public JsonTuple1Handler<STATUS> getThLink() {return thLink;}
+	protected SsiMappingProcessor<CONTEXT,DATA,JSON> ssiProcessor;
 	
 	protected final Map<DATA,JSON> mapData; public Map<DATA,JSON> getMapData() {return mapData;}
 	
@@ -68,17 +72,17 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	private final Class<JSON> cJson;
 	protected Long refA;
 	
-	public AbstractSsiBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi, final Class<JSON> cJson)
+	public AbstractSsiBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi, final Class<JSON> cJson)
 	{
 		this.fbSsi=fbSsi;
 		this.cJson=cJson;
-		sbhLink = new SbMultiHandler<LINK>(fbSsi.getClassStatus(),this);
-		thLink = new JsonTuple1Handler<LINK>(fbSsi.getClassStatus());
+		sbhLink = new SbMultiHandler<STATUS>(fbSsi.getClassStatus(),this);
+		thLink = new JsonTuple1Handler<STATUS>(fbSsi.getClassStatus());
 		mapData = new HashMap<>();
 		datas = new ArrayList<>();
 	}
 
-	public void postConstructSsi(JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB,HOST> fSsi)
+	public void postConstructSsi(JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{
 		this.fSsi=fSsi;
 		sbhLink.setList(fSsi.allOrderedPositionVisible(fbSsi.getClassStatus()));
@@ -131,16 +135,20 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		datas.clear();
 		thLink.clear();
 		
-		if(Objects.nonNull(refA))
+		EjbIoSsiQuery<CONTEXT,STATUS,ERROR> query = new EjbIoSsiQuery<>();
+		query.add(ssiProcessor.getMapping());
+		query.add(CqId.isValue(refA, CqId.path(JeeslIoSsiData.Attributes.refA)));
+		
+		if(Objects.nonNull(refA)) 
 		{
 			ATTRIBUTE a = fbSsi.ejbAttribute().build(ssiProcessor.getMapping()); a.setId(refA);
 			datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected(),a));
-			thLink.init(fSsi.tpIoSsiLinkForMapping(ssiProcessor.getMapping(),a));
+			thLink.init(fSsi.tpIoSsiStatus(query));
 		}
 		else
 		{
 			datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected()));
-			thLink.init(fSsi.tpIoSsiLinkForMapping(ssiProcessor.getMapping()));
+			thLink.init(fSsi.tpIoSsiStatus(query));
 		}
 		
 //		logger.info("List: "+AbstractLogMessage.reloaded(cJson, datas));

@@ -1,6 +1,9 @@
 package org.jeesl.model.ejb.io.db;
 
 import java.io.Serializable;
+import java.util.Objects;
+
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public class CqId implements Serializable
 {
@@ -13,8 +16,17 @@ public class CqId implements Serializable
 	private final String path; public String getPath() {return path;}
 
 	public static CqId isValue(Long id, String path) {return new CqId(Type.IsValue,id,path);}
-//	public static CqId dbIsEqualOrAfter(LocalDate date, String path) {return new CqId(Type.DbIsEqualOrAfter,date,path);}
-//	public static CqId dbIsEqual(LocalDate date, String path) {return new CqId(Type.DbIsEqual,date,path);}
+	public static CqId value(Long id, String path)
+	{
+		if(Objects.isNull(id)) {return new CqId(Type.IsNull,id,path);}
+		else {return new CqId(Type.IsValue,id,path);}
+	}
+	public static <T extends EjbWithId> CqId value(T t, String path)
+	{
+		if(Objects.isNull(t)) {return new CqId(Type.IsNull,null,path);}
+		else {return new CqId(Type.IsValue,t.getId(),path);}
+	}
+	public static CqId empty(String path) {return new CqId(Type.IsNull,null,path);}
 
 	private CqId(Type type, Long id, String path)
 	{

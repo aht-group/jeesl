@@ -17,7 +17,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 @DownloadJeeslData
 public interface JeeslJobStatus <L extends JeeslLang, D extends JeeslDescription,
-									S extends JeeslStatus<L,D,S>,G extends JeeslGraphic<?,?,?>>
+									S extends JeeslStatus<L,D,S>,
+									G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>,JeeslStatusFixedCode
 {
