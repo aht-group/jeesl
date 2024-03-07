@@ -9,19 +9,19 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbNonUniquieCodeCache <T extends EjbWithNonUniqueCode>
+public class EjbNonUniqueCodeCache <T extends EjbWithNonUniqueCode>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbNonUniquieCodeCache.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbNonUniqueCodeCache.class);
 	
 	private final Map<String,T> map; public Map<String, T> getMap() {return map;}
 	
-	public static <T extends EjbWithNonUniqueCode> EjbNonUniquieCodeCache<T> instance() {return new EjbNonUniquieCodeCache<>();}
-	public EjbNonUniquieCodeCache()
+	public static <T extends EjbWithNonUniqueCode> EjbNonUniqueCodeCache<T> instance() {return new EjbNonUniqueCodeCache<>();}
+	public EjbNonUniqueCodeCache()
 	{
 		map = new HashMap<>();
 	}
 	
-	public EjbNonUniquieCodeCache<T> addAll(List<T> list)
+	public EjbNonUniqueCodeCache<T> addAll(List<T> list)
 	{
 		map.clear();
 		for(T t : list) {map.put(t.getCode(),t);}

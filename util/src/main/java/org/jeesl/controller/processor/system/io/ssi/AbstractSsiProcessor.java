@@ -30,7 +30,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.db.cache.EjbCodeCache;
-import org.jeesl.util.db.cache.EjbNonUniquieCodeCache;
+import org.jeesl.util.db.cache.EjbNonUniqueCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +58,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	
 	protected final EjbCodeCache<STATUS> cacheLink; public EjbCodeCache<STATUS> getCacheLink() {return cacheLink;}
 	protected final EjbCodeCache<JOB> cacheJob; //public EjbCodeCache<JOB> getCacheJob() {return cacheJob;}
-	protected final EjbNonUniquieCodeCache<ERROR> cacheError;
+	protected final EjbNonUniqueCodeCache<ERROR> cacheError;
 	
 	protected CONTEXT context; @Override public CONTEXT getMapping() {return context;}
 	private final String localeCode;
@@ -73,7 +73,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		
 		this.initMappings();
 		
-		cacheError = EjbNonUniquieCodeCache.instance();
+		cacheError = EjbNonUniqueCodeCache.instance();
 		cacheError.addAll(fSsi.allForParent(fbSsi.getClassError(),context));
 		
 		jec = BucketSizeCounter.instance();

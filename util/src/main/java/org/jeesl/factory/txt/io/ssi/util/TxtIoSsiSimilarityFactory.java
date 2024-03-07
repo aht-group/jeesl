@@ -15,7 +15,7 @@ public class TxtIoSsiSimilarityFactory
 	
 	public static List<String> permutations(String input)
 	{
-		logger.info("Permutations of "+input);
+//		logger.info("Permutations of "+input);
 		List<String> result = new ArrayList<>();
 		if(Objects.isNull(input)) {return result;}
 		
@@ -54,7 +54,7 @@ public class TxtIoSsiSimilarityFactory
             for (int i = left; i <= right; i++)
             {
                 swap(permutation, left, i);
-                permute(array, permutation, left + 1, right, result);
+                permute(array, permutation, left+1, right, result);
                 swap(permutation, left, i); // Reset  for next iteration
             }
         }
@@ -78,5 +78,4 @@ public class TxtIoSsiSimilarityFactory
         array[i] = array[j];
         array[j] = temp;
     }
-
 }
