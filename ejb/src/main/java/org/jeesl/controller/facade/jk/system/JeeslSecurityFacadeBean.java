@@ -415,6 +415,23 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return fStaffURD(cStaff,users,roles,domains);
 	}
 	
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, EjbSecurityQuery query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<S> cQ = cB.createQuery(cStaff);
+		Root<S> root = cQ.from(cStaff);
+		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+		
+		cQ.select(root);
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		TypedQuery<S> tQ = em.createQuery(cQ);
+		if(query.getFirstResult()!=null){tQ.setFirstResult(query.getFirstResult());}
+		if(query.getMaxResults()!=null){tQ.setMaxResults(query.getMaxResults());}
+		return tQ.getResultList();
+	}
+	
 	public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffURD(Class<S> cStaff, List<USER> users, List<R> roles, List<D1> domains)
 	{
 		if(users==null && roles==null && domains==null) {return new ArrayList<S>();}

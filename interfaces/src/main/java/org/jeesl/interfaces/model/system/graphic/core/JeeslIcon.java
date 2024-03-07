@@ -28,11 +28,12 @@ public interface JeeslIcon <L extends JeeslLang, D extends JeeslDescription,
 	public enum Network {download,upload}
 	public enum CodeTreeFilter{tfCollapseAll,tfExpandAll,tfExpandTwo,tfExpandThree,tfExpandRelevant}
 	public enum Ejb{ejbUnsaved,jeeslInvisible}
+	public enum Calculation{jeeslFilter}
 	public enum Crud{jeeslDelete}
 	public enum Arrow{jeeslArrowLeft}
 	public enum Information{jeeslMegaphone}
 	public enum Code{jeeslWorkflow}
-	public enum Security{jeeslSecurityUser}
+	public enum Security{jeeslSecurityUser,jeeslPageArea}
 	
 	public static final String jeeslLibIcons = "jeesl/prototype/library-icons.xml";
 }

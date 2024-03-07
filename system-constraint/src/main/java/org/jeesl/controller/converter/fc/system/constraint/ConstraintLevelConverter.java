@@ -1,4 +1,4 @@
-package org.jeesl.controller.converter.forclass.system.constraint;
+package org.jeesl.controller.converter.fc.system.constraint;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;

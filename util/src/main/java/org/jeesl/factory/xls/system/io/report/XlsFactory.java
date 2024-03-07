@@ -90,6 +90,9 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 	private final EjbIoReportColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> efColumn;
 	private final EjbIoReportRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> efRow;
 	private EjbIoReportSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> efSheet;
+	
+	private final XlsColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfColumn;
+	
 	private final TxtIoColumnFactory<COLUMN> tfColumn;
 	private final TxtIoGroupFactory<SHEET,GROUP> tfGroup;
 	
@@ -120,6 +123,8 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
         efRow = fbReport.row();
         tfColumn = fbReport.tfColumn(localeCode);
         tfGroup = fbReport.tfGroup(localeCode);
+        
+        xfColumn = fbReport.xlsColumn();
     }
 	
 	private void init(Workbook wb)
@@ -145,12 +150,12 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 	}
 	
 	public void write(Object report, OutputStream os) throws IOException {write(null,report,os);}
-	public void write(JeeslReport<REPORT> jeeslReport, Object report, OutputStream os) throws IOException
+	public void write(JeeslReport<REPORT> ioReport, Object report, OutputStream os) throws IOException
 	{
 		Map<SHEET,Boolean> mapSheetVisibilityToggle = null; 
 		
 	    SXSSFWorkbook wb = new SXSSFWorkbook(100);
-	    init(wb);
+	    this.init(wb);
 	    
 	    JXPathContext context = JXPathContext.newContext(report);
 	    
@@ -166,24 +171,26 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfStyle = fbReport.xlsStyle(wb,groups,columns,rows);
 			XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell = fbReport.xlsCell(localeCode,xfStyle);
 			XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfRow = fbReport.xlsRow(localeCode,xfCell);
-			XlsColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfColumn = fbReport.xlsColumn();
 			
 			MutableInt rowNr = new MutableInt(0);
-			String sheetName = ioSheet.getName().get(localeCode).getLang();
-			Sheet sheet = XlsSheetFactory.getSheet(wb,sheetName);
+			MutableInt sheetNr = new MutableInt(1);
+			Sheet sheet = XlsSheetFactory.getSheet(wb,ioSheet.getName().get(localeCode).getLang());
 			xfColumn.trackWidth(sheet, columns);
 			
 			for(ROW ioRow : rows)
 			{
-//				logger.info(ioRow.getPosition()+" "+ioRow.getName().get(localeCode).getLang());
+				logger.info(ioRow.getPosition()+" "+ioRow.getName().get(localeCode).getLang());
 				switch(JeeslReportRowType.Code.valueOf(ioRow.getType().getCode()))
 				{
 					case label: xfRow.label(sheet, rowNr, ioRow); break;
 					case labelValue: xfRow.labelValue(sheet, rowNr, ioRow, context); break;
-					case table: this.applyTable(jeeslReport,context,sheet,rowNr,ioSheet,ioRow,columns,mapDynamicGroups,xfRow,xfCell); break;
+					case table: this.applyTable(ioReport,context,wb,ioSheet,sheet,sheetNr,ioRow,rowNr,columns,mapDynamicGroups,xfRow,xfCell); break;
 					case template: applyTemplate(sheet,rowNr,ioSheet,ioRow,xfCell); break;
 					default: break;
 				}
+				
+				logger.info(rowNr.getValue().toString());
+				
 			}
 			xfColumn.adjustWidth(sheet, columns);
 			
@@ -197,7 +204,9 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 	}
 
 	@SuppressWarnings("unchecked")
-	private void applyTable(JeeslReport<REPORT> jeeslReport, JXPathContext context, Sheet sheet, MutableInt rowNr, SHEET ioSheet, ROW ioRow, List<COLUMN> columns,
+	private void applyTable(JeeslReport<REPORT> jeeslReport, JXPathContext context, SXSSFWorkbook wb,
+							SHEET ioSheet, Sheet poiSheet, MutableInt sheetNr,
+							ROW ioRow, MutableInt rowNr, List<COLUMN> columns,
 							Map<GROUP,List<String>> mapDynamicGroups,
 							XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfRow,
 							XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
@@ -231,21 +240,21 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 
 		switch(implementation)
 		{
-			case model: xfRow.header(sheet,rowNr,ioSheet,mapDynamicGroups,context);break;
-			case flat: xfRow.header(sheet,rowNr,ioSheet,mapDynamicGroups,context);break;
-			case tree: xfRow.headerTree(sheet,rowNr,ioSheet,treeHeader,transformation,transformationHeader);break;
+			case model: xfRow.header(poiSheet,rowNr,ioSheet,mapDynamicGroups,context);break;
+			case flat: xfRow.header(poiSheet,rowNr,ioSheet,mapDynamicGroups,context);break;
+			case tree: xfRow.headerTree(poiSheet,rowNr,ioSheet,treeHeader,transformation,transformationHeader);break;
 		}
 		
 		switch(implementation)
 		{
-			case model: applyDomainTable(context,sheet,rowNr,ioSheet,columns,xfCell);break;
-			case flat: applyDomainTable(context,sheet,rowNr,ioSheet,columns,xfCell);break;
-			case tree: applyTreeTable(tree,treeHeader,sheet,rowNr,ioSheet,columns,xfCell,transformation);break;
+			case model: applyDomainTable(wb,context,ioSheet,poiSheet,sheetNr,rowNr,columns,xfCell); break;
+			case flat: applyDomainTable(wb,context,ioSheet,poiSheet,sheetNr,rowNr,columns,xfCell); break;
+			case tree: applyTreeTable(tree,treeHeader,poiSheet,rowNr,ioSheet,columns,xfCell,transformation);break;
 		}
 
         if(efSheet.hasFooters(ioSheet))
         {
-        	Row xlsFooter = sheet.createRow(rowNr.intValue());
+        	Row xlsFooter = poiSheet.createRow(rowNr.intValue());
         	logger.info(StringUtil.stars());
         	logger.info("Handling Footer");
         	MutableInt columnNr = new MutableInt(0);
@@ -264,7 +273,10 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
         }
 	}
 	
-	private void applyDomainTable(JXPathContext context, Sheet sheet, MutableInt rowNr, SHEET ioSheet, List<COLUMN> columns, XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
+	private void applyDomainTable(SXSSFWorkbook poiWb, JXPathContext context, 
+			SHEET ioSheet, Sheet poiSheet, MutableInt sheetNr,
+			MutableInt rowNr,
+			List<COLUMN> ioColumns, XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
 	{
 		logger.info("Applying Domain Table for "+ioSheet.getQueryTable());
 		
@@ -273,14 +285,14 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 		logger.debug("Beginning iteration");
         while (iterator.hasNext())
         {
-        	Row xlsRow = sheet.createRow(rowNr.intValue());
+        	Row xlsRow = poiSheet.createRow(rowNr.intValue());
         	
             Pointer pointer = iterator.next();
 			if (logger.isTraceEnabled()) {logger.info("Got pointer: " +pointer.getValue().getClass());}
 			JXPathContext relativeContext = context.getRelativeContext(pointer);
 			
 			MutableInt columnNr = new MutableInt(0);
-			for(COLUMN ioColumn : columns)
+			for(COLUMN ioColumn : ioColumns)
 			{
 //				logger.info(tfColumn.position(ioColumn)+" "+columnNr.intValue()+" "+ioColumn.getGroup().getQueryColumns());
 				
@@ -300,7 +312,17 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 				}
 			}
 			rowNr.add(1);
+			
+			if(rowNr.getValue()>1048500)
+			{
+				xfColumn.adjustWidth(poiSheet,ioColumns);
+				poiSheet = XlsSheetFactory.getSheet(poiWb,ioSheet.getName().get(localeCode).getLang()+"."+sheetNr.incrementAndGet());
+				xfColumn.trackWidth(poiSheet, ioColumns);
+				rowNr.setValue(5);
+			}
+			
         }
+        xfColumn.adjustWidth(poiSheet,ioColumns);
         logger.debug("Completed iteration");
 	}
 	
@@ -332,7 +354,6 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 				for(String p : parents)
 				{
 					xfCell.cell(ioColumn,xlsRow,columnNr,p);
-					
 				}
 				xfCell.cell(ioColumn,xlsRow,columnNr.intValue(),f.getLabel());
 				

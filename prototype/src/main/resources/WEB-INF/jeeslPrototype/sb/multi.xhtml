@@ -11,11 +11,12 @@
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype">
 	
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
+	<c:set var="orientation" value="#{empty orientation ? 'right' : orientation}" />
 	<c:set var="counter"  value="#{not empty counter ? counter : false}" />
 	<c:set var="headerIcons"  value="#{not empty headerIcons ? headerIcons : false}" />
 	<c:set var="listIcons"  value="#{not empty listIcons ? listIcons : false}" />
 
-	<jp:sbItem orientation="right" childs="#{handler.list}" styleClass="jeesl-menu-bar-dropdown" multi="true" rendered="#{rendered}">
+	<jp:sbItem orientation="#{orientation}" childs="#{handler.list}" styleClass="jeesl-menu-bar-dropdown" multi="true" rendered="#{rendered}">
 		<f:facet name="label">
 			<jtp:symbolizer rendered="#{not empty icon}" value="#{icon}" styleClass="jeesl-menu-bar-button-icon"/>
 			<h:outputText rendered="#{not empty label}" value="#{label}" styleClass="jeesl-menu-bar-button-label"/>

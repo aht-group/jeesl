@@ -151,11 +151,15 @@
 	</tag>
 	
 	<tag>
+        <tag-name>rowFilterRegistry</tag-name>
+        <component><resource-id>systemFilter/rowRegistry.xhtml</resource-id></component>
+	</tag>
+	
+	<tag>
         <tag-name>gridSystemProperty</tag-name>
         <component><resource-id>systemProperty/grid.xhtml</resource-id></component>
 	</tag>
-	
-		<tag>
+	<tag>
         <tag-name>gridSecurityContext</tag-name>
         <component><resource-id>systemSecurity/context.xhtml</resource-id></component>
 	</tag>

@@ -1,0 +1,2 @@
+create table SystemFilter (id  bigserial not null, json text, lastModifiedAt timestamp, position int4 not null, visible boolean not null, lastModifiedBy_id int8, parent_id int8, scope_id int8, type_id int8, user_id int8, primary key (id));
+create table SystemFilterJtLang (filter_id int8 not null, lang_id int8 not null, primary key (filter_id, lang_id));

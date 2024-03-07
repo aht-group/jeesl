@@ -1,5 +1,8 @@
 package org.jeesl.model.ejb.system.filter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -18,6 +21,12 @@ public class SystemFilterScope extends IoStatus implements JeeslFilterScope<IoLa
 {
 	public static final long serialVersionUID=1;
 
+	@Override public List<String> getFixedCodes()
+	{
+		List<String> fixed = new ArrayList<String>();
+		for(JeeslFilterScope.Code code : JeeslFilterScope.Code.values()){fixed.add(code.toString());}
+		return fixed;
+	}
 
 	@Override public boolean equals(Object object) {return (object instanceof SystemFilterScope) ? id == ((SystemFilterScope) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(27,43).append(id).toHashCode();}

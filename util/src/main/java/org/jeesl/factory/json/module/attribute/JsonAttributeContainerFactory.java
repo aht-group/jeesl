@@ -60,6 +60,12 @@ public class JsonAttributeContainerFactory<L extends JeeslLang, D extends JeeslD
 	}
 	
 	public static JsonAttributeContainer build() {return new JsonAttributeContainer();}
+	public static JsonAttributeContainer build(boolean withList)
+	{
+		JsonAttributeContainer json = new JsonAttributeContainer();
+		if(withList) {json.setDatas(new ArrayList<>());}
+		return json;
+	}
 	public static JsonAttributeContainer build(Long id)
 	{
 		JsonAttributeContainer json = JsonAttributeContainerFactory.build();
