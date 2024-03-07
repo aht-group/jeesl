@@ -43,12 +43,8 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	<A extends EjbWithId, B extends EjbWithId> DATA fIoSsiData(CTX mapping, String code, A a, B b) throws JeeslNotFoundException;
 		
 	<T extends EjbWithId> DATA fIoSsiData(CTX mapping, T ejb) throws JeeslNotFoundException;
-
-	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a, B b, Integer maxSize);
-
+	
 	JsonTuples1<STATUS> tpIoSsiStatus(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
-//	<A extends EjbWithId>                      JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a);
-//	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpcIoSsiStatusForContext(CTX mapping, A a, B b);
 	
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<ERROR> tpcIoSsiErrorContext(CTX mapping, A a, B b);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiStatusJobForContext(CTX mapping, A a, B b);
@@ -60,6 +56,7 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	Long cSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
 	List<DATA> fSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
 	List<DATA> fIoSsiData(CTX mapping, List<STATUS> links);
+	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a, B b, Integer maxSize);
 	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a);
 	List<DATA> fSsiDataWithJob1(CTX mapping, STATUS link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
 

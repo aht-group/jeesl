@@ -40,7 +40,7 @@ public class CqId implements Serializable
 		StringBuffer sb = new StringBuffer();
 		sb.append(path);
 		sb.append(" ").append(type.toString());
-		sb.append(" ").append(id.toString());
+		if(Objects.nonNull(id)) {sb.append(" ").append(id.toString());}
 		
 		return sb.toString();
 	}

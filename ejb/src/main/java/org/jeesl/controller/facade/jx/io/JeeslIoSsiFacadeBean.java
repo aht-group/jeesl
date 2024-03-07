@@ -564,6 +564,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 					switch(cq.getType())
 					{
 						case IsValue: predicates.add(cB.equal(eId,cq.getId())); break;
+						case IsNull: predicates.add(cB.isNull(eId)); break;
 						default: logger.error("NYI "+cq.toString());
 					}
 				}
