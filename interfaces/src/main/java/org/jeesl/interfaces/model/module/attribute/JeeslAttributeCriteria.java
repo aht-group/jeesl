@@ -33,10 +33,10 @@ public interface JeeslAttributeCriteria<L extends JeeslLang, D extends JeeslDesc
 					EjbWithLang<L>,EjbWithDescription<D>,
 					JeeslWithTenantSupport<R>
 {
-	public enum Attributes{category,category2,realm,rref,position,type}
+	public enum Attributes{category,realm,rref,position,type}
 	
-	CAT getCategory2();
-	void setCategory2(CAT category2);
+	CAT getCategory();
+	void setCategory(CAT category2);
 	
 	TYPE getType();
 	void setType(TYPE type);
