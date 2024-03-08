@@ -6,12 +6,12 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiContext<?,?>,
-										DATA extends JeeslIoSsiData<MAPPING,?,?,?>,
+public interface SsiMappingProcessor <CONTEXT extends JeeslIoSsiContext<?,?>,
+										DATA extends JeeslIoSsiData<CONTEXT,?,?,?>,
 										JSON extends Object>
 {
 	
-	MAPPING getMapping();
+	CONTEXT getMapping();
 	
 	void initMappings();
 	

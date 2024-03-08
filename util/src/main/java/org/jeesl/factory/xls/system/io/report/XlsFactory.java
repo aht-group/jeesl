@@ -179,7 +179,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			
 			for(ROW ioRow : rows)
 			{
-				logger.info(ioRow.getPosition()+" "+ioRow.getName().get(localeCode).getLang());
+				logger.trace(ioRow.getPosition()+" "+ioRow.getName().get(localeCode).getLang());
 				switch(JeeslReportRowType.Code.valueOf(ioRow.getType().getCode()))
 				{
 					case label: xfRow.label(sheet, rowNr, ioRow); break;
@@ -191,7 +191,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			}
 			xfColumn.adjustWidth(sheet, columns);
 			
-			logger.info(rowNr.getValue().toString());
+			logger.trace(rowNr.getValue().toString());
 			
 //			applyHeader(sheet,ioSheet,report);
 //			exportSheet(sheet,report,ioSheet,null);

@@ -208,22 +208,22 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	{
 		logger.warn("This method needs to be implemented in child class"); return data;
 	}
-	protected void importData(DATA data, JSON json) throws IOException, JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
-	{
-		logger.warn("This method needs to be implemented in child class");
-	}
 	
 	@Override public void linkData(List<DATA> datas)
 	{
+		logger.info("Linking "+datas.size()+" "+fbSsi.getClassData());
 		for(DATA data : datas)
 		{
-			
 			if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiStatus.Code.possible)))
 			{
 				try {importData(data,JsonUtil.read(this.getClassJson(),data.getJson()));}
 				catch (IOException | JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e){e.printStackTrace();}
 			}
 		}
+	}
+	protected void importData(DATA data, JSON json) throws IOException, JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	{
+		logger.warn("This method needs to be implemented in child class");
 	}
 	
 	protected <E extends Enum<E>> void applyError(StringBuilder sb, E code, DATA data, Object... substitutions)
