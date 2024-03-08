@@ -29,13 +29,13 @@ public interface JeeslAttributeSet <L extends JeeslLang, D extends JeeslDescript
 				EjbWithLang<L>,EjbWithDescription<D>,
 				JeeslWithTenantSupport<R>
 {
-	public enum Attributes{category,category2,refId,position}
+	public enum Attributes{category2,refId,position}
 	
 //	Long getRefId();
 //	void setRefId(Long refId);
 
-	CAT getCategory2();
-	void setCategory2(CAT category2);
+	CAT getCategory();
+	void setCategory(CAT category);
 	
 	List<ITEM> getItems();
 	void setItems(List<ITEM> items);
