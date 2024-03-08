@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class JsonAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									
 									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
 									TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,

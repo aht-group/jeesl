@@ -49,7 +49,7 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 								CDATA extends JeeslMdcData<COLLECTION,ACON>,
 								
 								CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+								
 								CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,ASET>,
 								TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 								OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
@@ -70,8 +70,8 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 	private final EjbAttributeContainerFactory<ASET,ACON> efAttributeContainer;
 	private final EjbAttributeDataFactory<CRITERIA,OPTION,ACON,ADATA> efAttributeData;
 	
-	private final JsonAttributeSetFactory<L,D,LOC,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,ASET,AITEM> jfAttributeSet;
-	private final JsonAttributeContainerFactory<L,D,LOC,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> jfAttributeContainer;
+	private final JsonAttributeSetFactory<L,D,LOC,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM> jfAttributeSet;
+	private final JsonAttributeContainerFactory<L,D,LOC,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> jfAttributeContainer;
 	
 	
 	public MdcJsonRestHandler(MdcFactoryBuilder<L,D,LOC,?,COLLECTION,SCOPE,STATUS,CDATA,ASET,ACON> fbMdc,

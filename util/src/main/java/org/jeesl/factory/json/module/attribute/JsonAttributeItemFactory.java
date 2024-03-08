@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class JsonAttributeItemFactory<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									
 									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
 									TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
@@ -30,7 +30,7 @@ public class JsonAttributeItemFactory<L extends JeeslLang, D extends JeeslDescri
 	final static Logger logger = LoggerFactory.getLogger(JsonAttributeItemFactory.class);
 	
 	private final JsonAttributeItem q;
-	private JsonAttributeCriteriaFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM> jfCriteria;
+	private JsonAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM> jfCriteria;
 	
 	public JsonAttributeItemFactory(String localeCode, JsonAttributeItem q)
 	{
