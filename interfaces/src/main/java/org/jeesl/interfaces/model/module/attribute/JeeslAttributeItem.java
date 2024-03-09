@@ -16,7 +16,7 @@ public interface JeeslAttributeItem <CRITERIA extends JeeslAttributeCriteria<?,?
 									SET extends JeeslAttributeSet<?,?,?,?,?>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbWithPositionVisibleParent,EjbRemoveable,EjbWithNonUniqueCode
 {
-	public enum Attributes{item,criteria}
+	public enum Attributes{set,criteria}
 	
 	SET getSet();
 	void setSet(SET set);
