@@ -140,7 +140,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		Expression<Long> eRref = root.get(JeeslWithTenantSupport.Attributes.rref.toString());
 		predicates.add(cB.equal(eRref,rref.getId()));
 		
-		Join<SET,CAT> jCategory = root.join(JeeslAttributeSet.Attributes.category2.toString());
+		Join<SET,CAT> jCategory = root.join(JeeslAttributeSet.Attributes.category.toString());
 		predicates.add(jCategory.in(categories));
 		
 		Path<Integer> pPosition = root.get(JeeslAttributeSet.Attributes.position.toString());

@@ -118,7 +118,7 @@
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.item.tableHeader}"/>
 						
 						<p:outputLabel value="#{msg.jeeslIoAttributeSetShort}"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.item.itemSet}" effect="fade" autoWidth="false">
+						<p:selectOneMenu value="#{cc.attrs.bean.item.set}" effect="fade" autoWidth="false">
 							<f:selectItems value="#{cc.attrs.bean.sets}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
