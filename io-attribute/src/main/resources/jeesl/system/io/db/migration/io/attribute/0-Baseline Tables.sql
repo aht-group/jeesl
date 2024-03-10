@@ -1,0 +1,10 @@
+create table IoAttributeCriteria (id  bigserial not null, allowEmpty boolean, code varchar(255), position int4 not null, rref int8 not null, visible boolean not null, category_id int8, nested_id int8, realm_id int8, type_id int8, primary key (id));
+create table IoAttributeCriteriaJtDescription (criteria_id int8 not null, description_id int8 not null, primary key (criteria_id, description_id));
+create table IoAttributeCriteriaJtLang (criteria_id int8 not null, lang_id int8 not null, primary key (criteria_id, lang_id));
+create table IoAttributeItem (id  bigserial not null, code varchar(255), position int4 not null, remark text, tableHeader boolean, visible boolean not null, criteria_id int8, set_id int8, primary key (id));
+create table IoAttributeOption (id  bigserial not null, code varchar(255), position int4 not null, criteria_id int8, primary key (id));
+create table IoAttributeOptionJtDescription (option_id int8 not null, description_id int8 not null, primary key (option_id, description_id));
+create table IoAttributeOptionJtLang (option_id int8 not null, lang_id int8 not null, primary key (option_id, lang_id));
+create table IoAttributeSet (id  bigserial not null, code varchar(255), position int4 not null, rref int8 not null, category_id int8, realm_id int8, primary key (id));
+create table IoAttributeSetJtDescription (set_id int8 not null, description_id int8 not null, primary key (set_id, description_id));
+create table IoAttributeSetJtLang (set_id int8 not null, lang_id int8 not null, primary key (set_id, lang_id));

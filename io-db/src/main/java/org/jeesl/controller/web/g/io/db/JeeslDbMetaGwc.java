@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbConstraintComparator;
@@ -22,6 +23,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.factory.sql.psql.SqlConstraintFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
@@ -33,6 +35,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaDifference;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSqlAction;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -43,6 +46,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
+import org.jeesl.model.ejb.io.db.meta.IoDbMetaTable;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +62,8 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,CUN>,
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
-								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>
+								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>,
+								SQL extends JeeslDbMetaSqlAction<L,D,SQL,?>
 >
 					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements SbSingleBean,ThMultiFilterBean
@@ -66,7 +71,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbMetaGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF,SQL> fbDb;
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb;
 	private final JeeslIoDbMetaCallback callback;
@@ -76,8 +81,12 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private final ThMultiFilterHandler<DIFF> thFilterTable; public ThMultiFilterHandler<DIFF> getThFilterTable() {return thFilterTable;}
 	private final ThMultiFilterHandler<DIFF> thFilterColumn; public ThMultiFilterHandler<DIFF> getThFilterColumn() {return thFilterColumn;}
 	private final ThMultiFilterHandler<DIFF> thFilterConstraint; public ThMultiFilterHandler<DIFF> getThFilterConstraint() {return thFilterConstraint;}
+	private final ThMultiFilterHandler<SQL> thAction; public ThMultiFilterHandler<SQL> getThAction() {return thAction;}
+	
+	private final SqlConstraintFactory<TAB,CON> sfConstraint;
 	
 	private final EjbCodeCache<DIFF> cacheDiff;
+	private final EjbCodeCache<CONT> cacheType;
 	
 	private final Comparator<SNAP> cpSnapshot;
 	private final Comparator<TAB> cpTable;
@@ -88,13 +97,17 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private final Map<TAB,DIFF> mapDiffTable; public Map<TAB, DIFF> getMapDiffTable() {return mapDiffTable;}
 	private final Map<COL,DIFF> mapDiffColumn; public Map<COL,DIFF> getMapDiffColumn() {return mapDiffColumn;}
 	private final Map<CON,DIFF> mapDiffConstraint; public Map<CON,DIFF> getMapDiffConstraint() {return mapDiffConstraint;}
+	private final Map<TAB,List<String>> mapAction; public Map<TAB,List<String>> getMapAction() {return mapAction;}
 	
 	private final Set<TAB> setSourceTable, setTargetTable;
 	private final Set<COL> setSourceColumn, setTargetColumn;
 	private final Set<CON> setSourceConstraint, setTargetConstraint;
 	
 	private final List<SNAP> snapshots; public List<SNAP> getSnapshots() {return snapshots;}
-	private final List<TAB> systemTables; private final List<TAB> snapshotTables; public List<TAB> getSnapshotTables() {return snapshotTables;}
+	private final List<TAB> systemTables;
+	private final List<TAB> snapshotTables; public List<TAB> getSnapshotTables() {return snapshotTables;}
+	private List<TAB> filteredTables; public void setFilteredTables(List<TAB> filteredTables) {this.filteredTables = filteredTables;}
+	public List<TAB> getFilteredTables() {return filteredTables;}
 	private final List<COL> systemColumn;
 	private final List<CON> systemConstraints;
 	
@@ -102,7 +115,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private SNAP snapshotSource; public SNAP getSnapshotSource() {return snapshotSource;} public void setSnapshotSource(SNAP snapshotSource) {this.snapshotSource = snapshotSource;}
 	private SNAP snapshotTarget; public SNAP getSnapshotTarget() {return snapshotTarget;} public void setSnapshotTarget(SNAP snapshotTarget) {this.snapshotTarget = snapshotTarget;}
 
-	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb)
+	private String sqlClipboard; public String getSqlClipboard() {return sqlClipboard;} public void setSqlClipboard(String sqlClipboard) {this.sqlClipboard = sqlClipboard;}
+	
+	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF,SQL> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.callback = callback;
@@ -113,8 +128,12 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		thFilterTable = new ThMultiFilterHandler<>(this);
 		thFilterColumn = new ThMultiFilterHandler<>(this);
 		thFilterConstraint = new ThMultiFilterHandler<>(this);
+		thAction = new ThMultiFilterHandler<>(this);
+		
+		sfConstraint = fbDb.sqlConstraint();
 		
 		cacheDiff = EjbCodeCache.instance(fbDb.getClassDifference());
+		cacheType= EjbCodeCache.instance(fbDb.getClassConstraintType());
 		
 		cpSnapshot = new EjbWithRecordJtComparator<SNAP>().factory(EjbWithRecordJtComparator.Type.dsc); 
 		cpTable = new EjbIoDbTableComparator<TAB>().instance(EjbIoDbTableComparator.Type.code);
@@ -125,6 +144,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		mapDiffTable = new HashMap<>();
 		mapDiffColumn = new HashMap<>();
 		mapDiffConstraint = new HashMap<>();
+		mapAction = new HashMap<>();
 		
 		setSourceTable = new HashSet<>(); setTargetTable = new HashSet<>();
 		setSourceColumn = new HashSet<>(); setTargetColumn = new HashSet<>();
@@ -147,12 +167,14 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		thFilterTable.setList(fDb.all(fbDb.getClassDifference()));
 		thFilterColumn.setList(fDb.all(fbDb.getClassDifference()));
 		thFilterConstraint.setList(fDb.all(fbDb.getClassDifference()));
+		thAction.setList(fDb.all(fbDb.getClassSql()));
 		
 		thFilterTable.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
 		thFilterColumn.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
 		thFilterConstraint.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
 		
 		cacheDiff.facade(fDb);
+		cacheType.facade(fDb);
 		
 		this.reloadSystem();
 		this.reloadSnapshot();
@@ -164,12 +186,14 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		this.reloadSystem();
 		this.reloadSnapshot();
 		this.reloadFilter();
+		this.reloadSqlAction();
 	}
 	
 	@Override public void filtered(ThMultiFilter filter) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info("Received "+filter.getClass().getSimpleName());
-		this.reloadFilter();
+		if(filter.equals(thAction)) {this.reloadSqlAction();}
+		else {this.reloadFilter();}
 	}
 	
 	public void reloadSystem()
@@ -213,6 +237,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		snapshot=null;
 		this.reloadSnapshot();
 		this.reloadFilter();
+		this.reloadSqlAction();
 	}
 	public void saveSource() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
@@ -235,6 +260,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		snapshot=null;
 		this.reloadSnapshot();
 		this.reloadFilter();
+		this.reloadSqlAction();
 	}
 	public void saveTarget() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
@@ -351,5 +377,129 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		for(List<CON> l : mapConstraint.values()) {Collections.sort(l,cpConstraint);}
 		logger.info("reloadedFilter()");
 		logger.info("\t"+fbDb.getClassConstraint().getSimpleName()+": System:"+systemConstraints.size()+" filter:"+mapConstraint.size());
+	}
+	
+	public void reloadSqlAction()
+	{
+		if(Objects.nonNull(filteredTables)) {logger.info("Filtered :"+filteredTables.size());}
+		logger.info("Reloading Actions ");
+		mapAction.clear();
+		
+		for(TAB t : this.getSnapshotTables())
+		{
+			List<String> sqlFkDropSrc = new ArrayList<>();
+			List<String> sqlFkRenameSrcToDst = new ArrayList<>();
+			
+			boolean processTable = true;
+//			processTable = t.getCode().startsWith("ioattribute");
+//			processTable = t.getId()==1730;
+			if(processTable && this.getMapConstraint().containsKey(t))
+			{
+				logger.trace(IoDbMetaTable.class.getSimpleName()+" "+t.toString());
+				List<CON> constraints = this.getMapConstraint().get(t);
+				for(CON c : constraints)
+				{
+					if(this.constraintMatches(c,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.both))
+					{
+						logger.trace("Drop duplicate Src.FK if this is availabel in both Snapshots");
+						sqlFkDropSrc.addAll(sfConstraint.drop(this.toOtherConstraint(c,constraints,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.deleted)));
+					}
+					if(this.constraintMatches(c,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.added))
+					{
+						logger.trace("Rename Src.FK to be aligned with added FK");
+						List<CON> others = this.toOtherConstraint(c,constraints,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.deleted);
+						if(others.size()>0) {sqlFkRenameSrcToDst.add(sfConstraint.rename(others.get(0),c));}
+						if(others.size()>1) {sqlFkRenameSrcToDst.addAll(sfConstraint.drop(others.subList(1,others.size())));}
+					}
+					if(this.constraintMatches(c,JeeslDbMetaConstraintType.Code.uk,JeeslDbMetaDifference.Code.both))
+					{
+//						if(t.getId()==177)
+						{
+							logger.trace(c.getCode());
+							CON cNew = null;
+							if(Objects.nonNull(cNew))
+							{
+								StringBuilder sb = new StringBuilder();
+								sb.append("ALTER TABLE ").append(t.getCode());
+								
+								{
+									sb.append(" RENAME CONSTRAINT ");
+									sb.append(c.getCode());
+									sb.append(" TO ").append(cNew.getCode());
+									
+								}
+								
+								{
+									sb.append(" DROP CONSTRAINT IF EXISTS ");
+									sb.append(c.getCode());
+								}
+								sb.append(";");
+								System.out.println(sb.toString());
+							}
+						}
+					}
+				}
+			}
+			
+			List<String> list = new ArrayList<>();
+			for(SQL sql : thAction.getSelected())
+			{
+				switch(JeeslDbMetaSqlAction.Code.valueOf(sql.getCode()))
+				{
+				case fkRenameSrcToDst: list.addAll(sqlFkRenameSrcToDst); break;
+					case fkDropDuplicate: list.addAll(sqlFkDropSrc); break;
+					
+					default: break;
+				}
+			}
+			mapAction.put(t,list);
+		}
+		sqlToClipboard();
+	}
+	
+	private boolean constraintMatches(CON c, JeeslDbMetaConstraintType.Code type, JeeslDbMetaDifference.Code difference)
+	{
+		return cacheType.equals(c.getType(),type)
+			&& cacheDiff.equals(this.getMapDiffConstraint().get(c),difference);
+	}
+	private List<CON> toOtherConstraint(CON constraint, List<CON> list, JeeslDbMetaConstraintType.Code type, JeeslDbMetaDifference.Code difference)
+	{
+		List<CON> others = new ArrayList<>();
+		for(CON other : list)
+		{
+			if(cacheType.equals(other.getType(),type) && !constraint.equals(other))
+			{
+				logger.trace(other.getTable().getCode()+" "+other.getType().getCode()+" "+other.getCode());
+				if(constraint.getColumnLocal().equals(other.getColumnLocal())
+					&& constraint.getColumnRemote().equals(other.getColumnRemote())
+					&& cacheDiff.equals(mapDiffConstraint.get(other),difference))
+				{
+					others.add(other);
+				}
+			}
+		}
+		return others;
+	}
+	
+	public void sqlToClipboard()
+	{
+		List<String> list = new ArrayList<>();
+		logger.info("sqlToClipboard ");
+		if(Objects.isNull(filteredTables))
+		{
+			for(TAB t : snapshotTables)
+			{
+				if(mapAction.containsKey(t)) {list.addAll(mapAction.get(t));}
+			}
+		}
+		else
+		{
+			for(TAB t : filteredTables)
+			{
+				if(mapAction.containsKey(t)) {list.addAll(mapAction.get(t));}
+			}
+		}
+		sqlClipboard = String.join("\n",list);
+		logger.info(sqlClipboard);
 	}
 }

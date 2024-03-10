@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:of="http://omnifaces.org/functions"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ofx="http://www.openfuxml.org/jsf"
 	xmlns:composite="http://java.sun.com/jsf/composite">
@@ -49,8 +49,10 @@
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteSource()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetSource()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.snapshot}"/>
 					</f:facet>
-					
 					<j:inputGrid>
+						<jtp:label entity="IoDbMetaSnapshot" code="id"/>
+						<h:outputText value="#{cc.attrs.ctrl.snapshotSource.id}"/>
+						
 						<jtp:label entity="IoDbMetaSnapshot" code="record"/>
 						<jp:outputDate value="#{cc.attrs.ctrl.snapshotSource.record}" withSecond="true"/>
 						
@@ -68,8 +70,10 @@
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveTarget()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetTarget()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.snapshot}"/>
 					</f:facet>
-					
 					<j:inputGrid>
+						<jtp:label entity="IoDbMetaSnapshot" code="id"/>
+						<h:outputText value="#{cc.attrs.ctrl.snapshotTarget.id}"/>
+						
 						<jtp:label entity="IoDbMetaSnapshot" code="record"/>
 						<jp:outputDate value="#{cc.attrs.ctrl.snapshotTarget.record}" withSecond="true"/>
 						
@@ -84,17 +88,19 @@
 		<j:slot width="12">
 			<h:form id="fTable">
 				<p:dataTable styleClass="jeesl-datatable"
-							var="t" value="#{cc.attrs.ctrl.snapshotTables}" draggableRows="false">
+							var="t" value="#{cc.attrs.ctrl.snapshotTables}" draggableRows="false" filteredValue="#{cc.attrs.ctrl.filteredTables}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoDbMetaTable" code="listOf">
-							
+							<j:svg id="iClip" type="jeeslClone" onclick="return false;"/>
+							<pe:clipboard trigger="iClip:link" action="copy" text="#{cc.attrs.ctrl.sqlClipboard}"/>
+							<jp:thFilter handler="#{cc.attrs.ctrl.thAction}"/>
 						</j:dtHeader>	
 					</f:facet>
-					<p:column>
+					<p:column filterBy="#{t.id}" filterMatchMode="exact" filterStyle="#{appSettingsBean.fs50}">
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="id"/></f:facet>
 						<h:outputText value="#{t.id}"/>
 					</p:column>
-					<p:column>
+					<p:column filterBy="#{t.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.fs50}">
 						<f:facet name="header">
 							<jtp:label entity="IoDbMetaTable" code="code"/>
 							<jp:thFilter handler="#{cc.attrs.ctrl.thFilterTable}"/>
@@ -124,15 +130,12 @@
 								<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="5"/>		
 						      <h:outputText value="#{c.code}"/>
 						   </h:column>
-						   
 						   <h:column>
 						     <h:outputText value="#{c.columnLocal.code}"/>
 						   </h:column>
-						   
 						   <h:column>
 						     <h:outputText value="#{c.columnRemote.table.code}"/>
 						   </h:column>
-						   
 						    <h:column>
 						     <h:outputText value="#{c.columnRemote.code}"/>
 						   </h:column>
@@ -155,7 +158,14 @@
 								<br/>
 							</ui:repeat>
 						</ui:fragment>
-						
+					</p:column>
+					<p:column rendered="#{cc.attrs.ctrl.thAction.hasSelected}">
+						<f:facet name="header">
+							<jtp:label entity="IoDbMetaSqlAction" code="listOf"/>
+						</f:facet>
+						<ui:repeat var="sql" value="#{cc.attrs.ctrl.mapAction[t]}">
+							<h:outputText value="#{sql}"/><br/>
+						</ui:repeat>
 					</p:column>
 				</p:dataTable>
 			</h:form>

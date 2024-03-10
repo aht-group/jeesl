@@ -6,13 +6,14 @@ import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaUniqueFactory;
-import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
+import org.jeesl.factory.sql.psql.SqlConstraintFactory;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaDifference;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSqlAction;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -30,7 +31,8 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 								CON extends JeeslDbMetaConstraint<MS,TAB,COL,CONT,CUN>,
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
-								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>
+								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>,
+								SQL extends JeeslDbMetaSqlAction<L,D,SQL,?>
 >
 			extends AbstractFactoryBuilder<L,D>
 {
@@ -48,6 +50,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	private final Class<CONT> cConstraintType; public Class<CONT> getClassConstraintType() {return cConstraintType;}
 	private final Class<CUN> cUnique; public Class<CUN> getClassUnique() {return cUnique;}
 	private final Class<DIFF> cDifference; public Class<DIFF> getClassDifference(){return cDifference;}
+	private final Class<SQL> cSql; public Class<SQL> getClassSql(){return cSql;}
 	
 	public IoDbMetaFactoryBuilder(final Class<L> cL, final Class<D> cD,
 							final Class<SYSTEM> cSystem,
@@ -58,7 +61,8 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 							final Class<CON> cConstraint,
 							final Class<CONT> cConstraintType,
 							final Class<CUN> cUnique,
-							final Class<DIFF> cDifference)
+							final Class<DIFF> cDifference,
+							final Class<SQL> cSql)
 	{
 		super(cL,cD);
 		this.cSystem=cSystem;
@@ -71,6 +75,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		this.cConstraintType=cConstraintType;
 		this.cUnique=cUnique;
 		this.cDifference=cDifference;
+		this.cSql=cSql;
 	}
 
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,MS> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
@@ -78,4 +83,6 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	public EjbIoDbMetaColumnFactory<TAB,COL> ejbColumn() {return new EjbIoDbMetaColumnFactory<>(cMetaColumn);}
 	public EjbIoDbMetaConstraintFactory<TAB,CON> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cConstraint);}
 	public EjbIoDbMetaUniqueFactory<COL,CON,CUN> ejbUnique() {return new EjbIoDbMetaUniqueFactory<>(cUnique);}
+	
+	public SqlConstraintFactory<TAB,CON> sqlConstraint() {return new SqlConstraintFactory<>();}
 }

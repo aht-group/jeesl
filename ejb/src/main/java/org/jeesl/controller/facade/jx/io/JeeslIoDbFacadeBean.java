@@ -69,17 +69,17 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
-	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta;
 	private final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway;
 	
 	public JeeslIoDbFacadeBean(EntityManager em,
 								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
-								final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta,
+								final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
 								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway)
 			{this(em,fbDb,fbDbMeta,fbDbFlyway,false);}
 	public JeeslIoDbFacadeBean(EntityManager em,
 								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
-								IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta,
+								IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
 								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway,
 								boolean handleTransaction)
 	{

@@ -17,6 +17,7 @@ import org.jeesl.model.ejb.io.db.meta.IoDbMetaConstraint;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaConstraintType;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaDifference;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaSnapshot;
+import org.jeesl.model.ejb.io.db.meta.IoDbMetaSqlAction;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaTable;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaUnique;
 import org.jeesl.model.ejb.io.db.pg.connection.IoDbConnectionColumn;
@@ -42,7 +43,7 @@ public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestHandler.class);
 	
 	public static IoDbRestHandler instance(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbBackupStatus> fbDb,
-											IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
+											IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference,IoDbMetaSqlAction> fbDbMeta,
 											JeeslIoDbFacade<IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
 											IoSsiSystem system)
 	{
@@ -50,7 +51,7 @@ public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription
 	}
 	
 	private IoDbRestHandler(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbBackupStatus> fbDb,
-							IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
+							IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference,IoDbMetaSqlAction> fbDbMeta,
 							JeeslIoDbFacade<IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
 							IoSsiSystem system)
 	{

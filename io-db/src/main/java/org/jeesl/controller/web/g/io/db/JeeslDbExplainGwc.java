@@ -56,7 +56,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbExplainGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF,?> fbDb;
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb;
 	
@@ -73,7 +73,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 
 	private JsonPostgresExplain explain; public JsonPostgresExplain getExplain() {return explain;} public void setExplain(JsonPostgresExplain explain) {this.explain = explain;}
 	
-	public JeeslDbExplainGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb)
+	public JeeslDbExplainGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF,?> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;

@@ -56,7 +56,8 @@ public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnaps
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("[").append(id).append("|");
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(code);
 		return sb.toString();
 	}
 }
