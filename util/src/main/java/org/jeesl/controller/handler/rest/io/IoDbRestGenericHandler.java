@@ -216,8 +216,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			query.add(eSystem);
 			query.codeList(JsonDbMetaTableFactory.toCodes(snapshot));
 			
-			List<TAB> tables = fDb.fIoDbMetaTables(query);
-			Map<String,TAB> mapTable = EjbCodeFactory.toMapNonUniqueCode(tables);
+			Map<String,TAB> mapTable = EjbCodeFactory.toMapNonUniqueCode(fDb.fIoDbMetaTables(query));
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
 				if(!mapTable.containsKey(jTable.getCode()))
@@ -303,7 +302,11 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 					}
 					else
 					{
-						mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode()));
+						CON c = mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode());
+						
+						
+						
+						mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(),c);
 					}
 				}
 				for(JsonPostgresMetaConstraint jConstraint : jTable.getUniqueKeys())
