@@ -304,6 +304,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 					{
 						CON c = mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode());
 						
+//						efConstraint
 						
 						
 						mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(),c);

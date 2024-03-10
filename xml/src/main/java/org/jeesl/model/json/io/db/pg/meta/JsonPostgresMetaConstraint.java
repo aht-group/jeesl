@@ -25,6 +25,11 @@ public class JsonPostgresMetaConstraint implements Serializable
 	public JsonType getType() {return type;}
 	public void setType(JsonType type) {this.type = type;}
 
+	@JsonProperty("local")
+	private JsonPostgresMetaColumn local;
+	public JsonPostgresMetaColumn getLocal() {return local;}
+	public void setLocal(JsonPostgresMetaColumn local) {this.local = local;}
+
 	@JsonProperty("localColumn")
 	private String localColumn;
 	public String getLocalColumn() {return localColumn;}

@@ -82,10 +82,10 @@ public class DatabaseSnapshotProcessor
 				
 				table.setForeignKeys(new ArrayList<>());
 				ResultSet rsFk = meta.getImportedKeys(null,null, table.getCode());
-				logger.trace("Foreign Keys of "+table.getCode());
+				logger.info("Foreign Keys of "+table.getCode());
 				while(rsFk.next())
 				{
-					for(int i=1;i<=rsFk.getMetaData().getColumnCount();i++){logger.trace(i+" "+rsFk.getMetaData().getColumnName(i)+": "+rsFk.getString(i));}
+					for(int i=1;i<=rsFk.getMetaData().getColumnCount();i++){logger.info(i+" "+rsFk.getMetaData().getColumnName(i)+": "+rsFk.getString(i));}
 					table.getForeignKeys().add(JsonDbMetaConstraintFactory.buildFk(rsFk));
 				}
 				

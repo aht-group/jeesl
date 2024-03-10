@@ -10,8 +10,8 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
-										CON extends JeeslDbMetaConstraint<?,MT,?,?,?>>
+public class EjbIoDbMetaConstraintFactory<TAB extends JeeslDbMetaTable<?,?>,
+										CON extends JeeslDbMetaConstraint<?,TAB,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaConstraintFactory.class);
 	
@@ -22,7 +22,7 @@ public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
         this.cConstraint = cConstraint;
 	}
 	
-	public CON build(MT table, String code)
+	public CON build(TAB table, String code)
 	{
 		CON ejb = null;
 		try
@@ -37,9 +37,9 @@ public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
 		return ejb;
 	}
 	
-	public Map<MT,List<CON>> toMapConstraints(List<CON> list)
+	public Map<TAB,List<CON>> toMapConstraints(List<CON> list)
 	{
-		Map<MT,List<CON>> map = new HashMap<>();
+		Map<TAB,List<CON>> map = new HashMap<>();
 		for(CON c : list)
 		{
 			if(!map.containsKey(c.getTable())) {map.put(c.getTable(), new ArrayList<>());}

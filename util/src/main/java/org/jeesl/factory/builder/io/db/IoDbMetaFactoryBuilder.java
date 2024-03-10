@@ -24,11 +24,11 @@ import org.slf4j.LoggerFactory;
 
 public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,MS>,
-								COL extends JeeslDbMetaColumn<MS,TAB,COLT>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
-								CON extends JeeslDbMetaConstraint<MS,TAB,COL,CONT,CUN>,
+								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,CUN>,
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
 								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>,
@@ -42,7 +42,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSsiSystem() {return cSystem;}
 	
-	private final Class<MS> cSnapshot; public Class<MS> getClassSnapshot(){return cSnapshot;}
+	private final Class<SNAP> cSnapshot; public Class<SNAP> getClassSnapshot(){return cSnapshot;}
 	private final Class<TAB> cTable; public Class<TAB> getClassTable(){return cTable;}
 	private final Class<COL> cMetaColumn; public Class<COL> getClassMetaColumn(){return cMetaColumn;}
 	private final Class<COLT> cColumnType; public Class<COLT> getClassColumnType(){return cColumnType;}
@@ -54,7 +54,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	
 	public IoDbMetaFactoryBuilder(final Class<L> cL, final Class<D> cD,
 							final Class<SYSTEM> cSystem,
-							final Class<MS> cSnapshot,
+							final Class<SNAP> cSnapshot,
 							final Class<TAB> cTable,
 							final Class<COL> cMetaColumn,
 							final Class<COLT> cColumnType,
@@ -78,7 +78,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		this.cSql=cSql;
 	}
 
-	public EjbIoDbMetaSnapshotFactory<SYSTEM,MS> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
+	public EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
 	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cTable);}
 	public EjbIoDbMetaColumnFactory<TAB,COL> ejbColumn() {return new EjbIoDbMetaColumnFactory<>(cMetaColumn);}
 	public EjbIoDbMetaConstraintFactory<TAB,CON> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cConstraint);}
