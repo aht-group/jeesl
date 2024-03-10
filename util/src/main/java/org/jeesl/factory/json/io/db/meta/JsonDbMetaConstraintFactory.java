@@ -13,7 +13,7 @@ public class JsonDbMetaConstraintFactory
 {
 	public static JsonPostgresMetaConstraint buildPk(ResultSet rs) throws IOException, SQLException
 	{
-		return JsonDbMetaConstraintFactory.build(rs.getString("pk_name"),null,rs.getString("column_name"),null,null);
+		return JsonDbMetaConstraintFactory.build(rs.getString("pk_name"),rs.getString("table_name"),rs.getString("column_name"),null,null);
 	}
 	public static JsonPostgresMetaConstraint buildFk(ResultSet rs) throws IOException, SQLException
 	{

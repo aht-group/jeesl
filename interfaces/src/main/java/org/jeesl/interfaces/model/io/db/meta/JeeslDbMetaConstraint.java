@@ -17,7 +17,7 @@ public interface JeeslDbMetaConstraint<SNAP extends JeeslDbMetaSnapshot<?,TAB,?,
 										TAB extends JeeslDbMetaTable<?,SNAP>,
 										COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 										CONT extends JeeslDbMetaConstraintType<?,?,CONT,?>,
-										CUN extends JeeslDbMetaUnique<COL,?>>
+										UNQ extends JeeslDbMetaUnique<COL,?>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 							EjbWithNonUniqueCode,JeeslWithType<CONT>
 {
@@ -35,6 +35,6 @@ public interface JeeslDbMetaConstraint<SNAP extends JeeslDbMetaSnapshot<?,TAB,?,
 	List<SNAP> getSnapshots();
 	void setSnapshots(List<SNAP> snapshots);
 	
-	List<CUN> getUniques();
-	void setUniques(List<CUN> uniques);
+	List<UNQ> getUniques();
+	void setUniques(List<UNQ> uniques);
 }

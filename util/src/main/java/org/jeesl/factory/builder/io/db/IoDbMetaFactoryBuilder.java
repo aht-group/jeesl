@@ -28,9 +28,9 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
-								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,CUN>,
+								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,UNQ>,
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
-								CUN extends JeeslDbMetaUnique<COL,CON>,
+								UNQ extends JeeslDbMetaUnique<COL,CON>,
 								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>,
 								SQL extends JeeslDbMetaSqlAction<L,D,SQL,?>
 >
@@ -48,7 +48,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	private final Class<COLT> cColumnType; public Class<COLT> getClassColumnType(){return cColumnType;}
 	private final Class<CON> cConstraint; public Class<CON> getClassConstraint(){return cConstraint;}
 	private final Class<CONT> cConstraintType; public Class<CONT> getClassConstraintType() {return cConstraintType;}
-	private final Class<CUN> cUnique; public Class<CUN> getClassUnique() {return cUnique;}
+	private final Class<UNQ> cUnique; public Class<UNQ> getClassUnique() {return cUnique;}
 	private final Class<DIFF> cDifference; public Class<DIFF> getClassDifference(){return cDifference;}
 	private final Class<SQL> cSql; public Class<SQL> getClassSql(){return cSql;}
 	
@@ -60,7 +60,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 							final Class<COLT> cColumnType,
 							final Class<CON> cConstraint,
 							final Class<CONT> cConstraintType,
-							final Class<CUN> cUnique,
+							final Class<UNQ> cUnique,
 							final Class<DIFF> cDifference,
 							final Class<SQL> cSql)
 	{
@@ -81,8 +81,8 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
 	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cTable);}
 	public EjbIoDbMetaColumnFactory<TAB,COL> ejbColumn() {return new EjbIoDbMetaColumnFactory<>(cMetaColumn);}
-	public EjbIoDbMetaConstraintFactory<TAB,CON> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cConstraint);}
-	public EjbIoDbMetaUniqueFactory<COL,CON,CUN> ejbUnique() {return new EjbIoDbMetaUniqueFactory<>(cUnique);}
+	public EjbIoDbMetaConstraintFactory<TAB,COL,CON,UNQ> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cConstraint);}
+	public EjbIoDbMetaUniqueFactory<COL,CON,UNQ> ejbUnique() {return new EjbIoDbMetaUniqueFactory<>(cUnique);}
 	
 	public SqlConstraintFactory<TAB,CON> sqlConstraint() {return new SqlConstraintFactory<>();}
 }

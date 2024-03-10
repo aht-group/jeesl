@@ -5,13 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.exlp.util.io.JsonUtil;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
+import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaColumn;
+import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbMetaConstraintFactory<TAB extends JeeslDbMetaTable<?,?>,
-										CON extends JeeslDbMetaConstraint<?,TAB,?,?,?>>
+										COL extends JeeslDbMetaColumn<?,TAB,?>,
+										CON extends JeeslDbMetaConstraint<?,TAB,COL,?,UNQ>,
+										UNQ extends JeeslDbMetaUnique<COL,CON>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaConstraintFactory.class);
 	
@@ -57,5 +65,42 @@ public class EjbIoDbMetaConstraintFactory<TAB extends JeeslDbMetaTable<?,?>,
 			map.get(c.getTable().getCode()).put(c.getCode(), c);
 		}
 		return map;
+	}
+	
+	public boolean equalsPk(CON ejb, JsonPostgresMetaConstraint json)
+	{
+//		JsonUtil.info(json);
+		EqualsBuilder eb = new EqualsBuilder();
+		eb.append(ejb.getCode(),json.getCode());
+		eb.append(ejb.getColumnLocal().getCode(),json.getLocal().getCode());
+		eb.append(ejb.getColumnLocal().getTable().getCode(),json.getLocal().getTable().getCode());
+		return eb.isEquals();
+	}
+	public boolean equalsFk(CON ejb, JsonPostgresMetaConstraint json)
+	{
+//		JsonUtil.info(json);
+		EqualsBuilder eb = new EqualsBuilder();
+		eb.append(ejb.getCode(),json.getCode());
+		eb.append(ejb.getColumnLocal().getCode(),json.getLocal().getCode());
+		eb.append(ejb.getColumnLocal().getTable().getCode(),json.getLocal().getTable().getCode());
+		eb.append(ejb.getColumnRemote().getCode(),json.getRemoteColumn());
+		eb.append(ejb.getColumnRemote().getTable().getCode(),json.getRemoteTable());
+		return eb.isEquals();
+	}
+	public boolean equalsUk(CON ejb, JsonPostgresMetaConstraint json)
+	{
+//		JsonUtil.info(json);
+		EqualsBuilder eb = new EqualsBuilder();
+		eb.append(ejb.getCode(),json.getCode());
+		eb.append(ejb.getUniques().size(),json.getColumns().size());
+		for(int i=0; i<Math.min(ejb.getUniques().size(),json.getColumns().size()); i++)
+		{
+			UNQ eU = ejb.getUniques().get(i);
+			JsonPostgresMetaColumn jU = json.getColumns().get(i);
+			eb.append(eU.getPosition(),jU.getPosition().intValue());
+			eb.append(eU.getColumn().getCode(),jU.getCode());
+		}
+		
+		return eb.isEquals();
 	}
 }

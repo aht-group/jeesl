@@ -23,7 +23,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 
 @Entity
-@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code"}))
+@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code","columnLocal_id","columnRemote_id"}))
 public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraintType,IoDbMetaUnique>
 {
 	public static final long serialVersionUID=1;
@@ -78,7 +78,8 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("[").append(id).append("|");
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(code);
 		return sb.toString();
 	}
 }

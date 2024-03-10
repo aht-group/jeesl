@@ -60,6 +60,9 @@ public class DatabaseSnapshotProcessor
 			if(proceed)
 			{
 				table.setColumns(new ArrayList<>());
+				table.setPrimaryKeys(new ArrayList<>());
+				table.setForeignKeys(new ArrayList<>());
+				
 				logger.trace("Columns of "+table.getCode());
 				ResultSet rsColumn = meta.getColumns(null,null, table.getCode(), null);
 				while(rsColumn.next())
@@ -68,7 +71,7 @@ public class DatabaseSnapshotProcessor
 					table.getColumns().add(JsonDbMetaColumnFactory.build(rsColumn));
 				}
 				
-				table.setPrimaryKeys(new ArrayList<>());
+				
 				Map<String,JsonPostgresMetaConstraint> mapPk = new HashMap<>();
 				ResultSet rsPk = meta.getPrimaryKeys(null, null, table.getCode());
 				logger.trace("Primary Keys of "+table.getCode());
@@ -80,12 +83,12 @@ public class DatabaseSnapshotProcessor
 					table.getPrimaryKeys().add(c);
 				}
 				
-				table.setForeignKeys(new ArrayList<>());
+				
 				ResultSet rsFk = meta.getImportedKeys(null,null, table.getCode());
-				logger.info("Foreign Keys of "+table.getCode());
+				logger.trace("Foreign Keys of "+table.getCode());
 				while(rsFk.next())
 				{
-					for(int i=1;i<=rsFk.getMetaData().getColumnCount();i++){logger.info(i+" "+rsFk.getMetaData().getColumnName(i)+": "+rsFk.getString(i));}
+					for(int i=1;i<=rsFk.getMetaData().getColumnCount();i++){logger.trace(i+" "+rsFk.getMetaData().getColumnName(i)+": "+rsFk.getString(i));}
 					table.getForeignKeys().add(JsonDbMetaConstraintFactory.buildFk(rsFk));
 				}
 				
