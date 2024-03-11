@@ -17,6 +17,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 
 public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
@@ -47,10 +48,10 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	JsonPostgres postgresStatements(String dbName);
 	
 	void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException;
-	List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query);
-	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query);
-	List<CON> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query);
-	List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM,SNAP> query);
+	List<TAB> fIoDbMetaTables(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	List<COL> fIoDbMetaColumns(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	List<CON> fIoDbMetaConstraints(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	List<CUN> fIoDbMetaUniques(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	
 	List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM,SNAP> query);
 }
