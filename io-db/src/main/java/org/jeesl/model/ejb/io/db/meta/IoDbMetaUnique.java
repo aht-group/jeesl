@@ -1,9 +1,11 @@
 package org.jeesl.model.ejb.io.db.meta;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -13,7 +15,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 
 @Entity
-@Table(name="IoDbMetaUnique",uniqueConstraints=@UniqueConstraint(columnNames={"constraint_id","column_id"}))
+@Table(name="IoDbMetaUnique",uniqueConstraints=@UniqueConstraint(name="uk_IoDbMetaUnique_constraint_column",columnNames={"constraint_id","column_id"}))
 public class IoDbMetaUnique implements JeeslDbMetaUnique<IoDbMetaColumn,IoDbMetaConstraint>
 {
 	public static final long serialVersionUID=1;
@@ -25,6 +27,7 @@ public class IoDbMetaUnique implements JeeslDbMetaUnique<IoDbMetaColumn,IoDbMeta
 	@Override public void setId(long id) {this.id = id;}
 	
 	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaUnique_constraint"))
 	private IoDbMetaConstraint constraint;
 	@Override public IoDbMetaConstraint getConstraint() {return constraint;}
 	@Override public void setConstraint(IoDbMetaConstraint constraint) {this.constraint = constraint;}
@@ -35,6 +38,7 @@ public class IoDbMetaUnique implements JeeslDbMetaUnique<IoDbMetaColumn,IoDbMeta
 	@Override public void setPosition(int position) {this.position = position;}
 
 	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaUnique_column"))
 	private IoDbMetaColumn column;
 	@Override public IoDbMetaColumn getColumn() {return column;}
 	@Override public void setColumn(IoDbMetaColumn column) {this.column = column;}
