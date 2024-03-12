@@ -38,7 +38,7 @@ public class IoSsiSimilarity implements JeeslIoSsiSimilarity<IoSsiSystem,SystemJ
 	@Override public void setSystemA(IoSsiSystem systemA) {this.systemA = systemA;}
 	
 	@NotNull @ManyToOne
-	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoSsiSimilarity_systema"))
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoSsiSimilarity_systemb"))
 	private IoSsiSystem systemB;
 	@Override public IoSsiSystem getSystemB() {return systemB;}
 	@Override public void setSystemB(IoSsiSystem systemB) {this.systemB = systemB;}

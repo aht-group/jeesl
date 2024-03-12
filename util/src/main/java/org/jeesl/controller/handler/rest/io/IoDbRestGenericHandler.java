@@ -93,7 +93,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	private final EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> efSnapshot;
 	private final EjbIoDbMetaTableFactory<SYSTEM,TAB> efTable;
 	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
-	private final EjbIoDbMetaConstraintFactory<TAB,COL,CON,UNQ> efConstraint;
+	private final EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> efConstraint;
 	private final EjbIoDbMetaUniqueFactory<COL,CON,UNQ> efUnique;
 
 	private final SYSTEM system;
@@ -301,7 +301,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 					CON eConstraint = null;
 					for(CON c : mapSystemConstraint.get(eTable))
 					{
-						if(cacheConstraintType.equals(c.getType(),JeeslDbMetaConstraintType.Code.fk) && efConstraint.equalsFk(c,jConstraint))
+						if(cacheConstraintType.equals(c.getType(),JeeslDbMetaConstraintType.Code.fk) && efConstraint.equals(c,jConstraint))
 						{
 							eConstraint = c;
 						}

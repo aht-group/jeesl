@@ -24,5 +24,5 @@ public interface JeeslDbMetaSqlAction <L extends JeeslLang, D extends JeeslDescr
 									EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
 									JeeslStatus<L,D,S>
 {	
-	public static enum Code{fkDropDuplicate,fkRenameSrcToDst,ukDropDuplicate,ukRenameSrcToDst};
+	public static enum Code{fk,uk,pk,idx};
 }

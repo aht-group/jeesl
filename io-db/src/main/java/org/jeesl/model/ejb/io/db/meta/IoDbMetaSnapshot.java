@@ -75,7 +75,7 @@ public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMet
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("[").append(id).append("|");
+		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}
 }

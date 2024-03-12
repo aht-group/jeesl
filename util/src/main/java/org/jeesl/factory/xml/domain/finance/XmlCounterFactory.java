@@ -23,6 +23,7 @@ public class XmlCounterFactory
 	public static <E extends Enum<E>> Counter build(E code, long counter) {return create(code.toString(),Long.valueOf(counter).intValue());}
 	
 	public static <C extends EjbWithCode> Counter build(C code, int counter) {return create(code.getCode(),counter);}
+	public static <C extends EjbWithCode> Counter build(C code, long counter) {return create(code.getCode(),Long.valueOf(counter).intValue());}
 	
 	public static <E extends Enum<E>> void add(Figures figures, E code, Long value)
 	{

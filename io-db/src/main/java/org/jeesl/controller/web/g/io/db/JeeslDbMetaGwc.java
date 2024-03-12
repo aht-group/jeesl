@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbConstraintComparator;
@@ -22,6 +21,8 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
+import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
+import org.jeesl.factory.ejb.system.constraint.EjbConstraintFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.sql.psql.SqlConstraintFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
@@ -59,9 +60,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
-								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,CUN>,
+								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,UNQ>,
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
-								CUN extends JeeslDbMetaUnique<COL,CON>,
+								UNQ extends JeeslDbMetaUnique<COL,CON>,
 								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>,
 								SQL extends JeeslDbMetaSqlAction<L,D,SQL,?>
 >
@@ -71,9 +72,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbMetaGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF,SQL> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,UNQ,DIFF,SQL> fbDb;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,UNQ,?> fDb;
 	private final JeeslIoDbMetaCallback callback;
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
@@ -83,6 +84,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private final ThMultiFilterHandler<DIFF> thFilterConstraint; public ThMultiFilterHandler<DIFF> getThFilterConstraint() {return thFilterConstraint;}
 	private final ThMultiFilterHandler<SQL> thAction; public ThMultiFilterHandler<SQL> getThAction() {return thAction;}
 	
+	private final EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> efConstraint;
 	private final SqlConstraintFactory<TAB,CON> sfConstraint;
 	
 	private final EjbCodeCache<DIFF> cacheDiff;
@@ -117,11 +119,13 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 
 	private String sqlClipboard; public String getSqlClipboard() {return sqlClipboard;} public void setSqlClipboard(String sqlClipboard) {this.sqlClipboard = sqlClipboard;}
 	
-	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF,SQL> fbDb)
+	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,UNQ,DIFF,SQL> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.callback = callback;
 		this.fbDb = fbDb;
+		
+		efConstraint = fbDb.ejbConstraint();
 		
 		sbhSystem = new SbSingleHandler<>(fbDb.getClassSsiSystem(),this);
 		
@@ -157,7 +161,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		systemConstraints = new ArrayList<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,UNQ,?> fDb)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb = fDb;
@@ -226,9 +230,10 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		}
 	}
 	
-	public void selectSnapshot()
+	public void selectSnapshot() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(snapshot));
+		if(Objects.isNull(snapshotSource)) {this.magnetSource();}
 	}
 	
 	public void magnetSource() throws JeeslNotFoundException
@@ -277,6 +282,21 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		snapshotTables.clear();
 	}
 	
+	public void flipSnapshots() throws JeeslNotFoundException
+	{
+		if(ObjectUtils.allNotNull(snapshotSource,snapshotTarget))
+		{
+			long idSrc = snapshotSource.getId();
+			long idDst = snapshotTarget.getId();
+			
+			snapshotSource = fDb.find(fbDb.getClassSnapshot(), idDst);
+			snapshotTarget = fDb.find(fbDb.getClassSnapshot(), idSrc);
+		}
+		this.reloadSnapshot();
+		this.reloadFilter();
+		this.reloadSqlAction();
+	}
+	
 	public void reloadSnapshot()
 	{
 		setSourceTable.clear(); setTargetTable.clear();
@@ -322,7 +342,6 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		mapColumn.clear(); mapConstraint.clear();
 		mapDiffTable.clear(); mapDiffColumn.clear(); mapDiffConstraint.clear();
 		
-		Set<DIFF> filter1 = new HashSet<>(thFilterTable.getSelected());
 		for(TAB t : systemTables)
 		{
 			DIFF d = null;
@@ -387,67 +406,75 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		
 		for(TAB t : this.getSnapshotTables())
 		{
+			List<String> sqlPkDropSrc = new ArrayList<>();
+			List<String> sqlPkDropDuplicate = new ArrayList<>();
+			
 			List<String> sqlFkDropSrc = new ArrayList<>();
-			List<String> sqlFkRenameSrcToDst = new ArrayList<>();
+			List<String> sqlFkDropDuplicate = new ArrayList<>();
+			
+			List<String> sqlUkDropSrc = new ArrayList<>();
+			List<String> sqlUkDropDuplicate = new ArrayList<>();
 			
 			boolean processTable = true;
 //			processTable = t.getCode().startsWith("ioattribute");
-//			processTable = t.getId()==1730;
+//			processTable = t.getId()==1943;
 			if(processTable && this.getMapConstraint().containsKey(t))
 			{
-				logger.trace(IoDbMetaTable.class.getSimpleName()+" "+t.toString());
+				logger.info(IoDbMetaTable.class.getSimpleName()+" "+t.toString());
 				List<CON> constraints = this.getMapConstraint().get(t);
 				for(CON c : constraints)
 				{
-					if(this.constraintMatches(c,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.both))
+					if(this.constraintMatches(JeeslDbMetaConstraintType.Code.pk,c,JeeslDbMetaDifference.Code.both))
 					{
-						logger.trace("Drop duplicate Src.FK if this is availabel in both Snapshots");
-						sqlFkDropSrc.addAll(sfConstraint.drop(this.toOtherConstraint(c,constraints,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.deleted)));
+						logger.trace("Drop other (deleted) Src.PK if this PK is availabel in both snapshot.");
+						List<CON> others = this.toOtherConstraint(JeeslDbMetaConstraintType.Code.uk,c,constraints,JeeslDbMetaDifference.Code.deleted);
+//						sqlPkDropDuplicate.addAll(sfConstraint.drop(others));
 					}
-					if(this.constraintMatches(c,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.added))
+					if(this.constraintMatches(JeeslDbMetaConstraintType.Code.pk,c,JeeslDbMetaDifference.Code.added))
+					{
+						logger.trace("Drop other (deleted) Src.PK if this PK is added to snapshot.");
+						List<CON> others = this.toOtherConstraint(JeeslDbMetaConstraintType.Code.pk,c,constraints,JeeslDbMetaDifference.Code.deleted);
+						if(others.size()>0) {sqlPkDropSrc.add(sfConstraint.rename(others.get(0),c));}
+						if(others.size()>1) {sqlPkDropSrc.addAll(sfConstraint.drop(others.subList(1,others.size())));}
+					}
+					
+					if(this.constraintMatches(JeeslDbMetaConstraintType.Code.fk,c,JeeslDbMetaDifference.Code.both))
+					{
+						logger.trace("Drop other (deleted) Src.FK if this is available in both Snapshots");
+						sqlFkDropSrc.addAll(sfConstraint.drop(this.toOtherConstraint(JeeslDbMetaConstraintType.Code.fk,c,constraints,JeeslDbMetaDifference.Code.deleted)));
+					}
+					if(this.constraintMatches(JeeslDbMetaConstraintType.Code.fk,c,JeeslDbMetaDifference.Code.added))
 					{
 						logger.trace("Rename Src.FK to be aligned with added FK");
-						List<CON> others = this.toOtherConstraint(c,constraints,JeeslDbMetaConstraintType.Code.fk,JeeslDbMetaDifference.Code.deleted);
-						if(others.size()>0) {sqlFkRenameSrcToDst.add(sfConstraint.rename(others.get(0),c));}
-						if(others.size()>1) {sqlFkRenameSrcToDst.addAll(sfConstraint.drop(others.subList(1,others.size())));}
+						List<CON> others = this.toOtherConstraint(JeeslDbMetaConstraintType.Code.fk,c,constraints,JeeslDbMetaDifference.Code.deleted);
+						if(others.size()>0) {sqlFkDropDuplicate.add(sfConstraint.rename(others.get(0),c));}
+						if(others.size()>1) {sqlFkDropDuplicate.addAll(sfConstraint.drop(others.subList(1,others.size())));}
 					}
-					if(this.constraintMatches(c,JeeslDbMetaConstraintType.Code.uk,JeeslDbMetaDifference.Code.both))
+					
+					if(this.constraintMatches(JeeslDbMetaConstraintType.Code.uk,c,JeeslDbMetaDifference.Code.both))
 					{
-//						if(t.getId()==177)
-						{
-							logger.trace(c.getCode());
-							CON cNew = null;
-							if(Objects.nonNull(cNew))
-							{
-								StringBuilder sb = new StringBuilder();
-								sb.append("ALTER TABLE ").append(t.getCode());
-								
-								{
-									sb.append(" RENAME CONSTRAINT ");
-									sb.append(c.getCode());
-									sb.append(" TO ").append(cNew.getCode());
-									
-								}
-								
-								{
-									sb.append(" DROP CONSTRAINT IF EXISTS ");
-									sb.append(c.getCode());
-								}
-								sb.append(";");
-								System.out.println(sb.toString());
-							}
-						}
+						logger.info("Drop other (deleted) Src.UK if this is available in both Snapshots");
+						List<CON> others = this.toOtherConstraint(JeeslDbMetaConstraintType.Code.uk,c,constraints,JeeslDbMetaDifference.Code.deleted);
+						sqlUkDropSrc.addAll(sfConstraint.drop(others));
+					}
+					if(this.constraintMatches(JeeslDbMetaConstraintType.Code.uk,c,JeeslDbMetaDifference.Code.added))
+					{
+						logger.trace("Drop other (deleted) Src.UK if this PK is added to snapshot.");
+						List<CON> others = this.toOtherConstraint(JeeslDbMetaConstraintType.Code.uk,c,constraints,JeeslDbMetaDifference.Code.deleted);
+						if(others.size()>0) {sqlUkDropDuplicate.add(sfConstraint.rename(others.get(0),c));}
+						if(others.size()>1) {sqlUkDropDuplicate.addAll(sfConstraint.drop(others.subList(1,others.size())));}
 					}
 				}
 			}
-			
+
 			List<String> list = new ArrayList<>();
 			for(SQL sql : thAction.getSelected())
 			{
 				switch(JeeslDbMetaSqlAction.Code.valueOf(sql.getCode()))
 				{
-				case fkRenameSrcToDst: list.addAll(sqlFkRenameSrcToDst); break;
-					case fkDropDuplicate: list.addAll(sqlFkDropSrc); break;
+					case pk: list.addAll(sqlPkDropSrc); list.addAll(sqlPkDropDuplicate); break;
+					case fk: list.addAll(sqlFkDropSrc); list.addAll(sqlFkDropDuplicate); break;
+					case uk: list.addAll(sqlUkDropSrc); list.addAll(sqlUkDropDuplicate); break;
 					
 					default: break;
 				}
@@ -457,27 +484,23 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		sqlToClipboard();
 	}
 	
-	private boolean constraintMatches(CON c, JeeslDbMetaConstraintType.Code type, JeeslDbMetaDifference.Code difference)
+	private boolean constraintMatches(JeeslDbMetaConstraintType.Code type, CON c, JeeslDbMetaDifference.Code difference)
 	{
-		return cacheType.equals(c.getType(),type)
-			&& cacheDiff.equals(this.getMapDiffConstraint().get(c),difference);
+		return cacheType.equals(c.getType(),type) && cacheDiff.equals(mapDiffConstraint.get(c),difference);
 	}
-	private List<CON> toOtherConstraint(CON constraint, List<CON> list, JeeslDbMetaConstraintType.Code type, JeeslDbMetaDifference.Code difference)
+	private List<CON> toOtherConstraint(JeeslDbMetaConstraintType.Code type, CON constraint, List<CON> list, JeeslDbMetaDifference.Code difference)
 	{
 		List<CON> others = new ArrayList<>();
 		for(CON other : list)
 		{
-			if(cacheType.equals(other.getType(),type) && !constraint.equals(other))
-			{
-				logger.trace(other.getTable().getCode()+" "+other.getType().getCode()+" "+other.getCode());
-				if(constraint.getColumnLocal().equals(other.getColumnLocal())
-					&& constraint.getColumnRemote().equals(other.getColumnRemote())
-					&& cacheDiff.equals(mapDiffConstraint.get(other),difference))
-				{
-					others.add(other);
-				}
-			}
+			boolean eqType = cacheType.equals(other.getType(),type);
+			boolean notSame = !constraint.equals(other);
+			boolean eqContent = efConstraint.equals(constraint,other);
+			boolean matchDiff = cacheDiff.equals(mapDiffConstraint.get(other),difference);
+			logger.info("\t\t"+other.toString()+" eqType:"+eqType+" notSame:"+notSame+" eqContent:"+eqContent+" matchDiff:"+matchDiff);
+			if(eqType && notSame && eqContent && matchDiff) {others.add(other);}
 		}
+		logger.info("\tOthers: "+others.size());
 		return others;
 	}
 	
