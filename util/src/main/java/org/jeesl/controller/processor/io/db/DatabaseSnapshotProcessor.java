@@ -52,8 +52,9 @@ public class DatabaseSnapshotProcessor
 
 		while(rsTable.next())
 		{
+			for(int i=1;i<=rsTable.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsTable.getMetaData().getColumnName(i)+": "+rsTable.getString(i));}
 			JsonPostgresMetaTable table = JsonDbMetaTableFactory.build(rsTable);
-		
+			
 			boolean proceed = true;
 			if(ObjectUtils.isNotEmpty(filteredTables)) {proceed = filteredTables.contains(table.getCode());}
 			

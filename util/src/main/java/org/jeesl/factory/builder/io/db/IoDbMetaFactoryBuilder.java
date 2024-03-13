@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaDifference;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSqlAction;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
@@ -25,7 +26,8 @@ import org.slf4j.LoggerFactory;
 public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
 								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,UNQ>,

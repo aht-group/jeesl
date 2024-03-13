@@ -40,6 +40,7 @@ import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
 import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
@@ -59,29 +60,30 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,?,CUN>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
 								FW extends JeeslIoDbFlyway>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON,CUN,FW>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,SCHEMA,TAB,COL,CON,CUN,FW>
 {
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
-	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,?,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta;
 	private final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway;
 	
 	public JeeslIoDbFacadeBean(EntityManager em,
 								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
-								final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
+								final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,?,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
 								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway)
 			{this(em,fbDb,fbDbMeta,fbDbFlyway,false);}
 	public JeeslIoDbFacadeBean(EntityManager em,
 								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
-								IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
+								IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,?,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
 								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway,
 								boolean handleTransaction)
 	{
@@ -246,6 +248,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 	}
 	
+	@Override
+	public List<SCHEMA> fIoDbMetaSchemas(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override public List<TAB> fIoDbMetaTables(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();

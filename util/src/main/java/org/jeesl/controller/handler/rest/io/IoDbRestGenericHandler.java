@@ -36,6 +36,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
@@ -66,7 +67,8 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 							STATUS extends JeeslDbBackupStatus<L,D,STATUS,?>,
 							
 							SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-							TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+							SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
+							TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 							COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 							COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
 							CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,UNQ>,
@@ -80,11 +82,11 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestGenericHandler.class);
 	
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,UNQ,?,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,SCHEMA,TAB,COL,COLT,CON,CONT,UNQ,?,?> fbDbMeta;
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,?,?,?,?> fbPg;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
-	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,UNQ,?> fDb;
+	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,SCHEMA,TAB,COL,CON,UNQ,?> fDb;
 	
 	private final EjbCodeCache<CONT> cacheConstraintType;
 	
@@ -99,10 +101,10 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	private final SYSTEM system;
 	
 	public IoDbRestGenericHandler(IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb,
-							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,UNQ,?,?> fbDbMeta,
+							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,SCHEMA,TAB,COL,COLT,CON,CONT,UNQ,?,?> fbDbMeta,
 							IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,?,?,?,?> fbdbPg,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
-							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,UNQ,?> fDb,
+							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,SCHEMA,TAB,COL,CON,UNQ,?> fDb,
 							SYSTEM system)
 	{
 		this.fbDb=fbDb;
@@ -140,10 +142,10 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 		catch (JeeslNotFoundException e) {dut.fail(e, true);return dut.toDataUpdate();}
 		
 		HOST eHost;
-		try{eHost = fDb.fByCode(fbDb.getClassDumpHost(), directory.getCode());}
+		try {eHost = fDb.fByCode(fbDb.getClassDumpHost(), directory.getCode());}
 		catch (JeeslNotFoundException e)
 		{
-			try{eHost = fDb.persist(fbSsi.ejbHost().build(system,directory.getCode(),null));}
+			try {eHost = fDb.persist(fbSsi.ejbHost().build(system,directory.getCode(),null));}
 			catch (JeeslConstraintViolationException e1) {dut.fail(e1, true);return dut.toDataUpdate();}
 		}
 		
@@ -212,6 +214,11 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			eSnapshot = fDb.save(eSnapshot);
 			
 			EjbIoDbQuery<SYSTEM,SNAP> query = new EjbIoDbQuery<>();
+			query.add(eSystem);
+			
+//			Map<String,SCHEMA> mapTable = EjbCodeFactory.toMapNonUniqueCode(fDb.fIoDbMetaTables(query));
+			
+			query.reset();
 			query.add(eSystem);
 			query.codeList(JsonDbMetaTableFactory.toCodes(snapshot));
 			

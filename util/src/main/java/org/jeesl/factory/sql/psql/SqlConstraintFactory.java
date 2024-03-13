@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SqlConstraintFactory <TAB extends JeeslDbMetaTable<?,?>,
+public class SqlConstraintFactory <TAB extends JeeslDbMetaTable<?,?,?>,
 									CON extends JeeslDbMetaConstraint<?,TAB,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SqlConstraintFactory.class);

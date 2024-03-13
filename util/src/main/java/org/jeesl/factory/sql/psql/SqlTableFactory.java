@@ -4,7 +4,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SqlTableFactory <TAB extends JeeslDbMetaTable<?,?>>
+public class SqlTableFactory <TAB extends JeeslDbMetaTable<?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SqlTableFactory.class);
 	

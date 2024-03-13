@@ -16,7 +16,7 @@ import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbIoDbMetaConstraintFactory<TAB extends JeeslDbMetaTable<?,?>,
+public class EjbIoDbMetaConstraintFactory<TAB extends JeeslDbMetaTable<?,?,?>,
 										COL extends JeeslDbMetaColumn<?,TAB,?>,
 										CON extends JeeslDbMetaConstraint<?,TAB,COL,?,UNQ>,
 										CONT extends JeeslDbMetaConstraintType<?,?,CONT,?>,

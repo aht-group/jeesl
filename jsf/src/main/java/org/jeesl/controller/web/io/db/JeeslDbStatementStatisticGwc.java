@@ -42,7 +42,7 @@ public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslD
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementStatisticGwc.class);
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,SC,?,?,?> fbDb;
 	
 	private final EjbDbStatementFactory<HOST,ST,SG> efStatement;
@@ -76,7 +76,7 @@ public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslD
 		mapColumn = new HashMap<>();
 	}
 	
-	public void postConstructDbStatement(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb)
+	public void postConstructDbStatement(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		mapColumn.putAll(EjbCodeFactory.toMapCode(fDb.allOrderedPositionVisible(fbDb.getClassStatementColumn())));

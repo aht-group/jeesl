@@ -22,7 +22,6 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
-import org.jeesl.factory.ejb.system.constraint.EjbConstraintFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.sql.psql.SqlConstraintFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
@@ -35,6 +34,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaDifference;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSqlAction;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
@@ -57,7 +57,8 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
 								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,UNQ>,
@@ -72,9 +73,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbMetaGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,UNQ,DIFF,SQL> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,SCHEMA,TAB,COL,COLT,CON,CONT,UNQ,DIFF,SQL> fbDb;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,UNQ,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,SCHEMA,TAB,COL,CON,UNQ,?> fDb;
 	private final JeeslIoDbMetaCallback callback;
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
@@ -119,7 +120,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 
 	private String sqlClipboard; public String getSqlClipboard() {return sqlClipboard;} public void setSqlClipboard(String sqlClipboard) {this.sqlClipboard = sqlClipboard;}
 	
-	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,UNQ,DIFF,SQL> fbDb)
+	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,SCHEMA,TAB,COL,COLT,CON,CONT,UNQ,DIFF,SQL> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.callback = callback;
@@ -161,7 +162,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		systemConstraints = new ArrayList<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,UNQ,?> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,SCHEMA,TAB,COL,CON,UNQ,?> fDb)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb = fDb;
