@@ -53,7 +53,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
 								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
 								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
@@ -67,10 +67,10 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
-	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,?,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta;
 	
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,?,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,?,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta, boolean handleTransaction)
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta, boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 		this.fbDb=fbDb;
@@ -232,12 +232,35 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 	}
 	
-	@Override
-	public List<SCHEMA> fIoDbMetaSchemas(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	@Override public List<SCHEMA> fIoDbMetaSchemas(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<SCHEMA> cQ = cB.createQuery(fbDbMeta.getClassSchema());
+		Root<SCHEMA> root = cQ.from(fbDbMeta.getClassSchema());
+		
+		if(ObjectUtils.isNotEmpty(query.getCodeList()))
+		{
+			Expression<String> eCode = root.get(JeeslDbMetaSchema.Attributes.code.toString());
+			predicates.add(eCode.in(query.getCodeList()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSystems()))
+		{
+			Join<TAB,SYSTEM> jSystem = root.join(JeeslDbMetaSchema.Attributes.system.toString());
+			predicates.add(jSystem.in(query.getSystems()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSnapshots()))
+		{
+			ListJoin<TAB,SNAP> jSnapshot = root.joinList(JeeslDbMetaSchema.Attributes.snapshots.toString());
+			predicates.add(jSnapshot.in(query.getSnapshots()));
+		}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		return em.createQuery(cQ).getResultList();
 	}
+	
 	@Override public List<TAB> fIoDbMetaTables(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();

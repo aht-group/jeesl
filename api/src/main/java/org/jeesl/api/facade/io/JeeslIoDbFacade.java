@@ -26,7 +26,7 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
 								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<?,TAB,?>,

@@ -3,6 +3,7 @@ package org.jeesl.factory.builder.io.db;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
+import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSchemaFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaUniqueFactory;
@@ -25,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
 								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
@@ -44,19 +45,21 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSsiSystem() {return cSystem;}
 	
-	private final Class<SNAP> cSnapshot; public Class<SNAP> getClassSnapshot(){return cSnapshot;}
-	private final Class<TAB> cTable; public Class<TAB> getClassTable(){return cTable;}
-	private final Class<COL> cMetaColumn; public Class<COL> getClassMetaColumn(){return cMetaColumn;}
-	private final Class<COLT> cColumnType; public Class<COLT> getClassColumnType(){return cColumnType;}
-	private final Class<CON> cConstraint; public Class<CON> getClassConstraint(){return cConstraint;}
+	private final Class<SNAP> cSnapshot; public Class<SNAP> getClassSnapshot() {return cSnapshot;}
+	private final Class<SCHEMA> cSchema; public Class<SCHEMA> getClassSchema() {return cSchema;}
+	private final Class<TAB> cTable; public Class<TAB> getClassTable() {return cTable;}
+	private final Class<COL> cMetaColumn; public Class<COL> getClassMetaColumn() {return cMetaColumn;}
+	private final Class<COLT> cColumnType; public Class<COLT> getClassColumnType() {return cColumnType;}
+	private final Class<CON> cConstraint; public Class<CON> getClassConstraint() {return cConstraint;}
 	private final Class<CONT> cConstraintType; public Class<CONT> getClassConstraintType() {return cConstraintType;}
 	private final Class<UNQ> cUnique; public Class<UNQ> getClassUnique() {return cUnique;}
-	private final Class<DIFF> cDifference; public Class<DIFF> getClassDifference(){return cDifference;}
-	private final Class<SQL> cSql; public Class<SQL> getClassSql(){return cSql;}
+	private final Class<DIFF> cDifference; public Class<DIFF> getClassDifference() {return cDifference;}
+	private final Class<SQL> cSql; public Class<SQL> getClassSql() {return cSql;}
 	
 	public IoDbMetaFactoryBuilder(final Class<L> cL, final Class<D> cD,
 							final Class<SYSTEM> cSystem,
 							final Class<SNAP> cSnapshot,
+							final Class<SCHEMA> cSchema,
 							final Class<TAB> cTable,
 							final Class<COL> cMetaColumn,
 							final Class<COLT> cColumnType,
@@ -70,6 +73,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		this.cSystem=cSystem;
 		
 		this.cSnapshot=cSnapshot;
+		this.cSchema=cSchema;
 		this.cTable=cTable;
 		this.cMetaColumn=cMetaColumn;
 		this.cColumnType=cColumnType;
@@ -81,6 +85,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	}
 
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
+	public EjbIoDbMetaSchemaFactory<SYSTEM,SCHEMA> ejbSchema() {return new EjbIoDbMetaSchemaFactory<>(cSchema);}
 	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cTable);}
 	public EjbIoDbMetaColumnFactory<TAB,COL> ejbColumn() {return new EjbIoDbMetaColumnFactory<>(cMetaColumn);}
 	public EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cConstraint);}

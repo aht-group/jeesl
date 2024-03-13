@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 
 public interface JeeslIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?>>
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?,?>>
 					extends JeeslCoreQuery
 {	
 //	List<CqId> getIds();

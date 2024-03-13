@@ -14,7 +14,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslDbMetaTable<SYSTEM extends JeeslIoSsiSystem<?,?>,
-									SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?>,
+									SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,?,?,?>,
 									SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 							EjbWithNonUniqueCode

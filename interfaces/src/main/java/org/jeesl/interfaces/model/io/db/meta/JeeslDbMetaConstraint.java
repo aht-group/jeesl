@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslDbMetaConstraint<SNAP extends JeeslDbMetaSnapshot<?,TAB,?,?>,
+public interface JeeslDbMetaConstraint<SNAP extends JeeslDbMetaSnapshot<?,?,TAB,?,?>,
 										TAB extends JeeslDbMetaTable<?,SNAP,?>,
 										COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 										CONT extends JeeslDbMetaConstraintType<?,?,CONT,?>,

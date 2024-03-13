@@ -24,10 +24,12 @@ import org.jeesl.factory.ejb.io.db.backup.EjbDbDumpFileFactory;
 import org.jeesl.factory.ejb.io.db.backup.EjbIoDumpFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
+import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSchemaFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaUniqueFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
+import org.jeesl.factory.json.io.db.meta.JsonDbMetaSchemaFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
@@ -49,6 +51,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaColumn;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
+import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSchema;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
@@ -66,7 +69,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 							HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
 							STATUS extends JeeslDbBackupStatus<L,D,STATUS,?>,
 							
-							SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+							SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
 							SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
 							TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 							COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
@@ -93,6 +96,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	private EjbIoDumpFactory<SYSTEM,DUMP> efDump;
 	private EjbDbDumpFileFactory<DUMP,FILE,HOST,STATUS> efDumpFile;
 	private final EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> efSnapshot;
+	private final EjbIoDbMetaSchemaFactory<SYSTEM,SCHEMA> efSchema;
 	private final EjbIoDbMetaTableFactory<SYSTEM,TAB> efTable;
 	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
 	private final EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> efConstraint;
@@ -121,6 +125,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 		efDump = fbDb.dump();
 		efDumpFile = fbDb.dumpFile();
 		efSnapshot = fbDbMeta.ejbSnapshot();
+		efSchema = fbDbMeta.ejbSchema();
 		efTable = fbDbMeta.ejbTable();
 		efColumn = fbDbMeta.ejbColumn();
 		efConstraint = fbDbMeta.ejbConstraint();
@@ -213,10 +218,21 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			eSnapshot.setRecord(snapshot.getRecord());
 			eSnapshot = fDb.save(eSnapshot);
 			
+			List<JsonPostgresMetaSchema> jSchemas = JsonDbMetaTableFactory.toSchemas(snapshot.getTables());
 			EjbIoDbQuery<SYSTEM,SNAP> query = new EjbIoDbQuery<>();
 			query.add(eSystem);
-			
-//			Map<String,SCHEMA> mapTable = EjbCodeFactory.toMapNonUniqueCode(fDb.fIoDbMetaTables(query));
+			query.codeList(JsonDbMetaSchemaFactory.toCodes(jSchemas));
+			Map<String,SCHEMA> mapSchema = EjbCodeFactory.toMapNonUniqueCode(fDb.fIoDbMetaSchemas(query));
+			for(JsonPostgresMetaSchema jSchema : jSchemas)
+			{
+				if(!mapSchema.containsKey(jSchema.getCode()))
+				{
+					SCHEMA eSchema = efSchema.build(eSystem,jSchema.getCode());
+					mapSchema.put(jSchema.getCode(),fDb.save(eSchema));
+				}
+			}
+			eSnapshot.getSchemas().addAll(mapSchema.values());
+			eSnapshot = fDb.save(eSnapshot);
 			
 			query.reset();
 			query.add(eSystem);

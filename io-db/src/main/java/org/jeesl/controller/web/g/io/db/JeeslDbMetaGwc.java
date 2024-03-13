@@ -56,7 +56,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
 								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,

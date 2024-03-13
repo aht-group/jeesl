@@ -42,7 +42,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,TAB,COL,CON>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,?>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,

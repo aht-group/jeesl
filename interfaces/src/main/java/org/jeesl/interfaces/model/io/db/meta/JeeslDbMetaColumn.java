@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
-public interface JeeslDbMetaColumn<SNAP extends JeeslDbMetaSnapshot<?,TAB,?,?>,
+public interface JeeslDbMetaColumn<SNAP extends JeeslDbMetaSnapshot<?,?,TAB,?,?>,
 										TAB extends JeeslDbMetaTable<?,SNAP,?>,
 										COLT extends JeeslDbMetaColumnType<?,?,COLT,?>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,

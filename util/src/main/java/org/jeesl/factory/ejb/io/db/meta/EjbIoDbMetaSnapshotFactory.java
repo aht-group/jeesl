@@ -6,20 +6,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbMetaSnapshotFactory<SYSTEM extends JeeslIoSsiSystem<?,?>,
-								MS extends JeeslDbMetaSnapshot<SYSTEM,?,?,?>>
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaSnapshotFactory.class);
 	
-	private final Class<MS> cSnapshot;
+	private final Class<SNAP> cSnapshot;
     
-	public EjbIoDbMetaSnapshotFactory(final Class<MS> cSnapshot)
+	public EjbIoDbMetaSnapshotFactory(final Class<SNAP> cSnapshot)
 	{       
         this.cSnapshot = cSnapshot;
 	}
 	
-	public MS build(SYSTEM system)
+	public SNAP build(SYSTEM system)
 	{
-		MS ejb = null;
+		SNAP ejb = null;
 		try
 		{
 			 ejb = cSnapshot.newInstance();

@@ -7,6 +7,7 @@ import org.jeesl.model.ejb.io.db.meta.IoDbMetaColumnType;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaConstraint;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaConstraintType;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaDifference;
+import org.jeesl.model.ejb.io.db.meta.IoDbMetaSchema;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaSnapshot;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaSqlAction;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaTable;
@@ -22,6 +23,6 @@ public class JeeslDbExplainWc extends JeeslDbExplainGwc<IoLang,IoDescription,IoL
 	
 	public JeeslDbExplainWc()
 	{
-		super(new IoDbMetaFactoryBuilder<>(IoLang.class,IoDescription.class,IoSsiSystem.class,IoDbMetaSnapshot.class,IoDbMetaTable.class,IoDbMetaColumn.class,IoDbMetaColumnType.class,IoDbMetaConstraint.class,IoDbMetaConstraintType.class,IoDbMetaUnique.class,IoDbMetaDifference.class,IoDbMetaSqlAction.class));
+		super(new IoDbMetaFactoryBuilder<>(IoLang.class,IoDescription.class,IoSsiSystem.class,IoDbMetaSnapshot.class,IoDbMetaSchema.class,IoDbMetaTable.class,IoDbMetaColumn.class,IoDbMetaColumnType.class,IoDbMetaConstraint.class,IoDbMetaConstraintType.class,IoDbMetaUnique.class,IoDbMetaDifference.class,IoDbMetaSqlAction.class));
 	}
 }

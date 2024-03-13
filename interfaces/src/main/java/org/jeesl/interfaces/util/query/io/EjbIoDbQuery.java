@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
-						SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?>
+						SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?,?>
 >
 			extends AbstractEjbQuery
 			implements JeeslIoDbQuery<SYSTEM,SNAP>
