@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -31,9 +32,11 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbFlywayFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
+import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
@@ -52,6 +55,7 @@ import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.CqOrdering.SortOrder;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -237,15 +241,14 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		}
 	}
 	
-	@Override
-	public void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException
+	@Override public void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException
 	{
 		snapshot = em.find(fbDbMeta.getClassSnapshot(), snapshot.getId());
+		snapshot.getSchemas().clear();
 		snapshot.getTables().clear();
 		snapshot.getColumns().clear();
 		snapshot.getConstraints().clear();
 		this.rmProtected(snapshot);
-		
 	}
 	
 	@Override public List<SCHEMA> fIoDbMetaSchemas(JeeslIoDbQuery<SYSTEM, SNAP> query)
@@ -399,6 +402,37 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
 		return em.createQuery(cQ).getResultList();
+	}
+	
+	@Override public JsonTuples1<SNAP> tpIoDbTableBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	{
+		
+			CriteriaBuilder cB = em.getCriteriaBuilder();
+			CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+			Root<TAB> root = cQ.from(fbDbMeta.getClassTable());
+				
+			ListJoin<TAB,SNAP> jTable = root.joinList(JeeslDbMetaTable.Attributes.snapshots.toString());
+			
+			Expression<Long> eCount = cB.count(root.<Long>get("id"));
+			
+			cQ.groupBy(jTable.get("id"));
+			cQ.multiselect(jTable.get("id"),eCount);
+		       
+			Json1TuplesFactory<SNAP> jtf = Json1TuplesFactory.instance(fbDbMeta.getClassSnapshot());
+			TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		    return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+
+	}
+	@Override public JsonTuples1<SNAP> tpIoDbColumnBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public JsonTuples1<SNAP> tpIoDbConstraintBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override public List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM, SNAP> query)

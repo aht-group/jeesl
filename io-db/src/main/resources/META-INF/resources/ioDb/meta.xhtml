@@ -37,6 +37,19 @@
 						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="name"/></f:facet>
 						<h:outputText value="#{s.name}"/>
 					</p:column>
+					
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="listOf"/></f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.thTable.map1[s].count1}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaColumn" code="listOf"/></f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.thColumn.map1[s].count1}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaConstraint" code="listOf"/></f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.thConstraint.map1[s].count1}"/>
+					</p:column>
 				</p:dataTable>
 			</h:form>
 		</j:slot>

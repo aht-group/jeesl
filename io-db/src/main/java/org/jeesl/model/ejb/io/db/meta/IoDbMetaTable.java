@@ -23,7 +23,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
-@Table(name="IoDbMetaTable",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","code"}))
+@Table(name="IoDbMetaTable",uniqueConstraints=@UniqueConstraint(name="uk_IoDbMetaTable_system_schema_code",columnNames={"system_id","schema_id","code"}))
 public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnapshot,IoDbMetaSchema>
 {
 	public static final long serialVersionUID=1;

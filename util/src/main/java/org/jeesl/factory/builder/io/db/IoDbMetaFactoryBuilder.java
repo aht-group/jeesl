@@ -86,7 +86,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
 	public EjbIoDbMetaSchemaFactory<SYSTEM,SCHEMA> ejbSchema() {return new EjbIoDbMetaSchemaFactory<>(cSchema);}
-	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cTable);}
+	public EjbIoDbMetaTableFactory<SYSTEM,SCHEMA,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cTable);}
 	public EjbIoDbMetaColumnFactory<TAB,COL> ejbColumn() {return new EjbIoDbMetaColumnFactory<>(cMetaColumn);}
 	public EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cConstraint);}
 	public EjbIoDbMetaUniqueFactory<COL,CON,UNQ> ejbUnique() {return new EjbIoDbMetaUniqueFactory<>(cUnique);}

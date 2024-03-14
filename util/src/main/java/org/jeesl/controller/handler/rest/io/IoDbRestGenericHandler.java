@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.exlp.model.xml.io.Dir;
 import org.exlp.model.xml.io.File;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
@@ -97,7 +98,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	private EjbDbDumpFileFactory<DUMP,FILE,HOST,STATUS> efDumpFile;
 	private final EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> efSnapshot;
 	private final EjbIoDbMetaSchemaFactory<SYSTEM,SCHEMA> efSchema;
-	private final EjbIoDbMetaTableFactory<SYSTEM,TAB> efTable;
+	private final EjbIoDbMetaTableFactory<SYSTEM,SCHEMA,TAB> efTable;
 	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
 	private final EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> efConstraint;
 	private final EjbIoDbMetaUniqueFactory<COL,CON,UNQ> efUnique;
@@ -238,16 +239,23 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			query.add(eSystem);
 			query.codeList(JsonDbMetaTableFactory.toCodes(snapshot));
 			
-			Map<String,TAB> mapTable = EjbCodeFactory.toMapNonUniqueCode(fDb.fIoDbMetaTables(query));
+			Map<MultiKey<String>,TAB> mapDbTable = efTable.toMultiKeyMap(fDb.fIoDbMetaTables(query));
+			Map<String,TAB> mapSnapshotTable = new HashMap<>();
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
-				if(!mapTable.containsKey(jTable.getCode()))
+				MultiKey<String> key = new MultiKey<String>(jTable.getScheme(),jTable.getCode());
+				TAB eTable = null;
+				if(mapDbTable.containsKey(key)) {eTable = mapDbTable.get(key);}
+				else
 				{
-					TAB t = efTable.build(eSystem,jTable.getCode());
-					mapTable.put(jTable.getCode(),fDb.save(t));
-				}
+					SCHEMA schema = mapSchema.get(jTable.getScheme());
+					eTable = efTable.build(eSystem,schema,jTable.getCode());
+					eTable = fDb.save(eTable);
+				} 
+				
+				mapSnapshotTable.put(jTable.getCode(),eTable);
 			}
-			eSnapshot.getTables().addAll(mapTable.values());
+			eSnapshot.getTables().addAll(mapSnapshotTable.values());
 			eSnapshot = fDb.save(eSnapshot);
 			
 			query.reset();
@@ -257,6 +265,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			Map<String,Map<String,COL>> mapSnapshotColums = new HashMap<>();
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
+				TAB eTable = mapSnapshotTable.get(jTable.getCode());
 				if(Objects.nonNull(jTable.getColumns()))
 				{
 					if(!mapSystemColums.containsKey(jTable.getCode())) {mapSystemColums.put(jTable.getCode(), new HashMap<>());}
@@ -268,7 +277,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 						{
 							cacheColumnType.verify(jColumn.getType().getCode());
 						
-							COL col = efColumn.build(mapTable.get(jTable.getCode()),jColumn.getCode());
+							COL col = efColumn.build(eTable,jColumn.getCode());
 							col.setType(cacheColumnType.ejb(jColumn.getType().getCode()));
 							col = fDb.save(col);
 							mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), col);
@@ -291,7 +300,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			Map<String,Map<String,CON>> mapSnapshotConstraints = new HashMap<>();
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
-				TAB eTable = mapTable.get(jTable.getCode());
+				TAB eTable = mapSnapshotTable.get(jTable.getCode());
 				if(!mapSystemConstraint.containsKey(eTable)) {mapSystemConstraint.put(eTable, new ArrayList<>());}
 				if(!mapSnapshotConstraints.containsKey(jTable.getCode())) {mapSnapshotConstraints.put(jTable.getCode(), new HashMap<>());}
 				

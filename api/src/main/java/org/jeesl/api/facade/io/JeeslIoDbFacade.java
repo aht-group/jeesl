@@ -20,6 +20,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
@@ -55,6 +56,10 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	List<COL> fIoDbMetaColumns(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	List<CON> fIoDbMetaConstraints(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	List<CUN> fIoDbMetaUniques(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	
+	JsonTuples1<SNAP> tpIoDbTableBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	JsonTuples1<SNAP> tpIoDbColumnBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	JsonTuples1<SNAP> tpIoDbConstraintBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	
 	List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM,SNAP> query);
 }

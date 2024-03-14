@@ -1,13 +1,13 @@
 package org.jeesl.web.handler.system.security.menu;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.infinispan.Cache;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.cache.JeeslMenuCache;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
@@ -35,6 +35,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	private final List<M> mainMenu;
 	
 	private I identity;
+	private long session;
 	private CTX context;
 	private boolean debugOnInfo; //protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 	public JeeslMenuHandler<V,CTX,M,USER,I> jogger() {this.debugOnInfo=true; return this;}
@@ -58,6 +59,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public void prepare(I identity)
 	{
+		session = OffsetDateTime.now().toEpochSecond();
 		if(Objects.isNull(identity)) {logger.error("Preparing(identity), but the provided value is null");}
 		else if(debugOnInfo) {logger.info("Preparing(identity) "+identity.toString());}
 		this.identity = identity;
@@ -80,7 +82,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	{
 		if(Objects.isNull(identity)) {logger.error("subMenu, but identity is null!");}
 		
-		String cacheKey = TxtIdentityFactory.key("sub",identity,viewCode);
+		String cacheKey = TxtIdentityFactory.key("sub",identity,viewCode,session);
 		if(cache.cacheContains(cacheKey)) {return cache.cacheGet(cacheKey);}
 		else
 		{
@@ -108,7 +110,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	{
 		if(Objects.isNull(identity)) {logger.error("breadcrumb, but identity is null!");}
 		
-		String cacheKey = TxtIdentityFactory.key("crumb",identity,viewCode);
+		String cacheKey = TxtIdentityFactory.key("crumb",identity,viewCode,session);
 		if(cache.cacheContains(cacheKey)){return cache.cacheGet(cacheKey);}
 		else
 		{

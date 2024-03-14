@@ -13,6 +13,7 @@ import java.util.Set;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
+import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbConstraintComparator;
 import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbTableComparator;
 import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordJtComparator;
@@ -80,10 +81,16 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
 	
+	private final JsonTuple1Handler<SNAP> thTable; public JsonTuple1Handler<SNAP> getThTable() {return thTable;}
+	private final JsonTuple1Handler<SNAP> thColumn; public JsonTuple1Handler<SNAP> getThColumn() {return thColumn;}
+	private final JsonTuple1Handler<SNAP> thConstraint; public JsonTuple1Handler<SNAP> getThConstraint() {return thConstraint;}
+	
 	private final ThMultiFilterHandler<DIFF> thFilterTable; public ThMultiFilterHandler<DIFF> getThFilterTable() {return thFilterTable;}
 	private final ThMultiFilterHandler<DIFF> thFilterColumn; public ThMultiFilterHandler<DIFF> getThFilterColumn() {return thFilterColumn;}
 	private final ThMultiFilterHandler<DIFF> thFilterConstraint; public ThMultiFilterHandler<DIFF> getThFilterConstraint() {return thFilterConstraint;}
 	private final ThMultiFilterHandler<SQL> thAction; public ThMultiFilterHandler<SQL> getThAction() {return thAction;}
+	
+	
 	
 	private final EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> efConstraint;
 	private final SqlConstraintFactory<TAB,CON> sfConstraint;
@@ -129,6 +136,10 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		efConstraint = fbDb.ejbConstraint();
 		
 		sbhSystem = new SbSingleHandler<>(fbDb.getClassSsiSystem(),this);
+		
+		thTable = JsonTuple1Handler.instance(fbDb.getClassSnapshot());
+		thColumn = JsonTuple1Handler.instance(fbDb.getClassSnapshot());
+		thConstraint = JsonTuple1Handler.instance(fbDb.getClassSnapshot());
 		
 		thFilterTable = new ThMultiFilterHandler<>(this);
 		thFilterColumn = new ThMultiFilterHandler<>(this);
@@ -219,6 +230,10 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			
 			systemColumn.addAll(fDb.fIoDbMetaColumns(query));
 			
+			thTable.init(fDb.tpIoDbTableBySnapshot(query));
+			thColumn.init(fDb.tpIoDbTableBySnapshot(query));
+			thConstraint.init(fDb.tpIoDbTableBySnapshot(query));
+			
 			query.addRootFetch(JeeslDbMetaConstraint.Attributes.uniques);
 			query.distinct(true);
 			systemConstraints.addAll(fDb.fIoDbMetaConstraints(query));
@@ -229,6 +244,8 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			snapshotSource = snapshots.get(snapshots.size()-1);
 			snapshotTarget = snapshots.get(0);
 		}
+		
+		
 	}
 	
 	public void selectSnapshot() throws JeeslNotFoundException

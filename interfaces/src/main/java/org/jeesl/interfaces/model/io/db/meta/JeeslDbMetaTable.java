@@ -24,6 +24,9 @@ public interface JeeslDbMetaTable<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	SYSTEM getSystem();
 	void setSystem(SYSTEM system);
 	
+	SCHEMA getSchema();
+	void setSchema(SCHEMA schema);
+	
 	List<SNAP> getSnapshots();
 	void setSnapshots(List<SNAP> snapshots);
 	

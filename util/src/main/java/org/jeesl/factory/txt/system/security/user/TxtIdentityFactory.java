@@ -12,7 +12,8 @@ public class TxtIdentityFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtIdentityFactory.class);
    
-    public static <CTX extends JeeslSecurityContext<?,?>, USER extends JeeslUser<?>, I extends JeeslIdentity<?,?,?,?,CTX,USER>> String key(String prefix, I identity, String key)
+    public static <CTX extends JeeslSecurityContext<?,?>, USER extends JeeslUser<?>, I extends JeeslIdentity<?,?,?,?,CTX,USER>>
+    			String key(String prefix, I identity, String key, long session)
     {
     	StringBuilder sb = new StringBuilder();
     	sb.append(prefix).append("-");
@@ -23,12 +24,12 @@ public class TxtIdentityFactory
     	}
     	else
     	{
-//    		logger.warn("Identity is null!");
     		if(Objects.isNull(identity.getContext())) {sb.append("0");} else {sb.append(identity.getContext().getId());}
     		sb.append("-");
     		if(Objects.isNull(identity.getUser())) {sb.append("0");} else {sb.append(identity.getUser().getId());}
     	}
     	sb.append("-").append(key);
+    	sb.append("-").append(session);
     	return sb.toString();
     }
 }
