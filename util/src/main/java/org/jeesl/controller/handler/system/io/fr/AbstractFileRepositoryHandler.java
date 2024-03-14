@@ -107,6 +107,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	protected File xmlFile;
 	private String fileName; public String getFileName() {return fileName;} public void setFileName(String fileName) {this.fileName = fileName;}
 	
+	
 	private boolean showInlineUpload; public boolean isShowInlineUpload() {return showInlineUpload;}
 	
 	private boolean allowUpload; public boolean isAllowUpload() {return allowUpload;}
@@ -174,16 +175,16 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		}
 		catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
 	}
-	
+
 	@Override public <W extends JeeslWithFileRepositoryContainer<CONTAINER>> void initSilent(W with)
 	{
-		try {init(with);}
+		try {this.init(with);}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 	}
 	@Override public <W extends JeeslWithFileRepositoryContainer<CONTAINER>> void init(W with) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		boolean reset = true;
-		init(storage,with,reset);
+		this.init(storage,with,reset);
 	}
 	@Override public <W extends JeeslWithFileRepositoryContainer<CONTAINER>> void init(STORAGE initForStorage, W with) throws JeeslConstraintViolationException, JeeslLockingException
 	{
@@ -197,7 +198,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			reset(true,true);
 		}
 		
-		if(with.getFrContainer()==null)
+		if(Objects.isNull(with.getFrContainer()))
 		{
 			container = efContainer.build(initForStorage);
 			if(EjbIdFactory.isSaved(with))
@@ -224,7 +225,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 
 	public void reset() {reset(true,true);}
 	public void cancelMeta() {reset(false,true);}
-	
+
 	private void reset(boolean rMetas, boolean rMeta)
 	{
 		if(rMetas) {metas.clear();}
