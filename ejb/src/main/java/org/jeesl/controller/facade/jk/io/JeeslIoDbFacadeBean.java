@@ -300,8 +300,8 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<COL> cQ = cB.createQuery(fbDbMeta.getClassMetaColumn());
-		Root<COL> root = cQ.from(fbDbMeta.getClassMetaColumn());
+		CriteriaQuery<COL> cQ = cB.createQuery(fbDbMeta.getClassColumn());
+		Root<COL> root = cQ.from(fbDbMeta.getClassColumn());
 		
 		if(ObjectUtils.isNotEmpty(query.getCodeList()))
 		{
@@ -391,18 +391,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public JsonTuples1<SNAP> tpIoDbTableBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	@Override public JsonTuples1<SNAP> tpIoDbBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override public JsonTuples1<SNAP> tpIoDbColumnBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public JsonTuples1<SNAP> tpIoDbConstraintBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	@Override public JsonTuples1<SYSTEM> tpIoDbBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		// TODO Auto-generated method stub
 		return null;

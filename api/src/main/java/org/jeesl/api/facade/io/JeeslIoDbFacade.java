@@ -57,9 +57,8 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	List<CON> fIoDbMetaConstraints(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	List<CUN> fIoDbMetaUniques(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	
-	JsonTuples1<SNAP> tpIoDbTableBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
-	JsonTuples1<SNAP> tpIoDbColumnBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
-	JsonTuples1<SNAP> tpIoDbConstraintBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	JsonTuples1<SNAP> tpIoDbBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	JsonTuples1<SYSTEM> tpIoDbBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	
 	List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM,SNAP> query);
 }

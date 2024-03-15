@@ -87,6 +87,13 @@ public class JsonTupleFactory
 //    	return json;
 //	}
 	
+	public static <A extends EjbWithId> JsonTuple1<A> build1(JsonTuple1<A> t)
+	{
+		JsonTuple1<A> json = new JsonTuple1<A>();
+		json.setId1(t.getId1());
+		json.setEjb1(t.getEjb1());		
+    	return json;
+	}
 	public static <A extends EjbWithId> JsonTuple1<A> build1(Tuple tuple, JsonTupleFactory.Type...types)
 	{
 		JsonTuple1<A> json = new JsonTuple1<A>();

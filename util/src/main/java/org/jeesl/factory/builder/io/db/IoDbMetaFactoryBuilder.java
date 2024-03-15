@@ -48,7 +48,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	private final Class<SNAP> cSnapshot; public Class<SNAP> getClassSnapshot() {return cSnapshot;}
 	private final Class<SCHEMA> cSchema; public Class<SCHEMA> getClassSchema() {return cSchema;}
 	private final Class<TAB> cTable; public Class<TAB> getClassTable() {return cTable;}
-	private final Class<COL> cMetaColumn; public Class<COL> getClassMetaColumn() {return cMetaColumn;}
+	private final Class<COL> cMetaColumn; public Class<COL> getClassColumn() {return cMetaColumn;}
 	private final Class<COLT> cColumnType; public Class<COLT> getClassColumnType() {return cColumnType;}
 	private final Class<CON> cConstraint; public Class<CON> getClassConstraint() {return cConstraint;}
 	private final Class<CONT> cConstraintType; public Class<CONT> getClassConstraintType() {return cConstraintType;}
@@ -91,5 +91,5 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	public EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cConstraint);}
 	public EjbIoDbMetaUniqueFactory<COL,CON,UNQ> ejbUnique() {return new EjbIoDbMetaUniqueFactory<>(cUnique);}
 	
-	public SqlConstraintFactory<TAB,CON> sqlConstraint() {return new SqlConstraintFactory<>();}
+	public SqlConstraintFactory<SCHEMA,TAB,CON> sqlConstraint() {return new SqlConstraintFactory<>();}
 }

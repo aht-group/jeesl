@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -65,7 +66,7 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public List<IoDbMetaSnapshot> getSnapshots() {if(Objects.isNull(snapshots)) {snapshots = new ArrayList<>();} return snapshots;}
 	@Override public void setSnapshots(List<IoDbMetaSnapshot> snapshots) {this.snapshots = snapshots;}
 	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="constraint")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="constraint")
 	@OrderBy("position ASC")
 	private List<IoDbMetaUnique> uniques;
 	@Override public List<IoDbMetaUnique> getUniques() {if(Objects.isNull(uniques)) {uniques = new ArrayList<>();} return uniques;}

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SqlConstraintFactory <TAB extends JeeslDbMetaTable<?,?,?>,
+public class SqlConstraintFactory <SCHEMA extends JeeslDbMetaSchema<?,?>,
+									TAB extends JeeslDbMetaTable<?,?,SCHEMA>,
 									CON extends JeeslDbMetaConstraint<?,TAB,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SqlConstraintFactory.class);

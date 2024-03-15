@@ -21,35 +21,46 @@
 							selection="#{cc.attrs.ctrl.snapshot}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoDbMetaSnapshot" code="listOf">
-							<j:svg type="jeeslArrowFlip" listener="#{cc.attrs.ctrl.flipSnapshots()}" update=":#{cc.id}:grid" />
+							<j:svg type="jeeslClean" listener="#{cc.attrs.ctrl.cleanSnapshots()}" update=":#{cc.id}:grid" />
 						</j:dtHeader>	
 					</f:facet>
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.ctrl.selectSnapshot()}" update=":#{cc.id}:rSnapshots"/>
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column colspan="3"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="3"><f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="elements"/></f:facet></p:column>
+                   		</p:row>
+						<p:row>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="id"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="record"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="name"/></f:facet></p:column>
+							
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoDbMetaTable" code="listOf"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoDbMetaColumn" code="listOf"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoDbMetaConstraint" code="listOf"/></f:facet></p:column>
+                   		</p:row>
+					</p:columnGroup>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="id"/></f:facet>
 						<h:outputText value="#{s.id}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="record"/></f:facet>
 						<jp:outputDate value="#{s.record}" withSecond="true"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="name"/></f:facet>
 						<h:outputText value="#{s.name}"/>
 					</p:column>
+					<p:column><h:outputText value="#{cc.attrs.ctrl.thSnapshot.map1[s].count1}"/></p:column>
+					<p:column><h:outputText value="#{cc.attrs.ctrl.thSnapshot.map1[s].count2}"/></p:column>
+					<p:column><h:outputText value="#{cc.attrs.ctrl.thSnapshot.map1[s].count3}"/></p:column>
 					
-					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="listOf"/></f:facet>
-						<h:outputText value="#{cc.attrs.ctrl.thTable.map1[s].count1}"/>
-					</p:column>
-					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaColumn" code="listOf"/></f:facet>
-						<h:outputText value="#{cc.attrs.ctrl.thColumn.map1[s].count1}"/>
-					</p:column>
-					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaConstraint" code="listOf"/></f:facet>
-						<h:outputText value="#{cc.attrs.ctrl.thConstraint.map1[s].count1}"/>
-					</p:column>
+					<p:columnGroup type="footer">
+			            <p:row>
+			                <p:column colspan="3" style="text-align:right" footerText="" />
+			                <p:column footerText="#{cc.attrs.ctrl.thSystem.map1[cc.attrs.ctrl.sbhSystem.selection].count1}" />
+			 				<p:column footerText="#{cc.attrs.ctrl.thSystem.map1[cc.attrs.ctrl.sbhSystem.selection].count2}" />
+			 				<p:column footerText="#{cc.attrs.ctrl.thSystem.map1[cc.attrs.ctrl.sbhSystem.selection].count3}" />
+			            </p:row>
+		        	</p:columnGroup>	
 				</p:dataTable>
 			</h:form>
 		</j:slot>
@@ -82,6 +93,7 @@
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveTarget()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetTarget()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.snapshot}"/>
+						<j:svg type="jeeslArrowFlip" listener="#{cc.attrs.ctrl.flipSnapshots()}" update=":#{cc.id}:grid" />
 					</f:facet>
 					<j:inputGrid>
 						<jtp:label entity="IoDbMetaSnapshot" code="id"/>

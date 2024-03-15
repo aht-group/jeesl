@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
@@ -50,6 +51,8 @@ import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaTable;
 import org.jeesl.util.db.cache.EjbCodeCache;
+import org.openfuxml.factory.xml.table.XmlTableFactory;
+import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,19 +84,16 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
 	
-	private final JsonTuple1Handler<SNAP> thTable; public JsonTuple1Handler<SNAP> getThTable() {return thTable;}
-	private final JsonTuple1Handler<SNAP> thColumn; public JsonTuple1Handler<SNAP> getThColumn() {return thColumn;}
-	private final JsonTuple1Handler<SNAP> thConstraint; public JsonTuple1Handler<SNAP> getThConstraint() {return thConstraint;}
+	private final JsonTuple1Handler<SNAP> thSnapshot; public JsonTuple1Handler<SNAP> getThSnapshot() {return thSnapshot;}
+	private final JsonTuple1Handler<SYSTEM> thSystem; public JsonTuple1Handler<SYSTEM> getThSystem() {return thSystem;}
 	
 	private final ThMultiFilterHandler<DIFF> thFilterTable; public ThMultiFilterHandler<DIFF> getThFilterTable() {return thFilterTable;}
 	private final ThMultiFilterHandler<DIFF> thFilterColumn; public ThMultiFilterHandler<DIFF> getThFilterColumn() {return thFilterColumn;}
 	private final ThMultiFilterHandler<DIFF> thFilterConstraint; public ThMultiFilterHandler<DIFF> getThFilterConstraint() {return thFilterConstraint;}
 	private final ThMultiFilterHandler<SQL> thAction; public ThMultiFilterHandler<SQL> getThAction() {return thAction;}
 	
-	
-	
 	private final EjbIoDbMetaConstraintFactory<TAB,COL,CON,CONT,UNQ> efConstraint;
-	private final SqlConstraintFactory<TAB,CON> sfConstraint;
+	private final SqlConstraintFactory<SCHEMA,TAB,CON> sfConstraint;
 	
 	private final EjbCodeCache<DIFF> cacheDiff;
 	private final EjbCodeCache<CONT> cacheType;
@@ -137,9 +137,8 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		
 		sbhSystem = new SbSingleHandler<>(fbDb.getClassSsiSystem(),this);
 		
-		thTable = JsonTuple1Handler.instance(fbDb.getClassSnapshot());
-		thColumn = JsonTuple1Handler.instance(fbDb.getClassSnapshot());
-		thConstraint = JsonTuple1Handler.instance(fbDb.getClassSnapshot());
+		thSnapshot = JsonTuple1Handler.instance(fbDb.getClassSnapshot());
+		thSystem = JsonTuple1Handler.instance(fbDb.getClassSsiSystem());
 		
 		thFilterTable = new ThMultiFilterHandler<>(this);
 		thFilterColumn = new ThMultiFilterHandler<>(this);
@@ -230,9 +229,8 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			
 			systemColumn.addAll(fDb.fIoDbMetaColumns(query));
 			
-			thTable.init(fDb.tpIoDbTableBySnapshot(query));
-			thColumn.init(fDb.tpIoDbTableBySnapshot(query));
-			thConstraint.init(fDb.tpIoDbTableBySnapshot(query));
+			thSnapshot.init(fDb.tpIoDbBySnapshot(query));
+			thSystem.init(fDb.tpIoDbBySystem(query));
 			
 			query.addRootFetch(JeeslDbMetaConstraint.Attributes.uniques);
 			query.distinct(true);
@@ -244,8 +242,6 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			snapshotSource = snapshots.get(snapshots.size()-1);
 			snapshotTarget = snapshots.get(0);
 		}
-		
-		
 	}
 	
 	public void selectSnapshot() throws JeeslNotFoundException
@@ -348,7 +344,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			if(ObjectUtils.allNotNull(snapshotSource,snapshotTarget))
 			{
 				logger.info(fbDb.getClassTable().getSimpleName()+": "+snapshotSource.toString()+":"+setSourceTable.size()+" -> "+snapshotTarget.toString()+":"+setTargetTable.size());
-				logger.info(fbDb.getClassMetaColumn().getSimpleName()+": "+snapshotSource.toString()+":"+setSourceColumn.size()+" -> "+snapshotTarget.toString()+":"+setTargetColumn.size());
+				logger.info(fbDb.getClassColumn().getSimpleName()+": "+snapshotSource.toString()+":"+setSourceColumn.size()+" -> "+snapshotTarget.toString()+":"+setTargetColumn.size());
 				logger.info(fbDb.getClassConstraint().getSimpleName()+": System:"+systemConstraints.size()+" "+snapshotSource.toString()+":"+setSourceConstraint.size()+" -> "+snapshotTarget.toString()+":"+setTargetConstraint.size());
 			}
 		}
@@ -542,5 +538,51 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		}
 		sqlClipboard = String.join("\n",list);
 		logger.info(sqlClipboard);
+	}
+	
+	public void cleanSnapshots() throws JeeslConstraintViolationException
+	{
+		EjbIoDbQuery<SYSTEM,SNAP> qSystem = new EjbIoDbQuery<>();
+		qSystem.add(sbhSystem.getSelection());
+		
+		List<SCHEMA> tablesSchema = fDb.fIoDbMetaSchemas(qSystem);
+		List<TAB> tablesSystem = fDb.fIoDbMetaTables(qSystem);
+		List<COL> columnsSystem = fDb.fIoDbMetaColumns(qSystem);
+		List<CON> constraintsSystem = fDb.fIoDbMetaConstraints(qSystem);
+		
+		List<SCHEMA> schemasSnapshot = new ArrayList<>();
+		List<TAB> tablesSnapshot = new ArrayList<>();
+		List<COL> columnsSnapshot = new ArrayList<>();
+		List<CON> constraintsSnapshot = new ArrayList<>();
+		
+		if(ObjectUtils.isNotEmpty(snapshots))
+		{
+			EjbIoDbQuery<SYSTEM,SNAP> qSnapshot = new EjbIoDbQuery<>();
+			qSnapshot.addSnapshots(snapshots);
+			tablesSnapshot.addAll(fDb.fIoDbMetaTables(qSnapshot));
+			columnsSnapshot.addAll(fDb.fIoDbMetaColumns(qSnapshot));
+			constraintsSnapshot.addAll(fDb.fIoDbMetaConstraints(qSnapshot));
+		}		
+		
+		List<SCHEMA> schemasRemove = new ArrayList<>(CollectionUtils.subtract(tablesSchema,schemasSnapshot));
+		List<TAB> tablesRemove = new ArrayList<>(CollectionUtils.subtract(tablesSystem,tablesSnapshot));
+		List<COL> columnsRemove = new ArrayList<>(CollectionUtils.subtract(columnsSystem,columnsSnapshot));
+		List<CON> constraintsRemove = new ArrayList<>(CollectionUtils.subtract(constraintsSystem,constraintsSnapshot));
+		
+		XmlTableFactory xt = XmlTableFactory.instance("Elements");
+		xt.header("Type").header(fbDb.getClassSsiSystem().getSimpleName()).header(fbDb.getClassSnapshot().getSimpleName()).header("Remove");
+		xt.cell(fbDb.getClassSchema().getSimpleName()).cell(tablesSchema.size()).cell(schemasSnapshot.size()).cell(schemasRemove.size()).row();
+		xt.cell(fbDb.getClassTable().getSimpleName()).cell(tablesSystem.size()).cell(tablesSnapshot.size()).cell(tablesRemove.size()).row();
+		xt.cell(fbDb.getClassColumn().getSimpleName()).cell(columnsSystem.size()).cell(columnsSnapshot.size()).cell(columnsRemove.size()).row();
+		xt.cell(fbDb.getClassConstraint().getSimpleName()).cell(constraintsSystem.size()).cell(constraintsSnapshot.size()).cell(constraintsRemove.size()).row();
+		
+		OfxTextRenderer.silent(xt.getTable(),System.out);
+		
+		fDb.rm(constraintsRemove);
+		fDb.rm(columnsRemove);
+		fDb.rm(tablesRemove);
+		fDb.rm(schemasRemove);
+		
+		this.reloadSystem();
 	}
 }

@@ -3,6 +3,7 @@ package org.jeesl.model.json.io.db.tuple.container;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
@@ -15,7 +16,7 @@ public class JsonTuples1 <T extends EjbWithId> implements Serializable
 
 	@JsonProperty("tuples")
 	private List<JsonTuple1<T>> tuples;
-	public List<JsonTuple1<T>> getTuples() {if(tuples==null){tuples = new ArrayList<JsonTuple1<T>>();} return tuples;}
+	public List<JsonTuple1<T>> getTuples() {if(Objects.isNull(tuples)) {tuples = new ArrayList<>();} return tuples;}
 	public void setTuples(List<JsonTuple1<T>> tuples) {this.tuples = tuples;}
 
 	private boolean ejbLoaded;

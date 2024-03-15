@@ -13,7 +13,6 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 @DownloadJeeslData
@@ -21,7 +20,6 @@ public interface JeeslDbMetaDifference <L extends JeeslLang, D extends JeeslDesc
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 							extends Serializable,EjbPersistable,
-									
 									EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
 									JeeslStatus<L,D,S>
 {	

@@ -10,8 +10,10 @@ import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDateTime;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslAttributes
 @DownloadJeeslDescription
 public interface JeeslDbMetaSnapshot<SYSTEM extends JeeslIoSsiSystem<?,?>,
 									SCHEMA extends JeeslDbMetaSchema<SYSTEM,?>,
