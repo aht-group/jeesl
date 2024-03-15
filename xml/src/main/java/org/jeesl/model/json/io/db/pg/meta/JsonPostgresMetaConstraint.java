@@ -20,6 +20,11 @@ public class JsonPostgresMetaConstraint implements Serializable
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
 	
+	@JsonProperty("tablespace")
+	private JsonPostgresTablespace tablespace;
+	public JsonPostgresTablespace getTablespace() {return tablespace;}
+	public void setTablespace(JsonPostgresTablespace tablespace) {this.tablespace = tablespace;}
+
 	@JsonProperty("type")
 	private JsonType type;
 	public JsonType getType() {return type;}

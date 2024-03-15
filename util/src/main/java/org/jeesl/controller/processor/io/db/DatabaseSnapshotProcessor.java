@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,12 +13,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.JsonUtil;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaColumnFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaConstraintFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
+import org.jeesl.factory.json.io.db.meta.JsonPostgresTablespaceFactory;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
@@ -30,6 +34,7 @@ public class DatabaseSnapshotProcessor
 
 	private final Connection connection;
 	
+	private final Map<String,String> mapIdxTbs;
 	private final Set<String> filteredTables;
 	
 	public DatabaseSnapshotProcessor filter(String table) {filteredTables.add(table); return this;}
@@ -39,6 +44,7 @@ public class DatabaseSnapshotProcessor
 	{
 		this.connection=connection;
 		filteredTables = new HashSet<>();
+		mapIdxTbs = new HashMap<>();
 	}
 	
 	public JsonPostgresMetaSnapshot snapshot() throws SQLException, IOException
@@ -47,9 +53,27 @@ public class DatabaseSnapshotProcessor
 		jSnapshot.setRecord(LocalDateTime.now());
 		jSnapshot.setTables(new ArrayList<>());
 		
-		DatabaseMetaData meta = connection.getMetaData();
-		ResultSet rsTable = meta.getTables(null, null, null, new String[]{"TABLE"});
+		Statement stmt = null;
+        ResultSet rs = null;
+		try
+		{
+			stmt = connection.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM pg_indexes WHERE tablespace IS NOT NULL;");
 
+            while (rs.next())
+            {
+            	String idxName = rs.getString("indexname");
+            	String tbs = rs.getString("tablespace");
+            	mapIdxTbs.put(idxName,tbs);
+            }
+        }
+		catch (SQLException e) {e.printStackTrace();}
+		finally {DbUtils.closeQuietly(rs);DbUtils.closeQuietly(stmt);}
+		
+		DatabaseMetaData meta = connection.getMetaData();
+		
+	
+		ResultSet rsTable = meta.getTables(null, null, null, new String[]{"TABLE"});
 		while(rsTable.next())
 		{
 			for(int i=1;i<=rsTable.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsTable.getMetaData().getColumnName(i)+": "+rsTable.getString(i));}
@@ -84,7 +108,6 @@ public class DatabaseSnapshotProcessor
 					table.getPrimaryKeys().add(c);
 				}
 				
-				
 				ResultSet rsFk = meta.getImportedKeys(null,null, table.getCode());
 				logger.trace("Foreign Keys of "+table.getCode());
 				while(rsFk.next())
@@ -93,30 +116,41 @@ public class DatabaseSnapshotProcessor
 					table.getForeignKeys().add(JsonDbMetaConstraintFactory.buildFk(rsFk));
 				}
 				
-				table.setUniqueKeys(new ArrayList<>());
 				Map<String,JsonPostgresMetaConstraint> mapUk = new HashMap<>();
-				ResultSet rsUk = meta.getIndexInfo(null,null, table.getCode(), true, false);
+				Map<String,JsonPostgresMetaConstraint> mapIdx = new HashMap<>();
+				ResultSet rsIdx = meta.getIndexInfo(null,null, table.getCode(), false, false);
 				logger.trace("Uniques of "+table.getCode());
-				while(rsUk.next())
+				while(rsIdx.next())
 				{
-					for(int i=1;i<=rsUk.getMetaData().getColumnCount();i++){logger.trace(i+" "+rsUk.getMetaData().getColumnName(i)+": "+rsUk.getString(i));}
-					JsonDbMetaConstraintFactory.addUk(rsUk,mapUk);
+					for(int i=1;i<=rsIdx.getMetaData().getColumnCount();i++){logger.trace(i+" "+rsIdx.getMetaData().getColumnName(i)+": "+rsIdx.getString(i));}
+					boolean unique = !rsIdx.getBoolean("NON_UNIQUE");
+					if(unique) {JsonDbMetaConstraintFactory.addUk(rsIdx,mapUk);}
+					else {JsonDbMetaConstraintFactory.addUk(rsIdx,mapIdx);}
 				}
+				
+				table.setUniqueKeys(new ArrayList<>());
+				table.setIndexes(new ArrayList<>());
 				if(ObjectUtils.isNotEmpty(mapUk.values()))
 				{
 					for(JsonPostgresMetaConstraint c : mapUk.values())
 					{
-						if(!mapPk.containsKey(c.getCode())) {table.getUniqueKeys().add(c);}
+						if(mapIdxTbs.containsKey(c.getCode())) {c.setTablespace(JsonPostgresTablespaceFactory.build(mapIdxTbs.get(c.getCode())));}
+						boolean isPk = mapPk.containsKey(c.getCode());
+						if(!isPk) {table.getUniqueKeys().add(c);}
+					}
+				}
+				if(ObjectUtils.isNotEmpty(mapIdx.values()))
+				{
+					for(JsonPostgresMetaConstraint c : mapIdx.values())
+					{
+						if(mapIdxTbs.containsKey(c.getCode())) {c.setTablespace(JsonPostgresTablespaceFactory.build(mapIdxTbs.get(c.getCode())));}
+						boolean isPk = mapPk.containsKey(c.getCode());
+						boolean isUk = mapUk.containsKey(c.getCode());
+						if(!isPk && !isUk) {table.getIndexes().add(c);}
 					}
 				}
 				
-				if(table.getCode().equals("xxIoReportSheet".toLowerCase()))
-				{
-					JsonUtil.info(table);
-					LoggedExit.exit(true);
-				}
-				
-				
+				if(table.getCode().equals("xxxxIoSsiData".toLowerCase())) {JsonUtil.info(table);LoggedExit.exit(true);}
 				jSnapshot.getTables().add(table);
 			}
 		}

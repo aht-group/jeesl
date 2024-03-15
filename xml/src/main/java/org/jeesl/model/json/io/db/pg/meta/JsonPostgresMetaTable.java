@@ -42,4 +42,9 @@ public class JsonPostgresMetaTable implements Serializable
 	private List<JsonPostgresMetaConstraint> uniqueKeys;
 	public List<JsonPostgresMetaConstraint> getUniqueKeys() {return uniqueKeys;}
 	public void setUniqueKeys(List<JsonPostgresMetaConstraint> uniqueKeys) {this.uniqueKeys = uniqueKeys;}
+	
+	@JsonProperty("indexes")
+	private List<JsonPostgresMetaConstraint> indexes;
+	public List<JsonPostgresMetaConstraint> getIndexes() {return indexes;}
+	public void setIndexes(List<JsonPostgresMetaConstraint> indexes) {this.indexes = indexes;}
 }
