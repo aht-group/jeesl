@@ -1,4 +1,4 @@
-package org.jeesl.util.query.ejb.io;
+package org.jeesl.util.filter.ejb.io.fr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbFileMetaQuery
+public class EjbFileMetaFilter
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbFileMetaQuery.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbFileMetaFilter.class);
 	
 	public static <META extends JeeslFileMeta<?,?,?,?>> List<META> filterImages(List<META> metas)
 	{	
