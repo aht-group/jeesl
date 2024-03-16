@@ -4,8 +4,6 @@ import java.io.File;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -16,9 +14,6 @@ import org.xml.sax.SAXException;
 @Mojo(name="parseXhtml")
 public class JeeslXhtmlGoal extends AbstractMojo
 {
-	@Parameter(defaultValue = "WARN")
-    private String log;
-
 	@Parameter(defaultValue="${project.groupId}")
     private String groupId;
 
@@ -37,9 +32,6 @@ public class JeeslXhtmlGoal extends AbstractMojo
     @Override
 	public void execute() throws MojoExecutionException
     {
-    	BasicConfigurator.configure();
-    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
-
     	getLog().info("groupId: "+groupId);
     	getLog().info("projectArtifactId: "+projectArtifactId);
     	getLog().info("artifactId: "+artifactId);
