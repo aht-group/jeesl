@@ -5,6 +5,7 @@ import java.util.List;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 
 public interface JeeslIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 								SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?,?>>
@@ -13,6 +14,7 @@ public interface JeeslIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 //	List<CqId> getIds();
 	List<String> getRootFetches();
 	List<String> getCodeList();
+	List<CqOrdering> getOrderings();
 	
 	List<SYSTEM> getSystems();
 	List<SNAP> getSnapshots();

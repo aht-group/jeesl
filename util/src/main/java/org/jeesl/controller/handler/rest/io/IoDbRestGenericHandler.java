@@ -49,7 +49,6 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaColumn;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSchema;
@@ -60,6 +59,7 @@ import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.util.db.cache.EjbCodeCache;
+import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

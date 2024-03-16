@@ -29,10 +29,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.model.json.io.db.pg.explain.JsonPostgresExplain;
 import org.jeesl.model.json.io.db.pg.explain.JsonPostgresTrigger;
+import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

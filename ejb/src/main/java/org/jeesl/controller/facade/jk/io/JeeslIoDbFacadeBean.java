@@ -36,11 +36,11 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -402,7 +402,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return null;
 	}
 	
-	@Override public List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM, SNAP> query)
+	@Override public List<FW> fIoDbFlyWay(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		// TODO Auto-generated method stub
 		return null;
