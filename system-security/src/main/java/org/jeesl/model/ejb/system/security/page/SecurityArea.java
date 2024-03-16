@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +39,7 @@ public class SecurityArea implements JeeslSecurityArea<IoLang,IoDescription,Secu
 
 	@Override public String resolveParentAttribute() {return JeeslSecurityArea.Attributes.view.toString();}
 	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_SecurityArea_view"))
 	private SecurityView view;
 	@Override public SecurityView getView() {return view;}
 	@Override public void setView(SecurityView view) {this.view = view;}

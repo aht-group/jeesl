@@ -17,13 +17,13 @@ public class SqlConstraintFactory <SCHEMA extends JeeslDbMetaSchema<?,?>,
 	
 	public String rename(CON from, CON to)
 	{
-		return SqlConstraintFactory.rename(from.getTable().getCode(),from.getCode(),to.getCode());
+		return SqlConstraintFactory.rename(from.getTable().getSchema().getCode()+"."+from.getTable().getCode(),from.getCode(),to.getCode());
 	}
 	
 	public List<String> drop(List<CON> constraints)
 	{
 		List<String> list = new ArrayList<>();
-		for(CON c : constraints) {list.add(SqlConstraintFactory.drop(c.getTable().getCode(),c.getCode()));}
+		for(CON c : constraints) {list.add(SqlConstraintFactory.drop(c.getTable().getSchema().getCode()+"."+c.getTable().getCode(),c.getCode()));}
 		return list;
 	}
 	

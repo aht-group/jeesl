@@ -13,6 +13,11 @@ public class JsonPostgresMetaTable implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
+	@JsonProperty("tablespace")
+	private JsonPostgresTablespace tablespace;
+	public JsonPostgresTablespace getTablespace() {return tablespace;}
+	public void setTablespace(JsonPostgresTablespace tablespace) {this.tablespace = tablespace;}
+	
 	@JsonProperty("scheme")
 	private String scheme;
 	public String getScheme() {return scheme;}

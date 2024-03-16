@@ -47,7 +47,7 @@ public class LoggerBootstrap
 			Configurator.initialize(null, sb.toString());
 //			logger.info("Activated with "+sb.toString());
 		}
-		
+		logger.info("Log4j2 configured with ["+String.join(", ",paths)+"]");
 	}
 
 	public static boolean isLog4jInited() {return log4jInited;}

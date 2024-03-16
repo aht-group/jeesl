@@ -39,6 +39,12 @@ public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnaps
 	@Override public IoSsiSystem getSystem() {return system;}
 	@Override public void setSystem(IoSsiSystem system) {this.system = system;}
 	
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaTable_space"))
+	private IoDbMetaSpace space;
+	public IoDbMetaSpace getSpace() {return space;}
+	public void setSpace(IoDbMetaSpace space) {this.space = space;}
+	
 //	@Override public String resolveParentAttribute() {return JeeslAttributeOption.Attributes.criteria.toString();}
 	@NotNull @ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaTable_schema"))

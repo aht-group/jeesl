@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.JsonUtil;
-import org.exlp.util.io.StringUtil;
 import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaColumnFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaConstraintFactory;
@@ -34,8 +34,11 @@ public class DatabaseSnapshotProcessor
 
 	private final Connection connection;
 	
-	private final Map<String,String> mapIdxTbs;
+	private final Map<String,String> mapTbsIndex,mapTbsTable;
 	private final Set<String> filteredTables;
+	
+	private Statement stmt;
+    private ResultSet rs;
 	
 	public DatabaseSnapshotProcessor filter(String table) {filteredTables.add(table); return this;}
 	
@@ -44,7 +47,11 @@ public class DatabaseSnapshotProcessor
 	{
 		this.connection=connection;
 		filteredTables = new HashSet<>();
-		mapIdxTbs = new HashMap<>();
+		mapTbsIndex = new HashMap<>();
+		mapTbsTable = new HashMap<>();
+		
+		stmt = null;
+		rs = null;
 	}
 	
 	public JsonPostgresMetaSnapshot snapshot() throws SQLException, IOException
@@ -53,22 +60,7 @@ public class DatabaseSnapshotProcessor
 		jSnapshot.setRecord(LocalDateTime.now());
 		jSnapshot.setTables(new ArrayList<>());
 		
-		Statement stmt = null;
-        ResultSet rs = null;
-		try
-		{
-			stmt = connection.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM pg_indexes WHERE tablespace IS NOT NULL;");
-
-            while (rs.next())
-            {
-            	String idxName = rs.getString("indexname");
-            	String tbs = rs.getString("tablespace");
-            	mapIdxTbs.put(idxName,tbs);
-            }
-        }
-		catch (SQLException e) {e.printStackTrace();}
-		finally {DbUtils.closeQuietly(rs);DbUtils.closeQuietly(stmt);}
+		this.tablespaces();
 		
 		DatabaseMetaData meta = connection.getMetaData();
 		
@@ -78,6 +70,8 @@ public class DatabaseSnapshotProcessor
 		{
 			for(int i=1;i<=rsTable.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsTable.getMetaData().getColumnName(i)+": "+rsTable.getString(i));}
 			JsonPostgresMetaTable table = JsonDbMetaTableFactory.build(rsTable);
+			if(mapTbsTable.containsKey(table.getCode())) {table.setTablespace(JsonPostgresTablespaceFactory.build(mapTbsTable.get(table.getCode())));}
+			Optional.ofNullable(mapTbsTable.get(table.getCode())).ifPresent(v -> {table.setTablespace(JsonPostgresTablespaceFactory.build(v));});
 			
 			boolean proceed = true;
 			if(ObjectUtils.isNotEmpty(filteredTables)) {proceed = filteredTables.contains(table.getCode());}
@@ -95,7 +89,6 @@ public class DatabaseSnapshotProcessor
 					for(int i=1;i<=rsColumn.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsColumn.getMetaData().getColumnName(i)+": "+rsColumn.getString(i));}
 					table.getColumns().add(JsonDbMetaColumnFactory.build(rsColumn));
 				}
-				
 				
 				Map<String,JsonPostgresMetaConstraint> mapPk = new HashMap<>();
 				ResultSet rsPk = meta.getPrimaryKeys(null, null, table.getCode());
@@ -134,7 +127,7 @@ public class DatabaseSnapshotProcessor
 				{
 					for(JsonPostgresMetaConstraint c : mapUk.values())
 					{
-						if(mapIdxTbs.containsKey(c.getCode())) {c.setTablespace(JsonPostgresTablespaceFactory.build(mapIdxTbs.get(c.getCode())));}
+						if(mapTbsIndex.containsKey(c.getCode())) {c.setTablespace(JsonPostgresTablespaceFactory.build(mapTbsIndex.get(c.getCode())));}
 						boolean isPk = mapPk.containsKey(c.getCode());
 						if(!isPk) {table.getUniqueKeys().add(c);}
 					}
@@ -143,7 +136,7 @@ public class DatabaseSnapshotProcessor
 				{
 					for(JsonPostgresMetaConstraint c : mapIdx.values())
 					{
-						if(mapIdxTbs.containsKey(c.getCode())) {c.setTablespace(JsonPostgresTablespaceFactory.build(mapIdxTbs.get(c.getCode())));}
+						if(mapTbsIndex.containsKey(c.getCode())) {c.setTablespace(JsonPostgresTablespaceFactory.build(mapTbsIndex.get(c.getCode())));}
 						boolean isPk = mapPk.containsKey(c.getCode());
 						boolean isUk = mapUk.containsKey(c.getCode());
 						if(!isPk && !isUk) {table.getIndexes().add(c);}
@@ -155,5 +148,38 @@ public class DatabaseSnapshotProcessor
 			}
 		}
 		return jSnapshot;
+	}
+	
+	private void tablespaces()
+	{
+		try
+		{
+			stmt = connection.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM pg_indexes WHERE tablespace IS NOT NULL;");
+
+            while (rs.next())
+            {
+            	String idxName = rs.getString("indexname");
+            	String tbs = rs.getString("tablespace");
+            	mapTbsIndex.put(idxName,tbs);
+            }
+        }
+		catch (SQLException e) {e.printStackTrace();}
+		finally {DbUtils.closeQuietly(rs);DbUtils.closeQuietly(stmt);}
+		
+		try
+		{
+			stmt = connection.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM pg_tables WHERE tablespace IS NOT NULL;");
+
+            while (rs.next())
+            {
+            	String table = rs.getString("tablename");
+            	String space = rs.getString("tablespace");
+            	mapTbsTable.put(table,space);
+            }
+        }
+		catch (SQLException e) {e.printStackTrace();}
+		finally {DbUtils.closeQuietly(rs);DbUtils.closeQuietly(stmt);}
 	}
 }

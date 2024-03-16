@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,9 +37,16 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public void setId(long id) {this.id = id;}
 	
 	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaConstraint_schema"))
 	private IoDbMetaTable table;
 	@Override public IoDbMetaTable getTable() {return table;}
 	@Override public void setTable(IoDbMetaTable table) {this.table = table;}
+	
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaConstraint_space"))
+	private IoDbMetaSpace space;
+	public IoDbMetaSpace getSpace() {return space;}
+	public void setSpace(IoDbMetaSpace space) {this.space = space;}
 
 	@NotNull
 	private String code;

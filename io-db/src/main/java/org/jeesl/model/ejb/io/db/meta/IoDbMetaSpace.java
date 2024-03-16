@@ -17,7 +17,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("ioDbMetaTablespace")
 @EjbErNode(name="Type",category="system",subset="db",level=3)
-public class IoDbMetaTablespace extends IoStatus implements JeeslDbMetaTablespace<IoLang,IoDescription,IoDbMetaTablespace,IoGraphic>
+public class IoDbMetaSpace extends IoStatus implements JeeslDbMetaTablespace<IoLang,IoDescription,IoDbMetaSpace,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 	
@@ -28,6 +28,6 @@ public class IoDbMetaTablespace extends IoStatus implements JeeslDbMetaTablespac
 		return fixed;
 	}
 	
-	@Override public boolean equals(Object object) {return (object instanceof IoDbMetaTablespace) ? id == ((IoDbMetaTablespace) object).getId() : (object == this);}
+	@Override public boolean equals(Object object) {return (object instanceof IoDbMetaSpace) ? id == ((IoDbMetaSpace) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }
