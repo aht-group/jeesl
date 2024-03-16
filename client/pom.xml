@@ -276,18 +276,12 @@
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
-        <dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		<!--	<version>1.2.17</version>-->
-		<!-- Acitivate if problems occur with Apache POI upgrade (Issue 1018) -->
-			<type>jar</type>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<scope>test</scope>
 		</dependency>
 		 <dependency>
 			<groupId>org.slf4j</groupId>
@@ -295,12 +289,7 @@
 			<type>jar</type>
 		</dependency>
 				
-		<!-- Test 
-	  	<dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency> -->
+		<!-- Test -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>

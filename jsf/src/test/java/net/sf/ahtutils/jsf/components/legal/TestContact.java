@@ -2,16 +2,15 @@ package net.sf.ahtutils.jsf.components.legal;
 
 import java.util.Scanner;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsJsfTst;
-import net.sf.ahtutils.test.UtilsJsfTstBootstrap;
-
+import org.jeesl.test.AbstractJeeslJsfTest;
+import org.jeesl.test.JeeslJsfTestBootstrap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestContact extends AbstractAhtUtilsJsfTst
+public class TestContact extends AbstractJeeslJsfTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestContact.class);
 	
@@ -42,7 +41,7 @@ public class TestContact extends AbstractAhtUtilsJsfTst
 	
 	public static void main(String[] args)
     {
-		UtilsJsfTstBootstrap.init();		
+		JeeslJsfTestBootstrap.init();		
 		Scanner sc = new Scanner(System.in);
 		Contact c = new Contact();
 		

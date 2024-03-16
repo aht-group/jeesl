@@ -1,6 +1,6 @@
 package net.sf.ahtutils.net.auth;
 
-import org.jeesl.JeeslBootstrap;
+import org.jeesl.test.JeeslBootstrap;
 import org.jeesl.util.db.ActiveDirectoryAuthenticator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

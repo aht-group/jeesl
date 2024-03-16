@@ -3,12 +3,6 @@ package org.jeesl.maven.goal.js;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.ahtutils.controller.factory.js.JsFactory;
-import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.io.RelativePathFactory.PathSeparator;
-
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -16,6 +10,10 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.mozilla.javascript.EvaluatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.controller.factory.js.JsFactory;
+import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.exlp.util.io.RelativePathFactory.PathSeparator;
 
 @Mojo(name="createJs")
 public class JsBuilderGoal extends AbstractMojo
@@ -39,10 +37,7 @@ public class JsBuilderGoal extends AbstractMojo
     
     
     public void execute() throws MojoExecutionException
-    {
-    	BasicConfigurator.configure();
-    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
-    	
+    {    	
     	File fProject = new File(projectBaseDir);
     	if(!fProject.exists()){throw new MojoExecutionException(fProject.getAbsolutePath()+" does not exist");}
     	if(!fProject.isDirectory()){throw new MojoExecutionException(fProject.getAbsolutePath()+" is not a directory");}

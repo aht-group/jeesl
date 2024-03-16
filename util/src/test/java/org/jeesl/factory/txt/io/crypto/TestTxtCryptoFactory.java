@@ -11,8 +11,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
+import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

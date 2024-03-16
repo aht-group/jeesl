@@ -1,7 +1,7 @@
 package org.jeesl.controller.io.db;
 
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.io.db.shell.mysql.MySqlShellCommands;
+import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

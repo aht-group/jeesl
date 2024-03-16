@@ -5,8 +5,8 @@ import java.util.Date;
 
 import org.exlp.util.system.DateUtil;
 import org.jeesl.AbstractJeeslUtilTest;
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.json.util.JsonDateFactory;
+import org.jeesl.test.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

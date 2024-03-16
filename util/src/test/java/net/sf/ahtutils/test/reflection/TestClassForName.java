@@ -1,6 +1,6 @@
 package net.sf.ahtutils.test.reflection;
 
-import org.jeesl.JeeslBootstrap;
+import org.jeesl.test.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

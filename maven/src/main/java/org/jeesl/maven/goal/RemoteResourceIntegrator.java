@@ -3,10 +3,9 @@ package org.jeesl.maven.goal;
 
 import java.io.File;
 import java.net.URL;
+
 import org.apache.ant.compress.taskdefs.Unzip;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -45,8 +44,6 @@ public class RemoteResourceIntegrator extends AbstractMojo
 	
     public void execute() throws MojoExecutionException
     {
-    	BasicConfigurator.configure();
-    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
     	
     	getLog().info("Trying to download remote resource from " +resourceArchiveUrl);
         try {

@@ -3,8 +3,6 @@ package org.jeesl.maven.goal.eap;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.jboss.as.controller.client.ModelControllerClient;
@@ -31,14 +29,11 @@ public class JeeslJbossEap80Configurator extends AbstractJbossEapConfigurator
 	
     public void execute() throws MojoExecutionException
     {
-    	BasicConfigurator.configure();
-    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
-
-		try {
+		try
+		{
 			configureEap(super.config());
-		} catch (Exception ex) {
-			throw new MojoExecutionException(ex.getClass().toGenericString() +": " +ex.getMessage());
 		}
+		catch (Exception e) {throw new MojoExecutionException(e.getClass().toGenericString() +": " +e.getMessage());}
     }
     
    

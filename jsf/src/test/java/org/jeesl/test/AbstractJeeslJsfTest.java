@@ -1,4 +1,4 @@
-package net.sf.ahtutils.test;
+package org.jeesl.test;
 
 import java.io.File;
 
@@ -9,9 +9,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractAhtUtilsJsfTst extends AbstractJeeslTest
+import net.sf.ahtutils.test.AbstractJeeslTest;
+
+public class AbstractJeeslJsfTest extends AbstractJeeslTest
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractAhtUtilsJsfTst.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslJsfTest.class);
 	
 	protected static NsPrefixMapperInterface nsPrefixMapper;
 	protected static File fTarget;
@@ -25,7 +27,7 @@ public class AbstractAhtUtilsJsfTst extends AbstractJeeslTest
 		setfTarget(new File(dirTarget));
 		logger.debug("Using targeDir "+fTarget.getAbsolutePath());
 	}
-	protected static void setfTarget(File fTarget) {AbstractAhtUtilsJsfTst.fTarget = fTarget;}
+	protected static void setfTarget(File fTarget) {AbstractJeeslJsfTest.fTarget = fTarget;}
 	
 	@BeforeAll
     public static void initLogger()

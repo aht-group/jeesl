@@ -13,8 +13,6 @@ import java.util.EnumSet;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.artifact.resolver.filter.AndArtifactFilter;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
 import org.apache.maven.execution.MavenSession;
@@ -61,9 +59,6 @@ public class JeeslDependencyGoal extends AbstractMojo
 		
 	}
 	
-	@Parameter(defaultValue="INFO")
-    private String log;
-
 	@Parameter(defaultValue = "${session}", readonly=true)
 	private MavenSession mavenSession;
 	
@@ -86,15 +81,12 @@ public class JeeslDependencyGoal extends AbstractMojo
 	
 	public void execute() throws MojoExecutionException
 	{
-		super.getLog().info("Skip: "+skip);
+		logger.info("Skip: "+skip);
 		if(!Boolean.valueOf(skip))
-		{
-			BasicConfigurator.configure();
-			org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
-			
-			super.getLog().info(project.toString());
-			super.getLog().info("groupId: "+groupId);
-			super.getLog().info("artifactId: "+artifactId);
+		{			
+			logger.info(project.toString());
+			logger.info("groupId: "+groupId);
+			logger.info("artifactId: "+artifactId);
 	    	
 		    GraphStyleConfigurer graphStyleConfigurer = new JsonGraphStyleConfigurer();
 

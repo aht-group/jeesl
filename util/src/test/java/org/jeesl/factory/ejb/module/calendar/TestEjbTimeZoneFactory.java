@@ -9,9 +9,9 @@ import java.util.TimeZone;
 
 import org.exlp.util.io.StringUtil;
 import org.jeesl.AbstractJeeslUtilTest;
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.test.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

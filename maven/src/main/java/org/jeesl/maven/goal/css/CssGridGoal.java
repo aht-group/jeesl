@@ -3,24 +3,19 @@ package org.jeesl.maven.goal.css;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.ahtutils.controller.factory.html.CssGridBuilder;
-import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.io.RelativePathFactory.PathSeparator;
-
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import net.sf.ahtutils.controller.factory.html.CssGridBuilder;
+import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.exlp.util.io.RelativePathFactory.PathSeparator;
+
 @Mojo(name="createCssGrid")
 public class CssGridGoal extends AbstractMojo
-{
-	@Parameter(defaultValue="WARN")
-    private String log;
-    
+{    
 	@Parameter(defaultValue="${project.build.directory}/security.${project.artifactId}")
     private String targetDir;
 	
@@ -31,10 +26,7 @@ public class CssGridGoal extends AbstractMojo
     private String vcsTest;
     	
     public void execute() throws MojoExecutionException
-    {
-    	BasicConfigurator.configure();
-    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
-    	
+    {    	
     	File fTmpDir = new File(targetDir);
     	if(!fTmpDir.exists()){fTmpDir.mkdirs();}
     	

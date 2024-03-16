@@ -3,8 +3,6 @@ package org.jeesl.maven.goal;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -16,10 +14,7 @@ import org.jeesl.factory.txt.system.locale.TranslationFactory;
 
 @Mojo(name="msgBundle2")
 public class JeeslMsgGoal extends AbstractMojo
-{
-	@Parameter(defaultValue="WARN")
-    private String log;
-    
+{    
 	@Parameter(defaultValue="${project.groupId}")
     private String groupId;
 	
@@ -45,10 +40,7 @@ public class JeeslMsgGoal extends AbstractMojo
     private String prefixXml;
     	
     public void execute() throws MojoExecutionException
-    {
-    	BasicConfigurator.configure();
-    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
-	
+    {	
     	getLog().info("groupId: "+groupId);
     	getLog().info("projectArtifactId: "+projectArtifactId);
     	getLog().info("artifactId: "+artifactId);

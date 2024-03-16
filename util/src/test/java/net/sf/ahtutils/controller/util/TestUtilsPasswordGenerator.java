@@ -1,7 +1,7 @@
 package net.sf.ahtutils.controller.util;
 
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.txt.system.security.user.TxtPasswordGenerator;
+import org.jeesl.test.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

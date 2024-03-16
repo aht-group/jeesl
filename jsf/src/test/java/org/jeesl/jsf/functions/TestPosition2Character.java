@@ -1,21 +1,19 @@
 package org.jeesl.jsf.functions;
 
 import org.jeesl.jsf.function.Position2Character;
+import org.jeesl.test.AbstractJeeslJsfTest;
+import org.jeesl.test.JeeslJsfTestBootstrap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsJsfTst;
-import net.sf.ahtutils.test.UtilsJsfTstBootstrap;
-
-public class TestPosition2Character extends AbstractAhtUtilsJsfTst
+public class TestPosition2Character extends AbstractJeeslJsfTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestPosition2Character.class);
 	
 	
-	@Test
-	public void test()
+	@Test public void test()
 	{
 		Assertions.assertEquals("A", Position2Character.toChar(1));
 		Assertions.assertEquals("B", Position2Character.toChar(2));	
@@ -23,7 +21,6 @@ public class TestPosition2Character extends AbstractAhtUtilsJsfTst
 	
 	public static void main(String[] args)
     {
-		UtilsJsfTstBootstrap.init();		
-		
+		JeeslJsfTestBootstrap.init();		
     }
 }

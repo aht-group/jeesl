@@ -2,16 +2,16 @@ package net.sf.ahtutils.jsf.filerepo;
 
 import java.io.File;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsJsfTst;
 import net.sf.exlp.util.io.HashUtil;
 
+import org.jeesl.test.AbstractJeeslJsfTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestUtilsFileRepository extends AbstractAhtUtilsJsfTst
+public class TestUtilsFileRepository extends AbstractJeeslJsfTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestUtilsFileRepository.class);
 		

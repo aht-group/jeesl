@@ -1,9 +1,8 @@
 package net.sf.ahtutils.jsf.menu;
 
-import net.sf.ahtutils.test.UtilsJsfTstBootstrap;
-
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.system.navigation.Menu;
+import org.jeesl.test.JeeslJsfTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +24,7 @@ public class TstMenu
 	
 	public static void main(String[] args)
     {
-		UtilsJsfTstBootstrap.init();		
+		JeeslJsfTestBootstrap.init();		
 			
 		TstMenu test = new TstMenu();
 		test.debug();

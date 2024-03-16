@@ -1,8 +1,6 @@
 package org.jeesl.maven.goal.eap;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.jeesl.controller.io.db.shell.mysql.MySqlShellCommands;
@@ -21,9 +19,6 @@ public class JeeslJbossEap71Configurator extends AbstractJbossEapConfigurator
 	
     public void execute() throws MojoExecutionException
     {
-    	BasicConfigurator.configure();
-    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
-
     	Configuration config = config();
 			//		try{dbRestore(config);}
 //		catch (ExlpUnsupportedOsException e) {throw new MojoExecutionException(e.getMessage());}
