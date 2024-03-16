@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.jeesl.JeeslBootstrap;
+import org.jeesl.test.JeeslBootstrap;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -3,9 +3,9 @@ package org.jeesl.factory.json;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.factory.json.util.JsonDayFactory;
 import org.jeesl.model.json.util.time.JsonDay;
+import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -4,9 +4,9 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.io.mail.imap.XmlImapStore;
 import org.jeesl.model.xml.io.mail.Mails;
+import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

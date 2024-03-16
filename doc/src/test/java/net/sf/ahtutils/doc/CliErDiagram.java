@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.configuration.Configuration;
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.doc.er.AbstractErDiagram;
+import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

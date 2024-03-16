@@ -281,8 +281,7 @@
 		<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-			<version>2.14.0</version>
-			<!-- Must be in for Apache POI upgrade (Issue 1018) -->
+			<version>2.14.0</version>	<!-- Must be in for Apache POI upgrade (Issue 1018) -->
         </dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -293,13 +292,6 @@
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-core</artifactId>
 		</dependency>
-		
-		<!--2022-10-14 tk Preparing removal 
-		<dependency>
-    		<groupId>de.sven-jacobs</groupId>
-    		<artifactId>loremipsum</artifactId>
-		</dependency>
-		-->
 		
 		<dependency>
 			<groupId>org.ehcache</groupId>
@@ -336,15 +328,10 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-   	   		<groupId>org.slf4j</groupId>
-   	   		<artifactId>slf4j-log4j12</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   		<dependency>
-   	   		<groupId>log4j</groupId>
-   	   		<artifactId>log4j</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<scope>test</scope>
+		</dependency>
 		
 		<!-- Test 
 		<dependency>

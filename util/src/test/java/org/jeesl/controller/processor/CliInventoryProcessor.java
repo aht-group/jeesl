@@ -1,10 +1,10 @@
 package org.jeesl.controller.processor;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.processor.pcinventory.PcInventoryPostProcessor;
 import org.jeesl.controller.processor.pcinventory.PcInventoryProcessor;
 import org.jeesl.model.xml.module.inventory.Inventory;
+import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
