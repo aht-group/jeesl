@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,8 +23,8 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
-@Table(name="IoDbMetaTable",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","code"}))
-public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnapshot>
+@Table(name="IoDbMetaTable",uniqueConstraints=@UniqueConstraint(name="uk_IoDbMetaTable_system_schema_code",columnNames={"system_id","schema_id","code"}))
+public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnapshot,IoDbMetaSchema>
 {
 	public static final long serialVersionUID=1;
 	
@@ -38,6 +39,19 @@ public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnaps
 	@Override public IoSsiSystem getSystem() {return system;}
 	@Override public void setSystem(IoSsiSystem system) {this.system = system;}
 	
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaTable_space"))
+	private IoDbMetaSpace space;
+	public IoDbMetaSpace getSpace() {return space;}
+	public void setSpace(IoDbMetaSpace space) {this.space = space;}
+	
+//	@Override public String resolveParentAttribute() {return JeeslAttributeOption.Attributes.criteria.toString();}
+	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaTable_schema"))
+	private IoDbMetaSchema schema;
+	public IoDbMetaSchema getSchema() {return schema;}
+	public void setSchema(IoDbMetaSchema schema) {this.schema = schema;}
+
 	@NotNull
 	private String code;
 	@Override public String getCode() {return code;}
@@ -56,7 +70,8 @@ public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnaps
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("[").append(id).append("|");
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(code);
 		return sb.toString();
 	}
 }

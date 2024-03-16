@@ -7,6 +7,43 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Tuple;
+import javax.persistence.TypedQuery;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.jeesl.api.facade.io.JeeslIoDbFacade;
+import org.jeesl.controller.facade.jk.JeeslFacadeBean;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
+import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
+import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
+import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
+import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
+import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
+import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
+import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
+import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
+import org.jeesl.model.json.io.db.pg.JsonPostgres;
+import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -18,55 +55,28 @@ import jakarta.persistence.criteria.ListJoin;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.controller.facade.jk.JeeslFacadeBean;
-import org.jeesl.exception.ejb.JeeslConstraintViolationException;
-import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
-import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
-import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
-import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
-import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
-import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
-import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
-import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
-import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
-import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
-import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
-import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
-import org.jeesl.model.json.io.db.pg.JsonPostgres;
-import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
 								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
+								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,?,CUN>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
 								FW extends JeeslIoDbFlyway>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON,CUN,FW>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,SCHEMA,TAB,COL,CON,CUN,FW>
 {
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
-	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta;
 	
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta, boolean handleTransaction)
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta, boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 		this.fbDb=fbDb;
@@ -228,7 +238,36 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 	}
 	
-	@Override public List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<SCHEMA> fIoDbMetaSchemas(JeeslIoDbQuery<SYSTEM,SNAP> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<SCHEMA> cQ = cB.createQuery(fbDbMeta.getClassSchema());
+		Root<SCHEMA> root = cQ.from(fbDbMeta.getClassSchema());
+		
+		if(ObjectUtils.isNotEmpty(query.getCodeList()))
+		{
+			Expression<String> eCode = root.get(JeeslDbMetaSchema.Attributes.code.toString());
+			predicates.add(eCode.in(query.getCodeList()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSystems()))
+		{
+			Join<TAB,SYSTEM> jSystem = root.join(JeeslDbMetaSchema.Attributes.system.toString());
+			predicates.add(jSystem.in(query.getSystems()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSnapshots()))
+		{
+			ListJoin<TAB,SNAP> jSnapshot = root.joinList(JeeslDbMetaSchema.Attributes.snapshots.toString());
+			predicates.add(jSnapshot.in(query.getSnapshots()));
+		}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		return em.createQuery(cQ).getResultList();
+	}
+	
+	@Override public List<TAB> fIoDbMetaTables(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -257,12 +296,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<COL> fIoDbMetaColumns(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<COL> cQ = cB.createQuery(fbDbMeta.getClassMetaColumn());
-		Root<COL> root = cQ.from(fbDbMeta.getClassMetaColumn());
+		CriteriaQuery<COL> cQ = cB.createQuery(fbDbMeta.getClassColumn());
+		Root<COL> root = cQ.from(fbDbMeta.getClassColumn());
 		
 		if(ObjectUtils.isNotEmpty(query.getCodeList()))
 		{
@@ -287,7 +326,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<CON> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<CON> fIoDbMetaConstraints(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -314,12 +353,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 		cQ.select(root);	    
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.distinct(query.isDistinct());
+		cQ.distinct(BooleanComparator.active(query.getDistinct()));
 		
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM, SNAP> query)
+	@Override public List<CUN> fIoDbMetaUniques(JeeslIoDbQuery<SYSTEM, SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -352,7 +391,18 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM, SNAP> query)
+	@Override public JsonTuples1<SNAP> tpIoDbBySnapshot(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override public JsonTuples1<SYSTEM> tpIoDbBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override public List<FW> fIoDbFlyWay(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		// TODO Auto-generated method stub
 		return null;

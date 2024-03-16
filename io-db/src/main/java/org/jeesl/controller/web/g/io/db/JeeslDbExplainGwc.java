@@ -29,10 +29,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.model.json.io.db.pg.explain.JsonPostgresExplain;
 import org.jeesl.model.json.io.db.pg.explain.JsonPostgresTrigger;
+import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,8 +42,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,TAB,COL,CON>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,?>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,CUN>,
@@ -56,9 +56,9 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbExplainGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,?,TAB,COL,COLT,CON,CONT,CUN,DIFF,?> fbDb;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,?,TAB,COL,CON,CUN,?> fDb;
 	
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
@@ -73,7 +73,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 
 	private JsonPostgresExplain explain; public JsonPostgresExplain getExplain() {return explain;} public void setExplain(JsonPostgresExplain explain) {this.explain = explain;}
 	
-	public JeeslDbExplainGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb)
+	public JeeslDbExplainGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,?,TAB,COL,COLT,CON,CONT,CUN,DIFF,?> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;
@@ -83,7 +83,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 		mapConstraint = new HashMap<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,?,TAB,COL,CON,CUN,?> fDb)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb=fDb;

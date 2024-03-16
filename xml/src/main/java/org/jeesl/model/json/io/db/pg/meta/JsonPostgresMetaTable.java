@@ -13,6 +13,11 @@ public class JsonPostgresMetaTable implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
+	@JsonProperty("tablespace")
+	private JsonPostgresTablespace tablespace;
+	public JsonPostgresTablespace getTablespace() {return tablespace;}
+	public void setTablespace(JsonPostgresTablespace tablespace) {this.tablespace = tablespace;}
+	
 	@JsonProperty("scheme")
 	private String scheme;
 	public String getScheme() {return scheme;}
@@ -42,4 +47,9 @@ public class JsonPostgresMetaTable implements Serializable
 	private List<JsonPostgresMetaConstraint> uniqueKeys;
 	public List<JsonPostgresMetaConstraint> getUniqueKeys() {return uniqueKeys;}
 	public void setUniqueKeys(List<JsonPostgresMetaConstraint> uniqueKeys) {this.uniqueKeys = uniqueKeys;}
+	
+	@JsonProperty("indexes")
+	private List<JsonPostgresMetaConstraint> indexes;
+	public List<JsonPostgresMetaConstraint> getIndexes() {return indexes;}
+	public void setIndexes(List<JsonPostgresMetaConstraint> indexes) {this.indexes = indexes;}
 }

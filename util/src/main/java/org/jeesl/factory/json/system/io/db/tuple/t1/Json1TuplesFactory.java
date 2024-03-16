@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
-import org.exlp.util.io.JsonUtil;
+import org.apache.poi.ss.formula.functions.T;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 
 public class Json1TuplesFactory <A extends EjbWithId>
 {
@@ -32,6 +33,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	
 	protected final Map<Long,A> mapA; public Map<Long,A> getMapA() {return mapA;}
 	
+	protected final Map<A,JsonTuple1<A>> map1;
 	private JsonTuples1<A> tuples; public JsonTuples1<A> get1Tuples() {return tuples;} public void set1Tuples(JsonTuples1<A> tuples) {this.tuples = tuples;}
 
 	public static <A extends EjbWithId> Json1TuplesFactory<A> instance(Class<A> cA) {return new Json1TuplesFactory<>(cA);}
@@ -45,8 +47,9 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	{
 		this.cA=cA;
 		this.fUtils=fUtils;
-		setA = new HashSet<Long>();
-		mapA = new HashMap<Long,A>();
+		setA = new HashSet<>();
+		mapA = new HashMap<>();
+		map1 = new HashMap<>();
 		
 		jtf = new Json1TupleFactory<A>();
 	}
@@ -74,6 +77,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	{
 		setA.clear();
 		mapA.clear();
+		map1.clear();
 	}
 	
 	public List<A> toListA()
@@ -127,21 +131,6 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		for(Tuple t : tuples)
         {
 			JsonTuple1<A> j = jtf.buildSum(t);
-			setA.add(j.getId1());
-        	json.getTuples().add(j);
-        }
-		ejb1Load(json);
-		return json;
-	}
-	
-	@Deprecated
-	public JsonTuples1<A> buildCount1(List<Tuple> tuples)
-	{
-		JsonTuples1<A> json = new JsonTuples1<A>();
-		
-		for(Tuple t : tuples)
-        {
-			JsonTuple1<A> j = jtf.buildCount(t);
 			setA.add(j.getId1());
         	json.getTuples().add(j);
         }
@@ -226,16 +215,31 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		}
 	}
 	
-	@Deprecated
-	public Map<A,JsonTuple1<A>> toMap(JsonTuples1<A> tuples)
-	{
-		Map<A,JsonTuple1<A>> map = new HashMap<A,JsonTuple1<A>>();
-		
-		for(JsonTuple1<A> t : tuples.getTuples())
+	public void merge(JsonTuples1<A> additional, JsonTupleFactory.Type type, int from, int to)
+	{	
+		for(JsonTuple1<A> t : additional.getTuples())
 		{
-			if(!map.containsKey(t.getEjb1())) {map.put(t.getEjb1(), t);}
+			if(!map1.containsKey(t.getEjb1())) {map1.put(t.getEjb1(),JsonTupleFactory.build1(t));}
+			JsonTuple1<A> merged = map1.get(t.getEjb1());
+			
+			if(type.equals(JsonTupleFactory.Type.count))
+			{
+				Long value = null;
+				if(from==1) {value = t.getCount1();}
+				else if(from==2) {value = t.getCount2();}
+				else if(from==3) {value = t.getCount3();}
+				
+				if(to==1) {merged.setCount1(value);}
+				if(to==2) {merged.setCount2(value);}
+				if(to==3) {merged.setCount3(value);}
+			}
 		}
-		
-		return map;
+	}
+	
+	public JsonTuples1<A> mapToTuples()
+	{
+		JsonTuples1<A> json = new JsonTuples1<A>();
+		json.getTuples().addAll(map1.values());
+		return json;
 	}
 }

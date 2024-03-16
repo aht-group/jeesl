@@ -1,5 +1,7 @@
 package org.jeesl.controller.web.module.rmmv;
 
+import java.util.Objects;
+
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.module.JeeslRmmvFacade;
@@ -68,5 +70,9 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 		classification = fbRmmv.ejbClassification().build(realm,rref);
 		classification.setName(efLang.buildEmpty(lp.getLocales()));
 	}
-	
+
+	@Override protected void savedClassification()
+	{
+		if(Objects.nonNull(callback)) {callback.classificationSaved();}
+	}
 }

@@ -131,8 +131,6 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		}
 	}
 	
-	
-	
 	public void orderDescending()
 	{
 		cpTuple.setMap(map1);
@@ -142,7 +140,6 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 	
 	public void debug(boolean debug)
 	{
-		
 		logger.info(cA.getSimpleName()+" "+listA.size());
 	}
 }

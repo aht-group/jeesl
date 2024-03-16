@@ -10,11 +10,14 @@ import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDateTime;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslAttributes
 @DownloadJeeslDescription
 public interface JeeslDbMetaSnapshot<SYSTEM extends JeeslIoSsiSystem<?,?>,
-									TAB extends JeeslDbMetaTable<SYSTEM,?>,
+									SCHEMA extends JeeslDbMetaSchema<SYSTEM,?>,
+									TAB extends JeeslDbMetaTable<SYSTEM,?,SCHEMA>,
 									COL extends JeeslDbMetaColumn<?,TAB,?>,
 									CON extends JeeslDbMetaConstraint<?,TAB,COL,?,?>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
@@ -24,6 +27,9 @@ public interface JeeslDbMetaSnapshot<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	SYSTEM getSystem();
 	void setSystem(SYSTEM system);
+	
+	List<SCHEMA> getSchemas();
+	void setSchemas(List<SCHEMA> schemas);
 	
 	List<TAB> getTables();
 	void setTables(List<TAB> tables);

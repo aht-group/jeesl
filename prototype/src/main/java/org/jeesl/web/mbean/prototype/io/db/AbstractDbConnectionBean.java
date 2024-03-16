@@ -33,7 +33,7 @@ public class AbstractDbConnectionBean <L extends JeeslLang, D extends JeeslDescr
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbConnectionBean.class);
 	
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,?,CC,CS,CW,?,?,?,?,?,?> fbPg;
 	
 	private final EjbCodeCache<CS> cacheState; public EjbCodeCache<CS> getCacheState() {return cacheState;}
@@ -57,7 +57,7 @@ public class AbstractDbConnectionBean <L extends JeeslLang, D extends JeeslDescr
 		mapColumn = new HashMap<>();
 	}
 	
-	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb)
+	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		cacheState.facade(fDb).load();

@@ -25,7 +25,7 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
 @Table(name="IoDbMetaSnapshot",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","record"}))
-public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint>
+public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMetaSchema,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint>
 {
 	public static final long serialVersionUID=1;
 
@@ -49,6 +49,12 @@ public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMet
 	private String name;
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
+	
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinTable(name="IoDbMetaSnapshotJtSchema",joinColumns={@JoinColumn(name="snapshot_id")},inverseJoinColumns={@JoinColumn(name="schema_id")})
+	private List<IoDbMetaSchema> schemas;
+	public List<IoDbMetaSchema> getSchemas() {if(Objects.isNull(schemas)) {schemas = new ArrayList<>();} return schemas;}
+	public void setSchemas(List<IoDbMetaSchema> schemas) {this.schemas = schemas;}
 	
 	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(name="IoDbMetaSnapshotJtTable",joinColumns={@JoinColumn(name="snapshot_id")},inverseJoinColumns={@JoinColumn(name="table_id")})
@@ -75,7 +81,7 @@ public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMet
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("[").append(id).append("|");
+		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}
 }

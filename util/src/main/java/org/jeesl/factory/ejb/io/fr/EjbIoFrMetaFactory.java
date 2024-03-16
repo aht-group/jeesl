@@ -3,8 +3,10 @@ package org.jeesl.factory.ejb.io.fr;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
@@ -84,6 +86,15 @@ public class EjbIoFrMetaFactory<CONTAINER extends JeeslFileContainer<?,META>,
 			map.get(meta.getContainer()).add(meta);
 		}
 		return map;
+	}
+	public List<CONTAINER> toContainers(List<META> metas)
+	{
+		Set<CONTAINER> set = new HashSet<>();
+		for(META meta : metas)
+		{
+			set.add(meta.getContainer());
+		}
+		return new ArrayList<>(set);
 	}
 	public Map<Long,List<META>> toMapIdMeta(List<META> metas)
 	{

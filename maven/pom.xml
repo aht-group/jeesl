@@ -46,6 +46,13 @@
         	<type>jar</type>
         	<scope>compile</scope>
 	    </dependency>
+	    <dependency>
+        	<groupId>org.jeesl</groupId>
+        	<artifactId>jeesl-xml</artifactId>
+        	<type>jar</type>
+        	<classifier>javax</classifier>
+        	<scope>compile</scope>
+	    </dependency>
 	    
 	    <!-- JEESL Modules -->
 	    <dependency>

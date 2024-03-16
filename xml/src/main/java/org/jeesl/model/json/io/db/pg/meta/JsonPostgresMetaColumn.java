@@ -28,4 +28,9 @@ public class JsonPostgresMetaColumn implements Serializable
 	private JsonType type;
 	public JsonType getType() {return type;}
 	public void setType(JsonType type) {this.type = type;}
+	
+	@JsonProperty("table")
+	private JsonPostgresMetaTable table;
+	public JsonPostgresMetaTable getTable() {return table;}
+	public void setTable(JsonPostgresMetaTable table) {this.table = table;}
 }

@@ -36,7 +36,7 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 			ejb = fbAttribute.getClassSet().newInstance();
 			ejb.setRealm(realm);
 			ejb.setRref(rref.getId());
-			ejb.setCategory2(category);
+			ejb.setCategory(category);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
@@ -67,7 +67,6 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 	
 	public void converter(JeeslFacade facade, SET ejb)
 	{
-//		if(ejb.getCategory()!=null) {ejb.setCategory(facade.find(fbAttribute.getClassCategory(),ejb.getCategory()));}
-		if(ejb.getCategory2()!=null) {ejb.setCategory2(facade.find(fbAttribute.getClassCat(),ejb.getCategory2()));}
+		if(ejb.getCategory()!=null) {ejb.setCategory(facade.find(fbAttribute.getClassCat(),ejb.getCategory()));}
 	}
 }

@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbIoDbTableComparator<MT extends JeeslDbMetaTable<?,?>>
+public class EjbIoDbTableComparator<MT extends JeeslDbMetaTable<?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbTableComparator.class);
 
@@ -36,6 +36,7 @@ public class EjbIoDbTableComparator<MT extends JeeslDbMetaTable<?,?>>
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
 			  ctb.append(a.getCode().startsWith("_"), b.getCode().startsWith("_"));
+			  ctb.append(a.getCode().endsWith("_"), b.getCode().endsWith("_"));
 			  ctb.append(a.getCode(), b.getCode());
 			  ctb.append(a.getId(),b.getId());
 			  return ctb.toComparison();

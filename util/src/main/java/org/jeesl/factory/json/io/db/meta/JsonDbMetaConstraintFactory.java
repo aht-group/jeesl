@@ -13,11 +13,11 @@ public class JsonDbMetaConstraintFactory
 {
 	public static JsonPostgresMetaConstraint buildPk(ResultSet rs) throws IOException, SQLException
 	{
-		return JsonDbMetaConstraintFactory.build(rs.getString("pk_name"),rs.getString("column_name"),null,null);
+		return JsonDbMetaConstraintFactory.build(rs.getString("pk_name"),rs.getString("table_name"),rs.getString("column_name"),null,null);
 	}
 	public static JsonPostgresMetaConstraint buildFk(ResultSet rs) throws IOException, SQLException
 	{
-		return JsonDbMetaConstraintFactory.build(rs.getString("fk_name"),rs.getString("fkcolumn_name"),rs.getString("pktable_name"),rs.getString("pkcolumn_name"));
+		return JsonDbMetaConstraintFactory.build(rs.getString("fk_name"),rs.getString("fktable_name"),rs.getString("fkcolumn_name"),rs.getString("pktable_name"),rs.getString("pkcolumn_name"));
 	}
 	public static void addUk(ResultSet rs, Map<String,JsonPostgresMetaConstraint> map) throws IOException, SQLException
 	{
@@ -27,8 +27,6 @@ public class JsonDbMetaConstraintFactory
 			JsonPostgresMetaConstraint json = new JsonPostgresMetaConstraint();
 			json.setCode(code);
 			json.setColumns(new ArrayList<>());
-//			if(code.endsWith("_pkey")) {json.setType(JsonTypeFactory.build(JeeslDbMetaConstraintType.Code.pk));}
-//			else {json.setType(JsonTypeFactory.build(JeeslDbMetaConstraintType.Code.uk));}
 			map.put(code,json);
 		}
 		
@@ -39,10 +37,13 @@ public class JsonDbMetaConstraintFactory
 		map.get(code).getColumns().add(c);
 	}
 	
-	public static JsonPostgresMetaConstraint build(String code, String localColumn, String remoteTable, String remoteColumn) throws IOException
+	public static JsonPostgresMetaConstraint build(String code,
+													String localTable, String localColumn,
+													String remoteTable, String remoteColumn) throws IOException
 	{
 		JsonPostgresMetaConstraint json = new JsonPostgresMetaConstraint();
 		json.setCode(code);
+		json.setLocal(JsonDbMetaColumnFactory.build(JsonDbMetaTableFactory.build(null,localTable),localColumn));
 		json.setLocalColumn(localColumn);
 		json.setRemoteTable(remoteTable);
 		json.setRemoteColumn(remoteColumn);

@@ -210,11 +210,11 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	public void saveItem() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(item));}
-		item.setItemSet(fAttribute.find(fbAttribute.getClassSet(),item.getItemSet()));
+		item.setSet(fAttribute.find(fbAttribute.getClassSet(),item.getSet()));
 		item.setCriteria(fAttribute.find(fbAttribute.getClassCriteria(),item.getCriteria()));
 		item = fAttribute.save(item);
 		reloadItems();
-		bAttribute.updateSet(item.getItemSet());
+		bAttribute.updateSet(item.getSet());
 	}
 	
 	public void deleteItem() throws JeeslConstraintViolationException, JeeslLockingException

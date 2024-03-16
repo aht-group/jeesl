@@ -43,6 +43,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 
 	private boolean distinct;
 	@Override public boolean isDistinct() {return distinct;}
+	public Boolean getDistinct() {return Boolean.valueOf(distinct);}
 	public abstract AbstractEjbQuery distinct(boolean distinct);
 	@Override public void setDistinct(boolean distinct) {this.distinct = distinct;}
 
@@ -147,7 +148,6 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	//Fetches
 	protected List<String> rootFetches; public List<String> getRootFetches() {return rootFetches;}
 	public abstract <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e);
-//	public <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	
 	@Override public void debug(boolean debug){debug(debug,0);}
 	@Override public void debug(boolean debug, int ident)

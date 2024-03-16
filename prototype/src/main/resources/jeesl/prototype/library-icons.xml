@@ -4,6 +4,7 @@
     <io:file code="jeeslArrowDown" name="ui/control/arrow/blue/down.svg"/>
     <io:file code="jeeslArrowLeft" name="ui/control/arrow/blue/left.svg"/>
     <io:file code="jeeslArrowRight" name="ui/control/arrow/blue/right.svg"/>
+    <io:file code="jeeslArrowFlip" name="ui/control/arrow/blue/flip.svg"/>
     <io:file code="jeeslUpload" name="ui/control/browser/upload.svg"/>
     <io:file code="jeeslDownload" name="ui/control/browser/download.svg"/>
     <io:file code="jeeslZip" name="ui/control/browser/zip.svg"/>

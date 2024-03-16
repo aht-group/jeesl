@@ -3,6 +3,8 @@ package org.jeesl.interfaces.model.io.db.meta;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.interfaces.model.io.db.meta.with.JeeslDbMetaWithSnapshots;
+import org.jeesl.interfaces.model.io.db.meta.with.JeeslDbMetaWithTable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
@@ -13,18 +15,16 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslDbMetaConstraint<SNAP extends JeeslDbMetaSnapshot<?,TAB,?,?>,
-										TAB extends JeeslDbMetaTable<?,SNAP>,
+public interface JeeslDbMetaConstraint<SNAP extends JeeslDbMetaSnapshot<?,?,TAB,?,?>,
+										TAB extends JeeslDbMetaTable<?,SNAP,?>,
 										COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 										CONT extends JeeslDbMetaConstraintType<?,?,CONT,?>,
-										CUN extends JeeslDbMetaUnique<COL,?>>
+										UNQ extends JeeslDbMetaUnique<COL,?>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
-							EjbWithNonUniqueCode,JeeslWithType<CONT>
+							EjbWithNonUniqueCode,JeeslWithType<CONT>,
+							JeeslDbMetaWithSnapshots<SNAP>,JeeslDbMetaWithTable<TAB>
 {
 	public static enum Attributes{table,code,snapshots,uniques};
-	
-	TAB getTable();
-	void setTable(TAB table);
 	
 	COL getColumnLocal();
 	void setColumnLocal(COL columnLocal);
@@ -32,9 +32,6 @@ public interface JeeslDbMetaConstraint<SNAP extends JeeslDbMetaSnapshot<?,TAB,?,
 	COL getColumnRemote();
 	void setColumnRemote(COL columnRemote);
 	
-	List<SNAP> getSnapshots();
-	void setSnapshots(List<SNAP> snapshots);
-	
-	List<CUN> getUniques();
-	void setUniques(List<CUN> uniques);
+	List<UNQ> getUniques();
+	void setUniques(List<UNQ> uniques);
 }

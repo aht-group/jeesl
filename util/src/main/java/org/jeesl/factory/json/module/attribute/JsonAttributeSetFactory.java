@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 public class JsonAttributeSetFactory<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
 									TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
@@ -38,7 +37,7 @@ public class JsonAttributeSetFactory<L extends JeeslLang, D extends JeeslDescrip
 	private JeeslFacade facade;
 	private IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute;
 	
-	private JsonAttributeItemFactory<L,D,LOC,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM> jfItem;
+	private JsonAttributeItemFactory<L,D,LOC,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM> jfItem;
 	
 	public JsonAttributeSetFactory(String localeCode, JsonAttributeSet q)
 	{

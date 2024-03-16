@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,6 +40,7 @@ public class SecurityTemplate implements JeeslSecurityTemplate<IoLang,IoDescript
 
 	@Override public String resolveParentAttribute() {return JeeslSecurityTemplate.Attributes.category.toString();}
 	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_SecurityTemplate_category"))
 	private SecurityCategory category;
 	@Override public SecurityCategory getCategory() {return category;}
 	@Override public void setCategory(SecurityCategory category) {this.category = category;}

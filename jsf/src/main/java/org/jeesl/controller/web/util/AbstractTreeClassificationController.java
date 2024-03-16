@@ -122,7 +122,9 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 		}
 		treePath.clear();TreeHelper.fillPath(treePath,classification);
 		this.reloadTree();
+		this.savedClassification();
 	}
+	protected abstract void savedClassification();
 	
 	public void deleteClassification() throws JeeslConstraintViolationException, JeeslLockingException
 	{
@@ -178,6 +180,4 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 			catch (JeeslNotFoundException e) {e.printStackTrace();}
 		}
 	}
-	
-	
 }

@@ -15,15 +15,25 @@ public class JsonPostgresMetaConstraint implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
+	@JsonProperty("tablespace")
+	private JsonPostgresTablespace tablespace;
+	public JsonPostgresTablespace getTablespace() {return tablespace;}
+	public void setTablespace(JsonPostgresTablespace tablespace) {this.tablespace = tablespace;}
+	
 	@JsonProperty("code")
 	private String code;
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
-	
+
 	@JsonProperty("type")
 	private JsonType type;
 	public JsonType getType() {return type;}
 	public void setType(JsonType type) {this.type = type;}
+
+	@JsonProperty("local")
+	private JsonPostgresMetaColumn local;
+	public JsonPostgresMetaColumn getLocal() {return local;}
+	public void setLocal(JsonPostgresMetaColumn local) {this.local = local;}
 
 	@JsonProperty("localColumn")
 	private String localColumn;

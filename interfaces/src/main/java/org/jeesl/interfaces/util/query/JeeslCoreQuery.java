@@ -16,7 +16,9 @@ import org.jeesl.model.ejb.io.db.CqOrdering;
 @DownloadJeeslAttributes
 public interface JeeslCoreQuery extends Serializable
 {
+	Boolean getDistinct();
 	Boolean getTupleLoad();
 	Integer getFirstResult();
 	Integer getMaxResults();
+	
 }

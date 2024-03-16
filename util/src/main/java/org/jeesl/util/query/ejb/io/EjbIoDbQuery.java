@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.util.query.io;
+package org.jeesl.util.query.ejb.io;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,14 +10,16 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
-						SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?>
+						SNAP extends JeeslDbMetaSnapshot<SYSTEM,?,?,?,?>
 >
 			extends AbstractEjbQuery
+			implements JeeslIoDbQuery<SYSTEM,SNAP>
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -52,12 +54,12 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	public EjbIoDbQuery<SYSTEM,SNAP> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
-	private List<SYSTEM> systems; public List<SYSTEM> getSystems() {return systems;}
+	private List<SYSTEM> systems; @Override public List<SYSTEM> getSystems() {return systems;}
 	public EjbIoDbQuery<SYSTEM,SNAP> add(SYSTEM system) {if(Objects.isNull(systems)) {systems = new ArrayList<>();} systems.add(system); return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> addSystems(List<SYSTEM> list) {if(Objects.isNull(systems)) {systems = new ArrayList<>();} systems.addAll(list); return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> addSystems(Collection<SYSTEM> collection) {if(Objects.isNull(systems)) {systems = new ArrayList<>();} systems.addAll(collection); return this;}
 	
-	private List<SNAP> snapshots; public List<SNAP> getSnapshots() {return snapshots;}
+	private List<SNAP> snapshots; @Override public List<SNAP> getSnapshots() {return snapshots;}
 	public EjbIoDbQuery<SYSTEM,SNAP> add(SNAP snapshot) {if(Objects.isNull(snapshots)) {snapshots = new ArrayList<>();} snapshots.add(snapshot); return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> addSnapshots(List<SNAP> list) {if(Objects.isNull(snapshots)) {snapshots = new ArrayList<>();} snapshots.addAll(list); return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> addSnapshots(Collection<SNAP> collection) {if(Objects.isNull(snapshots)) {snapshots = new ArrayList<>();} snapshots.addAll(collection); return this;}

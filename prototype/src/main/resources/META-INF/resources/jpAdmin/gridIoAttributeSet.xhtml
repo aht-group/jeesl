@@ -26,11 +26,11 @@
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSets()}" update="@form"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectSet()}" update=":#{cc.id}:fSet :#{cc.id}:sItems"/>
 					<p:column >  
-						<h:outputText value="#{s.category2.position}.#{s.position}"/>
+						<h:outputText value="#{s.category.position}.#{s.position}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslCategory}" rendered="#{cc.attrs.bean.sbhCat.hasMore}">  
-						<jtp:symbolizer value="#{s.category2}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
-						<h:outputText value="#{s.category2.name[localeCode].lang}"/>
+						<jtp:symbolizer value="#{s.category}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
+						<h:outputText value="#{s.category.name[localeCode].lang}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslIoAttributeSet}">  
 						<h:outputText value="#{s.name[localeCode].lang}"/>
@@ -47,7 +47,7 @@
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
 						<p:outputLabel value="#{msg.jeeslCategory}" rendered="#{cc.attrs.bean.sbhCat.hasMore}"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.set.category2}"  rendered="#{cc.attrs.bean.sbhCat.hasMore}" effect="fade" autoWidth="false" dynamic="true">
+						<p:selectOneMenu value="#{cc.attrs.bean.set.category}"  rendered="#{cc.attrs.bean.sbhCat.hasMore}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.bean.sbhCat.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 						<p:outputLabel value="#{msg.jeeslCode}"/>
@@ -90,7 +90,7 @@
 						<h:graphicImage rendered="#{i.tableHeader}" name="12/ui/system/io/attribute/table.png"  library="jeeslPrototypeGfx"/>
 				    </p:column>
 					<p:column>
-						<jtp:symbolizer value="#{i.criteria.category2}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
+						<jtp:symbolizer value="#{i.criteria.category}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
 						<h:outputText value="#{i.criteria.name[localeCode].lang}"/>
 						<jtp:symbolizer value="#{i.criteria.type}" marginLeft="5"/>
 					</p:column>
@@ -118,7 +118,7 @@
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.item.tableHeader}"/>
 						
 						<p:outputLabel value="#{msg.jeeslIoAttributeSetShort}"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.item.itemSet}" effect="fade" autoWidth="false">
+						<p:selectOneMenu value="#{cc.attrs.bean.item.set}" effect="fade" autoWidth="false">
 							<f:selectItems value="#{cc.attrs.bean.sets}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						

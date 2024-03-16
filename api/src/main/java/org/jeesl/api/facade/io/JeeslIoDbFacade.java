@@ -11,21 +11,24 @@ import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
 import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
 								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,?>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
+								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<?,TAB,?>,
 								CON extends JeeslDbMetaConstraint<?,TAB,COL,?,CUN>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
@@ -47,10 +50,14 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	JsonPostgres postgresStatements(String dbName);
 	
 	void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException;
-	List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query);
-	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query);
-	List<CON> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query);
-	List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM,SNAP> query);
+	List<SCHEMA> fIoDbMetaSchemas(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	List<TAB> fIoDbMetaTables(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	List<COL> fIoDbMetaColumns(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	List<CON> fIoDbMetaConstraints(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	List<CUN> fIoDbMetaUniques(JeeslIoDbQuery<SYSTEM,SNAP> query);
 	
-	List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM,SNAP> query);
+	JsonTuples1<SNAP> tpIoDbBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	JsonTuples1<SYSTEM> tpIoDbBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query);
+	
+	List<FW> fIoDbFlyWay(JeeslIoDbQuery<SYSTEM,SNAP> query);
 }

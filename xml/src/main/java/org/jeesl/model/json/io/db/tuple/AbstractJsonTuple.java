@@ -54,4 +54,9 @@ public abstract class AbstractJsonTuple implements Serializable
 	private Long count2;
 	public Long getCount2() {return count2;}
 	public void setCount2(Long count2) {this.count2 = count2;}
+	
+	@JsonProperty("count3")
+	private Long count3;
+	public Long getCount3() {return count3;}
+	public void setCount3(Long count3) {this.count3 = count3;}
 }

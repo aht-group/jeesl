@@ -28,7 +28,7 @@
 					<p:ajax event="rowSelect" update=":#{cc.id}:sCriteria" listener="#{cc.attrs.bean.selectCriteria()}"/>
 					<p:column>
 						<h:graphicImage rendered="#{not c.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
-						<h:outputText rendered="#{c.visible}" value="#{c.category2.position}.#{c.position}"/>
+						<h:outputText rendered="#{c.visible}" value="#{c.category.position}.#{c.position}"/>
 			      	</p:column>
 			      	<p:column rendered="#{cc.attrs.withCode}">
 			      		<f:facet name="header"><jtp:label entity="IoAttributeCriteria" code="code"/></f:facet>
@@ -36,8 +36,8 @@
 			     	</p:column>
 			      	<p:column rendered="#{cc.attrs.bean.sbhCat.hasMore}">
 			      		<f:facet name="header"><jtp:label entity="IoAttributeCriteria" code="category"/></f:facet>
-			      		<jtp:symbolizer value="#{c.category2}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
-						<h:outputText value="#{c.category2.name[localeCode].lang}"/>
+			      		<jtp:symbolizer value="#{c.category}" marginRight="5" rendered="#{cc.attrs.withCategoryIcon}"/>
+						<h:outputText value="#{c.category.name[localeCode].lang}"/>
 			     	</p:column>
 					<p:column>
 			         	<f:facet name="header"><jtp:label entity="IoAttributeCriteria"/></f:facet>
@@ -67,7 +67,7 @@
 						<h:outputText value="#{cc.attrs.bean.criteria.id}"/>
 						
 						<jtp:label entity="IoAttributeCriteria" code="category"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.criteria.category2}" effect="fade" autoWidth="false" dynamic="true">
+						<p:selectOneMenu value="#{cc.attrs.bean.criteria.category}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.bean.sbhCat.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 						

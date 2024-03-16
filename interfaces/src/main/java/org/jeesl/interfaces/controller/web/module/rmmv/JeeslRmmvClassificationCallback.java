@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public interface JeeslRmmvClassificationCallback extends Serializable
 {
-
+	void classificationSaved();
 }

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import org.jeesl.factory.json.system.status.JsonTypeFactory;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaColumn;
+import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
 
 public class JsonDbMetaColumnFactory
 {
@@ -19,6 +20,14 @@ public class JsonDbMetaColumnFactory
 		JsonPostgresMetaColumn json = new JsonPostgresMetaColumn();
 		json.setCode(code);
 		json.setType(JsonTypeFactory.build(type));
+		return json;
+	}
+	
+	public static JsonPostgresMetaColumn build(JsonPostgresMetaTable table, String code) throws IOException
+	{
+		JsonPostgresMetaColumn json = new JsonPostgresMetaColumn();
+		json.setTable(table);
+		json.setCode(code);
 		return json;
 	}
 }

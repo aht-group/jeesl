@@ -31,7 +31,7 @@ public class EjbAttributeItemFactory<CRITERIA extends JeeslAttributeCriteria<?,?
 		{
 			ejb = cItem.newInstance();
 			ejb.setCriteria(criteria);
-			ejb.setItemSet(set);
+			ejb.setSet(set);
 			EjbPositionFactory.next(ejb, list);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}

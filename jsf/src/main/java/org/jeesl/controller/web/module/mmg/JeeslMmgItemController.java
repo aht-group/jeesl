@@ -43,15 +43,15 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-											MG extends JeeslMmgGallery<L>,
-											MI extends JeeslMmgItem<L,MG,FRC,USER>,
-											MC extends JeeslMmgClassification<L,R,MC,?>,
-											MQ extends JeeslMmgQuality<L,D,MQ,?>,
-											FRS extends JeeslFileStorage<L,D,?,?,?>,
-											FRC extends JeeslFileContainer<FRS,FRM>,
-											FRM extends JeeslFileMeta<D,FRC,?,?>,
-											USER extends JeeslSimpleUser>
+										R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
+										MG extends JeeslMmgGallery<L>,
+										MI extends JeeslMmgItem<L,MG,FRC,USER>,
+										MC extends JeeslMmgClassification<L,R,MC,?>,
+										MQ extends JeeslMmgQuality<L,D,MQ,?>,
+										FRS extends JeeslFileStorage<L,D,?,?,?>,
+										FRC extends JeeslFileContainer<FRS,FRM>,
+										FRM extends JeeslFileMeta<D,FRC,?,?>,
+										USER extends JeeslSimpleUser>
 		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean,JeeslFileRepositoryCallback
 {
@@ -180,8 +180,6 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 		return null;
 	}
 	
-	
-	
 	protected void simulateFileUpload(Path path) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException, IOException
 	{
 		if(debugOnInfo) {logger.info("Handling FileUpload: "+path.getFileName().toString());}
@@ -213,17 +211,11 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 		frh.saveThreadsafe(container,event.getFile().getFileName(),event.getFile().getContent(),JeeslMmgQuality.Code.original.toString());
     }
 
-	@Override
-	public void callbackFrContainerSaved(EjbWithId id) throws JeeslConstraintViolationException, JeeslLockingException
+	@Override public void callbackFrMetaSelected() {}
+	@Override public void callbackFrContainerSaved(EjbWithId id) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info("callbackFrContainerSaved "+id);
 		item.setFrContainer(frh.getContainer());
 		item = fMmg.save(item);
-	}
-
-	@Override
-	public void callbackFrMetaSelected() {
-		// TODO Auto-generated method stub
-		
 	}
 }

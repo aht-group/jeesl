@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 
 @Entity
-@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code"}))
+@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code","columnLocal_id","columnRemote_id"}))
 public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraintType,IoDbMetaUnique>
 {
 	public static final long serialVersionUID=1;
@@ -35,9 +37,16 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public void setId(long id) {this.id = id;}
 	
 	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaConstraint_schema"))
 	private IoDbMetaTable table;
 	@Override public IoDbMetaTable getTable() {return table;}
 	@Override public void setTable(IoDbMetaTable table) {this.table = table;}
+	
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoDbMetaConstraint_space"))
+	private IoDbMetaSpace space;
+	public IoDbMetaSpace getSpace() {return space;}
+	public void setSpace(IoDbMetaSpace space) {this.space = space;}
 
 	@NotNull
 	private String code;
@@ -65,7 +74,7 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public List<IoDbMetaSnapshot> getSnapshots() {if(Objects.isNull(snapshots)) {snapshots = new ArrayList<>();} return snapshots;}
 	@Override public void setSnapshots(List<IoDbMetaSnapshot> snapshots) {this.snapshots = snapshots;}
 	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="constraint")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="constraint")
 	@OrderBy("position ASC")
 	private List<IoDbMetaUnique> uniques;
 	@Override public List<IoDbMetaUnique> getUniques() {if(Objects.isNull(uniques)) {uniques = new ArrayList<>();} return uniques;}
@@ -78,7 +87,8 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("[").append(id).append("|");
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(code);
 		return sb.toString();
 	}
 }

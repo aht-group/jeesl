@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,30 +26,38 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbFlywayFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
+import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
 import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSchema;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
+import org.jeesl.interfaces.model.io.db.meta.with.JeeslDbMetaWithSnapshots;
+import org.jeesl.interfaces.model.io.db.meta.with.JeeslDbMetaWithTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.CqOrdering.SortOrder;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,30 +65,31 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
 								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
-								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,SCHEMA,TAB,COL,CON>,
+								SCHEMA extends JeeslDbMetaSchema<SYSTEM,SNAP>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP,SCHEMA>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,?,CUN>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
 								FW extends JeeslIoDbFlyway>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON,CUN,FW>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,SCHEMA,TAB,COL,CON,CUN,FW>
 {
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
-	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta;
 	private final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway;
 	
 	public JeeslIoDbFacadeBean(EntityManager em,
 								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
-								final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta,
+								final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
 								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway)
 			{this(em,fbDb,fbDbMeta,fbDbFlyway,false);}
 	public JeeslIoDbFacadeBean(EntityManager em,
 								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
-								IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta,
+								IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,SCHEMA,TAB,COL,?,CON,?,CUN,?,?> fbDbMeta,
 								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway,
 								boolean handleTransaction)
 	{
@@ -233,18 +243,46 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		}
 	}
 	
-	@Override
-	public void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException
+	@Override public void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException
 	{
 		snapshot = em.find(fbDbMeta.getClassSnapshot(), snapshot.getId());
+		snapshot.getSchemas().clear();
 		snapshot.getTables().clear();
 		snapshot.getColumns().clear();
 		snapshot.getConstraints().clear();
 		this.rmProtected(snapshot);
-		
 	}
 	
-	@Override public List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<SCHEMA> fIoDbMetaSchemas(JeeslIoDbQuery<SYSTEM, SNAP> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<SCHEMA> cQ = cB.createQuery(fbDbMeta.getClassSchema());
+		Root<SCHEMA> root = cQ.from(fbDbMeta.getClassSchema());
+		
+		if(ObjectUtils.isNotEmpty(query.getCodeList()))
+		{
+			Expression<String> eCode = root.get(JeeslDbMetaSchema.Attributes.code.toString());
+			predicates.add(eCode.in(query.getCodeList()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSystems()))
+		{
+			Join<TAB,SYSTEM> jSystem = root.join(JeeslDbMetaSchema.Attributes.system.toString());
+			predicates.add(jSystem.in(query.getSystems()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSnapshots()))
+		{
+			ListJoin<TAB,SNAP> jSnapshot = root.joinList(JeeslDbMetaSchema.Attributes.snapshots.toString());
+			predicates.add(jSnapshot.in(query.getSnapshots()));
+		}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		return em.createQuery(cQ).getResultList();
+	}
+
+	@Override public List<TAB> fIoDbMetaTables(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -273,12 +311,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<COL> fIoDbMetaColumns(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<COL> cQ = cB.createQuery(fbDbMeta.getClassMetaColumn());
-		Root<COL> root = cQ.from(fbDbMeta.getClassMetaColumn());
+		CriteriaQuery<COL> cQ = cB.createQuery(fbDbMeta.getClassColumn());
+		Root<COL> root = cQ.from(fbDbMeta.getClassColumn());
 		
 		if(ObjectUtils.isNotEmpty(query.getCodeList()))
 		{
@@ -303,7 +341,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<CON> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<CON> fIoDbMetaConstraints(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -330,12 +368,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 		cQ.select(root);	    
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.distinct(query.isDistinct());
+		cQ.distinct(BooleanComparator.active(query.getDistinct()));
 		
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<CUN> fIoDbMetaUniques(JeeslIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -368,7 +406,104 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM, SNAP> query)
+	@Override public JsonTuples1<SNAP> tpIoDbBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query)
+	{
+		CriteriaBuilder cB1 = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ1 = cB1.createTupleQuery();
+		Root<TAB> root1 = cQ1.from(fbDbMeta.getClassTable());
+		
+		CriteriaBuilder cB2 = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ2 = cB2.createTupleQuery();
+		Root<COL> root2 = cQ2.from(fbDbMeta.getClassColumn());
+		
+		CriteriaBuilder cB3 = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ3 = cB3.createTupleQuery();
+		Root<CON> root3 = cQ3.from(fbDbMeta.getClassConstraint());
+		
+		Json1TuplesFactory<SNAP> jtf = Json1TuplesFactory.instance(fbDbMeta.getClassSnapshot());
+		jtf.merge(tpIoDbBySnapshot(query,cB1,cQ1,root1), JsonTupleFactory.Type.count, 1, 1);
+		jtf.merge(tpIoDbBySnapshot(query,cB2,cQ2,root2), JsonTupleFactory.Type.count, 1, 2);
+		jtf.merge(tpIoDbBySnapshot(query,cB3,cQ3,root3), JsonTupleFactory.Type.count, 1, 3);
+		
+		return jtf.mapToTuples();
+
+	}	
+	private <W extends JeeslDbMetaWithSnapshots<SNAP>> JsonTuples1<SNAP> tpIoDbBySnapshot(JeeslIoDbQuery<SYSTEM,SNAP> query, CriteriaBuilder cB, CriteriaQuery<Tuple> cQ, Root<W> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+			
+		ListJoin<W,SNAP> jSnapshot = root.joinList(JeeslDbMetaConstraint.Attributes.snapshots.toString());
+		Expression<Long> eCount = cB.count(root.<Long>get("id"));
+		
+		if(ObjectUtils.isNotEmpty(query.getSystems()))
+		{
+			Join<W,SYSTEM> jSystem = jSnapshot.join(JeeslDbMetaTable.Attributes.system.toString());
+			predicates.add(jSystem.in(query.getSystems()));
+		}
+		
+		cQ.multiselect(jSnapshot.get("id"),eCount);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.groupBy(jSnapshot.get("id"));
+	       
+		Json1TuplesFactory<SNAP> jtf = Json1TuplesFactory.instance(fbDbMeta.getClassSnapshot());
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+	    return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
+	
+	@Override public JsonTuples1<SYSTEM> tpIoDbBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query)
+	{
+		CriteriaBuilder cB1 = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ1 = cB1.createTupleQuery();
+		Root<TAB> root1 = cQ1.from(fbDbMeta.getClassTable());
+		
+		CriteriaBuilder cB2 = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ2 = cB2.createTupleQuery();
+		Root<COL> root2 = cQ2.from(fbDbMeta.getClassColumn());
+		
+		CriteriaBuilder cB3 = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ3 = cB3.createTupleQuery();
+		Root<CON> root3 = cQ3.from(fbDbMeta.getClassConstraint());
+		
+		Json1TuplesFactory<SYSTEM> jtf = Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem());
+		jtf.merge(tpIoDbTableBySystem(query,cB1,cQ1,root1), JsonTupleFactory.Type.count, 1, 1);
+		jtf.merge(tpIoDBySystem(query,cB2,cQ2,root2), JsonTupleFactory.Type.count, 1, 2);
+		jtf.merge(tpIoDBySystem(query,cB3,cQ3,root3), JsonTupleFactory.Type.count, 1, 3);	
+
+		return jtf.mapToTuples();
+	}
+	
+	private JsonTuples1<SYSTEM> tpIoDbTableBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query, CriteriaBuilder cB, CriteriaQuery<Tuple> cQ, Root<TAB> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		Join<TAB,SYSTEM> jSystem = root.join(JeeslDbMetaTable.Attributes.system.toString());
+		Expression<Long> eCount = cB.count(root.<Long>get("id"));
+		
+		if(ObjectUtils.isNotEmpty(query.getSystems())) {predicates.add(jSystem.in(query.getSystems()));}
+		
+		cQ.multiselect(jSystem.get("id"),eCount);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.groupBy(jSystem.get("id"));
+	       
+	    return Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem()).buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+	}
+	private <W extends JeeslDbMetaWithTable<TAB>> JsonTuples1<SYSTEM> tpIoDBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query, CriteriaBuilder cB, CriteriaQuery<Tuple> cQ, Root<W> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		Join<COL,TAB> jTable = root.join(JeeslDbMetaColumn.Attributes.table.toString());
+		Join<TAB,SYSTEM> jSystem = jTable.join(JeeslDbMetaTable.Attributes.system.toString());
+		Expression<Long> eCount = cB.count(root.<Long>get("id"));
+		
+		if(ObjectUtils.isNotEmpty(query.getSystems())) {predicates.add(jSystem.in(query.getSystems()));}
+		
+		cQ.multiselect(jSystem.get("id"),eCount);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.groupBy(jSystem.get("id"));
+	       
+	    return Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem()).buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+	}
+	
+	
+	@Override public List<FW> fIoDbFlyWay(JeeslIoDbQuery<SYSTEM, SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();

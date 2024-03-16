@@ -1,0 +1,2 @@
+ALTER TABLE IF EXISTS public.iodbmetaconstraint DROP CONSTRAINT IF EXISTS uked8io78fc4ko3udiw73d8oyva;
+ALTER TABLE IF EXISTS public.iodbmetaconstraint ADD CONSTRAINT uk_iodbmetaconstraint_table_code_local_remote UNIQUE (table_id,code,columnLocal_id,columnRemote_id);

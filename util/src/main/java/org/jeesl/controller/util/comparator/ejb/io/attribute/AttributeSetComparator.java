@@ -38,7 +38,7 @@ public class AttributeSetComparator<CAT extends JeeslAttributeCategory<?,?,?,CAT
         public int compare(SET a, SET b)
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
-			  ctb.append(a.getCategory2().getPosition(), b.getCategory2().getPosition());
+			  ctb.append(a.getCategory().getPosition(), b.getCategory().getPosition());
 			  ctb.append(a.getPosition(), b.getPosition());
 			  return ctb.toComparison();
         }

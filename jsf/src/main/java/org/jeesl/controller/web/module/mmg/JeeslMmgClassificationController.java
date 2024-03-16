@@ -68,7 +68,13 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		// TODO Auto-generated method stub
-	}	
+	}
+	
+	@Override protected void savedClassification()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 
 	public void addClassification()
 	{
