@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
@@ -35,11 +36,9 @@ public class AbstractUtilsMavenTst
 	@BeforeAll
     public static void initLogger()
 	{
-		if(!LoggerInit.isLog4jInited())
+		if(!LoggerBootstrap.isLog4jInited())
 		{
-			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.path("config.ahtutils-maven.test");
-			loggerInit.init();
+			LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 		}
     }
 	

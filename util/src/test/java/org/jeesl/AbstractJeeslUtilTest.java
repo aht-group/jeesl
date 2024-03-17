@@ -4,6 +4,7 @@ import java.io.File;
 
 import net.sf.ahtutils.test.AbstractJeeslTest;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
@@ -29,11 +30,9 @@ public class AbstractJeeslUtilTest extends AbstractJeeslTest
 	@BeforeClass
     public static void initLogger()
 	{
-		if(!LoggerInit.isLog4jInited())
+		if(!LoggerBootstrap.isLog4jInited())
 		{
-			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.path("jeesl/util/config");
-			loggerInit.init();
+			LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 		}
     }
 	

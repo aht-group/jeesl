@@ -1,6 +1,6 @@
 package net.sf.ahtutils.test;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -13,11 +13,9 @@ public class AbstractUtilsMonitorTest
 	@BeforeAll
     public static void initLogger()
 	{
-		if(!LoggerInit.isLog4jInited())
+		if(!LoggerBootstrap.isLog4jInited())
 		{
-			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.path("config.ahtutils-monitor.test");
-			loggerInit.init();
+			LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 		}
     }
 	

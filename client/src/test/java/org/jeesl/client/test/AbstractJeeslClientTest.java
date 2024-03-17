@@ -2,6 +2,7 @@ package org.jeesl.client.test;
 
 import java.io.File;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.jupiter.api.Assertions;
@@ -29,12 +30,7 @@ public class AbstractJeeslClientTest extends AbstractJeeslTest
 	@BeforeAll
     public static void initLogger()
 	{
-		if(!LoggerInit.isLog4jInited())
-		{
-			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.path("jeesl/client/config");
-			loggerInit.init();
-		}
+		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
     }
 	
 	@BeforeAll

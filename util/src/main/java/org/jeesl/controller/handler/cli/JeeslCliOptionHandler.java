@@ -80,7 +80,6 @@ public class JeeslCliOptionHandler
 		return this;
 	}
 	
-	
 	public void handleLog4j1(CommandLine line)
 	{
 		if(line.hasOption(oDebug.getOpt())) {this.initLogger("log4j-debug.xml");}
@@ -88,7 +87,7 @@ public class JeeslCliOptionHandler
 	}
 	private void initLogger(String loggingProfile)
 	{
-		LoggerInit loggerInit = new LoggerInit(loggingProfile);
+		LoggerInit loggerInit = LoggerInit.instance(loggingProfile);
 		for(String path : log4jPaths) {loggerInit.path(path);}
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();

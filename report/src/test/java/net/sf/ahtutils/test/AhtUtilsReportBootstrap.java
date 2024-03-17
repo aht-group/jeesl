@@ -1,5 +1,6 @@
 package net.sf.ahtutils.test;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.log.LoggerInit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +18,7 @@ final static Logger logger = LoggerFactory.getLogger(AhtUtilsReportBootstrap.cla
 	
 	public static void init(String configFile)
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.path("ahtutils-report");
-		loggerInit.init();
+		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 						
 		//ConfigLoader.add(configFile);
 		//Configuration config = ConfigLoader.init();					

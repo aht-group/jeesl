@@ -2,8 +2,8 @@ package org.jeesl;
 
 import java.io.File;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
-import org.exlp.util.io.log.LoggerInit;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -19,11 +19,9 @@ public class AbstractJeeslPrototypeTest
 	@BeforeAll
     public static void initLogger()
 	{
-		if(!LoggerInit.isLog4jInited())
+		if(!LoggerBootstrap.isLog4jInited())
 		{
-			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.path("jeesl/prototype/test");
-			loggerInit.init();
+			LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 		}
     }
 	
