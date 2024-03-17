@@ -384,7 +384,6 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	
 	@Override public JsonTuples1<CTX> tpMapping()
 	{
-		
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<DATA> item = cQ.from(fbSsi.getClassData());

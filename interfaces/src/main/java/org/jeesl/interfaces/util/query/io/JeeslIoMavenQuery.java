@@ -6,20 +6,21 @@ import java.util.List;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
+import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 
-public interface EjbIoMavenQuery <
+public interface JeeslIoMavenQuery <
 							VERSION extends JeeslIoMavenVersion<?,?,?>,
 							MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,?,?,?>,
 							STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>
 							>
-//			extends AbstractEjbQuery
+			extends JeeslCoreQuery
 {
 	boolean isDistinct();
 //	void x();
 	
 	//Fetches
 	List<String> getRootFetches();
-	public <E extends Enum<E>> EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> addRootFetch(E e);
+	public <E extends Enum<E>> JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> addRootFetch(E e);
 	
 	//LocalDate
 //	public EjbIoMavenQuery<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
@@ -29,15 +30,15 @@ public interface EjbIoMavenQuery <
 	List<Long> getIdList();
 	
 	List<VERSION> getVersions();
-	EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> add(VERSION version);
-	EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> addVersions(Collection<VERSION> list);
+	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> add(VERSION version);
+	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> addVersions(Collection<VERSION> list);
 	
 	List<MODULE> getModules();
-	EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> add(MODULE module);
-	EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> addModules(List<MODULE> list);
+	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> add(MODULE module);
+	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> addModules(List<MODULE> list);
 	
 	List<STRUCTURE> getStructures();
-	EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> add(STRUCTURE structure);
-	EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> addStructures(List<STRUCTURE> list);
+	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> add(STRUCTURE structure);
+	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> addStructures(List<STRUCTURE> list);
 	
 }

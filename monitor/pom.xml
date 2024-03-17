@@ -14,7 +14,14 @@
     <name>JEESL - Monitoring and Evaluation</name>
 		
 	<dependencyManagement>
-		<dependencies>      	         
+		<dependencies>   
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-eap73</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>org.jeesl.bom</groupId>
 				<artifactId>bom-core</artifactId>
@@ -79,40 +86,30 @@
 			<artifactId>joda-time</artifactId>
 			<scope>compile</scope>
 		</dependency> 
-        
-        <!-- Logging -->
-        <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-        <dependency>
-        	<groupId>org.slf4j</groupId>
-        	<artifactId>slf4j-log4j12</artifactId>
-        	<scope>test</scope>
-        </dependency>
-        <dependency>
-        	<groupId>org.slf4j</groupId>
-        	<artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
    		
    		<!-- Hibernate -->
+   		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+		</dependency>
    		<dependency>
         	<groupId>org.hsqldb</groupId>
         	<artifactId>hsqldb</artifactId>
         	<version>2.2.6</version>
         </dependency>
+        <!-- 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>4.3.0.Beta3</version>
-        </dependency>
+        </dependency>  
         <dependency>
         	<groupId>org.hibernate</groupId>
         	<artifactId>hibernate-entitymanager</artifactId>
         	<version>4.3.0.Beta3</version>
         	<type>jar</type>
         </dependency>
-        
+        -->
 
         <dependency>
         	<groupId>org.xbill</groupId>
@@ -120,25 +117,33 @@
         	<version>2.1.5</version>
         </dependency>
 
-		<!-- Testing 
-        <dependency>
-        	<groupId>junit</groupId>
-        	<artifactId>junit</artifactId>
-        	<scope>test</scope>
-        </dependency> -->
-        <dependency>
-	 		<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<scope>test</scope>
-		</dependency>
-
         <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
 			<version>3.2</version>
 		</dependency>
 		
-		<!-- XML - Test -->
+		<!-- Logging -->
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        
+		<!-- Testing -->
+        <dependency>
+	 		<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
         	<groupId>org.jboss.resteasy</groupId>
         	<artifactId>jaxrs-api</artifactId>

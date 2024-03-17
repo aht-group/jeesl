@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -19,7 +18,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
-import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 
 public class Json1TuplesFactory <A extends EjbWithId>
 {

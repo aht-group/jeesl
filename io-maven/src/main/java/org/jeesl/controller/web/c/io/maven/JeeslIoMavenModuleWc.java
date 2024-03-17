@@ -45,7 +45,7 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenType;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.PositionComparator;
-import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
+import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
@@ -104,7 +104,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	{
 		modules.clear();
 		
-		JeeslIoMavenQuery q = JeeslIoMavenQuery.instance().addRootFetch(JeeslIoMavenModule.Attributes.enterpriseEditions).distinct(true);
+		EjbIoMavenQuery q = EjbIoMavenQuery.instance().addRootFetch(JeeslIoMavenModule.Attributes.enterpriseEditions).distinct(true);
 		modules.addAll(fMaven.fIoMavenModules(q).stream().filter(m -> Objects.isNull(m.getParent())).collect(Collectors.toList()));
 		Collections.sort(modules,new PositionComparator<IoMavenModule>());
 	}
@@ -131,7 +131,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	
 	private void reloadModule()
 	{
-		JeeslIoMavenQuery q = JeeslIoMavenQuery.instance().addRootFetch(JeeslIoMavenModule.Attributes.enterpriseEditions);
+		EjbIoMavenQuery q = EjbIoMavenQuery.instance().addRootFetch(JeeslIoMavenModule.Attributes.enterpriseEditions);
 		q.id(module);
 		module = fMaven.fIoMavenModules(q).get(0);
 	}

@@ -89,9 +89,18 @@
 		<dependency>
 	      	<groupId>org.hibernate</groupId>
 	      	<artifactId>hibernate-envers</artifactId>
-	      	<version>4.2.0.Final</version>
 			<scope>provided</scope>
-		</dependency>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> 
 		
 		<!-- Apache Commons -->
 		<dependency>

@@ -99,7 +99,7 @@ public class JeeslFontTrackerApp
 		CommandLine line = parser.parse(handler.getOptions() , args); 
 	     
 		handler.handleHelp(line);
-		handler.handleLog4j1(line);
+		handler.handleLog4j2(line);
 
 		cfgUrl = config.getString(ConfigKey.netRestUrlProduction);
 		cfgSystem = line.getOptionValue(oSystem.getOpt());

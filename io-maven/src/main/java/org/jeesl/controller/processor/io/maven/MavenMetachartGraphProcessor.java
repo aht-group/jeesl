@@ -26,7 +26,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
-import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
+import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -77,7 +77,7 @@ public class MavenMetachartGraphProcessor
 	
 	private void resolveDependencies(Collection<IoMavenVersion> versions)
 	{
-		List<IoMavenDependency> dependencies = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(versions));
+		List<IoMavenDependency> dependencies = fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().addVersions(versions));
 		dependencyEdges.addAll(dependencies);
 		
 		List<IoMavenVersion> unprocessed = new ArrayList<>();
@@ -91,7 +91,7 @@ public class MavenMetachartGraphProcessor
 	
 	private void resolveDependencies(Collection<IoMavenVersion> roots, Set<IoMavenVersion> nodes, Set<IoMavenDependency> edges)
 	{
-		List<IoMavenDependency> dependencies = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(roots));
+		List<IoMavenDependency> dependencies = fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().addVersions(roots));
 		
 		edges.addAll(dependencies);
 		
@@ -142,7 +142,7 @@ public class MavenMetachartGraphProcessor
 	
 	public void addUsagePath(IoMavenVersion root)
 	{
-		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(JeeslIoMavenQuery.instance().addVersions(Arrays.asList(root)).addRootFetch(JeeslIoMavenUsage.Attributes.scopes));
+		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(EjbIoMavenQuery.instance().addVersions(Arrays.asList(root)).addRootFetch(JeeslIoMavenUsage.Attributes.scopes));
 		logger.info(IoMavenUsage.class.getSimpleName()+" "+usages.size());
 		for(IoMavenUsage u : usages)
 		{

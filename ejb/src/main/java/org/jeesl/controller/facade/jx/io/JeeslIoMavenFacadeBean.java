@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.io;
+package org.jeesl.controller.facade.jx.io;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -20,6 +22,8 @@ import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMavenFactoryBuilder;
+import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenMaintainer;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
@@ -31,9 +35,11 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
 import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,7 +110,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbMaven.getClassVersion().getSimpleName()+" not unique for artifact:"+artifact.getCode()+" and code="+code);}
 	}
 	
-	@Override public List<MODULE> fIoMavenModules(EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> query)
+	@Override public List<MODULE> fIoMavenModules(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -126,7 +132,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		return tQ.getResultList();
 	}
 
-	@Override public List<USAGE> fIoMavenUsages(EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> query)
+	@Override public List<USAGE> fIoMavenUsages(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -152,7 +158,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		return tQ.getResultList();
 	}
 
-	@Override public List<DEPENDENCY> fIoMavenDependencies(EjbIoMavenQuery<VERSION, MODULE, STRUCTURE> query)
+	@Override public List<DEPENDENCY> fIoMavenDependencies(JeeslIoMavenQuery<VERSION, MODULE, STRUCTURE> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -171,5 +177,22 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		
 		TypedQuery<DEPENDENCY> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
+	}
+
+	@Override public JsonTuples1<VERSION> tpUsageByVersion(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<USAGE> root = cQ.from(fbMaven.getClassUsage());
+		
+		Expression<Long> eCount = cB.count(root.<Long>get("id"));
+		Path<VERSION> pVersion = root.join(JeeslIoMavenUsage.Attributes.version.toString());
+		
+		cQ.multiselect(pVersion.get("id"),eCount);
+		cQ.groupBy(pVersion.get("id"));
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		Json1TuplesFactory<VERSION> jtf = Json1TuplesFactory.instance(fbMaven.getClassVersion()).tupleLoad(this,query.getTupleLoad());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 }

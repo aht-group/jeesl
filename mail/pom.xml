@@ -39,8 +39,8 @@
 			<artifactId>jeesl-util</artifactId>
 			<exclusions>
 				<exclusion>
-					<artifactId>antlr4</artifactId>
 					<groupId>org.antlr</groupId>
+					<artifactId>antlr4</artifactId>
 				</exclusion>
 				<exclusion>
 					<artifactId>commons-codec</artifactId>

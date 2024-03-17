@@ -305,9 +305,14 @@
 		<dependency>
     		<groupId>com.aspose</groupId>
     		<artifactId>aspose-words</artifactId>
-    		<scope>test</scope>
     		<classifier>jdk17</classifier>
+    		<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
     <build>

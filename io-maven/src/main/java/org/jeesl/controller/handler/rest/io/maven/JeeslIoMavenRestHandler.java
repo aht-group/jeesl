@@ -30,7 +30,7 @@ import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenSuitability;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
-import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenDependency;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
@@ -53,7 +53,7 @@ import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.status.JsonScope;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenDependencyComparator;
 import org.jeesl.util.db.cache.EjbCodeCache;
-import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
+import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -171,7 +171,7 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 		
 		Map<IoMavenVersion,List<IoMavenVersion>> nowDependsOn = EjbMavenDependencyFactory.toMapDependsOn(resolvedDependencies);
 		
-		List<IoMavenDependency> dbDependencies = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(nowDependsOn.keySet()));
+		List<IoMavenDependency> dbDependencies = fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().addVersions(nowDependsOn.keySet()));
 		Map<IoMavenVersion,List<IoMavenVersion>> dbDependsOn = EjbMavenDependencyFactory.toMapDependsOn(dbDependencies);
 		Map<MultiKey<IoMavenVersion>,IoMavenDependency> mapDependencies = EjbMavenDependencyFactory.toMultiKeyMap(dbDependencies);
 		
@@ -210,7 +210,7 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			}
 		}
 
-		EjbIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> query = JeeslIoMavenQuery.instance();
+		JeeslIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> query = EjbIoMavenQuery.instance();
 		query.addRootFetch(JeeslIoMavenUsage.Attributes.scopes);
 		query.add(module);
 	
