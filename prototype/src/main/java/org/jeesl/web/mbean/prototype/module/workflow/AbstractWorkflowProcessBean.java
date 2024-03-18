@@ -32,6 +32,7 @@ import org.jeesl.factory.xml.module.workflow.XmlProcessFactory;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.op.OpSelectionHandler;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -233,13 +234,13 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	{
 		postConstructProcess(bTranslation,bMessage,fGraphic,fApproval,fRevision,null);
 	}
-	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+	protected void postConstructProcess(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 										JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 										JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,USER> fApproval,
 										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision,
 										WP preSelection)
 	{
-		super.initJeeslAdmin(bTranslation,bMessage);
+		super.initJeeslAdmin(lp,bMessage);
 		this.fGraphic=fGraphic;
 		this.fWorkflow=fApproval;
 		this.fRevision=fRevision;
@@ -606,9 +607,9 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 		reset(WorkflowProcesslResetHandler.build().none().transistion(true));
 		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassTransition()));
 		transition = efTransition.build(stage,transitions);
-		transition.setName(efLang.createEmpty(localeCodes));
-		transition.setDescription(efDescription.createEmpty(localeCodes));
-		transition.setConfirmation(efDescription.createEmpty(localeCodes));
+		transition.setName(efLang.build(lp));
+		transition.setDescription(efDescription.build(lp));
+		transition.setConfirmation(efDescription.build(lp));
 		efTransition.ejb2nnb(transition,nnb);
 		editTransition = true;
 	}

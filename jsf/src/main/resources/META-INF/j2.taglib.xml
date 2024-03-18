@@ -85,6 +85,12 @@
         </component>
 	</tag>
 	<tag>
+        <tag-name>gridIoMavenReferral</tag-name>
+        <component>
+            <resource-id>ioMaven/referral.xhtml</resource-id>
+        </component>
+	</tag>
+	<tag>
         <tag-name>gridIoMavenFont</tag-name>
         <component>
             <resource-id>ioMaven/font.xhtml</resource-id>

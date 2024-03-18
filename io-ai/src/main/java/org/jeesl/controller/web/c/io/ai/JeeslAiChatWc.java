@@ -129,7 +129,7 @@ public class JeeslAiChatWc implements Serializable
 		completion.setEndDate(LocalDateTime.now());
 		
 		completion = facade.save(completion);
-		EjbIdFactory.replaceOrAdd(completions,completion);
+		EjbIdFactory.integrate(completions,completion);
 		
 		callback.chatRequestCompleted();
 	}
