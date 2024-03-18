@@ -3333,6 +3333,8 @@ body, .ui-widget {
 				visibility: visible;
 				
 				.jeesl-menu-bar-item {
+					display: inline-block;
+					
 					&:before {
 						border-color: $darker-colour;
 					}
