@@ -38,7 +38,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
-import org.jeesl.model.ejb.io.maven.module.IoMavenEe;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeEdition;
 import org.jeesl.model.ejb.io.maven.module.IoMavenJdk;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
@@ -63,7 +63,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
-	private final List<IoMavenEe> enterpriseEditions;  public List<IoMavenEe> getEnterpriseEditions() {return enterpriseEditions;}
+	private final List<IoMavenEeEdition> enterpriseEditions;  public List<IoMavenEeEdition> getEnterpriseEditions() {return enterpriseEditions;}
 	private final List<IoMavenType> types; public List<IoMavenType> getTypes() {return types;}
 	private final List<IoMavenJdk> compilers; public List<IoMavenJdk> getCompilers() {return compilers;}
 	private final List<IoMavenModule> modules; public List<IoMavenModule> getModules() {return modules;}
@@ -93,7 +93,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 		this.fGraphic=fGraphic;
 		
 		compilers.addAll(fMaven.allOrderedPositionVisible(IoMavenJdk.class));
-		enterpriseEditions.addAll(fMaven.allOrderedPositionVisible(IoMavenEe.class));
+		enterpriseEditions.addAll(fMaven.allOrderedPositionVisible(IoMavenEeEdition.class));
 		structures.addAll(fMaven.allOrderedPositionVisible(IoMavenStructure.class));
 		types.addAll(fMaven.allOrderedPositionVisible(IoMavenType.class));
 

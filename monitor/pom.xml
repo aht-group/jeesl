@@ -144,6 +144,7 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--
 		<dependency>
         	<groupId>org.jboss.resteasy</groupId>
         	<artifactId>jaxrs-api</artifactId>
@@ -161,7 +162,7 @@
         			<artifactId>commons-logging</artifactId>
         		</exclusion>
         	</exclusions>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<build>

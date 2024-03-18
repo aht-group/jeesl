@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.maven.module;
+package org.jeesl.interfaces.model.io.maven.ee;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @DownloadJeeslData
-public interface JeeslMavenEe <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslMavenEeEdition <L extends JeeslLang, D extends JeeslDescription,
 								S extends JeeslStatus<L,D,S>,
 								G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
