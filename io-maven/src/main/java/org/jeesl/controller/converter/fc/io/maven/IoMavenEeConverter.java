@@ -4,14 +4,14 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
 
 import org.jeesl.jsf.jx.converter.AbstractEjbIdConverter;
-import org.jeesl.model.ejb.io.maven.module.IoMavenEe;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeEdition;
 
 @RequestScoped
-@FacesConverter(forClass=IoMavenEe.class)
-public class IoMavenEeConverter extends AbstractEjbIdConverter<IoMavenEe>
+@FacesConverter(forClass=IoMavenEeEdition.class)
+public class IoMavenEeConverter extends AbstractEjbIdConverter<IoMavenEeEdition>
 {
 	public IoMavenEeConverter()
 	{
-		super(IoMavenEe.class);
+		super(IoMavenEeEdition.class);
 	}
 }  

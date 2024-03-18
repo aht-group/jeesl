@@ -1,6 +1,6 @@
 package org.jeesl;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +12,6 @@ public class JeeslMavenBootstrap
 	{
 //		AbstractUtilsMavenTst.setfTarget(new File("target"));
 		
-		LoggerInit loggerInit = new LoggerInit("log4j.maven.xml");
-		loggerInit.path("jeesl/system/io/config");
-		loggerInit.init();
+		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 	}
 }

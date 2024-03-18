@@ -84,15 +84,15 @@
    	   	</dependency>
 	
 		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		
+		<dependency>
 	   		<groupId>rcaller</groupId>
 	  		<artifactId>RCaller</artifactId>
 	  		<version>2.1.1</version>
-   		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		
+   		</dependency>		
 		
 		<dependency>
 			<groupId>io.netty</groupId>
@@ -173,15 +173,17 @@
             	</exclusion>
 			</exclusions>
 		</dependency>
-		
+	
+		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j2-impl</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	

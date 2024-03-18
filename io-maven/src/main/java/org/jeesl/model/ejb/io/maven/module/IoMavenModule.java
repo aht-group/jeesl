@@ -23,11 +23,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeEdition;
 
 @Entity
 @Table(name="IoMavenModule")
 @EjbErNode(name="Module",category="ioMaven",subset="ioMaven")
-public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenStructure,IoMavenType,IoMavenEe,IoGraphic>
+public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenStructure,IoMavenType,IoMavenEeEdition,IoGraphic>
 {
 	public static final long serialVersionUID=1;	
 
@@ -82,9 +83,9 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="IoMavenModuleEe",joinColumns={@JoinColumn(name="module_id")},inverseJoinColumns={@JoinColumn(name="ee_id")})
-	private List<IoMavenEe> enterpriseEditions;
-	@Override public List<IoMavenEe> getEnterpriseEditions() {if(Objects.isNull(enterpriseEditions)) {enterpriseEditions = new ArrayList<>();} return enterpriseEditions;}
-	@Override public void setEnterpriseEditions(List<IoMavenEe> enterpriseEditions) {this.enterpriseEditions = enterpriseEditions;}
+	private List<IoMavenEeEdition> enterpriseEditions;
+	@Override public List<IoMavenEeEdition> getEnterpriseEditions() {if(Objects.isNull(enterpriseEditions)) {enterpriseEditions = new ArrayList<>();} return enterpriseEditions;}
+	@Override public void setEnterpriseEditions(List<IoMavenEeEdition> enterpriseEditions) {this.enterpriseEditions = enterpriseEditions;}
 	
 	
 	@Override public boolean equals(Object object){return (object instanceof IoMavenModule) ? id == ((IoMavenModule) object).getId() : (object == this);}

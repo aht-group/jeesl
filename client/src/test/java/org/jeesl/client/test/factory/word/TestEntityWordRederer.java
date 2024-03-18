@@ -2,11 +2,11 @@ package org.jeesl.client.test.factory.word;
 
 import java.io.IOException;
 
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.doc.word.EntityWordRenderer;
 import org.jeesl.model.xml.io.label.Entities;
 import org.jeesl.model.xml.io.label.Entity;
+import org.jeesl.test.JeeslBootstrap;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,9 +47,7 @@ public class TestEntityWordRederer extends AbstractWordCli
 	
 	public static void main(String[] args) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.path("jeesl/client/config");
-		loggerInit.init();
+		JeeslBootstrap.init();
 		TestEntityWordRederer cli = new TestEntityWordRederer();
 		cli.renderEntities();	  
 	}

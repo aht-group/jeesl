@@ -105,7 +105,7 @@
    			<scope>provided</scope>
 		</dependency>
 		
-		<!-- RestEasy -->
+		<!-- RestEasy 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
@@ -121,6 +121,7 @@
             	</exclusion>
 			</exclusions>
 		</dependency>
+		-->
 
 		<!-- JSON -->
    	   	<dependency>

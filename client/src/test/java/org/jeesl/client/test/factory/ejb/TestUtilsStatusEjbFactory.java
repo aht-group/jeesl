@@ -1,6 +1,6 @@
 package org.jeesl.client.test.factory.ejb;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.model.ejb.system.locale.Status;
@@ -126,9 +126,7 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
 	
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("src/test/resources/config");
-			loggerInit.init();		
+		JeeslBootstrap.init();
 			
 		TestUtilsStatusEjbFactory test = new TestUtilsStatusEjbFactory();
 		test.init();

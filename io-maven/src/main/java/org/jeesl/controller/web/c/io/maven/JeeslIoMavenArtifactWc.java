@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
+import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.processor.io.maven.MavenMetachartGraphProcessor;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -40,7 +41,7 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
-import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
+import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.metachart.factory.json.chart.echart.js.type.JsonEchartGraphFactory;
 import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.graph.mc.JsonGraph;
@@ -131,7 +132,13 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	private void reloadArtifacts()
 	{
-		List<IoMavenVersion> list = fMaven.all(IoMavenVersion.class);
+		EjbIoMavenQuery q = EjbIoMavenQuery.instance();
+		q.setTupleLoad(true);
+		
+		JsonTuple1Handler<IoMavenVersion> th = new JsonTuple1Handler<>(IoMavenVersion.class);
+		th.init(fMaven.tpUsageByVersion(q));
+		
+		List<IoMavenVersion> list = th.getListA();
 		Collections.sort(list,cpVersion);
 		mapVersion.clear();
 		mapVersion.putAll(EjbMavenVersionFactory.toMapArtifactVersion(list));
@@ -190,7 +197,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		mapRoot.clear();
 		mapUsage.clear();
 		
-		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(JeeslIoMavenQuery.instance().addVersions(versions).addRootFetch(JeeslIoMavenUsage.Attributes.scopes));
+		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(EjbIoMavenQuery.instance().addVersions(versions).addRootFetch(JeeslIoMavenUsage.Attributes.scopes));
 		mapRoot.putAll(EjbMavenUsageFactory.toMapVersionRootModules(usages));
 		mapUsage.putAll(EjbMavenUsageFactory.toMapVersionModuleUsage(usages));
 	}
@@ -198,10 +205,10 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	private void reloadDependencies()
 	{
 		this.reset(false, false, true);
-		dependencies.addAll(fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().add(version)));
+		dependencies.addAll(fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().add(version)));
 
 		List<IoMavenVersion> dependenciesDependOn = EjbMavenDependencyFactory.toListDependsOn(dependencies);
-		List<IoMavenDependency> parents = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(dependenciesDependOn));
+		List<IoMavenDependency> parents = fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().addVersions(dependenciesDependOn));
 		
 		mapParent.putAll(EjbMavenDependencyFactory.toMapDependsOn(parents));
 		
@@ -220,10 +227,10 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	public void addModulePath()
 	{
 		this.reset(false, false, true);
-		dependencies.addAll(fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().add(version)));
+		dependencies.addAll(fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().add(version)));
 
 		List<IoMavenVersion> dependenciesDependOn = EjbMavenDependencyFactory.toListDependsOn(dependencies);
-		List<IoMavenDependency> parents = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(dependenciesDependOn));
+		List<IoMavenDependency> parents = fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().addVersions(dependenciesDependOn));
 		
 		mapParent.putAll(EjbMavenDependencyFactory.toMapDependsOn(parents));
 		

@@ -1,6 +1,6 @@
 package org.jeesl.connectors.tools;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 
 /**
  *
@@ -13,9 +13,7 @@ public class Bootstrap {
      */
     public static void init()
     {
-         LoggerInit loggerInit = new LoggerInit("log4j.xml");
-			loggerInit.path("config");
-			loggerInit.init();
+    	LoggerBootstrap.instance().path("jeesl/system/io/log").init();
     }
     
 }

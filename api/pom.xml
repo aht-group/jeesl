@@ -24,7 +24,7 @@
 				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>  	         
+			</dependency>
 			<dependency>
 				<groupId>org.jeesl.bom</groupId>
 				<artifactId>bom-core</artifactId>

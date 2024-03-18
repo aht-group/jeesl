@@ -14,7 +14,8 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
-import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslIoMavenFacade <GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
@@ -31,7 +32,9 @@ public interface JeeslIoMavenFacade <GROUP extends JeeslIoMavenGroup,
 	ARTIFACT fIoMavenArtifact(GROUP group, String code) throws JeeslNotFoundException;
 	VERSION fIoMavenVersion(ARTIFACT artifact, String code) throws JeeslNotFoundException;
 	
-	List<MODULE> fIoMavenModules(EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
-	List<USAGE> fIoMavenUsages(EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
-	List<DEPENDENCY> fIoMavenDependencies(EjbIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
+	List<MODULE> fIoMavenModules(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
+	List<USAGE> fIoMavenUsages(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
+	List<DEPENDENCY> fIoMavenDependencies(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
+	
+	JsonTuples1<VERSION> tpUsageByVersion(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
 }

@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import org.apache.commons.io.IOUtils;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
@@ -95,11 +96,9 @@ public class AbstractJeeslReportTest
 	
 	public static void initLogger()
 	{
-		if(!LoggerInit.isLog4jInited())
+		if(!LoggerBootstrap.isLog4jInited())
 		{
-			LoggerInit loggerInit = new LoggerInit(loggerConfigFile);
-			loggerInit.path(loggerConfigPath);
-			loggerInit.init();
+			LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 		}
     }
 	

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +19,7 @@ public abstract class AbstractFileProcessingTest extends AbstractAhtUtilsXmlTest
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.path("src/test/resources/config.ahtutils-util.test");
-		loggerInit.init();
+		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
     }
 	
 	protected static Collection<Object[]> initFileNames(String srcDir, String fileSuffix)

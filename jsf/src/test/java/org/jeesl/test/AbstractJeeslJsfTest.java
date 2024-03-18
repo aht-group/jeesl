@@ -2,6 +2,7 @@ package org.jeesl.test;
 
 import java.io.File;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.exlp.util.io.log.LoggerInit;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
@@ -32,12 +33,7 @@ public class AbstractJeeslJsfTest extends AbstractJeeslTest
 	@BeforeAll
     public static void initLogger()
 	{
-		if(!LoggerInit.isLog4jInited())
-		{
-			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.path("config.ahtutils-jsf.test");
-			loggerInit.init();
-		}
+		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
     }
 	
 	protected NsPrefixMapperInterface getPrefixMapper()

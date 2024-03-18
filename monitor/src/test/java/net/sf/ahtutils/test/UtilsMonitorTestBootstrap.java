@@ -1,5 +1,6 @@
 package net.sf.ahtutils.test;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
@@ -12,9 +13,7 @@ public class UtilsMonitorTestBootstrap
 	
 	public static void init()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.path("config.ahtutils-monitor.test");
-		loggerInit.init();
+		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
 	}
 }
