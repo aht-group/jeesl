@@ -3,9 +3,11 @@ package org.jeesl.model.ejb.io.maven.dependency;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -29,6 +31,7 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 
 	@Override public String resolveParentAttribute() {return JeeslIoMavenVersion.Attributes.artifact.toString();}
 	@ManyToOne @NotNull
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenVersion_artifact"))
 	private IoMavenArtifact artifact;
 	@Override public IoMavenArtifact getArtifact() {return artifact;}
 	@Override public void setArtifact(IoMavenArtifact artifact) {this.artifact = artifact;}
@@ -51,11 +54,13 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 	@Override public void setRemark(String remark) {this.remark = remark;}
 	
 	@ManyToOne @NotNull
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenVersion_outdate"))
 	private IoMavenOutdate outdate;
 	@Override public IoMavenOutdate getOutdate() {return outdate;}
 	@Override public void setOutdate(IoMavenOutdate outdate) {this.outdate = outdate;}
 	
 	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenVersion_maintainer"))
 	private IoMavenMaintainer maintainer;
 	@Override public IoMavenMaintainer getMaintainer() {return maintainer;}
 	@Override public void setMaintainer(IoMavenMaintainer maintainer) {this.maintainer = maintainer;}
