@@ -35,6 +35,7 @@ public class JeeslIoMavenFontWc extends AbstractJeeslLocaleWebController<IoLang,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFontWc.class);
 	
+	@SuppressWarnings("unused")
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
 
 	private final Nested2Map<IoMavenFont,IoSsiHost,IoMavenFontUsage> n2m; public Nested2Map<IoMavenFont, IoSsiHost, IoMavenFontUsage> getN2m() {return n2m;}

@@ -178,7 +178,7 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 			r.setPosition(index.getAndIncrement());
 			EjbMavenReferralFactory.recommendation(r);
 		}
-		fMaven.update(referrals);
+		fMaven.save(referrals);
 		if(Objects.nonNull(referral)) {referral = fMaven.find(IoMavenEeReferral.class,referral);}
 	}
 }

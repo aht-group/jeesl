@@ -38,6 +38,7 @@ public interface JeeslIoMavenFacade <GROUP extends JeeslIoMavenGroup,
 	List<USAGE> fIoMavenUsages(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
 	List<DEPENDENCY> fIoMavenDependencies(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
 	List<VERSION> fIoMavenVersions(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
+	List<EEF> fIoMavenEeReferrals(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
 	
 	Long cIoMavenVersions(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query);
 	

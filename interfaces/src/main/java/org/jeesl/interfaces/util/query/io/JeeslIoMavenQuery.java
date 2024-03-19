@@ -7,6 +7,7 @@ import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
+import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 
@@ -19,6 +20,7 @@ public interface JeeslIoMavenQuery <
 {
 	List<CqLiteral> getLiterals();
 	List<CqOrdering> getOrderings();
+	List<CqBool> getBools();
 	
 	boolean isDistinct();
 //	void x();
@@ -28,6 +30,7 @@ public interface JeeslIoMavenQuery <
 	public <E extends Enum<E>> JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> addRootFetch(E e);
 	
 	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> add(CqLiteral literal);
+	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> add(CqBool bool);
 	JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> orderBy(CqOrdering ordering);
 	
 	//LocalDate

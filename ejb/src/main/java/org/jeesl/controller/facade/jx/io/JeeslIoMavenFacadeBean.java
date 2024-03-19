@@ -184,6 +184,28 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		TypedQuery<DEPENDENCY> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
+	
+	@Override public List<EEF> fIoMavenEeReferrals(JeeslIoMavenQuery<VERSION, MODULE, STRUCTURE> query)
+	{
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<DEPENDENCY> cQ = cB.createQuery(fbMaven.getClassDependency());
+//		Root<DEPENDENCY> root = cQ.from(fbMaven.getClassDependency());
+//		if(ObjectUtils.isNotEmpty(query.getRootFetches())) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+//		
+//		if(ObjectUtils.isNotEmpty(query.getVersions()))
+//		{
+//			Path<VERSION> pArtifact = root.get(JeeslIoMavenDependency.Attributes.artifact.toString());
+//			predicates.add(pArtifact.in(query.getVersions()));
+//		}
+//
+//		cQ.select(root);
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		
+//		TypedQuery<EEF> tQ = em.createQuery(cQ);
+//		return tQ.getResultList();
+		return null;
+	}
 
 	@Override public JsonTuples1<VERSION> tpUsageByVersion(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query)
 	{
@@ -279,13 +301,13 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 					Expression<Integer> ePosition = root.get(JeeslIoMavenVersion.Attributes.position.toString());
 					SortByPredicateBuilder.addByInteger(cB,orders,cqo,ePosition);
 				}
-				if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.code)))
+				else if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.code)))
 				{
 					Path<ARTIFACT> pArtifact = root.get(JeeslIoMavenVersion.Attributes.artifact.toString());
 					Expression<String> eCode = pArtifact.get(JeeslIoMavenArtifact.Attributes.code.toString());
 					SortByPredicateBuilder.addByString(cB,orders,cqo,eCode);
 				}
-				if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.group,JeeslIoMavenGroup.Attributes.code)))
+				else if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.group,JeeslIoMavenGroup.Attributes.code)))
 				{
 					Path<ARTIFACT> pArtifact = root.get(JeeslIoMavenVersion.Attributes.artifact.toString());
  					Path<GROUP> pGroup = pArtifact.get(JeeslIoMavenArtifact.Attributes.group.toString());
