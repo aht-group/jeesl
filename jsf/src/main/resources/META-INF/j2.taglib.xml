@@ -96,6 +96,12 @@
             <resource-id>ioMaven/font.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>opIoMavenVersion</tag-name>
+        <component>
+            <resource-id>ioMaven/opVersion.xhtml</resource-id>
+        </component>
+	</tag>
 	
 	<tag>
         <tag-name>gridIoSsiPort</tag-name>

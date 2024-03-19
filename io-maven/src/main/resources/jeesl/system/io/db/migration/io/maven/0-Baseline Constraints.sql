@@ -7,6 +7,7 @@ alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_artifiact fore
 alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_bom foreign key (bom_id) references IoMavenVersion;
 alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_edition foreign key (edition_id) references IoStatus;
 alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_standard foreign key (standard_id) references IoStatus;
+alter table IoMavenEeReferral add constraint uk_IoMavenEeReferral_edition_standard_recommendation unique (edition_id, standard_id, recommendation);
 alter table IoMavenModule add constraint FKc2fr7ii7117d094pbme9tgpjq foreign key (graphic_id) references IoGraphic;
 alter table IoMavenModule add constraint fk_iomavenmodule_jdk foreign key (jdk_id) references IoStatus;
 alter table IoMavenModule add constraint fk_IoMavenModule_parent foreign key (parent_id) references IoMavenModule;

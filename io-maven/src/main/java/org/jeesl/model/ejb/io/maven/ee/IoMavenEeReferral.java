@@ -10,17 +10,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.io.maven.ee.JeeslMavenEeReferral;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 
 @Entity
-@Table(name="IoMavenEeReferral")
+@Table(name="IoMavenEeReferral",uniqueConstraints={@UniqueConstraint(name="uk_IoMavenEeReferral_edition_standard_recommendation",columnNames={"edition_id","standard_id","recommendation"})})
 @EjbErNode(name="Version",category="ioMaven",subset="ioMaven")
-public class IoMavenEeReferral implements EjbSaveable
+public class IoMavenEeReferral implements JeeslMavenEeReferral<IoMavenEeEdition,IoMavenEeStandard>
 {
 	public static final long serialVersionUID=1;	
 
@@ -42,7 +43,11 @@ public class IoMavenEeReferral implements EjbSaveable
 	public IoMavenEeStandard getStandard() {return standard;}
 	public void setStandard(IoMavenEeStandard standard) {this.standard = standard;}
 	
-	@ManyToOne
+	private int position;
+	public int getPosition() {return position;}
+	public void setPosition(int position) {this.position = position;}
+
+	@NotNull @ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenEeReferral_artifiact"))
 	private IoMavenVersion artifact;
 	public IoMavenVersion getArtifact() {return artifact;}
@@ -59,7 +64,10 @@ public class IoMavenEeReferral implements EjbSaveable
 	public String getRemark() {return remark;}
 	public void setRemark(String remark) {this.remark = remark;}
 	
-
+	private Boolean recommendation;
+	@Override public Boolean getRecommendation() {return recommendation;}
+	@Override public void setRecommendation(Boolean recommendation) {this.recommendation = recommendation;}
+	
 	@Override public boolean equals(Object object){return (object instanceof IoMavenEeReferral) ? id == ((IoMavenEeReferral) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 	

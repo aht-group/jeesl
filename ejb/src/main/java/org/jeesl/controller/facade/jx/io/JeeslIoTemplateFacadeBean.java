@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.io.JeeslIoTemplateFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
-import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoTemplateFactoryBuilder;
 import org.jeesl.interfaces.facade.ParentPredicate;

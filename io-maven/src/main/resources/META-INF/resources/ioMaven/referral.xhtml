@@ -2,155 +2,115 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
-	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag" xmlns:j2="https://www.jeesl.org/j2"
 	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 	
 	<composite:interface>
 		<composite:attribute name="ctrl" required="true"/>
-		
 		<composite:facet name="top" required="false"/>
 		<composite:facet name="bottom" required="false"/>
 	</composite:interface>
 	
 <composite:implementation>
+<h:outputScript library="jeeslJs" name="jeesl.js" target="head"/>
 <jp:grid id="grid">
 	<j:row>
 		<j:slot id="sDevelopments" width="8">
-			<h:form id="fDevelopments">
-				<p:dataTable styleClass="jeesl-datatable"
-						var="m" value="#{cc.attrs.ctrl.modules}" draggableRows="true"
-						selection="#{cc.attrs.ctrl.module}" selectionMode="single" rowKey="#{m.id}">
-					<f:facet name="header">
-						<j:dtHeader entity="IoMavenModule" code="listOf">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addDevelopment()}" update=":#{cc.id}:grid"/>
-						</j:dtHeader>
-					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectModule()}" update=":#{cc.id}:sDevelopment"/>
-					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderModules()}" update="@form"/>
-					<p:column>
-						<f:facet name="header"><jtp:label entity="IoMavenModule" code="structure"/></f:facet>
-		            	<jtp:symbolizer value="#{m.structure}"/>
-		            </p:column>
-					<p:column>
-						<f:facet name="header"><jtp:label entity="IoMavenModule" code="label"/></f:facet>
-		            	<jtp:symbolizer value="#{m}" marginRight="5"/>
-		            	<h:outputText value="#{m.label}" />
-		            </p:column>
-		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="code"/></f:facet>
-		            	<jtp:symbolizer value="#{m.type}" marginRight="5"/>
-						<h:outputText value="#{m.code}" />
-		            </p:column>
-		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="jdk"/></f:facet>
-		            	<jtp:symbolizer value="#{m.jdk}"/>
-		            </p:column>
-		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="enterpriseEditions"/></f:facet>
-		            	<ui:repeat var="ee" value="#{m.enterpriseEditions}">
-							<jtp:symbolizer value="#{ee}" marginRight="5"/>
-						</ui:repeat>
-		            </p:column>
-				</p:dataTable>
+			<p:dataTable id="dtFilesType" styleClass="jeesl-datatable"
+				var="s" value="#{cc.attrs.ctrl.eeStandards}">
+				<f:facet name="header">
+					<j:dtHeader entity="IoMavenReferral" code="listOf">
+						
+					</j:dtHeader>
+				</f:facet>
+				<p:columnGroup type="header">
+					<p:row>
+						<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoMavenEeStandard"/></f:facet></p:column>
+						<p:column colspan="1" headerText="" code="listOf"/>
+						<p:columns var="e" value="#{cc.attrs.ctrl.eeEditions}">
+							<f:facet name="header"><h:outputText value="#{e.name[localeCode].lang}"/></f:facet>
+						</p:columns>
+					</p:row>
+				</p:columnGroup>
+				<p:column rendered="true">
+					<h:outputText value="#{s.name[localeCode].lang}"/>
+				</p:column>
+				<p:column rendered="true">
+					<h:outputText value="#{s.code}"/>
+				</p:column>
+				<p:columns var="e" value="#{cc.attrs.ctrl.eeEditions}" styleClass="jeesl-cell-select">
+					<h:outputLabel onclick="jeeslCellSelection.single(this,'#{s.id}','#{e.id}')">
+						<h:panelGroup layout="block" styleClass="jeesl-cell-select-content">
+							xx
+						</h:panelGroup>
+					</h:outputLabel>
+				</p:columns>
+			</p:dataTable>
+			<h:form id="fCellSelectionSingle">
+				<p:remoteCommand name="selectCell" actionListener="#{cc.attrs.ctrl.selectCell}" update=":#{cc.id}:sReferral" style="display: none;"/>
 			</h:form>
 		</j:slot>
-		<j:slot id="sDevelopment" width="4">
-			<h:form id="fModule" rendered="#{not empty cc.attrs.ctrl.module}">
-				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="IoMavenModule"/></f:facet>
-					<f:facet name="actions">
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveDevelopment()}" update=":#{cc.id}:grid"/>
-					</f:facet>
-					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-					<j:inputGrid>
-						<jtp:label entity="IoMavenModule" code="code"/>
-						<p:inputText value="#{cc.attrs.ctrl.module.code}"/>
-						
-						<jtp:label entity="IoMavenModule" code="label"/>
-						<p:inputText value="#{cc.attrs.ctrl.module.label}"/>
-						
-						<jtp:label entity="IoMavenModule" code="structure"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.module.structure}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.ctrl.structures}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-						</p:selectOneMenu>
-						
-						<jtp:label entity="IoMavenModule" code="type"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.module.type}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.ctrl.types}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-						</p:selectOneMenu>
-						
-						<jtp:label entity="IoMavenModule" code="jdk"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.module.jdk}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.ctrl.compilers}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-						</p:selectOneMenu>
-						
-						<jtp:label entity="IoMavenModule" code="enterpriseEditions"/>
-						<p:selectCheckboxMenu value="#{cc.attrs.ctrl.module.enterpriseEditions}" multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-							<f:converter converterId="ioMavenEeConverter" />
-							<f:attribute name="collectionType" value="java.util.LinkedList" />
-							<f:selectItems value="#{cc.attrs.ctrl.enterpriseEditions}" var="e" itemLabel="#{e.name[localeCode].lang}" itemValue="#{e}" />
-						</p:selectCheckboxMenu>
-					</j:inputGrid>
-				</p:panel>
-			</h:form>
-			<h:form id="fUpload" enctype="multipart/form-data" rendered="#{cc.attrs.ctrl.module.id gt 0}">
-				<p:fileUpload  styleClass="jeeslFileUpload" previewWidth="80" mode="advanced" dragDropSupport="false"
-					sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/"
-					listener="#{cc.attrs.ctrl.handleFileUpload}" update=":#{cc.id}:grid"/>
-			</h:form>
-			<h:form id="fChilds">
-				<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.module.id gt 0}"
-						var="c" value="#{cc.attrs.ctrl.childs}" draggableRows="true"
-						selection="#{cc.attrs.ctrl.child}" selectionMode="single" rowKey="#{c.id}">
+		<j:slot id="sReferral" width="4">
+			<h:form id="fDevelopments">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="r" value="#{cc.attrs.ctrl.referrals}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.referral}" selectionMode="single" rowKey="#{r.id}">
 					<f:facet name="header">
-						<j:dtHeader entity="IoMavenModule" code="childs">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addChild()}" update=":#{cc.id}:fChilds :#{cc.id}:fChild"/>
+						<j:dtHeader entity="IoMavenReferral" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addReferral()}" update=":#{cc.id}:sReferral"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectChild()}" update=":#{cc.id}:fChild"/>
-					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderChilds()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectReferral()}" update=":#{cc.id}:fReferral"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderReferrals()}" update=":#{cc.id}:sReferral "/>
 					<p:column>
-						<jtp:symbolizer value="#{c.structure}"/>
+						<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
+		            	<h:outputText value="#{r.artifact.artifact.group.code}" styleClass="#{r.recommendation ? 'jeesl-red' : ''}"/>
+		            </p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMavenVersion" code="artifact"/></f:facet>
+		            	<jtp:symbolizer value="#{r.artifact.artifact.suitability}" marginRight="5"/>
+		            	<h:outputText value="#{r.artifact.artifact.code}"/>
 		            </p:column>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="code"/></f:facet>
-						<h:outputText value="#{c.code}" />  
-		            </p:column>
-		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="label"/></f:facet>
-						<h:outputText value="#{c.label}" />  
-		            </p:column>
-		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="abbreviation"/></f:facet>
-						<h:outputText value="#{c.abbreviation}" />  
+						<f:facet name="header"><jtp:label entity="IoMavenEeReferral" code="artifact"/></f:facet>
+		            	<jtp:symbolizer value="#{r.artifact.outdate}" marginRight="5"/>
+		            	<h:outputText value="#{r.artifact.code}"/>
 		            </p:column>
 				</p:dataTable>
 			</h:form>
-			<h:form id="fChild">
-				<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.ctrl.child}">
-					<f:facet name="header"><j:pHeader entity="IoMavenModule" code="child"/></f:facet>
+			<h:form id="fReferral" >
+				<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.ctrl.referral}">
+					<f:facet name="header"><j:pHeader entity="IoMavenReferral"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveChild()}" update=":#{cc.id}:fChilds :#{cc.id}:fChild"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteChild()}" update=":#{cc.id}:fChilds :#{cc.id}:fChild"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveReferral()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSearch" listener="#{cc.attrs.ctrl.prepareSearch()}" update=":#{cc.id}:fVersions" oncomplete="PF('wvVersions').show()"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid>
-						<jtp:label entity="IoMavenModule" code="code"/>
-						<p:inputText value="#{cc.attrs.ctrl.child.code}"/>
-						
-						<jtp:label entity="IoMavenModule" code="label"/>
-						<p:inputText value="#{cc.attrs.ctrl.child.label}"/>
-						
-						<jtp:label entity="IoMavenModule" code="abbreviation"/>
-						<p:inputText value="#{cc.attrs.ctrl.child.abbreviation}"/>
-						
-						<jtp:label entity="IoMavenModule" code="structure"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.child.structure}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.ctrl.structures}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						<jtp:label entity="IoMavenReferral" code="edition"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.referral.edition}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.eeEditions}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
+						
+						<jtp:label entity="IoMavenReferral" code="standard"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.referral.standard}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.eeStandards}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+					</j:inputGrid>
+					<j:inputGrid rendered="#{not empty cc.attrs.ctrl.referral.artifact}">
+						<jtp:label entity="IoMavenGroup"/>
+ 						<h:outputText value="#{cc.attrs.ctrl.referral.artifact.artifact.group.code}"/>
+						
+						<jtp:label entity="IoMavenArtifact"/>
+						<h:outputText value="#{cc.attrs.ctrl.referral.artifact.artifact.code}"/>
+						
+						<jtp:label entity="IoMavenVersion"/>
+						<h:outputText value="#{cc.attrs.ctrl.referral.artifact.code}"/>
 					</j:inputGrid>
 				</p:panel>
 			</h:form>
+			<h:form id="fVersions"><j2:opIoMavenVersion widgetVar="wvVersions" handler="#{cc.attrs.ctrl.opVersion}" update=":#{cc.id}:fReferral"/></h:form>
 		</j:slot>
 	</j:row>
 </jp:grid>

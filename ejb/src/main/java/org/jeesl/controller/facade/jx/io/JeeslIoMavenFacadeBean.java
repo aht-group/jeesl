@@ -2,6 +2,7 @@ package org.jeesl.controller.facade.jx.io;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -11,8 +12,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -20,6 +21,8 @@ import javax.persistence.criteria.Root;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMavenFactoryBuilder;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -32,13 +35,15 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenDependency;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
+import org.jeesl.interfaces.model.io.maven.ee.JeeslMavenEeReferral;
 import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
+import org.jeesl.model.ejb.io.db.CqLiteral;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,8 +59,9 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,?,?>,
 									STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
 									TYPE extends JeeslMavenType<L,D,TYPE,?>,
-									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>>
-	extends JeeslFacadeBean implements JeeslIoMavenFacade<GROUP,ARTIFACT,VERSION,DEPENDENCY,SCOPE,OUTDATE,MAINTAINER,MODULE,STRUCTURE,USAGE>
+									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>,
+									EEF extends JeeslMavenEeReferral<?,?>>
+	extends JeeslFacadeBean implements JeeslIoMavenFacade<GROUP,ARTIFACT,VERSION,DEPENDENCY,SCOPE,OUTDATE,MAINTAINER,MODULE,STRUCTURE,USAGE,EEF>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
@@ -194,5 +200,101 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json1TuplesFactory<VERSION> jtf = Json1TuplesFactory.instance(fbMaven.getClassVersion()).tupleLoad(this,query.getTupleLoad());
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
+
+	@Override public Long cIoMavenVersions(JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Long> cQ = cB.createQuery(Long.class);
+		Root<VERSION> root = cQ.from(fbMaven.getClassVersion());
+
+		cQ.select(cB.count(root));
+		cQ.where(cB.and(this.pVersions(cB,query,root)));
+		cQ.distinct(query.isDistinct());
+
+		return em.createQuery(cQ).getSingleResult();
+	}
+	@Override public List<VERSION> fIoMavenVersions(JeeslIoMavenQuery<VERSION, MODULE, STRUCTURE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<VERSION> cQ = cB.createQuery(fbMaven.getClassVersion());
+		Root<VERSION> root = cQ.from(fbMaven.getClassVersion());
+		if(ObjectUtils.isNotEmpty(query.getRootFetches())) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+
+		cQ.select(root).distinct(query.isDistinct());
+		cQ.where(cB.and(this.pVersions(cB,query,root)));
+		this.sortBy(cB,cQ,query,root);
+		
+		TypedQuery<VERSION> tQ = em.createQuery(cQ);
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		return tQ.getResultList();
+	}
+	public Predicate[] pVersions(CriteriaBuilder cB, JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query, Root<VERSION> ejb)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+//		if(ObjectUtils.isNotEmpty(query.getUsers()))
+//		{
+//			Join<ErpCvProfile,ErpUser> jUser = ejb.join(ErpCvProfile.Attributes.user.toString());
+//			predicates.add(jUser.in(query.getUsers()));
+//		}
+		
+		if(ObjectUtils.isNotEmpty(query.getLiterals()))
+		{
+			for(CqLiteral cql : query.getLiterals())
+			{
+				if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.code)))
+				{
+					Expression<String> eCode = cB.upper(ejb.get(JeeslIoMavenVersion.Attributes.code.toString()));
+					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
+				}
+				else if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenGroup.Attributes.code)))
+				{
+ 					Path<ARTIFACT> pArtifact = ejb.get(JeeslIoMavenVersion.Attributes.artifact.toString());
+ 					Expression<String> eCode = cB.upper(pArtifact.get(JeeslIoMavenGroup.Attributes.code.toString()));
+ 					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
+				}
+				else if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.group,JeeslIoMavenGroup.Attributes.code)))
+				{
+ 					Path<ARTIFACT> pArtifact = ejb.get(JeeslIoMavenVersion.Attributes.artifact.toString());
+ 					Path<GROUP> pGroup = pArtifact.get(JeeslIoMavenArtifact.Attributes.group.toString());
+ 					Expression<String> eCode = cB.upper(pGroup.get(JeeslIoMavenGroup.Attributes.code.toString()));
+ 					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
+				}
+				else {logger.warn("NYI Path: "+cql.toString());}
+			}
+		}
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	public void sortBy(CriteriaBuilder cB, CriteriaQuery<VERSION> cQ, JeeslIoMavenQuery<VERSION,MODULE,STRUCTURE> query, Root<VERSION> root)
+	{
+		if(ObjectUtils.isNotEmpty(query.getOrderings()))
+		{
+			List<Order> orders = new ArrayList<>();
+			for(CqOrdering cqo : query.getOrderings())
+			{
+				if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.position)))
+				{
+					Expression<Integer> ePosition = root.get(JeeslIoMavenVersion.Attributes.position.toString());
+					SortByPredicateBuilder.addByInteger(cB,orders,cqo,ePosition);
+				}
+				if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.code)))
+				{
+					Path<ARTIFACT> pArtifact = root.get(JeeslIoMavenVersion.Attributes.artifact.toString());
+					Expression<String> eCode = pArtifact.get(JeeslIoMavenArtifact.Attributes.code.toString());
+					SortByPredicateBuilder.addByString(cB,orders,cqo,eCode);
+				}
+				if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.group,JeeslIoMavenGroup.Attributes.code)))
+				{
+					Path<ARTIFACT> pArtifact = root.get(JeeslIoMavenVersion.Attributes.artifact.toString());
+ 					Path<GROUP> pGroup = pArtifact.get(JeeslIoMavenArtifact.Attributes.group.toString());
+ 					Expression<String> eCode = cB.upper(pGroup.get(JeeslIoMavenGroup.Attributes.code.toString()));
+					SortByPredicateBuilder.addByString(cB,orders,cqo,eCode);
+				}
+				else {logger.warn("No SortBy Handling for "+cqo.toString());}
+			}
+			if(!orders.isEmpty()) {cQ.orderBy(orders);}
+		}
 	}
 }

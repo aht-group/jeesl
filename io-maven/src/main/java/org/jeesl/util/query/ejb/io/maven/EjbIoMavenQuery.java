@@ -10,6 +10,8 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
+import org.jeesl.model.ejb.io.db.CqLiteral;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
@@ -36,6 +38,9 @@ public class EjbIoMavenQuery extends AbstractEjbQuery implements JeeslIoMavenQue
 	//Fetches
 	public <E extends Enum<E>> EjbIoMavenQuery addRootFetch(E e) {if(Objects.isNull(rootFetches)) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}
+	
+	@Override public EjbIoMavenQuery add(CqLiteral literal) {super.addLiteral(literal); return this;}
+	@Override public EjbIoMavenQuery orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
 	
 	//Lists
 	@Override public EjbIoMavenQuery id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
