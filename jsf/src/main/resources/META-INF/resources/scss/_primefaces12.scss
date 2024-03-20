@@ -170,6 +170,16 @@ body {
 			}
 		}
 		
+		tfoot td {
+			background: $panel-background;
+			border-width: $header-element-underline 0 0;
+			padding: $half-spacing $regular-spacing;
+			
+			@media (max-width: 768px) {
+				border-top-width: $header-element-underline-mobile;
+			}
+		}
+		
 		.ui-datatable-data {
 			background: $panel-background;
 			

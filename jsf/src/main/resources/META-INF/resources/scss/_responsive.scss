@@ -3487,7 +3487,7 @@ body, .ui-widget {
 		table-layout: auto;
 		
 		@media (max-width: 768px) {
-			thead th, tbody tr {
+			thead th, tbody tr, tfoot tr {
 				height: $element-height-mobile;
 			}
 		}
@@ -3566,11 +3566,11 @@ body, .ui-widget {
 				min-width: $element-height;
 				position: absolute;
 				transform: translateX(-50%);
+				width: calc(100% - 2 * $half-spacing) !important;
 				
 				@media (max-width: 768px) {
 					height: $element-height-mobile;
 					min-width: $element-height-mobile;
-					width: calc(100% - 2 * $half-spacing) !important;
 				}
 			}
 		}
@@ -3594,6 +3594,19 @@ body, .ui-widget {
 				cursor: pointer;
 				display: flex;
 				height: 100%;
+			}
+		}
+		
+		tfoot td {
+			background: $panel-background;
+			border-color: $dark-colour;
+			border-width: $header-element-underline 0 0;
+			color: $dark-colour;
+			font-weight: 700;
+			text-align: left;
+			
+			@media (max-width: 768px) {
+				border-top-width: $header-element-underline-mobile;
 			}
 		}
 	}
@@ -3764,9 +3777,11 @@ body, .ui-widget {
 		}
 	}
 	
-	@media (max-width: 768px) {
-		img {
-			height: 100%;
+	img {
+		height: 100%;
+		max-height: calc(#{$element-height} - 2 * #{$slim-spacing});
+		
+		@media (max-width: 768px) {
 			max-height: calc(#{$element-height-mobile} - 2 * #{$half-spacing});
 		}
 		
