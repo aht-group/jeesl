@@ -6,6 +6,7 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenDependency;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
+import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeReferral;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -20,7 +21,8 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 									DEPENDENCY extends JeeslIoMavenDependency<VERSION>,
 									SCOPE extends JeeslMavenScope<?,?,SCOPE,?>,
 									MODULE extends JeeslIoMavenModule<MODULE,?,?,?,?>,
-									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>>
+									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>,
+									EER extends JeeslIoMavenEeReferral<?,?>>
 			extends AbstractFactoryBuilder<L,D>
 {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +35,7 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 	private final Class<DEPENDENCY> cDependency; public Class<DEPENDENCY> getClassDependency() {return cDependency;}
 	private final Class<MODULE> cModule; public Class<MODULE> getClassModule() {return cModule;}
 	private final Class<USAGE> cUsage; public Class<USAGE> getClassUsage() {return cUsage;}
+	private final Class<EER> cEeReferral; public Class<EER> getClassEeReferral() {return cEeReferral;}
 		
 	public IoMavenFactoryBuilder(final Class<L> cL, final Class<D> cD,
 									final Class<GROUP> cGroup,
@@ -40,7 +43,8 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 									final Class<VERSION> cVersion,
 									final Class<DEPENDENCY> cDependency,
 									final Class<MODULE> cModule,
-									final Class<USAGE> cUsage)
+									final Class<USAGE> cUsage,
+									final Class<EER> cEeReferral)
 	{
 		super(cL,cD);
 		this.cGroup=cGroup;
@@ -50,5 +54,7 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 		
 		this.cModule=cModule;
 		this.cUsage=cUsage;
+		
+		this.cEeReferral=cEeReferral;
 	}
 }

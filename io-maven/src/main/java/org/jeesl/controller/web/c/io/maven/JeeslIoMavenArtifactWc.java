@@ -153,7 +153,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	public void selectArtifact()
 	{
 		this.reset(true, true, true);
-		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(artifact));}
+		logger.info(AbstractLogMessage.selectEntity(artifact));
 		this.reloadVersions();
 		this.reloadUsages();
 	}

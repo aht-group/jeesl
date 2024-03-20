@@ -30,7 +30,6 @@ import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenSuitability;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
-import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenDependency;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
@@ -57,7 +56,6 @@ import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 {
@@ -211,7 +209,7 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			}
 		}
 
-		JeeslIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> query = EjbIoMavenQuery.instance();
+		EjbIoMavenQuery query = EjbIoMavenQuery.instance();
 		query.addRootFetch(JeeslIoMavenUsage.Attributes.scopes);
 		query.add(module);
 	

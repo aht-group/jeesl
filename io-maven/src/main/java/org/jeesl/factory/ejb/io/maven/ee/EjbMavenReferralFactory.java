@@ -8,6 +8,7 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.model.ejb.io.maven.ee.IoMavenEeEdition;
 import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.ee.IoMavenEeStandard;
+import org.jeesl.model.pojo.map.generic.Nested2Map;
 
 public class EjbMavenReferralFactory
 {
@@ -30,5 +31,12 @@ public class EjbMavenReferralFactory
 	{
 		if(ejb.getPosition()==1) {ejb.setRecommendation(true);}
 		else {ejb.setRecommendation(null);}
+	}
+	
+	public static Nested2Map<IoMavenEeStandard,IoMavenEeEdition,IoMavenEeReferral> toN2m(List<IoMavenEeReferral> list)
+	{
+		Nested2Map<IoMavenEeStandard,IoMavenEeEdition,IoMavenEeReferral> n2m = new Nested2Map<>();
+		for(IoMavenEeReferral ejb : list) {n2m.put(ejb.getStandard(),ejb.getEdition(),ejb);}
+		return n2m;
 	}
 }

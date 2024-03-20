@@ -14,14 +14,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.maven.ee.JeeslMavenEeReferral;
+import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeReferral;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 
 @Entity
 @Table(name="IoMavenEeReferral",uniqueConstraints={@UniqueConstraint(name="uk_IoMavenEeReferral_edition_standard_recommendation",columnNames={"edition_id","standard_id","recommendation"})})
 @EjbErNode(name="Version",category="ioMaven",subset="ioMaven")
-public class IoMavenEeReferral implements JeeslMavenEeReferral<IoMavenEeEdition,IoMavenEeStandard>
+public class IoMavenEeReferral implements JeeslIoMavenEeReferral<IoMavenEeEdition,IoMavenEeStandard>
 {
 	public static final long serialVersionUID=1;	
 

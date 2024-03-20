@@ -3,6 +3,7 @@ package org.jeesl.factory.sql;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Table;
 
@@ -28,6 +29,11 @@ public class SqlFactory
 		newLine = false;
 	}
 	
+	public <T extends EjbWithId> SqlFactory from(Class<T> c)
+	{
+		SqlFactory.from(sb,c,alias,newLine);
+		return this;
+	}
 	public <T extends EjbWithId> SqlFactory delete(Class<T> c)
 	{
 		SqlFactory.deleteFrom(sb,c,alias,newLine);
@@ -52,8 +58,6 @@ public class SqlFactory
 	}
 	
 	public String toString() {sb.append(";"); return sb.toString();}
-	
-	
 	
 	public static <E extends Enum<E>, T extends EjbWithId> void update(StringBuilder sb, Class<?> c, String alias, E attribute, T t, boolean newLine)
 	{
@@ -234,7 +238,7 @@ public class SqlFactory
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
 		sb.append(" FROM ").append(c.getAnnotation(Table.class).name());
-		sb.append(" AS ").append(alias);
+		if(Objects.nonNull(alias)) {sb.append(" AS ").append(alias);}
 		newLine(newLine,sb);
 	}
 	
