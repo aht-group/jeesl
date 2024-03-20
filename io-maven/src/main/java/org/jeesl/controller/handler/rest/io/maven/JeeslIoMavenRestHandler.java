@@ -39,6 +39,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenSuitability;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.font.IoMavenFont;
 import org.jeesl.model.ejb.io.maven.font.IoMavenFontUsage;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
@@ -63,14 +64,14 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 	public static final long serialVersionUID=1;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenRestHandler.class);
 	
-	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
 	
 	private final EjbCodeCache<IoMavenStructure> cacheStructure;
 	private final EjbCodeCache<IoMavenOutdate> cacheOutdate;
 	private final EjbCodeCache<IoMavenSuitability> cacheSuitability;
 	private final EjbCodeCache<IoMavenScope> cacheScope;
 	
-	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven)
 	{
 		this.fMaven=fMaven;
 		

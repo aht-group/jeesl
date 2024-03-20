@@ -18,8 +18,12 @@ import org.jeesl.interfaces.model.io.ai.openai.JeeslIoAiOpenAiModel;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
-@Table(name="IoAiOpenAiModel",uniqueConstraints= {@UniqueConstraint(name="uk_IoAiOpenAiModel_code",columnNames={"code"}),
-												  @UniqueConstraint(name="uk_IoAiOpenAiModel_generation",columnNames={"generation_id", "fallback"})})
+//jeesl.highlight:unique
+@Table(name="IoAiOpenAiModel",uniqueConstraints={
+		@UniqueConstraint(name="uk_IoAiOpenAiModel_code",columnNames={"code"}),
+		@UniqueConstraint(name="uk_IoAiOpenAiModel_generation",columnNames={"generation_id", "fallback"})
+	})
+//jeesl.highlight:unique
 @EjbErNode(name="Model",category="system",subset="cms")
 public class IoAiOpenAiModel implements JeeslIoAiOpenAiModel<IoOpenAiGeneration>
 {

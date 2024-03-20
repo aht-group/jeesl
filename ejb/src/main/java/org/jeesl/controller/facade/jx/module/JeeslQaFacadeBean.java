@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.dev.JeeslQaFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
-import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;

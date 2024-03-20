@@ -18,7 +18,7 @@ public interface JeeslIoMavenVersion <ARTIFACT extends JeeslIoMavenArtifact<?,?>
 												EjbWithParentAttributeResolver,
 												EjbWithNonUniqueCode,EjbWithPosition
 {	
-	public static enum Attributes{artifact,code,maintainer,label};
+	public static enum Attributes{artifact,code,position,maintainer,label};
 	
 	String getLabel();
 	void setLabel(String label);

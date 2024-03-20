@@ -40,6 +40,7 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	
 	@Override public String resolveParentAttribute() {return JeeslIoMavenModule.Attributes.parent.toString();}
 	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenModule_parent"))
 	private IoMavenModule parent;
 	@Override public IoMavenModule getParent() {return parent;}
 	@Override public void setParent(IoMavenModule parent) {this.parent = parent;}
@@ -61,17 +62,20 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	@Override public void setAbbreviation(String abbreviation) {this.abbreviation = abbreviation;}
 	
 	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenModule_structure"))
 	private IoMavenStructure structure;
 	@Override public IoMavenStructure getStructure() {return structure;}
 	@Override public void setStructure(IoMavenStructure structure) {this.structure = structure;}
 	
 	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenModule_type"))
 	private IoMavenType type;
 	@Override public IoMavenType getType() {return type;}
 	@Override public void setType(IoMavenType type) {this.type = type;}
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private IoGraphic graphic;
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenModule_graphic"))
 	@Override public IoGraphic getGraphic() {return graphic;}
 	@Override public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
 	
@@ -86,8 +90,8 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	private List<IoMavenEeEdition> enterpriseEditions;
 	@Override public List<IoMavenEeEdition> getEnterpriseEditions() {if(Objects.isNull(enterpriseEditions)) {enterpriseEditions = new ArrayList<>();} return enterpriseEditions;}
 	@Override public void setEnterpriseEditions(List<IoMavenEeEdition> enterpriseEditions) {this.enterpriseEditions = enterpriseEditions;}
-	
-	
+
+
 	@Override public boolean equals(Object object){return (object instanceof IoMavenModule) ? id == ((IoMavenModule) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 	

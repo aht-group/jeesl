@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqId;
@@ -112,6 +113,10 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	//Literals
 	protected List<CqLiteral> literals; @Override public List<CqLiteral> getLiterals() {return literals;}
 	protected void addLiteral(CqLiteral literal) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(literal);}
+	
+	//Literals
+	protected List<CqBool> booleans; @Override public List<CqBool> getBools() {return booleans;}
+	protected void addBool(CqBool bool) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(bool);}
 	
 	//Strings
 	private String string1;

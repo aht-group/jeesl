@@ -20,5 +20,5 @@ public interface JeeslMavenEeEdition <L extends JeeslLang, D extends JeeslDescri
 								JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
-	public enum Code{ee8,ee10};
+	public enum Code{ee8,e10,ee10};
 }

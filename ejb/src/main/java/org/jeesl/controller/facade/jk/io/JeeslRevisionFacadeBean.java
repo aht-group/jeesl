@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.facade.jk.JeeslFacadeBean;
-import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

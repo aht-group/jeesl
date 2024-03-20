@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.jx;
+package org.jeesl.controller.facade.jx.predicate;
 
 import java.util.ArrayList;
 import java.util.List;
