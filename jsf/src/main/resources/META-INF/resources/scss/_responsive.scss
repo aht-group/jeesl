@@ -3777,19 +3777,6 @@ body, .ui-widget {
 		}
 	}
 	
-	img {
-		height: 100%;
-		max-height: calc(#{$element-height} - 2 * #{$slim-spacing});
-		
-		@media (max-width: 768px) {
-			max-height: calc(#{$element-height-mobile} - 2 * #{$half-spacing});
-		}
-		
-//		.ui-datatable-header {
-//			border-width: $border-width $border-width 0;
-//		}
-	}
-	
 	.ui-datatable-footer {
 		border: none;
 		border-radius: 0;

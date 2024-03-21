@@ -42,8 +42,10 @@
 											or
 						((not empty cc.attrs.code) and (empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.userLocaleCode].lang) and (not empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang)))}"/>
   			
-			<jtp:symbolizer rendered="#{false and fallback}" value="#{cc.attrs.fallbackLocale}" marginRight="5" />
-        	<h:outputText value="#{titleText}#{cc.attrs.suffix}" class="pf-datatable-header-title"/>
+  			<h:panelGroup class="pf-datatable-header-title">
+				<jtp:symbolizer rendered="#{true}" value="#{cc.attrs.fallbackLocale}" marginRight="5" />
+	        	<h:outputText value="#{titleText}#{cc.attrs.suffix}"/>
+        	</h:panelGroup>
         </c:if>
         <c:if test="#{not empty cc.facets.header}">
         	<h:outputText value="" class="pf-datatable-header-title"/>
