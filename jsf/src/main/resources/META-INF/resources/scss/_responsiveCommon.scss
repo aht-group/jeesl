@@ -1173,7 +1173,7 @@ img.jeesl-icon, .jeesl-icon img {
 	height: calc($icon-height * var(--icon-height-multiplier));
 
 	@media (max-width: 768px) {
-		height: $icon-height-mobile;
+		height: calc($icon-height-mobile * var(--icon-height-multiplier));
 	}
 }
 
