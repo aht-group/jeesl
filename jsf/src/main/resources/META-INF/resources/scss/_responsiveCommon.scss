@@ -344,9 +344,11 @@ $border: $border-width solid $border-colour;
 .ui-button.ui-state-default {
 	@include button;
 	
+	&.ui-state-loading .ui-icon {
+		display: inline-block;
+	}
+	
 	.ui-icon {
-//		@include icon;
-
 		left: 0;
 		margin: 0;
 		position: relative;
