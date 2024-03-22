@@ -56,6 +56,21 @@ public class SqlFactory
 		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
 		return this;
 	}
+	public SqlFactory limit(int limit)
+	{
+		sb.append(" LIMIT ").append(limit);
+		return this;
+	}
+	
+	public <T extends EjbWithId, E extends Enum<E>> void join(String aliasOwner, E attribute, Class<T> c,  String aliasOther)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append(" JOIN ").append(c.getAnnotation(Table.class).name());
+		sb.append(" ").append(aliasOther);
+		sb.append(" ON ");
+		sb.append(aliasOther).append(".id = ").append(aliasOwner).append(".").append(attribute.toString()).append("_id");
+		newLine(newLine,sb);
+	}
 	
 	public String toString() {sb.append(";"); return sb.toString();}
 	

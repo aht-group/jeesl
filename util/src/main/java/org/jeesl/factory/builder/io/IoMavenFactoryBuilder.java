@@ -22,7 +22,7 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 									SCOPE extends JeeslMavenScope<?,?,SCOPE,?>,
 									MODULE extends JeeslIoMavenModule<MODULE,?,?,?,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>,
-									EER extends JeeslIoMavenEeReferral<?,?>>
+									EER extends JeeslIoMavenEeReferral<VERSION,?,?>>
 			extends AbstractFactoryBuilder<L,D>
 {
 	private static final long serialVersionUID = 1L;

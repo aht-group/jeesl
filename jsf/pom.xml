@@ -64,36 +64,42 @@
    	   		</exclusions>
    	   	</dependency>
    	   	
-   	   	<!-- JSF -->
-   	   	<dependency> 
-			<groupId>org.jboss.spec.javax.faces</groupId>
-			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.faces</groupId>
-			<artifactId>jakarta.faces-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!-- EL -->
-		<dependency>
-  			<groupId>javax.el</groupId>
+   	   	<!-- Java EE -->
+   	   	<dependency>
+			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
+			<version>3.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- Jakarta EE -->
 		<dependency>
 		    <groupId>jakarta.el</groupId>
 		    <artifactId>jakarta.el-api</artifactId>
 		    <version>4.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
-		
+   	   	
+   	   	<!-- JSF -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
+			<groupId>jakarta.faces</groupId>
+			<artifactId>jakarta.faces-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 		    <groupId>jakarta.servlet</groupId>
 		    <artifactId>jakarta.servlet-api</artifactId>

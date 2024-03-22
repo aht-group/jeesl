@@ -13,6 +13,7 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
 import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeReferral;
+import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
@@ -25,23 +26,24 @@ public interface JeeslIoMavenFacade <GROUP extends JeeslIoMavenGroup,
 									SCOPE extends JeeslMavenScope<?,?,SCOPE,?>,
 									OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
 									MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>,
-									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,?,?,?>,
+									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,?,?>,
 									STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
+									TYPE extends JeeslMavenType<?,?,TYPE,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>,
-									EEF extends JeeslIoMavenEeReferral<?,?>>
+									EEF extends JeeslIoMavenEeReferral<VERSION,?,?>>
 			extends JeeslFacade
 {	
 	ARTIFACT fIoMavenArtifact(GROUP group, String code) throws JeeslNotFoundException;
 	VERSION fIoMavenVersion(ARTIFACT artifact, String code) throws JeeslNotFoundException;
 	
-	List<MODULE> fIoMavenModules(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
-	List<USAGE> fIoMavenUsages(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
-	List<DEPENDENCY> fIoMavenDependencies(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
-	List<ARTIFACT> fIoMavenArtifacts(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
-	List<VERSION> fIoMavenVersions(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
-	List<EEF> fIoMavenEeReferrals(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
+	List<MODULE> fIoMavenModules(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
+	List<USAGE> fIoMavenUsages(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
+	List<DEPENDENCY> fIoMavenDependencies(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
+	List<ARTIFACT> fIoMavenArtifacts(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
+	List<VERSION> fIoMavenVersions(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
+	List<EEF> fIoMavenEeReferrals(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
 	
-	Long cIoMavenVersions(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
+	Long cIoMavenVersions(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
 	
-	JsonTuples1<VERSION> tpUsageByVersion(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE> query);
+	JsonTuples1<VERSION> tpUsageByVersion(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query);
 }

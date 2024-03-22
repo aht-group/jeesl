@@ -17,11 +17,12 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
+import org.jeesl.model.ejb.io.maven.module.IoMavenType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoMavenQuery extends AbstractEjbQuery
-			implements JeeslIoMavenQuery<IoMavenArtifact,IoMavenVersion,IoMavenModule,IoMavenStructure>
+			implements JeeslIoMavenQuery<IoMavenArtifact,IoMavenVersion,IoMavenModule,IoMavenStructure,IoMavenType>
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -76,4 +77,9 @@ public class EjbIoMavenQuery extends AbstractEjbQuery
 	@Override public List<IoMavenModule> getIoMavenModules() {return modules;}
 	public EjbIoMavenQuery add(IoMavenModule module) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.add(module); return this;}
 	public EjbIoMavenQuery addModules(List<IoMavenModule> list) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.addAll(list); return this;}
+	
+	private List<IoMavenType> ioMavenTypes;
+	@Override public List<IoMavenType> getIoMavenTypes() {return ioMavenTypes;}
+	public EjbIoMavenQuery add(IoMavenType module) {if(Objects.isNull(ioMavenTypes)) {ioMavenTypes = new ArrayList<>();} ioMavenTypes.add(module); return this;}
+	public EjbIoMavenQuery addIoMavenTypes(List<IoMavenType> list) {if(Objects.isNull(ioMavenTypes)) {ioMavenTypes = new ArrayList<>();} ioMavenTypes.addAll(list); return this;}
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:of="http://omnifaces.org/functions"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag" xmlns:j2="https://www.jeesl.org/j2"
 	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 	
@@ -90,6 +90,11 @@
 		            	<jtp:symbolizer value="#{r.artifact.outdate}" marginRight="5"/>
 		            	<h:outputText value="#{r.artifact.code}"/>
 		            </p:column>
+		            <p:column>
+						<f:facet name="header"><jtp:label entity="IoMavenUsage"/></f:facet>
+		            	
+		            	<h:outputText value="#{cc.attrs.ctrl.thUsage.map1[r.artifact].count1}"/>
+		            </p:column>
 				</p:dataTable>
 			</h:form>
 			<h:form id="fReferral" >
@@ -99,6 +104,8 @@
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveReferral()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.referral.artifact}"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteReferral()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.referral.id gt 0}"/>
 						<j:svg type="jeeslSearch" listener="#{cc.attrs.ctrl.prepareSearch()}" update=":#{cc.id}:fVersions" oncomplete="PF('wvVersions').show()"/>
+						<j:svg id="iClipboard" type="jeeslClone"/>
+						<pe:clipboard trigger="iClipboard:link" text="#{cc.attrs.ctrl.clipboard}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid>
@@ -156,7 +163,12 @@
 						<jtp:symbolizer value="#{u.module.type}" marginRight="5" rendered="#{empty u.module.parent}"/>
 		            	<h:outputText value="#{u.module.label}"/>
 		            </p:column>
-					
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMavenUsage" code="scopes"/></f:facet>
+						<ui:repeat var="s" value="#{u.scopes}">
+							<jtp:symbolizer value="#{s}" marginRight="3"/>
+						</ui:repeat>
+					</p:column>
 				</p:dataTable>
 			</h:form>
 		</j:slot>

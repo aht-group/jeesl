@@ -32,7 +32,7 @@ public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,ST
 									
 {	
 	
-	public static enum Attributes{id,parent,code,enterpriseEditions};
+	public static enum Attributes{id,parent,code,type,enterpriseEditions};
 	
 	MODULE getParent();
 	void setParent(MODULE parent);

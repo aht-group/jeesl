@@ -188,7 +188,7 @@
 			<groupId>jakarta.enterprise</groupId>
 			<artifactId>jakarta.enterprise.cdi-api</artifactId>
 			<scope>provided</scope>
-			<version>2.0.1</version> <!-- We only need the version here during migration to EAP7 -->
+			<version>2.0.2</version> <!-- We only need the version here during migration to EAP7 -->
 		</dependency>
 		<dependency>
 			<groupId>jakarta.validation</groupId>

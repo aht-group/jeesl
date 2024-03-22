@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
+import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.lazy.io.maven.EjbIoMavenVersionLazyModel;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -17,6 +18,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.ejb.io.maven.ee.EjbMavenReferralFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.factory.txt.io.maven.TxtMavenVersionFactory;
 import org.jeesl.interfaces.bean.op.OpSingleSelectionBean;
 import org.jeesl.interfaces.controller.handler.op.OpSelectionHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -40,6 +42,7 @@ import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.ee.IoMavenEeStandard;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
+import org.jeesl.model.ejb.io.maven.module.IoMavenType;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
@@ -55,14 +58,15 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenReferralWc.class);
 	
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven;
 
 	private final JeeslTableCellSelectHandler<IoMavenEeStandard,IoMavenEeEdition> tcsh;
 	private final OpSingleSelectionHandler<IoMavenVersion> opVersion; public OpSingleSelectionHandler<IoMavenVersion> getOpVersion() {return opVersion;}
+	private final JsonTuple1Handler<IoMavenVersion> thUsage; public JsonTuple1Handler<IoMavenVersion> getThUsage() {return thUsage;}
 	
 	private final Comparator<IoMavenEeReferral> cpReferral;
 	
-	private final Nested2Map<IoMavenEeStandard,IoMavenEeEdition,IoMavenEeReferral> n2m; public Nested2Map<IoMavenEeStandard, IoMavenEeEdition, IoMavenEeReferral> getN2m() {return n2m;}
+	private final Nested2Map<IoMavenEeStandard,IoMavenEeEdition,IoMavenEeReferral> n2m; public Nested2Map<IoMavenEeStandard,IoMavenEeEdition,IoMavenEeReferral> getN2m() {return n2m;}
 
 	private final List<IoMavenEeEdition> eeEditions;  public List<IoMavenEeEdition> getEeEditions() {return eeEditions;}
 	private final List<IoMavenEeStandard> eeStandards;  public List<IoMavenEeStandard> getEeStandards() {return eeStandards;}
@@ -70,6 +74,7 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 	private final List<IoMavenUsage> usages; public List<IoMavenUsage> getUsages() {return usages;}
 
 	private IoMavenEeReferral referral; public IoMavenEeReferral getReferral() {return referral;} public void setReferral(IoMavenEeReferral referral) {this.referral = referral;}
+	private String clipboard; public String getClipboard() {return clipboard;}
 	
 	public JeeslIoMavenReferralWc()
 	{
@@ -77,6 +82,7 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 		
 		tcsh = JeeslTableCellSelectHandler.instance(IoMavenEeStandard.class,IoMavenEeEdition.class);
 		opVersion = OpSingleSelectionHandler.instance(this);
+		thUsage = JsonTuple1Handler.instance(IoMavenVersion.class);
 		
 		cpReferral = new PositionComparator<>();
 		
@@ -89,7 +95,7 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;
@@ -122,7 +128,7 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 		q.add(CqBool.isValue(true,CqBool.path(JeeslIoMavenEeReferral.Attributes.recommendation)));
 		
 		List<IoMavenEeReferral> list = fMaven.fIoMavenEeReferrals(q);
-		n2m.replaceAll(EjbMavenReferralFactory.toN2m(list));
+		n2m.replaceAll(EjbMavenReferralFactory.toN2mStanardEdition(list));
 	}
 	
 	public void selectCell() throws JeeslNotFoundException 
@@ -141,7 +147,7 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 		if(ObjectUtils.isNotEmpty(referrals))
 		{
 			referral = referrals.get(0);
-			this.reloadUsages();
+			this.selectReferral();
 		}
 		else
 		{
@@ -149,6 +155,9 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 			referral.setEdition(column);
 			referral.setStandard(row);
 		}
+		
+		thUsage.clear();
+		thUsage.init(fMaven.tpUsageByVersion(EjbIoMavenQuery.instance().addVersions(EjbMavenReferralFactory.toVersions(referrals))));
 	}
 	
 	public void selectReferral() throws JeeslNotFoundException
@@ -156,6 +165,8 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(referral));}
 		this.reset(false,false,true);
 		this.reloadUsages();
+		
+		clipboard = TxtMavenVersionFactory.xmlMaven(referral.getArtifact());
 	}
 	
 	public void addReferral() throws JeeslNotFoundException

@@ -15,4 +15,18 @@ public class TxtMavenVersionFactory
 		
 		return sb.toString();
 	}
+	
+	public static String xmlMaven(IoMavenVersion version)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<dependency>").append("\n");
+		sb.append("\t\t\t").append("<groupId>").append(version.getArtifact().getGroup().getCode()).append("</groupId>").append("\n");
+		sb.append("\t\t\t").append("<artifactId>").append(version.getArtifact().getCode()).append("</artifactId>").append("\n");
+		sb.append("\t\t\t").append("<version>").append(version.getCode()).append("</version>").append("\n");
+		sb.append("\t\t\t").append("<scope>provided</scope>").append("\n");
+		sb.append("\t\t</dependency>");
+		
+		return sb.toString();
+	}
 }
