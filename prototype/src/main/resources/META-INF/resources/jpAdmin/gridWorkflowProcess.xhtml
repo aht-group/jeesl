@@ -85,7 +85,7 @@
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.process.includeInDashboard}"/>
 						<jtp:label entity="WorkflowProcess" code="includeInDashboard"/>
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.process}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.process}" withDescription="true"/>
 				</p:panel>
 			</h:form>
 			<h:form id="fDocument" rendered="#{not empty cc.attrs.bean.process}">
@@ -175,7 +175,7 @@
 						<h:outputText value="#{cc.attrs.bean.stage.description[localeCode].lang}" rendered="#{not cc.attrs.bean.editStage}"/>
 						
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.stage}" keys="#{cc.attrs.localeKeys}" withDescription="true" rendered="#{cc.attrs.bean.editStage}"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.stage}" withDescription="true" rendered="#{cc.attrs.bean.editStage}"/>
 				</p:panel>
 			</h:form>
 			<h:form id="fUpload" enctype="multipart/form-data">
@@ -184,7 +184,6 @@
 					listener="#{cc.attrs.bean.handleFileUpload}" update=":#{cc.id}:grid"
 					mode="advanced" dragDropSupport="false" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
 			</h:form>
-			
 			
 			<h:form id="fPermissions" rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0)}">
 				<p:dataTable styleClass="jeesl-datatable"
@@ -353,10 +352,10 @@
 			<h:form id="fTransition" rendered="#{not empty cc.attrs.bean.transition}">
 				<p:panel header="#{msg.jeeslApprovalTransition} (#{cc.attrs.bean.transition.id})" styleClass="jeesl-panel">
 					<f:facet name="actions">
-						<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{not cc.attrs.bean.editTransition}"/>
-						<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{cc.attrs.bean.editTransition}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveTransition()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editTransition}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteTransition()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.transition.id gt 0) and cc.attrs.bean.editTransition}"/>
+						<j:svg type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{not cc.attrs.bean.editTransition}"/>
+						<j:svg type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{cc.attrs.bean.editTransition}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTransition()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editTransition}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteTransition()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.transition.id gt 0) and cc.attrs.bean.editTransition}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<p:outputLabel value="#{msg.jeeslApprovalTrasitionSource}"/>
@@ -407,7 +406,6 @@
 						<p:outputLabel value="#{msg.jeeslWorkflowTrasitionFileUpload}"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.fileUpload}" disabled="#{not cc.attrs.bean.editTransition}"/>
 					</p:panelGrid>
-					
 					
 					<p:tabView id="tabViewKey" var="t" value="#{cc.attrs.localeKeys}" rendered="#{cc.attrs.bean.editTransition}">  
 				  		<p:tab title="#{t}">

@@ -23,7 +23,7 @@ import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
-import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

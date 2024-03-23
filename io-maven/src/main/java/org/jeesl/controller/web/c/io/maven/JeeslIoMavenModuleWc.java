@@ -39,6 +39,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.ee.IoMavenEeEdition;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.module.IoMavenJdk;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
@@ -60,7 +61,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenModuleWc.class);
 	
 	private JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic;
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
 
 	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
 	private final List<IoMavenEeEdition> enterpriseEditions;  public List<IoMavenEeEdition> getEnterpriseEditions() {return enterpriseEditions;}
@@ -85,7 +86,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven,
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven,
 							JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);

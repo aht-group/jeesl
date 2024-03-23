@@ -23,6 +23,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
@@ -45,7 +46,7 @@ public class MavenMetachartGraphProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(MavenMetachartGraphProcessor.class);
 	
-	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
 	
 	private final Set<IoMavenVersion> dependencyNodes;
 	private final Set<IoMavenDependency> dependencyEdges;
@@ -54,12 +55,12 @@ public class MavenMetachartGraphProcessor
 	private IoMavenVersion root;
 	private String localeCode = "en";
 	
-	public static MavenMetachartGraphProcessor instance(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+	public static MavenMetachartGraphProcessor instance(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven)
 	{
 		return new MavenMetachartGraphProcessor(fMaven);
 	}
 	
-	private MavenMetachartGraphProcessor(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+	private MavenMetachartGraphProcessor(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven)
 	{
 		this.fMaven=fMaven;
 		

@@ -32,6 +32,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenType;
@@ -49,7 +50,7 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslLocaleWebController<IoLang
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenUsageWc.class);
 	
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
 
 	private final Comparator<IoMavenArtifact> cpArtifact;
 	private final Comparator<IoMavenUsage> cpUsage;
@@ -78,7 +79,7 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslLocaleWebController<IoLang
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;

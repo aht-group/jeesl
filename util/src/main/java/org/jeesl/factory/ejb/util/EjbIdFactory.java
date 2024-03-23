@@ -213,8 +213,8 @@ public class EjbIdFactory
 		if(index>=0) {list.set(index,ejb);}
 	}
 	
-	public static <T extends EjbWithId> void replaceOrAdd(List<T> list, T ejb)
-	{
+	public static <T extends EjbWithId> void integrate(List<T> list, T ejb)
+	{	// integrate is a "replace or add" operation
 //		if(!Collections.replaceAll(mapCompany.get(rref),company,company)){mapCompany.get(rref).add(company);}
 		int index = list.indexOf(ejb);
 		if(index>=0) {list.set(index,ejb);}

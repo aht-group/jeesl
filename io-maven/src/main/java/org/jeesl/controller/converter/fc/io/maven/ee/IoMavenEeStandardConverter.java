@@ -1,4 +1,4 @@
-package org.jeesl.controller.converter.fc.io.maven;
+package org.jeesl.controller.converter.fc.io.maven.ee;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
@@ -8,9 +8,9 @@ import org.jeesl.model.ejb.io.maven.ee.IoMavenEeEdition;
 
 @RequestScoped
 @FacesConverter(forClass=IoMavenEeEdition.class)
-public class IoMavenEeConverter extends AbstractEjbIdConverter<IoMavenEeEdition>
+public class IoMavenEeStandardConverter extends AbstractEjbIdConverter<IoMavenEeEdition>
 {
-	public IoMavenEeConverter()
+	public IoMavenEeStandardConverter()
 	{
 		super(IoMavenEeEdition.class);
 	}

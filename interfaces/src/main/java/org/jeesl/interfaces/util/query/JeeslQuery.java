@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqId;
@@ -39,6 +40,7 @@ public interface JeeslQuery extends Serializable,JeeslCoreQuery
 	List<CqLiteral> getLiterals();
 	List<CqDate> getLocalDates();
 	List<CqId> getIds();
+	List<CqBool> getBools();
 	
 //	boolean isSortAscending();
 //	void sort(String sortBy, boolean sortAscending);

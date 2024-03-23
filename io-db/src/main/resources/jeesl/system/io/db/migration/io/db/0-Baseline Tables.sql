@@ -2,14 +2,14 @@ create table IoDbDump (id  bigserial not null, name varchar(255), record timesta
 create table IoDbDumpFile (id  bigserial not null, dump_id int8, host_id int8, status_id int8, primary key (id));
 create table IoDbFlyWay (installed_rank  serial not null, description varchar(255), installed_on timestamp, type varchar(255), version varchar(255), primary key (installed_rank));
 create table IoDbMetaColumn (id  bigserial not null, code varchar(255), table_id int8, type_id int8, primary key (id));
-create table IoDbMetaConstraint (id  bigserial not null, code varchar(255), columnLocal_id int8, columnRemote_id int8, table_id int8, type_id int8, primary key (id));
+create table IoDbMetaConstraint (id  bigserial not null, code varchar(255), columnLocal_id int8, columnRemote_id int8, space_id int8, table_id int8, type_id int8, primary key (id));
 create table IoDbMetaSchema (id  bigserial not null, code varchar(255), system_id int8, primary key (id));
 create table IoDbMetaSnapshot (id  bigserial not null, name varchar(255), record timestamp, system_id int8, primary key (id));
 create table IoDbMetaSnapshotJtColumn (snapshot_id int8 not null, column_id int8 not null);
 create table IoDbMetaSnapshotJtConstraint (snapshot_id int8 not null, constraint_id int8 not null);
-create table IoDbMetaSnapshotJtSchema (schema_id int8 not null, snapshot_id int8 not null);
+create table IoDbMetaSnapshotJtSchema (snapshot_id int8 not null, schema_id int8 not null);
 create table IoDbMetaSnapshotJtTable (table_id int8 not null, snapshot_id int8 not null);
-create table IoDbMetaTable (id  bigserial not null, code varchar(255), schema_id int8, system_id int8, primary key (id));
+create table IoDbMetaTable (id  bigserial not null, code varchar(255), schema_id int8, space_id int8, system_id int8, primary key (id));
 create table IoDbMetaUnique (id  bigserial not null, position int4 not null, column_id int8, constraint_id int8, primary key (id));
 create table IoDbStatement (id  bigserial not null, average float8 not null, calls int4 not null, code varchar(255), record timestamp, remark text, rows int4 not null, sql text, total float8 not null, group_id int8, host_id int8, primary key (id));
 create table IoDbStatementGroup (id  bigserial not null, code varchar(255), name varchar(255), position int4 not null, remark text, system_id int8, primary key (id));
