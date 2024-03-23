@@ -101,7 +101,6 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 		enterpriseEditions.addAll(fMaven.allOrderedPositionVisible(IoMavenEeEdition.class));
 		structures.addAll(fMaven.allOrderedPositionVisible(IoMavenStructure.class));
 		types.addAll(callback.getTypes());
-		Collections.sort(types,PositionComparator.instance());
 
 		this.reloadModules();
 	}

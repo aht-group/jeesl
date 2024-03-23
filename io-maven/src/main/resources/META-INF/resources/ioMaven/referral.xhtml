@@ -27,8 +27,11 @@
 					<p:row>
 						<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoMavenEeStandard"/></f:facet></p:column>
 						<p:column colspan="1" headerText="" code="listOf"/>
-						<p:columns var="e" value="#{cc.attrs.ctrl.eeEditions}">
-							<f:facet name="header"><h:outputText value="#{e.name[localeCode].lang}"/></f:facet>
+						<p:columns var="e" value="#{cc.attrs.ctrl.sbhEdition.selected}">
+							<f:facet name="header">
+								<jtp:symbolizer value="#{e}" marginRight="5"/>
+								<h:outputText value="#{e.name[localeCode].lang}"/>
+							</f:facet>
 						</p:columns>
 					</p:row>
 				</p:columnGroup>
@@ -38,7 +41,7 @@
 				<p:column rendered="true">
 					<h:outputText value="#{s.code}"/>
 				</p:column>
-				<p:columns var="e" value="#{cc.attrs.ctrl.eeEditions}" styleClass="jeesl-cell-select">
+				<p:columns var="e" value="#{cc.attrs.ctrl.sbhEdition.selected}" styleClass="jeesl-cell-select">
 					<h:outputLabel onclick="jeeslCellSelection.single(this,'#{s.id}','#{e.id}')">
 						<h:panelGroup layout="block" styleClass="jeesl-cell-select-content">
 							<h:outputText value="#{cc.attrs.ctrl.n2m.m[s][e].artifact.artifact.group.code}"/><br/>
@@ -53,7 +56,7 @@
 				<p:columnGroup type="footer">
 					<p:row>
 						<p:column colspan="2"><f:facet name="header"></f:facet></p:column>
-						<p:columns var="e" value="#{cc.attrs.ctrl.eeEditions}">
+						<p:columns var="e" value="#{cc.attrs.ctrl.sbhEdition.selected}">
 							<f:facet name="footer"><h:outputText value="#{e.description[localeCode].lang}"/></f:facet>
 						</p:columns>
 					</p:row>
@@ -111,7 +114,7 @@
 					<j:inputGrid>
 						<jtp:label entity="IoMavenEeReferral" code="edition"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.referral.edition}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.ctrl.eeEditions}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+							<f:selectItems value="#{cc.attrs.ctrl.sbhEdition.selected}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 						
 						<jtp:label entity="IoMavenEeReferral" code="standard"/>

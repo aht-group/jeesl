@@ -52,12 +52,6 @@ public class IoMavenEeReferral implements JeeslIoMavenEeReferral<IoMavenVersion,
 	private IoMavenVersion artifact;
 	@Override public IoMavenVersion getArtifact() {return artifact;}
 	@Override public void setArtifact(IoMavenVersion artifact) {this.artifact = artifact;}
-	
-	@ManyToOne
-	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenEeReferral_bom"))
-	private IoMavenVersion bom;
-	public IoMavenVersion getBom() {return bom;}
-	public void setBom(IoMavenVersion bom) {this.bom = bom;}
 
 	@Basic @Column(columnDefinition="text")
 	private String remark;

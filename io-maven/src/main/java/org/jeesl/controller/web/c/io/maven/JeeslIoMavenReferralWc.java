@@ -20,11 +20,15 @@ import org.jeesl.factory.ejb.io.maven.ee.EjbMavenReferralFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.io.maven.TxtMavenVersionFactory;
 import org.jeesl.interfaces.bean.op.OpSingleSelectionBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.op.OpSelectionHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.io.maven.JeeslIoMavenReferralCallback;
 import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeReferral;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.jsf.handler.op.OpSingleSelectionHandler;
+import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.th.JeeslTableCellSelectHandler;
 import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -46,6 +50,7 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenType;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
+import org.jeesl.util.comparator.ejb.io.maven.EjbMavenUsageComparator;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,22 +58,25 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
-									implements OpSingleSelectionBean<IoMavenVersion>
+									implements OpSingleSelectionBean<IoMavenVersion>,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenReferralWc.class);
 	
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven;
 
+	private final JeeslIoMavenReferralCallback<IoMavenType,IoMavenEeEdition> callback;
+	
+	protected final SbMultiHandler<IoMavenEeEdition> sbhEdition; public SbMultiHandler<IoMavenEeEdition> getSbhEdition() {return sbhEdition;}
 	private final JeeslTableCellSelectHandler<IoMavenEeStandard,IoMavenEeEdition> tcsh;
 	private final OpSingleSelectionHandler<IoMavenVersion> opVersion; public OpSingleSelectionHandler<IoMavenVersion> getOpVersion() {return opVersion;}
 	private final JsonTuple1Handler<IoMavenVersion> thUsage; public JsonTuple1Handler<IoMavenVersion> getThUsage() {return thUsage;}
 	
 	private final Comparator<IoMavenEeReferral> cpReferral;
+	private final Comparator<IoMavenUsage> cpUsage;
 	
 	private final Nested2Map<IoMavenEeStandard,IoMavenEeEdition,IoMavenEeReferral> n2m; public Nested2Map<IoMavenEeStandard,IoMavenEeEdition,IoMavenEeReferral> getN2m() {return n2m;}
 
-	private final List<IoMavenEeEdition> eeEditions;  public List<IoMavenEeEdition> getEeEditions() {return eeEditions;}
 	private final List<IoMavenEeStandard> eeStandards;  public List<IoMavenEeStandard> getEeStandards() {return eeStandards;}
 	private final List<IoMavenEeReferral> referrals; public List<IoMavenEeReferral> getReferrals() {return referrals;}
 	private final List<IoMavenUsage> usages; public List<IoMavenUsage> getUsages() {return usages;}
@@ -76,19 +84,21 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 	private IoMavenEeReferral referral; public IoMavenEeReferral getReferral() {return referral;} public void setReferral(IoMavenEeReferral referral) {this.referral = referral;}
 	private String clipboard; public String getClipboard() {return clipboard;}
 	
-	public JeeslIoMavenReferralWc()
+	public JeeslIoMavenReferralWc(JeeslIoMavenReferralCallback<IoMavenType,IoMavenEeEdition> callback)
 	{
 		super(IoLang.class,IoDescription.class);
+		this.callback=callback;
 		
+		sbhEdition = new SbMultiHandler<>(IoMavenEeEdition.class,this);
 		tcsh = JeeslTableCellSelectHandler.instance(IoMavenEeStandard.class,IoMavenEeEdition.class);
 		opVersion = OpSingleSelectionHandler.instance(this);
 		thUsage = JsonTuple1Handler.instance(IoMavenVersion.class);
 		
 		cpReferral = new PositionComparator<>();
+		cpUsage = EjbMavenUsageComparator.instance(EjbMavenUsageComparator.Type.version);
 		
 		n2m = new Nested2Map<>();
 		
-		eeEditions = new ArrayList<>();
 		eeStandards = new ArrayList<>();
 		referrals = new ArrayList<>();
 		usages = new ArrayList<>();
@@ -103,16 +113,20 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 		tcsh.facade(fMaven);
 		opVersion.lazyModel(new EjbIoMavenVersionLazyModel(fMaven));
 		
-		eeEditions.add(fMaven.fByEnum(IoMavenEeEdition.class,IoMavenEeEdition.Code.ee8));
-		eeEditions.add(fMaven.fByEnum(IoMavenEeEdition.class,IoMavenEeEdition.Code.e10));
-		eeEditions.add(fMaven.fByEnum(IoMavenEeEdition.class,IoMavenEeEdition.Code.ee9));
-		eeEditions.add(fMaven.fByEnum(IoMavenEeEdition.class,IoMavenEeEdition.Code.ee10));
-		logger.info(jogger.milestone(IoMavenEeEdition.class, "fMaven.allOrderedPositionVisible()", eeEditions.size()));
+		sbhEdition.setList(fMaven.allOrderedPositionVisible(IoMavenEeEdition.class));
+		sbhEdition.preSelect(callback.getPreselectionEeEditions());
+		
+		logger.info(jogger.milestone(IoMavenEeEdition.class, "fMaven.allOrderedPositionVisible()", sbhEdition.getList().size()));
 		
 		eeStandards.addAll(fMaven.allOrderedPositionVisible(IoMavenEeStandard.class));
 		logger.info(jogger.milestone(IoMavenEeEdition.class, "fMaven.allOrderedPositionVisible()", eeStandards.size()));
 		
 		this.reloadN2m();
+	}
+	
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	{
+		callback.setPreselectionEeEditions(sbhEdition.getSelected());
 	}
 
 	private void reset(boolean rReferrals, boolean rReferral, boolean rUsages)
@@ -229,7 +243,9 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 		EjbIoMavenQuery q = EjbIoMavenQuery.instance();
 		q.addRootFetch(JeeslIoMavenUsage.Attributes.scopes);
 		q.add(referral.getArtifact());
+		q.addIoMavenTypes(callback.getTypes());
 		
 		usages.addAll(fMaven.fIoMavenUsages(q));
+		Collections.sort(usages,cpUsage);
 	}
 }
