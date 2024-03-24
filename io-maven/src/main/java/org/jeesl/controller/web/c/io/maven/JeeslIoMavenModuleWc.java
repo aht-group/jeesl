@@ -148,13 +148,29 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 		module = EjbMavenModuleFactory.build();
 	}
 	
-	public void saveDevelopment() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	public void saveModule() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(module));}
 		EjbMavenModuleFactory.converter(fMaven, module);
 		module = fMaven.save(module);
 		this.reloadModule();
 		this.reloadModules();
+		this.reloadChilds();
+		
+		List<IoMavenModule> updates = new ArrayList<>();
+		for(IoMavenModule c : childs)
+		{
+			if(!module.getType().equals(c.getType()))
+			{
+				c.setType(module.getType());
+				updates.add(c);
+			}
+		}
+		if(!updates.isEmpty())
+		{
+			fMaven.save(updates);
+			this.reloadChilds();
+		}
 	}
 	
 	public void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException
@@ -184,6 +200,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(IoMavenModule.class));}
 		child = EjbMavenModuleFactory.build();
 		child.setParent(module);
+		child.setType(module.getType());
 	}
 	
 	public void selectChild() throws JeeslNotFoundException
@@ -194,7 +211,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	public void saveChild() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(child));}
-		EjbMavenModuleFactory.converter(fMaven, child);
+		EjbMavenModuleFactory.converter(fMaven,child);
 		child.setJdk(module.getJdk());
 		child = fMaven.save(child);
 		this.reloadChilds();

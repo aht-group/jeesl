@@ -372,13 +372,9 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		}
 		if(ObjectUtils.isNotEmpty(query.getIoMavenTypes()))
 		{
-			Path<MODULE> pModule = root.get(JeeslIoMavenUsage.Attributes.module.toString());
-			Path<TYPE> pType1 = pModule.get(JeeslIoMavenModule.Attributes.type.toString());
-			
-			Path<MODULE> pParent = pModule.get(JeeslIoMavenModule.Attributes.parent.toString());
-			Path<TYPE> pType2 = pParent.get(JeeslIoMavenModule.Attributes.type.toString());
-			
-			predicates.add(cB.or(pType1.in(query.getIoMavenTypes()),pType2.in(query.getIoMavenTypes())));
+			Join<USAGE,MODULE> jModule = root.join(JeeslIoMavenUsage.Attributes.module.toString());
+			Path<TYPE> pType = jModule.get(JeeslIoMavenModule.Attributes.type.toString());
+			predicates.add(pType.in(query.getIoMavenTypes()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
