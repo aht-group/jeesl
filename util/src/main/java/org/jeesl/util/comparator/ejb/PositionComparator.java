@@ -11,6 +11,8 @@ public class PositionComparator<T extends EjbWithPosition> implements Comparator
 {
 	final static Logger logger = LoggerFactory.getLogger(PositionComparator.class);
 
+	public static <T extends EjbWithPosition> PositionComparator<T> instance() {return new PositionComparator<>();}
+	
 	public int compare(T a, T b)
     {
 		  CompareToBuilder ctb = new CompareToBuilder(); 

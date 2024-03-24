@@ -19,6 +19,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.ejb.io.maven.EjbMavenDependencyFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenVersionFactory;
+import org.jeesl.factory.ejb.io.maven.ee.EjbMavenReferralFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -36,10 +37,14 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenSuitability;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeEdition;
 import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
+import org.jeesl.model.ejb.io.maven.ee.IoMavenEeStandard;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
+import org.jeesl.model.ejb.io.maven.module.IoMavenType;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
+import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
@@ -57,12 +62,16 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenArtifactWc.class);
 	
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven;
+
+	
 
 	private EchartGraphDataProvider graph; public EchartGraphDataProvider getGraph() {return graph;}
 	
 	private final Comparator<IoMavenArtifact> cpArtifact;
 	private final Comparator<IoMavenVersion> cpVersion;
+	
+	private final Nested2Map<IoMavenVersion,IoMavenEeStandard,IoMavenEeReferral> n2m; public Nested2Map<IoMavenVersion,IoMavenEeStandard,IoMavenEeReferral> getN2m() {return n2m;}
 	
 	private final Map<IoMavenArtifact,List<IoMavenVersion>> mapVersion; public Map<IoMavenArtifact, List<IoMavenVersion>> getMapVersion() {return mapVersion;}
 	private final Map<IoMavenVersion,List<IoMavenModule>> mapRoot; public Map<IoMavenVersion,List<IoMavenModule>> getMapRoot() {return mapRoot;}
@@ -75,7 +84,9 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	private final List<IoMavenOutdate> outdates; public List<IoMavenOutdate> getOutdates() {return outdates;}
 	private final List<IoMavenMaintainer> maintainers; public List<IoMavenMaintainer> getMaintainers() {return maintainers;}
 	private final List<IoMavenDependency> dependencies; public List<IoMavenDependency> getDependencies() {return dependencies;}
-	
+	private final List<IoMavenEeEdition> eeEditions; public List<IoMavenEeEdition> getEeEditions() {return eeEditions;}
+	private final List<IoMavenEeStandard> eeStandards; public List<IoMavenEeStandard> getEeStandards() {return eeStandards;}
+
 	private IoMavenArtifact artifact; public IoMavenArtifact getArtifact() {return artifact;} public void setArtifact(IoMavenArtifact artifact) {this.artifact = artifact;}
 	private IoMavenVersion version; public IoMavenVersion getVersion() {return version;} public void setVersion(IoMavenVersion version) {this.version = version;}
 	private IoMavenDependency dependency; public IoMavenDependency getDependency() {return dependency;} public void setDependency(IoMavenDependency dependency) {this.dependency = dependency;}
@@ -91,6 +102,8 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		cpArtifact = EjbMavenArtifactComparator.instance(EjbMavenArtifactComparator.Type.code);
 		cpVersion = new PositionComparator<>();
 		
+		n2m = new Nested2Map<>();
+		
 		mapVersion = new HashMap<>();
 		mapRoot = new HashMap<>();
 		mapUsage = new HashMap<>();
@@ -102,14 +115,17 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		outdates = new ArrayList<>();
 		maintainers = new ArrayList<>();
 		dependencies = new ArrayList<>();
+		
+		eeEditions = new ArrayList<>();
+		eeStandards = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;
-
+		
 		suitabilities.addAll(fMaven.allOrderedPositionVisible(IoMavenSuitability.class));
 		outdates.addAll(fMaven.allOrderedPositionVisible(IoMavenOutdate.class));
 		maintainers.addAll(fMaven.allOrderedPositionVisible(IoMavenMaintainer.class));
@@ -117,12 +133,13 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		this.reloadArtifacts();
 	}
 	
-	public void cancelVersion() {this.reset(false,true,true);}
-	private void reset(boolean rVersions, boolean rVersion, boolean rDependencies)
+	public void cancelVersion() {this.reset(false,true,true,false);}
+	private void reset(boolean rVersions, boolean rVersion, boolean rDependencies, boolean rEe)
 	{
 		if(rVersions) {versions.clear();}
 		if(rVersion) {version=null;}
 		if(rDependencies) {dependencies.clear(); mapParent.clear();}
+		if(rEe) {eeEditions.clear(); eeStandards.clear();}
 	}
 	
 	@Override
@@ -152,10 +169,15 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	public void selectArtifact()
 	{
-		this.reset(true, true, true);
-		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(artifact));}
+		this.reset(true,true,true,true);
+		logger.info(AbstractLogMessage.selectEntity(artifact));
 		this.reloadVersions();
 		this.reloadUsages();
+		
+		List<IoMavenEeReferral> referrals = fMaven.fIoMavenEeReferrals(EjbIoMavenQuery.instance().add(artifact));
+		eeEditions.addAll(EjbMavenReferralFactory.toEeEditions(referrals));
+		eeStandards.addAll(EjbMavenReferralFactory.toEeStandards(referrals));
+		n2m.replaceAll(EjbMavenReferralFactory.toN2mVersionStanard(referrals));
 	}
 	
 	public void saveArtifact() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
@@ -169,14 +191,14 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	private void reloadVersions()
 	{
-		this.reset(true,false,false);
+		this.reset(true,false,false,false);
 		versions.addAll(fMaven.allForParent(IoMavenVersion.class,artifact));
 	}
 	
 	public void selectVersion() throws JeeslNotFoundException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(version));}
-		this.reset(false, false, true);
+		this.reset(false,false,true,false);
 		this.reloadDependencies();
 	}
 	
@@ -205,7 +227,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	private void reloadDependencies()
 	{
-		this.reset(false, false, true);
+		this.reset(false,false,true,false);
 		dependencies.addAll(fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().add(version)));
 
 		List<IoMavenVersion> dependenciesDependOn = EjbMavenDependencyFactory.toListDependsOn(dependencies);
@@ -227,7 +249,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	public void addModulePath()
 	{
-		this.reset(false, false, true);
+		this.reset(false,false,true,false);
 		dependencies.addAll(fMaven.fIoMavenDependencies(EjbIoMavenQuery.instance().add(version)));
 
 		List<IoMavenVersion> dependenciesDependOn = EjbMavenDependencyFactory.toListDependsOn(dependencies);

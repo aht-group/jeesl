@@ -1,5 +1,7 @@
 package org.jeesl.model.ejb.io.maven.dependency;
 
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,8 +74,13 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("[").append(id).append("]");
-		sb.append(" ").append(code);
+		sb.append("[").append(id).append("] ");
+		if(Objects.nonNull(artifact))
+		{
+			if(Objects.nonNull(artifact.getGroup())) {sb.append(artifact.getGroup().getCode()).append(":");}
+			sb.append(artifact.getCode()).append(":");
+		}
+		sb.append(code);
 		return sb.toString();
 	}
 }

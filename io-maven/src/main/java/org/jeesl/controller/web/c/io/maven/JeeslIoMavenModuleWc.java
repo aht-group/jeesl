@@ -19,6 +19,7 @@ import org.jeesl.factory.provider.io.IoLocaleFactoryProvider;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.io.maven.JeeslIoMavenModuleCallback;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.jsf.handler.PositionListReorderer;
@@ -61,8 +62,10 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenModuleWc.class);
 	
 	private JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic;
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven;
 
+	private final JeeslIoMavenModuleCallback<IoMavenType> callback;
+	
 	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
 	private final List<IoMavenEeEdition> enterpriseEditions;  public List<IoMavenEeEdition> getEnterpriseEditions() {return enterpriseEditions;}
 	private final List<IoMavenType> types; public List<IoMavenType> getTypes() {return types;}
@@ -73,9 +76,10 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	private IoMavenModule module; public IoMavenModule getModule() {return module;} public void setModule(IoMavenModule module) {this.module = module;}
 	private IoMavenModule child; public IoMavenModule getChild() {return child;} public void setChild(IoMavenModule child) {this.child = child;}
 	
-	public JeeslIoMavenModuleWc()
+	public JeeslIoMavenModuleWc(JeeslIoMavenModuleCallback<IoMavenType> callback)
 	{
 		super(IoLang.class,IoDescription.class);
+		this.callback=callback;
 		
 		structures = new ArrayList<>();
 		types = new ArrayList<>();
@@ -86,7 +90,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage,IoMavenEeReferral> fMaven,
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven,
 							JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
@@ -96,7 +100,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 		compilers.addAll(fMaven.allOrderedPositionVisible(IoMavenJdk.class));
 		enterpriseEditions.addAll(fMaven.allOrderedPositionVisible(IoMavenEeEdition.class));
 		structures.addAll(fMaven.allOrderedPositionVisible(IoMavenStructure.class));
-		types.addAll(fMaven.allOrderedPositionVisible(IoMavenType.class));
+		types.addAll(callback.getTypes());
 
 		this.reloadModules();
 	}
@@ -105,7 +109,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	{
 		modules.clear();
 		
-		EjbIoMavenQuery q = EjbIoMavenQuery.instance().addRootFetch(JeeslIoMavenModule.Attributes.enterpriseEditions).distinct(true);
+		EjbIoMavenQuery q = EjbIoMavenQuery.instance().addRootFetch(JeeslIoMavenModule.Attributes.enterpriseEditions).addIoMavenTypes(types).distinct(true);
 		modules.addAll(fMaven.fIoMavenModules(q).stream().filter(m -> Objects.isNull(m.getParent())).collect(Collectors.toList()));
 		Collections.sort(modules,new PositionComparator<IoMavenModule>());
 	}
@@ -144,13 +148,29 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 		module = EjbMavenModuleFactory.build();
 	}
 	
-	public void saveDevelopment() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	public void saveModule() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(module));}
 		EjbMavenModuleFactory.converter(fMaven, module);
 		module = fMaven.save(module);
 		this.reloadModule();
 		this.reloadModules();
+		this.reloadChilds();
+		
+		List<IoMavenModule> updates = new ArrayList<>();
+		for(IoMavenModule c : childs)
+		{
+			if(!module.getType().equals(c.getType()))
+			{
+				c.setType(module.getType());
+				updates.add(c);
+			}
+		}
+		if(!updates.isEmpty())
+		{
+			fMaven.save(updates);
+			this.reloadChilds();
+		}
 	}
 	
 	public void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException
@@ -180,6 +200,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(IoMavenModule.class));}
 		child = EjbMavenModuleFactory.build();
 		child.setParent(module);
+		child.setType(module.getType());
 	}
 	
 	public void selectChild() throws JeeslNotFoundException
@@ -190,7 +211,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	public void saveChild() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(child));}
-		EjbMavenModuleFactory.converter(fMaven, child);
+		EjbMavenModuleFactory.converter(fMaven,child);
 		child.setJdk(module.getJdk());
 		child = fMaven.save(child);
 		this.reloadChilds();

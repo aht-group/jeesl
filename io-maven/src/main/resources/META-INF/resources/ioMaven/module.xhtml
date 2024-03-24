@@ -59,7 +59,7 @@
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoMavenModule"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveDevelopment()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveModule()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid>
@@ -148,6 +148,9 @@
 						<p:selectOneMenu value="#{cc.attrs.ctrl.child.structure}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.structures}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
+						
+						<jtp:label entity="IoMavenModule" code="type"/>
+						<h:outputText value="#{cc.attrs.ctrl.child.type.name[localeCode].lang}"/>
 					</j:inputGrid>
 				</p:panel>
 			</h:form>

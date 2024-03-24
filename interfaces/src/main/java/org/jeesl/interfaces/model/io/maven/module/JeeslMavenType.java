@@ -20,5 +20,5 @@ public interface JeeslMavenType <L extends JeeslLang, D extends JeeslDescription
 								JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
-	public enum Code{mm,sm,sub};
+	public enum Code{lib,showcase,project};
 }

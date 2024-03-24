@@ -14,14 +14,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.maven.ee.JeeslMavenEeReferral;
+import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeReferral;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 
 @Entity
 @Table(name="IoMavenEeReferral",uniqueConstraints={@UniqueConstraint(name="uk_IoMavenEeReferral_edition_standard_recommendation",columnNames={"edition_id","standard_id","recommendation"})})
 @EjbErNode(name="Version",category="ioMaven",subset="ioMaven")
-public class IoMavenEeReferral implements JeeslMavenEeReferral<IoMavenEeEdition,IoMavenEeStandard>
+public class IoMavenEeReferral implements JeeslIoMavenEeReferral<IoMavenVersion,IoMavenEeEdition,IoMavenEeStandard>
 {
 	public static final long serialVersionUID=1;	
 
@@ -50,14 +50,8 @@ public class IoMavenEeReferral implements JeeslMavenEeReferral<IoMavenEeEdition,
 	@NotNull @ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenEeReferral_artifiact"))
 	private IoMavenVersion artifact;
-	public IoMavenVersion getArtifact() {return artifact;}
-	public void setArtifact(IoMavenVersion artifact) {this.artifact = artifact;}
-	
-	@ManyToOne
-	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenEeReferral_bom"))
-	private IoMavenVersion bom;
-	public IoMavenVersion getBom() {return bom;}
-	public void setBom(IoMavenVersion bom) {this.bom = bom;}
+	@Override public IoMavenVersion getArtifact() {return artifact;}
+	@Override public void setArtifact(IoMavenVersion artifact) {this.artifact = artifact;}
 
 	@Basic @Column(columnDefinition="text")
 	private String remark;

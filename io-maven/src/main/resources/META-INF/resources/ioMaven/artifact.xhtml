@@ -63,8 +63,10 @@
 						<h:outputText value="#{cc.attrs.ctrl.artifact.group.code}"/>
 						
 						<jtp:label entity="IoMavenArtifact"/>
-						<h:outputText value="#{cc.attrs.ctrl.artifact.code}"/>
-						
+						<ui:fragment>
+							<jtp:symbolizer value="#{cc.attrs.ctrl.artifact.suitability}" marginRight="5"/>
+							<h:outputText value="#{cc.attrs.ctrl.artifact.code}"/>
+						</ui:fragment>
 						<jtp:label entity="IoMavenArtifact" code="suitability"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.artifact.suitability}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.suitabilities}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
@@ -73,7 +75,17 @@
 						<jtp:label entity="IoMavenArtifact" code="remark"/>
 						<jtp:inputRemark value="#{cc.attrs.ctrl.artifact.remark}"/>
 					
-					</j:inputGrid>
+						<jtp:label entity="IoMavenEeStandard" rendered="#{not empty cc.attrs.ctrl.eeStandards}"/>
+						<ui:fragment rendered="#{not empty cc.attrs.ctrl.eeStandards}">
+							<ui:repeat var="edition" value="#{cc.attrs.ctrl.eeEditions}">
+								<jtp:symbolizer value="#{edition}" marginRight="5"/>
+							</ui:repeat>
+							<p:spacer width="10"/>
+							<ui:repeat var="standard" value="#{cc.attrs.ctrl.eeStandards}">
+								<h:outputText value="#{standard.name[localeCode].lang}"/>
+							</ui:repeat>
+						</ui:fragment>						
+					</j:inputGrid>					
 				</p:panel>
 			</h:form>
 			<h:form id="fVersions">
@@ -114,8 +126,11 @@
 							</ui:repeat>
 		            		<br/>
 		            	</ui:repeat>
-						
 		            </p:column>
+		            <p:columns var="standard" value="#{cc.attrs.ctrl.eeStandards}">
+						<f:facet name="header"><h:outputText value="#{standard.code}"/></f:facet>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.n2m.m[v][standard].edition}"/>
+					</p:columns>
 				</p:dataTable>
 			</h:form>
 			<h:form id="fVersion">

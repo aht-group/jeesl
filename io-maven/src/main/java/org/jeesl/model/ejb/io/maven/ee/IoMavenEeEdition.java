@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.maven.ee.JeeslMavenEeEdition;
+import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeEdition;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -17,14 +17,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("ioMavenEe")
 @EjbErNode(name="Usage",category="ioMaven",subset="ioMaven",level=3)
-public class IoMavenEeEdition extends IoStatus implements JeeslMavenEeEdition<IoLang,IoDescription,IoMavenEeEdition,IoGraphic>
+public class IoMavenEeEdition extends IoStatus implements JeeslIoMavenEeEdition<IoLang,IoDescription,IoMavenEeEdition,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(JeeslMavenEeEdition.Code c : JeeslMavenEeEdition.Code.values()){fixed.add(c.toString());}
+		for(JeeslIoMavenEeEdition.Code c : JeeslIoMavenEeEdition.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 	

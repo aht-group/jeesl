@@ -90,6 +90,11 @@ public class Nested2Map <L1 extends EjbWithId, L2 extends EjbWithId, VALUE exten
 		return new ArrayList<L2>(set);
 	}
 	
+	public void replaceAll(Nested2Map<L1,L2,VALUE> other)
+	{
+		this.clear();
+		this.putAll(other);
+	}
 	public void putAll(Nested2Map<L1,L2,VALUE> other)
 	{
 		for(L1 l1 : other.toL1())

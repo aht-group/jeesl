@@ -57,7 +57,6 @@ import org.jeesl.model.ejb.io.db.CqOrdering.SortOrder;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
-import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

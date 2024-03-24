@@ -63,7 +63,6 @@ public class JeeslSessionContextHandler <CTX extends JeeslSecurityContext<?,?>>
 			if(debugOnInfo)
 			{
 				logger.info("RequestContextPath: "+externalContext.getRequestContextPath());
-				logger.info("ApplicationContextPath: "+externalContext.getApplicationContextPath());
 				logger.info("RequestScheme: "+externalContext.getRequestScheme());
 				logger.info("RequestServerPort: "+externalContext.getRequestServerPort());
 				logger.info("RequestPathInfo: "+externalContext.getRequestPathInfo());
