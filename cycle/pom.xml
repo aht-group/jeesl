@@ -46,12 +46,7 @@
     		<scope>provided</scope>
 		</dependency>
 	
-		<!-- JakartaEE 
-		<dependency>
-			<groupId>jakarta.platform</groupId>
-			<artifactId>jakarta.jakartaee-api</artifactId>
-			<scope>provided</scope>
-		</dependency> -->
+		<!-- JakartaEE -->
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
