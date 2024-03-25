@@ -16,30 +16,30 @@ import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BucketSizeCounter
+public class JeeslEventCounter
 {
-	final static Logger logger = LoggerFactory.getLogger(BucketSizeCounter.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslEventCounter.class);
 	
-	private String category; public BucketSizeCounter category(String category) {this.category = category; return this;}
+	private String category; public JeeslEventCounter category(String category) {this.category = category; return this;}
 	private final Map<String,Long> map;
-	
+
 	private long loop;
-	
-	public static BucketSizeCounter instance() {return new BucketSizeCounter();}
-	public BucketSizeCounter(){this("Default Category");}
-	public BucketSizeCounter(String category)
+
+	public static JeeslEventCounter instance() {return new JeeslEventCounter();}
+	public JeeslEventCounter(){this("Default Category");}
+	public JeeslEventCounter(String category)
 	{
 		this.category=category;
 		map = new HashMap<String,Long>();
 		clear();
 	}
-	
+
 	public void clear()
 	{
 		map.clear();
 		loop=0;
 	}
-	
+
 	public <C extends EjbWithId> void countClass(C ejb){add(ejb.getClass().getSimpleName(),1);}
 	public <C extends EjbWithCode> void add(C ejb){add(ejb.getCode(),1);}
 	public <C extends EjbWithCode> void add(C ejb, long size){add(ejb.getCode(),size);}
@@ -50,7 +50,7 @@ public class BucketSizeCounter
 		if(!map.containsKey(event)){map.put(event, 0l);}
 		map.put(event, map.get(event)+size);
 	}
-	
+
 	public <E extends Enum<E>> long events(E event, long size){return events(event.toString());}
 	public long events(String event)
 	{

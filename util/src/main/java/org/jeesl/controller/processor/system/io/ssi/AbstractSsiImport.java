@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
+import org.jeesl.controller.monitoring.counter.JeeslEventCounter;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.txt.io.ssi.data.TxtIoSsiMappingFactory;
@@ -37,7 +37,7 @@ public abstract class AbstractSsiImport <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	protected File xlsDir,xlsFile;
 	
 	protected JeeslLogger jogger;
-	protected BucketSizeCounter jec;
+	protected JeeslEventCounter jec;
 	
 	protected int indexColumnStart, indexColumnEnd;
 	protected int indexRowStart; public void setIndexRowStart(int indexRowStart) {this.indexRowStart = indexRowStart;}
@@ -53,7 +53,7 @@ public abstract class AbstractSsiImport <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		cDataStatus = EjbCodeCache.instance(fBSsi.getClassStatus());
 		cJobStatus = EjbCodeCache.instance(fBSsi.getClassJob());
 		
-		jec = new BucketSizeCounter("Import");
+		jec = new JeeslEventCounter("Import");
 	}
 	
 	public void streamDir() throws IOException, UtilsConfigurationException
