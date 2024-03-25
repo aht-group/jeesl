@@ -64,6 +64,12 @@
     		<classifier>javax</classifier>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-ejb</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
 		
 		<!-- JEESL Modules -->
 		<dependency>

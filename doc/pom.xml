@@ -25,17 +25,39 @@
 	</dependencyManagement>
 	
 	<dependencies>
+		<!-- JEESL -->
 		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-util</artifactId>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-interfaces</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-api</artifactId>
 		</dependency>
 		
-		<!-- XML Modules -->
+		<!--
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-ejb</artifactId>
+			<type>jar</type>
+		</dependency> 
+		-->
+	
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-util</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-xml</artifactId>
 			<classifier>javax</classifier>
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- EXLP -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
@@ -86,6 +108,7 @@
 		    <scope>provided</scope>
 		</dependency> -->
 		
+		<!-- Java EE 8 -->
 		<dependency>
 		    <groupId>javax.ws.rs</groupId>
 		    <artifactId>javax.ws.rs-api</artifactId>
@@ -97,33 +120,6 @@
 			<artifactId>javax.persistence-api</artifactId>
 		    <version>2.2</version>
 		     <scope>provided</scope>
-		</dependency>
-			
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-interfaces</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-api</artifactId>
-		</dependency>
-		
-		<!-- XML Modules -->
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-xml</artifactId>
-			<classifier>javax</classifier>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-ejb</artifactId>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-util</artifactId>
 		</dependency>
 		
 		<!-- Only for WordResponsibilityMatrixFactory should be removed -->
