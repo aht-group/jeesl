@@ -60,7 +60,7 @@
     		<scope>provided</scope>
 		</dependency>
 		
-		<!-- JEESL Modles -->
+		<!-- JEESL Modules -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-cms</artifactId>
@@ -93,6 +93,7 @@
 		<dependency>
 			<groupId>com.theokanning.openai-gpt3-java</groupId>
 			<artifactId>service</artifactId>
+			<version>0.18.2</version>
 		    <scope>provided</scope>
 		</dependency>
 		
@@ -133,6 +134,5 @@
 	  		<artifactId>slf4j-api</artifactId>
 	  		<scope>provided</scope>
 	  	</dependency>
-		
 	</dependencies>
 </project>
