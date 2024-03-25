@@ -98,7 +98,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-
 		<!-- Jakarta EE -->
 		<dependency>
 		    <groupId>jakarta.el</groupId>
@@ -106,13 +105,14 @@
 		    <version>4.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
-   	   	
-   	   	<!-- JSF -->
 		<dependency>
 			<groupId>jakarta.faces</groupId>
 			<artifactId>jakarta.faces-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+   	   	
+   	   	<!-- JSF -->
+
 		
 		<dependency>
 		    <groupId>jakarta.servlet</groupId>
