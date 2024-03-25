@@ -131,20 +131,19 @@
 		    <version>2.0.1</version>
 		</dependency>
 
-		<!-- JBoss (for FacadeLookup) -->
+		<!-- JBoss (for FacadeLookup) 
 		<dependency>
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-ejb-client-bom</artifactId>
 			<version>7.2.0.Final</version>
 			<type>pom</type>
 			<scope>provided</scope>
-	  	</dependency> 
-	  	<!--
+	  	</dependency> -->
 	  	<dependency>
 		    <groupId>org.jboss.eap</groupId>
 		    <artifactId>wildfly-ejb-client-bom</artifactId>
 		    <type>pom</type>
-		</dependency> -->
+		</dependency>
 		
 		<!-- Hibernate -->
 		<dependency>
