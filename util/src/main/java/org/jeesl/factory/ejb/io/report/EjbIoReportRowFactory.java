@@ -44,7 +44,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
 								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
+								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
@@ -53,9 +53,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 								CW extends JeeslStatus<L,D,CW>,
 								RT extends JeeslReportRowType<L,D,RT,?>,
 								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>>
+								ATTRIBUTE extends EjbWithId>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportRowFactory.class);
 	
@@ -95,7 +93,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 		return ejb;
 	}
 	
-	public ROW build(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, SHEET sheet, Row row) throws JeeslNotFoundException
+	public ROW build(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,?,?> fReport, SHEET sheet, Row row) throws JeeslNotFoundException
 	{
 		ROW ejb = null;
 		try
@@ -110,7 +108,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 		return ejb;
 	}
 		
-	public ROW update(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, ROW eRow, Row xRow) throws JeeslNotFoundException
+	public ROW update(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,?,?> fReport, ROW eRow, Row xRow) throws JeeslNotFoundException
 	{
 		CDT eDataType = null; if(Objects.nonNull(xRow.getDataType())) {eDataType = fReport.fByCode(cDataType, xRow.getDataType().getCode());}
 		TEMPLATE eTemplate = null; if(Objects.nonNull(xRow.getTemplate())) {eTemplate = fReport.fByCode(cTemplate, xRow.getTemplate().getCode());}

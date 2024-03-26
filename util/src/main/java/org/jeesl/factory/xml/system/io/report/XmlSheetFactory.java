@@ -52,9 +52,7 @@ public class XmlSheetFactory <L extends JeeslLang,D extends JeeslDescription,
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,
 								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>
+								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSheetFactory.class);
@@ -66,8 +64,8 @@ public class XmlSheetFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlImplementationFactory<IMPLEMENTATION,L,D> xfImplementation;
-	private XmlColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xfGroup;
-	private XmlRowsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xfRows;
+	private XmlColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfGroup;
+	private XmlRowsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfRows;
 
 	public XmlSheetFactory(String localeCode, XlsSheet q)
 	{
@@ -77,8 +75,8 @@ public class XmlSheetFactory <L extends JeeslLang,D extends JeeslDescription,
 		try {xfLangs = new XmlLangsFactory<L>(ReportXpath.getLangs(q));} catch (ExlpXpathNotFoundException e) {}
 		try {xfDescriptions = new XmlDescriptionsFactory<D>(ReportXpath.getDescriptions(q));} catch (ExlpXpathNotFoundException e) {}
 		try {xfImplementation = new XmlImplementationFactory<IMPLEMENTATION,L,D>(localeCode,ReportXpath.getImplementation(q));} catch (ExlpXpathNotFoundException e) {}
-		try {xfGroup = new XmlColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,ReportXpath.getColumnGroup(q));}catch (ExlpXpathNotFoundException e) {}
-		try {xfRows = new XmlRowsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,ReportXpath.getRows(q));}catch (ExlpXpathNotFoundException e) {}
+		try {xfGroup = new XmlColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(localeCode,ReportXpath.getColumnGroup(q));}catch (ExlpXpathNotFoundException e) {}
+		try {xfRows = new XmlRowsFactory<>(localeCode,ReportXpath.getRows(q));}catch (ExlpXpathNotFoundException e) {}
 	}
 	
 	public XlsSheet build(SHEET sheet)

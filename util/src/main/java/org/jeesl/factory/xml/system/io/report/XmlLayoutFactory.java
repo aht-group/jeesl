@@ -36,17 +36,14 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
-								CW extends JeeslStatus<L,D,CW>,
-								
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId>
+								CW extends JeeslStatus<L,D,CW>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlLayoutFactory.class);
 	
 	private Layout q;
 	
 	private XmlTypeFactory<L,D,CW> xfType;
-	private XmlStylesFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfStyles;
+	private XmlStylesFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,?,?> xfStyles;
 	private XmlFontFactory<STYLE> xfFont;
 	
 	public XmlLayoutFactory(String localeCode, Layout q)

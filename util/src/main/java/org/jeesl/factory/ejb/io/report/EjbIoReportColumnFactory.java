@@ -102,7 +102,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN build(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
+	public COLUMN build(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
 	{
 		COLUMN ejb = null;
 		try
@@ -118,7 +118,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN update(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
+	public COLUMN update(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
 	{
 		CDT eDataType = null;if(xColumn.getDataType()!=null){eDataType = fReport.fByCode(cDataType, xColumn.getDataType().getCode());}
 		eColumn.setGroup(group);

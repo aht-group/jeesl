@@ -83,7 +83,7 @@ public class EjbIoReportFactory<L extends JeeslLang,D extends JeeslDescription,
 		return ejb;
 	}
 	
-	public REPORT build(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport, Report xReport) throws JeeslNotFoundException
+	public REPORT build(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport, Report xReport) throws JeeslNotFoundException
 	{
 		REPORT ejb = null;
 		try

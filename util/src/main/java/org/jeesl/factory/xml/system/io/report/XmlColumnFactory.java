@@ -46,9 +46,7 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,
 								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>
+								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlColumnFactory.class);
@@ -58,7 +56,7 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlDataTypeFactory<L,D,CDT> xfDataType;
-	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfLayout;
+	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfLayout;
 	
 	public XmlColumnFactory(String localeCode, XlsColumn q)
 	{

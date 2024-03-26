@@ -38,9 +38,7 @@ public interface JeeslIoReportFacade <L extends JeeslLang,D extends JeeslDescrip
 										ENTITY extends EjbWithId,
 										ATTRIBUTE extends EjbWithId,
 										TL extends JeeslTrafficLight<L,D,TLS>,
-										TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-										FILLING extends JeeslStatus<L,D,FILLING>,
-										TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
+										TLS extends JeeslTrafficLightScope<L,D,TLS,?>>
 			extends JeeslFacade
 {	
 	REPORT load(REPORT report, boolean recursive);

@@ -39,10 +39,9 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
-								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
+								
 								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
+								WORKBOOK extends JeeslReportWorkbook<?,SHEET>,
 								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
@@ -63,7 +62,7 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 	private JeeslDbLangUpdater<SHEET,L> dbuLang;
 	private JeeslDbDescriptionUpdater<SHEET,D> dbuDescription;
 	
-	public EjbIoReportSheetFactory(final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
+	public EjbIoReportSheetFactory(final IoReportFactoryBuilder<L,D,?,?,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
 			final Class<L> cL,final Class<D> cD,final Class<IMPLEMENTATION> cImplementation,final Class<SHEET> cSheet)
 	{
 		this.cImplementation=cImplementation;

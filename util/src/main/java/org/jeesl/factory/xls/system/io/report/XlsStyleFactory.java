@@ -14,31 +14,21 @@ import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.txt.system.io.report.TxtIoColumnFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
-import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
-import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
-import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
-import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,?,?>,
 								ROW extends JeeslReportRow<?,?,?,?,CDT,?>,
-								
 								STYLE extends JeeslReportStyle<?,?>,
 								CDT extends JeeslStatus<?,?,CDT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsStyleFactory.class);
-	
-	private Workbook xlsWorkbook;
 	
 	private Map<STYLE,CellStyle>	mapHeader;
 	private Map<COLUMN,CellStyle>	mapHeaderStyles;
@@ -61,9 +51,6 @@ public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,S
 	public XlsStyleFactory(final IoReportFactoryBuilder<?,?,?,?,?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,CDT,?,?,?,?,?,?,?,?,?> fbReport,
 							Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
 	{
-		
-		this.xlsWorkbook	= xlsWorkbook;
-		
 		efColumn			= fbReport.column();
 		tfColumn			= new TxtIoColumnFactory<COLUMN>("en");
 		
@@ -76,7 +63,7 @@ public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,S
 		mapRowDataType	= new HashMap<>();
 		
 		// Prepare the default styles and cache Maps
-        setupFallbackStyles(xlsWorkbook);
+        this.setupFallbackStyles(xlsWorkbook);
 		
 		for(ROW r : ioRows)
 		{

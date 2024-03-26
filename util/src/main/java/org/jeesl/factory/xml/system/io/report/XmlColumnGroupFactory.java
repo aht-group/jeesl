@@ -46,9 +46,7 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,
 								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>
+								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlColumnGroupFactory.class);
@@ -59,8 +57,8 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
-	private XmlColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xfColumn;
-	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfLayout;
+	private XmlColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfColumn;
+	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfLayout;
 	
 	public XmlColumnGroupFactory(String localeCode, ColumnGroup q)
 	{

@@ -47,9 +47,7 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,
 								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>
+								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlReportFactory.class);
@@ -59,7 +57,7 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlCategoryFactory<L,D,CATEGORY> xfCategory;
-	private XmlWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xfWorkbook;
+	private XmlWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfWorkbook;
 
 	public XmlReportFactory(Query q){this(q.getLang(), q.getReport());}
 	public XmlReportFactory(String localeCode, Report q)
@@ -68,7 +66,7 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(Objects.nonNull(q.getCategory())) {xfCategory = new XmlCategoryFactory<>(localeCode,q.getCategory());}
-		if(Objects.nonNull(q.getXlsWorkbook())) {xfWorkbook = new XmlWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsWorkbook());}
+		if(Objects.nonNull(q.getXlsWorkbook())) {xfWorkbook = new XmlWorkbookFactory<>(localeCode,q.getXlsWorkbook());}
 		
 	}
 	
