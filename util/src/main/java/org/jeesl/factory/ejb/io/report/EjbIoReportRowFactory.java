@@ -55,9 +55,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,
 								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
+								TLS extends JeeslTrafficLightScope<L,D,TLS,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportRowFactory.class);
 	
@@ -97,7 +95,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 		return ejb;
 	}
 	
-	public ROW build(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport, SHEET sheet, Row row) throws JeeslNotFoundException
+	public ROW build(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, SHEET sheet, Row row) throws JeeslNotFoundException
 	{
 		ROW ejb = null;
 		try
@@ -112,7 +110,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 		return ejb;
 	}
 		
-	public ROW update(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport, ROW eRow, Row xRow) throws JeeslNotFoundException
+	public ROW update(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, ROW eRow, Row xRow) throws JeeslNotFoundException
 	{
 		CDT eDataType = null; if(Objects.nonNull(xRow.getDataType())) {eDataType = fReport.fByCode(cDataType, xRow.getDataType().getCode());}
 		TEMPLATE eTemplate = null; if(Objects.nonNull(xRow.getTemplate())) {eTemplate = fReport.fByCode(cTemplate, xRow.getTemplate().getCode());}

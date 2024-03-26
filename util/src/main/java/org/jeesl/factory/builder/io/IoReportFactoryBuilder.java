@@ -1,4 +1,4 @@
-package org.jeesl.factory.builder.system;
+package org.jeesl.factory.builder.io;
 
 import java.util.Comparator;
 import java.util.List;
@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Query;
 
-public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
+public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 										REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 										IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
@@ -73,7 +73,7 @@ public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 {
 	private static final long serialVersionUID = 1L;
 
-	final static Logger logger = LoggerFactory.getLogger(ReportFactoryBuilder.class);
+	final static Logger logger = LoggerFactory.getLogger(IoReportFactoryBuilder.class);
 	
 	private final Class<CATEGORY> cCategory; public Class<CATEGORY> getClassCategory(){return cCategory;}
 	private final Class<REPORT> cReport; public Class<REPORT> getClassReport(){return cReport;}
@@ -94,7 +94,7 @@ public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 	private final Class<TRANSFORMATION> cTransformation; public Class<TRANSFORMATION> getClassTransformation(){return cTransformation;}
 //	
 	
-	public ReportFactoryBuilder(final Class<L> cL,final Class<D> cD,
+	public IoReportFactoryBuilder(final Class<L> cL,final Class<D> cD,
 								final Class<CATEGORY> cCategory, final Class<REPORT> cReport, 
 								final Class<IMPLEMENTATION> cImplementation, final Class<WORKBOOK> cWorkbook, final Class<SHEET> cSheet, 
 								final Class<GROUP> cGroup, final Class<COLUMN> cColumn, final Class<ROW> cRow, 
@@ -134,19 +134,19 @@ public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 		return new EjbIoReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(cL,cD,cCategory,cReport);
 	}
 	
-	public EjbIoReportWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> workbook()
+	public EjbIoReportWorkbookFactory<REPORT,WORKBOOK> workbook()
 	{
-		return new EjbIoReportWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(cL,cD,cWorkbook);
+		return new EjbIoReportWorkbookFactory<>(cWorkbook);
 	}
 	
-	public EjbIoReportSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> sheet()
+	public EjbIoReportSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> sheet()
 	{
-		return new EjbIoReportSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(this,cL,cD,cImplementation,cSheet);
+		return new EjbIoReportSheetFactory<>(this,cL,cD,cImplementation,cSheet);
 	}
 	
-	public EjbIoReportRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> row()
+	public EjbIoReportRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> row()
 	{
-		return new EjbIoReportRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(cL,cD,cRow,cTemplate,cDataType,cRt);
+		return new EjbIoReportRowFactory<>(cL,cD,cRow,cTemplate,cDataType,cRt);
 	}
 	
 	public EjbIoReportColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> group()
@@ -154,9 +154,9 @@ public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 		return new EjbIoReportColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(cL,cD,cGroup,cStyle);
 	}
 	
-	public EjbIoReportColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> column()
+	public EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> column()
 	{
-		return new EjbIoReportColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(cL,cD,cColumn,cDataType,cColumnWidth);
+		return new EjbIoReportColumnFactory<>(cL,cD,cColumn,cDataType,cColumnWidth);
 	}
 	
 	public EjbIoReportTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> template()
@@ -179,19 +179,19 @@ public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 		return new XlsColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>();
 	}
 	
-	public XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xlsRow(String localeCode, XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
+	public XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xlsRow(String localeCode, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
 	{
-		return new XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(localeCode,this,xfCell);
+		return new XlsRowFactory<>(localeCode,this,xfCell);
 	}
 	
-	public XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xlsCell(String localeCode, XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfStyle)
+	public XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xlsCell(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfStyle)
 	{
-		return new XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(localeCode,xfStyle);
+		return new XlsCellFactory<>(localeCode,xfStyle);
 	}
 	
-	public XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xlsStyle(Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
+	public XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xlsStyle(Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
 	{
-		return new XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(this,xlsWorkbook,ioGroups,ioColumns,ioRows);
+		return new XlsStyleFactory<>(this,xlsWorkbook,ioGroups,ioColumns,ioRows);
 	}
 	
 	public XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xmlReport(Query q)

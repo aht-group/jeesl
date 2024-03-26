@@ -13,6 +13,7 @@ import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
@@ -57,7 +58,6 @@ public class JeeslIoReportFacadeBean<L extends JeeslLang,D extends JeeslDescript
 {
 	private static final long serialVersionUID = 1L;
 	
-	private final Class<CATEGORY> cCategory;
 	private final Class<REPORT> cReport;
 	private final Class<WORKBOOK> cWorkbook;
 	private final Class<SHEET> cSheet;
@@ -67,10 +67,11 @@ public class JeeslIoReportFacadeBean<L extends JeeslLang,D extends JeeslDescript
 	private final Class<TEMPLATE> cTemplate;
 	private final Class<CELL> cCell;
 	
-	public JeeslIoReportFacadeBean(EntityManager em, final Class<CATEGORY> cCategory, final Class<REPORT> cReport, final Class<WORKBOOK> cWorkbook, final Class<SHEET> cSheet, final Class<GROUP> cGroup, final Class<COLUMN> cColumn, final Class<ROW> cRow, final Class<TEMPLATE> cTemplate, final Class<CELL> cCell)
+	public JeeslIoReportFacadeBean(EntityManager em,
+//			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport,
+			final Class<CATEGORY> cCategory, final Class<REPORT> cReport, final Class<WORKBOOK> cWorkbook, final Class<SHEET> cSheet, final Class<GROUP> cGroup, final Class<COLUMN> cColumn, final Class<ROW> cRow, final Class<TEMPLATE> cTemplate, final Class<CELL> cCell)
 	{
 		super(em);
-		this.cCategory=cCategory;
 		this.cReport=cReport;
 		this.cWorkbook=cWorkbook;
 		this.cSheet=cSheet;

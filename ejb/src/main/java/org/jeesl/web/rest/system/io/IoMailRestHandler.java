@@ -129,7 +129,6 @@ public class IoMailRestHandler <L extends JeeslLang,D extends JeeslDescription,
 	@Override public Mails discard(int days)
 	{
 		LocalDate ld = LocalDate.now().minusDays(days);
-//		DateTime dt = new DateTime().minusDays(days);
 		
 		List<CATEGORY> categories = fMail.all(fbMail.getClassCategory());
 		List<RETENTION> retentions = fMail.all(fbMail.getClassRetention());

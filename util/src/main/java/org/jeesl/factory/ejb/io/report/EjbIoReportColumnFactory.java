@@ -43,25 +43,25 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
-								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
-								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
+								
+								SHEET extends JeeslReportSheet<L,D,?,?,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
+								STYLE extends JeeslReportStyle<L,D>,
+								CDT extends JeeslStatus<L,D,CDT>,
 								CW extends JeeslStatus<L,D,CW>,
 								RT extends JeeslReportRowType<L,D,RT,?>,
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,
 								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
+								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
+//,
+//								FILLING extends JeeslStatus<L,D,FILLING>,
+//								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>
+>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportColumnFactory.class);
 	
@@ -102,7 +102,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN build(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
+	public COLUMN build(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
 	{
 		COLUMN ejb = null;
 		try
@@ -118,7 +118,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN update(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
+	public COLUMN update(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
 	{
 		CDT eDataType = null;if(xColumn.getDataType()!=null){eDataType = fReport.fByCode(cDataType, xColumn.getDataType().getCode());}
 		eColumn.setGroup(group);

@@ -33,13 +33,10 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
-							IMPLEMENTATION extends JeeslStatus<?,?,IMPLEMENTATION>,
-							WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-							SHEET extends JeeslReportSheet<?,?,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
-							GROUP extends JeeslReportColumnGroup<?,?,SHEET,COLUMN,STYLE>,
+public class XlsCellFactory <
+							GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
 							COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,TLS>,
-							ROW extends JeeslReportRow<?,?,SHEET,TEMPLATE,CDT,RT>,
+							ROW extends JeeslReportRow<?,?,?,TEMPLATE,CDT,RT>,
 							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
 							STYLE extends JeeslReportStyle<?,?>,
@@ -55,9 +52,9 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 		
 	private String localeCode;
 	
-	private XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfStyle;
+	private XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfStyle;
 	
-	public XlsCellFactory(String localeCode, XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfStyle)
+	public XlsCellFactory(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfStyle)
 	{
 		this.localeCode = localeCode;
 		this.xfStyle=xfStyle;

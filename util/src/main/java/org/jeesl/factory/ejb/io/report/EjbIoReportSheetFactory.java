@@ -10,7 +10,7 @@ import org.jeesl.controller.io.db.updater.JeeslDbLangUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.builder.system.ReportFactoryBuilder;
+import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
@@ -45,30 +45,26 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
 								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
+								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,
 								CDT extends JeeslStatus<L,D,CDT>,CW extends JeeslStatus<L,D,CW>,
-								RT extends JeeslReportRowType<L,D,RT,?>,
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
+								RT extends JeeslReportRowType<L,D,RT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportSheetFactory.class);
 	
-	private final EjbIoReportColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> efColumn;
+	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?> efColumn;
+	
 	final Class<IMPLEMENTATION> cImplementation;
 	final Class<SHEET> cSheet;
     
 	private JeeslDbLangUpdater<SHEET,L> dbuLang;
 	private JeeslDbDescriptionUpdater<SHEET,D> dbuDescription;
 	
-	public EjbIoReportSheetFactory(final ReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport, final Class<L> cL,final Class<D> cD,final Class<IMPLEMENTATION> cImplementation,final Class<SHEET> cSheet)
+	public EjbIoReportSheetFactory(final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
+			final Class<L> cL,final Class<D> cD,final Class<IMPLEMENTATION> cImplementation,final Class<SHEET> cSheet)
 	{
 		this.cImplementation=cImplementation;
         this.cSheet = cSheet;
