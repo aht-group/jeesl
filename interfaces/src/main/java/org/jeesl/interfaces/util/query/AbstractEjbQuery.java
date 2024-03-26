@@ -13,6 +13,7 @@ import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqId;
+import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.slf4j.Logger;
@@ -102,21 +103,25 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public void setToDate3(Date toDate3) {this.toDate3 = toDate3;}
 	
 	//LocalDate
-	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
-	public void addProtected(CqDate date) {if(Objects.isNull(localDates)) {localDates = new ArrayList<>();} localDates.add(date);}
+	
 	
 	protected LocalDate localDate1; @Override public LocalDate getLocalDate1() {return localDate1;}
 	protected LocalDate localDate2; @Override public LocalDate getLocalDate2() {return localDate2;}
 	
 	protected LocalDate ld3; public LocalDate getLd3() {return ld3;}
 	
-	//Literals
-	protected List<CqLiteral> literals; @Override public List<CqLiteral> getLiterals() {return literals;}
-	protected void addLiteral(CqLiteral literal) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(literal);}
+	//CQ Entites
+	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
+	public void addProtected(CqDate date) {if(Objects.isNull(localDates)) {localDates = new ArrayList<>();} localDates.add(date);}
 	
-	//Literals
+	protected List<CqLiteral> literals; @Override public List<CqLiteral> getLiterals() {return literals;}
+	protected void addProtected(CqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
+	
 	protected List<CqBool> booleans; @Override public List<CqBool> getBools() {return booleans;}
-	protected void addBool(CqBool bool) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(bool);}
+	protected void addProtected(CqBool cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
+	
+	protected List<CqInteger> integers; @Override public List<CqInteger> getIntegers() {return integers;}
+	protected void addProtected(CqInteger i) {if(Objects.isNull(integers)) {integers = new ArrayList<>();} integers.add(i);}
 	
 	//Strings
 	private String string1;
