@@ -29,15 +29,12 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XlsStyleFactory<
-								GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,?>,
-								ROW extends JeeslReportRow<?,?,?,TEMPLATE,CDT,?>,
-								TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
-								CELL extends JeeslReportCell<?,?,TEMPLATE>,
+public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
+								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,?,?>,
+								ROW extends JeeslReportRow<?,?,?,?,CDT,?>,
+								
 								STYLE extends JeeslReportStyle<?,?>,
-								CDT extends JeeslStatus<?,?,CDT>,
-								CW extends JeeslStatus<?,?,CW>>
+								CDT extends JeeslStatus<?,?,CDT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsStyleFactory.class);
 	
@@ -59,9 +56,9 @@ public class XlsStyleFactory<
 	
 	// Factories
 	private TxtIoColumnFactory<COLUMN> tfColumn;
-	private final EjbIoReportColumnFactory<?,?,?,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,?,?,?,?,?> efColumn;
+	private final EjbIoReportColumnFactory<?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,CDT,?,?,?,?,?,?> efColumn;
 	
-	public XlsStyleFactory(final IoReportFactoryBuilder<?,?,?,?,?,?,?,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,?,?,?,?,?,?,?,?> fbReport,
+	public XlsStyleFactory(final IoReportFactoryBuilder<?,?,?,?,?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,CDT,?,?,?,?,?,?,?,?,?> fbReport,
 							Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
 	{
 		
