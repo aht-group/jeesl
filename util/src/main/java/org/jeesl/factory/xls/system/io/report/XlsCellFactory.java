@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 public class XlsCellFactory <
 							GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
-							COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,TLS>,
+							COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,?>,
 							ROW extends JeeslReportRow<?,?,?,TEMPLATE,CDT,RT>,
 							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
@@ -44,17 +44,15 @@ public class XlsCellFactory <
 							CW extends JeeslStatus<?,?,CW>,
 							RT extends JeeslReportRowType<?,?,RT,?>,
 							ENTITY extends EjbWithId,
-							ATTRIBUTE extends EjbWithId,
-							TL extends JeeslTrafficLight<?,?,TLS>,
-							TLS extends JeeslTrafficLightScope<?,?,TLS,?>>
+							ATTRIBUTE extends EjbWithId>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsCellFactory.class);
 		
 	private String localeCode;
 	
-	private XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfStyle;
+	private XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfStyle;
 	
-	public XlsCellFactory(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfStyle)
+	public XlsCellFactory(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfStyle)
 	{
 		this.localeCode = localeCode;
 		this.xfStyle=xfStyle;

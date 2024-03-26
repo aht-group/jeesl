@@ -44,7 +44,10 @@ public class XlsRowFactory <L extends JeeslLang,D extends JeeslDescription,
 							GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
 							COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
 							ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
-							TEMPLATE extends JeeslReportTemplate<L,D,CELL>,CELL extends JeeslReportCell<L,D,TEMPLATE>,STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,CW extends JeeslStatus<L,D,CW>,
+							TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
+							CELL extends JeeslReportCell<L,D,TEMPLATE>,
+							STYLE extends JeeslReportStyle<L,D>,
+							CDT extends JeeslStatus<L,D,CDT>,CW extends JeeslStatus<L,D,CW>,
 							RT extends JeeslReportRowType<L,D,RT,?>,
 							ENTITY extends EjbWithId,
 							ATTRIBUTE extends EjbWithId,
@@ -59,10 +62,10 @@ public class XlsRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	private final EjbIoReportColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> efColumnGroup;
 	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> efColumn;
 	
-	private XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell;
+	private XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell;
 	
 	public XlsRowFactory(String localeCode, final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport,
-			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
+			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell)
 	{
 		this.localeCode = localeCode;
 //		this.fbReport=fbReport;

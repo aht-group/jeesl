@@ -119,7 +119,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 	protected final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> efColumn;
 	private final EjbIoReportColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> efGroup;
 	
-	protected XlsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xlsFactory;
+	protected XlsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,TRANSFORMATION> xlsFactory;
 	
 	protected JeeslComparatorProvider<EjbWithId> cProvider;
 	
@@ -187,7 +187,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 					if(!ioWorkbook.getSheets().isEmpty())
 					{
 						Collections.sort(ioWorkbook.getSheets(), comparatorSheet);
-						xlsFactory = new XlsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,fbReport,ioWorkbook);
+						xlsFactory = new XlsFactory<>(localeCode,fbReport,ioWorkbook);
 						
 						ioSheet = fReport.load(ioWorkbook.getSheets().get(0), true);
 						

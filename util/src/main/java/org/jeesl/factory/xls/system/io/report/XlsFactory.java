@@ -29,7 +29,6 @@ import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportRowFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportSheetFactory;
 import org.jeesl.factory.pojo.system.io.report.JeeslTreeFigureFactory;
-import org.jeesl.factory.txt.system.io.report.TxtIoColumnFactory;
 import org.jeesl.factory.txt.system.io.report.TxtIoGroupFactory;
 import org.jeesl.interfaces.controller.report.JeeslReport;
 import org.jeesl.interfaces.controller.report.JeeslReportSelectorTransformation;
@@ -79,21 +78,21 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 						ATTRIBUTE extends EjbWithId,
 						TL extends JeeslTrafficLight<L,D,TLS>,
 						TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-						FILLING extends JeeslStatus<L,D,FILLING>,
+//						FILLING extends JeeslStatus<L,D,FILLING>,
 						TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
 {
 	private final static Logger logger = LoggerFactory.getLogger(XlsFactory.class);
 		
 	private WORKBOOK ioWorkbook;
 	
-	private final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport;
+	private final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,TRANSFORMATION> fbReport;
 	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> efColumn;
 	private final EjbIoReportRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> efRow;
 	private EjbIoReportSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> efSheet;
 	
 	private final XlsColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfColumn;
 	
-	private final TxtIoColumnFactory<COLUMN> tfColumn;
+//	private final TxtIoColumnFactory<COLUMN> tfColumn;
 	private final TxtIoGroupFactory<SHEET,GROUP> tfGroup;
 	
     // Excel related objects
@@ -112,7 +111,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
     
 	
 	public XlsFactory(String localeCode,
-			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport,
+			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,TRANSFORMATION> fbReport,
 			WORKBOOK ioWorkbook)
     {
         this.localeCode = localeCode;
@@ -121,7 +120,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
         efColumn = fbReport.column();
         efSheet = fbReport.sheet();
         efRow = fbReport.row();
-        tfColumn = fbReport.tfColumn(localeCode);
+//        tfColumn = fbReport.tfColumn(localeCode);
         tfGroup = fbReport.tfGroup(localeCode);
         
         xfColumn = fbReport.xlsColumn();
@@ -168,8 +167,8 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			
 			Map<GROUP,List<String>> mapDynamicGroups = tfGroup.toContextKeys(ioSheet, context);
 			
-			XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfStyle = fbReport.xlsStyle(wb,groups,columns,rows);
-			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell = fbReport.xlsCell(localeCode,xfStyle);
+			XlsStyleFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfStyle = fbReport.xlsStyle(wb,groups,columns,rows);
+			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell = fbReport.xlsCell(localeCode,xfStyle);
 			XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfRow = fbReport.xlsRow(localeCode,xfCell);
 			
 			MutableInt rowNr = new MutableInt(0);
@@ -208,7 +207,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 							ROW ioRow, MutableInt rowNr, List<COLUMN> columns,
 							Map<GROUP,List<String>> mapDynamicGroups,
 							XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfRow,
-							XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
+							XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell)
 	{
 		rowNr.add(ioRow.getOffsetRows());
 		JeeslReportSetting.Implementation implementation = JeeslReportSetting.Implementation.valueOf(ioSheet.getImplementation().getCode());
@@ -275,7 +274,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 	private void applyDomainTable(SXSSFWorkbook poiWb, JXPathContext context, 
 			SHEET ioSheet, Sheet poiSheet, MutableInt sheetNr,
 			MutableInt rowNr,
-			List<COLUMN> ioColumns, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
+			List<COLUMN> ioColumns, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell)
 	{
 		logger.info("Applying Domain Table for "+ioSheet.getQueryTable());
 		
@@ -325,7 +324,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
         logger.debug("Completed iteration");
 	}
 	
-	private void applyTreeTable(Figures tree, Figures treeHeader, Sheet sheet, MutableInt rowNr, SHEET ioSheet, List<COLUMN> columns, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell, JeeslReportSetting.Transformation transformation)
+	private void applyTreeTable(Figures tree, Figures treeHeader, Sheet sheet, MutableInt rowNr, SHEET ioSheet, List<COLUMN> columns, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell, JeeslReportSetting.Transformation transformation)
 	{
 		try
 		{
@@ -339,7 +338,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 		catch (ExlpXpathNotFoundException e) {e.printStackTrace();}
 	}
 	
-	private void applyTreeRow(int level, Figures treeHeader, Sheet sheet, MutableInt rowNr, List<COLUMN> columns, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell,
+	private void applyTreeRow(int level, Figures treeHeader, Sheet sheet, MutableInt rowNr, List<COLUMN> columns, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell,
 								List<String> parents, Figures f, JeeslReportSetting.Transformation transformation)
 	{
 		MutableInt columnNr = new MutableInt(0);
@@ -388,7 +387,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 		}
 	}
 	
-	private void applyTemplate(Sheet sheet, MutableInt rowNr, SHEET ioSheet, ROW ioRow, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
+	private void applyTemplate(Sheet sheet, MutableInt rowNr, SHEET ioSheet, ROW ioRow, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfCell)
 	{
 		if(ioRow.getTemplate()!=null)
 		{
