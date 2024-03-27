@@ -119,10 +119,7 @@ public class SurveyTemplateFactoryBuilder<L extends JeeslLang, D extends JeeslDe
 		return new EjbSurveySectionFactory<L,D,TEMPLATE,SECTION>(cSection);
 	}
 	
-	public EjbSurveyQuestionFactory<L,D,SECTION,QUESTION,QE,UNIT,OPTIONS,OPTION> question()
-	{
-		return new EjbSurveyQuestionFactory<L,D,SECTION,QUESTION,QE,UNIT,OPTIONS,OPTION>(cQuestion);
-	}
+	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> question() {return EjbSurveyQuestionFactory.instance(cQuestion);}
 	
 	public EjbSurveyOptionFactory<QUESTION,OPTION> ejbOption()
 	{

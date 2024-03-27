@@ -55,7 +55,7 @@ public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDesc
 	QUESTION load(QUESTION question);
 	ANSWER load(ANSWER answer);
 	DATA load(DATA data);
-	OPTIONS load(OPTIONS optionSet);
+	OPTIONS load(OPTIONS options);
 	
 	List<SURVEY> fSurveysForCategories(List<TC> categories);
 	

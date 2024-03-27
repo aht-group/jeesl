@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.jx.module;
+package org.jeesl.controller.facade.jx.module.survey;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.jx.module;
+package org.jeesl.controller.facade.jx.module.survey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 											UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 											OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 											OPTION extends JeeslSurveyOption<L,D>>
-	extends JeeslFacadeBean implements JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION>
+	extends JeeslFacadeBean implements JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyTemplateFacadeBean.class);
@@ -68,6 +68,13 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 		this.fbTemplate=fbTemplate;
 		
 		eTemplate = fbTemplate.template();
+	}
+	
+	@Override public OPTIONS loadSurveyOptions(OPTIONS optionSet)
+	{
+		optionSet = em.find(fbTemplate.getOptionSetClass(),optionSet.getId());
+		optionSet.getOptions().size();
+		return optionSet;
 	}
 	
 	@Override public TEMPLATE load(TEMPLATE template,boolean withQuestions, boolean withOptions)

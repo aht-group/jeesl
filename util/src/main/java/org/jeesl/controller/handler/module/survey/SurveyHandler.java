@@ -48,18 +48,18 @@ import org.joda.time.Interval;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
-							SURVEY extends JeeslSurvey<L,D,?,TEMPLATE,DATA>,
-							TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,?,?,TC,SECTION,?,?>,
-							TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
-							SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,?,?,?,?,OPTION,?>,
+public class SurveyHandler<D extends JeeslDescription,
+							SURVEY extends JeeslSurvey<?,D,?,TEMPLATE,DATA>,
+							TEMPLATE extends JeeslSurveyTemplate<?,D,?,TEMPLATE,?,?,TC,SECTION,?,?>,
+							TC extends JeeslSurveyTemplateCategory<?,D,TC,?>,
+							SECTION extends JeeslSurveySection<?,D,TEMPLATE,SECTION,QUESTION>,
+							QUESTION extends JeeslSurveyQuestion<?,D,SECTION,CONDITION,VALIDATION,?,?,?,?,OPTION,?>,
 							CONDITION extends JeeslSurveyCondition<QUESTION,?,OPTION>,
-							VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,?>,
-							ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
-							MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
-							DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
-							OPTION extends JeeslSurveyOption<L,D>,
+							VALIDATION extends JeeslSurveyValidation<?,D,QUESTION,?>,
+							ANSWER extends JeeslSurveyAnswer<?,D,QUESTION,MATRIX,DATA,OPTION>,
+							MATRIX extends JeeslSurveyMatrix<?,D,ANSWER,OPTION>,
+							DATA extends JeeslSurveyData<?,D,SURVEY,ANSWER,CORRELATION>,
+							OPTION extends JeeslSurveyOption<?,D>,
 							CORRELATION extends JeeslSurveyCorrelation<DATA>>
 	implements JeeslSurveyHandler<SECTION>
 {
@@ -78,7 +78,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	private JeeslScoreProcessor<ANSWER> scoreProcessor; public void setScoreProcessor(JeeslScoreProcessor<ANSWER> scoreProcessor) {this.scoreProcessor = scoreProcessor;}
 
 	private final SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION> condition; public SurveyConditionalHandler<TEMPLATE, SECTION, QUESTION, CONDITION, ANSWER, OPTION> getCondition() {return condition;}
-	private final SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> validation; public SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> getValidation() {return validation;}
+	private final SurveyValidationHandler<D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER> validation; public SurveyValidationHandler<D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER> getValidation() {return validation;}
 
 	private final Class<SECTION> cSection;
 	
@@ -112,7 +112,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	public SurveyHandler(JeeslSurveyHandlerCallback<SECTION> callback,
 //				final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate,
-				final SurveyCoreFactoryBuilder<L,D,?,SURVEY,?,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fBSurvey,
+				final SurveyCoreFactoryBuilder<?,D,?,SURVEY,?,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fBSurvey,
 				JeeslFacesMessageBean bMessage,
 				final JeeslSurveyCoreFacade<?,?,?,SURVEY,?,?,?,TC,SECTION,QUESTION,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fSurvey,
 				JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,?,?,OPTION,?> bSurvey,
@@ -131,8 +131,8 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 		showAssessment = false;
 		allowAssessment = true;
 
-		condition = new SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION>(fBSurvey,bSurvey);
-		validation = new SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION>(bSurvey);
+		condition = new SurveyConditionalHandler<>(fBSurvey,bSurvey);
+		validation = new SurveyValidationHandler<>(bSurvey);
 		
 		answers = new HashMap<QUESTION,ANSWER>();
 		matrix = new Nested3IdMap<MATRIX>();

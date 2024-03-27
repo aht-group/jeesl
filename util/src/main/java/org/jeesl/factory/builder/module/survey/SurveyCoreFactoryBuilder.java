@@ -112,10 +112,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	public EjbSurveyFactory<L,D,SURVEY,SS,TEMPLATE> survey() {return new EjbSurveyFactory<L,D,SURVEY,SS,TEMPLATE>(cL,cD,cSurvey);}
 	public EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION> answer() {return new EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION>(cQuestion,cAnswer,cOption);}
 	
-	public EjbSurveyQuestionFactory<L,D,SECTION,QUESTION,QE,UNIT,OPTIONS,OPTION> ejbQuestion()
-	{
-		return new EjbSurveyQuestionFactory<L,D,SECTION,QUESTION,QE,UNIT,OPTIONS,OPTION>(cQuestion);
-	}
+	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> ejbQuestion() {return EjbSurveyQuestionFactory.instance(cQuestion);}
 	
 	public EjbSurveyCorrelationFactory<ANSWER,DATA,CORRELATION> ejbCorrelation()
 	{
@@ -160,7 +157,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	
 	public SurveyScoreProcessor<SECTION,QUESTION,ANSWER,OPTION> scoreProcessor() {return new SurveyScoreProcessor<>(ejbQuestion(),ejbFilterAnswer());}
 	
-	public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(
+	public SurveyHandler<D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(
 					JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage,
 					final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
 					JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,?> bSurvey)
@@ -172,9 +169,9 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	{
 		return new SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION>(this,cache);
 	}
-	public SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> validation(JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
+	public SurveyValidationHandler<D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER> validation(JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
 	{
-		return new SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION>(cache);
+		return new SurveyValidationHandler<>(cache);
 	}
 	
 //	public JeeslSurveyCacheFacadeBean<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> cache();

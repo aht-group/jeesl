@@ -79,7 +79,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	public ProcessingTimeTracker getPtt() {return ptt;}
 	public void setPtt(ProcessingTimeTracker ptt) {this.ptt = ptt;}
 
-	private final JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	private final JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
 	private final JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey;
 	
 	private final EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
@@ -103,7 +103,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	
 	
 	public XlsSurveyDataFactory(String localeCode,
-			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
 			JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
 			EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate,
 			EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix,

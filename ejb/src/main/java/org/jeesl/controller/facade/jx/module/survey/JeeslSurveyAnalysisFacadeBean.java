@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.jx.module;
+package org.jeesl.controller.facade.jx.module.survey;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

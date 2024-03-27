@@ -16,21 +16,22 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 
-public interface JeeslSurveyTemplateFacade <L extends JeeslLang, D extends JeeslDescription,
-									SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-									TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
-									VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-									TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
-									SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,?,OPTIONS,OPTION,?>,
-									QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
+public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?,TEMPLATE,SCORE>,
+									TEMPLATE extends JeeslSurveyTemplate<?,?,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
+									VERSION extends JeeslSurveyTemplateVersion<?,?,TEMPLATE>,
+									TS extends JeeslSurveyTemplateStatus<?,?,TS,?>,
+									TC extends JeeslSurveyTemplateCategory<?,?,TC,?>,
+									SECTION extends JeeslSurveySection<?,?,TEMPLATE,SECTION,QUESTION>,
+									QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,QE,SCORE,?,OPTIONS,OPTION,?>,
+									QE extends JeeslSurveyQuestionElement<?,?,QE,?>,
+									SCORE extends JeeslSurveyScore<?,?,SCHEME,QUESTION>,
 									
-									OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
-									OPTION extends JeeslSurveyOption<L,D>>
+									OPTIONS extends JeeslSurveyOptionSet<?,?,TEMPLATE,OPTION>,
+									OPTION extends JeeslSurveyOption<?,?>>
 	extends JeeslFacade
-{	
+{
+	OPTIONS loadSurveyOptions(OPTIONS options);
+	
 	TEMPLATE load(TEMPLATE template, boolean withQuestions, boolean withOptions);
 	TEMPLATE fcSurveyTemplate(TC category, TS status);
 	TEMPLATE fcSurveyTemplate(TC category, VERSION version, TS status, VERSION nestedVersion);

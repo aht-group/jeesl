@@ -72,7 +72,7 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(ObjectUtils.isNotEmpty(q.getData())) {xfData = new XmlDataFactory<>(localeCode,q.getData().get(0));}
 	}
 	
-	public void lazyLoad(JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+	public void lazyLoad(JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
 				JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
 				Class<SURVEY> cSurvey,
 				Class<SECTION> cSection

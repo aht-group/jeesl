@@ -1,48 +1,46 @@
 package org.jeesl.factory.ejb.module.survey;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.module.survey.Question;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbSurveyQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
-				SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
-				QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,?,UNIT,OPTIONS,OPTION,?>,
-				QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-				UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
-				OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,
-				OPTION extends JeeslSurveyOption<L,D>>
+public class EjbSurveyQuestionFactory<SECTION extends JeeslSurveySection<?,?,?,SECTION,QUESTION>,
+										QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,UNIT,OPTIONS,OPTION,?>,
+										UNIT extends JeeslSurveyQuestionUnit<?,?,UNIT,?>,
+										OPTIONS extends JeeslSurveyOptionSet<?,?,?,OPTION>,
+										OPTION extends JeeslSurveyOption<?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbSurveyQuestionFactory.class);
 	
 	final Class<QUESTION> cQuestion;
     
-	private JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey;
+	private JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fCore;
 	
-	public EjbSurveyQuestionFactory(final Class<QUESTION> cQuestion){this(null,cQuestion);}
+	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> facade(JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fCore) {this.fCore=fCore; return this;}
 	
-	public EjbSurveyQuestionFactory(JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey, final Class<QUESTION> cQuestion)
+	public static <SECTION extends JeeslSurveySection<?,?,?,SECTION,QUESTION>,
+					QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,UNIT,OPTIONS,OPTION,?>,
+					UNIT extends JeeslSurveyQuestionUnit<?,?,UNIT,?>,
+					OPTIONS extends JeeslSurveyOptionSet<?,?,?,OPTION>,
+					OPTION extends JeeslSurveyOption<?,?>>
+						EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> instance(final Class<QUESTION> cQuestion) {return new EjbSurveyQuestionFactory<>(cQuestion);}
+	private EjbSurveyQuestionFactory(final Class<QUESTION> cQuestion)
 	{
-		this.fSurvey = fSurvey;
-        this.cQuestion = cQuestion;
+		this.cQuestion = cQuestion;
 	}
 	    
-	public QUESTION build(SECTION section,UNIT unit, Question xQuestion)
+	public QUESTION build(SECTION section, UNIT unit, Question xQuestion)
 	{
 		return build(section,unit,
 				xQuestion.getCode(),
@@ -55,7 +53,7 @@ public class EjbSurveyQuestionFactory<L extends JeeslLang, D extends JeeslDescri
 	public QUESTION build(SECTION section){return build(section,null,null,0,null,null,null);}
 	public QUESTION build(SECTION section,UNIT unit){return build(section,unit,null,0,null,null,null);}
 	
-	public QUESTION build(SECTION section,UNIT unit, String code,int position,String topic,String question,String remark)
+	public QUESTION build(SECTION section, UNIT unit, String code,int position,String topic,String question,String remark)
 	{
 		QUESTION ejb = id(0);
 		ejb.setRendered(true);
@@ -87,12 +85,12 @@ public class EjbSurveyQuestionFactory<L extends JeeslLang, D extends JeeslDescri
 	
 	public List<OPTION> toOptions(QUESTION question)
 	{
-		if(fSurvey!=null) {question = fSurvey.load(question);}
+		if(fCore!=null) {question = fCore.load(question);}
 		if(question.getOptionSet()==null) {return question.getOptions();}
 		else
 		{
 			OPTIONS set = question.getOptionSet();
-			if(fSurvey!=null) {set = fSurvey.load(set);}
+			if(fCore!=null) {set = fCore.load(set);}
 			return set.getOptions();
 		}
 	}
@@ -119,16 +117,5 @@ public class EjbSurveyQuestionFactory<L extends JeeslLang, D extends JeeslDescri
 			set.add(question.getSection());
 		}
 		return new ArrayList<SECTION>(set);
-	}
-	
-	public Map<SECTION,List<QUESTION>> loadMap(JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey)
-	{
-		Map<SECTION,List<QUESTION>> map = new HashMap<SECTION,List<QUESTION>>();
-		for(QUESTION q : fSurvey.allOrderedPosition(cQuestion))
-		{
-			if(!map.containsKey(q.getSection())){map.put(q.getSection(),new ArrayList<QUESTION>());}
-			map.get(q.getSection()).add(q);
-		}
-		return map;
 	}
 }
