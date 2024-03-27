@@ -61,12 +61,12 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 						SS extends JeeslSurveyStatus<L,D,SS,?>,
 						SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
 						VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
-						TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,ANALYSIS>,
+						TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
 						VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 						TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 						TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 						SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
+						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
 						CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 						VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
 						QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
@@ -78,16 +78,9 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 						OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 						OPTION extends JeeslSurveyOption<L,D>,
 						CORRELATION extends JeeslSurveyCorrelation<DATA>,
-						DOMAIN extends JeeslDomain<L,DENTITY>,
-						QUERY extends JeeslDomainQuery<L,D,DOMAIN,PATH>,
-						PATH extends JeeslDomainPath<L,D,QUERY,DENTITY,DATTRIBUTE>,
-						DENTITY extends JeeslRevisionEntity<L,D,?,?,DATTRIBUTE,?>,
-						DATTRIBUTE extends JeeslRevisionAttribute<L,D,DENTITY,?,?>,
-						ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,DATTRIBUTE>,
-						AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
-						AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,DATTRIBUTE,AQ,ATT>,
+						
 						ATT extends JeeslStatus<L,D,ATT>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,ATT>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;

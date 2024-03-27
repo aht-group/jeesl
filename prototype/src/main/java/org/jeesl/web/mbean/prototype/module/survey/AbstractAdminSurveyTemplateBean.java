@@ -97,7 +97,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 						AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
 						AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,DATTRIBUTE,AQ,ATT>,
 						ATT extends JeeslStatus<L,D,ATT>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,ATT>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;

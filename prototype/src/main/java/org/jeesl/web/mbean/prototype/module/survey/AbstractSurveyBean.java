@@ -75,12 +75,12 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 						SS extends JeeslSurveyStatus<L,D,SS,?>,
 						SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
 						VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
-						TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,ANALYSIS>,
+						TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
 						VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 						TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 						TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 						SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
+						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
 						CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 						VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
 						QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
@@ -92,13 +92,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 						OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 						OPTION extends JeeslSurveyOption<L,D>,
 						CORRELATION extends JeeslSurveyCorrelation<DATA>,
-						DOMAIN extends JeeslDomain<L,DENTITY>,
-						QUERY extends JeeslDomainQuery<L,D,DOMAIN,PATH>,
-						PATH extends JeeslDomainPath<L,D,QUERY,DENTITY,DATTRIBUTE>,
-						DENTITY extends JeeslRevisionEntity<L,D,?,?,DATTRIBUTE,?>,
-						DATTRIBUTE extends JeeslRevisionAttribute<L,D,DENTITY,?,?>,
-						ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,DATTRIBUTE>,
-						AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
+						
 						
 						ATT extends JeeslStatus<L,D,ATT>>
 					extends AbstractAdminBean<L,D,LOC>
@@ -136,7 +130,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 	protected final SbSingleHandler<SURVEY> sbhSurvey; public SbSingleHandler<SURVEY> getSbhSurvey() {return sbhSurvey;}
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
-	protected final Comparator<DENTITY> cpDomainEntity;
+
 	
 	protected List<VERSION> versions; public List<VERSION> getVersions(){return versions;}
 	protected List<SECTION> sections; public List<SECTION> getSections(){return sections;}
@@ -171,7 +165,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 		
 		questions = new ArrayList<QUESTION>();
 		
-		cpDomainEntity = new LabelEntityComparator().factory(LabelEntityComparator.Type.position);
+		
 	}
 	
 	protected abstract void initPageSettings();

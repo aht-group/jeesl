@@ -3,6 +3,7 @@ package org.jeesl.web.mbean.prototype.module.survey;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.bean.JeeslSurveyBean;
@@ -13,6 +14,7 @@ import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.handler.module.survey.SurveyAnalysisCacheHandler;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -99,7 +101,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 						ATT extends JeeslStatus<L,D,ATT>,
 						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
 						CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,ATT>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -138,6 +140,8 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 	private final EjbSurveyAnalysisQuestionFactory <L,D,QUESTION,ANALYSIS,AQ> efAnalysisQuestion;
 	private final EjbSurveyAnalysisToolFactory <L,D,AQ,AT,ATT> efAnalysisTool;
 	
+	private final Comparator<DENTITY> cpDomainEntity;
+	
 	
 	public AbstractAdminSurveyAnalysisBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
 											SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore,
@@ -153,6 +157,8 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 		efAnalysis = fbAnalysis.ejbAnalysis();
 		efAnalysisQuestion = fbAnalysis.ejbAnalysisQuestion();
 		efAnalysisTool = fbAnalysis.ejbAnalysisTool();
+		
+		cpDomainEntity = new LabelEntityComparator().factory(LabelEntityComparator.Type.position);
 	}
 	
 	protected void initSuperAnalysis(String userLocale, JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
