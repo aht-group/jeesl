@@ -3,6 +3,7 @@ package org.jeesl.factory.builder.module.survey;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyConditionFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionFactory;
+import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionSetFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyQuestionFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveySchemeFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyScoreFactory;
@@ -97,10 +98,7 @@ public class SurveyTemplateFactoryBuilder<L extends JeeslLang, D extends JeeslDe
         this.cOption = cOption;
 	}
 	
-	public EjbSurveySchemeFactory<SCHEME,TEMPLATE> scheme()
-	{
-		return new EjbSurveySchemeFactory<SCHEME,TEMPLATE>(cScheme);
-	}
+	public EjbSurveySchemeFactory<SCHEME,TEMPLATE> efScheme() {return new EjbSurveySchemeFactory<SCHEME,TEMPLATE>(cScheme);}
 	
 	public EjbSurveyScoreFactory<QUESTION,SCORE> score()
 	{
@@ -114,17 +112,12 @@ public class SurveyTemplateFactoryBuilder<L extends JeeslLang, D extends JeeslDe
 		return new EjbSurveyTemplateVersionFactory<VERSION>(cVersion);
 	}
 	
-	public EjbSurveySectionFactory<L,D,TEMPLATE,SECTION> section()
-	{
-		return new EjbSurveySectionFactory<L,D,TEMPLATE,SECTION>(cSection);
-	}
+	public EjbSurveySectionFactory<L,D,TEMPLATE,SECTION> section() {return new EjbSurveySectionFactory<L,D,TEMPLATE,SECTION>(cSection);}
 	
 	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> question() {return EjbSurveyQuestionFactory.instance(cQuestion);}
 	
-	public EjbSurveyOptionFactory<QUESTION,OPTION> ejbOption()
-	{
-		return new EjbSurveyOptionFactory<QUESTION,OPTION>(cOption);
-	}
+	public EjbSurveyOptionFactory<QUESTION,OPTION> efOption() {return new EjbSurveyOptionFactory<>(cOption);}
+	public EjbSurveyOptionSetFactory<TEMPLATE,OPTIONS> efOptionSet() {return new EjbSurveyOptionSetFactory<>(cOptions);}
 	
 	public EjbSurveyConditionFactory<QUESTION,CONDITION,QE> ejbCondition(){return new EjbSurveyConditionFactory<QUESTION,CONDITION,QE>(cCondition);}
 	public EjbSurveyValidationFactory<QUESTION,VALIDATION> ejbValidation() {return new EjbSurveyValidationFactory<QUESTION,VALIDATION>(cValidation);}

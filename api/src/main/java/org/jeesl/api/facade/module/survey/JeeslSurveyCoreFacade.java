@@ -40,13 +40,13 @@ public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDesc
 									VERSION extends JeeslSurveyTemplateVersion<L,D,?>,
 									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 									SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,SCORE,?,OPTIONS,OPTION,?>,
+									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,SCORE,?,?,?,?>,
 									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-									ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
-									MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
+									ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,?>,
+									MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,?>,
 									DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
-									OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,
-									OPTION extends JeeslSurveyOption<L,D>,
+//									OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,
+//									OPTION extends JeeslSurveyOption<L,D>,
 									CORRELATION extends JeeslSurveyCorrelation<DATA>>
 	extends JeeslFacade
 {		
@@ -55,16 +55,15 @@ public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDesc
 	QUESTION load(QUESTION question);
 	ANSWER load(ANSWER answer);
 	DATA load(DATA data);
-	OPTIONS load(OPTIONS options);
 	
 	List<SURVEY> fSurveysForCategories(List<TC> categories);
 	
-	OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
-	OPTION saveOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+//	OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+//	OPTION saveOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 	
 	void rmVersion(VERSION version) throws JeeslConstraintViolationException;
-	void rmOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
-	void rmOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+//	void rmOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+//	void rmOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 	
 	SURVEY fSurvey(CORRELATION correlation) throws JeeslNotFoundException;
 	void deleteSurvey(SURVEY survey) throws JeeslConstraintViolationException, JeeslLockingException;

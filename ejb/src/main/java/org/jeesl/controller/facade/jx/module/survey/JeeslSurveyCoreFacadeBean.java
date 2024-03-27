@@ -81,7 +81,7 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 									OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 									OPTION extends JeeslSurveyOption<L,D>,
 									CORRELATION extends JeeslSurveyCorrelation<DATA>>
-	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>
+	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyCoreFacadeBean.class);
@@ -146,12 +146,12 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		return data;
 	}
 	
-	@Override public OPTIONS load(OPTIONS optionSet)
-	{
-		optionSet = em.find(fbCore.getOptionSetClass(),optionSet.getId());
-		optionSet.getOptions().size();
-		return optionSet;
-	}
+//	@Override public OPTIONS load(OPTIONS optionSet)
+//	{
+//		optionSet = em.find(fbCore.getOptionSetClass(),optionSet.getId());
+//		optionSet.getOptions().size();
+//		return optionSet;
+//	}
 	
 	@Override public SURVEY fSurvey(CORRELATION correlation) throws JeeslNotFoundException
 	{
@@ -226,51 +226,51 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		this.rmProtected(version);
 	}
 	
-	@Override public OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		question = em.find(fbTemplate.getClassQuestion(), question.getId());
-		option = this.saveProtected(option);
-		if(!question.getOptions().contains(option))
-		{
-			question.getOptions().add(option);
-			this.save(question);
-		}
-		return option;
-	}
-	@Override public OPTION saveOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		set = em.find(fbCore.getOptionSetClass(), set.getId());
-		option = this.saveProtected(option);
-		if(!set.getOptions().contains(option))
-		{
-			set.getOptions().add(option);
-			this.save(set);
-		}
-		return option;
-	}
+//	@Override public OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		question = em.find(fbTemplate.getClassQuestion(), question.getId());
+//		option = this.saveProtected(option);
+//		if(!question.getOptions().contains(option))
+//		{
+//			question.getOptions().add(option);
+//			this.save(question);
+//		}
+//		return option;
+//	}
+//	@Override public OPTION saveOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		set = em.find(fbCore.getOptionSetClass(), set.getId());
+//		option = this.saveProtected(option);
+//		if(!set.getOptions().contains(option))
+//		{
+//			set.getOptions().add(option);
+//			this.save(set);
+//		}
+//		return option;
+//	}
 	
-	@Override public void rmOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		question = em.find(fbTemplate.getClassQuestion(), question.getId());
-		option = em.find(fbTemplate.getClassOption(), option.getId());
-		if(question.getOptions().contains(option))
-		{
-			question.getOptions().remove(option);
-			this.save(question);
-		}
-		this.rmProtected(option);
-	}
-	@Override public void rmOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		set = em.find(fbCore.getOptionSetClass(), set.getId());
-		option = em.find(fbTemplate.getClassOption(), option.getId());
-		if(set.getOptions().contains(option))
-		{
-			set.getOptions().remove(option);
-			this.save(set);
-		}
-		this.rmProtected(option);
-	}
+//	@Override public void rmOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		question = em.find(fbTemplate.getClassQuestion(), question.getId());
+//		option = em.find(fbTemplate.getClassOption(), option.getId());
+//		if(question.getOptions().contains(option))
+//		{
+//			question.getOptions().remove(option);
+//			this.save(question);
+//		}
+//		this.rmProtected(option);
+//	}
+//	@Override public void rmOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		set = em.find(fbCore.getOptionSetClass(), set.getId());
+//		option = em.find(fbTemplate.getClassOption(), option.getId());
+//		if(set.getOptions().contains(option))
+//		{
+//			set.getOptions().remove(option);
+//			this.save(set);
+//		}
+//		this.rmProtected(option);
+//	}
 	
 	@Override public <TYPE extends JeeslStatus<L,D,TYPE>, WT extends JeeslWithType<TYPE>, W extends JeeslWithSurveyType<SURVEY,WT,TYPE>>
 		List<W> fWithSurveys(Class<W> c, List<SS> status, TYPE type, Date date)

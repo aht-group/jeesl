@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
+import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
@@ -25,16 +27,16 @@ public class EjbSurveyQuestionFactory<SECTION extends JeeslSurveySection<?,?,?,S
 	
 	final Class<QUESTION> cQuestion;
     
-	private JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fCore;
+	private JeeslSurveyTemplateFacade<?,?,?,?,?,SECTION,QUESTION,?,?,OPTIONS,OPTION> fTemplate;
 	
-	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> facade(JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fCore) {this.fCore=fCore; return this;}
+	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> facade(JeeslSurveyTemplateFacade<?,?,?,?,?,SECTION,QUESTION,?,?,OPTIONS,OPTION> fTemplate) {this.fTemplate=fTemplate; return this;}
 	
 	public static <SECTION extends JeeslSurveySection<?,?,?,SECTION,QUESTION>,
 					QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,UNIT,OPTIONS,OPTION,?>,
 					UNIT extends JeeslSurveyQuestionUnit<?,?,UNIT,?>,
 					OPTIONS extends JeeslSurveyOptionSet<?,?,?,OPTION>,
 					OPTION extends JeeslSurveyOption<?,?>>
-						EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> instance(final Class<QUESTION> cQuestion) {return new EjbSurveyQuestionFactory<>(cQuestion);}
+				EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> instance(final Class<QUESTION> cQuestion) {return new EjbSurveyQuestionFactory<>(cQuestion);}
 	private EjbSurveyQuestionFactory(final Class<QUESTION> cQuestion)
 	{
 		this.cQuestion = cQuestion;
@@ -85,12 +87,12 @@ public class EjbSurveyQuestionFactory<SECTION extends JeeslSurveySection<?,?,?,S
 	
 	public List<OPTION> toOptions(QUESTION question)
 	{
-		if(fCore!=null) {question = fCore.load(question);}
+		if(ObjectUtils.isNotEmpty(fTemplate)) {question = fTemplate.loadSurveyQuersion(question);}
 		if(question.getOptionSet()==null) {return question.getOptions();}
 		else
 		{
 			OPTIONS set = question.getOptionSet();
-			if(fCore!=null) {set = fCore.load(set);}
+			if(ObjectUtils.isNotEmpty(fTemplate)) {set = fTemplate.loadSurveyOptions(set);}
 			return set.getOptions();
 		}
 	}

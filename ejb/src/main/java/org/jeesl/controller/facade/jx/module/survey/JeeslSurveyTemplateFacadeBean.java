@@ -13,6 +13,8 @@ import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyTemplateFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
@@ -68,6 +70,16 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 		this.fbTemplate=fbTemplate;
 		
 		eTemplate = fbTemplate.template();
+	}
+	
+	@Override public QUESTION loadSurveyQuersion(QUESTION question)
+	{
+		question = em.find(fbTemplate.getClassQuestion(),question.getId());
+		question.getScores().size();
+		question.getOptions().size();
+		question.getConditions().size();
+		question.getValidations().size();
+		return question;
 	}
 	
 	@Override public OPTIONS loadSurveyOptions(OPTIONS optionSet)
@@ -165,5 +177,51 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 			return t;
 		}
 		else{return list.get(0);}
+	}
+	
+	@Override public OPTION saveOption2(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		question = em.find(fbTemplate.getClassQuestion(), question.getId());
+		option = this.saveProtected(option);
+		if(!question.getOptions().contains(option))
+		{
+			question.getOptions().add(option);
+			this.save(question);
+		}
+		return option;
+	}
+	@Override public OPTION saveOption2(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		set = em.find(fbTemplate.getOptionSetClass(), set.getId());
+		option = this.saveProtected(option);
+		if(!set.getOptions().contains(option))
+		{
+			set.getOptions().add(option);
+			this.save(set);
+		}
+		return option;
+	}
+	
+	@Override public void rmOption2(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		question = em.find(fbTemplate.getClassQuestion(), question.getId());
+		option = em.find(fbTemplate.getClassOption(), option.getId());
+		if(question.getOptions().contains(option))
+		{
+			question.getOptions().remove(option);
+			this.save(question);
+		}
+		this.rmProtected(option);
+	}
+	@Override public void rmOption2(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		set = em.find(fbTemplate.getOptionSetClass(), set.getId());
+		option = em.find(fbTemplate.getClassOption(), option.getId());
+		if(set.getOptions().contains(option))
+		{
+			set.getOptions().remove(option);
+			this.save(set);
+		}
+		this.rmProtected(option);
 	}
 }

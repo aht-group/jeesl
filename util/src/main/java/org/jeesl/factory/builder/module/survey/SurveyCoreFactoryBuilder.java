@@ -124,15 +124,8 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 		return new EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION>(cMatrix);
 	}
 	
-	public EjbSurveyOptionSetFactory<TEMPLATE,OPTIONS> optionSet()
-	{
-		return new EjbSurveyOptionSetFactory<TEMPLATE,OPTIONS>(cOptions);
-	}
-	
-	public EjbSurveyOptionFactory<QUESTION,OPTION> option()
-	{
-		return new EjbSurveyOptionFactory<QUESTION,OPTION>(cOption);
-	}
+//	public EjbSurveyOptionSetFactory<TEMPLATE,OPTIONS> optionSet(){return new EjbSurveyOptionSetFactory<>(cOptions);}
+//	public EjbSurveyOptionFactory<QUESTION,OPTION> option(){return new EjbSurveyOptionFactory<>(cOption);}
 	
 	public EjbSurveyDataFactory<SURVEY,DATA,CORRELATION> data()
 	{
@@ -159,7 +152,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	
 	public SurveyHandler<D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(
 					JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage,
-					final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
+					final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 					JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,?> bSurvey)
 	{
 		return new SurveyHandler<>(callback,this,bMessage,fSurvey,bSurvey,bSurvey);

@@ -74,7 +74,7 @@ public class XmlAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getMatrix())) {xfMatrix = new XmlMatrixFactory<>(localeCode,q.getMatrix());}
 	}
 	
-	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey)
+	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fSurvey)
 	{
 		if(Objects.nonNull(q.getMatrix())) {xfMatrix.lazyLoad(fSurvey);}
 	}

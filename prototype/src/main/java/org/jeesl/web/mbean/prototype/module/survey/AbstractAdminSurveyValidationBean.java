@@ -91,7 +91,7 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 						ATT extends JeeslStatus<L,D,ATT>,
 						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
 						CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -106,20 +106,20 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 	private final EjbSurveyValidationAlgorithmFactory<VALGORITHM> efValidationAlgorithm;
 	
 	public AbstractAdminSurveyValidationBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-											SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore,
+											
 											SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE> fbAnalysis)
 	{
-		super(fbTemplate,fbCore);
+		super(fbTemplate);
 		this.fbAnalysis=fbAnalysis;
 		efValidationAlgorithm = fbTemplate.ejbAlgorithm();
 	}
 	
 	protected void initSuperValidation(String userLocale,  JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
+			
+			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
-		super.initSuperSurvey(bTranslation,bMessage,fTemplate,fCore,bSurvey);
+		super.initSuperSurvey(bTranslation,bMessage,fCore,bSurvey);
 		initPageSettings();
 		super.initLocales(userLocale);
 		reloadAlgorithms();
@@ -137,7 +137,7 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 	
 	private void reloadAlgorithms()
 	{
-		algorithms = fTemplate.all(fbTemplate.getClassValidationAlgorithm());
+		algorithms = fCore.all(fbTemplate.getClassValidationAlgorithm());
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbTemplate.getClassValidationAlgorithm(), algorithms));}
 	}
 			
@@ -152,16 +152,16 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 	public void saveAlgorithm() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info(AbstractLogMessage.saveEntity(algorithm));
-		algorithm = fTemplate.save(algorithm);
+		algorithm = fCore.save(algorithm);
 		reloadAlgorithms();
 	}
 	
 	public void selectAlgorithm()
 	{
 		logger.info(AbstractLogMessage.selectEntity(algorithm));
-		algorithm = efLang.persistMissingLangs(fTemplate, localeCodes, algorithm);
-		algorithm = efDescription.persistMissingLangs(fTemplate, localeCodes, algorithm);
+		algorithm = efLang.persistMissingLangs(fCore, localeCodes, algorithm);
+		algorithm = efDescription.persistMissingLangs(fCore, localeCodes, algorithm);
 	}
 	
-	public void reorderAlgorithms() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fTemplate,algorithms);}
+	public void reorderAlgorithms() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCore,algorithms);}
 }

@@ -88,11 +88,9 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 						UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 						ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 						MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
-						DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
+						DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,?>,
 						OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 						OPTION extends JeeslSurveyOption<L,D>,
-						CORRELATION extends JeeslSurveyCorrelation<DATA>,
-						
 						
 						ATT extends JeeslStatus<L,D,ATT>>
 					extends AbstractAdminBean<L,D,LOC>
@@ -101,37 +99,28 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSurveyBean.class);
 	
-	protected JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
-	protected JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore;
+	protected final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
+	
+	protected JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,?> fCore;
 
 	protected JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey;
 	protected Long refId;
 
-	
-	
-	protected final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
-	protected final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore;
-	
-	
-	protected final EjbSurveyFactory<L,D,SURVEY,SS,TEMPLATE> efSurvey;
 	protected final EjbSurveyTemplateVersionFactory<VERSION> efVersion;
 	protected final EjbSurveySectionFactory<L,D,TEMPLATE,SECTION> efSection;
 	protected final EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> efQuestion;
 	protected final EjbSurveyConditionFactory<QUESTION,CONDITION,QE> efCondition;
 	protected final EjbSurveyValidationFactory<QUESTION,VALIDATION> efValidation;
-	protected final EjbSurveyOptionSetFactory<TEMPLATE,OPTIONS> efOptionSet;
-	protected final EjbSurveyOptionFactory<QUESTION,OPTION> efOption;
+
 	protected final EjbSurveySchemeFactory<SCHEME,TEMPLATE> efScheme;
 	protected final EjbSurveyScoreFactory<QUESTION,SCORE> efScore;
 	protected final EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
 
 	
 	protected final SbSingleHandler<TC> sbhCategory; public SbSingleHandler<TC> getSbhCategory() {return sbhCategory;}
-	protected final SbSingleHandler<SURVEY> sbhSurvey; public SbSingleHandler<SURVEY> getSbhSurvey() {return sbhSurvey;}
+	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
-	
 
-	
 	protected List<VERSION> versions; public List<VERSION> getVersions(){return versions;}
 	protected List<SECTION> sections; public List<SECTION> getSections(){return sections;}
 	protected final List<QUESTION> questions; public List<QUESTION> getQuestions(){return questions;}
@@ -139,28 +128,27 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 	protected SURVEY survey; public SURVEY getSurvey() {return survey;} public void setSurvey(SURVEY survey) {this.survey = survey;}
 	protected TEMPLATE template; public TEMPLATE getTemplate(){return template;} public void setTemplate(TEMPLATE template){this.template = template;}
 	
-	public AbstractSurveyBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore)
+	public AbstractSurveyBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate
+//			,SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fbCore
+			)
 	{
 		super(fbTemplate.getClassL(),fbTemplate.getClassD());
 		this.fbTemplate=fbTemplate;
-		this.fbCore=fbCore;
 		
 		efTemplate = fbTemplate.template();
 		efSection = fbTemplate.section();
 		
-		efSurvey = fbCore.survey();
+
 		efVersion = fbTemplate.version();
 		efQuestion = fbTemplate.question();
 		efCondition = fbTemplate.ejbCondition();
 		efValidation = fbTemplate.ejbValidation();
 		efScore = fbTemplate.score();
-		efOptionSet = fbCore.optionSet();
-		efOption = fbCore.option();
-		efScheme = fbTemplate.scheme();
+
+		efScheme = fbTemplate.efScheme();
 		
 		sbhCategory = new SbSingleHandler<TC>(fbTemplate.getClassTemplateCategory(),this);
-		sbhSurvey = new SbSingleHandler<SURVEY>(fbCore.getClassSurvey(),this);
+		
 		sbhLocale = new SbSingleHandler<LOC>(fbTemplate.getClassLocale(),this);
 		
 		questions = new ArrayList<QUESTION>();
@@ -172,14 +160,13 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 	
 	//JeeslTranslationBean<L,D,LOC> bTranslation,
 	protected void initSuperSurvey(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
+			
+			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,?> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 //		super.initJeeslAdmin(bTranslation, bMessage);
 		super.initJeeslAdmin(lp,bMessage);
 
-		this.fTemplate = fTemplate;
 		this.fCore = fCore;
 		this.bSurvey = bSurvey;
 	}

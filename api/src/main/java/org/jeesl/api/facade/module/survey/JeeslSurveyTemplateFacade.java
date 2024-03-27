@@ -1,5 +1,7 @@
 package org.jeesl.api.facade.module.survey;
 
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
@@ -11,10 +13,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 
 public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?,TEMPLATE,SCORE>,
 									TEMPLATE extends JeeslSurveyTemplate<?,?,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
@@ -30,9 +29,17 @@ public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?
 									OPTION extends JeeslSurveyOption<?,?>>
 	extends JeeslFacade
 {
+	QUESTION loadSurveyQuersion(QUESTION question);
 	OPTIONS loadSurveyOptions(OPTIONS options);
+	
 	
 	TEMPLATE load(TEMPLATE template, boolean withQuestions, boolean withOptions);
 	TEMPLATE fcSurveyTemplate(TC category, TS status);
 	TEMPLATE fcSurveyTemplate(TC category, VERSION version, TS status, VERSION nestedVersion);
+	
+	OPTION saveOption2(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	OPTION saveOption2(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	
+	void rmOption2(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	void rmOption2(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 }

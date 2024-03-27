@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.jeesl.api.bean.JeeslSurveyBean;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
+import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
@@ -74,7 +75,8 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppSurveyBean.class);
 
-	private JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey;
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 	
 	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
 	private final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> ffSurvey;
@@ -103,7 +105,7 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 		this.fbTemplate=fbTemplate;
 		this.ffSurvey=ffSurvey;
 		this.ffAnalysis=ffAnalysis;
-		efOption = ffSurvey.option();
+		efOption = fbTemplate.efOption();
 		efSection = fbTemplate.section();
 		
 		elements = new ArrayList<QE>();
@@ -122,8 +124,10 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 		matrixCells = new HashMap<QUESTION,List<OPTION>>();
 	}
 	
-	public void initSuper(JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey)
+	public void initSuper(JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+						JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fSurvey)
 	{
+		this.fTemplate=fTemplate;
 		this.fSurvey=fSurvey;
 		refreshUnits();
 		this.reloadSurveyStatus();
@@ -183,9 +187,9 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 	private void reloadSets()
 	{
 		mapOptionSet.clear();
-		for(OPTIONS set : fSurvey.allOrderedPosition(ffSurvey.getOptionSetClass()))
+		for(OPTIONS set : fSurvey.allOrderedPosition(fbTemplate.getOptionSetClass()))
 		{
-			set = fSurvey.load(set);
+			set = fTemplate.loadSurveyOptions(set);
 			if(!mapOptionSet.containsKey(set)){mapOptionSet.put(set,new ArrayList<OPTION>());}
 			for(OPTION o : set.getOptions()) {mapOptionId.put(o.getId(),o);}
 			mapOptionSet.get(set).addAll(set.getOptions());
