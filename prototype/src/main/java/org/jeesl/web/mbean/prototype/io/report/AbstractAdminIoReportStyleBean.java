@@ -87,7 +87,7 @@ public class AbstractAdminIoReportStyleBean <L extends JeeslLang, D extends Jees
 		comparatorStyle = new IoReportStyleComparator<STYLE>().factory(IoReportStyleComparator.Type.position);
 	}
 	
-	protected void postConstructReportStyle(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport)
+	protected void postConstructReportStyle(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
 	{
 		super.initSuperReport(bTranslation,bMessage,fReport);
 		reloadStyles();

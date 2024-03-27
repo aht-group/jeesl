@@ -35,34 +35,30 @@ import org.jeesl.model.xml.module.finance.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XlsRowFactory <L extends JeeslLang,D extends JeeslDescription,
-							CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
-							REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
-							IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-							WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-							SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
-							GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-							COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
-							ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
-							TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-							CELL extends JeeslReportCell<L,D,TEMPLATE>,
-							STYLE extends JeeslReportStyle<L,D>,
-							CDT extends JeeslStatus<L,D,CDT>,CW extends JeeslStatus<L,D,CW>,
-							RT extends JeeslReportRowType<L,D,RT,?>,
-							ENTITY extends EjbWithId,
-							ATTRIBUTE extends EjbWithId>
+public class XlsRowFactory <
+							WORKBOOK extends JeeslReportWorkbook<?,SHEET>,
+							SHEET extends JeeslReportSheet<?,?,?,WORKBOOK,GROUP,ROW>,
+							GROUP extends JeeslReportColumnGroup<?,?,SHEET,COLUMN,STYLE>,
+							COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,?>,
+							ROW extends JeeslReportRow<?,?,SHEET,TEMPLATE,CDT,RT>,
+							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
+							CELL extends JeeslReportCell<?,?,TEMPLATE>,
+							STYLE extends JeeslReportStyle<?,?>,
+							CDT extends JeeslStatus<?,?,CDT>,
+							CW extends JeeslStatus<?,?,CW>,
+							RT extends JeeslReportRowType<?,?,RT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsRowFactory.class);
 		
 	private final String localeCode;
 //	private final ReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport;
 	
-	private final EjbIoReportColumnGroupFactory<L,D,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efColumnGroup;
-	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,?,?> efColumn;
+	private final EjbIoReportColumnGroupFactory<?,?,SHEET,GROUP,COLUMN,STYLE> efColumnGroup;
+	private final EjbIoReportColumnFactory<?,?,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT,?,?> efColumn;
 	
 	private XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell;
 	
-	public XlsRowFactory(String localeCode, final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,?,?,?,?> fbReport,
+	public XlsRowFactory(String localeCode, final IoReportFactoryBuilder<?,?,?,?,?,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
 			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell)
 	{
 		this.localeCode = localeCode;

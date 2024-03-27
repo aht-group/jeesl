@@ -117,8 +117,8 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 	protected final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport;
 	
 	protected final EjbLangFactory<L> efLang;
-	protected final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> efColumn;
-	private final EjbIoReportColumnGroupFactory<L,D,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efGroup;
+	protected final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efColumn;
+	private final EjbIoReportColumnGroupFactory<L,D,SHEET,GROUP,COLUMN,STYLE> efGroup;
 	
 	protected XlsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,TRANSFORMATION> xlsFactory;
 	
@@ -168,7 +168,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 		headers = new ArrayList<String>();
 	}
 	
-	protected void initIo(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport, Class<?> classReport)
+	protected void initIo(JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport, Class<?> classReport)
 	{
 		if(fReport!=null)
 		{

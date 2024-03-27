@@ -46,18 +46,15 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 								
 								SHEET extends JeeslReportSheet<L,D,?,?,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
-								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
-								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-								CELL extends JeeslReportCell<L,D,TEMPLATE>,
+								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
+								ROW extends JeeslReportRow<L,D,SHEET,?,CDT,RT>,
+								CELL extends JeeslReportCell<L,D,?>,
 								STYLE extends JeeslReportStyle<L,D>,
 								CDT extends JeeslStatus<L,D,CDT>,
 								CW extends JeeslStatus<L,D,CW>,
 								RT extends JeeslReportRowType<L,D,RT,?>,
 								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
+								ATTRIBUTE extends EjbWithId
 //,
 //								FILLING extends JeeslStatus<L,D,FILLING>,
 //								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>
@@ -102,7 +99,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN build(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
+	public COLUMN build(JeeslIoReportFacade<?,?,?,SHEET,GROUP,COLUMN,ROW,?,CELL> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
 	{
 		COLUMN ejb = null;
 		try
@@ -118,7 +115,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN update(JeeslIoReportFacade<L,D,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
+	public COLUMN update(JeeslIoReportFacade<?,?,?,SHEET,GROUP,COLUMN,ROW,?,CELL> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
 	{
 		CDT eDataType = null;if(xColumn.getDataType()!=null){eDataType = fReport.fByCode(cDataType, xColumn.getDataType().getCode());}
 		eColumn.setGroup(group);

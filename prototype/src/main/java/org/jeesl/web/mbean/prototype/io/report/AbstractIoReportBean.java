@@ -62,7 +62,7 @@ public class AbstractIoReportBean <L extends JeeslLang, D extends JeeslDescripti
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractIoReportBean.class);
 	
-	protected JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport;
+	protected JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport;
 	protected final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport;
 	
 	protected AbstractIoReportBean(IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
@@ -71,7 +71,7 @@ public class AbstractIoReportBean <L extends JeeslLang, D extends JeeslDescripti
 		this.fbReport=fbReport;
 	}
 	
-	protected void initSuperReport(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport)
+	protected void initSuperReport(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
 	{
 		super.initJeeslAdmin(lp,bMessage);
 		this.fReport=fReport;

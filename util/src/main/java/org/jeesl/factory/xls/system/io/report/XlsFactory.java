@@ -86,9 +86,9 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 	private WORKBOOK ioWorkbook;
 	
 	private final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,TRANSFORMATION> fbReport;
-	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> efColumn;
-	private final EjbIoReportRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efRow;
-	private EjbIoReportSheetFactory<L,D,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> efSheet;
+	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efColumn;
+	private final EjbIoReportRowFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,STYLE,CDT,RT> efRow;
+	private final EjbIoReportSheetFactory<L,D,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,STYLE> efSheet;
 	
 	private final XlsColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfColumn;
 	
@@ -169,7 +169,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 			
 			XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,CDT> xfStyle = fbReport.xlsStyle(wb,groups,columns,rows);
 			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell = fbReport.xlsCell(localeCode,xfStyle);
-			XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfRow = fbReport.xlsRow(localeCode,xfCell);
+			XlsRowFactory<WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfRow = fbReport.xlsRow(localeCode,xfCell);
 			
 			MutableInt rowNr = new MutableInt(0);
 			MutableInt sheetNr = new MutableInt(1);
@@ -206,7 +206,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 							SHEET ioSheet, Sheet poiSheet, MutableInt sheetNr,
 							ROW ioRow, MutableInt rowNr, List<COLUMN> columns,
 							Map<GROUP,List<String>> mapDynamicGroups,
-							XlsRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfRow,
+							XlsRowFactory<WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfRow,
 							XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell)
 	{
 		rowNr.add(ioRow.getOffsetRows());

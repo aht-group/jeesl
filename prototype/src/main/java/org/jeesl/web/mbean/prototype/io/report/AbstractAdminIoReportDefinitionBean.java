@@ -126,7 +126,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	private GROUP group; public GROUP getGroup() {return group;}public void setGroup(GROUP group) {this.group = group;}
 	private COLUMN column; public COLUMN getColumn() {return column;} public void setColumn(COLUMN column) {this.column = column;}
 	
-	private UiHelperIoReport<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> uiHelper; public UiHelperIoReport<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> getUiHelper() {return uiHelper;}
+	private UiHelperIoReport<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP> uiHelper; public UiHelperIoReport<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP> getUiHelper() {return uiHelper;}
 	protected SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	
 	private Comparator<REPORT> comparatorReport;
@@ -135,15 +135,15 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	private Comparator<COLUMN> comparatorColumn;
 	private Comparator<ROW> comparatorRow;
 	
-	private EjbIoReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> efReport;
+	private EjbIoReportFactory<L,D,CATEGORY,REPORT> efReport;
 	private EjbIoReportWorkbookFactory<REPORT,WORKBOOK> efWorkbook;
-	private EjbIoReportSheetFactory<L,D,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> efSheet;
-	private EjbIoReportColumnGroupFactory<L,D,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efGroup;
-	private EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> efColumn;
-	private EjbIoReportRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efRow;
+	private EjbIoReportSheetFactory<L,D,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,STYLE> efSheet;
+	private EjbIoReportColumnGroupFactory<L,D,SHEET,GROUP,COLUMN,STYLE> efGroup;
+	private EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> efColumn;
+	private EjbIoReportRowFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,STYLE,CDT,RT> efRow;
 	
 	private final XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfReport;
-	private JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> reportUpdater;
+	private JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS> reportUpdater;
 
 	private String restUrl; public String getRestUrl() {return restUrl;} public void setRestUrl(String restUrl) {this.restUrl = restUrl;}
 	protected JeeslFacade fRest;
@@ -155,7 +155,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		xfReport = fbReport.xmlReport(XmlReportQuery.get(XmlReportQuery.Key.exReport));
 	}
 	
-	protected void postConstructReportDefinition(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> fReport,
+	protected void postConstructReportDefinition(JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
 												JeeslFacade fRest,
 												JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage)
 	{
@@ -171,7 +171,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		
 		reportUpdater = fbReport.ejbUpdater(fReport);
 		
-		uiHelper = new UiHelperIoReport<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>();
+		uiHelper = new UiHelperIoReport<>();
 		
 		revisionCategories = fReport.allOrderedPositionVisible(fbReport.getClassRevisionCategory());
 		

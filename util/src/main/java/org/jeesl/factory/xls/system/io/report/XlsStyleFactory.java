@@ -46,7 +46,7 @@ public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,S
 	
 	// Factories
 	private TxtIoColumnFactory<COLUMN> tfColumn;
-	private final EjbIoReportColumnFactory<?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,CDT,?,?,?,?,?,?> efColumn;
+	private final EjbIoReportColumnFactory<?,?,?,GROUP,COLUMN,ROW,?,STYLE,CDT,?,?,?,?> efColumn;
 	
 	public XlsStyleFactory(final IoReportFactoryBuilder<?,?,?,?,?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,CDT,?,?,?,?,?,?,?,?,?> fbReport,
 							Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)

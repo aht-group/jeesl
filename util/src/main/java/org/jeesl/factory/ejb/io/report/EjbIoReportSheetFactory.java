@@ -44,17 +44,13 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 								WORKBOOK extends JeeslReportWorkbook<?,SHEET>,
 								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
-								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
-								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,
-								CDT extends JeeslStatus<L,D,CDT>,CW extends JeeslStatus<L,D,CW>,
-								RT extends JeeslReportRowType<L,D,RT,?>>
+								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,?,?,?>,
+								ROW extends JeeslReportRow<L,D,SHEET,?,?,?>,
+								STYLE extends JeeslReportStyle<L,D>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportSheetFactory.class);
 	
-	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?> efColumn;
+	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,?,STYLE,?,?,?,?,?> efColumn;
 	
 	final Class<IMPLEMENTATION> cImplementation;
 	final Class<SHEET> cSheet;
@@ -62,7 +58,7 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 	private JeeslDbLangUpdater<SHEET,L> dbuLang;
 	private JeeslDbDescriptionUpdater<SHEET,D> dbuDescription;
 	
-	public EjbIoReportSheetFactory(final IoReportFactoryBuilder<L,D,?,?,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
+	public EjbIoReportSheetFactory(final IoReportFactoryBuilder<L,D,?,?,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,?,?,STYLE,?,?,?,?,?,?,?,?,?,?> fbReport,
 			final Class<L> cL,final Class<D> cD,final Class<IMPLEMENTATION> cImplementation,final Class<SHEET> cSheet)
 	{
 		this.cImplementation=cImplementation;
@@ -137,7 +133,6 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 		return eSheet;
 	}
 	
-	
 	public boolean hasFooters(SHEET sheet){return hasFooters(sheet,null);}
 	public boolean hasFooters(SHEET sheet, Map<GROUP,Boolean> mapGroupVisibilityToggle)
 	{
@@ -166,8 +161,7 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 		return list;
 	}
 	
-	private static <SHEET extends JeeslReportSheet<?,?,?,?,?,?>>
-			boolean visible(SHEET s, Map<SHEET,Boolean> mapVisibilityToggle)
+	private static <SHEET extends JeeslReportSheet<?,?,?,?,?,?>> boolean visible(SHEET s, Map<SHEET,Boolean> mapVisibilityToggle)
 	{
 		boolean toggle = true;
 		if(mapVisibilityToggle!=null)
