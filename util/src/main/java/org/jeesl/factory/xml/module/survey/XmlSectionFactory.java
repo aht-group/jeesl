@@ -32,7 +32,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSectionFactory.class);
 		
-	private JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey;
+	private JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,?,?,?,OPTIONS,OPTION,?> fSurvey;
 	
 	private final String localeCode;
 	private final Section q;
@@ -49,7 +49,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(ObjectUtils.isNotEmpty(q.getQuestion())) {xfQuestion = new XmlQuestionFactory<>(localeCode,q.getQuestion().get(0));}
 	}
 	
-	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
+	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,?,?,?,OPTIONS,OPTION,?> fSurvey)
 	{
 		this.fSurvey=fSurvey;
 		if(Objects.nonNull(xfSection)) {xfSection.lazyLoad(fSurvey);}

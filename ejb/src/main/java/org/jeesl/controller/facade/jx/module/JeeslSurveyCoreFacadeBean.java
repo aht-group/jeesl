@@ -69,32 +69,32 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 									TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 									SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
+									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,?,OPTIONS,OPTION,?>,
 									CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 									VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
 									QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
 									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-									UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
+									
 									ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 									MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
 									DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
 									OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 									OPTION extends JeeslSurveyOption<L,D>,
 									CORRELATION extends JeeslSurveyCorrelation<DATA>>
-	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>
+	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyCoreFacadeBean.class);
 	
-	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
-	private final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,?> fbCore;
+	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,?,OPTIONS,OPTION> fbTemplate;
+	private final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,?,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,?> fbCore;
 	
 	private EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION> efAnswer;
 
 	
 	public JeeslSurveyCoreFacadeBean(EntityManager em,
-			SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,?> fbCore)
+			SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,?,OPTIONS,OPTION> fbTemplate,
+			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,?,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,?> fbCore)
 	{
 		super(em);
 		this.fbTemplate=fbTemplate;
