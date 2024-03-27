@@ -32,11 +32,11 @@ public class EjbSurveyQuestionFactory<L extends JeeslLang, D extends JeeslDescri
 	
 	final Class<QUESTION> cQuestion;
     
-	private JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey;
+	private JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey;
 	
 	public EjbSurveyQuestionFactory(final Class<QUESTION> cQuestion){this(null,cQuestion);}
 	
-	public EjbSurveyQuestionFactory(JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey, final Class<QUESTION> cQuestion)
+	public EjbSurveyQuestionFactory(JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey, final Class<QUESTION> cQuestion)
 	{
 		this.fSurvey = fSurvey;
         this.cQuestion = cQuestion;
@@ -121,7 +121,7 @@ public class EjbSurveyQuestionFactory<L extends JeeslLang, D extends JeeslDescri
 		return new ArrayList<SECTION>(set);
 	}
 	
-	public Map<SECTION,List<QUESTION>> loadMap(JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey)
+	public Map<SECTION,List<QUESTION>> loadMap(JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,?,?,OPTIONS,OPTION,?> fSurvey)
 	{
 		Map<SECTION,List<QUESTION>> map = new HashMap<SECTION,List<QUESTION>>();
 		for(QUESTION q : fSurvey.allOrderedPosition(cQuestion))

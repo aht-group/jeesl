@@ -43,7 +43,7 @@ public class JsonSurveyQuestionFactory<L extends JeeslLang,D extends JeeslDescri
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonSurveyQuestionFactory.class);
 	
-	private JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,?,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fSurvey;
+	private JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fSurvey;
 	private SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
 	
 	private final String localeCode;
@@ -57,7 +57,7 @@ public class JsonSurveyQuestionFactory<L extends JeeslLang,D extends JeeslDescri
 	public JsonSurveyQuestionFactory(String localeCode, Question q){this(localeCode, q,null,null);}
 	public JsonSurveyQuestionFactory(String localeCode, Question q,
 			SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,?,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fSurvey)
+			JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fSurvey)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
