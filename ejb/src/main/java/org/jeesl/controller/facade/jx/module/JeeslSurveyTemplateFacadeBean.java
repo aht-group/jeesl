@@ -53,7 +53,7 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 											UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 											OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 											OPTION extends JeeslSurveyOption<L,D>>
-	extends JeeslFacadeBean implements JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION>
+	extends JeeslFacadeBean implements JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyTemplateFacadeBean.class);

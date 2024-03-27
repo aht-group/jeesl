@@ -23,10 +23,10 @@ public interface JeeslSurveyTemplateFacade <L extends JeeslLang, D extends Jeesl
 									TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 									SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
+									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,?,OPTIONS,OPTION,?>,
 									QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
 									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-									UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
+									
 									OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 									OPTION extends JeeslSurveyOption<L,D>>
 	extends JeeslFacade
