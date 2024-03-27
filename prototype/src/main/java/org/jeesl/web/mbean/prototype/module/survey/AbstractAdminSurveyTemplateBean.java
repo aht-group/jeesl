@@ -96,10 +96,8 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 						ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,DATTRIBUTE>,
 						AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
 						AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,DATTRIBUTE,AQ,ATT>,
-						ATT extends JeeslStatus<L,D,ATT>,
-						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
-						CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE,CACHE>
+						ATT extends JeeslStatus<L,D,ATT>>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -136,10 +134,9 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	private Comparator<OPTION> cmpOption;
 	
 	public AbstractAdminSurveyTemplateBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore,
-			SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE> fbAnalysis)
+			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore)
 	{
-		super(fbTemplate,fbCore,fbAnalysis);
+		super(fbTemplate,fbCore);
 
 		cmpOption = new PositionComparator<OPTION>();
 		options = new ArrayList<OPTION>();
@@ -157,10 +154,9 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 			JeeslLocaleProvider<LOC> bTranslation, JeeslFacesMessageBean bMessage,
 			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
 			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
-			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
-		super.initSuperSurvey(bTranslation,bMessage,fTemplate,fCore,fAnalysis,bSurvey);
+		super.initSuperSurvey(bTranslation,bMessage,fTemplate,fCore,bSurvey);
 		initPageSettings();
 		super.initLocales(userLocale);
 

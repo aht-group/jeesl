@@ -21,6 +21,7 @@ import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.io.domain.EjbSurveyDomainQueryFactory;
+import org.jeesl.factory.ejb.module.survey.EjbSurveyAnalysisToolFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyValueFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyValuesFactory;
@@ -111,16 +112,24 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 						ATT extends JeeslStatus<L,D,ATT>,
 						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
 						CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT,TOOLCACHETEMPLATE,CACHE>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSurveyReportBean.class);
 
+	protected final SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT,TOOLCACHETEMPLATE> fbAnalysis;
+	
+	protected JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis;
+	
+	protected SurveyAnalysisCacheHandler<SURVEY,SECTION,QUESTION,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT,TOOLCACHETEMPLATE,CACHE> cacheHandler;
+	
 	@SuppressWarnings("unused") //Required for future improvements
 	private JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
 	
-	private McOptionDataSetFactory<OPTION> mfOption;	
+	private McOptionDataSetFactory<OPTION> mfOption;
+	
+	protected final EjbSurveyAnalysisToolFactory<L,D,AQ,TOOL,ATT> efTool;
 	private final EjbSurveyDomainQueryFactory<L,D,DOMAIN,QUERY,PATH> efDomainQuery;
 	
 	private final Map<QUESTION,Ds> mapDsOption; public Map<QUESTION,Ds> getMapDsOption() {return mapDsOption;}
@@ -148,8 +157,10 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore,
 			SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT,TOOLCACHETEMPLATE> fbAnalysis)
 	{
-		super(fbTemplate,fbCore,fbAnalysis);
+		super(fbTemplate,fbCore);
+		this.fbAnalysis=fbAnalysis;
 		
+		efTool = fbAnalysis.ejbAnalysisTool();
 		efDomainQuery = fbAnalysis.ejbDomainQuery();
 		
 		mapQuestion = new HashMap<SECTION,List<QUESTION>>();
@@ -180,7 +191,9 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey,
 			JeeslReportAggregationLevelFactory tfName)
 	{
-		super.initSuperSurvey(lp,bMessage,fCore,fSurvey,fAnalysis,bSurvey);
+		super.initSuperSurvey(lp,bMessage,fCore,fSurvey,bSurvey);
+		this.fAnalysis=fAnalysis;
+		
 		this.fJob=fJob;
 		cacheHandler = new SurveyAnalysisCacheHandler<>(fJob,fAnalysis);
 		s1Processor = new SurveySelectOneProcessor<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT,TOOLCACHETEMPLATE,CACHE>(bSurvey,cacheHandler,efTool,tfName);
