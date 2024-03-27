@@ -104,7 +104,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;if(actionHandler!=null) {actionHandler.setDebugOnInfo(debugOnInfo);}}
 	private boolean allowTransitions; public boolean isAllowTransitions() {return allowTransitions;} public void setAllowTransitions(boolean allowTransitions) {this.allowTransitions = allowTransitions;}
 
-	private final JeeslWorkflowFacade<WP,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WC,WA,AB,AO,MT,MC,SR,WL,WF,WY,WD,USER> fWorkflow;
+	private final JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fWorkflow;
 
 	private final WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WC,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow;
 	private final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fbRevision;
@@ -112,7 +112,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 	private JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 	private JeeslJsfSecurityHandler<SR,?,?,?,?,USER> security;
 	private JeeslFileRepositoryHandler<LOC,?,FRC,?> frh; public JeeslFileRepositoryHandler<LOC,?,FRC,?> getFrh() {return frh;}
-	private final JeeslWorkflowCommunicator<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WC,WA,AB,AO,MT,MC,MD,SR,RE,RA,WL,WF,WY,FRC,USER> communicator;
+	private final JeeslWorkflowCommunicator<L,D,LOC,WP,WS,WSN,WT,WC,MT,MC,MD,SR,RE,WL,WF,WY,FRC,USER> communicator;
 	private final JeeslWorkflowActionsHandler<WPD,WT,WA,AB,AO,RE,RA,WF,WCS,USER> actionHandler;
 	private final JeeslWorkflowResponsibleHandler<WF,USER> responsibleHandler;
 
@@ -153,8 +153,8 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 
 	public JeeslWorkflowEngine(WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WC,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow,
 								IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fbRevision,
-								JeeslWorkflowFacade<WP,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WC,WA,AB,AO,MT,MC,SR,WL,WF,WY,WD,USER> fWorkflow,
-								JeeslWorkflowMessageHandler<WS,WC,SR,RE,MT,MC,MD,WF,WY,USER> messageHandler,
+								JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fWorkflow,
+								JeeslWorkflowMessageHandler<WS,SR,RE,MT,MC,MD,WF,WY,USER> messageHandler,
 								JeeslWorkflowActionsHandler<WPD,WT,WA,AB,AO,RE,RA,WF,WCS,USER> actionHandler,
 								JeeslWorkflowResponsibleHandler<WF,USER> responsibleHandler,
 								JeeslFileRepositoryHandler<LOC,?,FRC,?> frh)

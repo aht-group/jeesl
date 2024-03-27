@@ -38,20 +38,16 @@ import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 public interface JeeslWorkflowFacade <
 										WP extends JeeslWorkflowProcess<?,?,?,WS>,
 										
-										WS extends JeeslWorkflowStage<?,?,WP,WST,WSP,WT,?>,
+										WS extends JeeslWorkflowStage<?,?,WP,WST,?,WT,?>,
 										WST extends JeeslWorkflowStageType<?,?,WST,?>,
-										WSP extends JeeslWorkflowStagePermission<WS,WPT,WML,SR>,
-										WPT extends JeeslWorkflowPermissionType<?,?,WPT,?>,
-										WML extends JeeslWorkflowModificationLevel<?,?,WML,?>,
-										WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,?>,
+										
+										
+										
+										WSN extends JeeslWorkflowStageNotification<WS,?,?,SR,?>,
 										WT extends JeeslWorkflowTransition<?,?,?,WS,WTT,SR,?>,
 										WTT extends JeeslWorkflowTransitionType<?,?,WTT,?>,
-										AC extends JeeslWorkflowActionNotification<WT,MT,MC,SR,?>,
-										WA extends JeeslWorkflowAction<WT,AB,AO,?,?>,
-										AB extends JeeslWorkflowBot<AB,?,?,?>,
-										AO extends EjbWithId,
-										MT extends JeeslIoTemplate<?,?,?,?,?,?>,
-										MC extends JeeslTemplateChannel<?,?,MC,?>,
+										
+
 										SR extends JeeslSecurityRole<?,?,?,?,?,?>,
 
 										WL extends JeeslWorkflowLink<WF,?>,

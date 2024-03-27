@@ -23,7 +23,7 @@ import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 
 public interface JeeslWorkflowMessageHandler<WS extends JeeslWorkflowStage<?,?,?,?,?,?,?>,
-											WAN extends JeeslWorkflowActionNotification<?,MT,MC,SR,RE>,
+											
 											SR extends JeeslSecurityRole<?,?,?,?,?,?>,
 											RE extends JeeslRevisionEntity<?,?,?,?,?,?>,
 											MT extends JeeslIoTemplate<?,?,?,?,MD,?>,

@@ -27,77 +27,46 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
-import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
-import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
-import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
-import org.jeesl.interfaces.model.module.workflow.action.JeeslWorkflowAction;
-import org.jeesl.interfaces.model.module.workflow.action.JeeslWorkflowBot;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowDelegate;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowLink;
-import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowActionNotification;
 import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowStageNotification;
-import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowContext;
-import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowDocument;
 import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowProcess;
-import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowModificationLevel;
-import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowPermissionType;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
-import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStagePermission;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStageType;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransition;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescription,
-									AX extends JeeslWorkflowContext<L,D,AX,?>,
-									WP extends JeeslWorkflowProcess<L,D,AX,WS>,
-									WPD extends JeeslWorkflowDocument<L,D,WP>,
-									WS extends JeeslWorkflowStage<L,D,WP,WST,WSP,WT,?>,
-									WST extends JeeslWorkflowStageType<L,D,WST,?>,
-									WSP extends JeeslWorkflowStagePermission<WS,WPT,WML,SR>,
-									WPT extends JeeslWorkflowPermissionType<L,D,WPT,?>,
-									WML extends JeeslWorkflowModificationLevel<L,D,WML,?>,
-									WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,RE>,
-									WT extends JeeslWorkflowTransition<L,D,WPD,WS,WTT,SR,?>,
-									WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
-									AC extends JeeslWorkflowActionNotification<WT,MT,MC,SR,RE>,
-									AA extends JeeslWorkflowAction<WT,AB,AO,RE,RA>,
-									AB extends JeeslWorkflowBot<AB,L,D,?>,
-									AO extends EjbWithId,
-									MT extends JeeslIoTemplate<L,D,?,?,?,?>,
-									MC extends JeeslTemplateChannel<L,D,MC,?>,
-									SR extends JeeslSecurityRole<L,D,?,?,?,?>,
-									RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
-									RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
-									WL extends JeeslWorkflowLink<WF,RE>,
+public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
+									WS extends JeeslWorkflowStage<?,?,WP,WST,?,WT,?>,
+									WST extends JeeslWorkflowStageType<?,?,WST,?>,
+									WSN extends JeeslWorkflowStageNotification<WS,?,?,SR,?>,
+									WT extends JeeslWorkflowTransition<?,?,?,WS,WTT,SR,?>,
+									WTT extends JeeslWorkflowTransitionType<?,?,WTT,?>,
+									SR extends JeeslSecurityRole<?,?,?,?,?,?>,
+									WL extends JeeslWorkflowLink<WF,?>,
 									WF extends JeeslWorkflow<WP,WS,WY,USER>,
-									WY extends JeeslWorkflowActivity<WT,WF,WD,FRC,USER>,
+									WY extends JeeslWorkflowActivity<WT,WF,WD,?,USER>,
 									WD extends JeeslWorkflowDelegate<WY,USER>,
-									FRC extends JeeslFileContainer<?,?>,
 									USER extends JeeslUser<SR>>
 					extends JeeslFacadeBean
-					implements JeeslWorkflowFacade<WP,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,WL,WF,WY,WD,USER>
+					implements JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER>
 {	
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslWorkflowFacadeBean.class);
 	
-	private final WorkflowFactoryBuilder<L,D,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow;
+	private final WorkflowFactoryBuilder<?,?,?,WP,?,WS,WST,?,?,?,WSN,WT,WTT,?,?,?,?,?,?,SR,?,?,WL,WF,WY,WD,?,USER> fbWorkflow;
 	
-	public JeeslWorkflowFacadeBean(EntityManager em, final WorkflowFactoryBuilder<L,D,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbApproval)
+	public JeeslWorkflowFacadeBean(EntityManager em, final WorkflowFactoryBuilder<?,?,?,WP,?,WS,WST,?,?,?,WSN,WT,WTT,?,?,?,?,?,?,SR,?,?,WL,WF,WY,WD,?,USER> fbApproval)
 	{
 		super(em);
 		this.fbWorkflow=fbApproval;
@@ -482,6 +451,4 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
-
-	
 }
