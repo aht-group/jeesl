@@ -143,7 +143,7 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		return new EjbIoReportSheetFactory<>(this,cL,cD,cImplementation,cSheet);
 	}
 	
-	public EjbIoReportRowFactory<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,STYLE,CDT,RT> row()
+	public EjbIoReportRowFactory<L,D,SHEET,GROUP,ROW,TEMPLATE,STYLE,CDT,RT> row()
 	{
 		return new EjbIoReportRowFactory<>(cL,cD,cRow,cTemplate,cDataType,cRt);
 	}
@@ -153,12 +153,12 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		return new EjbIoReportColumnGroupFactory<>(cL,cD,cGroup,cStyle);
 	}
 	
-	public EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> column()
+	public EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT> column()
 	{
 		return new EjbIoReportColumnFactory<>(cL,cD,cColumn,cDataType,cColumnWidth);
 	}
 	
-	public EjbIoReportTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> template()
+	public EjbIoReportTemplateFactory<L,D,TEMPLATE,CELL,STYLE,CDT,CW> template()
 	{
 		return new EjbIoReportTemplateFactory<>(cL,cD,cTemplate);
 	}
@@ -193,7 +193,7 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		return new XlsStyleFactory<>(this,xlsWorkbook,ioGroups,ioColumns,ioRows);
 	}
 	
-	public XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xmlReport(Query q)
+	public XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xmlReport(Query q)
 	{
 		return new XmlReportFactory<>(q);
 	}

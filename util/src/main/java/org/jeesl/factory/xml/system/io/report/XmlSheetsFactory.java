@@ -33,17 +33,13 @@ public class XmlSheetsFactory<L extends JeeslLang,D extends JeeslDescription,
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
 								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
+								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
 								CW extends JeeslStatus<L,D,CW>,
-								RT extends JeeslReportRowType<L,D,RT,?>,
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
+								RT extends JeeslReportRowType<L,D,RT,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSheetsFactory.class);
@@ -52,7 +48,7 @@ public class XmlSheetsFactory<L extends JeeslLang,D extends JeeslDescription,
 	
 	private Comparator<SHEET> cSheet;
 	
-	private XmlSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfSheet;
+	private XmlSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfSheet;
 
 	public XmlSheetsFactory(String localeCode, XlsSheets q)
 	{

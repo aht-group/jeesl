@@ -39,8 +39,7 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class EjbIoReportRowFactory<L extends JeeslLang, D extends JeeslDescription,
 								SHEET extends JeeslReportSheet<L,D,?,?,GROUP,ROW>,
-								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,?,?>,
+								GROUP extends JeeslReportColumnGroup<L,D,SHEET,?,STYLE>,
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,?>,
 								
@@ -85,7 +84,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang, D extends JeeslDescripti
 		return ejb;
 	}
 	
-	public ROW build(JeeslIoReportFacade<?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,?> fReport, SHEET sheet, Row row) throws JeeslNotFoundException
+	public ROW build(JeeslIoReportFacade<?,?,?,SHEET,GROUP,?,ROW,TEMPLATE,?> fReport, SHEET sheet, Row row) throws JeeslNotFoundException
 	{
 		ROW ejb = null;
 		try
@@ -100,7 +99,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang, D extends JeeslDescripti
 		return ejb;
 	}
 		
-	public ROW update(JeeslIoReportFacade<?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,?> fReport, ROW eRow, Row xRow) throws JeeslNotFoundException
+	public ROW update(JeeslIoReportFacade<?,?,?,SHEET,GROUP,?,ROW,TEMPLATE,?> fReport, ROW eRow, Row xRow) throws JeeslNotFoundException
 	{
 		CDT eDataType = null; if(Objects.nonNull(xRow.getDataType())) {eDataType = fReport.fByCode(cDataType, xRow.getDataType().getCode());}
 		TEMPLATE eTemplate = null; if(Objects.nonNull(xRow.getTemplate())) {eTemplate = fReport.fByCode(cTemplate, xRow.getTemplate().getCode());}

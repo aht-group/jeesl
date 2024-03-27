@@ -52,9 +52,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 								STYLE extends JeeslReportStyle<L,D>,
 								CDT extends JeeslStatus<L,D,CDT>,
 								CW extends JeeslStatus<L,D,CW>,
-								RT extends JeeslReportRowType<L,D,RT,?>,
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId
+								RT extends JeeslReportRowType<L,D,RT,?>
 //,
 //								FILLING extends JeeslStatus<L,D,FILLING>,
 //								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>

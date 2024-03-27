@@ -39,7 +39,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescription,
-								
 								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 								WORKBOOK extends JeeslReportWorkbook<?,SHEET>,
 								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
@@ -50,7 +49,7 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportSheetFactory.class);
 	
-	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,?,STYLE,?,?,?,?,?> efColumn;
+	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,?,STYLE,?,?,?> efColumn;
 	
 	final Class<IMPLEMENTATION> cImplementation;
 	final Class<SHEET> cSheet;

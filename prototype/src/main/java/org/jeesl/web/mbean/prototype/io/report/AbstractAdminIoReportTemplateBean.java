@@ -83,7 +83,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 	private Comparator<TEMPLATE> comparatorTemplate;
 	private Comparator<CELL> comparatorCell;
 	
-	private EjbIoReportTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> efTemplate;
+	private EjbIoReportTemplateFactory<L,D,TEMPLATE,CELL,STYLE,CDT,CW> efTemplate;
 	private EjbIoReportCellFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> efCell;
 		
 	public AbstractAdminIoReportTemplateBean(final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RC,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)

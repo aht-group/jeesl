@@ -23,13 +23,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UiHelperIoReport <L extends JeeslLang,D extends JeeslDescription,
-										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
-										REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
-										IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-										WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-										SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,?>,
-										GROUP extends JeeslReportColumnGroup<L,D,SHEET,?,?>>
+public class UiHelperIoReport <REPORT extends JeeslIoReport<?,?,?,?>,
+								SHEET extends JeeslReportSheet<?,?,?,?,GROUP,?>,
+								GROUP extends JeeslReportColumnGroup<?,?,SHEET,?,?>>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;

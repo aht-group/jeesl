@@ -54,7 +54,7 @@ public class XlsRowFactory <
 //	private final ReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport;
 	
 	private final EjbIoReportColumnGroupFactory<?,?,SHEET,GROUP,COLUMN,STYLE> efColumnGroup;
-	private final EjbIoReportColumnFactory<?,?,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT,?,?> efColumn;
+	private final EjbIoReportColumnFactory<?,?,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT> efColumn;
 	
 	private XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell;
 	

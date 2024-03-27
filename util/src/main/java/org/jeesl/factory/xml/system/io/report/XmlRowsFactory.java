@@ -40,9 +40,7 @@ public class XmlRowsFactory <L extends JeeslLang,D extends JeeslDescription,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
 								CW extends JeeslStatus<L,D,CW>,
-								RT extends JeeslReportRowType<L,D,RT,?>,
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId
+								RT extends JeeslReportRowType<L,D,RT,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlRowsFactory.class);
@@ -51,7 +49,7 @@ public class XmlRowsFactory <L extends JeeslLang,D extends JeeslDescription,
 	
 	private Comparator<ROW> cRow;
 	
-	private XmlRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfRow;
+	private XmlRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfRow;
 	
 	public XmlRowsFactory(String localeCode, Rows q)
 	{
