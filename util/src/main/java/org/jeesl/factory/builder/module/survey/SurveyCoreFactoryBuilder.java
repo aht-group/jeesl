@@ -76,8 +76,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 				DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
 				OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 				OPTION extends JeeslSurveyOption<L,D>,
-				CORRELATION extends JeeslSurveyCorrelation<DATA>,
-				ATT extends JeeslStatus<L,D,ATT>>
+				CORRELATION extends JeeslSurveyCorrelation<DATA>>
 	extends AbstractFactoryBuilder<L,D>
 {
 	private static final long serialVersionUID = 1L;
@@ -161,7 +160,10 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	
 	public SurveyScoreProcessor<SECTION,QUESTION,ANSWER,OPTION> scoreProcessor() {return new SurveyScoreProcessor<>(ejbQuestion(),ejbFilterAnswer());}
 	
-	public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage, final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey, JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
+	public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(
+					JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage,
+					final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
+					JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,?> bSurvey)
 	{
 		return new SurveyHandler<>(callback,this,bMessage,fSurvey,bSurvey,bSurvey);
 	}
