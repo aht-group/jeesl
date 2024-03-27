@@ -52,7 +52,7 @@ public class XmlSheetsFactory<L extends JeeslLang,D extends JeeslDescription,
 	
 	private Comparator<SHEET> cSheet;
 	
-	private XmlSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfSheet;
+	private XmlSheetFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfSheet;
 
 	public XmlSheetsFactory(String localeCode, XlsSheets q)
 	{

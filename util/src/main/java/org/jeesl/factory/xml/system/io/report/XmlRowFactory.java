@@ -37,7 +37,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
 								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
+								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
@@ -45,9 +45,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 								CW extends JeeslStatus<L,D,CW>,
 								RT extends JeeslReportRowType<L,D,RT,?>,
 								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>
+								ATTRIBUTE extends EjbWithId
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlRowFactory.class);
@@ -59,7 +57,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlTypeFactory<L,D,RT> xfType;
 	private XmlDataTypeFactory<L,D,CDT> xfDataType;
 	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfLayout;
-	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfTemplate;
+	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfTemplate;
 	
 	public XmlRowFactory(String localeCode, Row q)
 	{
@@ -69,7 +67,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 		if(Objects.nonNull(q.getDataType())) {xfDataType = new XmlDataTypeFactory<>(localeCode,q.getDataType());}
 		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
-		if(Objects.nonNull(q.getTemplate())) {xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(q.getTemplate());}
+		if(Objects.nonNull(q.getTemplate())) {xfTemplate = new XmlTemplateFactory<>(q.getTemplate());}
 	}
 	
 	public Row build(ROW row)

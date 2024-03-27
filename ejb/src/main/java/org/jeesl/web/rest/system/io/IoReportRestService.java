@@ -103,7 +103,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 	private final Class<AGGREGATION> cAggregation;
 
 	private XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfReport;
-	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfTemplate;
+	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfTemplate;
 	private XmlStyleFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfStyle;
 		
 	private final JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS> reportUpdater;
@@ -140,7 +140,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 		reportUpdater = new JeeslReportUpdater<>(fReport,fbReport);
 		
 		xfReport = new XmlReportFactory<>(XmlReportQuery.get(XmlReportQuery.Key.exReport));
-		xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(XmlReportQuery.exTemplate());
+		xfTemplate = new XmlTemplateFactory<>(XmlReportQuery.exTemplate());
 		xfStyle = new XmlStyleFactory<>(XmlReportQuery.exStyle());
 		
 		efTemplate = fbReport.template();
