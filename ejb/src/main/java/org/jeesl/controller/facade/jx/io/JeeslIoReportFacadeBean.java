@@ -54,7 +54,7 @@ public class JeeslIoReportFacadeBean<L extends JeeslLang,D extends JeeslDescript
 									FILLING extends JeeslStatus<L,D,FILLING>,
 									TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
 					extends JeeslFacadeBean
-					implements JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL>
+					implements JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL>
 {
 	private static final long serialVersionUID = 1L;
 	

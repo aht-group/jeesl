@@ -97,7 +97,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN build(JeeslIoReportFacade<?,?,?,SHEET,GROUP,COLUMN,ROW,?,CELL> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
+	public COLUMN build(JeeslIoReportFacade<?,?,SHEET,GROUP,COLUMN,ROW,?,CELL> fReport, GROUP group, XlsColumn column) throws JeeslNotFoundException
 	{
 		COLUMN ejb = null;
 		try
@@ -113,7 +113,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		return ejb;
 	}
 	
-	public COLUMN update(JeeslIoReportFacade<?,?,?,SHEET,GROUP,COLUMN,ROW,?,CELL> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
+	public COLUMN update(JeeslIoReportFacade<?,?,SHEET,GROUP,COLUMN,ROW,?,CELL> fReport, GROUP group, COLUMN eColumn, XlsColumn xColumn) throws JeeslNotFoundException
 	{
 		CDT eDataType = null;if(xColumn.getDataType()!=null){eDataType = fReport.fByCode(cDataType, xColumn.getDataType().getCode());}
 		eColumn.setGroup(group);

@@ -21,11 +21,9 @@ import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslIoReportFacade <
-										REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
-										IMPLEMENTATION extends JeeslStatus<?,?,IMPLEMENTATION>,
+public interface JeeslIoReportFacade <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 										WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-										SHEET extends JeeslReportSheet<?,?,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
+										SHEET extends JeeslReportSheet<?,?,?,WORKBOOK,GROUP,ROW>,
 										GROUP extends JeeslReportColumnGroup<?,?,SHEET,COLUMN,?>,
 										COLUMN extends JeeslReportColumn<?,?,GROUP,?,?,?,?>,
 										ROW extends JeeslReportRow<?,?,SHEET,TEMPLATE,?,?>,

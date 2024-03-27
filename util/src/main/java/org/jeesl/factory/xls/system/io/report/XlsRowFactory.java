@@ -13,24 +13,18 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
-import org.jeesl.interfaces.model.io.report.JeeslIoReport;
-import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.module.finance.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +39,7 @@ public class XlsRowFactory <
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
 							STYLE extends JeeslReportStyle<?,?>,
 							CDT extends JeeslStatus<?,?,CDT>,
-							CW extends JeeslStatus<?,?,CW>,
+							CW extends JeeslReportColumnWidth<?,?,CW,?>,
 							RT extends JeeslReportRowType<?,?,RT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsRowFactory.class);

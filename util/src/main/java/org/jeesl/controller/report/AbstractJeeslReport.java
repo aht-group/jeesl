@@ -33,6 +33,7 @@ import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -71,7 +72,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 											CELL extends JeeslReportCell<L,D,TEMPLATE>,
 											STYLE extends JeeslReportStyle<L,D>,
 											CDT extends JeeslStatus<L,D,CDT>,
-											CW extends JeeslStatus<L,D,CW>,
+											CW extends JeeslReportColumnWidth<L,D,CW,?>,
 											RT extends JeeslReportRowType<L,D,RT,?>,
 											RCAT extends JeeslStatus<L,D,RCAT>,
 											ENTITY extends EjbWithId,
@@ -168,7 +169,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 		headers = new ArrayList<String>();
 	}
 	
-	protected void initIo(JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport, Class<?> classReport)
+	protected void initIo(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport, Class<?> classReport)
 	{
 		if(fReport!=null)
 		{

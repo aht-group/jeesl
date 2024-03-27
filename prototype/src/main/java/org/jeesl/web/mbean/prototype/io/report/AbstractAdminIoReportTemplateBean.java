@@ -21,6 +21,7 @@ import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -56,7 +57,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 										CELL extends JeeslReportCell<L,D,TEMPLATE>,
 										STYLE extends JeeslReportStyle<L,D>,
 										CDT extends JeeslStatus<L,D,CDT>,
-										CW extends JeeslStatus<L,D,CW>,
+										CW extends JeeslReportColumnWidth<L,D,CW,?>,
 										RT extends JeeslReportRowType<L,D,RT,?>,
 										ENTITY extends EjbWithId,
 										ATTRIBUTE extends EjbWithId,
@@ -92,7 +93,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 	}
 	
 	protected void postConstructReportTemplate(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
+			JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
 	{
 		super.initSuperReport(bTranslation,bMessage,fReport);
 		

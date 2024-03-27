@@ -29,6 +29,7 @@ import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -59,7 +60,7 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 										CELL extends JeeslReportCell<L,D,TEMPLATE>,
 										STYLE extends JeeslReportStyle<L,D>,	
 										CDT extends JeeslStatus<L,D,CDT>,
-										CW extends JeeslStatus<L,D,CW>,
+										CW extends JeeslReportColumnWidth<L,D,CW,?>,
 										RT extends JeeslReportRowType<L,D,RT,?>,
 										RCAT extends JeeslStatus<L,D,RCAT>,
 										ENTITY extends EjbWithId,
@@ -123,7 +124,7 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
         this.cTransformation=cTransformation;
 	}
 	
-	public JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS> ejbUpdater(JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
+	public JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS> ejbUpdater(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
 	{
 		return new JeeslReportUpdater<>(fReport,this);
 	}

@@ -27,7 +27,7 @@ public class JeeslDbCodeEjbUpdater<C extends EjbWithCode>
         ejbInDb = new Hashtable<String,C>();
     } 
 	
-	public static <C extends EjbWithCode> JeeslDbCodeEjbUpdater<C> createFactory(final Class<C> codeClass)
+	public static <C extends EjbWithCode> JeeslDbCodeEjbUpdater<C> instance(final Class<C> codeClass)
 	{
 		return new JeeslDbCodeEjbUpdater<C>(codeClass);
 	}

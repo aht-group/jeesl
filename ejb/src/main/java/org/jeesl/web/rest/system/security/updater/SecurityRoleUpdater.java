@@ -75,7 +75,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 	
 	public DataUpdate iuSecurityRoles(Security security)
 	{
-		updateRole = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassRole());
+		updateRole = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassRole());
 		updateRole.dbEjbs(fSecurity.all(fbSecurity.getClassRole()));
 
 		DataUpdate du = XmlDataUpdateFactory.build();

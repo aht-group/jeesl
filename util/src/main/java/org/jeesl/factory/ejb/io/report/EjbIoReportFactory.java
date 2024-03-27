@@ -65,7 +65,7 @@ public class EjbIoReportFactory<L extends JeeslLang,D extends JeeslDescription,
 		return ejb;
 	}
 	
-	public REPORT build(JeeslIoReportFacade<REPORT,?,?,?,?,?,?,?,?> fReport, Report xReport) throws JeeslNotFoundException
+	public REPORT build(JeeslIoReportFacade<REPORT,?,?,?,?,?,?,?> fReport, Report xReport) throws JeeslNotFoundException
 	{
 		REPORT ejb = null;
 		try

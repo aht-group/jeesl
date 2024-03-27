@@ -7,6 +7,7 @@ import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -16,9 +17,6 @@ import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.io.report.XlsWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +33,7 @@ public class XmlWorkbookFactory <L extends JeeslLang,D extends JeeslDescription,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
-								CW extends JeeslStatus<L,D,CW>,
+								CW extends JeeslReportColumnWidth<L,D,CW,?>,
 								RT extends JeeslReportRowType<L,D,RT,?>
 								>
 {

@@ -42,6 +42,7 @@ import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -87,7 +88,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 						CELL extends JeeslReportCell<L,D,TEMPLATE>,
 						STYLE extends JeeslReportStyle<L,D>,
 						CDT extends JeeslStatus<L,D,CDT>,
-						CW extends JeeslStatus<L,D,CW>,
+						CW extends JeeslReportColumnWidth<L,D,CW,?>,
 						RT extends JeeslReportRowType<L,D,RT,?>,
 						ENTITY extends EjbWithId,
 						ATTRIBUTE extends EjbWithId,
@@ -155,7 +156,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		xfReport = fbReport.xmlReport(XmlReportQuery.get(XmlReportQuery.Key.exReport));
 	}
 	
-	protected void postConstructReportDefinition(JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
+	protected void postConstructReportDefinition(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
 												JeeslFacade fRest,
 												JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage)
 	{

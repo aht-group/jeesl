@@ -23,6 +23,7 @@ import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -60,7 +61,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,
 								CDT extends JeeslStatus<L,D,CDT>,
-								CW extends JeeslStatus<L,D,CW>,
+								CW extends JeeslReportColumnWidth<L,D,CW,?>,
 								RT extends JeeslReportRowType<L,D,RT,?>,
 								RCAT extends JeeslStatus<L,D,RCAT>,
 								ENTITY extends EjbWithId,
@@ -73,7 +74,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 	
 	private final boolean debugCreation = false;
 	
-	private final JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport;
+	private final JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport;
 	private final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport;
 
 	private final EjbIoReportFactory<L,D,CATEGORY,REPORT> efReport;
@@ -83,7 +84,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 	private final EjbIoReportRowFactory<L,D,SHEET,GROUP,ROW,TEMPLATE,STYLE,CDT,RT> efRow;
 	private final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT> efColumn;
 
-	public JeeslReportUpdater(JeeslIoReportFacade<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
+	public JeeslReportUpdater(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
 			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport)
 	{
 		this.fReport=fReport;
@@ -191,7 +192,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 		}
 		eWorkbook = fReport.load(eWorkbook);
 		
-		JeeslDbCodeEjbUpdater<SHEET> dbUpdaterSheet = JeeslDbCodeEjbUpdater.createFactory(fbReport.getClassSheet());
+		JeeslDbCodeEjbUpdater<SHEET> dbUpdaterSheet = JeeslDbCodeEjbUpdater.instance(fbReport.getClassSheet());
 		dbUpdaterSheet.dbEjbs(eWorkbook.getSheets());
 		if(ObjectUtils.isNotEmpty(xWorkbook.getXlsSheets()))
 		{
@@ -233,8 +234,8 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 		eSheet = efSheet.updateLD(fReport, eSheet, xSheet);
 		eSheet = fReport.load(eSheet,false);
 		
-		JeeslDbCodeEjbUpdater<GROUP> dbUpdaterGroup = JeeslDbCodeEjbUpdater.createFactory(fbReport.getClassGroup());
-		JeeslDbCodeEjbUpdater<ROW> dbUpdaterRow = JeeslDbCodeEjbUpdater.createFactory(fbReport.getClassRow());
+		JeeslDbCodeEjbUpdater<GROUP> dbUpdaterGroup = JeeslDbCodeEjbUpdater.instance(fbReport.getClassGroup());
+		JeeslDbCodeEjbUpdater<ROW> dbUpdaterRow = JeeslDbCodeEjbUpdater.instance(fbReport.getClassRow());
 		
 		dbUpdaterGroup.dbEjbs(eSheet.getGroups());
 		dbUpdaterRow.dbEjbs(eSheet.getRows());
@@ -303,7 +304,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 		eGroup = efGroup.updateLD(fReport,eGroup, xGroup);
 		eGroup = fReport.load(eGroup);
 		
-		JeeslDbCodeEjbUpdater<COLUMN> dbUpdaterColumn = JeeslDbCodeEjbUpdater.createFactory(fbReport.getClassColumn());
+		JeeslDbCodeEjbUpdater<COLUMN> dbUpdaterColumn = JeeslDbCodeEjbUpdater.instance(fbReport.getClassColumn());
 		dbUpdaterColumn.dbEjbs(eGroup.getColumns());
 		for(XlsColumn xColumn : xGroup.getXlsColumn())
 		{
