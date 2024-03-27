@@ -41,8 +41,8 @@ public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDesc
 									TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 									SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,?,OPTIONS,OPTION,?>,
-									QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,SCORE,?,OPTIONS,OPTION,?>,
+									
 									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 									ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 									MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,

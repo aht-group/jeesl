@@ -28,7 +28,7 @@ public class JeeslSurveyCacheLoader <TEMPLATE extends JeeslSurveyTemplate<?,?,?,
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyCacheLoader.class);
 	
-	private final JeeslSurveyCoreFacade<?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,?,?,?,?,OPTION,?> fCore;
+	private final JeeslSurveyCoreFacade<?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,?,?,?,OPTION,?> fCore;
 	private final JeeslSurveyTemplateFacade<?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,?,?,OPTION> fTemplate;
 	
 //	private final SurveyCoreFactoryBuilder<?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,CONDITION,?,?,?,ANSWER,?,?,?,OPTION,?,?> fbCore;
@@ -38,7 +38,7 @@ public class JeeslSurveyCacheLoader <TEMPLATE extends JeeslSurveyTemplate<?,?,?,
 			SurveyTemplateFactoryBuilder<?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,?,OPTION> fbTemplate,
 //			SurveyCoreFactoryBuilder<?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,CONDITION,?,?,?,ANSWER,?,?,?,OPTION,?,?> fbCore,
 			JeeslSurveyTemplateFacade<?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,?,?,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,ANSWER,?,?,?,OPTION,?> fCore)
+			JeeslSurveyCoreFacade<?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,?,ANSWER,?,?,?,OPTION,?> fCore)
 	{
 		this.fbTemplate=fbTemplate;
 //		this.fbCore=fbCore;

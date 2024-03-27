@@ -125,7 +125,7 @@ public class EjbSurveyAnswerFactory<SECTION extends JeeslSurveySection<?,?,?,SEC
 		}
 	}
 	
-	public void update(JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,?,?,SECTION,QUESTION,?,?,ANSWER,MATRIX,DATA,?,OPTION,?> fSurvey,
+	public void update(JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,?,?,SECTION,QUESTION,?,ANSWER,MATRIX,DATA,?,OPTION,?> fSurvey,
 						org.jeesl.model.json.survey.Answer json,
 						DATA data,
 						Map<Long,ANSWER> map)

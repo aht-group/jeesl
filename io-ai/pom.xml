@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-ai</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO AI</name>
+    <name>JEESL - IO: AI</name>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -93,7 +93,6 @@
 		<dependency>
 			<groupId>com.theokanning.openai-gpt3-java</groupId>
 			<artifactId>service</artifactId>
-			<version>0.18.2</version>
 		    <scope>provided</scope>
 		</dependency>
 		

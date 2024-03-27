@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-crypto</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Crypto</name>
+    <name>JEESL - IO: Crypto</name>
 	
 	<dependencyManagement>
 		<dependencies>

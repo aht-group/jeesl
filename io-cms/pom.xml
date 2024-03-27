@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-cms</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO CMS</name>
+    <name>JEESL - IO: CMS</name>
 	
 	<dependencyManagement>
 		<dependencies>
