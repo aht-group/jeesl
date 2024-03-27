@@ -93,7 +93,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 	private XmlTemplateFactory<L,D,TEMPLATE,CELL> xfTemplate;
 	private XmlStyleFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfStyle;
 		
-	private final JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS> reportUpdater;
+	private final JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT> reportUpdater;
 
 	private EjbIoReportTemplateFactory<L,D,TEMPLATE,CELL,STYLE,CDT,CW> efTemplate;
 	private EjbIoReportCellFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> efCell;
@@ -144,8 +144,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 					ENTITY extends EjbWithId,
 					ATTRIBUTE extends EjbWithId,
 					TL extends JeeslTrafficLight<L,D,TLS>,
-					TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-					FILLING extends JeeslStatus<L,D,FILLING>>
+					TLS extends JeeslTrafficLightScope<L,D,TLS,?>>
 	IoReportRestService<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS>
 			factory(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
 					final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport)
@@ -154,7 +153,6 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 	}
 	
 	@Override public Container exportSystemIoReportCategories() {return xfContainer.build(fReport.allOrderedPosition(fbReport.getClassCategory()));}
-
 
 	@Override public Reports exportSystemIoReports()
 	{

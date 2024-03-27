@@ -76,7 +76,7 @@ public class WorkflowEscalationHandler<L extends JeeslLang, D extends JeeslDescr
 {
 	final static Logger logger = LoggerFactory.getLogger(WorkflowEscalationHandler.class);
 	
-	private final JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,USER> fWorkflow;
+	private final JeeslWorkflowFacade<WP,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,WL,WF,WY,WD,USER> fWorkflow;
 	private final WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow;
 
 	private final JeeslWorkflowCommunicator<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,MD,SR,RE,RA,WL,WF,WY,FRC,USER> communicator;
@@ -84,7 +84,7 @@ public class WorkflowEscalationHandler<L extends JeeslLang, D extends JeeslDescr
 	private final WTT typeEscalation;
 	private final USER user;
 	
-	public WorkflowEscalationHandler(JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,USER> fWorkflow,
+	public WorkflowEscalationHandler(JeeslWorkflowFacade<WP,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,WL,WF,WY,WD,USER> fWorkflow,
 									WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow,
 									JeeslWorkflowMessageHandler<WS,WAN,SR,RE,MT,MC,MD,WF,WY,USER> messageHandler,
 									USER user)

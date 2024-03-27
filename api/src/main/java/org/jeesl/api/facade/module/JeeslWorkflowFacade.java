@@ -35,27 +35,26 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
-public interface JeeslWorkflowFacade <WX extends JeeslWorkflowContext<?,?,WX,?>,
-										WP extends JeeslWorkflowProcess<?,?,WX,WS>,
-										WPD extends JeeslWorkflowDocument<?,?,WP>,
+public interface JeeslWorkflowFacade <
+										WP extends JeeslWorkflowProcess<?,?,?,WS>,
+										
 										WS extends JeeslWorkflowStage<?,?,WP,WST,WSP,WT,?>,
 										WST extends JeeslWorkflowStageType<?,?,WST,?>,
 										WSP extends JeeslWorkflowStagePermission<WS,WPT,WML,SR>,
 										WPT extends JeeslWorkflowPermissionType<?,?,WPT,?>,
 										WML extends JeeslWorkflowModificationLevel<?,?,WML,?>,
-										WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,RE>,
-										WT extends JeeslWorkflowTransition<?,?,WPD,WS,WTT,SR,?>,
+										WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,?>,
+										WT extends JeeslWorkflowTransition<?,?,?,WS,WTT,SR,?>,
 										WTT extends JeeslWorkflowTransitionType<?,?,WTT,?>,
-										AC extends JeeslWorkflowActionNotification<WT,MT,MC,SR,RE>,
-										WA extends JeeslWorkflowAction<WT,AB,AO,RE,RA>,
+										AC extends JeeslWorkflowActionNotification<WT,MT,MC,SR,?>,
+										WA extends JeeslWorkflowAction<WT,AB,AO,?,?>,
 										AB extends JeeslWorkflowBot<AB,?,?,?>,
 										AO extends EjbWithId,
 										MT extends JeeslIoTemplate<?,?,?,?,?,?>,
 										MC extends JeeslTemplateChannel<?,?,MC,?>,
 										SR extends JeeslSecurityRole<?,?,?,?,?,?>,
-										RE extends JeeslRevisionEntity<?,?,?,?,RA,?>,
-										RA extends JeeslRevisionAttribute<?,?,RE,?,?>,
-										WL extends JeeslWorkflowLink<WF,RE>,
+
+										WL extends JeeslWorkflowLink<WF,?>,
 										WF extends JeeslWorkflow<WP,WS,WY,USER>,
 										WY extends JeeslWorkflowActivity<WT,WF,WD,?,USER>,
 										WD extends JeeslWorkflowDelegate<WY,USER>,
