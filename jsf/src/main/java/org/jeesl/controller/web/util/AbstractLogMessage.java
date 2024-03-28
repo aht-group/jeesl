@@ -1,4 +1,4 @@
-package net.sf.ahtutils.web.mbean.util;
+package org.jeesl.controller.web.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;

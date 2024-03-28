@@ -12,6 +12,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
@@ -34,8 +35,6 @@ import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,

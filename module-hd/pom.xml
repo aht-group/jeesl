@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-module-hd</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - Module - Helpdesk</name>
+    <name>JEESL - Module: Helpdesk</name>
 	
 	<dependencyManagement>
 		<dependencies>

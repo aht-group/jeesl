@@ -12,6 +12,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -30,8 +31,6 @@ import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CATEGORY extends JeeslStatus<L,D,CATEGORY>,

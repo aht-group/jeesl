@@ -19,6 +19,7 @@ import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbConstraintComparato
 import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbTableComparator;
 import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordJtComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -55,8 +56,6 @@ import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,

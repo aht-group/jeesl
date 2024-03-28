@@ -12,6 +12,7 @@ import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionCo
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityUsecaseComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityViewComparator;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -39,8 +40,6 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,

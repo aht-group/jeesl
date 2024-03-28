@@ -13,6 +13,7 @@ import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.lazy.io.maven.EjbIoMavenVersionLazyModel;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -54,8 +55,6 @@ import org.jeesl.util.comparator.ejb.io.maven.EjbMavenUsageComparator;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
 									implements OpSingleSelectionBean<IoMavenVersion>,SbToggleBean

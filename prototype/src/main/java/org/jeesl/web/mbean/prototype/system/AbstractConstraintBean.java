@@ -11,6 +11,7 @@ import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
@@ -35,7 +36,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.factory.xml.system.XmlConstraintFactory;
 import net.sf.ahtutils.factory.xml.system.XmlConstraintScopeFactory;
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescription,
 									ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,

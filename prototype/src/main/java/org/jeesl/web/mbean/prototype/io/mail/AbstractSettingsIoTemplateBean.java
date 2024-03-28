@@ -15,6 +15,7 @@ import org.jeesl.api.facade.io.JeeslIoTemplateFacade;
 import org.jeesl.controller.util.comparator.ejb.io.template.IoTemplateComparator;
 import org.jeesl.controller.util.comparator.ejb.io.template.IoTemplateDefinitionComparator;
 import org.jeesl.controller.util.comparator.ejb.io.template.IoTemplateTokenComparator;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -45,7 +46,6 @@ import freemarker.core.InvalidReferenceException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CATEGORY extends JeeslStatus<L,D,CATEGORY>,

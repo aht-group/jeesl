@@ -8,6 +8,7 @@ import org.jeesl.api.facade.io.JeeslIoFrFacade;
 import org.jeesl.controller.handler.system.io.fr.JeeslFileTypeHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoFileRepositoryFactoryBuilder;
@@ -34,8 +35,6 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,

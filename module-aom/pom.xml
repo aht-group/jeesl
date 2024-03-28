@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-module-aom</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - Module - Asset/O+M</name>
+    <name>JEESL - Module: Asset/O+M</name>
 	
 	<dependencyManagement>
 		<dependencies>

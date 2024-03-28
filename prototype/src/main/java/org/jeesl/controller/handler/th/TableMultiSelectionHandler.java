@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.bean.TableMultiSelectionBean;
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 @Deprecated //Use ThMultiFilter instead
 public class TableMultiSelectionHandler <T extends EjbWithId>
