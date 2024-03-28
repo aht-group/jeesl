@@ -24,12 +24,12 @@ public class JeeslSurveyCacheLoader <TEMPLATE extends JeeslSurveyTemplate<?,?,?,
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyCacheLoader.class);
 	
-	private final JeeslSurveyTemplateFacade<?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,?,OPTION> fTemplate;
+	private final JeeslSurveyTemplateFacade<?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,OPTION> fTemplate;
 	
 	private final SurveyTemplateFactoryBuilder<?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,?,OPTION> fbTemplate;
 	
 	public JeeslSurveyCacheLoader(SurveyTemplateFactoryBuilder<?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,?,OPTION> fbTemplate,
-									JeeslSurveyTemplateFacade<?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,?,OPTION> fTemplate)
+									JeeslSurveyTemplateFacade<?,TEMPLATE,?,?,?,SECTION,QUESTION,?,?,OPTION> fTemplate)
 	{
 		this.fbTemplate=fbTemplate;
 //		this.fbCore=fbCore;

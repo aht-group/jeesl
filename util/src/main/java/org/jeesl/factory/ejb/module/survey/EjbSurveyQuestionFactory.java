@@ -27,9 +27,9 @@ public class EjbSurveyQuestionFactory<SECTION extends JeeslSurveySection<?,?,?,S
 	
 	final Class<QUESTION> cQuestion;
     
-	private JeeslSurveyTemplateFacade<?,?,?,?,?,SECTION,QUESTION,?,?,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyTemplateFacade<?,?,?,?,?,SECTION,QUESTION,?,OPTIONS,OPTION> fTemplate;
 	
-	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> facade(JeeslSurveyTemplateFacade<?,?,?,?,?,SECTION,QUESTION,?,?,OPTIONS,OPTION> fTemplate) {this.fTemplate=fTemplate; return this;}
+	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> facade(JeeslSurveyTemplateFacade<?,?,?,?,?,SECTION,QUESTION,?,OPTIONS,OPTION> fTemplate) {this.fTemplate=fTemplate; return this;}
 	
 	public static <SECTION extends JeeslSurveySection<?,?,?,SECTION,QUESTION>,
 					QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,UNIT,OPTIONS,OPTION,?>,

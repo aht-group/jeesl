@@ -27,7 +27,7 @@ public interface JeeslSurveyQuestion<L extends JeeslLang, D extends JeeslDescrip
 										SECTION extends JeeslSurveySection<L,D,?,SECTION,?>,
 										CONDITION extends JeeslSurveyCondition<?,QE,OPTION>,
 										VALIDATION extends JeeslSurveyValidation<L,D,?,?>,
-										QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+										QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 										SCORE extends JeeslSurveyScore<L,D,?,?>,
 										UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 										OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,

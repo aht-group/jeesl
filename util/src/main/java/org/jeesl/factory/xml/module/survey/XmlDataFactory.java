@@ -20,7 +20,7 @@ import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -40,7 +40,7 @@ public class XmlDataFactory<L extends JeeslLang,D extends JeeslDescription,
 							TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 							SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
 							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-							QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+							QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 							SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 							UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 							ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
@@ -52,7 +52,7 @@ public class XmlDataFactory<L extends JeeslLang,D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(XmlDataFactory.class);
 		
 	private JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
-	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate;
 	
 	private XmlSurveyFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfSurvey;
 	private XmlCorrelationFactory<CORRELATION> xfCorrelation;
@@ -73,7 +73,7 @@ public class XmlDataFactory<L extends JeeslLang,D extends JeeslDescription,
 	}
 	
 	public void lazyLoad(JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
-						JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate)
+						JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate)
 	{
 		this.fTemplate=fTemplate;
 		this.fSurvey=fSurvey;

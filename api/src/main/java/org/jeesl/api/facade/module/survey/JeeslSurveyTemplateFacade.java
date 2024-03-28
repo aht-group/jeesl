@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateVersion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 
 public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?,TEMPLATE,SCORE>,
@@ -23,8 +23,8 @@ public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?
 									TS extends JeeslSurveyTemplateStatus<?,?,TS,?>,
 									TC extends JeeslSurveyTemplateCategory<?,?,TC,?>,
 									SECTION extends JeeslSurveySection<?,?,TEMPLATE,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,QE,SCORE,?,OPTIONS,OPTION,?>,
-									QE extends JeeslSurveyQuestionElement<?,?,QE,?>,
+									QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,SCORE,?,OPTIONS,OPTION,?>,
+									
 									SCORE extends JeeslSurveyScore<?,?,SCHEME,QUESTION>,
 									
 									OPTIONS extends JeeslSurveyOptionSet<?,?,TEMPLATE,OPTION>,
