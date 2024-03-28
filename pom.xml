@@ -232,12 +232,11 @@
         		<version>${project.version}</version>
         	</dependency>
 
-			<!-- 2023-04-02 tk trying to remove 
-			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>resteasy-jaxb-provider</artifactId>
-				<version>2.2.1.GA</version>
-			</dependency> -->
+			<dependency>  
+	   			<groupId>org.primefaces</groupId>  
+	   			<artifactId>primefaces</artifactId>
+	   			<version>8.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
