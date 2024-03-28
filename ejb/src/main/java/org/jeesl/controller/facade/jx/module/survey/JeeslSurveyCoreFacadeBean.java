@@ -81,7 +81,7 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 									OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 									OPTION extends JeeslSurveyOption<L,D>,
 									CORRELATION extends JeeslSurveyCorrelation<DATA>>
-	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION>
+	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyCoreFacadeBean.class);
@@ -220,11 +220,11 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public void rmVersion(VERSION version) throws JeeslConstraintViolationException
-	{
-		version = em.find(fbTemplate.getClassVersion(), version.getId());
-		this.rmProtected(version);
-	}
+//	@Override public void rmVersion(VERSION version) throws JeeslConstraintViolationException
+//	{
+//		version = em.find(fbTemplate.getClassVersion(), version.getId());
+//		this.rmProtected(version);
+//	}
 	
 //	@Override public OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
 //	{
@@ -340,30 +340,30 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		catch (NoResultException ex){throw new JeeslNotFoundException(c.getSimpleName()+" not found for "+JeeslSurvey.class.getSimpleName()+"."+JeeslSurvey.Attributes.id+"="+surveyId);}
 	}
 	
-	@Override public List<VERSION> fVersions(TC category, Long refId)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<VERSION> cQ = cB.createQuery(fbTemplate.getClassVersion());
-		Root<VERSION> root = cQ.from(fbTemplate.getClassVersion());
-		
-		Join<VERSION,TEMPLATE> jTemplate = root.join(JeeslSurveyTemplateVersion.Attributes.template.toString());
-		Path<TC> pCategory = jTemplate.get(JeeslSurveyTemplate.Attributes.category.toString());
-		Path<Date> pRecord = root.get(JeeslSurveyTemplateVersion.Attributes.record.toString());
-		predicates.add(cB.equal(pCategory,category));
-		
-		if(refId!=null && refId>0)
-		{
-			Expression<Long> eRefId = root.get(JeeslSurveyTemplateVersion.Attributes.refId.toString());
-			predicates.add(cB.equal(eRefId,refId));
-		}	
-		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.orderBy(cB.desc(pRecord));
-		cQ.select(root);
-
-		return em.createQuery(cQ).getResultList();
-	}
+//	@Override public List<VERSION> fVersions(TC category, Long refId)
+//	{
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<VERSION> cQ = cB.createQuery(fbTemplate.getClassVersion());
+//		Root<VERSION> root = cQ.from(fbTemplate.getClassVersion());
+//		
+//		Join<VERSION,TEMPLATE> jTemplate = root.join(JeeslSurveyTemplateVersion.Attributes.template.toString());
+//		Path<TC> pCategory = jTemplate.get(JeeslSurveyTemplate.Attributes.category.toString());
+//		Path<Date> pRecord = root.get(JeeslSurveyTemplateVersion.Attributes.record.toString());
+//		predicates.add(cB.equal(pCategory,category));
+//		
+//		if(refId!=null && refId>0)
+//		{
+//			Expression<Long> eRefId = root.get(JeeslSurveyTemplateVersion.Attributes.refId.toString());
+//			predicates.add(cB.equal(eRefId,refId));
+//		}	
+//		
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.orderBy(cB.desc(pRecord));
+//		cQ.select(root);
+//
+//		return em.createQuery(cQ).getResultList();
+//	}
 	
 	@Override public List<ANSWER> fAnswers(DATA data, Boolean visible, List<SECTION> sections)
 	{

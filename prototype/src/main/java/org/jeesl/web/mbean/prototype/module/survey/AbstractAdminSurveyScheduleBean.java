@@ -90,6 +90,8 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 
 	private final SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore;
 	
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	
 	private final SbSingleHandler<SURVEY> sbhSurvey; public SbSingleHandler<SURVEY> getSbhSurvey() {return sbhSurvey;}
 	
 	private final EjbSurveyFactory<L,D,SURVEY,SS,TEMPLATE> efSurvey;
@@ -106,11 +108,12 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 	}
 	
 	protected void initSuperSchedule(String userLocale, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			
-			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
+			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 		super.initSuperSurvey(bTranslation,bMessage,fCore,bSurvey);
+		this.fTemplate=fTemplate;
 		initPageSettings();
 		
 		sbhCategory.silentCallback();
@@ -179,7 +182,7 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 	
 	private void reloadAvailableSurveVersions() throws JeeslNotFoundException
 	{
-		versions = fCore.fVersions(template.getCategory(),refId);
+		versions = fTemplate.fVersions2(template.getCategory(),refId);
 		logger.info(AbstractLogMessage.reloaded(fbTemplate.getClassVersion(), versions)+" for category:"+template.getCategory().toString());
 	}
 }

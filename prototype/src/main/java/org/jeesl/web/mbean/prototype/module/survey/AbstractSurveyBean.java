@@ -101,7 +101,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 	
 	protected final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
 	
-	protected JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,?> fCore;
+	protected JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,?> fCore;
 
 	protected JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey;
 	protected Long refId;
@@ -114,7 +114,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 
 	protected final EjbSurveySchemeFactory<SCHEME,TEMPLATE> efScheme;
 	protected final EjbSurveyScoreFactory<QUESTION,SCORE> efScore;
-	protected final EjbSurveyTemplateFactory<TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
+	protected final EjbSurveyTemplateFactory<TEMPLATE,TS,TC,SECTION,QUESTION> efTemplate;
 
 	
 	protected final SbSingleHandler<TC> sbhCategory; public SbSingleHandler<TC> getSbhCategory() {return sbhCategory;}
@@ -158,7 +158,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 	//JeeslTranslationBean<L,D,LOC> bTranslation,
 	protected void initSuperSurvey(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			
-			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,?> fCore,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,?> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 //		super.initJeeslAdmin(bTranslation, bMessage);

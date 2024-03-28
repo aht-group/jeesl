@@ -69,7 +69,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	private JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 	
 	private final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate;
-	private final JeeslSurveyCoreFacade<?,?,SURVEY,?,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
+	private final JeeslSurveyCoreFacade<?,?,SURVEY,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 	
 	private final JeeslFacesMessageBean bMessage;
 	private final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,?,?,OPTION,?> bSurvey;
@@ -115,7 +115,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 				final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate,
 				final SurveyCoreFactoryBuilder<?,D,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fBSurvey,
 				JeeslFacesMessageBean bMessage,
-				final JeeslSurveyCoreFacade<?,?,SURVEY,?,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
+				final JeeslSurveyCoreFacade<?,?,SURVEY,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 				JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,?,?,OPTION,?> bSurvey,
 				JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
 	{

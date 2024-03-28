@@ -31,7 +31,7 @@ public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlQuestionFactory.class);
 		
-	private JeeslSurveyCoreFacade<L,D,?,?,SCHEME,?,?,?,QUESTION,?,?,?,?> fSurvey;
+	private JeeslSurveyCoreFacade<L,D,?,?,?,?,QUESTION,?,?,?,?> fSurvey;
 	
 	private String localeCode;
 	private Question q;
@@ -48,7 +48,7 @@ public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getOptions())) {xfOptions = new XmlOptionsFactory<L,D,QUESTION,OPTION>(localeCode,q.getOptions());}
 	}
 	
-	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,SCHEME,?,?,?,QUESTION,?,?,?,?> fSurvey)
+	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,?,QUESTION,?,?,?,?> fSurvey)
 	{
 		this.fSurvey=fSurvey;
 	}

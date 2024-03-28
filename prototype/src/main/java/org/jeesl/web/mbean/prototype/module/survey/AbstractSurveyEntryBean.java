@@ -110,7 +110,7 @@ public abstract class AbstractSurveyEntryBean <L extends JeeslLang, D extends Je
 	
 	protected void initSuperEntry(String userLocale, JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			
-			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 		super.initSuperSurvey(lp,bMessage,fCore,bSurvey);

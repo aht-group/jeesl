@@ -108,12 +108,8 @@ public class SurveyTemplateFactoryBuilder<L extends JeeslLang, D extends JeeslDe
 		return new EjbSurveyScoreFactory<QUESTION,SCORE>(cScore);
 	}
 	
-	public EjbSurveyTemplateFactory<TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> template() {return new EjbSurveyTemplateFactory<>(cTemplate);}
-	
-	public EjbSurveyTemplateVersionFactory<VERSION> version()
-	{
-		return new EjbSurveyTemplateVersionFactory<VERSION>(cVersion);
-	}
+	public EjbSurveyTemplateFactory<TEMPLATE,TS,TC,SECTION,QUESTION> template() {return new EjbSurveyTemplateFactory<>(cTemplate);}
+	public EjbSurveyTemplateVersionFactory<VERSION> version() {return new EjbSurveyTemplateVersionFactory<VERSION>(cVersion);}
 	
 	public EjbSurveySectionFactory<L,D,TEMPLATE,SECTION> section() {return new EjbSurveySectionFactory<L,D,TEMPLATE,SECTION>(cSection);}
 	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> question() {return EjbSurveyQuestionFactory.instance(cQuestion);}

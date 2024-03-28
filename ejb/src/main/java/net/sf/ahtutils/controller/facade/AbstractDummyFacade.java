@@ -450,7 +450,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override
-	public <L extends JeeslLang, D extends JeeslDescription, C extends JeeslStatus<L,D,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C c) {
+	public <C extends JeeslStatus<?,?,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C c) {
 		// TODO Auto-generated method stub
 		return null;
 	}

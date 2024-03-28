@@ -1,11 +1,13 @@
 package org.jeesl.controller.facade.jx.module.survey;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -62,7 +64,7 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 	
 	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
 	
-	private final EjbSurveyTemplateFactory<TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> eTemplate;
+	private final EjbSurveyTemplateFactory<TEMPLATE,TS,TC,SECTION,QUESTION> eTemplate;
 	
 	public JeeslSurveyTemplateFacadeBean(EntityManager em, SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate)
 	{
@@ -234,5 +236,35 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 			this.save(set);
 		}
 		this.rmProtected(option);
+	}
+	@Override public void rmVersion2(VERSION version) throws JeeslConstraintViolationException
+	{
+		version = em.find(fbTemplate.getClassVersion(), version.getId());
+		this.rmProtected(version);
+	}
+	
+	@Override public List<VERSION> fVersions2(TC category, Long refId)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<VERSION> cQ = cB.createQuery(fbTemplate.getClassVersion());
+		Root<VERSION> root = cQ.from(fbTemplate.getClassVersion());
+		
+		Join<VERSION,TEMPLATE> jTemplate = root.join(JeeslSurveyTemplateVersion.Attributes.template.toString());
+		Path<TC> pCategory = jTemplate.get(JeeslSurveyTemplate.Attributes.category.toString());
+		Path<Date> pRecord = root.get(JeeslSurveyTemplateVersion.Attributes.record.toString());
+		predicates.add(cB.equal(pCategory,category));
+		
+		if(refId!=null && refId>0)
+		{
+			Expression<Long> eRefId = root.get(JeeslSurveyTemplateVersion.Attributes.refId.toString());
+			predicates.add(cB.equal(eRefId,refId));
+		}	
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.orderBy(cB.desc(pRecord));
+		cQ.select(root);
+
+		return em.createQuery(cQ).getResultList();
 	}
 }

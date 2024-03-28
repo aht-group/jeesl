@@ -1,5 +1,7 @@
 package org.jeesl.api.facade.module.survey;
 
+import java.util.List;
+
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -43,4 +45,7 @@ public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?
 	
 	void rmOption2(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 	void rmOption2(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	void rmVersion2(VERSION version) throws JeeslConstraintViolationException;
+	
+	List<VERSION> fVersions2(TC category, Long refId);
 }

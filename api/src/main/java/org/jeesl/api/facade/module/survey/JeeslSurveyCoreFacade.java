@@ -35,9 +35,9 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDescription,
 									SURVEY extends JeeslSurvey<L,D,SS,?,DATA>,
 									SS extends JeeslSurveyStatus<L,D,SS,?>,
-									SCHEME extends JeeslSurveyScheme<L,D,?,?>,
+//									SCHEME extends JeeslSurveyScheme<L,D,?,?>,
 									
-									VERSION extends JeeslSurveyTemplateVersion<L,D,?>,
+//									VERSION extends JeeslSurveyTemplateVersion<L,D,?>,
 									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 									SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
 									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,?,?,?,?,?>,
@@ -59,7 +59,7 @@ public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDesc
 //	OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 //	OPTION saveOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 	
-	void rmVersion(VERSION version) throws JeeslConstraintViolationException;
+//	void rmVersion(VERSION version) throws JeeslConstraintViolationException;
 //	void rmOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 //	void rmOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
 	
@@ -71,7 +71,7 @@ public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDesc
 	<W extends JeeslWithSurvey<SURVEY>> List<W> fSurveys(Class<W> c, List<SS> status, Date date);
 	<TYPE extends JeeslStatus<L,D,TYPE>, WT extends JeeslWithType<TYPE>, W extends JeeslWithSurveyType<SURVEY,WT,TYPE>> List<W> fWithSurveys(Class<W> c, List<SS> status, TYPE type, Date date);
 	<W extends JeeslWithSurvey<SURVEY>> W fWithSurvey(Class<W> c, long id) throws JeeslNotFoundException;
-	List<VERSION> fVersions(TC category, Long refId);
+//	List<VERSION> fVersions(TC category, Long refId);
 	
 	List<ANSWER> fcAnswers(DATA data);
 	List<ANSWER> fAnswers(SURVEY survey);

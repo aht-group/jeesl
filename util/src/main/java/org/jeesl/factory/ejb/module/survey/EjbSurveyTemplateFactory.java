@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbSurveyTemplateFactory<TEMPLATE extends JeeslSurveyTemplate<?,?,?,TEMPLATE,?,TS,TC,SECTION,?,?>,
-								VERSION extends JeeslSurveyTemplateVersion<?,?,TEMPLATE>,
 								TS extends JeeslSurveyTemplateStatus<?,?,TS,?>,
 								TC extends JeeslSurveyTemplateCategory<?,?,TC,?>,
 								SECTION extends JeeslSurveySection<?,?,TEMPLATE,SECTION,QUESTION>,

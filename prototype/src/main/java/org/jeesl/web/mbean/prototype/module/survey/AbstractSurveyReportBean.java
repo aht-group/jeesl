@@ -191,7 +191,7 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 	
 	protected void initSuperReport(String userLocale,JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			
-			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis,
 			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey,
@@ -217,7 +217,8 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 		{
 			if(fbTemplate.getClassTemplateCategory().isAssignableFrom(ejb.getClass()))
 			{
-				List<TC> categories = new ArrayList<TC>();categories.add(sbhCategory.getSelection());
+				List<TC> categories = new ArrayList<TC>();
+				categories.add(sbhCategory.getSelection());
 				sbhSurvey.setList(fCore.fSurveysForCategories(categories));
 				
 				for(SURVEY s : sbhSurvey.getList())

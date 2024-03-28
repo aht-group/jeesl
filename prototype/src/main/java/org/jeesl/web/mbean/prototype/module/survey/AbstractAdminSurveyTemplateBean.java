@@ -155,7 +155,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	protected void postConstructTemplate(String userLocale,
 			JeeslLocaleProvider<LOC> bTranslation, JeeslFacesMessageBean bMessage,
 			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 		super.initSuperSurvey(bTranslation,bMessage,fCore,bSurvey);
@@ -267,7 +267,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	protected void reloadVersions()
 	{
 		if(refId!=null && refId<=0) {versions = new ArrayList<VERSION>();}
-		else{versions = fCore.fVersions(sbhCategory.getSelection(),refId);}
+		else{versions = fTemplate.fVersions2(sbhCategory.getSelection(),refId);}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbTemplate.getClassVersion(), versions));}
 		
 		nestedVersions = new ArrayList<VERSION>();
@@ -277,7 +277,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 			if(!c.equals(sbhCategory.getSelection()))
 			{
 				if(refId!=null && refId<=0) {}
-				else{nestedVersions.addAll(fCore.fVersions(c,refId));}
+				else{nestedVersions.addAll(fTemplate.fVersions2(c,refId));}
 			}
 		}
 	}
@@ -315,7 +315,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void deleteVersion() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.deleteEntity(version));
-		fCore.rmVersion(version);
+		fTemplate.rmVersion2(version);
 		clear(true,true,true,true,true,true,true,true,true,true);
 		reloadVersions();
 	}
