@@ -2,7 +2,6 @@ package org.jeesl.maven.goal.eap;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -19,9 +18,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
-import org.jboss.as.controller.client.ModelControllerClient;
-import org.jeesl.controller.io.ssi.wildfly.JbossModuleConfigurator;
-import org.jeesl.controller.io.ssi.wildfly.JbossStandaloneConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.cache.AbstractEapCacheConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.ds.pg.DsPostgresEap73Configurator;

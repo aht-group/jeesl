@@ -23,11 +23,8 @@ import org.jeesl.model.xml.module.dev.qa.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaGroup;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaResult;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaStaff;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
 public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,

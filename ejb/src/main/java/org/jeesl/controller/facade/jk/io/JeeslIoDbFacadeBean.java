@@ -7,9 +7,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Tuple;
-import javax.persistence.TypedQuery;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
@@ -19,11 +16,9 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
-import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
@@ -40,7 +35,6 @@ import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
-import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

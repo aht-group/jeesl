@@ -11,7 +11,6 @@ import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
-import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;

@@ -13,7 +13,6 @@ import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
-import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowActionNotification;
 import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowNotification;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;

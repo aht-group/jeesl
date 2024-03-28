@@ -29,7 +29,6 @@ import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.db.CqId;
-import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.primefaces.model.FilterMeta;

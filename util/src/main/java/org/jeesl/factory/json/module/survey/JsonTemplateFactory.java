@@ -1,6 +1,5 @@
 package org.jeesl.factory.json.module.survey;
 
-import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
@@ -10,7 +9,6 @@ import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateCategory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateStatus;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateVersion;
-import org.jeesl.interfaces.model.module.survey.correlation.JeeslSurveyCorrelation;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyData;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyMatrix;
