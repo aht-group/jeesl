@@ -62,7 +62,7 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 	
 	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
 	
-	private final EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> eTemplate;
+	private final EjbSurveyTemplateFactory<TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> eTemplate;
 	
 	public JeeslSurveyTemplateFacadeBean(EntityManager em, SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate)
 	{

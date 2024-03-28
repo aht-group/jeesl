@@ -27,25 +27,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XlsSurveyQuestionFactory <L extends JeeslLang, D extends JeeslDescription,
-							SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
-							SS extends JeeslSurveyStatus<L,D,SS,?>,
-							SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-							TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
-							VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-							TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-							TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
-							SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-							QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-							SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-							UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
-							ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
-							MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
-							DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
-							OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
-							OPTION extends JeeslSurveyOption<L,D>,
-							CORRELATION extends JeeslSurveyCorrelation<DATA>>
+public class XlsSurveyQuestionFactory <QUESTION extends JeeslSurveyQuestion<?,?,?,?,?,?,?,?,OPTIONS,OPTION,?>,
+										OPTIONS extends JeeslSurveyOptionSet<?,?,?,OPTION>,
+										OPTION extends JeeslSurveyOption<?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsSurveyQuestionFactory.class);
 	
@@ -55,7 +39,7 @@ public class XlsSurveyQuestionFactory <L extends JeeslLang, D extends JeeslDescr
 	{
 		this.efOption = efOption;
 	}
-	
+
 	public int toSize(QUESTION question)
 	{
 		if(BooleanComparator.active(question.getShowMatrix()))

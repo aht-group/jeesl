@@ -59,7 +59,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
+public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 									SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
 									SS extends JeeslSurveyStatus<L,D,SS,?>,
 									SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
@@ -86,15 +86,15 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyCoreFacadeBean.class);
 	
-	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate;
-	private final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,?,SCORE,?,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore;
+	private final SurveyTemplateFactoryBuilder<L,D,?,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate;
+	private final SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore;
 	
 	private EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION> efAnswer;
 
 	
 	public JeeslSurveyCoreFacadeBean(EntityManager em,
-			SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,?,SCORE,?,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore)
+			SurveyTemplateFactoryBuilder<L,D,?,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate,
+			SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore)
 	{
 		super(em);
 		this.fbTemplate=fbTemplate;

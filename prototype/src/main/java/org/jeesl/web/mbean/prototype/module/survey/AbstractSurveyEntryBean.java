@@ -92,15 +92,15 @@ public abstract class AbstractSurveyEntryBean <L extends JeeslLang, D extends Je
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSurveyEntryBean.class);
 
-	protected final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore;
+	protected final SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore;
 	
 	private final SbSingleHandler<SURVEY> sbhSurvey; public SbSingleHandler<SURVEY> getSbhSurvey() {return sbhSurvey;}
-	private SurveyHandler<D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler; public SurveyHandler<D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> getHandler() {return handler;}
+	private SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler; public SurveyHandler<L,D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> getHandler() {return handler;}
 	
 	protected CORRELATION correlation;
 	
 	public AbstractSurveyEntryBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fbCore)
+			SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore)
 	{
 		super(fbTemplate);
 		this.fbCore=fbCore;
@@ -132,7 +132,7 @@ public abstract class AbstractSurveyEntryBean <L extends JeeslLang, D extends Je
 		}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 //		handler = fbCore.handler(this,bMessage,fCore,bSurvey);
-		handler = new SurveyHandler<>(this,fbCore,bMessage,fCore,bSurvey,bSurvey);
+		handler = new SurveyHandler<>(this,fbTemplate,fbCore,bMessage,fCore,bSurvey,bSurvey);
 	}
 	
 	protected abstract void prepareCorrelation();

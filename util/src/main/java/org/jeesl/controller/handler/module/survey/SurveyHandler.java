@@ -48,18 +48,18 @@ import org.joda.time.Interval;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SurveyHandler<D extends JeeslDescription,
-							SURVEY extends JeeslSurvey<?,D,?,TEMPLATE,DATA>,
-							TEMPLATE extends JeeslSurveyTemplate<?,D,?,TEMPLATE,?,?,TC,SECTION,?,?>,
-							TC extends JeeslSurveyTemplateCategory<?,D,TC,?>,
-							SECTION extends JeeslSurveySection<?,D,TEMPLATE,SECTION,QUESTION>,
-							QUESTION extends JeeslSurveyQuestion<?,D,SECTION,CONDITION,VALIDATION,?,?,?,?,OPTION,?>,
+public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
+							SURVEY extends JeeslSurvey<L,D,?,TEMPLATE,DATA>,
+							TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,?,?,TC,SECTION,?,?>,
+							TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
+							SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
+							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,?,?,?,?,OPTION,?>,
 							CONDITION extends JeeslSurveyCondition<QUESTION,?,OPTION>,
-							VALIDATION extends JeeslSurveyValidation<?,D,QUESTION,?>,
-							ANSWER extends JeeslSurveyAnswer<?,D,QUESTION,MATRIX,DATA,OPTION>,
-							MATRIX extends JeeslSurveyMatrix<?,D,ANSWER,OPTION>,
-							DATA extends JeeslSurveyData<?,D,SURVEY,ANSWER,CORRELATION>,
-							OPTION extends JeeslSurveyOption<?,D>,
+							VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,?>,
+							ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
+							MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
+							DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
+							OPTION extends JeeslSurveyOption<L,D>,
 							CORRELATION extends JeeslSurveyCorrelation<DATA>>
 	implements JeeslSurveyHandler<SECTION>
 {
@@ -68,6 +68,7 @@ public class SurveyHandler<D extends JeeslDescription,
 	
 	private JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 	
+	private final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate;
 	private final JeeslSurveyCoreFacade<?,?,SURVEY,?,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 	
 	private final JeeslFacesMessageBean bMessage;
@@ -111,14 +112,15 @@ public class SurveyHandler<D extends JeeslDescription,
 	private boolean debugOnInfo;
 	
 	public SurveyHandler(JeeslSurveyHandlerCallback<SECTION> callback,
-//				final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate,
-				final SurveyCoreFactoryBuilder<?,D,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fBSurvey,
+				final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate,
+				final SurveyCoreFactoryBuilder<?,D,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fBSurvey,
 				JeeslFacesMessageBean bMessage,
 				final JeeslSurveyCoreFacade<?,?,SURVEY,?,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 				JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,?,?,OPTION,?> bSurvey,
 				JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
 	{
 		this.callback=callback;
+		this.fbTemplate=fbTemplate;
 		this.bMessage=bMessage;
 		this.fSurvey=fSurvey;
 		
@@ -143,7 +145,8 @@ public class SurveyHandler<D extends JeeslDescription,
 		efData = fBSurvey.data();
 		efAnswer = fBSurvey.answer();
 		efMatrix = fBSurvey.ejbMatrix();
-		tfSection = fBSurvey.txtSection();
+		
+		tfSection = fbTemplate.txtSection();
 		tfAnswer = fBSurvey.txtAnswer();
 		
 		activeSections = new HashSet<SECTION>();

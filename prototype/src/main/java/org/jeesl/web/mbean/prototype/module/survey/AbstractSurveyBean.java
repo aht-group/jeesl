@@ -114,7 +114,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 
 	protected final EjbSurveySchemeFactory<SCHEME,TEMPLATE> efScheme;
 	protected final EjbSurveyScoreFactory<QUESTION,SCORE> efScore;
-	protected final EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
+	protected final EjbSurveyTemplateFactory<TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
 
 	
 	protected final SbSingleHandler<TC> sbhCategory; public SbSingleHandler<TC> getSbhCategory() {return sbhCategory;}
@@ -148,12 +148,9 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 		efScheme = fbTemplate.efScheme();
 		
 		sbhCategory = new SbSingleHandler<TC>(fbTemplate.getClassTemplateCategory(),this);
-		
 		sbhLocale = new SbSingleHandler<LOC>(fbTemplate.getClassLocale(),this);
 		
 		questions = new ArrayList<QUESTION>();
-		
-		
 	}
 	
 	protected abstract void initPageSettings();

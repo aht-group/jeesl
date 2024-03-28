@@ -82,10 +82,12 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	private final JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
 	private final JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 	
-	private final EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
+	private final EjbSurveyTemplateFactory<TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
 	private final EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix;
 	private final EjbSurveyOptionFactory<QUESTION,OPTION> efOption;
-	private final XlsSurveyQuestionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xlfQuestion;
+	
+	private final XlsSurveyQuestionFactory<QUESTION,OPTIONS,OPTION> xlfQuestion;
+	
 	private XlsSurveyAnswerFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xlfAnswer;
 	
 	private SurveyCorrelationInfoBuilder<CORRELATION> correlationBuilder;
@@ -105,7 +107,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	public XlsSurveyDataFactory(String localeCode,
 			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
 			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
-			EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate,
+			EjbSurveyTemplateFactory<TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate,
 			EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix,
 			EjbSurveyOptionFactory<QUESTION,OPTION> efOption,
 			SurveyCorrelationInfoBuilder<CORRELATION> builder)
@@ -118,7 +120,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 		this.efOption = efOption;
 		this.correlationBuilder = builder;
 
-		xlfQuestion = new XlsSurveyQuestionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(efOption);
+		xlfQuestion = new XlsSurveyQuestionFactory<>(efOption);
 		
 		mapSizeSection = new HashMap<SECTION,Integer>();
 		mapSizeQuestion = new HashMap<QUESTION,Integer>();
