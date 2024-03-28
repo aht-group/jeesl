@@ -2,7 +2,6 @@ package org.jeesl.web.mbean.prototype.io.fr;
 
 import java.util.List;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoFrFacade;
 import org.jeesl.controller.handler.system.io.fr.JeeslFileTypeHandler;
@@ -26,7 +25,6 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileStorageEngine;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorageType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileType;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;

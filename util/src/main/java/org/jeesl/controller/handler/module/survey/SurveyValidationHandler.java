@@ -19,12 +19,10 @@ import org.jeesl.interfaces.controller.processor.SurveyValidator;
 import org.jeesl.interfaces.model.json.module.survey.SurveyValidatorConfiguration;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

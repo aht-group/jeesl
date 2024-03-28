@@ -1,7 +1,6 @@
 package net.sf.ahtutils.test;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.slf4j.Logger;

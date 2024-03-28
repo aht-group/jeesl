@@ -28,7 +28,6 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.user.pwd.JeeslWithPwd;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;

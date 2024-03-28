@@ -3,7 +3,6 @@ package org.jeesl.factory.xml.system.security;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.exlp.util.io.StringUtil;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

@@ -20,7 +20,6 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
-import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyAnalysisFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyAnalysisQuestionFactory;
