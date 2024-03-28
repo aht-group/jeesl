@@ -1,4 +1,4 @@
-package net.sf.ahtutils.model.primefaces;
+package org.jeesl.jsf.model;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -16,9 +16,9 @@ import org.primefaces.model.SelectableDataModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PrimefacesEjbIdDataModel <T extends EjbWithId> extends ListDataModel<T> implements SelectableDataModel<T>
+public class JeeslPrimefacesDataModel <T extends EjbWithId> extends ListDataModel<T> implements SelectableDataModel<T>
 {    
-	final static Logger logger = LoggerFactory.getLogger(PrimefacesEjbIdDataModel.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslPrimefacesDataModel.class);
 	
 	private boolean details;
 	
@@ -29,7 +29,7 @@ public class PrimefacesEjbIdDataModel <T extends EjbWithId> extends ListDataMode
 	private DmSingleSelect<T> singleSelectCallback;
 	private DmAllSelect<T> allSelectCallback;
 
-	public PrimefacesEjbIdDataModel(List<T> data)
+	public JeeslPrimefacesDataModel(List<T> data)
     {  
         super(data);
         details = false;
@@ -162,5 +162,4 @@ public class PrimefacesEjbIdDataModel <T extends EjbWithId> extends ListDataMode
 		else{details=true;}
 		logger.trace("Toggled details to "+details);
 	}
-	
 }
