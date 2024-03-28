@@ -1,4 +1,4 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.data;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="matrix")
-public class Cell implements Serializable
+public class JsonCell implements Serializable
 {
 	public static final long serialVersionUID=1;
 
@@ -28,9 +28,9 @@ public class Cell implements Serializable
 	public void setColumn(Long column) {this.column = column;}
 	
 	@JsonProperty("answer")
-	private Answer answer;
-	public Answer getAnswer() {return answer;}
-	public void setAnswer(Answer answer) {this.answer = answer;}
+	private JsonAnswer answer;
+	public JsonAnswer getAnswer() {return answer;}
+	public void setAnswer(JsonAnswer answer) {this.answer = answer;}
 
 	@Override public String toString()
 	{

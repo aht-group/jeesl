@@ -35,5 +35,4 @@ public interface JeeslSurveyCondition<QUESTION extends JeeslSurveyQuestion<?,?,?
 	
 	boolean isNegate();
 	void setNegate(boolean negate);
-	
 }

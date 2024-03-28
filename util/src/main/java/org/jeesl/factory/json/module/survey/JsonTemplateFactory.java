@@ -26,7 +26,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidationAlgorithm;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.json.survey.Template;
+import org.jeesl.model.json.survey.JsonTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,35 +48,32 @@ public class JsonTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 				UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 				ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 				MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
-				DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
+				DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,?>,
 				OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
-				OPTION extends JeeslSurveyOption<L,D>,
-				CORRELATION extends JeeslSurveyCorrelation<DATA>>
+				OPTION extends JeeslSurveyOption<L,D>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonTemplateFactory.class);
 	
 	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
-//	private JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey1;
 	
-	private JsonSurveySectionFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> jfSection;
+	private JsonSurveySectionFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> jfSection;
 	
-	public JsonTemplateFactory(String localeCode, Template q){this(localeCode,q,null,null,null);}
-	public JsonTemplateFactory(String localeCode, Template q,
+	public JsonTemplateFactory(String localeCode, JsonTemplate q){this(localeCode,q,null,null);}
+	public JsonTemplateFactory(String localeCode, JsonTemplate q,
 			SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fSurvey
+			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate
 			)
 	{
 		this.fTemplate=fTemplate;
 //		this.fSurvey=fSurvey;
-		if(!q.getSections().isEmpty()){jfSection = new JsonSurveySectionFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,q.getSections().get(0),fbTemplate,fSurvey);}
+		if(!q.getSections().isEmpty()){jfSection = new JsonSurveySectionFactory<>(localeCode,q.getSections().get(0),fbTemplate,fTemplate);}
 	}
 	
-	public Template build(TEMPLATE ejb)
+	public JsonTemplate build(TEMPLATE ejb)
 	{
 		if(fTemplate!=null){ejb = fTemplate.load(ejb,false,false);}
 		
-		Template json = build();
+		JsonTemplate json = build();
 		json.setId(ejb.getId());
 		
 		for(SECTION section : ejb.getSections())
@@ -90,8 +87,8 @@ public class JsonTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 		return json;
 	}
 	
-	public static Template build()
+	public static JsonTemplate build()
 	{
-		return new Template();
+		return new JsonTemplate();
 	}
 }

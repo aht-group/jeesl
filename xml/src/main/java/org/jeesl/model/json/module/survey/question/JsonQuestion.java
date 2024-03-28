@@ -1,9 +1,10 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.question;
 
 import java.io.Serializable;
 import java.util.List;
 
 import org.jeesl.interfaces.model.survey.JeeslSimpleSurveyQuestion;
+import org.jeesl.model.json.survey.Condition;
 import org.jeesl.model.json.survey.validation.Validation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value = "question")
-public class Question implements Serializable,JeeslSimpleSurveyQuestion
+public class JsonQuestion implements Serializable,JeeslSimpleSurveyQuestion
 {
 	public static final long serialVersionUID=1;
 
@@ -133,9 +134,9 @@ public class Question implements Serializable,JeeslSimpleSurveyQuestion
 	@Override public void setShowMatrix(Boolean showMatrix) {this.showMatrix = showMatrix;}
 	
 	@JsonProperty("options")
-	private List<Option> options;
-	public List<Option> getOptions() {return options;}
-	public void setOptions(List<Option> options) {this.options = options;}
+	private List<JsonOption> options;
+	public List<JsonOption> getOptions() {return options;}
+	public void setOptions(List<JsonOption> options) {this.options = options;}
 
 	@JsonProperty("condition")
 	private String condition;

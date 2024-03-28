@@ -163,7 +163,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 	
 	protected void initSuperAnalysis(String userLocale, JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			
-			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fCore,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
 			JeeslIoDomainFacade<L,D,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,?,?> fDomain,
 			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,

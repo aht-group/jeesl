@@ -29,6 +29,7 @@ public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?
 									OPTION extends JeeslSurveyOption<?,?>>
 	extends JeeslFacade
 {
+	SECTION loadSurveySection(SECTION section);
 	QUESTION loadSurveyQuersion(QUESTION question);
 	OPTIONS loadSurveyOptions(OPTIONS options);
 	

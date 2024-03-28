@@ -116,7 +116,7 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 	
 	protected void initSuperValidation(String userLocale,  JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 			
-			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fCore,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 		super.initSuperSurvey(bTranslation,bMessage,fCore,bSurvey);

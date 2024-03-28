@@ -32,21 +32,19 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 
-public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
+public interface JeeslSurveyCoreFacade <L extends JeeslLang, D extends JeeslDescription,
 									SURVEY extends JeeslSurvey<L,D,SS,?,DATA>,
 									SS extends JeeslSurveyStatus<L,D,SS,?>,
-									SCHEME extends JeeslSurveyScheme<L,D,?,SCORE>,
+									SCHEME extends JeeslSurveyScheme<L,D,?,?>,
 									
 									VERSION extends JeeslSurveyTemplateVersion<L,D,?>,
 									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 									SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,SCORE,?,?,?,?>,
-									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
+									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,?,?,?,?,?>,
+									
 									ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,?>,
 									MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,?>,
 									DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
-//									OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,
-//									OPTION extends JeeslSurveyOption<L,D>,
 									CORRELATION extends JeeslSurveyCorrelation<DATA>>
 	extends JeeslFacade
 {		

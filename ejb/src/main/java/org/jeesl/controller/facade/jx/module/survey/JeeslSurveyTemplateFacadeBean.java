@@ -72,6 +72,17 @@ public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends Jeesl
 		eTemplate = fbTemplate.template();
 	}
 	
+	@Override public SECTION loadSurveySection(SECTION section)
+	{
+		section = em.find(fbTemplate.getClassSection(),section.getId());
+		for(SECTION sub : section.getSections())
+		{
+			sub.getQuestions().size();
+		}
+		section.getQuestions().size();
+		return section;
+	}
+	
 	@Override public QUESTION loadSurveyQuersion(QUESTION question)
 	{
 		question = em.find(fbTemplate.getClassQuestion(),question.getId());

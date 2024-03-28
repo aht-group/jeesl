@@ -15,11 +15,10 @@ import org.jeesl.factory.ejb.module.survey.EjbSurveyCorrelationFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyDataFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyMatrixFactory;
-import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionFactory;
-import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionSetFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyQuestionFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyAnswerFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyFactory;
+import org.jeesl.factory.json.module.survey.JsonSurveyQuestionFactory;
 import org.jeesl.factory.txt.module.survey.TxtOptionFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyAnswerFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyFactory;
@@ -50,6 +49,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidationAl
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
 import org.jeesl.util.filter.ejb.module.survey.EjbSurveyAnswerFilter;
 import org.jeesl.util.filter.ejb.module.survey.EjbSurveyQuestionFilter;
 import org.slf4j.Logger;
@@ -150,33 +150,28 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	
 	public SurveyScoreProcessor<SECTION,QUESTION,ANSWER,OPTION> scoreProcessor() {return new SurveyScoreProcessor<>(ejbQuestion(),ejbFilterAnswer());}
 	
-	public SurveyHandler<D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(
-					JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage,
-					final JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
-					JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,?> bSurvey)
-	{
-		return new SurveyHandler<>(callback,this,bMessage,fSurvey,bSurvey,bSurvey);
-	}
+//	private SurveyHandler<D,SURVEY,TEMPLATE,TC,SECTION,QUESTION,CONDITION,VALIDATION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> handler(
+//					JeeslSurveyHandlerCallback<SECTION> callback, JeeslFacesMessageBean bMessage,
+//					final JeeslSurveyCoreFacade<L,D,SURVEY,SS,SCHEME,VERSION,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
+//					JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,?> bSurvey)
+//	{
+//		return new SurveyHandler<>(callback,this,bMessage,fSurvey,bSurvey,bSurvey);
+//	}
 	
-	public SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION> conditional(JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
-	{
-		return new SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION>(this,cache);
-	}
-	public SurveyValidationHandler<D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER> validation(JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
-	{
-		return new SurveyValidationHandler<>(cache);
-	}
+//	private SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION> conditional(JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
+//	{
+//		return new SurveyConditionalHandler<>(this,cache);
+//	}
+//	private SurveyValidationHandler<D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER> validation(JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
+//	{
+//		return new SurveyValidationHandler<>(cache);
+//	}
 	
 //	public JeeslSurveyCacheFacadeBean<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> cache();
 	
-	public JsonSurveyFactory<L,D,SURVEY,SS> surveyJson(String localeCode, org.jeesl.model.json.survey.JsonSurvey q)
+	public JsonSurveyFactory<L,D,SURVEY,SS> surveyJson(String localeCode, org.jeesl.model.json.module.survey.data.JsonSurvey q)
 	{
 		return new JsonSurveyFactory<L,D,SURVEY,SS>(localeCode,q);
-	}
-	
-	public JsonSurveyAnswerFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> jsonAnswer(String localeCode, org.jeesl.model.json.survey.Answer q)
-	{
-		return new JsonSurveyAnswerFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION>(localeCode,q);
 	}
 	
 	public SurveyOptionHandler<QUESTION,OPTION> eHandlerOption() {return new SurveyOptionHandler<>();}

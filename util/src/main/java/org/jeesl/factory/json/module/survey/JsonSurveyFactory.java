@@ -5,7 +5,7 @@ import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.json.survey.JsonSurvey;
+import org.jeesl.model.json.module.survey.data.JsonSurvey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

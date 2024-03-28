@@ -1,4 +1,4 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="data")
-public class Data implements Serializable,JeeslSimpleSurveyData
+public class JsonData implements Serializable,JeeslSimpleSurveyData
 {
 	public static final long serialVersionUID=1;
 
@@ -33,14 +33,14 @@ public class Data implements Serializable,JeeslSimpleSurveyData
 	@Override public void setRecord(Date record) {this.record = record;}
 	
 	@JsonProperty("correlation")
-	private Correlation correlation;
-	public Correlation getCorrelation() {return correlation;}
-	public void setCorrelation(Correlation correlation) {this.correlation = correlation;}
+	private JsonCorrelation correlation;
+	public JsonCorrelation getCorrelation() {return correlation;}
+	public void setCorrelation(JsonCorrelation correlation) {this.correlation = correlation;}
 
 	@JsonProperty("answers")
-	private List<Answer> answers;
-	public List<Answer> getAnswers() {if(answers==null){answers = new ArrayList<Answer>();} return answers;}
-	public void setAnswers(List<Answer> answers) {this.answers = answers;}
+	private List<JsonAnswer> answers;
+	public List<JsonAnswer> getAnswers() {if(answers==null){answers = new ArrayList<JsonAnswer>();} return answers;}
+	public void setAnswers(List<JsonAnswer> answers) {this.answers = answers;}
 	
 	@Override public String toString()
 	{

@@ -67,7 +67,7 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 	}
 	
 	public void lazyLoad(JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
-						JeeslSurveyCoreFacade<L,D,?,SURVEY,?,SCHEME,VERSION,TC,SECTION,QUESTION,SCORE,?,?,?,?> fSurvey)
+						JeeslSurveyCoreFacade<L,D,SURVEY,?,SCHEME,VERSION,TC,SECTION,QUESTION,?,?,?,?> fSurvey)
 	{
 		this.fTemplate=fTemplate;
 		if(Objects.nonNull(xfSection)) {xfSection.lazyLoad(fSurvey);}

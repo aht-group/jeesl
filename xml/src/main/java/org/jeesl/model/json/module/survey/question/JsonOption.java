@@ -1,4 +1,4 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.question;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value = "question")
-public class Option implements Serializable
+public class JsonOption implements Serializable
 {
 	public static final long serialVersionUID=1;
 
