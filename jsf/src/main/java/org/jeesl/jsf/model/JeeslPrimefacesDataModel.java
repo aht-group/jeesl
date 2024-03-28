@@ -44,11 +44,12 @@ public class JeeslPrimefacesDataModel <T extends EjbWithId> extends ListDataMode
         }
     }  
 
-    @SuppressWarnings("unchecked")
-    @Override  
-    public T getRowData(String rowKey)
+	@Override public Object getRowKey(T item) {return item.getId();}
+    
+	@SuppressWarnings("unchecked")
+    @Override public T getRowData(String rowKey)
     {  
-    	List<T> list = (List<T>) getWrappedData();  
+    	List<T> list = (List<T>)super.getWrappedData();  
          
         for(T ejb : list)
         {  
@@ -56,20 +57,13 @@ public class JeeslPrimefacesDataModel <T extends EjbWithId> extends ListDataMode
         }
           
         return null;  
-    }  
-  
-    @Override  
-    public Object getRowKey(T item) {return item.getId();}
+    }
     
     public void unlock(T item) {mapUnlock.put(item.getId(), true);}
     public void unlock(T item, boolean value) {mapUnlock.put(item.getId(), value);}
     
-    // *********** INFO ************
-    
     public void info(T item, boolean value) {mapInfo.put(item.getId(), value);}
-    
-    // *********** SELECT ************
-    
+
     public void toggleSelection(T item)
     {
     	if(!mapSelect.containsKey(item.getId())){select(item, false);}
