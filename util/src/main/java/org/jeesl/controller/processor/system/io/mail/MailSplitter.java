@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
-import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
+import org.jeesl.controller.monitoring.counter.JeeslEventCounter;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -32,16 +32,16 @@ public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(MailSplitter.class);
 	
 	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
-	private final JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail;
+	private final JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,?> fMail;
 	
-	private final BucketSizeCounter bsc;
+	private final JeeslEventCounter bsc;
 	
 	public MailSplitter(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail,
-						JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail)
+						JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,?> fMail)
 	{		
 		this.fbMail=fbMail;
 		this.fMail=fMail;
-		bsc = new BucketSizeCounter(this.getClass().getSimpleName()); 
+		bsc = new JeeslEventCounter(this.getClass().getSimpleName()); 
 	}
 	
 	public void split(List<CATEGORY> categories, List<STATUS> status, Date upToDate)

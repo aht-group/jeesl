@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-ai</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO AI</name>
+    <name>JEESL - IO: AI</name>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -60,7 +60,7 @@
     		<scope>provided</scope>
 		</dependency>
 		
-		<!-- JEESL Modles -->
+		<!-- JEESL Modules -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-cms</artifactId>
@@ -133,6 +133,5 @@
 	  		<artifactId>slf4j-api</artifactId>
 	  		<scope>provided</scope>
 	  	</dependency>
-		
 	</dependencies>
 </project>

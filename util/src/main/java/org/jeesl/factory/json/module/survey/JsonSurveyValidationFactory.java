@@ -23,7 +23,7 @@ public class JsonSurveyValidationFactory<L extends JeeslLang,D extends JeeslDesc
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.getAlgorithm()!=null) {jfAlgorithm = new JsonSurveyValidationAlgorithmFactory<L,D,VALGORITHM>(localeCode,q.getAlgorithm());}
+		if(q.getAlgorithm()!=null) {jfAlgorithm = new JsonSurveyValidationAlgorithmFactory<>(localeCode,q.getAlgorithm());}
 	}
 	
 	public static Validation build() {return new Validation();}
@@ -41,5 +41,4 @@ public class JsonSurveyValidationFactory<L extends JeeslLang,D extends JeeslDesc
 		
 		return json;
 	}
-	
 }

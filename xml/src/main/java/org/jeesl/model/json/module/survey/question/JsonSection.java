@@ -1,4 +1,4 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.question;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties
 @JsonRootName(value="section")
-public class Section implements Serializable,JeeslSimpleSurveySection
+public class JsonSection implements Serializable,JeeslSimpleSurveySection
 {
 	public static final long serialVersionUID=1;
 
@@ -35,9 +35,9 @@ public class Section implements Serializable,JeeslSimpleSurveySection
 	@JsonIgnore public boolean isSetName() {return name!=null;}
 	
 	@JsonProperty("questions")
-	private List<Question> questions;
-	public List<Question> getQuestions() {if(questions==null){questions = new ArrayList<Question>();} return questions;}
-	public void setQuestions(List<Question> questions) {this.questions = questions;}
+	private List<JsonQuestion> questions;
+	public List<JsonQuestion> getQuestions() {if(questions==null){questions = new ArrayList<JsonQuestion>();} return questions;}
+	public void setQuestions(List<JsonQuestion> questions) {this.questions = questions;}
 	
 	public String toString()
 	{

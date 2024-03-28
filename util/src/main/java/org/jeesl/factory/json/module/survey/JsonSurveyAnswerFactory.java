@@ -1,5 +1,7 @@
 package org.jeesl.factory.json.module.survey;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyData;
@@ -15,47 +17,37 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidationAlgorithm;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.json.survey.Answer;
-import org.jeesl.model.json.survey.Question;
+import org.jeesl.model.json.module.survey.data.JsonAnswer;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonSurveyAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
-									VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
-									SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-									CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
-									VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-									QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-									SCORE extends JeeslSurveyScore<L,D,?,QUESTION>,
-									UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
-									ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
+public class JsonSurveyAnswerFactory<L extends JeeslLang,D extends JeeslDescription,									
+									ANSWER extends JeeslSurveyAnswer<L,D,?,MATRIX,DATA,OPTION>,
 									MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
 									DATA extends JeeslSurveyData<L,D,?,ANSWER,?>,
-									OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,
 									OPTION extends JeeslSurveyOption<L,D>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonSurveyAnswerFactory.class);
 	
-	private final Answer q;
+	private final JsonAnswer q;
 	
-	private JsonSurveyQuestionFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> jfQuestion;
-	private JsonSurveyMatrixFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> jfMatrix;
+	private JsonSurveyMatrixFactory<L,D,ANSWER,MATRIX,DATA,OPTION> jfMatrix;
 	private JsonSurveyOptionFactory<OPTION> jfOption;
 	
-	public JsonSurveyAnswerFactory(String localeCode, Answer q)
+	public JsonSurveyAnswerFactory(String localeCode, JsonAnswer q)
 	{
 		this.q=q;
-		if(q.getQuestion()!=null) {jfQuestion = new JsonSurveyQuestionFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION>(q.getQuestion());}
-		if(q.getMatrix()!=null) {jfMatrix = new JsonSurveyMatrixFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION>(localeCode,q.getMatrix());}
+		
+		if(Objects.nonNull(q.getQuestion())) {logger.warn("Upclimbing the ER hierarchy is not supported by desing");}
+		if(q.getMatrix()!=null) {jfMatrix = new JsonSurveyMatrixFactory<>(localeCode,q.getMatrix());}
 		if(q.getOption()!=null) {jfOption = new JsonSurveyOptionFactory<OPTION>(localeCode,q.getOption());}
 	}
 	
-	public Answer build(ANSWER answer)
+	public JsonAnswer build(ANSWER answer)
 	{
-		Answer json = build();
+		JsonAnswer json = build();
 		if(q.getId()>0) {json.setId(answer.getId());}
-		if(q.getQuestion()!=null) {json.setQuestion(jfQuestion.build(answer.getQuestion()));}
 		
 		if(q.getValueText()!=null && answer.getValueText()!=null) {json.setValueText(answer.getValueText());}
 		if(q.getValueBoolean()!=null && answer.getValueBoolean()!=null) {json.setValueBoolean(answer.getValueBoolean());}
@@ -72,9 +64,9 @@ public class JsonSurveyAnswerFactory<L extends JeeslLang,D extends JeeslDescript
 		return json;
 	}
 	
-	public Answer build(MATRIX matrix)
+	public JsonAnswer build(MATRIX matrix)
 	{
-		Answer json = build();
+		JsonAnswer json = build();
 		
 		if(q.getValueText()!=null && matrix.getValueText()!=null) {json.setValueText(matrix.getValueText());}
 		if(q.getValueBoolean()!=null && matrix.getValueBoolean()!=null) {json.setValueBoolean(matrix.getValueBoolean());}
@@ -86,12 +78,12 @@ public class JsonSurveyAnswerFactory<L extends JeeslLang,D extends JeeslDescript
 		return json;
 	}
 	
-	public static Answer build(){return new Answer();}
-	public static Answer build(Question question){Answer json = build();json.setQuestion(question);return json;}
+	public static JsonAnswer build(){return new JsonAnswer();}
+	public static JsonAnswer build(JsonQuestion question){JsonAnswer json = build();json.setQuestion(question);return json;}
 	
-	public static Answer build(long id)
+	public static JsonAnswer build(long id)
 	{
-		Answer json = build();
+		JsonAnswer json = build();
 		json.setId(id);
 		return json;
 	}

@@ -20,11 +20,7 @@ public interface JeeslIoReportRestImport
 	@JeeslRestSecured
 	@POST @Path("/system/io/report/category") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
 	DataUpdate importSystemIoReportCategories(Container container);
-	
-	@JeeslRestSecured
-	@POST @Path("/system/io/report/aggregation") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importSystemIoReportAggregation(Container container);
-	
+
 	@JeeslRestSecured
 	@POST @Path("/system/io/reports") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
 	DataUpdate importSystemIoReports(Reports reports);
@@ -41,27 +37,5 @@ public interface JeeslIoReportRestImport
 	@POST @Path("/system/io/report/styles") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
 	DataUpdate importSystemIoReportStyles(Styles styles);
 	
-	@JeeslRestSecured
-	@POST @Path("/system/io/report/style/alignment") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importSystemIoReportStyleAlignment(Container container);
 	
-	@JeeslRestSecured
-	@POST @Path("/system/io/report/setting/filling") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importSystemIoReportSettingFilling(Container container);
-	
-	@JeeslRestSecured
-	@POST @Path("/system/io/report/setting/transformation") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importSystemIoReportSettingTransformation(Container container);
-	
-	@JeeslRestSecured
-	@POST @Path("/system/io/report/setting/implementation") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importSystemIoReportSettingImplementation(Container container);
-	
-	@JeeslRestSecured
-	@POST @Path("/system/io/report/row/type") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importSystemIoReportRowType(Container container);
-	
-	@JeeslRestSecured
-	@POST @Path("/system/io/report/colum/width") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importSystemIoReportColumnWidth(Container container);
 }

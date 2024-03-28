@@ -1,4 +1,4 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.data;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="correlation")
-public class Correlation implements Serializable,JeeslSimpleSurveyCorrelation
+public class JsonCorrelation implements Serializable,JeeslSimpleSurveyCorrelation
 {
 	public static final long serialVersionUID=1;
 

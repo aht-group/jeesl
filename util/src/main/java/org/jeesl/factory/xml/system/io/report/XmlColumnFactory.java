@@ -30,25 +30,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
-								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
-								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
-								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
-								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
-								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-								CELL extends JeeslReportCell<L,D,TEMPLATE>,
+
+								GROUP extends JeeslReportColumnGroup<L,D,?,COLUMN,STYLE>,
+								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
+								ROW extends JeeslReportRow<L,D,?,?,CDT,?>,
+								
+								CELL extends JeeslReportCell<L,D,?>,
 								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
-								CW extends JeeslStatus<L,D,CW>,
-								RT extends JeeslReportRowType<L,D,RT,?>,
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
-								FILLING extends JeeslStatus<L,D,FILLING>,
-								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>
+								CW extends JeeslStatus<L,D,CW>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlColumnFactory.class);
@@ -58,7 +47,7 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlDataTypeFactory<L,D,CDT> xfDataType;
-	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfLayout;
+	private XmlLayoutFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfLayout;
 	
 	public XmlColumnFactory(String localeCode, XlsColumn q)
 	{

@@ -1,10 +1,11 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.data;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import org.jeesl.interfaces.model.survey.JeeslSimpleSurvey;
+import org.jeesl.model.json.survey.JsonTemplate;
 import org.jeesl.model.json.system.status.JsonStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -47,14 +48,14 @@ public class JsonSurvey implements Serializable,JeeslSimpleSurvey
 	
 	@Deprecated
 	@JsonProperty("template")
-	private Template template;
-	public Template getTemplate() {return template;}
-	public void setTemplate(Template template) {this.template = template;}
+	private JsonTemplate template;
+	public JsonTemplate getTemplate() {return template;}
+	public void setTemplate(JsonTemplate template) {this.template = template;}
 	
 	@JsonProperty("templates")
-	private List<Template> templates;
-	public List<Template> getTemplates() {return templates;}
-	public void setTemplates(List<Template> templates) {this.templates = templates;}
+	private List<JsonTemplate> templates;
+	public List<JsonTemplate> getTemplates() {return templates;}
+	public void setTemplates(List<JsonTemplate> templates) {this.templates = templates;}
 	
 	public String toString()
 	{

@@ -3,6 +3,7 @@ package org.jeesl.factory.builder.module.survey;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyConditionFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionFactory;
+import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionSetFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyQuestionFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveySchemeFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyScoreFactory;
@@ -11,7 +12,9 @@ import org.jeesl.factory.ejb.module.survey.EjbSurveyTemplateFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyTemplateVersionFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyValidationAlgorithmFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyValidationFactory;
+import org.jeesl.factory.json.module.survey.JsonSurveyQuestionFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyQuestionFactory;
+import org.jeesl.factory.txt.module.survey.TxtSurveySectionFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyTemplateFactory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
@@ -31,6 +34,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidationAl
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -97,45 +101,27 @@ public class SurveyTemplateFactoryBuilder<L extends JeeslLang, D extends JeeslDe
         this.cOption = cOption;
 	}
 	
-	public EjbSurveySchemeFactory<SCHEME,TEMPLATE> scheme()
-	{
-		return new EjbSurveySchemeFactory<SCHEME,TEMPLATE>(cScheme);
-	}
+	public EjbSurveySchemeFactory<SCHEME,TEMPLATE> efScheme() {return new EjbSurveySchemeFactory<SCHEME,TEMPLATE>(cScheme);}
 	
 	public EjbSurveyScoreFactory<QUESTION,SCORE> score()
 	{
 		return new EjbSurveyScoreFactory<QUESTION,SCORE>(cScore);
 	}
 	
-	public EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> template() {return new EjbSurveyTemplateFactory<>(cTemplate);}
+	public EjbSurveyTemplateFactory<TEMPLATE,TS,TC,SECTION,QUESTION> template() {return new EjbSurveyTemplateFactory<>(cTemplate);}
+	public EjbSurveyTemplateVersionFactory<VERSION> version() {return new EjbSurveyTemplateVersionFactory<VERSION>(cVersion);}
 	
-	public EjbSurveyTemplateVersionFactory<VERSION> version()
-	{
-		return new EjbSurveyTemplateVersionFactory<VERSION>(cVersion);
-	}
+	public EjbSurveySectionFactory<L,D,TEMPLATE,SECTION> section() {return new EjbSurveySectionFactory<L,D,TEMPLATE,SECTION>(cSection);}
+	public EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> question() {return EjbSurveyQuestionFactory.instance(cQuestion);}
 	
-	public EjbSurveySectionFactory<L,D,TEMPLATE,SECTION> section()
-	{
-		return new EjbSurveySectionFactory<L,D,TEMPLATE,SECTION>(cSection);
-	}
-	
-	public EjbSurveyQuestionFactory<L,D,SECTION,QUESTION,QE,UNIT,OPTIONS,OPTION> question()
-	{
-		return new EjbSurveyQuestionFactory<L,D,SECTION,QUESTION,QE,UNIT,OPTIONS,OPTION>(cQuestion);
-	}
-	
-	public EjbSurveyOptionFactory<QUESTION,OPTION> ejbOption()
-	{
-		return new EjbSurveyOptionFactory<QUESTION,OPTION>(cOption);
-	}
+	public EjbSurveyOptionFactory<QUESTION,OPTION> efOption() {return new EjbSurveyOptionFactory<>(cOption);}
+	public EjbSurveyOptionSetFactory<TEMPLATE,OPTIONS> efOptionSet() {return new EjbSurveyOptionSetFactory<>(cOptions);}
 	
 	public EjbSurveyConditionFactory<QUESTION,CONDITION,QE> ejbCondition(){return new EjbSurveyConditionFactory<QUESTION,CONDITION,QE>(cCondition);}
 	public EjbSurveyValidationFactory<QUESTION,VALIDATION> ejbValidation() {return new EjbSurveyValidationFactory<QUESTION,VALIDATION>(cValidation);}
 	
-	public TxtSurveyQuestionFactory<L,D,QUESTION,OPTION> txtQuestion(String localeCode)
-	{
-		return new TxtSurveyQuestionFactory<L,D,QUESTION,OPTION>(localeCode);
-	}
+	public TxtSurveySectionFactory<L,D,SECTION> txtSection() {return new TxtSurveySectionFactory<>();}
+	public TxtSurveyQuestionFactory<L,D,QUESTION,OPTION> txtQuestion(String localeCode) {return new TxtSurveyQuestionFactory<>(localeCode);}
 	
 	public EjbSurveyValidationAlgorithmFactory<VALGORITHM> ejbAlgorithm()
 	{

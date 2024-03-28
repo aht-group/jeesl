@@ -25,28 +25,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
-								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
-								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
-								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
+								GROUP extends JeeslReportColumnGroup<L,D,?,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
-								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,?>,
-								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
-								CW extends JeeslStatus<L,D,CW>,
+								ROW extends JeeslReportRow<L,D,?,?,CDT,?>,
 								
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId>
+								
+								STYLE extends JeeslReportStyle<L,D>,
+								CDT extends JeeslStatus<L,D,CDT>,
+								CW extends JeeslStatus<L,D,CW>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlLayoutFactory.class);
 	
 	private Layout q;
 	
 	private XmlTypeFactory<L,D,CW> xfType;
-	private XmlStylesFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfStyles;
+	private XmlStylesFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfStyles;
 	private XmlFontFactory<STYLE> xfFont;
 	
 	public XmlLayoutFactory(String localeCode, Layout q)

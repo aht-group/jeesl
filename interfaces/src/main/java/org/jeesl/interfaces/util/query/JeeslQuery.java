@@ -10,6 +10,7 @@ import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqId;
+import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 
@@ -41,6 +42,7 @@ public interface JeeslQuery extends Serializable,JeeslCoreQuery
 	List<CqDate> getLocalDates();
 	List<CqId> getIds();
 	List<CqBool> getBools();
+	List<CqInteger> getIntegers();
 	
 //	boolean isSortAscending();
 //	void sort(String sortBy, boolean sortAscending);

@@ -76,7 +76,7 @@
          	<scope>provided</scope>
 		</dependency>  
 
-		<!-- JavaEE -->
+		<!-- JavaEE 8 -->
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>javax.persistence-api</artifactId>
@@ -93,14 +93,20 @@
 			<version>2.0.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
-<dependency>
-    <groupId>javax.mail</groupId>
-    <artifactId>javax.mail-api</artifactId>
-    <version>1.6.2</version>
-</dependency>
-		
-         <!-- JakartaEE 10 -->
-         <dependency>
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>javax.mail-api</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>javax.ejb-api</artifactId>
+			<version>3.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JakartaEE 10 -->
+		<dependency>
 			<groupId>jakarta.inject</groupId>
 			<artifactId>jakarta.inject-api</artifactId>
 			<version>2.0.1</version>
@@ -125,20 +131,32 @@
 		    <version>3.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
-<dependency>
-    <groupId>jakarta.mail</groupId>
-    <artifactId>jakarta.mail-api</artifactId>
-    <version>2.0.1</version>
-</dependency>
+		<dependency>
+		    <groupId>jakarta.mail</groupId>
+		    <artifactId>jakarta.mail-api</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
 
-		
-		<!-- JBoss (for FacadeLookup) -->
+		<!-- JBoss (for FacadeLookup) 
 		<dependency>
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-ejb-client-bom</artifactId>
+			<version>7.2.0.Final</version>
 			<type>pom</type>
 			<scope>provided</scope>
-	  	</dependency>
+	  	</dependency> 
+	  	<dependency>
+		    <groupId>org.jboss.eap</groupId>
+		    <artifactId>wildfly-ejb-client-bom</artifactId>
+		    <type>pom</type>
+		    <scope>runtime</scope>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.jboss</groupId>
+		    <artifactId>jboss-ejb-client</artifactId>
+			<version>4.0.54.Final</version>
+		    <scope>runtime</scope>
+		</dependency>
 		
 		<!-- Hibernate -->
 		<dependency>

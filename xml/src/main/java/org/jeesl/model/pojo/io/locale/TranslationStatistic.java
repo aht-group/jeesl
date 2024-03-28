@@ -1,4 +1,4 @@
-package net.sf.ahtutils.model.pojo.status;
+package org.jeesl.model.pojo.io.locale;
 
 
 public class TranslationStatistic

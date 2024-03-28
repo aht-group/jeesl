@@ -9,12 +9,13 @@ import org.apache.commons.io.IOUtils;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
+import org.jeesl.api.rest.i.io.JeeslIoMailRestInterface;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRestExport;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRestImport;
-import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRestInterface;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.factory.xml.io.mail.XmlMailFactory;
 import org.jeesl.factory.xml.io.mail.XmlMailsFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
@@ -26,14 +27,13 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
-
-public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
+public class IoMailRestHandler <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 								MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
 								STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
@@ -42,23 +42,16 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslIoMailRestInterface,JeeslIoMailRestExport,JeeslIoMailRestImport
 {
-	final static Logger logger = LoggerFactory.getLogger(IoMailRestService.class);
+	final static Logger logger = LoggerFactory.getLogger(IoMailRestHandler.class);
 	
-	private JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
+	private final IoMailFactoryBuilder<?,?,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
+	private JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
 	
-	private final Class<CATEGORY> cCategory;
-	private final Class<MAIL> cMail;
-	private final Class<STATUS> cStatus;
-	private final Class<RETENTION> cRetention;
-	
-	private IoMailRestService(JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail,final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<MAIL> cMail, final Class<STATUS> cStatus, final Class<RETENTION> cRetention)
+	private IoMailRestHandler(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail, JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
-		super(fMail,cL,cD);
+		super(fMail,fbMail.getClassL(),fbMail.getClassD());
+		this.fbMail=fbMail;
 		this.fMail=fMail;
-		this.cCategory=cCategory;
-		this.cMail=cMail;
-		this.cStatus=cStatus;
-		this.cRetention=cRetention;
 	}
 	
 	public static <L extends JeeslLang,D extends JeeslDescription,
@@ -67,19 +60,19 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 					STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
 					RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 					FRC extends JeeslFileContainer<?,?>>
-		IoMailRestService<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>
-		factory(JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail,final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<MAIL> cMail, final Class<STATUS> cStatus, final Class<RETENTION> cRetention)
+		IoMailRestHandler<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>
+		instance(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail, JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
-		return new IoMailRestService<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>(fMail,cL,cD,cCategory,cMail,cStatus,cRetention);
+		return new IoMailRestHandler<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>(fbMail,fMail);
 	}
 	
-	@Override public Container exportSystemIoMailCategories() {return xfContainer.build(fMail.allOrderedPosition(cCategory));}
-	@Override public Container exportSystemIoMailStatus() {return xfContainer.build(fMail.allOrderedPosition(cStatus));}
-	@Override public Container exportSystemIoMailRetention() {return xfContainer.build(fMail.allOrderedPosition(cRetention));}
+	@Override public Container exportSystemIoMailCategories() {return xfContainer.build(fMail.allOrderedPosition(fbMail.getClassCategory()));}
+	@Override public Container exportSystemIoMailStatus() {return xfContainer.build(fMail.allOrderedPosition(fbMail.getClassStatus()));}
+	@Override public Container exportSystemIoMailRetention() {return xfContainer.build(fMail.allOrderedPosition(fbMail.getClassRetention()));}
 	
-	@Override public DataUpdate importSystemIoMailCategories(Container categories){return importStatus(cCategory,categories,null);}
-	@Override public DataUpdate importSystemIoMailStatus(Container categories){return importStatus(cStatus,categories,null);}
-	@Override public DataUpdate importSystemIoMailRetention(Container categories){return importStatus(cRetention,categories,null);}
+	@Override public DataUpdate importSystemIoMailCategories(Container categories) {return importStatus(fbMail.getClassCategory(),categories,null);}
+	@Override public DataUpdate importSystemIoMailStatus(Container categories) {return importStatus(fbMail.getClassStatus(),categories,null);}
+	@Override public DataUpdate importSystemIoMailRetention(Container categories) {return importStatus(fbMail.getClassRetention(),categories,null);}
 
 	@Override public Mails spool()
 	{
@@ -91,17 +84,17 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 		{
 			try
 			{
-				eMail = fMail.find(cMail,eMail);
+				eMail = fMail.find(fbMail.getClassMail(),eMail);
 				eMail.setRecordSpool(new Date());
 				eMail.setCounter(eMail.getCounter()+1);
 				if(eMail.getCounter()>5)
 				{
-					eMail.setStatus(fMail.fByCode(cStatus, JeeslIoMailStatus.Code.failed));
+					eMail.setStatus(fMail.fByCode(fbMail.getClassStatus(), JeeslIoMailStatus.Code.failed));
 					eMail = fMail.save(eMail);
 				}
 				else
 				{
-					eMail.setStatus(fMail.fByCode(cStatus, JeeslIoMailStatus.Code.spooling));
+					eMail.setStatus(fMail.fByCode(fbMail.getClassStatus(), JeeslIoMailStatus.Code.spooling));
 					eMail = fMail.save(eMail);
 					Mail xMail = JaxbUtil.loadJAXB(IOUtils.toInputStream(eMail.getXml(), "UTF-8"), Mail.class);
 					xMail.setId(eMail.getId());
@@ -120,8 +113,8 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 		Mail xMail = XmlMailFactory.build("pending");
 		try
 		{
-			MAIL eMail = fMail.find(cMail,id);
-			eMail.setStatus(fMail.fByCode(cStatus, JeeslIoMailStatus.Code.sent));
+			MAIL eMail = fMail.find(fbMail.getClassMail(),id);
+			eMail.setStatus(fMail.fByCode(fbMail.getClassStatus(), JeeslIoMailStatus.Code.sent));
 			eMail.setRecordSent(new Date());
 			eMail = fMail.update(eMail);
 			xMail.setId(eMail.getId());
@@ -136,13 +129,12 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 	@Override public Mails discard(int days)
 	{
 		LocalDate ld = LocalDate.now().minusDays(days);
-//		DateTime dt = new DateTime().minusDays(days);
 		
-		List<CATEGORY> categories = fMail.all(cCategory);
-		List<RETENTION> retentions = fMail.all(cRetention);
+		List<CATEGORY> categories = fMail.all(fbMail.getClassCategory());
+		List<RETENTION> retentions = fMail.all(fbMail.getClassRetention());
 		
 		List<STATUS> status = new ArrayList<>();
-		try {status.add(fMail.fByCode(cStatus,JeeslIoMailStatus.Code.queue));}
+		try {status.add(fMail.fByCode(fbMail.getClassStatus(),JeeslIoMailStatus.Code.queue));}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 		
 		List<MAIL> mails = fMail.fMails(categories, status, retentions, null, DateUtil.toDate(ld.atStartOfDay()), null);
@@ -151,7 +143,7 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 		{
 			try
 			{
-				STATUS discard = fMail.fByCode(cStatus,JeeslIoMailStatus.Code.discarded);
+				STATUS discard = fMail.fByCode(fbMail.getClassStatus(),JeeslIoMailStatus.Code.discarded);
 				for(MAIL mail : mails)
 				{
 					mail.setStatus(discard);

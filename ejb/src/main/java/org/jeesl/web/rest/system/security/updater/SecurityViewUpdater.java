@@ -58,8 +58,8 @@ public class SecurityViewUpdater <L extends JeeslLang,
 								JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
 	{       
         super(fbSecurity,fSecurity);
-		dbCleanerView = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassView());
-		dbCleanerAction = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassAction());
+		dbCleanerView = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassView());
+		dbCleanerAction = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassAction());
 	}
 	
 	@Deprecated public DataUpdate iuViewsAccess(Security access)

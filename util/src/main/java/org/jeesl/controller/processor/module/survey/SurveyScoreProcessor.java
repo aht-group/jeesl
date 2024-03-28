@@ -27,10 +27,10 @@ public class SurveyScoreProcessor <SECTION extends JeeslSurveySection<?,?,?,SECT
 {
 	final static Logger logger = LoggerFactory.getLogger(SurveyScoreProcessor.class);
 	
-	private EjbSurveyQuestionFactory<?,?,SECTION,QUESTION,?,?,?,?> efQuestion;
+	private EjbSurveyQuestionFactory<SECTION,QUESTION,?,?,?> efQuestion;
 	private EjbSurveyAnswerFilter<SECTION,QUESTION,ANSWER> fiAnswer;
 	
-	public SurveyScoreProcessor(EjbSurveyQuestionFactory<?,?,SECTION,QUESTION,?,?,?,?> efQuestion,
+	public SurveyScoreProcessor(EjbSurveyQuestionFactory<SECTION,QUESTION,?,?,?> efQuestion,
 								EjbSurveyAnswerFilter<SECTION,QUESTION,ANSWER> fiAnswer)
 	{
 		this.efQuestion=efQuestion;

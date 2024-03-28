@@ -1,8 +1,11 @@
-package org.jeesl.model.json.survey;
+package org.jeesl.model.json.module.survey.data;
 
 import java.io.Serializable;
 
 import org.jeesl.interfaces.model.survey.JeeslSimpleSurveyAnswer;
+import org.jeesl.model.json.module.survey.question.JsonOption;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
+import org.jeesl.model.json.survey.Matrix;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="answer")
-public class Answer implements Serializable,JeeslSimpleSurveyAnswer
+public class JsonAnswer implements Serializable,JeeslSimpleSurveyAnswer
 {
 	public static final long serialVersionUID=1;
 
@@ -20,9 +23,9 @@ public class Answer implements Serializable,JeeslSimpleSurveyAnswer
 	@Override public void setId(Long id) {this.id = id;}
 
 	@JsonProperty("question")
-	private Question question;
-	public Question getQuestion() {return question;}
-	public void setQuestion(Question question) {this.question = question;}
+	private JsonQuestion question;
+	public JsonQuestion getQuestion() {return question;}
+	public void setQuestion(JsonQuestion question) {this.question = question;}
 
 	@JsonProperty("valueBoolean")
 	private Boolean valueBoolean;
@@ -55,9 +58,9 @@ public class Answer implements Serializable,JeeslSimpleSurveyAnswer
 	@Override public void setRemark(String remark) {this.remark = remark;}
 	
 	@JsonProperty("option")
-	private Option option;
-	public Option getOption() {return option;}
-	public void setOption(Option option) {this.option = option;}
+	private JsonOption option;
+	public JsonOption getOption() {return option;}
+	public void setOption(JsonOption option) {this.option = option;}
 	
 	@JsonProperty("matrix")
 	private Matrix matrix;

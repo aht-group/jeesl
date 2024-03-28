@@ -3,26 +3,23 @@ package org.jeesl.factory.ftl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
-import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowStageNotification;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
-import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowDocument;
+import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
+import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowStageNotification;
 import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowProcess;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransition;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FtlWorkflowModelFactory <L extends JeeslLang, D extends JeeslDescription,
-										WP extends JeeslWorkflowProcess<L,D,?,WS>,
-										WPD extends JeeslWorkflowDocument<L,D,WP>,
-										WS extends JeeslWorkflowStage<L,D,WP,?,?,WT,?>,
+public class FtlWorkflowModelFactory <L extends JeeslLang,
+										WP extends JeeslWorkflowProcess<L,?,?,WS>,
+										WS extends JeeslWorkflowStage<L,?,WP,?,?,WT,?>,
 										WSN extends JeeslWorkflowStageNotification<WS,?,?,?,?>,
-										WT extends JeeslWorkflowTransition<L,D,WPD,WS,?,?,?>,
+										WT extends JeeslWorkflowTransition<L,?,?,WS,?,?,?>,
 										WF extends JeeslWorkflow<WP,WS,WY,USER>,
 										WY extends JeeslWorkflowActivity<WT,WF,?,?,USER>,
 										USER extends JeeslUser<?>

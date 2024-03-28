@@ -28,6 +28,7 @@ import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.json.jeesl.JsonContainerFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyAnswerFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyFactory;
+import org.jeesl.factory.json.module.survey.JsonSurveyQuestionFactory;
 import org.jeesl.factory.json.module.survey.JsonTemplateFactory;
 import org.jeesl.factory.xml.jeesl.XmlContainerFactory;
 import org.jeesl.factory.xml.module.survey.XmlAnswerFactory;
@@ -67,8 +68,10 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidationAl
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.json.module.survey.data.JsonAnswer;
 import org.jeesl.model.json.system.status.JsonContainer;
 import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.module.survey.Answer;
 import org.jeesl.model.xml.module.survey.Correlation;
 import org.jeesl.model.xml.module.survey.Data;
@@ -89,7 +92,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Aht;
-import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
 				SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
@@ -119,21 +121,17 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 				DENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 				ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,?>,
 				AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
-				AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,?,AQ,ATT>,
-				ATT extends JeeslStatus<L,D,ATT>>
+				AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,?,AQ,?>>
 			extends AbstractJeeslRestHandler<L,D>	
 			implements JeeslSurveyRestExport,JeeslSurveyRestImport,JeeslSurveyJsonRest,JeeslSurveyXmlRest
 {
 	final static Logger logger = LoggerFactory.getLogger(SurveyRestService.class);
 	
-	private JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate;
-	private JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey;
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 	
 	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
-	private final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> fbCore;
-	
-	private final Class<UNIT> cUNIT;
-	private final Class<CORRELATION> cCorrelation;
+	private final SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore;
 	
 	private JsonContainerFactory jfContainer;
 //	private JsonSurveyFactory<L,D,SURVEY,SS> jfSurvey;
@@ -147,34 +145,32 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 	private XmlSurveyFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfSurvey;
 	private XmlAnswerFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfAnswer;
 	
-	private EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemlate;
+	private EjbSurveyTemplateFactory<TEMPLATE,TS,TC,SECTION,QUESTION> efTemlate;
 	private EjbSurveySectionFactory<L,D,TEMPLATE,SECTION> efSection;
-	private EjbSurveyQuestionFactory<L,D,SECTION,QUESTION,QE,UNIT,OPTIONS,OPTION> efQuestion;
+	private EjbSurveyQuestionFactory<SECTION,QUESTION,UNIT,OPTIONS,OPTION> efQuestion;
 	private EjbSurveyFactory<L,D,SURVEY,SS,TEMPLATE> efSurvey;
 	private EjbSurveyDataFactory<SURVEY,DATA,CORRELATION> efData;
 	private EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION> efAnswer;
 	private EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix;
 	
-	private final JsonSurveyAnswerFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> jfAnswer;
+	private final JsonSurveyQuestionFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,ANSWER,OPTION> jfQuestion;
+	private final JsonSurveyAnswerFactory<L,D,ANSWER,MATRIX,DATA,OPTION> jfAnswer;
 	
-	public SurveyRestService(JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
+	public SurveyRestService(JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 			SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> fbCore,
-			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-			final Class<SCORE> cScore,final Class<UNIT> cUNIT, final Class<MATRIX> cMatrix, final Class<OPTIONS> cOptions, final Class<OPTION> cOption,final Class<CORRELATION> cCorrelation, final Class<ATT> cAtt)
+			SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore,
+			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate)
 	{
 		super(fSurvey,fbTemplate.getClassL(),fbTemplate.getClassD());
 		this.fTemplate=fTemplate;
 		this.fSurvey=fSurvey;
 		this.fbCore=fbCore;
 		this.fbTemplate=fbTemplate;
-		
-		this.cUNIT=cUNIT;
-		this.cCorrelation=cCorrelation;
 	
 		String localeCode = "en";
 		jfContainer = new JsonContainerFactory(localeCode,JsonStatusQueryProvider.statusIdCodeLabel());
-		jfAnswer = fbCore.jsonAnswer(localeCode,JsonSurveyQueryProvider.answers());
+		jfAnswer = new JsonSurveyAnswerFactory<>(localeCode,JsonSurveyQueryProvider.answers());
+		jfQuestion = new JsonSurveyQuestionFactory<>(localeCode,JsonSurveyQuestionFactory.id(1));
 		
 		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		
@@ -228,19 +224,14 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 					DENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 					ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,?>,
 					AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
-					AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,?,AQ,ATT>,
-					ATT extends JeeslStatus<L,D,ATT>>
-		SurveyRestService<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,ANALYSIS,AQ,AT,ATT>
-			factory(JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
+					AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,?,AQ,?>>
+		SurveyRestService<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,ANALYSIS,AQ,AT>
+			factory(JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 					SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> ffTemplate,
-					SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> fbCore,
-					JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-					
-					final Class<SCORE> cScore,
-					final Class<UNIT> cUNIT,final Class<ANSWER> cAnswer,
-					final Class<MATRIX> cMatrix, final Class<DATA> cData, final Class<OPTIONS> cOptions, final Class<OPTION> cOption,final Class<CORRELATION> cCorrelation, final Class<ATT> cAtt)
+					SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore,
+					JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate)
 	{
-		return new SurveyRestService<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,ANALYSIS,AQ,AT,ATT>(fSurvey,ffTemplate,fbCore,fTemplate,cScore,cUNIT,cMatrix,cOptions,cOption,cCorrelation,cAtt);
+		return new SurveyRestService<>(fSurvey,ffTemplate,fbCore,fTemplate);
 	}
 
 	@Override public Aht exportSurveyTemplateCategory()
@@ -257,7 +248,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		return aht;
 	}
 
-	@Override public Container surveyQuestionUnits() {return xfContainer.build(fSurvey.allOrderedPosition(cUNIT));}
+	@Override public Container surveyQuestionUnits() {return xfContainer.build(fSurvey.allOrderedPosition(fbTemplate.getClassUnit()));}
 	
 	
 	@Override public Aht exportSurveyStatus()
@@ -312,7 +303,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public DataUpdate importSurveyTemplateCategory(Aht categories){return importStatus(fbTemplate.getClassTemplateCategory(),cL,cD,categories,null);}
 	@Override public DataUpdate importSurveyTemplateStatus(Aht categories){return importStatus(fbTemplate.getClassTemplateStatus(),cL,cD,categories,null);}
-	@Override public DataUpdate importSurveyUnits(Aht categories){return importStatus(cUNIT,cL,cD,categories,null);}
+	@Override public DataUpdate importSurveyUnits(Aht categories){return importStatus(fbTemplate.getClassUnit(),cL,cD,categories,null);}
 	@Override public DataUpdate importSurveyStatus(Aht categories){return importStatus(fbCore.getClassSurveyStatus(),cL,cD,categories,null);}
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -348,7 +339,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 					eSection = fSurvey.persist(eSection);
 					for(Question xQuestion : xSection.getQuestion())
 					{
-						UNIT unit = fSurvey.fByCode(cUNIT,xQuestion.getUnit().getCode());
+						UNIT unit = fSurvey.fByCode(fbTemplate.getClassUnit(),xQuestion.getUnit().getCode());
 						QUESTION eQuestion = efQuestion.build(eSection,unit,xQuestion);
 						eQuestion = fSurvey.persist(eQuestion);
 						dut.getUpdate().getMapper().add(XmlMapperFactory.create(fbTemplate.getClassQuestion(), xQuestion.getId(), eQuestion.getId()));
@@ -378,7 +369,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 			
 			for(Data xData : survey.getData())
 			{
-				CORRELATION eCorrelation = fSurvey.find(cCorrelation,xData.getCorrelation().getId());
+				CORRELATION eCorrelation = fSurvey.find(fbCore.getClassCorrelation(),xData.getCorrelation().getId());
 				DATA eData = efData.build(eSurvey,eCorrelation);
 				eData = fSurvey.saveData(eData);
 				logger.trace("EDATA: "+eData.toString());
@@ -415,27 +406,27 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		return xml;
 	}
 	
-	@Override public org.jeesl.model.json.survey.JsonSurvey surveyStructureJson(String localeCode, long id)
+	@Override public org.jeesl.model.json.module.survey.data.JsonSurvey surveyStructureJson(String localeCode, long id)
 	{
 		JsonSurveyFactory<L,D,SURVEY,SS> jfSurvey = new JsonSurveyFactory<L,D,SURVEY,SS>(localeCode,JsonSurveyQueryProvider.survey());
-		JsonTemplateFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> jfTemplate = new JsonTemplateFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,JsonSurveyQueryProvider.templateExport(),fbTemplate,fTemplate,fSurvey); 
+		JsonTemplateFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> jfTemplate = new JsonTemplateFactory<>(localeCode,JsonSurveyQueryProvider.templateExport(),fbTemplate,fTemplate); 
 		
-		org.jeesl.model.json.survey.JsonSurvey jSurvey = JsonSurveyFactory.build();
+		org.jeesl.model.json.module.survey.data.JsonSurvey jSurvey = JsonSurveyFactory.build();
 		try
 		{
 			SURVEY eSurvey = fSurvey.find(fbCore.getClassSurvey(),id);
 			jSurvey = jfSurvey.build(eSurvey);
 			TEMPLATE eTemplate = fSurvey.find(fbTemplate.getClassTemplate(),eSurvey.getTemplate());
 			
-			org.jeesl.model.json.survey.Template jTemplate = jfTemplate.build(eTemplate);
+			org.jeesl.model.json.survey.JsonTemplate jTemplate = jfTemplate.build(eTemplate);
 			jTemplate.setCode("primary");
 			jSurvey.setTemplate(jTemplate);
 			
-			jSurvey.setTemplates(new ArrayList<org.jeesl.model.json.survey.Template>());
+			jSurvey.setTemplates(new ArrayList<org.jeesl.model.json.survey.JsonTemplate>());
 			jSurvey.getTemplates().add(jTemplate);
 			if(eTemplate.getNested()!=null)
 			{
-				org.jeesl.model.json.survey.Template jNested = jfTemplate.build(eTemplate.getNested());
+				org.jeesl.model.json.survey.JsonTemplate jNested = jfTemplate.build(eTemplate.getNested());
 				jNested.setCode("nested");
 				jSurvey.getTemplates().add(jNested);
 			}
@@ -462,9 +453,9 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		return xml;
 	}
 	
-	public org.jeesl.model.json.survey.Data jsonAnswers(DATA data)
+	public org.jeesl.model.json.module.survey.data.JsonData jsonAnswers(DATA data)
 	{
-		org.jeesl.model.json.survey.Data result = new org.jeesl.model.json.survey.Data();
+		org.jeesl.model.json.module.survey.data.JsonData result = new org.jeesl.model.json.module.survey.data.JsonData();
 		List<ANSWER> answers = fSurvey.fAnswers(Arrays.asList(data));
 		Map<ANSWER,List<MATRIX>> map = efMatrix.toMapAnswer(fSurvey.fCells(answers));
 		
@@ -472,15 +463,15 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		{
 			if(map.containsKey(a)) {a.setMatrix(map.get(a));}
 			else {a.setMatrix(new ArrayList<MATRIX>());}
-			result.getAnswers().add(jfAnswer.build(a));
+			
+			JsonAnswer jAnswer = jfAnswer.build(a);
+			jAnswer.setQuestion(jfQuestion.build(a.getQuestion()));
+			
+			result.getAnswers().add(jAnswer);
 		}
 
 		return result;
 	}
 	
-	@Override
-	public JsonContainer surveyQuestionUnitsJson()
-	{
-		return jfContainer.build(fSurvey.allOrderedPosition(cUNIT));
-	}
+	@Override public JsonContainer surveyQuestionUnitsJson() {return jfContainer.build(fSurvey.allOrderedPosition(fbTemplate.getClassUnit()));}
 }

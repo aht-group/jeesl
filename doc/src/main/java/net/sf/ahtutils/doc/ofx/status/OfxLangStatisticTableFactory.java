@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
 
-import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.io.StringIO;
 
+import org.jeesl.model.pojo.io.locale.TranslationStatistic;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;

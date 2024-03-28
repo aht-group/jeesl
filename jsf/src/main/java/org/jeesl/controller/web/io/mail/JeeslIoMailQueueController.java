@@ -47,7 +47,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	
 	private enum Statistic{today,day30}
 	
-	protected JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
+	protected JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
 	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
 
 	private List<CATEGORY> categories; public List<CATEGORY> getCategories() {return categories;}
@@ -84,7 +84,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	}
 	
 	public void postConstructMailQueue(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
+											JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMail=fMail;

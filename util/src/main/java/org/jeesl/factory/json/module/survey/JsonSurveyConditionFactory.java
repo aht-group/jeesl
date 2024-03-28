@@ -3,9 +3,9 @@ package org.jeesl.factory.json.module.survey;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.json.module.survey.question.JsonOption;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
 import org.jeesl.model.json.survey.Condition;
-import org.jeesl.model.json.survey.Option;
-import org.jeesl.model.json.survey.Question;
 import org.jeesl.model.json.system.status.JsonType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +38,13 @@ public class JsonSurveyConditionFactory<CONDITION extends JeeslSurveyCondition<?
 		
 		if(q.getTrigger()!=null)
 		{
-			Question trigger = new Question();
+			JsonQuestion trigger = new JsonQuestion();
 			trigger.setId(ejb.getTriggerQuestion().getId());
 			json.setTrigger(trigger);
 		}
 		if(q.getOption()!=null)
 		{
-			Option option = new Option();
+			JsonOption option = new JsonOption();
 			option.setId(ejb.getOption().getId());
 			json.setOption(option);
 		}

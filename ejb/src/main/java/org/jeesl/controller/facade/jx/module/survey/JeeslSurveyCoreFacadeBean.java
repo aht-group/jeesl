@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.jx.module;
+package org.jeesl.controller.facade.jx.module.survey;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +59,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
+public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 									SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
 									SS extends JeeslSurveyStatus<L,D,SS,?>,
 									SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
@@ -69,32 +69,32 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 									TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 									SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-									CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
+									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION,?>,
+									CONDITION extends JeeslSurveyCondition<QUESTION,?,OPTION>,
 									VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-									QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+									
 									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-									UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
+									
 									ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 									MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
 									DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
 									OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 									OPTION extends JeeslSurveyOption<L,D>,
 									CORRELATION extends JeeslSurveyCorrelation<DATA>>
-	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>
+	extends JeeslFacadeBean implements JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyCoreFacadeBean.class);
 	
-	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
-	private final SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,?> fbCore;
+	private final SurveyTemplateFactoryBuilder<L,D,?,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate;
+	private final SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore;
 	
 	private EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION> efAnswer;
 
 	
 	public JeeslSurveyCoreFacadeBean(EntityManager em,
-			SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,?> fbCore)
+			SurveyTemplateFactoryBuilder<L,D,?,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate,
+			SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore)
 	{
 		super(em);
 		this.fbTemplate=fbTemplate;
@@ -146,12 +146,12 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		return data;
 	}
 	
-	@Override public OPTIONS load(OPTIONS optionSet)
-	{
-		optionSet = em.find(fbCore.getOptionSetClass(),optionSet.getId());
-		optionSet.getOptions().size();
-		return optionSet;
-	}
+//	@Override public OPTIONS load(OPTIONS optionSet)
+//	{
+//		optionSet = em.find(fbCore.getOptionSetClass(),optionSet.getId());
+//		optionSet.getOptions().size();
+//		return optionSet;
+//	}
 	
 	@Override public SURVEY fSurvey(CORRELATION correlation) throws JeeslNotFoundException
 	{
@@ -220,57 +220,57 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public void rmVersion(VERSION version) throws JeeslConstraintViolationException
-	{
-		version = em.find(fbTemplate.getClassVersion(), version.getId());
-		this.rmProtected(version);
-	}
+//	@Override public void rmVersion(VERSION version) throws JeeslConstraintViolationException
+//	{
+//		version = em.find(fbTemplate.getClassVersion(), version.getId());
+//		this.rmProtected(version);
+//	}
 	
-	@Override public OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		question = em.find(fbTemplate.getClassQuestion(), question.getId());
-		option = this.saveProtected(option);
-		if(!question.getOptions().contains(option))
-		{
-			question.getOptions().add(option);
-			this.save(question);
-		}
-		return option;
-	}
-	@Override public OPTION saveOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		set = em.find(fbCore.getOptionSetClass(), set.getId());
-		option = this.saveProtected(option);
-		if(!set.getOptions().contains(option))
-		{
-			set.getOptions().add(option);
-			this.save(set);
-		}
-		return option;
-	}
+//	@Override public OPTION saveOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		question = em.find(fbTemplate.getClassQuestion(), question.getId());
+//		option = this.saveProtected(option);
+//		if(!question.getOptions().contains(option))
+//		{
+//			question.getOptions().add(option);
+//			this.save(question);
+//		}
+//		return option;
+//	}
+//	@Override public OPTION saveOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		set = em.find(fbCore.getOptionSetClass(), set.getId());
+//		option = this.saveProtected(option);
+//		if(!set.getOptions().contains(option))
+//		{
+//			set.getOptions().add(option);
+//			this.save(set);
+//		}
+//		return option;
+//	}
 	
-	@Override public void rmOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		question = em.find(fbTemplate.getClassQuestion(), question.getId());
-		option = em.find(fbTemplate.getClassOption(), option.getId());
-		if(question.getOptions().contains(option))
-		{
-			question.getOptions().remove(option);
-			this.save(question);
-		}
-		this.rmProtected(option);
-	}
-	@Override public void rmOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		set = em.find(fbCore.getOptionSetClass(), set.getId());
-		option = em.find(fbTemplate.getClassOption(), option.getId());
-		if(set.getOptions().contains(option))
-		{
-			set.getOptions().remove(option);
-			this.save(set);
-		}
-		this.rmProtected(option);
-	}
+//	@Override public void rmOption(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		question = em.find(fbTemplate.getClassQuestion(), question.getId());
+//		option = em.find(fbTemplate.getClassOption(), option.getId());
+//		if(question.getOptions().contains(option))
+//		{
+//			question.getOptions().remove(option);
+//			this.save(question);
+//		}
+//		this.rmProtected(option);
+//	}
+//	@Override public void rmOption(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException
+//	{
+//		set = em.find(fbCore.getOptionSetClass(), set.getId());
+//		option = em.find(fbTemplate.getClassOption(), option.getId());
+//		if(set.getOptions().contains(option))
+//		{
+//			set.getOptions().remove(option);
+//			this.save(set);
+//		}
+//		this.rmProtected(option);
+//	}
 	
 	@Override public <TYPE extends JeeslStatus<L,D,TYPE>, WT extends JeeslWithType<TYPE>, W extends JeeslWithSurveyType<SURVEY,WT,TYPE>>
 		List<W> fWithSurveys(Class<W> c, List<SS> status, TYPE type, Date date)
@@ -340,30 +340,30 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 		catch (NoResultException ex){throw new JeeslNotFoundException(c.getSimpleName()+" not found for "+JeeslSurvey.class.getSimpleName()+"."+JeeslSurvey.Attributes.id+"="+surveyId);}
 	}
 	
-	@Override public List<VERSION> fVersions(TC category, Long refId)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<VERSION> cQ = cB.createQuery(fbTemplate.getClassVersion());
-		Root<VERSION> root = cQ.from(fbTemplate.getClassVersion());
-		
-		Join<VERSION,TEMPLATE> jTemplate = root.join(JeeslSurveyTemplateVersion.Attributes.template.toString());
-		Path<TC> pCategory = jTemplate.get(JeeslSurveyTemplate.Attributes.category.toString());
-		Path<Date> pRecord = root.get(JeeslSurveyTemplateVersion.Attributes.record.toString());
-		predicates.add(cB.equal(pCategory,category));
-		
-		if(refId!=null && refId>0)
-		{
-			Expression<Long> eRefId = root.get(JeeslSurveyTemplateVersion.Attributes.refId.toString());
-			predicates.add(cB.equal(eRefId,refId));
-		}	
-		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.orderBy(cB.desc(pRecord));
-		cQ.select(root);
-
-		return em.createQuery(cQ).getResultList();
-	}
+//	@Override public List<VERSION> fVersions(TC category, Long refId)
+//	{
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<VERSION> cQ = cB.createQuery(fbTemplate.getClassVersion());
+//		Root<VERSION> root = cQ.from(fbTemplate.getClassVersion());
+//		
+//		Join<VERSION,TEMPLATE> jTemplate = root.join(JeeslSurveyTemplateVersion.Attributes.template.toString());
+//		Path<TC> pCategory = jTemplate.get(JeeslSurveyTemplate.Attributes.category.toString());
+//		Path<Date> pRecord = root.get(JeeslSurveyTemplateVersion.Attributes.record.toString());
+//		predicates.add(cB.equal(pCategory,category));
+//		
+//		if(refId!=null && refId>0)
+//		{
+//			Expression<Long> eRefId = root.get(JeeslSurveyTemplateVersion.Attributes.refId.toString());
+//			predicates.add(cB.equal(eRefId,refId));
+//		}	
+//		
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.orderBy(cB.desc(pRecord));
+//		cQ.select(root);
+//
+//		return em.createQuery(cQ).getResultList();
+//	}
 	
 	@Override public List<ANSWER> fAnswers(DATA data, Boolean visible, List<SECTION> sections)
 	{

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.interfaces.model.survey.JeeslSimpleSurvey;
+import org.jeesl.model.json.module.survey.question.JsonSection;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="template")
-public class Template implements Serializable,JeeslSimpleSurvey
+public class JsonTemplate implements Serializable,JeeslSimpleSurvey
 {
 	public static final long serialVersionUID=1;
 
@@ -27,9 +28,9 @@ public class Template implements Serializable,JeeslSimpleSurvey
 	public void setCode(String code) {this.code = code;}
 
 	@JsonProperty("sections")
-	private List<Section> sections;
-	public List<Section> getSections() {if(sections==null){sections = new ArrayList<Section>();} return sections;}
-	public void setSections(List<Section> sections) {this.sections = sections;}
+	private List<JsonSection> sections;
+	public List<JsonSection> getSections() {if(sections==null){sections = new ArrayList<JsonSection>();} return sections;}
+	public void setSections(List<JsonSection> sections) {this.sections = sections;}
 	
 	public String toString()
 	{

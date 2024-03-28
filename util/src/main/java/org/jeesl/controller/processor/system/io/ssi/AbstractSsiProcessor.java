@@ -8,7 +8,7 @@ import java.util.Objects;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
-import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
+import org.jeesl.controller.monitoring.counter.JeeslEventCounter;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -62,7 +62,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	
 	protected CONTEXT context; @Override public CONTEXT getMapping() {return context;}
 	private final String localeCode;
-	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
+	protected JeeslEventCounter jec; public void setEventCounter(JeeslEventCounter jec) {this.jec = jec;}
 
 	public AbstractSsiProcessor(String localeCode, IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi,
 									JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,?> fSsi)
@@ -76,7 +76,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		cacheError = EjbNonUniqueCodeCache.instance();
 		cacheError.addAll(fSsi.allForParent(fbSsi.getClassError(),context));
 		
-		jec = BucketSizeCounter.instance();
+		jec = JeeslEventCounter.instance();
 		cacheLink = EjbCodeCache.instance(fbSsi.getClassStatus()).facade(fSsi);
 		cacheJob = EjbCodeCache.instance(fbSsi.getClassJob()).facade(fSsi);
 		

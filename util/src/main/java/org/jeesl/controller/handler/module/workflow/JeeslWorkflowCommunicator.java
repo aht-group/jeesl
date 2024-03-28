@@ -57,27 +57,22 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 public class JeeslWorkflowCommunicator <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
-										WX extends JeeslWorkflowContext<L,D,WX,?>,
-										WP extends JeeslWorkflowProcess<L,D,WX,WS>,
-										WPD extends JeeslWorkflowDocument<L,D,WP>,
-										WS extends JeeslWorkflowStage<L,D,WP,WST,WSP,WT,?>,
-										WST extends JeeslWorkflowStageType<L,D,WST,?>,
-										WSP extends JeeslWorkflowStagePermission<WS,APT,WML,SR>,
-										APT extends JeeslWorkflowPermissionType<L,D,APT,?>,
-										WML extends JeeslWorkflowModificationLevel<?,?,WML,?>,
+										
+										WP extends JeeslWorkflowProcess<L,D,?,WS>,
+										
+										WS extends JeeslWorkflowStage<L,D,WP,?,?,WT,?>,
+										
 										WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,RE>,
-										WT extends JeeslWorkflowTransition<L,D,WPD,WS,WTT,SR,?>,
-										WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
+										WT extends JeeslWorkflowTransition<L,D,?,WS,?,SR,?>,
+										
 										AN extends JeeslWorkflowActionNotification<WT,MT,MC,SR,RE>,
-										AA extends JeeslWorkflowAction<WT,AB,AO,RE,RA>,
-										AB extends JeeslWorkflowBot<AB,L,D,?>,
-										AO extends EjbWithId,
+										
 										MT extends JeeslIoTemplate<L,D,?,?,MD,?>,
 										MC extends JeeslTemplateChannel<L,D,MC,?>,
 										MD extends JeeslIoTemplateDefinition<D,MC,MT>,
 										SR extends JeeslSecurityRole<L,D,?,?,?,?>,
-										RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
-										RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
+										RE extends JeeslRevisionEntity<L,D,?,?,?,?>,
+										
 										WL extends JeeslWorkflowLink<WF,RE>,
 										WF extends JeeslWorkflow<WP,WS,WY,USER>,
 										WY extends JeeslWorkflowActivity<WT,WF,?,FRC,USER>,
@@ -89,13 +84,13 @@ public class JeeslWorkflowCommunicator <L extends JeeslLang, D extends JeeslDesc
 	
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	private final JeeslWorkflowMessageHandler<WS,AN,SR,RE,MT,MC,MD,WF,WY,USER> messageHandler;
-	private final FtlWorkflowModelFactory<L,D,WP,WPD,WS,WSN,WT,WF,WY,USER> fmFactory;
+	private final JeeslWorkflowMessageHandler<WS,SR,RE,MT,MC,MD,WF,WY,USER> messageHandler;
+	private final FtlWorkflowModelFactory<L,WP,WS,WSN,WT,WF,WY,USER> fmFactory;
 	
 	private Configuration templateConfig;
 	
 	
-	public JeeslWorkflowCommunicator(JeeslWorkflowMessageHandler<WS,AN,SR,RE,MT,MC,MD,WF,WY,USER> messageHandler)
+	public JeeslWorkflowCommunicator(JeeslWorkflowMessageHandler<WS,SR,RE,MT,MC,MD,WF,WY,USER> messageHandler)
 	{
 		this.messageHandler=messageHandler;
 		fmFactory = new FtlWorkflowModelFactory<>();

@@ -70,14 +70,14 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		efLang = EjbLangFactory.instance(fbSecurity.getClassL());
 		efDescription = EjbDescriptionFactory.factory(fbSecurity.getClassD());
 		
-		dbCleanerCategory = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassCategory());
+		dbCleanerCategory = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassCategory());
 	}
 	
 	@Deprecated protected void iuCategoryAccess(Security access, JeeslSecurityCategory.Type type) throws UtilsConfigurationException
 	{
 		logger.info("i/u "+type+" with "+access.getCategory().size()+" categories");
 		
-		JeeslDbCodeEjbUpdater<C> updateCategory = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassCategory());
+		JeeslDbCodeEjbUpdater<C> updateCategory = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassCategory());
 		updateCategory.dbEjbs(fSecurity.allForType(fbSecurity.getClassCategory(),type.toString()));
 
 		for(Category category : access.getCategory())

@@ -9,15 +9,15 @@ import org.jeesl.factory.json.module.survey.JsonSurveyQuestionFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveySectionFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyValidationAlgorithmFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyValidationFactory;
-import org.jeesl.model.json.survey.Answer;
-import org.jeesl.model.json.survey.Cell;
+import org.jeesl.model.json.module.survey.data.JsonAnswer;
+import org.jeesl.model.json.module.survey.data.JsonCell;
+import org.jeesl.model.json.module.survey.data.JsonSurvey;
+import org.jeesl.model.json.module.survey.question.JsonOption;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
+import org.jeesl.model.json.module.survey.question.JsonSection;
 import org.jeesl.model.json.survey.Condition;
 import org.jeesl.model.json.survey.Matrix;
-import org.jeesl.model.json.survey.Option;
-import org.jeesl.model.json.survey.Question;
-import org.jeesl.model.json.survey.Section;
-import org.jeesl.model.json.survey.JsonSurvey;
-import org.jeesl.model.json.survey.Template;
+import org.jeesl.model.json.survey.JsonTemplate;
 import org.jeesl.model.json.survey.validation.Validation;
 import org.jeesl.model.json.survey.validation.ValidationAlgorithm;
 import org.jeesl.model.json.system.status.JsonType;
@@ -35,12 +35,12 @@ public class JsonSurveyQueryProvider
 		return json;
 	}
 	
-	public static Template templateExport()
+	public static JsonTemplate templateExport()
 	{
-		Question trigger = JsonSurveyQuestionFactory.build();
+		JsonQuestion trigger = JsonSurveyQuestionFactory.build();
 		trigger.setId(0l);
 		
-		Option triggerOption = JsonSurveyOptionFactory.build();
+		JsonOption triggerOption = JsonSurveyOptionFactory.build();
 		triggerOption.setId(0l);
 		
 		JsonType type = new JsonType();
@@ -62,7 +62,7 @@ public class JsonSurveyQueryProvider
 		condition.setOption(triggerOption);
 		condition.setType(type);
 		
-		Option option = JsonSurveyOptionFactory.build();
+		JsonOption option = JsonSurveyOptionFactory.build();
 		option.setId(0l);
 		option.setPosition(0);
 		option.setCode("");
@@ -72,7 +72,7 @@ public class JsonSurveyQueryProvider
 		option.setRow(true);
 		option.setCell(true);
 		
-		Question question = JsonSurveyQuestionFactory.build();
+		JsonQuestion question = JsonSurveyQuestionFactory.build();
 		question.setId(0l);
 		question.setVisible(true);
 		question.setPosition(0);
@@ -93,7 +93,7 @@ public class JsonSurveyQueryProvider
 		question.setShowSelectOne(true);
 		question.setShowSelectMulti(true);
 		question.setShowMatrix(true);
-		question.setOptions(new ArrayList<Option>());question.getOptions().add(option);
+		question.setOptions(new ArrayList<JsonOption>());question.getOptions().add(option);
 		
 		question.setCondition("");
 		question.setConditions(new ArrayList<Condition>());question.getConditions().add(condition);
@@ -102,24 +102,23 @@ public class JsonSurveyQueryProvider
 		question.setMandatory(true);
 		question.setShowEmptyOption(true);
 		
-		Section section = JsonSurveySectionFactory.build();
+		JsonSection section = JsonSurveySectionFactory.build();
 		section.setId(0l);
 		section.setCode("");
 		section.setName("");
 		section.getQuestions().add(question);
 		
-		Template xml = new Template();
+		JsonTemplate xml = new JsonTemplate();
 		xml.setId(Long.valueOf(0));
 		xml.getSections().add(section);
 		
 		return xml;
 	}
 	
-	public static Answer answers()
+	public static JsonAnswer answers()
 	{		
-		Answer json = new Answer();
+		JsonAnswer json = new JsonAnswer();
 		json.setId(Long.valueOf(1));
-		json.setQuestion(JsonSurveyQuestionFactory.id(1));
 		json.setValueBoolean(true);
 		json.setValueDouble(2d);
 		json.setValueNumber(1);
@@ -132,20 +131,20 @@ public class JsonSurveyQueryProvider
 	
 	private static Matrix matrix()
 	{
-		Answer answer = new Answer();
+		JsonAnswer answer = new JsonAnswer();
 		answer.setValueBoolean(true);
 		answer.setValueDouble(2d);
 		answer.setValueNumber(1);
 		answer.setValueText("");
 		answer.setOption(JsonSurveyOptionFactory.id(0));
 		
-		Cell cell = new Cell();
+		JsonCell cell = new JsonCell();
 		cell.setColumn(0l);
 		cell.setRow(0l);
 		cell.setAnswer(answer);
 		
 		Matrix json = new Matrix();
-		json.setCells(new ArrayList<Cell>());
+		json.setCells(new ArrayList<JsonCell>());
 		json.getCells().add(cell);
 		return json;
 	}

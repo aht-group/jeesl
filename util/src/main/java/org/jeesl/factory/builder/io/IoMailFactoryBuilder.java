@@ -43,5 +43,5 @@ public class IoMailFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 	}
 	
 	public EjbIoMailFactory<CATEGORY,MAIL,STATUS,RETENTION> mail() {return new EjbIoMailFactory<>(cMail);}
-	public MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION> splitter(JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail) {return new MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION>(this,fMail);}
+	public MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION> splitter(JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,?> fMail) {return new MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION>(this,fMail);}
 }

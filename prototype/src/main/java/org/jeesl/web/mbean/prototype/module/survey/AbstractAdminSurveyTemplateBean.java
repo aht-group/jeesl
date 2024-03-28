@@ -19,6 +19,8 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
+import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionFactory;
+import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionSetFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -71,12 +73,12 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 						SS extends JeeslSurveyStatus<L,D,SS,?>,
 						SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
 						VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
-						TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,ANALYSIS>,
+						TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
 						VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 						TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 						TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 						SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
+						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
 						CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 						VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
 						QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
@@ -88,22 +90,18 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 						OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 						OPTION extends JeeslSurveyOption<L,D>,
 						CORRELATION extends JeeslSurveyCorrelation<DATA>,
-						DOMAIN extends JeeslDomain<L,DENTITY>,
-						QUERY extends JeeslDomainQuery<L,D,DOMAIN,PATH>,
-						PATH extends JeeslDomainPath<L,D,QUERY,DENTITY,DATTRIBUTE>,
-						DENTITY extends JeeslRevisionEntity<L,D,?,?,DATTRIBUTE,?>,
-						DATTRIBUTE extends JeeslRevisionAttribute<L,D,DENTITY,?,?>,
-						ANALYSIS extends JeeslSurveyAnalysis<L,D,TEMPLATE,DOMAIN,DENTITY,DATTRIBUTE>,
-						AQ extends JeeslSurveyAnalysisQuestion<L,D,QUESTION,ANALYSIS>,
-						AT extends JeeslSurveyAnalysisTool<L,D,QE,QUERY,DATTRIBUTE,AQ,ATT>,
-						ATT extends JeeslStatus<L,D,ATT>,
-						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
-						CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE,CACHE>
+						
+						ATT extends JeeslStatus<L,D,ATT>>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSurveyTemplateBean.class);
+	
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	
+	protected final EjbSurveyOptionSetFactory<TEMPLATE,OPTIONS> efOptionSet;
+	protected final EjbSurveyOptionFactory<QUESTION,OPTION> efOption;
 	
 	protected List<VERSION> nestedVersions; public List<VERSION> getNestedVersions(){return nestedVersions;}
 	protected List<OPTIONS> optionSets; public List<OPTIONS> getOptionSets(){return optionSets;}
@@ -135,11 +133,12 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	private UiHelperSurvey<VERSION,SECTION> uiHelper; public UiHelperSurvey<VERSION,SECTION> getUiHelper() {return uiHelper;}
 	private Comparator<OPTION> cmpOption;
 	
-	public AbstractAdminSurveyTemplateBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> fbCore,
-			SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE> fbAnalysis)
+	public AbstractAdminSurveyTemplateBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate)
 	{
-		super(fbTemplate,fbCore,fbAnalysis);
+		super(fbTemplate);
+		
+		efOption = fbTemplate.efOption();
+		efOptionSet = fbTemplate.efOptionSet();
 
 		cmpOption = new PositionComparator<OPTION>();
 		options = new ArrayList<OPTION>();
@@ -155,12 +154,12 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	
 	protected void postConstructTemplate(String userLocale,
 			JeeslLocaleProvider<LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
-			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
+			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
-		super.initSuperSurvey(bTranslation,bMessage,fTemplate,fCore,fAnalysis,bSurvey);
+		super.initSuperSurvey(bTranslation,bMessage,fCore,bSurvey);
+		this.fTemplate=fTemplate;
 		initPageSettings();
 		super.initLocales(userLocale);
 
@@ -268,7 +267,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	protected void reloadVersions()
 	{
 		if(refId!=null && refId<=0) {versions = new ArrayList<VERSION>();}
-		else{versions = fCore.fVersions(sbhCategory.getSelection(),refId);}
+		else{versions = fTemplate.fVersions2(sbhCategory.getSelection(),refId);}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbTemplate.getClassVersion(), versions));}
 		
 		nestedVersions = new ArrayList<VERSION>();
@@ -278,7 +277,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 			if(!c.equals(sbhCategory.getSelection()))
 			{
 				if(refId!=null && refId<=0) {}
-				else{nestedVersions.addAll(fCore.fVersions(c,refId));}
+				else{nestedVersions.addAll(fTemplate.fVersions2(c,refId));}
 			}
 		}
 	}
@@ -316,7 +315,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void deleteVersion() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.deleteEntity(version));
-		fCore.rmVersion(version);
+		fTemplate.rmVersion2(version);
 		clear(true,true,true,true,true,true,true,true,true,true);
 		reloadVersions();
 	}
@@ -472,8 +471,8 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	//Option
 	private void reloadOptionSet(boolean updateBean)
 	{
-		optionSet = fCore.find(fbTemplate.getOptionSetClass(),optionSet);
-		optionSet = fCore.load(optionSet);
+		optionSet = fTemplate.find(fbTemplate.getOptionSetClass(),optionSet);
+		optionSet = fTemplate.loadSurveyOptions(optionSet);
 		Collections.sort(optionSet.getOptions(),cmpOption);
 		options.clear();
 		options.addAll(optionSet.getOptions());
@@ -499,14 +498,14 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void saveQuestionOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(option));}
-		option = fCore.saveOption(question,option);
+		option = fTemplate.saveOption2(question,option);
 		reloadQuestion();
 		bMessage.growlSaved(option);
 	}
 	public void saveSetOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(option));}
-		option = fCore.saveOption(optionSet,option);
+		option = fTemplate.saveOption2(optionSet,option);
 		reloadOptionSet(true);
 		bMessage.growlSaved(option);
 	}
@@ -514,7 +513,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void delQuestionOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
-		fCore.rmOption(question,option);
+		fTemplate.rmOption2(question,option);
 		bMessage.growlDeleted(option);
 		reloadQuestion();
 		
@@ -522,7 +521,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void rmSetOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
-		fCore.rmOption(optionSet,option);
+		fTemplate.rmOption2(optionSet,option);
 		bMessage.growlDeleted(option);
 		clear(false,false,true,true,true,true,true,false,true,true);
 		reloadOptionSet(true);

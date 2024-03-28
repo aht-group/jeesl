@@ -3,6 +3,8 @@ package org.jeesl.model.json.survey;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.model.json.module.survey.data.JsonCell;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -14,9 +16,9 @@ public class Matrix implements Serializable
 	public static final long serialVersionUID=1;
 
 	@JsonProperty("cells")
-	private List<Cell> cells;
-	public List<Cell> getCells() {return cells;}
-	public void setCells(List<Cell> cells) {this.cells = cells;}
+	private List<JsonCell> cells;
+	public List<JsonCell> getCells() {return cells;}
+	public void setCells(List<JsonCell> cells) {this.cells = cells;}
 
 
 	@Override public String toString()

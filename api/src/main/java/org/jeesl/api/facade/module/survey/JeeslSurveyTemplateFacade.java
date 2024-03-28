@@ -1,5 +1,9 @@
 package org.jeesl.api.facade.module.survey;
 
+import java.util.List;
+
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
@@ -11,27 +15,37 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 
-public interface JeeslSurveyTemplateFacade <L extends JeeslLang, D extends JeeslDescription,
-									SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-									TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
-									VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-									TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-									TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
-									SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-									QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-									QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-									SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-									UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
-									OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
-									OPTION extends JeeslSurveyOption<L,D>>
+public interface JeeslSurveyTemplateFacade <SCHEME extends JeeslSurveyScheme<?,?,TEMPLATE,SCORE>,
+									TEMPLATE extends JeeslSurveyTemplate<?,?,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
+									VERSION extends JeeslSurveyTemplateVersion<?,?,TEMPLATE>,
+									TS extends JeeslSurveyTemplateStatus<?,?,TS,?>,
+									TC extends JeeslSurveyTemplateCategory<?,?,TC,?>,
+									SECTION extends JeeslSurveySection<?,?,TEMPLATE,SECTION,QUESTION>,
+									QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,QE,SCORE,?,OPTIONS,OPTION,?>,
+									QE extends JeeslSurveyQuestionElement<?,?,QE,?>,
+									SCORE extends JeeslSurveyScore<?,?,SCHEME,QUESTION>,
+									
+									OPTIONS extends JeeslSurveyOptionSet<?,?,TEMPLATE,OPTION>,
+									OPTION extends JeeslSurveyOption<?,?>>
 	extends JeeslFacade
-{	
+{
+	SECTION loadSurveySection(SECTION section);
+	QUESTION loadSurveyQuersion(QUESTION question);
+	OPTIONS loadSurveyOptions(OPTIONS options);
+	
+	
 	TEMPLATE load(TEMPLATE template, boolean withQuestions, boolean withOptions);
 	TEMPLATE fcSurveyTemplate(TC category, TS status);
 	TEMPLATE fcSurveyTemplate(TC category, VERSION version, TS status, VERSION nestedVersion);
+	
+	OPTION saveOption2(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	OPTION saveOption2(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	
+	void rmOption2(QUESTION question, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	void rmOption2(OPTIONS set, OPTION option) throws JeeslConstraintViolationException, JeeslLockingException;
+	void rmVersion2(VERSION version) throws JeeslConstraintViolationException;
+	
+	List<VERSION> fVersions2(TC category, Long refId);
 }

@@ -49,7 +49,7 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTemplateFactory.class);
 	
-	private JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
 
 	private final Template q;
 	
@@ -66,8 +66,8 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(ObjectUtils.isNotEmpty(q.getSection())) {xfSection  = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}	
 	}
 	
-	public void lazyLoad(JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-						JeeslSurveyCoreFacade<L,D,?,SURVEY,?,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
+	public void lazyLoad(JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+						JeeslSurveyCoreFacade<L,D,SURVEY,?,TC,SECTION,QUESTION,?,?,?,?> fSurvey)
 	{
 		this.fTemplate=fTemplate;
 		if(Objects.nonNull(xfSection)) {xfSection.lazyLoad(fSurvey);}
