@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-db</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Database</name>
+    <name>JEESL - IO: Database</name>
 	
 	<dependencyManagement>
 		<dependencies>

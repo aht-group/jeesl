@@ -60,7 +60,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
@@ -106,7 +106,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 				QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
 				CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 				VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-				QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+				QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 				SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 				UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 				ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
@@ -127,7 +127,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(SurveyRestService.class);
 	
-	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate;
 	private JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 	
 	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
@@ -153,13 +153,13 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 	private EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION> efAnswer;
 	private EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix;
 	
-	private final JsonSurveyQuestionFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,ANSWER,OPTION> jfQuestion;
+	private final JsonSurveyQuestionFactory<L,D,VALGORITHM,QUESTION,CONDITION,VALIDATION,QE,SCORE,OPTION> jfQuestion;
 	private final JsonSurveyAnswerFactory<L,D,ANSWER,MATRIX,DATA,OPTION> jfAnswer;
 	
 	public SurveyRestService(JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 			SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
 			SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore,
-			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate)
+			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate)
 	{
 		super(fSurvey,fbTemplate.getClassL(),fbTemplate.getClassD());
 		this.fTemplate=fTemplate;
@@ -210,7 +210,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 					QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
 					CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 					VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-					QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+					QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 					SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 					UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 					ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>, MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
@@ -229,7 +229,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 			factory(JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 					SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> ffTemplate,
 					SurveyCoreFactoryBuilder<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fbCore,
-					JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate)
+					JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate)
 	{
 		return new SurveyRestService<>(fSurvey,ffTemplate,fbCore,fTemplate);
 	}

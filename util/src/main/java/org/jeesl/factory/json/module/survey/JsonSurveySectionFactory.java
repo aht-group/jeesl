@@ -21,7 +21,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
@@ -36,7 +36,7 @@ public class JsonSurveySectionFactory<L extends JeeslLang,D extends JeeslDescrip
 				SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
 				SS extends JeeslSurveyStatus<L,D,SS,?>,
 				SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-				VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
+				ALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
 				TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
 				VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 				TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
@@ -44,8 +44,8 @@ public class JsonSurveySectionFactory<L extends JeeslLang,D extends JeeslDescrip
 				SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
 				QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
 				CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
-				VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-				QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+				VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,ALGORITHM>,
+				QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 				SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 				UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 				ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
@@ -57,14 +57,14 @@ public class JsonSurveySectionFactory<L extends JeeslLang,D extends JeeslDescrip
 	private final String localeCode;
 	private final JsonSection q;
 	
-	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate;
 	
-	private JsonSurveyQuestionFactory<L,D,VALGORITHM,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,ANSWER,OPTION> jfQuestion;
+	private JsonSurveyQuestionFactory<L,D,ALGORITHM,QUESTION,CONDITION,VALIDATION,QE,SCORE,OPTION> jfQuestion;
 	
 	public JsonSurveySectionFactory(String localeCode, JsonSection q){this(localeCode,q,null,null);}
 	public JsonSurveySectionFactory(String localeCode, JsonSection q,
 			SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate)
+			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate)
 	{
 		this.localeCode=localeCode;
 		this.q=q;

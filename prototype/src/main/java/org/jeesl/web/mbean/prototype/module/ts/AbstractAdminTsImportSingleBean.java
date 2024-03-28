@@ -22,6 +22,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.controller.ImportStrategy;
 import org.jeesl.api.facade.module.JeeslTsFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
@@ -59,7 +60,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
 import net.sf.ahtutils.report.revert.excel.importers.ExcelSimpleSerializableImporter;
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CAT extends JeeslTsCategory<L,D,CAT,?>,

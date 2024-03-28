@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-mail</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Mail</name>
+    <name>JEESL - IO: Mail</name>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -53,7 +53,7 @@
     		<artifactId>jeesl-util</artifactId>
     		<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- JEESL-Modules-->
 		<dependency>
 			<groupId>org.jeesl</groupId>
@@ -65,20 +65,21 @@
     		<artifactId>jeesl-io-fr</artifactId>
     		<scope>compile</scope>
 		</dependency>
-	
+
 		<!-- JakartaEE -->
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Primefaces -->
 		<dependency>  
    			<groupId>org.primefaces</groupId>  
    			<artifactId>primefaces</artifactId>
+   			<version>12.0.0</version>
    			<scope>provided</scope>
-		</dependency>
+		</dependency> 
 
 		<!-- Commons -->
 		<dependency>

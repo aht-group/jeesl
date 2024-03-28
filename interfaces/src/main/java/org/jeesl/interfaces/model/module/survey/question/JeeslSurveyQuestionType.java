@@ -14,12 +14,12 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslSurveyQuestionElement <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslSurveyQuestionType <L extends JeeslLang, D extends JeeslDescription,
 											S extends JeeslStatus<L,D,S>,
 											G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 								JeeslStatusFixedCode,EjbWithCodeGraphic<G>,
 								JeeslStatus<L,D,S>
 {	
-
+//	void x();
 }

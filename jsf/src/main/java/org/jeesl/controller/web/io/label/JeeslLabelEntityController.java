@@ -20,6 +20,7 @@ import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.rest.rs.jx.system.JeeslSystemRest;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -62,8 +63,6 @@ import org.jeesl.util.query.cq.io.EjbIoLabelQuery;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,

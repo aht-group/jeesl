@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.JeeslTrafficLightBean;
 import org.jeesl.api.facade.system.graphic.JeeslTrafficLightFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.LightFactoryBuilder;
@@ -19,8 +20,6 @@ import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractAdminTrafficLightBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											LIGHT extends JeeslTrafficLight<L,D,SCOPE>,

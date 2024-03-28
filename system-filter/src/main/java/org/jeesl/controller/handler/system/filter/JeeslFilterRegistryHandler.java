@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.ejb.c.system.filter.EjbFilterFactory;
@@ -25,8 +26,6 @@ import org.jeesl.model.ejb.system.filter.SystemFilterType;
 import org.jeesl.model.ejb.system.security.user.SecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslFilterRegistryHandler implements JeeslFilterHandler,SbSingleBean
 {

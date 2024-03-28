@@ -16,6 +16,7 @@ import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.handler.module.survey.SurveyAnalysisCacheHandler;
 import org.jeesl.controller.processor.module.survey.analysis.SurveySelectOneProcessor;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
@@ -55,7 +56,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
@@ -77,8 +78,6 @@ import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 						SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
 						SS extends JeeslSurveyStatus<L,D,SS,?>,
@@ -92,7 +91,7 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
 						CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 						VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-						QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+						QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 						SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 						UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 						ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,

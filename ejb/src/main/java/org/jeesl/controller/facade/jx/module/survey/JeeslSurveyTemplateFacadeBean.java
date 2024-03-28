@@ -30,7 +30,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
@@ -43,30 +43,27 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslSurveyTemplateFacadeBean <L extends JeeslLang, D extends JeeslDescription,LOC extends JeeslStatus<L,D,LOC>,
 											SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-											VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
 											TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
 											VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 											TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 											TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 											SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-											QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-											CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
-											VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-											QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+											QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION,?>,
+											CONDITION extends JeeslSurveyCondition<QUESTION,?,OPTION>,
+											VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,?>,
 											SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-											UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 											OPTIONS extends JeeslSurveyOptionSet<L,D,TEMPLATE,OPTION>,
 											OPTION extends JeeslSurveyOption<L,D>>
-	extends JeeslFacadeBean implements JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION>
+	extends JeeslFacadeBean implements JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyTemplateFacadeBean.class);
 	
-	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
+	private final SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,?,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate;
 	
 	private final EjbSurveyTemplateFactory<TEMPLATE,TS,TC,SECTION,QUESTION> eTemplate;
 	
-	public JeeslSurveyTemplateFacadeBean(EntityManager em, SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate)
+	public JeeslSurveyTemplateFacadeBean(EntityManager em, SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,?,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,SCORE,?,OPTIONS,OPTION> fbTemplate)
 	{
 		super(em);
 		this.fbTemplate=fbTemplate;

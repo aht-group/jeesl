@@ -22,7 +22,7 @@ import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -42,7 +42,7 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 								TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 								SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
 								QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-								QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+								QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 								SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 								UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 								ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
@@ -72,7 +72,7 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(ObjectUtils.isNotEmpty(q.getData())) {xfData = new XmlDataFactory<>(localeCode,q.getData().get(0));}
 	}
 	
-	public void lazyLoad(JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+	public void lazyLoad(JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate,
 				JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 				Class<SURVEY> cSurvey,
 				Class<SECTION> cSection

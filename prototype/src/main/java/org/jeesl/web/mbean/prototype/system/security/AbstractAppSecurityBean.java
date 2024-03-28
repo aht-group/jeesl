@@ -14,6 +14,7 @@ import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
@@ -32,7 +33,6 @@ import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 import net.sf.exlp.util.io.ObjectIO;
 
 public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,

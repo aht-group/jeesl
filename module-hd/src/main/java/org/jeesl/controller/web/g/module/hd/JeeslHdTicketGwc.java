@@ -8,6 +8,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.module.JeeslHdFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.doc.ofx.cms.generic.JeeslMarkupSectionFactory;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -49,8 +50,6 @@ import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslHdTicketGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,

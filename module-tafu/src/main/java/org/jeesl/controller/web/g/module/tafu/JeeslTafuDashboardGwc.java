@@ -13,6 +13,7 @@ import java.util.Map;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslTafuFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
@@ -40,8 +41,6 @@ import org.jeesl.model.pojo.map.list.Nested2MapList;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
     										R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,

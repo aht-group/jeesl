@@ -40,7 +40,7 @@ import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -52,16 +52,13 @@ import org.slf4j.LoggerFactory;
 public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescription,
 							SURVEY extends JeeslSurvey<L,D,?,TEMPLATE,DATA>,
 							
-							SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-							TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,?,?,SECTION,OPTIONS,?>,
+							
+							TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,VERSION,?,?,SECTION,OPTIONS,?>,
 							VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-//							TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-//							TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
+
 							SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-							QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-							SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-							UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
+							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,?,?,OPTIONS,OPTION,?>,
+							
 							ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 							MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
 							DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
@@ -79,16 +76,15 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	public ProcessingTimeTracker getPtt() {return ptt;}
 	public void setPtt(ProcessingTimeTracker ptt) {this.ptt = ptt;}
 
-	private final JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,?,?,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate;
+	private final JeeslSurveyTemplateFacade<?,TEMPLATE,VERSION,?,?,SECTION,QUESTION,?,OPTIONS,OPTION> fTemplate;
 	private final JeeslSurveyCoreFacade<L,D,SURVEY,?,?,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 
-	private final EjbSurveyTemplateFactory<TEMPLATE,?,?,SECTION,QUESTION> efTemplate;
 	private final EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix;
 	private final EjbSurveyOptionFactory<QUESTION,OPTION> efOption;
 
 	private final XlsSurveyQuestionFactory<QUESTION,OPTIONS,OPTION> xfQuestion;
 
-	private XlsSurveyAnswerFactory<L,QUESTION,ANSWER,MATRIX,OPTION> xlfAnswer;
+	private XlsSurveyAnswerFactory<L,QUESTION,ANSWER,MATRIX,OPTION> xfAnswer;
 
 	private SurveyCorrelationInfoBuilder<CORRELATION> correlationBuilder;
 	
@@ -105,9 +101,8 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	
 	
 	public XlsSurveyDataFactory(String localeCode,
-			JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,?,?,SECTION,QUESTION,QE,SCORE,OPTIONS,OPTION> fTemplate,
+			JeeslSurveyTemplateFacade<?,TEMPLATE,VERSION,?,?,SECTION,QUESTION,?,OPTIONS,OPTION> fTemplate,
 			JeeslSurveyCoreFacade<L,D,SURVEY,?,?,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
-			EjbSurveyTemplateFactory<TEMPLATE,?,?,SECTION,QUESTION> efTemplate,
 			EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix,
 			EjbSurveyOptionFactory<QUESTION,OPTION> efOption,
 			SurveyCorrelationInfoBuilder<CORRELATION> builder)
@@ -115,7 +110,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 		this.localeCode = localeCode;
 		this.fTemplate=fTemplate;
 		this.fSurvey = fSurvey;
-		this.efTemplate = efTemplate;
+//		this.efTemplate = efTemplate;
 		this.efMatrix = efMatrix;
 		this.efOption = efOption;
 		this.correlationBuilder = builder;
@@ -131,7 +126,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	{		
 		style = sheet.getWorkbook().createCellStyle();
 		style.setAlignment(HorizontalAlignment.CENTER);
-		xlfAnswer = new XlsSurveyAnswerFactory<>(localeCode,style);
+		xfAnswer = new XlsSurveyAnswerFactory<>(localeCode,style);
 
 		simpleCalculateSizes(t);
 		
@@ -240,14 +235,14 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 							{
 								for(OPTION oCol : oCols)
 								{
-									if(matrix.containsKey(oRow,oCol)){xlfAnswer.build(row, colNr, answer.getQuestion(), matrix.get(oRow,oCol));}
+									if(matrix.containsKey(oRow,oCol)){xfAnswer.build(row, colNr, answer.getQuestion(), matrix.get(oRow,oCol));}
 									else{XlsCellFactory.build(row, colNr, style, "", 1);}
 								}
 							}
 						}
 						else
 						{
-							xlfAnswer.build(row, colNr, answer);
+							xfAnswer.build(row, colNr, answer);
 						}
 					}
 				}

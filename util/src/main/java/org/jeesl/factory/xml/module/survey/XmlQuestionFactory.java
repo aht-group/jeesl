@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -23,7 +23,7 @@ import net.sf.ahtutils.factory.xml.status.XmlUnitFactory;
 public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 								SCHEME extends JeeslSurveyScheme<L,D,?,SCORE>,
 								QUESTION extends JeeslSurveyQuestion<L,D,?,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-								QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+								QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 								SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 								UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 								OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,

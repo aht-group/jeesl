@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -22,7 +22,7 @@ public interface JeeslSurveyBean<
 					QUESTION extends JeeslSurveyQuestion<?,?,SECTION,CONDITION,VALIDATION,QE,?,?,OPTIONS,OPTION,?>,
 					CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 					VALIDATION extends JeeslSurveyValidation<?,?,QUESTION,?>, //TODO tk  add VALG
-					QE extends JeeslSurveyQuestionElement<?,?,QE,?>,
+					QE extends JeeslSurveyQuestionType<?,?,QE,?>,
 					OPTIONS extends JeeslSurveyOptionSet<?,?,TEMPLATE,OPTION>,
 					OPTION extends JeeslSurveyOption<?,?>,
 					ATT extends JeeslStatus<?,?,ATT>>
