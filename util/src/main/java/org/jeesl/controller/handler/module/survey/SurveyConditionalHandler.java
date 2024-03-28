@@ -50,7 +50,7 @@ public class SurveyConditionalHandler<TEMPLATE extends JeeslSurveyTemplate<?,?,?
 	private EjbSurveyAnswerFactory<SECTION,QUESTION,ANSWER,?,?,OPTION> efAnswer;
 	private final ConditionEvaluator evaluator;
 	
-	public SurveyConditionalHandler(SurveyCoreFactoryBuilder<?,?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,CONDITION,?,?,?,?,ANSWER,?,?,?,OPTION,?> fbCore,
+	public SurveyConditionalHandler(SurveyCoreFactoryBuilder<?,?,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,CONDITION,?,?,?,ANSWER,?,?,?,OPTION,?> fbCore,
 									JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,?> cache
 									)
 	{

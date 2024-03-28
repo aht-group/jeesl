@@ -112,7 +112,7 @@ public class SurveyHandler<D extends JeeslDescription,
 	
 	public SurveyHandler(JeeslSurveyHandlerCallback<SECTION> callback,
 //				final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate,
-				final SurveyCoreFactoryBuilder<?,D,?,SURVEY,?,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fBSurvey,
+				final SurveyCoreFactoryBuilder<?,D,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fBSurvey,
 				JeeslFacesMessageBean bMessage,
 				final JeeslSurveyCoreFacade<?,?,SURVEY,?,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 				JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,?,?,OPTION,?> bSurvey,

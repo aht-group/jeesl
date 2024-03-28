@@ -59,15 +59,15 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 				SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
 				SS extends JeeslSurveyStatus<L,D,SS,?>,
 				SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-				VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
+				
 				TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
 				VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
 				TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
 				TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 				SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-				QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
+				QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
 				CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
-				VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
+				
 				QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
 				SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 				UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
