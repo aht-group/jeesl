@@ -68,8 +68,8 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 	private List<ACTIVITY> activityItems; public List<ACTIVITY> getActivityItems() {return activityItems;} public void setActivityItems(List<ACTIVITY> activityItems) {this.activityItems = activityItems;}
 
 
-	private TreeNode tree; public TreeNode getTree() {return tree;}
-    private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
+	private TreeNode<ACTIVITY> tree; public TreeNode<ACTIVITY> getTree() {return tree;}
+    private TreeNode<ACTIVITY> node; public TreeNode<ACTIVITY> getNode() {return node;} public void setNode(TreeNode<ACTIVITY> node) {this.node = node;}
 	private String currentLocaleCode; public String getCurrentLocaleCode() {return currentLocaleCode;} public void setCurrentLocaleCode(String currentLocaleCode) {this.currentLocaleCode = currentLocaleCode;}
 
 
@@ -149,7 +149,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 		ACTIVITY root = project.getRoot();
 		if(Objects.isNull(root)) {root = efActivity.build(project, null); root.setName(project.getName());}
 
-		tree = new DefaultTreeNode(root, null);
+		tree = new DefaultTreeNode<>(root, null);
 		List<ACTIVITY> activities = fAm.allOrderedPositionParent(fbAm.getClassActivity(),root,true);
 		if(Objects.nonNull(tree) && Objects.nonNull(activities))
 		{
@@ -157,11 +157,11 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 		}
 	}
 
-	private void buildTree(TreeNode parent, List<ACTIVITY> activities)
+	private void buildTree(TreeNode<ACTIVITY> parent, List<ACTIVITY> activities)
 	{
 		for(ACTIVITY s : activities)
 		{
-			TreeNode n = new DefaultTreeNode(s, parent);
+			TreeNode<ACTIVITY> n = new DefaultTreeNode<>(s, parent);
 			List<ACTIVITY> childActivities = fAm.allOrderedPositionParent(fbAm.getClassActivity(),s,true);
 			if(!childActivities.isEmpty()) {buildTree(n,childActivities);}
 		}
@@ -173,15 +173,15 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<ACTIVITY> dragNode = event.getDragNode();
+        TreeNode<ACTIVITY> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + "Dropped on " + dropNode.getData() + " at " + dropIndex);
 
         logger.info("Childs of "+dropNode.getData());
         ACTIVITY parent = (ACTIVITY)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<ACTIVITY> n : dropNode.getChildren())
         {
         	ACTIVITY child =(ACTIVITY)n.getData();
         	ACTIVITY db = fAm.find(fbAm.getClassActivity(),child);
@@ -218,7 +218,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 		boolean appendToTree = EjbIdFactory.isUnSaved(activity);
 
 		activity = fAm.save(activity);
-		if(appendToTree) {new DefaultTreeNode(activity,tree);}
+		if(appendToTree) {new DefaultTreeNode<>(activity,tree);}
 		reloadActivity();
 	}
 

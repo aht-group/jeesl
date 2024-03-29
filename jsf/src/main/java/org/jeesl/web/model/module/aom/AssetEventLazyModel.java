@@ -19,6 +19,7 @@ import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 	}
 
 	@Override public EVENT getRowData(String rowKey){return llh.getRowData(list,rowKey);}
-    @Override public Object getRowKey(EVENT account) {return llh.getRowKey(account);}
+    @Override public String getRowKey(EVENT account) {return llh.getRowKey(account);}
     public void clear() {list.clear();}
 
     public void reloadScope(JeeslAomFacade<?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,?> fAsset, ASSET asset)
@@ -73,7 +74,8 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 		}
     }
 
-	@Override public List<EVENT> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
+    @Override public int count(Map<String,FilterMeta> filterBy) {return llh.size();}
+	@Override public List<EVENT> load(int first, int pageSize, Map<String,SortMeta> sortBy, Map<String,FilterMeta> filterBy)
 	{
 		llh.clear();
 		for(EVENT event : list)
@@ -86,7 +88,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 			if(thfTypeMatches || sbhTypeMatches){llh.add(event);}
 		}
 
-		if(sortField != null)
+		if(sortBy != null)
 		{
 
 		}
@@ -96,7 +98,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 //			Collections.sort(llh.getTmp(),cpBeneficiary);
 		}
 
-		this.setRowCount(llh.size());
+//		this.setRowCount(llh.size());
 
 		List<EVENT> x = llh.paginator(first,pageSize);
 		logger.info("Rows "+this.getRowCount()+" x:"+x.size());

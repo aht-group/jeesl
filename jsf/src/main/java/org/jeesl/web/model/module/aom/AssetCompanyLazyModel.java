@@ -13,6 +13,7 @@ import org.jeesl.jsf.util.JeeslLazyListHandler;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,14 +53,14 @@ public class AssetCompanyLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
     	llh.clear();
     }
 
-	@Override public Object getRowKey(COMPANY account) {return llh.getRowKey(account);}
+	@Override public String getRowKey(COMPANY account) {return llh.getRowKey(account);}
 	@Override public COMPANY getRowData(String rowKey)
 	{
 		return llh.getRowData(cache.getCachedAllCompanies().get(identifier), rowKey);
 	}
    
-    @Override
-	public List<COMPANY> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
+	@Override public int count(Map<String,FilterMeta> filterBy) {return llh.size();}
+    @Override public List<COMPANY> load(int first, int pageSize, Map<String,SortMeta> sortBy, Map<String,FilterMeta> filterBy)
 	{
 		llh.clear();
 		List<COMPANY> list = new ArrayList<>();
@@ -71,7 +72,7 @@ public class AssetCompanyLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 			{llh.add(item);}
 		}
 
-		if(sortField != null)
+		if(sortBy != null)
 		{
 
 		}

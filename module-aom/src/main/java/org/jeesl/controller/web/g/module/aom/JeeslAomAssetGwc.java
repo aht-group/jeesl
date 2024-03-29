@@ -113,8 +113,8 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
     
 	private final Set<ASSET> path;
 
-	private TreeNode tree; public TreeNode getTree() {return tree;}
-    private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
+	private TreeNode<ASSET> tree; public TreeNode<ASSET> getTree() {return tree;}
+    private TreeNode<ASSET> node; public TreeNode<ASSET> getNode() {return node;} public void setNode(TreeNode<ASSET> node) {this.node = node;}
 
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
@@ -213,7 +213,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		List<ASSET> assets = fAom.fAomAssets(identifier);
 		if(Objects.nonNull(jogger)) {jogger.milestone(fbAsset.getClassAsset(),"fAomAssets(identifier)",assets.size());}
 		
-		tree = new DefaultTreeNode();
+		tree = new DefaultTreeNode<>();
 		TreeHelper.buildTree(tree,assets);
 		if(Objects.nonNull(jogger)) {jogger.milestone(tree.getClass(),"TreeHelper.buildTree",assets.size());}
 
@@ -224,11 +224,11 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 //		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
 	}
 	
-	private void buildTree(TreeNode parent, List<ASSET> assets)
+	private void buildTree(TreeNode<ASSET> parent, List<ASSET> assets)
 	{
 		for(ASSET a : assets)
 		{
-			TreeNode n = new DefaultTreeNode(a,parent);
+			TreeNode<ASSET> n = new DefaultTreeNode<>(a,parent);
 			n.setExpanded(path.contains(a));
 			if(Objects.nonNull(jogger)) {jogger.loopStart(Loop.treeAllForParent);}
 			List<ASSET> childs = fAom.allForParent(fbAsset.getClassAsset(),a);
@@ -304,14 +304,14 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<ASSET> dragNode = event.getDragNode();
+        TreeNode<ASSET> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + " Dropped on " + dropNode.getData() + " at " + dropIndex);
         
         ASSET parent = (ASSET)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<ASSET> n : dropNode.getChildren())
         {
     		ASSET child =(ASSET)n.getData();
     		child.setParent(parent);

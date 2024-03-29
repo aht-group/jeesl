@@ -5,9 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.primefaces.event.ScheduleEntryMoveEvent;
+import org.primefaces.model.ScheduleDisplayMode;
 import org.primefaces.model.ScheduleEvent;
-import org.primefaces.model.ScheduleRenderingMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,20 +55,40 @@ public class JeeslCalendarEvent implements Serializable,ScheduleEvent<EjbWithId>
 		return sb.toString();
 	}
 
-	public static String debug(ScheduleEntryMoveEvent move)
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append(ScheduleEntryMoveEvent.class.getSimpleName());
-		sb.append(" dDay:").append(move.getDayDelta());
-		sb.append(" dMinute:").append(move.getMinuteDelta());
-		sb.append(" ").append(((JeeslCalendarEvent)move.getScheduleEvent()).toString());
-		return sb.toString();
-	}
-
 	@Override public EjbWithId getData() {return null;}
 	@Override public String getUrl() {return null;}
-	@Override public ScheduleRenderingMode getRenderingMode() {return null;}
+	
 	@Override public Map<String, Object> getDynamicProperties() {return null;}
 	@Override public String getGroupId() {return null;}
 	@Override public boolean isOverlapAllowed() {return false;}
+	@Override
+	public ScheduleDisplayMode getDisplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getBackgroundColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getBorderColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getTextColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Boolean isDraggable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Boolean isResizable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

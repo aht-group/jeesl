@@ -24,7 +24,7 @@ public class JeeslLazyListHandler <T extends EjbWithId>
 	public void add(T t) {tmp.add(t);}
 	public int size() {return tmp.size();}
 	
-	public Object getRowKey(T t) {return t.getId();}
+	public String getRowKey(T t) {return Long.valueOf(t.getId()).toString();}
 	public T getRowData(List<T> list, String rowKey)
 	{
 		long id = new Long(rowKey).longValue();
