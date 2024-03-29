@@ -27,20 +27,16 @@ import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.NodeCollapseEvent;
 import org.primefaces.event.NodeExpandEvent;
@@ -143,6 +139,12 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		List<M> list = new ArrayList<>();
 		if(sbhContext.isSelected())
 		{
+			EjbSecurityQuery<CTX> query = new EjbSecurityQuery<>();
+			
+			query.addRootFetch(JeeslSecurityMenu.Attributes.context);
+			query.orderBy(CqOrdering.ascending(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.id));
+			query.orderBy(CqOrdering.ascending(JeeslSecurityMenu.Attributes.position));
+			
 			list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,sbhContext.getSelection()));
 			if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+sbhContext.getSelection().getCode());}
 		}
