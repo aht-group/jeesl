@@ -10,7 +10,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
-import org.jeesl.util.query.ejb.io.EjbIoDbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,4 +50,5 @@ public class EjbSecurityQuery <CTX extends JeeslSecurityContext<?,?>>
 	public EjbSecurityQuery<CTX> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	private List<CTX> securityContext; @Override public List<CTX> getSecurityContext() {return securityContext;}
+	public EjbSecurityQuery<CTX> add(CTX context) {if(Objects.isNull(securityContext)) {securityContext = new ArrayList<>();} securityContext.add(context); return this;}
 }
