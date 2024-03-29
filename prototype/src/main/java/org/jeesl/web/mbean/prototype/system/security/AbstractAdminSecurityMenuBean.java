@@ -112,7 +112,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 		documents = new ArrayList<>();
 	}
 
-	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
+	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 	                              JeeslTranslationBean<L,D,LOC> bTranslation,
 	                              JeeslFacesMessageBean bMessage,
 	                              JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,

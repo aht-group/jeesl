@@ -22,6 +22,12 @@ public class SortByPredicateBuilder
 		else if(sortBy.getOrder()==SortOrder.DESCENDING) {orders.add(cB.desc(eInteger));}
 	}
 	
+	public static void addByLong(CriteriaBuilder cB, List<Order> orders, CqOrdering sortBy, Expression<Long> eLong)
+	{
+		if(sortBy.getOrder()==SortOrder.ASCENDING) {orders.add(cB.asc(eLong));}
+		else if(sortBy.getOrder()==SortOrder.DESCENDING) {orders.add(cB.desc(eLong));}
+	}
+	
 	public static void addByString(CriteriaBuilder cB, List<Order> orders, CqOrdering sortBy, Expression<String> eString)
 	{
 		if(sortBy.getOrder()==SortOrder.ASCENDING) {orders.add(cB.asc(eString));}

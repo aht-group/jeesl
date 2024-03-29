@@ -62,7 +62,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	
 	private enum Fm {category}
 	
-	protected JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	protected JeeslSecurityCategory.Type categoryType;
 	
 	protected JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
@@ -117,7 +117,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 	}
 	
-	public void postConstructSecurity(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
+	public void postConstructSecurity(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 									JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{

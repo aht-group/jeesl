@@ -38,7 +38,7 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	
 //	public Boolean getTupleLoad() {return isTupleLoad();}
 	
-	//IDs
+	//JEESL CQ
 	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(CqId cq) {super.addId(cq); return this;}
 	
 	//Fetches

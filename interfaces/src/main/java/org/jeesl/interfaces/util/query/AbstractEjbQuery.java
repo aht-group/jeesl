@@ -56,11 +56,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	private Integer maxResults;
 	@Override public Integer getMaxResults() {return maxResults;}
 	@Override public void setMaxResults(Integer maxResults) {this.maxResults = maxResults;}
-	
-	//IDs
-	protected List<CqId> ids; @Override public List<CqId> getIds() {return ids;}
-	protected void addId(CqId literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
-	
+		
 	protected Long id1;
 	public Long getId1() {return id1;}
 	
@@ -110,18 +106,26 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	
 	protected LocalDate ld3; public LocalDate getLd3() {return ld3;}
 	
-	//CQ Entites
-	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
-	public void addProtected(CqDate date) {if(Objects.isNull(localDates)) {localDates = new ArrayList<>();} localDates.add(date);}
-	
-	protected List<CqLiteral> literals; @Override public List<CqLiteral> getLiterals() {return literals;}
-	protected void addProtected(CqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
-	
+	//JEESL-CQ
+	protected List<CqId> ids; @Override public List<CqId> getIds() {return ids;}	
 	protected List<CqBool> booleans; @Override public List<CqBool> getBools() {return booleans;}
-	protected void addProtected(CqBool cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
-	
 	protected List<CqInteger> integers; @Override public List<CqInteger> getIntegers() {return integers;}
+	protected List<CqLiteral> literals; @Override public List<CqLiteral> getLiterals() {return literals;}
+	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
+	private List<CqOrdering> orderings; @Override public List<CqOrdering> getOrderings() {return orderings;}
+	
+	protected void addId(CqId literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
+	protected void addProtected(CqBool cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
 	protected void addProtected(CqInteger i) {if(Objects.isNull(integers)) {integers = new ArrayList<>();} integers.add(i);}
+	protected void addProtected(CqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
+	protected void addProtected(CqDate date) {if(Objects.isNull(localDates)) {localDates = new ArrayList<>();} localDates.add(date);}
+	protected void addOrdering(CqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
+	
+	//GraphFetch
+	private List<CqFetch> graphFetches;
+	@Override public List<CqFetch> getGraphFetches() {return graphFetches;}
+	protected void addGraphFetch(CqFetch fetch) {if(Objects.isNull(graphFetches)) {graphFetches = new ArrayList<>();} graphFetches.add(fetch);}
+	
 	
 	//Strings
 	private String string1;
@@ -141,15 +145,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public Boolean getBool1() {return bool1;}
 	@Override public void setBool1(Boolean bool1) {this.bool1 = bool1;}
 	
-	//Sorting
-	private List<CqOrdering> orderings;
-	@Override public List<CqOrdering> getOrderings() {return orderings;}
-	protected void addOrdering(CqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
-	
-	//GraphFetch
-	private List<CqFetch> graphFetches;
-	@Override public List<CqFetch> getGraphFetches() {return graphFetches;}
-	protected void addGraphFetch(CqFetch fetch) {if(Objects.isNull(graphFetches)) {graphFetches = new ArrayList<>();} graphFetches.add(fetch);}
+
 	
 	private String sortBy; //@Override public String getSortBy() {return sortBy;}
 	private boolean sortAscending; //@Override public boolean isSortAscending() {return sortAscending;}

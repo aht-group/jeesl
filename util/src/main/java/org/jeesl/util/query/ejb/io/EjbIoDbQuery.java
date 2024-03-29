@@ -41,6 +41,7 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	public <E extends Enum<E>> EjbIoDbQuery<SYSTEM,SNAP> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
+	//JEESL-CQ
 	public EjbIoDbQuery<SYSTEM,SNAP> orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
 	
 	//Lists
