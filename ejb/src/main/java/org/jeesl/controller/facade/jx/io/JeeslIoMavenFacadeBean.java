@@ -329,9 +329,9 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		if(ObjectUtils.isNotEmpty(query.getLiterals()))
+		if(ObjectUtils.isNotEmpty(query.getCqLiterals()))
 		{
-			for(JeeslCqLiteral cql : query.getLiterals())
+			for(JeeslCqLiteral cql : query.getCqLiterals())
 			{
 				if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.code)))
 				{

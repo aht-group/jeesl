@@ -43,7 +43,7 @@ public class EjbIoMavenQuery extends AbstractEjbQuery
 	public <E extends Enum<E>> EjbIoMavenQuery addRootFetch(E e) {if(Objects.isNull(rootFetches)) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
-	@Override public EjbIoMavenQuery add(JeeslCqLiteral literal) {super.addProtected(literal); return this;}
+	@Override public EjbIoMavenQuery add(JeeslCqLiteral literal) {super.addCqLiteral(literal); return this;}
 	@Override public EjbIoMavenQuery orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
 	@Override public EjbIoMavenQuery add(CqBool bool) {super.addProtected(bool); return this;}
 	

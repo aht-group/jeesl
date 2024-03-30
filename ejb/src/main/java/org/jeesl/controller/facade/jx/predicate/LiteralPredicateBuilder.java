@@ -25,4 +25,6 @@ public class LiteralPredicateBuilder
 			default: logger.error("NYI Type: "+lit.toString());
 		}
 	}
+	
+
 }

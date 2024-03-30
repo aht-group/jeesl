@@ -123,9 +123,9 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
 		Root<RE> root = cQ.from(fbRevision.getClassEntity());
 		
-		if(ObjectUtils.isNotEmpty(query.getLiterals()))
+		if(ObjectUtils.isNotEmpty(query.getCqLiterals()))
 		{
-			for(JeeslCqLiteral lit : query.getLiterals())
+			for(JeeslCqLiteral lit : query.getCqLiterals())
 			{
 				if(lit.getPath().equals(CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)))
 				{

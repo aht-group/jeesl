@@ -8,6 +8,6 @@ import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 public interface JeeslIoLabelQuery<ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>
 >
 {
-	List<JeeslCqLiteral> getLiterals();
+	List<JeeslCqLiteral> getCqLiterals();
 	JeeslIoLabelQuery<ENTITY> add(JeeslCqLiteral literal);
 }

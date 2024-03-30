@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +18,7 @@ import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.primefaces.model.FilterMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,14 +113,15 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<CqId> ids; @Override public List<CqId> getIds() {return ids;}	
 	protected List<CqBool> booleans; @Override public List<CqBool> getBools() {return booleans;}
 	protected List<CqInteger> integers; @Override public List<CqInteger> getIntegers() {return integers;}
-	protected List<JeeslCqLiteral> literals; @Override public List<JeeslCqLiteral> getLiterals() {return literals;}
+	protected List<JeeslCqLiteral> literals; @Override public List<JeeslCqLiteral> getCqLiterals() {return literals;}
 	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
 	private List<CqOrdering> orderings; @Override public List<CqOrdering> getOrderings() {return orderings;}
 	
+	@Override public void addCqLiteral(JeeslCqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
 	protected void addId(CqId literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
 	protected void addProtected(CqBool cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
 	protected void addProtected(CqInteger i) {if(Objects.isNull(integers)) {integers = new ArrayList<>();} integers.add(i);}
-	protected void addProtected(JeeslCqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
+	
 	protected void addProtected(CqDate date) {if(Objects.isNull(localDates)) {localDates = new ArrayList<>();} localDates.add(date);}
 	protected void addOrdering(CqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
 	
@@ -178,4 +182,15 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {list.add(l.toString());}}
 		return list;
 	}
+	
+//	public void applyPrimefaces(Map<String,FilterMeta> filterBy)
+//	{
+//		if(Objects.nonNull(filterBy))
+//		{
+//			for(FilterMeta meta : filterBy.values().stream().filter(m -> Objects.nonNull(m.getFilterValue())).collect(Collectors.toList()))
+//			{
+//				query.addCqLiteral(CqLiteral.contains(meta.getFilterValue().toString(),meta.getFilterField()));
+//			}
+//		}
+//	}
 }

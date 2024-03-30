@@ -4,13 +4,15 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.interfaces.util.query.cq.JeeslCqLiteralQuery;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslCoreQuery extends Serializable
+public interface JeeslCoreQuery extends Serializable,JeeslCqLiteralQuery
 {
 	Boolean getDistinct();
-	Boolean getTupleLoad();
 	Integer getFirstResult();
 	Integer getMaxResults();
+	
+	Boolean getTupleLoad();
 }

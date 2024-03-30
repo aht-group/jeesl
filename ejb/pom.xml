@@ -164,6 +164,14 @@
 			<artifactId>hibernate-envers</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!--
+		<dependency>  
+   			<groupId>org.primefaces</groupId>  
+   			<artifactId>primefaces</artifactId>
+   			<scope>provided</scope>
+		</dependency>
+		-->
       
 		<!-- REST --> 
 		<dependency>

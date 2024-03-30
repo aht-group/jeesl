@@ -44,5 +44,5 @@ public class EjbIoLabelQuery<ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>
 	@Override public EjbIoLabelQuery<ENTITY> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbIoLabelQuery<ENTITY> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
-	@Override public EjbIoLabelQuery<ENTITY> add(JeeslCqLiteral literal) {super.addProtected(literal); return this;}
+	@Override public EjbIoLabelQuery<ENTITY> add(JeeslCqLiteral literal) {super.addCqLiteral(literal); return this;}
 }

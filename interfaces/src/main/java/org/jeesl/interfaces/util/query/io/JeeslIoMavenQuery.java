@@ -21,7 +21,7 @@ public interface JeeslIoMavenQuery <
 							>
 			extends JeeslCoreQuery
 {
-	List<JeeslCqLiteral> getLiterals();
+	List<JeeslCqLiteral> getCqLiterals();
 	List<CqOrdering> getOrderings();
 	List<CqBool> getBools();
 	
