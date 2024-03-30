@@ -10,5 +10,4 @@ public interface JeeslJobQuery <TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>>
 	JeeslJobQuery<TEMPLATE> add(TEMPLATE template);
 	
 	Boolean getTupleLoad();
-	
 }

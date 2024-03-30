@@ -53,6 +53,7 @@ public class EjbDiaryQuery <BOOK extends JeeslJournalBook<SCOPE,ITEM>,
 	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
+	
 	private List<BOOK> books;
 	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> add(BOOK calendar) {if(Objects.isNull(books)) {books = new ArrayList<>();} books.add(calendar); return this;}
 	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> addCalendars(List<BOOK> list) {if(Objects.isNull(books)) {books = new ArrayList<>();} books.addAll(list); return this;}
