@@ -47,6 +47,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
 import org.jeesl.model.ejb.io.db.CqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
 import org.jeesl.util.query.sql.SqlNativeQueryHelper;
 import org.jeesl.util.query.sql.SqlRevisionQueries;
@@ -127,7 +128,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		
 		if(ObjectUtils.isNotEmpty(query.getLiterals()))
 		{
-			for(CqLiteral lit : query.getLiterals())
+			for(JeeslCqLiteral lit : query.getLiterals())
 			{
 				if(lit.getPath().equals(CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)))
 				{

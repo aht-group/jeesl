@@ -11,8 +11,8 @@ import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.ejb.io.db.CqInteger;
-import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
@@ -38,7 +38,7 @@ public interface JeeslQuery extends Serializable,JeeslCoreQuery
 	List<CqFetch> getGraphFetches();
 	
 	List<CqOrdering> getOrderings();
-	List<CqLiteral> getLiterals();
+	List<JeeslCqLiteral> getLiterals();
 	List<CqDate> getLocalDates();
 	List<CqId> getIds();
 	List<CqBool> getBools();
