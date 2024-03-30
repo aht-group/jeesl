@@ -45,10 +45,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.model.ejb.io.db.CqBool;
-import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

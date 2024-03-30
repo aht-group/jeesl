@@ -55,12 +55,12 @@ import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSearchHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
-import org.jeesl.util.query.cq.io.EjbIoLabelQuery;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
+import org.jeesl.util.query.ejb.io.EjbIoLabelQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

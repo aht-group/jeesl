@@ -1,6 +1,9 @@
-package org.jeesl.model.ejb.io.db;
+package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
+
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 
 public class CqLiteral implements JeeslCqLiteral
 {
