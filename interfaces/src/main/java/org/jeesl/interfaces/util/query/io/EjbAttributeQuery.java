@@ -18,6 +18,7 @@ public class EjbAttributeQuery<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?
 								CONTAINER extends JeeslAttributeContainer<?,DATA>,
 								DATA extends JeeslAttributeData<CRITERIA,?,CONTAINER>>
 			extends AbstractEjbQuery
+			implements JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA>
 {
 	private static final long serialVersionUID = 1L;
 	
