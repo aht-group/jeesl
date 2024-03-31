@@ -20,24 +20,24 @@ import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.system.DateUtil;
-import org.jeesl.api.facade.module.JeeslLogFacade;
+import org.jeesl.api.facade.module.JeeslJournalFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.LogFactoryBuilder;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
 import org.jeesl.interfaces.model.module.journal.JeeslWithJournal;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.module.EjbDiaryQuery;
+import org.jeesl.interfaces.util.query.module.JeeslJournalQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
+public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									LOG extends JeeslJournalBook<SCOPE,ITEM>,
 									SCOPE extends JeeslJournalScope<L,D,SCOPE,?>,
 									ITEM extends JeeslJournalItem<L,D,?,?,LOG,IMPACT,CONF,USER>,
@@ -46,15 +46,15 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									USER extends EjbWithId
 									>
 					extends JeeslFacadeBean
-					implements JeeslLogFacade<L,D,LOG,SCOPE,ITEM,IMPACT,CONF,USER>
+					implements JeeslJournalFacade<L,D,LOG,SCOPE,ITEM,IMPACT,CONF,USER>
 {	
 	private static final long serialVersionUID = 1L;
 
-	final static Logger logger = LoggerFactory.getLogger(JeeslLogFacadeBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslJournalFacadeBean.class);
 	
 	private final LogFactoryBuilder<L,D,LOG,SCOPE,ITEM,IMPACT,CONF,USER> fbLog;
 	
-	public JeeslLogFacadeBean(EntityManager em, final LogFactoryBuilder<L,D,LOG,SCOPE,ITEM,IMPACT,CONF,USER> fbLog)
+	public JeeslJournalFacadeBean(EntityManager em, final LogFactoryBuilder<L,D,LOG,SCOPE,ITEM,IMPACT,CONF,USER> fbLog)
 	{
 		super(em);
 		this.fbLog=fbLog;
@@ -142,7 +142,7 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	}
 
 	@Override
-	public List<ITEM> fDiaryItems(EjbDiaryQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
+	public List<ITEM> fDiaryItems(JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
 	{
 		// TODO Auto-generated method stub
 		return null;
