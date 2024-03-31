@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.util.query.module;
+package org.jeesl.util.query.ejb.module;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
