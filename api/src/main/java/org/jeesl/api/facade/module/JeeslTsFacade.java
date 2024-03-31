@@ -26,7 +26,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
-import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
+import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
@@ -52,7 +52,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 								CRON extends JeeslTsCron<SCOPE,INTERVAL,STATISTIC>>
 			extends JeeslFacade
 {	
-	List<SCOPE> fTsScopes(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<EC> findClasses(Class<EC> cClass, Class<CATEGORY> cCategory, List<CATEGORY> categories, boolean showInvisibleClasses);
 	
 	<T extends EjbWithId> BRIDGE fBridge(EC entityClass, T ejb) throws JeeslNotFoundException;
@@ -66,11 +66,11 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 
 	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
 	List<TS> fTimeSeries(SCOPE scope, INTERVAL interval, EC entityClass);
-	List<TS> fTimeSeries(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<TS> fTimeSeries(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	
 	DATA fDataLast(TS series) throws JeeslNotFoundException;
 	
-	List<DATA> fData(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<DATA> fData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);
@@ -87,5 +87,5 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	void deleteTransaction(TX transaction) throws JeeslConstraintViolationException;
 	
 	JsonTuples1<TS> tpcTsDataByTs(List<TS> series);
-	JsonTuples1<TX> tpcTsDataByTx(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 }
