@@ -42,7 +42,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.module.EjbAomQuery;
+import org.jeesl.interfaces.util.query.module.JeeslAomQuery;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
@@ -379,7 +379,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return tQ.getResultList();
 	}
 	
-	@Override public List<EVENT> fAomEvents(EjbAomQuery<ASSET, EVENT> query)
+	@Override public List<EVENT> fAomEvents(JeeslAomQuery<ASSET,EVENT> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<EVENT> cQ = cB.createQuery(fbAsset.getClassEvent());

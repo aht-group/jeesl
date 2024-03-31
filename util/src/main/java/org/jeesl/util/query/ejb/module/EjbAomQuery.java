@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.util.query.module;
+package org.jeesl.util.query.ejb.module;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
+import org.jeesl.interfaces.util.query.module.JeeslAomQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,7 @@ public class EjbAomQuery<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 							EVENT extends JeeslAomEvent<?,ASSET,?,?,?,?,?>
 >
 			extends AbstractEjbQuery
+			implements JeeslAomQuery<ASSET,EVENT>
 {
 	private static final long serialVersionUID = 1L;
 	
