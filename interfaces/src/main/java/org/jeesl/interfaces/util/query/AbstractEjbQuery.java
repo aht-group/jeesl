@@ -168,6 +168,8 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 			if(firstResult!=null){logger.info(StringUtils.repeat("\t",ident)+"firstResult: "+firstResult);}
 			if(maxResults!=null){logger.info(StringUtils.repeat("\t",ident)+"maxResults: "+maxResults);}
 			if(Objects.nonNull(tupleLoad)) {logger.info("Tuple-Load: "+tupleLoad);}
+			
+			if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral c : literals) {logger.info(c.toString());}}
 		}
 	}
 	
