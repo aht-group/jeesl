@@ -1,4 +1,4 @@
-package org.jeesl.util.query.ejb;
+package org.jeesl.util.query.cq;
 
 import java.util.List;
 import java.util.Map;
