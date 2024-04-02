@@ -7,7 +7,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 
 import org.jeesl.controller.facade.jx.io.JeeslIoMavenFacadeBean;
-import org.jeesl.model.ejb.io.db.CqId;
+import org.jeesl.util.query.cq.CqLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ public class LongPredicateBuilder
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
 		
-	public static void add(CriteriaBuilder cB, List<Predicate> predicates, CqId c, Expression<Long> e)
+	public static void add(CriteriaBuilder cB, List<Predicate> predicates, CqLong c, Expression<Long> e)
 	{
 		switch(c.getType())
 		{

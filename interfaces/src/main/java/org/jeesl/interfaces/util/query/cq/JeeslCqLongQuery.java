@@ -9,5 +9,5 @@ public interface JeeslCqLongQuery extends Serializable
 {	
 	List<JeeslCqLong> getCqLongs();
 	
-//	void addCqLong(JeeslCqLong c);
+	void addCqLong(JeeslCqLong c);
 }

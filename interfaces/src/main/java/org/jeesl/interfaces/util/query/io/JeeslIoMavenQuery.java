@@ -23,7 +23,6 @@ public interface JeeslIoMavenQuery <
 {
 	List<JeeslCqLiteral> getCqLiterals();
 	List<CqOrdering> getOrderings();
-	List<CqBool> getBools();
 	
 	boolean isDistinct();
 //	void x();

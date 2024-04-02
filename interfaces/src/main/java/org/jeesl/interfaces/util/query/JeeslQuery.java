@@ -44,7 +44,6 @@ public interface JeeslQuery extends JeeslCoreQuery
 	
 	List<CqDate> getLocalDates();
 	
-	List<CqBool> getBools();
 	List<CqInteger> getIntegers();
 	
 	

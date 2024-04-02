@@ -46,6 +46,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.util.query.cq.CqLiteral;
@@ -212,9 +213,9 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 			predicates.add(jArtifact.in(query.getIoMavenArtifacts()));
 		}
 		
-		if(ObjectUtils.isNotEmpty(query.getBools()))
+		if(ObjectUtils.isNotEmpty(query.getCqBooleans()))
 		{
-			for(CqBool cqb : query.getBools())
+			for(JeeslCqBoolean cqb : query.getCqBooleans())
 			{
 				if(cqb.getPath().equals(CqBool.path(JeeslIoMavenEeReferral.Attributes.recommendation)))
 				{
