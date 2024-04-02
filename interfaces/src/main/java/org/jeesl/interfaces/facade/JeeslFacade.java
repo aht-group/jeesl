@@ -76,7 +76,7 @@ public interface JeeslFacade extends JeeslIdFacade
 	
 	//Category,Type,Status ...
 	<C extends JeeslStatus<?,?,C>, W extends JeeslWithContext<C>> List<W> allForContext(Class<W> w, C context);
-	<L extends JeeslLang, D extends JeeslDescription, C extends JeeslStatus<L,D,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C category);
+	<C extends JeeslStatus<?,?,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C category);
 	<L extends JeeslLang, D extends JeeslDescription, T extends JeeslStatus<L,D,T>, W extends JeeslWithType<T>> List<W> allForType(Class<W> w, T type);
 	<L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, W extends JeeslWithStatus<S>> List<W> allForStatus(Class<W> w, S status);
 	

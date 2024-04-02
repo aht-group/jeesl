@@ -55,7 +55,7 @@ public class SecurityUsecaseUpdater <L extends JeeslLang,
 	private JeeslDbCodeEjbUpdater<U> updateUsecases;
 	
 	public SecurityUsecaseUpdater(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity,
-									JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
+									JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity)
 	{       
         super(fbSecurity,fSecurity);
 	}
@@ -63,7 +63,7 @@ public class SecurityUsecaseUpdater <L extends JeeslLang,
 	@Override public DataUpdate iuSecurityUsecases(Security usecases)
 	{
 		logger.trace("iuSecurityUsecases starting ..."+fSecurity.allForType(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.usecase.toString()).size());
-		updateUsecases = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassUsecase());
+		updateUsecases = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassUsecase());
 		updateUsecases.dbEjbs(fSecurity.all(fbSecurity.getClassUsecase()));
 
 		DataUpdate du = XmlDataUpdateFactory.build();

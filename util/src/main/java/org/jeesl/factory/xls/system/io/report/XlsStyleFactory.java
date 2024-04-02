@@ -9,62 +9,26 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.jeesl.factory.builder.system.ReportFactoryBuilder;
+import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.txt.system.io.report.TxtIoColumnFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
-import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
-import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
-import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
-import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Creates Apache POI CellStyles from given JEESL ColumnStyles
- * @param <SHEET>
- * @param <GROUP>
- * @param <COLUMN>
- * @param <ROW>
- * @param <TEMPLATE>
- * @param <CELL>
- * @param <STYLE>
- * @param <CDT>
- * @param <CW>
- * @param <RT>
- * @param <ENTITY>
- * @param <ATTRIBUTE>
- * @param <TL>
- * @param <TLS>
- */
-public class XlsStyleFactory<
-								SHEET extends JeeslReportSheet<?,?,?,?,GROUP,ROW>,
-								GROUP extends JeeslReportColumnGroup<?,?,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,TLS>,
-								ROW extends JeeslReportRow<?,?,SHEET,TEMPLATE,CDT,RT>,
-								TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
-								CELL extends JeeslReportCell<?,?,TEMPLATE>,
+public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
+								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,?,?>,
+								ROW extends JeeslReportRow<?,?,?,?,CDT,?>,
 								STYLE extends JeeslReportStyle<?,?>,
-								CDT extends JeeslStatus<?,?,CDT>,
-								CW extends JeeslStatus<?,?,CW>,
-								RT extends JeeslReportRowType<?,?,RT,?>,
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<?,?,TLS>,
-								TLS extends JeeslTrafficLightScope<?,?,TLS,?>>
+								CDT extends JeeslStatus<?,?,CDT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsStyleFactory.class);
-	
-	private Workbook xlsWorkbook;
 	
 	private Map<STYLE,CellStyle>	mapHeader;
 	private Map<COLUMN,CellStyle>	mapHeaderStyles;
@@ -82,14 +46,11 @@ public class XlsStyleFactory<
 	
 	// Factories
 	private TxtIoColumnFactory<COLUMN> tfColumn;
-	private final EjbIoReportColumnFactory<?,?,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> efColumn;
+	private final EjbIoReportColumnFactory<?,?,?,GROUP,COLUMN,ROW,?,STYLE,CDT,?,?> efColumn;
 	
-	public XlsStyleFactory(final ReportFactoryBuilder<?,?,?,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport,
+	public XlsStyleFactory(final IoReportFactoryBuilder<?,?,?,?,?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,CDT,?,?,?,?,?,?,?,?,?> fbReport,
 							Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
 	{
-		
-		this.xlsWorkbook	= xlsWorkbook;
-		
 		efColumn			= fbReport.column();
 		tfColumn			= new TxtIoColumnFactory<COLUMN>("en");
 		
@@ -102,7 +63,7 @@ public class XlsStyleFactory<
 		mapRowDataType	= new HashMap<>();
 		
 		// Prepare the default styles and cache Maps
-        setupFallbackStyles(xlsWorkbook);
+        this.setupFallbackStyles(xlsWorkbook);
 		
 		for(ROW r : ioRows)
 		{

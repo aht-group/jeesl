@@ -9,6 +9,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -23,8 +24,6 @@ import org.jeesl.jsf.handler.PositionListReorderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class JeeslSecurityContextController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CTX extends JeeslSecurityContext<L,D>>
 			extends AbstractJeeslLocaleWebController<L,D,LOC>
@@ -34,7 +33,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityContextController.class);
 	
 	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,?,?,?,?,?> fbSecurity;
-	private JeeslSecurityFacade<?,?,?,?,?,?,?> fSecurity;
+	private JeeslSecurityFacade<?,?,?,?,?,CTX,?,?> fSecurity;
 	
 	private final EjbSecurityContextFactory<CTX> efContext;
 	
@@ -54,7 +53,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	}
 	
 	public void postConstructContext(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslSecurityFacade<?,?,?,?,?,?,?> fSecurity)
+											JeeslSecurityFacade<?,?,?,?,?,CTX,?,?> fSecurity)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity = fSecurity;

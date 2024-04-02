@@ -15,49 +15,34 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
-import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
-import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
-import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
-							IMPLEMENTATION extends JeeslStatus<?,?,IMPLEMENTATION>,
-							WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-							SHEET extends JeeslReportSheet<?,?,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
-							GROUP extends JeeslReportColumnGroup<?,?,SHEET,COLUMN,STYLE>,
-							COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,TLS>,
-							ROW extends JeeslReportRow<?,?,SHEET,TEMPLATE,CDT,RT>,
+public class XlsCellFactory <
+							GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
+							COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,?>,
+							ROW extends JeeslReportRow<?,?,?,TEMPLATE,CDT,?>,
 							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
 							STYLE extends JeeslReportStyle<?,?>,
 							CDT extends JeeslStatus<?,?,CDT>,
-							CW extends JeeslStatus<?,?,CW>,
-							RT extends JeeslReportRowType<?,?,RT,?>,
-							ENTITY extends EjbWithId,
-							ATTRIBUTE extends EjbWithId,
-							TL extends JeeslTrafficLight<?,?,TLS>,
-							TLS extends JeeslTrafficLightScope<?,?,TLS,?>>
+							CW extends JeeslStatus<?,?,CW>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsCellFactory.class);
 		
 	private String localeCode;
 	
-	private XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfStyle;
+	private XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,CDT> xfStyle;
 	
-	public XlsCellFactory(String localeCode, XlsStyleFactory<SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfStyle)
+	public XlsCellFactory(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,CDT> xfStyle)
 	{
 		this.localeCode = localeCode;
 		this.xfStyle=xfStyle;

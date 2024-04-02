@@ -6,56 +6,38 @@ import java.util.List;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
-import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
-import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
-import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
-import org.jeesl.interfaces.model.module.workflow.action.JeeslWorkflowAction;
-import org.jeesl.interfaces.model.module.workflow.action.JeeslWorkflowBot;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowDelegate;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowLink;
-import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowActionNotification;
 import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowStageNotification;
-import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowContext;
-import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowDocument;
 import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowProcess;
-import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowModificationLevel;
-import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowPermissionType;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
-import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStagePermission;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStageType;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransition;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
-public interface JeeslWorkflowFacade <WX extends JeeslWorkflowContext<?,?,WX,?>,
-										WP extends JeeslWorkflowProcess<?,?,WX,WS>,
-										WPD extends JeeslWorkflowDocument<?,?,WP>,
-										WS extends JeeslWorkflowStage<?,?,WP,WST,WSP,WT,?>,
+public interface JeeslWorkflowFacade <
+										WP extends JeeslWorkflowProcess<?,?,?,WS>,
+										
+										WS extends JeeslWorkflowStage<?,?,WP,WST,?,WT,?>,
 										WST extends JeeslWorkflowStageType<?,?,WST,?>,
-										WSP extends JeeslWorkflowStagePermission<WS,WPT,WML,SR>,
-										WPT extends JeeslWorkflowPermissionType<?,?,WPT,?>,
-										WML extends JeeslWorkflowModificationLevel<?,?,WML,?>,
-										WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,RE>,
-										WT extends JeeslWorkflowTransition<?,?,WPD,WS,WTT,SR,?>,
+										
+										
+										
+										WSN extends JeeslWorkflowStageNotification<WS,?,?,SR,?>,
+										WT extends JeeslWorkflowTransition<?,?,?,WS,WTT,SR,?>,
 										WTT extends JeeslWorkflowTransitionType<?,?,WTT,?>,
-										AC extends JeeslWorkflowActionNotification<WT,MT,MC,SR,RE>,
-										WA extends JeeslWorkflowAction<WT,AB,AO,RE,RA>,
-										AB extends JeeslWorkflowBot<AB,?,?,?>,
-										AO extends EjbWithId,
-										MT extends JeeslIoTemplate<?,?,?,?,?,?>,
-										MC extends JeeslTemplateChannel<?,?,MC,?>,
+										
+
 										SR extends JeeslSecurityRole<?,?,?,?,?,?>,
-										RE extends JeeslRevisionEntity<?,?,?,?,RA,?>,
-										RA extends JeeslRevisionAttribute<?,?,RE,?,?>,
-										WL extends JeeslWorkflowLink<WF,RE>,
+
+										WL extends JeeslWorkflowLink<WF,?>,
 										WF extends JeeslWorkflow<WP,WS,WY,USER>,
 										WY extends JeeslWorkflowActivity<WT,WF,WD,?,USER>,
 										WD extends JeeslWorkflowDelegate<WY,USER>,

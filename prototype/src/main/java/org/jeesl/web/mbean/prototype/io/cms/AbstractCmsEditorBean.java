@@ -12,6 +12,7 @@ import org.jeesl.api.bean.cache.JeeslCmsCacheBean;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -60,8 +61,6 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										CAT extends JeeslIoCmsCategory<L,D,CAT,?>,
 										CMS extends JeeslIoCms<L,D,LOC,CAT,S>,
@@ -90,6 +89,8 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 
 	private String currentLocaleCode;
 	protected String[] cmsLocales; public String[] getCmsLocales() {return cmsLocales;}
+	
+	private final TreeHelper<S> thSection;
 	
 	protected final EjbIoCmsFactory<L,D,CAT,CMS,V,S,C,MT,LOC> efCms;
 	private final EjbIoCmsSectionFactory<L,S,FM> efS;
@@ -125,6 +126,8 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	{
 		super(fbCms.getClassL(),fbCms.getClassD());
 		this.fbCms=fbCms;
+		
+		thSection = TreeHelper.instance();
 		
 		efCms = fbCms.ejbCms();
 		efS = fbCms.ejbSection();
@@ -436,12 +439,12 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	
 	public void expandTree()
 	{
-		TreeHelper.setExpansion(this.node != null ? this.node : this.tree, true);
+		thSection.setExpansion(this.node != null ? this.node : this.tree, true);
 	}
 	
 	public void collapseTree()
 	{
-		TreeHelper.setExpansion(this.tree,  false);
+		thSection.setExpansion(this.tree,  false);
 	}
 	
 	public boolean isExpanded()

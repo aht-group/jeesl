@@ -43,9 +43,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
-import org.jeesl.model.ejb.io.db.CqId;
+import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.cq.CqLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -549,20 +550,20 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		if(ObjectUtils.isNotEmpty(query.getIds()))
+		if(ObjectUtils.isNotEmpty(query.getCqLongs()))
 		{
-			for(CqId cq : query.getIds())
+			for(JeeslCqLong cq : query.getCqLongs())
 			{
 				Expression<Long> eId = null;
-				if(cq.getPath().equals(CqId.path(JeeslIoSsiData.Attributes.refA))) {eId = ejb.get(JeeslIoSsiData.Attributes.refA.toString());}
-				else if(cq.getPath().equals(CqId.path(JeeslIoSsiData.Attributes.refB))) {eId = ejb.get(JeeslIoSsiData.Attributes.refB.toString());}
-				else if(cq.getPath().equals(CqId.path(JeeslIoSsiData.Attributes.refC))) {eId = ejb.get(JeeslIoSsiData.Attributes.refC.toString());}
+				if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refA))) {eId = ejb.get(JeeslIoSsiData.Attributes.refA.toString());}
+				else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refB))) {eId = ejb.get(JeeslIoSsiData.Attributes.refB.toString());}
+				else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refC))) {eId = ejb.get(JeeslIoSsiData.Attributes.refC.toString());}
 				if(Objects.isNull(eId)) {logger.error("NYI "+cq.toString());}
 				else
 				{
 					switch(cq.getType())
 					{
-						case IsValue: predicates.add(cB.equal(eId,cq.getId())); break;
+						case IsValue: predicates.add(cB.equal(eId,cq.getValue())); break;
 						case IsNull: predicates.add(cB.isNull(eId)); break;
 						default: logger.error("NYI "+cq.toString());
 					}

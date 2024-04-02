@@ -17,7 +17,7 @@ import org.jeesl.controller.handler.system.io.log.DebugJeeslLogger;
 import org.jeesl.controller.processor.JobCodeProcessor;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.builder.system.ReportFactoryBuilder;
+import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
@@ -33,6 +33,7 @@ import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -71,7 +72,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 											CELL extends JeeslReportCell<L,D,TEMPLATE>,
 											STYLE extends JeeslReportStyle<L,D>,
 											CDT extends JeeslStatus<L,D,CDT>,
-											CW extends JeeslStatus<L,D,CW>,
+											CW extends JeeslReportColumnWidth<L,D,CW,?>,
 											RT extends JeeslReportRowType<L,D,RT,?>,
 											RCAT extends JeeslStatus<L,D,RCAT>,
 											ENTITY extends EjbWithId,
@@ -114,12 +115,13 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 	protected FILLING reportFilling;
 	protected TRANSFORMATION reportSettingTransformation; public TRANSFORMATION getReportSettingTransformation() {return reportSettingTransformation;}
 
-	protected final ReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport;
-	protected final EjbLangFactory<L> efLang;
-	protected final EjbIoReportColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> efColumn;
-	private final EjbIoReportColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> efGroup;
+	protected final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport;
 	
-	protected XlsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xlsFactory;
+	protected final EjbLangFactory<L> efLang;
+	protected final EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT> efColumn;
+	private final EjbIoReportColumnGroupFactory<L,D,SHEET,GROUP,COLUMN,STYLE> efGroup;
+	
+	protected XlsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,TRANSFORMATION> xlsFactory;
 	
 	protected JeeslComparatorProvider<EjbWithId> cProvider;
 	
@@ -138,7 +140,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 	private Comparator<ROW> comparatorRow;
 	private Comparator<CELL> comparatorCell;
 
-	public AbstractJeeslReport(String localeCode, final ReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
+	public AbstractJeeslReport(String localeCode, final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
 	{
 		this.fbReport=fbReport;
 		this.localeCode=localeCode;
@@ -167,7 +169,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 		headers = new ArrayList<String>();
 	}
 	
-	protected void initIo(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport, Class<?> classReport)
+	protected void initIo(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport, Class<?> classReport)
 	{
 		if(fReport!=null)
 		{
@@ -187,7 +189,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 					if(!ioWorkbook.getSheets().isEmpty())
 					{
 						Collections.sort(ioWorkbook.getSheets(), comparatorSheet);
-						xlsFactory = new XlsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,fbReport,ioWorkbook);
+						xlsFactory = new XlsFactory<>(localeCode,fbReport,ioWorkbook);
 						
 						ioSheet = fReport.load(ioWorkbook.getSheets().get(0), true);
 						

@@ -1,7 +1,7 @@
 package org.jeesl.factory.json.module.survey;
 
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
-import org.jeesl.model.json.survey.Option;
+import org.jeesl.model.json.module.survey.question.JsonOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,17 +10,17 @@ public class JsonSurveyOptionFactory<OPTION extends JeeslSurveyOption<?,?>>
 	final static Logger logger = LoggerFactory.getLogger(JsonSurveyOptionFactory.class);
 	
 	private final String localeCode;
-	private final Option q;
+	private final JsonOption q;
 	
-	public JsonSurveyOptionFactory(String localeCode, Option q)
+	public JsonSurveyOptionFactory(String localeCode, JsonOption q)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
 	}
 	
-	public Option build(OPTION ejb)
+	public JsonOption build(OPTION ejb)
 	{
-		Option json = build();
+		JsonOption json = build();
 		
 		if(q.getId()!=null) {json.setId(ejb.getId());}
 		if(q.getPosition()!=null) {json.setPosition(ejb.getPosition());}
@@ -35,21 +35,20 @@ public class JsonSurveyOptionFactory<OPTION extends JeeslSurveyOption<?,?>>
 		return json;
 	}
 	
-	public static Option build() {return new Option();}
-	public static Option id(long id)
+	public static JsonOption build() {return new JsonOption();}
+	public static JsonOption id(long id)
 	{
-		Option json = build();
+		JsonOption json = build();
 		json.setId(id);
 		return json;
 	}
-	public static Option id(String code, String lable, String description)
+	public static JsonOption id(String code, String lable, String description)
 	{
-		Option json = build();
+		JsonOption json = build();
 		json.setCode(code);
 		json.setLabel(lable);
 		json.setDescription(description);
 				
 		return json;
 	}
-	
 }

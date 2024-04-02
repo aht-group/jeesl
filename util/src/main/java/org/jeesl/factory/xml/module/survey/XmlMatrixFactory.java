@@ -29,7 +29,7 @@ public class XmlMatrixFactory<
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlMatrixFactory.class);
 	
-	private JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,?,?,?,QUESTION,?,?,?,ANSWER,MATRIX,?,?,OPTION,?> fSurvey;
+	private JeeslSurveyCoreFacade<?,?,?,?,?,?,QUESTION,ANSWER,MATRIX,?,?> fSurvey;
 		
 	private String localeCode;
 	@SuppressWarnings("unused")
@@ -49,14 +49,13 @@ public class XmlMatrixFactory<
 		xfCell = new XmlCellFactory<MATRIX>(localeCode);
 	}
 	
-	public void lazyLoad(JeeslSurveyCoreFacade<?,?,?,?,?,?,?,?,?,?,?,QUESTION,?,?,?,ANSWER,MATRIX,?,?,OPTION,?> fSurvey)
+	public void lazyLoad(JeeslSurveyCoreFacade<?,?,?,?,?,?,QUESTION,ANSWER,MATRIX,?,?> fSurvey)
 	{
 		this.fSurvey=fSurvey;
 	}
 	
 	public Matrix build(ANSWER answer)
 	{
-		
 		QUESTION question = answer.getQuestion();
 		
 		List<OPTION> options = new ArrayList<>();

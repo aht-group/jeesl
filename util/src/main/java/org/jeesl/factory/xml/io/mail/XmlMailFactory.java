@@ -5,7 +5,6 @@ import java.util.Objects;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
-import org.jeesl.factory.xml.system.util.text.XmlExampleFactory;
 import org.jeesl.model.xml.io.mail.EmailAddress;
 import org.jeesl.model.xml.io.mail.Header;
 import org.jeesl.model.xml.io.mail.Mail;

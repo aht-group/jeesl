@@ -37,7 +37,7 @@ public abstract class AbstractSystemPageBean <L extends JeeslLang, D extends Jee
 	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,?,M,?,?,?,?,?,?> fbSecurity;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 	
-	private JeeslSecurityFacade<?,?,V,?,?,M,?> fSecurity;
+	private JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity;
 	
 	private TreeNode tree; public TreeNode getTree() {return tree;}
 	private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
@@ -50,7 +50,7 @@ public abstract class AbstractSystemPageBean <L extends JeeslLang, D extends Jee
 		efMenu = fbSecurity.ejbMenu();
 	}
 	
-	public void postConstructSystemPage(JeeslSecurityFacade<?,?,V,?,?,M,?> fSecurity, JeeslTranslationBean<L,D,?> bTranslation, JeeslFacesMessageBean bMessage)
+	public void postConstructSystemPage(JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity, JeeslTranslationBean<L,D,?> bTranslation, JeeslFacesMessageBean bMessage)
 	{
 		this.fSecurity=fSecurity;
 		reload();

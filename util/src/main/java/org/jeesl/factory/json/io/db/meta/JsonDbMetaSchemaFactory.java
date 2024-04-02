@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSchema;
-import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
-import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
 
 public class JsonDbMetaSchemaFactory
 {

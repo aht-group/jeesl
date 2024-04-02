@@ -2,75 +2,65 @@ package org.jeesl.factory.json.module.survey;
 
 import java.util.ArrayList;
 
-import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
+import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
-import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
-import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyData;
-import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyMatrix;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidationAlgorithm;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.model.json.module.survey.question.JsonOption;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
 import org.jeesl.model.json.survey.Condition;
-import org.jeesl.model.json.survey.Option;
-import org.jeesl.model.json.survey.Question;
 import org.jeesl.model.json.survey.validation.Validation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JsonSurveyQuestionFactory<L extends JeeslLang,D extends JeeslDescription,
-										VALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
-										SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
-										QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
+										ALGORITHM extends JeeslSurveyValidationAlgorithm<L,D>,
+										
+										QUESTION extends JeeslSurveyQuestion<L,D,?,CONDITION,VALIDATION,QE,SCORE,?,?,OPTION,?>,
 										CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
-										VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-										QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+										VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,ALGORITHM>,
+										QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 										SCORE extends JeeslSurveyScore<L,D,?,QUESTION>,
-										UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
-										ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
-										MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
-										DATA extends JeeslSurveyData<L,D,?,ANSWER,?>,
-										OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,
 										OPTION extends JeeslSurveyOption<L,D>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonSurveyQuestionFactory.class);
 	
-	private JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fSurvey;
-	private SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate;
+
+	private JeeslSurveyTemplateFacade<?,?,?,?,?,?,QUESTION,SCORE,?,OPTION> fTemplate;
+	private SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,?,QUESTION,CONDITION,VALIDATION,QE,SCORE,?,?,OPTION> fbTemplate;
 	
 	private final String localeCode;
-	private Question q;
+	private JsonQuestion q;
 	
 	private JsonSurveyOptionFactory<OPTION> jfOption;
 	private JsonSurveyConditionFactory<CONDITION,QE,OPTION> jfCondition;
-	private JsonSurveyValidationFactory<L,D,VALGORITHM,VALIDATION> jfValidation;
+	private JsonSurveyValidationFactory<L,D,ALGORITHM,VALIDATION> jfValidation;
 	
-	public JsonSurveyQuestionFactory(Question q){this(null, q,null,null);}
-	public JsonSurveyQuestionFactory(String localeCode, Question q){this(localeCode, q,null,null);}
-	public JsonSurveyQuestionFactory(String localeCode, Question q,
-			SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-			JeeslSurveyCoreFacade<L,D,?,?,?,?,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fSurvey)
+	public JsonSurveyQuestionFactory(JsonQuestion q) {this(null, q,null,null);}
+	public JsonSurveyQuestionFactory(String localeCode, JsonQuestion q) {this(localeCode, q,null,null);}
+	public JsonSurveyQuestionFactory(String localeCode, JsonQuestion q,
+			SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,?,QUESTION,CONDITION,VALIDATION,QE,SCORE,?,?,OPTION> fbTemplate,
+			JeeslSurveyTemplateFacade<?,?,?,?,?,?,QUESTION,SCORE,?,OPTION> fTemplate)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
 		this.fbTemplate=fbTemplate;
-		this.fSurvey=fSurvey;
+		this.fTemplate=fTemplate;
 		if(q.getOptions()!=null && !q.getOptions().isEmpty()) {jfOption = new JsonSurveyOptionFactory<OPTION>(localeCode,q.getOptions().get(0));}
 		if(q.getConditions()!=null && !q.getConditions().isEmpty()) {jfCondition = new JsonSurveyConditionFactory<CONDITION,QE,OPTION>(localeCode,q.getConditions().get(0));}
-		if(q.getValidations()!=null && !q.getValidations().isEmpty()) {jfValidation = new JsonSurveyValidationFactory<L,D,VALGORITHM,VALIDATION>(localeCode,q.getValidations().get(0));}
+		if(q.getValidations()!=null && !q.getValidations().isEmpty()) {jfValidation = new JsonSurveyValidationFactory<L,D,ALGORITHM,VALIDATION>(localeCode,q.getValidations().get(0));}
 	}
 	
-	public Question build(QUESTION ejb)
+	public JsonQuestion build(QUESTION ejb)
 	{
-		Question json = build();
+		JsonQuestion json = build();
 		
 		if(q.getId()!=null) {json.setId(ejb.getId());}
 		if(q.getVisible()!=null) {json.setVisible(ejb.isVisible());}
@@ -101,40 +91,39 @@ public class JsonSurveyQuestionFactory<L extends JeeslLang,D extends JeeslDescri
 		
 		if(q.getOptions()!=null && !q.getOptions().isEmpty())
 		{
-			ejb = fSurvey.load(ejb);
-			if(!ejb.getOptions().isEmpty()) {json.setOptions(new ArrayList<Option>());}
+			ejb = fTemplate.loadSurveyQuersion(ejb);
+			if(!ejb.getOptions().isEmpty()) {json.setOptions(new ArrayList<JsonOption>());}
 			for(OPTION option : ejb.getOptions())
 			{
 				json.getOptions().add(jfOption.build(option));
 			}
 		}
-		
+
 		if(q.getCondition()!=null) {json.setCondition(ejb.getRenderCondition());}
-		if(q.getConditions()!=null && !q.getConditions().isEmpty() && fSurvey!=null && fbTemplate!=null)
+		if(q.getConditions()!=null && !q.getConditions().isEmpty() && fTemplate!=null && fbTemplate!=null)
 		{
 			json.setConditions(new ArrayList<Condition>());
-			for(CONDITION condition : fSurvey.allForParent(fbTemplate.getClassCondition(), ejb))
+			for(CONDITION condition : fTemplate.allForParent(fbTemplate.getClassCondition(), ejb))
 			{
 				json.getConditions().add(jfCondition.build(condition));
 			}
 		}
-		if(q.getValidations()!=null && !q.getValidations().isEmpty() && fSurvey!=null && fbTemplate!=null)
+		if(q.getValidations()!=null && !q.getValidations().isEmpty() && fTemplate!=null && fbTemplate!=null)
 		{
 			json.setValidations(new ArrayList<Validation>());
-			for(VALIDATION validation : fSurvey.allForParent(fbTemplate.getClassValidation(), ejb))
+			for(VALIDATION validation : fTemplate.allForParent(fbTemplate.getClassValidation(), ejb))
 			{
 				json.getValidations().add(jfValidation.build(validation));
 			}
 		}
 		
-		
 		return json;
 	}
 	
-	public static Question build() {return new Question();}
-	public static Question id(long id)
+	public static JsonQuestion build() {return new JsonQuestion();}
+	public static JsonQuestion id(long id)
 	{
-		Question json = build();
+		JsonQuestion json = build();
 		json.setId(id);
 		return json;
 	}

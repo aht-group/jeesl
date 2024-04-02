@@ -36,7 +36,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbAttributeQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoAttributeQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -205,7 +205,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		return tQ.getResultList();
 	}
 	
-	@Override public List<DATA> fAttributeData(EjbAttributeQuery<CRITERIA, CONTAINER, DATA> query)
+	@Override public List<DATA> fAttributeData(JeeslIoAttributeQuery<CRITERIA, CONTAINER, DATA> query)
 	{
 		if(ObjectUtils.isEmpty(query.getCriterias()) && ObjectUtils.isEmpty(query.getContainers())) {return new ArrayList<>();}
 		

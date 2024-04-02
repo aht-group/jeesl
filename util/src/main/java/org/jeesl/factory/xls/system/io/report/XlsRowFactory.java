@@ -10,59 +10,50 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.jeesl.factory.builder.system.ReportFactoryBuilder;
+import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
-import org.jeesl.interfaces.model.io.report.JeeslIoReport;
-import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
-import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.module.finance.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XlsRowFactory <L extends JeeslLang,D extends JeeslDescription,
-							CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
-							REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
-							IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-							WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-							SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
-							GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-							COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
-							ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
-							TEMPLATE extends JeeslReportTemplate<L,D,CELL>,CELL extends JeeslReportCell<L,D,TEMPLATE>,STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,CW extends JeeslStatus<L,D,CW>,
-							RT extends JeeslReportRowType<L,D,RT,?>,
-							ENTITY extends EjbWithId,
-							ATTRIBUTE extends EjbWithId,
-							TL extends JeeslTrafficLight<L,D,TLS>,
-							TLS extends JeeslTrafficLightScope<L,D,TLS,?>>
+public class XlsRowFactory <
+							WORKBOOK extends JeeslReportWorkbook<?,SHEET>,
+							SHEET extends JeeslReportSheet<?,?,?,WORKBOOK,GROUP,ROW>,
+							GROUP extends JeeslReportColumnGroup<?,?,SHEET,COLUMN,STYLE>,
+							COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,?>,
+							ROW extends JeeslReportRow<?,?,SHEET,TEMPLATE,CDT,RT>,
+							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
+							CELL extends JeeslReportCell<?,?,TEMPLATE>,
+							STYLE extends JeeslReportStyle<?,?>,
+							CDT extends JeeslStatus<?,?,CDT>,
+							CW extends JeeslReportColumnWidth<?,?,CW,?>,
+							RT extends JeeslReportRowType<?,?,RT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsRowFactory.class);
 		
 	private final String localeCode;
 //	private final ReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport;
 	
-	private final EjbIoReportColumnGroupFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> efColumnGroup;
-	private final EjbIoReportColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,?,?> efColumn;
+	private final EjbIoReportColumnGroupFactory<?,?,SHEET,GROUP,COLUMN,STYLE> efColumnGroup;
+	private final EjbIoReportColumnFactory<?,?,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT> efColumn;
 	
-	private XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell;
+	private XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell;
 	
-	public XlsRowFactory(String localeCode, final ReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport,
-			XlsCellFactory<REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell)
+	public XlsRowFactory(String localeCode, final IoReportFactoryBuilder<?,?,?,?,?,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
+			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell)
 	{
 		this.localeCode = localeCode;
 //		this.fbReport=fbReport;

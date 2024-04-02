@@ -1,21 +1,20 @@
 package org.jeesl.interfaces.util.query;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
-import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
-import org.jeesl.model.ejb.io.db.CqId;
-import org.jeesl.model.ejb.io.db.CqLiteral;
+import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqLong;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslQuery extends Serializable,JeeslCoreQuery
+public interface JeeslQuery extends JeeslCoreQuery
 {
 	void reset();
 	void debug(boolean debug);
@@ -36,11 +35,17 @@ public interface JeeslQuery extends Serializable,JeeslCoreQuery
 	List<String> getRootFetches();
 	List<CqFetch> getGraphFetches();
 	
+	
+	List<JeeslCqLiteral> getCqLiterals();
+	List<JeeslCqLong> getCqLongs();
+	
 	List<CqOrdering> getOrderings();
-	List<CqLiteral> getLiterals();
+	
 	List<CqDate> getLocalDates();
-	List<CqId> getIds();
-	List<CqBool> getBools();
+	
+	List<CqInteger> getIntegers();
+	
+	
 	
 //	boolean isSortAscending();
 //	void sort(String sortBy, boolean sortAscending);

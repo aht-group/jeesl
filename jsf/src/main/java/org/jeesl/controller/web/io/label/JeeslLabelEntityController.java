@@ -20,6 +20,7 @@ import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.rest.rs.jx.system.JeeslSystemRest;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -54,16 +55,14 @@ import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSearchHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
-import org.jeesl.util.query.cq.io.EjbIoLabelQuery;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
+import org.jeesl.util.query.ejb.io.EjbIoLabelQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,

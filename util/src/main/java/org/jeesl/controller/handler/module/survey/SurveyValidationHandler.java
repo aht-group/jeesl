@@ -19,22 +19,19 @@ import org.jeesl.interfaces.controller.processor.SurveyValidator;
 import org.jeesl.interfaces.model.json.module.survey.SurveyValidatorConfiguration;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescription,
-							TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,?,?,?,SECTION,?,?>,
-							SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,VALIDATION,?,?,?,?,OPTION,?>,
-							VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,?>,
-							ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,?,?,OPTION>,
-							OPTION extends JeeslSurveyOption<L,D>>
+public class SurveyValidationHandler<D extends JeeslDescription,
+							TEMPLATE extends JeeslSurveyTemplate<?,D,?,TEMPLATE,?,?,?,SECTION,?,?>,
+							SECTION extends JeeslSurveySection<?,D,TEMPLATE,SECTION,QUESTION>,
+							QUESTION extends JeeslSurveyQuestion<?,D,SECTION,?,VALIDATION,?,?,?,?,?,?>,
+							VALIDATION extends JeeslSurveyValidation<?,D,QUESTION,?>,
+							ANSWER extends JeeslSurveyAnswer<?,D,QUESTION,?,?,?>>
 	implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(SurveyValidationHandler.class);

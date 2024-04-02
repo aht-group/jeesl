@@ -9,9 +9,9 @@ import java.util.Objects;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +41,7 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	public <E extends Enum<E>> EjbIoDbQuery<SYSTEM,SNAP> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
+	//JEESL-CQ
 	public EjbIoDbQuery<SYSTEM,SNAP> orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
 	
 	//Lists

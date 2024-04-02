@@ -128,7 +128,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	@Override public List<Long> listId(String nativeQuery) {return fJeesl.listId(nativeQuery);}
 	
 	@Override public <C extends JeeslStatus<?,?,C>, W extends JeeslWithContext<C>> List<W> allForContext(Class<W> w, C context) {return fJeesl.allForContext(w,context);}
-	@Override public <L extends JeeslLang, D extends JeeslDescription, C extends JeeslStatus<L,D,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C category) {return fJeesl.allForCategory(w, category);}
+	@Override public <C extends JeeslStatus<?,?,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C category) {return fJeesl.allForCategory(w, category);}
 	@Override public <L extends JeeslLang, D extends JeeslDescription, T extends JeeslStatus<L,D,T>, W extends JeeslWithType<T>> List<W> allForType(Class<W> w, T type) {return fJeesl.allForType(w, type);}
 	@Override public <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, W extends JeeslWithStatus<S>> List<W> allForStatus(Class<W> w, S status) {return fJeesl.allForStatus(w, status);}
 	

@@ -628,7 +628,7 @@ public class JeeslFacadeBean implements JeeslFacade
 		TypedQuery<W> tQ = em.createQuery(select);
 		return tQ.getResultList();
 	}
-	@Override public <L extends JeeslLang, D extends JeeslDescription, C extends JeeslStatus<L,D,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C category)
+	@Override public <C extends JeeslStatus<?,?,C>, W extends JeeslWithCategory<C>> List<W> allForCategory(Class<W> w, C category)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<W> cQ = cB.createQuery(w);

@@ -14,6 +14,8 @@ public interface JeeslIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 //	List<CqId> getIds();
 	List<String> getRootFetches();
 	List<String> getCodeList();
+	
+	//CQ
 	List<CqOrdering> getOrderings();
 	
 	List<SYSTEM> getSystems();

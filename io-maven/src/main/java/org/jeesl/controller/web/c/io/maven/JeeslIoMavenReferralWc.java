@@ -13,6 +13,7 @@ import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.lazy.io.maven.EjbIoMavenVersionLazyModel;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -30,7 +31,6 @@ import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.jsf.handler.op.OpSingleSelectionHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.th.JeeslTableCellSelectHandler;
-import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
@@ -51,11 +51,10 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenUsageComparator;
+import org.jeesl.util.query.cq.CqBool;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
 									implements OpSingleSelectionBean<IoMavenVersion>,SbToggleBean

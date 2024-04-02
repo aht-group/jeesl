@@ -28,9 +28,8 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
-import org.jeesl.model.ejb.io.db.CqId;
-import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.cq.CqLong;
 import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
@@ -100,9 +99,9 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		thStatus.clear();
 		
 		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
-		if(Objects.nonNull(refA)) {query.add(CqId.isValue(refA,CqId.path(JeeslIoSsiData.Attributes.refA)));}
-		if(Objects.nonNull(refB)) {query.add(CqId.isValue(refB,CqId.path(JeeslIoSsiData.Attributes.refB)));}
-		if(Objects.nonNull(refC)) {query.add(CqId.isValue(refC,CqId.path(JeeslIoSsiData.Attributes.refC)));}
+		if(Objects.nonNull(refA)) {query.add(CqLong.isValue(refA,CqLong.path(JeeslIoSsiData.Attributes.refA)));}
+		if(Objects.nonNull(refB)) {query.add(CqLong.isValue(refB,CqLong.path(JeeslIoSsiData.Attributes.refB)));}
+		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
 		
 		thStatus.init(fSsi.tpIoSsiStatus(query));
@@ -133,9 +132,9 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
 		query.setMaxResults(pageSize);
-		if(Objects.nonNull(refA)) {query.add(CqId.isValue(refA,CqId.path(JeeslIoSsiData.Attributes.refA)));}
-		if(Objects.nonNull(refB)) {query.add(CqId.isValue(refB,CqId.path(JeeslIoSsiData.Attributes.refB)));}
-		if(Objects.nonNull(refC)) {query.add(CqId.isValue(refC,CqId.path(JeeslIoSsiData.Attributes.refC)));}
+		if(Objects.nonNull(refA)) {query.add(CqLong.isValue(refA,CqLong.path(JeeslIoSsiData.Attributes.refA)));}
+		if(Objects.nonNull(refB)) {query.add(CqLong.isValue(refB,CqLong.path(JeeslIoSsiData.Attributes.refB)));}
+		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
 		if(sbhStatus.hasSelected()) {query.addStatus(sbhStatus.getSelected());}
 		query.debug(true);

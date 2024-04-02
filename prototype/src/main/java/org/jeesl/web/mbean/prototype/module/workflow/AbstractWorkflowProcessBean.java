@@ -17,6 +17,7 @@ import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.handler.module.workflow.WorkflowProcesslResetHandler;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -78,8 +79,6 @@ import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											WX extends JeeslWorkflowContext<L,D,WX,G>,
 											WP extends JeeslWorkflowProcess<L,D,WX,WS>,
@@ -115,7 +114,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	final static Logger logger = LoggerFactory.getLogger(AbstractWorkflowProcessBean.class);
 
 	private JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic;
-	private JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,USER> fWorkflow;
+	private JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fWorkflow;
 	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision;
 
 	private final WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow;
@@ -229,14 +228,14 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 											JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
-											JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,USER> fApproval,
+											JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fApproval,
 											JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision)
 	{
 		postConstructProcess(bTranslation,bMessage,fGraphic,fApproval,fRevision,null);
 	}
 	protected void postConstructProcess(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 										JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
-										JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,USER> fApproval,
+										JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fApproval,
 										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision,
 										WP preSelection)
 	{

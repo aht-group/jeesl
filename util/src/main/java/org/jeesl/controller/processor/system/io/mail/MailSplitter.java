@@ -32,12 +32,12 @@ public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(MailSplitter.class);
 	
 	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
-	private final JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail;
+	private final JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,?> fMail;
 	
 	private final JeeslEventCounter bsc;
 	
 	public MailSplitter(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail,
-						JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail)
+						JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,?> fMail)
 	{		
 		this.fbMail=fbMail;
 		this.fMail=fMail;

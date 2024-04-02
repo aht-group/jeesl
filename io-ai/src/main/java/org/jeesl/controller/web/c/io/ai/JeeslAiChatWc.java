@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import org.jeesl.api.facade.io.JeeslIoAiFacade;
 import org.jeesl.controller.io.ai.OpenAiChatCompletionHandler;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.ejb.io.ai.openai.EjbAiCompleteFactory;
@@ -32,8 +33,6 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import com.theokanning.openai.completion.chat.ChatCompletionResult;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslAiChatWc implements Serializable
 {

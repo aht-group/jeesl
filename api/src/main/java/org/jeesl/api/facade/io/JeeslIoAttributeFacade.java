@@ -17,7 +17,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbAttributeQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoAttributeQuery;
 
 public interface JeeslIoAttributeFacade <R extends JeeslTenantRealm<?,?,R,?>,
 										CAT extends JeeslAttributeCategory<?,?,R,CAT,?>,
@@ -41,7 +41,7 @@ public interface JeeslIoAttributeFacade <R extends JeeslTenantRealm<?,?,R,?>,
 	
 	List<DATA> fAttributeData(CONTAINER container);
 	List<DATA> fAttributeData(CRITERIA criteria, Collection<CONTAINER> containers);
-	List<DATA> fAttributeData(EjbAttributeQuery<CRITERIA,CONTAINER,DATA> query);
+	List<DATA> fAttributeData(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query);
 	
 	DATA fAttributeData(CRITERIA criteria, CONTAINER container) throws JeeslNotFoundException;
 	

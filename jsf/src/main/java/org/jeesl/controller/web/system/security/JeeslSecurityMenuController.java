@@ -12,6 +12,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -32,9 +33,7 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
@@ -52,33 +51,29 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<L,D,C,V,U,?>,
-											V extends JeeslSecurityView<L,D,C,R,U,?>,
-											U extends JeeslSecurityUsecase<L,D,C,R,V,?>,
+											
+											V extends JeeslSecurityView<L,D,?,?,?,?>,
 											CTX extends JeeslSecurityContext<L,D>,
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
-											AR extends JeeslSecurityArea<L,D,V>,
-											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
+											
+											
 											OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 											DC extends JeeslIoCms<L,D,LOC,?,DS>,
-											DS extends JeeslIoCmsSection<L,DS>,
-											USER extends JeeslUser<R>>
+											DS extends JeeslIoCmsSection<L,DS>>
 		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMenuController.class);
 
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,?,?,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,?,M,USER> fSecurity;
-	private JeeslSecurityBean<R,V,U,?,AR,CTX,M,USER> bSecurity;
+	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?> fbSecurity;
+	private JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity;
+	private JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity;
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
+	private final TreeHelper<M> thMenu;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
 	private List<V> opViews; public List<V> getOpViews(){return opViews;}
@@ -98,7 +93,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	private boolean disabledMenuImportFromDefaultContext; public boolean isDisabledMenuImportFromDefaultContext() {return disabledMenuImportFromDefaultContext;}
 
 	public JeeslSecurityMenuController(JeeslSecurityMenuCallback callback,
-										SecurityFactoryBuilder<L,D,C,R,V,U,?,?,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity,
+										SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?> fbSecurity,
 										IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
@@ -107,13 +102,15 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		sbhContext = new SbSingleHandler<>(fbSecurity.getClassContext(),this);
 
 		efMenu = fbSecurity.ejbMenu();
+		thMenu = TreeHelper.instance();
+		
 		helps = new ArrayList<>();
 		documents = new ArrayList<>();
 	}
 
 	public void postConstructMenu(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslSecurityFacade<C,R,V,U,?,M,USER> fSecurity,
-									JeeslSecurityBean<R,V,U,?,AR,CTX,M,USER> bSecurity,
+									JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity,
+									JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity,
 									JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
@@ -273,8 +270,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		}
 	}
 
-	public void expandTree() {TreeHelper.setExpansion(this.node!=null ? this.node : this.tree, true);}
-	public void collapseTree() {TreeHelper.setExpansion(this.tree,  false);}
+	public void expandTree() {thMenu.setExpansion(this.node!=null ? this.node : this.tree, true);}
+	public void collapseTree() {thMenu.setExpansion(this.tree,  false);}
 	public boolean isExpanded() {return this.tree != null && this.tree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
     public void onNodeCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
@@ -352,8 +349,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		}
 	}
 
-	public void expandHelp(){TreeHelper.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
-	public void collapseHelp() {TreeHelper.setExpansion(this.helpTree,  false);}
+	public void expandHelp(){thMenu.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+	public void collapseHelp() {thMenu.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
@@ -380,7 +377,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		Object data = ddEvent.getData();
 		if(debugOnInfo) {if(data==null) {logger.info("data = null");} else {logger.info("Data "+data.getClass().getSimpleName());}}
 
-		TreeNode n = TreeHelper.getNode(helpTree,ddEvent.getDragId(),3);
+		TreeNode n = thMenu.getNode(helpTree,ddEvent.getDragId(),3);
 		DS section = (DS)n.getData();
 		logger.info(section.toString());
 

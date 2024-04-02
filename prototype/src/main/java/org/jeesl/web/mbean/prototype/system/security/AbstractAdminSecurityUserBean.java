@@ -11,6 +11,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.core.JeeslUserFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -27,7 +28,6 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.user.pwd.JeeslWithPwd;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
@@ -36,7 +36,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.controller.audit.UtilsRevisionPageFlow;
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
@@ -55,7 +54,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityUserBean.class);
 
 	protected JeeslUserFacade<USER> fUtilsUser;
-	protected JeeslSecurityFacade<C,R,V,U,A,M,USER> fUtilsSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fUtilsSecurity;
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
 	
 	protected final List<CTX> contexts; public List<CTX> getContexts() {return contexts;}
@@ -90,7 +89,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	}
 	
 	public void postConstructSecurityUser(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-							JeeslUserFacade<USER> fUtilsUser, JeeslSecurityFacade<C,R,V,U,A,M,USER> fUtilsSecurity)
+							JeeslUserFacade<USER> fUtilsUser, JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fUtilsSecurity)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fUtilsUser=fUtilsUser;

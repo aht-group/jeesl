@@ -25,7 +25,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.module.EjbHelpdeskQuery;
+import org.jeesl.interfaces.util.query.module.JeeslHelpdeskQuery;
 
 public interface JeeslHdFacade <L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
@@ -49,5 +49,5 @@ public interface JeeslHdFacade <L extends JeeslLang, D extends JeeslDescription,
 {	
 	TICKET saveHdTicket(TICKET ticket, EVENT event, USER user) throws JeeslConstraintViolationException, JeeslLockingException;
 	
-	<RREF extends EjbWithId> List<TICKET> fHdTickets(EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query);
+	<RREF extends EjbWithId> List<TICKET> fHdTickets(JeeslHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query);
 }

@@ -12,6 +12,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -31,8 +32,6 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 											MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
@@ -47,7 +46,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	
 	private enum Statistic{today,day30}
 	
-	protected JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
+	protected JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
 	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
 
 	private List<CATEGORY> categories; public List<CATEGORY> getCategories() {return categories;}
@@ -84,7 +83,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	}
 	
 	public void postConstructMailQueue(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
+											JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMail=fMail;

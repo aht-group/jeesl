@@ -29,32 +29,29 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescription,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-									MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-									STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
-									RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
+public class JeeslIoMailFacadeBean<CATEGORY extends JeeslStatus<?,?,CATEGORY>,
+									MAIL extends JeeslIoMail<?,?,CATEGORY,STATUS,RETENTION,FRC>,
+									STATUS extends JeeslIoMailStatus<?,?,STATUS,?>,
+									RETENTION extends JeeslIoMailRetention<?,?,RETENTION,?>,
 									FRC extends JeeslFileContainer<?,?>>
 					extends JeeslFacadeBean
-					implements JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>
+					implements JeeslIoMailFacade<CATEGORY,MAIL,STATUS,RETENTION,FRC>
 {	
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMailFacadeBean.class);
 		
-	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
+	private final IoMailFactoryBuilder<?,?,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
 	
 	private EjbIoMailFactory<CATEGORY,MAIL,STATUS,RETENTION> efMail;
 	
-	public JeeslIoMailFacadeBean(EntityManager em, IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail)
+	public JeeslIoMailFacadeBean(EntityManager em, IoMailFactoryBuilder<?,?,CATEGORY,MAIL,STATUS,RETENTION> fbMail)
 	{
 		super(em);
 		this.fbMail = fbMail;

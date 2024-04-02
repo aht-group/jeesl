@@ -54,14 +54,14 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 	
 	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	
-	protected JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	protected EjbLangFactory<L> efLang;
 	protected EjbDescriptionFactory<D> efDescription;
 	
 	private final JeeslDbCodeEjbUpdater<C> dbCleanerCategory;
 				
 	public AbstractSecurityUpdater(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity,
-			JeeslSecurityFacade<C,R,V,U,A,M,USER> fAcl)
+			JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fAcl)
 	{
 		this.fbSecurity=fbSecurity;
 
@@ -70,14 +70,14 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		efLang = EjbLangFactory.instance(fbSecurity.getClassL());
 		efDescription = EjbDescriptionFactory.factory(fbSecurity.getClassD());
 		
-		dbCleanerCategory = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassCategory());
+		dbCleanerCategory = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassCategory());
 	}
 	
 	@Deprecated protected void iuCategoryAccess(Security access, JeeslSecurityCategory.Type type) throws UtilsConfigurationException
 	{
 		logger.info("i/u "+type+" with "+access.getCategory().size()+" categories");
 		
-		JeeslDbCodeEjbUpdater<C> updateCategory = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassCategory());
+		JeeslDbCodeEjbUpdater<C> updateCategory = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassCategory());
 		updateCategory.dbEjbs(fSecurity.allForType(fbSecurity.getClassCategory(),type.toString()));
 
 		for(Category category : access.getCategory())

@@ -7,6 +7,7 @@ import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -29,8 +30,6 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 @Deprecated //Use JeeslSecurityActionController
 public class AbstractAdminSecurityActionBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
@@ -64,7 +63,7 @@ public class AbstractAdminSecurityActionBean <L extends JeeslLang, D extends Jee
 		userIsDeveloper = true;
 	}
 	
-	public void initSuper(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity, JeeslTranslationBean<L,D,LOC> bTranslation,
+	public void initSuper(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, JeeslTranslationBean<L,D,LOC> bTranslation,
 											JeeslFacesMessageBean bMessage,
 											JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{

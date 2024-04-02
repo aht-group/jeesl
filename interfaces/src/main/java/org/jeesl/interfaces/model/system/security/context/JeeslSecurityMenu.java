@@ -7,6 +7,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisibleMigration;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
@@ -21,13 +22,13 @@ public interface JeeslSecurityMenu<L extends JeeslLang,
 									M extends JeeslSecurityMenu<L,V,CTX,M>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
 						EjbWithPosition,EjbWithLang<L>,
-						EjbWithParentAttributeResolver,
+						EjbWithParentAttributeResolver, EjbWithParentId<M>,
 						EjbWithVisibleMigration
 						
 {
 	public static final String extractId = "securityMenu";
 	public static final String keyRoot = "root";
-	public enum Attributes{context,parent,view}
+	public enum Attributes{id,context,parent,position,view}
 	
 	CTX getContext();
 	void setContext(CTX context);

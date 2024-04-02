@@ -6,13 +6,11 @@ import java.util.List;
 import org.jeesl.api.bean.JeeslSurveyBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.module.survey.JeeslSurveyAnalysisFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
-import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
-import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyValidationAlgorithmFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
@@ -40,7 +38,7 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
@@ -56,8 +54,6 @@ import org.jeesl.jsf.handler.PositionListReorderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 						SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
 						SS extends JeeslSurveyStatus<L,D,SS,?>,
@@ -71,7 +67,7 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 						QUESTION extends JeeslSurveyQuestion<L,D,SECTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION,AQ>,
 						CONDITION extends JeeslSurveyCondition<QUESTION,QE,OPTION>,
 						VALIDATION extends JeeslSurveyValidation<L,D,QUESTION,VALGORITHM>,
-						QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+						QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 						SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 						UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 						ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
@@ -91,12 +87,14 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 						ATT extends JeeslStatus<L,D,ATT>,
 						TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>,
 						CACHE extends JeeslJobCache<TOOLCACHETEMPLATE,?>>
-					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE,CACHE>
+					extends AbstractSurveyBean<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,ATT>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSurveyValidationBean.class);
 		
+	protected final SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE> fbAnalysis;
+	
 	protected List<VALGORITHM> algorithms; public List<VALGORITHM> getAlgorithms(){return algorithms;}
 	
 	protected VALGORITHM algorithm; public VALGORITHM getAlgorithm() {return algorithm;} public void setAlgorithm(VALGORITHM algorithm) {this.algorithm = algorithm;}
@@ -104,20 +102,20 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 	private final EjbSurveyValidationAlgorithmFactory<VALGORITHM> efValidationAlgorithm;
 	
 	public AbstractAdminSurveyValidationBean(SurveyTemplateFactoryBuilder<L,D,LOC,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,OPTIONS,OPTION> fbTemplate,
-											SurveyCoreFactoryBuilder<L,D,LOC,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> fbCore,
+											
 											SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT,TOOLCACHETEMPLATE> fbAnalysis)
 	{
-		super(fbTemplate,fbCore,fbAnalysis);
+		super(fbTemplate);
+		this.fbAnalysis=fbAnalysis;
 		efValidationAlgorithm = fbTemplate.ejbAlgorithm();
 	}
 	
 	protected void initSuperValidation(String userLocale,  JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
-			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
+			
+			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
-		super.initSuperSurvey(bTranslation,bMessage,fTemplate,fCore,fAnalysis,bSurvey);
+		super.initSuperSurvey(bTranslation,bMessage,fCore,bSurvey);
 		initPageSettings();
 		super.initLocales(userLocale);
 		reloadAlgorithms();
@@ -135,7 +133,7 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 	
 	private void reloadAlgorithms()
 	{
-		algorithms = fTemplate.all(fbTemplate.getClassValidationAlgorithm());
+		algorithms = fCore.all(fbTemplate.getClassValidationAlgorithm());
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbTemplate.getClassValidationAlgorithm(), algorithms));}
 	}
 			
@@ -150,16 +148,16 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 	public void saveAlgorithm() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info(AbstractLogMessage.saveEntity(algorithm));
-		algorithm = fTemplate.save(algorithm);
+		algorithm = fCore.save(algorithm);
 		reloadAlgorithms();
 	}
 	
 	public void selectAlgorithm()
 	{
 		logger.info(AbstractLogMessage.selectEntity(algorithm));
-		algorithm = efLang.persistMissingLangs(fTemplate, localeCodes, algorithm);
-		algorithm = efDescription.persistMissingLangs(fTemplate, localeCodes, algorithm);
+		algorithm = efLang.persistMissingLangs(fCore, localeCodes, algorithm);
+		algorithm = efDescription.persistMissingLangs(fCore, localeCodes, algorithm);
 	}
 	
-	public void reorderAlgorithms() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fTemplate,algorithms);}
+	public void reorderAlgorithms() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCore,algorithms);}
 }

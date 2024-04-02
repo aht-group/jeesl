@@ -56,7 +56,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 	private JeeslDbCodeEjbUpdater<R> updateRole;
 	
 	public SecurityRoleUpdater(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity,
-								JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
+								JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity)
 	{       
         super(fbSecurity,fSecurity);
 	}
@@ -75,7 +75,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 	
 	public DataUpdate iuSecurityRoles(Security security)
 	{
-		updateRole = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassRole());
+		updateRole = JeeslDbCodeEjbUpdater.instance(fbSecurity.getClassRole());
 		updateRole.dbEjbs(fSecurity.all(fbSecurity.getClassRole()));
 
 		DataUpdate du = XmlDataUpdateFactory.build();

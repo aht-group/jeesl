@@ -76,13 +76,13 @@ public class WorkflowRestService <L extends JeeslLang, D extends JeeslDescriptio
 {
 	final static Logger logger = LoggerFactory.getLogger(WorkflowRestService.class);
 	
-	private final JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,WA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,USER> fWorkflow;
+	private final JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,AL,WF,WY,WD,USER> fWorkflow;
 	private final WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,WA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fbWorkflow;
 	
 	private final XmlProcessFactory<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WT,WTT,SR> xfProcess;
 	
 	private WorkflowRestService(WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,WA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fbWorkflow,
-			JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,WA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,USER> fWorkflow)
+			JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,AL,WF,WY,WD,USER> fWorkflow)
 	{
 		super(fWorkflow,fbWorkflow.getClassL(),fbWorkflow.getClassD());
 		this.fWorkflow=fWorkflow;
@@ -121,7 +121,7 @@ public class WorkflowRestService <L extends JeeslLang, D extends JeeslDescriptio
 						USER extends JeeslUser<SR>>
 			WorkflowRestService<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,WA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,FRC,USER>
 			factory(WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,WA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fbWorkflow,
-					JeeslWorkflowFacade<WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,WA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,USER> fWorkflow)
+					JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,AL,WF,WY,WD,USER> fWorkflow)
 	{
 		return new WorkflowRestService<>(fbWorkflow,fWorkflow);
 	}

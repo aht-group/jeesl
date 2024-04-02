@@ -8,6 +8,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.module.JeeslHdFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
@@ -40,8 +41,6 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 								CAT extends JeeslHdCategory<L,D,R,CAT,?>,
@@ -69,6 +68,8 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 	protected final SbMultiHandler<SCOPE> sbhScope; public SbMultiHandler<SCOPE> getSbhScope() {return sbhScope;}
 	protected final SbSingleHandler<DOC> sbhDocuments; public SbSingleHandler<DOC> getSbhDocuments() {return sbhDocuments;}
 	
+	private final TreeHelper<SEC> thSection;
+	
 	private final List<FAQ> faqs; public List<FAQ> getFaqs() {return faqs;}
 	private final List<FGA> answers; public List<FGA> getAnswers() {return answers;}
 	private final List<SEC> sections; public List<SEC> getSections() {return sections;}
@@ -90,6 +91,8 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		sbhCategory = new SbMultiHandler<>(fbHd.getClassCategory(),this);
 		sbhScope = new SbMultiHandler<>(fbHd.getClassScope(),this);
 		sbhDocuments = new SbSingleHandler<DOC>(fbHd.getClassDoc(),null);
+		
+		thSection = TreeHelper.instance();
 		
 		faqs = new ArrayList<>();
 		answers = new ArrayList<>();
@@ -258,8 +261,8 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		}
 	}
 	
-	public void expandHelp(){TreeHelper.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
-	public void collapseHelp() {TreeHelper.setExpansion(this.helpTree,  false);}
+	public void expandHelp(){thSection.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+	public void collapseHelp() {thSection.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 	
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
@@ -275,7 +278,7 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		Object data = ddEvent.getData();
 		if(debugOnInfo) {if(data==null) {logger.info("data = null");} else{logger.info("Data "+data.getClass().getSimpleName());}}
 		
-		TreeNode n = TreeHelper.getNode(helpTree,ddEvent.getDragId(),3);
+		TreeNode n = thSection.getNode(helpTree,ddEvent.getDragId(),3);
 		SEC section = (SEC)n.getData();
 		logger.info(section.toString());
 		

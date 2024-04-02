@@ -14,6 +14,7 @@ import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
@@ -26,13 +27,12 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.interfaces.util.query.system.EjbSecurityQuery;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
+import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 import net.sf.exlp.util.io.ObjectIO;
 
 public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
@@ -51,7 +51,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	
 	protected enum JoggerLoop {loadView}
 	
-	protected JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	
 	protected SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity;
 	private EjbSecurityMenuFactory<V,CTX,M> efMenu;
@@ -132,7 +132,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		nullCtx = fbSecurity.ejbContext().build();
 	}
 	
-	public void postConstructDb(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
+	public void postConstructDb(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		views.addAll(fSecurity.all(fbSecurity.getClassView()));
@@ -179,7 +179,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void postConstructFile(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
+	public void postConstructFile(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		
@@ -226,14 +226,14 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		}
 	}
 	
-	public void reloadMenu(JeeslSecurityFacade<C,R,V,U,A,M,USER> fProvidedSecurity)
+	public void reloadMenu(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fProvidedSecurity)
 	{
 		mapMenuAll.clear();
 		mapMenuRoot.clear();
 		n2mMenu.clear();
 		mapRoot.clear();
 		
-		EjbSecurityQuery query = new EjbSecurityQuery();
+		EjbSecurityQuery<CTX> query = new EjbSecurityQuery<>();
 		query.addRootFetch(JeeslSecurityMenu.Attributes.context);
 		
 		for(M m : fProvidedSecurity.fSecurityMenus(query))

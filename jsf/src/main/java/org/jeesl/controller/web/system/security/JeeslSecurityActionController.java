@@ -7,6 +7,7 @@ import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -34,8 +35,6 @@ import org.jeesl.jsf.handler.PositionListReorderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class JeeslSecurityActionController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,U,A>,
@@ -55,7 +54,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityActionController.class);
 
-	JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
+	JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
@@ -83,7 +82,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
+			JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{

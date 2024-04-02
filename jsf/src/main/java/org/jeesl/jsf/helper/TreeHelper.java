@@ -21,26 +21,16 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class TreeHelper
+public final class TreeHelper <P extends EjbWithParentId<P>>
 {
 	final static Logger logger = LoggerFactory.getLogger(TreeHelper.class);
 	
-	private static TreeNode getAncestor(@NotNull TreeNode decendant, int ancestryLevel)
+	public static <P extends EjbWithParentId<P>> TreeHelper<P> instance() {return new TreeHelper<>();}
+	private TreeHelper()
 	{
-		TreeNode ancestor = decendant;
-		for (int i = 0; i < ancestryLevel; i++)
-		{
-			ancestor = ancestor.getParent();
-			if (ancestor == null) { break; }
-		}
-		return ancestor;
+
 	}
-	
-	private static int getDepth(TreeNode root)
-	{
-		return 1 + root.getChildren().stream().map(child -> getDepth(child)).max(Integer::compare).orElse(0);
-	}
-	
+		
 	public static <T extends EjbWithParentAttributeResolver> void buildTree(JeeslFacade facade, TreeNode parent, List<T> objects, Class<T> type)
 	{
 		for(T o : objects)
@@ -54,27 +44,8 @@ public abstract class TreeHelper
 			}
 		}
 	}
-	
-	public static TreeNode findNode(TreeNode node, Expression<TreeNode> expression)
-	{
-		if (node == null) { return null; }
-		
-		if (expression.condition(node))
-		{
-			return node;
-		}
-		for (TreeNode child : node.getChildren())
-		{
-			TreeNode n = findNode(child, expression);
-			if (n != null)
-			{
-				return n;
-			}
-		}
-		return null;
-	}
-	
-	public static List<TreeNode> findNodes(TreeNode node, Expression<TreeNode> expression)
+
+	public List<TreeNode> findNodes(TreeNode node, Expression<TreeNode> expression)
 	{
 		List<TreeNode> nodes = new ArrayList<TreeNode>();
 		if (node == null) { return nodes; }
@@ -91,7 +62,7 @@ public abstract class TreeHelper
 		return nodes;
 	}
 	
-	public static void forEach(TreeNode node, Functor<TreeNode> functor, Expression<TreeNode> breakExpression)
+	private void forEach(TreeNode node, Functor<TreeNode> functor, Expression<TreeNode> breakExpression)
 	{
 		if (node == null || breakExpression.condition(node)) { return; }
 		
@@ -99,24 +70,39 @@ public abstract class TreeHelper
 		node.getChildren().forEach(child -> forEach(child, functor, breakExpression));
 	}
 	
-	public static void setExpansion(TreeNode startNode, boolean expand)
+	public void setExpansion(TreeNode startNode, boolean expand)
 	{
 		setExpansion(startNode, expand, getDepth(startNode));
 	}
+	private int getDepth(TreeNode root)
+	{
+		return 1 + root.getChildren().stream().map(child -> getDepth(child)).max(Integer::compare).orElse(0);
+	}
 	
-	public static void setExpansion(TreeNode startNode, boolean expand, int reach)
+	public void setExpansion(TreeNode startNode, boolean expand, int reach)
 	{
 		forEach(startNode, node -> node.setExpanded(expand), node -> getAncestor(node, reach) == startNode);
 	}
 	
-	public static TreeNode getNode(TreeNode tree, String dragId, int position)
+	private TreeNode getAncestor(@NotNull TreeNode decendant, int ancestryLevel)
+	{
+		TreeNode ancestor = decendant;
+		for (int i = 0; i < ancestryLevel; i++)
+		{
+			ancestor = ancestor.getParent();
+			if (ancestor == null) { break; }
+		}
+		return ancestor;
+	}
+	
+	public TreeNode getNode(TreeNode tree, String dragId, int position)
     {
     	String[] elements = dragId.split(":");
     	String[] index = elements[position].split("_");
     	return getNode(tree.getChildren(),index,0);
     }
     
-    private static TreeNode getNode(List<TreeNode> nodes, String[] index, int level)
+    private TreeNode getNode(List<TreeNode> nodes, String[] index, int level)
     {
     	Integer position = Integer.valueOf(index[level]);
     	TreeNode n = nodes.get(position);

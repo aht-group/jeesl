@@ -12,6 +12,7 @@ import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionCo
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityUsecaseComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityViewComparator;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -40,8 +41,6 @@ import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,U,A>,
@@ -63,7 +62,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	
 	private enum Fm {category}
 	
-	protected JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	protected JeeslSecurityCategory.Type categoryType;
 	
 	protected JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
@@ -118,7 +117,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 	}
 	
-	public void postConstructSecurity(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
+	public void postConstructSecurity(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 									JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{

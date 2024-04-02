@@ -12,6 +12,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -50,8 +51,6 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,U,A>,
@@ -78,6 +77,8 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
+	private final TreeHelper<M> thMenu;
+	private final TreeHelper<DS> thSection;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
 	protected final SbSingleHandler<CTX> sbhContext; public SbSingleHandler<CTX> getSbhContext() {return sbhContext;}
@@ -103,12 +104,15 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 
 		sbhContext = new SbSingleHandler<CTX>(fbSecurity.getClassContext(),this);
 
+		thMenu = TreeHelper.instance();
+		thSection = TreeHelper.instance();
+		
 		efMenu = fbSecurity.ejbMenu();
 		helps = new ArrayList<>();
 		documents = new ArrayList<>();
 	}
 
-	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
+	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 	                              JeeslTranslationBean<L,D,LOC> bTranslation,
 	                              JeeslFacesMessageBean bMessage,
 	                              JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
@@ -268,8 +272,8 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 		}
 	}
 
-	public void expandTree() {TreeHelper.setExpansion(this.node!=null ? this.node : this.tree, true);}
-	public void collapseTree() {TreeHelper.setExpansion(this.tree,  false);}
+	public void expandTree() {thMenu.setExpansion(this.node!=null ? this.node : this.tree, true);}
+	public void collapseTree() {thMenu.setExpansion(this.tree,  false);}
 	public boolean isExpanded() {return this.tree != null && this.tree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
     public void onNodeCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
@@ -344,8 +348,8 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 		}
 	}
 
-	public void expandHelp(){TreeHelper.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
-	public void collapseHelp() {TreeHelper.setExpansion(this.helpTree,  false);}
+	public void expandHelp(){thSection.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+	public void collapseHelp() {thSection.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
@@ -372,7 +376,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 		Object data = ddEvent.getData();
 		if(debugOnInfo) {if(data==null) {logger.info("data = null");} else {logger.info("Data "+data.getClass().getSimpleName());}}
 
-		TreeNode n = TreeHelper.getNode(helpTree,ddEvent.getDragId(),3);
+		TreeNode n = thSection.getNode(helpTree,ddEvent.getDragId(),3);
 		DS section = (DS)n.getData();
 		logger.info(section.toString());
 

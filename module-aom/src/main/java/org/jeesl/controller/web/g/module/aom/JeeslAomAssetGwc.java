@@ -15,6 +15,7 @@ import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -65,8 +66,6 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
@@ -97,6 +96,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
+	private final TreeHelper<ASSET> thAsset;
 	private final EjbAssetFactory<REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE> efAsset;
 	private final EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC> efEvent;
 	
@@ -136,6 +136,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		sbhEventType = new SbMultiHandler<>(fbAsset.getClassEventType(),this);
 		lazyEvents = new AssetEventLazyModel<>(fbAsset.cpEvent(EjbEventComparator.Type.recordDesc),thfEventType,sbhEventType);
 		
+		thAsset = TreeHelper.instance();
 		efAsset = fbAsset.ejbAsset();
 		efEvent = fbAsset.ejbEvent();
 		
@@ -241,7 +242,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	public void expandTree()
 	{
-		TreeHelper.setExpansion(this.node != null ? this.node : this.tree, true);
+		thAsset.setExpansion(this.node != null ? this.node : this.tree, true);
 	}
 	
 	public void expandTree(int levels)
@@ -252,12 +253,12 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 			root = this.tree;
 			levels++;
 		}
-		TreeHelper.setExpansion(root, true, levels);
+		thAsset.setExpansion(root, true, levels);
 	}
 	
 	public void collapseTree()
 	{
-		TreeHelper.setExpansion(this.tree,  false);
+		thAsset.setExpansion(this.tree,  false);
 	}
 	
 	public boolean isExpanded()
@@ -401,7 +402,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		if(data==null) {logger.info("data = null");}
 		else{logger.info("Data "+data.getClass().getSimpleName());}
 		
-		TreeNode n = TreeHelper.getNode(tree,ddEvent.getDragId(),3);
+		TreeNode n = thAsset.getNode(tree,ddEvent.getDragId(),3);
 		ASSET a = (ASSET)n.getData();
 		logger.info(a.toString());
 		

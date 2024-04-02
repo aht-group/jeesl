@@ -13,7 +13,6 @@ import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
-import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowActionNotification;
 import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowNotification;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
@@ -23,7 +22,7 @@ import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 
 public interface JeeslWorkflowMessageHandler<WS extends JeeslWorkflowStage<?,?,?,?,?,?,?>,
-											WAN extends JeeslWorkflowActionNotification<?,MT,MC,SR,RE>,
+											
 											SR extends JeeslSecurityRole<?,?,?,?,?,?>,
 											RE extends JeeslRevisionEntity<?,?,?,?,?,?>,
 											MT extends JeeslIoTemplate<?,?,?,?,MD,?>,

@@ -19,7 +19,7 @@ import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateVersion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -39,7 +39,7 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 				TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
 				SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
 				QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-				QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+				QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 				SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 				UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 				
@@ -49,7 +49,7 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTemplateFactory.class);
 	
-	private JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate;
+	private JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate;
 
 	private final Template q;
 	
@@ -66,8 +66,8 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(ObjectUtils.isNotEmpty(q.getSection())) {xfSection  = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}	
 	}
 	
-	public void lazyLoad(JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-						JeeslSurveyCoreFacade<L,D,?,SURVEY,?,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
+	public void lazyLoad(JeeslSurveyTemplateFacade<SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,SCORE,OPTIONS,OPTION> fTemplate,
+						JeeslSurveyCoreFacade<L,D,SURVEY,?,TC,SECTION,QUESTION,?,?,?,?> fSurvey)
 	{
 		this.fTemplate=fTemplate;
 		if(Objects.nonNull(xfSection)) {xfSection.lazyLoad(fSurvey);}

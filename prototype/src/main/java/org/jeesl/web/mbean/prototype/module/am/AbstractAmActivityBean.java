@@ -8,6 +8,7 @@ import java.util.Objects;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAmFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AmFactoryBuilder;
@@ -36,8 +37,6 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>,
 										ACTIVITY extends JeeslAmActivity<L,D,REALM,ACTIVITY,PROJ>,
@@ -53,6 +52,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 
 	protected JeeslAmFacade<L,D,LOC,REALM,ACTIVITY,PROJ> fAm;
 
+	private final TreeHelper<ACTIVITY> thActivity;
 
 	protected String[] amLocales; public String[] getAmLocales() {return amLocales;}
 
@@ -77,6 +77,8 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 	{
 		super(fbAm.getClassL(),fbAm.getClassD());
 		this.fbAm=fbAm;
+		
+		thActivity = TreeHelper.instance();
 
 		efProject = fbAm.ejbProject();
 		efActivity = fbAm.ejbActivity();
@@ -248,12 +250,12 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 
 	public void expandTree()
 	{
-		TreeHelper.setExpansion(this.node != null ? this.node : this.tree, true);
+		thActivity.setExpansion(this.node != null ? this.node : this.tree, true);
 	}
 
 	public void collapseTree()
 	{
-		TreeHelper.setExpansion(this.tree,  false);
+		thActivity.setExpansion(this.tree,  false);
 	}
 
 	public boolean isExpanded()

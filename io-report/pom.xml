@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-report</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO - Report</name>
+    <name>JEESL - IO: Report</name>
 	
 	<dependencyManagement>
 		<dependencies>

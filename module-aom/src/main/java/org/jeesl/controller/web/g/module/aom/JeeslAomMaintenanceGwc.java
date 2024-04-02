@@ -13,6 +13,7 @@ import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
@@ -42,17 +43,15 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.module.EjbAomQuery;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
 import org.jeesl.model.ejb.module.aom.event.AomEvent;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
+import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,

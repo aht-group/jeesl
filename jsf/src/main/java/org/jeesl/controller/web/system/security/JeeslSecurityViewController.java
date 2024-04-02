@@ -15,6 +15,7 @@ import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionCo
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityUsecaseComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -45,8 +46,6 @@ import org.jeesl.jsf.util.TriStateBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-
 public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,U,A>,
@@ -70,7 +69,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	private enum SecuritySuffixDeprecated {Developer}
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	
 	private final JeeslSecurityViewCallback callback;
 	
@@ -119,7 +118,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
+			JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{

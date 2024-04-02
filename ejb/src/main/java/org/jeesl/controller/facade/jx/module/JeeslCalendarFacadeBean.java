@@ -36,7 +36,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.module.EjbCalendarQuery;
+import org.jeesl.interfaces.util.query.module.JeeslCalendarQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -138,7 +138,7 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		return map;
 	}
 	
-	@Override public List<ITEM> fCalendarItems(EjbCalendarQuery<CALENDAR, IT> query)
+	@Override public List<ITEM> fCalendarItems(JeeslCalendarQuery<CALENDAR,IT> query)
 	{
 		if(ObjectUtils.isEmpty(query.getCalendars())){return new ArrayList<>();}
 		

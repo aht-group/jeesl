@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.module.JeeslAomFacade;
+import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
@@ -30,8 +31,6 @@ import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public abstract class AbstractAssetCacheBean <L extends JeeslLang, D extends JeeslDescription,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,

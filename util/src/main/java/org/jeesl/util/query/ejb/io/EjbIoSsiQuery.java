@@ -10,9 +10,9 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
-import org.jeesl.model.ejb.io.db.CqId;
+import org.jeesl.util.query.cq.CqLong;
+import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,8 +38,8 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	
 //	public Boolean getTupleLoad() {return isTupleLoad();}
 	
-	//IDs
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(CqId cq) {super.addId(cq); return this;}
+	//JEESL CQ
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(CqLong cq) {super.addCqLong(cq); return this;}
 	
 	//Fetches
 	public <E extends Enum<E>> EjbIoSsiQuery<CTX,STATUS,ERROR> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}

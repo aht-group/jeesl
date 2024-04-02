@@ -1,7 +1,6 @@
 package org.jeesl.controller.util.comparator.ejb.io.label;
 
 import java.util.Comparator;
-import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.CompareToBuilder;

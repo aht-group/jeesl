@@ -24,7 +24,7 @@
 			<p:dataTable styleClass="jeesl-datatable"
 					var="s" value="#{cc.attrs.bean.statistics}">
 				<f:facet name="header">
-					<j:dtHeader entity="IoMail" code="listOfStatistics"/>
+					<j:dtHeader entity="IoMail" code="statistics"/>
 				</f:facet>
 				<p:column>
 					<h:outputText value="#{s}"/>
@@ -46,20 +46,37 @@
 						selection="#{cc.attrs.bean.mail}" selectionMode="single" rowKey="#{m.id}"
 						rows="50" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoMailQueue}"/>
+						<j:dtHeader entity="IoMail" code="queue"/>
 					</f:facet>
 					<p:ajax event="rowSelect" update=":#{cc.id}:sMail" listener="#{cc.attrs.bean.selectMail()}"/>
-					<p:column rendered="#{cc.attrs.withCategory}" headerText="#{msg.aupCategory}"><h:outputText value="#{m.category.name[userBean.localeCode].lang}"/></p:column>
-					<p:column headerText="#{msg.jeeslIoMailCreated}"><h:outputText value="#{m.recordCreation}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText></p:column>
-					<p:column headerText="#{msg.jeeslIoMailSpooled}"><h:outputText value="#{m.recordSpool}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText></p:column>
-					<p:column headerText="#{msg.jeeslIoMailSent}"><h:outputText value="#{m.recordSent}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText></p:column>
-					<p:column headerText="#{msg.jeeslIoMailStatus}" styleClass="jeeslCenter">
+					<p:column rendered="#{cc.attrs.withCategory}">
+						<f:facet name="header"><jtp:label entity="IoMail" code="category"/></f:facet>
+						<h:outputText value="#{m.category.name[localeCode].lang}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMail" code="recordCreation"/></f:facet>
+						<h:outputText value="#{m.recordCreation}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMail" code="recordSpool"/></f:facet>
+						<h:outputText value="#{m.recordSpool}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMail" code="recordSent"/></f:facet>
+						<h:outputText value="#{m.recordSent}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText>
+					</p:column>
+					<p:column styleClass="jeesl-center">
+						<f:facet name="header"><jtp:label entity="IoMail" code="status"/></f:facet>
 						<jtp:symbolizer value="#{m.status}" marginRight="5"/>
 						<jtp:symbolizer value="#{m.retention}"/>
-						<h:outputText value="#{m.status.name[userBean.localeCode].lang}" rendered="false"/>
+						<h:outputText value="#{m.status.name[localeCode].lang}" rendered="false"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslIoMailCounter}"><h:outputText value="#{m.counter}"/></p:column>
-					<p:column headerText="#{msg.jeeslIoMailRecipient}" filterBy="#{m.recipient}" filterMatchMode="contains">
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMail" code="counter"/></f:facet>
+						<h:outputText value="#{m.counter}"/>
+					</p:column>
+					<p:column filterBy="#{m.recipient}" filterMatchMode="contains">
+						<f:facet name="header"><jtp:label entity="IoMail" code="recipient"/></f:facet>
 						<h:outputText value="#{m.recipient}"/>
 					</p:column>
 				</p:dataTable>
@@ -69,34 +86,34 @@
 			<p:panel rendered="#{not empty cc.attrs.bean.mail}" styleClass="jeesl-panel">
 				<f:facet name="header"><j:pHeader entity="IoMail"/></f:facet>
 				<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-					<p:outputLabel value="#{msg.aupCategory}" rendered="#{cc.attrs.withCategory}"/>
+					<jtp:label entity="IoMail" code="category" rendered="#{cc.attrs.withCategory}"/>
 					<h:outputText value="#{cc.attrs.bean.mail.category.name[localeCode].lang}" rendered="#{cc.attrs.withCategory}"/>
 					
-					<p:outputLabel value="#{msg.jeeslIoMailStatus}"/>
+					<jtp:label entity="IoMail" code="status"/>
 					<ui:fragment>
 						<jtp:symbolizer value="#{cc.attrs.bean.mail.status}" marginRight="5"/>
 						<h:outputText value="#{cc.attrs.bean.mail.status.name[localeCode].lang}"/>
 					</ui:fragment>
 					
-					<p:outputLabel value="#{msg.jeeslIoMailRetention}"/>
+					<jtp:label entity="IoMail" code="retention"/>
 					<ui:fragment>
 						<jtp:symbolizer value="#{cc.attrs.bean.mail.retention}" marginRight="5"/>
 						<h:outputText value="#{cc.attrs.bean.mail.retention.name[localeCode].lang}"/>
 					</ui:fragment>
 					
-					<p:outputLabel value="#{msg.jeeslIoMailCreated}"/>
+					<jtp:label entity="IoMail" code="recordCreation"/>
 					<h:outputText value="#{cc.attrs.bean.mail.recordCreation}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText>
 					
-					<p:outputLabel value="#{msg.jeeslIoMailSpooled}"/>
+					<jtp:label entity="IoMail" code="recordSpool"/>
 					<h:outputText value="#{cc.attrs.bean.mail.recordSpool}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText>
 					
-					<p:outputLabel value="#{msg.jeeslIoMailSent}"/>
+					<jtp:label entity="IoMail" code="recordSent"/>
 					<h:outputText value="#{cc.attrs.bean.mail.recordSent}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText>
 					
-					<p:outputLabel value="#{msg.jeeslIoMailCounter}"/>
+					<jtp:label entity="IoMail" code="counter"/>
 					<h:outputText value="#{cc.attrs.bean.mail.counter}"/>
 					
-					<p:outputLabel value="#{msg.jeeslIoMailRecipient}"/>
+					<jtp:label entity="IoMail" code="recipient"/>
 					<h:outputText value="#{cc.attrs.bean.mail.recipient}"/>
 				</p:panelGrid>
 			</p:panel>

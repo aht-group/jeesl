@@ -8,9 +8,9 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
-import org.jeesl.model.ejb.io.db.CqBool;
-import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 
 public interface JeeslIoMavenQuery <
 							ARTIFACT extends JeeslIoMavenArtifact<?,?>,
@@ -21,9 +21,8 @@ public interface JeeslIoMavenQuery <
 							>
 			extends JeeslCoreQuery
 {
-	List<CqLiteral> getLiterals();
+	List<JeeslCqLiteral> getCqLiterals();
 	List<CqOrdering> getOrderings();
-	List<CqBool> getBools();
 	
 	boolean isDistinct();
 //	void x();
@@ -32,8 +31,8 @@ public interface JeeslIoMavenQuery <
 	List<String> getRootFetches();
 	public <E extends Enum<E>> JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> addRootFetch(E e);
 	
-	JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> add(CqLiteral literal);
-	JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> add(CqBool bool);
+	JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> add(JeeslCqLiteral literal);
+	JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> add(JeeslCqBoolean bool);
 	JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> orderBy(CqOrdering ordering);
 	
 	//LocalDate

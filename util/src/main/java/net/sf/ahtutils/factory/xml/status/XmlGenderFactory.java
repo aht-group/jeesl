@@ -2,7 +2,6 @@ package net.sf.ahtutils.factory.xml.status;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.io.locale.XmlLabelFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;

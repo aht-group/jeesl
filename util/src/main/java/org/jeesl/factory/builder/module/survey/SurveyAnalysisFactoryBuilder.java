@@ -23,7 +23,7 @@ import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyData;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyMatrix;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 public class SurveyAnalysisFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 				TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,?,?,?,?,?,ANALYSIS>,
 				QUESTION extends JeeslSurveyQuestion<L,D,?,?,?,QE,SCORE,?,?,OPTION,AQ>,
-				QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+				QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 				SCORE extends JeeslSurveyScore<L,D,?,QUESTION>,
 				ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 				MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,

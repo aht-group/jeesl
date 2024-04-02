@@ -2,6 +2,8 @@ package org.jeesl.model.json.survey;
 
 import java.io.Serializable;
 
+import org.jeesl.model.json.module.survey.question.JsonOption;
+import org.jeesl.model.json.module.survey.question.JsonQuestion;
 import org.jeesl.model.json.system.status.JsonType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,19 +32,19 @@ public class Condition implements Serializable
 	public void setPosition(int position) {this.position = position;}
 
 	@JsonProperty("question")
-	private Question question;
-	public Question getQuestion() {return question;}
-	public void setQuestion(Question question) {this.question = question;}
+	private JsonQuestion question;
+	public JsonQuestion getQuestion() {return question;}
+	public void setQuestion(JsonQuestion question) {this.question = question;}
 
 	@JsonProperty("trigger")
-	private Question trigger;
-	public Question getTrigger() {return trigger;}
-	public void setTrigger(Question trigger) {this.trigger = trigger;}
+	private JsonQuestion trigger;
+	public JsonQuestion getTrigger() {return trigger;}
+	public void setTrigger(JsonQuestion trigger) {this.trigger = trigger;}
 	
 	@JsonProperty("option")
-	private Option option;
-	public Option getOption() {return option;}
-	public void setOption(Option option) {this.option = option;}
+	private JsonOption option;
+	public JsonOption getOption() {return option;}
+	public void setOption(JsonOption option) {this.option = option;}
 	
 	@JsonProperty("type")
 	private JsonType type;

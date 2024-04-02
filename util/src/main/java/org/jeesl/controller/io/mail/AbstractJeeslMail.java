@@ -63,7 +63,7 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 	private final IoMailFactoryBuilder<L,D,MAILCAT,MAIL,STATUS,RETENTION> fbMail;
 	
 	protected final JeeslIoTemplateFacade<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fTemplate;
-	protected final JeeslIoMailFacade<L,D,MAILCAT,MAIL,STATUS,RETENTION,FRC> fMail;
+	protected final JeeslIoMailFacade<MAILCAT,MAIL,STATUS,RETENTION,FRC> fMail;
 	
 	protected JeeslTemplateHandler<LOC,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> mth;
 	protected final FreemarkerIoTemplateEngine<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fmEngine;
@@ -85,7 +85,7 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 	public AbstractJeeslMail(IoTemplateFactoryBuilder<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fbTemplate,
 							IoMailFactoryBuilder<L,D,MAILCAT,MAIL,STATUS,RETENTION> fbMail,
 							JeeslIoTemplateFacade<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fTemplate,
-							JeeslIoMailFacade<L,D,MAILCAT,MAIL,STATUS,RETENTION,FRC> fMail)
+							JeeslIoMailFacade<MAILCAT,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
 		this.fbTemplate=fbTemplate;
 		this.fbMail=fbMail;

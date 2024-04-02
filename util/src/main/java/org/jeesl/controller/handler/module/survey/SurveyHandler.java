@@ -17,6 +17,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
+import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyAnswerFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyDataFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyMatrixFactory;
@@ -67,7 +68,8 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	private JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 	
-	private final JeeslSurveyCoreFacade<?,?,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fSurvey;
+	private final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate;
+	private final JeeslSurveyCoreFacade<?,?,SURVEY,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
 	
 	private final JeeslFacesMessageBean bMessage;
 	private final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,?,?,OPTION,?> bSurvey;
@@ -77,7 +79,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	private JeeslScoreProcessor<ANSWER> scoreProcessor; public void setScoreProcessor(JeeslScoreProcessor<ANSWER> scoreProcessor) {this.scoreProcessor = scoreProcessor;}
 
 	private final SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION> condition; public SurveyConditionalHandler<TEMPLATE, SECTION, QUESTION, CONDITION, ANSWER, OPTION> getCondition() {return condition;}
-	private final SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> validation; public SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION> getValidation() {return validation;}
+	private final SurveyValidationHandler<D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER> validation; public SurveyValidationHandler<D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER> getValidation() {return validation;}
 
 	private final Class<SECTION> cSection;
 	
@@ -110,13 +112,15 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	private boolean debugOnInfo;
 	
 	public SurveyHandler(JeeslSurveyHandlerCallback<SECTION> callback,
-				final SurveyCoreFactoryBuilder<L,D,?,SURVEY,?,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION,?> fBSurvey,
+				final SurveyTemplateFactoryBuilder<L,D,?,?,?,?,?,?,?,SECTION,?,?,?,?,?,?,?,?> fbTemplate,
+				final SurveyCoreFactoryBuilder<?,D,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,OPTION,CORRELATION> fBSurvey,
 				JeeslFacesMessageBean bMessage,
-				final JeeslSurveyCoreFacade<?,?,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION> fSurvey,
+				final JeeslSurveyCoreFacade<?,?,SURVEY,?,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 				JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,?,?,OPTION,?> bSurvey,
 				JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION> cache)
 	{
 		this.callback=callback;
+		this.fbTemplate=fbTemplate;
 		this.bMessage=bMessage;
 		this.fSurvey=fSurvey;
 		
@@ -129,8 +133,8 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 		showAssessment = false;
 		allowAssessment = true;
 
-		condition = new SurveyConditionalHandler<TEMPLATE,SECTION,QUESTION,CONDITION,ANSWER,OPTION>(fBSurvey,bSurvey);
-		validation = new SurveyValidationHandler<L,D,TEMPLATE,SECTION,QUESTION,VALIDATION,ANSWER,OPTION>(bSurvey);
+		condition = new SurveyConditionalHandler<>(fBSurvey,bSurvey);
+		validation = new SurveyValidationHandler<>(bSurvey);
 		
 		answers = new HashMap<QUESTION,ANSWER>();
 		matrix = new Nested3IdMap<MATRIX>();
@@ -141,7 +145,8 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 		efData = fBSurvey.data();
 		efAnswer = fBSurvey.answer();
 		efMatrix = fBSurvey.ejbMatrix();
-		tfSection = fBSurvey.txtSection();
+		
+		tfSection = fbTemplate.txtSection();
 		tfAnswer = fBSurvey.txtAnswer();
 		
 		activeSections = new HashSet<SECTION>();

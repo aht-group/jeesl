@@ -44,10 +44,12 @@ import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
-import org.jeesl.model.ejb.io.db.CqBool;
-import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.cq.CqBool;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -211,9 +213,9 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 			predicates.add(jArtifact.in(query.getIoMavenArtifacts()));
 		}
 		
-		if(ObjectUtils.isNotEmpty(query.getBools()))
+		if(ObjectUtils.isNotEmpty(query.getCqBooleans()))
 		{
-			for(CqBool cqb : query.getBools())
+			for(JeeslCqBoolean cqb : query.getCqBooleans())
 			{
 				if(cqb.getPath().equals(CqBool.path(JeeslIoMavenEeReferral.Attributes.recommendation)))
 				{
@@ -328,9 +330,9 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		if(ObjectUtils.isNotEmpty(query.getLiterals()))
+		if(ObjectUtils.isNotEmpty(query.getCqLiterals()))
 		{
-			for(CqLiteral cql : query.getLiterals())
+			for(JeeslCqLiteral cql : query.getCqLiterals())
 			{
 				if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.code)))
 				{

@@ -20,28 +20,20 @@ import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyAnswerFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyMatrixFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionFactory;
-import org.jeesl.factory.ejb.module.survey.EjbSurveyTemplateFactory;
 import org.jeesl.factory.xls.system.io.report.XlsCellFactory;
 import org.jeesl.factory.xls.system.io.report.XlsRowFactory;
 import org.jeesl.factory.xls.system.io.report.XlsSheetFactory;
 import org.jeesl.interfaces.controller.builder.SurveyCorrelationInfoBuilder;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
-import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
-import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
-import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateCategory;
-import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateStatus;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateVersion;
 import org.jeesl.interfaces.model.module.survey.correlation.JeeslSurveyCorrelation;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyData;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyMatrix;
-import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -50,18 +42,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescription,
-							SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
-							SS extends JeeslSurveyStatus<L,D,SS,?>,
-							SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,
-							TEMPLATE extends JeeslSurveyTemplate<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,OPTIONS,?>,
+							SURVEY extends JeeslSurvey<L,D,?,TEMPLATE,DATA>,
+							
+							
+							TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,VERSION,?,?,SECTION,OPTIONS,?>,
 							VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-							TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-							TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
+
 							SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-							QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
-							SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
-							UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
+							QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,?,?,OPTIONS,OPTION,?>,
+							
 							ANSWER extends JeeslSurveyAnswer<L,D,QUESTION,MATRIX,DATA,OPTION>,
 							MATRIX extends JeeslSurveyMatrix<L,D,ANSWER,OPTION>,
 							DATA extends JeeslSurveyData<L,D,SURVEY,ANSWER,CORRELATION>,
@@ -79,15 +68,16 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	public ProcessingTimeTracker getPtt() {return ptt;}
 	public void setPtt(ProcessingTimeTracker ptt) {this.ptt = ptt;}
 
-	private final JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate;
-	private final JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey;
-	
-	private final EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate;
+	private final JeeslSurveyTemplateFacade<?,TEMPLATE,VERSION,?,?,SECTION,QUESTION,?,OPTIONS,OPTION> fTemplate;
+	private final JeeslSurveyCoreFacade<L,D,SURVEY,?,?,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey;
+
 	private final EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix;
 	private final EjbSurveyOptionFactory<QUESTION,OPTION> efOption;
-	private final XlsSurveyQuestionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xlfQuestion;
-	private XlsSurveyAnswerFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xlfAnswer;
-	
+
+	private final XlsSurveyQuestionFactory<QUESTION,OPTIONS,OPTION> xfQuestion;
+
+	private XlsSurveyAnswerFactory<L,QUESTION,ANSWER,MATRIX,OPTION> xfAnswer;
+
 	private SurveyCorrelationInfoBuilder<CORRELATION> correlationBuilder;
 	
 	//Simple
@@ -103,9 +93,8 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	
 	
 	public XlsSurveyDataFactory(String localeCode,
-			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-			JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
-			EjbSurveyTemplateFactory<L,D,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION> efTemplate,
+			JeeslSurveyTemplateFacade<?,TEMPLATE,VERSION,?,?,SECTION,QUESTION,?,OPTIONS,OPTION> fTemplate,
+			JeeslSurveyCoreFacade<L,D,SURVEY,?,?,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 			EjbSurveyMatrixFactory<ANSWER,MATRIX,OPTION> efMatrix,
 			EjbSurveyOptionFactory<QUESTION,OPTION> efOption,
 			SurveyCorrelationInfoBuilder<CORRELATION> builder)
@@ -113,12 +102,12 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 		this.localeCode = localeCode;
 		this.fTemplate=fTemplate;
 		this.fSurvey = fSurvey;
-		this.efTemplate = efTemplate;
+//		this.efTemplate = efTemplate;
 		this.efMatrix = efMatrix;
 		this.efOption = efOption;
 		this.correlationBuilder = builder;
 
-		xlfQuestion = new XlsSurveyQuestionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(efOption);
+		xfQuestion = new XlsSurveyQuestionFactory<>(efOption);
 		
 		mapSizeSection = new HashMap<SECTION,Integer>();
 		mapSizeQuestion = new HashMap<QUESTION,Integer>();
@@ -129,7 +118,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	{		
 		style = sheet.getWorkbook().createCellStyle();
 		style.setAlignment(HorizontalAlignment.CENTER);
-		xlfAnswer = new XlsSurveyAnswerFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,style);
+		xfAnswer = new XlsSurveyAnswerFactory<>(localeCode,style);
 
 		simpleCalculateSizes(t);
 		
@@ -149,7 +138,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 				{
 					mapOptions.put(question,question.getOptions());
 				}
-				int sizeQuestion = xlfQuestion.toSize(question);
+				int sizeQuestion = xfQuestion.toSize(question);
 				mapSizeQuestion.put(question,sizeQuestion);
 				sizeSection = sizeSection + sizeQuestion;
 			}			
@@ -238,14 +227,14 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 							{
 								for(OPTION oCol : oCols)
 								{
-									if(matrix.containsKey(oRow,oCol)){xlfAnswer.build(row, colNr, answer.getQuestion(), matrix.get(oRow,oCol));}
+									if(matrix.containsKey(oRow,oCol)){xfAnswer.build(row, colNr, answer.getQuestion(), matrix.get(oRow,oCol));}
 									else{XlsCellFactory.build(row, colNr, style, "", 1);}
 								}
 							}
 						}
 						else
 						{
-							xlfAnswer.build(row, colNr, answer);
+							xfAnswer.build(row, colNr, answer);
 						}
 					}
 				}

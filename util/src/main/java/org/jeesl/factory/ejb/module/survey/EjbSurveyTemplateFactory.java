@@ -7,22 +7,17 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateCategory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateStatus;
-import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateVersion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.module.survey.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbSurveyTemplateFactory<L extends JeeslLang, D extends JeeslDescription,
-								TEMPLATE extends JeeslSurveyTemplate<L,D,?,TEMPLATE,?,TS,TC,SECTION,?,?>,
-								VERSION extends JeeslSurveyTemplateVersion<L,D,TEMPLATE>,
-								TS extends JeeslSurveyTemplateStatus<L,D,TS,?>,
-								TC extends JeeslSurveyTemplateCategory<L,D,TC,?>,
-								SECTION extends JeeslSurveySection<L,D,TEMPLATE,SECTION,QUESTION>,
-								QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,?,?,?,?,?,?>
+public class EjbSurveyTemplateFactory<TEMPLATE extends JeeslSurveyTemplate<?,?,?,TEMPLATE,?,TS,TC,SECTION,?,?>,
+								TS extends JeeslSurveyTemplateStatus<?,?,TS,?>,
+								TC extends JeeslSurveyTemplateCategory<?,?,TC,?>,
+								SECTION extends JeeslSurveySection<?,?,TEMPLATE,SECTION,QUESTION>,
+								QUESTION extends JeeslSurveyQuestion<?,?,SECTION,?,?,?,?,?,?,?,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbSurveyTemplateFactory.class);

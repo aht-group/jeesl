@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
@@ -18,7 +19,8 @@ public interface JeeslItsIssue <R extends JeeslTenantRealm<?,?,R,?>,
 								IS extends JeeslItsIssueStatus<?,?,R,IS,?>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					JeeslWithTenantSupport<R>,
-					EjbWithParentAttributeResolver,EjbWithNonUniqueCode,EjbWithPosition,
+					EjbWithParentAttributeResolver, EjbWithParentId<I>,
+					EjbWithNonUniqueCode,EjbWithPosition,
 					EjbWithName,JeeslWithStatus<IS>
 					
 {

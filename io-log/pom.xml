@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-log</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Logging</name>
+    <name>JEESL - IO: Logging</name>
 	
 	<dependencyManagement>
 		<dependencies>

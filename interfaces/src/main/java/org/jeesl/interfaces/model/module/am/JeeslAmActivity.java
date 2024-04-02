@@ -10,6 +10,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithDateRange;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
@@ -21,7 +22,7 @@ public interface JeeslAmActivity <L extends JeeslLang, D extends JeeslDescriptio
 							ACTIVITY extends JeeslAmActivity<L,D,REALM,ACTIVITY,PROJ>,
 							PROJ extends JeesAmProject<L,D,REALM,ACTIVITY,PROJ>>
 			extends Serializable,EjbSaveable,EjbRemoveable,EjbWithCode,
-					EjbWithPosition,EjbWithParentAttributeResolver,
+					EjbWithPosition,EjbWithParentAttributeResolver,EjbWithParentId<ACTIVITY>,
 					EjbWithLang<L>,EjbWithDescription<D>,EjbWithDateRange,
 					EjbWithPositionParent
 

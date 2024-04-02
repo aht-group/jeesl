@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
+import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionType;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -24,7 +24,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 								SCHEME extends JeeslSurveyScheme<L,D,?,SCORE>,
 								SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
 								QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
-								QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
+								QE extends JeeslSurveyQuestionType<L,D,QE,?>,
 								SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 								UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
 								OPTIONS extends JeeslSurveyOptionSet<L,D,?,OPTION>,
@@ -32,7 +32,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSectionFactory.class);
 		
-	private JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey;
+	private JeeslSurveyCoreFacade<L,D,?,?,?,SECTION,QUESTION,?,?,?,?> fSurvey;
 	
 	private final String localeCode;
 	private final Section q;
@@ -49,7 +49,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(ObjectUtils.isNotEmpty(q.getQuestion())) {xfQuestion = new XmlQuestionFactory<>(localeCode,q.getQuestion().get(0));}
 	}
 	
-	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
+	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SECTION,QUESTION,?,?,?,?> fSurvey)
 	{
 		this.fSurvey=fSurvey;
 		if(Objects.nonNull(xfSection)) {xfSection.lazyLoad(fSurvey);}
