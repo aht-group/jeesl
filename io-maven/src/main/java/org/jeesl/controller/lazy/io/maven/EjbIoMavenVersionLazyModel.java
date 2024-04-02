@@ -48,16 +48,7 @@ public class EjbIoMavenVersionLazyModel extends LazyDataModel<IoMavenVersion>
 	private EjbIoMavenQuery query(Map<String,FilterMeta> filterBy)
 	{
 		EjbIoMavenQuery q = EjbIoMavenQuery.instance();
-		
-//		LiteralPredicateBuilder.
-		if(Objects.nonNull(filterBy))
-		{
-			for(FilterMeta meta : filterBy.values().stream().filter(m -> Objects.nonNull(m.getFilterValue())).collect(Collectors.toList()))
-			{
-				q.add(CqLiteral.contains(meta.getFilterValue().toString(),meta.getField()));
-			}
-		}
-		
+		q.applyPrimefaces(filterBy);		
 		return q;
 	}
 	

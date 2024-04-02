@@ -19,6 +19,7 @@ import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.primefaces.model.FilterMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -186,14 +187,15 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		return list;
 	}
 	
-//	public void applyPrimefaces(Map<String,FilterMeta> filterBy)
-//	{
-//		if(Objects.nonNull(filterBy))
-//		{
-//			for(FilterMeta meta : filterBy.values().stream().filter(m -> Objects.nonNull(m.getFilterValue())).collect(Collectors.toList()))
-//			{
-//				query.addCqLiteral(CqLiteral.contains(meta.getFilterValue().toString(),meta.getFilterField()));
-//			}
-//		}
-//	}
+	public void applyPrimefaces(Map<String,FilterMeta> filters)
+	{
+		if(Objects.nonNull(filters))
+		{
+			for(FilterMeta meta : filters.values().stream().filter(m -> Objects.nonNull(m.getFilterValue())).collect(Collectors.toList()))
+			{
+				logger.info(meta.toString());
+				this.addCqLiteral(CqLiteral.contains(meta.getFilterValue().toString(),meta.getFilterField()));
+			}
+		}
+	}
 }
