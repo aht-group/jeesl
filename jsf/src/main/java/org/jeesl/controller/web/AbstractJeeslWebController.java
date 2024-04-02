@@ -33,6 +33,7 @@ public class AbstractJeeslWebController implements Serializable
 		this.debugOnInfo=true;
 		this.jogger=jogger;
 	}
+	public void debugOnInfo(boolean value) {this.debugOnInfo=value;}
 	
 	protected void postConstructWebController(JeeslFacesMessageBean bMessage)
 	{

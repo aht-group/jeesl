@@ -30,7 +30,8 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 	{
 
 	}
-		
+	
+	@Deprecated
 	public static <T extends EjbWithParentAttributeResolver> void buildTree(JeeslFacade facade, TreeNode<T> parent, List<T> objects, Class<T> type)
 	{
 		for(T o : objects)
@@ -62,6 +63,7 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		return nodes;
 	}
 	
+	@Deprecated
 	private void forEach(TreeNode<P> node, Functor<TreeNode<P>> functor, Expression<TreeNode<P>> breakExpression)
 	{
 		if (node == null || breakExpression.condition(node)) { return; }
@@ -70,20 +72,22 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		node.getChildren().forEach(child -> forEach(child, functor, breakExpression));
 	}
 	
+	@Deprecated
 	public void setExpansion(TreeNode<P> startNode, boolean expand)
 	{
 		setExpansion(startNode, expand, getDepth(startNode));
 	}
-	private int getDepth(TreeNode<P> root)
+	@Deprecated private int getDepth(TreeNode<P> root)
 	{
 		return 1 + root.getChildren().stream().map(child -> getDepth(child)).max(Integer::compare).orElse(0);
 	}
-	
+	@Deprecated
 	public void setExpansion(TreeNode<P> startNode, boolean expand, int reach)
 	{
 		forEach(startNode, node -> node.setExpanded(expand), node -> getAncestor(node, reach) == startNode);
 	}
 	
+	@Deprecated
 	private TreeNode<P> getAncestor(@NotNull TreeNode<P> decendant, int ancestryLevel)
 	{
 		TreeNode<P> ancestor = decendant;
@@ -95,6 +99,7 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		return ancestor;
 	}
 	
+	@Deprecated
 	public TreeNode<P> getNode(TreeNode<P> tree, String dragId, int position)
     {
     	String[] elements = dragId.split(":");
@@ -102,6 +107,7 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
     	return getNode(tree.getChildren(),index,0);
     }
     
+	@Deprecated
     private TreeNode<P> getNode(List<TreeNode<P>> nodes, String[] index, int level)
     {
     	Integer position = Integer.valueOf(index[level]);
@@ -139,6 +145,7 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		}
 	}
     
+	@Deprecated
     @SuppressWarnings("unchecked")
 	public static <T extends JeeslTreeElement<T>> void persistDragDropEvent(JeeslFacade facade, TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
     {

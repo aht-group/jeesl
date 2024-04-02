@@ -6,6 +6,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.util.tree.JeeslTreeElement;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisibleMigration;
@@ -23,7 +24,8 @@ public interface JeeslSecurityMenu<L extends JeeslLang,
 			extends Serializable,EjbSaveable,EjbRemoveable,
 						EjbWithPosition,EjbWithLang<L>,
 						EjbWithParentAttributeResolver, EjbWithParentId<M>,
-						EjbWithVisibleMigration
+						EjbWithVisibleMigration,
+						JeeslTreeElement<M>
 						
 {
 	public static final String extractId = "securityMenu";
