@@ -194,7 +194,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 			for(FilterMeta meta : filters.values().stream().filter(m -> Objects.nonNull(m.getFilterValue())).collect(Collectors.toList()))
 			{
 				logger.info(meta.toString());
-				this.addCqLiteral(CqLiteral.contains(meta.getFilterValue().toString(),meta.getFilterField()));
+				this.addCqLiteral(CqLiteral.contains(meta.getFilterValue().toString(),meta.getField()));
 			}
 		}
 	}
