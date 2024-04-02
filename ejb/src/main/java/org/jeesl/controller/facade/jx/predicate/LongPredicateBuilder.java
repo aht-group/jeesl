@@ -7,20 +7,20 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 
 import org.jeesl.controller.facade.jx.io.JeeslIoMavenFacadeBean;
-import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
+import org.jeesl.util.query.cq.CqLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BooleanPredicateBuilder
+public class LongPredicateBuilder
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
 		
-	public static void add(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqBoolean cqb, Expression<Boolean> eBool)
+	public static void add(CriteriaBuilder cB, List<Predicate> predicates, CqLong c, Expression<Long> e)
 	{
-		switch(cqb.getType())
+		switch(c.getType())
 		{
-			case IsValue: predicates.add(cB.equal(eBool,cqb.getValue())); break;
-			default: logger.error("NYI Type: "+cqb.toString());
+			case IsValue: predicates.add(cB.equal(e,c.getValue())); break;
+			default: logger.error("NYI Type: "+c.toString());
 		}
 	}
 }

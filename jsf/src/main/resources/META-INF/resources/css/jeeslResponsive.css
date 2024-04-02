@@ -625,6 +625,9 @@ template {
   line-height: normal;
   padding: 2px 10px;
 }
+.ui-button.ui-state-default.ui-state-loading .ui-icon {
+  display: inline-block;
+}
 .ui-button.ui-state-default .ui-icon {
   left: 0;
   margin: 0;
@@ -2585,15 +2588,14 @@ template {
   display: inline-block;
   min-height: auto;
   vertical-align: top;
-  --icon-height-multiplier: 1;
 }
 
-img.jeesl-icon, .jeesl-icon img {
+img.jeesl-icon, .jeesl-icon img, .pf-action-icon img {
   height: calc(12px * var(--icon-height-multiplier));
 }
 @media (max-width: 768px) {
-  img.jeesl-icon, .jeesl-icon img {
-    height: 15px;
+  img.jeesl-icon, .jeesl-icon img, .pf-action-icon img {
+    height: calc(15px * var(--icon-height-multiplier));
   }
 }
 
@@ -4293,7 +4295,7 @@ body, .ui-widget {
   padding-bottom: 5px;
 }
 .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item {
-  height: 26px;
+  height: calc(14px * var(--icon-height-multiplier) + 12px);
 }
 .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list {
   background: hsl(154, 100%, 24%);
@@ -5778,12 +5780,10 @@ body, .ui-widget {
   min-width: auto !important;
 }
 .jeesl-panel .ui-panel-titlebar .ui-panel-actions img {
-  height: 12px;
   padding: 0 4px;
 }
 @media (max-width: 768px) {
   .jeesl-panel .ui-panel-titlebar .ui-panel-actions img {
-    height: 29px;
     padding: 0 6px;
   }
 }
@@ -6427,12 +6427,10 @@ body, .ui-widget {
   height: auto;
 }
 .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
-  height: 12px;
   padding: 0 4px;
 }
 @media (max-width: 768px) {
   .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
-    height: 29px;
     padding: 0 6px;
   }
 }
@@ -7229,12 +7227,10 @@ body, .ui-widget {
   height: auto;
 }
 .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img, .ui-datatable.ui-sortable-helper .ui-datatable-header .pf-datatable-header-actions img, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-header .pf-datatable-header-actions img {
-  height: 12px;
   padding: 0 4px;
 }
 @media (max-width: 768px) {
   .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img, .ui-datatable.ui-sortable-helper .ui-datatable-header .pf-datatable-header-actions img, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-header .pf-datatable-header-actions img {
-    height: 29px;
     padding: 0 6px;
   }
 }
@@ -7393,7 +7389,7 @@ body, .ui-widget {
   table-layout: auto;
 }
 @media (max-width: 768px) {
-  .jeesl-datatable table thead th, .jeesl-datatable table tbody tr, .ui-datatable.ui-sortable-helper table thead th, .ui-datatable.ui-sortable-helper table tbody tr, .ui-selectonemenu-panel .ui-selectonemenu-table table thead th, .ui-selectonemenu-panel .ui-selectonemenu-table table tbody tr {
+  .jeesl-datatable table thead th, .jeesl-datatable table tbody tr, .jeesl-datatable table tfoot tr, .ui-datatable.ui-sortable-helper table thead th, .ui-datatable.ui-sortable-helper table tbody tr, .ui-datatable.ui-sortable-helper table tfoot tr, .ui-selectonemenu-panel .ui-selectonemenu-table table thead th, .ui-selectonemenu-panel .ui-selectonemenu-table table tbody tr, .ui-selectonemenu-panel .ui-selectonemenu-table table tfoot tr {
     height: 42px;
   }
 }
@@ -7463,12 +7459,12 @@ body, .ui-widget {
   min-width: 22px;
   position: absolute;
   transform: translateX(-50%);
+  width: calc(100% - 10px) !important;
 }
 @media (max-width: 768px) {
   .jeesl-datatable table thead th .ui-inputfield, .ui-datatable.ui-sortable-helper table thead th .ui-inputfield, .ui-selectonemenu-panel .ui-selectonemenu-table table thead th .ui-inputfield {
     height: 42px;
     min-width: 42px;
-    width: calc(100% - 10px) !important;
   }
 }
 .jeesl-datatable table thead th.jeesl-min-width-column, .jeesl-datatable table tbody td.jeesl-min-width-column, .ui-datatable.ui-sortable-helper table thead th.jeesl-min-width-column, .ui-datatable.ui-sortable-helper table tbody td.jeesl-min-width-column, .ui-selectonemenu-panel .ui-selectonemenu-table table thead th.jeesl-min-width-column, .ui-selectonemenu-panel .ui-selectonemenu-table table tbody td.jeesl-min-width-column {
@@ -7486,6 +7482,19 @@ body, .ui-widget {
   cursor: pointer;
   display: flex;
   height: 100%;
+}
+.jeesl-datatable table tfoot td, .ui-datatable.ui-sortable-helper table tfoot td, .ui-selectonemenu-panel .ui-selectonemenu-table table tfoot td {
+  background: hsl(0, 0%, 93%);
+  border-color: hsl(154, 100%, 20%);
+  border-width: 2px 0 0;
+  color: hsl(154, 100%, 20%);
+  font-weight: 700;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  .jeesl-datatable table tfoot td, .ui-datatable.ui-sortable-helper table tfoot td, .ui-selectonemenu-panel .ui-selectonemenu-table table tfoot td {
+    border-top-width: 4px;
+  }
 }
 .jeesl-datatable tbody, .jeesl-datatable .ui-datatable-data, .ui-datatable.ui-sortable-helper tbody, .ui-datatable.ui-sortable-helper .ui-datatable-data, .ui-selectonemenu-panel .ui-selectonemenu-table tbody, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-data {
   background: hsl(0, 0%, 93%);
@@ -7675,12 +7684,6 @@ body, .ui-widget {
 .jeesl-datatable .ui-paginator .ui-paginator-rpp-options option, .ui-datatable.ui-sortable-helper .ui-paginator .ui-paginator-rpp-options option, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-paginator .ui-paginator-rpp-options option {
   background: hsl(154, 100%, 20%);
   color: hsl(0, 0%, 100%);
-}
-@media (max-width: 768px) {
-  .jeesl-datatable img, .ui-datatable.ui-sortable-helper img, .ui-selectonemenu-panel .ui-selectonemenu-table img {
-    height: 100%;
-    max-height: calc(42px - 2 * 5px);
-  }
 }
 .jeesl-datatable .ui-datatable-footer, .ui-datatable.ui-sortable-helper .ui-datatable-footer, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-footer {
   border: none;
@@ -8156,12 +8159,10 @@ body, .ui-widget {
   min-width: auto !important;
 }
 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions img {
-  height: 12px;
   padding: 0 4px;
 }
 @media (max-width: 768px) {
   .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions img {
-    height: 29px;
     padding: 0 6px;
   }
 }
@@ -8805,12 +8806,10 @@ body, .ui-widget {
   height: auto;
 }
 .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
-  height: 12px;
   padding: 0 4px;
 }
 @media (max-width: 768px) {
   .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
-    height: 29px;
     padding: 0 6px;
   }
 }
@@ -9514,12 +9513,10 @@ body, .ui-widget {
   right: 0;
 }
 .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions img {
-  height: 12px;
   padding: 0 4px;
 }
 @media (max-width: 768px) {
   .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions img {
-    height: 29px;
     padding: 0 6px;
   }
 }
@@ -10684,7 +10681,7 @@ body, .ui-widget {
 }
 @media (max-width: 768px) {
   .pf-action-icon img {
-    height: 42px;
+    height: calc(42px * var(--icon-height-multiplier));
   }
 }
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:composite="http://java.sun.com/jsf/composite">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:j="http://www.jeesl.org/jsf"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface		componentType="org.jeesl.jsf.components.JsonPropertyEditor">
 		<composite:attribute	name="value"	required="true" type="java.lang.String"/>
@@ -14,12 +15,12 @@
 	<composite:implementation>
 		<f:event type="postAddToView" listener="#{cc.init}" />
 		<ui:repeat value="#{cc.propertyNames}" var="propertyDescriptor">
-			<p:panelGrid columns="2">
+			<j:inputGrid>
 				<p:outputLabel for="propertyName" styleClass="p-col p-md-3" value="#{propertyDescriptor}"/>
 				<p:inputText id="propertyName" value="#{cc.properties[propertyDescriptor]}">
 					<p:ajax event="keyup" process="#{cc.clientId}" listener="#{cc.process}"/>
 				</p:inputText>
-			</p:panelGrid>
+			</j:inputGrid>
 		</ui:repeat>
 	</composite:implementation>
 </html>

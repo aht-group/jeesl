@@ -5,6 +5,8 @@ import java.io.Serializable;
 public interface JeeslCqLiteral extends Serializable
 {
 	public enum Type {STARTS,CONTAINS}
+//	
+//	void x();
 	
 	Type getType();
 	String getLiteral();

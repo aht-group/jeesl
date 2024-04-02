@@ -1,14 +1,15 @@
-package org.jeesl.model.ejb.io.db;
+package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CqBool implements Serializable
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
+
+public class CqBool implements JeeslCqBoolean
 {
 	private static final long serialVersionUID = 1L;
 
-	public enum Type {IsValue,NotValue,IsNull}
-	
 	private final Type type; public final Type getType() {return type;}
 	private final Boolean value; public Boolean getValue() {return value;}
 	private final String path; public String getPath() {return path;}

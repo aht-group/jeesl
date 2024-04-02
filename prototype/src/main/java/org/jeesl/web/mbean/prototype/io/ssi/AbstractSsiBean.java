@@ -31,7 +31,7 @@ import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
-import org.jeesl.model.ejb.io.db.CqId;
+import org.jeesl.util.query.cq.CqLong;
 import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -136,7 +136,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		
 		EjbIoSsiQuery<CONTEXT,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		query.add(ssiProcessor.getMapping());
-		query.add(CqId.isValue(refA, CqId.path(JeeslIoSsiData.Attributes.refA)));
+		query.add(CqLong.isValue(refA, CqLong.path(JeeslIoSsiData.Attributes.refA)));
 		
 		if(Objects.nonNull(refA)) 
 		{
