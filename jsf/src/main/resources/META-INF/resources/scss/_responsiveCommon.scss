@@ -300,7 +300,7 @@ $border: $border-width solid $border-colour;
 
 @mixin icon-default-size {
 	.jeesl-icon {
-		height: $table-icon-height;
+		height: calc($table-icon-height * var(--icon-height-multiplier));
 		width: auto;
 		
 		@media (max-width: 768px) {
@@ -1167,11 +1167,9 @@ $border: $border-width solid $border-colour;
 	display: inline-block;
 	min-height: auto;
 	vertical-align: top;
-	
-	--icon-height-multiplier: 1;
 }
 
-img.jeesl-icon, .jeesl-icon img {
+img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	height: calc($icon-height * var(--icon-height-multiplier));
 
 	@media (max-width: 768px) {

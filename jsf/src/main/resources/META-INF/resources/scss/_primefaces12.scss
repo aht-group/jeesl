@@ -352,4 +352,61 @@ body {
 		right: 0;
 		top: 0;
 	}
+	
+	.ui-dialog {
+		border-radius: $border-radius;
+		box-shadow: $overlay-shadow;
+		
+		&:not(.jeesl-dialog) {
+			background: transparent;
+			
+			.ui-dialog-titlebar {
+				display: none;
+			}
+			
+			.ui-dialog-content {
+				display: flex;
+				flex-grow: 1;
+				padding: 0;
+				
+				form, form .ui-panel {
+					height: 100%;
+					width: 100%;
+				}
+			}
+		}
+		
+		.ui-dialog-titlebar {
+			@include jeesl-widget-header;
+		}
+		
+		.ui-dialog-content {
+			background: transparent;
+			padding: $half-spacing $regular-spacing;
+			
+			.jeesl-grid {
+				flex-grow: 1;
+
+				&:first-child {
+					margin-left:0;
+				}
+				
+				&:last-child {
+					margin-right: 0;
+				}
+				
+				.ui-panel {
+					margin: 0;
+				}
+			}
+		}
+		
+		.ui-dialog-footer {
+			background: transparent;
+			border-top: $header-element-underline solid $dark-colour;
+			color: $dark-colour;
+			padding: $half-spacing $regular-spacing;
+			text-align: left;
+		}
+	}
 }
