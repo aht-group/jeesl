@@ -5,16 +5,15 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public class CqId implements Serializable
+public class CqId implements JeeslCqLong
 {
 	private static final long serialVersionUID = 1L;
 
-	public enum Type {IsValue,IsNull,IsNonNull}
-	
 	private final Type type; public final Type getType() {return type;}
 	private final Long id; public Long getId() {return id;}
 	private final String path; public String getPath() {return path;}
 
+//	public static CqId isValue(CqLiteral cq) {return new CqId(Type.IsValue,id,path);}
 	public static CqId isValue(Long id, String path) {return new CqId(Type.IsValue,id,path);}
 	public static CqId value(Long id, String path)
 	{
