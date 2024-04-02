@@ -5,18 +5,18 @@ import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
 import org.jeesl.interfaces.model.module.journal.JeeslWithJournal;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.module.EjbDiaryQuery;
+import org.jeesl.interfaces.util.query.module.JeeslJournalQuery;
 
-public interface JeeslLogFacade <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslJournalFacade <L extends JeeslLang, D extends JeeslDescription,
 									BOOK extends JeeslJournalBook<SCOPE,ITEM>,
 									SCOPE extends JeeslJournalScope<L,D,SCOPE,?>,
 									ITEM extends JeeslJournalItem<L,D,?,?,BOOK,IMPACT,CONF,USER>,
@@ -27,7 +27,7 @@ public interface JeeslLogFacade <L extends JeeslLang, D extends JeeslDescription
 			extends JeeslFacade
 {	
 	<OWNER extends JeeslWithJournal<BOOK>> OWNER fDiaryOwner(Class<OWNER> cOwner, BOOK diary) throws JeeslNotFoundException;
-	List<ITEM> fDiaryItems(EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> query);
+	List<ITEM> fDiaryItems(JeeslJournalQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> query);
 	List<ITEM> fLogItems(List<BOOK> books);
 	List<ITEM> fLogItems(List<BOOK> books, List<SCOPE> scopes, List<CONF> confidentialities, LocalDate ldStart, LocalDate ldEnd);
 }

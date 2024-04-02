@@ -46,8 +46,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
-import org.jeesl.model.ejb.io.db.CqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.sql.SqlNativeQueryHelper;
 import org.jeesl.util.query.sql.SqlRevisionQueries;
 import org.slf4j.Logger;
@@ -125,9 +126,9 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
 		Root<RE> root = cQ.from(fbRevision.getClassEntity());
 		
-		if(ObjectUtils.isNotEmpty(query.getLiterals()))
+		if(ObjectUtils.isNotEmpty(query.getCqLiterals()))
 		{
-			for(CqLiteral lit : query.getLiterals())
+			for(JeeslCqLiteral lit : query.getCqLiterals())
 			{
 				if(lit.getPath().equals(CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)))
 				{

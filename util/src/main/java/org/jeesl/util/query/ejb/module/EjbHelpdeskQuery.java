@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.util.query.module;
+package org.jeesl.util.query.ejb.module;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,7 +17,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.AbstractEjbQuery;
+import org.jeesl.interfaces.util.query.module.JeeslHelpdeskQuery;
+import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +34,7 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 							PRIORITY extends JeeslHdPriority<L,D,R,PRIORITY,?>,
 							USER extends JeeslSimpleUser>
 			extends AbstractEjbQuery
+			implements JeeslHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER>
 {
 	private static final long serialVersionUID = 1L;
 	

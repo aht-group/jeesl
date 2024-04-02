@@ -34,7 +34,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.EjbAttributeQuery;
+import org.jeesl.util.query.ejb.io.EjbIoAttributeQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -274,7 +274,7 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 //		if(Objects.nonNull(jogger)) {logger.info(jogger.milestone(this.getClass().getSimpleName()+"-loadContainers","for-loop",containers.size()));}
 		
 		containers.clear();
-		EjbAttributeQuery<CRITERIA,CONTAINER,DATA> query = new EjbAttributeQuery<>();
+		EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> query = new EjbIoAttributeQuery<>();
 		for(W w : list) {query.add(w.getAttributeContainer());}
 		containers.putAll(efData.toMapContainerCriteriaDta(fAttribute.fAttributeData(query)));
 		if(Objects.nonNull(jogger)) {logger.info(jogger.milestone(this.getClass().getSimpleName()+"-loadContainers","query",containers.size()));}

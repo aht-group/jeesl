@@ -6,7 +6,7 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
 import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
-import org.jeesl.interfaces.util.query.module.EjbChecklistQuery;
+import org.jeesl.interfaces.util.query.module.JeeslChecklistQuery;
 
 public interface JeeslChecklistFacade <CL extends JeeslClChecklist<?,?,?>,
 									CI extends JeeslClCheckItem<?,CL,?>,
@@ -16,5 +16,5 @@ public interface JeeslChecklistFacade <CL extends JeeslClChecklist<?,?,?>,
 {	
 	TL load(TL tracklist);
 	
-	List<CI> fCheckItems(EjbChecklistQuery<CL,CI,TL> query);
+	List<CI> fCheckItems(JeeslChecklistQuery<CL,CI,TL> query);
 }

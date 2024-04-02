@@ -31,9 +31,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.module.EjbChecklistQuery;
 import org.jeesl.jsf.handler.ui.edit.UiEditBooleanHandler;
 import org.jeesl.util.db.cache.EjbCodeCache;
+import org.jeesl.util.query.ejb.module.EjbChecklistQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

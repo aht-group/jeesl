@@ -17,7 +17,7 @@ import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
 import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
 import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
-import org.jeesl.interfaces.util.query.module.EjbChecklistQuery;
+import org.jeesl.interfaces.util.query.module.JeeslChecklistQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ public class JeeslChecklistFacadeBean<CL extends JeeslClChecklist<?,?,?>,
 		return tracklist;
 	}
 
-	@Override public List<CI> fCheckItems(EjbChecklistQuery<CL,CI,TL> query)
+	@Override public List<CI> fCheckItems(JeeslChecklistQuery<CL,CI,TL> query)
 	{
 		if(ObjectUtils.allNull(query.getCheckLists())) {return new ArrayList<>();}
 		

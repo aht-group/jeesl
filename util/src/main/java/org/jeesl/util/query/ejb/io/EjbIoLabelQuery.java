@@ -1,4 +1,4 @@
-package org.jeesl.util.query.cq.io;
+package org.jeesl.util.query.ejb.io;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
-import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,5 +44,5 @@ public class EjbIoLabelQuery<ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>
 	@Override public EjbIoLabelQuery<ENTITY> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbIoLabelQuery<ENTITY> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
-	@Override public EjbIoLabelQuery<ENTITY> add(CqLiteral literal) {super.addProtected(literal); return this;}
+	@Override public EjbIoLabelQuery<ENTITY> add(JeeslCqLiteral literal) {super.addCqLiteral(literal); return this;}
 }
