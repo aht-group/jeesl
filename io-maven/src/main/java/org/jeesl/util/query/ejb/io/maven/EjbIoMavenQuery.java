@@ -9,8 +9,8 @@ import java.util.Objects;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
-import org.jeesl.model.ejb.io.db.CqBool;
 import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
@@ -44,8 +44,8 @@ public class EjbIoMavenQuery extends AbstractEjbQuery
 	public EjbIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	@Override public EjbIoMavenQuery add(JeeslCqLiteral literal) {super.addCqLiteral(literal); return this;}
+	@Override public EjbIoMavenQuery add(JeeslCqBoolean bool) {super.addCqBoolean(bool); return this;}
 	@Override public EjbIoMavenQuery orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
-	@Override public EjbIoMavenQuery add(CqBool bool) {super.addProtected(bool); return this;}
 	
 	//Lists
 	@Override public EjbIoMavenQuery id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}

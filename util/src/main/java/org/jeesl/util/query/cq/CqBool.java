@@ -1,7 +1,10 @@
-package org.jeesl.model.ejb.io.db;
+package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 
 public class CqBool implements JeeslCqBoolean
 {

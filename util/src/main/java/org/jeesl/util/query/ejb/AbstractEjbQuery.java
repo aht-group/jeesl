@@ -123,7 +123,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	
 	@Override public void addCqLiteral(JeeslCqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
 	@Override public void addCqLong(JeeslCqLong literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
-	protected void addProtected(JeeslCqBoolean cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
+	@Override public void addCqBoolean(JeeslCqBoolean cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
 	protected void addProtected(CqInteger i) {if(Objects.isNull(integers)) {integers = new ArrayList<>();} integers.add(i);}
 	
 	protected void addProtected(CqDate date) {if(Objects.isNull(localDates)) {localDates = new ArrayList<>();} localDates.add(date);}

@@ -9,5 +9,5 @@ public interface JeeslCqBooleanQuery extends Serializable
 {	
 	List<JeeslCqBoolean> getCqBooleans();
 	
-//	void addCqLong(JeeslCqLong c);
+	void addCqBoolean(JeeslCqBoolean c);
 }
