@@ -33,6 +33,7 @@ import org.jeesl.util.query.cq.CqLong;
 import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,22 +126,27 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		this.reloadStatistics();
 	}
 	
-	@Override
-	public List<DATA> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
+	private EjbIoSsiQuery<CTX,STATUS,ERROR> query(Map<String,FilterMeta> filterBy)
 	{
-		datas.clear(); mapJson.clear();
 		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
-		query.setFirstResult(first);
-		query.setMaxResults(pageSize);
 		if(Objects.nonNull(refA)) {query.add(CqLong.isValue(refA,CqLong.path(JeeslIoSsiData.Attributes.refA)));}
 		if(Objects.nonNull(refB)) {query.add(CqLong.isValue(refB,CqLong.path(JeeslIoSsiData.Attributes.refB)));}
 		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
 		if(sbhStatus.hasSelected()) {query.addStatus(sbhStatus.getSelected());}
+		return query;
+	}
+	
+	@Override public int count(Map<String,FilterMeta> filterBy) {return fSsi.cSsiData(query(filterBy)).intValue();}
+	@Override public List<DATA> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy)
+	{
+		datas.clear(); mapJson.clear();
+		EjbIoSsiQuery<CTX,STATUS,ERROR> query = this.query(filterBy);
+		query.setFirstResult(first);
+		query.setMaxResults(pageSize);
 		query.debug(true);
 		
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
-		super.setRowCount(fSsi.cSsiData(query).intValue());
 		datas.addAll(fSsi.fSsiData(query));
 		logger.info("PageSize:"+pageSize+" page:"+first+" results:"+datas.size() +" rows:" +getRowCount()+" time:"+ptt.toTotalTime());
 
