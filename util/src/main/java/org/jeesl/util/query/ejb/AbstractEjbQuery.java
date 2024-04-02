@@ -19,6 +19,7 @@ import org.jeesl.model.ejb.io.db.CqId;
 import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.primefaces.model.FilterMeta;
 import org.slf4j.Logger;
@@ -112,10 +113,12 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected LocalDate ld3; public LocalDate getLd3() {return ld3;}
 	
 	//JEESL-CQ
-	protected List<CqId> ids; @Override public List<CqId> getIds() {return ids;}	
+	protected List<JeeslCqLiteral> literals; @Override public List<JeeslCqLiteral> getCqLiterals() {return literals;}
+	protected List<JeeslCqLong> ids; @Override public List<JeeslCqLong> getCqLongs() {return ids;}
+	
 	protected List<CqBool> booleans; @Override public List<CqBool> getBools() {return booleans;}
 	protected List<CqInteger> integers; @Override public List<CqInteger> getIntegers() {return integers;}
-	protected List<JeeslCqLiteral> literals; @Override public List<JeeslCqLiteral> getCqLiterals() {return literals;}
+	
 	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
 	private List<CqOrdering> orderings; @Override public List<CqOrdering> getOrderings() {return orderings;}
 	

@@ -6,5 +6,7 @@ public interface JeeslCqLong extends Serializable
 {
 	public enum Type {IsValue,IsNull,IsNonNull}
 	
-
+	Long getValue();
+	Type getType();
+	String getPath();
 }

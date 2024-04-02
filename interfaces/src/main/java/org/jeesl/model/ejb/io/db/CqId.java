@@ -9,9 +9,9 @@ public class CqId implements JeeslCqLong
 {
 	private static final long serialVersionUID = 1L;
 
-	private final Type type; public final Type getType() {return type;}
-	private final Long id; public Long getId() {return id;}
-	private final String path; public String getPath() {return path;}
+	private final Type type; @Override public final Type getType() {return type;}
+	private final Long id; @Override public Long getValue() {return id;}
+	private final String path; @Override public String getPath() {return path;}
 
 //	public static CqId isValue(CqLiteral cq) {return new CqId(Type.IsValue,id,path);}
 	public static CqId isValue(Long id, String path) {return new CqId(Type.IsValue,id,path);}

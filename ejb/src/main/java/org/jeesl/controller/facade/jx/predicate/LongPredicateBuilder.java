@@ -19,7 +19,7 @@ public class LongPredicateBuilder
 	{
 		switch(c.getType())
 		{
-			case IsValue: predicates.add(cB.equal(e,c.getId())); break;
+			case IsValue: predicates.add(cB.equal(e,c.getValue())); break;
 			default: logger.error("NYI Type: "+c.toString());
 		}
 	}
