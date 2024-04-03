@@ -3,6 +3,7 @@
 @import '_fonts';
 
 $enable-pointer-cursor-for-buttons: true;
+.jeesl-icon, .pf-action-icon, .jeesl-menu-bar-item, .ui-selectonemenu { --icon-height-multiplier: 1 }
 
 @import '_reboot';
 @import '_responsiveCommon';
