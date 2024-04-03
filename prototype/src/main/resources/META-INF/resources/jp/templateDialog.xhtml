@@ -22,12 +22,13 @@
 		<p:dialog id="dialog" header="#{cc.attrs.handler.mail.template.name[localeCode].lang}" widgetVar="#{cc.attrs.widgetVar}" modal="true" resizable="false">
 			<j:row>
 				<j:slot width="5">
-					<p:panel header="#{msg.jeeslTemplateRecipients} (#{cc.attrs.handler.numberRecipients})" styleClass="jeeslPanel">
+					<p:panel header="#{msg.jeeslTemplateRecipients} (#{cc.attrs.handler.numberRecipients})" styleClass="jeesl-panel">
 						<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 							<h:outputText value="#{cc.attrs.handler.recipients}"/>
 						</p:panelGrid>
 					</p:panel>
-					<p:dataTable var="token" value="#{cc.attrs.handler.tokens}">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="token" value="#{cc.attrs.handler.tokens}" lazy="false">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslIoTokens}"/>
 						</f:facet>
@@ -45,7 +46,7 @@
 				</j:slot>
 				<j:slot width="7">
 					<h:form id="fTemplate">
-						<p:panel header="#{msg.jeeslIoTemplate}" styleClass="jeeslPanel">
+						<p:panel header="#{msg.jeeslIoTemplate}" styleClass="jeesl-panel">
 							<f:facet name="actions">
 								<j:svg type="jeeslSave" listener="#{cc.attrs.handler.saveTemplate()}" update="@form" library="jeeslGfx"/>
 							</f:facet>
@@ -54,7 +55,7 @@
 						  		<p:inputTextarea value="#{cc.attrs.handler.body[cc.attrs.handler.channel][cc.attrs.handler.locale.code]}" autocomplete="off" style="width:100%" autoResize="true"/>
 							</p:panelGrid>
 						</p:panel>
-						<p:panel id="pPreview" header="#{cc.attrs.handler.previewHeader}" styleClass="jeeslPanel">
+						<p:panel id="pPreview" header="#{cc.attrs.handler.previewHeader}" styleClass="jeesl-panel">
 							<f:facet name="actions">
 								<j:svg type="jeeslEmailSend" listener="#{cc.attrs.handler.sendMails()}" oncomplete="PF('#{cc.attrs.widgetVar}').hide();" library="jeeslGfx"/>
 							</f:facet>
