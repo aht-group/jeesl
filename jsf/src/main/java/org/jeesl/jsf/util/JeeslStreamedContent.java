@@ -6,6 +6,7 @@ import org.jeesl.interfaces.controller.report.format.JeeslCsvReport;
 import org.jeesl.interfaces.controller.report.format.JeeslDocReport;
 import org.jeesl.interfaces.controller.report.format.JeeslPdfReport;
 import org.jeesl.interfaces.controller.report.format.JeeslXlsReport;
+import org.jeesl.interfaces.controller.report.format.JeeslZipReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.primefaces.model.DefaultStreamedContent;
 import org.slf4j.Logger;
@@ -94,6 +95,15 @@ public class JeeslStreamedContent
 		try
 		{
 			return DefaultStreamedContent.builder().stream(() -> is).contentType(JeeslCsvReport.mimeType).name(fileName).build();
+		}
+		catch (Exception e) {e.printStackTrace();}
+		return null;
+	}
+	public static DefaultStreamedContent zip(InputStream is, String fileName)
+	{
+		try
+		{
+			return DefaultStreamedContent.builder().stream(() -> is).contentType(JeeslZipReport.mimeType).name(fileName).build();
 		}
 		catch (Exception e) {e.printStackTrace();}
 		return null;
