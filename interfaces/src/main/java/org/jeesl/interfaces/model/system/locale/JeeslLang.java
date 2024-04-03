@@ -15,6 +15,8 @@ public interface JeeslLang extends Serializable,EjbWithId,EjbRemoveable,EjbSavea
 	public static String attributeLang = "lang";
 	public static String en="en";
 	
+	public enum Att {lang}
+	
 	String getLkey();
 	void setLkey(String lkey);
 	

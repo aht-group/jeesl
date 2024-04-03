@@ -4,9 +4,13 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Predicate;
 
 import org.jeesl.controller.facade.jx.io.JeeslIoMavenFacadeBean;
+import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,5 +39,14 @@ public class LiteralPredicateBuilder
 			case CONTAINS: predicates.add(cB.or(cB.like(cB.upper(e1),literal),cB.like(cB.upper(e2),literal))); break;
 			default: logger.error("NYI Type: "+cq.toString());
 		}
+	}
+	
+	public static <O extends EjbWithId, T extends EjbWithId, L extends JeeslLang, E extends Enum<E>> void ml(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqLiteral cq, Join<O,T> join, E attribute, String localeCode)
+	{
+		MapJoin<T,String,L> lang = join.joinMap(attribute.toString());
+		predicates.add(cB.equal(lang.key(),localeCode));
+		
+		Expression<String> e = lang.get(JeeslLang.Att.lang.toString());
+		LiteralPredicateBuilder.add(cB,predicates,cq,e);
 	}
 }
