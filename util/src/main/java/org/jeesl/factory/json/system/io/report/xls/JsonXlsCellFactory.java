@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.util.CellReference;
 import org.exlp.controller.handler.io.log.LoggedExit;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.slf4j.Logger;
@@ -38,12 +39,13 @@ public class JsonXlsCellFactory
 			case NUMERIC: json.setValueString(cell.getStringCellValue()); break;
 			case STRING: json.setValueString(cell.getStringCellValue()); break;
 			case FORMULA: json.setValueString(cell.getStringCellValue()); break;
+			case ERROR: json.setValueString(cell.getStringCellValue()); break;
 			case BLANK: break;
 			default:
-				logger.error("You need to handle "+type);
-				logger.error("Check Row: " + cell.getRowIndex() + " Column: " + cell.getColumnIndex());
-				logger.error("value: " + cell.getStringCellValue());
-				LoggedExit.exit(true);
+						logger.error("You need to handle "+type);
+						logger.error("Check Row:" + cell.getRowIndex() + " Column:"+cell.getColumnIndex()+"/"+CellReference.convertNumToColString(cell.getColumnIndex()));
+						logger.error("value: " + cell.getStringCellValue());
+						LoggedExit.exit(true);
 		}
 
 		return json;

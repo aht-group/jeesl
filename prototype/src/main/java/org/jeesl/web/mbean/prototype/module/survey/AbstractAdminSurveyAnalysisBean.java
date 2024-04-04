@@ -165,7 +165,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fCore,
 			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
 			JeeslIoDomainFacade<L,D,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,?,?> fDomain,
-			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
+			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey)
 	{
 		super.initSuperSurvey(lp,bMessage,fCore,bSurvey);

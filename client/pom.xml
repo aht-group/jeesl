@@ -230,10 +230,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- 2024-04-04 tk removed .. but wondering why no compilation error is shown 
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-		</dependency>
+		</dependency> -->
 		
 
 		<!-- Test for eap80 

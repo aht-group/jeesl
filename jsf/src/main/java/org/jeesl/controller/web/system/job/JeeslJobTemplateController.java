@@ -42,7 +42,7 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslJobTemplateController.class);
 	
-	private JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,EXPIRE,?,PRIORITY,?,?,?,?,CACHE,?,?,?,?> fJob;
+	private JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,?,PRIORITY,?,?,?,?,CACHE,?,?,?,?> fJob;
 	
 	private final JobFactoryBuilder<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,?,PRIORITY,?,?,?,?,CACHE,?,?,?> fbJob;
 	
@@ -73,7 +73,7 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 	}
 	
 	public void postConstructJobTemplate(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,EXPIRE,?,PRIORITY,?,?,?,?,CACHE,?,?,?,?> fJob)
+											JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,?,PRIORITY,?,?,?,?,CACHE,?,?,?,?> fJob)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fJob=fJob;

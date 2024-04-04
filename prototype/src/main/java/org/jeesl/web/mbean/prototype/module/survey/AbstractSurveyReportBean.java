@@ -126,7 +126,7 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 	private final SbSingleHandler<SURVEY> sbhSurvey; public SbSingleHandler<SURVEY> getSbhSurvey() {return sbhSurvey;}
 	
 	@SuppressWarnings("unused") //Required for future improvements
-	private JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
+	private JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
 	
 	private McOptionDataSetFactory<OPTION> mfOption;
 	
@@ -191,7 +191,7 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 			
 			JeeslSurveyCoreFacade<L,D,SURVEY,SS,TC,SECTION,QUESTION,ANSWER,MATRIX,DATA,CORRELATION> fSurvey,
 			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis,
-			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
+			JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
 			final JeeslSurveyBean<SURVEY,TEMPLATE,SECTION,QUESTION,CONDITION,VALIDATION,QE,OPTIONS,OPTION,ATT> bSurvey,
 			JeeslReportAggregationLevelFactory tfName)
 	{
