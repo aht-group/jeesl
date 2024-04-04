@@ -105,8 +105,8 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.1</version>
+			<artifactId>javax.faces-api</artifactId>
+			<version>2.3</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -116,15 +116,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-		
 		<!-- Jakarta EE 
 		<dependency>
 			<groupId>jakarta.enterprise</groupId>
 			<artifactId>jakarta.enterprise.cdi-api</artifactId>
 			<scope>provided</scope>
 		</dependency> -->
-
-
 
 		<!-- Primefaces -->		
 		<dependency>  
