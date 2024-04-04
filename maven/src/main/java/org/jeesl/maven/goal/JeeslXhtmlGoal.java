@@ -9,11 +9,15 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.jeesl.processor.JeeslXhtmlParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 @Mojo(name="parseXhtml")
 public class JeeslXhtmlGoal extends AbstractMojo
 {
+	final static Logger logger = LoggerFactory.getLogger(JeeslXhtmlGoal.class);
+	
 	@Parameter(defaultValue="${project.groupId}")
     private String groupId;
 
@@ -32,11 +36,11 @@ public class JeeslXhtmlGoal extends AbstractMojo
     @Override
 	public void execute() throws MojoExecutionException
     {
-    	getLog().info("groupId: "+groupId);
-    	getLog().info("projectArtifactId: "+projectArtifactId);
-    	getLog().info("artifactId: "+artifactId);
-    	getLog().info("xhtmlSource: "+xhtmlSource);
-    	getLog().info("projectBuildDirectory: "+projectBuildDirectory);
+    	logger.info("groupId: "+groupId);
+    	logger.info("projectArtifactId: "+projectArtifactId);
+    	logger.info("artifactId: "+artifactId);
+    	logger.info("xhtmlSource: "+xhtmlSource);
+    	logger.info("projectBuildDirectory: "+projectBuildDirectory);
 
     	File fRoot = new File(xhtmlSource);
     	if(!fRoot.exists()){throw new MojoExecutionException("XHTML directory does not exist: "+fRoot.getAbsolutePath());}
@@ -49,7 +53,7 @@ public class JeeslXhtmlGoal extends AbstractMojo
 
 			for(String s : xhtmlParser.getStats())
 			{
-				getLog().error(s);
+				logger.error(s);
 			}
 			if(xhtmlParser.getStats().size() > 0)
 			{

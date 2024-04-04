@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -52,8 +53,6 @@ public class JeeslXhtmlParser
 		xmlReader = saxParser.getXMLReader();
 	    xmlReader.setContentHandler(new DefaultHandler());
 	    src = new File(pathToXhtmlFolder);
-	    
-	   
 	}
 
 	public void parse()
@@ -67,9 +66,9 @@ public class JeeslXhtmlParser
 
 	 private void parseFiles(File[] files, XMLReader xmlReader)
 	 {
-        for (File file : files)
+        for(File file : files)
         {
-            if (file.isDirectory())
+            if(file.isDirectory())
             {
             	parseFiles(file.listFiles(),xmlReader); // Calls recursive method.
             }
@@ -85,15 +84,15 @@ public class JeeslXhtmlParser
 				        Document jdomDocument = jsb.build(file);
 
 				        XPathExpression<Element> xpe = xpf.compile("//p:dataTable", Filters.element(), null, nsPrimefaces);
-				        List<Element> links = xpe.evaluate(jdomDocument);
 
-				        for(Element e : links)
+				        for(Element e : xpe.evaluate(jdomDocument))
 				        {
-				        	if(e.getAttribute("styleClass")==null) {logger.info(file.getAbsolutePath());}
+
+				        	if(Objects.isNull(e.getAttribute("styleClass"))) {logger.warn("Missing p:dataTable(styleClass): "+file.getAbsolutePath());}
 				        	else
 				        	{
 				        		String v = e.getAttributeValue("styleClass");
-				        		if(!v.contains("jeesl-datatable")) {logger.info(file.getAbsolutePath());}
+				        		if(!v.contains("jeesl-datatable")) {logger.warn("Wrong p:dataTable(styleClass): "+file.getAbsolutePath());}
 				        	}
 				        }
 					}
