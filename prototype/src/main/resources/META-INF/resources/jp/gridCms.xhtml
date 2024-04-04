@@ -12,8 +12,6 @@
 		<composite:attribute name="bean" required="true"/>
 		<composite:attribute name="updateStatusBar" required="false"/>
 		<composite:attribute name="layout" required="false" default="false"/>
-		
-
 	</composite:interface>
 	
 	<composite:implementation>
@@ -40,7 +38,7 @@
 						<p:panel styleClass="jeesl-panel">
 							<f:facet name="header"><j:pHeader entity="IoCms"/></f:facet>
 							<f:facet name="actions">
-								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:grid #{cc.attrs.updateStatusBar}" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:grid #{cc.attrs.updateStatusBar}" tooltip="#{msg.ttSave}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
 								<jtp:label entity="IoCms" code="id"/>
@@ -65,9 +63,9 @@
 							<p:panel id="pPanel" styleClass="jeesl-tree" >
 								<f:facet name="header"><j:pHeader entity="IoCms" code="structure" suffix=" (Layout false)"/></f:facet>
 								<f:facet name="actions">
-									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtAdd}" library="jeeslGfx"/>
-									<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}" library="jeeslGfx"/>
-									<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}" library="jeeslGfx"/>
+									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtAdd}"/>
+									<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}"/>
+									<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}"/>
 								</f:facet>
 								<p:tree id="tree1" value="#{cc.attrs.bean.tree}" var="node" 
 										selection="#{cc.attrs.bean.node}" selectionMode="single"
@@ -88,10 +86,10 @@
 							<p:panel header="#{msg.jeeslCmsSection}" styleClass="jeeslPanel jeesl-panel">
 								<f:facet name="header"><j:pHeader entity="IoCmsSection"/></f:facet>
 								<f:facet name="actions">
-									<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}"/>
+									<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection"/>
 									<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveSection()}" update=":#{cc.id}:fTree :#{cc.id}:sSection" rendered="#{not empty cc.attrs.bean.section}"/>
-									<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}"/>
-									<j:svg type="jeeslReset" listener="#{cc.attrs.bean.clearSectionCache()}" update=":#{cc.id}:fSection" rendered="#{cc.attrs.bean.cms.id gt 0}" value="#{appLabelBean.descriptions['IoCmsSection']['ttReloadCache'][localeCode].lang}"/>
+									<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.cms.id gt 0}" />
+									<j:svg type="jeeslReset" listener="#{cc.attrs.bean.clearSectionCache()}" update=":#{cc.id}:fSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{appLabelBean.descriptions['IoCmsSection']['ttReloadCache'][localeCode].lang}"/>
 								</f:facet>
 								<j:inputGrid>
 									<jtp:label entity="IoCmsSection" code="id"/>
@@ -125,8 +123,10 @@
 									<f:facet name="header"><jtp:label entity="IoCmsElement" code="type"/></f:facet>
 									<jtp:symbolizer value="#{e.type}"/>
 								</p:column>
-								<p:column rendered="false" headerText="#{msg.jeeslCmsElementType}"><h:outputText value="#{e.type.name[localeCode].lang}"/></p:column>
-								<p:column rendered="false" headerText="#{msg.jeeslCmsElement} ID"><h:outputText value="#{e.id}"/></p:column>	
+								<p:column>
+									<f:facet name="header"><jtp:label entity="IoCmsElement" code="id"/></f:facet>
+									<h:outputText value="#{e.id}"/>
+								</p:column>
 								<p:column>
 									<f:facet name="header"><jtp:label entity="IoCmsElement" code="preview"/></f:facet>
 									Preview deactivated
@@ -160,7 +160,6 @@
 							</p:panel>
 						</h:form>
 						<h:panelGroup id="pgElements" rendered="#{(not empty cc.attrs.bean.element) and (cc.attrs.bean.element.id gt 0)}">
-						
 							<h:form id="fStatusList" rendered="#{(cc.attrs.bean.element.type.code eq 'sysStatusList')												 or (cc.attrs.bean.element.type.code eq 'wfProcess')}">
 								<p:panel styleClass="jeesl-panel">
 									<f:facet name="header"><j:pHeader title="#{cc.attrs.bean.element.type.name[localeCode].lang}"/></f:facet>
@@ -174,7 +173,6 @@
 									</j:inputGrid>
 								</p:panel>
 							</h:form>
-						
 							<h:form id="fImage" rendered="#{(cc.attrs.bean.element.type.code eq 'paragraph') or (cc.attrs.bean.element.type.code eq 'image')}">
 								<p:panel styleClass="jeesl-panel jeesl-editor">
 									<f:facet name="header"><j:pHeader title="#{cc.attrs.bean.element.type.name[localeCode].lang}"/></f:facet>
@@ -185,7 +183,6 @@
 								</p:panel>
 							</h:form>
 							<jp:ioFrFiles handler="#{cc.attrs.bean.hFileRepository}" allowDelete="true" rendered="#{(cc.attrs.bean.element.type.code eq 'image')}" componentPrefix="#{cc.id}"/>
-							
 							<composite:insertChildren/>
 						</h:panelGroup>
 					</j:slot>
@@ -251,9 +248,14 @@
 								<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderElements()}" update="@form"/>
 								<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectElement()}" update=":#{cc.id}:sElement"/>
 								<p:column rendered="true"><h:outputText value="#{e.position}"/></p:column>
-								<p:column><jtp:symbolizer value="#{e.type}"/></p:column>
-								<p:column headerText="#{msg.jeeslCmsElementType}"><h:outputText value="#{e.type.name[localeCode].lang}"/></p:column>
-								<p:column headerText="#{msg.jeeslCmsElement} ID"><h:outputText value="#{e.id}"/></p:column>	
+								<p:column>
+									<f:facet name="header"><jtp:label entity="IoCmsElement" code="type"/></f:facet>
+									<jtp:symbolizer value="#{e.type}"/>
+								</p:column>
+								<p:column>
+									<f:facet name="header"><jtp:label entity="IoCmsElement" code="id"/></f:facet>
+									<h:outputText value="#{e.id}"/>
+								</p:column>	
 							</p:dataTable>
 						</h:form>
 					</j:slot>
