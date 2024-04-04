@@ -207,6 +207,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>com.monitorjbl</groupId>
+			<artifactId>xlsx-streamer</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Chart -->
 		<dependency>
