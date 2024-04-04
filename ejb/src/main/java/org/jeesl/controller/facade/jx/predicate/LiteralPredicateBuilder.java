@@ -8,7 +8,6 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Predicate;
 
-import org.jeesl.controller.facade.jx.io.JeeslIoMavenFacadeBean;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
@@ -17,15 +16,19 @@ import org.slf4j.LoggerFactory;
 
 public class LiteralPredicateBuilder
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
+	final static Logger logger = LoggerFactory.getLogger(LiteralPredicateBuilder.class);
 		
 	public static void add(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqLiteral cq, Expression<String> expression)
 	{
-		Expression<String> literal = cB.upper(cB.literal("%"+cq.getLiteral()+"%"));
-		
+		Expression<String> literal;
 		switch(cq.getType())
 		{
-			case CONTAINS: predicates.add(cB.like(cB.upper(expression),literal)); break;
+			case CONTAINS: 	literal = cB.upper(cB.literal("%"+cq.getLiteral()+"%"));
+							predicates.add(cB.like(cB.upper(expression),literal));
+							break;
+			case EXACT: 	literal = cB.literal(cq.getLiteral());
+							predicates.add(cB.equal(expression,literal));
+							break;
 			default: logger.error("NYI Type: "+cq.toString());
 		}
 	}
