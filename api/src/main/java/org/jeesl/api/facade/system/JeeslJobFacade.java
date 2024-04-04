@@ -30,10 +30,10 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.util.query.system.JeeslJobQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
-public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,TYPE,PRIORITY,EXPIRE>,
+public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,TYPE,PRIORITY,?>,
 								CATEGORY extends JeeslJobCategory<?,?,CATEGORY,?>,
 								TYPE extends JeeslJobType<?,?,TYPE,?>,
-								EXPIRE extends JeeslJobExpiration<?,?,EXPIRE,?>,
+								
 								JOB extends JeeslJob<TEMPLATE,PRIORITY,STATUS,USER>,
 								PRIORITY extends JeeslJobPriority<?,?,PRIORITY,?>,
 								FEEDBACK extends JeeslJobFeedback<FT,USER>,

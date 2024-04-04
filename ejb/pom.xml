@@ -93,13 +93,12 @@
 			<version>2.0.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		<!--
 		<dependency>
-		    <groupId>javax.mail</groupId>
-		    <artifactId>javax.mail-api</artifactId>
-		    <version>1.6.2</version>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+			<scope>provided</scope>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>javax.ejb</groupId>
 			<artifactId>javax.ejb-api</artifactId>

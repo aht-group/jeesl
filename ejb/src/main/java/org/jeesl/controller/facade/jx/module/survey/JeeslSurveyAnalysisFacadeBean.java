@@ -98,7 +98,7 @@ public class JeeslSurveyAnalysisFacadeBean <L extends JeeslLang, D extends Jeesl
 	final static Logger logger = LoggerFactory.getLogger(JeeslSurveyAnalysisFacadeBean.class);
 	
 	@SuppressWarnings("unused")
-	private JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,TOOLCACHE,?,?,?,?> fJob;
+	private JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,TOOLCACHE,?,?,?,?> fJob;
 	
 	private final SurveyAnalysisFactoryBuilder<L,D,TEMPLATE,QUESTION,QE,SCORE,ANSWER,MATRIX,DATA,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,TOOLT,TOOLCACHETEMPLATE> fbAnalyis;
 	private final EjbSurveyAnalysisToolFactory <L,D,AQ,TOOL,TOOLT> efTool;

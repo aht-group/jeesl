@@ -64,12 +64,12 @@ public class SurveyAnalysisCacheHandler<SURVEY extends JeeslSurvey<?,?,?,?,DATA>
 
 	private static boolean debugOnInfo = true;
 	
-	private final JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
+	private final JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob;
 	private final JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis;
 	
 	private TOOLCACHETEMPLATE jobTemplate;
 
-	public SurveyAnalysisCacheHandler(JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
+	public SurveyAnalysisCacheHandler(JeeslJobFacade<TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,CACHE,?,?,?,?> fJob,
 			JeeslSurveyAnalysisFacade<SURVEY,QUESTION,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis)
 	{
 		this.fJob=fJob;
