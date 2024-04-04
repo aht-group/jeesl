@@ -4,16 +4,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellReference;
 import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.controller.processor.system.io.ssi.AbstractSsiXlsMapper;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.factory.json.system.io.report.xls.JsonXlsCellFactory;
+import org.jeesl.factory.json.system.io.report.xls.JsonXlsColumnFactory;
 import org.jeesl.interfaces.controller.processor.io.report.XlsxToMongoCallback;
+import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
+import org.jeesl.model.json.io.report.xlsx.JsonXlsColumn;
+import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,6 +80,12 @@ public class XlsxRowCallbackImporter
 		}
 	}
 	
+	public void streamFile(Path path) throws IOException, UtilsConfigurationException
+	{
+		this.xlsFile = path.toFile();
+		this.streamFile();
+	}
+	
 	protected void streamFile() throws IOException, UtilsConfigurationException
 	{
 		String fName = FilenameUtils.removeExtension(xlsFile.getName());
@@ -102,5 +116,27 @@ public class XlsxRowCallbackImporter
 		}
 		indexRowStart = 2;
 		is.close();
+	}
+	
+	public JsonXlsRow toJsonRow(int rowIndex, Row row)
+	{
+		JsonXlsRow jRow = new JsonXlsRow();
+		jRow.setCells(new ArrayList<JsonXlsCell>());
+		jRow.setNr(rowIndex);
+		for(int i=indexColumnStart;i<=indexColumnEnd;i++)
+		{
+			Cell cell = row.getCell(i);
+			if(Objects.nonNull(cell))
+			{
+				JsonXlsColumn jColumn = JsonXlsColumnFactory.build();
+				jColumn.setNr(i);
+				jColumn.setKey(CellReference.convertNumToColString(i));
+				
+				JsonXlsCell jCell = JsonXlsCellFactory.build(cell);
+				jCell.setColumn(jColumn);
+				jRow.getCells().add(jCell);
+			}
+		}
+		return jRow;
 	}
 }
