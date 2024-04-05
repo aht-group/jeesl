@@ -69,8 +69,8 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 	private final EjbAttributeContainerFactory<ASET,ACON> efAttributeContainer;
 	private final EjbAttributeDataFactory<CRITERIA,OPTION,ACON,ADATA> efAttributeData;
 	
-	private final JsonAttributeSetFactory<L,D,LOC,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM> jfAttributeSet;
-	private final JsonAttributeContainerFactory<L,D,LOC,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> jfAttributeContainer;
+	private final JsonAttributeSetFactory<L,D,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM> jfAttributeSet;
+	private final JsonAttributeContainerFactory<L,D,CAT,CRITERIA,TYPE,OPTION,ACON,ADATA> jfAttributeContainer;
 	
 	
 	public MdcJsonRestHandler(MdcFactoryBuilder<L,D,LOC,?,COLLECTION,SCOPE,STATUS,CDATA,ASET,ACON> fbMdc,

@@ -84,7 +84,7 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 	public XmlAttributesFactory<L,D,CAT,CRITERIA,OPTION,SET,ITEM,DATA> xmlAttributes(QueryAttribute query) {return new XmlAttributesFactory<>(query);}
 	public XmlAttributeFactory<L,D,CRITERIA,OPTION,ITEM,DATA> xmlAttribute(QueryAttribute query) {return new XmlAttributeFactory<L,D,CRITERIA,OPTION,ITEM,DATA>(query);}
 	
-	public JsonAttributeDataFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> jsonData(String localeCode, JsonAttributeData q){return new JsonAttributeDataFactory<>(localeCode,q);} 
+	public JsonAttributeDataFactory<L,D,CAT,CRITERIA,TYPE,OPTION,DATA> jsonData(String localeCode, JsonAttributeData q){return new JsonAttributeDataFactory<>(localeCode,q);} 
 	
 	public Comparator<CRITERIA> cpCriteria(AttributeCriteriaComparator.Type type) {return (new AttributeCriteriaComparator<CAT,CRITERIA>()).factory(type);}
 	

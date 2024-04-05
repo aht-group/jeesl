@@ -3,37 +3,30 @@ package org.jeesl.factory.json.module.attribute;
 import java.util.ArrayList;
 
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
-import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
-import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
-import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.model.json.module.attribute.JsonAttributeCriteria;
 import org.jeesl.model.json.module.attribute.JsonAttributeData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JsonAttributeDataFactory<L extends JeeslLang, D extends JeeslDescription,
-										R extends JeeslTenantRealm<L,D,R,?>,
-										CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
+										CAT extends JeeslAttributeCategory<L,D,?,CAT,?>,
+										CRITERIA extends JeeslAttributeCriteria<L,D,?,CAT,TYPE,OPTION,?>,
 										TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 										OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-										SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
-										ITEM extends JeeslAttributeItem<CRITERIA,SET>,
-										CONTAINER extends JeeslAttributeContainer<SET,DATA>,
-										DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
+										
+										DATA extends JeeslAttributeData<CRITERIA,OPTION,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonAttributeDataFactory.class);
 	
 	private final JsonAttributeData q;
 	
-	private JsonAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,ITEM> jfCriteria;
+	private JsonAttributeCriteriaFactory<L,D,CAT,CRITERIA,TYPE,OPTION> jfCriteria;
 	private JsonAttributeOptionFactory<L,D,OPTION> jfOption;
 	private JsonAttributeOptionFactory<L,D,OPTION> jfOptions;
 
