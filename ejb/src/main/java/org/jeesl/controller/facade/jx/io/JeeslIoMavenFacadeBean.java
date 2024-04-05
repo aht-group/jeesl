@@ -307,7 +307,6 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 
 	
 	// Predicates
-	
 	private Predicate[] pModules(CriteriaBuilder cB, JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query, Root<MODULE> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();

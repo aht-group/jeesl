@@ -33,10 +33,10 @@ public class JsonAttributeDataFactory<L extends JeeslLang, D extends JeeslDescri
 	
 	private final JsonAttributeData q;
 	
-	private JsonAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM> jfCriteria;
+	private JsonAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,ITEM> jfCriteria;
 	private JsonAttributeOptionFactory<L,D,OPTION> jfOption;
 	private JsonAttributeOptionFactory<L,D,OPTION> jfOptions;
-	
+
 	public JsonAttributeDataFactory(String localeCode, JsonAttributeData q)
 	{
 		this.q=q;

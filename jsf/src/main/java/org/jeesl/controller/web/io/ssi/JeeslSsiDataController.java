@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
@@ -43,7 +44,6 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 										ERROR extends JeeslIoSsiError<?,?,CTX,?>,
 										JOB extends JeeslJobStatus<?,?,JOB,?>,
 										JSON extends Object>
-//									extends AbstractJeeslWebController<L,D,LOC>
 									extends LazyDataModel<DATA>
 									implements Serializable,SbToggleBean
 {
@@ -51,13 +51,14 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiDataController.class);
 	
 	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,ERROR,?,?,JOB,?> fSsi;
-	private final IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData;
+	private final IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,ERROR,?,?,JOB> fbSsiData;
 	private final JeeslIoSsiDataCallback callback;
 	
-	protected final SbMultiHandler<STATUS> sbhStatus; public SbMultiHandler<STATUS> getSbhStatus() {return sbhStatus;}
+	private final SbMultiHandler<STATUS> sbhStatus; public SbMultiHandler<STATUS> getSbhStatus() {return sbhStatus;}
 	
-	protected JsonTuple1Handler<STATUS> thStatus; public JsonTuple1Handler<STATUS> getThStatus() {return thStatus;}
-	protected JsonTuple2Handler<STATUS,JOB> thJob; public JsonTuple2Handler<STATUS,JOB> getThJob() {return thJob;}
+	private JsonTuple1Handler<STATUS> thStatus; public JsonTuple1Handler<STATUS> getThStatus() {return thStatus;}
+	private JsonTuple2Handler<STATUS,JOB> thJob; public JsonTuple2Handler<STATUS,JOB> getThJob() {return thJob;}
+	private JsonTuple2Handler<STATUS,ERROR> thError; public JsonTuple2Handler<STATUS,ERROR> getThError() {return thError;}
 	
 	final Map<DATA,JSON> mapJson; public Map<DATA,JSON> getMapJson() {return mapJson;}
 
@@ -65,7 +66,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private List<DATA> selection; public List<DATA> getSelection() {return selection;} public void setSelection(List<DATA> selection) {this.selection = selection;}
 	
 	private CTX context; public CTX getContext() {return context;} public void setContext(CTX context) {this.context = context;}
-	private Class<JSON> cJson; public void setClassJson(Class<JSON> cJson) {this.cJson = cJson;}
+	private Class<JSON> cJson; public JeeslSsiDataController<CTX,DATA,STATUS,ERROR,JOB,JSON> json(Class<JSON> cJson) {this.cJson = cJson; return this;}
 
 	private String json; public String getJson() {return json;} public void setJson(String json) {this.json = json;}
 
@@ -73,8 +74,17 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private Long refB; public <B extends EjbWithId> void setRefB(B b) {this.refB = b.getId();}
 	private Long refC; public <C extends EjbWithId> void setRefC(C c) {this.refC = c.getId();}
 
-	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback,
-						IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData)
+	public static <CTX extends JeeslIoSsiContext<?,?>,
+					DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
+					STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
+					ERROR extends JeeslIoSsiError<?,?,CTX,?>,
+					JOB extends JeeslJobStatus<?,?,JOB,?>,
+					JSON extends Object>
+				JeeslSsiDataController<CTX,DATA,STATUS,ERROR,JOB,JSON> instance(final JeeslIoSsiDataCallback callback, IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,ERROR,?,?,JOB> fbSsi)
+	{
+		return new JeeslSsiDataController<>(callback,fbSsi);
+	}
+	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback, IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,ERROR,?,?,JOB> fbSsiData)
 	{
 		this.callback=callback;
 		this.fbSsiData=fbSsiData;
@@ -83,6 +93,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		
 		thStatus = JsonTuple1Handler.instance(fbSsiData.getClassStatus());
 		thJob = JsonTuple2Handler.instance(fbSsiData.getClassStatus(),fbSsiData.getClassJob());
+		thError = JsonTuple2Handler.instance(fbSsiData.getClassStatus(),fbSsiData.getClassError());
 		
 		mapJson = new HashMap<>();
 		datas = new ArrayList<>();
@@ -104,12 +115,11 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
 		
-		thStatus.init(fSsi.tpIoSsiStatus(query));
-		
-		JsonTuples2<STATUS,JOB> tJob = fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB));
-		JsonUtil.info(tJob);
-		thJob.init(tJob);
+		thStatus.init(fSsi.tpIoSsiDataByStatus(query));
+		thJob.init(fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB)));
 		thJob.initListB(fSsi);
+		
+		thError.init(fSsi.tpIoSsiDataByStatusError(query)).initListB(fSsi);
 	}
 	
 	public void addDatas(List<DATA> list)
@@ -163,5 +173,28 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		for (DATA d : datas) {if(d.getId()==id){return d;}}
 		try {return fSsi.find(fbSsiData.getClassData(),id);} catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
 		return null;
+	}
+	
+	public void selectItems()
+	{
+		this.setJson(null);
+		if(Objects.nonNull(cJson) && ObjectUtils.isNotEmpty(selection))
+		{
+			if(selection.size()==1)
+			{
+				DATA data = selection.get(0);
+				try
+				{
+					JSON json = JsonUtil.read(cJson,data.getJson());
+					this.setJson(JsonUtil.toPrettyString(json));
+				}
+				catch (IOException e) {e.printStackTrace();}
+			}
+			else
+			{
+				logger.info("Selection size is "+this.getSelection().size());
+			}
+		}
+		else {logger.warn("Selection is NULL");}
 	}
 }

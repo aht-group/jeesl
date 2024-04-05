@@ -33,7 +33,7 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	@Override public void reset()
 	{
 		super.reset();
-		contexts=null;
+		ioSsiContexts=null;
 	}
 	
 //	public Boolean getTupleLoad() {return isTupleLoad();}
@@ -56,17 +56,17 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	public EjbIoSsiQuery<CTX,STATUS,ERROR> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbIoSsiQuery<CTX,STATUS,ERROR> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 
-	// IO SSI Objects
-	private List<CTX> contexts; @Override public List<CTX> getIoSsiContexts() {return contexts;}
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(CTX context) {if(Objects.isNull(contexts)) {contexts = new ArrayList<>();} contexts.add(context); return this;}
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> addContexts(List<CTX> list) {if(Objects.isNull(contexts)) {contexts = new ArrayList<>();} contexts.addAll(list); return this;}
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> addContexts(Collection<CTX> collection) {if(Objects.isNull(contexts)) {contexts = new ArrayList<>();} contexts.addAll(collection); return this;}
+	// IO - SSI
+	private List<CTX> ioSsiContexts; @Override public List<CTX> getIoSsiContexts() {return ioSsiContexts;}
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(CTX ejb) {if(Objects.isNull(ioSsiContexts)) {ioSsiContexts = new ArrayList<>();} ioSsiContexts.add(ejb); return this;}
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> addContexts(List<CTX> list) {if(Objects.isNull(ioSsiContexts)) {ioSsiContexts = new ArrayList<>();} ioSsiContexts.addAll(list); return this;}
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> addContexts(Collection<CTX> collection) {if(Objects.isNull(ioSsiContexts)) {ioSsiContexts = new ArrayList<>();} ioSsiContexts.addAll(collection); return this;}
 	
-	private List<STATUS> status; @Override public List<STATUS> getIoSsiStatus() {return status;}
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(STATUS s) {if(Objects.isNull(status)) {status = new ArrayList<>();} status.add(s); return this;}
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> addStatus(List<STATUS> list) {if(Objects.isNull(status)) {status = new ArrayList<>();} status.addAll(list); return this;}
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> addStatus(Collection<STATUS> collection) {if(Objects.isNull(status)) {status = new ArrayList<>();} status.addAll(collection); return this;}
+	private List<STATUS> ioSsiStatus; @Override public List<STATUS> getIoSsiStatus() {return ioSsiStatus;}
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(STATUS ejb) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.add(ejb); return this;}
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> addStatus(List<STATUS> list) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.addAll(list); return this;}
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> addStatus(Collection<STATUS> collection) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.addAll(collection); return this;}
 	
-	private List<ERROR> errors; @Override public List<ERROR> getIoSsiErrors() {return errors;}
-	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(ERROR error) {if(Objects.isNull(errors)) {errors = new ArrayList<>();} errors.add(error); return this;}
+	private List<ERROR> ioSsiError; @Override public List<ERROR> getIoSsiErrors() {return ioSsiError;}
+	public EjbIoSsiQuery<CTX,STATUS,ERROR> add(ERROR ejb) {if(Objects.isNull(ioSsiError)) {ioSsiError = new ArrayList<>();} ioSsiError.add(ejb); return this;}
 }

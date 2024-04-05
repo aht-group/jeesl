@@ -13,5 +13,7 @@ public interface JeeslIoAttributeQuery<CRITERIA extends JeeslAttributeCriteria<?
 			extends JeeslCoreQuery
 {
 	List<CRITERIA> getCriterias();
-	public List<CONTAINER> getContainers();
+	List<CONTAINER> getContainers();
+	
+//	void x();
 }

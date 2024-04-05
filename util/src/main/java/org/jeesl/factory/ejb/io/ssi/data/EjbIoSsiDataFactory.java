@@ -39,8 +39,9 @@ public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiContext<?,?>,
 		return ejb;
 	}
 	
-	public void resetError(DATA data)
+	public void resetEvaluation(DATA data)
 	{
+		data.setTargetId(null);
 		data.setError(null);
 		data.setRemark(null);
 	}
@@ -50,7 +51,7 @@ public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiContext<?,?>,
 		data.setJson(null);
 		if(Objects.nonNull(json))
 		{
-			try{data.setJson(JsonUtil.toString(json));}
+			try {data.setJson(JsonUtil.toString(json));}
 			catch (JsonProcessingException e) {e.printStackTrace();}
 		}
 	}

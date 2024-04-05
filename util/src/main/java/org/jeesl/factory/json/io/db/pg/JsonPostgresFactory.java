@@ -1,4 +1,4 @@
-package org.jeesl.factory.json.system.io.db;
+package org.jeesl.factory.json.io.db.pg;
 
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 

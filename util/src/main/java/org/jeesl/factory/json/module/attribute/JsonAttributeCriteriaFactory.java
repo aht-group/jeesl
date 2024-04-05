@@ -22,16 +22,16 @@ public class JsonAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDe
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 									
-									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
+									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,?>,
 									TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-									SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
-									ITEM extends JeeslAttributeItem<CRITERIA,SET>>
+									
+									ITEM extends JeeslAttributeItem<CRITERIA,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonAttributeCriteriaFactory.class);
 	
 	private JeeslFacade facade;
-	private IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute;
+	private IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,ITEM,?,?> fbAttribute;
 	
 	private final String localeCode;
 	private final JsonAttributeCriteria q;
@@ -47,7 +47,7 @@ public class JsonAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDe
 		if(q.getOptions()!=null && !q.getOptions().isEmpty()) {jfOption = new JsonAttributeOptionFactory<>(localeCode,q.getOptions().get(0));}
 	}
 	
-	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute)
+	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,ITEM,?,?> fbAttribute)
 	{
 		this.facade=facade;
 		this.fbAttribute=fbAttribute;

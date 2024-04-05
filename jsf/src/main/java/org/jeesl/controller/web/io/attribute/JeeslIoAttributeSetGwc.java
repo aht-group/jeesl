@@ -154,7 +154,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	protected void reloadSets()
 	{
 		sets.clear();
-		if(sbhRealm.getSelection()!=null && sbhRref.getSelection()!=null) {sets.addAll(fAttribute.fAttributeSets(sbhRealm.getSelection(),sbhRref.getSelection(),sbhCat.getSelected()));}
+		if(sbhRealm.getSelection()!=null && sbhRref.getSelection()!=null) {sets.addAll(fAttribute.fIoAttributeSets(sbhRealm.getSelection(),sbhRref.getSelection(),sbhCat.getSelected()));}
 //		if(refId<0){}
 //		else {sets.addAll(fAttribute.fAttributeSets(sbhCategory.getSelected(), refId));}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassSet(),sets));}

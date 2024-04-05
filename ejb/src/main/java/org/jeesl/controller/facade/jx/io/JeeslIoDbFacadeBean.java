@@ -32,10 +32,10 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbFlywayFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
+import org.jeesl.factory.json.io.db.pg.JsonPostgresConnectionFactory;
+import org.jeesl.factory.json.io.db.pg.JsonPostgresFactory;
+import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementFactoryRm;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
-import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
-import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
-import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
@@ -218,7 +218,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		for(Object o : em.createNativeQuery(SqlDbPgStatFactory.statements14(dbName)).getResultList())
 		{
 			Object[] array = (Object[])o;
-			json.getStatements().add(JsonPostgresStatementFactory.build(i,array));
+			json.getStatements().add(JsonPostgresStatementFactoryRm.build(i,array));
 			i++;
 		}		
 		return json;

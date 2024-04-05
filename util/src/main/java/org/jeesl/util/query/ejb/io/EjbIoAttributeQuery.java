@@ -32,7 +32,7 @@ public class EjbIoAttributeQuery<CRITERIA extends JeeslAttributeCriteria<?,?,?,?
 	
 	@Override public void reset()
 	{
-		criterias=null;
+		ioAttributeCriterias=null;
 	}
 	
 	//Fetches
@@ -51,14 +51,14 @@ public class EjbIoAttributeQuery<CRITERIA extends JeeslAttributeCriteria<?,?,?,?
 	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	
-	private List<CRITERIA> criterias; public List<CRITERIA> getCriterias() {return criterias;}
-	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> add(CRITERIA calendar) {if(Objects.isNull(criterias)) {criterias = new ArrayList<>();} criterias.add(calendar); return this;}
-	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addCriterias(List<CRITERIA> list) {if(Objects.isNull(criterias)) {criterias = new ArrayList<>();} criterias.addAll(list); return this;}
-	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addCriterias(Collection<CRITERIA> collection) {if(Objects.isNull(criterias)) {criterias = new ArrayList<>();} criterias.addAll(collection); return this;}
+	private List<CRITERIA> ioAttributeCriterias; @Override public List<CRITERIA> getCriterias() {return ioAttributeCriterias;}
+	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> add(CRITERIA criteria) {if(Objects.isNull(ioAttributeCriterias)) {ioAttributeCriterias = new ArrayList<>();} ioAttributeCriterias.add(criteria); return this;}
+	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addCriterias(List<CRITERIA> list) {if(Objects.isNull(ioAttributeCriterias)) {ioAttributeCriterias = new ArrayList<>();} ioAttributeCriterias.addAll(list); return this;}
+	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addCriterias(Collection<CRITERIA> collection) {if(Objects.isNull(ioAttributeCriterias)) {ioAttributeCriterias = new ArrayList<>();} ioAttributeCriterias.addAll(collection); return this;}
 	
-	private List<CONTAINER> containers; public List<CONTAINER> getContainers() {return containers;}
-	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> add(CONTAINER calendar) {if(Objects.isNull(containers)) {containers = new ArrayList<>();} containers.add(calendar); return this;}
-	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addContainers(List<CONTAINER> list) {if(Objects.isNull(containers)) {containers = new ArrayList<>();} containers.addAll(list); return this;}
-	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addContainers(Collection<CONTAINER> collection) {if(Objects.isNull(containers)) {containers = new ArrayList<>();} containers.addAll(collection); return this;}
+	private List<CONTAINER> ioAttributeContainers; @Override public List<CONTAINER> getContainers() {return ioAttributeContainers;}
+	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> add(CONTAINER calendar) {if(Objects.isNull(ioAttributeContainers)) {ioAttributeContainers = new ArrayList<>();} ioAttributeContainers.add(calendar); return this;}
+	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addContainers(List<CONTAINER> list) {if(Objects.isNull(ioAttributeContainers)) {ioAttributeContainers = new ArrayList<>();} ioAttributeContainers.addAll(list); return this;}
+	public EjbIoAttributeQuery<CRITERIA,CONTAINER,DATA> addContainers(Collection<CONTAINER> collection) {if(Objects.isNull(ioAttributeContainers)) {ioAttributeContainers = new ArrayList<>();} ioAttributeContainers.addAll(collection); return this;}
 
 }

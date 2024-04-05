@@ -142,12 +142,12 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		{
 			ATTRIBUTE a = fbSsi.ejbAttribute().build(ssiProcessor.getMapping()); a.setId(refA);
 			datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected(),a));
-			thLink.init(fSsi.tpIoSsiStatus(query));
+			thLink.init(fSsi.tpIoSsiDataByStatus(query));
 		}
 		else
 		{
 			datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected()));
-			thLink.init(fSsi.tpIoSsiStatus(query));
+			thLink.init(fSsi.tpIoSsiDataByStatus(query));
 		}
 		
 //		logger.info("List: "+AbstractLogMessage.reloaded(cJson, datas));

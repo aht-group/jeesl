@@ -114,7 +114,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 		this.reloadCriterias();
 		
 		sets.clear();
-		sets.addAll(fAttribute.fAttributeSets(sbhRealm.getSelection(),sbhRref.getSelection(),sbhCat.getSelected()));
+		sets.addAll(fAttribute.fIoAttributeSets(sbhRealm.getSelection(),sbhRref.getSelection(),sbhCat.getSelected()));
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)

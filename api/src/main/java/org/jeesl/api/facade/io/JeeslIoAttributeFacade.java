@@ -37,7 +37,9 @@ public interface JeeslIoAttributeFacade <R extends JeeslTenantRealm<?,?,R,?>,
 	List<CRITERIA> fAttributeCriteria(SET set);
 	List<OPTION> fAttributeOption(SET set);
 	
-	<RREF extends EjbWithId> List<SET> fAttributeSets(R realm, RREF rref, List<CAT> categories);
+	<RREF extends EjbWithId> List<SET> fIoAttributeSets(R realm, RREF rref, List<CAT> categories);
+	List<SET> fIoAttributeSets(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query);
+	List<ITEM> fIoAttributeItems(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query);
 	
 	List<DATA> fAttributeData(CONTAINER container);
 	List<DATA> fAttributeData(CRITERIA criteria, Collection<CONTAINER> containers);
