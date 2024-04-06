@@ -1,7 +1,12 @@
 package org.jeesl.factory.json.module.attribute;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.collections4.ListUtils;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
@@ -9,6 +14,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.model.json.module.attribute.JsonAttributeContainer;
 import org.jeesl.model.json.module.attribute.JsonAttributeCriteria;
 import org.jeesl.model.json.module.attribute.JsonAttributeData;
 import org.slf4j.Logger;
@@ -68,8 +74,24 @@ public class JsonAttributeDataFactory<L extends JeeslLang, D extends JeeslDescri
 				json.getValueOptions().add(jfOptions.build(o));
 			}
 		}
-	
 		
 		return json;
+	}
+	
+	public static Map<Long,JsonAttributeData> toMapCriteriaId(JsonAttributeContainer container)
+	{
+		return JsonAttributeDataFactory.toMapCriteriaId(container.getDatas());
+	}
+	public static Map<Long,JsonAttributeData> toMapCriteriaId(List<JsonAttributeData> list)
+	{
+		Map<Long,JsonAttributeData> map = new HashMap<>();
+		for(JsonAttributeData d : ListUtils.emptyIfNull(list))
+		{
+			if(Objects.nonNull(d.getCriteria()) && Objects.nonNull(d.getCriteria().getId()))
+			{
+				map.put(d.getCriteria().getId(),d);
+			}
+		}
+		return map;
 	}
 }

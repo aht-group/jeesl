@@ -38,6 +38,8 @@ public interface JeeslIoAttributeFacade <R extends JeeslTenantRealm<?,?,R,?>,
 	List<OPTION> fAttributeOption(SET set);
 	
 	<RREF extends EjbWithId> List<SET> fIoAttributeSets(R realm, RREF rref, List<CAT> categories);
+	
+	List<OPTION> fIoAttributeOptions(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query);
 	List<SET> fIoAttributeSets(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query);
 	List<ITEM> fIoAttributeItems(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query);
 	

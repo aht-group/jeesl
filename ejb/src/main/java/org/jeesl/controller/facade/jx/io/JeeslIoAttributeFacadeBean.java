@@ -191,6 +191,21 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
 		return tQ.getResultList();
 	}
+	
+	@Override public List<OPTION> fIoAttributeOptions(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<OPTION> cQ = cB.createQuery(fbAttribute.getClassOption());
+		Root<OPTION> root = cQ.from(fbAttribute.getClassOption());
+
+		cQ.select(root);
+		cQ.where(cB.and(pOption(cB,query,root)));
+
+		TypedQuery<OPTION> tQ = em.createQuery(cQ);
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		return tQ.getResultList();
+	}
 
 	
 	@Override public DATA fAttributeData(CRITERIA criteria, CONTAINER container) throws JeeslNotFoundException
@@ -332,6 +347,19 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 				BooleanPredicateBuilder.add(cB,predicates,c,e);
 			}
 			else {logger.warn("NYI Path: "+c.toString());}
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	
+	private Predicate[] pOption(CriteriaBuilder cB, JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query, Root<OPTION> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getCriterias()))
+		{
+			Path<CRITERIA> pCriteria = root.get(JeeslAttributeOption.Attributes.criteria.toString());
+			predicates.add(pCriteria.in(query.getCriterias()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
