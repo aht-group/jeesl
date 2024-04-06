@@ -3,6 +3,7 @@ package org.jeesl.controller.facade.jx.io;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -15,9 +16,12 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.BooleanPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -37,6 +41,9 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoAttributeQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -126,9 +133,9 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		return result;
 	}
 	
-	@Override public <RREF extends EjbWithId> List<SET> fAttributeSets(R realm, RREF rref, List<CAT> categories)
+	@Override public <RREF extends EjbWithId> List<SET> fIoAttributeSets(R realm, RREF rref, List<CAT> categories)
 	{
-		if(categories==null || categories.isEmpty()){return new ArrayList<SET>();}
+		if(categories==null || categories.isEmpty()) {return new ArrayList<SET>();}
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<SET> cQ = cB.createQuery(fbAttribute.getClassSet());
@@ -146,11 +153,58 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		Path<Integer> pPosition = root.get(JeeslAttributeSet.Attributes.position.toString());
 		Path<Integer> pCategoryPosition = jCategory.get(JeeslAttributeSet.Attributes.position.toString());
 		
+		cQ.select(root);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.asc(pCategoryPosition),cB.asc(pPosition));
-		cQ.select(root);
 
 		return em.createQuery(cQ).getResultList();
+	}
+	@Override public List<SET> fIoAttributeSets(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<SET> cQ = cB.createQuery(fbAttribute.getClassSet());
+		Root<SET> root = cQ.from(fbAttribute.getClassSet());
+		
+//		Path<Integer> pPosition = root.get(JeeslAttributeSet.Attributes.position.toString());
+
+		cQ.select(root);
+		cQ.where(cB.and(pSets(cB,query,root)));
+//		cQ.orderBy(cB.asc(pCategoryPosition),cB.asc(pPosition));
+
+		return em.createQuery(cQ).getResultList();
+	}
+	
+	@Override public List<ITEM> fIoAttributeItems(JeeslIoAttributeQuery<CRITERIA, CONTAINER, DATA> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<ITEM> cQ = cB.createQuery(fbAttribute.getClassItem());
+		Root<ITEM> root = cQ.from(fbAttribute.getClassItem());
+		
+//		Path<Integer> pPosition = root.get(JeeslAttributeSet.Attributes.position.toString());
+
+		cQ.select(root);
+		cQ.where(cB.and(pItems(cB,query,root)));
+//		cQ.orderBy(cB.asc(pCategoryPosition),cB.asc(pPosition));
+
+		TypedQuery<ITEM> tQ = em.createQuery(cQ);
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		return tQ.getResultList();
+	}
+	
+	@Override public List<OPTION> fIoAttributeOptions(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<OPTION> cQ = cB.createQuery(fbAttribute.getClassOption());
+		Root<OPTION> root = cQ.from(fbAttribute.getClassOption());
+
+		cQ.select(root);
+		cQ.where(cB.and(pOption(cB,query,root)));
+
+		TypedQuery<OPTION> tQ = em.createQuery(cQ);
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		return tQ.getResultList();
 	}
 
 	
@@ -245,5 +299,69 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 			this.save(fbAttribute.ejbData().copy(c,data));
 		}
 		return c;
+	}
+	
+	
+	
+	// Predicates
+	private Predicate[] pSets(CriteriaBuilder cB, JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query, Root<SET> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+//		for(JeeslCqLiteral cql : ObjectUtils.isNotEmpty(query.getCqLiterals()) ? query.getCqLiterals() : Collections.<JeeslCqLiteral>emptyList())
+		for(JeeslCqLiteral cql : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cql.getPath().equals(CqLiteral.path(JeeslAttributeSet.Attributes.code)))
+			{
+				Expression<String> e = root.get(JeeslAttributeSet.Attributes.code.toString());
+				LiteralPredicateBuilder.add(cB,predicates,cql,e);
+			}
+			else {logger.warn("NYI Path: "+cql.toString());}
+		}
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	private Predicate[] pItems(CriteriaBuilder cB, JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query, Root<ITEM> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		for(JeeslCqLiteral cql : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cql.getPath().equals(CqLiteral.path(JeeslAttributeItem.Attributes.set,JeeslAttributeSet.Attributes.code)))
+			{
+				Path<SET> pSet = root.get(JeeslAttributeItem.Attributes.set.toString());
+				Expression<String> e = pSet.get(JeeslAttributeSet.Attributes.code.toString());
+				LiteralPredicateBuilder.add(cB,predicates,cql,e);
+			}
+			else {logger.warn("NYI Path: "+cql.toString());}
+		}
+		for(JeeslCqBoolean c : ListUtils.emptyIfNull(query.getCqBooleans()))
+		{
+			if(c.getPath().equals(CqLiteral.path(JeeslAttributeItem.Attributes.visible)))
+			{
+				Expression<Boolean> e = root.get(JeeslAttributeItem.Attributes.visible.toString());
+				BooleanPredicateBuilder.add(cB,predicates,c,e);
+			}
+			else if(c.getPath().equals(CqLiteral.path(JeeslAttributeItem.Attributes.tableHeader)))
+			{
+				Expression<Boolean> e = root.get(JeeslAttributeItem.Attributes.tableHeader.toString());
+				BooleanPredicateBuilder.add(cB,predicates,c,e);
+			}
+			else {logger.warn("NYI Path: "+c.toString());}
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	
+	private Predicate[] pOption(CriteriaBuilder cB, JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query, Root<OPTION> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getCriterias()))
+		{
+			Path<CRITERIA> pCriteria = root.get(JeeslAttributeOption.Attributes.criteria.toString());
+			predicates.add(pCriteria.in(query.getCriterias()));
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 }

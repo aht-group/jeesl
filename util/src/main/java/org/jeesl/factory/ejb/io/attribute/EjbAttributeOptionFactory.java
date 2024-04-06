@@ -1,6 +1,9 @@
 package org.jeesl.factory.ejb.io.attribute;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
@@ -33,5 +36,16 @@ public class EjbAttributeOptionFactory<CRITERIA extends JeeslAttributeCriteria<?
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		
 		return ejb;
+	}
+	
+	public Map<CRITERIA,List<OPTION>> toMapCriteria(List<OPTION> list)
+	{
+		Map<CRITERIA,List<OPTION>> map = new HashMap<>();
+		for(OPTION o : list)
+		{
+			if(!map.containsKey(o.getCriteria())) {map.put(o.getCriteria(),new ArrayList<>());}
+			map.get(o.getCriteria()).add(o);
+		}
+		return map;
 	}
 }

@@ -307,8 +307,7 @@
 									
 								</p:panel>	
 							</h:form>
-							<jp:ioFrFiles handler="#{cc.attrs.bean.hFileRepository}" allowDelete="true" rendered="#{(cc.attrs.bean.element.type.code eq 'image')}" componentPrefix="#{cc.id}" update=":#{cc.id}:sRow"/>
-							
+							<jp:ioFrFiles handler="#{cc.attrs.bean.hFileRepository}" allowDelete="true" rendered="#{(cc.attrs.bean.element.type.code eq 'image')}" componentPrefix="#{cc.id}" update=":#{cc.id}:sRow"/>						
 							<composite:insertChildren/>
 						</h:panelGroup>
 					</j:slot>

@@ -11,7 +11,9 @@ public interface JeeslIoSsiQuery<CTX extends JeeslIoSsiContext<?,?>,
 								STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
 								ERROR extends JeeslIoSsiError<?,?,CTX,?>>
 					extends JeeslCoreQuery
-{		
+{
+//	void x();
+	
 	List<CTX> getIoSsiContexts();
 	List<STATUS> getIoSsiStatus();
 	List<ERROR> getIoSsiErrors();

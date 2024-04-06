@@ -9,38 +9,30 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
-import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
-import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.model.json.module.attribute.JsonAttributeContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonAttributeContainerFactory<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-									R extends JeeslTenantRealm<L,D,R,?>,
-									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									
-									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
+public class JsonAttributeContainerFactory<L extends JeeslLang, D extends JeeslDescription,
+									CAT extends JeeslAttributeCategory<L,D,?,CAT,?>,
+									CRITERIA extends JeeslAttributeCriteria<L,D,?,CAT,TYPE,OPTION,?>,
 									TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-									SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
-									ITEM extends JeeslAttributeItem<CRITERIA,SET>,
-									CONTAINER extends JeeslAttributeContainer<SET,DATA>,
+									CONTAINER extends JeeslAttributeContainer<?,DATA>,
 									DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonAttributeContainerFactory.class);
 	
 	private JeeslFacade facade;
-	private IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
+	private IoAttributeFactoryBuilder<L,D,?,CAT,CRITERIA,TYPE,OPTION,?,?,CONTAINER,DATA> fbAttribute;
 
 	private final JsonAttributeContainer q;
 	
-	private JsonAttributeDataFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> jfData;
+	private JsonAttributeDataFactory<L,D,CAT,CRITERIA,TYPE,OPTION,DATA> jfData;
 	
 	public JsonAttributeContainerFactory(String localeCode, JsonAttributeContainer q)
 	{
@@ -52,7 +44,7 @@ public class JsonAttributeContainerFactory<L extends JeeslLang, D extends JeeslD
 //		if(q.getOptions()!=null && !q.getOptions().isEmpty()) {jfOption = new JsonAttributeOptionFactory<>(localeCode,q.getOptions().get(0));}
 	}
 	
-	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,?,CAT,CRITERIA,TYPE,OPTION,?,?,CONTAINER,DATA> fbAttribute)
 	{
 		this.facade=facade;
 		this.fbAttribute=fbAttribute;

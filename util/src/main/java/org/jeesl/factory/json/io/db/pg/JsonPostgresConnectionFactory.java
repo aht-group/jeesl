@@ -1,4 +1,4 @@
-package org.jeesl.factory.json.system.io.db;
+package org.jeesl.factory.json.io.db.pg;
 
 import java.sql.Timestamp;
 import java.util.Date;

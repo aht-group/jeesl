@@ -48,6 +48,16 @@ public class JsonAttributeQueryProvider
 		return json;
 	}
 	
+	public static JsonAttributeCriteria criteriaLabel()
+	{
+		JsonAttributeCriteria json = new JsonAttributeCriteria();
+		json.setId(0l);
+		json.setCode("");
+		json.setLabel("");
+		json.setType(JsonAttributeQueryProvider.typeCode());
+		return json;
+	}
+	
 	public static JsonAttributeType typeCode()
 	{				
 		JsonAttributeType xml = new JsonAttributeType();
@@ -65,6 +75,16 @@ public class JsonAttributeQueryProvider
 		json.setDescription("");
 		return json;
 	}
+	
+	public static JsonAttributeOption optionLabel()
+	{
+		JsonAttributeOption json = new JsonAttributeOption();
+		json.setId(0l);
+		json.setCode("");
+		json.setLabel("");
+		return json;
+	}
+	
 	public static JsonAttributeContainer container()
 	{				
 		JsonAttributeContainer json = new JsonAttributeContainer();
@@ -88,20 +108,11 @@ public class JsonAttributeQueryProvider
 		json.setValueBoolean(Boolean.TRUE);
 		json.setValueInteger(0);
 		
-		JsonAttributeCriteria criteria = new JsonAttributeCriteria();
-		criteria.setId(0l);
-		criteria.setCode("");
-		criteria.setLabel("");
-		json.setCriteria(criteria);
-		
-		JsonAttributeOption option = new JsonAttributeOption();
-		option.setId(0l);
-		option.setCode("");
-		option.setLabel("");
-		json.setValueOption(option);
+		json.setCriteria(JsonAttributeQueryProvider.criteriaLabel());
+		json.setValueOption(JsonAttributeQueryProvider.optionLabel());
 		
 		json.setValueOptions(new ArrayList<>());
-		json.getValueOptions().add(option);
+		json.getValueOptions().add(JsonAttributeQueryProvider.optionLabel());
 		
 		return json;
 	}

@@ -1,4 +1,4 @@
-package org.jeesl.factory.json.system.io.db;
+package org.jeesl.factory.json.io.db.pg;
 
 import java.util.Objects;
 
@@ -6,7 +6,7 @@ import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
 
-public class JsonPostgresStatementFactory
+public class JsonPostgresStatementFactoryRm
 {
 	public static JsonPostgresStatement build(long number, Object[] array)
 	{

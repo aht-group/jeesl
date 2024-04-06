@@ -44,7 +44,8 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 	<T extends EjbWithId> DATA fIoSsiData(CTX mapping, T ejb) throws JeeslNotFoundException;
 	
-	JsonTuples1<STATUS> tpIoSsiStatus(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
+	JsonTuples1<STATUS> tpIoSsiDataByStatus(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
+	JsonTuples2<STATUS,ERROR> tpIoSsiDataByStatusError(JeeslIoSsiQuery<CTX,STATUS,ERROR> query);
 	
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<ERROR> tpcIoSsiErrorContext(CTX mapping, A a, B b);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiStatusJobForContext(CTX mapping, A a, B b);
