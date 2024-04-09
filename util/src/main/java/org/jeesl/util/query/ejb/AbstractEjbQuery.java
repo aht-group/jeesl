@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,8 +17,6 @@ import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
-import org.jeesl.util.query.cq.CqLiteral;
-import org.primefaces.model.FilterMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -189,15 +185,5 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		return list;
 	}
 	
-	public void applyPrimefaces(Map<String,FilterMeta> filters)
-	{
-		if(Objects.nonNull(filters))
-		{
-			for(FilterMeta meta : filters.values().stream().filter(m -> Objects.nonNull(m.getFilterValue())).collect(Collectors.toList()))
-			{
-				logger.info(meta.toString());
-				this.addCqLiteral(CqLiteral.contains(meta.getFilterValue().toString(),meta.getFilterField()));
-			}
-		}
-	}
+	
 }
