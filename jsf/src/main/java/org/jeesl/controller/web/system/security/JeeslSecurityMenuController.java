@@ -27,6 +27,7 @@ import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
@@ -49,9 +50,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-											
-											V extends JeeslSecurityView<L,D,?,?,?,?>,
+											R extends JeeslSecurityRole<L,D,?,V,?,?>,
+											V extends JeeslSecurityView<L,D,?,R,?,?>,
 											CTX extends JeeslSecurityContext<L,D>,
+											
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
 											
 											
@@ -65,7 +67,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMenuController.class);
 
 	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?> fbSecurity;
-	private JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity;
+	private JeeslSecurityFacade<?,R,V,?,?,CTX,M,?> fSecurity;
 	private JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity;
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
@@ -113,7 +115,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	public void postConstructMenu(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity,
+									JeeslSecurityFacade<?,R,V,?,?,CTX,M,?> fSecurity,
 									JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity,
 									JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
@@ -145,7 +147,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		List<M> list = new ArrayList<>();
 		if(sbhContext.isSelected())
 		{
-			EjbSecurityQuery<CTX> query = new EjbSecurityQuery<>();
+			EjbSecurityQuery<CTX,R> query = new EjbSecurityQuery<>();
 			query.add(sbhContext.getSelection());
 			query.addRootFetch(JeeslSecurityMenu.Attributes.context);
 			query.orderBy(CqOrdering.ascending(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.id));
