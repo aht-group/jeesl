@@ -13,7 +13,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Order;
@@ -28,11 +27,6 @@ import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.access.JeeslStaff;
@@ -48,10 +42,8 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory.Type;
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
-import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -292,7 +284,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 
-	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<CTX> query)
+	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<CTX,R> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<M> cQ = cB.createQuery(fbSecurity.getClassMenu());
@@ -427,7 +419,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return fStaffURD(cStaff,users,roles,domains);
 	}
 	
-	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<CTX> query)
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<CTX,R> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -564,7 +556,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 	
-	public Predicate[] pMenu(CriteriaBuilder cB, JeeslSecurityQuery<CTX> query, Root<M> root)
+	public Predicate[] pMenu(CriteriaBuilder cB, JeeslSecurityQuery<CTX,R> query, Root<M> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -577,7 +569,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
-	public void sortBy(CriteriaBuilder cB, CriteriaQuery<M> cQ, JeeslSecurityQuery<CTX> query, Root<M> root)
+	public void sortBy(CriteriaBuilder cB, CriteriaQuery<M> cQ, JeeslSecurityQuery<CTX,R> query, Root<M> root)
 	{
 		if(ObjectUtils.isNotEmpty(query.getOrderings()))
 		{

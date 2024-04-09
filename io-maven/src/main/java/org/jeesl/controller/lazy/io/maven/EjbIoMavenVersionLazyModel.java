@@ -2,8 +2,6 @@ package org.jeesl.controller.lazy.io.maven;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
@@ -11,6 +9,7 @@ import org.jeesl.controller.converter.fc.io.maven.IoMavenVersionConverter;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
+import org.jeesl.jsf.util.PrimefacesPredicateBuilder;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenDependency;
@@ -24,7 +23,6 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenType;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
-import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
@@ -47,9 +45,9 @@ public class EjbIoMavenVersionLazyModel extends LazyDataModel<IoMavenVersion>
 
 	private EjbIoMavenQuery query(Map<String,FilterMeta> filterBy)
 	{
-		EjbIoMavenQuery q = EjbIoMavenQuery.instance();
-		q.applyPrimefaces(filterBy);		
-		return q;
+		EjbIoMavenQuery query = EjbIoMavenQuery.instance();
+		PrimefacesPredicateBuilder.apply(filterBy,query);		
+		return query;
 	}
 	
 	@Override public int count(Map<String,FilterMeta> filterBy) {return fMaven.cIoMavenVersions(query(filterBy)).intValue();}
