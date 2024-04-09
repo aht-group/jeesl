@@ -329,10 +329,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		List<S> fStaffU(Class<S> clStaff, USER user)
 	{return allForParent(clStaff,JeeslStaff.Attributes.user, user);}
 	
-	@Override
-	public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
-		List<S> fStaffR(Class<S> clStaff, R role)
-	{return allForParent(clStaff,JeeslStaff.Attributes.role, role);}
+//	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffR(Class<S> clStaff, R role) {return allForParent(clStaff,JeeslStaff.Attributes.role, role);}
 	
 	@Override
 	public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
