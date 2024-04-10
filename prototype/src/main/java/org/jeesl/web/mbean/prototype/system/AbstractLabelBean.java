@@ -121,6 +121,9 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	//Method coming from  OfxTranslationProvider ... but required!
 	@Override public List<String> getLocaleCodes() {return EjbCodeFactory.toListCode(locales);}
 	
+	@Override public void setContext(String localeCode, Class<?> c) {throw new UnsupportedOperationException("It's not allowed to set the context");}
+	@Override public <E extends Enum<E>> String toLabel(E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
+	
 	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code)
 	{
 		logger.info("toLabel("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
@@ -144,5 +147,8 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	@Override public String toCurrency(String localeCode, Double value) {logger.warn("NYI"); return null;}
 	@Override public String toCurrency(String localeCode, boolean grouping, int decimals, Double value) {logger.warn("NYI"); return null;}
 	@Override public void setLanguages(List<LOC> locales) {logger.warn("NYI");}
+	
+	
+	
 	
 }
