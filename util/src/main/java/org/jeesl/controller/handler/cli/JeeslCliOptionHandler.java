@@ -95,8 +95,8 @@ public class JeeslCliOptionHandler
 	
 	public void handleLog4j2(CommandLine line)
 	{
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("debug-log4j2.xml");}
-        else {this.initLogger2("cli-log4j2.xml");}
+		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("log4j2.debug.xml");}
+        else {this.initLogger2("log4j2.app.xml");}
 	}
 	private void initLogger2(String loggingProfile)
 	{

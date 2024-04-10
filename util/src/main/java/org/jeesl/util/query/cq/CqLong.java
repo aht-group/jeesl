@@ -3,6 +3,7 @@ package org.jeesl.util.query.cq;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
@@ -48,4 +49,9 @@ public class CqLong implements JeeslCqLong
 	}
 	
 	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
+	
+	public static boolean isParseable(JeeslCqLiteral c)
+	{
+		return NumberUtils.isParsable(c.getLiteral());
+	}
 }
