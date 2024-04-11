@@ -27,10 +27,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
@@ -47,13 +43,9 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 										R extends JeeslSecurityRole<L,D,C,V,U,A>,
 										V extends JeeslSecurityView<L,D,C,R,U,A>,
 										U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-										A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-										AT extends JeeslSecurityTemplate<L,D,C>,
-										CTX extends JeeslSecurityContext<L,D>,
-										M extends JeeslSecurityMenu<L,V,CTX,M>,
+										A extends JeeslSecurityAction<L,D,R,V,U,?>,
 										AR extends JeeslSecurityArea<L,D,V>,
-										OT extends JeeslSecurityOnlineTutorial<L,D,V>,
-										OH extends JeeslSecurityOnlineHelp<V,?,?>,
+										
 										USER extends JeeslUser<R>>
 									extends AbstractJeeslLocaleWebController<L,D,LOC>
 									implements Serializable
@@ -61,9 +53,9 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityRoleController.class);
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
-	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,USER> fbSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,?,?,USER> fSecurity;
+	private JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity;
 	
 	private final EjbSecurityCategoryFactory<C> efCategory;
 	
@@ -100,7 +92,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
-	public JeeslSecurityRoleController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public JeeslSecurityRoleController(SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
@@ -109,7 +101,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		
 		comparatorView = (new SecurityViewComparator<V>()).factory(SecurityViewComparator.Type.position);
 		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
-		comparatorUsecase = (new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityUsecaseComparator.Type.position);
+		comparatorUsecase = (new SecurityUsecaseComparator<C,U>()).factory(SecurityUsecaseComparator.Type.position);
 		
 		categories = new ArrayList<>();
 		roles = new ArrayList<>();
@@ -122,8 +114,8 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	}
 	
 	public void postConstructRole(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
-			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
+			JeeslSecurityFacade<C,R,V,U,A,?,?,USER> fSecurity,
+			JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity=fSecurity;

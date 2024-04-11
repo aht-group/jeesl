@@ -52,8 +52,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 											CTX extends JeeslSecurityContext<L,D>,
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
 											AR extends JeeslSecurityArea<L,D,V>,
-											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
-											OH extends JeeslSecurityOnlineHelp<V,?,?>,
+
 											USER extends JeeslUser<R>>
 									extends AbstractJeeslLocaleWebController<L,D,LOC>
 									implements Serializable
@@ -67,7 +66,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	
 	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,USER> fbSecurity;
 	
 	protected final EjbSecurityCategoryFactory<C> efCategory;
 	protected final EjbSecurityUsecaseFactory<C,U> efUsecase;
@@ -102,7 +101,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	public boolean isHasDeveloperAction() {return userIsDeveloper;}
 	
-	public JeeslSecurityUsecaseController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public JeeslSecurityUsecaseController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
@@ -112,7 +111,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		
 		comparatorRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
 		comparatorView = (new SecurityViewComparator<V>()).factory(SecurityViewComparator.Type.position);
-		comparatorUsecase = (new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityUsecaseComparator.Type.position);
+		comparatorUsecase = (new SecurityUsecaseComparator<C,U>()).factory(SecurityUsecaseComparator.Type.position);
 		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 	}
 	
