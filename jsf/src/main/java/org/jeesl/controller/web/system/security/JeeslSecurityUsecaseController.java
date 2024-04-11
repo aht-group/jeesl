@@ -97,9 +97,10 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	
 	protected boolean uiShowDocumentation; public boolean isUiShowDocumentation() {return uiShowDocumentation;}
 	protected boolean uiShowInvisible; public boolean isUiShowInvisible() {return uiShowInvisible;}
-	protected boolean hasDeveloperAction; public boolean isHasDeveloperAction() {return hasDeveloperAction;}
 	
-	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
+	
+	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
+	public boolean isHasDeveloperAction() {return userIsDeveloper;}
 	
 	public JeeslSecurityUsecaseController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
@@ -130,22 +131,25 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		opActions = new ArrayList<A>();
 		
 		// Page Security Settings
-		hasDeveloperAction = security.allow(security.getPageCode()+".Developer");
-		userIsDeveloper = security.allow(security.getPageCode()+".developer");
-		uiShowDocumentation = hasDeveloperAction;
-		uiShowInvisible = hasDeveloperAction;
+		userIsDeveloper = security.allow(security.getPageCode()+".Developer") || security.allow(security.getPageCode()+".developer");
+		uiShowDocumentation = userIsDeveloper;
+		uiShowInvisible = userIsDeveloper;
 		
+		if(debugOnInfo) {logger.info("Page security for "+security.getPageCode()+" hasDeveloperAction:"+userIsDeveloper+" uiShowDocumentation:"+uiShowInvisible);}
 		
-		if(debugOnInfo) {logger.info("Page security for "+security.getPageCode()+" hasDeveloperAction:"+hasDeveloperAction+" uiShowDocumentation:"+uiShowInvisible);}
-		
-		reloadCategories();
+		this.reloadCategories();
+	}
+	
+	private void reset(boolean rUsecase)
+	{
+		if(rUsecase) {usecase = null;}
 	}
 	
 	protected void reloadCategories()
 	{
-		if(hasDeveloperAction){categories = fSecurity.allOrderedPosition(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.usecase);}
+		if(userIsDeveloper){categories = fSecurity.allOrderedPosition(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.usecase);}
 		else{categories = fSecurity.allOrderedPositionVisible(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.usecase);}
-		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassCategory(),categories));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassCategory(),categories)+" (developer:"+userIsDeveloper+")");}
 	}
 	
 	public void selectCategory() throws JeeslNotFoundException
@@ -209,6 +213,25 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		Collections.sort(roles,comparatorRole);
 	}
 	
+	public void saveUsecase() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
+	{
+		logger.info(AbstractLogMessage.saveEntity(usecase));
+		usecase.setCategory(fSecurity.find(fbSecurity.getClassCategory(), usecase.getCategory()));
+		usecase = fSecurity.save(usecase);
+		this.reloadUsecases();
+		this.reloadUsecase();
+		bSecurity.update(usecase);
+	}
+	
+	public void deleteUsecase() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
+	{
+		logger.info(AbstractLogMessage.deleteEntity(usecase));
+		fSecurity.rm(usecase);
+		this.reloadUsecases();
+		this.reloadUsecase();
+		this.reset(true);
+	}
+	
 	private void reloadActions()
 	{
 		opActions.clear();
@@ -220,21 +243,10 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		}
 		Collections.sort(opActions, comparatorAction);
 	}
-	
-	//Add
-
 
 
 	//Save
-	public void saveUsecase() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
-	{
-		logger.info(AbstractLogMessage.saveEntity(usecase));
-		usecase.setCategory(fSecurity.find(fbSecurity.getClassCategory(), usecase.getCategory()));
-		usecase = fSecurity.save(usecase);
-		reloadUsecase();
-		reloadUsecases();
-		bSecurity.update(usecase);
-	}
+
 	
 	//OP View
 	public void selectTblView() {logger.info(AbstractLogMessage.selectEntity(tblView));}

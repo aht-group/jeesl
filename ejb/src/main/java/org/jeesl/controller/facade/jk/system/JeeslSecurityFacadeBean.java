@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.facade.jk.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -111,8 +113,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return usecase;
 	}
 	
-	@Override
-	public <E extends Enum<E>> C fSecurityCategory(Type type, E code)
+	@Override public <E extends Enum<E>> C fSecurityCategory(Type type, E code)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -130,6 +131,38 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		
 		TypedQuery<C> tQ = em.createQuery(cQ);
 		return tQ.getSingleResult();
+	}
+	
+	@Override public List<C> fSecurityCategories(JeeslSecurityQuery<C,R,CTX> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<C> cQ = cB.createQuery(fbSecurity.getClassCategory());
+		Root<C> root = cQ.from(fbSecurity.getClassCategory());
+		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+		
+		cQ.select(root);
+		cQ.where(cB.and(pCategory(cB,query,root)));
+//		this.sortMenuBy(cB,cQ,query,root);
+		
+		TypedQuery<C> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
+	}
+	
+	@Override public List<R> fSecurityRoles(JeeslSecurityQuery<C,R,CTX> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<R> cQ = cB.createQuery(fbSecurity.getClassRole());
+		Root<R> root = cQ.from(fbSecurity.getClassRole());
+		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+		
+		cQ.select(root);
+		cQ.where(cB.and(pRole(cB,query,root)));
+//		this.sortMenuBy(cB,cQ,query,root);
+		
+		TypedQuery<R> tQ = em.createQuery(cQ);
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		return tQ.getResultList();
 	}
 	
 	@Override public List<V> allViewsForUser(USER user)
@@ -281,7 +314,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 	
-	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<CTX,R> query)
+	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,CTX> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -413,7 +446,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return fStaffURD(cStaff,users,roles,domains);
 	}
 	
-	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<CTX,R> query)
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,CTX> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -548,5 +581,27 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 			}
 		}
 		return result;
+	}
+	
+	private Predicate[] pRole(CriteriaBuilder cB, JeeslSecurityQuery<C,R,CTX> query, Root<R> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	
+	private Predicate[] pCategory(CriteriaBuilder cB, JeeslSecurityQuery<C,R,CTX> query, Root<C> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getSecurityContext()))
+		{
+			Path<CTX> pCtx = root.get(JeeslSecurityMenu.Attributes.context.toString());
+			predicates.add(pCtx.in(query.getSecurityContext()));
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 }
