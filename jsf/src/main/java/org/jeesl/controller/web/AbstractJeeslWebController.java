@@ -28,11 +28,6 @@ public class AbstractJeeslWebController implements Serializable
 		jogger = DebugJeeslLogger.instance(this.getClass());
 	}
 	
-	public void debugOnInfo(boolean value)
-	{
-		this.debugOnInfo=value;
-	}
-	
 	public void activateDebuggingOnInfo(JeeslLogger jogger)
 	{
 		this.debugOnInfo=true;
