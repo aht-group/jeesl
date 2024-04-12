@@ -28,19 +28,17 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.NodeCollapseEvent;
 import org.primefaces.event.NodeExpandEvent;
@@ -53,12 +51,10 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<?,?,C,?,?,?>,
-											V extends JeeslSecurityView<L,D,?,?,?,?>,
+											R extends JeeslSecurityRole<L,D,C,V,?,?>,
+											V extends JeeslSecurityView<L,D,C,R,?,?>,
 											CTX extends JeeslSecurityContext<L,D>,
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
-											
-											
 											OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 											DC extends JeeslIoCms<L,D,LOC,?,DS>,
 											DS extends JeeslIoCmsSection<L,DS>>
@@ -69,7 +65,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMenuController.class);
 
 	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?> fbSecurity;
-	private JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity;
+	private JeeslSecurityFacade<C,R,V,?,?,CTX,M,?> fSecurity;
 	private JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity;
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
@@ -110,7 +106,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	public void postConstructMenu(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslSecurityFacade<?,?,V,?,?,CTX,M,?> fSecurity,
+									JeeslSecurityFacade<C,R,V,?,?,CTX,M,?> fSecurity,
 									JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity,
 									JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
@@ -142,7 +138,13 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		List<M> list = new ArrayList<>();
 		if(sbhContext.isSelected())
 		{
-			list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,sbhContext.getSelection()));
+			EjbSecurityQuery<C,R,CTX> query = new EjbSecurityQuery<>();
+			query.add(sbhContext.getSelection());
+			query.addRootFetch(JeeslSecurityMenu.Attributes.context);
+			query.orderBy(CqOrdering.ascending(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.id));
+			query.orderBy(CqOrdering.ascending(JeeslSecurityMenu.Attributes.position));
+			
+			list.addAll(fSecurity.fSecurityMenus(query));
 			if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+sbhContext.getSelection().getCode());}
 		}
 		else
