@@ -3,27 +3,14 @@ package org.jeesl.controller.util.comparator.ejb.system.security;
 import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SecurityUsecaseComparator<L extends JeeslLang,
-									D extends JeeslDescription,
-									C extends JeeslSecurityCategory<L,D>,
-									R extends JeeslSecurityRole<L,D,C,V,U,A>,
-									V extends JeeslSecurityView<L,D,C,R,U,A>,
-									U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-									A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-									AT extends JeeslSecurityTemplate<L,D,C>,
-									USER extends JeeslUser<R>>
+public class SecurityUsecaseComparator<C extends JeeslSecurityCategory<?,?>,
+									U extends JeeslSecurityUsecase<?,?,C,?,?,?>
+									>
 {
 	final static Logger logger = LoggerFactory.getLogger(SecurityUsecaseComparator.class);
 
@@ -37,7 +24,7 @@ public class SecurityUsecaseComparator<L extends JeeslLang,
     public Comparator<U> factory(Type type)
     {
         Comparator<U> c = null;
-        SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER> factory = new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>();
+        SecurityUsecaseComparator<C,U> factory = new SecurityUsecaseComparator<>();
         switch (type)
         {
             case position: c = factory.new PositionCodeComparator();break;
@@ -46,14 +33,14 @@ public class SecurityUsecaseComparator<L extends JeeslLang,
         return c;
     }
 
-    private class PositionCodeComparator implements Comparator<U>
+	private class PositionCodeComparator implements Comparator<U>
     {
-        public int compare(U a, U b)
-        {
-			  CompareToBuilder ctb = new CompareToBuilder();
-			  ctb.append(a.getCategory().getPosition(), b.getCategory().getPosition());
-			  ctb.append(a.getPosition(), b.getPosition());
-			  return ctb.toComparison();
-        }
+    	@Override public int compare(U a, U b)
+    	{
+    		CompareToBuilder ctb = new CompareToBuilder();
+    		ctb.append(a.getCategory().getPosition(), b.getCategory().getPosition());
+    		ctb.append(a.getPosition(), b.getPosition());
+    		return ctb.toComparison();
+    	}
     }
 }

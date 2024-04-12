@@ -39,6 +39,7 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.system.security.Action;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.model.xml.system.security.Roles;
@@ -57,7 +58,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.rest.security.UtilsSecurityViewImport;
-import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,
@@ -117,7 +117,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 		
 		comparatorRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
 		comparatorView = (new SecurityViewComparator<V>()).factory(SecurityViewComparator.Type.position);
-		comparatorUsecase = (new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityUsecaseComparator.Type.position);
+		comparatorUsecase = (new SecurityUsecaseComparator<C,U>()).factory(SecurityUsecaseComparator.Type.position);
 		comparatorAction = (new SecurityActionComparator<C,V,A,AT>()).factory(SecurityActionComparator.Type.position);
 		
 		viewUpdater = new SecurityViewUpdater<>(fbSecurity,fSecurity);

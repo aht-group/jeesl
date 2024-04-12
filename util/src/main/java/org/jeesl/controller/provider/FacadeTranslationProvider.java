@@ -87,7 +87,10 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override public void setContext(String localeCode, Class<?> c) {throw new UnsupportedOperationException("It's not allowed to set the context");}
+	@Override public <E extends Enum<E>> String toLabel(E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
+	
 	@Override
 	public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code) {
 		// TODO Auto-generated method stub

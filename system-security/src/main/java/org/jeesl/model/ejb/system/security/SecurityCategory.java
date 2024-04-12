@@ -78,7 +78,11 @@ public class SecurityCategory implements JeeslSecurityCategory<IoLang,IoDescript
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("id="+id);
+		sb.append("[").append(id).append("]");
+		sb.append(" type:").append(type);
+		sb.append(" code:").append(code);
+		sb.append(" position:").append(position);
+		sb.append(" visible:").append(visible);
 		return sb.toString();
 	}
 }
