@@ -7,6 +7,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -44,6 +45,14 @@ public class LiteralPredicateBuilder
 		}
 	}
 	
+	public static <T extends EjbWithId, L extends JeeslLang, E extends Enum<E>> void ml(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqLiteral cq, Root<T> root, E attribute, String localeCode)
+	{
+		MapJoin<T,String,L> lang = root.joinMap(attribute.toString());
+		predicates.add(cB.equal(lang.key(),localeCode));
+		
+		Expression<String> e = lang.get(JeeslLang.Att.lang.toString());
+		LiteralPredicateBuilder.add(cB,predicates,cq,e);
+	}
 	public static <O extends EjbWithId, T extends EjbWithId, L extends JeeslLang, E extends Enum<E>> void ml(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqLiteral cq, Join<O,T> join, E attribute, String localeCode)
 	{
 		MapJoin<T,String,L> lang = join.joinMap(attribute.toString());

@@ -28,6 +28,8 @@ public interface JeeslSecurityTemplate<L extends JeeslLang, D extends JeeslDescr
 {
 	public enum Attributes {category}
 	
+//	void x();
+	
 	public boolean getDocumentation();
 	public void setDocumentation(boolean documentation);
 }
