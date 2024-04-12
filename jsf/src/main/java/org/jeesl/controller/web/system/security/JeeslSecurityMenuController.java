@@ -53,6 +53,7 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
+											R extends JeeslSecurityRole<?,?,C,?,?,?>,
 											V extends JeeslSecurityView<L,D,?,?,?,?>,
 											CTX extends JeeslSecurityContext<L,D>,
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
