@@ -2,7 +2,9 @@ package org.jeesl.factory.sql;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.persistence.Table;
@@ -21,19 +23,49 @@ public class SqlFactory
 	private String alias;
 	private boolean newLine;
 	
+	private Map<Class<?>,String> mapAlias;
+	private boolean envers; public SqlFactory envers() {envers=true; return this;}
+	
 	public static SqlFactory instance() {return new SqlFactory();}
 	private SqlFactory()
 	{
 		sb = new StringBuilder();
 		alias = null;
 		newLine = false;
+		envers = false;
+		
+		mapAlias = new HashMap<>();
 	}
+	
+	public <T extends EjbWithId> SqlFactory alias(Class<T> c, String a) {mapAlias.put(c,a);return this;}
 	
 	public <T extends EjbWithId> SqlFactory from(Class<T> c)
 	{
-		SqlFactory.from(sb,c,alias,newLine);
+		String a = null;
+		if(Objects.nonNull(alias)) {a=alias;}
+		else if(mapAlias.containsKey(c)) {a = mapAlias.get(c);}
+		
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append(" FROM ");
+		if(envers) {sb.append("envers.");}
+		sb.append(c.getAnnotation(Table.class).name());
+		if(envers) {sb.append("_");}
+		if(Objects.nonNull(a)) {sb.append(" AS ").append(a);}
+		
 		return this;
 	}
+	
+	public <T extends EjbWithId, E extends Enum<E>> SqlFactory where(Class<T> c, E attribute, Long id)
+	{
+		sb.append(" WHERE ");
+		if(Objects.nonNull(alias)) {sb.append(alias).append(".");} else if(mapAlias.containsKey(c)) {sb.append(mapAlias.get(c)).append(".");}
+		sb.append(attribute.toString());
+		sb.append(" = ").append(id);
+		
+		return this;
+	}
+
+	
 	public <T extends EjbWithId> SqlFactory delete(Class<T> c)
 	{
 		SqlFactory.deleteFrom(sb,c,alias,newLine);

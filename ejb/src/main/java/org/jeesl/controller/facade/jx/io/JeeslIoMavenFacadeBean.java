@@ -19,6 +19,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
@@ -329,30 +330,27 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		if(ObjectUtils.isNotEmpty(query.getCqLiterals()))
+		for(JeeslCqLiteral cql : ListUtils.emptyIfNull(query.getCqLiterals()))
 		{
-			for(JeeslCqLiteral cql : query.getCqLiterals())
+			if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.code)))
 			{
-				if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.code)))
-				{
-					Expression<String> eCode = cB.upper(ejb.get(JeeslIoMavenVersion.Attributes.code.toString()));
-					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
-				}
-				else if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenGroup.Attributes.code)))
-				{
- 					Path<ARTIFACT> pArtifact = ejb.get(JeeslIoMavenVersion.Attributes.artifact.toString());
- 					Expression<String> eCode = cB.upper(pArtifact.get(JeeslIoMavenGroup.Attributes.code.toString()));
- 					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
-				}
-				else if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.group,JeeslIoMavenGroup.Attributes.code)))
-				{
- 					Path<ARTIFACT> pArtifact = ejb.get(JeeslIoMavenVersion.Attributes.artifact.toString());
- 					Path<GROUP> pGroup = pArtifact.get(JeeslIoMavenArtifact.Attributes.group.toString());
- 					Expression<String> eCode = cB.upper(pGroup.get(JeeslIoMavenGroup.Attributes.code.toString()));
- 					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
-				}
-				else {logger.warn("NYI Path: "+cql.toString());}
+				Expression<String> eCode = cB.upper(ejb.get(JeeslIoMavenVersion.Attributes.code.toString()));
+				LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
 			}
+			else if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenGroup.Attributes.code)))
+			{
+					Path<ARTIFACT> pArtifact = ejb.get(JeeslIoMavenVersion.Attributes.artifact.toString());
+					Expression<String> eCode = cB.upper(pArtifact.get(JeeslIoMavenGroup.Attributes.code.toString()));
+					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
+			}
+			else if(cql.getPath().equals(CqLiteral.path(JeeslIoMavenVersion.Attributes.artifact,JeeslIoMavenArtifact.Attributes.group,JeeslIoMavenGroup.Attributes.code)))
+			{
+					Path<ARTIFACT> pArtifact = ejb.get(JeeslIoMavenVersion.Attributes.artifact.toString());
+					Path<GROUP> pGroup = pArtifact.get(JeeslIoMavenArtifact.Attributes.group.toString());
+					Expression<String> eCode = cB.upper(pGroup.get(JeeslIoMavenGroup.Attributes.code.toString()));
+					LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
+			}
+			else {logger.warn("NYI Path: "+cql.toString());}
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

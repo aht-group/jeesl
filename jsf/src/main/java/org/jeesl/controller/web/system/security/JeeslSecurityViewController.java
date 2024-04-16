@@ -115,6 +115,8 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		
 		tsb = new TriStateBinder();
 		actions = new ArrayList<>();
+		
+		userIsDeveloper = false;
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
@@ -128,15 +130,12 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		templates = fSecurity.allOrderedPositionVisible(fbSecurity.getClassTemplate());
 		
 		this.reloadCategories();
-		if(Objects.nonNull(security))
-		{
-			this.postConstruct(security);
-		}	
+		if(Objects.nonNull(security)) {this.postConstruct(security);}	
 	}
 	
 	private void postConstruct(JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
-		userIsDeveloper = security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffixDeprecated.Developer);
+		userIsDeveloper = userIsDeveloper || security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffixDeprecated.Developer);
 	}
 	
 	private void reset(boolean rCategory, boolean rView, boolean rAction, boolean rArea)
