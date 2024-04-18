@@ -14,16 +14,19 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
+import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
+import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
+public class AssetEventLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
+									ASSET extends JeeslAomAsset<REALM,ASSET,?,?,?>,
 									EVENT extends JeeslAomEvent<?,ASSET,ETYPE,ESTATUS,?,USER,?>,
 									ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
 									ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
@@ -54,10 +57,14 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
     @Override public Object getRowKey(EVENT account) {return llh.getRowKey(account);}
     public void clear() {list.clear();}
 
-    public void reloadScope(JeeslAomFacade<?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,?> fAsset, ASSET asset)
+    public void reloadScope(JeeslAomFacade<?,?,REALM,?,ASSET,?,?,?,EVENT,ESTATUS,?> fAsset, ASSET asset)
     {
 		this.clear();
-		list.addAll(fAsset.fAssetEvents(asset));
+		
+		EjbAomQuery<REALM,ASSET,EVENT> query = new EjbAomQuery<>();
+		query.add(asset);
+		
+		list.addAll(fAsset.fAomEvents(query));
 		Collections.sort(list,cpEvent);
 		logger.info("Reloaded "+list.size());
 		if(thfEventType!=null)

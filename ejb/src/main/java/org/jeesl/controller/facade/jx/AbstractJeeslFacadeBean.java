@@ -2,7 +2,6 @@ package org.jeesl.controller.facade.jx;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.ejb.TransactionAttribute;
@@ -86,11 +85,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 //		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
 	}
 	
-	protected void pagination(TypedQuery<?> tQ, JeeslPaginationQuery query)
-	{
-		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
-		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
-	}
+	protected void pagination(TypedQuery<?> tQ, JeeslPaginationQuery query) {fJeesl.pagination(tQ, query);}
 	
 	@Override public <E extends EjbEquals<T>, T extends EjbWithId> boolean equalsAttributes(Class<T> c,E object){return fJeesl.equalsAttributes(c,object);}
 	@Override public <L extends JeeslLang,D extends JeeslDescription, S extends EjbWithId,G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>, GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>> S loadGraphic(Class<S> cS, S status){return fJeesl.loadGraphic(cS,status);}

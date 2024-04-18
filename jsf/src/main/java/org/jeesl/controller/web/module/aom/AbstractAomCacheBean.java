@@ -48,7 +48,7 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	final static Logger logger = LoggerFactory.getLogger(AbstractAomCacheBean.class);
 	
 	private final AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom;
-	protected JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?> fAom;
+	protected JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ESTATUS,?> fAom;
 
 //	@Inject @AomCompanyCache private Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheCdiAllCompanies;
 //	@Inject @AomCompanyCache private Cache<AomScopeCacheKey,List<COMPANY>> cacheCdiCompanyScope;
@@ -87,7 +87,7 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 		eventStatus = new ArrayList<>();
 	}
 	
-	public void postConstruct(JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?> fAom)
+	public void postConstruct(JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ESTATUS,?> fAom)
 	{
 		this.fAom=fAom;
 		

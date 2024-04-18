@@ -43,7 +43,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomViewController.class);
 
-	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAom;
+	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?> fAom;
 	private JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic;
 
 	@SuppressWarnings("unused")
@@ -73,7 +73,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 
 	public void postConstructView(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache,
-									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
+									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?> fAsset,
 									JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 									REALM realm)
 	{
