@@ -3,8 +3,10 @@ package org.jeesl.factory.ofx;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xls.system.io.report.XlsColumnFactory;
 import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
@@ -23,14 +25,15 @@ public class OfxMatrixDeviceFactory
 	final static Logger logger = LoggerFactory.getLogger(OfxStatusTableFactory.class);
 	
 	private Map<String,String> map;
+	private String colorOff; public OfxMatrixDeviceFactory off(String value) {colorOff=value; return this;}
 	
-	public static OfxMatrixDeviceFactory instance()
-	{
-		return new OfxMatrixDeviceFactory();
-	}
+	
+	
+	public static OfxMatrixDeviceFactory instance() {return new OfxMatrixDeviceFactory();}
 	public OfxMatrixDeviceFactory()
 	{
 		map = new HashMap<>();
+		colorOff = "";
 	}
 	
 	public Table build(JsonMatrixDevice device)
@@ -38,7 +41,7 @@ public class OfxMatrixDeviceFactory
 		map.clear();
 		
 		Table table = new Table();
-		table.setTitle(XmlTitleFactory.build(device.getName()));
+		table.setTitle(XmlTitleFactory.build(device.getName()+" ("+device.getColumns()+"x"+device.getRows()+")"));
 		
 		Content content = new Content();
 		content.setHead(buildHead(device));
@@ -50,6 +53,7 @@ public class OfxMatrixDeviceFactory
 	private static Head buildHead(JsonMatrixDevice device)
 	{
 		Row row = new Row();
+		row.getCell().add(XmlCellFactory.createParagraphCell(""));
 		for(int i=0; i<device.getColumns(); i++)
 		{
 			row.getCell().add(XmlCellFactory.createParagraphCell(""+(i+1)));
@@ -61,16 +65,18 @@ public class OfxMatrixDeviceFactory
 	{
 		Body body = new Body();
 		List<List<String>> partitions = ListUtils.partition(device.getData(),device.getColumns());
+		AtomicInteger index = new AtomicInteger();
 		for(List<String> partition : partitions)
 		{
-			body.getRow().add(buildRow(partition));
+			body.getRow().add(buildRow(index.incrementAndGet(),partition));
 		}
 		return body;
 	}
 	
-	private Row buildRow(List<String> datas)
+	private Row buildRow(int index, List<String> datas)
 	{		
 		Row row = new Row();
+		row.getCell().add(XmlCellFactory.createParagraphCell(index));
 		for(String cell : datas)
 		{
 			row.getCell().add(XmlCellFactory.createParagraphCell(toCode(cell)));
@@ -80,6 +86,8 @@ public class OfxMatrixDeviceFactory
 	
 	private String toCode(String colour)
 	{
+		if(ObjectUtils.isEmpty(colour)) {return "";}
+		if(colour.equals(colorOff)) {return "";}
 		if(!map.containsKey(colour))
 		{
 			String code = XlsColumnFactory.index2code(map.size());

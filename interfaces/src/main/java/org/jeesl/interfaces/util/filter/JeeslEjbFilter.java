@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.util;
+package org.jeesl.interfaces.util.filter;
 
 import java.util.Map;
 

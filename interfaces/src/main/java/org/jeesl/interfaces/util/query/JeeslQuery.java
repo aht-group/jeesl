@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
-import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqFetch;
 import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqOrdering;
@@ -29,26 +28,17 @@ public interface JeeslQuery extends JeeslCoreQuery
 	void setDistinct(boolean distinct);
 
 	void setFirstResult(Integer firstResult);
-
 	void setMaxResults(Integer maxResults);
 	
 	List<String> getRootFetches();
 	List<CqFetch> getGraphFetches();
 	
-	
 	List<JeeslCqLiteral> getCqLiterals();
 	List<JeeslCqLong> getCqLongs();
-	
 	List<CqOrdering> getOrderings();
-	
-	List<CqDate> getLocalDates();
-	
 	List<CqInteger> getIntegers();
 	
-	
-	
-//	boolean isSortAscending();
-//	void sort(String sortBy, boolean sortAscending);
+
 	
 	List<Long> getIdList();
 	List<String> getCodeList();

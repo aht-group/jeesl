@@ -174,7 +174,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<ITEM> fIoAttributeItems(JeeslIoAttributeQuery<CRITERIA, CONTAINER, DATA> query)
+	@Override public List<ITEM> fIoAttributeItems(JeeslIoAttributeQuery<CRITERIA,CONTAINER,DATA> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ITEM> cQ = cB.createQuery(fbAttribute.getClassItem());
