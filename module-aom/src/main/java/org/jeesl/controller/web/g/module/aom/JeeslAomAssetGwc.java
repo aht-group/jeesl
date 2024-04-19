@@ -90,7 +90,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	private enum Loop{treeAllForParent}
 	
-	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS,UP> fAom;
+	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom;
 //	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
 	private JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE> cache;
 	
@@ -109,7 +109,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
     private final SbSingleHandler<VIEW> sbhView; public SbSingleHandler<VIEW> getSbhView() {return sbhView;}
     private JeeslFileRepositoryHandler<LOC,?,FRC,?> frh; public JeeslFileRepositoryHandler<LOC,?,FRC,?> getFrh() {return frh;}  public void setFrh(JeeslFileRepositoryHandler<LOC,?,FRC,?> frh) {this.frh = frh;}
     
-    private final AssetEventLazyModel<REALM,ASSET,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<REALM,ASSET,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
+    private final AssetEventLazyModel<REALM,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<REALM,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
     
 	private final Set<ASSET> path;
 
@@ -149,7 +149,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 						JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE> cache,
-						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS,UP> fAsset,
+						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAsset,
 						REALM realm)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);

@@ -26,13 +26,13 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
-	private JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?> fAom;
+	private JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?> fAom;
 	
 	private LoadingCache<AomTypeCacheKey,List<ATYPE>> cacheType;
 	
 	private Map<AomTypeCacheKey,List<ATYPE>> cachedType; @Override public Map<AomTypeCacheKey,List<ATYPE>> getCachedType() {return cachedType;}
 	
-	public JeeslAomTypeLoadingCache(JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?> fAom)
+	public JeeslAomTypeLoadingCache(JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?> fAom)
 	{
 		this.fAom=fAom;
 		cacheType = Caffeine.newBuilder()

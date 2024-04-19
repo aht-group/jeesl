@@ -11,8 +11,6 @@ import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
@@ -29,29 +27,27 @@ public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription
 									ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,?>,
 									VIEW extends JeeslAomView<L,D,REALM,?>,
 									EVENT extends JeeslAomEvent<COMPANY,ASSET,?,ESTATUS,?,?,?>,
-									
-									ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
-									UP extends JeeslAomEventUpload<L,D,UP,?>>
+									ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>>
 			extends JeeslFacade
 {
 	EVENT load(EVENT event);
-	
-	<RREF extends EjbWithId> List<ASSET> fAomAssets(REALM realm, RREF rref, ATYPE type1, ATYPE type2);
+
+	<RREF extends EjbWithId> List<ASSET> fAomAssets(REALM realm, RREF rref, ATYPE type1);
+	List<ASSET> fAomAssets(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT> query);
 	List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier);
 	List<ASSET> allAssets(ASSET root);
-	
-	
+
 	<RREF extends EjbWithId> VIEW fAomView(REALM realm, RREF rref, JeeslAomView.Tree tree) throws JeeslNotFoundException;
 	<RREF extends EjbWithId> VIEW fcAomView(REALM realm, RREF rref, JeeslAomView.Tree tree);
 	List<VIEW> fAomViews(TenantIdentifier<REALM> identifier);
-	
+
 	List<ATYPE> fAomAssetTypes(TenantIdentifier<REALM> identifier, VIEW view);
-	
+
+	List<COMPANY> fAomCompanies(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT> query);
 	List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier);
-	
-//	List<EVENT> fAssetEvents(ASSET asset);
+
 	<RREF extends EjbWithId> List<EVENT> fAssetEvents(REALM realm, RREF rref, List<ESTATUS> status);
-	List<EVENT> fAomEvents(JeeslAomQuery<REALM,ASSET,EVENT> query);
-	
+	List<EVENT> fAomEvents(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT> query);
+
 	JsonTuples1<VIEW> tpcTypeByView(TenantIdentifier<REALM> identifier);
 }
