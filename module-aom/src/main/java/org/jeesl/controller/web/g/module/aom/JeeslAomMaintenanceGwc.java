@@ -46,6 +46,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.module.aom.event.AomEvent;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.query.ejb.module.EjbAomQuery;
@@ -75,7 +76,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomMaintenanceGwc.class);
 	
-	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset;
+	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
@@ -95,6 +96,8 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 
 	private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
+	
+	private TenantIdentifier<REALM> tenant;
 	private REALM realm; public REALM getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
 	private MT markupType;
@@ -127,13 +130,14 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	}
 	
 	public <E extends Enum<E>> void postConstructAssetMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset,
+									JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset,
 									JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL,ETYPE> cache,
 									REALM realm)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fAsset = fAsset;
 		this.realm = realm;
+		tenant = TenantIdentifier.instance(realm);
 		
 		
 		uiHelper.setCacheBean(cache);
@@ -147,12 +151,11 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		sbhEventStatus.preSelect(JeeslAomEventStatus.Code.planned);
 		sbhEventStatus.preSelect(JeeslAomEventStatus.Code.date);
 		sbhEventStatus.preSelect(JeeslAomEventStatus.Code.postponed);
-		
-		
 	}
 	
 	public void updateRealmReference(RREF rref)
 	{
+		tenant.withRref(rref);
 		this.rref = rref;
 		this.reloadEvents();
 	}
@@ -163,7 +166,12 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	private void reloadEvents()
 	{
 		events.clear();
-		events.addAll(fAsset.fAssetEvents(realm, rref, sbhEventStatus.getSelected()));
+
+		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		query.tenant(tenant);
+		query.addAomEventStatus(sbhEventStatus.getSelected());
+		
+		events.addAll(fAsset.fAomEvents(query));
 		Collections.sort(events,cpEvent);
 	}
         
@@ -178,8 +186,10 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
     	Collections.sort(event.getAssets(),cpAsset);
     	slotHandler.set(8,4);
     	
-    	EjbAomQuery<ASSET,EVENT> query = EjbAomQuery.instance();
+    	EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.addAssets(event.getAssets());
+		query.add(CqOrdering.desending(CqOrdering.path(JeeslAomEvent.Attributes.record)));
+		
     	history.addAll(fAsset.fAomEvents(query));
     	logger.info(AomEvent.class.getSimpleName()+": "+history.size());
     }

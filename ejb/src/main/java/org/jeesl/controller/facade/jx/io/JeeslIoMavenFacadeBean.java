@@ -48,6 +48,7 @@ import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.util.query.cq.CqBool;
 import org.jeesl.util.query.cq.CqLiteral;
@@ -277,10 +278,10 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 	
 	public void sortBy(CriteriaBuilder cB, CriteriaQuery<VERSION> cQ, JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query, Root<VERSION> root)
 	{
-		if(ObjectUtils.isNotEmpty(query.getOrderings()))
+		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
 		{
 			List<Order> orders = new ArrayList<>();
-			for(CqOrdering cqo : query.getOrderings())
+			for(JeeslCqOrdering cqo : query.getCqOrderings())
 			{
 				if(cqo.getPath().equals(CqOrdering.path(JeeslIoMavenVersion.Attributes.position)))
 				{

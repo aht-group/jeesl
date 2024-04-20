@@ -28,7 +28,7 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomCompanyLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
-	private final JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?> fAom;
+	private final JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?> fAom;
 	private final AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAom;
 	
 	private final LoadingCache<TenantIdentifier<REALM>,List<COMPANY>> cacheCompanies;
@@ -37,7 +37,7 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 	private Map<AomScopeCacheKey,List<COMPANY>> cachedScopeCompanies;
 	
 	public JeeslAomCompanyLoadingCache(AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAom,
-										JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?> fAom)
+										JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?> fAom)
 	{
 		this.fbAom=fbAom;
 		this.fAom=fAom;

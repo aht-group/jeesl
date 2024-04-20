@@ -2,14 +2,12 @@ package org.jeesl.model.ejb.io.db;
 
 import java.io.Serializable;
 
-public class CqOrdering implements Serializable
+public class CqOrdering implements JeeslCqOrdering
 {
 	private static final long serialVersionUID = 1L;
-
-	public enum SortOrder {ASCENDING,DESCENDING,UNSORTED}
 	
-	private final SortOrder order; public final SortOrder getOrder() {return order;}
-	private String path; public String getPath() {return path;}
+	private final SortOrder order; @Override public SortOrder getOrder() {return order;}
+	private String path; @Override public String getPath() {return path;}
 
 	public static CqOrdering ascending(Serializable...path) {return new CqOrdering(SortOrder.ASCENDING,CqOrdering.path(path));}
 	public static CqOrdering desending(Serializable...path) {return new CqOrdering(SortOrder.DESCENDING,CqOrdering.path(path));}

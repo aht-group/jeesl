@@ -53,7 +53,7 @@ public class AomRestHandler <L extends JeeslLang, D extends JeeslDescription, LO
 {
 	final static Logger logger = LoggerFactory.getLogger(AomRestHandler.class);
 	
-	protected final JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset;
+	protected final JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
@@ -81,7 +81,7 @@ public class AomRestHandler <L extends JeeslLang, D extends JeeslDescription, LO
 //	}
 	
 	public AomRestHandler(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset,
-							JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset)
+							JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset)
 	{
 	
 		this.fbAsset=fbAsset;

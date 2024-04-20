@@ -13,6 +13,7 @@ public class MatrixProcessorCursor
 		this.col=col;
 	}
 	
+	public MatrixProcessorCursor jump(int row, int col) {this.row=row; this.col=col; return this;}
 	public MatrixProcessorCursor move(MatrixProcessorCursor cursor, int row, int col) {this.row=cursor.getRow()+row; this.col=cursor.getColumn()+col; return this;}
 	public MatrixProcessorCursor row(MatrixProcessorCursor cursor, int i) {row=cursor.getRow()+i; return this;}
 	public MatrixProcessorCursor moveCol(MatrixProcessorCursor cursor, int i) {this.col=cursor.getColumn()+i; return this;}

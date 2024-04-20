@@ -29,12 +29,12 @@ public interface JeeslAomEvent <COMPANY extends JeeslAomCompany<?,?>,
 								USER extends JeeslSecurityUser,
 								FRC extends JeeslFileContainer<?,?>>
 			extends Serializable,EjbSaveable,
-					EjbWithRecord,EjbWithRemark,EjbWithName,
+					EjbWithName,EjbWithRecord,EjbWithRemark,
 					JeeslWithType<ETYPE>,JeeslWithStatus<ESTATUS>,
-					JeeslWithFileRepositoryContainer<FRC>,
-					JeeslWithMarkupSingle<M>
+					JeeslWithMarkupSingle<M>,
+					JeeslWithFileRepositoryContainer<FRC>
 {
-	public enum Attributes{assets,status}
+	public enum Attributes{assets,status,record}
 	
 	List<ASSET> getAssets();
 	void setAssets(List<ASSET> assets);

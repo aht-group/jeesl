@@ -1,14 +1,15 @@
-package org.jeesl.model.ejb.io.db;
+package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class CqDate implements Serializable
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqDate;
+
+public class CqDate implements JeeslCqDate
 {
 	private static final long serialVersionUID = 1L;
 
-	public enum Type {DbIsBefore,DbIsBeforeOrEqual,DbIsEqual,DbIsEqualOrAfter,DbIsAfter}
-	
 	private final Type type; public final Type getType() {return type;}
 	private final LocalDate date; public LocalDate getDate() {return date;}
 	private final String path; public String getPath() {return path;}

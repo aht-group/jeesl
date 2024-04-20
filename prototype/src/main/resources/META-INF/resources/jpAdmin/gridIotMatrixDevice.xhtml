@@ -16,7 +16,8 @@
 	<j:row>
 		<j:slot id="sDevices" width="7">
 			<h:form id="fDevices">
-				<p:dataTable var="d" value="#{cc.attrs.ctrl.devices}" draggableRows="true"
+				<p:dataTable styleClass="jeesl-datatable"
+						var="d" value="#{cc.attrs.ctrl.devices}" draggableRows="true"
 						selection="#{cc.attrs.ctrl.device}" selectionMode="single" rowKey="#{d.id}"
 						paginator="true" rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
 					<f:facet name="header">
@@ -78,10 +79,6 @@
 						<h:outputText value="#{cc.attrs.ctrl.device.brightness}"/>
 						
 					</p:panelGrid>
-					
-					<ui:remove>
-						<j:tabTranslationEditor value="#{cc.attrs.ctrl.system}" withDescription="true"/>
-					</ui:remove>
 					
 				</p:panel>
 			</h:form>

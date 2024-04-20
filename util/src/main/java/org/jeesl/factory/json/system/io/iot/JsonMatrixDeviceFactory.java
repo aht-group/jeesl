@@ -10,6 +10,7 @@ import org.jeesl.interfaces.factory.json.JeeslJsonMatrixDeviceFactory;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixLayout;
 import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
+import org.jeesl.model.pojo.iot.MatrixProcessorCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,6 @@ public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LA
     			if(Objects.isNull(cells[r][c])) {json.getData().add("");}
         		else {json.getData().add(cells[r][c]);}
         	}
-    		
     	}
     	
     	return json;
@@ -96,5 +96,10 @@ public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LA
 			result.addAll(list);
 		}
 		return result;
+	}
+
+	@Override public void apply(MatrixProcessorCursor cursor, int row, int column, String color)
+	{
+		cells[cursor.getRow()-2+row][cursor.getColumn()-2+column] = color;
 	}
 }
