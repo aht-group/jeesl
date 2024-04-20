@@ -63,7 +63,7 @@ public class AssetEventLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
     {
 		this.clear();
 		
-		EjbAomQuery<REALM,ASSET,ATYPE,EVENT> query = new EjbAomQuery<>();
+		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.add(asset);
 		
 		list.addAll(fAsset.fAomEvents(query));

@@ -14,7 +14,8 @@ import org.jeesl.interfaces.util.query.jpa.JeeslPaginationQuery;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslCoreQuery extends Serializable,
-									JeeslPaginationQuery,JeeslCqRootFetchQuery,
+									JeeslPaginationQuery,
+									JeeslCqRootFetchQuery,
 									JeeslCqLiteralQuery,JeeslCqLongQuery,JeeslCqBooleanQuery,JeeslCqDateQuery
 {
 	Boolean getDistinct();

@@ -95,6 +95,8 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 
 	private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
+	
+	private TenantIdentifier<REALM> tenant;
 	private REALM realm; public REALM getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
 	private MT markupType;
@@ -134,6 +136,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fAsset = fAsset;
 		this.realm = realm;
+		tenant = TenantIdentifier.instance(realm);
 		
 		
 		uiHelper.setCacheBean(cache);
@@ -153,6 +156,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	public void updateRealmReference(RREF rref)
 	{
+		tenant.withRref(rref);
 		this.rref = rref;
 		this.reloadEvents();
 	}
@@ -163,7 +167,12 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	private void reloadEvents()
 	{
 		events.clear();
-		events.addAll(fAsset.fAssetEvents(realm, rref, sbhEventStatus.getSelected()));
+
+		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		query.tenant(tenant);
+		query.addAomEventStatus(sbhEventStatus.getSelected());
+		
+		events.addAll(fAsset.fAomEvents(query));
 		Collections.sort(events,cpEvent);
 	}
         
@@ -178,8 +187,9 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
     	Collections.sort(event.getAssets(),cpAsset);
     	slotHandler.set(8,4);
     	
-    	EjbAomQuery<REALM,ASSET,ATYPE,EVENT> query = new EjbAomQuery<>();
+    	EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.addAssets(event.getAssets());
+		
     	history.addAll(fAsset.fAomEvents(query));
     	logger.info(AomEvent.class.getSimpleName()+": "+history.size());
     }

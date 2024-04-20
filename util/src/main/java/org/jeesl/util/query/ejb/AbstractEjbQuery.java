@@ -10,7 +10,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.JeeslQuery;
-import org.jeesl.model.ejb.io.db.CqFetch;
+import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
@@ -133,9 +133,9 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected void addOrdering(CqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
 	
 	//GraphFetch
-	private List<CqFetch> graphFetches;
-	@Override public List<CqFetch> getGraphFetches() {return graphFetches;}
-	protected void addGraphFetch(CqFetch fetch) {if(Objects.isNull(graphFetches)) {graphFetches = new ArrayList<>();} graphFetches.add(fetch);}
+	private List<CqGraphFetch> graphFetches;
+	@Override public List<CqGraphFetch> getGraphFetches() {return graphFetches;}
+	protected void addGraphFetch(CqGraphFetch fetch) {if(Objects.isNull(graphFetches)) {graphFetches = new ArrayList<>();} graphFetches.add(fetch);}
 	
 	
 	//Strings

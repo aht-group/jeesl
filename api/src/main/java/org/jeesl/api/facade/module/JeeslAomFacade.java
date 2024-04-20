@@ -33,7 +33,7 @@ public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription
 	EVENT load(EVENT event);
 
 //	<RREF extends EjbWithId> List<ASSET> fAomAssets(REALM realm, RREF rref, ATYPE type1);
-	List<ASSET> fAomAssets(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT> query);
+	List<ASSET> fAomAssets(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query);
 	List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier);
 	List<ASSET> allAssets(ASSET root);
 
@@ -43,11 +43,11 @@ public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription
 
 	List<ATYPE> fAomAssetTypes(TenantIdentifier<REALM> identifier, VIEW view);
 
-	List<COMPANY> fAomCompanies(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT> query);
+	List<COMPANY> fAomCompanies(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query);
 	List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier);
 
-	<RREF extends EjbWithId> List<EVENT> fAssetEvents(REALM realm, RREF rref, List<ESTATUS> status);
-	List<EVENT> fAomEvents(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT> query);
+//	<RREF extends EjbWithId> List<EVENT> fAssetEvents(REALM realm, RREF rref, List<ESTATUS> status);
+	List<EVENT> fAomEvents(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query);
 
 	JsonTuples1<VIEW> tpcTypeByView(TenantIdentifier<REALM> identifier);
 }

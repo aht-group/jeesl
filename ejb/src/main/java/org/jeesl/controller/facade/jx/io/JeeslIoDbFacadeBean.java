@@ -53,7 +53,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
-import org.jeesl.model.ejb.io.db.CqOrdering.SortOrder;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
@@ -522,8 +522,8 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 				if(el.getPath().equals(CqOrdering.path(JeeslIoDbFlyway.Attributes.id)))
 				{
 					Expression<Long> eId = root.get(JeeslIoDbFlyway.Attributes.id.toString());
-					if(el.getOrder()==SortOrder.ASCENDING) {orders.add(cB.asc(eId));}
-					else if(el.getOrder()==SortOrder.DESCENDING) {orders.add(cB.desc(eId));}
+					if(el.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(eId));}
+					else if(el.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(eId));}
 				}
 				else {logger.warn("No Handling for "+el.toString());}
 			}
