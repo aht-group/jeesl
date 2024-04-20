@@ -55,8 +55,8 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 
 	private final TreeHelper<I> thIssue;
 	
-	private TreeNode tree; public TreeNode getTree() {return tree;}
-    private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
+	private TreeNode<I> tree; public TreeNode<I> getTree() {return tree;}
+    private TreeNode<I> node; public TreeNode<I> getNode() {return node;} public void setNode(TreeNode<I> node) {this.node = node;}
 
     protected R realm;
     protected RREF rref; public RREF getRref() {return rref;}
@@ -107,7 +107,7 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 		}
 		else {return;}
 		
-		tree = new DefaultTreeNode();
+		tree = new DefaultTreeNode<>();
 		this.issue = null;
 		TreeHelper.buildTree(this.fIssue, this.tree, this.fIssue.allForParent(this.fbIssue.getClassIssue(), this.root), this.fbIssue.getClassIssue());
 		
@@ -157,14 +157,14 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<I> dragNode = event.getDragNode();
+        TreeNode<I> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + "Dropped on " + dropNode.getData() + " at " + dropIndex);
 
         I parent = (I)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<I> n : dropNode.getChildren())
         {
         	I child =(I)n.getData();
     		child.setParent(parent);

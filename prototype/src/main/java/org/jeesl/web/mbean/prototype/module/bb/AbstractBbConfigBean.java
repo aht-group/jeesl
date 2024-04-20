@@ -61,8 +61,8 @@ public class AbstractBbConfigBean <L extends JeeslLang, D extends JeeslDescripti
 
 	protected long refId;
 	private BB board; public BB getBoard() {return board;} public void setBoard(BB board) {this.board = board;}
-	private TreeNode tree; public TreeNode getTree() {return tree;}
-    private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
+	private TreeNode<BB> tree; public TreeNode<BB> getTree() {return tree;}
+    private TreeNode<BB> node; public TreeNode<BB> getNode() {return node;} public void setNode(TreeNode<BB> node) {this.node = node;}
 	
 	public AbstractBbConfigBean(BbFactoryBuilder<L,D,SCOPE,BB,PUB,THREAD,POST,M,MT,USER> fbBb)
 	{
@@ -98,24 +98,24 @@ public class AbstractBbConfigBean <L extends JeeslLang, D extends JeeslDescripti
 	{
 		boards = fBb.fBulletinBoards(sbhScope.getSelection(), refId);
 		logger.info(AbstractLogMessage.reloaded(fbBb.getClassBoard(),boards));
-		tree = new DefaultTreeNode(null, null);
+		tree = new DefaultTreeNode<>(null, null);
 		for(BB b : boards)
 		{
 			if(b.getParent()==null)
 			{
-				TreeNode n = new DefaultTreeNode(b, tree);
+				TreeNode<BB> n = new DefaultTreeNode<>(b, tree);
 				buildTree(n,b);
 			}
 		}
 	}
 	
-	private void buildTree(TreeNode nParent, BB bbParent)
+	private void buildTree(TreeNode<BB> nParent, BB bbParent)
 	{
 		for(BB b : boards)
 		{
 			if(bbParent.equals(b.getParent()))
 			{
-				TreeNode n = new DefaultTreeNode(b,nParent);
+				TreeNode<BB> n = new DefaultTreeNode<>(b,nParent);
 				buildTree(n,b);
 			}
 		}
@@ -146,15 +146,15 @@ public class AbstractBbConfigBean <L extends JeeslLang, D extends JeeslDescripti
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<BB> dragNode = event.getDragNode();
+        TreeNode<BB> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + "Dropped on " + dropNode.getData() + " at " + dropIndex);
         
         logger.info("Childs of "+dropNode.getData());
         BB parent = (BB)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<BB> n : dropNode.getChildren())
         {
     		BB child =(BB)n.getData();
 //    		BB db = fBb.find(child,false);

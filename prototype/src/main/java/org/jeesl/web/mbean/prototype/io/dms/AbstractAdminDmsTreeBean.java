@@ -108,15 +108,15 @@ public abstract class AbstractAdminDmsTreeBean <L extends JeeslLang,D extends Je
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<S> dragNode = event.getDragNode();
+        TreeNode<S> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + "Dropped on " + dropNode.getData() + " at " + dropIndex);
 
         logger.info("Childs of "+dropNode.getData());
         S parent = (S)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<S> n : dropNode.getChildren())
         {
         		S child =(S)n.getData();
         		S db = fDms.load(child,false);

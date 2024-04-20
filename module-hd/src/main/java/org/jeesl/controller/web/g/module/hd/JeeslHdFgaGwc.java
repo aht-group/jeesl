@@ -238,8 +238,8 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 	protected final List<DOC> documents; public List<DOC> getDocuments() {return documents;}
 	private DOC document;
     
-	private TreeNode helpTree; public TreeNode getHelpTree() {return helpTree;}
-	private TreeNode helpNode; public TreeNode getHelpNode() {return helpNode;} public void setHelpNode(TreeNode helpNode) {this.helpNode = helpNode;}
+	private TreeNode<SEC> helpTree; public TreeNode<SEC> getHelpTree() {return helpTree;}
+	private TreeNode<SEC> helpNode; public TreeNode<SEC> getHelpNode() {return helpNode;} public void setHelpNode(TreeNode<SEC> helpNode) {this.helpNode = helpNode;}
 	    
     public void selectDocument(DOC doc)
     {
@@ -248,15 +248,15 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
     	
     	SEC root = this.fCms.load(document.getRoot(), true);
 
-		this.helpTree = new DefaultTreeNode(root, null);
+		this.helpTree = new DefaultTreeNode<>(root, null);
 		buildTree(this.helpTree, root.getSections());
     }
 
-    private void buildTree(TreeNode parent, List<SEC> sections)
+    private void buildTree(TreeNode<SEC> parent, List<SEC> sections)
 	{
 		for(SEC s : sections)
 		{
-			TreeNode n = new DefaultTreeNode(s, parent);
+			TreeNode<SEC> n = new DefaultTreeNode<>(s, parent);
 			if(!s.getSections().isEmpty()) {buildTree(n,s.getSections());}
 		}
 	}
@@ -270,7 +270,6 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
     public void onHelpCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
     
     // Handler Tree-Select
-	@SuppressWarnings("unchecked")
 	public void onHelpDrop(DragDropEvent<SEC> ddEvent) throws JeeslConstraintViolationException, JeeslLockingException
     {
     	if(debugOnInfo) {logger.info("DRAG "+ddEvent.getDragId());}
@@ -278,7 +277,7 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		Object data = ddEvent.getData();
 		if(debugOnInfo) {if(data==null) {logger.info("data = null");} else{logger.info("Data "+data.getClass().getSimpleName());}}
 		
-		TreeNode n = thSection.getNode(helpTree,ddEvent.getDragId(),3);
+		TreeNode<SEC> n = thSection.getNode(helpTree,ddEvent.getDragId(),3);
 		SEC section = (SEC)n.getData();
 		logger.info(section.toString());
 		

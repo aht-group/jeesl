@@ -178,14 +178,14 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<ATYPE> dragNode = event.getDragNode();
+        TreeNode<ATYPE> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + "Dropped on " + dropNode.getData() + " at " + dropIndex);
 
         ATYPE parent = (ATYPE)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<ATYPE> n : dropNode.getChildren())
         {
         	ATYPE child =(ATYPE)n.getData();
     		child.setParent(parent);

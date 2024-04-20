@@ -15,6 +15,7 @@ import org.jeesl.jsf.util.JeeslLazyListHandler;
 import org.jeesl.model.json.io.label.JsonTranslation;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,7 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 	}
 	
 	@Override public T getRowData(String rowKey){return llh.getRowData(source,rowKey);}
-    @Override public Object getRowKey(T account) {return llh.getRowKey(account);}
+    @Override public String getRowKey(T account) {return llh.getRowKey(account);}
 
 	public void updateFiler(List<JsonTranslation> columns)
 	{
@@ -67,16 +68,17 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 	public void addAll(List<T> items) {source.addAll(items);}
 	public void add(T item){source.add(item);}
 
-	@Override public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
+	@Override public int count(Map<String, FilterMeta> filterBy) {return source.size();}
+	@Override public List<T> load(int first, int pageSize, Map<String,SortMeta> sortBy, Map<String,FilterMeta> filterBy)
 	{
 		tmp.clear();
 		for(T item : source)
 		{
-			if(this.matches(item,filters)) {tmp.add(item);}
+			if(this.matches(item,filterBy)) {tmp.add(item);}
 		}
 
 		//sort
-		if(sortField != null)
+		if(sortBy != null)
 		{
 
 		}

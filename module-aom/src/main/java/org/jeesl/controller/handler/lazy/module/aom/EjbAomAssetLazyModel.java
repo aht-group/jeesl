@@ -21,6 +21,7 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,8 @@ public class EjbAomAssetLazyModel extends LazyDataModel<AomAsset>
 	}
 	
 	public int count(Map<String,FilterMeta> filterBy) {return fAsset.fAomAssets(query(filterBy)).size();}
-	@Override public List<AomAsset> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filterBy)
+	@Override public List<AomAsset> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy)
+//	@Override public List<AomAsset> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filterBy)
 	{
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 		
@@ -71,7 +73,7 @@ public class EjbAomAssetLazyModel extends LazyDataModel<AomAsset>
 		return data;
 	}
 	
-	@Override public Object getRowKey(AomAsset item) {return item.getId();}
+	@Override public String getRowKey(AomAsset item) {return Long.valueOf(item.getId()).toString();}
 	@Override public AomAsset getRowData(String rowKey)
 	{
 		Long id = Long.valueOf(rowKey);

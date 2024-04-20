@@ -52,6 +52,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
+import org.jeesl.jsf.helper.JeeslTreeHelper;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.web.model.module.aom.AssetEventLazyModel;
@@ -95,7 +96,9 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
+	private final JeeslTreeHelper<ASSET> th;
 	private final TreeHelper<ASSET> thAsset;
+	
 	private final EjbAssetFactory<REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE> efAsset;
 	private final EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT> efEvent;
 	
@@ -112,8 +115,8 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
     
 	private final Set<ASSET> path;
 
-	private TreeNode tree; public TreeNode getTree() {return tree;}
-    private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
+	private TreeNode<ASSET> tree; public TreeNode<ASSET> getTree() {return tree;}
+    private TreeNode<ASSET> node; public TreeNode<ASSET> getNode() {return node;} public void setNode(TreeNode<ASSET> node) {this.node = node;}
 
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
@@ -134,7 +137,9 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		sbhEventType = new SbMultiHandler<>(fbAsset.getClassEventType(),this);
 		lazyEvents = new AssetEventLazyModel<>(fbAsset.cpEvent(EjbEventComparator.Type.recordDesc),thfEventType,sbhEventType);
 		
+		th = JeeslTreeHelper.instance();
 		thAsset = TreeHelper.instance();
+		
 		efAsset = fbAsset.ejbAsset();
 		efEvent = fbAsset.ejbEvent();
 		
@@ -207,17 +212,13 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		List<ASSET> assets = fAom.fAomAssets(identifier);
 		if(Objects.nonNull(jogger)) {jogger.milestone(fbAsset.getClassAsset(),"fAomAssets(identifier)",assets.size());}
 		
-		tree = new DefaultTreeNode();
-		TreeHelper.buildTree(tree,assets);
+		tree = th.build(assets);
+//		tree = new DefaultTreeNode<>();
+//		TreeHelper.buildTree(tree,assets);
 		if(Objects.nonNull(jogger)) {jogger.milestone(tree.getClass(),"TreeHelper.buildTree",assets.size());}
 
-//		root = fAom.fcAssetRoot(identifier.getRealm(),identifier);
-//		if(Objects.nonNull(jogger)) {jogger.milestone("root");}
-		
-//		buildTree(tree,fAom.allForParent(fbAsset.getClassAsset(), root));
-//		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
 	}
-	
+
 	public void expandTree()
 	{
 		thAsset.setExpansion(this.node != null ? this.node : this.tree, true);
@@ -282,14 +283,14 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<ASSET> dragNode = event.getDragNode();
+        TreeNode<ASSET> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + " Dropped on " + dropNode.getData() + " at " + dropIndex);
         
         ASSET parent = (ASSET)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<ASSET> n : dropNode.getChildren())
         {
     		ASSET child =(ASSET)n.getData();
     		child.setParent(parent);

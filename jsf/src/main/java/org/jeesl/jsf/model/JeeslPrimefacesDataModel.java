@@ -44,7 +44,7 @@ public class JeeslPrimefacesDataModel <T extends EjbWithId> extends ListDataMode
         }
     }  
 
-	@Override public Object getRowKey(T item) {return item.getId();}
+	@Override public String getRowKey(T item) {return Long.valueOf(item.getId()).toString();}
     
 	@SuppressWarnings("unchecked")
     @Override public T getRowData(String rowKey)

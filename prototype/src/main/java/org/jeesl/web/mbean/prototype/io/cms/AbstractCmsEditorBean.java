@@ -119,8 +119,8 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	
 	private MT markupHtml;
 	
-	private TreeNode tree; public TreeNode getTree() {return tree;}
-    private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
+	private TreeNode<S> tree; public TreeNode<S> getTree() {return tree;}
+    private TreeNode<S> node; public TreeNode<S> getNode() {return node;} public void setNode(TreeNode<S> node) {this.node = node;}
 
 	public AbstractCmsEditorBean(IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,?,MT,FC,FM> fbCms)
 	{
@@ -273,15 +273,15 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 			else {logger.info("No Sections, because sbhLocale is null");}
 		}
 		
-		tree = new DefaultTreeNode(root, null);
+		tree = new DefaultTreeNode<>(root, null);
 		buildTree(tree,root.getSections());
 	}
 	
-	private void buildTree(TreeNode parent, List<S> sections)
+	private void buildTree(TreeNode<S> parent, List<S> sections)
 	{
 		for(S s : sections)
 		{
-			TreeNode n = new DefaultTreeNode(s, parent);
+			TreeNode<S> n = new DefaultTreeNode<>(s, parent);
 			if(!s.getSections().isEmpty()) {buildTree(n,s.getSections());}
 		}
 	}
@@ -292,15 +292,15 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+        TreeNode<S> dragNode = event.getDragNode();
+        TreeNode<S> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + "Dropped on " + dropNode.getData() + " at " + dropIndex);
         
         logger.info("Childs of "+dropNode.getData());
         S parent = (S)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<S> n : dropNode.getChildren())
         {
     		S child =(S)n.getData();
     		S db = fCms.load(child,false);
@@ -369,7 +369,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 		boolean appendToTree = EjbIdFactory.isUnSaved(section);
 		
 		section = fCms.save(section);
-		if(appendToTree) {new DefaultTreeNode(section,tree);}
+		if(appendToTree) {new DefaultTreeNode<>(section,tree);}
 		reloadSection();
 	}
 	

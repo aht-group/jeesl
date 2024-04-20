@@ -7,6 +7,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.util.tree.JeeslTreeElement;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -22,7 +23,7 @@ public interface JeeslIoCmsSection<L extends JeeslLang, S extends JeeslIoCmsSect
 					EjbRemoveable,EjbPersistable,EjbSaveable,
 					EjbWithNonUniqueCode,
 					EjbWithPositionVisibleParent,EjbWithLang<L>
-,					EjbWithParentId<S>
+,					EjbWithParentId<S>,JeeslTreeElement<S>
 {	
 	public enum Attributes{section}
 	

@@ -36,6 +36,7 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
+import org.jeesl.jsf.helper.JeeslTreeHelper;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
@@ -44,16 +45,17 @@ import org.primefaces.event.NodeCollapseEvent;
 import org.primefaces.event.NodeExpandEvent;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TreeDragDropEvent;
-import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,?,?>,
 											V extends JeeslSecurityView<L,D,C,R,?,?>,
 											CTX extends JeeslSecurityContext<L,D>,
+											
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
 											OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 											DC extends JeeslIoCms<L,D,LOC,?,DS>,
@@ -70,15 +72,19 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
-	private final TreeHelper<M> thMenu;
+	private final JeeslTreeHelper<M> thMenu;
+	private final JeeslTreeHelper<DS> thDs;
+	
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
+	private final JeeslSecurityMenuCallback callback;
+	
 	private List<V> opViews; public List<V> getOpViews(){return opViews;}
 	
 	protected final SbSingleHandler<CTX> sbhContext; public SbSingleHandler<CTX> getSbhContext() {return sbhContext;}
 
-	private TreeNode tree; public TreeNode getTree() {return tree;}
-	private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
+	private TreeNode<M> tree; public TreeNode<M> getTree() {return tree;}
+	private TreeNode<M> node; public TreeNode<M> getNode() {return node;} public void setNode(TreeNode<M> node) {this.node = node;}
 
 	private final List<OH> helps; public List<OH> getHelps() {return helps;}
 	protected final List<DC> documents; public List<DC> getDocuments() {return documents;}
@@ -94,12 +100,15 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 										IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
+		this.callback=callback;
 		this.fbSecurity=fbSecurity;
 
 		sbhContext = new SbSingleHandler<>(fbSecurity.getClassContext(),this);
 
 		efMenu = fbSecurity.ejbMenu();
-		thMenu = TreeHelper.instance();
+		
+		thMenu = JeeslTreeHelper.instance();
+		thDs = JeeslTreeHelper.instance();
 		
 		helps = new ArrayList<>();
 		documents = new ArrayList<>();
@@ -206,11 +215,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		if(sbhContext.isSelected()) {disabledMenuImportFromDefaultContext = !list.isEmpty();}
 		else {disabledMenuImportFromDefaultContext = true;}
 
-		Map<M,List<M>> map = efMenu.toMapChild(list);
-	    tree = new DefaultTreeNode(null, null);
-
-	    buildTree(tree, efMenu.toListRoot(list),map);
-
+		tree = thMenu.build(list);
+		
 	    if(debugOnInfo) {logger.info("Reloaded Menu with "+list.size()+" elements. sbhContext.isSelected():"+sbhContext.isSelected()+" disabledMenuImportFromDefaultContext:"+disabledMenuImportFromDefaultContext);}
     }
 
@@ -261,43 +267,16 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 			logger.info("import of menu item failed : " + e.getMessage());
 		}
 	}
-	private void buildTree(TreeNode parent, List<M> items, Map<M,List<M>> map)
-	{
-		for(M menu : items)
-		{
-			TreeNode n = new DefaultTreeNode(menu, parent);
-			if(map.containsKey(menu))
-			{
-				buildTree(n, map.get(menu),map);
-			}
-		}
-	}
 
-	public void expandTree() {thMenu.setExpansion(this.node!=null ? this.node : this.tree, true);}
+	public void expandTree() {thMenu.expand(tree,node);}
 	public void collapseTree() {thMenu.setExpansion(this.tree,  false);}
 	public boolean isExpanded() {return this.tree != null && this.tree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
     public void onNodeCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
 
-	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
-        int dropIndex = event.getDropIndex();
-        if(debugOnInfo) {logger.info("Dragged " + dragNode.getData() + "Dropped on " + dropNode.getData() + " at " + dropIndex);}
-
-        M parent = (M)dropNode.getData();
-        int index=1;
-        for(TreeNode n : dropNode.getChildren())
-        {
-    		M child =(M)n.getData();
-    		child = fSecurity.find(fbSecurity.getClassMenu(),child);
-    		child.setParent(parent);
-    		child.setPosition(index);
-    		fSecurity.save(child);
-    		index++;
-        }
+		thMenu.persistDragDropEvent(fSecurity,event);
         propagateChanges();
 	}
 	protected void propagateChanges()
@@ -312,7 +291,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		menu = (M)event.getTreeNode().getData();
 		menu = fSecurity.find(fbSecurity.getClassMenu(),menu);
 
-		reloadHelps();
+		this.reloadHelps();
     }
     
     public void saveMenu() throws JeeslConstraintViolationException, JeeslLockingException
@@ -329,8 +308,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
     }
 
     // Handler Tree-Select
-	private TreeNode helpTree; public TreeNode getHelpTree() {return helpTree;}
-	private TreeNode helpNode; public TreeNode getHelpNode() {return helpNode;} public void setHelpNode(TreeNode helpNode) {this.helpNode = helpNode;}
+	private TreeNode<DS> helpTree; public TreeNode<DS> getHelpTree() {return helpTree;}
+	private TreeNode<DS> helpNode; public TreeNode<DS> getHelpNode() {return helpNode;} public void setHelpNode(TreeNode<DS> helpNode) {this.helpNode = helpNode;}
 
     public void addHelp(DC doc)
     {
@@ -338,22 +317,11 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
     	logger.info(document.toString());
 
     	DS root = this.fCms.load(document.getRoot(), true);
-
-		this.helpTree = new DefaultTreeNode(root, null);
-		buildTree(this.helpTree, root.getSections());
+		helpTree = thDs.build(root.getSections());
     }
 
-    private void buildTree(TreeNode parent, List<DS> sections)
-	{
-		for(DS s : sections)
-		{
-			TreeNode n = new DefaultTreeNode(s, parent);
-			if(!s.getSections().isEmpty()) {buildTree(n,s.getSections());}
-		}
-	}
-
-	public void expandHelp(){thMenu.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
-	public void collapseHelp() {thMenu.setExpansion(this.helpTree,  false);}
+	public void expandHelp() {thDs.expand(helpTree,helpNode);}
+	public void collapseHelp() {thDs.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
@@ -372,15 +340,14 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 
     // Handler Tree-Select
 
-    @SuppressWarnings("unchecked")
-	public void onHelpDrop(DragDropEvent ddEvent) throws JeeslConstraintViolationException, JeeslLockingException
+	public void onHelpDrop(DragDropEvent<DS> ddEvent) throws JeeslConstraintViolationException, JeeslLockingException
     {
     	if(debugOnInfo) {logger.info("DRAG "+ddEvent.getDragId());}
     	if(debugOnInfo) {logger.info("DROP "+ddEvent.getDropId());}
 		Object data = ddEvent.getData();
 		if(debugOnInfo) {if(data==null) {logger.info("data = null");} else {logger.info("Data "+data.getClass().getSimpleName());}}
 
-		TreeNode n = thMenu.getNode(helpTree,ddEvent.getDragId(),3);
+		TreeNode<DS> n = thDs.getNode(helpTree,ddEvent.getDragId(),3);
 		DS section = (DS)n.getData();
 		logger.info(section.toString());
 

@@ -30,12 +30,13 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 	{
 
 	}
-		
-	public static <T extends EjbWithParentAttributeResolver> void buildTree(JeeslFacade facade, TreeNode parent, List<T> objects, Class<T> type)
+	
+	@Deprecated
+	public static <T extends EjbWithParentAttributeResolver> void buildTree(JeeslFacade facade, TreeNode<T> parent, List<T> objects, Class<T> type)
 	{
 		for(T o : objects)
 		{
-			TreeNode n = new DefaultTreeNode(o, parent);
+			TreeNode<T> n = new DefaultTreeNode<>(o, parent);
 			
 			List<T> children = facade.allForParent(type, o);
 			if (!children.isEmpty())
@@ -45,16 +46,16 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		}
 	}
 
-	public List<TreeNode> findNodes(TreeNode node, Expression<TreeNode> expression)
+	public List<TreeNode<P>> findNodes(TreeNode<P> node, Expression<TreeNode<P>> expression)
 	{
-		List<TreeNode> nodes = new ArrayList<TreeNode>();
+		List<TreeNode<P>> nodes = new ArrayList<TreeNode<P>>();
 		if (node == null) { return nodes; }
 		
 		if (expression.condition(node))
 		{
 			nodes.add(node);
 		}
-		for (TreeNode child : node.getChildren())
+		for (TreeNode<P> child : node.getChildren())
 		{
 			nodes.addAll(findNodes(child, expression));
 		}
@@ -62,7 +63,8 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		return nodes;
 	}
 	
-	private void forEach(TreeNode node, Functor<TreeNode> functor, Expression<TreeNode> breakExpression)
+	@Deprecated
+	private void forEach(TreeNode<P> node, Functor<TreeNode<P>> functor, Expression<TreeNode<P>> breakExpression)
 	{
 		if (node == null || breakExpression.condition(node)) { return; }
 		
@@ -70,23 +72,25 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		node.getChildren().forEach(child -> forEach(child, functor, breakExpression));
 	}
 	
-	public void setExpansion(TreeNode startNode, boolean expand)
+	@Deprecated
+	public void setExpansion(TreeNode<P> startNode, boolean expand)
 	{
 		setExpansion(startNode, expand, getDepth(startNode));
 	}
-	private int getDepth(TreeNode root)
+	@Deprecated private int getDepth(TreeNode<P> root)
 	{
 		return 1 + root.getChildren().stream().map(child -> getDepth(child)).max(Integer::compare).orElse(0);
 	}
-	
-	public void setExpansion(TreeNode startNode, boolean expand, int reach)
+	@Deprecated
+	public void setExpansion(TreeNode<P> startNode, boolean expand, int reach)
 	{
 		forEach(startNode, node -> node.setExpanded(expand), node -> getAncestor(node, reach) == startNode);
 	}
 	
-	private TreeNode getAncestor(@NotNull TreeNode decendant, int ancestryLevel)
+	@Deprecated
+	private TreeNode<P> getAncestor(@NotNull TreeNode<P> decendant, int ancestryLevel)
 	{
-		TreeNode ancestor = decendant;
+		TreeNode<P> ancestor = decendant;
 		for (int i = 0; i < ancestryLevel; i++)
 		{
 			ancestor = ancestor.getParent();
@@ -95,24 +99,26 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		return ancestor;
 	}
 	
-	public TreeNode getNode(TreeNode tree, String dragId, int position)
+	@Deprecated
+	public TreeNode<P> getNode(TreeNode<P> tree, String dragId, int position)
     {
     	String[] elements = dragId.split(":");
     	String[] index = elements[position].split("_");
     	return getNode(tree.getChildren(),index,0);
     }
     
-    private TreeNode getNode(List<TreeNode> nodes, String[] index, int level)
+	@Deprecated
+    private TreeNode<P> getNode(List<TreeNode<P>> nodes, String[] index, int level)
     {
     	Integer position = Integer.valueOf(index[level]);
-    	TreeNode n = nodes.get(position);
+    	TreeNode<P> n = nodes.get(position);
     	if(index.length==(level+1)){return n;}
     	else {return getNode(n.getChildren(),index,level+1);}
     }
     
     // The following functions are from EH Module
-    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list) {buildTree(treeParent,list,null);}
-    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list, Set<T> path)
+    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode<T> treeParent, List<T> list) {buildTree(treeParent,list,null);}
+    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode<T> treeParent, List<T> list, Set<T> path)
     {
     	buildTree(treeParent,null,list,path);
     	if(!list.isEmpty())
@@ -120,11 +126,11 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
     		logger.info("Size "+list.size());
     		for(T t : list)
     		{
-    			new DefaultTreeNode(t,treeParent);
+    			new DefaultTreeNode<>(t,treeParent);
     		}
     	}
     }
-	private static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, T elementParent, List<T> list, Set<T> path)
+	private static <T extends EjbWithParentId<T>> void buildTree(TreeNode<T> treeParent, T elementParent, List<T> list, Set<T> path)
 	{
 		List<T> childs = list.stream()
 				.filter(t -> (elementParent==null && t.getParent()==null) || (elementParent!=null && t.getParent()!=null && elementParent.getId()==t.getParent().getId()))
@@ -133,24 +139,25 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		
 		for(T t : childs)
 		{
-			TreeNode n = new DefaultTreeNode(t,treeParent);
+			TreeNode<T> n = new DefaultTreeNode<>(t,treeParent);
 			if(path!=null && path.contains(t)) {n.setExpanded(true);}
 			TreeHelper.buildTree(n,t,list,path);
 		}
 	}
     
+	@Deprecated
     @SuppressWarnings("unchecked")
 	public static <T extends JeeslTreeElement<T>> void persistDragDropEvent(JeeslFacade facade, TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
     {
-    	TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
+    	TreeNode<T> dragNode = event.getDragNode();
+        TreeNode<T> dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + " Dropped on " + dropNode.getData() + " at " + dropIndex);
         
         T parent = null;
-        if(!(dropNode.getData() instanceof String)){parent = (T)dropNode.getData();}
+       parent = (T)dropNode.getData();
         int index=1;
-        for(TreeNode n : dropNode.getChildren())
+        for(TreeNode<T> n : dropNode.getChildren())
         {
         	T child = (T)n.getData();
     		child.setParent(parent);
@@ -166,16 +173,15 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
     	if(element.getParent()!=null) {fillPath(path,element.getParent());}
     }
     
-    @SuppressWarnings("unchecked")
-    public static <T extends JeeslTreeElement<T>> TreeNode findNode(TreeNode tree, T ejb)
+    public static <T extends JeeslTreeElement<T>> TreeNode<T> findNode(TreeNode<T> tree, T ejb)
     {
-    	for(TreeNode node : tree.getChildren())
+    	for(TreeNode<T> node : tree.getChildren())
     	{
 			T t = (T)node.getData();
     		if(t.equals(ejb)) {return node;}
     		else
     		{
-    			TreeNode child = findNode(node,ejb);
+    			TreeNode<T> child = findNode(node,ejb);
     			if(child!=null) {return child;}
     		}
     	}
