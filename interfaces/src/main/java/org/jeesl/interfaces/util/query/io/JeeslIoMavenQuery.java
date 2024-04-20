@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
+import org.jeesl.interfaces.util.query.jpa.JeeslOrderingQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
@@ -19,10 +20,9 @@ public interface JeeslIoMavenQuery <
 							STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
 							TYPE extends JeeslMavenType<?,?,TYPE,?>
 							>
-			extends JeeslCoreQuery
+			extends JeeslCoreQuery,JeeslOrderingQuery
 {
 	List<JeeslCqLiteral> getCqLiterals();
-	List<CqOrdering> getOrderings();
 	
 	boolean isDistinct();
 //	void x();

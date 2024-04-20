@@ -14,6 +14,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslAomQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
@@ -57,6 +58,7 @@ public class EjbAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	public EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
+	public EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> add(JeeslCqOrdering cq) {super.addOrdering(cq); return this;}
 	@Override public EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
 	@Override public <T extends EjbWithId> EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}

@@ -50,6 +50,7 @@ import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
 import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -637,7 +638,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	private void sortCategoryBy(CriteriaBuilder cB, CriteriaQuery<C> cQ, JeeslSecurityQuery<C,R,CTX> query, Root<C> root)
 	{
 		List<Order> orders = new ArrayList<>();
-		for(CqOrdering c : ListUtils.emptyIfNull(query.getOrderings()))
+		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
 		{
 			if(c.getPath().equals(CqOrdering.path(JeeslSecurityCategory.Attributes.position)))
 			{
@@ -678,7 +679,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	private void sortRoleBy(CriteriaBuilder cB, CriteriaQuery<R> cQ, JeeslSecurityQuery<C,R,CTX> query, Root<R> root)
 	{
 		List<Order> orders = new ArrayList<>();
-		for(CqOrdering c : ListUtils.emptyIfNull(query.getOrderings()))
+		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
 		{
 			if(c.getPath().equals(CqOrdering.path(JeeslSecurityRole.Attributes.position)))
 			{
@@ -711,10 +712,10 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	}
 	private void sortMenuBy(CriteriaBuilder cB, CriteriaQuery<M> cQ, JeeslSecurityQuery<C,R,CTX> query, Root<M> root)
 	{
-		if(ObjectUtils.isNotEmpty(query.getOrderings()))
+		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
 		{
 			List<Order> orders = new ArrayList<>();
-			for(CqOrdering c : query.getOrderings())
+			for(JeeslCqOrdering c : query.getCqOrderings())
 			{
 				if(c.getPath().equals(CqOrdering.path(JeeslSecurityMenu.Attributes.position)))
 				{

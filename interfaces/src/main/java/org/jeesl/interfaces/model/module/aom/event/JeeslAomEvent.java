@@ -34,7 +34,7 @@ public interface JeeslAomEvent <COMPANY extends JeeslAomCompany<?,?>,
 					JeeslWithMarkupSingle<M>,
 					JeeslWithFileRepositoryContainer<FRC>
 {
-	public enum Attributes{assets,status}
+	public enum Attributes{assets,status,record}
 	
 	List<ASSET> getAssets();
 	void setAssets(List<ASSET> assets);

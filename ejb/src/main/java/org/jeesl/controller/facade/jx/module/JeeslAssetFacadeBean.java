@@ -1,6 +1,7 @@
 package org.jeesl.controller.facade.jx.module;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,13 +15,16 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -41,6 +45,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslAomQuery;
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
@@ -290,10 +296,11 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<EVENT> cQ = cB.createQuery(fbAsset.getClassEvent());
-		Root<EVENT> event = cQ.from(fbAsset.getClassEvent());
+		Root<EVENT> sort = cQ.from(fbAsset.getClassEvent());
 		
-		cQ.select(event).distinct(true);
-		cQ.where(cB.and(this.pEvent(cB, query, event)));
+		cQ.select(sort).distinct(true);
+		cQ.where(cB.and(this.pEvent(cB, query, sort)));
+		this.eventSortBy(cB,cQ,query,sort);
 
 		TypedQuery<EVENT> tQ = em.createQuery(cQ);
 		super.pagination(tQ,query);
@@ -382,5 +389,19 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	public void eventSortBy(CriteriaBuilder cB, CriteriaQuery<EVENT> cQ, JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query, Root<EVENT> ejb)
+	{
+		List<Order> orders = new ArrayList<>();
+		for(JeeslCqOrdering el : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+			if(el.getPath().equals(CqOrdering.path(JeeslAomEvent.Attributes.record)))
+			{
+				Expression<Date> e = ejb.get(JeeslAomEvent.Attributes.record.toString());
+				SortByPredicateBuilder.juDate(cB,orders,el,e);
+			}
+			else {logger.warn("No Handling for "+el.toString());}
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 }

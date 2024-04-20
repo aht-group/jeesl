@@ -513,11 +513,11 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		cQ.select(root);	    
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
-		if(ObjectUtils.isNotEmpty(query.getOrderings()))
+		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
 		{
 			List<Order> orders = new ArrayList<>();
 			
-			for(CqOrdering el : query.getOrderings())
+			for(JeeslCqOrdering el : query.getCqOrderings())
 			{
 				if(el.getPath().equals(CqOrdering.path(JeeslIoDbFlyway.Attributes.id)))
 				{

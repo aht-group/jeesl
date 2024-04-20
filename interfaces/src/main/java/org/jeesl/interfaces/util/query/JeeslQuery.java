@@ -7,9 +7,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.CqInteger;
-import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
@@ -32,7 +32,7 @@ public interface JeeslQuery extends JeeslCoreQuery
 	
 	List<String> getRootFetches();
 	List<CqGraphFetch> getGraphFetches();
-	List<CqOrdering> getOrderings();
+	List<JeeslCqOrdering> getCqOrderings();
 	
 	List<JeeslCqLiteral> getCqLiterals();
 	List<JeeslCqLong> getCqLongs();

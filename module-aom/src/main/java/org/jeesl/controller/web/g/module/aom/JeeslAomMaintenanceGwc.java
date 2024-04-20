@@ -46,6 +46,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.module.aom.event.AomEvent;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.query.ejb.module.EjbAomQuery;
@@ -150,8 +151,6 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		sbhEventStatus.preSelect(JeeslAomEventStatus.Code.planned);
 		sbhEventStatus.preSelect(JeeslAomEventStatus.Code.date);
 		sbhEventStatus.preSelect(JeeslAomEventStatus.Code.postponed);
-		
-		
 	}
 	
 	public void updateRealmReference(RREF rref)
@@ -189,6 +188,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
     	
     	EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.addAssets(event.getAssets());
+		query.add(CqOrdering.desending(CqOrdering.path(JeeslAomEvent.Attributes.record)));
 		
     	history.addAll(fAsset.fAomEvents(query));
     	logger.info(AomEvent.class.getSimpleName()+": "+history.size());
