@@ -32,13 +32,11 @@ public interface JeeslQuery extends JeeslCoreQuery
 	
 	List<String> getRootFetches();
 	List<CqGraphFetch> getGraphFetches();
+	List<CqOrdering> getOrderings();
 	
 	List<JeeslCqLiteral> getCqLiterals();
 	List<JeeslCqLong> getCqLongs();
-	List<CqOrdering> getOrderings();
 	List<CqInteger> getIntegers();
-	
-
 	
 	List<Long> getIdList();
 	List<String> getCodeList();

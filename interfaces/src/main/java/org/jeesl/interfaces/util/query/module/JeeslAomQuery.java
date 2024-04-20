@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
+import org.jeesl.interfaces.util.query.jpa.JeeslOrderingQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslPaginationQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslTenantQuery;
 
@@ -17,7 +18,8 @@ public interface JeeslAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 							EVENT extends JeeslAomEvent<?,ASSET,?,?,?,?,?>
 ,							ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>
 >
-			extends JeeslCoreQuery,JeeslPaginationQuery,JeeslTenantQuery<REALM>
+			extends JeeslCoreQuery,JeeslTenantQuery<REALM>,
+			JeeslPaginationQuery//,JeeslOrderingQuery
 {
 	public List<ASSET> getAssets();
 	public List<ATYPE> getAomAssetTypes();

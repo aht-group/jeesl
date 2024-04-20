@@ -19,7 +19,5 @@ public interface JeeslCoreQuery extends Serializable,
 									JeeslCqLiteralQuery,JeeslCqLongQuery,JeeslCqBooleanQuery,JeeslCqDateQuery
 {
 	Boolean getDistinct();
-
-	
 	Boolean getTupleLoad();
 }
