@@ -98,6 +98,7 @@ public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[").append(id).append("]");
+		sb.append(" ").append(record.toInstant());
 		return sb.toString();
 	}
 }

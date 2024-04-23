@@ -27,13 +27,24 @@ public class CqDate implements JeeslCqDate
 	
 	public String toString()
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(path);
 		sb.append(" ").append(type.toString());
 		sb.append(" ").append(date.toString());
 		
 		return sb.toString();
 	}
+	
+	public String nyi(Class<?> c)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("NYI ");
+		sb.append(this.toString());
+		sb.append(" ").append(c.getName());
+		return sb.toString();
+	}
+	
+	
 	
 	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
 }

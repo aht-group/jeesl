@@ -37,7 +37,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.model.pojo.map.list.Nested2MapList;
+import org.jeesl.model.pojo.map.generic.Nested2List;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +74,7 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 
     private final PositionComparator<SC> cpScope;
     
-    private final Nested2MapList<SC,DOW,T> n2m; public Nested2MapList<SC, DOW, T> getN2m() {return n2m;}
+    private final Nested2List<SC,DOW,T> n2m; public Nested2List<SC, DOW, T> getN2m() {return n2m;}
    
 	private final Map<DOW,Date> mapDate; public Map<DOW, Date> getMapDate() {return mapDate;}
 
@@ -100,7 +100,7 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 		sbhViewport = new SbSingleHandler<>(fbTafu.getClassViewport(),this);
 		sbhDow = new SbMultiHandler<>(fbTafu.getClassDayOfWeek(),this);
 		
-		n2m = new Nested2MapList<>();
+		n2m = new Nested2List<>();
 		mapDate = new HashMap<>();
 		
 		postpone = new ArrayList<>();

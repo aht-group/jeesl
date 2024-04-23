@@ -1,38 +1,41 @@
 package org.jeesl.factory.ejb.module.asset;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 								ASSET extends JeeslAomAsset<?,ASSET,COMPANY,?,?>,
-								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
+								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,?,?>,
 								ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
 								ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
 								M extends JeeslIoMarkup<MT>,
-								MT extends JeeslIoMarkupType<?,?,MT,?>,
-								USER extends JeeslSecurityUser,
-								FRC extends JeeslFileContainer<?,?>>
+								MT extends JeeslIoMarkupType<?,?,MT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAssetEventFactory.class);
 	
-	private final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,?> fbAsset;
+	private final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,M,MT,?,?,?> fbAsset;
 	
-    public EjbAssetEventFactory(final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,?> fbAsset)
+    public EjbAssetEventFactory(final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,M,MT,?,?,?> fbAsset)
     {
         this.fbAsset = fbAsset;
     }
@@ -95,7 +98,7 @@ public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 	{
 		event.setType(facade.find(fbAsset.getClassEventType(),event.getType()));
 		event.setStatus(facade.find(fbAsset.getClassEventStatus(),event.getStatus()));
-		if(event.getCompany()!=null) {event.setCompany(facade.find(fbAsset.getClassCompany(),event.getCompany()));}
+		if(Objects.nonNull(event.getCompany())) {event.setCompany(facade.find(fbAsset.getClassCompany(),event.getCompany()));}
 	}
 	
 	public void ejb2nnb(EVENT event, NullNumberBinder nnb)
@@ -105,5 +108,17 @@ public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 	public void nnb2ejb(EVENT event, NullNumberBinder nnb)
 	{
 		event.setAmount(nnb.aToDouble());
+	}
+	
+	public Map<LocalDate,List<EVENT>> toMapDate(List<EVENT> list)
+	{
+		Map<LocalDate,List<EVENT>> map = new HashMap<>();
+		for(EVENT e : list)
+		{
+			LocalDate ld = DateUtil.toLocalDate(e.getRecord());
+			if(!map.containsKey(ld)) {map.put(ld,new ArrayList<>());}
+			map.get(ld).add(e);
+		}
+		return map;
 	}
 }

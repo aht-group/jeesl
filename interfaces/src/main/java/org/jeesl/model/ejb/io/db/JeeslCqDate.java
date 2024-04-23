@@ -10,4 +10,6 @@ public interface JeeslCqDate extends Serializable
 	Type getType();
 	LocalDate getDate();
 	String getPath();
+	
+	String nyi(Class<?> c);
 }

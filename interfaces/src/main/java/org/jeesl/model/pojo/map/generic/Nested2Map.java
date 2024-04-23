@@ -22,13 +22,14 @@ public class Nested2Map <L1 extends EjbWithId, L2 extends EjbWithId, VALUE exten
 		m = new HashMap<L1,Map<L2,VALUE>>();
     }
     
-    public void clear()
+    public Nested2Map<L1,L2,VALUE> clear()
     {
-    	for(Map<L2,VALUE> m : m.values())
+    	for(Map<L2,VALUE> child : m.values())
     	{
-    		m.clear();
+    		child.clear();
     	}
     	m.clear();
+    	return this;
     }
     
     public void put(L1 l1, L2 l2, VALUE value)

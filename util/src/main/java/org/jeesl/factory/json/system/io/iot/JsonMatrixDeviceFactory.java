@@ -21,8 +21,10 @@ public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LA
 	final static Logger logger = LoggerFactory.getLogger(JsonMatrixDeviceFactory.class);
 
 	private final JsonMatrixDevice q;
+	
 	private JsonMatrixDevice json;
 	private String[][] cells; @Override public String[][] getCells() {return cells;}
+	
 	
 	public static <DEVICE extends JeeslIotMatrixDevice<?,?,LAYOUT>,LAYOUT extends JeeslIotMatrixLayout<?,?,LAYOUT,?>>
 					JsonMatrixDeviceFactory<DEVICE,LAYOUT> instance(String localeCode, JsonMatrixDevice q) {return new JsonMatrixDeviceFactory<>(localeCode,q);}
@@ -102,4 +104,17 @@ public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LA
 	{
 		cells[cursor.getRow()-2+row][cursor.getColumn()-2+column] = color;
 	}
+	
+	@Override public void apply(MatrixProcessorCursor cursor, String color)
+	{
+		cells[cursor.getRow()-1][cursor.getColumn()-1] = color;
+	}
+
+
+	@Override public void offset(MatrixProcessorCursor cursor, int row, int column, String color)
+	{
+		cells[cursor.getRow()-1+row][cursor.getColumn()-1+column] = color;	
+	}
+	
+	
 }
