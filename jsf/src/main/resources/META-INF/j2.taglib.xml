@@ -55,9 +55,7 @@
 	</tag>
 	<tag>
         <tag-name>gridIoDbFlyway</tag-name>
-        <component>
-            <resource-id>ioDb/flyway.xhtml</resource-id>
-        </component>
+        <component><resource-id>ioDb/flyway.xhtml</resource-id></component>
 	</tag>
 	<tag>
         <tag-name>gridIoDbMeta</tag-name>
@@ -65,11 +63,18 @@
             <resource-id>ioDb/meta.xhtml</resource-id>
         </component>
 	</tag>
+	
+	<tag>
+        <tag-name>gridIoLocaleOption</tag-name>
+        <component>
+        	<resource-id>ioLocale/option.xhtml</resource-id>
+        </component>
+	</tag>
   
 	<tag>
         <tag-name>gridIoMavenArtifact</tag-name>
         <component>
-            <resource-id>ioMaven/artifact.xhtml</resource-id>
+        <resource-id>ioMaven/artifact.xhtml</resource-id>
         </component>
 	</tag>
 	<tag>

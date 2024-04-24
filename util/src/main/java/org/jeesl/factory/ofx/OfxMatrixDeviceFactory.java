@@ -41,7 +41,7 @@ public class OfxMatrixDeviceFactory
 		map.clear();
 		
 		Table table = new Table();
-		table.setTitle(XmlTitleFactory.build(device.getName()+" ("+device.getColumns()+"x"+device.getRows()+")"));
+		table.setTitle(XmlTitleFactory.build(device.getName()+" ("+device.getRows()+"x"+device.getColumns()+")"));
 		
 		Content content = new Content();
 		content.setHead(buildHead(device));

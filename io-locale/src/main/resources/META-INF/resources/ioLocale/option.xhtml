@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="langKeys" required="false" default="#{appTranslationBean.langKeys}"/>
+		
+		<composite:attribute name="graphicTypes" required="false" default="#{appIoGraphicBean.graphicTypes}"/>
+		<composite:attribute name="graphicStyles" required="false" default="#{appIoGraphicBean.shapes}"/>
+		
+		<composite:facet name="revision" required="false"/>
+		<composite:facet name="inputImageLabel" required="false"/>
+		<composite:facet name="inputImageInput" required="false"/>
+		<composite:facet name="inputSymbolLabel" required="false"/>
+		<composite:facet name="inputSymbolInput" required="false"/>
+		
+		<composite:facet name="top" required="false"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid>
+	<c:if test="#{not empty cc.facets.top}"><composite:renderFacet name="top"/></c:if>
+	<j:row>
+		<j:slot id="sCategories" width="2">
+			<h:form id="fProperties">
+				<p:dataTable id="dtProgram" styleClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.bean.categories}" rowKey="#{c.id}"
+						selection="#{cc.attrs.bean.category}" selectionMode="single">
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCategory}" update=":#{cc.id}:sCategory :#{cc.id}:sLang"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoStatus" value="listOf"/></f:facet>
+						<h:outputText value="#{msg[c.code]}" rendered="#{empty cc.attrs.bean.mapEntity[c]}"/>
+						<h:outputText value="#{cc.attrs.bean.mapEntity[c].name[localeCode].lang}" rendered="#{not empty cc.attrs.bean.mapEntity[c]}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sCategory" width="6">
+			<h:form id="fEntity" rendered="#{(not empty cc.attrs.bean.entity)}">
+				<p:panel id="pLang" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader title="#{cc.attrs.bean.entity.name[localeCode].lang}"/></f:facet>
+					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
+						<h:outputText value="#{cc.attrs.bean.entity.description[localeCode].lang}"/>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+			<h:form id="fCategory" rendered="#{not empty cc.attrs.bean.category}">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="s" value="#{cc.attrs.bean.items}" 
+			          		selection="#{cc.attrs.bean.status}" selectionMode="single" rowKey="#{s.id}" draggableRows="#{cc.attrs.bean.uiAllowReorder}">
+					<f:facet name="header">
+			          	<j:dtHeader title="#{empty cc.attrs.bean.mapEntity[cc.attrs.bean.category] ? msg[cc.attrs.bean.category.code] : cc.attrs.bean.mapEntity[cc.attrs.bean.category].name[localeCode].lang}">
+			          		<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
+			          		<j:svg type="jeeslDownload" listener="#{cc.attrs.bean.downloadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.supportsDownload}"/>
+			          		<j:svg type="jeeslUpload" listener="#{cc.attrs.bean.uploadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.uiAllowUpload}"/>
+			          		<j:svg type="jeeslInfo" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" styleClass="#{cc.attrs.bean.showDescription ? '' : 'jeesl-greyscale'}"/>
+			          	</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorder()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectStatus}" update=":#{cc.id}:sLang"/>
+					<p:column styleClass="aupPfDtColCentered">  
+						<j:duoCheckmark value="#{s.visible}"/>
+		            </p:column>
+					<p:column rendered="#{not empty cc.attrs.bean.parents}">
+						<f:facet name="header"><jtp:label entity="IoStatus" code="parent"/></f:facet>
+			            <h:outputText value="#{s.parent.name[localeCode].lang}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoStatus" code="code"/></f:facet>
+						<h:outputText value="#{of:abbreviate(s.code,20)}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoStatus" code="name"/></f:facet>
+						<h:outputText value="#{s.name[localeCode].lang}" />
+						<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.bean.showDescription}"/>
+						<h:outputText value="#{s.description[localeCode].lang}" rendered="#{cc.attrs.bean.showDescription}" styleClass="jeeslItalic"/>
+					</p:column>
+					<p:column rendered="#{cc.attrs.bean.supportsLocked}">
+						<f:facet name="header"><jtp:label entity="IoStatus" code="locked"/></f:facet>
+						<h:outputText value="#{s.locked}" />
+					</p:column>
+					<p:column rendered="#{cc.attrs.bean.supportsGraphic}" styleClass="jeeslCenter">
+						<jtp:symbolizer value="#{s}"/>
+					</p:column>
+					<p:column rendered="#{cc.attrs.bean.supportsColour}" styleClass="jeeslCenter">
+						<p:colorPicker value="#{s.color}"/>
+					</p:column>
+					<p:column rendered="#{cc.attrs.bean.supportsSymbol}">
+						<f:facet name="header"><jtp:label entity="IoStatus" code="symbol"/></f:facet>
+						<h:outputText value="#{s.symbol}" />
+					</p:column>
+				</p:dataTable>
+	    	</h:form>
+		</j:slot>
+		<j:slot id="sLang" width="4">
+			<h:form id="fLang">
+				<p:panel id="pLang" rendered="#{not empty cc.attrs.bean.status}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoStatus"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDispappear="true"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" ejb="#{cc.attrs.bean.status}" ejbRendered="saved"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					
+					<j:inputGrid>
+						<jtp:label entity="IoLabelEntity" code="jscn"/>
+						<h:outputText id="jscn" value="#{cc.attrs.bean.optionClass.simpleName} (#{cc.attrs.bean.status.id})"/>
+						
+						<jtp:label entity="IoStatus" code="code"/>
+						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}" autocomplete="off"/>
+						<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}"/>
+					</j:inputGrid>
+					
+					<j:inputGrid rendered="#{cc.attrs.bean.supportsSymbol}">
+						<c:if test="#{empty cc.facets.inputSymbolLabel}" >
+							<jtp:label entity="IoStatus" code="symbol"/>
+						</c:if>
+						<c:if test="#{not empty cc.facets.inputSymbolLabel}">
+							<composite:renderFacet name="inputSymbolLabel"/>
+						</c:if>
+						<c:if test="#{empty cc.facets.inputSymbolInput}" >
+							<p:inputText value="#{cc.attrs.bean.status.symbol}" autocomplete="off"/>
+						</c:if>
+						<c:if test="#{not empty cc.facets.inputSymbolInput}">
+							<composite:renderFacet name="inputSymbolInput"/>
+						</c:if>
+					</j:inputGrid>
+					
+					<j:inputGrid>
+						<jtp:label entity="IoStatus" code="position" rendered="#{cc.attrs.bean.uiAllowReorder}"/>
+						<p:inputText value="#{cc.attrs.bean.status.position}" rendered="#{cc.attrs.bean.uiAllowReorder}"/>
+						
+						<jtp:label entity="IoStatus" code="visible"/>
+						<p:selectBooleanCheckbox  value="#{cc.attrs.bean.status.visible}"/>
+
+						
+						
+						<jtp:label entity="IoStatus" code="parent" rendered="#{not empty cc.attrs.bean.parents}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.parentId}" rendered="#{not empty cc.attrs.bean.parents}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.bean.parents}" var="p" itemLabel="#{p.name[localeCode].lang}" itemValue="#{p.id}"/>
+						</p:selectOneMenu>
+						
+						<c:if test="#{empty cc.facets.inputImageLabel}" >
+							<p:outputLabel value="#{msg.aupStatusImageResource}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}"/>
+						</c:if>
+						<c:if test="#{not empty cc.facets.inputImageLabel}">
+							<composite:renderFacet rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" name="inputImageLabel"/>
+						</c:if>
+						<c:if test="#{empty cc.facets.inputImageInput}" >
+							<p:inputText value="#{cc.attrs.bean.status.image}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" autocomplete="off"/>
+						</c:if>
+						<c:if test="#{not empty cc.facets.inputImageInput}">
+							<composite:renderFacet rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" name="inputImageInput"/>
+						</c:if>
+						
+						<jtp:label entity="IoStatus" code="color" rendered="#{cc.attrs.bean.supportsColour}"/>
+						<p:colorPicker value="#{cc.attrs.bean.status.color}" rendered="#{cc.attrs.bean.supportsColour}"/>
+
+					</j:inputGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.status}" locales="#{appLabelBean.locales}" withDescription="true"/>
+								
+					<j:inputGrid rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
+						<jtp:label entity="IoGraphic" code="style"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.graphic.style}" effect="fade">
+							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoGraphic" code="size"/>
+						<h:panelGroup layout="block" styleClass="jeesl-spinner">
+							<p:spinner id="sSize" value="#{cc.attrs.bean.graphic.size}" min="0" max="100" />
+						</h:panelGroup>
+						
+						<jtp:label entity="IoGraphic" code="color"/>
+						<p:colorPicker value="#{cc.attrs.bean.graphic.color}" />
+					</j:inputGrid>
+					
+					<j:inputGrid rendered="#{cc.attrs.bean.supportsGraphic}">
+						<jtp:label entity="IoGraphic" code="type"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.graphic.type}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.bean.graphicTypes}" var="type" itemLabel="#{type.name[localeCode].lang}" itemValue="#{type}"/>
+							<p:ajax event="change" listener="#{cc.attrs.bean.changeGraphicType()}" update="@form :#{cc.id}:fUpload"/>
+						</p:selectOneMenu>
+					</j:inputGrid>
+					
+					<c:if test="#{not empty cc.facets.revision}">
+			            <f:facet name="footer">
+							<composite:renderFacet name="revision"/>
+						</f:facet>
+					</c:if>
+				</p:panel>
+			</h:form>
+			
+			<h:form id="fPreview" rendered="#{not empty cc.attrs.bean.status}">
+				<p:panel rendered="#{cc.attrs.bean.supportsGraphic}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoGraphic" code="preview"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslUpload" listener="#{cc.attrs.bean.ehUpload.toggle()}" update=":#{cc.id}:fUpload"/>
+					</f:facet>
+					<p:panelGrid columns="6" columnClasses="jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15">
+						<p:outputLabel value="8px"/>
+						<p:outputLabel value="12px"/>
+						<p:outputLabel value="14px"/>
+						<p:outputLabel value="18px"/>
+						<p:outputLabel value="24px"/>
+						<p:outputLabel value="32px"/>
+						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="8"/>
+						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="12"/>
+						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="14"/>
+						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="18"/>
+						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="24"/>
+						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="32"/>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+					
+			<h:form id="fUpload" enctype="multipart/form-data" rendered="#{(not empty cc.attrs.bean.status) and cc.attrs.bean.supportsGraphic}">
+				<p:fileUpload rendered="#{cc.attrs.bean.ehUpload.allow}"
+									styleClass="jeeslFileUpload"
+									listener="#{cc.attrs.bean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+									update=":#{cc.id}:sLang" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
+			</h:form>
+			
+			<h:form id="fComponents" rendered="#{not empty cc.attrs.bean.status}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.bean.figures}" draggableRows="true"
+						selection="#{cc.attrs.bean.component}" selectionMode="single" rowKey="#{c.id}">
+					<f:facet name="header">
+			          	<j:dtHeader entity="IoGraphicComponent" code="listOf">
+			          		<j:svg type="jeeslAdd" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fComponent"/>
+			          	</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFigures()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectComponent()}" update=":#{cc.id}:fComponent"/>
+					<p:column>
+			             <j:duoCheckmark value="#{c.visible}"/>
+			             <j:duoCheckmark value="#{c.css}"/>
+					</p:column>
+					<p:column>
+			             <f:facet name="header"><jtp:label entity="IoGraphicComponent" code="style"/></f:facet>
+			             <jtp:symbolizer value="#{c.style}" marginRight="5"/>
+			             <h:outputText value="#{c.style.name[localeCode].lang}"/>
+					</p:column>
+					<p:column>
+			             <f:facet name="header"><jtp:label entity="IoGraphicComponent" code="size"/></f:facet>  
+			             <h:outputText value="#{c.size}"/>
+					</p:column>
+					<p:column rendered="false">
+						<jtp:symbolizer value="#{c}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fComponent">
+				<p:panel id="pLang" rendered="#{not empty cc.attrs.bean.component}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoGraphicComponent"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelFigure()}" update=":#{cc.id}:fComponents @form"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveFigure()}" update=":#{cc.id}:fComponents @form"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteFigure()}" update=":#{cc.id}:fComponents @form" rendered="#{cc.attrs.bean.component.id gt 0}"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					
+					<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
+						<jtp:label entity="IoGraphicComponent" code="visible"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.component.visible}" />
+					
+						<jtp:label entity="IoGraphicComponent" code="css"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.component.css}" />
+						
+						<jtp:label entity="IoGraphicComponent" code="shape"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.component.style}" effect="fade">
+							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoGraphicComponent" code="size"/>
+						<p:spinner id="spSize" value="#{cc.attrs.bean.component.size}" min="0" max="100" />
+						
+						<jtp:label entity="IoGraphicComponent" code="color"/>
+						<p:colorPicker value="#{cc.attrs.bean.component.color}" />
+						
+						<jtp:label entity="IoGraphicComponent" code="rotation"/>
+						<p:spinner id="spRotation" value="#{cc.attrs.bean.component.rotation}" min="0" max="360" />
+						
+						<jtp:label entity="IoGraphicComponent" code="offsetX"/>
+						<p:spinner id="spOffsetX" value="#{cc.attrs.bean.component.offsetX}" min="0" max="10" />
+						
+						<jtp:label entity="IoGraphicComponent" code="offsetY"/>
+						<p:spinner id="spOffsetY" value="#{cc.attrs.bean.component.offsetY}" min="0" max="10" />
+							
+					</p:panelGrid>
+
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+	<j:row id="rowRevisions"/>
+</jp:grid>
+	</composite:implementation>
+</html>
