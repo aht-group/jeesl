@@ -8,6 +8,13 @@ public class TxtGraphicComponentFactory <GC extends JeeslGraphicComponent<?,GC,?
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtGraphicComponentFactory.class);
 	
+	public static <GC extends JeeslGraphicComponent<?,GC,?>> TxtGraphicComponentFactory<GC> instance() {return new TxtGraphicComponentFactory<>();}
+	
+	public String toIntegerRgb(GC gc)
+	{
+		return TxtGraphicComponentFactory.toIntegerRgb(gc.getColor());
+	}
+	
 	public static String toIntegerRgb(String hexRgb)
 	{
 		int r = Integer.valueOf(hexRgb.substring(0,2), 16);
