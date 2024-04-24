@@ -16,7 +16,9 @@ public interface JeeslGraphic <GT extends JeeslGraphicType<?,?,GT,?>,
 								GC extends JeeslGraphicComponent<?,GC,GS>,
 								GS extends JeeslGraphicShape<?,?,GS,?>>
 		extends Serializable,EjbWithId,EjbSaveable
-{		
+{
+	public enum Att{figures}
+	
 	Long getVersionLock();
 	
 	GT getType();

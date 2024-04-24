@@ -18,7 +18,7 @@ import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.test.AbstractJeeslClientTest;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
-import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicComponentFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
@@ -34,7 +34,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	final static Logger logger = LoggerFactory.getLogger(TestSvgFigureFactory.class);
 
 	private EjbStatusFactory<Lang,Description,GraphicShape> efStyle;
-	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicComponent,GraphicShape> efFigure;
+	private EjbGraphicComponentFactory<Graphic,GraphicComponent,GraphicShape> efFigure;
 	private static SvgFigureFactory<Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
 	
 	private String colorRed = "FF0000";

@@ -20,8 +20,8 @@ import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicComponentFactory;
 import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
-import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -46,7 +46,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
-import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphicFigure;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImageAlt;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
@@ -100,7 +99,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected boolean logOnInfo; public boolean isLogOnInfo() {return logOnInfo;} public void setLogOnInfo(boolean logOnInfo) {this.logOnInfo = logOnInfo;}
 	
 	protected final EjbGraphicFactory<L,D,G,GT,GS> efGraphic;
-	protected final EjbGraphicFigureFactory<L,D,G,GC,GS> efFigure;
+	protected final EjbGraphicComponentFactory<G,GC,GS> efFigure;
 
 	@SuppressWarnings("rawtypes") protected Class clParent;
 	protected long parentId; public long getParentId(){return parentId;} public void setParentId(long parentId) {this.parentId = parentId;}

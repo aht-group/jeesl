@@ -21,6 +21,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
+import org.jeesl.interfaces.util.query.io.JeeslIoGraphicQuery;
 
 public class JeeslIoGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									S extends EjbWithId,
@@ -85,5 +86,10 @@ public class JeeslIoGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescri
 			ejb.getGraphic().getFigures().size();
 		}
 		return this.all(c);
+	}
+
+	@Override public <T extends EjbWithGraphic<G>> List<GC> fIoGraphicComponents(Class<T> c, JeeslIoGraphicQuery<G, GT, GC, GS> query)
+	{
+		throw new UnsupportedOperationException("NYI");
 	}
 }

@@ -58,17 +58,17 @@ public class CqGraphFetch implements Serializable
 	}
 //	public static CqFetch attribute(Serializable...path) {return new CqFetch(Type.ATTRIBUTE,CqFetch.path(path));}
 
-//	private static String path(Serializable...attributes)
-//	{
-//		StringBuffer sb = new StringBuffer();
-//		
-//		for(int i=0;i<attributes.length;i++)
-//		{
-//			sb.append(attributes[i].toString());
-//			if(i<(attributes.length-1)) {sb.append(".");}
-//		}
-//		return sb.toString();
-//	}
+	public static String path(Serializable...attributes)
+	{
+		StringBuffer sb = new StringBuffer();
+		
+		for(int i=0;i<attributes.length;i++)
+		{
+			sb.append(attributes[i].toString());
+			if(i<(attributes.length-1)) {sb.append(".");}
+		}
+		return sb.toString();
+	}
 	
 	public String toString()
 	{

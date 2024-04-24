@@ -13,7 +13,7 @@ import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
-import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicComponentFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
@@ -66,7 +66,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected boolean logOnInfo; public boolean isLogOnInfo() {return logOnInfo;} public void setLogOnInfo(boolean logOnInfo) {this.logOnInfo = logOnInfo;}
 	
 	protected final EjbGraphicFactory<L,D,G,GT,GS> efGraphic;
-	protected final EjbGraphicFigureFactory<L,D,G,GC,GS> efFigure;
+	protected final EjbGraphicComponentFactory<G,GC,GS> efFigure;
 
 	@SuppressWarnings("rawtypes") protected Class clParent;
 	protected long parentId; public long getParentId(){return parentId;} public void setParentId(long parentId) {this.parentId = parentId;}

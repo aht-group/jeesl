@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
 
@@ -48,7 +48,7 @@ public class CqLong implements JeeslCqLong
 		return sb.toString();
 	}
 	
-	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
+	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 	
 	public static boolean isParseable(JeeslCqLiteral c)
 	{

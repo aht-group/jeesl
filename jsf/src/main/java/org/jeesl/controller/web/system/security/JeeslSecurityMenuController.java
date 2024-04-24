@@ -37,7 +37,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.NodeCollapseEvent;
