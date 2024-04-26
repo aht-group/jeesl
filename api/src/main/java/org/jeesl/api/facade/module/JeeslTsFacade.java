@@ -53,7 +53,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 			extends JeeslFacade
 {	
 	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
-//	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<EC> findClasses(Class<EC> cClass, Class<CATEGORY> cCategory, List<CATEGORY> categories, boolean showInvisibleClasses);
 	
 	<T extends EjbWithId> BRIDGE fBridge(EC entityClass, T ejb) throws JeeslNotFoundException;
