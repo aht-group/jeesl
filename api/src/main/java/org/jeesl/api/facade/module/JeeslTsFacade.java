@@ -48,11 +48,12 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 								SAMPLE extends JeeslTsSample, 
 								USER extends EjbWithId, 
 								WS extends JeeslStatus<L,D,WS>,
-								QAF extends JeeslStatus<L,D,QAF>,
+								
 								CRON extends JeeslTsCron<SCOPE,INTERVAL,STATISTIC>>
 			extends JeeslFacade
 {	
 	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+//	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<EC> findClasses(Class<EC> cClass, Class<CATEGORY> cCategory, List<CATEGORY> categories, boolean showInvisibleClasses);
 	
 	<T extends EjbWithId> BRIDGE fBridge(EC entityClass, T ejb) throws JeeslNotFoundException;
@@ -69,14 +70,14 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	List<TS> fTimeSeries(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	
 	DATA fDataLast(TS series) throws JeeslNotFoundException;
+	List<DATA> fDataFirst(List<TS> list);
+	List<DATA> fDataLast(List<TS> list);
 	
 	List<DATA> fData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);
 	List<DATA> fData(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
-	List<DATA> fDataFirst(List<TS> list);
-	List<DATA> fDataLast(List<TS> list);
 	
 	List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	List<POINT> fPoints(WS workspace, List<TS> timeSeries, List<MP> mps, JeeslTsData.QueryInterval interval, Date from, Date to);

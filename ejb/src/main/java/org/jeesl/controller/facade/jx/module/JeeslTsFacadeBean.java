@@ -84,14 +84,14 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 							QAF extends JeeslStatus<L,D,QAF>,
 							CRON extends JeeslTsCron<SCOPE,INT,STAT>>
 					extends JeeslFacadeBean
-					implements JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					implements JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslTsFacadeBean.class);
 
 	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
 
-	private final EjbTsFactory<SCOPE,UNIT,TS,SOURCE,BRIDGE,EC,INT,STAT> efTs;
+	private final EjbTsFactory<SCOPE,TS,BRIDGE,INT,STAT> efTs;
 	private final SqlTimeSeriesFactory<TS,DATA> sqlFactory;
 
 	public JeeslTsFacadeBean(EntityManager em, final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
@@ -122,10 +122,10 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return em.createQuery(cQ).getResultList();
 	}
 
-//	@Override public List<SCOPE> findScopes(Class<SCOPE> cScope, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleScopes)
+//	@Override public List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query)
 //	{
-//		List<ParentPredicate<CAT>> ppCategory = ParentPredicate.createFromList(cCategory,"category",categories);
-//		return allForOrParents(cScope,ppCategory);
+//		
+//		return null;
 //	}
 
 	@Override public List<EC> findClasses(Class<EC> cClass, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleScopes)

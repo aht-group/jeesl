@@ -90,7 +90,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		mapTsEntity = new HashMap<TS,EjbWithId>();
 	}
 	
-	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
+	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhCategory.toggleAll();
