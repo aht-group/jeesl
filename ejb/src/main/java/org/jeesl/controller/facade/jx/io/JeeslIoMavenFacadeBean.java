@@ -134,8 +134,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 //		cQ.where(cB.and(this.pReferrals(cB,query,root)));
 		
 		TypedQuery<ARTIFACT> tQ = em.createQuery(cQ);
-		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
-		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
 	

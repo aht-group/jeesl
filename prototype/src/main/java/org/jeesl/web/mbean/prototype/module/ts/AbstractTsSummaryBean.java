@@ -131,7 +131,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		if(bridges.size() > 0)
 		{
 			EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
-			query.addBridges(bridges);
+			query.addTsBridges(bridges);
 			
 			series = fTs.fTimeSeries(query);
 			mapTs.putAll(efTs.toMapBridgTsList(series));

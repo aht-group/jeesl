@@ -125,7 +125,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 //		scopes = fTs.fTsScopes(HrmTsQuery.instance().addCategories(sbhCategory.getSelected()));
 		
 		EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
-		query.addCategories(sbhCategory.getSelected());
+		query.addTsCategories(sbhCategory.getSelected());
 		
 		scopes = fTs.fTsScopes(query);
 		Collections.sort(scopes, comparatorScope);

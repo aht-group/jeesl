@@ -21,12 +21,13 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 >
 			extends JeeslCoreQuery
 {
+//	void x();
 	List<String> getRootFetches();
 	
-	List<CAT> getCategories();
-	List<SCOPE> getScopes();
-	List<INTV> getIntervals();
-	List<BRIDGE> getBridges();
-	List<TS> getSeries();
-	List<TX> getTransactions();
+	List<CAT> getTsCategories();
+	List<SCOPE> getTsScopes();
+	List<INTV> getTsIntervals();
+	List<BRIDGE> getTsBridges();
+	List<TS> getTsSeries();
+	List<TX> getTsTransactions();
 }
