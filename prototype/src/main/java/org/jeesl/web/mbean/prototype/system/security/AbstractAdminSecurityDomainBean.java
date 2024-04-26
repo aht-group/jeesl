@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.jeesl.api.facade.core.JeeslUserFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.api.facade.system.security.JeeslUserFacade;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityStaffComparator;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;

@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
-import org.jeesl.api.facade.core.JeeslUserFacade;
+import org.jeesl.api.facade.system.security.JeeslUserFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;

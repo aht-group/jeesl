@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 
-import org.jeesl.api.facade.core.JeeslUserFacade;
+import org.jeesl.api.facade.system.security.JeeslUserFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;

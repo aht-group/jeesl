@@ -8,8 +8,8 @@ import java.util.Map;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.core.JeeslUserFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.api.facade.system.security.JeeslUserFacade;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
