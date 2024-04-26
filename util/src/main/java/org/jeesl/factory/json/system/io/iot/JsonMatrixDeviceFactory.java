@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.jeesl.factory.json.system.status.JsonModeFactory;
 import org.jeesl.interfaces.factory.json.JeeslJsonMatrixDeviceFactory;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
@@ -45,22 +46,13 @@ public class JsonMatrixDeviceFactory <L extends JeeslLang, D extends JeeslDescri
     
     public JsonMatrixDevice build()
     {
-    	json.setData(new ArrayList<>());
-    	for(int r=0;r<cells.length;r++)
-    	{
-    		for(int c=0;c<cells[r].length;c++)
-        	{
-    			if(Objects.isNull(cells[r][c])) {json.getData().add("");}
-        		else {json.getData().add(cells[r][c]);}
-        	}
-    	}
-    	
+    	json.setData(JsonMatrixDeviceFactory.toData(cells));
     	return json;
     }
     
     public JsonMatrixDevice build(DEVICE ejb)
 	{
-    	json = create();
+    	json = JsonMatrixDeviceFactory.create();
 		if(q.getId()!=null){json.setId(ejb.getId());}
 		if(q.getCode()!=null){json.setCode(ejb.getCode());}
 		if(q.getName()!=null){json.setName(ejb.getName());}
@@ -73,6 +65,33 @@ public class JsonMatrixDeviceFactory <L extends JeeslLang, D extends JeeslDescri
 		
 		return json;
 	}
+    
+    public static List<String> toData(String[][] cells)
+    {
+    	List<String> data = new ArrayList<>();
+    	for(int r=0;r<cells.length;r++)
+    	{
+    		for(int c=0;c<cells[r].length;c++)
+        	{
+    			if(Objects.isNull(cells[r][c])) {data.add("");}
+        		else {data.add(cells[r][c]);}
+        	}
+    	}
+    	return data;
+    }
+    public static String[][] toCells(JsonMatrixDevice json)
+    {
+    	String[][] cells = new String[json.getRows()][json.getColumns()];
+    	MutableInt index = new MutableInt(0);
+    	for(int row=0;row<json.getRows();row++)
+		{
+			for(int col=0;col<json.getColumns();col++)
+			{
+				cells[row][col] = json.getData().get(index.getAndIncrement());
+			}
+		}
+    	return cells;
+    }
 
 	public List<String> transform(DEVICE device, JsonMatrixDevice json)
 	{
@@ -129,17 +148,14 @@ public class JsonMatrixDeviceFactory <L extends JeeslLang, D extends JeeslDescri
 	{
 		cells[cursor.getRow()-2+row][cursor.getColumn()-2+column] = color;
 	}
-	
+
 	@Override public void apply(MatrixProcessorCursor cursor, String color)
 	{
 		cells[cursor.getRow()-1][cursor.getColumn()-1] = color;
 	}
 
-
 	@Override public void offset(MatrixProcessorCursor cursor, int row, int column, String color)
 	{
 		cells[cursor.getRow()-1+row][cursor.getColumn()-1+column] = color;	
 	}
-	
-	
 }

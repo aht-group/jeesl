@@ -65,6 +65,7 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	private List<SCOPE> scopes; public List<SCOPE> getScopes() {return scopes;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> add(SCOPE scope) {if(Objects.isNull(scopes)) {scopes = new ArrayList<>();} scopes.add(scope); return this;}
+	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> addTsScopes(List<SCOPE> list) {if(Objects.isNull(scopes)) {scopes = new ArrayList<>();} scopes.addAll(list); return this;}
 
 	private List<INTV> intervals; public List<INTV> getIntervals() {return intervals;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> add(INTV interval) {if(Objects.isNull(intervals)) {intervals = new ArrayList<>();} intervals.add(interval); return this;}

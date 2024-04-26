@@ -7,6 +7,9 @@ public class MatrixProcessorCursor
 	private Orientation orientation;
 	private int row; public int getRow() {return row;}
 	private int col; public int getColumn() {return col;}
+	
+	private int rowSpan; public int getRowSpan() {return rowSpan;} public void setRowSpan(int rowSpan) {this.rowSpan = rowSpan;}
+	private int colSpan; public int getColSpan() {return colSpan;} public void setColSpan(int colSpan) {this.colSpan = colSpan;}
 
 	public static MatrixProcessorCursor clone(MatrixProcessorCursor cursor) {return new MatrixProcessorCursor(cursor.getRow(),cursor.getColumn());}
 	public static MatrixProcessorCursor instance(int row, int col) {return new MatrixProcessorCursor(row,col);}
@@ -29,6 +32,8 @@ public class MatrixProcessorCursor
 	
 	public MatrixProcessorCursor moveRows(int i) {row=row+i; return this;}
 	public MatrixProcessorCursor moveColumns(int i) {col=col+i; return this;}
+	
+	public MatrixProcessorCursor span(int rowSpan, int colSpan) {this.rowSpan=rowSpan; this.colSpan=colSpan; return this;}
 	
 	public MatrixProcessorCursor crlf() {row=row+1;col=1; return this;}
 	

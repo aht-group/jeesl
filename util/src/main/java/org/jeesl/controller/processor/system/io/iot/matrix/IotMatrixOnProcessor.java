@@ -48,6 +48,7 @@ public class IotMatrixOnProcessor
 	
 	public void build(MatrixProcessorCursor cursor, int rowSpan, int colSpan)
 	{
+		
 		for(int row=0;row<rowSpan;row++)
 		{
 			for(int col=0;col<colSpan;col++)
@@ -57,5 +58,19 @@ public class IotMatrixOnProcessor
 			}
 		}
 		cursor.move(rowSpan-1, colSpan-1);
+	}
+	
+	public void build(MatrixProcessorCursor cursor)
+	{
+		
+		for(int row=0;row<cursor.getRowSpan();row++)
+		{
+			for(int col=0;col<cursor.getColSpan();col++)
+			{
+				String c = colorOn;
+				jfDevice.offset(cursor,row,col, c);
+			}
+		}
+		cursor.move(cursor.getRowSpan()-1, cursor.getColSpan()-1);
 	}
 }
