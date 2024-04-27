@@ -52,8 +52,8 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 								CRON extends JeeslTsCron<SCOPE,INTERVAL,STATISTIC>>
 			extends JeeslFacade
 {	
-	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
-	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<EC> findClasses(Class<EC> cClass, Class<CATEGORY> cCategory, List<CATEGORY> categories, boolean showInvisibleClasses);
 	
 	<T extends EjbWithId> BRIDGE fBridge(EC entityClass, T ejb) throws JeeslNotFoundException;
@@ -67,18 +67,19 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 
 	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
 	List<TS> fTimeSeries(SCOPE scope, INTERVAL interval, EC entityClass);
-	List<TS> fTimeSeries(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<TS> fTimeSeries(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	
 	DATA fDataLast(TS series) throws JeeslNotFoundException;
 	List<DATA> fDataFirst(List<TS> list);
 	List<DATA> fDataLast(List<TS> list);
 	
-	List<DATA> fData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	List<DATA> fTsData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);
 	List<DATA> fData(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
+	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 	List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	List<POINT> fPoints(WS workspace, List<TS> timeSeries, List<MP> mps, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
@@ -88,6 +89,6 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	void deleteTransaction(TX transaction) throws JeeslConstraintViolationException;
 	
 	JsonTuples1<TS> tpcTsDataByTs(List<TS> series);
-	JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
-	JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
+	JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
 }
