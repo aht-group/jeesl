@@ -13,10 +13,11 @@ public class EjbCalCalendarFactory<CAL extends JeeslCalendar<ZONE,CT>,
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCalCalendarFactory.class);
 	
-	private final Class<CAL> cCalendar;
+	@SuppressWarnings("unused")
 	private final Class<ZONE> cZone;
 	private final Class<CT> cType;
-    
+	private final Class<CAL> cCalendar;
+	
 	public EjbCalCalendarFactory(Class<CAL> cCalendar, Class<ZONE> cZone, Class<CT> cType)
 	{
 		this.cCalendar = cCalendar;

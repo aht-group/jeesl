@@ -9,6 +9,7 @@ import org.jeesl.interfaces.util.query.cq.JeeslCqDateQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqLiteralQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqLongQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqRootFetchQuery;
+import org.jeesl.interfaces.util.query.cq.JeeslCqTimeQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslOrderingQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslPaginationQuery;
 
@@ -17,7 +18,8 @@ import org.jeesl.interfaces.util.query.jpa.JeeslPaginationQuery;
 public interface JeeslCoreQuery extends Serializable,
 									JeeslPaginationQuery,JeeslOrderingQuery,
 									JeeslCqRootFetchQuery,
-									JeeslCqLiteralQuery,JeeslCqLongQuery,JeeslCqBooleanQuery,JeeslCqDateQuery
+									JeeslCqLiteralQuery,JeeslCqLongQuery,JeeslCqBooleanQuery,
+									JeeslCqDateQuery,JeeslCqTimeQuery
 {
 	Boolean getDistinct();
 	Boolean getTupleLoad();

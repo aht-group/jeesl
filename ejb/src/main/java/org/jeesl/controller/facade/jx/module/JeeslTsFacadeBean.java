@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -25,8 +24,10 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.TimePredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
@@ -57,9 +58,12 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.ejb.module.EjbTimeSeriesQuery;
 import org.slf4j.Logger;
@@ -338,24 +342,17 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public List<DATA> fData(JeeslTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query)
 	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
-		Root<DATA> ejb = cQ.from(fbTs.getClassData());
-		Expression<Date> eRecord = ejb.get(JeeslTsData.Attributes.record.toString());
+		Root<DATA> root = cQ.from(fbTs.getClassData());
+		Expression<Date> eRecord = root.get(JeeslTsData.Attributes.record.toString());
 		
-		if(ObjectUtils.isNotEmpty(query.getTsSeries()))
-		{
-			Path<TS> pSeries = ejb.get(JeeslTsData.Attributes.timeSeries.toString());
-			predicates.add(pSeries.in(query.getTsSeries()));
-		}
-		
-		cQ.select(ejb);
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(root);
+		cQ.where(cB.and(pData(cB, query, root)));
 		cQ.orderBy(cB.asc(eRecord));
 		
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
-		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
 
@@ -598,6 +595,22 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return em.createQuery(cQ).getResultList();
 	}
 
+	@Override public JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<DATA> root = cQ.from(fbTs.getClassData());
+		
+		Expression<Long> eCount = cB.count(root.<Long>get("id"));
+		Path<TS> pTs = root.join(JeeslTsData.Attributes.timeSeries.toString());
+		
+		cQ.multiselect(pTs.get("id"),eCount);
+		cQ.where(cB.and(this.pData(cB,query,root)));
+		cQ.groupBy(pTs.get("id"));
+		
+		Json1TuplesFactory<TS> jtf = Json1TuplesFactory.instance(fbTs.getClassTs()).tupleLoad(this,query.getTupleLoad());
+		return jtf.buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+	}
 	@Override public JsonTuples1<TS> tpcTsDataByTs(List<TS> series)
 	{
 		if(ObjectUtils.isEmpty(series)) {return new JsonTuples1<>();}
@@ -636,21 +649,15 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 			return new JsonTuples1<>();
 		}
 		
-		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
-		Root<DATA> ejb = cQ.from(fbTs.getClassData());
+		Root<DATA> root = cQ.from(fbTs.getClassData());
 		
-		Expression<Long> eCount = cB.count(ejb.<Long>get("id"));
-		Path<TX> pTx = ejb.join(JeeslTsData.Attributes.transaction.toString());
-		
-		if(ObjectUtils.isNotEmpty(query.getTsTransactions()))
-		{
-			predicates.add(pTx.in(query.getTsTransactions()));
-		}
+		Expression<Long> eCount = cB.count(root.<Long>get("id"));
+		Path<TX> pTx = root.get(JeeslTsData.Attributes.transaction.toString());
 		
 		cQ.multiselect(pTx.get("id"),eCount);
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.where(cB.and(this.pData(cB,query,root)));
 		cQ.groupBy(pTx.get("id"));
 		
 		Json1TuplesFactory<TX> jtf = Json1TuplesFactory.instance(fbTs.getClassTransaction()).tupleLoad(this,query.getTupleLoad());
@@ -658,6 +665,43 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	}
 	
 	// Predicates
+	private Predicate[] pData(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query, Root<DATA> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record)))
+			{
+				Expression<Date> eDate = root.get(JeeslTsData.Attributes.record.toString());
+				DatePredicateBuilder.juDate(cB,predicates, cq, eDate);
+			}
+			else {logger.warn(cq.nyi(JeeslTsData.class));}
+		}
+		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record)))
+			{
+				Expression<Date> eDate = root.get(JeeslTsData.Attributes.record.toString());
+				TimePredicateBuilder.juDate(cB,predicates, cq, eDate);
+			}
+			else {logger.warn(cq.nyi(JeeslTsData.class));}
+		}
+		
+		if(ObjectUtils.isNotEmpty(query.getTsSeries()))
+		{
+			Join<DATA,TS> jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());
+			predicates.add(jTs.in(query.getTsSeries()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getTsTransactions()))
+		{
+			Path<TX> pTx = root.get(JeeslTsData.Attributes.transaction.toString());
+			predicates.add(pTx.in(query.getTsTransactions()));
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	
 	private Predicate[] pMultiPoint(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query, Root<MP> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
