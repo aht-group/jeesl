@@ -28,6 +28,7 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	List<CAT> getTsCategories();
 	List<SCOPE> getTsScopes();
+	List<MP> getTsMultiPoints();
 	List<INTV> getTsIntervals();
 	List<BRIDGE> getTsBridges();
 	List<TS> getTsSeries();

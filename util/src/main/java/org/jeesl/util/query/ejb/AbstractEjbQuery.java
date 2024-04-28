@@ -184,7 +184,9 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 			if(maxResults!=null){logger.info(StringUtils.repeat("\t",ident)+"maxResults: "+maxResults);}
 			if(Objects.nonNull(tupleLoad)) {logger.info("Tuple-Load: "+tupleLoad);}
 			
-			if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral c : literals) {logger.info(c.toString());}}
+			if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {logger.info(l.toString());}}
+			if(ObjectUtils.isNotEmpty(cqDates)) {for(JeeslCqDate cq : cqDates) {logger.info(cq.toString());}}
+			if(ObjectUtils.isNotEmpty(cqTimes)) {for(JeeslCqTime cq : cqTimes) {logger.info(cq.toString());}}
 		}
 	}
 	

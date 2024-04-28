@@ -97,6 +97,23 @@ public class EjbTsBridgeFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,EC,?>,
 		return map;
 	}
 	
+	public <T extends EjbWithId> Map<T,List<DATA>> toMapEntityDatas(List<T> ejbs, List<DATA> datas)
+	{
+		Map<T,List<DATA>> map = new HashMap<>();
+		Map<Long,T> idMap = EjbIdFactory.toIdMap(ejbs);
+		for(DATA data : datas)
+		{
+			long refId = data.getTimeSeries().getBridge().getRefId();
+			if(idMap.containsKey(refId))
+			{
+				T t = idMap.get(refId);
+				if(!map.containsKey(t)) {map.put(t,new ArrayList<>());}
+				map.get(t).add(data);
+			}
+		}
+		return map;
+	}
+	
 	public <T extends EjbWithId> Nested2Map<T,SCOPE,DATA> toN2mEntityScopeData(List<T> ejbs, List<DATA> datas)
 	{
 		Nested2Map<T,SCOPE,DATA> n2m = new Nested2Map<>();

@@ -17,7 +17,7 @@ public interface JeeslTsDataPoint <DATA extends JeeslTsData<?,?,?,?,?>,
 									MP extends JeeslTsMultiPoint<?,?,?,?>>
 		extends EjbWithId,EjbSaveable,Serializable,EjbRemoveable,EjbPersistable,EjbWithParentAttributeResolver
 {
-	public enum Attributes {data}
+	public enum Attributes {data,multiPoint}
 	
 	DATA getData();
 	void setData(DATA data);

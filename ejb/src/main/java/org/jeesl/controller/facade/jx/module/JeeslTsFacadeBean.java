@@ -722,7 +722,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		Join<POINT,DATA> jData = root.join(JeeslTsDataPoint.Attributes.data.toString());
-		
+
 		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
 		{
 			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record)))
@@ -742,6 +742,11 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 			else {logger.warn(cq.nyi(JeeslTsData.class));}
 		}
 		
+		if(ObjectUtils.isNotEmpty(query.getTsMultiPoints()))
+		{
+			Join<POINT,MP> jMp = root.join(JeeslTsDataPoint.Attributes.multiPoint.toString());
+			predicates.add(jMp.in(query.getTsMultiPoints()));
+		}
 		if(ObjectUtils.isNotEmpty(query.getTsSeries()))
 		{
 			Join<DATA,TS> jTs = jData.join(JeeslTsData.Attributes.timeSeries.toString());
@@ -774,6 +779,10 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		{
 			Path<SCOPE> pScope = root.get(JeeslTsMultiPoint.Attributes.scope.toString());
 			predicates.add(pScope.in(query.getTsScopes()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getTsMultiPoints()))
+		{
+			predicates.add(root.in(query.getTsMultiPoints()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
