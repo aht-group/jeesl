@@ -2,7 +2,7 @@ package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
 
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 
 public class CqLiteral implements JeeslCqLiteral
@@ -34,6 +34,6 @@ public class CqLiteral implements JeeslCqLiteral
 		return sb.toString();
 	}
 	
-	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
-	public static String pathMl(Serializable...attributes) {return CqOrdering.path(attributes)+"[localeCode].lang";}
+	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
+	public static String pathMl(Serializable...attributes) {return CqGraphFetch.path(attributes)+"[localeCode].lang";}
 }

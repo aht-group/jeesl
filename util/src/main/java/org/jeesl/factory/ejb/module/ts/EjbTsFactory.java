@@ -7,21 +7,15 @@ import java.util.Map;
 
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbTsFactory<SCOPE extends JeeslTsScope<?,?,?,?,UNIT,EC,INT>,
-							UNIT extends JeeslStatus<?,?,UNIT>,
+public class EjbTsFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,?,INT>,
 							TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-							SOURCE extends EjbWithLangDescription<?,?>, 
-							BRIDGE extends JeeslTsBridge<EC>,
-							EC extends JeeslTsEntityClass<?,?,?,?>,
+							BRIDGE extends JeeslTsBridge<?>,
 							INT extends JeeslTsInterval<?,?,INT,?>,
 							STAT extends JeeslTsStatistic<?,?,STAT,?>
 							>

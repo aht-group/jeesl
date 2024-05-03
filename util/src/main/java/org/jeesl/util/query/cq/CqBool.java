@@ -3,7 +3,7 @@ package org.jeesl.util.query.cq;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 
 public class CqBool implements JeeslCqBoolean
@@ -35,5 +35,5 @@ public class CqBool implements JeeslCqBoolean
 		return sb.toString();
 	}
 	
-	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
+	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 }

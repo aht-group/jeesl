@@ -123,7 +123,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
         this.cCron=cCron;
 	}
 	
-	public EjbTsFactory<SCOPE,UNIT,TS,SOURCE,BRIDGE,EC,INT,STAT> ejbTs(){return new EjbTsFactory<>(cTs);}
+	public EjbTsFactory<SCOPE,TS,BRIDGE,INT,STAT> ejbTs(){return new EjbTsFactory<>(cTs);}
 	public EjbTsScopeFactory<CAT,SCOPE,UNIT> ejbScope(){return new EjbTsScopeFactory<>(cScope);}
 	public EjbTsBridgeFactory<SCOPE,MP,TS,BRIDGE,EC,DATA,POINT> ejbBridge(){return new EjbTsBridgeFactory<>(cBridge);}
 	public EjbTsTransactionFactory<TRANSACTION,SOURCE,USER> ejbTransaction() {return new EjbTsTransactionFactory<>(cTransaction);}
@@ -133,7 +133,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	public EjbTsMutliPointFactory<SCOPE,MP> ejbMultiPoint() {return new EjbTsMutliPointFactory<>(cMp);}
 	public EjbTsCronFactory<SCOPE,INT,STAT,CRON> ejbCron() {return new EjbTsCronFactory<SCOPE,INT,STAT,CRON>(cCron);}
 	
-	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
+	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		return new McTimeSeriesFactory<>(this,fTs);
 	}

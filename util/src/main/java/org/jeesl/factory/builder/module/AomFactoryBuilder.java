@@ -27,6 +27,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.util.filter.ejb.module.aom.EjbAomAssetFilter;
+import org.jeesl.util.filter.ejb.module.aom.EjbAomEventFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,8 +103,11 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 	public EjbAssetTypeFactory<REALM,ATYPE,VIEW> ejbType() {return new EjbAssetTypeFactory<>(cAssetType);}
 	public EjbAssetLevelFactory<REALM,VIEW> ejbLevel() {return new EjbAssetLevelFactory<>(cView);}
 	public EjbAssetFactory<REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE> ejbAsset() {return new EjbAssetFactory<>(this);}
-	public EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC> ejbEvent() {return new EjbAssetEventFactory<>(this);}
+	public EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT> ejbEvent() {return new EjbAssetEventFactory<>(this);}
 	
 	public Comparator<ASSET> cpAsset(EjbAssetComparator.Type type){return new EjbAssetComparator<ASSET>().factory(type);}
 	public Comparator<EVENT> cpEvent(EjbEventComparator.Type type){return new EjbEventComparator<EVENT>().factory(type);}
+	
+	public EjbAomAssetFilter<ASSET> fiAsset() {return new EjbAomAssetFilter<>();}
+	public EjbAomEventFilter<ASSET,EVENT> fiEvent() {return new EjbAomEventFilter<>();}
 }

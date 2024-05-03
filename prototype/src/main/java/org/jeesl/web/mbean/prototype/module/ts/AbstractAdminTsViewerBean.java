@@ -90,7 +90,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		mapTsEntity = new HashMap<TS,EjbWithId>();
 	}
 	
-	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
+	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhCategory.toggleAll();
@@ -101,8 +101,8 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		super.toggled(handler,c);
 		if(fbTs.getClassCategory().isAssignableFrom(c))
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
-			query.addCategories(sbhCategory.getSelected());
+			EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
+			query.addTsCategories(sbhCategory.getSelected());
 			
 			sbhScope.setList(fTs.fTsScopes(query));
 			Collections.sort(sbhScope.getList(), comparatorScope);

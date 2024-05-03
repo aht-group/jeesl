@@ -11,17 +11,17 @@ public class IotMatrixOffProcessor implements IotMatrixProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(IotMatrixOffProcessor.class);
 	
+	private final JeeslJsonMatrixDeviceFactory jfDevice;
+	
 	public final static String colorOff = "000000000";
 	
-	public void build(JsonMatrixDevice device, int size)
+	public static IotMatrixOffProcessor instance(JeeslJsonMatrixDeviceFactory jfDevice) {return new IotMatrixOffProcessor(jfDevice);}
+	private IotMatrixOffProcessor(JeeslJsonMatrixDeviceFactory jfDevice)
 	{
-		for(int i=1;i<=size;i++)
-		{
-			device.getData().add(colorOff);
-		}
+		this.jfDevice=jfDevice;
 	}
 	
-	public void build(JeeslJsonMatrixDeviceFactory factory, MatrixProcessorCursor cursorStart, int sizeRow, int sizeCol)
+	@Deprecated public void build(JeeslJsonMatrixDeviceFactory factory, MatrixProcessorCursor cursorStart, int sizeRow, int sizeCol)
 	{
 		MatrixProcessorCursor cursor = MatrixProcessorCursor.clone(cursorStart);
 		for(int row=0;row<sizeRow;row++)
@@ -37,6 +37,18 @@ public class IotMatrixOffProcessor implements IotMatrixProcessor
 		cursorStart.apply(cursor);
 	}
 	
+	public void build(MatrixProcessorCursor cursor, int rowSpan, int colSpan)
+	{
+		for(int row=0; row<rowSpan; row++)
+		{
+			for(int col=0; col<colSpan; col++)
+			{
+				jfDevice.offset(cursor,row,col, colorOff);
+			}
+		}
+		cursor.move(rowSpan-1, colSpan-1);
+	}
+	
 	public void padding(JsonMatrixDevice device)
 	{
 		int size = device.getData().size();
@@ -48,6 +60,13 @@ public class IotMatrixOffProcessor implements IotMatrixProcessor
 		if(mod>0)
 		{
 			this.build(device,columns-mod);
+		}
+	}
+	@Deprecated private void build(JsonMatrixDevice device, int size)
+	{
+		for(int i=1;i<=size;i++)
+		{
+			device.getData().add(colorOff);
 		}
 	}
 }

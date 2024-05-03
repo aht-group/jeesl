@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-module-tafu</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - Module - Tasks and Followup</name>
+    <name>JEESL - Module: Tasks and Followup</name>
 	
 	<dependencyManagement>
 		<dependencies>

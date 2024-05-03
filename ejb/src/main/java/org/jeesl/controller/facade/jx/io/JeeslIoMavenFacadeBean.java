@@ -45,13 +45,13 @@ import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
-import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.util.query.cq.CqBool;
 import org.jeesl.util.query.cq.CqLiteral;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -134,8 +134,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 //		cQ.where(cB.and(this.pReferrals(cB,query,root)));
 		
 		TypedQuery<ARTIFACT> tQ = em.createQuery(cQ);
-		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
-		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
 	
@@ -186,6 +185,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
 		TypedQuery<DEPENDENCY> tQ = em.createQuery(cQ);
+		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
 	

@@ -2,7 +2,7 @@ package org.jeesl.factory.builder.system;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
-import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicComponentFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.factory.svg.SvgSymbolFactory;
@@ -48,7 +48,7 @@ public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	}
 	
     public EjbGraphicFactory<L,D,G,GT,GS> efGraphic() {return new EjbGraphicFactory<>(cG,cType,cFs);}
-    public EjbGraphicFigureFactory<L,D,G,GC,GS> efFigure() {return new EjbGraphicFigureFactory<>(cF);}
+    public EjbGraphicComponentFactory<G,GC,GS> efFigure() {return new EjbGraphicComponentFactory<>(cF);}
 	public EjbStatusFactory<L,D,GS> style() {return EjbStatusFactory.instance(cFs,cL,cD);}
 	
 	public SvgSymbolFactory<G,GT,GC,GS> symbol() {return SvgSymbolFactory.factory();}

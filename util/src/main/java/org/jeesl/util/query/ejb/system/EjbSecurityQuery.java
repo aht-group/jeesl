@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,6 +3,8 @@ package org.jeesl.model.json.io.iot.matrix;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.model.json.system.status.JsonMode;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -43,6 +45,11 @@ public class JsonMatrixDevice implements Serializable
 	public Integer getBrightness() {return brightness;}
 	public void setBrightness(Integer brightness) {this.brightness = brightness;}
 	
+	@JsonProperty("mode")
+	private JsonMode mode;
+	public JsonMode getMode() {return mode;}
+	public void setMode(JsonMode mode) {this.mode = mode;}
+
 	@JsonProperty("data")
 	private List<String> data;
 	public List<String> getData() {return data;}

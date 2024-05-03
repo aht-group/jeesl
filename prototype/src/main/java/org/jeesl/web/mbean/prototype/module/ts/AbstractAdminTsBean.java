@@ -71,12 +71,12 @@ public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslD
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminTsBean.class);
 	
-	protected JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs;
+	protected JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs;
 	protected final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
 	
 	protected List<CAT> categories; public List<CAT> getCategories() {return categories;}
 	
-	protected final EjbTsFactory<SCOPE,UNIT,TS,SOURCE,BRIDGE,EC,INT,STAT> efTs;
+	protected final EjbTsFactory<SCOPE,TS,BRIDGE,INT,STAT> efTs;
 	protected EjbTsBridgeFactory<SCOPE,MP,TS,BRIDGE,EC,DATA,POINT> efBridge;
 	protected EjbTsDataFactory<TS,TRANSACTION,DATA,WS> efData;
 	protected EjbTsCronFactory<SCOPE,INT,STAT,CRON> efCron;
@@ -98,7 +98,7 @@ public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslD
 		sbhWorkspace = new SbMultiHandler<WS>(fbTs.getClassWorkspace(),this);
 	}
 	
-	protected void postConstructTs(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
+	protected void postConstructTs(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fTs=fTs;

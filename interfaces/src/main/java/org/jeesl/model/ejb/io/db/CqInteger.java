@@ -34,5 +34,5 @@ public class CqInteger implements Serializable
 		return sb.toString();
 	}
 	
-	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
+	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 }

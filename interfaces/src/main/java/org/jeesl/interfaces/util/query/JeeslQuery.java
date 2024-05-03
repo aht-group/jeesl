@@ -26,13 +26,10 @@ public interface JeeslQuery extends JeeslCoreQuery
 	
 	boolean isDistinct();
 	void setDistinct(boolean distinct);
-
-	void setFirstResult(Integer firstResult);
-	void setMaxResults(Integer maxResults);
 	
 	List<String> getRootFetches();
 	List<CqGraphFetch> getGraphFetches();
-	List<JeeslCqOrdering> getCqOrderings();
+//	List<JeeslCqOrdering> getCqOrderings();
 	
 	List<JeeslCqLiteral> getCqLiterals();
 	List<JeeslCqLong> getCqLongs();
@@ -40,6 +37,7 @@ public interface JeeslQuery extends JeeslCoreQuery
 	
 	List<Long> getIdList();
 	List<String> getCodeList();
+	
 	
 	Boolean getBool1();
 	void setBool1(Boolean bool1);

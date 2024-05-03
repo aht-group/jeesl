@@ -18,7 +18,7 @@ public interface JeeslGraphicComponent<G extends JeeslGraphic<?,GC,GS>,
 										GS extends JeeslGraphicShape<?,?,GS,G>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithPositionVisible,EjbWithParentAttributeResolver
 {
-	public enum Attributes{graphic}
+	public enum Attributes{graphic,style}
 	
 	G getGraphic();
 	void setGraphic(G graphic);

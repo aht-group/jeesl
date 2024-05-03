@@ -47,11 +47,11 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory.Typ
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
-import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.util.query.cq.CqLiteral;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

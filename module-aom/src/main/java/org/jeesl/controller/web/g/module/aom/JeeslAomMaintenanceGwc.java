@@ -46,9 +46,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
-import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.module.aom.event.AomEvent;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
 import org.slf4j.Logger;
@@ -80,7 +80,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
-	private final EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC> efEvent;
+	private final EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT> efEvent;
 	
 	private final Comparator<ASSET> cpAsset;
 	private final Comparator<EVENT> cpEvent;

@@ -5,6 +5,7 @@ import java.util.List;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
@@ -13,6 +14,7 @@ import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 
 public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								SCOPE extends JeeslTsScope<?,?,CAT,?,?,?,INTV>,
+								MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTV,STAT>,
 								TX extends JeeslTsTransaction<?,?,?,?>,
 								BRIDGE extends JeeslTsBridge<?>,
@@ -21,12 +23,14 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 >
 			extends JeeslCoreQuery
 {
+//	void x();
 	List<String> getRootFetches();
 	
-	List<CAT> getCategories();
-	List<SCOPE> getScopes();
-	List<INTV> getIntervals();
-	List<BRIDGE> getBridges();
-	List<TS> getSeries();
-	List<TX> getTransactions();
+	List<CAT> getTsCategories();
+	List<SCOPE> getTsScopes();
+	List<MP> getTsMultiPoints();
+	List<INTV> getTsIntervals();
+	List<BRIDGE> getTsBridges();
+	List<TS> getTsSeries();
+	List<TX> getTsTransactions();
 }

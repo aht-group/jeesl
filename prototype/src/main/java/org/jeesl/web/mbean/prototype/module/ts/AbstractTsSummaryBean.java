@@ -92,7 +92,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		th = new JsonTuple1Handler<TS>(fbTs.getClassTs());
 	}
 
-	protected void postConstructSummary(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
+	protected void postConstructSummary(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhClass.update(fTs.all(fbTs.getClassEntity()));
@@ -130,8 +130,8 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 		if(bridges.size() > 0)
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
-			query.addBridges(bridges);
+			EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
+			query.addTsBridges(bridges);
 			
 			series = fTs.fTimeSeries(query);
 			mapTs.putAll(efTs.toMapBridgTsList(series));

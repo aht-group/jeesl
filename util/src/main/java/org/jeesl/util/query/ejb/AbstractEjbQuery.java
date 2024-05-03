@@ -12,13 +12,13 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.JeeslQuery;
 import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.CqInteger;
-import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqRootFetch;
+import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,6 +70,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<JeeslCqLong> ids; @Override public List<JeeslCqLong> getCqLongs() {return ids;}
 	protected List<JeeslCqBoolean> booleans; @Override public List<JeeslCqBoolean> getCqBooleans() {return booleans;}
 	protected List<JeeslCqDate> cqDates; @Override public List<JeeslCqDate> getCqDates() {return cqDates;}
+	protected List<JeeslCqTime> cqTimes; @Override public List<JeeslCqTime> getCqTimes() {return cqTimes;}
 	
 	protected List<CqInteger> integers; @Override public List<CqInteger> getIntegers() {return integers;}
 
@@ -80,6 +81,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public void addCqLong(JeeslCqLong literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
 	@Override public void addCqBoolean(JeeslCqBoolean cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
 	@Override public void addCqDate(JeeslCqDate cq) {if(Objects.isNull(cqDates)) {cqDates = new ArrayList<>();} cqDates.add(cq);}
+	@Override public void addCqTime(JeeslCqTime cq) {if(Objects.isNull(cqTimes)) {cqTimes = new ArrayList<>();} cqTimes.add(cq);}
 	
 	protected void addProtected(CqInteger i) {if(Objects.isNull(integers)) {integers = new ArrayList<>();} integers.add(i);}
 	
@@ -164,8 +166,8 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	
 
 	
-	private String sortBy; //@Override public String getSortBy() {return sortBy;}
-	private boolean sortAscending; //@Override public boolean isSortAscending() {return sortAscending;}
+//	private String sortBy; //@Override public String getSortBy() {return sortBy;}
+//	private boolean sortAscending; //@Override public boolean isSortAscending() {return sortAscending;}
 //	@Override public void sort(String sortBy, boolean sortAscending) {this.sortBy=sortBy; this.sortAscending=sortAscending;}
 
 	//Fetches
@@ -182,21 +184,23 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 			if(maxResults!=null){logger.info(StringUtils.repeat("\t",ident)+"maxResults: "+maxResults);}
 			if(Objects.nonNull(tupleLoad)) {logger.info("Tuple-Load: "+tupleLoad);}
 			
-			if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral c : literals) {logger.info(c.toString());}}
+			if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {logger.info(l.toString());}}
+			if(ObjectUtils.isNotEmpty(cqDates)) {for(JeeslCqDate cq : cqDates) {logger.info(cq.toString());}}
+			if(ObjectUtils.isNotEmpty(cqTimes)) {for(JeeslCqTime cq : cqTimes) {logger.info(cq.toString());}}
 		}
 	}
 	
 	protected List<String> debugStrings()
 	{
 		List<String> list = new ArrayList<>();
-		if(Objects.nonNull(firstResult)){list.add("firstResult: "+firstResult);}
-		if(Objects.nonNull(maxResults)){list.add("maxResults: "+maxResults);}
+		if(Objects.nonNull(firstResult)) {list.add("firstResult: "+firstResult);}
+		if(Objects.nonNull(maxResults)) {list.add("maxResults: "+maxResults);}
 		if(Objects.nonNull(tupleLoad)) {list.add("Tuple-Load: "+tupleLoad);}
 		if(Objects.nonNull(localDate1)) {list.add(LocalDate.class.getSimpleName()+".1: "+localDate1.toString());}
 		if(Objects.nonNull(localDate2)) {list.add(LocalDate.class.getSimpleName()+".2: "+localDate2.toString());}
 		if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {list.add(l.toString());}}
+		if(ObjectUtils.isNotEmpty(cqDates)) {for(JeeslCqDate cq : cqDates) {list.add(cq.toString());}}
+		if(ObjectUtils.isNotEmpty(cqTimes)) {for(JeeslCqTime cq : cqTimes) {list.add(cq.toString());}}
 		return list;
 	}
-	
-	
 }

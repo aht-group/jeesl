@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public interface JeeslLogger extends Serializable
 {
+//	void x();
 	void reset();
 	boolean isActive();
 	boolean isNotActive();

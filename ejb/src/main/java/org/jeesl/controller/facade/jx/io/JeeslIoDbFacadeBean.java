@@ -52,11 +52,11 @@ import org.jeesl.interfaces.model.io.db.meta.with.JeeslDbMetaWithTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
-import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

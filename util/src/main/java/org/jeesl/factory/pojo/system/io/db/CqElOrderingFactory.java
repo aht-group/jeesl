@@ -1,6 +1,6 @@
 package org.jeesl.factory.pojo.system.io.db;
 
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

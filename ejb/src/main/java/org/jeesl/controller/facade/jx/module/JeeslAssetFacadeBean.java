@@ -24,6 +24,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -45,10 +46,12 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslAomQuery;
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.cq.CqDate;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -377,6 +380,17 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		{
 			
 		}
+		
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslAomEvent.Attributes.record)))
+			{
+				Expression<Date> e = root.get(JeeslAomEvent.Attributes.record.toString());
+				DatePredicateBuilder.juDate(cB,predicates, cq, e);
+			}
+			else {logger.warn(cq.nyi(JeeslAomEvent.class));}
+		}
+		
 		if(ObjectUtils.isNotEmpty(query.getAssets()))
 		{
 			ListJoin<EVENT,ASSET> jAsset = root.joinList(JeeslAomEvent.Attributes.assets.toString());

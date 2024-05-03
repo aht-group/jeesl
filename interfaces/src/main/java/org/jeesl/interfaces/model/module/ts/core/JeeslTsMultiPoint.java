@@ -26,7 +26,7 @@ public interface JeeslTsMultiPoint <L extends JeeslLang, D extends JeeslDescript
 				EjbWithParentAttributeResolver,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>
 {
-	public enum Attributes{scope}
+	public enum Attributes{scope,code}
 
 	SCOPE getScope();
 	void setScope(SCOPE scope);

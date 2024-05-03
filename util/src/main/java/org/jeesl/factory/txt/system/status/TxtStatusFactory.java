@@ -19,6 +19,10 @@ public class TxtStatusFactory <L extends JeeslLang, D extends JeeslDescription, 
 		this.localeCode=localeCode;
 	}
 	
+	public static <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, E extends Enum<E>> TxtStatusFactory<L,D,S> factory(E localeCode)
+	{
+		return new TxtStatusFactory<L,D,S>(localeCode.toString());
+	}
 	public static <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>> TxtStatusFactory<L,D,S> factory(String localeCode)
 	{
 		return new TxtStatusFactory<L,D,S>(localeCode);
@@ -32,8 +36,14 @@ public class TxtStatusFactory <L extends JeeslLang, D extends JeeslDescription, 
 		sb.append(" ").append(status.getName().get(localeCode).getLang());
 		return sb.toString();
 	}
+	public String build(S status)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(status.getName().get(localeCode).getLang());
+		return sb.toString();
+	}
 	
-	public String labels (List<S> list){return labels(localeCode,list);}
+	public String labels (List<S> list) {return labels(localeCode,list);}
 	
 	public static <L extends JeeslLang, S extends JeeslStatus<L,?,S>, E extends Enum<E>> String labels(E localeCode, List<S> list) {return TxtStatusFactory.labels(localeCode.toString(), list);}
 	public static <L extends JeeslLang, S extends JeeslStatus<L,?,S>> String labels(String localeCode, List<S> list)

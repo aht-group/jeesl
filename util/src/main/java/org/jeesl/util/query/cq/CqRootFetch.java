@@ -2,7 +2,7 @@ package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
 
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqRootFetch;
 
 public class CqRootFetch implements JeeslCqRootFetch
@@ -31,5 +31,5 @@ public class CqRootFetch implements JeeslCqRootFetch
 		return sb.toString();
 	}
 	
-	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
+	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 }

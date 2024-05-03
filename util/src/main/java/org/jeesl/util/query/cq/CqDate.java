@@ -3,7 +3,7 @@ package org.jeesl.util.query.cq;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 
 public class CqDate implements JeeslCqDate
@@ -27,7 +27,7 @@ public class CqDate implements JeeslCqDate
 	
 	public String toString()
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(path);
 		sb.append(" ").append(type.toString());
 		sb.append(" ").append(date.toString());
@@ -35,5 +35,16 @@ public class CqDate implements JeeslCqDate
 		return sb.toString();
 	}
 	
-	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
+	public String nyi(Class<?> c)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("NYI ");
+		sb.append(this.toString());
+		sb.append(" ").append(c.getName());
+		return sb.toString();
+	}
+	
+	
+	
+	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 }
