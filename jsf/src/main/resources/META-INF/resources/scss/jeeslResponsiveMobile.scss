@@ -923,6 +923,34 @@ html, body, .ui-widget {
 	}
 }
 
+@mixin jeesl-fileupload-titlebar {
+	.ui-fileupload-buttonbar {
+		@include jeesl-titlebar;
+		
+		.ui-button {
+			align-items: stretch;
+			padding: $ls-element-padding-vertical 0;
+			
+			&.ui-button-text-icon-left .ui-icon {
+				border-right: $border;
+			}
+			
+			.ui-icon {
+				height: calc(#{$element-height-mobile} - 2 * #{$ls-element-padding-vertical});
+				padding: 0 $ls-element-padding-vertical;
+				
+				&.ui-icon-plusthick, &.ui-icon-cancel, &.ui-icon-arrowreturnthick-1-n {
+					width: $element-height-mobile + $border-width;
+				}
+			}
+			
+			.ui-button-text {
+				display: none;
+			}
+		}
+	}
+}
+
 @mixin jeesl-tabs-titlebar {
 	.ui-tabs-nav {
 		@include jeesl-titlebar;
@@ -1277,7 +1305,7 @@ html, body, .ui-widget {
 	}
 }
 
-.jeesl-datatable {
+.jeesl-datatable, .ui-datatable.ui-sortable-helper, .ui-selectonemenu-panel .ui-selectonemenu-table {
 	@include jeesl-table-titlebar;
 	
 	&.jeesl-datatable-collapsible .ui-datatable-header {
@@ -1285,9 +1313,11 @@ html, body, .ui-widget {
 	}
 	
 	table {
-		thead th {
+		thead th, tbody tr, tfoot tr {
 			height: $element-height-mobile;
-			
+		}
+		
+		thead th {
 			&.ui-sortable-column {
 				.ui-column-title {
 					margin-right: 16px;
@@ -1341,7 +1371,7 @@ html, body, .ui-widget {
 			@include icon();
 			
 			height: calc(#{$element-height-mobile} - 13px);
-			margin: 7px 0 6px;
+			margin: $header-icon-padding-vertical;
 			
 			&:before {
 				border-left: $border-width solid $border-colour;
@@ -1361,6 +1391,14 @@ html, body, .ui-widget {
 		
 	.ui-datatable-header {
 		border-width: $border-width $border-width 0;
+	}
+}
+
+body .jeesl-fileupload {
+	@include jeesl-fileupload-titlebar;
+	
+	.ui-fileupload-content .ui-button {
+		width: auto;
 	}
 }
 
@@ -1558,4 +1596,10 @@ html, body, .ui-widget {
 
 .jeesl-footer {
 	font-size: .75rem;
+}
+
+body {
+	.ui-panelgrid .ui-panelgrid-cell {
+		padding: $half-spacing $regular-spacing;
+	}
 }

@@ -1169,7 +1169,7 @@ $border: $border-width solid $border-colour;
 	vertical-align: top;
 }
 
-img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
+img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui-button .ui-icon {
 	height: calc($icon-height * var(--icon-height-multiplier));
 
 	@media (max-width: 768px) {

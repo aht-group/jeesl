@@ -3,7 +3,7 @@
 @import '_fonts';
 
 $enable-pointer-cursor-for-buttons: true;
-.jeesl-icon, .pf-action-icon, .jeesl-menu-bar-item, .ui-selectonemenu { --icon-height-multiplier: 1 }
+.jeesl-icon, .pf-action-icon, .jeesl-menu-bar-item, .ui-selectonemenu, .ui-icon { --icon-height-multiplier: 1 }
 
 @import '_reboot';
 @import '_responsiveCommon';
@@ -577,7 +577,7 @@ $enable-pointer-cursor-for-buttons: true;
 	
 	img {
 //		height: $header-icon-height;
-		padding: 0 4px;
+		padding: 0 $header-icon-padding-horizontal;
 			
 		@media (max-width: 768px) {
 //			height: $header-icon-height-mobile;
@@ -607,7 +607,7 @@ $enable-pointer-cursor-for-buttons: true;
 
 		@media (max-width: 768px) {
 			align-items: stretch;
-			padding: 7px 0 6px;
+			padding: $header-icon-padding-vertical;
 			
 			&:before {
 			    border-left: $border;
@@ -637,7 +637,11 @@ $enable-pointer-cursor-for-buttons: true;
 		.ui-selectonemenu-label {
 			background: transparent;
 			min-height: $header-icon-height;
-			padding: 7px 0 6px !important;
+			padding: $half-spacing 0 !important;
+			
+			@media (max-width: 768px) {
+				padding: $header-icon-padding-vertical !important;
+			}
 		}
 		
 		.ui-selectonemenu-trigger {
@@ -727,6 +731,100 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.pf-datatable-header-actions {
 			@include jeesl-titlebar-actions;
+		}
+	}
+}
+
+@mixin jeesl-fileupload-titlebar {
+	.ui-fileupload-buttonbar {
+		@include jeesl-titlebar;
+		
+		.ui-button {
+			align-items: stretch;
+			background: none;
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+			display: flex;
+			height: auto;
+			margin-right: 0;
+			padding: $half-spacing 0;
+			
+			&:before {
+				border-radius: 0;
+			}
+			
+			@media (max-width: 768px) {
+				padding: $header-icon-padding-vertical;
+			
+				&.ui-button-text-icon-left .ui-button-text {
+					border-right: $border;
+				}
+			}
+			
+			.ui-icon {
+				height: calc($icon-height * var(--icon-height-multiplier));
+				left: 0;
+				margin: 0;
+				padding: 0 $header-icon-padding-horizontal;
+				position: relative;
+				top: 0;
+				
+				@media (max-width: 768px) {
+					height: calc($element-height-mobile * var(--icon-height-multiplier));
+					padding: 0 $header-icon-padding-horizontal-mobile;
+				}
+				
+				&.ui-icon-plusthick, &.ui-icon-cancel, &.ui-icon-arrowreturnthick-1-n {
+					width: calc($icon-height * var(--icon-height-multiplier) + (2 * #{$header-icon-padding-horizontal}));
+					
+					@media (max-width: 768px) {
+						width: calc($element-height-mobile * var(--icon-height-multiplier)  + (2 * #{$header-icon-padding-horizontal-mobile}));
+					}
+					
+					&:before {
+						background-repeat: no-repeat;
+						background-size: 100%;
+						content: '';
+						display: block;
+						height: 100%;
+					}
+				}
+				
+				&.ui-icon-plusthick {
+					&:before {
+						background-image: url(/jeesl/javax.faces.resource/ui/control/crud/add.svg.xhtml?ln=jeeslGfx&buildVersion=1714132495);
+					}
+				}
+				
+				&.ui-icon-cancel {
+					&:before {
+						background-image: url(/jeesl/javax.faces.resource/ui/control/crud/cancel.svg.xhtml?ln=jeeslGfx&buildVersion=1714471959);
+					}
+				}
+				
+				&.ui-icon-arrowreturnthick-1-n {
+					&:before {
+						background-image: url(/erp/javax.faces.resource/ui/control/browser/upload.svg.xhtml?ln=jeeslGfx&buildVersion=1714471959);
+					}
+				}
+				
+				+ .ui-button-text {
+					padding-left: 0;
+				}
+			}
+			
+			.ui-button-text {
+				align-items: center;
+				color: $dark-colour;
+				display: flex;
+				padding: 0 $half-spacing;
+			
+				@media (max-width: 768px) {
+					font-size: 1.4em;
+					letter-spacing: -.5px;
+				}
+			}
 		}
 	}
 }
@@ -3722,12 +3820,13 @@ body, .ui-widget {
 			@include vertical-center(after);
 			
 			height: 100%;
+			padding: $half-spacing 0;
 			white-space: nowrap;
 			width: 100%;
 			
 			@media (max-width: 768px) {
 				height: calc(#{$element-height-mobile} - 13px);
-				margin: 7px 0 6px;
+				margin: $header-icon-padding-vertical;
 			}
 
 			&:before {
@@ -4572,9 +4671,14 @@ body, .ui-widget {
 	}
 }
 
-.ui-fileupload {
+.jeesl-fileupload {
+	@include jeesl-fileupload-titlebar;
+	
+	border: $border;
+	border-radius: $border-radius;
+	
 	.ui-fileupload-content {
-		background: $panel-background;
+		background: transparent;
 		padding: $slim-spacing;
 		
 		.ui-fileupload-files {
@@ -4608,6 +4712,8 @@ body, .ui-widget {
 				
 				.ui-fileupload-cancel .ui-icon:before {
 					content: $icon-cancel;
+					font-family: "Font Awesome 5 Free" !important;
+					font-weight: 700;
 				}
 			}
 		}

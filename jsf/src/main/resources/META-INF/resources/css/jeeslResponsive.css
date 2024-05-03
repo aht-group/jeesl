@@ -39,6 +39,10 @@
   font-size: 2rem;
 }
 
+.jeesl-icon, .pf-action-icon, .jeesl-menu-bar-item, .ui-selectonemenu, .ui-icon {
+  --icon-height-multiplier: 1 ;
+}
+
 *,
 *::before,
 *::after {
@@ -2590,11 +2594,11 @@ template {
   vertical-align: top;
 }
 
-img.jeesl-icon, .jeesl-icon img, .pf-action-icon img {
+img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui-button .ui-icon {
   height: calc(12px * var(--icon-height-multiplier));
 }
 @media (max-width: 768px) {
-  img.jeesl-icon, .jeesl-icon img, .pf-action-icon img {
+  img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui-button .ui-icon {
     height: calc(15px * var(--icon-height-multiplier));
   }
 }
@@ -4523,7 +4527,7 @@ body, .ui-widget {
   padding: 0;
   background-image: linear-gradient(to bottom, hsl(154, 100%, 20%), hsl(154, 100%, 24%));
   background-repeat: repeat;
-  background-size: 100% 26px;
+  background-size: 100% calc(14px * var(--icon-height-multiplier) + 12px);
   height: auto;
   line-height: normal;
   margin: -10px 10px 10px;
@@ -4823,7 +4827,7 @@ body, .ui-widget {
   visibility: visible;
 }
 .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item {
-  height: 26px;
+  height: calc(14px * var(--icon-height-multiplier) + 12px);
   white-space: nowrap;
 }
 @media (max-width: 768px) {
@@ -5845,7 +5849,12 @@ body, .ui-widget {
 .jeesl-panel .ui-panel-titlebar .ui-panel-actions .jeesl-icon-select .ui-selectonemenu-label {
   background: transparent;
   min-height: 12px;
-  padding: 7px 0 6px !important;
+  padding: 5px 0 !important;
+}
+@media (max-width: 768px) {
+  .jeesl-panel .ui-panel-titlebar .ui-panel-actions .jeesl-icon-select .ui-selectonemenu-label {
+    padding: 7px 0 6px !important;
+  }
 }
 .jeesl-panel .ui-panel-titlebar .ui-panel-actions .jeesl-icon-select .ui-selectonemenu-trigger {
   display: none;
@@ -6492,7 +6501,12 @@ body, .ui-widget {
 .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label {
   background: transparent;
   min-height: 12px;
-  padding: 7px 0 6px !important;
+  padding: 5px 0 !important;
+}
+@media (max-width: 768px) {
+  .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label {
+    padding: 7px 0 6px !important;
+  }
 }
 .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-trigger {
   display: none;
@@ -6962,10 +6976,18 @@ body, .ui-widget {
 .jeesl-panel .ui-panel-content .jeesl-panelgrid-scrollview {
   overflow-x: auto;
 }
+.jeesl-panel .ui-panel-footer {
+  border: none;
+  border-radius: 0 0 3px 3px;
+  border-top: 2px solid hsl(154, 100%, 20%);
+  color: hsl(154, 100%, 20%);
+  font-weight: 700;
+  padding: 5px 10px;
+}
 @media (max-width: 768px) {
   .jeesl-panel .ui-panel-footer {
+    border-top-width: 4px;
     margin: 5px 0 0;
-    border-width: 4px 0 0;
   }
 }
 .jeesl-panel .pvtUi {
@@ -7016,7 +7038,7 @@ body, .ui-widget {
   background: transparent;
 }
 .jeesl-tree .ui-widget-content .ui-treenode .jeesl-icon {
-  height: 12px;
+  height: calc(12px * var(--icon-height-multiplier));
   width: auto;
 }
 @media (max-width: 768px) {
@@ -7292,7 +7314,12 @@ body, .ui-widget {
 .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label, .ui-datatable.ui-sortable-helper .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label {
   background: transparent;
   min-height: 12px;
-  padding: 7px 0 6px !important;
+  padding: 5px 0 !important;
+}
+@media (max-width: 768px) {
+  .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label, .ui-datatable.ui-sortable-helper .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label {
+    padding: 7px 0 6px !important;
+  }
 }
 .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-trigger, .ui-datatable.ui-sortable-helper .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-trigger, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-trigger {
   display: none;
@@ -7484,16 +7511,19 @@ body, .ui-widget {
   height: 100%;
 }
 .jeesl-datatable table tfoot td, .ui-datatable.ui-sortable-helper table tfoot td, .ui-selectonemenu-panel .ui-selectonemenu-table table tfoot td {
-  background: hsl(0, 0%, 93%);
-  border-color: hsl(154, 100%, 20%);
-  border-width: 2px 0 0;
+  border: none;
+  border-radius: 0 0 3px 3px;
+  border-top: 2px solid hsl(154, 100%, 20%);
   color: hsl(154, 100%, 20%);
   font-weight: 700;
+  padding: 5px 10px;
+  background: hsl(0, 0%, 93%);
   text-align: left;
 }
 @media (max-width: 768px) {
   .jeesl-datatable table tfoot td, .ui-datatable.ui-sortable-helper table tfoot td, .ui-selectonemenu-panel .ui-selectonemenu-table table tfoot td {
     border-top-width: 4px;
+    margin: 5px 0 0;
   }
 }
 .jeesl-datatable tbody, .jeesl-datatable .ui-datatable-data, .ui-datatable.ui-sortable-helper tbody, .ui-datatable.ui-sortable-helper .ui-datatable-data, .ui-selectonemenu-panel .ui-selectonemenu-table tbody, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-data {
@@ -7517,7 +7547,7 @@ body, .ui-widget {
   padding: 5px 10px;
 }
 .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon, .ui-datatable.ui-sortable-helper tbody td .jeesl-icon, .ui-datatable.ui-sortable-helper .ui-datatable-data td .jeesl-icon, .ui-selectonemenu-panel .ui-selectonemenu-table tbody td .jeesl-icon, .ui-selectonemenu-panel .ui-selectonemenu-table .ui-datatable-data td .jeesl-icon {
-  height: 12px;
+  height: calc(12px * var(--icon-height-multiplier));
   width: auto;
 }
 @media (max-width: 768px) {
@@ -7608,6 +7638,7 @@ body, .ui-widget {
   width: auto;
   -webkit-font-smoothing: antialiased;
   height: 100%;
+  padding: 5px 0;
   white-space: nowrap;
   width: 100%;
 }
@@ -8224,7 +8255,12 @@ body, .ui-widget {
 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .jeesl-icon-select .ui-selectonemenu-label {
   background: transparent;
   min-height: 12px;
-  padding: 7px 0 6px !important;
+  padding: 5px 0 !important;
+}
+@media (max-width: 768px) {
+  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .jeesl-icon-select .ui-selectonemenu-label {
+    padding: 7px 0 6px !important;
+  }
 }
 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .jeesl-icon-select .ui-selectonemenu-trigger {
   display: none;
@@ -8871,7 +8907,12 @@ body, .ui-widget {
 .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label {
   background: transparent;
   min-height: 12px;
-  padding: 7px 0 6px !important;
+  padding: 5px 0 !important;
+}
+@media (max-width: 768px) {
+  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-label {
+    padding: 7px 0 6px !important;
+  }
 }
 .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-icon-select .ui-selectonemenu-trigger {
   display: none;
@@ -9341,10 +9382,18 @@ body, .ui-widget {
 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .jeesl-panelgrid-scrollview {
   overflow-x: auto;
 }
+.jeesl-content .jeesl-content-container .ui-panel .ui-panel-footer {
+  border: none;
+  border-radius: 0 0 3px 3px;
+  border-top: 2px solid hsl(154, 100%, 20%);
+  color: hsl(154, 100%, 20%);
+  font-weight: 700;
+  padding: 5px 10px;
+}
 @media (max-width: 768px) {
   .jeesl-content .jeesl-content-container .ui-panel .ui-panel-footer {
+    border-top-width: 4px;
     margin: 5px 0 0;
-    border-width: 4px 0 0;
   }
 }
 .jeesl-content .jeesl-content-container .ui-panel .pvtUi {
@@ -9578,7 +9627,12 @@ body, .ui-widget {
 .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions .jeesl-icon-select .ui-selectonemenu-label {
   background: transparent;
   min-height: 12px;
-  padding: 7px 0 6px !important;
+  padding: 5px 0 !important;
+}
+@media (max-width: 768px) {
+  .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions .jeesl-icon-select .ui-selectonemenu-label {
+    padding: 7px 0 6px !important;
+  }
 }
 .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions .jeesl-icon-select .ui-selectonemenu-trigger {
   display: none;
@@ -9816,6 +9870,25 @@ body, .ui-widget {
     transform: translate(0, -50%);
     width: calc(100% - 30px) !important;
   }
+}
+.ui-dialog.jeesl-dialog {
+  border: 1px solid hsl(0, 0%, 67%);
+}
+.ui-dialog.jeesl-multipanel-dialog {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.ui-dialog.jeesl-multipanel-dialog .ui-dialog-titlebar {
+  border: 1px solid hsl(0, 0%, 67%);
+  border-radius: 3px;
+  box-shadow: 0 3px 3px hsla(0, 0%, 0%, 0.4);
+}
+.ui-dialog.jeesl-multipanel-dialog .ui-dialog-content {
+  padding: 10px 0 5px;
+}
+.ui-dialog.jeesl-multipanel-dialog .ui-dialog-content .jeesl-panel {
+  box-shadow: 0 3px 3px hsla(0, 0%, 0%, 0.4);
 }
 .ui-dialog.jeesl-table-dialog .ui-dialog-titlebar {
   margin: 0;
@@ -10260,6 +10333,25 @@ body, .ui-widget {
   border-bottom-width: 0;
   margin-bottom: -5px;
 }
+.ui-dialog .ui-dialog-content .ui-datatable {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+}
+.ui-dialog .ui-dialog-footer {
+  border: none;
+  border-radius: 0 0 3px 3px;
+  border-top: 2px solid hsl(154, 100%, 20%);
+  color: hsl(154, 100%, 20%);
+  font-weight: 700;
+  padding: 5px 10px;
+}
+@media (max-width: 768px) {
+  .ui-dialog .ui-dialog-footer {
+    border-top-width: 4px;
+    margin: 5px 0 0;
+  }
+}
 
 .jeesl-tabs {
   background: hsl(0, 0%, 93%);
@@ -10630,7 +10722,7 @@ body, .ui-widget {
   margin-bottom: 10px;
 }
 .jeesl-input-grid .p-field .p-col .jeesl-icon {
-  height: 12px;
+  height: calc(12px * var(--icon-height-multiplier));
   width: auto;
 }
 @media (max-width: 768px) {
@@ -10724,35 +10816,141 @@ body, .ui-widget {
   box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.8);
 }
 
-.ui-fileupload .ui-fileupload-content {
-  background: hsl(0, 0%, 93%);
+.jeesl-fileupload {
+  border: 1px solid hsl(0, 0%, 67%);
+  border-radius: 3px;
+}
+.jeesl-fileupload .ui-fileupload-buttonbar {
+  align-items: center;
+  background: hsl(0, 0%, 77%) linear-gradient(to bottom, hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0));
+  border-radius: 3px 3px 0 0;
+  border: none;
+  border-bottom: 2px solid hsl(154, 100%, 20%);
+  box-shadow: 0 -1px 0 inset hsla(0, 0%, 100%, 0.35);
+  box-sizing: content-box;
+  color: hsl(0, 0%, 20%);
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 700;
+  height: auto;
+  margin: 0;
+  min-height: 22px;
+  padding: 0;
+  position: relative;
+  text-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.7);
+}
+@media (max-width: 768px) {
+  .jeesl-fileupload .ui-fileupload-buttonbar {
+    border-bottom-width: 4px;
+    min-height: 42px;
+  }
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button {
+  align-items: stretch;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  height: auto;
+  margin-right: 0;
+  padding: 5px 0;
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button:before {
+  border-radius: 0;
+}
+@media (max-width: 768px) {
+  .jeesl-fileupload .ui-fileupload-buttonbar .ui-button {
+    padding: 7px 0 6px;
+  }
+  .jeesl-fileupload .ui-fileupload-buttonbar .ui-button.ui-button-text-icon-left .ui-button-text {
+    border-right: 1px solid hsl(0, 0%, 67%);
+  }
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon {
+  height: calc(12px * var(--icon-height-multiplier));
+  left: 0;
+  margin: 0;
+  padding: 0 4px;
+  position: relative;
+  top: 0;
+}
+@media (max-width: 768px) {
+  .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon {
+    height: calc(42px * var(--icon-height-multiplier));
+    padding: 0 6px;
+  }
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-plusthick, .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-cancel, .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-arrowreturnthick-1-n {
+  width: calc(12px * var(--icon-height-multiplier) + 2 * 4px);
+}
+@media (max-width: 768px) {
+  .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-plusthick, .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-cancel, .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-arrowreturnthick-1-n {
+    width: calc(42px * var(--icon-height-multiplier) + 2 * 6px);
+  }
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-plusthick:before, .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-cancel:before, .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-arrowreturnthick-1-n:before {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  content: "";
+  display: block;
+  height: 100%;
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-plusthick:before {
+  background-image: url(/jeesl/javax.faces.resource/ui/control/crud/add.svg.xhtml?ln=jeeslGfx&buildVersion=1714132495);
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-cancel:before {
+  background-image: url(/jeesl/javax.faces.resource/ui/control/crud/cancel.svg.xhtml?ln=jeeslGfx&buildVersion=1714471959);
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon.ui-icon-arrowreturnthick-1-n:before {
+  background-image: url(/erp/javax.faces.resource/ui/control/browser/upload.svg.xhtml?ln=jeeslGfx&buildVersion=1714471959);
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-icon + .ui-button-text {
+  padding-left: 0;
+}
+.jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-button-text {
+  align-items: center;
+  color: hsl(154, 100%, 20%);
+  display: flex;
+  padding: 0 5px;
+}
+@media (max-width: 768px) {
+  .jeesl-fileupload .ui-fileupload-buttonbar .ui-button .ui-button-text {
+    font-size: 1.4em;
+    letter-spacing: -0.5px;
+  }
+}
+.jeesl-fileupload .ui-fileupload-content {
+  background: transparent;
   padding: 2px;
 }
-.ui-fileupload .ui-fileupload-content .ui-fileupload-files {
+.jeesl-fileupload .ui-fileupload-content .ui-fileupload-files {
   margin: 0;
   width: 100%;
 }
-.ui-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row > div {
+.jeesl-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row > div {
   vertical-align: middle;
   white-space: nowrap;
 }
-.ui-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-preview {
+.jeesl-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-preview {
   display: none;
 }
-.ui-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-filename {
+.jeesl-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-filename {
   display: table-cell;
   white-space: break-spaces;
 }
-.ui-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-progress .ui-progressbar {
+.jeesl-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-progress .ui-progressbar {
   top: 0;
 }
-.ui-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-progress .ui-progressbar .ui-progressbar-value {
+.jeesl-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-progress .ui-progressbar .ui-progressbar-value {
   background: hsl(154, 100%, 27%);
   border: none;
   border-radius: 1px;
 }
-.ui-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-cancel .ui-icon:before {
+.jeesl-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-cancel .ui-icon:before {
   content: "\f05e";
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 700;
 }
 
 .jeesl-vertical-nospace {

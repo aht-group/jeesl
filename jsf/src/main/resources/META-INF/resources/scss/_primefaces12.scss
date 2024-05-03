@@ -147,6 +147,24 @@ body {
 		}
 	}
 	
+	.ui-selectonebutton > .ui-button, .ui-selectmenybutton > .ui-button {
+		@include button;
+		
+		border-radius: 0;
+		
+		&:first-child {
+			border-radius: $border-radius-left;
+		}
+		
+		&:last-child {
+			border-radius: $border-radius-right;
+		}
+		
+		&.ui-state-active:not(.ui-state-disabled):hover {
+			border-color: $dark-colour;
+		}
+	}
+	
 	.jeesl-datatable {
 		border: $border;
 		
@@ -165,7 +183,7 @@ body {
 				height: $element-height-mobile;
 			}
 			
-			span {
+			span:not(.ui-icon) {
 				padding: $slim-spacing $regular-spacing;
 			}
 		}
@@ -235,6 +253,52 @@ body {
 				&:before {
 					display: none;
 				}
+			}
+		}
+	}
+	
+	.jeesl-fileupload {
+		@include jeesl-fileupload-titlebar;
+		
+		background: $panel-background;
+		border: $border;
+		border-radius: $border-radius;
+		color: $foreground;
+		padding: 0;
+		
+		.ui-fileupload-buttonbar {
+			border-radius: $border-radius-top;
+			
+			.ui-button.ui-button-text-icon-left .ui-icon {
+				left: 0;
+				margin: 0;
+				
+				@media (max-width: 768px) {
+					left: 0;
+					margin: 0;
+				}
+			}
+		}
+		
+		.ui-fileupload-content {
+			background: transparent;
+			
+			.ui-button {
+				@media (max-width: 768px) {
+					width: auto;
+				}
+				
+				.ui-icon {
+					height: auto;
+					left: 0;
+					margin: 0;
+					position: relative;
+					top: 0;
+				}
+			}
+			
+			.ui-fileupload-files .ui-fileupload-row > div {
+				padding: $half-spacing $regular-spacing;
 			}
 		}
 	}
@@ -341,6 +405,23 @@ body {
 						}
 					}
 				}
+			}
+		}
+		
+		.ui-timepicker-div {
+			dd, dt {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.ui_tpicker_time_label {
+				margin: 0 0 #{$regular-spacing} #{-$wide-spacing};
+				padding-left: $wide-spacing;
+			}
+			
+			.ui_tpicker_time {
+				margin: 0 #{-$wide-spacing} #{$regular-spacing} 0;
+				padding-right: $wide-spacing;
 			}
 		}
 	}
