@@ -4,7 +4,8 @@
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
 	
 	<c:set var="bean" value="#{bean}" />
-	<c:set var="path"  value="#{path}" />
+	<c:set var="path" value="#{path}" />
+	<c:set var="update" value="#{update}" />
 	
 	<h:panelGroup rendered="#{not empty path}" layout="block" styleClass="jeesl-image-wall-wrapper" >
 		<ui:repeat var="image" value="#{bean.images}">
@@ -15,9 +16,9 @@
 	</h:panelGroup>
 	<h:panelGroup rendered="#{empty path}" layout="block" styleClass="jeesl-image-wall-wrapper" >
 		<ui:repeat var="image" value="#{bean.controller.items}">
-			<a class="jeesl-image-wall-image-wrapper">
+			<p:commandLink styleClass="jeesl-image-wall-image-wrapper" update="#{update}" action="#{mmgGalleryBean.controller.selectItem(image)}">
 				<o:graphicImage value="#{bean.controller.is(image)}" dataURI="true"/>
-			</a>
+			</p:commandLink>
 		</ui:repeat>
 	</h:panelGroup>
 	<h:outputScript library="jeeslJs" name="jeesl.imagewall.js"/>
