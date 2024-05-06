@@ -131,7 +131,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	public <E extends Enum<E>> void postConstructAssetMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset,
-									JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL,ETYPE> cache,
+									JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,ALEVEL,ETYPE> cache,
 									REALM realm)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);

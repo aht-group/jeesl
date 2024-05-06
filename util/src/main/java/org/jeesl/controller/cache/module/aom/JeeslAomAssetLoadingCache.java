@@ -1,12 +1,15 @@
 package org.jeesl.controller.cache.module.aom;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.module.JeeslAomFacade;
-import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
+import org.jeesl.factory.builder.module.AomFactoryBuilder;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomAssetCache;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
@@ -18,12 +21,13 @@ import org.slf4j.LoggerFactory;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 
-public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
+public class JeeslAomAssetLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
+										ASTATUS extends JeeslAomAssetStatus<?,?,ASTATUS,?>,
 										ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,VIEW,?>,
 										VIEW extends JeeslAomView<?,?,REALM,?>>
-						implements JeeslAomTypeCache<REALM,ATYPE,VIEW>
+						implements JeeslAomAssetCache<REALM,ASTATUS,ATYPE,VIEW>
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeLoadingCache.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslAomAssetLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
 	private JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?> fAom;
@@ -32,7 +36,10 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 	
 	private Map<AomTypeCacheKey,List<ATYPE>> cachedType; @Override public Map<AomTypeCacheKey,List<ATYPE>> getCachedType() {return cachedType;}
 	
-	public JeeslAomTypeLoadingCache(JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?> fAom)
+	private final List<ASTATUS> assetStatus;
+	
+	public JeeslAomAssetLoadingCache(AomFactoryBuilder<?,?,REALM,?,?,?,ASTATUS,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAom,
+									JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?> fAom)
 	{
 		this.fAom=fAom;
 		cacheType = Caffeine.newBuilder()
@@ -42,7 +49,12 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 			    .build(key -> load(key));
 		
 		cachedType = new CacheMapCompany();
+		
+		assetStatus = fAom.allOrderedPositionVisible(fbAom.getClassStatus());
 	}
+	
+	@Override public List<ASTATUS> getAssetStatus() {return assetStatus; }
+	
 	@SuppressWarnings("unchecked")
 	private List<ATYPE> load(Object oKey)
 	{
@@ -57,6 +69,8 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 		private static final long serialVersionUID = 1L;
 		@Override public List<ATYPE> get(Object key) {return cacheType.get(((AomTypeCacheKey)key));}
 	}
+
+	
 
 //	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier) {cacheCompanies.invalidate(identifier);}
 }

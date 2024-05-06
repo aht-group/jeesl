@@ -91,8 +91,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	private enum Loop{treeAllForParent}
 	
 	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom;
-//	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
-	private JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE> cache;
+	private JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache; public JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> getCache() {return cache;}
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
@@ -119,7 +118,6 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
 
-//	private ASSET root;
     private ASSET asset; public ASSET getAsset() {return asset;} public void setAsset(ASSET asset) {this.asset = asset;}
     private EVENT event; public EVENT getEvent() {return event;} public void setEvent(EVENT event) {this.event = event;}
     private MT markupType;
@@ -148,7 +146,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	}
 	
 	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-						JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE> cache,
+						JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache,
 						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAsset,
 						REALM realm)
 	{
@@ -165,11 +163,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		thfEventType.selectAll();
 		
 		sbhEventType.getList().addAll(cache.getEventType());
-		sbhEventType.preSelect(	JeeslAomEventType.Code.maintenance,
-								JeeslAomEventType.Code.check,
-								JeeslAomEventType.Code.renew,
-								JeeslAomEventType.Code.malfunction
-								);
+		sbhEventType.selectAll();
 	}
 	
 	public <RREF extends EjbWithId> void updateRealmReference(RREF rref)
@@ -222,22 +216,6 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		
 //		buildTree(tree,fAom.allForParent(fbAsset.getClassAsset(), root));
 //		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
-	}
-	
-	private void buildTree(TreeNode parent, List<ASSET> assets)
-	{
-		for(ASSET a : assets)
-		{
-			TreeNode n = new DefaultTreeNode(a,parent);
-			n.setExpanded(path.contains(a));
-			if(Objects.nonNull(jogger)) {jogger.loopStart(Loop.treeAllForParent);}
-			List<ASSET> childs = fAom.allForParent(fbAsset.getClassAsset(),a);
-			if(Objects.nonNull(jogger)) {jogger.loopEnd(Loop.treeAllForParent,childs.size());}
-			if(!childs.isEmpty())
-			{
-				buildTree(n,childs);
-			}
-		}
 	}
 	
 	public void expandTree()

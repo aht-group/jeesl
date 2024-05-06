@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomAssetCache;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
-import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
@@ -41,18 +41,14 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 										ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
 										ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
 										UC extends JeeslAomEventUpload<?,?,UC,?>>
-								implements JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE>,
-											JeeslAomTypeCache<REALM,ATYPE,VIEW>
+								implements JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE>,
+											JeeslAomAssetCache<REALM,ASTATUS,ATYPE,VIEW>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAomCacheBean.class);
 	
 	private final AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom;
 	protected JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ESTATUS> fAom;
-
-//	@Inject @AomCompanyCache private Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheCdiAllCompanies;
-//	@Inject @AomCompanyCache private Cache<AomScopeCacheKey,List<COMPANY>> cacheCdiCompanyScope;
-//	@Inject @AomCompanyCache private Cache<AomTypeCacheKey,List<ATYPE>> cacheCdiType;
 	
 	private final com.github.benmanes.caffeine.cache.Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheLocalAllCompanies;
 	private final com.github.benmanes.caffeine.cache.Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheLocalCompanyScope;
@@ -135,8 +131,6 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 		return cachedCompanies.get(id).stream().filter(c -> c.getScopes().contains(identifier.getScope())).collect(Collectors.toList());
 	}
 
-
-	
 	private class CacheMapType extends HashMap<AomTypeCacheKey,List<ATYPE>>
 	{
 		private static final long serialVersionUID = 1L;
