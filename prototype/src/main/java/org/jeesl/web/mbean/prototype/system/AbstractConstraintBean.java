@@ -37,26 +37,25 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.factory.xml.system.XmlConstraintFactory;
 import net.sf.ahtutils.factory.xml.system.XmlConstraintScopeFactory;
 
-public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescription,
-									ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
-									GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
-									SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
-									CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
-									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
-									LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
-									TYPE extends JeeslConstraintType<L,D,TYPE,?>,
-									RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
-							implements Serializable,JeeslConstraintsBean<CONSTRAINT>
+public class AbstractConstraintBean <ALGORITHM extends JeeslConstraintAlgorithm<?,?,GROUP>,
+									GROUP extends JeeslConstraintAlgorithmGroup<?,?,GROUP,?>,
+									SCOPE extends JeeslConstraintScope<?,?,CATEGORY>,
+									CATEGORY extends JeeslConstraintCategory<?,?,CATEGORY,?>,
+									CONSTRAINT extends JeeslConstraint<?,?,SCOPE,CATEGORY,CONSTRAINT,?,?,RESOLUTION>,
+									
+									
+									RESOLUTION extends JeeslConstraintResolution<?,?,CONSTRAINT>>
+							implements JeeslConstraintsBean<CONSTRAINT>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractConstraintBean.class);
 	private static final long serialVersionUID = 1L;
 	
 //	private JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint;
-	private final ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
+	private final ConstraintFactoryBuilder<?,?,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,?,?,RESOLUTION> fbConstraint;
 	
 	private final Map<String,Map<String,CONSTRAINT>> mapConstraints;
 	
-	public AbstractConstraintBean(ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
+	public AbstractConstraintBean(ConstraintFactoryBuilder<?,?,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,?,?,RESOLUTION> fbConstraint)
 	{
 		this.fbConstraint=fbConstraint;
 		mapConstraints = new HashMap<String,Map<String,CONSTRAINT>>();
@@ -67,10 +66,9 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 		
 	}
 	
-	protected void postConstruct(JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint)
+	protected void postConstruct(JeeslSystemConstraintFacade<?,?,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,?,?,RESOLUTION> fConstraint)
 	{
-//		this.fConstraint=fConstraint;
-		
+//		this.fConstraint=fConstraint;		
 		int i=0;
 		logger.info("Loading "+fbConstraint.getClassConstraint());
 		for(CONSTRAINT c : fConstraint.all(fbConstraint.getClassConstraint()))
