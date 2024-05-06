@@ -41,9 +41,7 @@ public class AbstractConstraintBean <ALGORITHM extends JeeslConstraintAlgorithm<
 									GROUP extends JeeslConstraintAlgorithmGroup<?,?,GROUP,?>,
 									SCOPE extends JeeslConstraintScope<?,?,CATEGORY>,
 									CATEGORY extends JeeslConstraintCategory<?,?,CATEGORY,?>,
-									CONSTRAINT extends JeeslConstraint<?,?,SCOPE,CATEGORY,CONSTRAINT,?,?,RESOLUTION>,
-									
-									
+									CONSTRAINT extends JeeslConstraint<?,?,SCOPE,CATEGORY,?,?>,
 									RESOLUTION extends JeeslConstraintResolution<?,?,CONSTRAINT>>
 							implements JeeslConstraintsBean<CONSTRAINT>
 {

@@ -20,7 +20,7 @@ public class ConstraintFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 									ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 									SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 									CONCAT extends JeeslConstraintCategory<L,D,CONCAT,?>,
-									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,LEVEL,TYPE>,
 									LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 									TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 									RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>

@@ -41,7 +41,7 @@ public abstract class AbstractWorkflowActionHandler <WPD extends JeeslWorkflowDo
 										RE extends JeeslRevisionEntity<?,?,?,?,RA,?>,
 										RA extends JeeslRevisionAttribute<?,?,RE,?,?>,
 										WF extends JeeslWorkflow<?,?,?,?>,
-										WC extends JeeslConstraint<?,?,?,?,WC,?,?,?>,
+										WC extends JeeslConstraint<?,?,?,?,?,?>,
 										USER extends JeeslUser<?>>
 					implements JeeslWorkflowActionsHandler<WPD,WT,WA,AB,AO,RE,RA,WF,WC,USER>
 {

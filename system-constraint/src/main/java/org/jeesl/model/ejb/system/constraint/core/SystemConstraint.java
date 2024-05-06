@@ -28,7 +28,7 @@ import org.jeesl.model.ejb.system.constraint.resolution.SystemConstraintResoluti
 @Entity
 @Table(name="SystemConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"scope_id","code"}))
 @EjbErNode(name="Constraint",category="system",subset="handbook")
-public class SystemConstraint implements JeeslConstraint<IoLang,IoDescription,SystemConstraintScope,SystemConstraintCategory,SystemConstraint,SystemConstraintLevel,SystemConstraintType,SystemConstraintResolution>
+public class SystemConstraint implements JeeslConstraint<IoLang,IoDescription,SystemConstraintScope,SystemConstraintCategory,SystemConstraintLevel,SystemConstraintType>
 {
 	public static final long serialVersionUID=1;	
 	

@@ -29,7 +29,7 @@ public abstract class AbstractSystemConstraintBean <L extends JeeslLang, D exten
 													ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
 													SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
 													CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
-													CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+													CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,LEVEL,TYPE>,
 													LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 													TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 													RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>

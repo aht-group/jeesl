@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslConstraintHandler <CONSTRAINT extends JeeslConstraint<?,?,?,?,CONSTRAINT,LEVEL,?,?>,
+public class JeeslConstraintHandler <CONSTRAINT extends JeeslConstraint<?,?,?,?,LEVEL,?>,
 									LEVEL extends JeeslConstraintLevel<?,?,LEVEL,?>
 									>
 								implements JeeslConstraintMessageBean<CONSTRAINT>

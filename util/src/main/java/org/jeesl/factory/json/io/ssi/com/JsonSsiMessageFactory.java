@@ -23,7 +23,7 @@ public class JsonSsiMessageFactory
 	public static <E extends Enum<E>, LOC extends Enum<LOC>,
 				L extends JeeslLang, D extends JeeslDescription,
 				SCOPE extends JeeslConstraintScope<L,D,?>,
-				CONSTRAINT extends JeeslConstraint<L,D,SCOPE,?,CONSTRAINT,LEVEL,TYPE,?>,
+				CONSTRAINT extends JeeslConstraint<L,D,SCOPE,?,LEVEL,TYPE>,
 				LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 				TYPE extends JeeslConstraintType<L,D,TYPE,?>>
 		JsonSsiMessage build(LOC loc, JeeslSystemConstraintFacade<L,D,?,?,SCOPE,CONSTRAINT,?,LEVEL,TYPE,?> facade, Class<?> c, E code)

@@ -40,7 +40,7 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 										GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
 										ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
 										SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
-										CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+										CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,LEVEL,TYPE>,
 										CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
 										LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 										TYPE extends JeeslConstraintType<L,D,TYPE,?>,

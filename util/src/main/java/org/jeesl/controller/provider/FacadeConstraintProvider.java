@@ -9,7 +9,7 @@ import org.jeesl.model.xml.system.constraint.ConstraintScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FacadeConstraintProvider <CONSTRAINT extends JeeslConstraint<?,?,?,?,CONSTRAINT,?,?,?>>
+public class FacadeConstraintProvider <CONSTRAINT extends JeeslConstraint<?,?,?,?,?,?>>
 									implements JeeslConstraintsBean<CONSTRAINT>
 {
 	private static final long serialVersionUID = 1L;

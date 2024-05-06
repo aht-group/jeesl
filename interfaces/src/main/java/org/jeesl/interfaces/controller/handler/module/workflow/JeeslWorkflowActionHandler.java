@@ -27,7 +27,7 @@ public interface JeeslWorkflowActionHandler<WPD extends JeeslWorkflowDocument<?,
 											RE extends JeeslRevisionEntity<?,?,?,?,RA,?>,
 											RA extends JeeslRevisionAttribute<?,?,RE,?,?>,
 											WF extends JeeslWorkflow<?,?,?,?>,
-											WCS extends JeeslConstraint<?,?,?,?,?,?,?,?>,
+											WCS extends JeeslConstraint<?,?,?,?,?,?>,
 											USER extends JeeslUser<?>>
 {
 	boolean checkVeto(JeeslWithWorkflow<?> entity, WT transition);

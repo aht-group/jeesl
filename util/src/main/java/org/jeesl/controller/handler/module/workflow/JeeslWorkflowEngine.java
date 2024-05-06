@@ -92,7 +92,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 									WY extends JeeslWorkflowActivity<WT,WF,WD,FRC,USER>,
 									WD extends JeeslWorkflowDelegate<WY,USER>,
 									FRC extends JeeslFileContainer<?,?>,
-									WCS extends JeeslConstraint<L,D,?,?,?,?,?,?>,
+									WCS extends JeeslConstraint<L,D,?,?,?,?>,
 									USER extends JeeslUser<SR>
 									>
 				implements JeeslJsfWorkflowHandler

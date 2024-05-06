@@ -75,7 +75,7 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 											WY extends JeeslWorkflowActivity<WT,WF,WD,FRC,USER>,
 											WD extends JeeslWorkflowDelegate<WY,USER>,
 											FRC extends JeeslFileContainer<?,?>,
-											WCS extends JeeslConstraint<L,D,?,?,?,?,?,?>,
+											WCS extends JeeslConstraint<L,D,?,?,?,?>,
 											USER extends JeeslUser<SR>,
 											ID extends JeeslIdentity<SR,?,?,?,?,USER>>
 				extends AbstractAdminBean<L,D,LOC>

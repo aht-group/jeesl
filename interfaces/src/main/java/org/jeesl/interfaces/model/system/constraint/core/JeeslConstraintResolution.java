@@ -14,7 +14,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslConstraintResolution<L extends JeeslLang, D extends JeeslDescription,
-									CONSTRAINT extends JeeslConstraint<L,D,?,?,CONSTRAINT,?,?,?>>
+											CONSTRAINT extends JeeslConstraint<L,D,?,?,?,?>>
 			extends EjbWithId,
 					EjbSaveable,EjbRemoveable,
 					EjbWithPosition,

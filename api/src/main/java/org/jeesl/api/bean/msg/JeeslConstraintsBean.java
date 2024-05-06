@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.system.constraint.ConstraintScope;
 
-public interface JeeslConstraintsBean <CONSTRAINT extends JeeslConstraint<?,?,?,?,CONSTRAINT,?,?,?>> extends Serializable
+public interface JeeslConstraintsBean <CONSTRAINT extends JeeslConstraint<?,?,?,?,?,?>> extends Serializable
 {
 //	void x();
 	

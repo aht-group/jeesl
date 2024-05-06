@@ -17,7 +17,7 @@ public interface JeeslSystemConstraintFacade <L extends JeeslLang, D extends Jee
 									ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
 									GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
 									SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
-									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,LEVEL,TYPE>,
 									CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
 									LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 									TYPE extends JeeslConstraintType<L,D,TYPE,?>,
