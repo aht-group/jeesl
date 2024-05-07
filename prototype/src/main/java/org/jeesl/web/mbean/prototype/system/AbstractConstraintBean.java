@@ -1,7 +1,6 @@
 package org.jeesl.web.mbean.prototype.system;
 
 import java.io.FileNotFoundException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -10,6 +9,7 @@ import java.util.Objects;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
+import org.jeesl.controller.handler.system.constraint.ConstraintHandler;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -18,12 +18,8 @@ import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlg
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintCategory;
-import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
-import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Lang;
@@ -57,6 +53,7 @@ public class AbstractConstraintBean <ALGORITHM extends JeeslConstraintAlgorithm<
 	{
 		this.fbConstraint=fbConstraint;
 		mapConstraints = new HashMap<String,Map<String,CONSTRAINT>>();
+		
 	}
 	
 	public void ping()

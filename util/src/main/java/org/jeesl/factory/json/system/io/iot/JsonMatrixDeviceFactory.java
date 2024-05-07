@@ -61,6 +61,8 @@ public class JsonMatrixDeviceFactory <L extends JeeslLang, D extends JeeslDescri
 		if(q.getBrightness()!=null){json.setBrightness(ejb.getBrightness());}
 		if(ObjectUtils.allNotNull(q.getMode(),ejb.getLayout())) {json.setMode(jfMode.build(ejb.getLayout()));}
 		
+		json.setRefreshRate(120);
+		
 		cells = new String[ejb.getTotalRows()][ejb.getTotalCols()];
 		
 		return json;

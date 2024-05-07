@@ -45,6 +45,11 @@ public class JsonMatrixDevice implements Serializable
 	public Integer getBrightness() {return brightness;}
 	public void setBrightness(Integer brightness) {this.brightness = brightness;}
 	
+	@JsonProperty("refreshRate")
+	private Integer refreshRate;
+	public Integer getRefreshRate() {return refreshRate;}
+	public void setRefreshRate(Integer refreshRate) {this.refreshRate = refreshRate;}
+
 	@JsonProperty("mode")
 	private JsonMode mode;
 	public JsonMode getMode() {return mode;}

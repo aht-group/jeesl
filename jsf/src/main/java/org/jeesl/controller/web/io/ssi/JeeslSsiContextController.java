@@ -10,7 +10,7 @@ import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
-import org.jeesl.controller.handler.system.io.log.DebugJeeslLogger;
+import org.jeesl.controller.handler.io.log.DebugJeeslLogger;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
 import org.jeesl.controller.util.comparator.ejb.EjbIdComparator;

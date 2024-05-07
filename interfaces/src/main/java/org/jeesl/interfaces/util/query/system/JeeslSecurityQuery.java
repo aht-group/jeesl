@@ -13,8 +13,11 @@ public interface JeeslSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 									CTX extends JeeslSecurityContext<?,?>>
 					extends JeeslCoreQuery,JeeslOrderingQuery
 {	
+//	void x();
+	
 	List<String> getRootFetches();
-//	List<CqOrdering> getOrderings();
+	
+	
 	
 	List<C> getSecurityCategory();
 	List<R> getSecurityRole();

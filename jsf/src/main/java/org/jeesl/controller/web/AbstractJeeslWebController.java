@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.controller.handler.system.io.log.DebugJeeslLogger;
+import org.jeesl.controller.handler.io.log.DebugJeeslLogger;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
