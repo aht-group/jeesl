@@ -9,4 +9,6 @@ public interface JeeslCqBoolean extends Serializable
 	Boolean getValue();
 	Type getType();
 	String getPath();
+	
+	String nyi(Class<?> c);
 }

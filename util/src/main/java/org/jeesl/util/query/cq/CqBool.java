@@ -35,5 +35,14 @@ public class CqBool implements JeeslCqBoolean
 		return sb.toString();
 	}
 	
+	public String nyi(Class<?> c)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("NYI ");
+		sb.append(this.toString());
+		sb.append(" ").append(c.getName());
+		return sb.toString();
+	}
+	
 	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 }

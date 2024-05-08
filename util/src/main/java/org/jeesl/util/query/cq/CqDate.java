@@ -44,7 +44,5 @@ public class CqDate implements JeeslCqDate
 		return sb.toString();
 	}
 	
-	
-	
 	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 }

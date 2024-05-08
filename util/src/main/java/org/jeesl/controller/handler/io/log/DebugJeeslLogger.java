@@ -1,6 +1,7 @@
 package org.jeesl.controller.handler.io.log;
 
 import java.io.OutputStream;
+import java.util.Objects;
 
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.slf4j.Logger;
@@ -32,7 +33,14 @@ public class DebugJeeslLogger implements JeeslLogger
 	@Override public String milestone(String milestone, String message) {return milestone;}
 	
 	@Override public String milestone(Class<?> c, String message, Integer elements) {return milestone(c.getSimpleName(), message, elements);}
-	@Override public String milestone(String milestone, String message, Integer elements) {return milestone;}
+	@Override public String milestone(String milestone, String message, Integer elements)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(milestone);
+		sb.append(" ").append(Objects.nonNull(message) ? message : "-");
+		sb.append(" ").append(Objects.nonNull(elements) ? elements : "-");
+		return sb.toString();
+	}
 	
 	@Override public <E extends Enum<E>> String loopStart(E code) {return code.toString();}
 	@Override public <E extends Enum<E>> String loopEnd(E code) {return code.toString();}
