@@ -48,6 +48,7 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
 import org.jeesl.model.ejb.module.aom.event.AomEvent;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
+import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
@@ -139,7 +140,6 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		this.realm = realm;
 		tenant = TenantIdentifier.instance(realm);
 		
-		
 		uiHelper.setCacheBean(cache);
 		
 		markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
@@ -160,8 +160,8 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		this.reloadEvents();
 	}
 	
-	@Override public void toggled(SbToggleSelection handler, Class<?> c){reloadEvents();}
-	@Override public void callbackDateChanged(SbDateSelection handler) {reloadEvents();}
+	@Override public void toggled(SbToggleSelection handler, Class<?> c){this.reloadEvents();}
+	@Override public void callbackDateChanged(SbDateSelection handler) {this.reloadEvents();}
 	
 	private void reloadEvents()
 	{
@@ -170,6 +170,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.tenant(tenant);
 		query.addAomEventStatus(sbhEventStatus.getSelected());
+		query.addCqDate(CqDate.dbIsBeforeOrEqual(sbDateHandler.getDateTo(), CqDate.path(JeeslAomEvent.Attributes.record)));
 		
 		events.addAll(fAsset.fAomEvents(query));
 		Collections.sort(events,cpEvent);

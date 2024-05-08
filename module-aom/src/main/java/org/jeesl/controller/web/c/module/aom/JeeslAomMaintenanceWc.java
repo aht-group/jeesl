@@ -28,7 +28,7 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslAomMaintenanceWc < RREF extends EjbWithId>
+public class JeeslAomMaintenanceWc <RREF extends EjbWithId>
 					extends JeeslAomMaintenanceGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventType,AomEventStatus,IoMarkup,IoMarkupType,SecurityUser,IoFileContainer,AomEventUpload>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
 {

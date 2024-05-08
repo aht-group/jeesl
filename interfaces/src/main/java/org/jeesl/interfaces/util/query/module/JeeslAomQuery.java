@@ -15,11 +15,10 @@ import org.jeesl.interfaces.util.query.jpa.JeeslTenantQuery;
 public interface JeeslAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 							ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 							ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,?,?>,
-							EVENT extends JeeslAomEvent<?,ASSET,?,?,?,?,?>
-,							ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>
->
+							EVENT extends JeeslAomEvent<?,ASSET,?,?,?,?,?>,
+							ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>>
 			extends JeeslCoreQuery,JeeslTenantQuery<REALM>,
-			JeeslPaginationQuery,JeeslOrderingQuery
+					JeeslPaginationQuery,JeeslOrderingQuery
 {
 	public List<ASSET> getAssets();
 	public List<ATYPE> getAomAssetTypes();
