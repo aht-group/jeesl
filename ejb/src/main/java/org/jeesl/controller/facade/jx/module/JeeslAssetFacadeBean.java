@@ -206,6 +206,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		cQ.select(root);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.asc(ePosition));
+		
 		return em.createQuery(cQ).getResultList();
 	}
 	

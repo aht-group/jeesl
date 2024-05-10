@@ -2,6 +2,7 @@ package org.jeesl.controller.web.module.aom;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.model.ejb.module.aom.AomScopeCacheKey;
 import org.jeesl.model.ejb.module.aom.AomTypeCacheKey;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
+import org.jeesl.util.comparator.ejb.ParentPositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -145,6 +147,8 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	{
 		TenantIdentifier<REALM> identifier = TenantIdentifier.instance((REALM)key.getRealm()).withRref(key);
 		VIEW view = fAom.fcAomView(identifier.getRealm(),identifier,key.getTree());
-		return fAom.fAomAssetTypes(identifier,view);
+		List<ATYPE> list = fAom.fAomAssetTypes(identifier,view);
+		Collections.sort(list,ParentPositionComparator.instance());
+		return list;
 	}
 }

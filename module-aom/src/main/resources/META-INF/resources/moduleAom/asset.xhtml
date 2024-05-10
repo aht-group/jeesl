@@ -75,8 +75,8 @@
                         <jtp:label entity="AomAsset" code="type1"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.asset.type1}" var="t" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.cache.cachedType[cc.attrs.ctrl.key.typeNatural]}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-                        	<p:column><jtp:symbolizer value="#{t}"/></p:column>
-				            <p:column><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
+                        	<p:column><jtp:symbolizer value="#{t.parent}" marginRight="5"/><h:outputText value="#{t.parent.name[localeCode].lang}"/></p:column>
+				            <p:column><jtp:symbolizer value="#{t}" marginRight="5"/><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
                         </p:selectOneMenu>
  
                         <jtp:label entity="AomAsset" code="manufacturer"/>
