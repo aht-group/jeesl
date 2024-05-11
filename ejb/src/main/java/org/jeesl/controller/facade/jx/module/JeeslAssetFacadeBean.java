@@ -109,21 +109,11 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
 		Root<ASSET> root = cQ.from(fbAsset.getClassAsset());
-
-//		if(type1!=null)
-//		{
-//			Path<ATYPE> pType = root.get(JeeslAomAsset.Attributes.type1.toString());
-//			predicates.add(cB.equal(pType,type1));
-//		}
-//		if(type2!=null)
-//		{
-//			Path<ATYPE> pType = root.get(JeeslAomAsset.Attributes.type2.toString());
-//			predicates.add(cB.equal(pType,type2));
-//		}
 		
 		cQ.select(root);
 		cQ.where(cB.and(pAsset(cB,query,root)));
-
+		this.assetSortBy(cB, cQ, query, root);
+		
 		TypedQuery<ASSET> tQ = em.createQuery(cQ);
 		super.pagination(tQ,query);
 		return tQ.getResultList();
@@ -166,25 +156,25 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return tQ.getResultList();
 	}
 	
-	@Override public List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
-		Root<ASSET> root = cQ.from(fbAsset.getClassAsset());
-		
-		Expression<Long> eRefId = root.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
-		Path<REALM> pRealm = root.get(JeeslAomAsset.Attributes.realm.toString());
-		
-		predicates.add(cB.equal(eRefId,identifier.getId()));
-		predicates.add(cB.equal(pRealm,identifier.getRealm()));
-		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.select(root);
-
-		TypedQuery<ASSET> tQ = em.createQuery(cQ);
-		return tQ.getResultList();
-	}
+//	@Override public List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier)
+//	{
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
+//		Root<ASSET> root = cQ.from(fbAsset.getClassAsset());
+//		
+//		Expression<Long> eRefId = root.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
+//		Path<REALM> pRealm = root.get(JeeslAomAsset.Attributes.realm.toString());
+//		
+//		predicates.add(cB.equal(eRefId,identifier.getId()));
+//		predicates.add(cB.equal(pRealm,identifier.getRealm()));
+//		
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.select(root);
+//
+//		TypedQuery<ASSET> tQ = em.createQuery(cQ);
+//		return tQ.getResultList();
+//	}
 	
 	@Override
 	public List<ATYPE> fAomAssetTypes(TenantIdentifier<REALM> identifier, VIEW view)
@@ -270,32 +260,6 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return em.createQuery(cQ).getResultList();
 	}
 
-//	@Override public <RREF extends EjbWithId> List<EVENT> fAssetEvents(REALM realm, RREF rref, List<ESTATUS> status)
-//	{
-//		if(status==null || status.isEmpty()) {return new ArrayList<>();}
-//		CriteriaBuilder cB = em.getCriteriaBuilder();
-//		CriteriaQuery<EVENT> cQ = cB.createQuery(fbAsset.getClassEvent());
-//		Root<EVENT> event = cQ.from(fbAsset.getClassEvent());
-//		List<Predicate> predicates = new ArrayList<Predicate>();
-//		
-//		ListJoin<EVENT,ASSET> jAsset = event.joinList(JeeslAomEvent.Attributes.assets.toString());
-//		Expression<Long> eRefId = jAsset.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
-//		Path<REALM> pRealm = jAsset.get(JeeslAomAsset.Attributes.realm.toString());
-//		
-//		predicates.add(cB.equal(eRefId,rref.getId()));
-//		predicates.add(cB.equal(pRealm,realm));
-//		
-//		Join<EVENT,ESTATUS> jStatus = event.join(JeeslAomEvent.Attributes.status.toString());
-//		predicates.add(jStatus.in(status));
-//		
-//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-//		cQ.select(event);
-//		cQ.distinct(true);
-//
-//		TypedQuery<EVENT> tQ = em.createQuery(cQ);
-//		return tQ.getResultList();
-//	}
-
 	@Override public List<EVENT> fAomEvents(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -371,6 +335,20 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	public void assetSortBy(CriteriaBuilder cB, CriteriaQuery<ASSET> cQ, JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query, Root<ASSET> ejb)
+	{
+		List<Order> orders = new ArrayList<>();
+		for(JeeslCqOrdering el : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+			if(el.getPath().equals(CqOrdering.path(JeeslAomAsset.Attributes.position)))
+			{
+				Expression<Integer> e = ejb.get(JeeslAomAsset.Attributes.position.toString());
+				SortByPredicateBuilder.addByInteger(cB,orders,el,e);
+			}
+			else {logger.warn("No Handling for "+el.toString());}
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
 	public Predicate[] pEvent(CriteriaBuilder cB, JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query, Root<EVENT> root)

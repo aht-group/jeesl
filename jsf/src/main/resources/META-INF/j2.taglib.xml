@@ -116,6 +116,10 @@
 	</tag>
 	
 	<tag>
+        <tag-name>gridAomType</tag-name>
+        <component><resource-id>moduleAom/type.xhtml</resource-id></component>
+	</tag>
+	<tag>
         <tag-name>gridAomMaintenance</tag-name>
         <component>
             <resource-id>moduleAom/maintenance.xhtml</resource-id>

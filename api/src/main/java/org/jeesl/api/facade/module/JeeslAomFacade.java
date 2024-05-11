@@ -34,7 +34,7 @@ public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription
 
 //	<RREF extends EjbWithId> List<ASSET> fAomAssets(REALM realm, RREF rref, ATYPE type1);
 	List<ASSET> fAomAssets(JeeslAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query);
-	List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier);
+//	List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier);
 	List<ASSET> allAssets(ASSET root);
 
 	<RREF extends EjbWithId> VIEW fAomView(REALM realm, RREF rref, JeeslAomView.Tree tree) throws JeeslNotFoundException;

@@ -55,6 +55,8 @@ import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 import org.jeesl.jsf.helper.JeeslTreeHelper;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
+import org.jeesl.util.query.cq.CqOrdering;
+import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.jeesl.web.model.module.aom.AssetEventLazyModel;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
 import org.primefaces.event.DragDropEvent;
@@ -209,7 +211,11 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		if(Objects.nonNull(jogger)) {jogger.start("reloadTree");}
 		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
 		
-		List<ASSET> assets = fAom.fAomAssets(identifier);
+		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		query.tenant(identifier);
+		query.add(CqOrdering.ascending(JeeslAomAsset.Attributes.position));
+		
+		List<ASSET> assets = fAom.fAomAssets(query);
 		if(Objects.nonNull(jogger)) {jogger.milestone(fbAsset.getClassAsset(),"fAomAssets(identifier)",assets.size());}
 		
 		tree = th.build(assets);
@@ -289,12 +295,14 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
         logger.info("Dragged " + dragNode.getData() + " Dropped on " + dropNode.getData() + " at " + dropIndex);
         
         ASSET parent = (ASSET)dropNode.getData();
+//      logger.info("DropNode/Parent: "+parent.getName());
         int index=1;
         for(TreeNode<ASSET> n : dropNode.getChildren())
         {
     		ASSET child =(ASSET)n.getData();
     		child.setParent(parent);
     		child.setPosition(index);
+//    		logger.info("Child: "+index+" "+child.getName());
     		fAom.save(child);
     		index++;
         }  
