@@ -20,6 +20,7 @@ public interface JeeslAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 			extends JeeslCoreQuery,JeeslTenantQuery<REALM>,
 					JeeslPaginationQuery,JeeslOrderingQuery
 {
+//	void x();
 	public List<ASSET> getAssets();
 	public List<ATYPE> getAomAssetTypes();
 	public List<ESTATUS> getAomEventStatus();

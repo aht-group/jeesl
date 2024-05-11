@@ -30,7 +30,7 @@ public interface JeeslAomAsset <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 					JeeslWithStatus<STATUS>
 					
 {
-	public enum Attributes{realm,realmIdentifier,parent,type1,type2}
+	public enum Attributes{realm,realmIdentifier,parent,type1,type2,position}
 	
 	REALM getRealm();
 	void setRealm(REALM realm);

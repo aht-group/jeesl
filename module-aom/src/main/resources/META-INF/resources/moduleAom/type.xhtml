@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sAssets" width="7">
+			<h:form id="fTree" >
+				<p:panel header="#{msg.jeeslCmsDocumentStructure}" styleClass="jeesl-tree" >
+					<f:facet name="actions">
+						<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addType()}" update=":#{cc.id}:sType" tooltip="#{msg.jeeslAomTypeAdd}"/>
+					</f:facet>
+					<p:tree id="tree1" value="#{cc.attrs.ctrl.tree}" var="node" 
+							selection="#{cc.attrs.ctrl.node}" selectionMode="single"
+			                draggable="true" droppable="true" dragdropScope="demo">
+			            <p:ajax event="dragdrop" listener="#{cc.attrs.ctrl.onDragDrop}" update=":#{cc.id}:sType"/>
+			            <p:ajax event="select" listener="#{cc.attrs.ctrl.onNodeSelect}" update=":#{cc.id}:sType"/>
+			            <p:ajax event="expand" listener="#{cc.attrs.ctrl.onNodeExpand}" />
+						<p:ajax event="collapse" listener="#{cc.attrs.ctrl.onNodeCollapse}" />
+			            <p:treeNode>
+			            	<jtp:symbolizer value="#{node}" marginRight="5"/>
+			                <h:outputText value="#{node.name[localeCode].lang}" />
+			            </p:treeNode>
+			        </p:tree>
+				</p:panel>
+			</h:form>
+		</j:slot>
+		<j:slot id="sType" width="5">
+			<h:form id="fType" rendered="#{not empty cc.attrs.ctrl.type}">
+				<p:panel header="#{msg.jeeslAomType}" styleClass="jeesl-panel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.ctrl.cancelType()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.ctrl.saveType()}" update=":#{cc.id}:grid" />
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteType()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.type.id gt 0}"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="AomAssetType" code="id"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.type.id}"/>
+						
+						<jtp:label entity="AomAssetType" code="position"/>
+						<h:outputText value="#{cc.attrs.ctrl.type.position}"/>
+						
+						<jtp:label entity="AomAssetType" code="code"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.type.code}"/>
+
+					</j:inputGrid>
+					<p:panelGrid columns="6" columnClasses="jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15" rendered="#{cc.attrs.ctrl.type.id gt 0}">
+						<p:outputLabel value="8px"/>
+						<p:outputLabel value="12px"/>
+						<p:outputLabel value="14px"/>
+						<p:outputLabel value="18px"/>
+						<p:outputLabel value="24px"/>
+						<p:outputLabel value="32px"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.type}" height="8"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.type}" height="12"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.type}" height="14"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.type}" height="18"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.type}" height="24"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.type}" height="32"/>
+					</p:panelGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.ctrl.type}" withDescription="true"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fUpload" enctype="multipart/form-data" rendered="#{(not empty cc.attrs.ctrl.type) and (cc.attrs.ctrl.type.id gt 0)}">
+				<p:fileUpload styleClass="jeeslFileUpload"
+								listener="#{cc.attrs.ctrl.handleFileUpload}" mode="advanced" dragDropSupport="false"
+								update=":#{cc.id}:sType" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>
