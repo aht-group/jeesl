@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
+import org.jeesl.processor.io.report.jasper.ReportJasperCompiler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,8 +16,9 @@ public class AntJasperCreatorTask extends Task
 	
     public void execute() throws BuildException
     {
-    	try {
-			ReportCompiler.execute(configFile, reportRoot, targetDir);
+    	try
+    	{
+			ReportJasperCompiler.instance().compile(configFile, reportRoot, targetDir);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

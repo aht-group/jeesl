@@ -26,15 +26,16 @@ import org.slf4j.LoggerFactory;
 
 public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								CAT extends JeeslIoCmsCategory<L,D,CAT,?>,
-								CMS extends JeeslIoCms<L,D,LOC,CAT,S>,
+								CMS extends JeeslIoCms<L,D,LOC,CAT,SEC>,
 								V extends JeeslIoCmsVisiblity,
-								S extends JeeslIoCmsSection<L,S>,
-								E extends JeeslIoCmsElement<V,S,EC,ET,C,FC>,
+								SEC extends JeeslIoCmsSection<L,SEC>,
+								E extends JeeslIoCmsElement<V,SEC,EC,ET,C,FC>,
 								EC extends JeeslStatus<L,D,EC>,
 								ET extends JeeslIoCmsElementType<L,D,ET,?>,
 								C extends JeeslIoCmsContent<V,E,MT>,
 								M extends JeeslIoMarkup<MT>,
 								MT extends JeeslIoMarkupType<L,D,MT,?>,
+								
 								FC extends JeeslFileContainer<?,FM>,
 								FM extends JeeslFileMeta<D,FC,?,?>
 								>
@@ -47,7 +48,7 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 	private final Class<LOC> cLoc; public Class<LOC> getClassLocale() {return cLoc;}
 	private final Class<CAT> cCategory; public Class<CAT> getClassCategory() {return cCategory;}
 	private final Class<CMS> cCms; public Class<CMS> getClassCms() {return cCms;}
-	private final Class<S> cSection; public Class<S> getClassSection() {return cSection;}
+	private final Class<SEC> cSection; public Class<SEC> getClassSection() {return cSection;}
 	private final Class<E> cElement; public Class<E> getClassElement() {return cElement;}
 	private final Class<EC> cElementCategory; public Class<EC> getClassElementCategory() {return cElementCategory;}
 	private final Class<ET> cElementType; public Class<ET> getClassElementType() {return cElementType;}
@@ -58,7 +59,7 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
     
 	public IoCmsFactoryBuilder(final Class<L> cL, final Class<D> cD,final Class<LOC> cLoc,
 				final Class<CAT> cCategory, final Class<CMS> cCms,
-				final Class<S> cSection,
+				final Class<SEC> cSection,
 				final Class<E> cElement,final Class<EC> cElementCategory,final Class<ET> cElementType,
 				final Class<C> cContent,
 				final Class<M> cMarkup,
@@ -80,9 +81,9 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 		this.cFileMeta=cFileMeta;
 	}
 	
-	public EjbIoCmsFactory<L,D,CAT,CMS,V,S,C,MT,LOC> ejbCms() {return new EjbIoCmsFactory<>(cCms);}
-	public EjbIoCmsSectionFactory<L,S,FM> ejbSection() {return new EjbIoCmsSectionFactory<>(cSection);}
-	public EjbIoCmsElementFactory<L,S,E> ejbElement() {return new EjbIoCmsElementFactory<>(cElement);}
+	public EjbIoCmsFactory<L,D,CAT,CMS,V,SEC,C,MT,LOC> ejbCms() {return new EjbIoCmsFactory<>(cCms);}
+	public EjbIoCmsSectionFactory<L,SEC,FM> ejbSection() {return new EjbIoCmsSectionFactory<>(cSection);}
+	public EjbIoCmsElementFactory<L,SEC,E> ejbElement() {return new EjbIoCmsElementFactory<>(cElement);}
 	public EjbIoCmsContentFactory<LOC,E,C,MT> ejbContent() {return new EjbIoCmsContentFactory<>(cContent);}
 	public EjbIoCmsMarkupFactory<M,MT> ejbMarkup() {return new EjbIoCmsMarkupFactory<>(cMarkup);}
 }

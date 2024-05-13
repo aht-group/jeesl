@@ -14,7 +14,7 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     
     
-    
+    <c:if test="#{not empty cc.attrs.styleClass}"><f:attribute name="styleClass" value="#{cc.attrs.styleClass}"/></c:if>
     </ui:remove>
     
 	<composite:interface>
@@ -32,8 +32,9 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<h:outputText value="#{cc.attrs.value}">
-			<c:if test="#{not empty cc.attrs.styleClass}"><f:attribute name="styleClass" value="#{cc.attrs.styleClass}"/></c:if>
+		<h:outputText value="#{cc.attrs.value}"
+						styleClass="#{empty cc.attrs.styleClass ? '' : cc.attrs.styleClass}">
+			
 			
 			<c:if test="#{cc.attrs.withDate}">
 				<c:choose>
