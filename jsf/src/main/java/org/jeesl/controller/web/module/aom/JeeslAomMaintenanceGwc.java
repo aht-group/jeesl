@@ -1,18 +1,21 @@
-package org.jeesl.controller.web.g.module.aom;
+package org.jeesl.controller.web.module.aom;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
-import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -24,6 +27,7 @@ import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.model.io.cms.css.JeeslIoCmsCssStyle;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
@@ -46,8 +50,8 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
-import org.jeesl.model.ejb.module.aom.event.AomEvent;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
+import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.module.EjbAomQuery;
@@ -68,6 +72,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 										ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
 										M extends JeeslIoMarkup<MT>,
 										MT extends JeeslIoMarkupType<L,D,MT,?>,
+										CSS extends JeeslIoCmsCssStyle<L,D,CSS,?>,
 										USER extends JeeslSecurityUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
@@ -92,6 +97,10 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	private final UiHelperAsset<L,D,REALM,COMPANY,SCOPE,EVENT,ETYPE> uiHelper; public UiHelperAsset<L,D,REALM,COMPANY,SCOPE,EVENT,ETYPE> getUiHelper() {return uiHelper;}
 	private NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;} public void setNnb(NullNumberBinder nnb) {this.nnb = nnb;}
 
+	private final EjbCodeCache<CSS> cacheStyle;
+	
+	private final Map<EVENT,String> mapCss; public Map<EVENT,String> getMapCss() {return mapCss;}
+	
 	private final List<EVENT> events; public List<EVENT> getEvents() {return events;}
 	private final List<EVENT> history; public List<EVENT> getHistory() {return history;}
 
@@ -105,7 +114,8 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	private EVENT event; public EVENT getEvent() {return event;} public void setEvent(EVENT event) {this.event = event;}
 
-	public JeeslAomMaintenanceGwc(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
+	public JeeslAomMaintenanceGwc(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset
+			)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
@@ -124,6 +134,10 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		sbhEventStatus = new SbMultiHandler<>(fbAsset.getClassEventStatus(),this);
 		sbDateHandler = SbDateHandler.instance(this);
 		sbDateHandler.initWeeks(0,4);
+		
+		cacheStyle = EjbCodeCache.instance(null);
+		
+		mapCss = new HashMap<>();
 		
 		events = new ArrayList<>();
 		history = new ArrayList<>();
@@ -166,6 +180,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	private void reloadEvents()
 	{
 		events.clear();
+		mapCss.clear();
 
 		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.tenant(tenant);
@@ -174,6 +189,15 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		
 		events.addAll(fAsset.fAomEvents(query));
 		Collections.sort(events,cpEvent);
+		
+		LocalDate now = LocalDate.now();
+		for(EVENT e : events)
+		{
+			if(DateUtil.toLocalDate(e.getRecord()).isBefore(now))
+			{
+				mapCss.put(e,"jeesl-red");
+			}
+		}		
 	}
         
     public void selectEvent()
@@ -192,7 +216,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		query.add(CqOrdering.desending(CqOrdering.path(JeeslAomEvent.Attributes.record)));
 		
     	history.addAll(fAsset.fAomEvents(query));
-    	logger.info(AomEvent.class.getSimpleName()+": "+history.size());
+    	logger.info(fbAsset.getClassEvent().getSimpleName()+": "+history.size());
     }
     
     public void cloneEvent()

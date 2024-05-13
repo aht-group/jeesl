@@ -31,12 +31,8 @@
 					<p:column headerText="#{msg.jeeslAssetEventDate}">
 						<h:panelGroup styleClass="jeesl-nbsc">
 							<jtp:symbolizer value="#{e.status}" marginRight="5"/>
-							<jp:outputDate type="both" value="#{e.record}" withMinute="false"/>
+							<jp:outputDate type="both" value="#{e.record}" withMinute="false" styleClass="#{cc.attrs.ctrl.mapCss[e]}"/>
 						</h:panelGroup>
-					</p:column>
-					<p:column rendered="false" headerText="#{msg.jeeslAssetEventType}">
-						<jtp:symbolizer value="#{e.type}" marginRight="5"/>
-						<h:outputText value="#{e.type.name[localeCode].lang}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslAsset}">
 						<ui:repeat var="a" value="#{e.assets}">
@@ -57,7 +53,7 @@
 						<jtp:symbolizer value="#{e.type}" marginRight="5"/>
 						<jp:outputAmount value="#{e.name}"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslAssetCompany}" rendered="#{not cc.attrs.ctrl.slotHandler.showB}">
+					<p:column headerText="#{msg.jeeslAssetCompany}" rendered="#{false and (not cc.attrs.ctrl.slotHandler.showB)}">
 						<h:outputText value="#{e.company.code}" rendered="#{not empty e.company}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslAssetEventAmount}" styleClass="jeeslRight" rendered="false">

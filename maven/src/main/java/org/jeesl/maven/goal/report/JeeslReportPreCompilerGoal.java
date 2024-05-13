@@ -1,7 +1,10 @@
 package org.jeesl.maven.goal.report;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -10,8 +13,9 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
-
-import net.sf.ahtutils.report.ReportCompiler;
+import org.jeesl.processor.io.report.jasper.ReportJasperCompiler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Goal which compiles a set of JasperReports jrxml files to .jasper file. Creates a rtl language and a ltr language version of all reports.
@@ -19,6 +23,8 @@ import net.sf.ahtutils.report.ReportCompiler;
 @Mojo(name ="compileReports", requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PREPARE_PACKAGE)
 public class JeeslReportPreCompilerGoal extends AbstractMojo
 {
+	final static Logger logger = LoggerFactory.getLogger(JeeslReportPreCompilerGoal.class);
+	
 	@Parameter(defaultValue = "${project.basedir}/src/main/resources/reports.${project.artifactId}/reports.xml", required = true)
     private String configFile;
     
@@ -28,20 +34,36 @@ public class JeeslReportPreCompilerGoal extends AbstractMojo
     @Parameter(defaultValue = "${project.build.directory}/classes/reports.${project.artifactId}", required = true)
     private String target;
     
+    @Parameter(required=false)
+    private String target2;
+    
     @Parameter(defaultValue = "WARN")
     private String log;
 	
     public void execute() throws MojoExecutionException
-    {    	
-    	getLog().info("Using configFile " +configFile);
-    	getLog().info("Using jrxml from " +source);
-    	getLog().info("Compiling jasper to " +target);
+    {
+    	Path p2 = Paths.get(target2);
+    	
+    	logger.info("Config File: "+configFile);
+    	logger.info("Source jrxml: " +source);
+    	logger.info("Compiling (v1).jasper-files to " +target);
+    	logger.info("Compiling (v2).jasper-files to " +target2);
+    	logger.info("Compiling (v2).jasper-files to path " +p2.toString());
     	
     	ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
     	int[] counter;
 		try
 		{
-			counter = ReportCompiler.execute(configFile, source, target);
+			ReportJasperCompiler jasper = new ReportJasperCompiler();
+			
+			counter = jasper.compile(configFile, source, target);
+			
+			if(Objects.nonNull(target2))
+			{
+				logger.info("t2: "+target2);
+				jasper.compile(configFile, source, p2);
+			}
+
 		}
 		catch (FileNotFoundException e) {throw new MojoExecutionException("Report file not found.");}
     	

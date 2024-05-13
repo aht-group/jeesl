@@ -2,11 +2,12 @@ package org.jeesl.controller.web.c.module.aom;
 
 import java.io.Serializable;
 
-import org.jeesl.controller.web.g.module.aom.JeeslAomMaintenanceGwc;
+import org.jeesl.controller.web.module.aom.JeeslAomMaintenanceGwc;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.cms.markup.IoCmsStyle;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkupType;
 import org.jeesl.model.ejb.io.fr.IoFileContainer;
@@ -29,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslAomMaintenanceWc <RREF extends EjbWithId>
-					extends JeeslAomMaintenanceGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventType,AomEventStatus,IoMarkup,IoMarkupType,SecurityUser,IoFileContainer,AomEventUpload>
+					extends JeeslAomMaintenanceGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventType,AomEventStatus,IoMarkup,IoMarkupType,IoCmsStyle,SecurityUser,IoFileContainer,AomEventUpload>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;

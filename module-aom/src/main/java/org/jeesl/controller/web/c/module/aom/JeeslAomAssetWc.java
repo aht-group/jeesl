@@ -2,7 +2,7 @@ package org.jeesl.controller.web.c.module.aom;
 
 import java.io.Serializable;
 
-import org.jeesl.controller.web.g.module.aom.JeeslAomAssetGwc;
+import org.jeesl.controller.web.module.aom.JeeslAomAssetGwc;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkupType;
