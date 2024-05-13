@@ -1477,6 +1477,10 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui
 	@extend .ui-corner-right;
 }
 
+.ui-dialog-mask {
+	z-index: 1002 !important;
+}
+
 /* Primefaces 12 fixes */
 body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
 	font-family: "Font Awesome 5 Free" !important;
