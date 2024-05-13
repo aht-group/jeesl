@@ -63,16 +63,16 @@ import org.apache.commons.io.IOUtils;
  */
 public class ReportHandler
 {
-	
 	final static Logger logger = LoggerFactory.getLogger(ReportHandler.class);
+	public enum Format {pdf, xls};
+	
+	protected MultiResourceLoader mrl;
+	
 	protected Reports reports;
 	protected Resources resources;
 	protected Templates templates;
 	protected String reportRoot;
 	protected String configFileLocation;
-	protected MultiResourceLoader mrl;	
-	
-	public enum Format {pdf, xls};
 	
 	/*
 	 * This class contains methods to work with the elements configured in reports.xml,
@@ -84,12 +84,13 @@ public class ReportHandler
 	public ReportHandler(String reportFile) throws ReportException
 	{
 		logger.info("Initializing report handling system");
-		mrl = MultiResourceLoader.instance();
+		
 		configFileLocation = reportFile.substring(0, reportFile.lastIndexOf("/")) +"/";
 		
 		try
 		{
 			reports = JaxbUtil.loadJAXB(reportFile, Reports.class);
+			logger.info("Configured with baseDir: "+reports.getDir());
 //			JaxbUtil.debug2(reports);
 		}
 		catch (FileNotFoundException e)
@@ -99,6 +100,9 @@ public class ReportHandler
 		
 		//Reading reportRoot directory from configuration file and add all directories covered by the conventions of the AHTUtils reporting system
 		reportRoot = reports.getDir() +"/";
+		
+		mrl = MultiResourceLoader.instance();
+		mrl.setDebugInfo(false);
 		mrl.addPath(reports.getDir());
 		mrl.addPath(configFileLocation);
 		mrl.addPath("src/main/resource/" +reportRoot);
@@ -128,24 +132,10 @@ public class ReportHandler
 			templates = (Templates)JaxbUtil.loadJAXB(reportRoot +"templates.xml", Templates.class);
 			logger.info("Read templates definitions from " +reportRoot +"templates.xml");
 		}
-		catch (FileNotFoundException e) {
+		catch (FileNotFoundException e)
+		{
 			logger.warn("Problem loading templates.xml from " +reportRoot +" - no templates needed?");
 		}
-	}
-	
-	/*
-	 * This class contains methods to work with the elements configured in reports.xml, resources.xml and templates.xml - Additional functionality needs to be implemented in dedicated classes (e.g. working with specific data XML files, report)
-	 * @param reports Reports object
-	 * @param resources Resources object
-	 * @param templates Templates object
-	 * @throws ReportException
-	 */
-	public ReportHandler(Reports reports, Resources resources,Templates templates) throws ReportException
-	{
-		logger.info("Initializing report handling system with given configuration objects");
-		this.reports   = reports;
-		this.resources = resources;
-		this.templates = templates;
 	}
 
 	/*
@@ -187,6 +177,15 @@ public class ReportHandler
 		catch (FileNotFoundException e)
 		{
 			logger.warn("Problem loading templates.xml from " +reports.getTemplates() +" - no templates needed?");
+		}
+	}
+	
+	public void overrideResourcePath(String path)
+	{
+		if(Objects.nonNull(mrl))
+		{
+			mrl.clearPath();
+			mrl.addPath(path);
 		}
 	}
 	
@@ -305,14 +304,8 @@ public class ReportHandler
 		Jr report = null;
 		try
 		{
-			if (subreport != null)
-			{
-				report = ReportXpath.getSr(reports, reportId, subreport, format);
-			}
-			else
-			{
-				report = ReportXpath.getMr(reports, reportId, format);
-			}
+			if(Objects.isNull(subreport))	{report = ReportXpath.getMr(reports, reportId, format);}
+			else 							{report = ReportXpath.getSr(reports, reportId, subreport, format);}
 		}
 		catch (ExlpXpathNotFoundException e1) {throw new ReportException("XPath has not been found when trying to find report with id " +reportId +"! " +e1.getMessage());}
 		catch (ExlpXpathNotUniqueException e1) {throw new ReportException("XPath search found non-unique results when trying to find report with id " +reportId +"! " +e1.getMessage());}
@@ -472,8 +465,7 @@ public class ReportHandler
 				BufferedImage image = null;
 				try
 				{
-					String imgLocation = "/resources/" +res.getType() +"/" +res.getValue().getValue();
-					logger.info("Including image resource: " +imgLocation);
+					String imgLocation = "resources/" +res.getType() +"/" +res.getValue().getValue();
 					image = ImageIO.read(mrl.searchIs(imgLocation));
 				} 
 				catch (FileNotFoundException e) {logger.error(e.getMessage());}
@@ -513,26 +505,27 @@ public class ReportHandler
 				mapReportParameter.put(res.getName(), Base64.getEncoder().encodeToString(byteArrayOfVectorImage));
 			}
 			else if (res.getType().equals("template"))           
-			{
-                                
-				try {
-					String templateLocation = "/resources/templates" +"/" +res.getValue().getValue();
+			{                 
+				try
+				{
+					String templateLocation = "resources/templates" +"/" +res.getValue().getValue();
 					logger.info("Including style template resource: " +templateLocation);
 					JRTemplate style = (JRTemplate) JRXmlTemplateLoader.load(mrl.searchIs(templateLocation));
-                                            mapReportParameter.put(res.getName() +"-style", style);
-                                            templateList.add(style);
-                                    }
-				catch (FileNotFoundException e) {logger.error(e.getMessage());}
-				catch (IOException e) {logger.error(e.getMessage());}
-				
+					mapReportParameter.put(res.getName() +"-style", style);
+					templateList.add(style);
+				}
+				catch (FileNotFoundException e) {logger.error(e.getMessage());}				
 			}
 		}
-                mapReportParameter.put("REPORT_TEMPLATES", templateList);
-		for (Object key : mapReportParameter.keySet())
+		
+		mapReportParameter.put("REPORT_TEMPLATES", templateList);
+		
+		for(String key : mapReportParameter.keySet())
 		{
-			String keyString = (String) key;
-			String valueString = mapReportParameter.get(keyString).getClass().getCanonicalName();
-			if (logger.isTraceEnabled()) {logger.trace("Report Parameter: " +keyString +" = " +valueString);}
+			logger.info("Debug: "+key+" "+mapReportParameter.containsKey(key));
+//			Object value = mapReportParameter.get(key);
+			String valueString = mapReportParameter.get(key).getClass().getCanonicalName();
+			if (logger.isTraceEnabled()) {logger.trace("Report Parameter: " +key +" = " +valueString);}
 		}
 		return mapReportParameter;
 	}
@@ -674,12 +667,11 @@ public class ReportHandler
 	public ByteArrayOutputStream createUsingJDom(String reportId, org.jdom2.Document doc, Format format, Locale locale, boolean swap) throws ReportException
 	{
 		logger.info("Using JDom data document.");
-		//	JasperDesign masterDesign = getMasterReport(reportId, format.name());
-		//	JasperReport masterReport = getCompiledReport(masterDesign);
-		JasperReport masterReport = getCompiledReport(reportId, null, format.name(), "mr");
+		JasperReport masterReport = this.getCompiledReport(reportId, null, format.name(), "mr");
+		
 		Map<String, Object> reportParameterMap = getParameterMapJDom(doc, locale);
 		reportParameterMap.putAll(getSubreportsMap(reportId, format.name()));
-		if(swap) { reportParameterMap.put(JRParameter.REPORT_VIRTUALIZER, useSwapFileVirtualizer());}
+		if(swap) {reportParameterMap.put(JRParameter.REPORT_VIRTUALIZER, useSwapFileVirtualizer());}
 
 		JasperPrint print = getJasperPrint(masterReport, reportParameterMap);
 

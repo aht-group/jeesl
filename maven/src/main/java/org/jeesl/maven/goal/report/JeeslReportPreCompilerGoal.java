@@ -26,29 +26,26 @@ public class JeeslReportPreCompilerGoal extends AbstractMojo
 	final static Logger logger = LoggerFactory.getLogger(JeeslReportPreCompilerGoal.class);
 	
 	@Parameter(defaultValue = "${project.basedir}/src/main/resources/reports.${project.artifactId}/reports.xml", required = true)
-    private String configFile;
+    private String xmlConfig;
     
     @Parameter(defaultValue = "${project.basedir}/src/main/reports.${project.artifactId}", required = true)
     private String source;
     
-    @Parameter(defaultValue = "${project.build.directory}/classes/reports.${project.artifactId}", required = true)
+    @Parameter(defaultValue="${project.build.directory}/classes/reports.${project.artifactId}", required = true)
     private String target;
-    
-    @Parameter(required=false)
-    private String target2;
     
     @Parameter(defaultValue = "WARN")
     private String log;
 	
     public void execute() throws MojoExecutionException
     {
-    	Path p2 = Paths.get(target2);
+    	Path pTarget = Paths.get(target);
     	
-    	logger.info("Config File: "+configFile);
+    	logger.info("Config xmlConfig: "+xmlConfig);
     	logger.info("Source jrxml: " +source);
-    	logger.info("Compiling (v1).jasper-files to " +target);
-    	logger.info("Compiling (v2).jasper-files to " +target2);
-    	logger.info("Compiling (v2).jasper-files to path " +p2.toString());
+    	logger.info("Compiling (v1).jasper-files to " +pTarget.toString());
+//    	logger.info("Compiling (v2).jasper-files to " +target2);
+//    	logger.info("Compiling (v2).jasper-files to path " +p2.toString());
     	
     	ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
     	int[] counter;
@@ -56,14 +53,13 @@ public class JeeslReportPreCompilerGoal extends AbstractMojo
 		{
 			ReportJasperCompiler jasper = new ReportJasperCompiler();
 			
-			counter = jasper.compile(configFile, source, target);
+			counter = jasper.compile(xmlConfig, source, pTarget);
 			
-			if(Objects.nonNull(target2))
-			{
-				logger.info("t2: "+target2);
-				jasper.compile(configFile, source, p2);
-			}
-
+//			if(Objects.nonNull(target2))
+//			{
+//				logger.info("t2: "+target2);
+//				jasper.compile(xmlConfig, source, p2);
+//			}
 		}
 		catch (FileNotFoundException e) {throw new MojoExecutionException("Report file not found.");}
     	

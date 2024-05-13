@@ -56,17 +56,16 @@ public class ReportJasperCompiler
  		for(Report report : reports.getReport())
  		{
  			compiledCounter[0]++;
- 			logger.info("Report: "+report.getId() +" (" +report.getMedia().size() + " media outputs)");
+// 			logger.info("Report: "+report.getId() +" (" +report.getMedia().size() + " media outputs)");
  			for (Media media : report.getMedia())
  			{
-				if (media.getType().equals("pdf"))
+				if(media.getType().equals("pdf"))
 				{
 					compiledCounter[1]++;
-					logger.info("Compiling " +media.getJr().size() +" reports for output -" +media.getType() +"-");
+//					logger.info(report.getId()+": Compiling " +media.getJr().size() +" reports for output -" +media.getType() +"-");
 					for (Jr jr : media.getJr())
 					{
 						compiledCounter[2]++;
-						logger.info(jr.getName());
 						//Compiling for left to right and right to left languages
 						Path pJrxml = Paths.get(report.getDir(),media.getType(),jr.getType()+jr.getName()+".jrxml");
 						
@@ -74,7 +73,7 @@ public class ReportJasperCompiler
 						{
 							Path pJasper = Paths.get(report.getDir(),media.getType(),"ltr", jr.getType()+jr.getName()+".jasper");
 							
-							logger.info("Compiling LTR " +pJrxml.toString() +" to " +pJasper);
+							logger.info(report.getId()+": Compiling LTR " +pJrxml.toString() +" to " +pJasper);
 							new File(pDstJasper.toString()  +"/" +report.getDir() +"/" + media.getType() + "/ltr/").mkdirs();
 							
 //							ReportJasperCompiler.compileReport(pJrxml.toString(), jasperLtr);
