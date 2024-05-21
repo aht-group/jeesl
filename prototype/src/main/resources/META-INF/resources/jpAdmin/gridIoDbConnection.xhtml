@@ -15,7 +15,7 @@
 				<j:slot id="sCriterias" width="12">
 					<p:dataTable styleClass="jeesl-datatable"
 							var="c" value="#{cc.attrs.bean.connections}">
-						<f:facet name="header"><j:dtHeader entity="IoDbConnectionColumn" code="lConnection"/></f:facet>
+						<f:facet name="header"><j:dtHeader entity="IoDbConnectionColumn" code="listOf"/></f:facet>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['id'].name[localeCode].lang}"/></f:facet>
 							<h:outputText value="#{c.id}"/>
