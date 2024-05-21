@@ -387,8 +387,10 @@ body {
 						display: block;
 						height: auto;
 						line-height: $line-height-base;
+//						margin: 0 auto;
 						padding: 0;
-						width: $line-height-base;
+//						width: $line-height-base;
+						width: 100%;
 						
 						@media (max-width: 768px) {
 							line-height: calc($ls-element-height-mobile - $separator-thickness-mobile);
@@ -416,7 +418,7 @@ body {
 			
 			.ui_tpicker_time_label {
 				margin: 0 0 #{$regular-spacing} #{-$wide-spacing};
-				padding-left: $wide-spacing;
+				padding: 0 0 0 $wide-spacing;
 			}
 			
 			.ui_tpicker_time {

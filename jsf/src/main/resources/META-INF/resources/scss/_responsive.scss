@@ -2494,6 +2494,10 @@ body, .ui-widget {
 					}
 				}
 				
+				&.jeesl-menu-bar-popup-button {
+					z-index: 1003;
+				}
+				
 				&.jeesl-active {
 					background: $main-background-gradient 0 0 / 99% 100% no-repeat;
 					
@@ -2761,6 +2765,10 @@ body, .ui-widget {
 					&.jeesl-active:after {
 						opacity: 1;
 					}
+				}
+				
+				&.jeesl-menu-bar-popup-button {
+					z-index: 1003;
 				}
 				
 				&.jeesl-menu-bar-button-gravatar {
