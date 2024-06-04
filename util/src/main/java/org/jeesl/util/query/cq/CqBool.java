@@ -45,4 +45,5 @@ public class CqBool implements JeeslCqBoolean
 	}
 	
 	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
+	public static String path(Class<?> c, Serializable...attributes) {return CqGraphFetch.path(c,attributes);}
 }

@@ -1,7 +1,6 @@
 package org.jeesl.controller.facade.jx.io;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +17,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
@@ -563,8 +563,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(pSsiData(cB,query,root)));
 		
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
-		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
-		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
 
@@ -572,7 +571,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		for(JeeslCqLiteral c : ObjectUtils.isNotEmpty(query.getCqLiterals()) ? query.getCqLiterals() : Collections.<JeeslCqLiteral>emptyList())
+		for(JeeslCqLiteral c : ListUtils.emptyIfNull(query.getCqLiterals()))
 		{
 			if(c.getPath().equals(CqLiteral.path(JeeslIoSsiData.Attributes.job1,JeeslJobStatus.Att.code)))
 			{
@@ -582,23 +581,21 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 			}
 			else {logger.warn("NYI Path: "+c.toString());}
 		}
-		if(ObjectUtils.isNotEmpty(query.getCqLongs()))
+		for(JeeslCqLong cq : ListUtils.emptyIfNull(query.getCqLongs()))
 		{
-			for(JeeslCqLong cq : query.getCqLongs())
+			Expression<Long> eId = null;
+			if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refA))) {eId = root.get(JeeslIoSsiData.Attributes.refA.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refB))) {eId = root.get(JeeslIoSsiData.Attributes.refB.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refC))) {eId = root.get(JeeslIoSsiData.Attributes.refC.toString());}
+			if(Objects.isNull(eId)) {logger.error("NYI "+cq.toString());}
+			else
 			{
-				Expression<Long> eId = null;
-				if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refA))) {eId = root.get(JeeslIoSsiData.Attributes.refA.toString());}
-				else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refB))) {eId = root.get(JeeslIoSsiData.Attributes.refB.toString());}
-				else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refC))) {eId = root.get(JeeslIoSsiData.Attributes.refC.toString());}
-				if(Objects.isNull(eId)) {logger.error("NYI "+cq.toString());}
-				else
+			
+				switch(cq.getType())
 				{
-					switch(cq.getType())
-					{
-						case IsValue: predicates.add(cB.equal(eId,cq.getValue())); break;
-						case IsNull: predicates.add(cB.isNull(eId)); break;
-						default: logger.error("NYI "+cq.toString());
-					}
+					case IsValue: predicates.add(cB.equal(eId,cq.getValue())); break;
+					case IsNull: predicates.add(cB.isNull(eId)); break;
+					default: logger.error("NYI "+cq.toString());
 				}
 			}
 		}
