@@ -217,12 +217,17 @@ body {
 				&.ui-state-highlight {
 					background: $highlight-colour;
 					color: $white-100;
+					
+					> td {
+						border-color: $highlight-border-colour;
+					}
 				}
 				
 				> td, .ui-panelgrid-cell {
 					background: transparent;
 					border-color: $light-grey;
 					padding: $half-spacing $regular-spacing;
+					transition: border-color $transition-duration linear;
 				}
 			}
 		}
@@ -301,6 +306,10 @@ body {
 				padding: $half-spacing $regular-spacing;
 			}
 		}
+	}
+	
+	.ui-button.ui-button-text-only .ui-button-text {
+		padding: $slim-spacing 0;
 	}
 	
 	.ui-chkbox .ui-chkbox-box {

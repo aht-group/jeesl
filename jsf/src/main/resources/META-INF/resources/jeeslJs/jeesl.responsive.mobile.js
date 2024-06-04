@@ -4,6 +4,14 @@
  */
 calculateMenuHeight = function() {
 	let cssRules = '';
-	$('.jeesl-dropdown-list').each((index, element) => cssRules += '#' + $(element).attr('id') + '.jeesl-active { height: ' + ($(element).children('.jeesl-dropdown-item').toArray().map(child => $(child).outerHeight()).reduce((previous, current) => previous + current, 0) + 30) + 'px; }');
+	$('.jeesl-dropdown-list').each((index, element) =>
+		cssRules += '#' +
+					$(element).attr('id') +
+					'.jeesl-active { height: ' +
+					($(element).children('.jeesl-dropdown-item')
+							  .toArray()
+							  .map(child => $(child).outerHeight())
+							  .reduce((previous, current) => previous + current, 0) + 15 + $(element).hasClass('.jeesl-dropdown-list-multi') * 15) +
+					'px; }');
 	menuHeightStyle.append(cssRules);
 }

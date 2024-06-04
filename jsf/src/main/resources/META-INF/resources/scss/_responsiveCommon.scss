@@ -203,7 +203,7 @@ $border: $border-width solid $border-colour;
 	cursor: pointer;
 	font-weight: 700;
 	line-height: normal;
-	padding: 0 $half-spacing;
+	padding: 0 $regular-spacing;
 	text-align: center;
 	text-shadow: $text-shadow;
 	transition: border-color $transition-duration linear, color $transition-duration linear, text-shadow $transition-duration linear;
@@ -231,6 +231,10 @@ $border: $border-width solid $border-colour;
 		.ui-button-text {
 			display: none;
 		}
+	}
+	
+	&.ui-button-text-only .ui-icon-loading + .ui-button-text {
+		padding-left: $half-spacing;
 	}
 	
 	&.#{$active-class}, &.ui-state-hover, &:hover {
@@ -272,7 +276,7 @@ $border: $border-width solid $border-colour;
 	
 	.ui-button-text {
 		line-height: normal;
-		padding: $slim-spacing $regular-spacing;
+		padding: $slim-spacing 0;
 	}
 }
 
@@ -344,8 +348,14 @@ $border: $border-width solid $border-colour;
 .ui-button.ui-state-default {
 	@include button;
 	
-	&.ui-state-loading .ui-icon {
-		display: inline-block;
+	&.ui-state-loading {
+		.ui-button-text {
+			opacity: 1;
+		}
+		
+		.ui-icon {
+			display: inline-block;
+		}
 	}
 	
 	.ui-icon {
@@ -1135,7 +1145,6 @@ $border: $border-width solid $border-colour;
 	
 	.p-grid {
 		display: flex;
-		flex-wrap: wrap;
 		
 		&.p-field {
 			align-items: center;
@@ -1253,6 +1262,10 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui
 			content: $icon-return;
 		}
 	}
+	
+	&.ui-icon-loading:before {
+		content: $icon-loading;
+	}
 }
 
 .ui-spinner {
@@ -1313,23 +1326,11 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui
 		flex-grow: 1;
 		
 		&:not(:first-child) {
-			border-radius: $border-radius-right;
 			padding-left: 0 !important;
 		}
 		
 		&:not(:last-child) {
-			border-radius: $border-radius-left;
 			padding-right: 0 !important;
-		}
-	}
-	
-	> .ui-inputtextarea, > .ui-inputtext, > .jeesl-input-label {
-		&:first-child {
-			border-radius: $border-radius-left;
-		}
-		
-		&:last-child {
-			border-radius: $border-radius-right;
 		}
 	}
 }
