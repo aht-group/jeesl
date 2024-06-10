@@ -1,4 +1,4 @@
-package org.jeesl.controller.web.g.module.aom;
+package org.jeesl.controller.web.module.aom;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,7 +14,6 @@ import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
-import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -52,7 +51,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
-import org.jeesl.jsf.helper.JeeslTreeHelper;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.query.cq.CqOrdering;
@@ -98,9 +96,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
-	private final JeeslTreeHelper<ASSET> th;
 	private final TreeHelper<ASSET> thAsset;
-	
 	private final EjbAssetFactory<REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE> efAsset;
 	private final EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT> efEvent;
 	
@@ -117,8 +113,8 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
     
 	private final Set<ASSET> path;
 
-	private TreeNode<ASSET> tree; public TreeNode<ASSET> getTree() {return tree;}
-    private TreeNode<ASSET> node; public TreeNode<ASSET> getNode() {return node;} public void setNode(TreeNode<ASSET> node) {this.node = node;}
+	private TreeNode tree; public TreeNode getTree() {return tree;}
+    private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
 
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
@@ -139,9 +135,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		sbhEventType = new SbMultiHandler<>(fbAsset.getClassEventType(),this);
 		lazyEvents = new AssetEventLazyModel<>(fbAsset.cpEvent(EjbEventComparator.Type.recordDesc),thfEventType,sbhEventType);
 		
-		th = JeeslTreeHelper.instance();
 		thAsset = TreeHelper.instance();
-		
 		efAsset = fbAsset.ejbAsset();
 		efEvent = fbAsset.ejbEvent();
 		
@@ -218,13 +212,17 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		List<ASSET> assets = fAom.fAomAssets(query);
 		if(Objects.nonNull(jogger)) {jogger.milestone(fbAsset.getClassAsset(),"fAomAssets(identifier)",assets.size());}
 		
-		tree = th.build(assets);
-//		tree = new DefaultTreeNode<>();
-//		TreeHelper.buildTree(tree,assets);
+		tree = new DefaultTreeNode();
+		TreeHelper.buildTree(tree,assets);
 		if(Objects.nonNull(jogger)) {jogger.milestone(tree.getClass(),"TreeHelper.buildTree",assets.size());}
 
+//		root = fAom.fcAssetRoot(identifier.getRealm(),identifier);
+//		if(Objects.nonNull(jogger)) {jogger.milestone("root");}
+		
+//		buildTree(tree,fAom.allForParent(fbAsset.getClassAsset(), root));
+//		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
 	}
-
+	
 	public void expandTree()
 	{
 		thAsset.setExpansion(this.node != null ? this.node : this.tree, true);
@@ -289,15 +287,15 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-        TreeNode<ASSET> dragNode = event.getDragNode();
-        TreeNode<ASSET> dropNode = event.getDropNode();
+        TreeNode dragNode = event.getDragNode();
+        TreeNode dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
         logger.info("Dragged " + dragNode.getData() + " Dropped on " + dropNode.getData() + " at " + dropIndex);
         
         ASSET parent = (ASSET)dropNode.getData();
 //      logger.info("DropNode/Parent: "+parent.getName());
         int index=1;
-        for(TreeNode<ASSET> n : dropNode.getChildren())
+        for(TreeNode n : dropNode.getChildren())
         {
     		ASSET child =(ASSET)n.getData();
     		child.setParent(parent);

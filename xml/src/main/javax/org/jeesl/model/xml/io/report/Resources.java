@@ -44,8 +44,7 @@ public class Resources
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Resource> resource;
-    @XmlAttribute(name = "dir")
-    protected String dir;
+   
 
     /**
      * Gets the value of the resource property.
@@ -76,28 +75,5 @@ public class Resources
         return this.resource;
     }
 
-    /**
-     * Gets the value of the dir property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDir() {
-        return dir;
-    }
-
-    /**
-     * Sets the value of the dir property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDir(String value) {
-        this.dir = value;
-    }
-
+   
 }

@@ -456,9 +456,9 @@
 			<h:form id="fAction" rendered="#{not empty cc.attrs.bean.action}">
 				<p:panel header="#{msg.jeeslApprovalAction}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:rStage"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAction()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.action.id gt 0)}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:rStage"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteAction()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.action.id gt 0)}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -475,7 +475,7 @@
 						<p:outputLabel value="#{msg.jeeslRevisionEntity}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.action.entity}" effect="fade" autoWidth="false">
 							<f:selectItem itemLabel="--"/>
-							<f:selectItems value="#{cc.attrs.bean.entities}" var="e" itemLabel="#{e.category.name[localeCode].lang} - #{e.name[localeCode].lang}" itemValue="#{e}"/>
+							<f:selectItems value="#{cc.attrs.bean.entities}" var="e" itemLabel="#{e.category.name[localeCode].lang} - #{e.diagram.name[localeCode].lang} - #{e.name[localeCode].lang} (#{e.id})" itemValue="#{e}"/>
 							<p:ajax event="change" listener="#{cc.attrs.bean.changeEntity()}" update="pgEntity"/>
 						</p:selectOneMenu>
 						

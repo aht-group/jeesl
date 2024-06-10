@@ -209,4 +209,11 @@ public abstract class AbstractWorkflowActionHandler <WPD extends JeeslWorkflowDo
 	}
 	
 	protected abstract WC getConstraintNotFound();
+	
+	public static <WC extends JeeslConstraint<?,?,?,?,?,?>, WA extends JeeslWorkflowAction<?,?,?,?,?>> void invalidCommand(JeeslConstraintsBean<WC> bConstraint, List<WC> constraints, WA action)
+	{
+		WC c = bConstraint.getSilent(JeeslWorkflowAction.class, JeeslWorkflowAction.Constraint.invalidCommand);
+		c.setContextMessage(action.getCallbackCommand());
+		constraints.add(c);
+	}
 }

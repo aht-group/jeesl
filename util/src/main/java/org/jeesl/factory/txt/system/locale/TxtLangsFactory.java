@@ -11,7 +11,13 @@ public class TxtLangsFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtLangsFactory.class);
 	
-	public static <L extends JeeslLang> void debug(boolean debug, String description, Map<String,L> map)
+	public TxtLangsFactory()
+	{
+		
+	}
+	
+	@Deprecated //Use TxtMultiLangFactory
+	private static <L extends JeeslLang> void debug(boolean debug, String description, Map<String,L> map)
 	{
 		if(debug)
 		{

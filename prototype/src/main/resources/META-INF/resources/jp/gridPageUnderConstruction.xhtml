@@ -6,6 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:j="http://www.jeesl.org/jsf"
 	xmlns:jp="http://jsf.jeesl.org/prototype"
 	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
@@ -20,7 +21,7 @@
 		<jp:grid id="grid">
 			<aht:row>
 				<aht:slot width="4">
-					<p:panel styleClass="jeesl-construction-wrapper">
+					<p:panel styleClass="jeesl-construction-wrapper jeesl-panel">
 						<p:graphicImage library="jeeslPrototypeGfx" name="ui/construction-sign.svg" styleClass="jeesl-construction-icon"/>
 					</p:panel>
 				</aht:slot>
@@ -29,7 +30,7 @@
 				</aht:slot>
 				<aht:slot id="sDocuments" width="6">
 					<p:panel header="#{msg.jeeslDevUnderConstruction}" styleClass="jeeslPanel jeesl-panel">
-						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<j:inputGrid>
 							<p:outputLabel value="#{msg.aupSecurityView}"/>
 							<h:outputText value="#{cc.attrs.security.view.name[localeCode].lang}"/>
 							<p:outputLabel value="#{msg.aupSecurityViewPattern}"/>
@@ -38,7 +39,7 @@
 							<h:outputText value="#{cc.attrs.security.view.urlMapping}"/>
 							<p:outputLabel value="#{msg.jeeslDescription}"/>
 							<h:outputText value="#{cc.attrs.security.view.description[localeCode].lang}"/>
-						</p:panelGrid>
+						</j:inputGrid>
 					</p:panel>
 				</aht:slot>
 			</aht:row>

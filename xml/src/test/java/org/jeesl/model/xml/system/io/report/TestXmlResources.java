@@ -15,7 +15,6 @@ public class TestXmlResources extends AbstractXmlReportTest<Resources>
     public Resources build(boolean withChildren)
     {
     	Resources resources = new Resources();
-    	resources.setDir("src/main/resources/report/resources");
     	resources.getResource().add(TestXmlResource.create(false));
     	return resources;
     }

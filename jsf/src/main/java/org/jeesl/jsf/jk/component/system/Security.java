@@ -1,6 +1,7 @@
 package org.jeesl.jsf.jk.component.system;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import jakarta.el.ValueExpression;
 import jakarta.faces.component.FacesComponent;
@@ -50,7 +51,7 @@ public class Security extends UIPanel
 			
 			String action;
 			String actionSuffix = ComponentAttribute.get(Properties.actionSuffix,null,context,this);
-			if(actionSuffix!=null)
+			if(Objects.nonNull(actionSuffix))
 			{
 				action = handler.getPageCode()+"."+actionSuffix;
 				if(debugOnInfo) {logger.info("SUFFIX:"+action);}
