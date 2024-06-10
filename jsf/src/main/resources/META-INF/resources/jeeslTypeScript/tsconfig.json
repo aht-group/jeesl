@@ -1,0 +1,32 @@
+{
+	"compileOnSave": false,
+    "compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"allowJs": true,
+		"baseUrl": "./",
+		"types": ["jquery","jqueryui","primefaces","node"],
+		"strict": true,
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "ES5",
+		"module": "ES2015",
+		"moduleResolution": "bundler",
+		"outDir": "./dist/",
+		"lib": [
+			"ES2018",
+			"dom"
+		  ],
+		  "paths": {
+			"jquery":["node_modules/@types/jquery/index"],
+			"jquery-ui":["node_modules/@types/jqueryui/index"],
+			"primefaces":["node_modules/primefaces/primefaces/index"],
+		  }
+    },
+	"include": ["src/**/*.ts","src/**/*.js", "src/**/*.test.ts", "src/*.ts"],
+	"exclude": ["node_modules"]
+}

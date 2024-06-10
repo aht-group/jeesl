@@ -17,7 +17,6 @@
    </composite:interface>
         
   <composite:implementation>
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script>
         jQuery.ajax({
             url: "#{!empty cc.attrs.jiraHost ? cc.attrs.jiraHost : cc.attrs.bean.jiraHost}/s/#{!empty cc.attrs.scriptPath ? cc.attrs.scriptPath : cc.attrs.bean.jiraScriptPath}/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=#{!empty cc.attrs.collectorId ? cc.attrs.collectorId : cc.attrs.bean.collectorId[cc.attrs.collector]}",
