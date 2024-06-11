@@ -7,6 +7,7 @@ import javax.persistence.Tuple;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.AbstractJsonTuple;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
@@ -186,5 +187,15 @@ public class JsonTupleFactory
 	{
 		if(n2m.containsKey(a,b)) {return n2m.get(a,b).getSum1();}
 		else {return null;}
+	}
+	
+	public static long toCount1(JsonTuples2<?,?> tuples)
+	{
+		long result = 0;
+		for(JsonTuple2<?,?> t : tuples.getTuples())
+		{
+			if(Objects.nonNull(t.getCount1())) {result = result+t.getCount();}
+		}
+		return result;
 	}
 }
