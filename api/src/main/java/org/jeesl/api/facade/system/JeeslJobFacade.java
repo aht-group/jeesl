@@ -11,7 +11,6 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.feedback.JeeslJobFeedback;
 import org.jeesl.interfaces.model.system.feedback.JeeslJobFeedbackType;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
-import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
 import org.jeesl.interfaces.model.system.job.core.JeeslJob;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobPriority;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
