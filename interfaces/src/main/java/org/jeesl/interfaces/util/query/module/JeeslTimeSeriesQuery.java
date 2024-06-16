@@ -31,6 +31,7 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	List<MP> getTsMultiPoints();
 	List<INTV> getTsIntervals();
 	List<BRIDGE> getTsBridges();
+	List<STAT> getTsTypes();
 	List<TS> getTsSeries();
 	List<TX> getTsTransactions();
 }

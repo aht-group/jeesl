@@ -1,5 +1,9 @@
 package org.jeesl.controller.handler.cli;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.LogManager;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
@@ -73,17 +77,33 @@ public class JeeslCliOptionHandler
 		System.exit(0);
 	}
 
-	
-	public JeeslCliOptionHandler setLog4jPaths(String... paths)
+	public JeeslCliOptionHandler setogPaths(String... paths)
 	{
 		log4jPaths = paths;
 		return this;
 	}
 	
+	public void handleLogJul(CommandLine line)
+	{
+		if(line.hasOption(oDebug.getOpt())) {this.initLogger("debug.jul.properties");}
+        else {this.initLogJul("app.jul.properties");}
+	}
+	private void initLogJul(String loggingProfile)
+	{
+		for(String path : log4jPaths)
+		{
+			try (InputStream is = this.getClass().getClassLoader().getResourceAsStream(path+"/"+loggingProfile))
+			{
+		          LogManager.getLogManager().readConfiguration(is);
+			}
+			catch (IOException e) {e.printStackTrace();}
+		}
+	}
+	
 	public void handleLog4j1(CommandLine line)
 	{
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger("log4j-debug.xml");}
-        else {this.initLogger("log4j-cli.xml");}
+		if(line.hasOption(oDebug.getOpt())) {this.initLogger("debug.log4j.xml");}
+        else {this.initLogger("app.log4j.xml");}
 	}
 	private void initLogger(String loggingProfile)
 	{
@@ -95,8 +115,8 @@ public class JeeslCliOptionHandler
 	
 	public void handleLog4j2(CommandLine line)
 	{
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("log4j2.debug.xml");}
-        else {this.initLogger2("log4j2.app.xml");}
+		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("debug.log4j2.xml");}
+        else {this.initLogger2("app.log4j2.xml");}
 	}
 	private void initLogger2(String loggingProfile)
 	{
