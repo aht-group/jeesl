@@ -77,7 +77,7 @@ public class JeeslCliOptionHandler
 		System.exit(0);
 	}
 
-	public JeeslCliOptionHandler setogPaths(String... paths)
+	public JeeslCliOptionHandler setLogPaths(String... paths)
 	{
 		log4jPaths = paths;
 		return this;

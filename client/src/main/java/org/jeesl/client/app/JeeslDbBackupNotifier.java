@@ -119,7 +119,7 @@ public class JeeslDbBackupNotifier
 		notifier.local(); System.exit(0);
 		
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
-		jco.setogPaths("jeesl/client/config");
+		jco.setLogPaths("jeesl/client/config");
 		
 		try {notifier.parseArguments(jco,args);}
 		catch (ParseException e) {logger.error(e.getMessage());jco.help();}
