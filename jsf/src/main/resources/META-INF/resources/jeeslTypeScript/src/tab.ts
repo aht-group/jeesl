@@ -1,4 +1,4 @@
-$(function() {
+(function($) {
     let root: JQuery = $('.html-tab .html-container > div').addClass('ui-tabs ui-widget ui-widget-content ui-corner-all ui-hidden-container ui-tabs-top');
     let mainSection: JQuery = root.children().first();
 
@@ -43,4 +43,4 @@ $(function() {
     });
 
     select({ data: 0 } as JQuery.ClickEvent);
-});
+})(jQuery.noConflict(true));

@@ -1,4 +1,4 @@
-$(function() {
+(function($) {
     function collapseSection(element: JQuery): void {
         element.attr('data-collapsed', 'true');
         element.stop().animate({ height: '33px' }, 1000);
@@ -49,4 +49,4 @@ $(function() {
         $(this).attr('data-collapsed', 'true');
     });
     $('.html-accordion-header').click(toggleAccordion);
-});
+})(jQuery.noConflict(true));

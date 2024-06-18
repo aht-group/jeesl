@@ -1,7 +1,7 @@
 declare function deeplTranslate(): void;
 
-$(function() {
-    let timeout: NodeJS.Timeout;
+(function($) {
+    let timeout: any;
     $('.jeesl-deepl-textarea').on('input', () => {
         if (timeout) { 
             clearTimeout(timeout); 
@@ -17,6 +17,6 @@ $(function() {
             deeplTranslate();
         }, 3000);
     });
-});
+})(jQuery.noConflict(true));
 
 

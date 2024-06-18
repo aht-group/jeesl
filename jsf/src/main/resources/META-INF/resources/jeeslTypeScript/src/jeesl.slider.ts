@@ -1,4 +1,5 @@
-$(function(): void {
+import 'slick-carousel';
+(function($): void {
     ($('.jeesl-carousel-wrapper') as any).slick({
         adaptiveHeight: true,
         autoplay: true,
@@ -37,4 +38,4 @@ $(function(): void {
         focusOnSelect: true,
         slidesToShow: 5
     });
-});
+})(jQuery.noConflict(true));

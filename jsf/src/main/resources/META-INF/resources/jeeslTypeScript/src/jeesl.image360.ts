@@ -1,7 +1,8 @@
+import 'marzipano';
 var Marzipano = require('marzipano');
 declare const sources: { [key: string]: string };
 
-$(function() {
+(function($) {
     let $viewerElements: JQuery = $('.jeesl-360-viewer');
     let viewerOptions: { controls: { mouseViewMode: string } } = { controls: { mouseViewMode: 'drag' } };
     
@@ -30,4 +31,4 @@ $(function() {
 		$element.height(elementWidth);
 		scene.switchTo();
 	});
-});
+})(jQuery.noConflict(true));

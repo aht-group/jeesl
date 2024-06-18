@@ -1,6 +1,8 @@
+
 let menuHeightStyle: JQuery<HTMLElement>;
 let treeHeightStyle: JQuery<HTMLElement>;
 let listItemHeight: number;
+
 declare function calculateMenuHeight(dropdowns?: JQuery<HTMLElement>): void;
 window.calculateMenuHeight = function() {
     let cssRules = '@media (max-width: 768px) {' + cssRulesMenuHeightCalculate() + '}';
@@ -123,7 +125,7 @@ function initCollapsibleDatatable(parent?: JQuery<HTMLElement>): void {
     datatable.find('.ui-datatable-header').click(toggleDatatable);
 }
 
-$(function() {
+(function($) {
     menuHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
     treeHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
     
@@ -139,4 +141,4 @@ $(function() {
     overlay.find('.jeesl-submenu-icon').click({ overlay: overlay }, toggleSubmenu);
     
     initCollapsibleDatatable();
-});
+})(jQuery.noConflict(true));
