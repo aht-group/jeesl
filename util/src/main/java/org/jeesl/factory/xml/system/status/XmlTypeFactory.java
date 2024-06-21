@@ -24,8 +24,8 @@ public class XmlTypeFactory<L extends JeeslLang, D extends JeeslDescription,S ex
 	private String localeCode;
 	private Type q;
 	
-	public XmlTypeFactory(Query q){this(q.getLang(),q.getType());}
-	public XmlTypeFactory(Type q){this(null,q);}
+	public XmlTypeFactory(Query q) {this(q.getLang(),q.getType());}
+	public XmlTypeFactory(Type q) {this(null,q);}
 	public XmlTypeFactory(String localeCode, Type q)
 	{
 		this.localeCode=localeCode;
