@@ -15,8 +15,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.jeesl.factory.xls.system.io.report.XlsCellFactory;
-import org.jeesl.factory.xls.system.io.report.XlsSheetFactory;
+import org.jeesl.factory.xlsx.io.report.XlsCellFactory;
+import org.jeesl.factory.xlsx.io.report.XlsSheetFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

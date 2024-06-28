@@ -1,4 +1,4 @@
-package org.jeesl.factory.xls.system.io.report;
+package org.jeesl.factory.xlsx.io.report;
 
 import java.util.Date;
 import java.util.Objects;

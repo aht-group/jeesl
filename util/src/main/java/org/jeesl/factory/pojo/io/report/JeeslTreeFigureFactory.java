@@ -1,4 +1,4 @@
-package org.jeesl.factory.pojo.system.io.report;
+package org.jeesl.factory.pojo.io.report;
 
 import java.util.ArrayList;
 import java.util.List;

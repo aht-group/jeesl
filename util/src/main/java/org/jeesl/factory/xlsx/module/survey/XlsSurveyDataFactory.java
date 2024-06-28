@@ -1,4 +1,4 @@
-package org.jeesl.factory.xls.module.survey;
+package org.jeesl.factory.xlsx.module.survey;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +20,9 @@ import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyAnswerFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyMatrixFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionFactory;
-import org.jeesl.factory.xls.system.io.report.XlsCellFactory;
-import org.jeesl.factory.xls.system.io.report.XlsRowFactory;
-import org.jeesl.factory.xls.system.io.report.XlsSheetFactory;
+import org.jeesl.factory.xlsx.io.report.XlsCellFactory;
+import org.jeesl.factory.xlsx.io.report.XlsRowFactory;
+import org.jeesl.factory.xlsx.io.report.XlsSheetFactory;
 import org.jeesl.interfaces.controller.builder.SurveyCorrelationInfoBuilder;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;

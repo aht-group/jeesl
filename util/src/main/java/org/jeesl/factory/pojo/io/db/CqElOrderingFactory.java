@@ -1,4 +1,4 @@
-package org.jeesl.factory.pojo.system.io.db;
+package org.jeesl.factory.pojo.io.db;
 
 import org.jeesl.util.query.cq.CqOrdering;
 import org.primefaces.model.SortOrder;

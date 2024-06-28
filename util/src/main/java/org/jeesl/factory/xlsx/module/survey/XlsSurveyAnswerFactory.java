@@ -1,10 +1,10 @@
-package org.jeesl.factory.xls.module.survey;
+package org.jeesl.factory.xlsx.module.survey;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
-import org.jeesl.factory.xls.system.io.report.XlsCellFactory;
+import org.jeesl.factory.xlsx.io.report.XlsCellFactory;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyMatrix;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;

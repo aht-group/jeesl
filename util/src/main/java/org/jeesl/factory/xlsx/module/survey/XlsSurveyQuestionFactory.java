@@ -1,4 +1,4 @@
-package org.jeesl.factory.xls.module.survey;
+package org.jeesl.factory.xlsx.module.survey;
 
 import java.util.List;
 

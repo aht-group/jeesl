@@ -1,4 +1,4 @@
-package org.jeesl.factory.xls.system.io.report;
+package org.jeesl.factory.xlsx.io.report;
 
 import java.util.Map;
 import java.util.Objects;

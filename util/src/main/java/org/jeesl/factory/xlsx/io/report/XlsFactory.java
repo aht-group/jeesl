@@ -1,4 +1,4 @@
-package org.jeesl.factory.xls.system.io.report;
+package org.jeesl.factory.xlsx.io.report;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,7 +28,7 @@ import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportRowFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportSheetFactory;
-import org.jeesl.factory.pojo.system.io.report.JeeslTreeFigureFactory;
+import org.jeesl.factory.pojo.io.report.JeeslTreeFigureFactory;
 import org.jeesl.factory.txt.system.io.report.TxtIoGroupFactory;
 import org.jeesl.interfaces.controller.report.JeeslReport;
 import org.jeesl.interfaces.controller.report.JeeslReportSelectorTransformation;

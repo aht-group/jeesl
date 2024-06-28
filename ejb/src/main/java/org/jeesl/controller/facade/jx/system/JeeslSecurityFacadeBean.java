@@ -465,6 +465,8 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	
 	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,CTX> query)
 	{
+		
+		
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<S> cQ = cB.createQuery(cStaff);
 		Root<S> root = cQ.from(cStaff);
@@ -737,6 +739,8 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	private <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> Predicate[] pStaff(CriteriaBuilder cB, JeeslSecurityQuery<C,R,CTX> query, Root<S> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		logger.info("SeRole+"+ObjectUtils.isNotEmpty(query.getSecurityRole()));
 		
 		if(ObjectUtils.isNotEmpty(query.getSecurityRole()))
 		{
