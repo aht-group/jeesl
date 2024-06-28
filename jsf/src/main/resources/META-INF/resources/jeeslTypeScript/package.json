@@ -1,5 +1,6 @@
 {
 	"name": "jeesl",
+	"sideEffects": false,
 	"version": "1.0.0",
 	"description": "jeesl",
 	"main": "index.js",
