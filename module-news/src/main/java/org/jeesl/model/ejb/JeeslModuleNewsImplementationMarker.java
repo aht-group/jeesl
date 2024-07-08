@@ -1,6 +1,8 @@
 package org.jeesl.model.ejb;
 
-public interface JeeslModuleNewsImplementationMarker extends IoSsiFlywayProvider
+import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayIoSsiVersionMarker;
+
+public interface JeeslModuleNewsImplementationMarker extends FlywayIoSsiVersionMarker
 {	
 	
 }

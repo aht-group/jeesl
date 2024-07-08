@@ -32,16 +32,14 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 	
     private final Class<D> cD;
 	
+    public static <D extends JeeslDescription> EjbDescriptionFactory<D> factory(final Class<D> cD) {return new EjbDescriptionFactory<D>(cD);}
     public static <D extends JeeslDescription> EjbDescriptionFactory<D> instance(final Class<D> cD) {return new EjbDescriptionFactory<>(cD);}
     private EjbDescriptionFactory(final Class<D> cD)
     {
         this.cD = cD;
     } 
     
-    public static <D extends JeeslDescription> EjbDescriptionFactory<D> factory(final Class<D> cD)
-    {
-        return new EjbDescriptionFactory<D>(cD);
-    }
+   
     
     public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> build(JeeslLocaleManager<LOC> lp, Descriptions xDescriptions) throws JeeslConstraintViolationException
 	{

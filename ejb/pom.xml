@@ -190,8 +190,12 @@
 			</exclusions>
 		</dependency>
 
-
-
+		<!-- MQTT -->
+		<dependency>
+		  <groupId>org.eclipse.paho</groupId>
+		  <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+		  <scope>provided</scope>
+		</dependency>
 	  	
 	  	<!--2022-09-04 tk Preparing removal 
 		<dependency>

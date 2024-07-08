@@ -1,6 +1,9 @@
 package org.jeesl.model.ejb;
 
-public interface IoMailFlywayProvider extends JeeslFlywayMigrationVerifier,IoFrFlywayProvider
+import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayVersionMarker;
+import org.jeesl.model.ejb.io.db.flyway.FlywayIoFrVersionMarker;
+
+public interface IoMailFlywayProvider extends JeeslFlywayVersionMarker,FlywayIoFrVersionMarker
 {	
 //	void x();
 }
