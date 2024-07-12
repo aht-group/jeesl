@@ -1,10 +1,13 @@
 package org.jeesl.model.ejb.io.ssi.core;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -15,7 +18,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
-@Table(name="IoSsiCredential",uniqueConstraints={@UniqueConstraint(name="UC_IoSsiCredential_system_code",columnNames={"system_id","code"})})
+@Table(name="IoSsiCredential",uniqueConstraints={@UniqueConstraint(name="uk_IoSsiCredential_system-code",columnNames={"system_id","code"})})
 @EjbErNode(name="Credential")
 public class IoSsiCredential implements JeeslIoSsiCredential<IoSsiSystem>
 {
@@ -29,6 +32,7 @@ public class IoSsiCredential implements JeeslIoSsiCredential<IoSsiSystem>
 
 	@Override public String resolveParentAttribute() {return JeeslIoSsiCredential.Attributes.system.toString();}
 	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoSsiCredential_system"))
 	private IoSsiSystem system;
 	@Override public IoSsiSystem getSystem(){return system;}
 	@Override public void setSystem(IoSsiSystem system){this.system = system;}
@@ -74,6 +78,11 @@ public class IoSsiCredential implements JeeslIoSsiCredential<IoSsiSystem>
 	private boolean encrypted;
 	@Override public boolean isEncrypted() {return encrypted;}
 	@Override public void setEncrypted(boolean encrypted) {this.encrypted = encrypted;}
+	
+	@Basic @Column(columnDefinition="text")
+	private String keyPrivate;
+	public String getKeyPrivate() {return keyPrivate;}
+	public void setKeyPrivate(String keyPrivate) {this.keyPrivate = keyPrivate;}
 
 
 	@Override public boolean equals(Object object){return (object instanceof IoSsiCredential) ? id == ((IoSsiCredential) object).getId() : (object == this);}

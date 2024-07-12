@@ -3,9 +3,9 @@ FROM debian:bullseye
 RUN apt-get update && apt-get install -y wget maven git tmux procps build-essential libz-dev unzip curl xmlstarlet
 
 RUN cd /usr/lib/jvm \
-	&& wget https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-aarch64_bin.tar.gz \
-	&& tar -xvzf graalvm-jdk-17_linux-aarch64_bin.tar.gz \
-	&& rm graalvm-jdk-17_linux-aarch64_bin.tar.gz \
+	&& wget https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz \
+	&& tar -xvzf graalvm-jdk-17_linux-x64_bin.tar.gz \
+	&& rm graalvm-jdk-17_linux-x64_bin.tar.gz \
 	&& update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-jdk-17.0.11+7.1/bin/java 1 \
 	&& cd /usr/lib/jvm
 	
