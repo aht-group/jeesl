@@ -233,7 +233,7 @@ $border: $border-width solid $border-colour;
 		}
 	}
 	
-	&.ui-button-text-only .ui-icon-loading + .ui-button-text {
+	&.jeesl-loading-button .ui-icon-loading + .ui-button-text {
 		padding-left: $half-spacing;
 	}
 	
@@ -353,7 +353,7 @@ $border: $border-width solid $border-colour;
 			opacity: 1;
 		}
 		
-		.ui-icon {
+		&.jeesl-loading-button .ui-icon.ui-icon-loading {
 			display: inline-block;
 		}
 	}
@@ -363,6 +363,10 @@ $border: $border-width solid $border-colour;
 		margin: 0;
 		position: relative;
 		top: 0;
+		
+		&.ui-icon-loading {
+			display: none;
+		}
 	}
 	
 	.ui-icon-circle-triangle-e:before {

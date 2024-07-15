@@ -1263,7 +1263,7 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	&:first-child {
-		margin-top: -$regular-spacing;
+		margin-top: -$half-spacing;
 	}
 	
 	&:last-child {
@@ -1944,10 +1944,13 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.ui-separator {
+			background: $border-colour;
+			border: none;
+			height: $separator-thickness;
+			margin: $half-spacing #{-$regular-spacing};
+			
 			@media (max-width: 768px) {
-				background: $light-grey;
-				height: 2px;
-				margin: 6px 0;
+				height: $separator-thickness-mobile;
 			}
 		}
 		
@@ -3344,6 +3347,42 @@ body, .ui-widget {
 	}
 }
 
+@mixin jeesl-footer-action-container {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+	> a {
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+		color: $body-foreground;
+		height: $element-height;
+		margin: 0;
+		padding: 0;
+		transition: background $transition-duration linear;
+		
+		@media (max-width: 768px) {
+			height: $element-height-mobile;
+		}
+		
+		&.ui-state-hover, &:hover {
+			background: $soft-grey;
+			text-decoration: none;
+		}
+		
+		.ui-outputlabel {
+			align-items: center;
+			cursor: pointer;
+			display: flex;
+			height: 100%;
+			padding: 0 $half-spacing;
+		}
+	}
+}
+
 .jeesl-datatable, .ui-datatable.ui-sortable-helper, .ui-selectonemenu-panel .ui-selectonemenu-table {
 	@include jeesl-table-titlebar;
 	
@@ -3583,42 +3622,33 @@ body, .ui-widget {
 		}
 	}
 	
-	.ui-paginator {
-		align-items: center;
+	.ui-datatable-footer, .ui-paginator {
 		border: $border;
 		border-width: $border-width 0 0;
 		box-shadow: 0 -1px 0 inset $white-35;
-		display: flex;
-		flex-wrap: wrap;
 		min-height: $element-height;
 		padding: 0;
-		justify-content: center;
 		
 		@media (max-width: 768px) {
 			border-radius: $border-radius-bottom;
 			min-height: $element-height-mobile;
 		}
 		
+		.ui-datatable-footer-actions {
+			@include jeesl-footer-action-container;
+		}
+	}
+	
+	.ui-paginator {
+		@include jeesl-footer-action-container;
+		
+		
 		.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last {
-			background: transparent;
-			border: none;
-			border-radius: 0;
-			box-shadow: none;
-			color: $body-foreground;
-			height: $element-height;
-			margin: 0;
 			overflow: hidden;
-			padding: 0;
-			transition: background $transition-duration linear;
 			width: $element-height;
 			
 			@media (max-width: 768px) {
-				height: $element-height-mobile;
 				width: $element-height-mobile;
-			}
-			
-			&.ui-state-hover {
-				background: $soft-grey;
 			}
 		}
 		
@@ -3635,7 +3665,6 @@ body, .ui-widget {
 			@include vertical-center(after);
 			
 			height: 100%;
-			padding: $half-spacing 0;
 			white-space: nowrap;
 			width: 100%;
 			
@@ -3755,9 +3784,20 @@ body, .ui-widget {
 			}
 		}
 		
-		.height-balance-container {
-			.jeesl-grid-#{$i} {
-				width: calc((100% / 12) * #{$i} - #{$half-spacing});
+		.jeesl-grid.height-balance-container > .jeesl-grid-#{$i} {
+			height: 100%;
+			width: calc((100% / 12) * #{$i} - #{$half-spacing});
+		
+			&:first-child {
+				margin-left: 0;
+			}
+			
+			&:last-child {
+				margin-right: 0;
+			}
+			
+			> * {
+				height: calc(100% - #{$regular-spacing});
 			}
 		}
 	}
@@ -4159,8 +4199,8 @@ body, .ui-widget {
 		
 		.ui-tabs-panel {
 			.ui-texteditor, .jeesl-ck-editor {
-				margin-left: -$slim-spacing;
-				margin-right: -$slim-spacing;
+//				margin-left: -$slim-spacing;
+//				margin-right: -$slim-spacing;
 				
 				@media (max-width: 768px) {
 					margin-left: -$regular-spacing;
@@ -4173,7 +4213,7 @@ body, .ui-widget {
 				
 				&:last-child {
 					border-bottom-width: 0;
-					margin-bottom: -$slim-spacing;
+//					margin-bottom: -$slim-spacing;
 				
 					@media (max-width: 768px) {
 						margin-bottom: -$half-spacing;
