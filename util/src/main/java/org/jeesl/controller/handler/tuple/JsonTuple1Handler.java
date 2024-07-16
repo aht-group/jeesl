@@ -33,7 +33,10 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 	
 	private int sizeA; public int getSizeA() {return sizeA;}
 	private final List<A> listA; public List<A> getListA() {return listA;}
-	private final Map<A,JsonTuple1<A>> map1; public Map<A,JsonTuple1<A>> getMapA() {return map1;} public Map<A,JsonTuple1<A>> getMap1() {return map1;}
+	
+	private final Map<A,JsonTuple1<A>> map1;
+	public Map<A,JsonTuple1<A>> getMapA() {return map1;}
+	public Map<A,JsonTuple1<A>> getMap1() {return map1;}
 
 	public static <A extends EjbWithId> JsonTuple1Handler<A> instance(Class<A> cA) {return new JsonTuple1Handler<>(cA);}
 	public JsonTuple1Handler(Class<A> cA)
@@ -41,8 +44,9 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		this.cA=cA;
 		
 		mapA = new HashMap<Long,A>();
-		listA = new ArrayList<A>();
 		map1 = new HashMap<A,JsonTuple1<A>>();
+		
+		listA = new ArrayList<A>();
 		
 		cpTuple = new Tuple1Comparator<A>();
 		

@@ -19,7 +19,7 @@
 					<f:facet name="header">
 						<j:dtHeader entity="SystemJobMaintenance" code="listOf"/>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectMaintenance()}" update=":#{cc.id}:sInfo"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectMaintenance()}" update=":#{cc.id}:sMaintenances :#{cc.id}:sInfo"/>
 			      	<p:column>
 			      		<f:facet name="header"><jtp:label entity="SystemJobMaintenance" code="name"/></f:facet>
 			      		<h:outputText value="#{m.name[localeCode].lang}"/>
@@ -27,6 +27,19 @@
 			     	<p:columns var="status" value="#{cc.attrs.ctrl.statusHeader}" columnIndexVar="colIndex" styleClass="jeesl-right">
 						<f:facet name="header">
 							<jtp:symbolizer value="#{status}" rendered="#{status.id gt 0}"/>
+							
+							<h:outputText value="#{cc.attrs.ctrl.mapTh[m].map1[status].count1}">
+								<f:convertNumber groupingUsed="true" />
+							</h:outputText>
+						</f:facet>
+					</p:columns>
+					<p:columns var="status" value="#{cc.attrs.ctrl.statusHeader}" columnIndexVar="colIndex" styleClass="jeesl-right">
+						<f:facet name="header">
+							<jtp:symbolizer value="#{status}" rendered="#{status.id gt 0}"/>
+							<h:outputText value="#{cc.attrs.ctrl.mapTh[m].mapA[status].count1}">
+								<f:convertNumber groupingUsed="true" />
+							</h:outputText>
+							
 						</f:facet>
 					</p:columns>
 		       	</p:dataTable>
@@ -40,9 +53,11 @@
 					<f:facet name="header">
 						<j:dtHeader entity="SystemJobMaintenanceInfo" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addInfo()}" update=":#{cc.id}:sInfo"/>
+							<ui:remove> with click, remove :grid avove </ui:remove>
 						</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectInfo()}" update=":#{cc.id}:fInfo"/>
+						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
 				      	<p:column>
 				      		<f:facet name="header"><jtp:label entity="SystemJobStatus" code="code"/></f:facet>
 				      		<jtp:symbolizer value="#{i.status}"/>
@@ -50,6 +65,24 @@
 				      	<p:column>
 				      		<f:facet name="header"><jtp:label entity="SystemJobMaintenanceInfo" code="description"/></f:facet>
 				      		<h:outputText value="#{i.description[localeCode].lang}"/>
+				     	</p:column>
+				     	<p:column>
+				      		<f:facet name="header"><jtp:label entity="SystemJobMaintenanceInfo" code="description"/></f:facet>
+				      		<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].mapA[i.status].count}">
+								<f:convertNumber groupingUsed="true" />
+							</h:outputText>
+							<br/>
+							<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].mapA[i.status].count1}">
+								<f:convertNumber groupingUsed="true" />
+							</h:outputText>
+							<br/>
+							<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].map1[i.status].count}">
+								<f:convertNumber groupingUsed="true" />
+							</h:outputText>
+							<br/>
+							<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].map1[i.status].count1}">
+								<f:convertNumber groupingUsed="true" />
+							</h:outputText>
 				     	</p:column>
 		       	</p:dataTable>
 			</h:form>
