@@ -50,7 +50,7 @@ public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,
 	<E extends Enum<E>> TEMPLATE fJobTemplate(E type, String code) throws JeeslNotFoundException;
 	List<JOB> fJobs(List<CATEGORY> categories, List<TYPE> type, List<STATUS> status, Date from, Date to);
 	List<JOB> fJobs(TEMPLATE template, String code);
-	List<JOB> fJobs(JeeslJobQuery<TEMPLATE> query);
+	List<JOB> fJobs(JeeslJobQuery<TEMPLATE,STATUS> query);
 	
 	JOB fActiveJob(TEMPLATE template, String code) throws JeeslNotFoundException;
 	JOB cJob(USER user, List<FEEDBACK> feedbacks, TEMPLATE template, String code, String name, String jsonFilter) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException;
@@ -71,7 +71,7 @@ public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,
 	<T extends EjbWithMigrationJob4<STATUS>> JsonTuples1<STATUS> tpcJob4Status(Class<T> c);
 	<T extends EjbWithMigrationJob5<STATUS>> JsonTuples1<STATUS> tpcJob5Status(Class<T> c);
 	
-	JsonTuples1<TEMPLATE> tpJobJobByTemplate(JeeslJobQuery<TEMPLATE> query);
-	JsonTuples1<TEMPLATE> tpJobCacheByTemplate(JeeslJobQuery<TEMPLATE> query);
+	JsonTuples1<TEMPLATE> tpJobJobByTemplate(JeeslJobQuery<TEMPLATE,STATUS> query);
+	JsonTuples1<TEMPLATE> tpJobCacheByTemplate(JeeslJobQuery<TEMPLATE,STATUS> query);
 	
 }

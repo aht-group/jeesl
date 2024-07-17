@@ -24,39 +24,28 @@
 			      		<f:facet name="header"><jtp:label entity="SystemJobMaintenance" code="name"/></f:facet>
 			      		<h:outputText value="#{m.name[localeCode].lang}"/>
 			     	</p:column>
-			     	<p:columns var="status" value="#{cc.attrs.ctrl.statusHeader}" columnIndexVar="colIndex" styleClass="jeesl-right">
+					<p:columns var="s" value="#{cc.attrs.ctrl.statusHeader}" columnIndexVar="colIndex" styleClass="jeesl-right">
 						<f:facet name="header">
-							<jtp:symbolizer value="#{status}" rendered="#{status.id gt 0}"/>
-							
-							<h:outputText value="#{cc.attrs.ctrl.mapTh[m].map1[status].count1}">
+							<jtp:symbolizer value="#{s}" rendered="#{s.id gt 0}"/>
+						</f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.mapTh[m].mapA[s].count1}">
 								<f:convertNumber groupingUsed="true" />
 							</h:outputText>
-						</f:facet>
-					</p:columns>
-					<p:columns var="status" value="#{cc.attrs.ctrl.statusHeader}" columnIndexVar="colIndex" styleClass="jeesl-right">
-						<f:facet name="header">
-							<jtp:symbolizer value="#{status}" rendered="#{status.id gt 0}"/>
-							<h:outputText value="#{cc.attrs.ctrl.mapTh[m].mapA[status].count1}">
-								<f:convertNumber groupingUsed="true" />
-							</h:outputText>
-							
-						</f:facet>
 					</p:columns>
 		       	</p:dataTable>
 			</h:form>
 		</j:slot>
 		<j:slot id="sInfo" width="4">
 			<h:form id="fInfos" rendered="#{not empty cc.attrs.ctrl.maintenance}">
-				<p:dataTable styleClass="jeesl-datatable"
+				<p:dataTable widgetVar="wvDtMaintenances" styleClass="jeesl-datatable"
 						var="i" value="#{cc.attrs.ctrl.infos}"
 						selection="#{cc.attrs.ctrl.info}" selectionMode="single" rowKey="#{i.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemJobMaintenanceInfo" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addInfo()}" update=":#{cc.id}:sInfo"/>
-							<ui:remove> with click, remove :grid avove </ui:remove>
 						</j:dtHeader>
 						</f:facet>
-						<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectInfo()}" update=":#{cc.id}:fInfo"/>
+						<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectInfo()}" update=":#{cc.id}:fInfo" oncomplete="PF('wvDtMaintenances').filter();"/>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
 				      	<p:column>
 				      		<f:facet name="header"><jtp:label entity="SystemJobStatus" code="code"/></f:facet>
@@ -67,22 +56,11 @@
 				      		<h:outputText value="#{i.description[localeCode].lang}"/>
 				     	</p:column>
 				     	<p:column>
-				      		<f:facet name="header"><jtp:label entity="SystemJobMaintenanceInfo" code="description"/></f:facet>
-				      		<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].mapA[i.status].count}">
+				      		<f:facet name="header"><jtp:label entity="SystemJobMaintenance" code="count"/></f:facet>
+				      		<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].mapA[i.status].count1}">
 								<f:convertNumber groupingUsed="true" />
 							</h:outputText>
-							<br/>
-							<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].mapA[i.status].count1}">
-								<f:convertNumber groupingUsed="true" />
-							</h:outputText>
-							<br/>
-							<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].map1[i.status].count}">
-								<f:convertNumber groupingUsed="true" />
-							</h:outputText>
-							<br/>
-							<h:outputText value="#{cc.attrs.ctrl.mapTh[cc.attrs.ctrl.maintenance].map1[i.status].count1}">
-								<f:convertNumber groupingUsed="true" />
-							</h:outputText>
+							
 				     	</p:column>
 		       	</p:dataTable>
 			</h:form>

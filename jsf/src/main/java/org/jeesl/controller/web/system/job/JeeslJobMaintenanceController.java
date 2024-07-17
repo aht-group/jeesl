@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
@@ -91,20 +90,11 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 		{
 			mapTh.put(m, new JsonTuple1Handler<>(fbJob.getClassStatus()));
 		}
-		
-		if(maintenances.size()<5)
-		{
-			for(MNT m : maintenances)
-			{
-				JsonTuples1<STATUS> tuples = tupler.calculateTuples(m);
-				if(Objects.nonNull(tuples)) {mapTh.get(m).init(tuples);}
-			}
-		}
-		
+				
 		try
 		{
 			STATUS zeroStatus = fbJob.getClassStatus().newInstance();
-			zeroStatus.setId(0);
+			zeroStatus.setId(0);zeroStatus.setCode("null");
 			statusHeader.add(zeroStatus);
 		}
 		catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
@@ -129,12 +119,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 		this.reloadInfos();
 		JsonTuples1<STATUS> tuples = tupler.calculateTuples(maintenance);
 		if(Objects.isNull(tuples)) {logger.warn("Tuples not implemented");}
-		else
-		{
-			logger.info("Tuples: "+tuples.getTuples().size());
-			JsonUtil.info(tuples);
-			mapTh.get(maintenance).init(tuples);
-		}
+		else {mapTh.get(maintenance).init(tuples);}
 		
 		logger.info("Statistics for "+maintenance.getCode());
 		JsonTuple1Handler<STATUS> th = mapTh.get(maintenance);
