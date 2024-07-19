@@ -227,10 +227,12 @@ $border: $border-width solid $border-colour;
 	    z-index: -1;
 	}
 	
-	&.ui-button-icon-only {
-		.ui-button-text {
-			display: none;
-		}
+	&.ui-button-icon-only .ui-button-text {
+		display: none;
+	}
+	
+	&.ui-button-text-icon-left .ui-button-text {
+		margin-left: $half-spacing;
 	}
 	
 	&.jeesl-loading-button .ui-icon-loading + .ui-button-text {
@@ -382,12 +384,12 @@ $border: $border-width solid $border-colour;
 	.ui-chkbox-box.ui-state-default {
 		@include button;
 		
+		padding: 0;
 		position: relative;
 		text-align: center;
 		width: $element-height;
 		
 		@media (max-width: 768px) {
-			padding: 0;
 			width: $element-height-mobile;
 		}
 		

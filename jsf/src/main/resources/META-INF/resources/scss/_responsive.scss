@@ -1679,7 +1679,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	.ui-widget-content:not(.ui-dialog, .ui-selectonemenu-item) {
+	.ui-widget-content:not(.ui-dialog, .ui-selectonemenu-item, .ui-datatable-data) {
 		background: transparent;
 	}
 	
@@ -3734,6 +3734,8 @@ body, .ui-widget {
 }
 
 .jeesl-datatable {
+	background: $panel-background;
+	
 	.jeesl-heatbar-wrapper {
 		display: flex;
 		gap: $half-spacing;
@@ -3743,6 +3745,10 @@ body, .ui-widget {
 .ui-selectonemenu-panel .ui-selectonemenu-table {
 	border: 0;
 	width: auto;
+	
+	&.ui-helper-hidden {
+		display: none;
+	}
 	
 	tbody tr {
 		&:last-child td {
@@ -3948,6 +3954,10 @@ body, .ui-widget {
 	background: $panel-background;
 	max-width: $min-fixed-container-width;
 	
+	&.ui-hidden-container {
+		display: none;
+	}
+	
 	@for $i from 1 to 13 {
 		&.jeesl-dialog-#{$i} {
 			width: calc(100% * (#{$i} / 12)) !important;
@@ -3966,6 +3976,7 @@ body, .ui-widget {
 	
 	&.jeesl-dialog {
 		border: $border;
+		overflow: visible;
 	}
 	
 	&.jeesl-multipanel-dialog {
@@ -3980,9 +3991,10 @@ body, .ui-widget {
 		}
 		
 		.ui-dialog-content {
+			overflow: visible;
 			padding: $regular-spacing 0 $half-spacing;
 			
-			.jeesl-panel {
+			.jeesl-panel, .jeesl-datatable {
 				box-shadow: $overlay-shadow;
 			}
 		}
@@ -4166,7 +4178,7 @@ body, .ui-widget {
 			}
 		}
 		
-		.ui-datatable {
+		.jeesl-panel .ui-datatable {
 			border: none;
 			border-radius: 0;
 			margin: 0;
