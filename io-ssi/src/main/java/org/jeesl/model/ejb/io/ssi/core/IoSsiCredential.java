@@ -79,10 +79,15 @@ public class IoSsiCredential implements JeeslIoSsiCredential<IoSsiSystem>
 	@Override public boolean isEncrypted() {return encrypted;}
 	@Override public void setEncrypted(boolean encrypted) {this.encrypted = encrypted;}
 	
-	@Basic @Column(columnDefinition="text")
-	private String keyPrivate;
-	public String getKeyPrivate() {return keyPrivate;}
-	public void setKeyPrivate(String keyPrivate) {this.keyPrivate = keyPrivate;}
+//	@Basic @Column(columnDefinition="text")
+//	private String keyPrivate;
+//	public String getKeyPrivate() {return keyPrivate;}
+//	public void setKeyPrivate(String keyPrivate) {this.keyPrivate = keyPrivate;}
+//	
+//	@Basic @Column(columnDefinition="text")
+//	private String keyPublic;
+//	public String getKeyPublic() {return keyPublic;}
+//	public void setKeyPublic(String keyPublic) {this.keyPublic = keyPublic;}
 
 
 	@Override public boolean equals(Object object){return (object instanceof IoSsiCredential) ? id == ((IoSsiCredential) object).getId() : (object == this);}
