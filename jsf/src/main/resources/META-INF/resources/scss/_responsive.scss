@@ -3889,6 +3889,14 @@ body, .ui-widget {
 		
 		.ui-panel {
 			@include jeesl-panel;
+			
+			.jeesl-action-tabview {
+				margin: $half-spacing #{-$regular-spacing};
+				
+				.jeesl-tabs {
+					margin: 0;
+				}
+			}
 		}
 	}
 }
@@ -3977,6 +3985,7 @@ body, .ui-widget {
 	&.jeesl-dialog {
 		border: $border;
 		overflow: visible;
+		z-index: 1003 !important;
 	}
 	
 	&.jeesl-multipanel-dialog {
@@ -4187,6 +4196,20 @@ body, .ui-widget {
 	
 	.ui-dialog-footer {
 		@include jeesl-footer;
+	}
+}
+
+.jeesl-action-tabview {
+	display: block;
+	position: relative;
+	
+	.ui-panel-actions {
+		@include jeesl-titlebar-actions;
+		
+		float: none;
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 }
 
@@ -4425,6 +4448,7 @@ body, .ui-widget {
 			@include icon-default-size;
 			
 			&:not(.ui-outputlabel) {
+				flex-grow: 1;
 				min-height: $element-height;
 				
 				@media (max-width: 768px) {
