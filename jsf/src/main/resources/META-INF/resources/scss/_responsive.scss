@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:math';
 
 @import '_fonts';
@@ -938,11 +939,13 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 @mixin jeesl-footer {
+	background: color.adjust($border-colour, $alpha: -.8);
 	border: none;
 	border-radius: $border-radius-bottom;
-	border-top: $header-element-underline solid $dark-colour;
+//	border-top: $header-element-underline solid $dark-colour;
+	border-top: $border-width solid transparent;
 	color: $dark-colour;
-	font-weight: 700;
+//	font-weight: 700;
 	padding: $half-spacing $regular-spacing;
 			
 	@media (max-width: 768px) {
@@ -1959,7 +1962,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	.ui-panel-footer {
+	.ui-widget-content.ui-panel-footer {
 		@include jeesl-footer;
 	}
 
