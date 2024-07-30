@@ -1465,6 +1465,12 @@ $enable-pointer-cursor-for-buttons: true;
 					border-top-right-radius: $border-radius;
 				}
 			}
+			
+			*:not(:first-child) {
+				.jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+					border-top-width: $border-width;
+				}
+			}
 		}
 		
 		.jeesl-editor-list {
