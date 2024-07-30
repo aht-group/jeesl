@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -195,6 +196,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		{	// A object is created and the corresponding id is set
 			for(JsonTuple1<A> t : json.getTuples())
 			{
+				JsonUtil.info(t);
 				try
 				{
 					t.setEjb1(cA.newInstance());
