@@ -226,4 +226,14 @@ public class EjbIdFactory
 		int index = list.indexOf(ejb);
 		if(index>=0) {list.remove(index);}
 	}
+	
+	public static <T extends EjbWithId> T next(List<T> list, T ejb)
+	{
+		int index = list.indexOf(ejb);
+		if(list.size()>index)
+		{
+			return list.get(index+1);
+		}
+		return ejb;
+	}
 }

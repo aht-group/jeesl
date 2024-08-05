@@ -16,6 +16,7 @@ import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
+import org.jeesl.model.ejb.io.db.JeeslCqEntity;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqRootFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
@@ -66,6 +67,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<JeeslCqRootFetch> cqRootFetches; @Override public List<JeeslCqRootFetch> getCqRootFetches() {return cqRootFetches;}
 	private List<JeeslCqOrdering> orderings; @Override public List<JeeslCqOrdering> getCqOrderings() {return orderings;}
 	
+	protected List<JeeslCqEntity> entities; @Override public List<JeeslCqEntity> getCqEntities() {return entities;}
 	protected List<JeeslCqLiteral> literals; @Override public List<JeeslCqLiteral> getCqLiterals() {return literals;}
 	protected List<JeeslCqLong> ids; @Override public List<JeeslCqLong> getCqLongs() {return ids;}
 	protected List<JeeslCqBoolean> booleans; @Override public List<JeeslCqBoolean> getCqBooleans() {return booleans;}
@@ -77,6 +79,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public void addCqRootFetch(JeeslCqRootFetch cq) {if(Objects.isNull(cqRootFetches)) {cqRootFetches = new ArrayList<>();} cqRootFetches.add(cq);}
 	protected void addOrdering(JeeslCqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
 	
+	@Override public void addCqEntity(JeeslCqEntity cq) {if(Objects.isNull(entities)) {entities = new ArrayList<>();} entities.add(cq);}
 	@Override public void addCqLiteral(JeeslCqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
 	@Override public void addCqLong(JeeslCqLong literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
 	@Override public void addCqBoolean(JeeslCqBoolean cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
