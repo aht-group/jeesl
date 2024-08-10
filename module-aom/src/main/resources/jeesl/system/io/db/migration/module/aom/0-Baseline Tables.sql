@@ -1,0 +1,2 @@
+create table AomCompany (id  bigserial not null, code varchar(255), name varchar(255), rref int8, url varchar(255), realm_id int8, primary key (id));
+create table AomCompanyJtScope (company_id int8 not null, scope_id int8 not null);
