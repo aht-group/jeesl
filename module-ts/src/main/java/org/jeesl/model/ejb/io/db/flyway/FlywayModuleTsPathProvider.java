@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
-import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
-import org.jeesl.model.ejb.io.cms.markup.IoMarkupType;
+import org.jeesl.model.ejb.module.ts.config.TsCategory;
 
-public class FlywayIoCmsPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider
-{	
-	public static FlywayIoCmsPathProvider instance() {return new FlywayIoCmsPathProvider();}
+public class FlywayModuleTsPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider
+{
+	public static FlywayModuleTsPathProvider instance() {return new FlywayModuleTsPathProvider();}
 	
-	@Override public String getRootDirectory() {return "jeesl/system/io/db/migration/io/cms";}
+	@Override public String getRootDirectory() {return "jeesl/system/io/db/migration/module/ts";}
 	
 	@Override public String getBaselineTables() {return this.getRootDirectory()+"/"+JeeslFlywayPathProvider.sqlTables;}
 	@Override public String getBaselineConstraints() {return this.getRootDirectory()+"/"+JeeslFlywayPathProvider.sqlConstraints;}
@@ -20,8 +19,9 @@ public class FlywayIoCmsPathProvider implements JeeslFlywayPathProvider, JeesDdl
 	@Override public List<Class<?>> getMdsClasses()
 	{
 		List<Class<?>> list = new ArrayList<>();
-		list.add(IoMarkup.class);
-		list.add(IoMarkupType.class);
+		list.add(TsCategory.class);
+		
+		
 		return list;
 	}
 }

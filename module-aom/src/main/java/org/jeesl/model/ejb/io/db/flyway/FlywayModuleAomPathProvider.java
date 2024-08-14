@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
+import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayModuleAomVersionMarker;
 import org.jeesl.model.ejb.module.aom.company.AomCompany;
 import org.jeesl.model.ejb.module.aom.company.AomCompanyScope;
 
-public class FlywayModuleAomPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider
+public class FlywayModuleAomPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywayModuleAomVersionMarker
 {	
 	public static FlywayModuleAomPathProvider instance() {return new FlywayModuleAomPathProvider();}
 	
@@ -24,4 +25,6 @@ public class FlywayModuleAomPathProvider implements JeeslFlywayPathProvider, Jee
 		list.add(AomCompanyScope.class);
 		return list;
 	}
+
+	@Override public void sinceModuleAom(int i) {}
 }

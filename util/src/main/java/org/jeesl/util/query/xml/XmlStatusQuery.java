@@ -12,6 +12,7 @@ import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Level;
 import org.jeesl.model.xml.io.locale.status.Model;
 import org.jeesl.model.xml.io.locale.status.Parent;
+import org.jeesl.model.xml.io.locale.status.Quarter;
 import org.jeesl.model.xml.io.locale.status.Reason;
 import org.jeesl.model.xml.io.locale.status.Result;
 import org.jeesl.model.xml.io.locale.status.Scope;
@@ -87,6 +88,15 @@ public class XmlStatusQuery
 	public static Type typeLabel()
 	{		
 		Type xml = new Type();
+		xml.setId(0l);
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
+	}
+	
+	public static Quarter quarterLabel()
+	{		
+		Quarter xml = new Quarter();
 		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
