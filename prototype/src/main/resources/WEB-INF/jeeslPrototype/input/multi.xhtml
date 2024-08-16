@@ -18,8 +18,9 @@
 		<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
 		<jtp:inputRemark value="#{value.description[locales[0].code].lang}" rendered="#{withDescription}"/>
 	</j:inputGrid>
-	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs" rendered="#{locales.size() gt 1}"
-  			var="l" value="#{locales}">  
+	<h:panelGroup styleClass="jeesl-action-tabview">
+  	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs jeesl-action-header" rendered="#{locales.size() gt 1}"
+  			var="l" value="#{locales}">
   		<p:tab title="#{l.code}">
   			<j:inputGrid>
   				<p:outputLabel value="#{labelName}" rendered="#{withName}"/>
@@ -30,5 +31,22 @@
   			</j:inputGrid>
   		</p:tab>
   	</p:tabView>
+	<h:panelGroup styleClass="ui-panel-actions">
+		<j:svg type="jeeslAi" listener="#{deeplFragmentBean.openDialog()}" tooltip="#{msg.jeeslTtAi}" oncomplete="PF('translationsWidget').show();" styleClass="pf-action-icon"/>
+	</h:panelGroup>
+  	</h:panelGroup>
+  	
+  	<j:dialog id="dTranslations" widgetVar="translationsWidget" header="Automatic Translations" width="12">
+		<f:facet name="actions">
+			<j:svg type="jeeslCancel" oncomplete="PF('translationsWidget').hide()"/>
+			<j:svg type="jeeslSave" oncomplete="PF('translationsWidget').hide()"/>
+		</f:facet>
+		<ui:repeat var="l" value="#{locales}">
+			<j:inputGrid >
+				<p:outputLabel value="#{l.code}" />
+				<h:panelGroup styleClass="output-text"><h:outputText value="test"/></h:panelGroup>
+			</j:inputGrid>
+		</ui:repeat>
+	</j:dialog>
 	
 </ui:composition>

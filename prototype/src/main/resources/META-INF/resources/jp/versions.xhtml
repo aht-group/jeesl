@@ -10,7 +10,7 @@
 	
 	<composite:implementation>
 		<p:panel header="Versions" styleClass="jeesl-panel">
-            <p:panelGrid columns="2" columnClasses="jeeslGrid50,jeeslgrid50">
+            <j:inputGrid labelWidth="5">
 				<p:outputLabel value="JSF Version"/>
 				<h:outputText value="#{j:version('javax.faces.view.ViewScoped')}"/>
             	 
@@ -19,7 +19,7 @@
 				
 				<p:outputLabel value="OmniFaces Version"/>
 				<h:outputText value="#{j:version('org.omnifaces.cdi.ViewScoped')}"/>
-            </p:panelGrid>
+            </j:inputGrid>
         </p:panel>
 	</composite:implementation>
 </html>

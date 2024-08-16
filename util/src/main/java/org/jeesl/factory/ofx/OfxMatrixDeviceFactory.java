@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.jeesl.factory.xls.system.io.report.XlsColumnFactory;
+import org.jeesl.factory.xlsx.io.report.XlsColumnFactory;
 import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.table.XmlCellFactory;

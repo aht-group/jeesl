@@ -36,8 +36,9 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 	protected final Map<Long,B> mapB;
 	private final Map<A,Map<B,JsonTuple2<A,B>>> map;
-	public Map<A,Map<B,JsonTuple2<A,B>>> getMap() {return map;}
-	public Map<A,Map<B,JsonTuple2<A,B>>> getMap2() {return map;}
+	public Map<A,Map<B,JsonTuple2<A,B>>> getMap() {return map;}	//Deprecated
+	public Map<A,Map<B,JsonTuple2<A,B>>> getMap2() {return map;} //Deprecated
+	public Map<A,Map<B,JsonTuple2<A,B>>> getMapB() {return map;}
 	
 	private final List<B> listB; public List<B> getListB() {return listB;}
 	private final List<JsonTuple2<A,B>> tuples2; public List<JsonTuple2<A,B>> getTuples2() {return tuples2;}

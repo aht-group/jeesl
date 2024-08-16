@@ -28,6 +28,10 @@ body {
 		
 		border: $border;
 		
+		.ui-panel-content {
+			color: $body-foreground;
+		}
+		
 		.ui-panelgrid .ui-panelgrid-cell {
 			background: transparent;
 		}
@@ -97,7 +101,14 @@ body {
 		
 		.ui-tabs-panels {
 			background: transparent;
+			border-radius: 0;
 			color: $body-foreground;
+			padding: $half-spacing $regular-spacing;
+			position: relative;
+			
+			.ui-tabs-panel {
+				padding: 0;
+			}
 		}
 	}
 	
@@ -165,6 +176,13 @@ body {
 		}
 	}
 	
+	.ui-panelgrid .ui-panelgrid-cell {
+		background: transparent;
+		border: none;
+		color: $body-foreground;
+		padding: $half-spacing $regular-spacing;
+	}
+	
 	.jeesl-datatable {
 		border: $border;
 		
@@ -178,14 +196,15 @@ body {
 			
 			border-color: $border-colour;
 			height: $element-height;
+			padding: $slim-spacing $regular-spacing;
 			
 			@media (max-width: 768px) {
 				height: $element-height-mobile;
 			}
 			
-			span:not(.ui-icon) {
-				padding: $slim-spacing $regular-spacing;
-			}
+//			span:not(.ui-icon) {
+//				padding: $slim-spacing $regular-spacing;
+//			}
 		}
 		
 		tfoot td {
@@ -341,11 +360,6 @@ body {
 		
 		.ui-button.ui-button-icon-only {
 			border-radius: $border-radius;
-			
-			.ui-icon {
-				margin: 0;
-				translate: -50% -50%;
-			}
 		}
 	}
 	
@@ -499,6 +513,19 @@ body {
 			color: $dark-colour;
 			padding: $half-spacing $regular-spacing;
 			text-align: left;
+		}
+	}
+	
+	.ui-texteditor {
+		.ui-editor-toolbar.ql-toolbar {
+			background: none;
+			border: solid $border-colour;
+			border-radius: 0;
+	   		border-width: 0 0 $border-width;
+   		}
+   		
+   		.ql-container {
+			border: none !important;
 		}
 	}
 }

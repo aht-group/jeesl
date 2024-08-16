@@ -21,7 +21,7 @@ import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
-import org.jeesl.factory.xls.system.io.report.XlsFactory;
+import org.jeesl.factory.xlsx.io.report.XlsFactory;
 import org.jeesl.interfaces.controller.handler.JeeslProgressHandler;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;

@@ -66,4 +66,9 @@ public class Nested3Map <L1 extends EjbWithId, L2 extends EjbWithId, L3 extends 
     {
     	return m.get(l1).get(l2,l3);
     }
+	
+	public List<L1> toL1()
+	{
+		return new ArrayList<L1>(m.keySet());
+	}
 }

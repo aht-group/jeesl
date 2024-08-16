@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -18,9 +19,13 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Json1TuplesFactory <A extends EjbWithId>
 {
+	final static Logger logger = LoggerFactory.getLogger(Json1TuplesFactory.class);
+	
 	private final Class<A> cA; public Class<A> getClassA() {return cA;}
 
 	private JeeslFacade fUtils; public void setfUtils(JeeslFacade fUtils) {this.fUtils = fUtils;}
@@ -180,7 +185,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	{
 		JsonTuples1<A> json = new JsonTuples1<A>();
 		for(Tuple t : tuples) {json.getTuples().add(JsonTupleFactory.build1(t,types));}
-		ejb1Load(json);
+		this.ejb1Load(json);
 		return json;
 	}
 	
@@ -195,6 +200,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		{	// A object is created and the corresponding id is set
 			for(JsonTuple1<A> t : json.getTuples())
 			{
+//				JsonUtil.info(t);
 				try
 				{
 					t.setEjb1(cA.newInstance());

@@ -197,8 +197,6 @@ ul.aupHeadlineBreadcrumb,
 
 .aupStatusBar > ul > li:hover {
 	background: ${colorDark};
-	/* Prevent bledd on hover */
-	height:12px;
 }
 
 .aupStatusBar > ul > li > ul > li:hover {

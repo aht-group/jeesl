@@ -303,7 +303,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		{
 			boolean wspIsResponsible = wsp.getType().getCode().contentEquals(JeeslWorkflowPermissionType.Code.responsible.toString());
 			boolean wspIsDelegation = wsp.getType().getCode().contentEquals(JeeslWorkflowPermissionType.Code.delegate.toString());
-			boolean userHasRole = security.hasRole(wsp.getRole());
+			boolean userHasRole = false; if(Objects.nonNull(security)) { userHasRole = security.hasRole(wsp.getRole());}
 			boolean wspIsFullAllow = wsp.getModificationLevel().getCode().contentEquals(JeeslWorkflowModificationLevel.Code.full.toString());
 			boolean wspIsAdminAllow = wsp.getModificationLevel().getCode().contentEquals(JeeslWorkflowModificationLevel.Code.admin.toString());
 

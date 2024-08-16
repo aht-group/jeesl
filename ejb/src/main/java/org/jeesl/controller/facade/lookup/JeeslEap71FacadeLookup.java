@@ -20,7 +20,8 @@ public class JeeslEap71FacadeLookup implements JeeslFacadeLookup
 
 	private final String appName;
 	private final String moduleName;
-	private String localeCode; @Override public String getLocaleCode() {return localeCode;}
+	
+	private String localeCode; public void setLocaleCode(String localeCode) {this.localeCode = localeCode;} @Override public String getLocaleCode() {return localeCode;}
 	
 	private String username; public String getUsername() {return username;} public void setUsername(String username) {this.username = username;}
 	private String password; public String getPassword() {return password;} public void setPassword(String password) {this.password = password;}

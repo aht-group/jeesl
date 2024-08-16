@@ -9,4 +9,6 @@ public interface JeeslCqLong extends Serializable
 	Long getValue();
 	Type getType();
 	String getPath();
+	
+	String nyi(Class<?> c);
 }

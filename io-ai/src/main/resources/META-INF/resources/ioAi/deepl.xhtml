@@ -15,11 +15,8 @@
 	<j:row>
 		<j:slot id="sLeft" width="6">
 			<h:form id="fInput">
-				<p:panel styleClass="jeesl-panel jeesl-panel-deepl">
+				<p:panel styleClass="jeesl-panel jeesl-panel-deepl jeesl-font-size-xl">
 					<f:facet name="header"><j:pHeader entity="DeeplLanguage" code="labelTranslateFrom"/></f:facet>
-					<f:facet name="actions">
-						<jp:thFilter handler="#{cc.attrs.ctrl.thSource}"/>
-					</f:facet>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 						<p:inputTextarea styleClass="jeesl-deepl-textarea" value="#{cc.attrs.ctrl.input}">
 							<p:ajax event="keyup" delay="1000" listener="#{cc.attrs.ctrl.translate()}" update=":#{cc.id}:fOutput" process="@this" />
@@ -33,7 +30,8 @@
 				<p:panel styleClass="jeesl-panel jeesl-panel-deepl">
 					<f:facet name="header"><j:pHeader entity="DeeplLanguage" code="labelTranslateTo"/></f:facet>
 					<f:facet name="actions">
-						<j:icon id="iClip" type="jeeslClone" listener="#{cc.attrs.ctrl.voidCallback()}"/>
+						<ui:remove><j:icon id="iClip" type="jeeslClone" listener="#{cc.attrs.ctrl.voidCallback()}"/></ui:remove>
+						<j:svg id="iClip" type="jeeslTranslate" library="jeeslGfx" listener="#{cc.attrs.ctrl.voidCallback()}" />
 						<pe:clipboard trigger="iClip:link" text="#{cc.attrs.ctrl.output}"/>
 						<jp:thFilter handler="#{cc.attrs.ctrl.thTarget}"/>
 					</f:facet>

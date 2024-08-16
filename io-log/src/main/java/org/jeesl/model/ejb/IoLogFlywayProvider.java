@@ -1,7 +1,10 @@
 package org.jeesl.model.ejb;
 
-public interface IoLogFlywayProvider extends JeeslFlywayMigrationVerifier,
-										IoLocaleFlywayProvider
+import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayVersionMarker;
+import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayIoLocaleVersionMarker;
+
+public interface IoLogFlywayProvider extends JeeslFlywayVersionMarker,
+										FlywayIoLocaleVersionMarker
 {	
 	
 }

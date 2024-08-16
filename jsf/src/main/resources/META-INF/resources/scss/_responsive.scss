@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:math';
 
 @import '_fonts';
@@ -727,7 +728,6 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.ui-button {
 			align-items: stretch;
-			background: none;
 			border: none;
 			border-radius: 0;
 			box-shadow: none;
@@ -735,6 +735,19 @@ $enable-pointer-cursor-for-buttons: true;
 			height: auto;
 			margin-right: 0;
 			padding: $half-spacing 0;
+			
+			&:not(.ui-state-disabled) {
+				background: none;
+				
+				.ui-button-text {
+					color: $dark-colour;
+				}
+			}
+			
+			&.ui-state-disabled .ui-icon {
+				filter: grayscale(1);
+				opacity: .3;
+			}
 			
 			&:before {
 				border-radius: 0;
@@ -802,7 +815,6 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.ui-button-text {
 				align-items: center;
-				color: $dark-colour;
 				display: flex;
 				padding: 0 $half-spacing;
 			
@@ -938,11 +950,13 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 @mixin jeesl-footer {
+	background: color.adjust($border-colour, $alpha: -.8);
 	border: none;
 	border-radius: $border-radius-bottom;
-	border-top: $header-element-underline solid $dark-colour;
+//	border-top: $header-element-underline solid $dark-colour;
+	border-top: $border-width solid transparent;
 	color: $dark-colour;
-	font-weight: 700;
+//	font-weight: 700;
 	padding: $half-spacing $regular-spacing;
 			
 	@media (max-width: 768px) {
@@ -1041,6 +1055,7 @@ $enable-pointer-cursor-for-buttons: true;
 						
 							@media (max-width: 768px) {
 								display: flex;
+								min-height: $element-height-mobile;
 							}
 						}
 						
@@ -1263,7 +1278,7 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	&:first-child {
-		margin-top: -$regular-spacing;
+		margin-top: -$half-spacing;
 	}
 	
 	&:last-child {
@@ -1462,6 +1477,12 @@ $enable-pointer-cursor-for-buttons: true;
 					border-top-right-radius: $border-radius;
 				}
 			}
+			
+			*:not(:first-child) {
+				.jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+					border-top-width: $border-width;
+				}
+			}
 		}
 		
 		.jeesl-editor-list {
@@ -1553,7 +1574,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 		}
 		
-		.ui-panel-content {
+		.ui-panel-content, .ui-dialog-content {
 			padding: 0;
 			position: relative;
 			width: 100%;
@@ -1679,7 +1700,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	.ui-widget-content:not(.ui-dialog, .ui-selectonemenu-item) {
+	.ui-widget-content:not(.ui-dialog, .ui-selectonemenu-item, .ui-datatable-data) {
 		background: transparent;
 	}
 	
@@ -1932,7 +1953,7 @@ $enable-pointer-cursor-for-buttons: true;
 		border: none;
 	}
 	
-	.ui-panel-content {
+	.ui-panel-content, .ui-dialog-content {
 		@include input-grid;
 		@include image-gallery;
 		
@@ -1944,10 +1965,13 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.ui-separator {
+			background: $border-colour;
+			border: none;
+			height: $separator-thickness;
+			margin: $half-spacing #{-$regular-spacing};
+			
 			@media (max-width: 768px) {
-				background: $light-grey;
-				height: 2px;
-				margin: 6px 0;
+				height: $separator-thickness-mobile;
 			}
 		}
 		
@@ -1956,7 +1980,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	.ui-panel-footer {
+	.ui-widget-content.ui-panel-footer {
 		@include jeesl-footer;
 	}
 
@@ -3276,7 +3300,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel {
+.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
 	margin-bottom: $regular-spacing;
 	
 	.ui-panel-content {
@@ -3340,6 +3364,42 @@ body, .ui-widget {
 			&:before {
 				font-size: 1em;
 			}
+		}
+	}
+}
+
+@mixin jeesl-footer-action-container {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+	> a {
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+		color: $body-foreground;
+		height: $element-height;
+		margin: 0;
+		padding: 0;
+		transition: background $transition-duration linear;
+		
+		@media (max-width: 768px) {
+			height: $element-height-mobile;
+		}
+		
+		&.ui-state-hover, &:hover {
+			background: $soft-grey;
+			text-decoration: none;
+		}
+		
+		.ui-outputlabel {
+			align-items: center;
+			cursor: pointer;
+			display: flex;
+			height: 100%;
+			padding: 0 $half-spacing;
 		}
 	}
 }
@@ -3583,42 +3643,33 @@ body, .ui-widget {
 		}
 	}
 	
-	.ui-paginator {
-		align-items: center;
+	.ui-datatable-footer, .ui-paginator {
 		border: $border;
 		border-width: $border-width 0 0;
 		box-shadow: 0 -1px 0 inset $white-35;
-		display: flex;
-		flex-wrap: wrap;
 		min-height: $element-height;
 		padding: 0;
-		justify-content: center;
 		
 		@media (max-width: 768px) {
 			border-radius: $border-radius-bottom;
 			min-height: $element-height-mobile;
 		}
 		
+		.ui-datatable-footer-actions {
+			@include jeesl-footer-action-container;
+		}
+	}
+	
+	.ui-paginator {
+		@include jeesl-footer-action-container;
+		
+		
 		.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last {
-			background: transparent;
-			border: none;
-			border-radius: 0;
-			box-shadow: none;
-			color: $body-foreground;
-			height: $element-height;
-			margin: 0;
 			overflow: hidden;
-			padding: 0;
-			transition: background $transition-duration linear;
 			width: $element-height;
 			
 			@media (max-width: 768px) {
-				height: $element-height-mobile;
 				width: $element-height-mobile;
-			}
-			
-			&.ui-state-hover {
-				background: $soft-grey;
 			}
 		}
 		
@@ -3635,7 +3686,6 @@ body, .ui-widget {
 			@include vertical-center(after);
 			
 			height: 100%;
-			padding: $half-spacing 0;
 			white-space: nowrap;
 			width: 100%;
 			
@@ -3705,6 +3755,8 @@ body, .ui-widget {
 }
 
 .jeesl-datatable {
+	background: $panel-background;
+	
 	.jeesl-heatbar-wrapper {
 		display: flex;
 		gap: $half-spacing;
@@ -3714,6 +3766,10 @@ body, .ui-widget {
 .ui-selectonemenu-panel .ui-selectonemenu-table {
 	border: 0;
 	width: auto;
+	
+	&.ui-helper-hidden {
+		display: none;
+	}
 	
 	tbody tr {
 		&:last-child td {
@@ -3755,9 +3811,20 @@ body, .ui-widget {
 			}
 		}
 		
-		.height-balance-container {
-			.jeesl-grid-#{$i} {
-				width: calc((100% / 12) * #{$i} - #{$half-spacing});
+		.jeesl-grid.height-balance-container > .jeesl-grid-#{$i} {
+			height: 100%;
+			width: calc((100% / 12) * #{$i} - #{$half-spacing});
+		
+			&:first-child {
+				margin-left: 0;
+			}
+			
+			&:last-child {
+				margin-right: 0;
+			}
+			
+			> * {
+				height: calc(100% - #{$regular-spacing});
 			}
 		}
 	}
@@ -3843,6 +3910,14 @@ body, .ui-widget {
 		
 		.ui-panel {
 			@include jeesl-panel;
+			
+			.jeesl-action-tabview {
+				margin: $half-spacing #{-$regular-spacing};
+				
+				.jeesl-tabs {
+					margin: 0;
+				}
+			}
 		}
 	}
 }
@@ -3908,6 +3983,10 @@ body, .ui-widget {
 	background: $panel-background;
 	max-width: $min-fixed-container-width;
 	
+	&.ui-hidden-container {
+		display: none;
+	}
+	
 	@for $i from 1 to 13 {
 		&.jeesl-dialog-#{$i} {
 			width: calc(100% * (#{$i} / 12)) !important;
@@ -3926,6 +4005,8 @@ body, .ui-widget {
 	
 	&.jeesl-dialog {
 		border: $border;
+		overflow: visible;
+		z-index: 1003 !important;
 	}
 	
 	&.jeesl-multipanel-dialog {
@@ -3940,9 +4021,10 @@ body, .ui-widget {
 		}
 		
 		.ui-dialog-content {
+			overflow: visible;
 			padding: $regular-spacing 0 $half-spacing;
 			
-			.jeesl-panel {
+			.jeesl-panel, .jeesl-datatable {
 				box-shadow: $overlay-shadow;
 			}
 		}
@@ -4126,7 +4208,7 @@ body, .ui-widget {
 			}
 		}
 		
-		.ui-datatable {
+		.jeesl-panel .ui-datatable {
 			border: none;
 			border-radius: 0;
 			margin: 0;
@@ -4135,6 +4217,20 @@ body, .ui-widget {
 	
 	.ui-dialog-footer {
 		@include jeesl-footer;
+	}
+}
+
+.jeesl-action-tabview {
+	display: block;
+	position: relative;
+	
+	.ui-panel-actions {
+		@include jeesl-titlebar-actions;
+		
+		float: none;
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 }
 
@@ -4159,8 +4255,8 @@ body, .ui-widget {
 		
 		.ui-tabs-panel {
 			.ui-texteditor, .jeesl-ck-editor {
-				margin-left: -$slim-spacing;
-				margin-right: -$slim-spacing;
+//				margin-left: -$slim-spacing;
+//				margin-right: -$slim-spacing;
 				
 				@media (max-width: 768px) {
 					margin-left: -$regular-spacing;
@@ -4173,7 +4269,7 @@ body, .ui-widget {
 				
 				&:last-child {
 					border-bottom-width: 0;
-					margin-bottom: -$slim-spacing;
+//					margin-bottom: -$slim-spacing;
 				
 					@media (max-width: 768px) {
 						margin-bottom: -$half-spacing;
@@ -4373,6 +4469,7 @@ body, .ui-widget {
 			@include icon-default-size;
 			
 			&:not(.ui-outputlabel) {
+				flex-grow: 1;
 				min-height: $element-height;
 				
 				@media (max-width: 768px) {
@@ -4476,6 +4573,7 @@ body, .ui-widget {
 	
 	.ui-fileupload-content {
 		background: transparent;
+		border: none;
 		padding: $slim-spacing;
 		
 		.ui-fileupload-files {

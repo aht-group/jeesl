@@ -75,10 +75,13 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 	public void startThreadPool(int maxThreads) throws NamingException
     {
         for(int i=1;i<=maxThreads;i++) {threads.add(buildWorker(i));}
-        pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(maxThreads);
-        for(Runnable w : threads) {pool.execute(w);}
-        pool.shutdown();
-        logger.info("Active: "+pool.getActiveCount());
+        if(maxThreads>0)
+        {
+        	pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(maxThreads);
+            for(Runnable w : threads) {pool.execute(w);}
+            pool.shutdown();
+            logger.info("Active: "+pool.getActiveCount());
+        }
     }
 	protected abstract SystemMaintenanceRunnable<MNT> buildWorker(int i) throws NamingException;
 	
