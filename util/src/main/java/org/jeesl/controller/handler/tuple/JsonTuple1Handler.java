@@ -36,6 +36,8 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 	
 	private final Map<A,JsonTuple1<A>> map1;
 	public Map<A,JsonTuple1<A>> getMapA() {return map1;}
+	
+	@Deprecated
 	public Map<A,JsonTuple1<A>> getMap1() {return map1;}
 
 	public static <A extends EjbWithId> JsonTuple1Handler<A> instance(Class<A> cA) {return new JsonTuple1Handler<>(cA);}

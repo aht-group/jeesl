@@ -6,6 +6,10 @@ import java.util.List;
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayModuleAomVersionMarker;
+import org.jeesl.model.ejb.module.aom.asset.AomAsset;
+import org.jeesl.model.ejb.module.aom.asset.AomAssetStatus;
+import org.jeesl.model.ejb.module.aom.asset.AomAssetType;
+import org.jeesl.model.ejb.module.aom.asset.AomView;
 import org.jeesl.model.ejb.module.aom.company.AomCompany;
 import org.jeesl.model.ejb.module.aom.company.AomCompanyScope;
 
@@ -21,8 +25,15 @@ public class FlywayModuleAomPathProvider implements JeeslFlywayPathProvider, Jee
 	@Override public List<Class<?>> getMdsClasses()
 	{
 		List<Class<?>> list = new ArrayList<>();
+		
 		list.add(AomCompany.class);
 		list.add(AomCompanyScope.class);
+		
+		list.add(AomAsset.class);
+		list.add(AomAssetStatus.class);
+		list.add(AomAssetType.class);
+		list.add(AomView.class);
+		
 		return list;
 	}
 
