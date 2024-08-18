@@ -12,6 +12,9 @@ import org.jeesl.model.ejb.module.aom.asset.AomAssetType;
 import org.jeesl.model.ejb.module.aom.asset.AomView;
 import org.jeesl.model.ejb.module.aom.company.AomCompany;
 import org.jeesl.model.ejb.module.aom.company.AomCompanyScope;
+import org.jeesl.model.ejb.module.aom.event.AomEvent;
+import org.jeesl.model.ejb.module.aom.event.AomEventStatus;
+import org.jeesl.model.ejb.module.aom.event.AomEventType;
 
 public class FlywayModuleAomPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywayModuleAomVersionMarker
 {	
@@ -33,6 +36,10 @@ public class FlywayModuleAomPathProvider implements JeeslFlywayPathProvider, Jee
 		list.add(AomAssetStatus.class);
 		list.add(AomAssetType.class);
 		list.add(AomView.class);
+		
+		list.add(AomEvent.class);
+		list.add(AomEventStatus.class);
+		list.add(AomEventType.class);
 		
 		return list;
 	}

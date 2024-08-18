@@ -3,6 +3,7 @@ alter table AomAssetType add constraint UC_AomAssetType_realm_view_code unique (
 alter table AomAssetTypeJtDescription add constraint UK_3vf21ew4njgel0mqkxon776hg unique (description_id);
 alter table AomAssetTypeJtLang add constraint UK_ivagmlf79i0r0iu9pbv6xkuuy unique (lang_id);
 alter table AomCompanyJtScope add constraint UKfg2dutnto5609n9g130obnhq2 unique (company_id, scope_id);
+alter table AomEventJtAsset add constraint UKr1j8winj9xfsldsfnhy13axk2 unique (event_id, asset_id);
 alter table AomView add constraint UC_AomView_realm_code unique (realm_id, rref, code);
 alter table AomView add constraint UC_AomView_realm_tree unique (realm_id, rref, tree);
 alter table AomViewJtDescription add constraint UK_gsf9gkcpxp4arutvn9ix47ifc unique (description_id);
@@ -23,6 +24,13 @@ alter table AomAssetTypeJtLang add constraint FK9vs2exsw2eloet6s6ma3vjhix foreig
 alter table AomCompany add constraint FKbm6sbpr8fchwfy7j14vl1t7yr foreign key (realm_id) references IoStatus;
 alter table AomCompanyJtScope add constraint FK8g5dfsilcr8ksbs98676lsbt2 foreign key (scope_id) references IoStatus;
 alter table AomCompanyJtScope add constraint FKd2aps4bb8eits7qe7vvrqkogr foreign key (company_id) references AomCompany;
+alter table AomEvent add constraint FKfitfyui7x99ade79sob91a8yw foreign key (company_id) references AomCompany;
+alter table AomEvent add constraint FK6gnd727rprvra6uix12skh5p0 foreign key (frContainer_id) references IoFileContainer;
+alter table AomEvent add constraint FKrgnmfa61ws6d4nrxkb5e7l80 foreign key (markup_id) references IoMarkup;
+alter table AomEvent add constraint FKtdon57uolnup7s20jkirknrc foreign key (status_id) references IoStatus;
+alter table AomEvent add constraint FKkhaofsii2qdrok3nggckrpmh7 foreign key (type_id) references IoStatus;
+alter table AomEventJtAsset add constraint FK3y4qer0ut0bg3ccwy2km6orol foreign key (asset_id) references AomAsset;
+alter table AomEventJtAsset add constraint FKq0ktq932x1su2wqest99yd5ru foreign key (event_id) references AomEvent;
 alter table AomView add constraint FK860lh3vp0un3kcv9uf33l0ckm foreign key (graphic_id) references IoGraphic;
 alter table AomView add constraint FKfeg5hfgpsv2jdxj0p05yo2xt3 foreign key (realm_id) references IoStatus;
 alter table AomViewJtDescription add constraint FKlwdopw6kh2fh0ybcdtq6f4ymh foreign key (description_id) references IoDescription;

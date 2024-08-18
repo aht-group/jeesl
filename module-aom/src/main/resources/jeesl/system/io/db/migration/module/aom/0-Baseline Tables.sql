@@ -4,6 +4,8 @@ create table AomAssetTypeJtDescription (type_id int8 not null, description_id in
 create table AomAssetTypeJtLang (type_id int8 not null, lang_id int8 not null, primary key (type_id, lang_id));
 create table AomCompany (id  bigserial not null, code varchar(255), name varchar(255), rref int8, url varchar(255), realm_id int8, primary key (id));
 create table AomCompanyJtScope (company_id int8 not null, scope_id int8 not null);
+create table AomEvent (id  bigserial not null, amount float8, name varchar(255), record timestamp, remark text, company_id int8, frContainer_id int8, markup_id int8, status_id int8, type_id int8, primary key (id));
+create table AomEventJtAsset (event_id int8 not null, asset_id int8 not null);
 create table AomView (id  bigserial not null, code varchar(255), position int4 not null, rref int8 not null, tree varchar(255), visible boolean not null, graphic_id int8, realm_id int8, primary key (id));
 create table AomViewJtDescription (view_id int8 not null, description_id int8 not null, primary key (view_id, description_id));
 create table AomViewJtLang (view_id int8 not null, lang_id int8 not null, primary key (view_id, lang_id));
