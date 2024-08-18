@@ -82,7 +82,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomMaintenanceGwc.class);
 	
-	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset;
+	protected JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
@@ -145,7 +145,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	}
 	
 	public <E extends Enum<E>> void postConstructAssetMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset,
+									JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ESTATUS> fAsset,
 									JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,ALEVEL,ETYPE> cache,
 									REALM realm)
 	{
@@ -182,7 +182,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		events.clear();
 		mapCss.clear();
 
-		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.tenant(tenant);
 		query.addAomEventStatus(sbhEventStatus.getSelected());
 		query.addCqDate(CqDate.dbIsBeforeOrEqual(sbDateHandler.getDateTo(), CqDate.path(JeeslAomEvent.Attributes.record)));
@@ -211,7 +211,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
     	Collections.sort(event.getAssets(),cpAsset);
     	slotHandler.set(8,4);
     	
-    	EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+    	EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.addAssets(event.getAssets());
 		query.add(CqOrdering.desending(CqOrdering.path(JeeslAomEvent.Attributes.record)));
 		

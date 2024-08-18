@@ -1,7 +1,6 @@
 package org.jeesl.controller.cache.module.aom;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,7 @@ public class JeeslAomAssetLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomAssetLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
-	private JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?> fAom;
+	private JeeslAomFacade<?,?,REALM,?,?,?,?,ATYPE,VIEW,?,?> fAom;
 	
 	private LoadingCache<AomTypeCacheKey,List<ATYPE>> cacheType;
 	
@@ -39,7 +38,7 @@ public class JeeslAomAssetLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM
 	private final List<ASTATUS> assetStatus;
 	
 	public JeeslAomAssetLoadingCache(AomFactoryBuilder<?,?,REALM,?,?,?,ASTATUS,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAom,
-									JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?> fAom)
+									JeeslAomFacade<?,?,REALM,?,?,?,?,ATYPE,VIEW,?,?> fAom)
 	{
 		this.fAom=fAom;
 		cacheType = Caffeine.newBuilder()

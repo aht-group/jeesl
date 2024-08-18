@@ -50,7 +50,7 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	final static Logger logger = LoggerFactory.getLogger(AbstractAomCacheBean.class);
 	
 	private final AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom;
-	protected JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ESTATUS> fAom;
+	protected JeeslAomFacade<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ESTATUS> fAom;
 	
 	private final com.github.benmanes.caffeine.cache.Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheLocalAllCompanies;
 	private final com.github.benmanes.caffeine.cache.Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheLocalCompanyScope;
@@ -85,7 +85,7 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 		eventStatus = new ArrayList<>();
 	}
 	
-	public void postConstruct(JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ESTATUS> fAom)
+	public void postConstruct(JeeslAomFacade<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ESTATUS> fAom)
 	{
 		this.fAom=fAom;
 		
