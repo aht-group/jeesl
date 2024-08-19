@@ -728,7 +728,6 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.ui-button {
 			align-items: stretch;
-			background: none;
 			border: none;
 			border-radius: 0;
 			box-shadow: none;
@@ -736,6 +735,19 @@ $enable-pointer-cursor-for-buttons: true;
 			height: auto;
 			margin-right: 0;
 			padding: $half-spacing 0;
+			
+			&:not(.ui-state-disabled) {
+				background: none;
+				
+				.ui-button-text {
+					color: $dark-colour;
+				}
+			}
+			
+			&.ui-state-disabled .ui-icon {
+				filter: grayscale(1);
+				opacity: .3;
+			}
 			
 			&:before {
 				border-radius: 0;
@@ -803,7 +815,6 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.ui-button-text {
 				align-items: center;
-				color: $dark-colour;
 				display: flex;
 				padding: 0 $half-spacing;
 			
@@ -1044,6 +1055,7 @@ $enable-pointer-cursor-for-buttons: true;
 						
 							@media (max-width: 768px) {
 								display: flex;
+								min-height: $element-height-mobile;
 							}
 						}
 						
@@ -1562,7 +1574,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 		}
 		
-		.ui-panel-content {
+		.ui-panel-content, .ui-dialog-content {
 			padding: 0;
 			position: relative;
 			width: 100%;
@@ -1941,7 +1953,7 @@ $enable-pointer-cursor-for-buttons: true;
 		border: none;
 	}
 	
-	.ui-panel-content {
+	.ui-panel-content, .ui-dialog-content {
 		@include input-grid;
 		@include image-gallery;
 		
@@ -3288,7 +3300,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel {
+.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
 	margin-bottom: $regular-spacing;
 	
 	.ui-panel-content {
@@ -4561,6 +4573,7 @@ body, .ui-widget {
 	
 	.ui-fileupload-content {
 		background: transparent;
+		border: none;
 		padding: $slim-spacing;
 		
 		.ui-fileupload-files {
