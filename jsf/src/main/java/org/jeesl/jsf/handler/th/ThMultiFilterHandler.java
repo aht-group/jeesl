@@ -206,6 +206,7 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 	public boolean getHasSome(){return !list.isEmpty();}
 	public boolean getHasSelected(){return hasSelected();}
 	public boolean getHasMoreSelected(){return selected.size()>1;}
+	public boolean getHasSomeSelected(){return !selected.isEmpty() && !allSelected();}
 	public boolean hasSelected(){return !selected.isEmpty();}
 	public boolean allSelected(){return selected.size()==list.size();}
 

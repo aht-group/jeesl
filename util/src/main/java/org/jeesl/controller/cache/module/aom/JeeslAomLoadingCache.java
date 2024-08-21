@@ -39,7 +39,7 @@ public class JeeslAomLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	private final JeeslAomEventCache<REALM,ETYPE> event;
 
 	public JeeslAomLoadingCache(AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,?,ASTATUS,ATYPE,VIEW,?,ETYPE,?,?,?,?,?,?> fbAom,
-										JeeslAomFacade<?,?,REALM,COMPANY,?,?,ATYPE,VIEW,?,?> fAom)
+										JeeslAomFacade<?,?,REALM,COMPANY,SCOPE,?,?,ATYPE,VIEW,?,?> fAom)
 	{
 		company = new JeeslAomCompanyLoadingCache<>(fbAom,fAom);
 		type = new JeeslAomAssetLoadingCache<>(fbAom,fAom);

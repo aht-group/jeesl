@@ -15,6 +15,7 @@ public class CqEntity implements JeeslCqEntity
 	private final EjbWithId id; @Override public EjbWithId getValue() {return id;}
 	private final String path; @Override public String getPath() {return path;}
 
+	public static CqEntity isNull(String path) {return new CqEntity(Type.IsNull,null,path);}
 	public static CqEntity nonNull(String path) {return new CqEntity(Type.IsNonNull,null,path);}
 
 	private CqEntity(Type type, EjbWithId id, String path)

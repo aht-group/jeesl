@@ -79,7 +79,7 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	{
 		map.clear();
 		for(T t : list){map.put(t,true);}
-		refresh();
+		this.refresh();
 	}
 	
 	public void fillAndSelect(List<T> items)
