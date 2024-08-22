@@ -14,6 +14,11 @@
 		<composite:attribute name="header" required="false" default="false" shortDescription="If used inside j:dtHeader, it need to be true. In columns the default=false can be used."/>
 	</composite:interface>
 
+	<ui:remove>
+		The following produces errors!
+		 title="#{var.name[localeCode].lang}"
+	</ui:remove>
+
 	<composite:implementation>
 	   <ui:repeat value="#{cc.attrs.handler.list}" var="var" varStatus="vs">
 			<p:commandLink id="link" 
@@ -22,7 +27,8 @@
 				   process="#{cc.attrs.process}" 
 				   immediate="#{cc.attrs.immediate}"
 				   styleClass="#{cc.attrs.handler.map[var] ? 'pf-action-icon' : 'pf-action-icon pf-inactive'}"
-				   title="#{var.name[localeCode].lang}">
+				  
+				   >
 				<h:graphicImage id="image" height="#{cc.attrs.height}" value="/image/symbolizer/graphic/#{var.class.name}/#{cc.attrs.height}/#{var.id}">
 				</h:graphicImage>
 			</p:commandLink>

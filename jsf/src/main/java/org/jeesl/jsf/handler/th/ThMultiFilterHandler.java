@@ -1,6 +1,5 @@
 package org.jeesl.jsf.handler.th;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,11 +18,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,ThMultiFilter
+public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMultiFilter
 {
 	final static Logger logger = LoggerFactory.getLogger(ThMultiFilterHandler.class);
 	private static final long serialVersionUID = 1L;
@@ -41,7 +40,7 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 	public boolean toggleMode; public boolean isToggleMode() {return toggleMode;} public void setToggleMode(boolean toggleMode) {this.toggleMode = toggleMode;}
 	private int selectedSize; public int getSelectedSize() {return selectedSize;}
 
-	public static <T extends EjbWithId> ThMultiFilterHandler<T> instance(ThMultiFilterBean callback) {return new ThMultiFilterHandler<>(callback);}
+	public static <T extends EjbWithGraphic<?>> ThMultiFilterHandler<T> instance(ThMultiFilterBean callback) {return new ThMultiFilterHandler<>(callback);}
 	public ThMultiFilterHandler(ThMultiFilterBean bean)
 	{
 		this.bean=bean;

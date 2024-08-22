@@ -1,6 +1,8 @@
 package org.jeesl.interfaces.bean.th;
 
-public interface ThMultiFilter
+import java.io.Serializable;
+
+public interface ThMultiFilter extends Serializable
 {
 	
 }
