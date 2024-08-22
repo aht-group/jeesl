@@ -66,7 +66,7 @@ public abstract class AbstractDeduplicator <RE extends JeeslRevisionEntity<?,?,?
 	{
 		this.ejbOriginal=projectOriginal;
 		this.ejbDuplicate=projectDuplicate;
-		analyse();
+		this.analyse();
 	}
 	
 	public void analyse()
