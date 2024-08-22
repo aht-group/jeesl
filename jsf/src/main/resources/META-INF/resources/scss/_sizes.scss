@@ -122,6 +122,17 @@ $overlay-filter-input-width: 200px;
 	}
 }
 
+@mixin icon-default-size {
+	.jeesl-icon {
+		height: calc($table-icon-height * var(--icon-height-multiplier));
+		width: auto;
+		
+		@media (max-width: 768px) {
+			height: $table-icon-height-mobile !important;
+		}
+	}
+}
+
 @mixin setContainerWidth($minimum, $maximum: 100%) {
 	$min-fixed-container-width: $minimum !global;
 	$max-fixed-container-width: $maximum !global;

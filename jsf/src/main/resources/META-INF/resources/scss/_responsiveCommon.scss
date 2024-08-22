@@ -304,17 +304,6 @@ $border: $border-width solid $border-colour;
 	}
 }
 
-@mixin icon-default-size {
-	.jeesl-icon {
-		height: calc($table-icon-height * var(--icon-height-multiplier));
-		width: auto;
-		
-		@media (max-width: 768px) {
-			height: $table-icon-height-mobile;
-		}
-	}
-}
-
 @mixin icon {
 	background-image: none !important; // Override primefaces 12 rule.
 	color: inherit; // !important; Override primefaces 12 rule.
