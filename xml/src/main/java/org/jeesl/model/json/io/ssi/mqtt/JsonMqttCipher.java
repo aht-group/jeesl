@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-@JsonRootName(value="container")
-public class JsonMqttContainer implements Serializable
+@JsonRootName(value="mqttCipher")
+public class JsonMqttCipher implements Serializable
 {
 	public static final long serialVersionUID=1;
 
