@@ -8,4 +8,4 @@ CKEDITOR.config.removePlugins = 'elementspath';
 CKEDITOR.config.resize_enabled = false;
 CKEDITOR.config.width = '100%';
 CKEDITOR.addCss('.cke_editable { margin: 0; line-height: 1.3em; font-size: 11px; } .cke_editable h1, .cke_editable h2, .cke_editable h3, .cke_editable h4, .cke_editable h5, .cke_editable h6 { font-weight: bold; line-height: normal; } .cke_editable p, .cke_editable address, .cke_editable ul, .cke_editable ol { margin-left: 1em; }');
-CKEDITOR.config.toolbar = [['Bold', 'Italic','-', 'NumberedList', 'BulletedList','-','Subscript', 'Superscript']];
+CKEDITOR.config.toolbar = [['Format', 'Bold', 'Italic','-', 'NumberedList', 'BulletedList','-','Subscript', 'Superscript']];

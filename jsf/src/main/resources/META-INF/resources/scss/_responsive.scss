@@ -361,7 +361,7 @@ $enable-pointer-cursor-for-buttons: true;
 				-webkit-tap-highlight-color: $bright-colour;
 
 				@media (max-width: 768px) {
-			    	height: $bc-element-height-mobile;
+			    	height: calc($sb-element-height-mobile * var(--icon-height-multiplier));
 					transition-duration: .4s;
 				}
 				
@@ -1278,7 +1278,7 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	&:first-child {
-		margin-top: -$half-spacing;
+		margin-top: -$regular-spacing;
 	}
 	
 	&:last-child {
@@ -1320,6 +1320,20 @@ $enable-pointer-cursor-for-buttons: true;
 			padding: 0;
 		}
 		
+		&.jeesl-ck-editor-ext .cke .cke_inner .cke_top .cke_toolbar {
+			.cke_combo {
+				display: flex;
+				
+				+ .cke_toolgroup {
+					border-left: $border;
+				}
+			}
+						
+			.cke_toolgroup + .cke_combo {
+				border-left: $border;
+			}
+		}
+		
 		.cke {
 			border: none;
 			border-radius: inherit;
@@ -1337,16 +1351,21 @@ $enable-pointer-cursor-for-buttons: true;
 					
 					.cke_toolbar {
 						display: flex;
+						flex-wrap: wrap-reverse;
 						float: none;
-							justify-content: right;
+						justify-content: right;
+						
+						.cke_toolbar_start {
+							border-left: $border;
+						}
 							
-						.cke_toolgroup {
+						.cke_toolgroup, .cke_combo {
 							align-items: center;
 							display: flex;
 							padding: 0;
 							margin: 0;
 								
-							.cke_button {
+							.cke_button, .cke_combo_button {
 								@include button(cke_button_on);
 								
 								border: $border;
@@ -1358,10 +1377,6 @@ $enable-pointer-cursor-for-buttons: true;
 								
 								@media (max-width: 768px) {
 									min-width: $element-height-mobile;
-								}
-								
-								&:first-child {
-									border-left: $border;
 								}
 								
 								&:after {
@@ -1424,6 +1439,46 @@ $enable-pointer-cursor-for-buttons: true;
 								width: 0;
 							}
 						}
+						
+						.cke_combo {
+							display: none;
+							
+							&:after {
+								display: none;
+							}
+							
+							.cke_combo_button {
+								.cke_combo_text {
+									cursor: inherit;
+									font-weight: 700;
+									float: none;
+									line-height: normal;
+									padding: 0;
+									width: auto;
+								}
+								
+								.cke_combo_open {
+									cursor: inherit;
+									font-size: 1em;
+									height: auto;
+									margin: 0 0 0 $half-spacing;
+									width: auto;
+	
+									.cke_combo_arrow {
+										@include icon;
+										
+										border: none;
+										cursor: inherit;
+										float: none;
+										font-family: "Font Awesome 5 Free";
+										
+										&:before {
+											content: $icon-down;
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 				
@@ -1469,10 +1524,12 @@ $enable-pointer-cursor-for-buttons: true;
 				border-radius: $border-radius-bottom;
 			}
 			
-			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
-				border-top-width: $border-width;
+			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar {
+				.cke_toolgroup .cke_button, .cke_combo .cke_combo_button {
+					border-top-width: $border-width;
+				}
 				
-				&:last-child {
+				.cke_toolgroup .cke_button:last-child {
 					border-right-width: $border-width;
 					border-top-right-radius: $border-radius;
 				}
@@ -1977,6 +2034,22 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.jeesl-panelgrid-scrollview {
 			overflow-x: auto;
+		}
+		
+		.jeesl-markup-content {
+			h1, h2, h3, h4, h5, h6 {
+				margin-bottom: $regular-spacing;
+				margin-top: $wide-spacing;
+			}
+			
+			p, address, ul, ol {
+				margin-left: $wide-spacing;
+			}
+			
+			address {
+				font-style: italic;
+				margin-bottom: 0;
+			}
 		}
 	}
 	
@@ -2525,7 +2598,7 @@ body, .ui-widget {
     margin: -10px 10px 10px;
 
 	@media (max-width: 768px) {
-		background-size: 100% $sb-element-height-mobile;
+		background-size: 100% calc($sb-element-height-mobile * var(--icon-height-multiplier));
 		height: auto;
 	}
 	
@@ -2586,7 +2659,7 @@ body, .ui-widget {
 			white-space: nowrap;
 			
 			@media(max-width: 768px) {
-				height: $sb-element-height-mobile;
+				height: calc($sb-element-height-mobile * var(--icon-height-multiplier));
 			}
 			
 			&:hover {
@@ -4199,7 +4272,7 @@ body, .ui-widget {
 			
 			&:first-child {
 				border-top-width: 0;
-				margin-top: -$half-spacing;
+				margin-top: -$regular-spacing;
 			}
 			
 			&:last-child {
