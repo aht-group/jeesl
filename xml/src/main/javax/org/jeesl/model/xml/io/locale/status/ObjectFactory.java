@@ -334,6 +334,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Goals }
+     * 
+     */
+    public Goals createGoals() {
+        return new Goals();
+    }
+
+    /**
+     * Create an instance of {@link Goal }
+     * 
+     */
+    public Goal createGoal() {
+        return new Goal();
+    }
+
+    /**
      * Create an instance of {@link Contexts }
      * 
      */
