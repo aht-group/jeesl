@@ -835,7 +835,6 @@ $enable-pointer-cursor-for-buttons: true;
 			padding: 3px $regular-spacing 0 !important; // Overwrite primefaces style.
 			
 		@media (max-width: 768px) {
-			
 			&:after {
 				margin-left: -3px;
 				width: 100%;
@@ -848,7 +847,7 @@ $enable-pointer-cursor-for-buttons: true;
 			border-width: $border-width;
 			box-shadow: inset 0 1px 0 $white-100;
 			display: flex;
-				margin: 0 3px 0 0;
+			margin: 0 3px 0 0;
 			min-height: $element-height;
 			padding: 0;
 				top: 0 !important;
@@ -1108,13 +1107,19 @@ $enable-pointer-cursor-for-buttons: true;
 						margin: 0;
 						padding: 0;
 						
+						@media (max-width: 768px) {
+							margin: 0 #{-$regular-spacing};
+						}
+						
 						.ui-tabs-nav {
+							align-items: stretch;
 							border-radius: $border-radius-top;
 							margin: 0;
 							
 							@media (max-width: 768px) {
-								border-width: $border-width $border-width 0;
-								padding: #{$regular-spacing - $border-width} $regular-spacing 0 !important;
+								border-radius: 0;
+								border-width: $border-width $border-width $header-element-underline-mobile;
+								padding: $regular-spacing $regular-spacing 0 !important;
 								
 								&:after {
 									margin-left: -#{$regular-spacing + $border-width};
@@ -1128,7 +1133,7 @@ $enable-pointer-cursor-for-buttons: true;
 								top: $border-width;
 								
 								@media (max-width: 768px) {
-									justify-content: center;
+									flex-direction: column;
 									min-height: #{$element-height-mobile - $regular-spacing};
 									min-width: $element-height-mobile;
 								}
@@ -1151,6 +1156,11 @@ $enable-pointer-cursor-for-buttons: true;
 							
 						.ui-tabs-panels {
 							padding: 0;
+							
+							@media (max-width: 768px) {
+								background: $soft-grey;
+								padding: $half-spacing $regular-spacing $regular-spacing;
+							}
 							
 							.ui-tabs-panel {
 								margin-top: $header-element-underline;
@@ -1455,6 +1465,10 @@ $enable-pointer-cursor-for-buttons: true;
 									line-height: normal;
 									padding: 0;
 									width: auto;
+									
+									@media (max-width: 768px) {
+										font-size: 1.4em;
+									}
 								}
 								
 								.cke_combo_open {
@@ -1479,14 +1493,6 @@ $enable-pointer-cursor-for-buttons: true;
 								}
 							}
 						}
-					}
-				}
-				
-				.cke_contents {
-					padding: $half-spacing $regular-spacing;
-					
-					@media (max-width: 768px) {
-						padding: $regular-spacing;
 					}
 				}
 			}
@@ -1520,34 +1526,51 @@ $enable-pointer-cursor-for-buttons: true;
 
 			@include jeesl-ck-editor;
 			
-			>.jeesl-ck-editor:last-child {
+			> .jeesl-ck-editor:last-child, > .jeesl-editor-list:last-child .jeesl-ck-editor {
 				border-radius: $border-radius-bottom;
 			}
 			
-			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar {
-				.cke_toolgroup .cke_button, .cke_combo .cke_combo_button {
-					border-top-width: $border-width;
-				}
-				
-				.cke_toolgroup .cke_button:last-child {
-					border-right-width: $border-width;
-					border-top-right-radius: $border-radius;
+			.jeesl-ck-editor:not(:first-child), .jeesl-editor-list:not(:first-child) .jeesl-ck-editor, .jeesl-input-grid .jeesl-ck-editor {
+				.cke .cke_inner .cke_top .cke_toolbar {
+					.cke_combo, .cke_toolgroup {
+						border-top: $border;
+					}
+					
+					.cke_toolgroup {
+						align-items: flex-start;
+						margin-bottom: #{-$border-width};
+					}
 				}
 			}
 			
-			*:not(:first-child) {
-				.jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
-					border-top-width: $border-width;
+			@media (max-width: 768px) {
+				.jeesl-editor-list .jeesl-ck-editor:not(:first-child) .cke .cke_inner .cke_top .cke_toolbar {
+					.cke_combo, .cke_toolgroup {
+						border-top: none;
+					}
 				}
+			}
+			
+			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:last-child {
+				border-right-width: $border-width;
+				border-top-right-radius: $border-radius;
 			}
 		}
 		
 		.jeesl-editor-list {
 			display: flex;
-			margin: -#{$regular-spacing} -#{$regular-spacing} -#{$half-spacing};
+			margin: 0 -#{$regular-spacing} $regular-spacing;
 			
 			@media(max-width: 768px) {
 				flex-direction: column;
+			}
+			
+			&:first-child {
+				margin-top: -#{$regular-spacing};
+			}
+			
+			&:last-child {
+				margin-bottom: -#{$half-spacing};
 			}
 			
 			>.jeesl-ck-editor {
@@ -1558,6 +1581,10 @@ $enable-pointer-cursor-for-buttons: true;
 					
 				@media(max-width: 768px) {
 					border-width: 0 0 $border-width;
+					
+					&:first-child, &:last-child {
+						border-radius: 0;
+					}
 				}
 				
 				&:first-child {
