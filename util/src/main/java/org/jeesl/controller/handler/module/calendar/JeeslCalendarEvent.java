@@ -61,34 +61,11 @@ public class JeeslCalendarEvent implements Serializable,ScheduleEvent<EjbWithId>
 	@Override public Map<String, Object> getDynamicProperties() {return null;}
 	@Override public String getGroupId() {return null;}
 	@Override public boolean isOverlapAllowed() {return false;}
-	@Override
-	public ScheduleDisplayMode getDisplay() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public String getBackgroundColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public String getBorderColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public String getTextColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Boolean isDraggable() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Boolean isResizable() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	@Override public ScheduleDisplayMode getDisplay() {return null;}
+	@Override public String getBackgroundColor() {return null;}
+	@Override public String getBorderColor() {return null;}
+	@Override public String getTextColor() {return null;}
+	@Override public Boolean isDraggable() {return null;}
+	@Override public Boolean isResizable() {return null;}
 }
