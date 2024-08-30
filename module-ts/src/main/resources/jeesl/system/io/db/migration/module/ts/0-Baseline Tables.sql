@@ -1,0 +1,11 @@
+create table TsClass (id  bigserial not null, attribute varchar(255), code varchar(255), position int4, visible boolean, xpath varchar(255), xpathName varchar(255), xpathParent varchar(255), category_id int8, primary key (id));
+create table TsClassJtDescription (class int8 not null, descr int8 not null, primary key (class, descr));
+create table TsClassJtLang (class int8 not null, lng int8 not null, primary key (class, lng));
+create table TsMultiPoint (id  bigserial not null, code varchar(255), color1 varchar(255), position int4 not null, visible boolean, scope_id int8, sld_id int8, unit_id int8, primary key (id));
+create table TsMultiPointJtDescription (mp int8 not null, dscr int8 not null, primary key (mp, dscr));
+create table TsMultiPointJtLang (mp int8 not null, lng int8 not null, primary key (mp, lng));
+create table TsScope (id  bigserial not null, code varchar(255), position int4 not null, visible boolean not null, category_id int8, sld_id int8, type_id int8, unit_id int8, primary key (id));
+create table TsScopeJtClass (scope int8 not null, class int8 not null);
+create table TsScopeJtDescription (scope int8 not null, dscr int8 not null, primary key (scope, dscr));
+create table TsScopeJtInterval (scope int8 not null, intervl int8 not null);
+create table TsScopeJtLang (scope int8 not null, lng int8 not null, primary key (scope, lng));

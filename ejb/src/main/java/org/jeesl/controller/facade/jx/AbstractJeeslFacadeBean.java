@@ -82,7 +82,6 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 				case LEFT: root.fetch(cq.getPath(), JoinType.LEFT); break;
 			}
 		}
-//		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
 	}
 	
 	protected void pagination(TypedQuery<?> tQ, JeeslPaginationQuery query) {fJeesl.pagination(tQ, query);}

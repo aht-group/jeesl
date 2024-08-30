@@ -35,8 +35,7 @@ public class TxtMultiLangFactory <L extends JeeslLang>
 		else {return map.get(localeCode).getLang();}
 	}
 	
-	public static <L extends JeeslLang, T extends EjbWithLang<L>>
-		String label(String localeCode, List<T> list)
+	public static <L extends JeeslLang, T extends EjbWithLang<L>> String label(String localeCode, List<T> list)
 	{
 		if(list==null || list.isEmpty()) {return null;}
 		List<String> result = new ArrayList<String>();

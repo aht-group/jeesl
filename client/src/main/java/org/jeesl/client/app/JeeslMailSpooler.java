@@ -101,7 +101,7 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 		smtp.local(); System.exit(-1);
 		
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
-		jco.setLog4jPaths("jeesl/client/config");
+		jco.setLogPaths("jeesl/client/config");
 		
 		try
 		{

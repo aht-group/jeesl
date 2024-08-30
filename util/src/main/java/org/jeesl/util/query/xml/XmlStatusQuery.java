@@ -7,11 +7,13 @@ import org.jeesl.model.xml.io.locale.status.Category;
 import org.jeesl.model.xml.io.locale.status.Condition;
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Goal;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Level;
 import org.jeesl.model.xml.io.locale.status.Model;
 import org.jeesl.model.xml.io.locale.status.Parent;
+import org.jeesl.model.xml.io.locale.status.Quarter;
 import org.jeesl.model.xml.io.locale.status.Reason;
 import org.jeesl.model.xml.io.locale.status.Result;
 import org.jeesl.model.xml.io.locale.status.Scope;
@@ -75,6 +77,15 @@ public class XmlStatusQuery
 		return xml;
 	}
 	
+	public static Goal goalLabel()
+	{		
+		Goal xml = new Goal();
+		xml.setId(0l);
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
+	}
+	
 	public static Status statusLabel()
 	{		
 		Status xml = new Status();
@@ -87,6 +98,15 @@ public class XmlStatusQuery
 	public static Type typeLabel()
 	{		
 		Type xml = new Type();
+		xml.setId(0l);
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
+	}
+	
+	public static Quarter quarterLabel()
+	{		
+		Quarter xml = new Quarter();
 		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");

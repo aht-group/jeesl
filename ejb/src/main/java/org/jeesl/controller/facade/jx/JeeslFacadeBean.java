@@ -17,11 +17,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -74,7 +76,9 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithContext;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.interfaces.util.query.cq.JeeslCqRootFetchQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslPaginationQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqRootFetch;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,6 +99,17 @@ public class JeeslFacadeBean implements JeeslFacade
 	{
 		this.em=em;
 		this.handleTransaction=handleTransaction;
+	}
+	
+	protected void rootFetch(Root<?> root, JeeslCqRootFetchQuery query)
+	{
+		for(JeeslCqRootFetch cq : ListUtils.emptyIfNull(query.getCqRootFetches()))
+		{
+			switch(cq.getType())
+			{
+				case LEFT: root.fetch(cq.getPath(), JoinType.LEFT); break;
+			}
+		}
 	}
 	
 	protected void pagination(TypedQuery<?> tQ, JeeslPaginationQuery query)

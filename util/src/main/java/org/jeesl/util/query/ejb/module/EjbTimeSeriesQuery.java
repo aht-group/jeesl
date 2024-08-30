@@ -90,4 +90,7 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	private List<TX> tsTransactions;
 	@Override public List<TX> getTsTransactions() {return tsTransactions;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,STAT> add(TX tx) {if(Objects.isNull(tsTransactions)) {tsTransactions = new ArrayList<>();} tsTransactions.add(tx); return this;}
+	
+	private List<STAT> tsTypes;
+	@Override public List<STAT> getTsTypes() {return tsTypes;}
 }

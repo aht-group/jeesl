@@ -139,7 +139,7 @@
 				</p:panel>
 			</h:form>
 			
-			<p:panel header="#{msg.jeeslGraphicPreview}" rendered="#{not empty cc.attrs.bean.status}" styleClass="jeeslPanel">
+			<p:panel header="#{msg.jeeslGraphicPreview}" rendered="#{not empty cc.attrs.bean.status}" styleClass="jeeslPanel jeesl-panel">
 				<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 					<p:outputLabel value="12px"/>
 					<jtp:symbolizer value="#{cc.attrs.bean.status}" height="12"/>

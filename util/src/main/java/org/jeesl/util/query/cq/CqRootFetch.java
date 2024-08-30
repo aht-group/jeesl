@@ -12,7 +12,7 @@ public class CqRootFetch implements JeeslCqRootFetch
 	private final Type type; @Override public Type getType() {return type;}
 	private final String path; @Override public String getPath() {return path;}
 
-	public static CqRootFetch left(String literal, String path) {return new CqRootFetch(Type.LEFT,path);}
+	public static CqRootFetch left(String path) {return new CqRootFetch(Type.LEFT,path);}
 //	public static CqRootFetch contains(String literal, String path) {return new CqRootFetch(Type.CONTAINS,literal,path);}
 //	public static CqRootFetch exact(String literal, String path) {return new CqRootFetch(Type.EXACT,literal,path);}
 

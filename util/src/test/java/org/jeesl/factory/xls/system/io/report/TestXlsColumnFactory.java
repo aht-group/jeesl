@@ -1,6 +1,7 @@
 package org.jeesl.factory.xls.system.io.report;
 
 import org.jeesl.AbstractJeeslUtilTest;
+import org.jeesl.factory.xlsx.io.report.XlsColumnFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf"  xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+    
+	<composite:interface componentType="net.sf.ahtutils.jsf.components.IconListener">
+		<composite:attribute name="listener" required="false" method-signature="void listener()"/>
+		<composite:attribute name="for" required="false"/>
+		<composite:attribute name="update" required="true"/>
+		<composite:attribute name="handler" required="true"/>
+		<composite:attribute name="widgetVar" required="true"/>
+		<composite:attribute name="entity" required="true"/>
+	</composite:interface>
+
+	<composite:implementation>
+		<j:dialog id="dJeesl" widgetVar="#{cc.attrs.widgetVar}" header="#{appLabelBean.labels[cc.attrs.entity]['listOf'][localeCode].lang}" styleClass="jeesl-table-dialog">
+			<f:facet name="actions">
+				<j:svg type="jeeslCancel" oncomplete="PF('#{cc.attrs.widgetVar}').hide();"/>
+			</f:facet>
+			<p:dataTable styleClass="jeesl-datatable"
+					var="c" value="#{cc.attrs.handler.lazyModel}" lazy="true"
+					selection="#{cc.attrs.handler.item}" selectionMode="single" rowKey="#{c.id}" draggableRows="false"
+					rows="10" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+				<p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectItem()}" update="#{cc.attrs.update}" oncomplete="PF('#{cc.attrs.widgetVar}').hide();"/>
+					<p:column filterBy="#{c.code}" filterMatchMode="contains">
+	                	<f:facet name="header"><jtp:label entity="#{cc.attrs.entity}" code="code"/></f:facet>  
+						<h:outputText value="#{c.code}" />
+					</p:column>
+					<p:column>
+	                	<jtp:symbolizer value="#{c}"/>
+					</p:column>
+					<p:column filterBy="#{c.name[localeCode].lang}" filterMatchMode="contains">
+	                	<f:facet name="header"><jtp:label entity="#{cc.attrs.entity}" code="label"/></f:facet> 
+						<h:outputText value="#{c.name[localeCode].lang}" />
+					</p:column>
+			</p:dataTable>
+		</j:dialog>
+	</composite:implementation>
+</html>

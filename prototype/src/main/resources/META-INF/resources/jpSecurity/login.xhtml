@@ -25,7 +25,7 @@
 				<p:password id="password" value="#{cc.attrs.bean.identity.loginPassword}"/>
 				
 				<p:outputLabel for="cbLogin" value=""/>
-				<p:commandButton id="cbLogin" action="#{userBean.login}" update="@form" styleClass="ui-button-fixed-size"
+				<p:commandButton id="cbLogin" action="#{userBean.login}" update="@form" styleClass="ui-button-fixed-size jeesl-loading-button"
 						value="#{appLabelBean.labels['SecurityUser']['login'][localeCode].lang}"/>
 				<p:blockUI trigger="cbLogin" block="@form" />
 			</j:inputGrid>

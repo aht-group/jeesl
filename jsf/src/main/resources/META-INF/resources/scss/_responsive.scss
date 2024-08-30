@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:math';
 
 @import '_fonts';
@@ -124,7 +125,6 @@ $enable-pointer-cursor-for-buttons: true;
 		.jeesl-dropdown-item {
 			@include jeesl-submenu(jeesl-submenu, $dark-colour);
 			
-//			background: $background;
 			background: transparent;
 			display: block;
 			opacity: 1;
@@ -146,10 +146,6 @@ $enable-pointer-cursor-for-buttons: true;
 			&:hover {
 				background: $hover;
 
-//				> .jeesl-dropdown-item-label {
-//					background: $hover;
-//				}
-				
 				.jeesl-dropdown-sub {
 					opacity: 1;
 					transition: opacity $transition-duration 1s linear, visibility 0s 1s linear;
@@ -169,7 +165,6 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.jeesl-dropdown-item-label {
 				background: transparent;
-//				background: $background;
 				color: $foreground;
     			display: block;
 				height: 30px;
@@ -177,7 +172,6 @@ $enable-pointer-cursor-for-buttons: true;
 				margin: 0;
 				padding: 8px 15px;
 			    position: relative;
-//				transition: background $transition-duration linear;
 			    white-space: nowrap;
 
 				@media (max-width: 768px) {
@@ -355,9 +349,10 @@ $enable-pointer-cursor-for-buttons: true;
 			.jeesl-menu-bar-button {
 				@include vertical-center(after);
 				
+				align-items: stretch;
 				cursor: pointer;
-			    display: inline-block;
-			    height: 100%;
+				display: flex;
+				height: 100%;
 				transition: background .2s linear;
 				pointer-events: all;
 			    position: relative;
@@ -366,8 +361,13 @@ $enable-pointer-cursor-for-buttons: true;
 				-webkit-tap-highlight-color: $bright-colour;
 
 				@media (max-width: 768px) {
-			    	height: $bc-element-height-mobile;
+			    	height: calc($sb-element-height-mobile * var(--icon-height-multiplier));
 					transition-duration: .4s;
+				}
+				
+				.jeesl-menu-bar-button-icon, .jeesl-menu-bar-button-label, .jeesl-menu-bar-button-info, .jeesl-menu-bar-button-summary {
+					align-items: center;
+					display: flex;
 				}
 
 				.jeesl-menu-bar-button-icon, .ui-commandlink {
@@ -382,8 +382,6 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				.jeesl-menu-bar-button-label {
 			    	color: $white-100;
-				    display: inline-block;
-					vertical-align: middle;
 				}
 				
 				.jeesl-menu-bar-button-info {
@@ -396,7 +394,6 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 					
 					@media (max-width: 768px) {
-						display: inline-block;
 						padding: 0 6px;
 					}
 				}
@@ -413,7 +410,6 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 					
 					.jeesl-menu-bar-button-selected-items {
-						height: 100%;
 						padding: 0 5px;
 						position: relative;
 						
@@ -439,8 +435,6 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 					
 			.jeesl-overlay-container {
-//				@include pseudo-overlay;
-
 				visibility: hidden;
 				pointer-events: all;
 				transition: none;
@@ -462,14 +456,11 @@ $enable-pointer-cursor-for-buttons: true;
 				}
 				
 				.jeesl-overlay-wrapper .ui-selectonemenu-list {
-//					@include select-list(ui-selectonemenu);
-					
 					overflow: hidden;
 					
 					@media (max-width: 768px) {
 						&:before, &:after {
 							content: '';
-//						    display: none;
 							display: list-item;
 						    height: 15px;
 						    width: 100%;
@@ -531,9 +522,7 @@ $enable-pointer-cursor-for-buttons: true;
 @mixin jeesl-titlebar {
 	align-items: center;
 	background: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
-//	border-color: $dark-colour;
 	border-radius: $border-radius-top;
-//	border-width: 0 0 $header-element-underline 0;
 	border: none;
 	border-bottom: $header-underline;
 	box-shadow: $header-shadow;
@@ -576,11 +565,9 @@ $enable-pointer-cursor-for-buttons: true;
 	height: auto;
 	
 	img {
-//		height: $header-icon-height;
 		padding: 0 $header-icon-padding-horizontal;
 			
 		@media (max-width: 768px) {
-//			height: $header-icon-height-mobile;
 			padding: 0 $ls-element-padding-vertical;
 		}
 	}
@@ -741,7 +728,6 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.ui-button {
 			align-items: stretch;
-			background: none;
 			border: none;
 			border-radius: 0;
 			box-shadow: none;
@@ -749,6 +735,19 @@ $enable-pointer-cursor-for-buttons: true;
 			height: auto;
 			margin-right: 0;
 			padding: $half-spacing 0;
+			
+			&:not(.ui-state-disabled) {
+				background: none;
+				
+				.ui-button-text {
+					color: $dark-colour;
+				}
+			}
+			
+			&.ui-state-disabled .ui-icon {
+				filter: grayscale(1);
+				opacity: .3;
+			}
 			
 			&:before {
 				border-radius: 0;
@@ -816,7 +815,6 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.ui-button-text {
 				align-items: center;
-				color: $dark-colour;
 				display: flex;
 				padding: 0 $half-spacing;
 			
@@ -837,8 +835,6 @@ $enable-pointer-cursor-for-buttons: true;
 			padding: 3px $regular-spacing 0 !important; // Overwrite primefaces style.
 			
 		@media (max-width: 768px) {
-//			padding: 3px $regular-spacing 0 !important; // Overwrite primefaces style.
-			
 			&:after {
 				margin-left: -3px;
 				width: 100%;
@@ -851,51 +847,32 @@ $enable-pointer-cursor-for-buttons: true;
 			border-width: $border-width;
 			box-shadow: inset 0 1px 0 $white-100;
 			display: flex;
-				margin: 0 3px 0 0;
+			margin: 0 3px 0 0;
 			min-height: $element-height;
 			padding: 0;
 				top: 0 !important;
 			
 			@media (max-width: 768px) {
-//				border-width: $border-width;
-//				margin: 0 3px 0 0;
 				min-height: $element-height-mobile;
-//				top: 0 !important;
 			}
 			
 			&.ui-tabs-selected {
 				background: linear-gradient(to bottom, $white-100, $panel-background);
-//				padding-bottom: 1px;
 				    border: 0;
 					padding: 1px;
-				
-				@media (max-width: 768px) {
-//				    border: 0;
-//					padding: 1px;
-				}
 				
 				&:before {
 					background: linear-gradient(to bottom, $medium-colour, $dark-colour);
 				    border-radius: inherit;
 				    box-shadow: inset 0 1px 0 $bright-colour;
-//					display: none;
 					opacity: 1;
-						display: block;
-
-					@media (max-width: 768px) {
-//						display: block;
-					}
+					display: block;
 				}
 				
 				> * {
 					position: relative;
 						color: $white-100;
 						text-shadow: none;
-					
-					@media (max-width: 768px) {
-//						color: $white-100;
-//						text-shadow: none;
-					}
 					
 					> a {
 						color: inherit;
@@ -972,11 +949,13 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 @mixin jeesl-footer {
+	background: color.adjust($border-colour, $alpha: -.8);
 	border: none;
 	border-radius: $border-radius-bottom;
-	border-top: $header-element-underline solid $dark-colour;
+//	border-top: $header-element-underline solid $dark-colour;
+	border-top: $border-width solid transparent;
 	color: $dark-colour;
-	font-weight: 700;
+//	font-weight: 700;
 	padding: $half-spacing $regular-spacing;
 			
 	@media (max-width: 768px) {
@@ -1055,18 +1034,11 @@ $enable-pointer-cursor-for-buttons: true;
 						// Overriding inline css
 						width: 100% !important;
 					}
-//					@for $i from 1 to 13 {
-//						&.p-col-count-#{$i} {
-//							width: math.div(75, $i) * 1%;
-//						}
-//					}
-
+					
 					> .ui-inputfield, .ui-selectonemenu, .ui-spinner, .ui-selectcheckboxmenu, .ui-selectmanybutton, .ui-chips {
 						border-radius: $border-radius;
-//						height: 100%;
 						
 						@media (max-width: 768px) {
-//							font-size: 18px !important;
 							margin: 0;
 							padding: $half-spacing $regular-spacing;
 							width: 100%;
@@ -1082,6 +1054,7 @@ $enable-pointer-cursor-for-buttons: true;
 						
 							@media (max-width: 768px) {
 								display: flex;
+								min-height: $element-height-mobile;
 							}
 						}
 						
@@ -1099,47 +1072,6 @@ $enable-pointer-cursor-for-buttons: true;
 							}
 						}
 					}
-					
-//					> .jeesl-input-container {
-//						display: flex;
-//						
-//						.ui-inputtext, .ui-inputtextarea {
-//							flex-shrink: 1;
-////							width: 85%;
-//							width: auto;
-//							
-////							&:last-child {
-////								width: 100%;
-////							}
-//						}
-//						
-//						.ui-commandlink {
-//							flex-grow: 1;
-//							height: auto;
-//							margin: 0 0 0 6px;
-//							padding: 0;
-//							
-//							> img {
-//								height: auto;
-//								width: 100%;
-//							}
-//						}
-//						
-//						.ui-button {
-//							align-items: center;
-//							display: flex;
-//							flex-grow: 1;
-//							flex-shrink: 0;
-//							justify-content: center;
-//							margin: 0 0 0 6px;
-//							overflow: hidden;
-//							padding: 0 $slim-spacing;
-//							
-//							.ui-button-text {
-//								padding: 0;
-//							}
-//						}
-//					}
 					
 					> .ui-button {
 						width: auto;
@@ -1175,13 +1107,19 @@ $enable-pointer-cursor-for-buttons: true;
 						margin: 0;
 						padding: 0;
 						
+						@media (max-width: 768px) {
+							margin: 0 #{-$regular-spacing};
+						}
+						
 						.ui-tabs-nav {
+							align-items: stretch;
 							border-radius: $border-radius-top;
 							margin: 0;
 							
 							@media (max-width: 768px) {
-								border-width: $border-width $border-width 0;
-								padding: #{$regular-spacing - $border-width} $regular-spacing 0 !important;
+								border-radius: 0;
+								border-width: $border-width $border-width $header-element-underline-mobile;
+								padding: $regular-spacing $regular-spacing 0 !important;
 								
 								&:after {
 									margin-left: -#{$regular-spacing + $border-width};
@@ -1195,7 +1133,7 @@ $enable-pointer-cursor-for-buttons: true;
 								top: $border-width;
 								
 								@media (max-width: 768px) {
-									justify-content: center;
+									flex-direction: column;
 									min-height: #{$element-height-mobile - $regular-spacing};
 									min-width: $element-height-mobile;
 								}
@@ -1218,6 +1156,11 @@ $enable-pointer-cursor-for-buttons: true;
 							
 						.ui-tabs-panels {
 							padding: 0;
+							
+							@media (max-width: 768px) {
+								background: $soft-grey;
+								padding: $half-spacing $regular-spacing $regular-spacing;
+							}
 							
 							.ui-tabs-panel {
 								margin-top: $header-element-underline;
@@ -1379,37 +1322,26 @@ $enable-pointer-cursor-for-buttons: true;
 			border-radius: $border-radius-bottom;
 		}
 	}
-	
-//	.ui-widget-content {
-//		margin: 0 -.2em -.2em;
-//		padding: 0 !important; // overriding necessary.
-//		
-//		@media (max-width: 768px) {
-//			margin: 0;
-//		}
-//		
-//		.ql-toolbar {
-//			border: 0;
-//			margin: 0;
-//		}
-//		
-//		.ql-container {
-//			border: solid $soft-grey;
-//			border-radius: $border-radius-bottom;
-//			border-width: 1px 0 0;
-//			overflow: hidden;
-//			
-//			.ql-editor {
-//				background: $white-100;
-//			}
-//		}
-//	}
 }
 
 @mixin jeesl-ck-editor {
 	.jeesl-ck-editor {
 		@media (max-width: 768px) {
 			padding: 0;
+		}
+		
+		&.jeesl-ck-editor-ext .cke .cke_inner .cke_top .cke_toolbar {
+			.cke_combo {
+				display: flex;
+				
+				+ .cke_toolgroup {
+					border-left: $border;
+				}
+			}
+						
+			.cke_toolgroup + .cke_combo {
+				border-left: $border;
+			}
 		}
 		
 		.cke {
@@ -1429,16 +1361,21 @@ $enable-pointer-cursor-for-buttons: true;
 					
 					.cke_toolbar {
 						display: flex;
+						flex-wrap: wrap-reverse;
 						float: none;
-							justify-content: right;
+						justify-content: right;
+						
+						.cke_toolbar_start {
+							border-left: $border;
+						}
 							
-						.cke_toolgroup {
+						.cke_toolgroup, .cke_combo {
 							align-items: center;
 							display: flex;
 							padding: 0;
 							margin: 0;
 								
-							.cke_button {
+							.cke_button, .cke_combo_button {
 								@include button(cke_button_on);
 								
 								border: $border;
@@ -1450,10 +1387,6 @@ $enable-pointer-cursor-for-buttons: true;
 								
 								@media (max-width: 768px) {
 									min-width: $element-height-mobile;
-								}
-								
-								&:first-child {
-									border-left: $border;
 								}
 								
 								&:after {
@@ -1516,14 +1449,50 @@ $enable-pointer-cursor-for-buttons: true;
 								width: 0;
 							}
 						}
-					}
-				}
-				
-				.cke_contents {
-					padding: $half-spacing $regular-spacing;
-					
-					@media (max-width: 768px) {
-						padding: $regular-spacing;
+						
+						.cke_combo {
+							display: none;
+							
+							&:after {
+								display: none;
+							}
+							
+							.cke_combo_button {
+								.cke_combo_text {
+									cursor: inherit;
+									font-weight: 700;
+									float: none;
+									line-height: normal;
+									padding: 0;
+									width: auto;
+									
+									@media (max-width: 768px) {
+										font-size: 1.4em;
+									}
+								}
+								
+								.cke_combo_open {
+									cursor: inherit;
+									font-size: 1em;
+									height: auto;
+									margin: 0 0 0 $half-spacing;
+									width: auto;
+	
+									.cke_combo_arrow {
+										@include icon;
+										
+										border: none;
+										cursor: inherit;
+										float: none;
+										font-family: "Font Awesome 5 Free";
+										
+										&:before {
+											content: $icon-down;
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1557,26 +1526,51 @@ $enable-pointer-cursor-for-buttons: true;
 
 			@include jeesl-ck-editor;
 			
-			>.jeesl-ck-editor:last-child {
+			> .jeesl-ck-editor:last-child, > .jeesl-editor-list:last-child .jeesl-ck-editor {
 				border-radius: $border-radius-bottom;
 			}
 			
-			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
-				border-top-width: $border-width;
-				
-				&:last-child {
-					border-right-width: $border-width;
-					border-top-right-radius: $border-radius;
+			.jeesl-ck-editor:not(:first-child), .jeesl-editor-list:not(:first-child) .jeesl-ck-editor, .jeesl-input-grid .jeesl-ck-editor {
+				.cke .cke_inner .cke_top .cke_toolbar {
+					.cke_combo, .cke_toolgroup {
+						border-top: $border;
+					}
+					
+					.cke_toolgroup {
+						align-items: flex-start;
+						margin-bottom: #{-$border-width};
+					}
 				}
+			}
+			
+			@media (max-width: 768px) {
+				.jeesl-editor-list .jeesl-ck-editor:not(:first-child) .cke .cke_inner .cke_top .cke_toolbar {
+					.cke_combo, .cke_toolgroup {
+						border-top: none;
+					}
+				}
+			}
+			
+			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:last-child {
+				border-right-width: $border-width;
+				border-top-right-radius: $border-radius;
 			}
 		}
 		
 		.jeesl-editor-list {
 			display: flex;
-			margin: -#{$regular-spacing} -#{$regular-spacing} -#{$half-spacing};
+			margin: 0 -#{$regular-spacing} $regular-spacing;
 			
 			@media(max-width: 768px) {
 				flex-direction: column;
+			}
+			
+			&:first-child {
+				margin-top: -#{$regular-spacing};
+			}
+			
+			&:last-child {
+				margin-bottom: -#{$half-spacing};
 			}
 			
 			>.jeesl-ck-editor {
@@ -1587,6 +1581,10 @@ $enable-pointer-cursor-for-buttons: true;
 					
 				@media(max-width: 768px) {
 					border-width: 0 0 $border-width;
+					
+					&:first-child, &:last-child {
+						border-radius: 0;
+					}
 				}
 				
 				&:first-child {
@@ -1660,7 +1658,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 		}
 		
-		.ui-panel-content {
+		.ui-panel-content, .ui-dialog-content {
 			padding: 0;
 			position: relative;
 			width: 100%;
@@ -1786,7 +1784,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	.ui-widget-content:not(.ui-dialog, .ui-selectonemenu-item) {
+	.ui-widget-content:not(.ui-dialog, .ui-selectonemenu-item, .ui-datatable-data) {
 		background: transparent;
 	}
 	
@@ -2018,7 +2016,6 @@ $enable-pointer-cursor-for-buttons: true;
 		margin: $half-spacing (-$regular-spacing);
 	
 		@media (max-width: 768px) {
-//			border-top: $border;
 			margin: $half-spacing (-$regular-spacing);
 		}
 		
@@ -2034,45 +2031,13 @@ $enable-pointer-cursor-for-buttons: true;
 				margin-bottom: -$half-spacing;
 			}
 		}
-	
-//		&.jeesl-editor {
-//			&:first-child {
-//				margin-top: calc(-.2em - 4px);
-//				
-//				@media (max-width: 768px) {
-//					margin-top: -4px;
-//				}
-//			}
-//			
-//			&:last-child {
-//				margin-bottom: calc(-.2em - 4px);
-//				
-//				@media (max-width: 768px) {
-//					margin-bottom: -4px;
-//				}
-//				
-//				.ui-widget-content {
-//					.ql-container {
-//						border-bottom: 0;
-//						border-radius: 0 0 3px 3px;
-//					}
-//				}
-//			}
-//			
-//			.ui-widget-content {
-//				.ql-container {
-//					border-radius: 0;
-//					border-width: 1px 0;
-//				}
-//			}
-//		}
 	}
 	
 	.vis-timeline {
 		border: none;
 	}
 	
-	.ui-panel-content {
+	.ui-panel-content, .ui-dialog-content {
 		@include input-grid;
 		@include image-gallery;
 		
@@ -2084,19 +2049,38 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.ui-separator {
+			background: $border-colour;
+			border: none;
+			height: $separator-thickness;
+			margin: $half-spacing #{-$regular-spacing};
+			
 			@media (max-width: 768px) {
-				background: $light-grey;
-				height: 2px;
-				margin: 6px 0;
+				height: $separator-thickness-mobile;
 			}
 		}
 		
 		.jeesl-panelgrid-scrollview {
 			overflow-x: auto;
 		}
+		
+		.jeesl-markup-content {
+			h1, h2, h3, h4, h5, h6 {
+				margin-bottom: $regular-spacing;
+				margin-top: $wide-spacing;
+			}
+			
+			p, address, ul, ol {
+				margin-left: $wide-spacing;
+			}
+			
+			address {
+				font-style: italic;
+				margin-bottom: 0;
+			}
+		}
 	}
 	
-	.ui-panel-footer {
+	.ui-widget-content.ui-panel-footer {
 		@include jeesl-footer;
 	}
 
@@ -2341,8 +2325,6 @@ body, .ui-widget {
 			.jeesl-dropdown-item-label {
 				@include font-nav;
 				
-//				float: left;
-				
 				@media (max-width: 768px) {
 					float: none;
 					height: 50px;
@@ -2494,6 +2476,10 @@ body, .ui-widget {
 					}
 				}
 				
+				&.jeesl-menu-bar-popup-button {
+					z-index: 1003;
+				}
+				
 				&.jeesl-active {
 					background: $main-background-gradient 0 0 / 99% 100% no-repeat;
 					
@@ -2562,8 +2548,8 @@ body, .ui-widget {
 	}
 }
 
-#fStatusBarHelp .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item:after {
-	@include jeesl-sb-separator;
+#fStatusBarHelp .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button-icon {
+	border-right: 1px solid $bright-colour;
 }
 
 .jeesl-footer {
@@ -2639,20 +2625,8 @@ body, .ui-widget {
     margin: -10px 10px 10px;
 
 	@media (max-width: 768px) {
-		background-size: 100% $sb-element-height-mobile;
+		background-size: 100% calc($sb-element-height-mobile * var(--icon-height-multiplier));
 		height: auto;
-	}
-
-	// Overriding more specific rule necessary.
-	> .jeesl-menu-bar-list {
-		> .jeesl-menu-bar-item {
-			&.jeesl-left:not(:first-child):before, &.jeesl-right:not(:last-child):before {
-				content: '';
-				position: initial;
-				left: 0;
-				top: 0;
-			}
-		}
 	}
 	
 	.jeesl-menu-bar-list {
@@ -2665,6 +2639,7 @@ body, .ui-widget {
 		}
 		
 		> .jeesl-right:last-child {
+			display: flex;
 			flex-grow: 1;
 			justify-content: flex-end;
 			text-align: right;
@@ -2682,15 +2657,14 @@ body, .ui-widget {
 				flex-grow: 1;
 			}
 			
-			&.jeesl-status-bar-left .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:first-child):before,
-			&.jeesl-status-bar-right .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:last-child):before {
-				content: '';
-				display: inline-block;
-				position: initial;
-				left: 0;
-				top: 0;
+			&.jeesl-status-bar-left .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:first-child) .jeesl-menu-bar-button,
+			&.jeesl-status-bar-right .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button {
+				.jeesl-menu-bar-button-icon, .jeesl-menu-bar-button-label, .jeesl-menu-bar-button-info, .jeesl-menu-bar-button-summary {
+					&:first-child {
+						border-left: 1px solid $bright-colour;
+					}
+				}
 			}
-			
 			&.jeesl-status-bar-right  .jeesl-status-bar-group-list {
 				flex-direction: row-reverse;
 			}
@@ -2712,7 +2686,7 @@ body, .ui-widget {
 			white-space: nowrap;
 			
 			@media(max-width: 768px) {
-				height: $sb-element-height-mobile;
+				height: calc($sb-element-height-mobile * var(--icon-height-multiplier));
 			}
 			
 			&:hover {
@@ -2734,16 +2708,6 @@ body, .ui-widget {
 				}
 			}
 			
-			&:before {
-				@include jeesl-sb-separator;
-			}
-
-			&.jeesl-left:first-child, &.jeesl-right:last-child {
-				&:before {
-					display: none;
-				}
-			}
-			
 			&.jeesl-left {
 				.jeesl-dropdown-list {
 					left: 0;
@@ -2761,6 +2725,10 @@ body, .ui-widget {
 					&.jeesl-active:after {
 						opacity: 1;
 					}
+				}
+				
+				&.jeesl-menu-bar-popup-button {
+					z-index: 1003;
 				}
 				
 				&.jeesl-menu-bar-button-gravatar {
@@ -2823,17 +2791,17 @@ body, .ui-widget {
 					}
 				}
 				
+				&.jeesl-menu-bar-dropdown > span {
+					height: auto;
+					vertical-align: middle;
+				}
+				
 				&:before {
 					@include pseudo-overlay();
 					
 					background: linear-gradient(to bottom, $dark-colour, transparent);
-//				    content: '';
 				    display: block;
-//				    height: 100%;
-//				    position: absolute;
-//				    top: 0;
 				    transition: opacity .4s linear;
-//				    width: 100%;
 					z-index: 1;
 				}
 				
@@ -2850,7 +2818,13 @@ body, .ui-widget {
 					z-index: 0;
 				}
 				
+				> .ui-commandlink {
+					align-items: stretch;
+				}
+				
 				> * {
+					align-items: center;
+					display: flex;
 					position: relative;
 					z-index: 2;
 				}
@@ -2889,17 +2863,16 @@ body, .ui-widget {
 			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
 			
 			.jeesl-dropdown-list {
+	    		top: 100%;
 				z-index: 3;
 				
 				&.jeesl-dropdown-list-multi {
+					&:before {
+						display: none;
+					}
+					
 					.jeesl-dropdown-item {
 						&:first-child {
-							border-top: 0 solid $medium-colour;
-							
-							@media (max-width: 768px) {
-								border-top-width: 2px;
-							}
-							
 							&:hover {
 								background: transparent;
 							}
@@ -2916,6 +2889,10 @@ body, .ui-widget {
 									height: $ls-element-height-mobile;
 									visibility: visible;
 								}
+							}
+							
+							&:after {
+								display: none;
 							}
 							
 							.jeesl-dropdown-multi-summary {
@@ -2977,7 +2954,6 @@ body, .ui-widget {
 						
 						.jeesl-dropdown-item-label-icon {
 							margin: 0;
-//							padding: 2px 0;
 							
 							@media (max-width: 768px) {
 								padding: 12px 0;
@@ -3125,8 +3101,6 @@ body, .ui-widget {
 			}
 			
 			.jeesl-overlay-container {
-//				@include pseudo-overlay;
-
 				background: $medium-colour;
 				border: none;
 				border-radius: 0;
@@ -3136,8 +3110,6 @@ body, .ui-widget {
 				
 				.jeesl-overlay-wrapper {
 					.ui-selectonemenu-list {
-//						@include select-list(ui-selectonemenu);
-						
 						@media (max-width: 768px) {
 							overflow: hidden;
 						}
@@ -3177,23 +3149,15 @@ body, .ui-widget {
 							}
 							
 							.ui-selectonemenu-item-text {
-//								color: $body-foreground;
 								flex-grow: 1;
 								height: $ls-element-height;
-//								line-height: $ls-element-height;
-//								padding: 0 $wide-spacing;
 								position: relative;
-//								transition: background .2s linear, color .2s linear;
 								
 								color: $white-100;
 								font-weight: 400;
 								line-height: 14px;
 								padding: 6px 7px;
 								
-//								&:hover {
-//									color: $dark-colour;
-//								}
-							
 								@media (max-width: 768px) {
 									font-weight: $font-weight-bold;
 									font-size: $font-size-ls-mobile;
@@ -3207,9 +3171,7 @@ body, .ui-widget {
 								border-bottom: 0 solid $dark-colour;
 								color: $body-foreground;
 								height: $ls-element-height;
-//								margin-top: -$ls-element-height;
 								position: absolute;
-//								width: calc(100% - (2 * #{$half-spacing}));
 								font-weight: $font-weight-base;
 								
 								cursor: default;
@@ -3320,27 +3282,6 @@ body, .ui-widget {
 					}
 				}
 			}
-			
-//			.ui-inputgroup {
-//				align-items: stretch;
-//				display: flex;
-//				height: 100%;
-//				margin: 0;
-//				padding: $slim-spacing $half-spacing;
-//				
-//				> * {
-//					border: none;
-//				}
-//				
-//				.ui-button, .ui-inputfield {
-//					margin: 0;
-//					height: 100%;
-//				}
-//				
-//				.ui-button {
-//					width: auto;
-//				}
-//			}
 		}
 		
 		.jeesl-menu-bar-calendar-item {
@@ -3361,6 +3302,7 @@ body, .ui-widget {
 			}
 			
 			.jeesl-menu-bar-calendar-item-list {
+				align-items: center;
 				display: flex;
 				height: 100%;
 			    opacity: 1;
@@ -3445,12 +3387,12 @@ body, .ui-widget {
 				.jeesl-menu-bar-item {
 					display: inline-block;
 					
-					&:before {
-						border-color: $darker-colour;
-					}
-					
 					&:last-child:after {
 						display: none;
+					}
+					
+					&:not(:first-child) .ui-commandlink .jeesl-menu-bar-button-label {
+						border-left: $border-width solid $darker-colour;
 					}
 				}
 			}
@@ -3458,7 +3400,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel {
+.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
 	margin-bottom: $regular-spacing;
 	
 	.ui-panel-content {
@@ -3526,6 +3468,42 @@ body, .ui-widget {
 	}
 }
 
+@mixin jeesl-footer-action-container {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+	> a {
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+		color: $body-foreground;
+		height: $element-height;
+		margin: 0;
+		padding: 0;
+		transition: background $transition-duration linear;
+		
+		@media (max-width: 768px) {
+			height: $element-height-mobile;
+		}
+		
+		&.ui-state-hover, &:hover {
+			background: $soft-grey;
+			text-decoration: none;
+		}
+		
+		.ui-outputlabel {
+			align-items: center;
+			cursor: pointer;
+			display: flex;
+			height: 100%;
+			padding: 0 $half-spacing;
+		}
+	}
+}
+
 .jeesl-datatable, .ui-datatable.ui-sortable-helper, .ui-selectonemenu-panel .ui-selectonemenu-table {
 	@include jeesl-table-titlebar;
 	
@@ -3562,13 +3540,6 @@ body, .ui-widget {
 			&:before {
 				@include background-overlay($soft-grey);
 				
-//				background: $soft-grey;
-//				content: '';	
-//				height: 100%;
-//				opacity: 0;
-//				position: absolute;
-//				transition: opacity .2s linear;
-//				width: 100%;
 				z-index: 1;
 			}
 			
@@ -3751,6 +3722,10 @@ body, .ui-widget {
 					padding: $half-spacing $regular-spacing;
 				}
 			}
+			
+			> * {
+				vertical-align: middle;
+			}
 		}
 		
 		tr.ui-state-hover, .jeesl-cell-select > label:not(.selected):hover {
@@ -3768,42 +3743,33 @@ body, .ui-widget {
 		}
 	}
 	
-	.ui-paginator {
-		align-items: center;
+	.ui-datatable-footer, .ui-paginator {
 		border: $border;
 		border-width: $border-width 0 0;
 		box-shadow: 0 -1px 0 inset $white-35;
-		display: flex;
-		flex-wrap: wrap;
 		min-height: $element-height;
 		padding: 0;
-		justify-content: center;
 		
 		@media (max-width: 768px) {
 			border-radius: $border-radius-bottom;
 			min-height: $element-height-mobile;
 		}
 		
+		.ui-datatable-footer-actions {
+			@include jeesl-footer-action-container;
+		}
+	}
+	
+	.ui-paginator {
+		@include jeesl-footer-action-container;
+		
+		
 		.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last {
-			background: transparent;
-			border: none;
-			border-radius: 0;
-			box-shadow: none;
-			color: $body-foreground;
-			height: $element-height;
-			margin: 0;
 			overflow: hidden;
-			padding: 0;
-			transition: background $transition-duration linear;
 			width: $element-height;
 			
 			@media (max-width: 768px) {
-				height: $element-height-mobile;
 				width: $element-height-mobile;
-			}
-			
-			&.ui-state-hover {
-				background: $soft-grey;
 			}
 		}
 		
@@ -3820,7 +3786,6 @@ body, .ui-widget {
 			@include vertical-center(after);
 			
 			height: 100%;
-			padding: $half-spacing 0;
 			white-space: nowrap;
 			width: 100%;
 			
@@ -3890,6 +3855,8 @@ body, .ui-widget {
 }
 
 .jeesl-datatable {
+	background: $panel-background;
+	
 	.jeesl-heatbar-wrapper {
 		display: flex;
 		gap: $half-spacing;
@@ -3899,6 +3866,10 @@ body, .ui-widget {
 .ui-selectonemenu-panel .ui-selectonemenu-table {
 	border: 0;
 	width: auto;
+	
+	&.ui-helper-hidden {
+		display: none;
+	}
 	
 	tbody tr {
 		&:last-child td {
@@ -3940,9 +3911,20 @@ body, .ui-widget {
 			}
 		}
 		
-		.height-balance-container {
-			.jeesl-grid-#{$i} {
-				width: calc((100% / 12) * #{$i} - #{$half-spacing});
+		.jeesl-grid.height-balance-container > .jeesl-grid-#{$i} {
+			height: 100%;
+			width: calc((100% / 12) * #{$i} - #{$half-spacing});
+		
+			&:first-child {
+				margin-left: 0;
+			}
+			
+			&:last-child {
+				margin-right: 0;
+			}
+			
+			> * {
+				height: calc(100% - #{$regular-spacing});
 			}
 		}
 	}
@@ -4028,6 +4010,14 @@ body, .ui-widget {
 		
 		.ui-panel {
 			@include jeesl-panel;
+			
+			.jeesl-action-tabview {
+				margin: $half-spacing #{-$regular-spacing};
+				
+				.jeesl-tabs {
+					margin: 0;
+				}
+			}
 		}
 	}
 }
@@ -4062,14 +4052,6 @@ body, .ui-widget {
 
 				&:before {
 					@include background-overlay($dark-colour);
-					
-//				    background: $dark-colour;
-//					content: '';
-//				    height: 100%;
-//				    opacity: 0;
-//				    position: absolute;
-//				    transition: opacity .2s linear;
-//				    width: 100%;
 				}
 
 				.jeesl-dropdown-item-label {
@@ -4101,9 +4083,12 @@ body, .ui-widget {
 	background: $panel-background;
 	max-width: $min-fixed-container-width;
 	
+	&.ui-hidden-container {
+		display: none;
+	}
+	
 	@for $i from 1 to 13 {
 		&.jeesl-dialog-#{$i} {
-//			width: calc(#{$min-fixed-container-width} * (#{$i} / 12)) !important;
 			width: calc(100% * (#{$i} / 12)) !important;
 			
 			@media (max-width: $min-fixed-container-width) {
@@ -4120,6 +4105,8 @@ body, .ui-widget {
 	
 	&.jeesl-dialog {
 		border: $border;
+		overflow: visible;
+		z-index: 1003 !important;
 	}
 	
 	&.jeesl-multipanel-dialog {
@@ -4134,9 +4121,10 @@ body, .ui-widget {
 		}
 		
 		.ui-dialog-content {
+			overflow: visible;
 			padding: $regular-spacing 0 $half-spacing;
 			
-			.jeesl-panel {
+			.jeesl-panel, .jeesl-datatable {
 				box-shadow: $overlay-shadow;
 			}
 		}
@@ -4311,7 +4299,7 @@ body, .ui-widget {
 			
 			&:first-child {
 				border-top-width: 0;
-				margin-top: -$half-spacing;
+				margin-top: -$regular-spacing;
 			}
 			
 			&:last-child {
@@ -4320,7 +4308,7 @@ body, .ui-widget {
 			}
 		}
 		
-		.ui-datatable {
+		.jeesl-panel .ui-datatable {
 			border: none;
 			border-radius: 0;
 			margin: 0;
@@ -4329,6 +4317,20 @@ body, .ui-widget {
 	
 	.ui-dialog-footer {
 		@include jeesl-footer;
+	}
+}
+
+.jeesl-action-tabview {
+	display: block;
+	position: relative;
+	
+	.ui-panel-actions {
+		@include jeesl-titlebar-actions;
+		
+		float: none;
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 }
 
@@ -4353,8 +4355,8 @@ body, .ui-widget {
 		
 		.ui-tabs-panel {
 			.ui-texteditor, .jeesl-ck-editor {
-				margin-left: -$slim-spacing;
-				margin-right: -$slim-spacing;
+//				margin-left: -$slim-spacing;
+//				margin-right: -$slim-spacing;
 				
 				@media (max-width: 768px) {
 					margin-left: -$regular-spacing;
@@ -4367,7 +4369,7 @@ body, .ui-widget {
 				
 				&:last-child {
 					border-bottom-width: 0;
-					margin-bottom: -$slim-spacing;
+//					margin-bottom: -$slim-spacing;
 				
 					@media (max-width: 768px) {
 						margin-bottom: -$half-spacing;
@@ -4567,6 +4569,7 @@ body, .ui-widget {
 			@include icon-default-size;
 			
 			&:not(.ui-outputlabel) {
+				flex-grow: 1;
 				min-height: $element-height;
 				
 				@media (max-width: 768px) {
@@ -4599,19 +4602,10 @@ body, .ui-widget {
 				}
 				
 				.jeesl-ck-editor {
-//					border: $border;
 					border-radius: $border-radius;
 					margin: 0;
 				}
 			}
-			
-//			> * {
-//				min-height: $element-height;
-//				
-//				@media (max-width: 768px) {
-//					min-height: $element-height-mobile;
-//				}
-//			}
 		}
 	}
 }
@@ -4679,6 +4673,7 @@ body, .ui-widget {
 	
 	.ui-fileupload-content {
 		background: transparent;
+		border: none;
 		padding: $slim-spacing;
 		
 		.ui-fileupload-files {

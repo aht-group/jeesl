@@ -33,6 +33,7 @@ public class EjbCodeCache <T extends EjbWithCode>
 	public int size() {return map.size();}
 	public boolean contains(String code) {return map.containsKey(code);}
 	
+	public <E extends Enum<E>> T ejb(int value) {return ejb(""+value);}
 	public <E extends Enum<E>> T ejb(E code) {return ejb(code.toString());}
 	public T ejb(String code)
 	{

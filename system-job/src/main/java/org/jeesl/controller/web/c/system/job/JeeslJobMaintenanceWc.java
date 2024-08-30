@@ -2,6 +2,7 @@ package org.jeesl.controller.web.c.system.job;
 
 import org.jeesl.controller.web.system.job.JeeslJobMaintenanceController;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
+import org.jeesl.interfaces.controller.processor.system.job.JeeslJobMaitenanceTupler;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
@@ -21,8 +22,8 @@ public class JeeslJobMaintenanceWc extends JeeslJobMaintenanceController<IoLang,
 {
 	private static final long serialVersionUID = 1L;
 	
-	public JeeslJobMaintenanceWc()
+	public JeeslJobMaintenanceWc(JeeslJobMaitenanceTupler callback)
 	{
-		super(new JobFactoryBuilder<>(IoLang.class,IoDescription.class,SystemJobTemplate.class,SystemJobCategory.class,SystemJobType.class,SystemJobExpiration.class,SystemJob.class,SystemJobPriority.class,SystemJobStatus.class,SystemJobRobot.class,SystemJobCache.class,SystemJobMaintenance.class,SystemJobMaintenanceInfo.class));	
+		super(callback,new JobFactoryBuilder<>(IoLang.class,IoDescription.class,SystemJobTemplate.class,SystemJobCategory.class,SystemJobType.class,SystemJobExpiration.class,SystemJob.class,SystemJobPriority.class,SystemJobStatus.class,SystemJobRobot.class,SystemJobCache.class,SystemJobMaintenance.class,SystemJobMaintenanceInfo.class));	
 	}
 }

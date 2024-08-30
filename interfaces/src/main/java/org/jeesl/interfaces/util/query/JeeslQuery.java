@@ -6,10 +6,8 @@ import java.util.List;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.model.ejb.io.db.CqGraphFetch;
-import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
-import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
@@ -33,7 +31,6 @@ public interface JeeslQuery extends JeeslCoreQuery
 	
 	List<JeeslCqLiteral> getCqLiterals();
 	List<JeeslCqLong> getCqLongs();
-	List<CqInteger> getIntegers();
 	
 	List<Long> getIdList();
 	List<String> getCodeList();

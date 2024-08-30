@@ -16,7 +16,7 @@ public interface JeeslAomCompany <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 									SCOPE extends JeeslAomScope<?,?,SCOPE,?>>
 		extends Serializable,EjbSaveable,EjbWithName,EjbWithNonUniqueCode
 {
-	public enum Attributes{realm,realmIdentifier,scopes}
+	public enum Attributes{realm,realmIdentifier,code,name,scopes}
 	
 	REALM getRealm();
 	void setRealm(REALM realm);

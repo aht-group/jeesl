@@ -91,7 +91,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	private enum Loop{treeAllForParent}
 	
-	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom;
+	protected JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom;
 	private JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache; public JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> getCache() {return cache;}
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
@@ -109,7 +109,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
     private final SbSingleHandler<VIEW> sbhView; public SbSingleHandler<VIEW> getSbhView() {return sbhView;}
     private JeeslFileRepositoryHandler<LOC,?,FRC,?> frh; public JeeslFileRepositoryHandler<LOC,?,FRC,?> getFrh() {return frh;}  public void setFrh(JeeslFileRepositoryHandler<LOC,?,FRC,?> frh) {this.frh = frh;}
     
-    private final AssetEventLazyModel<REALM,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<REALM,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
+    private final AssetEventLazyModel<REALM,SCOPE,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<REALM,SCOPE,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
     
 	private final Set<ASSET> path;
 
@@ -148,7 +148,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 						JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache,
-						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAsset,
+						JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAsset,
 						REALM realm)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
@@ -205,7 +205,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		if(Objects.nonNull(jogger)) {jogger.start("reloadTree");}
 		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
 		
-		EjbAomQuery<REALM,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.tenant(identifier);
 		query.add(CqOrdering.ascending(JeeslAomAsset.Attributes.position));
 		

@@ -12,7 +12,9 @@
 		<composite:attribute name="height" required="false" default="12"/>
 		<composite:attribute name="styleClass" required="false" default="12"/>
 		<composite:attribute name="header" required="false" default="false" shortDescription="If used inside j:dtHeader, it need to be true. In columns the default=false can be used."/>
+		<composite:attribute name="showTooltipFromListName" required="false" default="false" shortDescription="Show tool tip using list name attribute "/>
 	</composite:interface>
+
 
 	<composite:implementation>
 	   <ui:repeat value="#{cc.attrs.handler.list}" var="var" varStatus="vs">
@@ -21,7 +23,9 @@
 				   actionListener="#{cc.attrs.handler.toggle(var)}"
 				   process="#{cc.attrs.process}" 
 				   immediate="#{cc.attrs.immediate}"
-				   styleClass="#{cc.attrs.handler.map[var] ? 'pf-action-icon' : 'pf-action-icon pf-inactive'}">
+				   styleClass="#{cc.attrs.handler.map[var] ? 'pf-action-icon' : 'pf-action-icon pf-inactive'}"
+				   title ="#{cc.attrs.showTooltipFromListName ? var.name[localeCode].lang : ''}"
+				   >
 				<h:graphicImage id="image" height="#{cc.attrs.height}" value="/image/symbolizer/graphic/#{var.class.name}/#{cc.attrs.height}/#{var.id}">
 				</h:graphicImage>
 			</p:commandLink>

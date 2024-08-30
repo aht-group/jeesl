@@ -1,8 +1,10 @@
 package org.jeesl.controller.io.db;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -15,14 +17,18 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
+import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ResourceList;
 import io.github.classgraph.ScanResult;
+import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 public class JeeslFlywayVerifier
 {
@@ -48,6 +54,31 @@ public class JeeslFlywayVerifier
 		List<URI> listFlyway = JeeslFlywayVerifier.sqlScripts(pathFlyway);
 		List<URI> listUpdates = JeeslFlywayVerifier.sqlScriptsSince(pathLibrary,i);
 		logger.info("Checking "+listUpdates.size()+" "+library+" library updates against "+listFlyway.size()+" flyway migrations for "+pathLibrary);
+
+		try
+		{
+			Map<String,URI> mapFly = this.toMapHashUri(listFlyway);
+			Map<URI,String> mapLib = this.toMapUriHash(listUpdates);
+			
+			for(URI uri : listUpdates)
+			{
+				String hash = mapLib.get(uri);
+				if(!mapFly.containsKey(hash))
+				{
+					logger.warn("Not applied: "+toLibName(uri));
+				}
+			}
+		}
+		catch (IOException e) {e.printStackTrace();}
+	}
+	
+	public void test(int i, JeeslFlywayPathProvider pathProvider)
+	{
+		String library = this.toLibName(pathProvider.getRootDirectory());
+		
+		List<URI> listFlyway = JeeslFlywayVerifier.sqlScripts(pathFlyway);
+		List<URI> listUpdates = JeeslFlywayVerifier.sqlScriptsSince(pathProvider.getRootDirectory(),i);
+		logger.info("Checking "+listUpdates.size()+" "+library+" library updates against "+listFlyway.size()+" flyway migrations for "+pathProvider.getRootDirectory());
 
 		try
 		{
@@ -93,7 +124,7 @@ public class JeeslFlywayVerifier
 		    	Integer iVersion = Integer.valueOf(sVersion);
 		    	if(iVersion>=i)
 		    	{
-		    		logger.info(name);
+		    		logger.trace(name);
 		    		map.put(iVersion,url);
 		    	}
 		    }
@@ -157,9 +188,15 @@ public class JeeslFlywayVerifier
 	private String toLibName(URI uri) {return toLibName(uri.getSchemeSpecificPart());}
 	private String toLibName(String path)
 	{
-		logger.info(path);
+		logger.trace(path);
 		int index = path.indexOf(jeeslPath);
 		String name = path.substring(index+jeeslPath.length()+1,path.length());
 		return name;
+	}
+	
+	public static void addPathProvider(MultiResourceLoader mrl, JeeslFlywayPathProvider provider, Set<String> set) throws UncheckedIOException, FileNotFoundException
+	{
+		set.addAll(IOUtils.readLines(mrl.searchIs(provider.getBaselineTables()), "UTF-8"));
+		set.addAll(IOUtils.readLines(mrl.searchIs(provider.getBaselineConstraints()), "UTF-8"));
 	}
 }

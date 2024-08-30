@@ -10,5 +10,5 @@ public interface JeeslCqLiteral extends Serializable
 	String getLiteral();
 	String getPath();
 	
-//	void x();
+	String nyi(Class<?> c);
 }

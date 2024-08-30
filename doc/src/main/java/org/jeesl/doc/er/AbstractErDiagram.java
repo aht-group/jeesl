@@ -51,6 +51,13 @@ public class AbstractErDiagram
 	private JeeslRevisionRestImport restUpload; public void setRest(JeeslRevisionRestImport restUpload) {this.restUpload = restUpload;}
 	private JeeslIoLabelRest restDownload; public void setRest(JeeslIoLabelRest restDownload) {this.restDownload = restDownload;}
 
+	public AbstractErDiagram(org.exlp.interfaces.system.property.Configuration config)
+	{
+		localeCode = "en";
+		fTmp = new File(config.getString(ConfigKey.dirTmp));
+		showErDiagramLabel = true;
+		logger.info("Using Tmp: "+fTmp);
+	}
 	public AbstractErDiagram(Configuration config, OfxMultiLangLatexWriter ofxWriter)
 	{
 		localeCode = "en";

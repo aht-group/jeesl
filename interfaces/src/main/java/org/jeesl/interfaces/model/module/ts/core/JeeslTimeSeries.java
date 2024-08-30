@@ -14,10 +14,10 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslTimeSeries <SCOPE extends JeeslTsScope<?,?,?,?,?,?,INT>,
-									TS extends JeeslTimeSeries<SCOPE,TS,?,INT,STAT>,
+									TS extends JeeslTimeSeries<SCOPE,TS,?,INT,TYPE>,
 									BRIDGE extends JeeslTsBridge<?>,
 									INT extends JeeslTsInterval<?,?,INT,?>,
-									STAT extends JeeslTsStatistic<?,?,STAT,?>
+									TYPE extends JeeslTsStatistic<?,?,TYPE,?>
 >
 		extends EjbWithId,Serializable,EjbRemoveable,EjbPersistable
 {
@@ -29,8 +29,8 @@ public interface JeeslTimeSeries <SCOPE extends JeeslTsScope<?,?,?,?,?,?,INT>,
 	INT getInterval();
 	void setInterval(INT interval);
 	
-	STAT getStatistic();
-	void setStatistic(STAT statistic);
+	TYPE getStatistic();
+	void setStatistic(TYPE statistic);
 	
 	BRIDGE getBridge();
 	void setBridge(BRIDGE bridge);

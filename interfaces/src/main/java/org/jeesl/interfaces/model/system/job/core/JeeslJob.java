@@ -53,6 +53,9 @@ public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 	Integer getAttempts();
 	void setAttempts(Integer attempts);
 	
+	Integer getProcessingCounter();
+	void setProcessingCounter(Integer processingCounter);
+	
 //	List<FEEDBACK> getFeedbacks();
 //	void setFeedbacks(List<FEEDBACK> feedbacks);
 	

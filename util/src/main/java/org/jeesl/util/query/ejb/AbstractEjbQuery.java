@@ -11,14 +11,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.JeeslQuery;
 import org.jeesl.model.ejb.io.db.CqGraphFetch;
-import org.jeesl.model.ejb.io.db.CqInteger;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
+import org.jeesl.model.ejb.io.db.JeeslCqEntity;
+import org.jeesl.model.ejb.io.db.JeeslCqInteger;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqRootFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
+import org.jeesl.util.query.cq.CqInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,24 +68,24 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<JeeslCqRootFetch> cqRootFetches; @Override public List<JeeslCqRootFetch> getCqRootFetches() {return cqRootFetches;}
 	private List<JeeslCqOrdering> orderings; @Override public List<JeeslCqOrdering> getCqOrderings() {return orderings;}
 	
+	protected List<JeeslCqEntity> entities; @Override public List<JeeslCqEntity> getCqEntities() {return entities;}
 	protected List<JeeslCqLiteral> literals; @Override public List<JeeslCqLiteral> getCqLiterals() {return literals;}
 	protected List<JeeslCqLong> ids; @Override public List<JeeslCqLong> getCqLongs() {return ids;}
 	protected List<JeeslCqBoolean> booleans; @Override public List<JeeslCqBoolean> getCqBooleans() {return booleans;}
 	protected List<JeeslCqDate> cqDates; @Override public List<JeeslCqDate> getCqDates() {return cqDates;}
 	protected List<JeeslCqTime> cqTimes; @Override public List<JeeslCqTime> getCqTimes() {return cqTimes;}
-	
-	protected List<CqInteger> integers; @Override public List<CqInteger> getIntegers() {return integers;}
+	protected List<JeeslCqInteger> cqIntegers; @Override public List<JeeslCqInteger> getCqInteger() {return cqIntegers;}
 
 	@Override public void addCqRootFetch(JeeslCqRootFetch cq) {if(Objects.isNull(cqRootFetches)) {cqRootFetches = new ArrayList<>();} cqRootFetches.add(cq);}
 	protected void addOrdering(JeeslCqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
 	
+	@Override public void addCqEntity(JeeslCqEntity cq) {if(Objects.isNull(entities)) {entities = new ArrayList<>();} entities.add(cq);}
 	@Override public void addCqLiteral(JeeslCqLiteral cq) {if(Objects.isNull(literals)) {literals = new ArrayList<>();} literals.add(cq);}
 	@Override public void addCqLong(JeeslCqLong literal) {if(Objects.isNull(ids)) {ids = new ArrayList<>();} ids.add(literal);}
 	@Override public void addCqBoolean(JeeslCqBoolean cq) {if(Objects.isNull(booleans)) {booleans = new ArrayList<>();} booleans.add(cq);}
 	@Override public void addCqDate(JeeslCqDate cq) {if(Objects.isNull(cqDates)) {cqDates = new ArrayList<>();} cqDates.add(cq);}
 	@Override public void addCqTime(JeeslCqTime cq) {if(Objects.isNull(cqTimes)) {cqTimes = new ArrayList<>();} cqTimes.add(cq);}
-	
-	protected void addProtected(CqInteger i) {if(Objects.isNull(integers)) {integers = new ArrayList<>();} integers.add(i);}
+	@Override public void addCqInteger(JeeslCqInteger i) {if(Objects.isNull(cqIntegers)) {cqIntegers = new ArrayList<>();} cqIntegers.add(i);}
 	
 	
 	

@@ -1,5 +1,6 @@
 package org.jeesl.factory.json.io.ssi.core;
 
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
@@ -40,6 +41,21 @@ public class JsonSsiCredentialFactory
 		
 		json.setUser(ejb.getUser());
 		json.setPassword(ejb.getPwd());
+		
+		return json;
+	}
+	
+	public static <MQTT extends Enum<MQTT>>  JsonSsiCredential build(Configuration config, MQTT mqtt)
+	{
+		JsonSsiCredential json = JsonSsiCredentialFactory.build();
+		
+		String host = config.getString("net.mqtt."+mqtt.toString()+".host");
+		Integer port = config.getInt("net.mqtt."+mqtt.toString()+".port");
+		String scheme = null; if(port==8883) {scheme = "ssl";} else {scheme = "tcp";}
+				
+		json.setUrl(scheme+"://"+host+":"+port);
+		json.setUser(config.getString("net.mqtt."+mqtt.toString()+".user"));
+		json.setPassword(config.getString("net.mqtt."+mqtt.toString()+".password"));
 		
 		return json;
 	}

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public interface JeeslCqOrdering extends Serializable
 {
-
 	public enum SortOrder {ASCENDING,DESCENDING,UNSORTED}
 	
 	SortOrder getOrder();

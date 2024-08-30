@@ -25,7 +25,6 @@ public class OpSingleSelectionHandler <T extends EjbWithId> implements OpSelecti
 	private LazyDataModel<T> lazyModel; public LazyDataModel<T> getLazyModel() {return lazyModel;}
 	private T item; public T getItem() {return item;} public void setItem(T item) {this.item = item;}
 	
-
 	public static <T extends EjbWithId> OpSingleSelectionHandler<T> instance(OpSingleSelectionBean<T> bean) {return new OpSingleSelectionHandler<>(bean);}
 	public static <T extends EjbWithId> OpSingleSelectionHandler<T> instance(OpManySelectionBean bean) {return new OpSingleSelectionHandler<>(bean);}
 	
@@ -49,6 +48,16 @@ public class OpSingleSelectionHandler <T extends EjbWithId> implements OpSelecti
 	{
 		if(Objects.nonNull(bSingle)) {bSingle.callbackOpSelection(this,item);}
 		if(Objects.nonNull(bMany)) {bMany.callbackOpSelection(this, item);}
+		item = null;
+	}
+	
+	public void selectTableItem() throws JeeslLockingException, JeeslConstraintViolationException, JeeslNotFoundException
+	{
+		
+	}
+	
+	public void cancelItem()
+	{
 		item = null;
 	}
 }

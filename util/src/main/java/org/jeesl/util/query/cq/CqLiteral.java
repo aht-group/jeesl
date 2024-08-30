@@ -36,4 +36,13 @@ public class CqLiteral implements JeeslCqLiteral
 	
 	public static String path(Serializable...attributes) {return CqGraphFetch.path(attributes);}
 	public static String pathMl(Serializable...attributes) {return CqGraphFetch.path(attributes)+"[localeCode].lang";}
+	
+	public String nyi(Class<?> c)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("NYI ");
+		sb.append(this.toString());
+		sb.append(" ").append(c.getName());
+		return sb.toString();
+	}
 }

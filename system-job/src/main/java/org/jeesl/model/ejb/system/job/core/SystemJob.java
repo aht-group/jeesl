@@ -52,10 +52,6 @@ public class SystemJob implements JeeslJob<SystemJobTemplate,SystemJobPriority,S
 	@Override public SystemJobPriority getPriority() {return priority;}
 	@Override public void setPriority(SystemJobPriority priority) {this.priority = priority;}
 
-	private Integer processingCounter;
-	public Integer getProcessingCounter() {return processingCounter;}
-	public void setProcessingCounter(Integer processingCounter) {this.processingCounter = processingCounter;}
-
 	@NotNull
 	private Date recordCreation;
 	@Override public Date getRecordCreation() {return recordCreation;}
@@ -81,6 +77,10 @@ public class SystemJob implements JeeslJob<SystemJobTemplate,SystemJobPriority,S
 	private Integer attempts;
 	@Override public Integer getAttempts() {return attempts;}
 	@Override public void setAttempts(Integer attempts) {this.attempts = attempts;}
+	
+	private Integer processingCounter;
+	@Override public Integer getProcessingCounter() {return processingCounter;}
+	@Override public void setProcessingCounter(Integer processingCounter) {this.processingCounter = processingCounter;}
 
 //	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="job")
 //	private List<SystemJobFeedback> feedbacks;

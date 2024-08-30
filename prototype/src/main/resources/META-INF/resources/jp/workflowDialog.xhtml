@@ -5,7 +5,7 @@
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
     
-	<composite:interface >
+	<composite:interface componentType="org.jeesl.jsf.components.output.Dialog">
 		<composite:attribute name="widgetVar" required="false" default="wvWorkflow"/>
 		<composite:attribute name="update" required="false"/>
 		<composite:attribute name="updateAfterConfirmimation" required="false"/>
@@ -13,17 +13,24 @@
 		<composite:attribute name="handler" required="true"/>
 		<composite:attribute name="label" required="false" default="Yes, remove permanently!"/>
 		<composite:attribute name="styleClass" required="false"/>
+		<composite:attribute name="width" required="false" default="6"/>
 	</composite:interface>
 
 	<composite:implementation>
 
 		<p:dialog id="dialog"
-				  header="#{cc.attrs.handler.workflow.process.context.name[localeCode].lang}: #{cc.attrs.handler.workflow.process.name[localeCode].lang}"
 				  widgetVar="#{cc.attrs.widgetVar}"
 				  modal="true"
+				  styleClass="jeesl-panel #{cc.styleClass(cc.attrs.size)} jeesl-dialog jeesl-dialog-#{cc.attrs.width} #{cc.attrs.styleClass}"
+				  closable="false"
 				  draggable="false"
-				  resizable="false"
-				  styleClass="#{cc.attrs.styleClass}">
+				  resizable="false">
+			<f:facet name="header">
+				<h:outputText class="ui-dialog-title" value="#{cc.attrs.handler.workflow.process.context.name[localeCode].lang}: #{cc.attrs.handler.workflow.process.name[localeCode].lang}"/>
+				<div class="ui-dialog-titlebar-actions">
+					<j:svg type="jeeslCancel" oncomplete="PF('#{cc.attrs.widgetVar}').hide()" />
+				</div>
+			</f:facet>
 			<j:row>
 				<j:slot width="6">
 					<h:form id="fStages">

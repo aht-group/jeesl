@@ -40,6 +40,7 @@ $regular-spacing: 10px;
 $wide-spacing: 15px;
 
 $border-width: 1px;
+$separator-thickness: 1px;
 $separator-thickness-mobile: 2px;
 
 $headings-margin-bottom: $half-spacing;
@@ -117,6 +118,17 @@ $overlay-filter-input-width: 200px;
 			&:after {
 				transform: translateY(calc(-#{$icon-size} / 4)) rotate(45deg);
 			}
+		}
+	}
+}
+
+@mixin icon-default-size {
+	.jeesl-icon {
+		height: calc($table-icon-height * var(--icon-height-multiplier));
+		width: auto;
+		
+		@media (max-width: 768px) {
+			height: $table-icon-height-mobile !important;
 		}
 	}
 }

@@ -79,7 +79,7 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	{
 		map.clear();
 		for(T t : list){map.put(t,true);}
-		refresh();
+		this.refresh();
 	}
 	
 	public void fillAndSelect(List<T> items)
@@ -91,9 +91,9 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	{
 		for(T t : items)
 		{
-			if(list.contains(t)){map.put(t,true);}
+			if(list.contains(t)) {map.put(t,true);}
 		}
-		refresh();
+		this.refresh();
 	}
 	public void preSelect(int from, int to)
 	{
