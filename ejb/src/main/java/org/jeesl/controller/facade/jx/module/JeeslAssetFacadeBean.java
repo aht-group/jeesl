@@ -201,24 +201,6 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<COMPANY> fAomCompanies(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query)
-	{
-		if(Objects.isNull(query.getTenantIdentifier())) {return new ArrayList<>();}
-		
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<COMPANY> cQ = cB.createQuery(fbAsset.getClassCompany());
-		Root<COMPANY> company = cQ.from(fbAsset.getClassCompany());
-		company.fetch(JeeslAomCompany.Attributes.scopes.toString(), JoinType.LEFT);
-		
-		cQ.select(company);
-		cQ.where(cB.and(pCompany(cB, query, company)));
-		cQ.distinct(true);
-
-		TypedQuery<COMPANY> tQ = em.createQuery(cQ);
-		super.pagination(tQ,query);
-		return tQ.getResultList();
-	}
-
 	@Override public List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -226,7 +208,6 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		CriteriaQuery<COMPANY> cQ = cB.createQuery(fbAsset.getClassCompany());
 		Root<COMPANY> company = cQ.from(fbAsset.getClassCompany());
 		company.fetch(JeeslAomCompany.Attributes.scopes.toString(), JoinType.LEFT);
-		
 		
 		Expression<Long> eRefId = company.get(JeeslAomCompany.Attributes.realmIdentifier.toString());
 		predicates.add(cB.equal(eRefId,identifier.getId()));
@@ -240,6 +221,25 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 		return em.createQuery(cQ).getResultList();
 	}
+	@Override public List<COMPANY> fAomCompanies(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query)
+	{
+		if(Objects.isNull(query.getTenantIdentifier())) {return new ArrayList<>();}
+		
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<COMPANY> cQ = cB.createQuery(fbAsset.getClassCompany());
+		Root<COMPANY> root = cQ.from(fbAsset.getClassCompany());
+		root.fetch(JeeslAomCompany.Attributes.scopes.toString(), JoinType.LEFT);
+		
+		cQ.select(root);
+		cQ.where(cB.and(pCompany(cB, query, root)));
+		cQ.distinct(true);
+		this.sortByCompany(cB, cQ, query, root);
+
+		TypedQuery<COMPANY> tQ = em.createQuery(cQ);
+		super.pagination(tQ,query);
+		return tQ.getResultList();
+	}
+	
 
 	@Override public List<EVENT> fAomEvents(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query)
 	{
@@ -300,6 +300,26 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	public void sortByCompany(CriteriaBuilder cB, CriteriaQuery<COMPANY> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<COMPANY> root)
+	{
+		List<Order> orders = new ArrayList<>();
+		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+			logger.info("SORT "+cq.toString());
+			if(cq.getPath().equals(CqOrdering.path(JeeslAomCompany.Attributes.code)))
+			{
+				Expression<String> e = root.get(JeeslAomCompany.Attributes.code.toString());
+				SortByPredicateBuilder.addByString(cB,orders,cq,e);
+			}
+			else if(cq.getPath().equals(CqOrdering.path(JeeslAomCompany.Attributes.name)))
+			{
+				Expression<String> e = root.get(JeeslAomCompany.Attributes.name.toString());
+				SortByPredicateBuilder.addByString(cB,orders,cq,e);
+			}
+			else {logger.warn("No Handling for "+cq.toString());}
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
 	public Predicate[] pAsset(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<ASSET> root)
