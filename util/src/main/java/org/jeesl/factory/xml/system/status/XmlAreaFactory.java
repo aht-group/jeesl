@@ -19,9 +19,6 @@ public class XmlAreaFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D 
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlAreaFactory.class);
 	
-	private static boolean errorPrinted = false;
-	
-	private String localeCode;
 	private Area q;
 	
 	private XmlLabelFactory<L> xfLabel;
@@ -31,7 +28,6 @@ public class XmlAreaFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D 
 	public XmlAreaFactory(Area q){this(null,q);}
 	public XmlAreaFactory(String localeCode,Area q)
 	{
-		this.localeCode=localeCode;
 		this.q=q;
 		
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}

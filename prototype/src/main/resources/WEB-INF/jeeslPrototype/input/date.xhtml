@@ -6,7 +6,9 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://primefaces.org/ui"
 >
-	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
+	<c:set var="rendered" value="#{not empty rendered ? rendered : true}" />
+	<c:set var="mindate" value="#{not empty mindate ? mindate : null}" />
+	<c:set var="maxdate" value="#{not empty maxdate ? maxdate : null}" />
 
 	<ui:remove>
 		<!-- The Id was originally pCalendar -->
@@ -15,7 +17,9 @@
 		<p:calendar 
 					value="#{value}"
 					showOn="button"
-					pattern="#{appSettingsBean.patternDate}">
+					pattern="#{appSettingsBean.patternDate}"
+					mindate="#{mindate}"
+					maxdate="#{maxdate}">
 		</p:calendar>
 	</h:panelGroup>
 </ui:composition>
