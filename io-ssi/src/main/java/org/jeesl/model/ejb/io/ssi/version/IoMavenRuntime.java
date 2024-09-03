@@ -17,7 +17,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("ioSsiLibrary")
 @EjbErNode(name="Link",category="ssi",subset="systemSsi")
-public class IoSsiLibrary extends IoStatus implements JeeslIoMavenRuntime<IoLang,IoDescription,IoSsiLibrary,IoGraphic>
+public class IoMavenRuntime extends IoStatus implements JeeslIoMavenRuntime<IoLang,IoDescription,IoMavenRuntime,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 	
@@ -28,6 +28,6 @@ public class IoSsiLibrary extends IoStatus implements JeeslIoMavenRuntime<IoLang
 		return fixed;
 	}
 	
-	@Override public boolean equals(Object object){return (object instanceof IoSsiLibrary) ? id == ((IoSsiLibrary) object).getId() : (object == this);}
+	@Override public boolean equals(Object object){return (object instanceof IoMavenRuntime) ? id == ((IoMavenRuntime) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,57).append(id).toHashCode();}
 }

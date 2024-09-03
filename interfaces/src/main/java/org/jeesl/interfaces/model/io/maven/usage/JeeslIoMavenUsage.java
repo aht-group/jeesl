@@ -23,6 +23,8 @@ public interface JeeslIoMavenUsage <VERSION extends JeeslIoMavenVersion<?,?,?>,
 {
 	public static enum Attributes{module,version,scopes};
 	
+//	void x();
+	
 	MODULE getModule();
 	void setModule(MODULE module);
 	

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

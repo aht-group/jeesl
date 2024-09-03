@@ -37,7 +37,7 @@ import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenType;
-import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenUsageComparator;
 import org.slf4j.Logger;
