@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.ssi.version;
+package org.jeesl.model.ejb.io.maven.usage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,8 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 public class IoMavenRuntime extends IoStatus implements JeeslIoMavenRuntime<IoLang,IoDescription,IoMavenRuntime,IoGraphic>
 {
 	public static final long serialVersionUID=1;
+	
+	//Needs to be moved to io-maven
 	
 	@Override public List<String> getFixedCodes()
 	{
