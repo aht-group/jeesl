@@ -16,7 +16,9 @@ public class CqLiteral implements JeeslCqLiteral
 	public static CqLiteral starts(String literal, String path) {return new CqLiteral(Type.STARTS,literal,path);}
 	public static CqLiteral contains(String literal, String path) {return new CqLiteral(Type.CONTAINS,literal,path);}
 	public static CqLiteral exact(String literal, String path) {return new CqLiteral(Type.EXACT,literal,path);}
-
+	public static CqLiteral isNull(String path) {return new CqLiteral(Type.NULL,null,path);}
+	public static CqLiteral isNotNull(String path) {return new CqLiteral(Type.NONNULL,null,path);}
+	
 	private CqLiteral(Type type, String literal, String path)
 	{
 		this.type=type;
