@@ -40,9 +40,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-api</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-jsf</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-util</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		
+		<!-- JEESL Modles -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
@@ -62,6 +74,13 @@
    			<artifactId>commons-lang3</artifactId>
    			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Logging -->
+		<dependency>
+	  		<groupId>org.slf4j</groupId>
+	  		<artifactId>slf4j-api</artifactId>
+	  		<scope>provided</scope>
+	  	</dependency>
 		
 	</dependencies>
 </project>
