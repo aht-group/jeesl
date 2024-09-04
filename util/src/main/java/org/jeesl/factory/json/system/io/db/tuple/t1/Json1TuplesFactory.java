@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
-import org.exlp.util.io.JsonUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;

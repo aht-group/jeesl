@@ -22,7 +22,6 @@ public class JeeslBootstrap
 	public static Configuration init()
 	{
 		return init(xmlConfig);
-		
 	}
 	
 	public static Configuration init(String configFile)

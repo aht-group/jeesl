@@ -23,7 +23,6 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
-import org.jeesl.model.ejb.system.constraint.resolution.SystemConstraintResolution;
 
 @Entity
 @Table(name="SystemConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"scope_id","code"}))

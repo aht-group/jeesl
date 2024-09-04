@@ -1,4 +1,4 @@
-package org.jeesl.client.test.factory.ejb;
+package org.jeesl.client.test.factory.ejb.io.locale;
 
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.locale.Description;
@@ -17,45 +17,52 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
+public class TestEjbLocaleStatusFactory extends AbstractJeeslClientTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestUtilsStatusEjbFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestEjbLocaleStatusFactory.class);
 	
-	private EjbStatusFactory<Lang,Description,Status> facStatus;
+	private EjbStatusFactory<Lang,Description,Status> efStatus;
 	private org.jeesl.model.xml.io.locale.status.Status status;
 	
 	@BeforeEach
 	public void init()
 	{
-		facStatus = EjbStatusFactory.instance(Status.class, Lang.class,Description.class);
+		efStatus = EjbStatusFactory.instance(Status.class, Lang.class,Description.class);
 		status = createStatus();
 	}
     
     @AfterEach
     public void close()
     {
-    	facStatus = null;
+    	efStatus = null;
     	status = null;
+    }
+    
+    @Test
+    public void testBuildEjb() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
+    {
+    	Object o = efStatus.create("test");
+    	Assertions.assertTrue(o instanceof Status);
     }
  
     @Test
-    public void testClass() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
+    public void testBuildXml() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
-    	Object o = facStatus.create(status);
+    	Object o = efStatus.create(status);
     	Assertions.assertTrue(o instanceof Status);
     }
     
     @Test
     public void testCode() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
-    	Status ejb = (Status)facStatus.create(status);
+    	Status ejb = (Status)efStatus.create(status);
     	Assertions.assertEquals(status.getCode(), ejb.getCode());
     }
     
     @Test
     public void testMapSize() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
-    	Status ejb = (Status)facStatus.create(status);
+    	Status ejb = (Status)efStatus.create(status);
     	Assertions.assertEquals(status.getLangs().getLang().size(), ejb.getName().size());
     	Assertions.assertEquals(status.getDescriptions().getDescription().size(), ejb.getDescription().size());
     }
@@ -65,7 +72,7 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
     {
     	org.jeesl.model.xml.io.locale.status.Lang lang = status.getLangs().getLang().get(0);
     	org.jeesl.model.xml.io.locale.status.Description desc = status.getDescriptions().getDescription().get(0);
-    	Status ejb = (Status)facStatus.create(status);
+    	Status ejb = (Status)efStatus.create(status);
     	Assertions.assertEquals(lang.getTranslation(), ejb.getName().get(lang.getKey()).getLang());
     	Assertions.assertEquals(desc.getValue(), ejb.getDescription().get(lang.getKey()).getLang());
     }
@@ -74,28 +81,28 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
     public void testMissingKeyLang() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
     	status.getLangs().getLang().get(0).setKey(null);
-    	facStatus.create(status);
+    	efStatus.create(status);
     }
     
     @Test @Disabled //(expected=JeeslConstraintViolationException.class)
     public void testMissingKeyDescription() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
     	status.getDescriptions().getDescription().get(0).setKey(null);
-    	facStatus.create(status);
+    	efStatus.create(status);
     }
     
     @Test @Disabled //(expected=JeeslConstraintViolationException.class)
     public void testMissingLangTranslation() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
     	status.getLangs().getLang().get(0).setTranslation(null);
-    	facStatus.create(status);
+    	efStatus.create(status);
     }
     
     @Test @Disabled //(expected=JeeslConstraintViolationException.class)
     public void testMissingDescriptionValue() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
     	status.getDescriptions().getDescription().get(0).setValue(null);
-    	facStatus.create(status);
+    	efStatus.create(status);
     }
 
     
@@ -128,14 +135,16 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
     {
 		JeeslBootstrap.init();
 			
-		TestUtilsStatusEjbFactory test = new TestUtilsStatusEjbFactory();
+		TestEjbLocaleStatusFactory test = new TestEjbLocaleStatusFactory();
 		test.init();
-		test.testClass();
-		test.testCode();
-		test.testMapSize();
+		
+		test.testBuildEjb();
+//		test.testBuildXml();
+//		test.testCode();
+//		test.testMapSize();
 //		test.testMissingKey();
 //		test.testMissingTranslation();
-		test.testMissingLangTranslation();
-		test.close();
+//		test.testMissingLangTranslation();
+//		test.close();
     }
 }

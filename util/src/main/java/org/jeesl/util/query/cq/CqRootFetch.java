@@ -25,9 +25,9 @@ public class CqRootFetch implements JeeslCqRootFetch
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
+		sb.append("Root ");
 		sb.append(type.toString());
-		sb.append(" ");
-		sb.append(" in [").append(path).append("]");
+		sb.append(" -> ").append(path);
 		return sb.toString();
 	}
 	

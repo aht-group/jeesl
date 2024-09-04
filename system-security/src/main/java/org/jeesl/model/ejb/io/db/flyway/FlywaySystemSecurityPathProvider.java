@@ -5,14 +5,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
-import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
-import org.jeesl.model.ejb.io.graphic.core.IoGraphicComponent;
-import org.jeesl.model.ejb.io.graphic.core.IoGraphicShape;
-import org.jeesl.model.ejb.io.graphic.core.IoGraphicType;
-import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
-import org.jeesl.model.ejb.io.locale.IoLocale;
-import org.jeesl.model.ejb.io.locale.IoStatus;
 import org.jeesl.model.ejb.system.security.SecurityCategory;
 import org.jeesl.model.ejb.system.security.access.SecurityRole;
 import org.jeesl.model.ejb.system.security.access.SecurityUsecase;

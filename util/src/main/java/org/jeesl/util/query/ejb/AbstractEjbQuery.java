@@ -203,6 +203,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {list.add(l.toString());}}
 		if(ObjectUtils.isNotEmpty(cqDates)) {for(JeeslCqDate cq : cqDates) {list.add(cq.toString());}}
 		if(ObjectUtils.isNotEmpty(cqTimes)) {for(JeeslCqTime cq : cqTimes) {list.add(cq.toString());}}
+		if(ObjectUtils.isNotEmpty(cqRootFetches)) {for(JeeslCqRootFetch cq : cqRootFetches) {list.add(cq.toString());}}
 		return list;
 	}
 }

@@ -9,7 +9,6 @@ import java.util.Objects;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
-import org.jeesl.controller.handler.system.constraint.ConstraintHandler;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

@@ -1,14 +1,9 @@
 package org.jeesl.factory.xml.system.status;
 
-import java.util.List;
-import java.util.Objects;
-
-import org.jeesl.api.exception.xml.JeeslXmlStructureException;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.locale.status.Goals;
-import org.jeesl.model.xml.io.locale.status.Scopes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
