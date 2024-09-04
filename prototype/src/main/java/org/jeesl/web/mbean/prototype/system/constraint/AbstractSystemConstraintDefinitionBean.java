@@ -11,6 +11,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
 import org.jeesl.controller.handler.ui.helper.UiTwiceClickHelper;
 import org.jeesl.controller.util.comparator.ejb.system.constraint.ContraintScopeComparator;
+import org.jeesl.controller.util.comparator.ejb.system.constraint.SystemConstraintAlgorithmComparator;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -33,6 +34,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,11 +47,16 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 										LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 										TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 										RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
-					extends AbstractSystemConstraintBean<L,D,LOC,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
+					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSystemConstraintDefinitionBean.class);
+	
+	protected JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint;
+	protected final ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
+
+	protected final Comparator<ALGORITHM> cpAlgorithm;
 	
 	private JeeslConstraintsBean<CONSTRAINT> bConstraint;
 	
@@ -70,7 +77,11 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	
 	public AbstractSystemConstraintDefinitionBean(ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
-		super(fbConstraint);
+		super(fbConstraint.getClassL(),fbConstraint.getClassD());
+		this.fbConstraint=fbConstraint;
+		
+		cpAlgorithm = (new SystemConstraintAlgorithmComparator<ALGORITHM,GROUP>()).factory(SystemConstraintAlgorithmComparator.Type.position);
+		
 		cpScope = new ContraintScopeComparator<SCOPE,CATEGORY>().factory(ContraintScopeComparator.Type.position);
 		ui2 = new UiTwiceClickHelper();
 		efScope = new EjbConstraintScopeFactory<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(fbConstraint.getClassL(),fbConstraint.getClassD(),fbConstraint.getClassScope(),fbConstraint.getClassConstraintCategory());
@@ -80,7 +91,8 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	protected void postConstructConstraintDefinition(JeeslConstraintsBean<CONSTRAINT> bConstraint, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 													JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint)
 	{
-		super.initConstraint(bTranslation,bMessage,fConstraint);
+		super.initJeeslAdmin(bTranslation,bMessage);
+		this.fConstraint=fConstraint;
 		this.bConstraint=bConstraint;
 		
 		types = fConstraint.allOrderedPosition(fbConstraint.getClassConstraintType());
