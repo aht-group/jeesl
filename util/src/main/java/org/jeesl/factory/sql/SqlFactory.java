@@ -10,6 +10,7 @@ import java.util.Objects;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.factory.txt.util.TxtIdFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.query.sql.JeeslSqlQuery;
 import org.slf4j.Logger;
@@ -78,8 +79,16 @@ public class SqlFactory
 	}
 	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where(E attribute, T where)
 	{
-		sb.append(" WHERE ");
+		sb.append(" WHERE (");
 		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
+		sb.append(" )");
+		return this;
+	}
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory whereIn(E attribute, T... where)
+	{
+		sb.append(" WHERE ");
+		sb.append(id(alias,attribute));
+		sb.append(" IN (").append(TxtIdFactory.commaList(where)).append(")");
 		return this;
 	}
 	public <E extends Enum<E>, T extends EjbWithId> SqlFactory and(E attribute, T where)

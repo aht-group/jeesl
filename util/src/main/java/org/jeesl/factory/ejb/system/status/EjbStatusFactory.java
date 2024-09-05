@@ -1,12 +1,10 @@
 package org.jeesl.factory.ejb.system.status;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
@@ -66,128 +64,96 @@ public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S 
         efDescription = EjbDescriptionFactory.factory(cD);
     }
     
-    public <E extends Enum<E>> S build(E code){return create(code.toString());}
+    public S build()
+	{
+        S s = null;
+		try
+		{
+			s = cStatus.getDeclaredConstructor().newInstance();
+		}
+		catch (InstantiationException e) {throw new RuntimeException(e);}
+		catch (IllegalAccessException e) {throw new RuntimeException(e);}
+		catch (IllegalArgumentException e) {throw new RuntimeException(e);}
+		catch (InvocationTargetException e) {throw new RuntimeException(e);}
+		catch (NoSuchMethodException e) {throw new RuntimeException(e);}
+		catch (SecurityException e) {throw new RuntimeException(e);}
+        
+        return s;
+    }
+    
+    public <E extends Enum<E>> S build(E code) {return create(code.toString());}
     
 	public S create(Status status) throws JeeslConstraintViolationException
 	{
 		if(Objects.isNull(status.getLangs())) {throw new JeeslConstraintViolationException("No <langs> available for "+JaxbUtil.toString(status));}
-        S s=null;
-		try
+        S s = build();
+        
+        s.setCode(status.getCode());
+		if(Objects.nonNull(status.getPosition())) {s.setPosition(status.getPosition());}
+		else{s.setPosition(0);}
+		
+		Langs langs = XmlLangsFactory.build();
+		if(localeCodes==null) {langs.getLang().addAll(status.getLangs().getLang());}
+		else
 		{
-			s = cStatus.newInstance();
-			s.setCode(status.getCode());
-			if(Objects.nonNull(status.getPosition())) {s.setPosition(status.getPosition());}
-			else{s.setPosition(0);}
-			
-			Langs langs = XmlLangsFactory.build();
-			if(localeCodes==null) {langs.getLang().addAll(status.getLangs().getLang());}
+			for(Lang l : status.getLangs().getLang())
+			{
+				if(localeCodes.contains(l.getKey())) {langs.getLang().add(l);}
+			}
+		}
+		
+		Descriptions descriptions = XmlDescriptionsFactory.build();
+		if(Objects.nonNull(status.getDescriptions()))
+		{
+			if(localeCodes==null) {descriptions.getDescription().addAll(status.getDescriptions().getDescription());}
 			else
 			{
-				for(Lang l : status.getLangs().getLang())
+				for(Description d : status.getDescriptions().getDescription())
 				{
-					if(localeCodes.contains(l.getKey())) {langs.getLang().add(l);}
+					if(localeCodes.contains(d.getKey())) {descriptions.getDescription().add(d);}
 				}
 			}
-			
-			Descriptions descriptions = XmlDescriptionsFactory.build();
-			if(Objects.nonNull(status.getDescriptions()))
-			{
-				if(localeCodes==null) {descriptions.getDescription().addAll(status.getDescriptions().getDescription());}
-				else
-				{
-					for(Description d : status.getDescriptions().getDescription())
-					{
-						if(localeCodes.contains(d.getKey())) {descriptions.getDescription().add(d);}
-					}
-				}
-			}
-			
-			s.setName(efLang.getLangMap(langs));
-			s.setDescription(efDescription.create(descriptions));
 		}
-		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
+		
+		s.setName(efLang.getLangMap(langs));
+		s.setDescription(efDescription.create(descriptions));
 		
         return s;
     }
 	
-	public S create(String code){return create(code,null);}
+	public S create(String code) {return create(code,null);}
 	public S create(String code, String[] langKeys)
 	{
-        S s;
-		try
-		{
-			s = cStatus.newInstance();
-			s.setCode(code);
-			if(langKeys!=null){s.setName(efLang.createEmpty(langKeys));}
-			if(langKeys!=null){s.setDescription(efDescription.createEmpty(langKeys));}
-		}
-		catch (InstantiationException e) {throw new RuntimeException(e);}
-		catch (IllegalAccessException e) {throw new RuntimeException(e);}
+        S s = build();
+        s.setCode(code);
+		if(langKeys!=null){s.setName(efLang.createEmpty(langKeys));}
+		if(langKeys!=null){s.setDescription(efDescription.createEmpty(langKeys));}
         
         return s;
     }
 	public <LOC extends JeeslLocale<L,D,LOC,?>> S build(String code, List<LOC> locales)
 	{
-		S s;
-		try
-		{
-			s = cStatus.newInstance();
-			s.setCode(code);
-			s.setName(efLang.buildEmpty(locales));
-			s.setDescription(efDescription.buildEmpty(locales));
-		}
-		catch (InstantiationException e) {throw new RuntimeException(e);}
-		catch (IllegalAccessException e) {throw new RuntimeException(e);}
+		S s = this.build();
+		s.setCode(code);
+		s.setName(efLang.buildEmpty(locales));
+		s.setDescription(efDescription.buildEmpty(locales));
         
         return s;
 	}
-	
 	
 	public S id(int id) {return id((long)id);}
 	public S id(long id)
 	{
-        S s;
-		try
-		{
-			s = cStatus.newInstance();
-			s.setId(id);
-		}
-		catch (InstantiationException e) {throw new RuntimeException(e);}
-		catch (IllegalAccessException e) {throw new RuntimeException(e);}
+        S s = build();
+        s.setId(id);
         
         return s;
     }
 	
-	public Map<String,D> getDescriptionMap(Descriptions desciptions) throws InstantiationException, IllegalAccessException
-	{
-		if(Objects.nonNull(desciptions) && ObjectUtils.isNotEmpty(desciptions.getDescription()))
-		{
-			return getDescriptionMap(desciptions.getDescription());
-		}
-		else
-		{
-			return new Hashtable<String,D>();
-		}
-	}
-	
-	private Map<String,D> getDescriptionMap(List<Description> descList) throws InstantiationException, IllegalAccessException
-	{
-		Map<String,D> mapDesc = new Hashtable<String,D>();
-		for(Description xmlD : descList)
-		{
-			D d = cD.newInstance();
-			d.setLkey(xmlD.getKey());
-			d.setLang(xmlD.getValue().trim());
-			mapDesc.put(d.getLkey(), d);
-		}
-		return mapDesc;
-	}
-	
 	public static <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription>
-		S build(final Class<S> cStatus, final Class<L> cLang, final Class<D> descriptionClass, String[] localeCodes, long id, String code, String name)
+		S build(final Class<S> cStatus, final Class<L> cLang, final Class<D> cDestription, String[] localeCodes, long id, String code, String name)
 	{
-		EjbStatusFactory<L,D,S> f = EjbStatusFactory.instance(cStatus, cLang, descriptionClass);
+		EjbStatusFactory<L,D,S> f = EjbStatusFactory.instance(cStatus, cLang, cDestription);
 		S status = f.create(code, localeCodes);
 		status.setId(id);
 		for(String localeCode : localeCodes)
@@ -198,6 +164,7 @@ public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	}
 	
 	@SuppressWarnings("unchecked")
+	//This is only used once and should be removed
 	public List<S> toList(List<EjbWithId> years)
 	{
 		List<S> list = new ArrayList<S>();

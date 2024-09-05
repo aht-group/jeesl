@@ -1,5 +1,7 @@
 package org.jeesl.factory.ejb.system.constraint;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.jeesl.controller.io.db.updater.JeeslDbDescriptionUpdater;
 import org.jeesl.controller.io.db.updater.JeeslDbLangUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -42,16 +44,26 @@ public class EjbConstraintScopeFactory <L extends JeeslLang, D extends JeeslDesc
         dbuDescription = JeeslDbDescriptionUpdater.factory(cScope,cD);
 	}
 	
-	public SCOPE build(CATEGORY category)
+	private SCOPE build()
 	{
 		SCOPE ejb = null;
 		try
 		{
-			ejb = cScope.newInstance();
-			ejb.setPosition(0);
+			ejb = cScope.getDeclaredConstructor().newInstance();
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
+		return ejb;
+	}
+	
+	public SCOPE build(CATEGORY category)
+	{
+		SCOPE ejb = this.build();
+		ejb.setPosition(0);
 		
 		return ejb;
 	}

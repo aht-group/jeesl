@@ -1,8 +1,10 @@
-package org.jeesl.model.ejb.io.db.flyway;
+package org.jeesl.interfaces.controller.io.db.flyway.marker;
 
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayVersionMarker;
 
 public interface FlywaySystemConstraintVersionMarker extends JeeslFlywayVersionMarker
 {	
-//	public void markerSecurity2();
+	void sinceSystemConstraint(int i);
+	
+//	public void markerSystemConstraint();
 }

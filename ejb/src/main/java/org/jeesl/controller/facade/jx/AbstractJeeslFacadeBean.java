@@ -80,6 +80,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 			switch(cq.getType())
 			{
 				case LEFT: root.fetch(cq.getPath(), JoinType.LEFT); break;
+				default: logger.warn("NYI");
 			}
 		}
 	}

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 
 public class EjbAomAssetFilter<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>>
 {

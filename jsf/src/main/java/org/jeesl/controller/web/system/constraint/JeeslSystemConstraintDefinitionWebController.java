@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.system.constraint;
+package org.jeesl.controller.web.system.constraint;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -11,6 +11,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
 import org.jeesl.controller.util.comparator.ejb.system.constraint.ContraintScopeComparator;
 import org.jeesl.controller.util.comparator.ejb.system.constraint.SystemConstraintAlgorithmComparator;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -20,6 +21,7 @@ import org.jeesl.factory.ejb.system.constraint.EjbConstraintFactory;
 import org.jeesl.factory.ejb.system.constraint.EjbConstraintScopeFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
@@ -34,12 +36,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiTwiceClickHelper;
-import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Deprecated //Use JeeslSystemConstraintDefinitionWebController
-public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslSystemConstraintDefinitionWebController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
 										ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
 										SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
@@ -48,11 +48,11 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 										LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 										TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 										RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
-					extends AbstractAdminBean<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractSystemConstraintDefinitionBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSystemConstraintDefinitionWebController.class);
 	
 	protected JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint;
 	protected final ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
@@ -76,7 +76,7 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	private final UiTwiceClickHelper ui2; public UiTwiceClickHelper getUi2() {return ui2;}
 	private final Comparator<SCOPE> cpScope;
 	
-	public AbstractSystemConstraintDefinitionBean(ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
+	public JeeslSystemConstraintDefinitionWebController(ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
 		super(fbConstraint.getClassL(),fbConstraint.getClassD());
 		this.fbConstraint=fbConstraint;
@@ -89,10 +89,10 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 		efConstraint = new EjbConstraintFactory<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(fbConstraint.getClassL(),fbConstraint.getClassD(),fbConstraint.getClassConstraint(),fbConstraint.getClassConstraintType());
 	}
 	
-	protected void postConstructConstraintDefinition(JeeslConstraintsBean<CONSTRAINT> bConstraint, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+	public void postConstructConstraintDefinition(JeeslConstraintsBean<CONSTRAINT> bConstraint, JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 													JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint)
 	{
-		super.initJeeslAdmin(bTranslation,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fConstraint=fConstraint;
 		this.bConstraint=bConstraint;
 		
@@ -124,8 +124,8 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbConstraint.getClassScope()));}
 		scope = efScope.build(null);
-		scope.setName(efLang.createEmpty(localeCodes));
-		scope.setDescription(efDescription.createEmpty(localeCodes));
+		scope.setName(efLang.buildEmpty(lp.getLocales()));
+		scope.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		reset(false,true);
 		ui2.checkA(scope);
 	}
@@ -134,7 +134,8 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(scope));}
 		scope = fConstraint.find(fbConstraint.getClassScope(),scope);
-		scope = efScope.updateLD(fConstraint, scope, localeCodes);
+		scope = efLang.persistMissingLangs(fConstraint,lp.getLocales(),scope);
+		scope = efDescription.persistMissingLangs(fConstraint,lp.getLocales(),scope);
 		reloadConstraints();
 		ui2.checkA(scope);
 	}
@@ -159,8 +160,8 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbConstraint.getClassConstraint()));}
 		constraint = efConstraint.build(scope,null);
-		constraint.setName(efLang.createEmpty(localeCodes));
-		constraint.setDescription(efDescription.createEmpty(localeCodes));
+		constraint.setName(efLang.buildEmpty(lp.getLocales()));
+		constraint.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		reset(false,false);
 		ui2.checkB(constraint);
 	}
@@ -180,7 +181,8 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(constraint));}
 		constraint = fConstraint.find(fbConstraint.getClassConstraint(),constraint);
-		efConstraint.updateLD(fConstraint, constraint, localeCodes);
+		constraint = efLang.persistMissingLangs(fConstraint,lp.getLocales(),constraint);
+		constraint = efDescription.persistMissingLangs(fConstraint,lp.getLocales(),constraint);
 		ui2.checkB(constraint);
 	}
 	
