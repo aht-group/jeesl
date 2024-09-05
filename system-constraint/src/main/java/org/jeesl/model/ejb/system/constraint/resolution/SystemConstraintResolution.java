@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,6 +54,7 @@ public class SystemConstraintResolution implements Serializable,EjbRemoveable,Ej
 	@Override public void setPosition(int position) {this.position = position;}
 
 	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_SystemConstraintResolution_type"))
 	private SystemConstraintType type;
 	public SystemConstraintType getType() {return type;}
 	public void setType(SystemConstraintType type) {this.type = type;}
