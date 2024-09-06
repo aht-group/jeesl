@@ -27,8 +27,8 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 
 	private JeeslComparatorProvider<C> jppC; public void setComparatorProviderC(JeeslComparatorProvider<C> jppC) {this.jppC = jppC;}
 	
-	private final Class<C> cC;
-	
+	private final Class<C> cC; public Class<C> getClassC() {return cC;}
+
 	protected final Map<Long,C> mapC;
 	private final Map<A,Map<B,Map<C,JsonTuple3<A,B,C>>>> map3; public Map<A,Map<B,Map<C,JsonTuple3<A,B,C>>>> getMap3() {return map3;}
 	

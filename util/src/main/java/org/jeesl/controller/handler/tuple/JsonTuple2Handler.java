@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.collections4.ListUtils;
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -32,8 +34,8 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 
 	private JeeslComparatorProvider<B> jcpB; public void setComparatorProviderB(JeeslComparatorProvider<B> jppB) {this.jcpB = jppB;}
 
-	protected final Class<B> cB;
-	
+	protected final Class<B> cB; public Class<B> getClassB() {return cB;}
+
 	protected final Map<Long,B> mapB;
 	private final Map<A,Map<B,JsonTuple2<A,B>>> map;
 	public Map<A,Map<B,JsonTuple2<A,B>>> getMap() {return map;}	//Deprecated
@@ -187,8 +189,20 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 	public void initListB(JeeslFacade fJeesl)
 	{
-		if(fJeesl==null){listB.addAll(mapB.values());}
-		else{listB.clear(); listB.addAll(fJeesl.find(cB,new ArrayList<Long>(mapB.keySet())));}
+		if(Objects.isNull(fJeesl)) {listB.addAll(mapB.values());}
+		else
+		{
+			listB.clear();
+			
+			int pSize = 5000;
+			AtomicInteger i = new AtomicInteger(1);
+			for(List<Long> partition : ListUtils.partition(new ArrayList<Long>(mapB.keySet()),pSize))
+			{
+				logger.info("Loading "+i.getAndIncrement()+" ("+listB.size()+"/"+mapB.size()+") "+cB.getSimpleName());
+				listB.addAll(fJeesl.find(cB,new ArrayList<>(partition)));
+			}
+		}
+		
 		sizeB = listB.size();
 		if(jcpB!=null && jcpB.provides(cB)){Collections.sort(listB, jcpB.provide(cB));}
 	}
