@@ -4,7 +4,9 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -196,6 +198,9 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public void ofxMilestones(OutputStream os)
 	{
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+		 
+		   
 		List<String> header = new ArrayList<>();
 		header.add("Time");
 		
@@ -212,7 +217,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		for(MILESTONE ejb : milestones)
 		{
 			String[] cell = new String[7];
-			cell[0] = ejb.getRecord().toString();
+			cell[0] = dtf.format(ejb.getRecord());
 			
 			cell[1] = Long.valueOf(ejb.getMilliTotal()).toString();
 			cell[2] = Long.valueOf(ejb.getMilliStep()).toString();
