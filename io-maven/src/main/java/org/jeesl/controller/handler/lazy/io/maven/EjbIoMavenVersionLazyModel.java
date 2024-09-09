@@ -21,7 +21,7 @@ import org.jeesl.model.ejb.io.maven.ee.IoMavenEeReferral;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenType;
-import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.primefaces.model.FilterMeta;

@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.ssi.version;
+package org.jeesl.interfaces.model.io.maven.usage;
 
 import java.io.Serializable;
 
@@ -17,7 +17,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 @DownloadJeeslData
-public interface JeeslIoSsiLibrary <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslIoMavenRuntime <L extends JeeslLang, D extends JeeslDescription,
 						S extends JeeslStatus<L,D,S>,
 						G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithSymbol,

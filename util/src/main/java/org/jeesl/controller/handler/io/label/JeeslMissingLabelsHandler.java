@@ -3,6 +3,7 @@ package org.jeesl.controller.handler.io.label;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -79,8 +80,9 @@ public class JeeslMissingLabelsHandler<L extends JeeslLang,D extends JeeslDescri
 
 	private boolean containsInMissingLabelCollection(String missingEntity, String missingCode, String localString)
 	{
-		for(RML rml : missingLabelCollection)
+		for (Iterator<RML> iterator = missingLabelCollection.iterator(); iterator.hasNext();)
 		{
+			RML rml =iterator.next();
 			try
 			{
 				if(Objects.nonNull(rml) && Objects.equals(rml.getMissingEntity(), missingEntity) && Objects.equals(rml.getMissingCode(), missingCode) && Objects.equals(rml.getMissingLocal(),localString))
@@ -106,7 +108,7 @@ public class JeeslMissingLabelsHandler<L extends JeeslLang,D extends JeeslDescri
 		mapEntities.put(entityJscn, null);
 		updateMissingTranslation(entityJscn,"","");
 	}
-	
+
 	/*
 	 Alternative imp
 	{

@@ -20,7 +20,6 @@ import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqRootFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
-import org.jeesl.util.query.cq.CqInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -189,6 +188,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 			if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {logger.info(l.toString());}}
 			if(ObjectUtils.isNotEmpty(cqDates)) {for(JeeslCqDate cq : cqDates) {logger.info(cq.toString());}}
 			if(ObjectUtils.isNotEmpty(cqTimes)) {for(JeeslCqTime cq : cqTimes) {logger.info(cq.toString());}}
+			if(ObjectUtils.isNotEmpty(orderings)) {for(JeeslCqOrdering cq : orderings) {logger.info(cq.toString());}}
 		}
 	}
 	
@@ -203,6 +203,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {list.add(l.toString());}}
 		if(ObjectUtils.isNotEmpty(cqDates)) {for(JeeslCqDate cq : cqDates) {list.add(cq.toString());}}
 		if(ObjectUtils.isNotEmpty(cqTimes)) {for(JeeslCqTime cq : cqTimes) {list.add(cq.toString());}}
+		if(ObjectUtils.isNotEmpty(cqRootFetches)) {for(JeeslCqRootFetch cq : cqRootFetches) {list.add(cq.toString());}}
 		return list;
 	}
 }

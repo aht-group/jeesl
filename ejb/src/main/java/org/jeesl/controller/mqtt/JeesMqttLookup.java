@@ -49,6 +49,7 @@ public class JeesMqttLookup
 	
 	}
 
+	public static <MQTT extends Enum<MQTT>> String topic(Configuration config, MQTT mqtt) {return config.getString("net.mqtt."+mqtt.toString()+".topic");}
 	public static <MQTT extends Enum<MQTT>> MqttClient mqtt(Configuration config, MQTT mqtt, String clientId, boolean cleanSession) throws MqttException
 	{
 		JsonSsiCredential credential = JsonSsiCredentialFactory.build(config, mqtt);

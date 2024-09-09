@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.maven.module;
+package org.jeesl.model.ejb.io.maven.usage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
+import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 
 @Entity
 @Table(name="IoMavenUsage")

@@ -46,7 +46,7 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenJdk;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenType;
-import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.query.ejb.io.maven.EjbIoMavenQuery;
 import org.primefaces.event.FileUploadEvent;

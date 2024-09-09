@@ -13,6 +13,8 @@ public class TxtOptionFactory <L extends JeeslLang, D extends JeeslDescription, 
 {
 	private final String localeCode;
 	
+	public static <L extends JeeslLang, D extends JeeslDescription, OPTION extends JeeslAttributeOption<L,D,?>, E extends Enum<E>> 
+		TxtOptionFactory<L,D,OPTION> instance(E localeCode) {return new TxtOptionFactory<>(localeCode.toString());}
 	public static <L extends JeeslLang, D extends JeeslDescription, OPTION extends JeeslAttributeOption<L,D,?>> 
 					TxtOptionFactory<L,D,OPTION> instance(String localeCode) {return new TxtOptionFactory<>(localeCode);}
 	public TxtOptionFactory(String localeCode)

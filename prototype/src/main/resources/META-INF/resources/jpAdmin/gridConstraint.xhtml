@@ -15,7 +15,7 @@
 <composite:implementation>
 <jp:grid id="grid">
 	<j:row id="rowScope">
-		<j:slot id="sScopes" width="3">
+		<j:slot id="sScopes" width="5">
 			<h:form id="fCategories">
 				<p:dataTable styleClass="jeesl-datatable"
 						var="s" value="#{cc.attrs.bean.scopes}" draggableRows="true"
@@ -60,11 +60,11 @@
 						<p:inputText value="#{cc.attrs.bean.scope.code}" autocomplete="off"/>
 						
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.scope}" keys="#{cc.attrs.bean.localeCodes}" withDescription="true" />
+					<j:tabTranslationEditor value="#{cc.attrs.bean.scope}" withDescription="true" />
 				</p:panel>
 			</h:form>
 			<h:form id="fConstraints" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.scope.id gt 0)}">
-				<p:dataTable stlyeClass="jeesl-datatable"
+				<p:dataTable styleClass="jeesl-datatable"
 						var="c" value="#{cc.attrs.bean.constraints}" draggableRows="true"
 						selection="#{cc.attrs.bean.constraint}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
@@ -86,7 +86,7 @@
 		       	</p:dataTable>
 			</h:form>
 		</j:slot>
-		<j:slot id="sConstraint" width="5">
+		<j:slot id="sConstraint" width="3">
 			<h:form id="fConstraint" rendered="#{not empty cc.attrs.bean.constraint}">
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SystemConstraint"/></f:facet>
@@ -110,7 +110,7 @@
 						<p:inputText value="#{cc.attrs.bean.constraint.code}" autocomplete="off"/>
 						
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.constraint}" keys="#{cc.attrs.bean.localeCodes}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.constraint}" withDescription="true"/>
 				</p:panel>
 			</h:form>
 		</j:slot>

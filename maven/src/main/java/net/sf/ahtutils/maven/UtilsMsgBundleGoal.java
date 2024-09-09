@@ -14,7 +14,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.txt.system.locale.TranslationFactory;
 import org.jeesl.maven.goal.JeeslMsgGoal;
 
-@Mojo(name="msgBundle",defaultPhase=LifecyclePhase.INITIALIZE)
+//@Mojo(name="msgBundle",defaultPhase=LifecyclePhase.INITIALIZE)
 public class UtilsMsgBundleGoal extends AbstractMojo
 {
 	@Parameter(defaultValue="${project.groupId}")

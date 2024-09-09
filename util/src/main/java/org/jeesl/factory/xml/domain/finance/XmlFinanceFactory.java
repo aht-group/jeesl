@@ -61,7 +61,7 @@ public class XmlFinanceFactory <L extends JeeslLang, C extends UtilsCurrency<L>>
 		}
 		return create(code.toString(),value);
 	}
-	public static <C extends EjbWithCode> Finance build(C code, double value){return create(code.getCode(),value);}
+	public static <C extends EjbWithCode> Finance build(C code, double value) {return create(code.getCode(),value);}
 	public static <E extends Enum<E>> Finance build(E code, double value){return create(code.toString(),value);}
 	
 	public static <A extends EjbWithId, E extends Enum<E>> void addTh1Sum1(Figures xml, E code, JsonTuple1Handler<A> th,A a) 

@@ -30,6 +30,10 @@ public class LiteralPredicateBuilder
 			case EXACT: 	literal = cB.literal(cq.getLiteral());
 							predicates.add(cB.equal(expression,literal));
 							break;
+			case NULL: 		predicates.add(cB.isNull(expression));
+							break;
+			case NONNULL: 	predicates.add(cB.isNotNull(expression));
+							break;
 			default: logger.error("NYI Type: "+cq.toString());
 		}
 	}

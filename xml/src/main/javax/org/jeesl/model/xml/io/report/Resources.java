@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -24,7 +23,6 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/report}resource" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="dir" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -44,7 +42,6 @@ public class Resources
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Resource> resource;
-   
 
     /**
      * Gets the value of the resource property.
@@ -75,5 +72,4 @@ public class Resources
         return this.resource;
     }
 
-   
 }

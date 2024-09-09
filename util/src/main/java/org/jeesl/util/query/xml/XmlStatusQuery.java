@@ -7,6 +7,7 @@ import org.jeesl.model.xml.io.locale.status.Category;
 import org.jeesl.model.xml.io.locale.status.Condition;
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Goal;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Level;
@@ -73,6 +74,15 @@ public class XmlStatusQuery
 		xml.setDescriptions(descriptions());
 		xml.setParent(parent);
 		
+		return xml;
+	}
+	
+	public static Goal goalLabel()
+	{		
+		Goal xml = new Goal();
+		xml.setId(0l);
+		xml.setCode("");
+		xml.setLabel("");
 		return xml;
 	}
 	
