@@ -13,6 +13,9 @@ import java.util.EnumSet;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+
 import org.apache.maven.artifact.resolver.filter.AndArtifactFilter;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
 import org.apache.maven.execution.MavenSession;
@@ -28,6 +31,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.jx.io.JeeslIoMavenRest;
+import org.jeesl.controller.handler.web.rest.DelayedUrlConfig;
 import org.jeesl.factory.json.io.maven.JsonMavenGraphFactory;
 import org.jeesl.model.json.io.maven.JsonMavenGraph;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
@@ -135,10 +139,11 @@ public class JeeslDependencyGoal extends AbstractMojo
 					JsonUtil.write(graph,new File(path.toFile(),"graph.json"));
 				}
 				
-				ResteasyClient client = new ResteasyClientBuilder().build();
+				Client client = ClientBuilder.newBuilder().build();
 //				client.register(new BasicAuthentication(restUser,restPwd));
 //				client.register(new RestLogger());
-				ResteasyWebTarget target = client.target("https://www.jeesl.org/jeesl");
+				ResteasyWebTarget target = (ResteasyWebTarget)client.target("https://www.jeesl.org/jeesl");
+				
 //				ResteasyWebTarget target = client.target("http://localhost:8080/jeesl");
 				JeeslIoMavenRest rest = target.proxy(JeeslIoMavenRest.class);
 				JsonSsiUpdate message = rest.uploadDependencyGraph(graph);				

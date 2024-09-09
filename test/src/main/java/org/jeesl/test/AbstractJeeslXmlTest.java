@@ -2,7 +2,11 @@ package org.jeesl.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -18,38 +22,44 @@ public class AbstractJeeslXmlTest<T extends Object>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslXmlTest.class);
 
-	private boolean debug;
 	protected static File fXml;
 	
 	private File xmlFile;
 	
-	private Class<T> cXml;
+	private Class<T> cJaxb;
 	
-	public AbstractJeeslXmlTest(){this(null,null);}
-	public AbstractJeeslXmlTest(Class<T> cXml,String xmlDirSuffix){this(cXml,"data"+File.separator+"xml",xmlDirSuffix);}
-	public AbstractJeeslXmlTest(Class<T> cXml,String xmlDirPrefix, String xmlDirSuffix)
+	private AbstractJeeslXmlTest(Class<T> cXml, Path pPrefix, String xmlDirSuffix)
 	{
-		debug=true;
-		this.cXml=cXml;
-		if(cXml!=null)
+		this.cJaxb=cXml;
+		if(Objects.nonNull(cXml))
 		{
 			try
 			{
-				T t = cXml.newInstance();
-				xmlFile = new File(getXmlDir(xmlDirPrefix,xmlDirSuffix),t.getClass().getSimpleName()+".xml");
+				T t = cXml.getDeclaredConstructor().newInstance();
+				xmlFile = new File(getXmlDir(pPrefix,xmlDirSuffix),t.getClass().getSimpleName()+".xml");
 			}
 			catch (InstantiationException e) {e.printStackTrace();}
 			catch (IllegalAccessException e) {e.printStackTrace();}
+			catch (IllegalArgumentException e) {e.printStackTrace();}
+			catch (InvocationTargetException e) {e.printStackTrace();}
+			catch (NoSuchMethodException e) {e.printStackTrace();}
+			catch (SecurityException e) {e.printStackTrace();}
 		}
 	}
 	
-	private File getXmlDir(String prefix, String suffix)
+	private File getXmlDir(Path pPrefix, String suffix)
     {
         File f = new File(".");
         String s = FilenameUtils.normalizeNoEndSeparator(f.getAbsolutePath());
 
+        Path path = Paths.get(s, "src","test","resources");
+        path = path.resolve(pPrefix);
+        if(Objects.nonNull(suffix)) {path = path.resolve(Paths.get(suffix));}
+        
+        logger.info("Path: "+path.toString());
+        
         f = new File(s);
-        return new File(f,"src"+File.separator+"test"+File.separator+"resources"+File.separator+prefix+File.separator+suffix);
+        return new File(f,"src"+File.separator+"test"+File.separator+"resources"+File.separator+pPrefix.toString()+File.separator+suffix);
     }
 	
 	protected static XMLGregorianCalendar getDefaultXmlDate()
@@ -60,9 +70,8 @@ public class AbstractJeeslXmlTest<T extends Object>
 	
 	protected void saveReferenceXml()
 	{
-		Object xml = build(true);
+		Object xml = this.build(true);
 		logger.debug("Saving Reference XML");
-		if(debug){JaxbUtil.info(xml);}
     	JaxbUtil.save(xmlFile,xml,true);
 	}
 	
@@ -70,7 +79,7 @@ public class AbstractJeeslXmlTest<T extends Object>
     public void xml() throws FileNotFoundException
     {
     	T actual = build(true);
-    	T expected = JaxbUtil.loadJAXB(xmlFile.getAbsolutePath(), cXml);
+    	T expected = JaxbUtil.loadJAXB(xmlFile.getAbsolutePath(), cJaxb);
     	Assert.assertEquals("Actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
     }
     

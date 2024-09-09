@@ -2,7 +2,6 @@ package org.jeesl.client.app;
 
 import java.io.File;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.client.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +24,7 @@ public class JeeslTest
 	
 	public static void main(String args[])
 	{
-		Configuration config = JeeslBootstrap.init();
+		JeeslBootstrap.init();
 		System.out.println("Hello World");
 		
 		JeeslTest cli = new JeeslTest();
