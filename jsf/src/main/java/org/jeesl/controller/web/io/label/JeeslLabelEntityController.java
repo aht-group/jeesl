@@ -699,7 +699,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		
 		return url.toString();
 	}
-
 	
 	@SuppressWarnings("unchecked")
 	@Override

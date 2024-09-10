@@ -77,8 +77,8 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 	protected RETENTION retention;
 	protected EmailAddress mailFrom;
 	
-	protected final Mails mails;
-	
+	protected final Mails mails; public Mails getMails() {return mails;}
+
 	protected String subjectPreifx;
 	protected boolean developmentMode; public void activateDevelopmentMode() {developmentMode=true;}
 	
