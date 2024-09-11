@@ -33,7 +33,7 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 	private final List<T> selected; public List<T> getSelected() {return selected;}
 	private final List<T> selection; public List<T> getSelection() {return selection;}
 	
-	private T selectedSingle; public T getSelectedSingle() { return selectedSingle; } public void getSelectedSingle(T value) { selectedSingle = value; }
+	private T selectedSingle; public T getSelectedSingle() {return selectedSingle; } public void setSelectedSingle(T value) {selectedSingle = value;}
 	
 	private final List<T> memory;
 	private final Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
