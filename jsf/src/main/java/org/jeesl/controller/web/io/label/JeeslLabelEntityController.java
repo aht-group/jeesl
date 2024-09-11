@@ -10,14 +10,10 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.rs.jx.system.JeeslSystemRest;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.controller.web.util.AbstractLogMessage;
@@ -679,15 +675,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			return true;
 		}
 		return false;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String iFqcn)
-	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(JeeslLabelEntityController.urlForInterface(iFqcn));
-		JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
-		return rest;
 	}
 	
 	public static String urlForInterface(String iFqcn)

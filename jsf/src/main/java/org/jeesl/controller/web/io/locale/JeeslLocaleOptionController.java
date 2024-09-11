@@ -11,7 +11,6 @@ import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
-import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -25,6 +24,7 @@ import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.io.label.JeeslOptionTableCallback;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -81,6 +81,8 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
 	protected final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision;
 	
+	private final JeeslOptionTableCallback callback;
+	
 	private final UiEditBooleanHandler ehUpload; public UiEditBooleanHandler getEhUpload() {return ehUpload;}
 
 	protected final Map<EjbWithPosition,RE> mapEntity; public Map<EjbWithPosition, RE> getMapEntity() {return mapEntity;}
@@ -133,12 +135,14 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected boolean uiAllowRemove; public boolean isUiAllowRemove() {return uiAllowRemove;}
 	protected boolean uiAllowCode; public boolean isUiAllowCode() {return uiAllowCode;}
 	
-	public JeeslLocaleOptionController(IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
+	public JeeslLocaleOptionController(JeeslOptionTableCallback callback,
+									IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
 									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbRevision.getClassL(),fbRevision.getClassD());
 		
+		this.callback=callback;
 		this.fbStatus=fbStatus;
 		this.fbSvg=fbSvg;
 		this.fbRevision=fbRevision;
@@ -529,7 +533,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	
 	protected Container downloadData(String iFqcn) throws UtilsConfigurationException
 	{
-		return JeeslLabelEntityController.rest(iFqcn).exportStatus(iFqcn);
+		return callback.rest(iFqcn).exportStatus(iFqcn);
 	}
 	
 	@SuppressWarnings({"rawtypes" })
@@ -540,6 +544,6 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 		Class<?> c = Class.forName(entity.getCode());
 		Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
 
-		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());
+		Container xml = callback.rest(i.getName()).exportStatus(i.getName());
 	}
 }

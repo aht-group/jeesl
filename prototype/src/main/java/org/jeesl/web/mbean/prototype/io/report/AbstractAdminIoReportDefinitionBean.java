@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
@@ -75,7 +72,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
-public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public abstract class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 						CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 						REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 						IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
@@ -616,6 +613,8 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		}
 	}
 	
+	protected abstract JeeslIoReportRestExport rest(String restUrl);
+	
 	public  void download() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException, JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException, UtilsProcessingException
 	{
 		logger.info("Downloading Report from REST: "+restUrl);
@@ -630,10 +629,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		else
 		{
 			logger.info("Using Direct Connection (JBoss EAP7)");
-			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget restTarget = client.target(restUrl);
-			JeeslIoReportRestExport rest = restTarget.proxy(JeeslIoReportRestExport.class);
-			xml = rest.exportSystemIoReport(report.getCode());
+			xml = rest(restUrl).exportSystemIoReport(report.getCode());
 		}
 
 		JaxbUtil.info(xml);

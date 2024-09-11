@@ -165,12 +165,22 @@
 		   <scope>provided</scope>
 		</dependency>
 		 	
+		<!--
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
 			<version>3.0.1.Final</version>
 			<scope>provided</scope>
+			<exclusions>
+			   	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+		   </exclusions>
 		</dependency>
+		-->
+		
+		<!--
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
@@ -193,6 +203,7 @@
 			<version>3.0.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
+		-->
 		
 		<!--2022-09-17 tk Preparing removal 
 		<dependency>

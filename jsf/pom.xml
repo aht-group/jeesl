@@ -226,6 +226,7 @@
 		</dependency> 
 
 
+		<!--
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
@@ -238,8 +239,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-		<!--
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>jaxrs-api</artifactId>
