@@ -23,5 +23,5 @@ public interface JeeslJobStatus <L extends JeeslLang, D extends JeeslDescription
 					JeeslStatus<L,D,S>,JeeslStatusFixedCode
 {
 	public enum Att {code}
-	public enum Code{queue,deferred,constraint,timeout,working,completed,failed,obsolete};
+	public enum Code{queue,deferred,constraint,timeout,working,completed,failed,obsolete,archive};
 }

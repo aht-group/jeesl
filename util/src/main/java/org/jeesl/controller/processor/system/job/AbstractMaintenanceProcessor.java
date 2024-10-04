@@ -95,7 +95,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 		{
 			list.clear(); list.addAll(f.find());
 			queue.addAll(list);
-			logger.info("Added "+list.size()+" elements to the queue, loop: "+i.incrementAndGet());
+			logger.info("Added "+list.size()+" elements to the queue, loop: "+i.incrementAndGet()+" in "+task.getCode()+" - "+tfMaintenance.debug(task));
 			while(queue.peek()!=null) {try {Thread.sleep(100);} catch (InterruptedException e) {e.printStackTrace();}}
 		}
 		for(SystemMaintenanceRunnable<MNT> w : threads) {w.shutdown();}

@@ -24,14 +24,16 @@ public class SqlDbPgStatFactory
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT ").append(StringUtils.join(fileds,","));
 		sb.append(" FROM pg_stat_activity");
+
 		sb.append(" WHERE datname='").append(userName).append("'");
 		sb.append("   AND query NOT ILIKE '%pg_stat_activity%'");
 		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_roles%'");
 		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_type%'");
 		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_opclass%'");
-		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_trigger%'");
-		
+		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_trigger%'");		
 		sb.append("   AND query != '<IDLE>'");
+		
+		sb.append(" ORDER BY state,query_start");
 		
 		return sb.toString();
 	}
