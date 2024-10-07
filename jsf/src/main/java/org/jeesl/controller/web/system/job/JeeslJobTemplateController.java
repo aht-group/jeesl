@@ -46,7 +46,7 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 	
 	private final JobFactoryBuilder<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,?,PRIORITY,?,?,?,?,CACHE,?,?,?> fbJob;
 	
-	private SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
+	private final SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	private SbMultiHandler<TYPE> sbhType; public SbMultiHandler<TYPE> getSbhType() {return sbhType;}
 	private final SbMultiHandler<PRIORITY> sbhPriority; public SbMultiHandler<PRIORITY> getSbhPriority() {return sbhPriority;}
 	
@@ -65,6 +65,7 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 		super(fbJob.getClassL(),fbJob.getClassD());
 		this.fbJob=fbJob;
 		
+		sbhCategory = SbMultiHandler.instance(fbJob.getClassCategory(), this);
 		sbhType = new SbMultiHandler<>(fbJob.getClassType(),this);
 		sbhPriority = new SbMultiHandler<>(fbJob.getClassPriority(),this);
 		
@@ -80,9 +81,12 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 		
 		efTemplate = fbJob.template();
 		
+		sbhCategory.setList(fJob.allOrderedPositionVisible(fbJob.getClassCategory()));
 		sbhType.setList(fJob.allOrderedPositionVisible(fbJob.getClassType()));
 		sbhPriority.setList(fJob.allOrderedPositionVisible(fbJob.getClassPriority()));
 		expirations = fJob.allOrderedPosition(fbJob.getClassExpire());
+		
+		sbhCategory.selectAll();
 		
 		if(debugOnInfo)
 		{
