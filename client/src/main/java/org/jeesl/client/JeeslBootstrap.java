@@ -19,11 +19,9 @@ public class JeeslBootstrap
 	
 	public final static String xmlConfig = "jeesl/client/config/jeesl.xml";
 	
-	public static Configuration init()
-	{
-		return init(xmlConfig);
-	}
-	
+	public static org.exlp.interfaces.system.property.Configuration wrap() {return ConfigLoader.wrap(JeeslBootstrap.init());}
+	public static Configuration init() {return JeeslBootstrap.init(xmlConfig);}
+
 	public static Configuration init(String configFile)
 	{
 		LoggerBootstrap.instance().path("jeesl/system/io/log").init();

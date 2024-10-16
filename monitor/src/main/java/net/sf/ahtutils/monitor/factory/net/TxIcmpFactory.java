@@ -65,7 +65,7 @@ public class TxIcmpFactory extends AbstractTransmissionFactory
 		DataSet ds = new DataSet();
 		while(mdtEnd.isBefore(last) || mdtEnd.isEqual(last))
 		{
-			ds.getData().add(buildData(fUm.inInterval(IcmpResult.class, mdtStart.toDate(), mdtEnd.toDate())));
+			ds.getData().add(this.buildData(fUm.inInterval(IcmpResult.class, mdtStart.toDate(), mdtEnd.toDate())));
 			mdtStart.add(dataRange);
 			mdtEnd.add(dataRange);
 		}

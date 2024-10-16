@@ -117,11 +117,12 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!--2022-09-04 tk Preparing removal -->
+		<!--	2022-09-04 tk Preparing removal
+				2024-09-11 tk Removed
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		<!-- Dependency Graph -->
 		<dependency>

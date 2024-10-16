@@ -84,6 +84,13 @@ public class SqlFactory
 		sb.append(" )");
 		return this;
 	}
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory whereNot(E attribute, T where)
+	{
+		sb.append(" WHERE (");
+		whereAndOrAttribute(sb,alias,true,attribute,where,newLine);
+		sb.append(" )");
+		return this;
+	}
 	public <E extends Enum<E>, T extends EjbWithId> SqlFactory whereIn(E attribute, T... where)
 	{
 		sb.append(" WHERE ");
