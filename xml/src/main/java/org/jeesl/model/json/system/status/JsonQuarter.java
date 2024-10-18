@@ -3,18 +3,14 @@ package org.jeesl.model.json.system.status;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonRootName(value="gender")
-public class JsonGender implements Serializable
+@JsonRootName(value="status")
+public class JsonQuarter implements Serializable
 {
 	public static final long serialVersionUID=1;
 
-	public JsonGender() {}
-	
 	@JsonProperty("id")
 	private Long id;
 	public Long getId() {return id;}

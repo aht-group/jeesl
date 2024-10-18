@@ -3,6 +3,7 @@ package org.jeesl.util.query.json;
 import org.jeesl.model.json.system.status.JsonCategory;
 import org.jeesl.model.json.system.status.JsonInterval;
 import org.jeesl.model.json.system.status.JsonMode;
+import org.jeesl.model.json.system.status.JsonQuarter;
 import org.jeesl.model.json.system.status.JsonSector;
 import org.jeesl.model.json.system.status.JsonStatus;
 import org.jeesl.model.json.system.status.JsonType;
@@ -110,5 +111,13 @@ public class JsonStatusQueryProvider
 		JsonWorkspace json = new JsonWorkspace();
 		json.setCode("");
 		return json;
+	}
+	
+	public static JsonQuarter quarterCodeLabel()
+	{				
+		JsonQuarter xml = new JsonQuarter();
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
 	}
 }
