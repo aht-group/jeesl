@@ -117,6 +117,20 @@ public class JeeslFacadeBean implements JeeslFacade
 		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
 		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
 	}
+	
+	protected boolean abort(JeeslPaginationQuery query, Predicate[] predicates)
+	{
+		boolean noMax = Objects.isNull(query.getMaxResults()) || query.getMaxResults()==0;
+		boolean noPredicates = Objects.isNull(predicates) || predicates.length==0;
+		boolean abort = noMax && noPredicates;
+		logger.info("Abort Conditions: abort:"+abort+" (noMax:"+noMax+" noPredicates:"+noPredicates+")");
+		if(abort)
+		{
+			logger.warn("Aborting query because to risky to fetch a huge number of items");
+			return true;
+		}
+		else {return false;}
+	}
 
 	//Persist
 	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected(o);}

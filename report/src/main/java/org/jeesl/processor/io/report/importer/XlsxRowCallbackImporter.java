@@ -59,7 +59,7 @@ public class XlsxRowCallbackImporter
 	}
 	public void restrictArea(int rowStart, int columnStart, int columnEnd)
 	{
-		indexRowStart=rowStart;
+		indexRowStart = rowStart;
 		indexColumnStart = columnStart;
 		indexColumnEnd = columnEnd;
 		
@@ -105,8 +105,7 @@ public class XlsxRowCallbackImporter
 			
 			if(rowIndex==1)
 			{
-				if(Objects.isNull(mapper)) {throw new UtilsConfigurationException("No Mapper");}
-				mapper.buildRangeColumnIndex(r,0,indexColumnEnd);
+				if(Objects.nonNull(mapper)) {mapper.buildRangeColumnIndex(r,0,indexColumnEnd);}
 			}
 			if(rowIndex>=indexRowStart)
 			{
