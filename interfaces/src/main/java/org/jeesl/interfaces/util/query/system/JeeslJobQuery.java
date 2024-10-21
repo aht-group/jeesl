@@ -10,7 +10,6 @@ public interface JeeslJobQuery <TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 {
 	public List<TEMPLATE> getSystemJobTemplates();
 	public List<STATUS> getSystemJobStatus();
-//	JeeslJobQuery<TEMPLATE> add(TEMPLATE template);
 	
 	Boolean getTupleLoad();
 }

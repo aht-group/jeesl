@@ -6,6 +6,6 @@ public interface EjbWithMigrationJob4 <STATUS extends JeeslJobStatus<?,?,?,?>>
 {
 	public enum Attributes{job4}
 	
-	STATUS getJob3();
-	void setJob3(STATUS job1);
+	STATUS getJob4();
+	void setJob4(STATUS job1);
 }
