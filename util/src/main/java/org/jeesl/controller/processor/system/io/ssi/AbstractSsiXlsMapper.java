@@ -118,4 +118,11 @@ public class AbstractSsiXlsMapper
 		if(ObjectUtils.isEmpty(value)) {return null;}
 		else return value;
 	}
+	
+	public String toString(Row row, int index) throws UtilsConfigurationException
+	{
+		String value = row.getCell(index).getStringCellValue().trim();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value;
+	}
 }

@@ -84,6 +84,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	List<POINT> fPoints(WS workspace, List<TS> timeSeries, List<MP> mps, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
 	List<TX> fTransactions(List<USER> users, JeeslTsData.QueryInterval interval, Date from, Date to);
+	List<TX> fTsTransactions(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	
 	void deleteTsSeries(TS series) throws JeeslConstraintViolationException;
 	void deleteTransaction(TX transaction) throws JeeslConstraintViolationException;

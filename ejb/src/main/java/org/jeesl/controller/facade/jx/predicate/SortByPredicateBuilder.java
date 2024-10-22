@@ -1,6 +1,7 @@
 package org.jeesl.controller.facade.jx.predicate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class SortByPredicateBuilder
 	}
 	
 	public static void jtDate(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering sortBy, Expression<LocalDate> e)
+	{
+		if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(e));}
+		else if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(e));}
+	}
+	
+	public static void jtDateTime(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering sortBy, Expression<LocalDateTime> e)
 	{
 		if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(e));}
 		else if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(e));}

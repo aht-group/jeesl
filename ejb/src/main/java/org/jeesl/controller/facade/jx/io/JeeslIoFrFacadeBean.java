@@ -1,9 +1,11 @@
 package org.jeesl.controller.facade.jx.io;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
@@ -17,9 +19,11 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoFrFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.TimePredicateBuilder;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryAmazonS3;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryFileStorage;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
@@ -45,8 +49,11 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.util.query.io.JeeslIoFrQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -198,5 +205,50 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 
 		TypedQuery<META> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
+	}
+	
+	@Override public List<META> fIoFrMetas(JeeslIoFrQuery<STORAGE,CONTAINER> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<META> cQ = cB.createQuery(fbFile.getClassMeta());
+		Root<META> root = cQ.from(fbFile.getClassMeta());
+			
+		cQ.select(root);
+		cQ.where(cB.and(this.pMeta(cB, query, root)));
+		
+		TypedQuery<META> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
+	}
+	
+	
+	public Predicate[] pMeta(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<META> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		Path<CONTAINER> pContainer = null;
+		
+		if(ObjectUtils.isNotEmpty(query.getIoFrContainers()))
+		{
+			if(Objects.isNull(pContainer)) {pContainer = root.get(JeeslFileMeta.Attributes.container.toString());}
+			predicates.add(pContainer.in(query.getIoFrContainers()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getIoFrStorages()))
+		{
+			if(Objects.isNull(pContainer)) {pContainer = root.get(JeeslFileMeta.Attributes.container.toString());}
+			Path<STORAGE> pStorage = pContainer.get(JeeslFileContainer.Attributes.storage.toString());
+			predicates.add(pStorage.in(query.getIoFrStorages()));
+		}
+		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
+		{
+			if(cq.getPath().equals(CqOrdering.path(JeeslFileMeta.Attributes.record+"x")))
+			{
+				Expression<LocalDateTime> e = root.get(JeeslFileMeta.Attributes.record.toString());
+				TimePredicateBuilder.jtTime(cB, predicates,cq, e);
+			}
+			else {logger.warn("No Handling for "+cq.nyi(fbFile.getClassMeta()));}
+		}
+
+		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 }
