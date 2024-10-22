@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
@@ -206,7 +207,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		return tQ.getResultList();
 	}
 	
-	@Override public List<META> fIoFrMetas(JeeslIoFrQuery<CONTAINER> query)
+	@Override public List<META> fIoFrMetas(JeeslIoFrQuery<STORAGE,CONTAINER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<META> cQ = cB.createQuery(fbFile.getClassMeta());
@@ -215,20 +216,28 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		cQ.select(root);
 		cQ.where(cB.and(this.pMeta(cB, query, root)));
 		
-
 		TypedQuery<META> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
 	
 	
-	public Predicate[] pMeta(CriteriaBuilder cB, JeeslIoFrQuery<CONTAINER> query, Root<META> root)
+	public Predicate[] pMeta(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<META> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
+		Path<CONTAINER> pContainer = null;
+		
 		if(ObjectUtils.isNotEmpty(query.getIoFrContainers()))
 		{
-			Path<CONTAINER> pContainer = root.get(JeeslFileMeta.Attributes.container.toString());
+			if(Objects.isNull(pContainer)) {pContainer = root.get(JeeslFileMeta.Attributes.container.toString());}
 			predicates.add(pContainer.in(query.getIoFrContainers()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getIoFrStorages()))
+		{
+			if(Objects.isNull(pContainer)) {pContainer = root.get(JeeslFileMeta.Attributes.container.toString());}
+			Path<STORAGE> pStorage = pContainer.get(JeeslFileContainer.Attributes.storage.toString());
+			predicates.add(pStorage.in(query.getIoFrStorages()));
 		}
 		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
 		{
