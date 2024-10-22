@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -276,7 +277,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		xmlFile.setName(name);
 		xmlFile.setSize(Integer.valueOf(bytes.length).longValue());
 		xmlFile.setData(XmlDataFactory.build(bytes));
-		meta = efMeta.build(container,name,bytes.length,new Date());
+		meta = efMeta.build(container,name,bytes.length,LocalDateTime.now());
 		meta.setCategory(category);
 		if(mode.equals(Mode.deferredSave)) {EjbIdFactory.setNextNegativeId(meta,metas);}
 		fth.updateType(meta);
@@ -288,7 +289,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		xmlFile.setName(event.getFile().getFileName());
 		xmlFile.setSize(event.getFile().getSize());
 		xmlFile.setData(XmlDataFactory.build(event.getFile().getContent()));
-		meta = efMeta.build(container,event.getFile().getFileName(),event.getFile().getSize(),new Date());
+		meta = efMeta.build(container,event.getFile().getFileName(),event.getFile().getSize(),LocalDateTime.now());
 		meta.setType(fFr.fByCode(fbFile.getClassType(), JeeslFileType.Code.unknown));
 		meta.setDescription(efDescription.buildEmpty(locales));
 		
@@ -358,7 +359,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	}
 	@Override public void saveThreadsafe(CONTAINER c, String name, byte[] bytes, String category) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		META m = efMeta.build(c,name,bytes.length,new Date());
+		META m = efMeta.build(c,name,bytes.length,LocalDateTime.now());
 		m.setCategory(category);
 		fth.updateType(m);
 		m = fFr.saveToFileRepository(m,bytes);

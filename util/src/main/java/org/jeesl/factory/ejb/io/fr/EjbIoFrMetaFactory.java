@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.io.fr;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileType;
@@ -28,12 +30,12 @@ public class EjbIoFrMetaFactory<CONTAINER extends JeeslFileContainer<?,META>,
         this.cMeta = cMeta;
 	}
 
-	public META build(CONTAINER container, String name, long size, Date record)
+	public META build(CONTAINER container, String name, long size, LocalDateTime record)
 	{
 		return build(container, name, size, record, null);
 	}
 
-	public META build(CONTAINER container, String fileName, long size, Date record, List<META> list)
+	public META build(CONTAINER container, String fileName, long size, LocalDateTime record, List<META> list)
 	{
 		META ejb = null;
 		try
@@ -52,13 +54,13 @@ public class EjbIoFrMetaFactory<CONTAINER extends JeeslFileContainer<?,META>,
 		return ejb;
 	}
 
-	public Date toLastDate(List<META> metas)
+	public LocalDateTime toLastDate(List<META> metas)
 	{
 		if(metas==null || metas.isEmpty()) {return null;}
-		Date last = new Date(0);
+		LocalDateTime last = DateUtil.toLocalDateTime(new Date(0));
 		for(META meta : metas)
 		{
-			if(meta.getRecord().after(last)) {last = meta.getRecord();}
+			if(meta.getRecord().isAfter(last)) {last = meta.getRecord();}
 		}
 		return last;
 	}
