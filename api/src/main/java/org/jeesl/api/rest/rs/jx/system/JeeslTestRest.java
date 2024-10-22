@@ -14,7 +14,7 @@ import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.jeesl.model.json.util.JsonTime;
 import org.jeesl.model.xml.system.test.Test;
 
-@Path("/rest/test")
+@Path("/test")
 public interface JeeslTestRest extends JeeslTestRestInterface
 {
 	@GET @Path("/date/time/public") @Produces(MediaType.TEXT_PLAIN) 

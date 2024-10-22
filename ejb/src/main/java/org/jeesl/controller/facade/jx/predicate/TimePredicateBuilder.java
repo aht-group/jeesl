@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.jx.predicate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,19 @@ public class TimePredicateBuilder
 			case greaterThan: predicates.add(cB.greaterThan(eDate,DateUtil.toDate(cq.getTime()))); break;
 			
 			case leDb: predicates.add(cB.lessThanOrEqualTo(eDate,DateUtil.toDate(cq.getTime()))); break;
+			default: logger.warn("NYI "+cq.toString()); break;
+		}
+	}
+	
+	public static void jtTime(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqTime cq, Expression<LocalDateTime> e)
+	{
+		switch(cq.getType())
+		{
+			case equalTo: predicates.add(cB.equal(e,cq.getTime())); break;
+			case lessThan: predicates.add(cB.lessThan(e,cq.getTime())); break;
+			case greaterThan: predicates.add(cB.greaterThan(e,cq.getTime())); break;
+			
+			case leDb: predicates.add(cB.lessThanOrEqualTo(e,cq.getTime())); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
 	}
