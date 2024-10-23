@@ -32,6 +32,11 @@ public class JsonSsiStatistic implements Serializable
 	public Integer getObsolete() {return obsolete;}
 	public void setObsolete(Integer obsolete) {this.obsolete = obsolete;}
 	
+	@JsonProperty("partial")
+	private Integer partial;
+	public Integer getPartial() {return partial;}
+	public void setPartial(Integer partial) {this.partial = partial;}
+
 	@JsonProperty("error")
 	private Integer error;
 	public Integer getError() {return error;}

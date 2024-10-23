@@ -23,6 +23,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoFrFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.TimePredicateBuilder;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryAmazonS3;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryFileStorage;
@@ -50,9 +51,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.util.query.io.JeeslIoFrQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,6 +188,20 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		Json2TuplesFactory<STORAGE,TYPE> jtf = Json2TuplesFactory.instance(fbFile.getClassStorage(),fbFile.getClassType()).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
+	
+	@Override public List<CONTAINER> fIoFrContainer(JeeslIoFrQuery<STORAGE,CONTAINER> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<CONTAINER> cQ = cB.createQuery(fbFile.getClassContainer());
+		Root<CONTAINER> root = cQ.from(fbFile.getClassContainer());
+			
+		cQ.select(root);
+		cQ.where(cB.and(this.pContainer(cB, query, root)));
+		
+		TypedQuery<CONTAINER> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
+	}
 
 	@Override public <OWNER extends JeeslWithFileRepositoryContainer<CONTAINER>> List<META> fIoFrMetas(Class<OWNER> c, List<OWNER> owners)
 	{
@@ -221,6 +238,34 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		return tQ.getResultList();
 	}
 	
+	public Predicate[] pContainer(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<CONTAINER> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getIoFrContainers()))
+		{
+			predicates.add(root.in(query.getIoFrContainers()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getIoFrStorages()))
+		{
+			Path<STORAGE> pStorage = root.get(JeeslFileContainer.Attributes.storage.toString());
+			predicates.add(pStorage.in(query.getIoFrStorages()));
+		}
+		
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cq.getPath().equals(CqLiteral.path(JeeslFileContainer.Attributes.metas,JeeslFileMeta.Attributes.category)))
+			{
+				ListJoin<CONTAINER,META> jMeta = root.joinList(JeeslFileContainer.Attributes.metas.toString());
+				Expression<String> e = jMeta.get(JeeslFileMeta.Attributes.category.toString());
+				LiteralPredicateBuilder.add(cB, predicates, cq, e);
+			}
+			else {logger.warn("No Handling for "+cq.nyi(fbFile.getClassContainer()));}
+		}
+		
+
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
 	
 	public Predicate[] pMeta(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<META> root)
 	{
@@ -238,6 +283,16 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 			if(Objects.isNull(pContainer)) {pContainer = root.get(JeeslFileMeta.Attributes.container.toString());}
 			Path<STORAGE> pStorage = pContainer.get(JeeslFileContainer.Attributes.storage.toString());
 			predicates.add(pStorage.in(query.getIoFrStorages()));
+		}
+		
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cq.getPath().equals(CqLiteral.path(JeeslFileMeta.Attributes.category)))
+			{
+				Expression<String> e = root.get(JeeslFileMeta.Attributes.category.toString());
+				LiteralPredicateBuilder.add(cB, predicates, cq, e);
+			}
+			else {logger.warn("No Handling for "+cq.nyi(fbFile.getClassContainer()));}
 		}
 		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
 		{
