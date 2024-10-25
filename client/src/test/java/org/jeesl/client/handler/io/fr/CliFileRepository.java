@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
@@ -125,7 +126,7 @@ public class CliFileRepository
 			while(s<100000000)
 			{
 				IoFileContainer container = efContainer.build(storage);
-				IoFileMeta meta = efMeta.build(container, "", 0, new Date());
+				IoFileMeta meta = efMeta.build(container, "", 0, LocalDateTime.now());
 				byte[] expecteds = new byte[s];
 				rnd.nextBytes(expecteds);
 				frFile.saveToFileRepository(meta, expecteds);
