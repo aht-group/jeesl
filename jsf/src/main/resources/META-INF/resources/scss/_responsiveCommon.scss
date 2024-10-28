@@ -186,6 +186,10 @@ $border: $border-width solid $border-colour;
 	border-radius: $border-radius-right;
 }
 
+.ui-corner-none {
+	border-radius: 0;
+}
+
 .ui-input-overlay {
 	@include overlay;
 }
@@ -227,8 +231,12 @@ $border: $border-width solid $border-colour;
 	    z-index: -1;
 	}
 	
-	&.ui-button-icon-only .ui-button-text {
-		display: none;
+	&.ui-button-icon-only {
+		width: auto;
+	
+		.ui-button-text {
+			display: none;
+		}
 	}
 	
 	&.ui-button-text-icon-left .ui-button-text {
@@ -771,15 +779,13 @@ $border: $border-width solid $border-colour;
 .ui-datepicker {
 	@include headlined-overlay(ui-datepicker);
 	
-	padding: $half-spacing;
+	padding: $half-spacing 0;
+	
+	@media (max-width: 768px) {
+		padding: $wide-spacing 0;
+	}
 	
 	.ui-datepicker-header {
-		margin: 0 #{-$half-spacing};
-		
-		@media (max-width: 768px) {
-			margin: 0;
-		}
-		
 		.ui-icon {
 			left: 0;
 		}
@@ -803,6 +809,10 @@ $border: $border-width solid $border-colour;
 		@media (max-width: 768px) {
 			margin: 0 $wide-spacing;
 			width: calc(100% - (2 * #{$wide-spacing}));
+		}
+		
+		> thead th {
+			font-size: 1.2em;
 		}
 		
 		> tbody {
@@ -1471,6 +1481,10 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui
 
 .ui-corner-right:before {
 	@extend .ui-corner-right;
+}
+
+.ui-corner-none:before {
+	@extend .ui-corner-none;
 }
 
 .ui-dialog-mask {

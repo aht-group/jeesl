@@ -254,6 +254,10 @@ body {
 		.ui-datatable-header {
 			@include jeesl-widget-header;
 			
+			.jeesl-overlay-container {
+				text-shadow: none;
+			}
+			
 //			border-width: 0 0 $border-width;
 			
 //			@media (max-width: 768px) {
@@ -327,6 +331,13 @@ body {
 		}
 	}
 	
+	.ui-button.ui-button-icon-only .ui-icon {
+		left: 0;
+		margin: 0;
+		position: unset;
+		top: 0;
+	}
+	
 	.ui-button.ui-button-text-only .ui-button-text {
 		padding: $slim-spacing 0;
 	}
@@ -368,15 +379,22 @@ body {
 		border-radius: $border-radius;
 		box-shadow: $overlay-shadow;
 		color: $body-foreground;
-		padding: $half-spacing;
+		padding: $half-spacing 0;
 		width: min-content;
+		
+		@media (max-width: 768px) {
+			padding: $wide-spacing 0;
+		}
 		
 		.ui-datepicker-header {
 			background: $status-bar-background-gradient;
 			border: none;
 			color: $white-100;
-			margin: 0 #{-$half-spacing};
 			padding: 0;
+			
+			@media (max-width: 768px) {
+				margin: 0;
+			}
 			
 			.ui-datepicker-prev, .ui-datepicker-next {
 				line-height: normal;
@@ -391,6 +409,10 @@ body {
 		.ui-datepicker-calendar {
 			margin: 0;
 			
+			@media (max-width: 768px) {
+				margin: 0 $wide-spacing;
+			}
+			
 			th {
 				padding: $half-spacing;
 				
@@ -404,16 +426,23 @@ body {
 			
 				td {
 					padding: 0;
+					
+					> .ui-state-default {
+						display: block;
+						height: auto;
+						width: 100%;
+						
+						@media (max-width: 768px) {
+							width: auto;
+						}
+					}
 									
 					> a {
 						border-radius: 0;
-						display: block;
-						height: auto;
 						line-height: $line-height-base;
 //						margin: 0 auto;
 						padding: 0;
 //						width: $line-height-base;
-						width: 100%;
 						
 						@media (max-width: 768px) {
 							line-height: calc($ls-element-height-mobile - $separator-thickness-mobile);
@@ -527,5 +556,31 @@ body {
    		.ql-container {
 			border: none !important;
 		}
+	}
+	
+	.jeesl-overlay-container .jeesl-datatable .ui-datatable-data {
+		background: $white-100;
+		
+		> tr > td {
+			border: none;
+		}
+		
+		@media (max-width: 768px) {
+			> tr.ui-state-hover {
+				background: transparent;
+				
+				&:after {
+					border-color: $dark-colour;
+				}
+			}
+		}
+	}
+	
+	.pf-action-dropdown .jeesl-overlay-container .jeesl-datatable .ui-datatable-data {
+		background: transparent;
+	}
+	
+	.ui-input-group .ui-corner-none {
+		border-radius: 0;
 	}
 }
