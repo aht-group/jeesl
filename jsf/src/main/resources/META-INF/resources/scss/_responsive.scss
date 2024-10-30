@@ -434,10 +434,11 @@ $enable-pointer-cursor-for-buttons: true;
 				pointer-events: all;
 			}
 					
-			.jeesl-overlay-container {
-				visibility: hidden;
+			.jeesl-search-overlay-container {
 				pointer-events: all;
+				top: 100%;
 				transition: none;
+				visibility: hidden;
 				z-index: 1000;
 				
 				@media (max-width: 768px) {
@@ -448,14 +449,14 @@ $enable-pointer-cursor-for-buttons: true;
 				&.jeesl-visible {
 					visibility: visible;
 					
-					.jeesl-overlay-wrapper .ui-selectonemenu-list {
+					.jeesl-search-overlay-wrapper .ui-selectonemenu-list {
 						&:before, &:after {
 						    display: list-item;
 						}
 					}
 				}
 				
-				.jeesl-overlay-wrapper .ui-selectonemenu-list {
+				.jeesl-search-overlay-wrapper .ui-selectonemenu-list {
 					overflow: hidden;
 					
 					@media (max-width: 768px) {
@@ -606,9 +607,17 @@ $enable-pointer-cursor-for-buttons: true;
 			background: $header-background-colour;
 		}
 		
+		&.jeesl-menu-bar-dropdown.jeesl-active {
+			background: $header-background-colour;
+		}
+		
 		img {
 			vertical-align: middle;
 		}
+	}
+	
+	.pf-action-dropdown .pf-action-icon.jeesl-menu-bar-dropdown.jeesl-active {
+		background: $header-background-colour;
 	}
 	
 	.jeesl-icon-select {
@@ -726,6 +735,8 @@ $enable-pointer-cursor-for-buttons: true;
 	.ui-fileupload-buttonbar {
 		@include jeesl-titlebar;
 		
+		justify-content: flex-end;
+		
 		.ui-button {
 			align-items: stretch;
 			border: none;
@@ -739,9 +750,9 @@ $enable-pointer-cursor-for-buttons: true;
 			&:not(.ui-state-disabled) {
 				background: none;
 				
-				.ui-button-text {
-					color: $dark-colour;
-				}
+//				.ui-button-text {
+//					color: $dark-colour;
+//				}
 			}
 			
 			&.ui-state-disabled .ui-icon {
@@ -814,14 +825,15 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			.ui-button-text {
-				align-items: center;
-				display: flex;
-				padding: 0 $half-spacing;
-			
-				@media (max-width: 768px) {
-					font-size: 1.4em;
-					letter-spacing: -.5px;
-				}
+				display: none;
+//				align-items: center;
+//				display: flex;
+//				padding: 0 $half-spacing;
+//			
+//				@media (max-width: 768px) {
+//					font-size: 1.4em;
+//					letter-spacing: -.5px;
+//				}
 			}
 		}
 	}
@@ -1108,7 +1120,7 @@ $enable-pointer-cursor-for-buttons: true;
 						padding: 0;
 						
 						@media (max-width: 768px) {
-							margin: 0 #{-$regular-spacing};
+							margin: 0 -#{$regular-spacing};
 						}
 						
 						.ui-tabs-nav {
@@ -1530,15 +1542,19 @@ $enable-pointer-cursor-for-buttons: true;
 				border-radius: $border-radius-bottom;
 			}
 			
+			.jeesl-ck-editor {
+				border: none;
+			}
+			
 			.jeesl-ck-editor:not(:first-child), .jeesl-editor-list:not(:first-child) .jeesl-ck-editor, .jeesl-input-grid .jeesl-ck-editor {
 				.cke .cke_inner .cke_top .cke_toolbar {
 					.cke_combo, .cke_toolgroup {
 						border-top: $border;
 					}
 					
-					.cke_toolgroup {
+					.cke_combo + .cke_toolgroup {
 						align-items: flex-start;
-						margin-bottom: #{-$border-width};
+						margin-bottom: -#{$border-width};
 					}
 				}
 			}
@@ -2052,7 +2068,7 @@ $enable-pointer-cursor-for-buttons: true;
 			background: $border-colour;
 			border: none;
 			height: $separator-thickness;
-			margin: $half-spacing #{-$regular-spacing};
+			margin: $half-spacing -#{$regular-spacing};
 			
 			@media (max-width: 768px) {
 				height: $separator-thickness-mobile;
@@ -2657,12 +2673,10 @@ body, .ui-widget {
 				flex-grow: 1;
 			}
 			
-			&.jeesl-status-bar-left .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:first-child) .jeesl-menu-bar-button,
-			&.jeesl-status-bar-right .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button {
-				.jeesl-menu-bar-button-icon, .jeesl-menu-bar-button-label, .jeesl-menu-bar-button-info, .jeesl-menu-bar-button-summary {
-					&:first-child {
-						border-left: 1px solid $bright-colour;
-					}
+			&.jeesl-status-bar-left .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:first-child),
+			&.jeesl-status-bar-right .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:last-child) {
+				&:before {
+					@include jeesl-sb-separator;
 				}
 			}
 			&.jeesl-status-bar-right  .jeesl-status-bar-group-list {
@@ -2682,6 +2696,7 @@ body, .ui-widget {
 		}
 		
 		.jeesl-menu-bar-item {
+			display: flex;
 			height: calc(($sb-element-height - 2 * $sb-vertical-padding) * var(--icon-height-multiplier) + 2 * $sb-vertical-padding);
 			white-space: nowrap;
 			
@@ -2713,6 +2728,12 @@ body, .ui-widget {
 					left: 0;
 					right: auto;
 					text-align: left;
+				}
+			}
+			
+			&.jeesl-left:not(:first-child), &.jeesl-right:not(:last-child) {
+				&:before {
+					@include jeesl-sb-separator;
 				}
 			}
 
@@ -3019,7 +3040,7 @@ body, .ui-widget {
 					vertical-align: top;
 				}
 				
-				+ .jeesl-overlay-container {
+				+ .jeesl-search-overlay-container {
 					margin: -$slim-spacing $half-spacing 0;
 					position: absolute;
 					min-width: calc(100% - (2 * #{$half-spacing}));
@@ -3100,7 +3121,7 @@ body, .ui-widget {
 				}
 			}
 			
-			.jeesl-overlay-container {
+			.jeesl-search-overlay-container {
 				background: $medium-colour;
 				border: none;
 				border-radius: 0;
@@ -3108,7 +3129,7 @@ body, .ui-widget {
 				margin: 0 4px;
 				min-width: calc(100% - 8px);
 				
-				.jeesl-overlay-wrapper {
+				.jeesl-search-overlay-wrapper {
 					.ui-selectonemenu-list {
 						@media (max-width: 768px) {
 							overflow: hidden;
@@ -3377,7 +3398,8 @@ body, .ui-widget {
 			}
 			
 			.jeesl-menu-bar-radio-item-list, .jeesl-menu-bar-radio-item-list:hover {
-			    display: inline-block;
+//			    display: inline-block;
+				display: flex;
 			    height: 100%;
 			    opacity: 1;
 				padding: 0;
@@ -3387,11 +3409,12 @@ body, .ui-widget {
 				.jeesl-menu-bar-item {
 					display: inline-block;
 					
-					&:last-child:after {
-						display: none;
-					}
+//					&:last-child:after {
+//						display: none;
+//					}
 					
-					&:not(:first-child) .ui-commandlink .jeesl-menu-bar-button-label {
+//					&:not(:first-child) .ui-commandlink .jeesl-menu-bar-button-label {
+					&:not(:first-child) {
 						border-left: $border-width solid $darker-colour;
 					}
 				}
@@ -3403,7 +3426,7 @@ body, .ui-widget {
 .jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
 	margin-bottom: $regular-spacing;
 	
-	.ui-panel-content {
+	.ui-panel-content, .ui-datatable-tablewrapper {
 		overflow: hidden;
 	}
 }
@@ -3509,7 +3532,6 @@ body, .ui-widget {
 	
 	border: $border;
 	border-radius: $border-radius;
-	overflow: hidden;
 	
 	&.jeesl-datatable-collapsible {
 		&.jeesl-active .ui-datatable-header {
@@ -3587,7 +3609,7 @@ body, .ui-widget {
 				vertical-align: middle;
 				
 				.ui-column-title {
-					-ms-writing-mode: tb-rl;-webkit-writing-mode: vertical-lr;writing-mode: vertical-lr;
+					-ms-writing-mode: tb-rl;-webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;
 					vertical-align: middle;
 					padding: 6px 0;
 					transform: rotate(180deg);
@@ -3740,6 +3762,10 @@ body, .ui-widget {
 			color: $white-100;
 			font-weight: 500;
 			text-shadow: none;
+			
+			.aht-icon {
+				filter: grayscale(1) brightness(3);
+			}
 		}
 	}
 	
@@ -3863,6 +3889,110 @@ body, .ui-widget {
 	}
 }
 
+.jeesl-overlay-container {
+	background: $white-100;
+	border: none;
+	box-shadow: $overlay-shadow;
+	padding: $half-spacing 0;
+	
+	@media (max-width: 768px) {
+		padding: $wide-spacing 0;
+	}
+	
+	.ui-overlaypanel-content {
+		padding: 0;
+		
+		.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
+			border: 0;
+			border-radius: 0;
+			margin: 0;
+		}
+		
+		.jeesl-datatable table {
+			border-bottom: $border;
+			
+			@media (max-width: 768px) {
+				border-bottom: none;
+				
+				&:before {
+					border-bottom: $wide-spacing solid $soft-grey;
+					border-radius: 0;
+					content: 0;
+					left: 0;
+					position: absolute;
+					top: 0;
+					width: 100%;
+				}
+			}
+			
+			thead tr th {
+				background-image: $status-bar-background-gradient;
+				background-repeat: repeat;
+				background-size: 100%;
+				border: none;
+//				border-bottom: 0;
+//				border-color: $white-100;
+				color: $white-100;
+				font-size: 1.2em;
+				height: $ls-element-height;
+				margin: 0;
+				padding: 0;
+				text-shadow: none;
+				
+				&:not(:last-child) {
+					border: $border-width solid transparent;
+				}
+			
+				@media (max-width: 768px) {
+					background-size: 100% $ls-element-height-mobile;
+					height: $ls-element-height-mobile;
+				}
+				
+				.ui-column-title {
+					padding: 0 $regular-spacing;
+					text-align: center;
+					text-wrap: nowrap;
+				}
+			}
+			
+			tbody tr {
+				position: relative;
+				
+				&:after {
+					@media (max-width: 768px) {
+						border-bottom: $separator-thickness-mobile solid $soft-grey;
+						bottom: 0;
+					    content: '';
+					    display: block;
+					    left: $wide-spacing;
+					    position: absolute;
+					    width: calc(100% - (2 * #{$wide-spacing}));
+					}
+				}
+				
+				td {
+					height: $ls-element-height;
+					text-wrap: nowrap;
+					
+					@media (max-width: 768px) {
+						font-size: 1.1em;
+						font-weight: 700;
+						height: $ls-element-height-mobile;
+						
+						&:first-child {
+							padding-left: $wide-spacing;
+						}
+						
+						&:last-child {
+							padding-right: $wide-spacing;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 .ui-selectonemenu-panel .ui-selectonemenu-table {
 	border: 0;
 	width: auto;
@@ -3884,7 +4014,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-content-container, .jeesl-overlay-container {
+.jeesl-content-container, .jeesl-search-overlay-container {
 	line-height: 1.25em;
 	
 	@for $i from 1 to 13 {
@@ -3954,6 +4084,10 @@ body, .ui-widget {
 				flex-flow: row-reverse wrap-reverse;
 			}
 			
+			.jeesl-row {
+				align-self: flex-start;
+			}
+			
 			.jeesl-grid {
 				@media (max-width: 768px) {
 					margin-top: $regular-spacing;
@@ -4012,7 +4146,7 @@ body, .ui-widget {
 			@include jeesl-panel;
 			
 			.jeesl-action-tabview {
-				margin: $half-spacing #{-$regular-spacing};
+				margin: $half-spacing -#{$regular-spacing};
 				
 				.jeesl-tabs {
 					margin: 0;
@@ -4130,49 +4264,48 @@ body, .ui-widget {
 		}
 	}
 	
-	&.jeesl-table-dialog {
-		.ui-dialog-titlebar {
+	&.jeesl-table-dialog .ui-dialog-content {
+		padding: 0;
+		
+		.jeesl-datatable {
+			border: none;
 			margin: 0;
-			
-			@media (max-width: 768px) {
-				margin-bottom: 4px;
-			}
 		}
 		
-		.ui-widget-content {
-			padding: 0;
-			
-			table {
-				thead, tbody {
+		table {
+			thead, tbody {
+				border: 0;
+				
+				tr {
 					border: 0;
 					
-					tr {
-						border: 0;
+					th, td {
+						border: $border;
 						
-						th, td {
-							border: $border;
-							
-							&:first-child {
-								border-left: 0;
-							}
-							
-							&:last-child {
-								border-right: 0;
-							}
+						&:first-child {
+							border-left: 0;
+						}
+						
+						&:last-child {
+							border-right: 0;
 						}
 					}
 				}
-				
-				thead tr:first-child th {
-					@media (max-width: 768px) {
-						border-top: 0;
-					}
-				}
-				
-				tbody tr:last-child, tbody tr:last-child td {
-					border-bottom: 0;
+			}
+			
+			thead tr:first-child th {
+				@media (max-width: 768px) {
+					border-top: 0;
 				}
 			}
+			
+			tbody tr:last-child, tbody tr:last-child td {
+				border-bottom: 0;
+			}
+		}
+		
+		.jeesl-datatable {
+			border: none;
 		}
 	}
 
@@ -4620,6 +4753,53 @@ body, .ui-widget {
 	}
 }
 
+.pf-action-dropdown {
+	@include jeesl-sb-dropdown($body-foreground, $light-grey, $soft-grey, $light-grey);
+	
+	.jeesl-dropdown-list {
+		border-radius: $border-radius;
+		margin-top: -1px;
+		text-align: left;
+		top: 100% !important;
+		
+		@media (max-width: 768px) {
+			box-shadow: none;
+		}
+		
+		&.jeesl-active {
+			left: unset !important;
+			opacity: 1;
+			visibility: visible;
+		}
+		
+		* {
+			visibility: visible !important;
+		}
+		
+		.ui-overlaypanel-content {
+			border: $border;
+			padding: $half-spacing 0;
+			
+			@media (max-width: 768px) {
+				border: none;
+				padding: 0;
+			}
+		}
+		
+		.jeesl-datatable, .ui-datatable-data {
+			background: transparent;
+			
+			table {
+				width: 100%;
+			}
+		}
+			
+		.jeesl-dropdown-item {
+			display: table-row;
+		}
+	}
+}
+
 .jeesl-heatmap {
 	display: flex;
 	flex-direction: column;
@@ -4681,9 +4861,21 @@ body, .ui-widget {
 			width: 100%;
 			
 			.ui-fileupload-row {
+				@media (max-width: 768px) {
+					display: grid;
+					grid-template-columns: 1fr auto;
+				}
+				
 				> div {
 					vertical-align: middle;
 					white-space: nowrap;
+					
+					@media (max-width: 768px) {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						min-height: $element-height-mobile + 2 * $half-spacing;
+					}
 				}
 				
 				.ui-fileupload-preview {
@@ -4693,10 +4885,22 @@ body, .ui-widget {
 				.ui-fileupload-filename {
 					display: table-cell;
 					white-space: break-spaces;
+					
+					@media (max-width: 768px) {
+						display: flex;
+						
+						+ div {
+							text-align: right;
+						}
+					}
 				}
 				
 				.ui-fileupload-progress .ui-progressbar {
 					top: 0;
+					
+					@media (max-width: 768px) {
+						width: auto;
+					}
 					
 					.ui-progressbar-value {
 						background: $bright-colour;
@@ -4705,10 +4909,16 @@ body, .ui-widget {
 					}
 				}
 				
-				.ui-fileupload-cancel .ui-icon:before {
-					content: $icon-cancel;
-					font-family: "Font Awesome 5 Free" !important;
-					font-weight: 700;
+				.ui-fileupload-cancel {
+					@media (max-width: 768px) {
+						align-self: flex-end;
+					}
+					
+					.ui-icon:before {
+						content: $icon-cancel;
+						font-family: "Font Awesome 5 Free" !important;
+						font-weight: 700;
+					}
 				}
 			}
 		}
@@ -4789,7 +4999,7 @@ body, .ui-widget {
 	}
 	
 	.jeesl-input-container {
-		margin: $regular-spacing #{-$regular-spacing} #{-$half-spacing};
+		margin: $regular-spacing -#{$regular-spacing} -#{$half-spacing};
 		
 		.ui-inputfield {
 			border-radius: 0 0 0 $border-radius;

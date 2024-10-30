@@ -13,9 +13,9 @@ inputChange();
 
 $(document).click(function(event) {
 	var $target = $(event.target);
-	var overlay = $target.closest('.jeesl-menu-bar-search').find('.jeesl-overlay-container.jeesl-visible');
+	var overlay = $target.closest('.jeesl-menu-bar-search').find('.jeesl-search-overlay-container.jeesl-visible');
 	if(!overlay.length) {
-		hideResults($('.jeesl-menu-bar-search .jeesl-overlay-container.jeesl-visible'));
+		hideResults($('.jeesl-menu-bar-search .jeesl-search-overlay-container.jeesl-visible'));
 	}
 })
 
@@ -39,17 +39,17 @@ function toggleDetails(eventArgs) {
 
 function showResults() {
 	let input = $(requestQuery.replaceAll(':','\\:'));
-	let overlay = $(resultQuery.replaceAll(':','\\:')).parent();
-	
-	let targetHeight = overlay.height();
-	input.val() ? overlay.height(previousHeight).addClass('jeesl-visible').animate({ height: targetHeight }, 400, () => {
-		overlay.height('auto');
-		previousHeight = overlay.height();
-	}) : hideResults(overlay);
-	
-//	input.val() ? overlay.addClass('jeesl-visible') : overlay.removeClass('jeesl-visible');
-	
-	overlay.find('.jeesl-field-tip-icon').click({ overlay: overlay }, toggleDetails);
+	let results = $(resultQuery.replaceAll(':','\\:'));
+	let overlay = results.parent();
+		
+			  
+		let targetHeight = results.height();
+		
+		input.val() ? overlay.height(previousHeight).addClass('jeesl-visible').animate({ height: targetHeight }, 300, () => {
+			previousHeight = overlay.height();
+		}) : hideResults(overlay);
+		
+		overlay.find('.jeesl-field-tip-icon').click({ overlay: overlay }, toggleDetails);
 }
 
 function hideResults(overlay) {
@@ -57,7 +57,6 @@ function hideResults(overlay) {
 	
 	overlay.height(previousHeight).animate({ height: 0 }, 400, () => {
 		overlay.removeClass('jeesl-visible');
-		overlay.height('auto');
 		previousHeight = 0;
 	});
 }
