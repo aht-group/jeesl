@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -25,12 +26,16 @@ public class AbstractSsiXlsMapper
 	protected final List<Integer> listColumns;
 	
 	public List<Integer> getListColumns() {return listColumns;}
+	
+	private boolean analyseHeader; public boolean isAnalyseHeader() {return analyseHeader;} public void setAnalyseHeader(boolean analyseHeader) {this.analyseHeader = analyseHeader;}
 
 	public AbstractSsiXlsMapper()
 	{
 		mapColumnCode = new HashMap<>();
 		mapColumnIndex = new HashMap<>();
 		listColumns = new ArrayList<>();
+		
+		analyseHeader = true;
 	}
 	
 	private void clear()
@@ -121,7 +126,17 @@ public class AbstractSsiXlsMapper
 	
 	public String toString(Row row, int index) throws UtilsConfigurationException
 	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
 		String value = row.getCell(index).getStringCellValue().trim();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value;
+	}
+	public Double toDouble(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		Double value = row.getCell(index).getNumericCellValue();
 		if(ObjectUtils.isEmpty(value)) {return null;}
 		else return value;
 	}
