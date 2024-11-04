@@ -8,4 +8,6 @@ public interface JeeslCqOrdering extends Serializable
 	
 	SortOrder getOrder();
 	String getPath();
+	
+	String nyi(Class<?> c);
 }
