@@ -105,7 +105,7 @@ public class XlsxRowCallbackImporter
 			
 			if(rowIndex==1)
 			{
-				if(Objects.nonNull(mapper)) {mapper.buildRangeColumnIndex(r,0,indexColumnEnd);}
+				if(Objects.nonNull(mapper) && mapper.isAnalyseHeader()) {mapper.buildRangeColumnIndex(r,0,indexColumnEnd);}
 			}
 			if(rowIndex>=indexRowStart)
 			{

@@ -445,6 +445,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 			sb.append(" actions:").append(actions.size());
 			logger.info(sb.toString());
 		}
+		
 		if(autoPerform && constraints.isEmpty()) {performTransition();}
 	}
 
