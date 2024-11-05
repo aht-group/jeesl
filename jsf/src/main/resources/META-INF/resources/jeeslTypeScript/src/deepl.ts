@@ -1,22 +1,21 @@
 declare function deeplTranslate(): void;
-
-(function($) {
-    let timeout: any;
-    $('.jeesl-deepl-textarea').on('input', () => {
-        if (timeout) { 
-            clearTimeout(timeout); 
-        }
-
-        timeout = setTimeout(() => {
-            console.log('change called');
-            if (!deeplTranslate) {
-                console.log('deeplTranslate does not exist!');
-                return;
+(function($): void {
+    $(() => {
+        let timeout: any;
+        $('.jeesl-deepl-textarea').on('input', () => {
+            if (timeout) { 
+                clearTimeout(timeout); 
             }
 
-            deeplTranslate();
-        }, 3000);
+            timeout = setTimeout(() => {
+                console.log('change called');
+                if (!deeplTranslate) {
+                    console.log('deeplTranslate does not exist!');
+                    return;
+                }
+
+                deeplTranslate();
+            }, 3000);
+        });
     });
 })(jQuery.noConflict(true));
-
-
