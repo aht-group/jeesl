@@ -25,5 +25,5 @@ public interface JeeslSecurityMfaType <L extends JeeslLang, D extends JeeslDescr
 					EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>
 {
-	public enum Code{email,otp}
+	public enum Code{email,totp}
 }

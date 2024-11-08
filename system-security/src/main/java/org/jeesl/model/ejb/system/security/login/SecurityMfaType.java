@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityLoginResult;
+import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfaType;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -16,15 +17,15 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("securityMfaType")
-@EjbErNode(name="Result",category="systemSecurity",subset="systemSecurity")
-public class SecurityMfaType extends IoStatus implements JeeslSecurityLoginResult<IoLang,IoDescription,SecurityMfaType,IoGraphic>											
+@EjbErNode(name="MFA Type",category="systemSecurity",subset="systemSecurity")
+public class SecurityMfaType extends IoStatus implements JeeslSecurityMfaType<IoLang,IoDescription,SecurityMfaType,IoGraphic>											
 {
 	public static final long serialVersionUID=1;
 
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(JeeslSecurityLoginResult.Code code : JeeslSecurityLoginResult.Code.values()) {fixed.add(code.toString());}
+		for(JeeslSecurityMfaType.Code code : JeeslSecurityMfaType.Code.values()) {fixed.add(code.toString());}
 		return fixed;
 	}
 
