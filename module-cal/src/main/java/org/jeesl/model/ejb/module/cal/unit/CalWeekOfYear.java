@@ -16,7 +16,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("calendarWeekOfYear")
-@EjbErNode(name="Week of Year",category="sys",level=3,subset="sysTime")
+@EjbErNode(name="Week of Year",category="sys",level=3,subset="sysTime,mTimeIntern")
 public class CalWeekOfYear extends IoStatus implements JeeslCalendarWeekOfYear<IoLang,IoDescription,CalWeekOfYear,IoGraphic>
 {
 	public static final long serialVersionUID=1;
