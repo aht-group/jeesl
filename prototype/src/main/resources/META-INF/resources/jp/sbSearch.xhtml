@@ -25,18 +25,18 @@
 	<div class="sbSearch jeesl-menu-bar-item jeesl-menu-bar-search jeesl-left">
 		<div class="ui-inputgroup">
 			<p:inputText id="searchText" value="#{cc.attrs.handler.searchText}"  placeholder="Search" styleClass="search-box" onfocus="showResults()">
-				<p:ajax event="keyup" delay="500" update="searchResults" process="searchText" listener="#{cc.attrs.handler.handleKeyEvent}" oncomplete="showResults()"/>
+				<p:ajax event="keyup" update="searchResults" process="searchText" listener="#{cc.attrs.handler.handleKeyEvent}" oncomplete="showResults()"/>
 			</p:inputText>
 			<h:panelGroup styleClass="jeesl-menu-bar-search-buttons">
 				<c:if test="#{not empty cc.attrs.applyList}">
-					<p:commandButton icon="ui-icon ui-icon-apply" styleClass="search-btn-light" action="#{cc.attrs.handler.applySbSearch}" update="#{cc.attrs.applyList}"/>
+					<p:commandButton icon="ui-icon ui-icon-apply" styleClass="search-btn-light ui-corner-right" action="#{cc.attrs.handler.applySbSearch}" update="#{cc.attrs.applyList}"/>
 				</c:if>
-				<p:commandButton icon="ui-icon ui-icon-close fa fa-times" styleClass="search-btn-light ui-corner-none" update="searchResults" action="#{cc.attrs.handler.cancelEvent}" oncomplete="hideResults()"/>
+				<p:commandButton icon="ui-icon ui-icon-close fa fa-times" styleClass="search-btn-light ui-corner-right" update="searchResults" action="#{cc.attrs.handler.cancelEvent}" oncomplete="hideResults()"/>
 			</h:panelGroup>
 		</div>
 		
-		<h:panelGroup layout="block" styleClass="auContainer jeesl-search-overlay-container">
-			<h:panelGroup id="searchResults" layout="block" styleClass="jeesl-search-overlay-wrapper">
+		<h:panelGroup layout="block" styleClass="auContainer jeesl-overlay-container">
+			<h:panelGroup id="searchResults" layout="block" styleClass="jeesl-overlay-wrapper">
 				<ul class="ui-selectonemenu-list">
 					<ui:repeat var="var" value="#{cc.attrs.handler.list}" varStatus="loop">
 						<li class="ui-selectonemenu-item">

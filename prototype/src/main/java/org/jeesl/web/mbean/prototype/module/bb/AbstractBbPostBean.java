@@ -13,8 +13,8 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.BbFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.module.bb.JeeslBbBoard;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbPost;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbThread;
@@ -48,27 +48,28 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractBbPostBean.class);
-	
+
 	protected JeeslBbFacade<L,D,SCOPE,BB,PUB,THREAD,POST,M,MT,USER> fBb;
-	
+
 	private final BbFactoryBuilder<L,D,SCOPE,BB,PUB,THREAD,POST,M,MT,USER> fbBb;
-	
+
 	protected final SbSingleHandler<SCOPE> sbhScope; public SbSingleHandler<SCOPE> getSbhScope() {return sbhScope;}
-	
+
 	private List<BB> boards; public List<BB> getBoards() {return boards;} public void setBoards(List<BB> boards) {this.boards = boards;}
 	private final List<THREAD> threads; public List<THREAD> getThreads() {return threads;}
 	private final List<POST> postings; public List<POST> getPostings() {return postings;}
-	
+
 	protected long refId;
 	private USER user;
 	protected MT markupType;
+
 	private BB board; public BB getBoard() {return board;} public void setBoard(BB board) {this.board = board;}
 	private THREAD thread; public THREAD getThread() {return thread;} public void setThread(THREAD thread) {this.thread = thread;}
 	private POST posting; public POST getPosting() {return posting;} public void setPosting(POST posting) {this.posting = posting;}
 
 	private TreeNode tree; public TreeNode getTree() {return tree;}
     private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
-	
+
 	public AbstractBbPostBean(BbFactoryBuilder<L,D,SCOPE,BB,PUB,THREAD,POST,M,MT,USER> fbBb)
 	{
 		super(fbBb.getClassL(),fbBb.getClassD());
@@ -87,11 +88,10 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 		this.user=user;
 		pageConfig();
 		reloadBoards();
-		
-		try {markupType = fBb.fByCode(fbBb.getClassMarkupType(),JeeslIoMarkupType.Code.text);}
+		try {markupType = fBb.fByCode(fbBb.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 	}
-	
+
 	//This method can be overriden
 	protected void pageConfig()
 	{
@@ -99,20 +99,20 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 		sbhScope.setList(fBb.allOrderedPositionVisible(fbBb.getClassScope()));
 		sbhScope.setDefault();
 	}
-	
+
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadBoards();
 		reset(true,true,true);
 	}
-	
+
 	private void reset(boolean rBoard, boolean rThread, boolean rPosting)
 	{
 		if(rBoard) {board=null;}
 		if(rThread) {thread=null;}
 		if(rPosting) {posting=null;}
 	}
-	
+
 	private void reloadBoards()
 	{
 		boards = fBb.fBulletinBoards(sbhScope.getSelection(), refId);
@@ -127,7 +127,7 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 			}
 		}
 	}
-	
+
 	private void buildTree(TreeNode nParent, BB bbParent)
 	{
 		for(BB b : boards)
@@ -139,7 +139,7 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 			}
 		}
 	}
-	
+
     @SuppressWarnings("unchecked")
 	public void onBoardSelect(NodeSelectEvent event)
     {
@@ -149,63 +149,63 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 		reloadThreads();
 		reset(false,true,true);
     }
-    
+
 	private void reloadThreads()
 	{
 		threads.clear();
 		threads.addAll(fBb.allForParent(fbBb.getClassThread(), board));
 	}
-	
+
     public void selectThread()
     {
     	reset(false,false,true);
     	reloadPostings();
     }
-    
+
     public void addThread()
     {
     	thread = fbBb.ejbThread().build(board);
     	posting = fbBb.ejbPost().build(thread,markupType,user);
     }
-    
+
     public void saveThread() throws JeeslConstraintViolationException, JeeslLockingException
     {
     	logger.info(AbstractLogMessage.saveEntity(thread));
     	thread = fBb.save(thread);
-    	
+
     	logger.info(AbstractLogMessage.saveEntity(posting));
     	posting.setThread(thread);
     	posting = fBb.save(posting);
     	reloadThreads();
     	reloadPostings();
     }
-   
+
     private void reloadPostings()
     {
     	postings.clear();
     	postings.addAll(fBb.allForParent(fbBb.getClassPost(), thread));
     }
-    
+
     public void postingToThreads()
     {
     	logger.info("postingToThread");
     	reset(false,true,true);
     }
-    
+
     public void addPosting()
     {
     	logger.info(AbstractLogMessage.createEntity(fbBb.getClassPost()));
     	reset(false,false,true);
     	posting = fbBb.ejbPost().build(thread,markupType,user);
     }
-    
+
     public void savePosting() throws JeeslConstraintViolationException, JeeslLockingException
     {
     	logger.info(AbstractLogMessage.createEntity(fbBb.getClassPost()));
     	posting = fBb.save(posting);
     	reloadPostings();
     }
-	
+
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
     public void onNodeCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
 }
