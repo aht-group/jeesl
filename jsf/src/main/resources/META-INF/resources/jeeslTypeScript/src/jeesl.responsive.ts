@@ -15,8 +15,8 @@ function cssRulesMenuHeightCalculate(): string {
         cssRules += '#' +
             ($(element).attr('id') || '').replace(/:/g, '\\:') +
             '.jeesl-active { height: ' +
-            ($.merge($(element).children('.jeesl-dropdown-item'), $(element).find('.jeesl-datatable tr'))
-                .map((child: HTMLElement) => $(child).outerHeight() as number)
+            ($.merge($(element).children('.jeesl-dropdown-item').toArray(), $(element).find('.jeesl-datatable tr').toArray())
+                .map((child: HTMLElement) => $(child).outerHeight() ?? 0)
                 .reduce((previous: number, current: number) => previous + current, 0) + 15 + (!$(element).hasClass('jeesl-dropdown-list-multi') ? 15 : 0)) +
             'px; }';
     });
