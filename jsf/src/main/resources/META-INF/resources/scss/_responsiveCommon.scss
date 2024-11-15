@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:string';
 
 $border: $border-width solid $border-colour;
 
@@ -164,6 +165,11 @@ $border: $border-width solid $border-colour;
 
 .jeesl-block {
 	display: block;
+}
+
+.jeesl-flex {
+	align-items: center;
+	display: flex;
 }
 
 .ui-corner-all {
@@ -423,10 +429,20 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+.jeesl-output-container {
+	align-items: center;
+	display: flex;
+	
+	.ui-outputtext {
+		flex-grow: 1;
+	}
+}
+
 .jeesl-input-container {
 	display: flex;
 	
 	.ui-inputtext, .ui-inputtextarea {
+		flex-grow: 1;
 		flex-shrink: 1;
 		width: 0;
 	}
@@ -443,15 +459,17 @@ $border: $border-width solid $border-colour;
 		}
 	}
 	
-	.ui-button {
+	.ui-button, .ui-chkbox {
 		align-items: center;
 		display: flex;
-		flex-grow: 1;
+//		flex: 1;
 		flex-shrink: 0;
 		justify-content: center;
 		margin: 0 0 0 6px;
 		overflow: hidden;
 		padding: 0 $slim-spacing;
+		
+		min-width: calc(15% - 6px);
 		
 		.ui-button-text {
 			padding: 0;
@@ -1275,7 +1293,7 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui
 
 .ui-spinner {
 	display: grid;
-	grid-template: unquote("[row1-start] 'input btn-up' min-content [row1-end] [row2-start] 'input btn-down' min-content [row2-end] / calc(85% + 6px) 1fr");
+	grid-template: string.unquote("[row1-start] 'input btn-up' min-content [row1-end] [row2-start] 'input btn-down' min-content [row2-end] / calc(85% + 6px) 1fr");
 	
 	.ui-spinner-input {
 		grid-area: input;

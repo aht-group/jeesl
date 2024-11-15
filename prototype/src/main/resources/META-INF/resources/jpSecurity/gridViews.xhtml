@@ -91,12 +91,12 @@
 						<j:svg type="jeeslClone" listener="#{cc.attrs.bean.cloneView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.jeeslTooltipClone}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						<jtp:label entity="SecurityView" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.view.category}" effect="fade" autoWidth="false">
 							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
-					</p:panelGrid>
+					</j:inputGrid>
 					<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.visible}"  />
 						<jtp:label entity="SecurityView" code="visible" />
@@ -104,29 +104,30 @@
 						<p:triStateCheckbox value="#{cc.attrs.bean.tsb.a}" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
 						<jtp:label entity="SecurityView" code="redirect" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
 					</p:panelGrid>	
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						<jtp:label entity="SecurityView" code="code"/>
 						<h:outputText rendered="#{not cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.view.code}"/>
 						<p:inputText rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.view.code}"/>
-					</p:panelGrid>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid50,jeeslGrid50" rendered="#{cc.attrs.bean.userIsDeveloper}">	
+					</j:inputGrid>
+					<j:inputGrid rendered="#{cc.attrs.bean.userIsDeveloper}">	
 						<jtp:label entity="SecurityView" code="documentation"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.documentation}"/>
-					</p:panelGrid>
-					<p:panelGrid rendered="#{cc.attrs.bean.userIsDeveloper}" columns="2" columnClasses="jeeslGrid50,jeeslGrid50">
+						
 						<jtp:label entity="SecurityView" code="accessPublic"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.accessPublic}"/>
+						
 						<jtp:label entity="SecurityView" code="accessLogin"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.accessLogin}"/>
-					</p:panelGrid>	
-					<p:panelGrid rendered="#{cc.attrs.bean.userIsDeveloper}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+						
 						<jtp:label entity="SecurityView" code="viewPattern"/>
 						<p:inputText value="#{cc.attrs.bean.view.viewPattern}"/>
+						
 						<jtp:label entity="SecurityView" code="urlMapping"/>
 						<p:inputText value="#{cc.attrs.bean.view.urlMapping}"/>
+						
 						<jtp:label entity="SecurityView" code="urlBase"/>
 						<p:inputText value="#{cc.attrs.bean.view.urlBase}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 					<jtp:inputMulti value="#{cc.attrs.bean.view}"
 						withName="true" labelName="#{appLabelBean.labels['SecurityView']['name'][localeCode].lang}"
 						withDescription="true" labelDescription="#{appLabelBean.labels['SecurityView']['description'][localeCode].lang}"/>
@@ -161,7 +162,7 @@
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
 						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.rmAction()}" update=":#{cc.id}:sView"/>
 					</f:facet>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						<p:outputLabel value="#{msg.jeeslSecurityActionTemplate}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.action.template}" disabled="#{not cc.attrs.bean.userIsDeveloper}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItem itemLabel="---"/>
@@ -171,7 +172,7 @@
 						<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
 						<h:outputText rendered="#{(not empty cc.attrs.bean.action.template) or (not cc.attrs.bean.userIsDeveloper)}" value="#{cc.attrs.bean.view.code}.#{fn:substringAfter(cc.attrs.bean.action.template.code,'.')}"/>
 						<p:inputText rendered="#{(empty cc.attrs.bean.action.template) and (cc.attrs.bean.userIsDeveloper)}" value="#{cc.attrs.bean.action.code}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 					<aht:tabTranslationEditor rendered="#{empty cc.attrs.bean.action.template}" value="#{cc.attrs.bean.action}" keys="#{appTranslationBean.langKeys}" withDescription="true"/>
 				</p:panel>
 			</h:form>
@@ -205,15 +206,14 @@
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
 						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.deleteArea()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						<jtp:label entity="SecurityArea" code="code"/>
 						<h:outputText rendered="#{not cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
 						<p:inputText rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
 						
 						<jtp:label entity="SecurityArea" code="restricted"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.area.restricted}"/>
-						
-					</p:panelGrid>
+					</j:inputGrid>
 					<jtp:inputMulti value="#{cc.attrs.bean.area}"
 						withName="true" labelName="#{appLabelBean.labels['SecurityArea']['name'][localeCode].lang}"
 						withDescription="true" labelDescription="#{appLabelBean.labels['SecurityArea']['description'][localeCode].lang}"/>
