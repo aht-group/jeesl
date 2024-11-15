@@ -48,17 +48,17 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiContextController.class);
-	
+
 	protected JeeslLogger jogger;
-	
+
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,?,?,STATUS,ERROR,ENTITY,?,?> fbSsi;
 	private JeeslIoSsiFacade<SYSTEM,?,CONTEXT,?,?,STATUS,ERROR,ENTITY,?,?,?> fSsi;
-	
-	private JeeslIoSsiContextCache<CONTEXT,STATUS> cache; 
+
+	private JeeslIoSsiContextCache<CONTEXT,STATUS> cache;
 	private final Comparator<CONTEXT> cpContext;
-	
+
 	private final EjbIoSsiContextFactory<SYSTEM,CONTEXT,ENTITY> efContext;
-	
+
 	private final JsonTuple1Handler<CONTEXT> thContext; public JsonTuple1Handler<CONTEXT> getThContext() {return thContext;}
 	private final JsonTuple1Handler<ERROR> thError; public JsonTuple1Handler<ERROR> getThError() {return thError;}
 	private final JsonTuple2Handler<CONTEXT,STATUS> thStatus; public JsonTuple2Handler<CONTEXT,STATUS> getThStatus() {return thStatus;}
@@ -68,29 +68,29 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	private final List<CONTEXT> contexts; public List<CONTEXT> getContexts() {return contexts;}
 	private final List<STATUS> links; public List<STATUS> getLinks() {return links;}
 	private final List<ERROR> errors; public List<ERROR> getErrors() {return errors;}
-	
+
 	private CONTEXT context; public CONTEXT getContext() {return context;} public void setContext(CONTEXT context) {this.context = context;}
 	private ERROR error; public ERROR getError() {return error;} public void setError(ERROR error) {this.error = error;}
-	
+
 	public JeeslSsiContextController(final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,?,?,STATUS,ERROR,ENTITY,?,?> fbSsi)
 	{
 		super(fbSsi.getClassL(),fbSsi.getClassD());
 		this.fbSsi=fbSsi;
-		
+
 		efContext = fbSsi.ejbContext();
-		
+
 		systems = new ArrayList<>();
 		contexts = new ArrayList<>();
 		entities = new ArrayList<>();
 		links = new ArrayList<>();
 		errors = new ArrayList<>();
-		
+
 		cpContext = new EjbIdComparator<CONTEXT>().factory(EjbIdComparator.Type.dsc);
-		
+
 		thContext = new JsonTuple1Handler<>(fbSsi.getClassMapping());
 		thError = new JsonTuple1Handler<>(fbSsi.getClassError());
 		thStatus = new JsonTuple2Handler<>(fbSsi.getClassMapping(),fbSsi.getClassStatus());
-		
+
 		jogger = DebugJeeslLogger.instance(this.getClass());
 	}
 
@@ -101,16 +101,16 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		super.postConstructLocaleWebController(lp, bMessage);
 		this.fSsi=fSsi;
 		this.cache=cache;
-		
+
 		systems.addAll(fSsi.all(fbSsi.getClassSystem()));
 		links.addAll(fSsi.allOrderedPosition(fbSsi.getClassStatus()));
 		if(Objects.nonNull(jogger)) {jogger.milestone(fbSsi.getClassStatus().getSimpleName(),null,links.size());}
-		
+
 		entities.addAll(fSsi.all(fbSsi.getClassEntity()));
 		jogger.milestone(fbSsi.getClassEntity().getSimpleName(),null,entities.size());
-		
+
 		this.reload();
-		
+
 		if(Objects.nonNull(cache))
 		{
 			thStatus.clear();
@@ -122,7 +122,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 			}
 		}
 	}
-	
+
 	public void reset(boolean rErrors, boolean rError)
 	{
 		if(rErrors) {errors.clear();}
@@ -136,13 +136,13 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		Collections.sort(contexts,cpContext);
 		jogger.milestone(fbSsi.getClassMapping().getSimpleName(),null,contexts.size());
 	}
-	
+
 	public void selectContext()
 	{
 		logger.info(AbstractLogMessage.selectEntity(context));
 		this.reloadErrors();
 	}
-	
+
 	public void countNumbers()
 	{
 		efContext.converter(fSsi, context);
@@ -152,7 +152,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		{
 			thStatus.append(tuples);
 			cache.cachePutTuples2(this.getClass(),context,tuples);
-			
+
 			JsonTuples2<CONTEXT,STATUS> t = cache.cacheGetTuples2(this.getClass(),context);
 			logger.warn("t from cache is null ? "+Objects.isNull(t));
 		}
@@ -161,20 +161,26 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 			thStatus.init(tuples);
 		}
 	}
-	
+
 	public void addContext()
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSsi.getClassMapping()));
 		context = fbSsi.ejbContext().build(null);
 	}
-	
+
 	public void saveContext() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		efContext.converter(fSsi,context);
 		context = fSsi.save(context);
 		EjbIdFactory.replace(contexts,context);
 	}
-	
+
+	public void deleteMapping() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		fSsi.rm(context);
+		EjbIdFactory.remove(contexts, context);
+	}
+
 	private void reloadErrors()
 	{
 		this.reset(true,false);
@@ -209,8 +215,9 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		logger.info(AbstractLogMessage.deleteEntity(error));
 		fSsi.rm(error);
 		this.reset(false, true);
-		this.reloadErrors();	
+		this.reloadErrors();
 	}
+
 	public void countErrors()
 	{
 		thError.clear();

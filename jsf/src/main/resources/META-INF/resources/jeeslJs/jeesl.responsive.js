@@ -9,18 +9,16 @@ let menuHeightStyle;
 let treeHeightStyle;
 
 var calculateMenuHeight = function() {
-	let dropdowns = $('.jeesl-dropdown-list');
 	let cssRules = '@media (max-width: 768px) {';
 	
-	
-	dropdowns.each((index, element) =>
+	$('.jeesl-dropdown-list').each((index, element) =>
 		cssRules += '#' +
-					$(element).attr('id').replaceAll(':', '\\:') +
+					$(element).attr('id') +
 					'.jeesl-active { height: ' +
-					($.merge($(element).children('.jeesl-dropdown-item'), $(element).find('.jeesl-datatable tr'))
-					  .toArray()
-					  .map(child => $(child).outerHeight())
-					  .reduce((previous, current) => previous + current, 0) + 15 + (!$(element).hasClass('jeesl-dropdown-list-multi') * 15)) +
+					($(element).children('.jeesl-dropdown-item')
+							   .toArray()
+							   .map(child => $(child).outerHeight())
+							   .reduce((previous, current) => previous + current, 0) + 15 + (!$(element).hasClass('jeesl-dropdown-list-multi') * 15)) +
 					'px; }');
 	
 	menuHeightStyle.append(cssRules + '}');
@@ -63,14 +61,7 @@ function setTreeHeight(node) {
 function toggleMenu() {
 	$('.jeesl-menu-bar-dropdown').filter((index, button) => button !== this).removeClass('jeesl-active').siblings('.jeesl-dropdown-list').removeClass('jeesl-active');
 	
-	$(this).filter(current => $(current).find('.jeesl-greyscale'))
-		   .toggleClass('jeesl-active')
-		   .siblings('.jeesl-dropdown-list')
-		   .removeAttr('style')
-		   .toggleClass('jeesl-active')
-		   .find('.jeesl-open')
-		   .delay(200)
-		   .queue(function() { $(this).removeClass('jeesl-open').removeAttr('style').dequeue(); });
+	$(this).filter(current => $(current).find('.jeesl-greyscale')).toggleClass('jeesl-active').siblings('.jeesl-dropdown-list').removeAttr('style').toggleClass('jeesl-active').find('.jeesl-open').delay(200).queue(function() { $(this).removeClass('jeesl-open').removeAttr('style').dequeue(); });
 }
 
 function reloadStatusBar() {
@@ -134,7 +125,7 @@ $(function() {
 	treeHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
 	
 	let menuButtons = $('.jeesl-menu-bar-dropdown');
-	let dropdowns = $('.jeesl-dropdown-list').attr('id', (index, oldValue) => oldValue || ('jeesl-dropdown-' + index));
+	let dropdowns = $('.jeesl-dropdown-list').attr('id', (index, oldValue) => 'jeesl-dropdown-' + index);
 	
 	calculateMenuHeight(dropdowns);
 	menuButtons.click(toggleMenu);
