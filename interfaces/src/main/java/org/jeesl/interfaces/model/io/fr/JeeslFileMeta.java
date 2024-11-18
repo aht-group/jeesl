@@ -33,7 +33,7 @@ public interface JeeslFileMeta<D extends JeeslDescription,
 				//	EjbWithRecord
 					JeeslWithRecordDateTime
 {
-	public enum Attributes{container,type,size,record,category}
+	public enum Attributes{container,code,type,size,record,category}
 	
 	CONTAINER getContainer();
 	void setContainer(CONTAINER container);

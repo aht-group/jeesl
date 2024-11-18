@@ -104,6 +104,7 @@ public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,A
 		StringBuffer sb = new StringBuffer();
 		sb.append("[").append(id).append("]");
 		sb.append(" ").append(code);
+		sb.append(" ").append(name);
 		return sb.toString();
 	}
 }

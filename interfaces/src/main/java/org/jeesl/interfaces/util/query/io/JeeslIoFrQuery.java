@@ -9,12 +9,8 @@ import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 public interface JeeslIoFrQuery <STORAGE extends JeeslFileStorage<?,?,?,?,?>,
 								CONTAINER extends JeeslFileContainer<?,?>>
 					extends JeeslCoreQuery
-{	
-//	List<CqId> getIds();
-//	List<String> getRootFetches();
-//	List<String> getCodeList();
-//	List<CqOrdering> getOrderings();
-	
+{
+//	void x();
 	List<STORAGE> getIoFrStorages();
 	List<CONTAINER> getIoFrContainers();
 }

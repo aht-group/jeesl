@@ -15,7 +15,7 @@ $light-grey: hsl(0,0%,87%);
 $soft-grey: hsl(0,0%,77%);
 $medium-grey: hsl(0,0%,67%);
 $dark-grey: hsl(0,0%,33%);
-$anthracite: hsl(0,0%,20%);
+$anthracite: hsl(0,0%,25%);
 $black: $anthracite;
 $brighter-colour: hsla(154,100%,33%,1);
 $bright-colour: hsla(154,100%,27%,1);
@@ -93,6 +93,15 @@ $header-underline: 2px solid $dark-colour;
 	
 	$highlight-colour: $medium-colour !global;
 	$header-underline: 2px solid $dark-colour !global;
+}
+
+@mixin adjustGreys($hue, $saturation) {
+	$bright-grey: color.adjust($bright-grey, $hue: $hue, $saturation: $saturation) !global;
+	$light-grey: color.adjust($light-grey, $hue: $hue, $saturation: $saturation) !global;
+	$soft-grey: color.adjust($soft-grey, $hue: $hue, $saturation: $saturation) !global;
+	$medium-grey: color.adjust($medium-grey, $hue: $hue, $saturation: $saturation) !global;
+	$dark-grey: color.adjust($dark-grey, $hue: $hue, $saturation: $saturation) !global;
+	$anthracite: color.adjust($anthracite, $hue: $hue, $saturation: $saturation) !global;
 }
 
 @mixin setHighlightColour($highlight) {
