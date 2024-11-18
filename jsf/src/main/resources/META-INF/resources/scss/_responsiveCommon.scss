@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:string';
 
 $border: $border-width solid $border-colour;
 
@@ -166,6 +167,11 @@ $border: $border-width solid $border-colour;
 	display: block;
 }
 
+.jeesl-flex {
+	align-items: center;
+	display: flex;
+}
+
 .ui-corner-all {
 	border-radius: $border-radius;
 }
@@ -184,10 +190,6 @@ $border: $border-width solid $border-colour;
 	
 .ui-corner-right {
 	border-radius: $border-radius-right;
-}
-
-.ui-corner-none {
-	border-radius: 0;
 }
 
 .ui-input-overlay {
@@ -231,12 +233,8 @@ $border: $border-width solid $border-colour;
 	    z-index: -1;
 	}
 	
-	&.ui-button-icon-only {
-		width: auto;
-	
-		.ui-button-text {
-			display: none;
-		}
+	&.ui-button-icon-only .ui-button-text {
+		display: none;
 	}
 	
 	&.ui-button-text-icon-left .ui-button-text {
@@ -423,10 +421,20 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+.jeesl-output-container {
+	align-items: center;
+	display: flex;
+	
+	.ui-outputtext {
+		flex-grow: 1;
+	}
+}
+
 .jeesl-input-container {
 	display: flex;
 	
 	.ui-inputtext, .ui-inputtextarea {
+		flex-grow: 1;
 		flex-shrink: 1;
 		width: 0;
 	}
@@ -443,15 +451,17 @@ $border: $border-width solid $border-colour;
 		}
 	}
 	
-	.ui-button {
+	.ui-button, .ui-chkbox {
 		align-items: center;
 		display: flex;
-		flex-grow: 1;
+//		flex: 1;
 		flex-shrink: 0;
 		justify-content: center;
 		margin: 0 0 0 6px;
 		overflow: hidden;
 		padding: 0 $slim-spacing;
+		
+		min-width: calc(15% - 6px);
 		
 		.ui-button-text {
 			padding: 0;
@@ -779,13 +789,15 @@ $border: $border-width solid $border-colour;
 .ui-datepicker {
 	@include headlined-overlay(ui-datepicker);
 	
-	padding: $half-spacing 0;
-	
-	@media (max-width: 768px) {
-		padding: $wide-spacing 0;
-	}
+	padding: $half-spacing;
 	
 	.ui-datepicker-header {
+		margin: 0 #{-$half-spacing};
+		
+		@media (max-width: 768px) {
+			margin: 0;
+		}
+		
 		.ui-icon {
 			left: 0;
 		}
@@ -809,10 +821,6 @@ $border: $border-width solid $border-colour;
 		@media (max-width: 768px) {
 			margin: 0 $wide-spacing;
 			width: calc(100% - (2 * #{$wide-spacing}));
-		}
-		
-		> thead th {
-			font-size: 1.2em;
 		}
 		
 		> tbody {
@@ -1275,7 +1283,7 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui
 
 .ui-spinner {
 	display: grid;
-	grid-template: unquote("[row1-start] 'input btn-up' min-content [row1-end] [row2-start] 'input btn-down' min-content [row2-end] / calc(85% + 6px) 1fr");
+	grid-template: string.unquote("[row1-start] 'input btn-up' min-content [row1-end] [row2-start] 'input btn-down' min-content [row2-end] / calc(85% + 6px) 1fr");
 	
 	.ui-spinner-input {
 		grid-area: input;
@@ -1481,10 +1489,6 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img, .ui
 
 .ui-corner-right:before {
 	@extend .ui-corner-right;
-}
-
-.ui-corner-none:before {
-	@extend .ui-corner-none;
 }
 
 .ui-dialog-mask {

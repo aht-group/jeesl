@@ -4,6 +4,7 @@
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
 				
 	<c:set var="locales"  value="#{not empty locales ? locales : appLabelBean.locales}" />
+	<c:set var="parentId" value="#{parentId}" />
 	
 	<c:set var="withName" value="#{not empty withName ? withName : true}" />
 	<c:set var="withDescription" value="#{not empty withDescription ? withDescription : false}" />
@@ -19,21 +20,25 @@
 		<jtp:inputRemark value="#{value.description[locales[0].code].lang}" rendered="#{withDescription}"/>
 	</j:inputGrid>
 	<h:panelGroup styleClass="jeesl-action-tabview">
-  	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs jeesl-action-header" rendered="#{locales.size() gt 1}"
-  			var="l" value="#{locales}">
-  		<p:tab title="#{l.code}">
-  			<j:inputGrid>
-  				<p:outputLabel value="#{labelName}" rendered="#{withName}"/>
-	  			<jtp:inputText value="#{value.name[l.code].lang}" rendered="#{withName}"/>
-	  			
-	  			<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
-	  			<jtp:inputRemark value="#{value.description[l.code].lang}" rendered="#{withDescription}"/>
-  			</j:inputGrid>
-  		</p:tab>
-  	</p:tabView>
-	<h:panelGroup styleClass="ui-panel-actions">
-		<j:svg type="jeeslAi" listener="#{deeplFragmentBean.openDialog()}" tooltip="#{msg.jeeslTtAi}" oncomplete="PF('translationsWidget').show();" styleClass="pf-action-icon"/>
-	</h:panelGroup>
+	  	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs jeesl-action-header" rendered="#{locales.size() gt 1}"
+	  			   var="l" value="#{locales}">
+	  		<c:if test="#{not empty parentId}">
+	  			<p:ajax event="tabChange" listener="#{deeplFragmentBean.setSourceLanguage(l)}"/>
+	  		</c:if>
+	  		<p:tab title="#{l.code}">
+	  			<j:inputGrid>
+	  				<p:outputLabel value="#{labelName}" rendered="#{withName}"/>
+		  			<jtp:inputText value="#{l.name[l.code].lang}" rendered="#{withName}"/>
+		  			
+		  			<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
+		  			<jtp:inputRemark value="#{l.description[l.code].lang}" rendered="#{withDescription}"/>
+	  			</j:inputGrid>
+	  		</p:tab>
+	  	</p:tabView>
+		<h:panelGroup styleClass="ui-panel-actions">
+			<j:svg type="jeeslAi" listener="#{deeplFragmentBean.openDialog()}" tooltip="#{msg.jeeslTtAi}"
+				   oncomplete="PF('translationsWidget').show();" styleClass="pf-action-icon" update=":#{parentId}:dTranslations:dTranslations"/>
+		</h:panelGroup>
   	</h:panelGroup>
   	
   	<j:dialog id="dTranslations" widgetVar="translationsWidget" header="Automatic Translations" width="12">
@@ -41,10 +46,17 @@
 			<j:svg type="jeeslCancel" oncomplete="PF('translationsWidget').hide()"/>
 			<j:svg type="jeeslSave" oncomplete="PF('translationsWidget').hide()"/>
 		</f:facet>
-		<ui:repeat var="l" value="#{locales}">
-			<j:inputGrid >
+		<j:inputGrid>
+			<p:outputLabel value="Ausganssprache: #{deeplFragmentBean.sourceLanguage.code}" />
+			<h:panelGroup styleClass="output-text"><h:outputText value="#{deeplFragmentBean.sourceLanguage.description[sourceLanguage.code].lang}"/></h:panelGroup>
+		</j:inputGrid>
+		<ui:repeat var="l" value="#{deeplFragmentBean.getTargetLanguages()}">
+			<j:inputGrid>
 				<p:outputLabel value="#{l.code}" />
-				<h:panelGroup styleClass="output-text"><h:outputText value="test"/></h:panelGroup>
+				<h:panelGroup styleClass="jeesl-output-container">
+					<h:outputText value="#{deeplFragmentBean.translations[l]}" styleClass="ui-outputtext" />
+					<p:selectBooleanCheckbox value="#{deeplFragmentBean.utilizations[l]}"></p:selectBooleanCheckbox>
+				</h:panelGroup>
 			</j:inputGrid>
 		</ui:repeat>
 	</j:dialog>
