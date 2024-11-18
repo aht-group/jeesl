@@ -27,7 +27,7 @@ public class EjbJobQuery <TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 		return new EjbJobQuery<>();
 	}
 	
-	private EjbJobQuery()
+	public EjbJobQuery()
 	{       
 		reset();
 	}

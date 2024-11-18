@@ -17,12 +17,14 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobPriority;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobCategory;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.util.query.system.JeeslJobQuery;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.util.query.ejb.system.EjbJobQuery;
 import org.slf4j.Logger;
@@ -34,6 +36,7 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 										TYPE extends JeeslJobType<L,D,TYPE,?>,
 										EXPIRE extends JeeslJobExpiration<L,D,EXPIRE,?>,
 										PRIORITY extends JeeslJobPriority<L,D,PRIORITY,?>,
+										STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 										CACHE extends JeeslJobCache<TEMPLATE,?>
 										>
 						extends AbstractJeeslLocaleWebController<L,D,LOC>
@@ -42,7 +45,7 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslJobTemplateController.class);
 	
-	private JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,?,PRIORITY,?,?,?,?,CACHE,?,?,?,?> fJob;
+	private JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,?,PRIORITY,?,?,STATUS,?,CACHE,?,?,?,?> fJob;
 	
 	private final JobFactoryBuilder<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,?,PRIORITY,?,?,?,?,CACHE,?,?,?> fbJob;
 	
@@ -74,7 +77,7 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 	}
 	
 	public void postConstructJobTemplate(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,?,PRIORITY,?,?,?,?,CACHE,?,?,?,?> fJob)
+											JeeslJobFacade<TEMPLATE,CATEGORY,TYPE,?,PRIORITY,?,?,STATUS,?,CACHE,?,?,?,?> fJob)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fJob=fJob;
@@ -95,8 +98,10 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 		}
 		this.reloadTemplates();
 		
-		thJob.init(fJob.tpJobJobByTemplate(EjbJobQuery.instance()));
-		thCache.init(fJob.tpJobCacheByTemplate(EjbJobQuery.instance()));
+		JeeslJobQuery<TEMPLATE,STATUS> query = new EjbJobQuery<TEMPLATE,STATUS>();
+		
+		thJob.init(fJob.tpJobJobByTemplate(query));
+		thCache.init(fJob.tpJobCacheByTemplate(query));
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)
