@@ -76,6 +76,12 @@
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-jsf</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
@@ -157,6 +163,10 @@
 			   		<artifactId>metachart-xml</artifactId>
 			   		<groupId>org.metachart</groupId>
 			   	</exclusion>
+			   	<exclusion>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+				</exclusion>
 			   	<exclusion>
             		<artifactId>commons-logging</artifactId>
             		<groupId>commons-logging</groupId>
