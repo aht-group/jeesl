@@ -304,7 +304,12 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 				Expression<String> e = root.get(JeeslFileMeta.Attributes.category.toString());
 				LiteralPredicateBuilder.add(cB, predicates, cq, e);
 			}
-			else {logger.warn("No Handling for "+cq.nyi(fbFile.getClassContainer()));}
+			else if(cq.getPath().equals(CqLiteral.path(JeeslFileMeta.Attributes.code)))
+			{
+				Expression<String> e = root.get(JeeslFileMeta.Attributes.code.toString());
+				LiteralPredicateBuilder.add(cB, predicates, cq, e);
+			}
+			else {logger.warn(cq.nyi(fbFile.getClassContainer()));}
 		}
 		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
 		{
