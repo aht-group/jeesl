@@ -157,6 +157,10 @@
 			   		<artifactId>metachart-xml</artifactId>
 			   		<groupId>org.metachart</groupId>
 			   	</exclusion>
+			   	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
 		   </exclusions>
 		</dependency>
 		<dependency>

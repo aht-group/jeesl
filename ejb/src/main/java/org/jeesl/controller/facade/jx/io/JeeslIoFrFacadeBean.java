@@ -75,20 +75,20 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 									RSTATUS extends JeeslFileStatus<L,D,RSTATUS,?>>
 					extends JeeslFacadeBean
 					implements JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS>
-{	
+{
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoFrFacadeBean.class);
 
 	private final IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fbFile;
 	private final Map<STORAGE,JeeslFileRepositoryStore<META>> mapStorages;
-	
+
 	public JeeslIoFrFacadeBean(EntityManager em, IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fbFile)
 	{
 		super(em);
 		this.fbFile=fbFile;
 		mapStorages = new HashMap<STORAGE,JeeslFileRepositoryStore<META>>();
 	}
-	
+
 	private JeeslFileRepositoryStore<META> build(STORAGE storage)
 	{
 		if(!mapStorages.containsKey(storage))
@@ -110,7 +110,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		this.build(meta.getContainer().getStorage()).saveToFileRepository(meta,bytes);
 		return meta;
 	}
-	
+
 	@Override public byte[] loadFromFileRepository(META meta) throws JeeslNotFoundException
 	{
 		return build(meta.getContainer().getStorage()).loadFromFileRepository(meta);
@@ -124,19 +124,19 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		{
 			build(meta.getContainer().getStorage()).delteFileFromRepository(meta);
 		}
-		
+
 		logger.info("Removing Meta "+meta.getContainer().getMetas().size()+" keep:"+keep+" "+meta.getCode());
 		meta.getContainer().getMetas().remove(meta);
 		logger.trace("Removing Meta "+meta.getContainer().getMetas().size());
 		this.rm(meta);
 	}
-	
+
 	@Override public CONTAINER moveContainer(CONTAINER container, STORAGE destination) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		container = this.find(fbFile.getClassContainer(),container);
 		JeeslFileRepositoryStore<META> sourceRepo = this.build(container.getStorage());
 		JeeslFileRepositoryStore<META> destinationRepo = this.build(destination);
-		
+
 		for(META meta : container.getMetas())
 		{
 			byte[] bytes = sourceRepo.loadFromFileRepository(meta);
@@ -157,11 +157,11 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<META> item = cQ.from(fbFile.getClassMeta());
-		
+
 		Expression<Long> eSum = cB.sum(item.<Long>get(JeeslFileMeta.Attributes.size.toString()));
 		Join<META,CONTAINER> jContainer = item.join(JeeslFileMeta.Attributes.container.toString());
 		Path<STORAGE> pStorage = jContainer.get(JeeslFileContainer.Attributes.storage.toString());
-		
+
 		cQ.groupBy(pStorage.get("id"));
 		cQ.multiselect(pStorage.get("id"),eSum);
 
@@ -169,18 +169,18 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		Json1TuplesFactory<STORAGE> jtf = Json1TuplesFactory.instance(fbFile.getClassStorage()).tupleLoad(this,true);
         return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
-	
+
 	@Override public JsonTuples2<STORAGE,TYPE> tpcIoFileByStorageType()
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<META> item = cQ.from(fbFile.getClassMeta());
-		
+
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
 		Join<META,CONTAINER> jContainer = item.join(JeeslFileMeta.Attributes.container.toString());
 		Path<STORAGE> pStorage = jContainer.get(JeeslFileContainer.Attributes.storage.toString());
 		Path<TYPE> pType = item.get(JeeslFileMeta.Attributes.type.toString());
-		
+
 		cQ.groupBy(pStorage.get("id"),pType.get("id"));
 		cQ.multiselect(pStorage.get("id"),pType.get("id"),eCount);
 
@@ -188,16 +188,16 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		Json2TuplesFactory<STORAGE,TYPE> jtf = Json2TuplesFactory.instance(fbFile.getClassStorage(),fbFile.getClassType()).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
-	
+
 	@Override public List<CONTAINER> fIoFrContainer(JeeslIoFrQuery<STORAGE,CONTAINER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<CONTAINER> cQ = cB.createQuery(fbFile.getClassContainer());
 		Root<CONTAINER> root = cQ.from(fbFile.getClassContainer());
-			
+
 		cQ.select(root);
 		cQ.where(cB.and(this.pContainer(cB, query, root)));
-		
+
 		TypedQuery<CONTAINER> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
 		return tQ.getResultList();
@@ -206,42 +206,54 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 	@Override public <OWNER extends JeeslWithFileRepositoryContainer<CONTAINER>> List<META> fIoFrMetas(Class<OWNER> c, List<OWNER> owners)
 	{
 		if(ObjectUtils.isEmpty(owners)) {return new ArrayList<>();}
-		
+
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<META> cQ = cB.createQuery(fbFile.getClassMeta());
 		Root<OWNER> owner = cQ.from(c);
-		
+
 		List<Predicate> predicates = new ArrayList<>();
 		predicates.add(owner.in(owners));
-		
+
 		Join<OWNER,CONTAINER> jContainer = owner.join(JeeslWithFileRepositoryContainer.Attributes.frContainer.toString());
 		ListJoin<CONTAINER,META> jMeta = jContainer.joinList(JeeslFileContainer.Attributes.metas.toString());
-			
+
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(jMeta).distinct(true);
 
 		TypedQuery<META> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
-	
+
+	@Override public Long cIoFrMetas(JeeslIoFrQuery<STORAGE,CONTAINER> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Long> cQ = cB.createQuery(Long.class);
+		Root<META> root = cQ.from(fbFile.getClassMeta());
+
+		cQ.select(cB.count(root));
+		cQ.where(cB.and(this.pMeta(cB, query, root)));
+
+		TypedQuery<Long> tQ = em.createQuery(cQ);
+		return tQ.getSingleResult();
+	}
 	@Override public List<META> fIoFrMetas(JeeslIoFrQuery<STORAGE,CONTAINER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<META> cQ = cB.createQuery(fbFile.getClassMeta());
 		Root<META> root = cQ.from(fbFile.getClassMeta());
-			
+
 		cQ.select(root);
 		cQ.where(cB.and(this.pMeta(cB, query, root)));
-		
+
 		TypedQuery<META> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
-	
+
 	public Predicate[] pContainer(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<CONTAINER> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		
+
 		if(ObjectUtils.isNotEmpty(query.getIoFrContainers()))
 		{
 			predicates.add(root.in(query.getIoFrContainers()));
@@ -251,7 +263,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 			Path<STORAGE> pStorage = root.get(JeeslFileContainer.Attributes.storage.toString());
 			predicates.add(pStorage.in(query.getIoFrStorages()));
 		}
-		
+
 		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
 		{
 			if(cq.getPath().equals(CqLiteral.path(JeeslFileContainer.Attributes.metas,JeeslFileMeta.Attributes.category)))
@@ -262,17 +274,17 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 			}
 			else {logger.warn("No Handling for "+cq.nyi(fbFile.getClassContainer()));}
 		}
-		
+
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	
+
 	public Predicate[] pMeta(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<META> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		
+
 		Path<CONTAINER> pContainer = null;
-		
+
 		if(ObjectUtils.isNotEmpty(query.getIoFrContainers()))
 		{
 			if(Objects.isNull(pContainer)) {pContainer = root.get(JeeslFileMeta.Attributes.container.toString());}
@@ -284,7 +296,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 			Path<STORAGE> pStorage = pContainer.get(JeeslFileContainer.Attributes.storage.toString());
 			predicates.add(pStorage.in(query.getIoFrStorages()));
 		}
-		
+
 		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
 		{
 			if(cq.getPath().equals(CqLiteral.path(JeeslFileMeta.Attributes.category)))
