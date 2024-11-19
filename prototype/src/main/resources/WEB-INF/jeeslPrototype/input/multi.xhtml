@@ -44,13 +44,14 @@
 		</h:panelGroup>
   	</h:panelGroup>
   	
-  	<j:dialog id="dTranslations" widgetVar="translationsWidget" header="#{appLabelBean.labels['IoLocale']['aiTranslation'][localeCode].lang}" width="12">
+  	<j:dialog id="dTranslations" widgetVar="translationsWidget" rendered="#{not empty aitHandler}"
+				header="#{appLabelBean.labels['IoLocale']['aiTranslation'][localeCode].lang}" width="12">
 		<f:facet name="actions">
 			<j:svg type="jeeslCancel" oncomplete="PF('translationsWidget').hide()"/>
 			<j:svg type="jeeslSave" oncomplete="PF('translationsWidget').hide()"/>
 		</f:facet>
 		<j:inputGrid inputFields="2">
-			<jtp:label entity="IoLocale" code="language"/>
+			<jtp:label entity="IoLocale"/>
 			<jtp:label entity="IoLocale" code="original"/>
 			<jtp:label entity="IoLocale" code="translation"/>
 		</j:inputGrid>
