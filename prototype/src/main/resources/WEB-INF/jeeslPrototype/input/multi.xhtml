@@ -4,14 +4,15 @@
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
 				
 	<c:set var="locales"  value="#{not empty locales ? locales : appLabelBean.locales}" />
+	<c:set var="parentId" value="#{parentId}" />
+	
+	<c:set var="aitHandler" value="#{aitHandler}" />
 	
 	<c:set var="withName" value="#{not empty withName ? withName : true}" />
 	<c:set var="withDescription" value="#{not empty withDescription ? withDescription : false}" />
 	
-	<c:set var="aitHandler" value="#{aitHandler}" />
-	
-	<c:set var="labelName" value="#{not empty labelName ? labelName : appLabelBean.labels['IoLabelEntity']['name'][localeCode].lang}"/>
-	<c:set var="labelDescription" value="#{not empty labelDescription ? labelDescription : appLabelBean.labels['IoLabelEntity']['description'][localeCode].lang}"/>
+	<c:set var="labelName" value="#{not empty labelName ? labelName : appLabelBean.labels['IoLang']['name'][localeCode].lang}"/>
+	<c:set var="labelDescription" value="#{not empty labelDescription ? labelDescription : appLabelBean.labels['IoDescription']['description'][localeCode].lang}"/>
 	
 	<j:inputGrid rendered="#{locales.size() eq 1}">
 		<p:outputLabel value="#{labelName}"/>
@@ -20,13 +21,11 @@
 		<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
 		<jtp:inputRemark value="#{value.description[locales[0].code].lang}" rendered="#{withDescription}"/>
 	</j:inputGrid>
-	
 	<h:panelGroup styleClass="jeesl-action-tabview">
 	  	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs jeesl-action-header" rendered="#{locales.size() gt 1}"
 	  			   var="l" value="#{locales}">
-			
 	  		<c:if test="#{not empty aitHandler}">
-	  			<p:ajax event="tabChange" listener="#{deeplFragmentBean.setSourceLanguage(l)}"/>
+	  			<p:ajax event="tabChange" listener="#{aitHandler.changeSourceLanguageCode(l.code)}"/>
 	  		</c:if>
 	  		<p:tab title="#{l.code}">
 	  			<j:inputGrid>
@@ -34,18 +33,42 @@
 		  			<jtp:inputText value="#{value.name[l.code].lang}" rendered="#{withName}"/>
 		  			
 		  			<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
-		  			<jtp:inputRemark value="#{value.name[l.code].lang}" rendered="#{withDescription}"/>
+		  			<jtp:inputRemark value="#{value.description[l.code].lang}" rendered="#{withDescription}"/>
 	  			</j:inputGrid>
 	  		</p:tab>
 	  	</p:tabView>
 		<h:panelGroup styleClass="ui-panel-actions" rendered="#{not empty aitHandler}">
-			<j:svg type="jeeslAi" listener="#{deeplFragmentBean.openDialog()}" tooltip="#{msg.jeeslTtAi}"
+			<j:svg type="jeeslAi" listener="#{aitHandler.openDialog()}"
+					ttEntity="IoLocale" ttCode="aiTranslation"
 				   oncomplete="PF('translationsWidget').show();" styleClass="pf-action-icon" update="@form"/>
 		</h:panelGroup>
   	</h:panelGroup>
   	
-  	<j:dialog id="dTranslations" widgetVar="translationsWidget" header="Automatic Translations" width="12">
-		
+  	<j:dialog id="dTranslations" widgetVar="translationsWidget" header="#{appLabelBean.labels['IoLocale']['aiTranslation'][localeCode].lang}" width="12">
+		<f:facet name="actions">
+			<j:svg type="jeeslCancel" oncomplete="PF('translationsWidget').hide()"/>
+			<j:svg type="jeeslSave" oncomplete="PF('translationsWidget').hide()"/>
+		</f:facet>
+		<j:inputGrid inputFields="2">
+			<jtp:label entity="IoLocale" code="language"/>
+			<jtp:label entity="IoLocale" code="original"/>
+			<jtp:label entity="IoLocale" code="translation"/>
+		</j:inputGrid>
+		<ui:repeat var="l" value="#{locales}">
+			<j:inputGrid inputFields="2">
+				<ui:fragment>
+					<jtp:symbolizer value="#{l}" marginRigh="5"/>
+					<p:outputLabel value="#{l.code}" />
+				</ui:fragment>
+				
+				<h:outputText value="#{value.name[l.code].lang}"/>
+				
+				<h:panelGroup styleClass="jeesl-output-container">
+					<h:outputText value="#{aitHandler.translations[l]}" styleClass="ui-outputtext" />
+					<p:selectBooleanCheckbox value="#{aitHandler.utilizations[l]}"/>
+				</h:panelGroup>
+			</j:inputGrid>
+		</ui:repeat>
 	</j:dialog>
 	
 </ui:composition>

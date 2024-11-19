@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.system.status;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -38,8 +39,6 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
     {
         this.cD = cD;
     } 
-    
-   
     
     public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> build(JeeslLocaleManager<LOC> lp, Descriptions xDescriptions) throws JeeslConstraintViolationException
 	{
@@ -79,10 +78,14 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 		D d = null;
 		try
 		{
-			d = cD.newInstance();
+			d = cD.getDeclaredConstructor().newInstance();
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	d.setLang(value);
     	d.setLkey(key);
     	return d;
