@@ -65,7 +65,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	private final IoFileRepositoryFactoryBuilder<L,D,LOC,?,FRS,?,?,FRC,?,?,?,?,?> fbFile;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
-	private JeeslFileRepositoryHandler<LOC,FRS,FRC,FRM> frh;
+	private JeeslFileRepositoryHandler<LOC,FRS,FRC,FRM> frh; public JeeslFileRepositoryHandler<LOC, FRS, FRC, FRM> getFrh() {return frh;}
 	public long getFileSizeLimit() {return frh.getStorage().getFileSizeLimit();}
 	
 	private final List<MI> items; public List<MI> getItems() {return items;}

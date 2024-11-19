@@ -34,6 +34,7 @@
     <io:file code="jeeslSearch" name="ui/control/action/search.svg"/>
     <io:file code="jeeslReload" name="ui/control/action/reload.svg"/>
     <io:file code="jeeslDropZone" name="ui/control/action/drop.svg"/>
+    <io:file code="jeeslTranslate" name="/ui/control/translate.svg"/>
     <io:file code="jeeslFavorite" name="ui/system/favorite.svg"/>
     <io:file code="jeeslAddressBook" name="ui/system/entity/address.svg"/>
     <io:file code="jeeslEntityCompany" name="ui/system/entity/company.svg"/>
@@ -46,6 +47,7 @@
     <io:file code="jeeslFrozen" name="/ui/info/frozen.svg"/>
     <io:file code="jeeslProject" name="/ui/info/project.svg"/>
     <io:file code="jeeslOnlineHelp" name="ui/info/help.svg"/>
+    <io:file code="jeeslGallery" name="ui/info/gallery.svg"/>
     <io:file code="jeeslRevision" name="ui/io/revision/envers/revision.svg"/>
     <io:file code="jeeslRevisionMod" name="ui/io/revision/envers/mod.svg"/>
     <io:file code="jeeslRevisionAdd" name="ui/io/revision/envers/add.svg"/>

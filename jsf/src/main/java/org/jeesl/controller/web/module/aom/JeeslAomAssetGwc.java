@@ -56,6 +56,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
+import org.jeesl.jsf.handler.ui.edit.UiEditBooleanHandler;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.query.cq.CqLiteral;
@@ -114,6 +115,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	private final Comparator<ASSET> cpAsset;
 
 	private final UiHelperAsset<L,D,REALM,COMPANY,SCOPE,EVENT,ETYPE> uiHelper; public UiHelperAsset<L,D,REALM,COMPANY,SCOPE,EVENT,ETYPE> getUiHelper() {return uiHelper;}
+	private final UiEditBooleanHandler ehGallery; public UiEditBooleanHandler getEhGallery() {return ehGallery;}
     private final NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;}
     private final ThMultiFilterHandler<ETYPE> thfEventType; public ThMultiFilterHandler<ETYPE> getThfEventType() {return thfEventType;}
     private final SbMultiHandler<ETYPE> sbhEventType; public SbMultiHandler<ETYPE> getSbhEventType() {return sbhEventType;}
@@ -143,6 +145,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		this.fbFr=fbFr;
 
 		uiHelper = new UiHelperAsset<>();
+		ehGallery = UiEditBooleanHandler.instance().value(false);
 		nnb = new NullNumberBinder();
 
 		thfEventType = new ThMultiFilterHandler<>(this);
@@ -358,6 +361,12 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 
 			if(!metas.isEmpty()) {preview = metas.get(0);}
 		}
+	}
+	
+	public void toggleGallery()
+	{
+		ehGallery.toggle();
+		logger.info("Load Gallery "+ehGallery.isAllow());
 	}
 
     public void addEvent() throws JeeslConstraintViolationException, JeeslLockingException

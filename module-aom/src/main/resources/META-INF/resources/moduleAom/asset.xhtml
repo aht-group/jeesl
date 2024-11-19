@@ -22,6 +22,7 @@
 					<f:facet id="fActions" name="actions">
 						<p:outputPanel id="cActions">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addAsset()}" update=":#{cc.id}:sAsset" tooltip="#{msg.jeeslTtAdd}" marginLeft="5" rendered="#{cc.attrs.ctrl.sbhView.selection.tree eq 'hierarchy'}"/>
+							<p:spacer width="10" height="12"/>
 							<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.ctrl.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}"/>
 							<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.ctrl.collapseTree()}" update="@form" rendered="#{cc.attrs.ctrl.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}"/>
 							<j:svg type="jeeslTreeExpandThree" listener="#{cc.attrs.ctrl.expandTree(3)}" update="@form" tooltip="#{msg.jeeslTtExpandThree}"/>
@@ -54,6 +55,8 @@
 							<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelAsset()}" update=":#{cc.id}:grid"/>
 							<j:svg type="jeeslSave"   listener="#{cc.attrs.ctrl.saveAsset()}"   update=":#{cc.id}:grid"/>
 							<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.asset.id gt 0}"/>
+							<p:spacer width="10" height="12"/>
+							<j:svg type="jeeslGallery" listener="#{cc.attrs.ctrl.toggleGallery()}" update=":#{cc.id}:sAsset" rendered="#{cc.attrs.ctrl.asset.id gt 0}" styleClass="#{cc.attrs.ctrl.ehGallery.allow ? '' : 'jeesl-greyscale'}"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 						<j:inputGrid rendered="#{cc.attrs.withCode}">
@@ -92,11 +95,18 @@
 				</h:form>
 			</j:slot>
 			<j:slot width="7">
-				<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{not empty cc.attrs.ctrl.preview}">
+				<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{cc.attrs.ctrl.ehGallery.deny and (not empty cc.attrs.ctrl.preview)}">
 					<o:graphicImage value="#{graphicAomBean.get(cc.attrs.ctrl.preview.code)}" />
 					
 				</p:panel>
-				
+				<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{cc.attrs.ctrl.ehGallery.allow}">
+					thumbs	
+				</p:panel>
+			</j:slot>
+			<j:slot width="12">
+				<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{cc.attrs.ctrl.ehGallery.allow}">
+					detail	
+				</p:panel>
 			</j:slot>
 			<j:slot width="12">
 				<h:form id="fEvents" rendered="#{not empty cc.attrs.ctrl.asset}">
