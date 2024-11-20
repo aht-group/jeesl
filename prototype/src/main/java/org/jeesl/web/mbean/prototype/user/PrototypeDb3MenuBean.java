@@ -57,7 +57,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 
-	public PrototypeDb3MenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity)
+	public PrototypeDb3MenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,?,USER> fbSecurity)
 	{				
 		cacheSub = Caffeine.newBuilder()
 			       .maximumSize(100)

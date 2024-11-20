@@ -15,7 +15,7 @@ public interface JeeslSecurityMfa <USER extends JeeslSecurityUser,
 									TYPE extends JeeslSecurityMfaType<?,?,TYPE,?>>
 			extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 					EjbWithParentAttributeResolver,EjbWithPositionVisible,JeeslWithRecordDateTime,
-			JeeslWithType<TYPE>
+					JeeslWithType<TYPE>
 {
 	public enum Attributes{user,type}
 	

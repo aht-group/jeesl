@@ -13,7 +13,6 @@ import org.jeesl.factory.ejb.system.security.EjbSecurityHelpFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityRoleFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityUsecaseFactory;
-import org.jeesl.factory.ejb.system.security.EjbSecurityUserFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityViewFactory;
 import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
 import org.jeesl.factory.json.system.security.JsonPageFactory;
@@ -32,10 +31,12 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
+import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfaType;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -52,10 +53,13 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									CTX extends JeeslSecurityContext<L,D>,
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									AR extends JeeslSecurityArea<L,D,V>,
+//									MFA extends JeeslSecurityMfa<?,?>,
+//									MFT extends JeeslSecurityMfaType<L,D,MFT,?>,
 									OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 									OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 									DC extends JeeslIoCms<L,D,?,?,DS>,
 									DS extends JeeslIoCmsSection<L,DS>,
+									UJ extends JeeslSecurityUser,
 									UP extends JeeslUser<R>
 >
 				extends AbstractFactoryBuilder<L,D>
@@ -115,20 +119,15 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public EjbSecurityAreaFactory<V,AR> ejbArea() {return new EjbSecurityAreaFactory<V,AR>(cArea);}
 	public EjbSecurityHelpFactory<V,OH,DC,DS> ejbHelp() {return new EjbSecurityHelpFactory<>(cOnlineHelp);}
 	
-	public EjbSecurityUserFactory<UP> ejbUser() {return new EjbSecurityUserFactory<>(cUser);}
+//	public EjbSecurityUserFactory<UP> ejbUser() {return new EjbSecurityUserFactory<>(cUser);}
 	
-	public <STAFF extends JeeslStaff<R,UP,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
-				EjbStaffFactory<R,UP,STAFF,D1,D2> ejbStaff(final Class<STAFF> cStaff)
-	{
-		return new EjbStaffFactory<R,UP,STAFF,D1,D2>(cStaff);
-	}
+	public <STAFF extends JeeslStaff<R,UP,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> EjbStaffFactory<R,UP,STAFF,D1,D2> ejbStaff(final Class<STAFF> cStaff) {return new EjbStaffFactory<>(cStaff);}
 	
 	public <STAFF extends JeeslStaff<R,UP,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> TxtStaffFactory<L,D,R,UP,STAFF,D1,D2> txtStaff(String localeCode) {return new TxtStaffFactory<>(localeCode);}
-	
 	public TxtSecurityViewFactory<L,D,C,V> txtView(String localeCode){return new TxtSecurityViewFactory<>(localeCode);}
 	
 	public JsonPageFactory<L,D,C,V,CTX,M> jsonPage() {return new JsonPageFactory<>();}
-	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,UP> jsonPages() {return new JsonPagesFactory<>(this);}
+	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,UJ,UP> jsonPages() {return new JsonPagesFactory<>(this);}
 	
 	public SqlUserFactory<UP> sqlUser() {return new SqlUserFactory<>();}
 	

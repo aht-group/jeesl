@@ -53,7 +53,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityRoleController.class);
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<C,R,V,U,A,?,?,USER> fSecurity;
 	private JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity;
 	
@@ -92,7 +92,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
-	public JeeslSecurityRoleController(SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,USER> fbSecurity)
+	public JeeslSecurityRoleController(SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;

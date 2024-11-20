@@ -90,7 +90,7 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 	private final WorkflowFactoryBuilder<L,D,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,?,?,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fbApproval;
 //	private final IoTemplateFactoryBuilder<L,D,?,?,MT,?,?,?,?> fbTemplate;
 	private final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fbRevision;
-	private final SecurityFactoryBuilder<L,D,?,SR,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,?,SR,?,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity;
 
 	private JeeslWorkflowEngine<L,D,LOC,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,?,?,?,SR,RE,RA,AL,WF,WY,WD,FRC,WCS,USER> wfEngine;
 
@@ -103,7 +103,7 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 
 	public AbstractWorkflowDashboardBean(final WorkflowFactoryBuilder<L,D,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,?,?,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fbApproval,
 											final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fbRevision,
-											final SecurityFactoryBuilder<L,D,?,SR,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity)
+											final SecurityFactoryBuilder<L,D,?,SR,?,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity)
 	{
 		super(fbApproval.getClassL(),fbApproval.getClassD());
 		this.fbApproval=fbApproval;

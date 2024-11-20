@@ -52,7 +52,7 @@ public class JeeslMfaController  <L extends JeeslLang, D extends JeeslDescriptio
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslMfaController.class);
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<C,R,V,U,A,?,?,USER> fSecurity;
 	private JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity;
 	
@@ -91,7 +91,7 @@ public class JeeslMfaController  <L extends JeeslLang, D extends JeeslDescriptio
 	
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
-	public JeeslMfaController(SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,USER> fbSecurity)
+	public JeeslMfaController(SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;

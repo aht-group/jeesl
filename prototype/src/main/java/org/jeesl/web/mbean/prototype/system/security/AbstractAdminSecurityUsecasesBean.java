@@ -61,7 +61,7 @@ public class AbstractAdminSecurityUsecasesBean <L extends JeeslLang, D extends J
 	private U usecase; public U getUsecase(){return usecase;} public void setUsecase(U usecase){this.usecase = usecase;}
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
-	public AbstractAdminSecurityUsecasesBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public AbstractAdminSecurityUsecasesBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity);
 		categoryType = JeeslSecurityCategory.Type.usecase;

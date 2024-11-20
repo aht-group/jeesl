@@ -38,7 +38,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 	protected JeeslSecurityFacade<?,R,V,U,A,CTX,?,USER> fSecurity;
 	protected JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity;
 	
-	private final SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	
 	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityFacade(JeeslSecurityFacade<?,R,V,U,A,CTX,?,USER> fSecurity) {this.fSecurity = fSecurity; return this;}
 	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityBean(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity) {this.bSecurity = bSecurity; return this;}
@@ -53,12 +53,12 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 				   A extends JeeslSecurityAction<?,?,R,V,U,?>,
 				   CTX extends JeeslSecurityContext<?,?>,
 				   USER extends JeeslUser<R>>
-		JeeslIdentityFactory<I,R,V,U,A,CTX,USER> instance(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity, final Class<I> cIdentity)
+		JeeslIdentityFactory<I,R,V,U,A,CTX,USER> instance(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,?,USER> fbSecurity, final Class<I> cIdentity)
 	{
 		return new JeeslIdentityFactory<>(fbSecurity,cIdentity);
 	}
 	
-	public JeeslIdentityFactory(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity, final Class<I> cIdentity)
+	public JeeslIdentityFactory(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,?,USER> fbSecurity, final Class<I> cIdentity)
 	{
 		this.fbSecurity=fbSecurity;
 		this.cIdentity=cIdentity;

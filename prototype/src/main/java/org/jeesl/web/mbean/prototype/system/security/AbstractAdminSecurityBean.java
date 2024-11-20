@@ -67,7 +67,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	
 	protected JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
-	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,?,USER> fbSecurity;
 	
 	protected final EjbSecurityCategoryFactory<C> efCategory;
 	protected final EjbSecurityViewFactory<C,V> efView;
@@ -100,7 +100,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	protected U opUsecase; public U getOpUsecase(){return opUsecase;}public void setOpUsecase(U opUsecase){this.opUsecase = opUsecase;}
 	protected U tblUsecase; public U getTblUsecase(){return tblUsecase;}public void setTblUsecase(U tblUsecase){this.tblUsecase = tblUsecase;}
 	
-	public AbstractAdminSecurityBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public AbstractAdminSecurityBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
