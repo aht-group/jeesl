@@ -53,6 +53,8 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityUserBean.class);
 
+	protected final EjbSecurityUserFactory<USER> efUser;
+	
 	protected JeeslUserFacade<USER> fUtilsUser;
 	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fUtilsSecurity;
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
@@ -65,7 +67,6 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	protected USER user; public USER getUser(){return user;} public void setUser(USER user){this.user = user;}
 	
 	protected Map<Long,Boolean> mapRoles; public Map<Long, Boolean> getMapRoles() {return mapRoles;}
-	protected final EjbSecurityUserFactory<USER> efUser;
 	
 	protected boolean performPasswordCheck;
 	protected String pwd1; public String getPwd1() {return pwd1;} public void setPwd1(String pwd1) {this.pwd1 = pwd1;}
@@ -79,7 +80,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
-		efUser = fbSecurity.ejbUser();
+		efUser = new EjbSecurityUserFactory<>(fbSecurity.getClassUser());
 		useSaltedHash = false;
 		booleans = new ArrayList<>();
 		booleans.add(Boolean.TRUE);

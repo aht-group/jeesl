@@ -115,7 +115,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public EjbSecurityAreaFactory<V,AR> ejbArea() {return new EjbSecurityAreaFactory<V,AR>(cArea);}
 	public EjbSecurityHelpFactory<V,OH,DC,DS> ejbHelp() {return new EjbSecurityHelpFactory<>(cOnlineHelp);}
 	
-	public EjbSecurityUserFactory<USER> ejbUser() {return new EjbSecurityUserFactory<USER>(cUser);}
+//	public EjbSecurityUserFactory<USER> ejbUser() {return new EjbSecurityUserFactory<USER>(cUser);}
 	
 	public <STAFF extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
 				EjbStaffFactory<R,USER,STAFF,D1,D2> ejbStaff(final Class<STAFF> cStaff)
