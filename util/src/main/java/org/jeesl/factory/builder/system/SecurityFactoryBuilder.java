@@ -56,7 +56,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 									DC extends JeeslIoCms<L,D,?,?,DS>,
 									DS extends JeeslIoCmsSection<L,DS>,
-									USER extends JeeslUser<R>
+									UP extends JeeslUser<R>
 >
 				extends AbstractFactoryBuilder<L,D>
 {
@@ -75,7 +75,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
     private final Class<AR> cArea; public Class<AR> getClassArea(){return cArea;}
     
     private final Class<OH> cOnlineHelp; public Class<OH> getClassOnlineHelp() {return cOnlineHelp;}
-	private final Class<USER> cUser; public Class<USER> getClassUser(){return cUser;}
+	private final Class<UP> cUser; public Class<UP> getClassUserProject() {return cUser;}
 	
 	public SecurityFactoryBuilder(final Class<L> cL, final Class<D> cD,
 									final Class<C> cCategory,
@@ -88,7 +88,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									final Class<M> cMenu,
 									final Class<AR> cArea,
 									final Class<OH> cOnlineHelp,
-									final Class<USER> cUser)
+									final Class<UP> cUser)
 	{		
 		super(cL,cD);
 		this.cCategory=cCategory;
@@ -115,26 +115,22 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public EjbSecurityAreaFactory<V,AR> ejbArea() {return new EjbSecurityAreaFactory<V,AR>(cArea);}
 	public EjbSecurityHelpFactory<V,OH,DC,DS> ejbHelp() {return new EjbSecurityHelpFactory<>(cOnlineHelp);}
 	
-//	public EjbSecurityUserFactory<USER> ejbUser() {return new EjbSecurityUserFactory<USER>(cUser);}
+	public EjbSecurityUserFactory<UP> ejbUser() {return new EjbSecurityUserFactory<>(cUser);}
 	
-	public <STAFF extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
-				EjbStaffFactory<R,USER,STAFF,D1,D2> ejbStaff(final Class<STAFF> cStaff)
+	public <STAFF extends JeeslStaff<R,UP,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
+				EjbStaffFactory<R,UP,STAFF,D1,D2> ejbStaff(final Class<STAFF> cStaff)
 	{
-		return new EjbStaffFactory<R,USER,STAFF,D1,D2>(cStaff);
+		return new EjbStaffFactory<R,UP,STAFF,D1,D2>(cStaff);
 	}
 	
-	public <STAFF extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
-		TxtStaffFactory<L,D,R,USER,STAFF,D1,D2> txtStaff(String localeCode)
-	{
-		return new TxtStaffFactory<L,D,R,USER,STAFF,D1,D2>(localeCode);
-	}
+	public <STAFF extends JeeslStaff<R,UP,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> TxtStaffFactory<L,D,R,UP,STAFF,D1,D2> txtStaff(String localeCode) {return new TxtStaffFactory<>(localeCode);}
 	
 	public TxtSecurityViewFactory<L,D,C,V> txtView(String localeCode){return new TxtSecurityViewFactory<>(localeCode);}
 	
 	public JsonPageFactory<L,D,C,V,CTX,M> jsonPage() {return new JsonPageFactory<>();}
-	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,USER> jsonPages() {return new JsonPagesFactory<>(this);}
+	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,UP> jsonPages() {return new JsonPagesFactory<>(this);}
 	
-	public SqlUserFactory<USER> sqlUser() {return new SqlUserFactory<>();}
+	public SqlUserFactory<UP> sqlUser() {return new SqlUserFactory<>();}
 	
 	public Comparator<A> comparatorAction(SecurityActionComparator.Type type) {return (new SecurityActionComparator<C,V,A,AT>()).factory(type);}
 }

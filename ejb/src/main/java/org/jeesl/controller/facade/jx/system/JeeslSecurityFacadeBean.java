@@ -161,7 +161,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	
 	@Override public List<V> allViewsForUser(USER user)
 	{
-		user = em.find(fbSecurity.getClassUser(), user.getId());
+		user = em.find(fbSecurity.getClassUserProject(), user.getId());
 		Map<Long,V> views = new HashMap<Long,V>();
 		for(R role : user.getRoles())
 		{
@@ -193,8 +193,8 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 //		cQ.where(cB.equal(pId,id));
 		
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<USER> cQ = cB.createQuery(fbSecurity.getClassUser());
-		Root<USER> root = cQ.from(fbSecurity.getClassUser());
+		CriteriaQuery<USER> cQ = cB.createQuery(fbSecurity.getClassUserProject());
+		Root<USER> root = cQ.from(fbSecurity.getClassUserProject());
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
 		ListJoin<USER,R> jRole = root.joinList(JeeslUser.Attributes.roles.toString());
@@ -282,7 +282,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	
 	@Override public List<A> allActionsForUser(USER user)
 	{
-		user = em.find(fbSecurity.getClassUser(), user.getId());
+		user = em.find(fbSecurity.getClassUserProject(), user.getId());
 		Map<Long,A> actions = new HashMap<Long,A>();
 		for(R r : user.getRoles())
 		{
@@ -346,7 +346,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	
 	@Override public List<R> allRolesForUser(USER user)
 	{
-		user = em.find(fbSecurity.getClassUser(), user.getId());
+		user = em.find(fbSecurity.getClassUserProject(), user.getId());
 		user.getRoles().size();
 		return user.getRoles();
 	}
