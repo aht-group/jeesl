@@ -79,7 +79,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 
 	public JeeslMmgItemController(final JeeslMmgItemCallback callback,
 									final MmgFactoryBuilder<L,D,LOC,R,MG,MI,MC,MQ,USER> fbRmmv,
-									IoFileRepositoryFactoryBuilder<L,D,LOC,?,FRS,?,?,FRC,?,?,?,?,?> fbFile)
+									final IoFileRepositoryFactoryBuilder<L,D,LOC,?,FRS,?,?,FRC,?,?,?,?,?> fbFile)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;
