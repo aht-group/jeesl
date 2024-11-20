@@ -64,7 +64,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMenuController.class);
 
-	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?,?> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,?,OH,DC,DS,?,?> fbSecurity;
 	private JeeslSecurityFacade<C,R,V,?,?,CTX,M,?> fSecurity;
 	private JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity;
 	
@@ -90,7 +90,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	private boolean disabledMenuImportFromDefaultContext; public boolean isDisabledMenuImportFromDefaultContext() {return disabledMenuImportFromDefaultContext;}
 
 	public JeeslSecurityMenuController(JeeslSecurityMenuCallback callback,
-										SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?,?> fbSecurity,
+										SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,?,OH,DC,DS,?,?> fbSecurity,
 										IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());

@@ -66,7 +66,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	
 	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,USER> fbSecurity;
 	
 	protected final EjbSecurityCategoryFactory<C> efCategory;
 	protected final EjbSecurityUsecaseFactory<C,U> efUsecase;
@@ -101,7 +101,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	public boolean isHasDeveloperAction() {return userIsDeveloper;}
 	
-	public JeeslSecurityUsecaseController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,USER> fbSecurity)
+	public JeeslSecurityUsecaseController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;

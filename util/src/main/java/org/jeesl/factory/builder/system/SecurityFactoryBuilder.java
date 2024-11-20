@@ -54,7 +54,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									AR extends JeeslSecurityArea<L,D,V>,
 //									MFA extends JeeslSecurityMfa<?,?>,
-//									MFT extends JeeslSecurityMfaType<L,D,MFT,?>,
+									MFT extends JeeslSecurityMfaType<L,D,MFT,?>,
 									OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 									OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 									DC extends JeeslIoCms<L,D,?,?,DS>,

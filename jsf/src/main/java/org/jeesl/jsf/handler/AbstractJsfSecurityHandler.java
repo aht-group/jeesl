@@ -39,7 +39,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	final static Logger logger = LoggerFactory.getLogger(AbstractJsfSecurityHandler.class);
 	public static final long serialVersionUID=1;
 
-	private SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,?,USER> fbSecurity;
+	private SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<?,R,V,U,A,CTX,M,USER> fSecurity;
 	protected JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity;
 	
@@ -63,7 +63,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 	
-	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,?,USER> fbSecurity,
+	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,?,?,USER> fbSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 			I identity,
 			V view)

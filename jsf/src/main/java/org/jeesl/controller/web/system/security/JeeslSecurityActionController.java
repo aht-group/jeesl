@@ -57,7 +57,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,OT,OH,?,?,?,USER> fbSecurity;
 	
 	private final EjbSecurityCategoryFactory<C> efCategory;
 	protected final EjbSecurityActionTemplateFactory<C,AT> efTemplate;
@@ -70,7 +70,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	
 	protected boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	
-	public JeeslSecurityActionController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,?,USER> fbSecurity)
+	public JeeslSecurityActionController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,OT,OH,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;

@@ -68,7 +68,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	private enum SecuritySuffix {developer}
 	private enum SecuritySuffixDeprecated {Developer}
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,OT,OH,?,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	
 	private final JeeslSecurityViewCallback callback;
@@ -99,7 +99,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	
-	public JeeslSecurityViewController(JeeslSecurityViewCallback callback, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,?,USER> fbSecurity)
+	public JeeslSecurityViewController(JeeslSecurityViewCallback callback, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,OT,OH,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.callback = callback;
