@@ -13,6 +13,7 @@ import org.jeesl.model.ejb.system.property.SystemVersion;
 public class FlywaySystemPropertyPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywaySystemPropertyVersionMarker
 {
 	public static FlywaySystemPropertyPathProvider instance() {return new FlywaySystemPropertyPathProvider();}
+	private FlywaySystemPropertyPathProvider() {}
 	
 	@Override public String getRootDirectory() {return "jeesl/system/io/db/migration/system/property";}
 	
@@ -31,7 +32,4 @@ public class FlywaySystemPropertyPathProvider implements JeeslFlywayPathProvider
 		
 		return list;
 	}
-
-//	@Override public void sinceSystemJob(int i) {}
-//	@Override public void markerSystemJob() {}
 }

@@ -72,6 +72,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	private final List<MC> classifications; public List<MC> getClassifications() {return classifications;}
 
 	private R realm;
+	@SuppressWarnings("unused")
 	private RREF rref;
 	private MG gallery;
 	private USER currentUser;

@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,8 +38,8 @@ public class SecurityMenu implements JeeslSecurityMenu<IoLang,SecurityView,Secur
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
-	@NotNull
-	@ManyToOne(fetch=FetchType.LAZY)
+	@NotNull @ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_SecurityMenu_context"))
 	private SecurityContext context;
 	@Override public SecurityContext getContext() {return context;}
 	@Override public void setContext(SecurityContext context) {this.context = context;}

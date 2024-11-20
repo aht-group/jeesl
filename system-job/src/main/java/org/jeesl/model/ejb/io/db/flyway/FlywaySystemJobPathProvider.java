@@ -19,6 +19,7 @@ import org.jeesl.model.ejb.system.job.template.SystemJobType;
 public class FlywaySystemJobPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywaySystemJobVersionMarker
 {
 	public static FlywaySystemJobPathProvider instance() {return new FlywaySystemJobPathProvider();}
+	private FlywaySystemJobPathProvider() {}
 	
 	@Override public String getRootDirectory() {return "jeesl/system/io/db/migration/system/job";}
 	

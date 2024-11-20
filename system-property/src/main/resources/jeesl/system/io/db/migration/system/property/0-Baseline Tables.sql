@@ -1,0 +1,4 @@
+create table SystemFeature (id  bigserial not null, code varchar(255), name varchar(255), position int4 not null, remark text, visible boolean not null, primary key (id));
+create table SystemProperty (id  bigserial not null, documentation boolean, frozen boolean not null, key varchar(255), position int4, value varchar(255), category_id int8, primary key (id));
+create table SystemPropertyJtDescription (property_id int8 not null, description_id int8 not null, primary key (property_id, description_id));
+create table SystemPropertyJtLang (property_id int8 not null, lang_id int8 not null, primary key (property_id, lang_id));
