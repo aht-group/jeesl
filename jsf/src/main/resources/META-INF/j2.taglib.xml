@@ -148,6 +148,13 @@
 	</tag>
 	
 	<tag>
+        <tag-name>imageWall</tag-name>
+        <component>
+            <resource-id>moduleMmg/wall.xhtml</resource-id>
+        </component>
+	</tag>
+	
+	<tag>
         <tag-name>gridModuleNewsRegistry</tag-name>
         <component>
             <resource-id>moduleNews/registry.xhtml</resource-id>
