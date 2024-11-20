@@ -63,11 +63,6 @@
 		<!-- JEESL Modules -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-io-cms</artifactId>
-    		<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-fr</artifactId>
     		<scope>compile</scope>
 		</dependency>
