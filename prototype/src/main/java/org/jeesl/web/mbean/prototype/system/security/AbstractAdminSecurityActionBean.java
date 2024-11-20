@@ -57,7 +57,7 @@ public class AbstractAdminSecurityActionBean <L extends JeeslLang, D extends Jee
 	
 	protected boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	
-	private AbstractAdminSecurityActionBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,OT,OH,?,?,?,USER> fbSecurity)
+	private AbstractAdminSecurityActionBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,OT,OH,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity);
 		userIsDeveloper = true;

@@ -29,7 +29,7 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 	protected String forwardDeactivated;
 	protected String forwardDenied;
 
-	public AbstractRewriteProvider(SecurityFactoryBuilder<?,?,?,?,V,?,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity)
+	public AbstractRewriteProvider(SecurityFactoryBuilder<?,?,?,?,V,?,?,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity)
 	{
 		debugOnInfo = false;
 		forwardUnauthorized = "/jsf/settings/system/security/redirect/unauthorized.xhtml";

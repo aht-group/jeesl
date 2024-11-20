@@ -31,6 +31,7 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
+import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfa;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfaType;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
@@ -53,7 +54,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									CTX extends JeeslSecurityContext<L,D>,
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									AR extends JeeslSecurityArea<L,D,V>,
-//									MFA extends JeeslSecurityMfa<?,?>,
+									MFA extends JeeslSecurityMfa<UJ,MFT>,
 									MFT extends JeeslSecurityMfaType<L,D,MFT,?>,
 									OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 									OH extends JeeslSecurityOnlineHelp<V,DC,DS>,

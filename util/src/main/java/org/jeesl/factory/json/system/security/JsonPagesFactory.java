@@ -41,11 +41,11 @@ public class JsonPagesFactory<L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonPagesFactory.class);
 
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,UJ,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,UJ,USER> fbSecurity;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 	private final JsonPageFactory<L,D,C,V,CTX,M> jfPage;
 	
-	public JsonPagesFactory(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,UJ,USER> fbSecurity)
+	public JsonPagesFactory(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,UJ,USER> fbSecurity)
 	{
 		this.fbSecurity=fbSecurity;
 		efMenu = fbSecurity.ejbMenu();

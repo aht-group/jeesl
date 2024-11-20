@@ -29,8 +29,7 @@ import org.jeesl.model.xml.system.security.Security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslMenuStructureReport <L extends JeeslLang,
-								D extends JeeslDescription,
+public class JeeslMenuStructureReport <L extends JeeslLang, D extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -44,14 +43,14 @@ public class JeeslMenuStructureReport <L extends JeeslLang,
 	final static Logger logger = LoggerFactory.getLogger(JeeslMenuStructureReport.class);
 
 	private final JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	
 	private final String localeCode;
 	
 //	private org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V,U,A,AT,USER> xfView;
 	private Comparator<V> comparatorView;
 	
-	public JeeslMenuStructureReport(String localeCode, JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,?,?,USER> fbSecurity)
+	public JeeslMenuStructureReport(String localeCode, JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,?,?,?,USER> fbSecurity)
 	{
 		this.localeCode=localeCode;
 		this.fSecurity=fSecurity;

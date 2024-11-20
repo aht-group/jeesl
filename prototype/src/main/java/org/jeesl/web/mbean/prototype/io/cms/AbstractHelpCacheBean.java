@@ -58,7 +58,7 @@ public abstract class AbstractHelpCacheBean <L extends JeeslLang,D extends Jeesl
 	final static Logger logger = LoggerFactory.getLogger(AbstractHelpCacheBean.class);
 	
 	private final IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,?,MT,FC,FM> fbCms;
-	private final SecurityFactoryBuilder<L,D,?,?,VIEW,?,?,?,?,M,?,?,?,OH,CMS,S,?,?> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,?,?,VIEW,?,?,?,?,M,?,?,?,?,OH,CMS,S,?,?> fbSecurity;
 	
 	private JeeslCmsRenderer<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC> ofx;
 	private JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,?,MT,FC,FM> fCms;
@@ -70,7 +70,7 @@ public abstract class AbstractHelpCacheBean <L extends JeeslLang,D extends Jeesl
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	public AbstractHelpCacheBean(IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,?,MT,FC,FM> fbCms,
-								SecurityFactoryBuilder<L,D,?,?,VIEW,?,?,?,?,M,?,?,?,OH,CMS,S,?,?> fbSecurity)
+								SecurityFactoryBuilder<L,D,?,?,VIEW,?,?,?,?,M,?,?,?,?,OH,CMS,S,?,?> fbSecurity)
 	{
 		this.fbCms=fbCms;
 		this.fbSecurity=fbSecurity;

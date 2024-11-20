@@ -73,7 +73,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityMenuBean.class);
 
 //	private final IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fbCms;
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,OT,OH,DC,DS,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,OT,OH,DC,DS,?,USER> fbSecurity;
 
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
@@ -95,7 +95,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 
 	private boolean disabledMenuImportFromDefaultContext; public boolean isDisabledMenuImportFromDefaultContext() {return disabledMenuImportFromDefaultContext;}
 
-	public AbstractAdminSecurityMenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,OT,OH,DC,DS,?,USER> fbSecurity,
+	public AbstractAdminSecurityMenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,OT,OH,DC,DS,?,USER> fbSecurity,
 										IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity);

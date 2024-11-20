@@ -37,7 +37,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityDomainBean.class);
 
 	protected JeeslSecurityFacade<C,R,?,?,?,?,?,USER> fSecurity;
-	private final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	protected JeeslUserFacade<USER> fUser;
 
 	protected final Comparator<STAFF> cpStaff;
@@ -55,7 +55,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	
 	private OverlayUserSelectionHandler<USER> opContactHandler; @Override public OverlayUserSelectionHandler<USER> getOpUserHandler() {return opContactHandler;}
 	
-	public AbstractAdminSecurityDomainBean(final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity, Class<STAFF> cStaff)
+	public AbstractAdminSecurityDomainBean(final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity, Class<STAFF> cStaff)
 	{
 		this.fbSecurity=fbSecurity;
 		this.cStaff=cStaff;
