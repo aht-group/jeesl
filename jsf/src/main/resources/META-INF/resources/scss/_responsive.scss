@@ -1636,6 +1636,24 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
+	&.jeesl-image-wrapper {
+		padding: $regular-spacing;
+		
+		.ui-panel-content {
+			padding: 0;
+			position: relative;
+		
+			img {
+				left: 50%;
+				max-height: 100%;
+				object-fit: contain;
+				position: absolute;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+	}
+	
 	&.jeesl-galleria {
 		padding: 0;
 		

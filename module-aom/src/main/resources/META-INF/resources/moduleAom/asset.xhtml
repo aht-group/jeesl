@@ -47,62 +47,64 @@
 			</h:form>
 		</j:slot>
 		<j:row id="sAsset" width="8">
-			<j:slot width="5">
-				<h:form id="fType" rendered="#{not empty cc.attrs.ctrl.asset}">
-					<p:panel styleClass="jeesl-panel">
-						<f:facet name="header"><j:pHeader entity="AomAsset"/></f:facet>
-						<f:facet name="actions">
-							<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelAsset()}" update=":#{cc.id}:grid"/>
-							<j:svg type="jeeslSave"   listener="#{cc.attrs.ctrl.saveAsset()}"   update=":#{cc.id}:grid"/>
-							<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.asset.id gt 0}"/>
-							<p:spacer width="10" height="12"/>
-							<j:svg type="jeeslGallery" listener="#{cc.attrs.ctrl.toggleGallery()}" update=":#{cc.id}:sAsset" rendered="#{cc.attrs.ctrl.asset.id gt 0}" styleClass="#{cc.attrs.ctrl.ehGallery.allow ? '' : 'jeesl-greyscale'}"/>
-						</f:facet>
-						<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-						<j:inputGrid rendered="#{cc.attrs.withCode}">
-							<jtp:label entity="AomAsset" code="code"/>
-							<jtp:inputText value="#{cc.attrs.ctrl.asset.code}"/>
-						</j:inputGrid>
-						<j:inputGrid>
-							
-							<jtp:label entity="AomAsset" code="name"/>
-							<jtp:inputText value="#{cc.attrs.ctrl.asset.name}"/>
-							
-							<jtp:label entity="AomAsset" code="status"/>
-							<p:selectOneMenu value="#{cc.attrs.ctrl.asset.status}" var="s" effect="fade" autoWidth="false">
-	                        	<f:selectItems value="#{cc.attrs.ctrl.cache.assetStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
-	                        	<p:column><jtp:symbolizer value="#{s}"/></p:column>
-					            <p:column><h:outputText value="#{s.name[localeCode].lang}"/></p:column>
-	                        </p:selectOneMenu>
-	                        
-	                        <jtp:label entity="AomAsset" code="type1"/>
-							<p:selectOneMenu value="#{cc.attrs.ctrl.asset.type1}" var="t" effect="fade" autoWidth="false">
-	                        	<f:selectItems value="#{cc.attrs.cache.cachedType[cc.attrs.ctrl.key.typeNatural]}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-	                        	<p:column><jtp:symbolizer value="#{t.parent}" marginRight="5"/><h:outputText value="#{t.parent.name[localeCode].lang}"/></p:column>
-					            <p:column><jtp:symbolizer value="#{t}" marginRight="5"/><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
-	                        </p:selectOneMenu>
-	 
-	                        <jtp:label entity="AomAsset" code="manufacturer"/>
-							<p:selectOneMenu value="#{cc.attrs.ctrl.asset.manufacturer}" effect="fade" autoWidth="false">
-								<f:selectItem itemLabel="--"/>
-	                        	<f:selectItems value="#{cc.attrs.cache.cachedScopeCompanies[cc.attrs.ctrl.key.scopeManufacturer]}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
-	                        </p:selectOneMenu>
-	                        
-	                        <jtp:label entity="AomAsset" code="remark"/>
-	                        <jtp:inputRemark value="#{cc.attrs.ctrl.asset.remark}"/>
-						</j:inputGrid>
+			<j:balancer width="12">
+				<j:slot width="5">
+					<h:form id="fType" rendered="#{not empty cc.attrs.ctrl.asset}">
+						<p:panel styleClass="jeesl-panel">
+							<f:facet name="header"><j:pHeader entity="AomAsset"/></f:facet>
+							<f:facet name="actions">
+								<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelAsset()}" update=":#{cc.id}:grid"/>
+								<j:svg type="jeeslSave"   listener="#{cc.attrs.ctrl.saveAsset()}"   update=":#{cc.id}:grid"/>
+								<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.asset.id gt 0}"/>
+								<p:spacer width="10" height="12"/>
+								<j:svg type="jeeslGallery" listener="#{cc.attrs.ctrl.toggleGallery()}" update=":#{cc.id}:sAsset" rendered="#{cc.attrs.ctrl.asset.id gt 0}" styleClass="#{cc.attrs.ctrl.ehGallery.allow ? '' : 'jeesl-greyscale'}"/>
+							</f:facet>
+							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+							<j:inputGrid rendered="#{cc.attrs.withCode}">
+								<jtp:label entity="AomAsset" code="code"/>
+								<jtp:inputText value="#{cc.attrs.ctrl.asset.code}"/>
+							</j:inputGrid>
+							<j:inputGrid>
+								
+								<jtp:label entity="AomAsset" code="name"/>
+								<jtp:inputText value="#{cc.attrs.ctrl.asset.name}"/>
+								
+								<jtp:label entity="AomAsset" code="status"/>
+								<p:selectOneMenu value="#{cc.attrs.ctrl.asset.status}" var="s" effect="fade" autoWidth="false">
+		                        	<f:selectItems value="#{cc.attrs.ctrl.cache.assetStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+		                        	<p:column><jtp:symbolizer value="#{s}"/></p:column>
+						            <p:column><h:outputText value="#{s.name[localeCode].lang}"/></p:column>
+		                        </p:selectOneMenu>
+		                        
+		                        <jtp:label entity="AomAsset" code="type1"/>
+								<p:selectOneMenu value="#{cc.attrs.ctrl.asset.type1}" var="t" effect="fade" autoWidth="false">
+		                        	<f:selectItems value="#{cc.attrs.cache.cachedType[cc.attrs.ctrl.key.typeNatural]}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+		                        	<p:column><jtp:symbolizer value="#{t.parent}" marginRight="5"/><h:outputText value="#{t.parent.name[localeCode].lang}"/></p:column>
+						            <p:column><jtp:symbolizer value="#{t}" marginRight="5"/><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
+		                        </p:selectOneMenu>
+		 
+		                        <jtp:label entity="AomAsset" code="manufacturer"/>
+								<p:selectOneMenu value="#{cc.attrs.ctrl.asset.manufacturer}" effect="fade" autoWidth="false">
+									<f:selectItem itemLabel="--"/>
+		                        	<f:selectItems value="#{cc.attrs.cache.cachedScopeCompanies[cc.attrs.ctrl.key.scopeManufacturer]}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
+		                        </p:selectOneMenu>
+		                        
+		                        <jtp:label entity="AomAsset" code="remark"/>
+		                        <jtp:inputRemark value="#{cc.attrs.ctrl.asset.remark}"/>
+							</j:inputGrid>
+						</p:panel>
+					</h:form>
+				</j:slot>
+				<j:slot width="7">
+					<p:panel styleClass="jeesl-panel jeesl-image-wrapper" rendered="#{cc.attrs.ctrl.ehGallery.deny and (not empty cc.attrs.ctrl.preview)}">
+						<o:graphicImage value="#{graphicAomBean.get(cc.attrs.ctrl.preview.code)}" />
+						
 					</p:panel>
-				</h:form>
-			</j:slot>
-			<j:slot width="7">
-				<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{cc.attrs.ctrl.ehGallery.deny and (not empty cc.attrs.ctrl.preview)}">
-					<o:graphicImage value="#{graphicAomBean.get(cc.attrs.ctrl.preview.code)}" />
-					
-				</p:panel>
-				<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{cc.attrs.ctrl.ehGallery.allow}">
-					thumbs	
-				</p:panel>
-			</j:slot>
+					<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{cc.attrs.ctrl.ehGallery.allow}">
+						thumbs	
+					</p:panel>
+				</j:slot>
+			</j:balancer>
 			<j:slot width="12">
 				<p:panel styleClass="jeesl-panel jeesl-galleria" rendered="#{cc.attrs.ctrl.ehGallery.allow}">
 					detail	
