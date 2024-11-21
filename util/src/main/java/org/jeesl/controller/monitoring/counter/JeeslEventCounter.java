@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.io.FileUtils;
 import org.jeesl.factory.xml.domain.finance.XmlCounterFactory;
@@ -41,7 +42,7 @@ public class JeeslEventCounter
 	}
 
 	public <C extends EjbWithId> void countClass(C ejb){add(ejb.getClass().getSimpleName(),1);}
-	public <C extends EjbWithCode> void add(C ejb){add(ejb.getCode(),1);}
+	public <C extends EjbWithCode> void add(C ejb) {if(Objects.nonNull(ejb)) {add(ejb.getCode(),1);} else {this.add("--",1);}}
 	public <C extends EjbWithCode> void add(C ejb, long size){add(ejb.getCode(),size);}
 	public <E extends Enum<E>> void add(E event, long size){add(event.toString(),size);}
 	public void add(String event) {this.add(event,1);}
@@ -51,11 +52,11 @@ public class JeeslEventCounter
 		map.put(event, map.get(event)+size);
 	}
 
-	public <E extends Enum<E>> long events(E event, long size){return events(event.toString());}
+	public <E extends Enum<E>> long events(E event, long size) {return events(event.toString());}
 	public long events(String event)
 	{
-		if(map.containsKey(event)){return map.get(event);}
-		else{return 0;}
+		if(map.containsKey(event)) {return map.get(event);}
+		else {return 0;}
 	}
 	
 	public void debugAsFileSize()

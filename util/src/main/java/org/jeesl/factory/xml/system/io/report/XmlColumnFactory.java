@@ -6,6 +6,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -27,7 +28,8 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 								ROW extends JeeslReportRow<L,D,?,?,CDT,?>,
 								
 								CELL extends JeeslReportCell<L,D,?>,
-								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
+								STYLE extends JeeslReportStyle<L,D>,
+								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>
 								>
 {

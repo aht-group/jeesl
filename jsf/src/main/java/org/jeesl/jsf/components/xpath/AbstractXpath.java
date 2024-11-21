@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.faces.component.UIOutput;
 
@@ -38,7 +39,7 @@ public abstract class AbstractXpath extends UIOutput
 	
 	protected DecimalFormat getDecimalFormat(String pattern)
 	{
-		if(mapDecimal==null){mapDecimal = new HashMap<String,DecimalFormat>();}
+		if(Objects.isNull(mapDecimal)) {mapDecimal = new HashMap<String,DecimalFormat>();}
 		if(mapDecimal.containsKey(pattern)){return mapDecimal.get(pattern);}
 		else
 		{

@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
@@ -55,7 +56,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 										TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 										CELL extends JeeslReportCell<L,D,TEMPLATE>,
 										STYLE extends JeeslReportStyle<L,D>,
-										CDT extends JeeslStatus<L,D,CDT>,
+										CDT extends JeeslReportCellType<L,D,CDT,?>,
 										CW extends JeeslReportColumnWidth<L,D,CW,?>,
 										RT extends JeeslReportRowType<L,D,RT,?>,
 										ENTITY extends EjbWithId,

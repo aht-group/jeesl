@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
@@ -33,7 +34,7 @@ public class XlsCellFactory <
 							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
 							STYLE extends JeeslReportStyle<?,?>,
-							CDT extends JeeslStatus<?,?,CDT>,
+							CDT extends JeeslReportCellType<?,?,CDT,?>,
 							CW extends JeeslStatus<?,?,CW>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsCellFactory.class);

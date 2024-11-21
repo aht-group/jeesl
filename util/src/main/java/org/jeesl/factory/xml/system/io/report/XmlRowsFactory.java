@@ -6,6 +6,7 @@ import java.util.Comparator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
@@ -36,7 +37,8 @@ public class XmlRowsFactory <L extends JeeslLang,D extends JeeslDescription,
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
+								STYLE extends JeeslReportStyle<L,D>,
+								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslReportColumnWidth<L,D,CW,?>,
 								RT extends JeeslReportRowType<L,D,RT,?>
 								>

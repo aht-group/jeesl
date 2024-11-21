@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.io.report.xlsx;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -22,7 +23,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslReportColumn<L extends JeeslLang,D extends JeeslDescription,
 									GROUP extends JeeslReportColumnGroup<L,D,?,?,STYLE>,
 									STYLE extends JeeslReportStyle<L,D>,
-									CDT extends JeeslStatus<L,D,CDT>,
+									CDT extends JeeslReportCellType<L,D,CDT,?>,
 									CW extends JeeslStatus<L,D,CW>,
 									TLS extends JeeslStatus<L,D,TLS>>
 

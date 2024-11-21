@@ -13,6 +13,7 @@ import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.txt.system.io.report.TxtIoColumnFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -26,7 +27,7 @@ public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,S
 								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,?,?>,
 								ROW extends JeeslReportRow<?,?,?,?,CDT,?>,
 								STYLE extends JeeslReportStyle<?,?>,
-								CDT extends JeeslStatus<?,?,CDT>>
+								CDT extends JeeslReportCellType<?,?,CDT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsStyleFactory.class);
 	

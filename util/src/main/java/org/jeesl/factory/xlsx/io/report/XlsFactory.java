@@ -34,6 +34,7 @@ import org.jeesl.interfaces.controller.report.JeeslReport;
 import org.jeesl.interfaces.controller.report.JeeslReportSelectorTransformation;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
@@ -71,7 +72,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 						TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 						CELL extends JeeslReportCell<L,D,TEMPLATE>,
 						STYLE extends JeeslReportStyle<L,D>,
-						CDT extends JeeslStatus<L,D,CDT>,
+						CDT extends JeeslReportCellType<L,D,CDT,?>,
 						CW extends JeeslReportColumnWidth<L,D,CW,?>,
 						RT extends JeeslReportRowType<L,D,RT,?>,
 						RCAT extends JeeslStatus<L,D,RCAT>,
