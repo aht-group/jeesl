@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="false"/>
+	</composite:interface>
+
+	<composite:implementation>
+	<j:row>
+		<j:slot id="sMfaList" width="4">
+			sMfaList
+		</j:slot>
+		<j:slot id="sMfa" width="8">
+			sMfa
+		</j:slot>
+	</j:row>
+	</composite:implementation>
+</ui:composition>

@@ -79,6 +79,8 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
     private final Class<M> cMenu; public Class<M> getClassMenu(){return cMenu;}
     private final Class<AR> cArea; public Class<AR> getClassArea(){return cArea;}
     
+    private Class<MFT> cMfaType; public Class<MFT> getClassMfaType() {return cMfaType;}
+    
     private final Class<OH> cOnlineHelp; public Class<OH> getClassOnlineHelp() {return cOnlineHelp;}
 	private final Class<UP> cUser; public Class<UP> getClassUserProject() {return cUser;}
 	
@@ -92,6 +94,8 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									final Class<CTX> cContext,
 									final Class<M> cMenu,
 									final Class<AR> cArea,
+									final Class<MFA> cMfa,
+									final Class<MFT> cMfaType,
 									final Class<OH> cOnlineHelp,
 									final Class<UP> cUser)
 	{		

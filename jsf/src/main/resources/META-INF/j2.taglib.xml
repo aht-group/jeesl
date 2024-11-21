@@ -206,5 +206,11 @@
             <resource-id>systemSecurity/pExpired.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>rMfa</tag-name>
+        <component>
+            <resource-id>systemSecurity/rMfa.xhtml</resource-id>
+        </component>
+	</tag>
     
 </facelet-taglib>

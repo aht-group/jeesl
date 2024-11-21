@@ -18,7 +18,7 @@
 						>
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityContext" code="listOf">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.ctrl.addContext()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addContext()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.ctrl.selectContext()}" update=":#{cc.id}:grid"/>
