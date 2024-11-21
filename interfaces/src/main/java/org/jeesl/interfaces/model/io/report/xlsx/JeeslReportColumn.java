@@ -30,7 +30,9 @@ public interface JeeslReportColumn<L extends JeeslLang,D extends JeeslDescriptio
 		extends Serializable,EjbRemoveable,EjbPersistable,EjbSaveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>
-{					
+{
+	public enum Att {dataType} 
+	
 	GROUP getGroup();
 	void setGroup(GROUP group);
 	
