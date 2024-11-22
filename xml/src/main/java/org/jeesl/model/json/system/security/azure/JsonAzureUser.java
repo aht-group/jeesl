@@ -14,6 +14,11 @@ public class JsonAzureUser implements Serializable
 
 	public JsonAzureUser() {}
 	
+	@JsonProperty("guid")
+	private String guid;
+	public String getGuid() {return guid;}
+	public void setGuid(String guid) {this.guid = guid;}
+
 	@JsonProperty("email")
 	private String email;
 	public String getEmail() {return email;}
