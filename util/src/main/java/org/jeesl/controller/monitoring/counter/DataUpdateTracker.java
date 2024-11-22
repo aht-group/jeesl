@@ -94,6 +94,12 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		else {json.getStatistic().setObsolete(json.getStatistic().getObsolete()+1);}
 		total();
 	}
+	public void deferred()
+	{
+		if(Objects.isNull(json.getStatistic().getDeferred())) {json.getStatistic().setDeferred(0);}
+		json.getStatistic().setDeferred(json.getStatistic().getDeferred()+1);
+		total();
+	}
 	
 	private void error()
 	{

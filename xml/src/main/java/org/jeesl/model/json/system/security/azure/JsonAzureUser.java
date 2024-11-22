@@ -1,4 +1,4 @@
-package org.jeesl.model.json.system.security;
+package org.jeesl.model.json.system.security.azure;
 
 import java.io.Serializable;
 
