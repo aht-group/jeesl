@@ -74,4 +74,9 @@ let jeeslCellSelection = {
             }
         }
     }
-}
+};
+
+
+// Attach jeeslCellSelection to the global window object
+(window as any).jeeslCellSelection = jeeslCellSelection;
+(window as any).updateCellSelection = updateCellSelection;

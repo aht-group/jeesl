@@ -308,6 +308,9 @@ var jeeslCellSelection = {
         }
     }
 };
+// Attach jeeslCellSelection to the global window object
+window.jeeslCellSelection = jeeslCellSelection;
+window.updateCellSelection = updateCellSelection;
 
 
 /***/ }),
