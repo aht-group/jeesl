@@ -12,7 +12,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("ioReportC")
+@DiscriminatorValue("ioReportCategory")
 @EjbErNode(name="Category",category="system",subset="report",level=3)
 public class IoReportCategory extends IoStatus implements JeeslIoReportCategory<IoLang,IoDescription,IoReportCategory,IoGraphic>
 {
