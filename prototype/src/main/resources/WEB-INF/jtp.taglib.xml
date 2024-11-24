@@ -153,6 +153,10 @@
         <tag-name>pFooterLast</tag-name>
         <source>jeeslPrototype/footer/panel/last.xhtml</source>
 	</tag>
+	<tag>
+        <tag-name>pFooterLastUpdated</tag-name>
+        <source>jeeslPrototype/footer/lastUpdated.xhtml</source>
+	</tag>
     
     <tag>
         <tag-name>ioFiles</tag-name>

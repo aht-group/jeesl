@@ -24,15 +24,15 @@ public class JsonAzureUser implements Serializable
 	public String getGuid() {return guid;}
 	public void setGuid(String guid) {this.guid = guid;}
 	
-//	@JsonProperty("DatabaseGuid")
-//	private String databaseGuid;
-//    public String getDatabaseGuid() {return databaseGuid;}
-//	public void setDatabaseGuid(String databaseGuid) {this.databaseGuid = databaseGuid;}
-//	
-//	@JsonProperty("ExchangeGuid")
-//	private String exchangeGuid;
-//	public String getExchangeGuid() {return exchangeGuid;}
-//	public void setExchangeGuid(String exchangeGuid) {this.exchangeGuid = exchangeGuid;}
+	@JsonProperty("DatabaseGuid")
+	private String databaseGuid;
+    public String getDatabaseGuid() {return databaseGuid;}
+	public void setDatabaseGuid(String databaseGuid) {this.databaseGuid = databaseGuid;}
+	
+	@JsonProperty("ExchangeGuid")
+	private String exchangeGuid;
+	public String getExchangeGuid() {return exchangeGuid;}
+	public void setExchangeGuid(String exchangeGuid) {this.exchangeGuid = exchangeGuid;}
 
 	@JsonProperty("DisplayName")
     protected String displayName;
