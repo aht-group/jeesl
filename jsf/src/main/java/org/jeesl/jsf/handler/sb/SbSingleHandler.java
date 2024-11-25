@@ -1,5 +1,6 @@
 package org.jeesl.jsf.handler.sb;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -49,11 +50,15 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 		{
 			try
 			{
-				previous = c.newInstance();
+				previous = c.getDeclaredConstructor().newInstance();
 				previous.setId(-1);
 			}
 			catch (InstantiationException e) {e.printStackTrace();}
 			catch (IllegalAccessException e) {e.printStackTrace();}
+			catch (IllegalArgumentException e) {e.printStackTrace();}
+			catch (InvocationTargetException e) {e.printStackTrace();}
+			catch (NoSuchMethodException e) {e.printStackTrace();}
+			catch (SecurityException e) {e.printStackTrace();}
 		}
 		
 	}

@@ -48,6 +48,22 @@ public class JsonAzureUser implements Serializable
     protected String type;
 	public String getType() {return type;}
 	public void setType(String type) {this.type = type;}
+	
+	@JsonProperty("ResourceType")
+    protected String resourceType;
+	public String getResourceType() {return resourceType;}
+	public void setResourceType(String resourceType) {this.resourceType = resourceType;}
+	
+	@JsonProperty("WhenChangedUTC")
+    protected String created;
+	
+
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
 
 	@JsonProperty("SurName")
     protected String firstName;

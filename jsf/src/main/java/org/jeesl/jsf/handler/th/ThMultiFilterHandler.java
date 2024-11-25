@@ -200,8 +200,9 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 		return map.containsKey(t) && map.get(t);
 	}
 
-	public boolean getHasMore(){return list.size()>1;}
+	public boolean getHasMore() {return list.size()>1;}
 	public boolean getHasNone(){return list.isEmpty();}
+	public boolean getHasOne() {return list.size()==1;}
 	public boolean getHasSome(){return !list.isEmpty();}
 	public boolean getHasSelected(){return hasSelected();}
 	public boolean getHasMoreSelected(){return selected.size()>1;}

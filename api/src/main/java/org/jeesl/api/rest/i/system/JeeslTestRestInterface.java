@@ -10,6 +10,8 @@ public interface JeeslTestRestInterface
 	String dateTimePublic();
 	String dateTimeRestricted();
 	
+	String timeout(int seconds);
+	
 	JsonSsiUpdate jsonUpdate();
 	JsonSystemJob jsonJob();
 	
