@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,14 +28,18 @@ public class EjbSecurityRoleFactory <C extends JeeslSecurityCategory<?,?>,
     	R ejb = null;
     	try
     	{
-			ejb = cRole.newInstance();
+			ejb = cRole.getDeclaredConstructor().newInstance();
 			ejb.setPosition(1);
 			ejb.setCategory(category);
 			ejb.setCode(code);
 			ejb.setVisible(true);
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	return ejb;
     }
     

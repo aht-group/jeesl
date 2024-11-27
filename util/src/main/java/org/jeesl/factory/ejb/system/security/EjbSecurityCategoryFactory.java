@@ -1,5 +1,7 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
 import org.slf4j.Logger;
@@ -22,14 +24,18 @@ public class EjbSecurityCategoryFactory <C extends JeeslSecurityCategory<?,?>>
     	
     	try
     	{
-			ejb = cCategory.newInstance();
+			ejb = cCategory.getDeclaredConstructor().newInstance();
 			ejb.setCode(code);
 			ejb.setType(type);
 			ejb.setPosition(1);
 			ejb.setVisible(true);
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	
     	return ejb;
     }

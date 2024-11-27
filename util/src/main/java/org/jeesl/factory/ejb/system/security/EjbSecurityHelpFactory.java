@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.jeesl.factory.ejb.util.EjbPositionFactory;
@@ -30,14 +31,18 @@ public class EjbSecurityHelpFactory <V extends JeeslSecurityView<?,?,?,?,?,?>,
     	
     	try
     	{
-			ejb = cOh.newInstance();
+			ejb = cOh.getDeclaredConstructor().newInstance();
 			ejb.setView(view);
 			ejb.setDocument(document);
 			ejb.setSection(section);
 			EjbPositionFactory.next(ejb,list);
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	
     	return ejb;
     }

@@ -7,7 +7,10 @@ import java.util.List;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.factory.ejb.system.security.user.EjbSecurityMfaFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.system.security.JeeslSecurityMfaCallback;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -34,6 +37,8 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity;
 	private JeeslSecurityFacade<?,?,?,?,?,?,?,UP> fSecurity;
 		
+	private final EjbSecurityMfaFactory<MFA,MFT,UJ> efMfa;
+	
 	private final List<MFT> types; public List<MFT> getTypes() {return types;}
 	private final List<MFA> mfas; public List<MFA> getMfas() {return mfas;}
 	
@@ -45,6 +50,8 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
+		
+		efMfa = fbSecurity.ejbMfa();
 		
 		types = new ArrayList<>();
 		mfas = new ArrayList<>();
@@ -74,6 +81,13 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	
 	public void addMfa()
 	{
-		mfa = fbSecurity.ejbMfa().build(user,types.get(0));
+		mfa = efMfa.build(user,types.get(0));
+	}
+	
+	public void saveMfa() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		efMfa.converter(fSecurity, mfa);
+		mfa = fSecurity.save(mfa);
+		this.reladMfas();
 	}
 }

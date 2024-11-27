@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.security.user;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
 import org.jeesl.interfaces.model.system.security.login.JeeslRememberMe;
@@ -28,13 +29,18 @@ public class EjbRememberMeFactory <USER extends JeeslUser<?>, REM extends JeeslR
 		
 		try
 		{
-			ejb = cRem.newInstance();
+			ejb = cRem.getDeclaredConstructor().newInstance();
 			ejb.setUser(user);
 			ejb.setCode(UUID.randomUUID().toString());
 			ejb.setValidUntil(dt.plusDays(validDays).toDate());
 		}
-	    	catch (InstantiationException e) {e.printStackTrace();}
-	    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (InstantiationException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
+		
 		return ejb;
 	}
 }

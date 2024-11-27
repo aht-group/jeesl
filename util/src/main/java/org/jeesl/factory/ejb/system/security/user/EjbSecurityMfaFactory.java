@@ -1,7 +1,9 @@
 package org.jeesl.factory.ejb.system.security.user;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
+import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfa;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfaType;
 import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
@@ -15,10 +17,12 @@ public class EjbSecurityMfaFactory <MFA extends JeeslSecurityMfa<UJ,MFT>,
 	final static Logger logger = LoggerFactory.getLogger(EjbSecurityMfaFactory.class);
     
     private final Class<MFA> cMfa;
+    private final Class<MFT> cMft;
     
-    public EjbSecurityMfaFactory(final Class<MFA> cMfa)
+    public EjbSecurityMfaFactory(final Class<MFA> cMfa, Class<MFT> cMft)
     {
         this.cMfa = cMfa;
+        this.cMft = cMft;
     } 
     
     public MFA build(UJ user, MFT type)
@@ -39,5 +43,10 @@ public class EjbSecurityMfaFactory <MFA extends JeeslSecurityMfa<UJ,MFT>,
 		catch (SecurityException e) {e.printStackTrace();}
     	
     	return ejb;
+    }
+    
+    public void converter(JeeslFacade facade, MFA ejb)
+    {
+    	if(Objects.nonNull(ejb.getType())) {ejb.setType(facade.find(cMft,ejb.getType()));}
     }
 }

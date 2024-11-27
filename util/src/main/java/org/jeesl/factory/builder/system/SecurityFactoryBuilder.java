@@ -126,7 +126,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public EjbSecurityActionTemplateFactory<C,AT> ejbTemplate(){return new EjbSecurityActionTemplateFactory<C,AT>(cTemplate);}
 	public EjbSecurityMenuFactory<V,CTX,M> ejbMenu(){return new EjbSecurityMenuFactory<>(cMenu);}
 	public EjbSecurityAreaFactory<V,AR> ejbArea() {return new EjbSecurityAreaFactory<V,AR>(cArea);}
-	public EjbSecurityMfaFactory<MFA,MFT,UJ> ejbMfa() {return new EjbSecurityMfaFactory<>(cMfa);}
+	public EjbSecurityMfaFactory<MFA,MFT,UJ> ejbMfa() {return new EjbSecurityMfaFactory<>(cMfa,cMfaType);}
 	public EjbSecurityHelpFactory<V,OH,DC,DS> ejbHelp() {return new EjbSecurityHelpFactory<>(cOnlineHelp);}
 	
 //	public EjbSecurityUserFactory<UP> ejbUser() {return new EjbSecurityUserFactory<>(cUser);}
