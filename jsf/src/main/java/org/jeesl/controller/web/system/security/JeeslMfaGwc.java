@@ -9,6 +9,7 @@ import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.system.security.JeeslSecurityMfaCallback;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -34,14 +35,19 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	private JeeslSecurityFacade<?,?,?,?,?,?,?,UP> fSecurity;
 		
 	private final List<MFT> types; public List<MFT> getTypes() {return types;}
+	private final List<MFA> mfas; public List<MFA> getMfas() {return mfas;}
 	
-	
-	public JeeslMfaGwc(SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity)
+	private UJ user;
+	private MFA mfa; public MFA getMfa() {return mfa;} public void setMfa(MFA mfa) {this.mfa = mfa;}
+
+	public JeeslMfaGwc(JeeslSecurityMfaCallback callback,
+						SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
 		
 		types = new ArrayList<>();
+		mfas = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
@@ -50,8 +56,24 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 		
-//		types.
+		types.addAll(fSecurity.allOrderedPositionVisible(fbSecurity.getClassMfaType()));
 	}
 	
+	public void reload(UJ user)
+	{
+		logger.info("Reaload for "+user.toString());
+		this.user=user;
+		this.reladMfas();
+	}
 	
+	private void reladMfas()
+	{
+		mfas.clear();
+		mfas.addAll(fSecurity.allForParent(fbSecurity.getClassMfa(), user));
+	}
+	
+	public void addMfa()
+	{
+		mfa = fbSecurity.ejbMfa().build(user,types.get(0));
+	}
 }

@@ -15,6 +15,7 @@ import org.jeesl.factory.ejb.system.security.EjbSecurityRoleFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityUsecaseFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityViewFactory;
 import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
+import org.jeesl.factory.ejb.system.security.user.EjbSecurityMfaFactory;
 import org.jeesl.factory.json.system.security.JsonPageFactory;
 import org.jeesl.factory.json.system.security.JsonPagesFactory;
 import org.jeesl.factory.sql.system.security.SqlUserFactory;
@@ -79,6 +80,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
     private final Class<M> cMenu; public Class<M> getClassMenu(){return cMenu;}
     private final Class<AR> cArea; public Class<AR> getClassArea(){return cArea;}
     
+    private Class<MFA> cMfa; public Class<MFA> getClassMfa() {return cMfa;}
     private Class<MFT> cMfaType; public Class<MFT> getClassMfaType() {return cMfaType;}
     
     private final Class<OH> cOnlineHelp; public Class<OH> getClassOnlineHelp() {return cOnlineHelp;}
@@ -109,6 +111,8 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 		this.cContext=cContext;
 		this.cMenu=cMenu;
 		this.cArea=cArea;
+		this.cMfa=cMfa;
+		this.cMfaType=cMfaType;
 		this.cOnlineHelp=cOnlineHelp;
 		this.cUser=cUser;
 	}
@@ -122,6 +126,7 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public EjbSecurityActionTemplateFactory<C,AT> ejbTemplate(){return new EjbSecurityActionTemplateFactory<C,AT>(cTemplate);}
 	public EjbSecurityMenuFactory<V,CTX,M> ejbMenu(){return new EjbSecurityMenuFactory<>(cMenu);}
 	public EjbSecurityAreaFactory<V,AR> ejbArea() {return new EjbSecurityAreaFactory<V,AR>(cArea);}
+	public EjbSecurityMfaFactory<MFA,MFT,UJ> ejbMfa() {return new EjbSecurityMfaFactory<>(cMfa);}
 	public EjbSecurityHelpFactory<V,OH,DC,DS> ejbHelp() {return new EjbSecurityHelpFactory<>(cOnlineHelp);}
 	
 //	public EjbSecurityUserFactory<UP> ejbUser() {return new EjbSecurityUserFactory<>(cUser);}

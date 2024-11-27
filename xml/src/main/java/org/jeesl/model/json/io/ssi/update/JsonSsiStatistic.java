@@ -27,6 +27,11 @@ public class JsonSsiStatistic implements Serializable
 	public Integer getObsolete() {return obsolete;}
 	public void setObsolete(Integer obsolete) {this.obsolete = obsolete;}
 	
+	@JsonProperty("skipped")
+	private Integer skipped;
+	public Integer getSkipped() {return skipped;}
+	public void setSkipped(Integer skipped) {this.skipped = skipped;}
+
 	@JsonProperty("deferred")
 	private Integer deferred;
 	public Integer getDeferred() {return deferred;}

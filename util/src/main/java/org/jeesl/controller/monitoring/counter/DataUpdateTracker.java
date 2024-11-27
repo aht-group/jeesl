@@ -77,6 +77,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	public void success()
 	{
 		update.getResult().setSuccess(update.getResult().getSuccess()+1);
+		
 		if(json.getStatistic().getSuccess()==null) {json.getStatistic().setSuccess(1);}
 		else {json.getStatistic().setSuccess(json.getStatistic().getSuccess()+1);}
 		total();
@@ -130,8 +131,11 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		else {json.getStatistic().setDeleted(json.getStatistic().getDeleted()+1);}
 	}
 	
-	public void skip()
+	public void entitySkipped()
 	{
+		if(Objects.isNull(json.getStatistic().getSkipped())) {json.getStatistic().setSkipped(0);}
+		json.getStatistic().setSkipped(json.getStatistic().getSkipped()+1);
+		
 		update.getResult().setSkip(update.getResult().getSkip()+1);
 	}
 	

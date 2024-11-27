@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ public class EjbSecurityActionFactory <V extends JeeslSecurityView<?,?,?,?,?,A>,
     	
     	try
     	{
-			ejb = cAction.newInstance();
+			ejb = cAction.getDeclaredConstructor().newInstance();
 			
 			ejb.setView(view);
 			ejb.setCode(code);
@@ -36,7 +37,11 @@ public class EjbSecurityActionFactory <V extends JeeslSecurityView<?,?,?,?,?,A>,
 			else{ejb.setPosition(list.size()+1);}
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	
     	return ejb;
     }
