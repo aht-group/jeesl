@@ -11,13 +11,13 @@ public class XmlGoalsFactory<L extends JeeslLang, D extends JeeslDescription,S e
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlGoalsFactory.class);
 		
-	private Goals q;
+//	private Goals q;
 	
-	private XmlScopeFactory<L,D,S> xfScope;
+//	private XmlGoalFactory<L,D,S> xfGoal;
 	
 	public XmlGoalsFactory(String localeCode, Goals q)
 	{
-		this.q=q;
+//		this.q=q;
 //		if(Objects.nonNull(q.getScope())) {xfScope = new XmlScopeFactory<>(localeCode,q.getScope().get(0));}
 	}
 	

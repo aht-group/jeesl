@@ -22,5 +22,5 @@ public interface JeeslCalendarWeekOfYear <L extends JeeslLang, D extends JeeslDe
 							EjbWithCode,JeeslStatusFixedCode,
 							EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
-
+	public enum Att {position}
 }

@@ -36,10 +36,10 @@ public class SortByPredicateBuilder
 		else if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(e));}
 	}
 	
-	public static void addByInteger(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering sortBy, Expression<Integer> eInteger)
+	public static void addByInteger(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering cq, Expression<Integer> eInteger)
 	{
-		if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(eInteger));}
-		else if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(eInteger));}
+		if(cq.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(eInteger));}
+		else if(cq.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(eInteger));}
 	}
 	
 	public static void addByLong(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering sortBy, Expression<Long> eLong)

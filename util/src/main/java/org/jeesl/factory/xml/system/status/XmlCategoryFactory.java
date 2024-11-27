@@ -19,9 +19,6 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlCategoryFactory.class);
 	
-	private static boolean errorPrinted = false;
-	
-	private String localeCode;
 	private Category q;
 	
 	private XmlLabelFactory<L> xfLabel;
@@ -31,11 +28,10 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlCategoryFactory(Category q){this(null,q);}
 	public XmlCategoryFactory(String localeCode, Category q)
 	{
-		this.localeCode=localeCode;
 		this.q=q;
 		
-		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getLabel())) {xfLabel = new XmlLabelFactory<>(localeCode);}
+		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 	

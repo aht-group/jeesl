@@ -32,7 +32,7 @@ public abstract class AbstractJeeslRestHandler <L extends JeeslLang,D extends Je
 		this.cL=cL;
 		this.cD=cD;
 		
-		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfContainer = new XmlContainerFactory(null,XmlStatusQuery.statusExport());
 	}
 		
     @SuppressWarnings({ "rawtypes", "unchecked" })
