@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
@@ -29,7 +30,7 @@ public class EjbSecurityActionTemplateFactory <
     	
     	try
     	{
-			ejb = cTemplate.newInstance();
+			ejb = cTemplate.getDeclaredConstructor().newInstance();
 			ejb.setCategory(category);
 			ejb.setCode(code);
 			ejb.setPosition(1);
@@ -37,7 +38,11 @@ public class EjbSecurityActionTemplateFactory <
 			ejb.setDocumentation(false);
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	
     	return ejb;
     }

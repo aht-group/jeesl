@@ -18,8 +18,6 @@ import org.jeesl.model.xml.io.locale.status.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.aht.Query;
-
 public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlStatusFactory.class);
@@ -30,8 +28,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	
-	public XmlStatusFactory(Query query) {this(query.getLang(),query.getStatus());}
-	public XmlStatusFactory(Status q){this(null,q);}
+	public XmlStatusFactory(Status q) {this(null,q);}
 	public XmlStatusFactory(String localeCode, Status q)
 	{
 		this.localeCode=localeCode;
@@ -57,7 +54,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}		
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		
-		if(Objects.nonNull(q.getId())) {xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getStyle())) {xml.setStyle(ejb.getStyle());}
 		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
 		if(Objects.nonNull(q.getSymbol()) && (ejb instanceof EjbWithSymbol)){xml.setSymbol(ejb.getSymbol());}

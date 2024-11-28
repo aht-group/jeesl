@@ -172,7 +172,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		jfAnswer = new JsonSurveyAnswerFactory<>(localeCode,JsonSurveyQueryProvider.answers());
 		jfQuestion = new JsonSurveyQuestionFactory<>(localeCode,JsonSurveyQuestionFactory.id(1));
 		
-		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfContainer = new XmlContainerFactory(null,XmlStatusQuery.statusExport());
 		
 		xfTemplateCategory = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		xfTemplateStatus = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());

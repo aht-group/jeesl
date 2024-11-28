@@ -1,5 +1,7 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.slf4j.Logger;
@@ -22,11 +24,15 @@ public class EjbSecurityContextFactory <CTX extends JeeslSecurityContext<?,?>>
     	
     	try
     	{
-			ejb = cCtx.newInstance();
+			ejb = cCtx.getDeclaredConstructor().newInstance();
 			ejb.setPosition(1);
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	
     	return ejb;
     }

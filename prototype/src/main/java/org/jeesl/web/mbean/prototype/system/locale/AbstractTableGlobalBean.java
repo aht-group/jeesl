@@ -416,16 +416,15 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Container xml = this.downloadData(i.getName());
 
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
-		
         asdi.setStatusEjbFactory(EjbStatusFactory.instance(cS,cL,cD,EjbCodeFactory.toListCode(lp.getLocales())));
         asdi.setFacade(fGraphic);
         DataUpdate dataUpdate = asdi.iuStatus(xml.getStatus(),cS,cL,clParent);
         asdi.deleteUnusedStatus(cS, cL, cD);
-//        JaxbUtil.info(dataUpdate);
+//      JaxbUtil.info(dataUpdate);
 
         dbuGraphic.update(cW,xml.getStatus());
 
-        selectCategory();
+        this.selectCategory();
 	}
 	
 	protected abstract JeeslSystemRestInterface rest(String iFqcn);

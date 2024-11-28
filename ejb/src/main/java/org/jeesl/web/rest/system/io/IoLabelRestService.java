@@ -90,7 +90,7 @@ public class IoLabelRestService <L extends JeeslLang,D extends JeeslDescription,
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;
 
-		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfContainer = new XmlContainerFactory(null,XmlStatusQuery.statusExport());
 		xfEntity = new XmlEntityFactory<>(XmlRevisionQuery.get(XmlRevisionQuery.Key.xEntity));
 
 		efLang = EjbLangFactory.instance(fbRevision.getClassL());

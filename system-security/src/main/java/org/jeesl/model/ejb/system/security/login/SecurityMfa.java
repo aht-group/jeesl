@@ -54,6 +54,10 @@ public class SecurityMfa implements JeeslSecurityMfa<SecurityUser,SecurityMfaTyp
 	private LocalDateTime record;
 	@Override public LocalDateTime getRecord() {return record;}
 	@Override public void setRecord(LocalDateTime record) {this.record = record;}
+
+	private String name;
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
 	
 	private String json;
 	@Override public String getJson() {return json;}

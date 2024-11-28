@@ -22,10 +22,11 @@ public class XmlContainerFactory
 	{
 		return new XmlContainerFactory(localeCode,query);
 	}
-	public XmlContainerFactory(Status query)
+	private XmlContainerFactory(Status query)
 	{
 		xfStatus = new XmlStatusFactory(query);
 	}
+	
 	public XmlContainerFactory(String localeCode, Status query)
 	{
 		xfStatus = new XmlStatusFactory(localeCode,query);

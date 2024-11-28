@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.system.security;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -40,11 +41,15 @@ public class EjbSecurityMenuFactory <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	    	
     	try
     	{
-			ejb = cM.newInstance();
+			ejb = cM.getDeclaredConstructor().newInstance();
 			ejb.setVisible(true);
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
 	    	
     	return ejb;
     }
