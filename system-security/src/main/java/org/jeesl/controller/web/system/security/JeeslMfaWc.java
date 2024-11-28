@@ -15,8 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslMfaWc <UP extends JeeslUser<?>>
-			extends JeeslMfaGwc<IoLang,IoDescription,IoLocale,SecurityMfa,SecurityMfaType,SecurityUser,UP>
-			implements Serializable
+							extends JeeslMfaGwc<IoLang,IoDescription,IoLocale,SecurityMfa,SecurityMfaType,SecurityUser,UP>
+							implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslMfaWc.class);

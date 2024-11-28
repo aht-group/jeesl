@@ -28,8 +28,8 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 							MFT extends JeeslSecurityMfaType<L,D,MFT,?>,
 							UJ extends JeeslSecurityUser,
 							UP extends JeeslUser<?>>
-			extends AbstractJeeslLocaleWebController<L,D,LOC>
-			implements Serializable
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
+					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslMfaGwc.class);

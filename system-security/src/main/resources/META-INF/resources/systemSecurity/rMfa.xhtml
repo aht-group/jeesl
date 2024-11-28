@@ -9,12 +9,48 @@
 	</composite:interface>
 
 	<composite:implementation>
-	<j:row>
+	<j:row id="rMfa">
 		<j:slot id="sMfaList" width="4">
-			sMfaList
+			<h:form id="fRoles">
+				<p:dataTable var="m" value="#{cc.attrs.ctrl.mfas}" styleClass="jeesl-datatable"
+						selection="#{cc.attrs.ctrl.mfa}" selectionMode="single" rowKey="#{m.id}" draggableRows="true"
+						>
+					<f:facet name="header">
+						<j:dtHeader entity="SecurityMfa" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addMfa()}" update=":#{cc.id}:rMfa"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.ctrl.selectMfa()}" update=":#{cc.id}:sMfa"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderMfas()}" update="@form"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="SecurityMfa" code="position"/></f:facet>
+						<h:outputText value="#{m.position}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SecurityMfa" code="type"/></f:facet>
+						<h:outputText value="#{m.type.name[localeCode].lang}" />  
+		            </p:column>
+		            
+		       	</p:dataTable>
+			</h:form>
 		</j:slot>
 		<j:slot id="sMfa" width="8">
-			sMfa
+			<h:form id="fRole" rendered="#{not empty cc.attrs.ctrl.context}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="SecurityContext"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveMfa()}" update=":#{cc.id}:rMfa" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMfa()}" update=":#{cc.id}:rMfa"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						
+						<jtp:label entity="SecurityContext" code="code"/>
+						<p:inputText value="#{cc.attrs.ctrl.mfa.json}"/>
+						
+					</j:inputGrid>
+				</p:panel>
+			</h:form>
 		</j:slot>
 	</j:row>
 	</composite:implementation>

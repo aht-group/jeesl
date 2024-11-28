@@ -9,13 +9,14 @@ import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDateTime;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 
 public interface JeeslSecurityMfa <USER extends JeeslSecurityUser,
 									TYPE extends JeeslSecurityMfaType<?,?,TYPE,?>>
 			extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 					EjbWithParentAttributeResolver,EjbWithPositionVisible,JeeslWithRecordDateTime,
-					JeeslWithType<TYPE>
+					EjbWithName,JeeslWithType<TYPE>
 {
 	public enum Attributes{user,type}
 	
