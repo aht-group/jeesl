@@ -30,14 +30,17 @@
 		            	<f:facet name="header"><jtp:label entity="SecurityMfa" code="type"/></f:facet>
 						<h:outputText value="#{m.type.name[localeCode].lang}" />  
 		            </p:column>
-		            
+					<p:column>
+		            	<f:facet name="header"><jtp:label entity="SecurityMfa" code="name"/></f:facet>
+						<h:outputText value="#{m.name}" />  
+		            </p:column>
 		       	</p:dataTable>
 			</h:form>
 		</j:slot>
 		<j:slot id="sMfa" width="8">
-			<h:form id="fRole" rendered="#{not empty cc.attrs.ctrl.context}">
+			<h:form id="fRole" rendered="#{not empty cc.attrs.ctrl.mfa}">
 				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="SecurityContext"/></f:facet>
+					<f:facet name="header"><j:pHeader entity="SecurityMfa"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveMfa()}" update=":#{cc.id}:rMfa" />
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMfa()}" update=":#{cc.id}:rMfa"/>
@@ -45,8 +48,8 @@
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<j:inputGrid>
 						
-						<jtp:label entity="SecurityContext" code="code"/>
-						<p:inputText value="#{cc.attrs.ctrl.mfa.json}"/>
+						<jtp:label entity="SecurityMfa" code="name"/>
+						<p:inputText value="#{cc.attrs.ctrl.mfa.name}"/>
 						
 					</j:inputGrid>
 				</p:panel>
