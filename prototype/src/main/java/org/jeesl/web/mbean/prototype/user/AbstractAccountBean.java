@@ -6,10 +6,12 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Deprecated //Migrate to a JeeslAccountGwc
 public class AbstractAccountBean <USER extends JeeslUser<?>> implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractAccountBean.class);
 	private static final long serialVersionUID = 1L;
+	
 	
 	protected USER user; public USER getUser() {return user;}
 	
