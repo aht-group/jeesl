@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use 'sass:string';
 
-$border: $border-width solid $border-colour;
+$border: $border-width solid var(--container-border-colour);
 
 @mixin vertical-center($pseudo) {
 	&:#{$pseudo} {
@@ -18,8 +18,8 @@ $border: $border-width solid $border-colour;
 }
 
 @mixin overlay {
-	background: $white-100;
-	border: $border-width solid $border-colour;
+	background: var(--panel-content-select-dropdown-background);
+	border: $border;
 	border-radius: $border-radius;
 	box-shadow: $overlay-shadow;
 	opacity: 0;
@@ -38,7 +38,7 @@ $border: $border-width solid $border-colour;
 	}
 	
 	.jeesl-overlay-wrapper {
-		color: $body-foreground;
+		color: var(--panel-content-select-dropdown-foreground);
 		overflow: auto;
 	}
 }
@@ -52,7 +52,7 @@ $border: $border-width solid $border-colour;
 	
 	&:before {
 		@media (max-width: 768px) {
-			border-bottom: $separator-thickness-mobile solid $soft-grey;
+			border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-colour);
 		    content: '';
 		    display: block;
 		    width: calc(100% - (2 * #{$wide-spacing}));
@@ -85,7 +85,7 @@ $border: $border-width solid $border-colour;
 		
 		&:after {
 			@media (max-width: 768px) {
-				border-bottom: $separator-thickness-mobile solid $bright-grey;
+				border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-colour);
 				bottom: 0;
 				content: '';
 				display: block;
@@ -97,28 +97,28 @@ $border: $border-width solid $border-colour;
 		
 		&.ui-state-hover, &:hover {
 			&:not(.ui-state-highlight) {
-				background: $light-grey;
+				background: var(--panel-content-select-dropdown-hover-background);
 				box-shadow: none;
-				color: $dark-colour;
+				color: var(--panel-content-select-dropdown-hover-foreground);
 				
 				@media (max-width: 768px) {
 					background: none;
 				}
 				
 				&:after {
-					border-color: $dark-colour;
+					border-color: var(--panel-content-select-dropdown-hover-foreground);
 				}
 			}
 		}
 				
 		&.ui-state-highlight {
-			background: $highlight-colour;
+			background: var(--panel-content-select-dropdown-highlight-background);
 			font-weight: 700;
 			text-shadow: none;
 			
 			&:after {
 				@media (max-width: 768px) {
-					border-color: $white-0;
+					border-color: transparent;
 				}
 			}
 		}
@@ -127,7 +127,7 @@ $border: $border-width solid $border-colour;
 
 @mixin setBackground($url) {
 	body {
-		background: $light-grey url($url) repeat fixed;
+		background: var(--main-background) url($url) repeat fixed;
 	}
 }
 
@@ -152,11 +152,11 @@ $border: $border-width solid $border-colour;
 }
 
 .jeesl-red {
-	color: $foreground-alert;
+	color: var(--body-alert-foreground);
 }
 
 .jeesl-grey {
-	color: $foreground-grey;
+	color: var(--body-emphasis-foreground);
 }
 
 .jeesl-greyscale {
@@ -201,11 +201,11 @@ $border: $border-width solid $border-colour;
 	@include min-button-width;
 	@include vertical-center(after);
 	
-	background: $panel-header-gradient;
+	background: var(--panel-content-button-background);
 	border: $border;
 	border-radius: $border-radius;
 	box-shadow: $highlight-shadow;
-	color: $foreground;
+	color: var(--panel-content-button-foreground);
 	cursor: pointer;
 	font-weight: 700;
 	line-height: normal;
@@ -252,25 +252,26 @@ $border: $border-width solid $border-colour;
 		}
 	}
 	
-	&.ui-state-hover, &:hover {
-		&:not(.#{$active-class}):not(.ui-state-disabled):not(:disabled) {
-			background: $panel-header-gradient;
-			border-color: $medium-grey;
-			box-shadow: none;
-			color: $anthracite;
-		}
-	}
+	// TODO: Check! May override an unwanted hover effect on some elements.
+//	&.ui-state-hover, &:hover {
+//		&:not(.#{$active-class}):not(.ui-state-disabled):not(:disabled) {
+//			background: $panel-header-gradient;
+//			border-color: $medium-grey;
+//			box-shadow: none;
+//			color: $anthracite;
+//		}
+//	}
 	
 	&.ui-state-disabled, &:disabled {
-		background: linear-gradient(to bottom, $bright-grey, $light-grey);
-		color: $soft-grey;
+		background: var(--panel-content-button-disabled-background);
+		color: var(--panel-content-button-disabled-foreground);
 		cursor: default;
 		opacity: 1;
 	}
 	
 	&.#{$active-class} {
-		border-color: $dark-colour;
-		color: $white-100;
+		border-color: var(--panel-content-button-highlight-border-colour);
+		color: var(--panel-content-button-highlight-foreground);
 		text-shadow: none;
 	
 		&:focus {
@@ -278,7 +279,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		&:before {
-			background: $highlight-colour;
+			background: var(--panel-content-button-highlight-background);
 		}
 	}
 	
@@ -289,7 +290,7 @@ $border: $border-width solid $border-colour;
 }
 
 @mixin inputfield {
-	background: $white-100;
+	background: var(--panel-content-input-background);
 	border: none;
 	border-radius: $border-radius;
     box-shadow: none;
@@ -428,6 +429,14 @@ $border: $border-width solid $border-colour;
 	.ui-outputtext {
 		flex-grow: 1;
 	}
+	
+	.ui-chkbox {
+		margin: -$half-spacing 0;
+		
+		@media (max-width: 768px) {
+			margin: 0;
+		}
+	}
 }
 
 .jeesl-input-container {
@@ -471,7 +480,7 @@ $border: $border-width solid $border-colour;
 
 .ui-float-label {
 	align-items: center;
-	background: $white-100;
+	background: var(--panel-content-input-background);
 	border-radius: $border-radius;
 	display: flex;
 	
@@ -487,7 +496,7 @@ $border: $border-width solid $border-colour;
 	}
 	
 	> .ui-outputlabel {
-		color: $foreground;
+		color: var(--panel-content-input-foreground);
 		left: 0;
 		margin: 0;
 		opacity: .5;
@@ -498,15 +507,15 @@ $border: $border-width solid $border-colour;
 
 @mixin jeesl-select($class) {
 	.#{$class}.ui-state-default {
-		background: $panel-header-gradient;
+//		background: $panel-header-gradient;
 		border: none;
 		display: flex;
 		padding: 0;
 		
 		&.ui-state-active, &.ui-state-hover, &.ui-state-focus {
-			border-color: $medium-grey;
+//			border-color: $medium-grey;
 			box-shadow: none;
-			color: $anthracite;
+//			color: $anthracite;
 		}
 		
 		.ui-inputfield {
@@ -590,7 +599,7 @@ $border: $border-width solid $border-colour;
 				width: auto;
 				
 				&:before {
-					color: $body-foreground;
+					color: var(--panel-content-select-dropdown-foreground);
 					font-size: 1.2em;
 					text-shadow: none;
 				}
@@ -648,7 +657,7 @@ $border: $border-width solid $border-colour;
 	&.ui-state-hover {
 		border: none;
 		box-shadow: none;
-		background: $dark-colour;
+		background: var(--panel-content-select-dropdown-header-background);
 	}
 }
 
@@ -662,12 +671,12 @@ $border: $border-width solid $border-colour;
 	
 	.#{$class}-header {
 		align-items: center;
-		background-image: $status-bar-background-gradient;
+		background-image: var(--panel-content-select-dropdown-header-background);
 		background-repeat: repeat;
 		background-size: 100% $ls-element-height;
 		border: 0;
 		border-radius: 0;
-		color: $white-100;
+		color: var(--panel-content-select-dropdown-header-foreground);
 		display: flex;
 		font-size: 1.2em;
 		margin: 0;
@@ -698,7 +707,7 @@ $border: $border-width solid $border-colour;
 			width: 100%;
 
 			&:before {
-				color: white;
+				color: var(--panel-content-select-dropdown-header-foreground);
 				display: inline-block;
 				vertical-align: middle;
 				width: 100%;
@@ -850,31 +859,31 @@ $border: $border-width solid $border-colour;
 					padding: 0;
 					
 					&:after {
-						border-bottom: $separator-thickness-mobile solid $bright-grey;
+						border-bottom: $separator-thickness-mobile solid var(--panel-content-datepicker-separator-colour);
 					    content: '';
 					    display: block;
 					}
 				}
 				
 				&.ui-state-highlight {
-					background: $bright-grey;
+					background: var(--panel-content-datepicker-highlight-background);
 					box-shadow: none;
-					color: $dark-colour;
+					color: var(--panel-content-datepicker-highlight-foreground);
 					font-weight: bold;
 					
 					&.ui-state-hover {
-						background: $bright-grey;
+						background: var(--panel-content-datepicker-highlight-background);
 					}
 				}
 				
 				&.ui-state-hover {
-					background: $light-grey;
-					color: $dark-colour;
+					background: var(--panel-content-select-dropdown-hover-background);
+					color: var(--panel-content-select-dropdown-hover-foreground);
 					text-shadow: none;
 					
 					&:after {
-						border-color: $dark-colour;
-						color: $dark-colour;
+						border-color: var(--panel-content-select-dropdown-hover-foreground);
+						color: var(--panel-content-select-dropdown-hover-foreground);
 					}
 					
 					@media (max-width: 768px) {
@@ -887,15 +896,15 @@ $border: $border-width solid $border-colour;
 				}
 				
 				&.ui-state-active {
-					background: $highlight-colour;
-					color: $white-100;
+					background: var(--panel-content-select-dropdown-highlight-background);
+					color: var(--panel-content-select-dropdown-highlight-foreground);
 					
 					&:after {
-						border-color: $dark-colour;
+						border-color: var(--panel-content-select-dropdown-highlight-background);
 					}
 					
 					&.ui-state-hover {
-						background: $highlight-colour;
+						background: var(--panel-content-select-dropdown-highlight-background);
 					}
 				}
 			}
@@ -936,7 +945,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		.ui_tpicker_time_label, .ui_tpicker_time {
-			background: $bright-grey;
+			background: var(--panel-content-datepicker-summary-background);
 			margin-bottom: $regular-spacing;
 		}
 		
@@ -976,7 +985,7 @@ $border: $border-width solid $border-colour;
 }
 
 .ui-slider {
-	background: linear-gradient(to bottom, $dark-colour, $bright-colour);
+	background: var(--panel-content-slider-track-background);
     border: none;
 
 	&.ui-slider-horizontal {
@@ -1015,7 +1024,7 @@ $border: $border-width solid $border-colour;
 	
 	.ql-toolbar {
 		margin: 0;
-		border: solid $border-colour;
+		border: solid var(--container-border-colour);
 		border-width: 0 0 $border-width;
 	}
 	
@@ -1024,7 +1033,7 @@ $border: $border-width solid $border-colour;
 		overflow: hidden;
 	
 		.ql-editor {
-			background: $white-100;
+			background: var(--panel-content-input-background);
 			
 			@media (max-width: 768px) {
 				min-height: $element-height-mobile;
@@ -1033,6 +1042,7 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+// TODO: Check!
 @mixin token-container($classname) {
 	align-items: flex-start;
 	display: flex;
@@ -1074,7 +1084,7 @@ $border: $border-width solid $border-colour;
 			@include icon;
 			
 			align-self: stretch;
-			color: $white-100 !important;
+			color: var(--panel-content-select-chips-foreground) !important;
 			flex-shrink: 0;
 			left: auto;
 			min-height: #{$element-height - 2 * $border-width};
@@ -1089,11 +1099,11 @@ $border: $border-width solid $border-colour;
 			}
 			
 			&:hover:before {
-				background: linear-gradient(to right, transparent, #{$medium-colour} 50%) 0 0/100% 99% no-repeat
+				background: var(--panel-content-select-chips-icon-background);
 			}
 			
 			&:before {
-			    background: linear-gradient(to right, transparent, #{$medium-colour} 50%) 12500% 0/99% 100% no-repeat;
+			    background: var(--panel-content-select-chips-icon-hover-background);
 				content: '';
 			    height: 100%;
 				left: 0;
@@ -1195,7 +1205,7 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	height: calc($icon-height * var(--icon-height-multiplier));
 
 	@media (max-width: 768px) {
-		height: calc($icon-height-mobile * var(--icon-height-multiplier));
+		height: calc($icon-height-mobile * var(--icon-height-multiplier) - 2 * #{$half-spacing});
 	}
 }
 
@@ -1331,7 +1341,7 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 
 .jeesl-input-container {
 	> .jeesl-input-label {
-		background: $white-100;
+		background: var(--panel-content-input-background);
 		padding: 0 $half-spacing;
 	}
 	
@@ -1379,7 +1389,7 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 .ui-colorpicker-container {
 	@include overlay;
 	
-	background: $panel-background;
+	background: var(--container-content-background);
 	opacity: 1;
 	
 	.ui-colorpicker_color, .ui-colorpicker_hue, .ui-colorpicker_new_color {
@@ -1471,25 +1481,25 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 }
 
 
-.ui-corner-all:before {
-	@extend .ui-corner-all;
-}
-
-.ui-corner-top:before {
-	@extend .ui-corner-top;
-}
-
-.ui-corner-bottom:before {
-	@extend .ui-corner-bottom;
-}
-
-.ui-corner-left:before {
-	@extend .ui-corner-left;
-}
-
-.ui-corner-right:before {
-	@extend .ui-corner-right;
-}
+//.ui-corner-all:before {
+//	@extend .ui-corner-all;
+//}
+//
+//.ui-corner-top:before {
+//	@extend .ui-corner-top;
+//}
+//
+//.ui-corner-bottom:before {
+//	@extend .ui-corner-bottom;
+//}
+//
+//.ui-corner-left:before {
+//	@extend .ui-corner-left;
+//}
+//
+//.ui-corner-right:before {
+//	@extend .ui-corner-right;
+//}
 
 .ui-dialog-mask {
 	z-index: 1002 !important;
@@ -1502,5 +1512,5 @@ body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
 
 /* Primefaces only sets dotted, which overrides both border width and color. It shouldn't, but it does.' */
 .fc-time-grid .fc-slats	.fc-minor td {
-	border: $border-width dotted $border-colour;
+	border: $border-width dotted var(--container-border-colour);
 }
