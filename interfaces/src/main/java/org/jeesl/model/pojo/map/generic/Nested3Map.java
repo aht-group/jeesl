@@ -101,4 +101,9 @@ public class Nested3Map <L1 extends EjbWithId, L2 extends EjbWithId, L3 extends 
 		return new ArrayList<L3>(set);
 	}
 	
+	public void remove(L1 l1, L2 l2, L3 l3)
+	{
+		m.get(l1).getM().get(l2).remove(l3);
+	}
+	
 }
