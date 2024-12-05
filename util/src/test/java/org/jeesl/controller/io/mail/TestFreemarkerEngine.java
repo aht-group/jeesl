@@ -6,7 +6,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.controller.io.mail.freemarker.FreemarkerEngine;
-import org.jeesl.exception.processing.UtilsDeveloperException;
+import org.jeesl.exception.processing.JeeslDeveloperException;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 import org.jeesl.model.xml.io.mail.Template;
@@ -54,7 +54,7 @@ public class TestFreemarkerEngine extends AbstractJeeslUtilTest
 	}
     
 	@Ignore
-    @Test(expected=UtilsDeveloperException.class)
+    @Test(expected=JeeslDeveloperException.class)
     public void devException() throws SAXException, IOException, ParserConfigurationException, TemplateException
     {
     	fme.processXml("test");

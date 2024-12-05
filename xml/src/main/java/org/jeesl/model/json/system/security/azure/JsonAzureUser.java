@@ -1,6 +1,7 @@
 package org.jeesl.model.json.system.security.azure;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -74,4 +75,14 @@ public class JsonAzureUser implements Serializable
     protected String lastName;
     public String getLastName() {return lastName;}
     public void setLastName(String value) {this.lastName = value;}
+    
+    @JsonProperty("MailboxPlan")
+    private String mailboxPlan;
+    public String getMailboxPlan() {return mailboxPlan;}
+	public void setMailboxPlan(String mailboxPlan) {this.mailboxPlan = mailboxPlan;}
+
+	@JsonProperty("BoxUsers")
+    private List<String> accessedBy;
+	public List<String> getAccessedBy() {return accessedBy;}
+	public void setAccessedBy(List<String> accessedBy) {this.accessedBy = accessedBy;}
 }

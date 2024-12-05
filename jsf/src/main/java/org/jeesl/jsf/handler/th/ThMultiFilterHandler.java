@@ -33,7 +33,7 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 	private final List<T> selected; public List<T> getSelected() {return selected;}
 	private final List<T> selection; public List<T> getSelection() {return selection;}
 	
-	private T selectedSingle; public T getSelectedSingle() {return selectedSingle; } public void setSelectedSingle(T value) {selectedSingle = value;}
+	private T selectedSingle; public T getSelectedSingle() {return selectedSingle;} public void setSelectedSingle(T value) {selectedSingle = value;}
 	
 	private final List<T> memory;
 	private final Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
@@ -193,6 +193,8 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 		Collections.reverse(selection);
 		
 		selectedSize = selected.size();
+		if(selectedSize==1) {selectedSingle = selection.get(0);}
+		else {selectedSingle=null;}
 	}
 
 	public boolean isSelected(T t)
@@ -205,6 +207,7 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 	public boolean getHasOne() {return list.size()==1;}
 	public boolean getHasSome(){return !list.isEmpty();}
 	public boolean getHasSelected(){return hasSelected();}
+	public boolean getHasOneSelected(){return selected.size()==1;}
 	public boolean getHasMoreSelected(){return selected.size()>1;}
 	public boolean getHasSomeSelected(){return !selected.isEmpty() && !allSelected();}
 	public boolean hasSelected(){return !selected.isEmpty();}
