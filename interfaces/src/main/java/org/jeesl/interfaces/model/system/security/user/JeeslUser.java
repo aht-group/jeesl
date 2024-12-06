@@ -16,6 +16,8 @@ public interface JeeslUser <R extends JeeslSecurityRole<?,?,?,?,?,?>>
 	String getSalt();
 	void setSalt(String salt);
 	
+	String getPwd();
+	
 	Boolean getPermitLogin();
 	void setPermitLogin(Boolean permitLogin);
 	

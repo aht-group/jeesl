@@ -17,7 +17,7 @@ import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.exception.processing.UtilsDeveloperException;
+import org.jeesl.exception.processing.JeeslDeveloperException;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -152,7 +152,7 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 		DataUpdateTracker dut = new DataUpdateTracker(true);
 		dut.setType(XmlTypeFactory.build(cStatus.getName(),"Status-DB Import"));
 		
-		if(Objects.isNull(fStatus)) {dut.fail(new UtilsDeveloperException("No Facade available for "+cStatus.getName()), true);}
+		if(Objects.isNull(fStatus)) {dut.fail(new JeeslDeveloperException("No Facade available for "+cStatus.getName()), true);}
 		else {logger.debug("Updating "+cStatus.getSimpleName()+" with "+list.size()+" entries");}
 		
 		this.iuStatusEJB(list, cStatus, cLang);

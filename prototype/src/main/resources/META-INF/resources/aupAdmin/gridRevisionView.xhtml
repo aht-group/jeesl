@@ -67,7 +67,7 @@
 							selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.aupRevisionMappings}">
-									<:icon type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderMappings()}" update="@form"/>

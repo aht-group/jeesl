@@ -14,7 +14,7 @@ import net.sf.exlp.util.xml.JDomUtil;
 import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.output.Format;
-import org.jeesl.exception.processing.UtilsDeveloperException;
+import org.jeesl.exception.processing.JeeslDeveloperException;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 import org.jeesl.util.query.xpath.MailXpath;
@@ -97,7 +97,7 @@ public class FreemarkerEngine
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String process(Document jdom) throws SAXException, IOException, ParserConfigurationException, TemplateException
 	{
-		if(ftl==null){throw new UtilsDeveloperException("You forgot to init the template");}
+		if(ftl==null){throw new JeeslDeveloperException("You forgot to init the template");}
 		jdom=JDomUtil.unsetNameSpace(jdom);
 		 
 //		JDomUtil.debug(jdom);

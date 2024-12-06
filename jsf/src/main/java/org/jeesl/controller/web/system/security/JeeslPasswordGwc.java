@@ -1,49 +1,49 @@
-package org.jeesl.controller.processor.system;
+package org.jeesl.controller.web.system.security;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordDateComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.pwd.JeeslSecurityPasswordRating;
 import org.jeesl.interfaces.model.system.security.pwd.JeeslSecurityPasswordRule;
 import org.jeesl.interfaces.model.system.security.user.pwd.JeeslPasswordHistory;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.Months;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
 
-public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRating<?,?,?,?>,
+public class JeeslPasswordGwc <RATING extends JeeslSecurityPasswordRating<?,?,?,?>,
 										RULE extends JeeslSecurityPasswordRule<?,?,?,?>,
 										HISTORY extends JeeslPasswordHistory<?>>
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslPasswordRuleChecker.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslPasswordGwc.class);
 	
-	private final String regexDigits = "(.*?\\d){%d,}.*?";
-	private final String regexLower = "(.*?[a-z]){%d,}.*?";
 	private final String regexUpper = "(.*?[A-Z]){%d,}.*?";
 	private final String regexSymbols = "(.*?[_.*+:#!?%%{}\\|@\\[\\];=\"&$\\\\/,()-]){%d,}.*?";
 	
 	private final Class<RATING> cRating;
+	private RATING rating;
 
 	private final Map<RULE,Boolean> mapResult; public Map<RULE,Boolean> getMapResult() {return mapResult;}
 
-	private JeeslFacade fJeesl;
+	private JeeslFacade facade;
 	
 	private final EjbWithRecordDateComparator<HISTORY> cpHistory;
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	public JeeslPasswordRuleChecker(JeeslFacade fJeesl, Class<RATING> cRating)
+	public JeeslPasswordGwc(Class<RATING> cRating)
 	{		
-		this.fJeesl=fJeesl;
 		this.cRating=cRating;
 		
 		mapResult = new HashMap<>();
@@ -52,7 +52,12 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		debugOnInfo = false;
 	}
 	
-	public void clear()
+	public void genericPostConstruct(JeeslFacade facade)
+	{
+		this.facade=facade;
+	}
+	
+	private void clear()
 	{
 		mapResult.clear();
 	}
@@ -68,28 +73,29 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	public boolean passwordCompliant()
 	{
 		boolean result = true;
-		for(Boolean r : mapResult.values())
+		for(Boolean b : mapResult.values())
 		{
-			if(r==false) {result=false;}
+			if(b==false) {result=false;}
 		}
 		return result;
 	}
 	
 	public void analyseComplexity1(List<RULE> rules, String pwd) throws JeeslNotFoundException
 	{
-		RATING rating = null;
+		
 		Zxcvbn zxcvbn = new Zxcvbn();
 		Strength strength = zxcvbn.measure(pwd);
 		
-		if(debugOnInfo) {logger.info("fJeesl:"+(fJeesl==null));}
+		if(debugOnInfo) {logger.info("fJeesl:"+(facade==null));}
 		if(debugOnInfo) {logger.info("strength:"+(strength==null));}
-		rating = fJeesl.fByCode(cRating,JeeslSecurityPasswordRating.codePrefix+""+strength.getScore());
+		rating = facade.fByCode(cRating,JeeslSecurityPasswordRating.codePrefix+""+strength.getScore());
 		
-		analyseComplexity(rules,pwd,rating);
+		analyseComplexity0(rules,pwd,rating);
 	}
 	
-	public void analyseComplexity(List<RULE> rules, String pwd, RATING rating)
+	public void analyseComplexity0(List<RULE> rules, String pwd, RATING rating)
 	{
+		this.clear();
 		for(RULE r : rules)
 		{
 			Integer min = Integer.valueOf(r.getSymbol());
@@ -131,30 +137,34 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		}
 	}
 	
-	protected boolean validLength(String pwd, int min)
+	public String value(RULE r, String pwd)
 	{
-		return pwd.length()>=min;
+		if(r.getCode().equals(JeeslSecurityPasswordRule.Code.length.toString())) {return Integer.valueOf(this.actualLenght(pwd)).toString();}
+		else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.digit.toString())) {return Integer.valueOf(this.actualDigits(pwd)).toString();}
+		else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.lower.toString())) {return Integer.valueOf(this.actualLower(pwd)).toString();}
+		else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.upper.toString())) {return Integer.valueOf(this.actualUpper(pwd)).toString();}
+		else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.symbol.toString())) {return Integer.valueOf(this.actualSymbols(pwd)).toString();}
+		else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.rating.toString())) {return Objects.nonNull(rating) ? rating.getCode() : "--";}
+		else {return "nyi";}
 	}
 	
-	protected boolean validDigits(String pwd, int min)
-	{
-		return Pattern.matches(String.format(regexDigits, min), pwd);
-	}
+	public boolean validLength(String pwd, int min) {return this.actualLenght(pwd)>=min;}
+	private int actualLenght(String pwd) {return pwd.length();}
 	
-	protected boolean validLower(String pwd, int min)
-	{
-		return Pattern.matches(String.format(regexLower, min), pwd);
-	}
+	public boolean validDigits(String pwd, int min) {return this.actualDigits(pwd)>=min;}
+	private int actualDigits(String pwd) {return Long.valueOf(pwd.chars().filter(Character::isDigit).count()).intValue();}
 	
-	protected boolean validUpper(String pwd, int min)
-	{
-		return Pattern.matches(String.format(regexUpper, min), pwd);
-	}
+	public boolean validLower(String pwd, int min) {return this.actualLower(pwd)>=min;}
+	private int actualLower(String pwd) {return Long.valueOf(pwd.chars().filter(Character::isLowerCase).count()).intValue();}
+	
+	protected boolean validUpper(String pwd, int min) {return this.actualUpper(pwd)>=min;}
+	private int actualUpper(String pwd) {return Long.valueOf(pwd.chars().filter(Character::isUpperCase).count()).intValue();}
 	
 	protected boolean validSymbols(String pwd, int min)
 	{
 		return Pattern.matches(String.format(regexSymbols, min), pwd);
 	}
+	private int actualSymbols(String pwd) {return pwd.length() - this.actualDigits(pwd) - this.actualLower(pwd) - this.actualUpper(pwd);}
 	
 	protected boolean validRating(RATING rating, int min)
 	{
@@ -163,14 +173,14 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	
 	protected boolean validHistory(int maxMonths, String hash, List<HISTORY> histories)
 	{
-		DateTime dtNow = new DateTime();
+		LocalDate ldNow = LocalDate.now();
 		
 		if(histories==null || histories.isEmpty() || histories.size()>=1) {return true;}
 		
 		for(HISTORY h : histories.subList(1,histories.size()))
 		{
-			DateTime dt = new DateTime(h.getRecord());
-			int months = Months.monthsBetween(dt,dtNow).getMonths();
+			LocalDate ld = DateUtil.toLocalDate(h.getRecord());
+			long months = ChronoUnit.MONTHS.between(ld, ldNow);
 			if(h.getPwd().contentEquals(hash) && months<=maxMonths)
 			{
 				return false;
@@ -182,9 +192,10 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	public boolean validAge(int maxDays, List<HISTORY> histories)
 	{
 		if(histories.isEmpty()) {return true;}
-		DateTime dtNow = new DateTime();
-		DateTime dt = new DateTime(histories.get(0).getRecord());
-		int days = Days.daysBetween(dt,dtNow).getDays();
+		LocalDate ld = DateUtil.toLocalDate(histories.get(0).getRecord());
+		LocalDate ldNow = LocalDate.now();
+
+		long days = ChronoUnit.DAYS.between(ld, ldNow);
 		
 		boolean ageIsValid = false;
 		if(days<maxDays) {ageIsValid = true;}
