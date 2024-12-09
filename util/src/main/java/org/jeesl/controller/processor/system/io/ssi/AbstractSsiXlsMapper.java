@@ -12,12 +12,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
 import org.exlp.controller.handler.io.log.LoggedExit;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.interfaces.controller.processor.io.report.XlsxImportMapper;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractSsiXlsMapper
+public class AbstractSsiXlsMapper implements XlsxImportMapper
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiXlsMapper.class);
 	

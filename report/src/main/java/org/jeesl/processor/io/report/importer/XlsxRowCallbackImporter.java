@@ -18,7 +18,7 @@ import org.jeesl.controller.processor.system.io.ssi.AbstractSsiXlsMapper;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.json.system.io.report.xls.JsonXlsCellFactory;
 import org.jeesl.factory.json.system.io.report.xls.JsonXlsColumnFactory;
-import org.jeesl.interfaces.controller.processor.io.report.XlsxToMongoCallback;
+import org.jeesl.interfaces.controller.processor.io.report.XlsxImportCallback;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsColumn;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
@@ -40,7 +40,7 @@ public class XlsxRowCallbackImporter
 	protected int indexColumnStart, indexColumnEnd;
 	protected int indexRowStart; public void setIndexRowStart(int indexRowStart) {this.indexRowStart = indexRowStart;}
 	
-	private XlsxToMongoCallback callback; public void callback(XlsxToMongoCallback callback) {this.callback=callback;}
+	private XlsxImportCallback callback; public void callback(XlsxImportCallback callback) {this.callback=callback;}
 	private AbstractSsiXlsMapper mapper; public void mapper(AbstractSsiXlsMapper mapper) {this.mapper=mapper;}
 	
 	public XlsxRowCallbackImporter(Configuration config)
@@ -90,11 +90,7 @@ public class XlsxRowCallbackImporter
 	{
 		String fName = FilenameUtils.removeExtension(xlsFile.getName());
 		logger.info(fName);
-		
-//		try {district = fUtils.fByName(MeisDistrict.class, fName.toUpperCase());}
-//		catch (JeeslNotFoundException e) {throw new UtilsConfigurationException("No district with name="+fName);}
-//		logger.info("Open: "+xlsFile.getAbsolutePath()+" and processing "+TxtDistrictFactory.hierarchy(district));
-		
+			
 		InputStream is = new FileInputStream(xlsFile);
 		Sheet sheet = StreamingReader.builder().rowCacheSize(100).bufferSize(4096).open(is).getSheetAt(indexSheet);
 		
@@ -110,7 +106,7 @@ public class XlsxRowCallbackImporter
 			if(rowIndex>=indexRowStart)
 			{
 				if(Objects.isNull(callback)) {throw new UtilsConfigurationException("No Callback");}
-				callback.callbackXlsxRow2Mongo(fName,indexSheet,rowIndex,r);
+				callback.callbackXlsxRow2Mongo(mapper,fName,indexSheet,rowIndex,r);
 			}
 		}
 		indexRowStart = 2;

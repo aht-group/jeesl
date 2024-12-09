@@ -1,5 +1,7 @@
 package org.jeesl.controller.web.io.locale;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
@@ -134,6 +137,8 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected boolean uiAllowSave; public boolean getUiAllowSave() {return uiAllowSave;}
 	protected boolean uiAllowRemove; public boolean isUiAllowRemove() {return uiAllowRemove;}
 	protected boolean uiAllowCode; public boolean isUiAllowCode() {return uiAllowCode;}
+	
+	private byte[] previewBytes;
 	
 	public JeeslLocaleOptionController(JeeslOptionTableCallback callback,
 									IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
@@ -310,7 +315,6 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	{
 		logger.debug("add");
 		
-
 		status = optionClass.newInstance();
 		((EjbWithId)status).setId(0);
 		((EjbWithCode)status).setCode("enter code");
@@ -355,6 +359,8 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 			graphic = ((EjbWithGraphic<G>)status).getGraphic();
 
 			reloadFigures();
+			previewBytes = new byte[0];
+			if(ObjectUtils.isNotEmpty(graphic.getData())) {previewBytes = graphic.getData();}
 		}
 
 //		uiAllowCode = hasDeveloperAction || hasAdministratorAction;
@@ -394,10 +400,14 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
         	if(debugSave){logger.info("Saving "+status.getClass().getSimpleName()+" "+status.toString());}
 			status = fGraphic.save((EjbSaveable)status);
 			status = fGraphic.loadGraphic(optionClass,(EjbWithId)status);
+			
+			previewBytes = new byte[0];
 			if(supportsGraphic)
 			{
 				graphic = ((EjbWithGraphic<G>)status).getGraphic();
 				if(debugSave){logger.info("Saved "+graphic.getClass().getSimpleName()+" "+graphic.toString());}
+				
+				if(ObjectUtils.isNotEmpty(graphic.getData())) {previewBytes = graphic.getData();}
 			}
 			this.reloadFigures();
 			if(debugSave){logger.info("Saved "+status.getClass().getSimpleName()+" "+status.toString());}
@@ -453,9 +463,16 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	{
 		UploadedFile file = event.getFile();
 		logger.info("Received file with a size of " +file.getSize());
+		previewBytes = file.getContent();
 		((EjbWithGraphic<G>)status).getGraphic().setData(file.getContent());
 	}
 
+	public InputStream previewIs() throws JeeslNotFoundException
+	{
+		logger.info(InputStream.class.getSimpleName()+" "+previewBytes.length);
+		return new ByteArrayInputStream(previewBytes);
+	}
+	
 //	@Override
 	@SuppressWarnings("unchecked")
 	public void changeGraphicType()
