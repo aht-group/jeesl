@@ -82,6 +82,7 @@ public class XlsxRowCallbackImporter
 	
 	public void streamFile(Path path) throws IOException, UtilsConfigurationException
 	{
+		logger.debug("Streaming "+path.toString());
 		this.xlsFile = path.toFile();
 		this.streamFile();
 	}
