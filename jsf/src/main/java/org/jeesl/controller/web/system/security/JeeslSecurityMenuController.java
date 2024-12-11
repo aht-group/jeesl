@@ -2,10 +2,12 @@ package org.jeesl.controller.web.system.security;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -213,6 +215,44 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 
 	    if(debugOnInfo) {logger.info("Reloaded Menu with "+list.size()+" elements. sbhContext.isSelected():"+sbhContext.isSelected()+" disabledMenuImportFromDefaultContext:"+disabledMenuImportFromDefaultContext);}
     }
+	
+	public void deleteItemsFromContext() throws IllegalArgumentException, JeeslConstraintViolationException
+	{
+		CTX core = fSecurity.fByEnum(fbSecurity.getClassContext(), JeeslSecurityContext.Code.core);
+		if(sbhContext.isSelected() && sbhContext.getSelection().equals(core)) {throw new IllegalStateException("Not allowd to ");}
+		
+		List<M> list = new ArrayList<>();
+		List<M> delete = new ArrayList<>();
+		Set<M> parents = new HashSet<>();
+		list.add(null);
+		int loop=1;
+		
+		while(!list.isEmpty())
+		{
+			list.clear();
+			parents.clear();
+			delete.clear();
+			
+			EjbSecurityQuery<C,R,CTX> query = new EjbSecurityQuery<>();
+			query.add(sbhContext.getSelection());
+			list.addAll(fSecurity.fSecurityMenus(query));
+			
+			logger.info("Loop "+loop+" with "+list.size());
+			for(M m : list)
+			{
+				if(Objects.nonNull(m.getParent())) {parents.add(m.getParent());}
+			}
+			for(M m : list)
+			{
+				if(!parents.contains(m)) {delete.add(m);}
+			}
+			
+			fSecurity.rm(delete);
+			loop++;	
+		}
+		
+		
+	}
 
 	public void importFromDefaultContext()
 	{
@@ -352,7 +392,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		}
 	}
 
-	public void expandHelp(){thMenu.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+	public void expandHelp() {thMenu.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
 	public void collapseHelp() {thMenu.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 

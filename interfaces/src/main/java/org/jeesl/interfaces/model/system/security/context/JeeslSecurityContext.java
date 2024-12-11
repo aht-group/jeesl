@@ -20,6 +20,8 @@ public interface JeeslSecurityContext<L extends JeeslLang, D extends JeeslDescri
 						EjbWithLang<L>,EjbWithDescription<D>,
 						EjbWithCode,EjbWithPosition
 {
+	public enum Code {core}
+	
 	String getServerName();
 	void setServerName(String serverName);
 
