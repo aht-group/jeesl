@@ -16,6 +16,7 @@ import org.jeesl.interfaces.controller.web.system.security.JeeslSecurityMfaCallb
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfa;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfaType;
 import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
@@ -23,7 +24,12 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.warrenstrange.googleauth.GoogleAuthenticator;
+import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
+import com.warrenstrange.googleauth.GoogleAuthenticatorQRGenerator;
+
 public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+							CTX extends JeeslSecurityContext<L,D>,
 							MFA extends JeeslSecurityMfa<UJ,MFT>,
 							MFT extends JeeslSecurityMfaType<L,D,MFT,?>,
 							UJ extends JeeslSecurityUser,
@@ -43,8 +49,14 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	private final List<MFA> mfas; public List<MFA> getMfas() {return mfas;}
 	
 	private UJ user;
+	private UP uProject;
 	private MFA mfa; public MFA getMfa() {return mfa;} public void setMfa(MFA mfa) {this.mfa = mfa;}
 
+	private String qrCode; public String getQrCode() {return qrCode;}
+	private String qrVerification; public String getQrVerification() {return qrVerification;} public void setQrVerification(String qrVerification) {this.qrVerification = qrVerification;}
+
+	
+	
 	public JeeslMfaGwc(JeeslSecurityMfaCallback callback,
 						SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity)
 	{
@@ -66,11 +78,17 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 		types.addAll(fSecurity.allOrderedPositionVisible(fbSecurity.getClassMfaType()));
 	}
 	
-	public void reload(UJ user)
+	public void reload(UJ user, UP uProject)
 	{
 		logger.info("Reaload for "+user.toString());
 		this.user=user;
+		this.uProject=uProject;
 		this.reladMfas();
+	}
+	
+	private void reset(boolean rMfa, boolean rQr)
+	{
+		if(rQr) {qrCode = null;}
 	}
 	
 	private void reladMfas()
@@ -82,12 +100,30 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	public void addMfa()
 	{
 		mfa = efMfa.build(user,types.get(0));
+		
+		GoogleAuthenticator authenticator = new GoogleAuthenticator();
+		GoogleAuthenticatorKey key = authenticator.createCredentials();
+		mfa.setJson(key.getKey());
+		
+		qrCode = GoogleAuthenticatorQRGenerator.getOtpAuthTotpURL("JEESL",uProject.getEmail(),key);
+	}
+	
+	public void selectMfa()
+	{
+		this.reset(false,true);
+		mfa = fSecurity.find(fbSecurity.getClassMfa(),mfa);
 	}
 	
 	public void saveMfa() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		efMfa.converter(fSecurity, mfa);
-		mfa = fSecurity.save(mfa);
+		
+		GoogleAuthenticator authenticator = new GoogleAuthenticator();
+		boolean isAuthorized = authenticator.authorize(mfa.getJson(),Integer.parseInt(qrVerification));
+		
+		logger.info("Matches: "+isAuthorized);
+		
+		//mfa = fSecurity.save(mfa);
 		this.reladMfas();
 	}
 }

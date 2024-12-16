@@ -51,7 +51,14 @@
 						<jtp:label entity="SecurityMfa" code="name"/>
 						<p:inputText value="#{cc.attrs.ctrl.mfa.name}"/>
 						
+						<jtp:label entity="SecurityMfa" code="qrCode"/>
+						
+						
+						<jtp:label entity="SecurityMfa" code="verification"/>
+						<p:inputText value="#{cc.attrs.ctrl.qrVerification}"/>
+						
 					</j:inputGrid>
+					<j:qrCode qrValue="#{cc.attrs.ctrl.qrCode}" styleClass="jeesl-qr"/>
 				</p:panel>
 			</h:form>
 		</j:slot>
