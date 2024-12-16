@@ -11,7 +11,11 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslAttributes
+@DownloadJeeslDescription
 public interface JeeslSecurityMfa <USER extends JeeslSecurityUser,
 									TYPE extends JeeslSecurityMfaType<?,?,TYPE,?>>
 			extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,

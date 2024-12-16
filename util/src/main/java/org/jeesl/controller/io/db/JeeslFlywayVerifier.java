@@ -78,7 +78,7 @@ public class JeeslFlywayVerifier
 		
 		List<URI> listFlyway = JeeslFlywayVerifier.sqlScripts(pathFlyway);
 		List<URI> listUpdates = JeeslFlywayVerifier.sqlScriptsSince(pathProvider.getRootDirectory(),i);
-		logger.info("Checking "+listUpdates.size()+" "+library+" library updates against "+listFlyway.size()+" flyway migrations for "+pathProvider.getRootDirectory());
+		logger.debug("Checking "+listUpdates.size()+" "+library+" library updates against "+listFlyway.size()+" flyway migrations for "+pathProvider.getRootDirectory());
 
 		try
 		{

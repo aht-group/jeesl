@@ -2,6 +2,8 @@ package org.jeesl.model.ejb.system.security.login;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -59,6 +61,7 @@ public class SecurityMfa implements JeeslSecurityMfa<SecurityUser,SecurityMfaTyp
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
 	
+	@Basic @Column(columnDefinition="text")
 	private String json;
 	@Override public String getJson() {return json;}
 	@Override public void setJson(String json) {this.json = json;}
