@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
@@ -40,9 +41,13 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslMfaGwc.class);
 	
+	public enum Constraints{qrCodeVerification}
+	
 	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity;
 	private JeeslSecurityFacade<?,?,?,?,?,?,?,UP> fSecurity;
-		
+	
+	private final JeeslSecurityMfaCallback callback;
+	
 	private final EjbSecurityMfaFactory<MFA,MFT,UJ> efMfa;
 	
 	private final List<MFT> types; public List<MFT> getTypes() {return types;}
@@ -57,12 +62,11 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	private String qrCode; public String getQrCode() {return qrCode;}
 	private String qrVerification; public String getQrVerification() {return qrVerification;} public void setQrVerification(String qrVerification) {this.qrVerification = qrVerification;}
 
-	
-	
 	public JeeslMfaGwc(JeeslSecurityMfaCallback callback,
 						SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
+		this.callback=callback;
 		this.fbSecurity=fbSecurity;
 		
 		efMfa = fbSecurity.ejbMfa();
@@ -94,6 +98,7 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	
 	private void reset(boolean rMfa, boolean rQr)
 	{
+		if(rMfa) {mfa=null; callback.callbackMfaConstraintsClear();}
 		if(rQr) {qrCode = null;}
 	}
 	
@@ -105,6 +110,7 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	
 	public void addMfa()
 	{
+		callback.callbackMfaConstraintsClear();
 		mfa = efMfa.build(user,types.get(0));
 		
 		GoogleAuthenticator authenticator = new GoogleAuthenticator();
@@ -122,14 +128,29 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	
 	public void saveMfa() throws JeeslConstraintViolationException, JeeslLockingException
 	{
+		callback.callbackMfaConstraintsClear();
 		efMfa.converter(fSecurity, mfa);
 		
 		GoogleAuthenticator authenticator = new GoogleAuthenticator();
-		boolean isAuthorized = authenticator.authorize(mfa.getJson(),Integer.parseInt(qrVerification));
+		boolean codeIsVerified = false;
 		
-		logger.info("Matches: "+isAuthorized);
+		if(ObjectUtils.isNotEmpty(qrVerification))
+		{
+			codeIsVerified = authenticator.authorize(mfa.getJson(),Integer.parseInt(qrVerification));
+		}
 		
-		//mfa = fSecurity.save(mfa);
+		if(!codeIsVerified)
+		{
+			callback.callbackMfaConstraintsFailedVerification();
+			return;
+		}
+		
+		
+		logger.info("Matches: "+codeIsVerified);
+		
+		mfa = fSecurity.save(mfa);
+		qrCode=null;
+		qrVerification=null;
 		this.reladMfas();
 	}
 }

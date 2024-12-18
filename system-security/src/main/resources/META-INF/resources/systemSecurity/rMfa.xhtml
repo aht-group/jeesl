@@ -6,6 +6,7 @@
 	
 	<composite:interface>
 		<composite:attribute name="ctrl" required="false"/>
+		<composite:attribute name="constraints" required="false"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -46,19 +47,26 @@
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMfa()}" update=":#{cc.id}:rMfa"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<j:constraints value="#{cc.attrs.constraints}"/>
 					<j:inputGrid>
 						
 						<jtp:label entity="SecurityMfa" code="name"/>
 						<p:inputText value="#{cc.attrs.ctrl.mfa.name}"/>
 						
-						<jtp:label entity="SecurityMfa" code="qrCode"/>
+						
 						
 						
 						<jtp:label entity="SecurityMfa" code="verification"/>
 						<p:inputText value="#{cc.attrs.ctrl.qrVerification}"/>
 						
 					</j:inputGrid>
-					<j:qrCode qrValue="#{cc.attrs.ctrl.qrCode}" styleClass="jeesl-qr"/>
+					<j:inputGrid rendered="#{not empty cc.attrs.ctrl.qrCode}">
+						<jtp:label entity="SecurityMfa" code="qrCode"/>
+						<h:outputText value="Put here the QR Code"/>
+					</j:inputGrid>
+					<j:qrCode qrValue="#{cc.attrs.ctrl.qrCode}" styleClass="jeesl-qr" rendered="#{not empty cc.attrs.ctrl.qrCode}"/>
+					
+					
 				</p:panel>
 			</h:form>
 		</j:slot>

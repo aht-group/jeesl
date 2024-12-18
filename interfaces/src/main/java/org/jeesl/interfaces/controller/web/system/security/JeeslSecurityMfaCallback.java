@@ -4,5 +4,6 @@ import java.io.Serializable;
 
 public interface JeeslSecurityMfaCallback extends Serializable
 {
-	
+	public void callbackMfaConstraintsClear();
+	public void callbackMfaConstraintsFailedVerification();
 }
