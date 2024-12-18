@@ -1181,6 +1181,10 @@ $enable-pointer-cursor-for-buttons: true;
 							}
 						}
 					}
+					
+					> .jeesl-qr {
+						max-height: $qrCodeHeight;
+					}
 				}
 			}
 		}

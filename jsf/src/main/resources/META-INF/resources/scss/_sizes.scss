@@ -76,6 +76,8 @@ $input-field-icon-height-mobile: 22px;
 $field-tip-width: 300px;
 $overlay-filter-input-width: 200px;
 
+$qrCodeHeight: 200px;
+
 @mixin element-height {
 	height: $element-height;
 	
