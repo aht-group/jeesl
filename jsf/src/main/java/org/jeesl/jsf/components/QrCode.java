@@ -41,13 +41,34 @@ public class QrCode extends UIOutput
 		return qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 0, 0);
 	}
 	
+	// None of the options in the QRCodeWriter to remove the margin work, so we need to find the amount
+	// of empty rows to determine the margin manually (it's the same on all sides), then apply that to the SVG drawing.
+	private int findQrMargin(BitMatrix qrBitMatrix) {
+		int matrixWidth = qrBitMatrix.getWidth();
+		int matrixHeight = qrBitMatrix.getHeight();
+		BitArray row = new BitArray(matrixWidth);
+		
+		int margin = 0;
+		boolean isRowEmpty = false;
+		for (int yIndex = 0; yIndex < matrixHeight; ++yIndex) {
+			row = qrBitMatrix.getRow(yIndex, row);
+			for (int xIndex = 0; xIndex < matrixWidth; ++xIndex) {
+				isRowEmpty = !row.get(xIndex);
+				if (!isRowEmpty) { break; }
+			}
+			if (!isRowEmpty) { break; }
+			margin++;
+		}
+		return margin;
+	}
+	
 	private void encodePath(String content, FacesContext context) throws IOException, WriterException
 	{
 		ResponseWriter responseWriter = context.getResponseWriter();
-		StringBuilder sbPath = new StringBuilder();
 		BitMatrix qrBitMatrix = generateQrCode(content);
-		int matrixWidth = qrBitMatrix.getWidth();
-		int matrixHeight = qrBitMatrix.getHeight();
+		int margin = findQrMargin(qrBitMatrix);
+		int matrixWidth = qrBitMatrix.getWidth() - 2 * margin;
+		int matrixHeight = qrBitMatrix.getHeight() - 2 * margin;
 		BitArray row = new BitArray(matrixWidth);
 		
 		double rectWidth = 100f / matrixWidth;
@@ -55,16 +76,16 @@ public class QrCode extends UIOutput
 		
 		for (int yIndex = 0; yIndex < matrixHeight; ++yIndex)
 		{
-			row = qrBitMatrix.getRow(yIndex, row);
+			row = qrBitMatrix.getRow(yIndex + margin, row);
 			for (int xIndex = 0; xIndex < matrixWidth; ++xIndex)
 			{
-				if (row.get(xIndex))
+				if (row.get(xIndex + margin))
 				{
 					responseWriter.startElement("rect", this);
 					responseWriter.writeAttribute("width", String.valueOf(rectWidth) + "%", null);
 					responseWriter.writeAttribute("height", String.valueOf(rectHeight) + "%", null);
-					responseWriter.writeAttribute("x", String.valueOf(xIndex * rectWidth) + "%", null);
-					responseWriter.writeAttribute("y", String.valueOf(yIndex * rectHeight) + "%", null);
+					responseWriter.writeAttribute("x", String.valueOf(xIndex * rectWidth) + "0%", null);
+					responseWriter.writeAttribute("y", String.valueOf(yIndex * rectHeight) + "0%", null);
 					responseWriter.endElement("rect");
 				}
 			}
@@ -74,12 +95,10 @@ public class QrCode extends UIOutput
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
 	{
-		Map<String,Object> map = getAttributes();
-		
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("svg", this);
 		responseWriter.writeAttribute("viewbox", "0 0 100 100", null);
-		responseWriter.writeAttribute("preserveAspectRatio", "xMidYMid meet", null);
+		responseWriter.writeAttribute("preserveAspectRatio", "xMinYMin slice", null);
 		
 		try
 		{
