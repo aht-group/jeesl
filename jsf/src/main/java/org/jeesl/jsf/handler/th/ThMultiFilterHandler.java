@@ -89,7 +89,7 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 	{
 		map.clear();
 		for(T t : list){map.put(t,true);}
-		refresh();
+		this.refresh();
 	}
 
 	@SuppressWarnings("unchecked")
