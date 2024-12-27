@@ -143,11 +143,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected boolean uiAllowRemove; public boolean isUiAllowRemove() {return uiAllowRemove;}
 	protected boolean uiAllowCode; public boolean isUiAllowCode() {return uiAllowCode;}
 	
-	private byte[] previewBytes;
-	
-	public byte[] getPreviewBytes() {
-		return previewBytes;
-	}
+	private byte[] previewBytes; public byte[] getPreviewBytes() {return previewBytes;}
 
 	public JeeslLocaleOptionController(JeeslOptionTableCallback callback,
 									IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
@@ -330,6 +326,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 			GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.shapeCircle.toString());
 			graphic = efGraphic.buildSymbol(type, style);
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
+			previewBytes = new byte[0];
 		}
 	}
 

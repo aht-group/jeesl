@@ -35,6 +35,11 @@
 		<!-- JEESL -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-api</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-interfaces</artifactId>
     		<scope>provided</scope>
 		</dependency>
