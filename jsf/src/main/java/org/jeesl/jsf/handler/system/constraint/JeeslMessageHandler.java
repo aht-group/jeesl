@@ -184,6 +184,6 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		if(ObjectUtils.isEmpty(summary)) {summary = "** ERROR **";}
 		if(ObjectUtils.isEmpty(detail)) {detail = "** In Use **";}
 		
-		fcm.info(id,summary,detail);		
+		fcm.error(id,summary,detail);		
 	}
 }

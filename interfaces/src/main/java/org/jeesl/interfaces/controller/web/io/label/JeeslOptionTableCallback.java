@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 
-public interface JeeslOptionTableCallback 
-					extends Serializable
+public interface JeeslOptionTableCallback extends Serializable
 {
 	JeeslSystemRestInterface rest(String code);
 }

@@ -103,7 +103,13 @@ public class Nested3Map <L1 extends EjbWithId, L2 extends EjbWithId, L3 extends 
 	
 	public void remove(L1 l1, L2 l2, L3 l3)
 	{
-		m.get(l1).getM().get(l2).remove(l3);
+		if (l1!= null && l2!=null && l3!=null)
+		{
+			if (m.containsKey(l1) && m.get(l1).getM().containsKey(l2) && m.get(l1).getM().get(l2).containsKey(l3))
+			{
+				m.get(l1).getM().get(l2).remove(l3);
+			}
+		}
 	}
 	
 }

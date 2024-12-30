@@ -57,14 +57,8 @@ public class JsonAzureUser implements Serializable
 	
 	@JsonProperty("WhenChangedUTC")
     protected String created;
-	
-
-	public String getCreated() {
-		return created;
-	}
-	public void setCreated(String created) {
-		this.created = created;
-	}
+	public String getCreated() {return created;}
+	public void setCreated(String created) {this.created = created;}
 
 	@JsonProperty("SurName")
     protected String firstName;
@@ -80,6 +74,11 @@ public class JsonAzureUser implements Serializable
     private String mailboxPlan;
     public String getMailboxPlan() {return mailboxPlan;}
 	public void setMailboxPlan(String mailboxPlan) {this.mailboxPlan = mailboxPlan;}
+	
+	@JsonProperty("uoLocation") //Only for XLSX
+    private String uoLocation;
+	public String getUoLocation() {return uoLocation;}
+	public void setUoLocation(String uoLocation) {this.uoLocation = uoLocation;}
 
 	@JsonProperty("BoxUsers")
     private List<String> accessedBy;
