@@ -104,7 +104,21 @@
 					<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
 				</h:graphicImage>
 			</p:commandLink>
-			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" header="#{cc.attrs.confirmHeader}" message="#{cc.attrs.confirmMessage}">
+			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" closable="false"
+							 message="#{cc.attrs.confirmMessage}" styleClass="jeesl-dialog">
+				<f:facet name="header">
+					<h:outputText class="ui-dialog-title" value="#{cc.attrs.confirmHeader}"/>
+					<div class="jeeslDialogActions ui-dialog-titlebar-actions">
+			            <composite:renderFacet name="actions"/>
+			            <p:commandLink styleClass="pf-action-icon">
+							<h:graphicImage id="imgClose"
+											height="#{cc.attrs.height}"
+											library="#{appIconBean.library['jeeslCancel']}"
+											name="#{appIconBean.svg['jeeslCancel']}"
+											onclick="PF('#{cc.attrs.id}-cd').hide();"/>
+						</p:commandLink>
+			        </div>
+				</f:facet>
 				<p:commandButton id="linkConfirm" 
 								 value="#{cc.attrs.confirmYes}"
 								 oncomplete="PF('#{cc.attrs.id}-cd').hide(); #{cc.attrs.oncomplete}"

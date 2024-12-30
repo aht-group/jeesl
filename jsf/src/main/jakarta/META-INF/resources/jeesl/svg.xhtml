@@ -54,7 +54,8 @@
 					<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1500" hideEvent="mouseleave click"/>
 					<p:tooltip for="image2" rendered="#{(not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)}" value="#{appLabelBean.descriptions[cc.attrs.ttEntity][cc.attrs.ttCode][localeCode].lang}" showDelay="1500" hideEvent="mouseleave click"/>
 			</p:commandLink>
-			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" header="#{cc.attrs.confirmHeader}" message="#{cc.attrs.confirmMessage}">
+			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" header="#{cc.attrs.confirmHeader}"
+							 message="#{cc.attrs.confirmMessage}" styleClass="jeesl-dialog">
 				<p:commandButton id="linkConfirm" 
 								 value="#{cc.attrs.confirmYes}"
 								 oncomplete="PF('#{cc.attrs.id}-cd').hide(); #{cc.attrs.oncomplete}"

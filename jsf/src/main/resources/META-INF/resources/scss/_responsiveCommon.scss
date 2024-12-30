@@ -430,11 +430,21 @@ $border: $border-width solid var(--container-border-colour);
 		flex-grow: 1;
 	}
 	
+	.jeesl-input-label {
+		padding: 0 $half-spacing;
+	}
+	
 	.ui-chkbox {
 		margin: -$half-spacing 0;
 		
 		@media (max-width: 768px) {
 			margin: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.ui-outputlabel {
+			padding: 0 0 0 $regular-spacing;
 		}
 	}
 }
@@ -669,7 +679,7 @@ $border: $border-width solid var(--container-border-colour);
 		padding: $wide-spacing 0;
 	}
 	
-	.#{$class}-header {
+	.#{$class}-header, thead th {
 		align-items: center;
 		background-image: var(--panel-content-select-dropdown-header-background);
 		background-repeat: repeat;
@@ -687,7 +697,7 @@ $border: $border-width solid var(--container-border-colour);
 			background-size: 100% $ls-element-height-mobile;
 		}
 		
-		.#{$class}-title {
+		.#{$class}-title, .ui-outputlabel {
 			flex-grow: 1;
 			line-height: $ls-element-height;
 			margin: 0;
@@ -718,6 +728,10 @@ $border: $border-width solid var(--container-border-colour);
 			}
 		}
 	}
+}
+
+.jeesl-selectonetable {
+	@include headlined-overlay(ui-selectonemenu);
 }
 
 .ui-selectcheckboxmenu-panel {
@@ -795,7 +809,7 @@ $border: $border-width solid var(--container-border-colour);
 	}
 }
 
-.ui-datepicker {
+.ui-datepicker:not(.ui-datepicker-inline) {
 	@include headlined-overlay(ui-datepicker);
 	
 	padding: $half-spacing;
@@ -1343,6 +1357,10 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	> .jeesl-input-label {
 		background: var(--panel-content-input-background);
 		padding: 0 $half-spacing;
+		
+		@media (max-width: 768px) {
+			padding: $regular-spacing;
+		}
 	}
 	
 	> .ui-inputtextarea, > .ui-inputtext {

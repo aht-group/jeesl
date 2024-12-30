@@ -285,7 +285,7 @@ body {
 		@include jeesl-fileupload-titlebar;
 		
 		background: var(--container-content-background);
-		border: var(--container-border-colour);
+		border-color: var(--container-border-colour);
 		border-radius: $border-radius;
 		color: var(--container-content-foreground);
 		padding: 0;

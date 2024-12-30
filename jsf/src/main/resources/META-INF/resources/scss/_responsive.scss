@@ -2033,7 +2033,6 @@ $enable-pointer-cursor-for-buttons: true;
 		@include input-grid;
 		@include image-gallery;
 		
-
 		.jeesl-headline {
 			padding: $regular-spacing 0;
 			text-shadow: $text-shadow;
@@ -3512,6 +3511,26 @@ body, .ui-widget {
 	}
 }
 
+.jeesl-calendar .ui-datepicker-inline {
+	border: none;
+	padding: 0;
+	
+	.ui-datepicker-header {
+		@include jeesl-titlebar;
+		
+		.ui-datepicker-prev, .ui-datepicker-next {
+		}
+		
+		.ui-datepicker-title {
+			@include jeesl-titlebar-title;
+		}
+	}
+	
+	.ui-widget-content {
+		
+	}
+}
+
 .jeesl-datatable, .ui-datatable.ui-sortable-helper, .ui-selectonemenu-panel .ui-selectonemenu-table {
 	@include jeesl-table-titlebar;
 	
@@ -4350,17 +4369,6 @@ body, .ui-widget {
 				}
 			}
 		}
-		
-		.ui-dialog-buttonpane {
-			display: flex;
-			gap: $half-spacing;
-			margin: 0;
-			padding: $regular-spacing;
-			
-			.ui-button {
-				margin: 0;
-			}
-		}
 	}
 	
 	&.multi-panel-dialog {
@@ -4454,6 +4462,17 @@ body, .ui-widget {
 	
 	.ui-dialog-footer {
 		@include jeesl-footer;
+	}
+
+	.ui-dialog-buttonpane {
+		display: flex;
+		gap: $half-spacing;
+		margin: 0;
+		padding: $regular-spacing;
+		
+		.ui-button {
+			margin: 0;
+		}
 	}
 }
 
