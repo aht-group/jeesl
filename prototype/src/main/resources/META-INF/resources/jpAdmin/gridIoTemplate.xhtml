@@ -79,7 +79,7 @@
 					<j:inputGrid>
 						<jtp:label entity="IoTemplate" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.template.category}" effect="fade" >
-							<f:selectItems value="#{cc.attrs.bean.sbhCategory.selected}" var="c" itemLabel="#{c.position}. #{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
+							<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="c" itemLabel="#{c.position}. #{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 						<jtp:label entity="IoTemplate" code="scope"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.template.scope}" effect="fade" >
@@ -89,7 +89,7 @@
 						<jtp:label entity="IoTemplate" code="visible"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.template.visible}"/>
 						<jtp:label entity="IoTemplate" code="code"/>
-						<h:inputText autocomplete="off" value="#{cc.attrs.bean.template.code}" styleClass="w100"/>
+						<p:inputText autocomplete="off" value="#{cc.attrs.bean.template.code}"/>
 					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.template}" withDescription="true" locales="#{cc.attrs.locales}" />
 				</p:panel>
