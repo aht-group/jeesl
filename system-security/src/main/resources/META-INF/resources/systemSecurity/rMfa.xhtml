@@ -62,7 +62,7 @@
 					</j:inputGrid>
 					<j:inputGrid rendered="#{not empty cc.attrs.ctrl.qrCode}">
 						<jtp:label entity="SecurityMfa" code="qrCode"/>
-						<j:qrCode qrValue="A" styleClass="jeesl-qr" rendered="#{not empty cc.attrs.ctrl.qrCode}"/>
+						<j:qrCode qrValue="#{cc.attrs.ctrl.qrCode}" styleClass="jeesl-qr" rendered="#{not empty cc.attrs.ctrl.qrCode}"/>
 					</j:inputGrid>
 					
 					
