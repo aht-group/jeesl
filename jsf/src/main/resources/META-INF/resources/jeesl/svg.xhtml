@@ -49,14 +49,14 @@
 							onstart="#{cc.attrs.onstart}"
 							oncomplete="#{cc.attrs.oncomplete}"
 							styleClass="#{styleClass}"
-							style="margin:3px;"
 							immediate="#{cc.attrs.immediate}"
 							rendered="#{(empty cc.attrs.ejb) or
 							(
 								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
 							)}"
 							>
-					<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="value" value="#{cc.attrs.textLink}"/></c:if>
+					<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
+					<f:attribute name="value" value="#{cc.attrs.textLink}"/>
 					<h:graphicImage id="image2" rendered="#{not cc.attrs.disabled}">
 						<f:attribute name="height" value="#{cc.attrs.height}"/>
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
@@ -94,13 +94,13 @@
 		<c:if test="#{cc.attrs.confirm}">
 			<p:commandLink id="link" onclick="PF('#{cc.attrs.id}-cd').show()"
 							styleClass="#{styleClass}"
-							style="margin:3px;"
 							rendered="#{(empty cc.attrs.ejb) or
 							(
 								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
 							)}"
 							>
-				<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="value" value="#{cc.attrs.textLink}"/></c:if>
+				<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
+				<f:attribute name="value" value="#{cc.attrs.textLink}"/>
 				<h:graphicImage id="image2">
 					<f:attribute name="height" value="#{cc.attrs.height}"/>
 					<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>

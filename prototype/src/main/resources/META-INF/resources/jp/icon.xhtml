@@ -49,8 +49,8 @@
 					   onstart="#{cc.attrs.onstart}"
 					   oncomplete="#{cc.attrs.oncomplete}"
 					   immediate="#{cc.attrs.immediate}"
-					   style="margin:3px;"
 					   styleClass="#{cc.attrs.styleClass}">
+						<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
 						<f:attribute name="value" value="#{cc.attrs.textLink}"/>
 			<h:graphicImage id="image2"
 							value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"
