@@ -15,6 +15,7 @@
 		<composite:attribute name="process" required="false" default=""/>
 		
 		<composite:attribute name="value" required="false"/>
+		<composite:attribute name="textLink" required="false"/>
 		<composite:attribute name="type" required="false"/>
 		<composite:attribute name="height" required="false" default="12"/>
 		
@@ -54,7 +55,8 @@
 								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
 							)}"
 							>
-					
+					<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
+					<f:attribute name="value" value="#{cc.attrs.textLink}"/>
 					<h:graphicImage id="image2" rendered="#{not cc.attrs.disabled}">
 						<f:attribute name="height" value="#{cc.attrs.height}"/>
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
@@ -97,6 +99,8 @@
 								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
 							)}"
 							>
+				<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
+				<f:attribute name="value" value="#{cc.attrs.textLink}"/>
 				<h:graphicImage id="image2">
 					<f:attribute name="height" value="#{cc.attrs.height}"/>
 					<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
