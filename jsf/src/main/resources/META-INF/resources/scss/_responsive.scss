@@ -3406,7 +3406,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
+.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload, .jeesl-calendar {
 	margin-bottom: $regular-spacing;
 	
 	.ui-panel-content, .ui-datatable-tablewrapper {
@@ -3511,6 +3511,90 @@ body, .ui-widget {
 	}
 }
 
+@mixin inner-table {
+	border-collapse: collapse;
+	border-style: hidden;
+	height: 100%;
+	margin: 0;
+	table-layout: auto;
+
+	@media (max-width: 768px) {
+		thead th, tbody tr, tfoot tr {
+			height: $element-height-mobile;
+		}
+	}
+	
+	thead th {
+		background: var(--container-header-background);
+		border: $border;
+		border-top: 0;
+		box-shadow: 0 -1px 0 inset $white-35;
+		color: var(--container-header-foreground);
+		padding: $table-header-padding;
+		position: relative;
+	}
+	
+	tbody, .ui-datatable-data {
+		background: var(--container-content-background);
+		border: none;
+
+		tr {
+			background: transparent;
+			border: none;
+			// TODO: Check!
+			border-color: $soft-grey $light-grey;
+			
+			&:nth-child(2n) {
+				background: var(--datatable-content-odd-row-background);
+			}
+		}
+		
+		tr, .jeesl-cell-select > label {
+			transition: background $transition-duration linear, border-color $transition-duration linear;
+		}
+
+		td {
+			@include icon-default-size;
+
+			border-style: solid;
+			border-color: inherit;
+			border-width: 0 0 $border-width $border-width;
+			padding: $half-spacing $regular-spacing;
+
+			> * {
+				vertical-align: middle;
+			}
+		}
+
+		tr.ui-state-hover, .jeesl-cell-select > label:not(.selected):hover {
+			background: var(--container-header-action-button-dropdown-background);
+			box-shadow: none;
+			// TODO: Check!
+			border-color: $soft-grey $light-grey;
+		}
+
+		tr.ui-state-highlight, .jeesl-cell-select > label.selected {
+			background: var(--datatable-content-highlight-background);
+			// TODO: Check!
+			border-color: var(--datatable-content-highlight-background);
+			color: var(--datatable-content-highlight-foreground);
+			font-weight: 500;
+			text-shadow: none;
+			
+			.aht-icon {
+				filter: grayscale(1) brightness(3);
+			}
+		}
+	}
+	
+	tfoot td {
+		@include jeesl-footer;
+
+		background: var(--container-content-background);
+		text-align: left;
+	}
+}
+
 .jeesl-calendar .ui-datepicker-inline {
 	border: none;
 	padding: 0;
@@ -3519,15 +3603,120 @@ body, .ui-widget {
 		@include jeesl-titlebar;
 		
 		.ui-datepicker-prev, .ui-datepicker-next {
+			color: var(--container-header-foreground);
+			display: flex;
+			height: auto;
+			left: 0;
+			margin: 0;
+			padding: $half-spacing 0;
+			position: relative;
+			text-decoration: none;
+			top: 0;
+			width: auto;
+			
+			&:hover:before {
+				opacity: 1;
+			}
+			
+			&:before {
+				@include background-overlay(var(--container-header-action-button-hover-background));
+			}
+			
+			.ui-icon {
+				display: flex;
+				left: 0;
+				margin: 0;
+				padding: 0 $half-spacing;
+				position: relative;
+				text-indent: 0;
+				top: 0;
+			}
+		}
+		
+		.ui-datepicker-prev {
+			order: 2;
+		}
+		
+		.ui-datepicker-next {
+			order: 3;
 		}
 		
 		.ui-datepicker-title {
 			@include jeesl-titlebar-title;
+			
+			margin: 0;
+			order: 1;
 		}
 	}
 	
 	.ui-widget-content {
+		background: var(--container-content-background);
+		border: $border;
+		border-radius: $border-radius;
+		color: var(--container-content-foreground);
+	}
+	
+	.ui-datepicker-calendar {
+		@include inner-table;
 		
+		thead th {
+			padding-left: 0;
+			padding-right: 0;
+		}
+		
+		tbody {
+			tr {
+				&:last-child td > .ui-state-default:before {
+					border-bottom-width: 0;
+					bottom: 0;
+				}
+				
+				&:hover {
+					background: var(--datatable-content-hover-background);
+				}
+			}
+			
+			td {
+				padding: 0;
+
+				&:last-child >.ui-state-default:before {
+					border-right-width: 0;
+					right: 0;
+				}
+				
+				> .ui-state-default {
+					box-shadow: none;
+					color: inherit;
+					padding: $half-spacing 0;
+					position: relative;
+					text-shadow: none;
+					z-index: 0;
+					
+					&.ui-state-highlight {
+						background: var(--datatable-content-hover-background);
+					}
+					
+					&.ui-state-active {
+						color: var(--datatable-content-highlight-foreground);
+						
+						&:before {
+							opacity: 1;
+						}
+					}
+					
+					&:before {
+						@include background-overlay(var(--datatable-content-highlight-background));
+						
+						border-color: var(--datatable-content-highlight-border-colour);
+						border-style: solid;
+						border-width: 0 $border-width $border-width 0;
+						right: -$border-width;
+						bottom: -$border-width;
+						z-index: -1;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -3588,22 +3777,9 @@ body, .ui-widget {
 	}
 	
 	table {
-		border-collapse: collapse;
-		border-style: hidden;
-		height: 100%;
-		table-layout: auto;
-		
-		@media (max-width: 768px) {
-			thead th, tbody tr, tfoot tr {
-				height: $element-height-mobile;
-			}
-		}
+		@include inner-table;
 		
 		thead th {
-			border-top: 0;
-			box-shadow: 0 -1px 0 inset $white-35;
-			position: relative;
-			
 			&.jeesl-column-min-width {
 				white-space: nowrap;
 			}
@@ -3712,75 +3888,20 @@ body, .ui-widget {
 				height: 100%;
 			}
 		}
-		
-		tfoot td {
-			@include jeesl-footer;
 			
-			background: var(--container-content-background);
-			text-align: left;
-		}
-	}
-		
-	tbody, .ui-datatable-data {
-		background: var(--container-content-background);
-		border: none;
-		
-		tr {
-			background: transparent;
-			border: none;
-			// TODO: Check!
-			border-color: $soft-grey $light-grey;
-			
-			&:nth-child(2n) {
-				background: var(--datatable-content-odd-row-background);
-			}
-		}
-		
-		tr, .jeesl-cell-select > label {
-			transition: background $transition-duration linear, border-color $transition-duration linear;
-		}
-		
-		td {
-			@include icon-default-size;
-			
-			border-color: inherit;
-			border-width: 0 0 $border-width $border-width;
-			padding: $half-spacing $regular-spacing;
-			
-			&.jeesl-column-min-width {
-				width: 0;
-			}
-			
-			&.jeesl-cell-select {
-				padding: 0;
-				
-				label {
-					padding: $half-spacing $regular-spacing;
+		tbody, .ui-datatable-data {
+			td {
+				&.jeesl-column-min-width {
+					width: 0;
 				}
-			}
-			
-			> * {
-				vertical-align: middle;
-			}
-		}
-		
-		tr.ui-state-hover, .jeesl-cell-select > label:not(.selected):hover {
-			background: var(--container-header-action-button-dropdown-background);
-			box-shadow: none;
-			// TODO: Check!
-			border-color: $soft-grey $light-grey;
-		}
-		
-		tr.ui-state-highlight, .jeesl-cell-select > label.selected {
-			background: var(--datatable-content-highlight-background);
-			// TODO: Check!
-			border-color: var(--datatable-content-highlight-background);
-			color: var(--datatable-content-highlight-foreground);
-			font-weight: 500;
-			text-shadow: none;
-			
-			.aht-icon {
-				filter: grayscale(1) brightness(3);
+				
+				&.jeesl-cell-select {
+					padding: 0;
+					
+					label {
+						padding: $half-spacing $regular-spacing;
+					}
+				}
 			}
 		}
 	}
