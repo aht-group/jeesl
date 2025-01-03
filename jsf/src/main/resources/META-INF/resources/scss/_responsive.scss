@@ -3595,124 +3595,129 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-calendar .ui-datepicker-inline {
-	border: none;
-	padding: 0;
-	
-	.ui-datepicker-header {
-		@include jeesl-titlebar;
+.jeesl-calendar {
+	width: 100%;
+
+	.ui-datepicker-inline {
+		border: none;
+		padding: 0;
+		width: auto;
 		
-		.ui-datepicker-prev, .ui-datepicker-next {
-			color: var(--container-header-foreground);
-			display: flex;
-			height: auto;
-			left: 0;
-			margin: 0;
-			padding: $half-spacing 0;
-			position: relative;
-			text-decoration: none;
-			top: 0;
-			width: auto;
+		.ui-datepicker-header {
+			@include jeesl-titlebar;
 			
-			&:hover:before {
-				opacity: 1;
-			}
-			
-			&:before {
-				@include background-overlay(var(--container-header-action-button-hover-background));
-			}
-			
-			.ui-icon {
+			.ui-datepicker-prev, .ui-datepicker-next {
+				color: var(--container-header-foreground);
 				display: flex;
+				height: auto;
 				left: 0;
 				margin: 0;
-				padding: 0 $half-spacing;
+				padding: $half-spacing 0;
 				position: relative;
-				text-indent: 0;
+				text-decoration: none;
 				top: 0;
-			}
-		}
-		
-		.ui-datepicker-prev {
-			order: 2;
-		}
-		
-		.ui-datepicker-next {
-			order: 3;
-		}
-		
-		.ui-datepicker-title {
-			@include jeesl-titlebar-title;
-			
-			margin: 0;
-			order: 1;
-		}
-	}
-	
-	.ui-widget-content {
-		background: var(--container-content-background);
-		border: $border;
-		border-radius: $border-radius;
-		color: var(--container-content-foreground);
-	}
-	
-	.ui-datepicker-calendar {
-		@include inner-table;
-		
-		thead th {
-			padding-left: 0;
-			padding-right: 0;
-		}
-		
-		tbody {
-			tr {
-				&:last-child td > .ui-state-default:before {
-					border-bottom-width: 0;
-					bottom: 0;
+				width: auto;
+				
+				&:hover:before {
+					opacity: 1;
 				}
 				
-				&:hover {
-					background: var(--datatable-content-hover-background);
-				}
-			}
-			
-			td {
-				padding: 0;
-
-				&:last-child >.ui-state-default:before {
-					border-right-width: 0;
-					right: 0;
+				&:before {
+					@include background-overlay(var(--container-header-action-button-hover-background));
 				}
 				
-				> .ui-state-default {
-					box-shadow: none;
-					color: inherit;
-					padding: $half-spacing 0;
+				.ui-icon {
+					display: flex;
+					left: 0;
+					margin: 0;
+					padding: 0 $half-spacing;
 					position: relative;
-					text-shadow: none;
-					z-index: 0;
+					text-indent: 0;
+					top: 0;
+				}
+			}
+			
+			.ui-datepicker-prev {
+				order: 2;
+			}
+			
+			.ui-datepicker-next {
+				order: 3;
+			}
+			
+			.ui-datepicker-title {
+				@include jeesl-titlebar-title;
+				
+				margin: 0;
+				order: 1;
+			}
+		}
+		
+		.ui-widget-content {
+			background: var(--container-content-background);
+			border: $border;
+			border-radius: $border-radius;
+			color: var(--container-content-foreground);
+		}
+		
+		.ui-datepicker-calendar {
+			@include inner-table;
+			
+			thead th {
+				padding-left: 0;
+				padding-right: 0;
+			}
+			
+			tbody {
+				tr {
+					&:last-child td > .ui-state-default:before {
+						border-bottom-width: 0;
+						bottom: 0;
+					}
 					
-					&.ui-state-highlight {
+					&:hover {
 						background: var(--datatable-content-hover-background);
 					}
-					
-					&.ui-state-active {
-						color: var(--datatable-content-highlight-foreground);
-						
-						&:before {
-							opacity: 1;
-						}
+				}
+				
+				td {
+					padding: 0;
+	
+					&:last-child >.ui-state-default:before {
+						border-right-width: 0;
+						right: 0;
 					}
 					
-					&:before {
-						@include background-overlay(var(--datatable-content-highlight-background));
+					> .ui-state-default {
+						box-shadow: none;
+						color: inherit;
+						padding: $half-spacing 0;
+						position: relative;
+						text-shadow: none;
+						z-index: 0;
 						
-						border-color: var(--datatable-content-highlight-border-colour);
-						border-style: solid;
-						border-width: 0 $border-width $border-width 0;
-						right: -$border-width;
-						bottom: -$border-width;
-						z-index: -1;
+						&.ui-state-highlight {
+							background: var(--datatable-content-hover-background);
+						}
+						
+						&.ui-state-active {
+							color: var(--datatable-content-highlight-foreground);
+							
+							&:before {
+								opacity: 1;
+							}
+						}
+						
+						&:before {
+							@include background-overlay(var(--datatable-content-highlight-background));
+							
+							border-color: var(--datatable-content-highlight-border-colour);
+							border-style: solid;
+							border-width: 0 $border-width $border-width 0;
+							right: -$border-width;
+							bottom: -$border-width;
+							z-index: -1;
+						}
 					}
 				}
 			}
