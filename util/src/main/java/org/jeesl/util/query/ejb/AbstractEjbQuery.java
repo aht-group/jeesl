@@ -13,6 +13,7 @@ import org.jeesl.interfaces.util.query.JeeslQuery;
 import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
+import org.jeesl.model.ejb.io.db.JeeslCqDouble;
 import org.jeesl.model.ejb.io.db.JeeslCqEntity;
 import org.jeesl.model.ejb.io.db.JeeslCqInteger;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
@@ -74,6 +75,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<JeeslCqDate> cqDates; @Override public List<JeeslCqDate> getCqDates() {return cqDates;}
 	protected List<JeeslCqTime> cqTimes; @Override public List<JeeslCqTime> getCqTimes() {return cqTimes;}
 	protected List<JeeslCqInteger> cqIntegers; @Override public List<JeeslCqInteger> getCqInteger() {return cqIntegers;}
+	protected List<JeeslCqDouble> cqDoubles; @Override public List<JeeslCqDouble> getCqDouble() {return cqDoubles;}
 
 	@Override public void addCqRootFetch(JeeslCqRootFetch cq) {if(Objects.isNull(cqRootFetches)) {cqRootFetches = new ArrayList<>();} cqRootFetches.add(cq);}
 	protected void addOrdering(JeeslCqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
@@ -85,6 +87,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public void addCqDate(JeeslCqDate cq) {if(Objects.isNull(cqDates)) {cqDates = new ArrayList<>();} cqDates.add(cq);}
 	@Override public void addCqTime(JeeslCqTime cq) {if(Objects.isNull(cqTimes)) {cqTimes = new ArrayList<>();} cqTimes.add(cq);}
 	@Override public void addCqInteger(JeeslCqInteger i) {if(Objects.isNull(cqIntegers)) {cqIntegers = new ArrayList<>();} cqIntegers.add(i);}
+	@Override public void addCqDouble(JeeslCqDouble cq) {if(Objects.isNull(cqDoubles)) {cqDoubles = new ArrayList<>();} cqDoubles.add(cq);}
 	
 	
 	

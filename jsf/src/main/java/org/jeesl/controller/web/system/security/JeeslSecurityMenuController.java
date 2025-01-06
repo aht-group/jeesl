@@ -250,8 +250,6 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 			fSecurity.rm(delete);
 			loop++;	
 		}
-		
-		
 	}
 
 	public void importFromDefaultContext()
@@ -272,6 +270,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 				{
 					M newMenu = efMenu.build();
 					newMenu.setPosition(m.getPosition());
+					newMenu.setVisible(m.getVisible());
 					newMenu.setView(m.getView());
 					newMenu.setContext(currentCtx);
 					newMenu = fSecurity.save(newMenu);
