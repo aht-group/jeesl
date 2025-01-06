@@ -260,39 +260,42 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 			{
 				CTX defaultCtx = fSecurity.fByCode(fbSecurity.getClassContext(), "core");
 				CTX currentCtx = sbhContext.getSelection();
-				List<M> list = new ArrayList<>();
-				list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,defaultCtx));
-				Map<M,List<M>> map = efMenu.toMapChild(list);
+				if(!defaultCtx.equals(currentCtx))
+				{
+					List<M> list = new ArrayList<>();
+					list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,defaultCtx));
+					Map<M,List<M>> map = efMenu.toMapChild(list);
 
-				Map<M,M> defaultVsCurrentMap = new HashMap<>();
-				logger.info("copying menu items....");
-				for (M m :  list)
-				{
-					M newMenu = efMenu.build();
-					newMenu.setPosition(m.getPosition());
-					newMenu.setVisible(m.getVisible());
-					newMenu.setView(m.getView());
-					newMenu.setContext(currentCtx);
-					newMenu = fSecurity.save(newMenu);
-					//logger.info("copying ids from = " + m.getId() +" to " + newMenu.getId());
-					defaultVsCurrentMap.put(m, newMenu);
-				}
-				logger.info("copying menu items....done");
-				
-				logger.info("Updating menu parents....");
-				for (Map.Entry<M,List<M>> defautlMenuEntry : map.entrySet())
-				{
-					M currentParentMenu= fSecurity.find(fbSecurity.getClassMenu(),defaultVsCurrentMap.get(defautlMenuEntry.getKey()));
-					for (M m :  defautlMenuEntry.getValue())
+					Map<M,M> defaultVsCurrentMap = new HashMap<>();
+					logger.info("copying menu items....");
+					for (M m :  list)
 					{
-						M currentMenu = fSecurity.find(fbSecurity.getClassMenu(), defaultVsCurrentMap.get(m));
-						//logger.info("new MenuId:" + currentMenu.getId() + "parent :" + currentParentMenu.getId());
-						currentMenu.setParent(currentParentMenu);
-						fSecurity.update(currentMenu);
+						M newMenu = efMenu.build();
+						newMenu.setPosition(m.getPosition());
+						newMenu.setVisible(m.getVisible());
+						newMenu.setView(m.getView());
+						newMenu.setContext(currentCtx);
+						newMenu = fSecurity.save(newMenu);
+						//logger.info("copying ids from = " + m.getId() +" to " + newMenu.getId());
+						defaultVsCurrentMap.put(m, newMenu);
 					}
+					logger.info("copying menu items....done");
+					
+					logger.info("Updating menu parents....");
+					for (Map.Entry<M,List<M>> defautlMenuEntry : map.entrySet())
+					{
+						M currentParentMenu= fSecurity.find(fbSecurity.getClassMenu(),defaultVsCurrentMap.get(defautlMenuEntry.getKey()));
+						for (M m :  defautlMenuEntry.getValue())
+						{
+							M currentMenu = fSecurity.find(fbSecurity.getClassMenu(), defaultVsCurrentMap.get(m));
+							//logger.info("new MenuId:" + currentMenu.getId() + "parent :" + currentParentMenu.getId());
+							currentMenu.setParent(currentParentMenu);
+							fSecurity.update(currentMenu);
+						}
+					}
+					logger.info("Updating menu parents....done");
+					buildMenu(createMissingItems());
 				}
-				logger.info("Updating menu parents....done");
-				buildMenu(createMissingItems());
 			}
 		}
 		catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e)
