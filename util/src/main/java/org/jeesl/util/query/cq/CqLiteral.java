@@ -21,6 +21,7 @@ public class CqLiteral implements JeeslCqLiteral
 	
 	public static CqLiteral isNull(String path) {return new CqLiteral(Type.NULL,null,path);}
 	public static CqLiteral isNotNull(String path) {return new CqLiteral(Type.NONNULL,null,path);}
+	public static CqLiteral isNotEmpty(String path) {return new CqLiteral(Type.NotEmpty,null,path);}
 	
 	private CqLiteral(Type type, String literal, String path)
 	{

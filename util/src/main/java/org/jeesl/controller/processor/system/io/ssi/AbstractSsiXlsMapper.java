@@ -125,6 +125,7 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 		else return value;
 	}
 	
+	public String toStringByCol(Row row, String col) throws UtilsConfigurationException {return this.toString(row, CellReference.convertColStringToIndex(col));}
 	public String toString(Row row, int index) throws UtilsConfigurationException
 	{
 		if(Objects.isNull(row)) {return null;}
@@ -140,5 +141,25 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 		Double value = row.getCell(index).getNumericCellValue();
 		if(ObjectUtils.isEmpty(value)) {return null;}
 		else return value;
+	}
+	
+	public Integer toIntegerByCol(Row row, String col) throws UtilsConfigurationException {return this.toInteger(row, CellReference.convertColStringToIndex(col));}
+	public Integer toInteger(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		Double value = row.getCell(index).getNumericCellValue();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value.intValue();
+	}
+	
+	public Long toLongByCol(Row row, String col) throws UtilsConfigurationException {return this.toLong(row, CellReference.convertColStringToIndex(col));}
+	public Long toLong(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		Double value = row.getCell(index).getNumericCellValue();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value.longValue();
 	}
 }

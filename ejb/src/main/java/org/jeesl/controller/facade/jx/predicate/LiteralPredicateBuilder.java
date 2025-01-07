@@ -32,8 +32,8 @@ public class LiteralPredicateBuilder
 							break;
 			case NULL: 		predicates.add(cB.isNull(expression));
 							break;
-			case NONNULL: 	predicates.add(cB.isNotNull(expression));
-							break;
+			case NONNULL: 	predicates.add(cB.isNotNull(expression)); break;
+			case NotEmpty:	predicates.add(cB.and(cB.isNotNull(expression),cB.notEqual(expression,""))); break;
 			default: logger.error("NYI Type: "+cq.toString());
 		}
 	}
