@@ -5,6 +5,9 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.exlp.util.system.DateUtil;
+import org.jeesl.factory.xml.io.locale.status.XmlCategoryFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlUnitFactory;
 import org.jeesl.factory.xml.module.survey.XmlAnswerFactory;
 import org.jeesl.factory.xml.module.survey.XmlCorrelationFactory;
 import org.jeesl.factory.xml.module.survey.XmlDataFactory;
@@ -15,8 +18,6 @@ import org.jeesl.factory.xml.module.survey.XmlScoreFactory;
 import org.jeesl.factory.xml.module.survey.XmlSurveyFactory;
 import org.jeesl.factory.xml.module.survey.XmlTemplateFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
-import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
-import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.model.xml.io.db.query.QuerySurvey;
 import org.jeesl.model.xml.module.survey.Answer;
@@ -34,7 +35,6 @@ import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.module.survey.Surveys;
 import org.jeesl.model.xml.module.survey.Template;
 
-import net.sf.ahtutils.factory.xml.status.XmlUnitFactory;
 import net.sf.ahtutils.xml.aht.Query;
 
 public class XmlSurveyQuery

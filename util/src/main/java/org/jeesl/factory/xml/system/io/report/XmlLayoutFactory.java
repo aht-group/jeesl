@@ -3,7 +3,7 @@ package org.jeesl.factory.xml.system.io.report;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.symbol.XmlColorFactory;
 import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;

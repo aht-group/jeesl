@@ -3,7 +3,7 @@ package org.jeesl.util.query.xml.module;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.model.xml.io.db.query.QueryCalendar;
 import org.jeesl.model.xml.module.calendar.Item;
 

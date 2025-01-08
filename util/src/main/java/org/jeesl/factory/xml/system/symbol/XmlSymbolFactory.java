@@ -2,8 +2,8 @@ package org.jeesl.factory.xml.system.symbol;
 
 import java.util.Objects;
 
-import org.jeesl.factory.xml.system.status.XmlStyleFactory;
-import org.jeesl.factory.xml.system.status.XmlStylesFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStyleFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStylesFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;

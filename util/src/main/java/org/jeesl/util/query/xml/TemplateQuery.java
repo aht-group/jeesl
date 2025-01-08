@@ -3,8 +3,8 @@ package org.jeesl.util.query.xml;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlCategoryFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.model.xml.io.label.Attribute;
 import org.jeesl.model.xml.io.label.Entity;

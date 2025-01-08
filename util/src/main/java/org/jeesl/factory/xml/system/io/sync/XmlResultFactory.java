@@ -1,8 +1,7 @@
 package org.jeesl.factory.xml.system.io.sync;
 
 import org.jeesl.model.xml.io.ssi.sync.Result;
-
-import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.io.db.JeeslSync;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

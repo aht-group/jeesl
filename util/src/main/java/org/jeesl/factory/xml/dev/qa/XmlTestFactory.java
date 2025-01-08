@@ -4,7 +4,8 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.dev.JeeslQaFacade;
-import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatementFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -19,7 +20,6 @@ import org.jeesl.model.xml.module.dev.qa.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.factory.xml.status.XmlStatementFactory;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaGroup;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaResult;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaSchedule;

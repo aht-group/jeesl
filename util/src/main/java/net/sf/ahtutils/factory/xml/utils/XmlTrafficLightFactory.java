@@ -3,9 +3,9 @@ package net.sf.ahtutils.factory.xml.utils;
 import java.util.Objects;
 
 import org.jeesl.api.exception.xml.JeeslXmlStructureException;
+import org.jeesl.factory.xml.io.locale.status.XmlScopeFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.factory.xml.system.status.XmlScopeFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;

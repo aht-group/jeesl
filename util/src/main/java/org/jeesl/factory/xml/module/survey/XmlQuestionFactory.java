@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.module.survey;
 import java.util.Objects;
 
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
+import org.jeesl.factory.xml.io.locale.status.XmlUnitFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
@@ -17,8 +18,6 @@ import org.jeesl.model.xml.io.db.query.QuerySurvey;
 import org.jeesl.model.xml.module.survey.Question;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.factory.xml.status.XmlUnitFactory;
 
 public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 								SCHEME extends JeeslSurveyScheme<L,D,?,SCORE>,

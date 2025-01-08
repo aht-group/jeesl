@@ -2,7 +2,7 @@ package org.jeesl.factory.xml.module.bb;
 
 import java.util.List;
 
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.model.xml.module.bb.Message;
 import org.jeesl.model.xml.module.bb.Messages;
 import org.slf4j.Logger;

@@ -2,9 +2,9 @@ package org.jeesl.factory.xml.system.io.revision;
 
 import java.util.Objects;
 
+import org.jeesl.factory.xml.io.locale.status.XmlCategoryFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

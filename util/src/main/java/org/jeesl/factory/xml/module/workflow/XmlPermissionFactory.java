@@ -2,9 +2,10 @@ package org.jeesl.factory.xml.module.workflow;
 
 import java.util.Objects;
 
+import org.jeesl.factory.xml.io.locale.status.XmlLevelFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.security.XmlRoleFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowModificationLevel;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowPermissionType;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
@@ -16,8 +17,6 @@ import org.jeesl.model.xml.module.workflow.Permission;
 import org.jeesl.model.xml.system.security.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.factory.xml.status.XmlLevelFactory;
 
 public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescription,
 								WS extends JeeslWorkflowStage<L,D,?,?,WSP,?,?>,

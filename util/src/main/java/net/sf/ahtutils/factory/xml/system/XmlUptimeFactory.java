@@ -3,7 +3,7 @@ package net.sf.ahtutils.factory.xml.system;
 import java.util.Date;
 
 import org.exlp.util.system.DateUtil;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.model.xml.io.locale.status.Type;
 import org.jeesl.model.xml.system.constraint.Uptime;
 import org.slf4j.Logger;

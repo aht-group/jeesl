@@ -2,7 +2,7 @@ package org.jeesl.factory.xml.system.symbol;
 
 import java.util.Objects;
 
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;

@@ -3,9 +3,9 @@ package org.jeesl.factory.xml.system.io.report;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.jeesl.factory.xml.io.locale.status.XmlCategoryFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;

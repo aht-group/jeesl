@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.exlp.model.xml.io.Data;
 import org.exlp.model.xml.io.File;
-import org.jeesl.factory.xml.system.status.XmlStyleFactory;
-import org.jeesl.factory.xml.system.status.XmlStylesFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStyleFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStylesFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.symbol.XmlColorFactory;
 import org.jeesl.factory.xml.system.symbol.XmlColorsFactory;
 import org.jeesl.factory.xml.system.symbol.XmlSizeFactory;
