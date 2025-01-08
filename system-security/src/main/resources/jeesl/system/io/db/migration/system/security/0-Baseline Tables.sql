@@ -14,7 +14,7 @@ create table SecurityContextJtLang (context_id int8 not null, lang_id int8 not n
 create table SecurityHelp (id  bigserial not null, position int4 not null, visible boolean not null, document_id int8, section_id int8, view_id int8, primary key (id));
 create table SecurityMenu (id  bigserial not null, position int4 not null, visible boolean, context_id int8, parent_id int8, view_id int8, primary key (id));
 create table SecurityMenuJtLang (menu_id int8 not null, lang_id int8 not null, primary key (menu_id, lang_id));
-create table SecurityMfa (id  bigserial not null, json varchar(255), position int4 not null, record timestamp, visible boolean not null, type_id int8, user_id int8, primary key (id));
+create table SecurityMfa (id  bigserial not null, json text, name varchar(255), position int4 not null, record timestamp, visible boolean not null, type_id int8, user_id int8, primary key (id));
 create table SecurityRole (id  bigserial not null, code varchar(255), documentation boolean, position int4 not null, visible boolean not null, category_id int8, primary key (id));
 create table SecurityRoleJtAction (action_id int8 not null, role_id int8 not null);
 create table SecurityRoleJtDescription (role_id int8 not null, description_id int8 not null, primary key (role_id, description_id));

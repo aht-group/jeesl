@@ -10,22 +10,22 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
-public class TxtStatusFactory <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>>
+public class TxtStatusFactory <L extends JeeslLang, S extends JeeslStatus<L,?,S>>
 {
 	private final String localeCode;
+	
+	public static <L extends JeeslLang, S extends JeeslStatus<L,?,S>, E extends Enum<E>> TxtStatusFactory<L,S> instance(E localeCode)
+	{
+		return new TxtStatusFactory<L,S>(localeCode.toString());
+	}
+	public static <L extends JeeslLang,  S extends JeeslStatus<L,?,S>> TxtStatusFactory<L,S> factory(String localeCode)
+	{
+		return new TxtStatusFactory<L,S>(localeCode);
+	}
 	
 	public TxtStatusFactory(String localeCode)
 	{
 		this.localeCode=localeCode;
-	}
-	
-	public static <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, E extends Enum<E>> TxtStatusFactory<L,D,S> factory(E localeCode)
-	{
-		return new TxtStatusFactory<L,D,S>(localeCode.toString());
-	}
-	public static <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>> TxtStatusFactory<L,D,S> factory(String localeCode)
-	{
-		return new TxtStatusFactory<L,D,S>(localeCode);
 	}
 	
 	public String debug(S status)
@@ -50,7 +50,7 @@ public class TxtStatusFactory <L extends JeeslLang, D extends JeeslDescription, 
 	{
 		if(list==null || list.isEmpty()){return null;}
 		List<String> result = new ArrayList<String>();
-		for(S ejb : list){result.add(ejb.getName().get(localeCode).getLang());}
+		for(S ejb : list) {result.add(ejb.getName().get(localeCode).getLang());}
 		return StringUtils.join(result, ", ");
 	}
 	

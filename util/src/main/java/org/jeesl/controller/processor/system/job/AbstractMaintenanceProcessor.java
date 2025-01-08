@@ -37,7 +37,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 	protected final EjbCodeCache<MS> cacheJob;
 	protected final EjbCodeCache<MNT> cacheMaintenance;
 	
-	protected final TxtStatusFactory<L,D,MNT> tfMaintenance;
+	protected final TxtStatusFactory<L,MNT> tfMaintenance;
 	
 	protected ThreadPoolExecutor pool;
 	
