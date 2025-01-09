@@ -133,7 +133,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getSingleResult();
 	}
 	
-	@Override public List<C> fSecurityCategories(JeeslSecurityQuery<C,R,CTX> query)
+	@Override public List<C> fSecurityCategories(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<C> cQ = cB.createQuery(fbSecurity.getClassCategory());
@@ -148,7 +148,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<R> fSecurityRoles(JeeslSecurityQuery<C,R,CTX> query)
+	@Override public List<R> fSecurityRoles(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<R> cQ = cB.createQuery(fbSecurity.getClassRole());
@@ -162,6 +162,28 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		TypedQuery<R> tQ = em.createQuery(cQ);
 		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
 		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		return tQ.getResultList();
+	}
+	
+	@Override
+	public List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<M> cQ = cB.createQuery(fbSecurity.getClassMenu());
+		Root<M> root = cQ.from(fbSecurity.getClassMenu());
+		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+		
+		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		TypedQuery<M> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
 	
@@ -314,20 +336,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 	
-	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,CTX> query)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<M> cQ = cB.createQuery(fbSecurity.getClassMenu());
-		Root<M> root = cQ.from(fbSecurity.getClassMenu());
-		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
-		
-		cQ.select(root);
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		
-		TypedQuery<M> tQ = em.createQuery(cQ);
-		return tQ.getResultList();
-	}
+
 	
 	@Override public List<R> allRolesForUser(USER user)
 	{
@@ -446,7 +455,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return fStaffURD(cStaff,users,roles,domains);
 	}
 	
-	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,CTX> query)
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -583,7 +592,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 	
-	private Predicate[] pRole(CriteriaBuilder cB, JeeslSecurityQuery<C,R,CTX> query, Root<R> root)
+	private Predicate[] pRole(CriteriaBuilder cB, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<R> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -592,7 +601,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
-	private Predicate[] pCategory(CriteriaBuilder cB, JeeslSecurityQuery<C,R,CTX> query, Root<C> root)
+	private Predicate[] pCategory(CriteriaBuilder cB, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<C> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		

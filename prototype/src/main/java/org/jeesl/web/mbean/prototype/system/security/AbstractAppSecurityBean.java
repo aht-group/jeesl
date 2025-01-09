@@ -233,7 +233,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		n2mMenu.clear();
 		mapRoot.clear();
 		
-		EjbSecurityQuery<C,R,CTX> query = new EjbSecurityQuery<>();
+		EjbSecurityQuery<C,R,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 		query.addRootFetch(JeeslSecurityMenu.Attributes.context);
 		
 		for(M m : fProvidedSecurity.fSecurityMenus(query))

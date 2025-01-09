@@ -36,13 +36,15 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	<WC extends JeeslSecurityWithCategory<C>> List<WC> allForCategory(Class<WC> clWc, Class<C> clC, String catCode) throws JeeslNotFoundException;
 	<E extends Enum<E>> C fSecurityCategory(JeeslSecurityCategory.Type type, E code);
 	
-	List<C> fSecurityCategories(JeeslSecurityQuery<C,R,CTX> query);
+	List<C> fSecurityCategories(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
+	List<R> fSecurityRoles(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
+	List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
+	List<M> fSecurityMenus(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
 	
 	List<V> allViewsForUser(USER user);
 	
 	List<USER> fUsers(R role);
 	
-	List<R> fSecurityRoles(JeeslSecurityQuery<C,R,CTX> query);
 	List<R> allRolesForUser(USER user);
 	List<R> rolesForView(V view);
 	List<R> rolesForView(Class<V> cView, Class<USER> cUser, V view, USER user);
@@ -52,13 +54,11 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	List<A> allActionsForUser(USER user);
 	List<A> allActions(Class<R> cRole, List<R> roles);
 	
-	List<M> fSecurityMenus(JeeslSecurityQuery<C,R,CTX> query);
-	
 	void grantRole(Class<USER> clUser, Class<R> clRole, USER user, R role, boolean grant);
 	boolean hasRole(Class<USER> clUser, Class<R> clRole, USER user, R role);
 	
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> S fStaff(Class<S> cStaff, USER user, R role, D1 domain) throws JeeslNotFoundException;
-	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,CTX> query);
+	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffU(Class<S> cStaff, USER user);
 //	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffR(Class<S> cStaff, R role);
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffD(Class<S> cStaff, D1 domain);

@@ -53,7 +53,6 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	private final List<MFT> types; public List<MFT> getTypes() {return types;}
 	private final List<MFA> mfas; public List<MFA> getMfas() {return mfas;}
 	
-	private String localeCode;
 	private CTX context;
 	private UJ user;
 	private UP uProject;
@@ -85,13 +84,12 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 		types.addAll(fSecurity.allOrderedPositionVisible(fbSecurity.getClassMfaType()));
 	}
 	
-	public void reload(CTX context, UJ user, UP uProject, String localeCode)
+	public void reload(CTX context, UJ user, UP uProject)
 	{
 		logger.info("Reaload for "+user.toString());
 		this.context=context;
 		this.user=user;
 		this.uProject=uProject;
-		this.localeCode=localeCode;
 		
 		this.reladMfas();
 	}

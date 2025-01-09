@@ -25,7 +25,7 @@ public interface JeeslSecurityAction<L extends JeeslLang, D extends JeeslDescrip
 								   R extends JeeslSecurityRole<L,D,?,V,U,?>,
 								   V extends JeeslSecurityView<L,D,?,R,U,?>,
 								   U extends JeeslSecurityUsecase<L,D,?,R,V,?>,
-								   AT extends JeeslSecurityTemplate<L,D,?>>
+								   T extends JeeslSecurityTemplate<L,D,?>>
 			extends Serializable,EjbWithCode,EjbPersistable,EjbSaveable,EjbRemoveable,
 					EjbWithPositionVisible,EjbWithParentAttributeResolver,
 					EjbWithLang<L>,EjbWithDescription<D>
@@ -48,8 +48,8 @@ public interface JeeslSecurityAction<L extends JeeslLang, D extends JeeslDescrip
 	public Boolean getDocumentation();
 	public void setDocumentation(Boolean documentation);
 	
-	public AT getTemplate();
-	public void setTemplate(AT template);
+	public T getTemplate();
+	public void setTemplate(T template);
 	
 	
     public static String toCode(JeeslSecurityAction<?,?,?,?,?,?> action)
