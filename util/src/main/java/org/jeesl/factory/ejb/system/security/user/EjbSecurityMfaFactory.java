@@ -1,8 +1,10 @@
 package org.jeesl.factory.ejb.system.security.user;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Objects;
 
+import org.jeesl.factory.ejb.util.EjbPositionFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfa;
 import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfaType;
@@ -25,7 +27,7 @@ public class EjbSecurityMfaFactory <MFA extends JeeslSecurityMfa<UJ,MFT>,
         this.cMft = cMft;
     } 
     
-    public MFA build(UJ user, MFT type)
+    public MFA build(UJ user, MFT type, List<MFA> list)
     {
     	MFA ejb = null;
     	
@@ -34,6 +36,7 @@ public class EjbSecurityMfaFactory <MFA extends JeeslSecurityMfa<UJ,MFT>,
 			ejb = cMfa.getDeclaredConstructor().newInstance();
 			ejb.setUser(user);
 			ejb.setType(type);
+			EjbPositionFactory.calcNext(ejb,list);
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}

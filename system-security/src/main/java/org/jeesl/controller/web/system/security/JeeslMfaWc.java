@@ -23,7 +23,7 @@ public class JeeslMfaWc <UP extends JeeslUser<?>>
 	final static Logger logger = LoggerFactory.getLogger(JeeslMfaWc.class);
 		
 	public JeeslMfaWc(JeeslSecurityMfaCallback callback,
-						SecurityFactoryBuilder<IoLang,IoDescription,?,?,?,?,?,?,?,?,?,SecurityMfa,SecurityMfaType,?,?,?,?,SecurityUser,UP> fbSecurity)
+						SecurityFactoryBuilder<IoLang,IoDescription,?,?,?,?,?,?,SecurityContext,?,?,SecurityMfa,SecurityMfaType,?,?,?,?,SecurityUser,UP> fbSecurity)
 	{
 		super(callback,fbSecurity);
 	}

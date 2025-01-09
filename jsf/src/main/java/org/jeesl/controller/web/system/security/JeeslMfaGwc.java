@@ -43,7 +43,7 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	
 	public enum Constraints{qrCodeVerification}
 	
-	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity;
 	private JeeslSecurityFacade<?,?,?,?,?,?,?,UP> fSecurity;
 	
 	private final JeeslSecurityMfaCallback callback;
@@ -63,7 +63,7 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	private String qrVerification; public String getQrVerification() {return qrVerification;} public void setQrVerification(String qrVerification) {this.qrVerification = qrVerification;}
 
 	public JeeslMfaGwc(JeeslSecurityMfaCallback callback,
-						SecurityFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity)
+						SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,MFA,MFT,?,?,?,?,UJ,UP> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.callback=callback;
@@ -110,14 +110,16 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 	
 	public void addMfa()
 	{
+		this.context=fSecurity.find(fbSecurity.getClassContext(), context);
+		
 		callback.callbackMfaConstraintsClear();
-		mfa = efMfa.build(user,types.get(0));
+		mfa = efMfa.build(user,types.get(0),mfas);
 		
 		GoogleAuthenticator authenticator = new GoogleAuthenticator();
 		GoogleAuthenticatorKey key = authenticator.createCredentials();
 		mfa.setJson(key.getKey());
 		
-		qrCode = GoogleAuthenticatorQRGenerator.getOtpAuthTotpURL(context.getName().get(localeCode).getLang(),uProject.getEmail(),key);
+		qrCode = GoogleAuthenticatorQRGenerator.getOtpAuthTotpURL(context.getMfaLabel(),uProject.getEmail(),key);
 	}
 	
 	public void selectMfa()
@@ -151,6 +153,13 @@ public class JeeslMfaGwc <L extends JeeslLang, D extends JeeslDescription, LOC e
 		mfa = fSecurity.save(mfa);
 		qrCode=null;
 		qrVerification=null;
+		this.reladMfas();
+	}
+	
+	public void deleteMfa() throws JeeslConstraintViolationException
+	{
+		fSecurity.rm(mfa);
+		this.reset(true, true);
 		this.reladMfas();
 	}
 }

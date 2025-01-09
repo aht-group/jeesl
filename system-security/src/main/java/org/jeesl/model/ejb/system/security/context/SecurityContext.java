@@ -102,6 +102,10 @@ public class SecurityContext implements JeeslSecurityContext<IoLang,IoDescriptio
 	@Override public String getEmailName() {return emailName;}
 	@Override public void setEmailName(String emailName) {this.emailName = emailName;}
 
+	private String mfaLabel;
+	@Override public String getMfaLabel() {return mfaLabel;}
+	@Override public void setMfaLabel(String mfaLabel) {this.mfaLabel = mfaLabel;}
+	
 	private Long contextId;
 	@Override public Long getContextId() {return contextId;}
 	@Override public void setContextId(Long contextId) {this.contextId = contextId;}
