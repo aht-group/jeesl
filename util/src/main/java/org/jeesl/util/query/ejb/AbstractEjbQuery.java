@@ -203,10 +203,12 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		if(Objects.nonNull(tupleLoad)) {list.add("Tuple-Load: "+tupleLoad);}
 		if(Objects.nonNull(localDate1)) {list.add(LocalDate.class.getSimpleName()+".1: "+localDate1.toString());}
 		if(Objects.nonNull(localDate2)) {list.add(LocalDate.class.getSimpleName()+".2: "+localDate2.toString());}
+		if(ObjectUtils.isNotEmpty(booleans)) {for(JeeslCqBoolean cq : booleans) {list.add(cq.toString());}}
 		if(ObjectUtils.isNotEmpty(literals)) {for(JeeslCqLiteral l : literals) {list.add(l.toString());}}
 		if(ObjectUtils.isNotEmpty(cqDates)) {for(JeeslCqDate cq : cqDates) {list.add(cq.toString());}}
 		if(ObjectUtils.isNotEmpty(cqTimes)) {for(JeeslCqTime cq : cqTimes) {list.add(cq.toString());}}
 		if(ObjectUtils.isNotEmpty(cqRootFetches)) {for(JeeslCqRootFetch cq : cqRootFetches) {list.add(cq.toString());}}
+		
 		return list;
 	}
 }

@@ -27,23 +27,27 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.util.query.cq.CqBool;
+import org.jeesl.util.query.cq.CqOrdering;
+import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										C extends JeeslSecurityCategory<L,D>,
 										R extends JeeslSecurityRole<L,D,C,V,U,A>,
 										V extends JeeslSecurityView<L,D,C,R,U,A>,
 										U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
 										A extends JeeslSecurityAction<L,D,R,V,U,?>,
+										CTX extends JeeslSecurityContext<L,D>,
 										AR extends JeeslSecurityArea<L,D,V>,
 										
 										USER extends JeeslUser<R>>
@@ -51,10 +55,10 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 									implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityRoleController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityRoleGwc.class);
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,?,?,?,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,A,?,?,USER> fSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,CTX,?,USER> fSecurity;
 	private JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity;
 	
 	private final EjbSecurityCategoryFactory<C> efCategory;
@@ -92,7 +96,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
-	public JeeslSecurityRoleController(SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,?,?,?,USER> fbSecurity)
+	public JeeslSecurityRoleGwc(SecurityFactoryBuilder<L,D,C,R,V,U,A,?,?,?,AR,?,?,?,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
@@ -114,7 +118,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	}
 	
 	public void postConstructRole(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<C,R,V,U,A,?,?,USER> fSecurity,
+			JeeslSecurityFacade<C,R,V,U,A,CTX,?,USER> fSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
@@ -133,8 +137,12 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	{
 		if(Objects.nonNull(security))
 		{
-			userIsDeveloper = security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffixDeprecated.Developer);
+			userIsDeveloper = security.isDeveloper()	
+								|| security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffix.developer)
+								|| security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffixDeprecated.Developer);
 		}
+		logger.info("userIsDeveloper:"+userIsDeveloper);
+		
 		this.reloadCategories();
 	}
 
@@ -159,7 +167,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		logger.info(AbstractLogMessage.selectEntity(category));
 		category = efLang.persistMissingLangs(fSecurity,lp,category);
 		category = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),category);
-		reloadRoles();
+		this.reloadRoles();
 		role=null;
 	}
 	public void saveCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
@@ -173,7 +181,16 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	private void reloadRoles() throws JeeslNotFoundException
 	{
 		roles.clear();
-		roles.addAll(fSecurity.allForCategory(fbSecurity.getClassRole(),fbSecurity.getClassCategory(),category.getCode()));
+		
+		EjbSecurityQuery<C,R,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+		query.add(category);
+		query.orderBy(CqOrdering.ascending(JeeslSecurityRole.Attributes.category,JeeslSecurityCategory.Attributes.position));
+		query.orderBy(CqOrdering.ascending(JeeslSecurityRole.Attributes.position));
+		if(!userIsDeveloper) {query.add(CqBool.isValue(true,CqBool.path(JeeslSecurityCategory.Attributes.visible)));}
+		
+		roles.addAll(fSecurity.fSecurityRoles(query));
+		
+//		roles.addAll(fSecurity.allForCategory(fbSecurity.getClassRole(),fbSecurity.getClassCategory(),category.getCode()));
 		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassRole(), roles));
 	}
 

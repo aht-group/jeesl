@@ -40,6 +40,7 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	List<R> fSecurityRoles(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
 	List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
 	List<M> fSecurityMenus(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
+	List<A> fSecurityActions(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
 	
 	List<V> allViewsForUser(USER user);
 	
@@ -55,7 +56,7 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	List<A> allActions(Class<R> cRole, List<R> roles);
 	
 	void grantRole(Class<USER> clUser, Class<R> clRole, USER user, R role, boolean grant);
-	boolean hasRole(Class<USER> clUser, Class<R> clRole, USER user, R role);
+	boolean hasSecurityRole(USER user, R role);
 	
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> S fStaff(Class<S> cStaff, USER user, R role, D1 domain) throws JeeslNotFoundException;
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,U,A,CTX,USER> query);

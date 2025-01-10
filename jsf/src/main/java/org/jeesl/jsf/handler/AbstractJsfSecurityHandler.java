@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
@@ -63,6 +64,8 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 	
+	@Override public boolean isDeveloper() {return Objects.nonNull(identity) && identity.isDeveloper();}
+
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,?,?,?,USER> fbSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 			I identity,
@@ -91,7 +94,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 		areas = bSecurity.fAreas(view);
 		
 		noRoles = roles.size()==0;
-		update();
+		this.update();
 	}
 	
 	protected void update()

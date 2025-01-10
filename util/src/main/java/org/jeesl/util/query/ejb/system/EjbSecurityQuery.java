@@ -13,6 +13,7 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
@@ -46,6 +47,7 @@ public class EjbSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	public EjbSecurityQuery<C,R,U,A,CTX,USER> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//JEESL-CQ
+	public EjbSecurityQuery<C,R,U,A,CTX,USER> add(JeeslCqBoolean bool) {super.addCqBoolean(bool); return this;}
 	public EjbSecurityQuery<C,R,U,A,CTX,USER> orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
 	
 	//Lists

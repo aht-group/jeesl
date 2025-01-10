@@ -165,8 +165,13 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override
-	public List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	@Override public List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override public List<A> fSecurityActions(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -543,7 +548,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 //		role = em.merge(role);
 	}
 
-	@Override public boolean hasRole(Class<USER> clUser, Class<R> clRole, USER user, R role)
+	@Override public boolean hasSecurityRole(USER user, R role)
 	{
 		if(user==null || role==null){return false;}
 		for(R r: allRolesForUser(user))
