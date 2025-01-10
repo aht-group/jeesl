@@ -84,4 +84,8 @@ public class EjbCodeCache <T extends EjbWithCode>
 	{
 		return this.equals(ejb,a) || this.equals(ejb,b);
 	}
+	public boolean equalsOr(T ejb, String a, String b, String c)
+	{
+		return this.equals(ejb,a) || this.equals(ejb,b) || this.equals(ejb,c);
+	}
 }

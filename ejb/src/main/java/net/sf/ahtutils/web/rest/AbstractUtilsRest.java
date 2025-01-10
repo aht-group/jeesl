@@ -6,7 +6,7 @@ import java.util.Map;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
-import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatusFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

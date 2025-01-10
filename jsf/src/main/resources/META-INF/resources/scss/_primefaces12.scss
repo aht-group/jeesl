@@ -1,6 +1,6 @@
 @mixin jeesl-header {
-	background: $panel-header-gradient;
-	color: $body-foreground;
+	background: var(--container-header-background);
+	color: var(--container-header-foreground);
 	min-height: $element-height;
 	padding: 0;
 	text-shadow: 0 1px 0 $white-70;
@@ -29,7 +29,7 @@ body {
 		border: $border;
 		
 		.ui-panel-content {
-			color: $body-foreground;
+			color: var(--container-content-foreground);
 		}
 		
 		.ui-panelgrid .ui-panelgrid-cell {
@@ -55,14 +55,14 @@ body {
 				border-bottom: none;
 				
 				&.ui-tabs-selected {
-					border-color: $border-colour;
+					border-color: var(--panel-content-select-dropdown-highlight-background);
 					top: $border-width;
 				}
 			}
 		}
 		
 		.ui-tabs-nav {
-			background: $panel-header-gradient;
+			background: var(--container-header-background);
 			
 			li.ui-tabs-header {
 				@include jeesl-header;
@@ -71,19 +71,19 @@ body {
 				border-width: $border-width $border-width 0;
 				margin: 0 3px 0 0;
 				
-				&.ui-state-hover {
-					background: linear-gradient(to bottom, $bright-grey 87%, $soft-grey 100%);
-				}
+//				&.ui-state-hover {
+//					background: linear-gradient(to bottom, $bright-grey 87%, $soft-grey 100%);
+//				}
 				
 				&.ui-tabs-selected {
-					background: linear-gradient(to bottom, $white-100, $panel-background);
+					background: var(--tabview-header-tab-highlight-background);
 					cursor: default;
 					
 					> a, &.ui-state-hover > a {
-						color: $white-100;
+						color: var(--tabview-header-tab-highlight-foreground);
 					
 						@media (max-width: 768px) {
-							color: $white-100;
+							color: var(--tabview-header-tab-highlight-foreground);
 						}
 					}
 				}
@@ -93,7 +93,7 @@ body {
 				}
 				
 				> a, &.ui-state-hover > a {
-					color: $anthracite;
+					color: var(--tabview-header-tab-foreground);
 					padding: 0 $regular-spacing;
 				}
 			}
@@ -102,7 +102,7 @@ body {
 		.ui-tabs-panels {
 			background: transparent;
 			border-radius: 0;
-			color: $body-foreground;
+			color: var(--tabview-header-tab-foreground);
 			padding: $half-spacing $regular-spacing;
 			position: relative;
 			
@@ -113,7 +113,7 @@ body {
 	}
 	
 	.ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
-		color: $body-foreground;
+		color: var(--tabview-header-tab-foreground);
 		font-weight: 700;
 	}
 	
@@ -132,7 +132,7 @@ body {
 			&:before {
 				@include pseudo-overlay;
 				
-				background: $white-100;
+				background: var(--panel-content-select-dropdown-background);
 				z-index: -1;
 				
 				@media (max-width: 768px) {
@@ -152,8 +152,8 @@ body {
 			}
 			
 			&.ui-state-highlight {
-				background: $highlight-colour;
-				color: $white-100;
+				background: var(--panel-content-select-dropdown-highlight-background);
+				color: var(--panel-content-select-dropdown-highlight-foreground);
 			}
 		}
 	}
@@ -179,7 +179,7 @@ body {
 	.ui-panelgrid .ui-panelgrid-cell {
 		background: transparent;
 		border: none;
-		color: $body-foreground;
+		color: var(--container-content-foreground);
 		padding: $half-spacing $regular-spacing;
 	}
 	
@@ -194,7 +194,7 @@ body {
 		thead th {
 			@include jeesl-header;
 			
-			border-color: $border-colour;
+			border-color: var(--container-border-colour);
 			height: $element-height;
 			padding: $slim-spacing $regular-spacing;
 			
@@ -208,7 +208,7 @@ body {
 		}
 		
 		tfoot td {
-			background: $panel-background;
+			background: var(--container-content-background);
 			border-width: $header-element-underline 0 0;
 			padding: $half-spacing $regular-spacing;
 			
@@ -218,29 +218,38 @@ body {
 		}
 		
 		.ui-datatable-data {
-			background: $panel-background;
+			background: var(--container-content-background);
 			
 			> tr {
 				background: transparent;
-				color: $body-foreground;
+				color: var(--container-content-foreground);
 				transition: background $transition-duration linear;
 				
 				&:nth-child(2n) {
-					background: $white-50;
+					background: var(--datatable-content-odd-row-background);
 				}
 				
 				&.ui-state-hover {
-					background: $light-grey;
+					background: var(--datatable-content-hover-background);
 				}
 				
 				&.ui-state-highlight {
+<<<<<<< HEAD
 					background: $highlight-colour;
 					color: $white-100;
+=======
+					background: var(--datatable-content-highlight-background);
+					color: var(--datatable-content-highlight-foreground);
+					
+					> td {
+						border-color: var(--datatable-content-highlight-border-colour);
+					}
+>>>>>>> refs/remotes/origin/master
 				}
 				
 				> td, .ui-panelgrid-cell {
 					background: transparent;
-					border-color: $light-grey;
+					border-color: var(--datatable-content-border-colour);
 					padding: $half-spacing $regular-spacing;
 				}
 			}
@@ -279,10 +288,10 @@ body {
 	.jeesl-fileupload {
 		@include jeesl-fileupload-titlebar;
 		
-		background: $panel-background;
-		border: $border;
+		background: var(--container-content-background);
+		border-color: var(--container-border-colour);
 		border-radius: $border-radius;
-		color: $foreground;
+		color: var(--container-content-foreground);
 		padding: 0;
 		
 		.ui-fileupload-buttonbar {
@@ -340,7 +349,7 @@ body {
 	
 	.html-container-panel .ui-panel-content {
 		border: none;
-		color: $foreground;
+		color: var(--container-content-foreground);
 		padding: 0;
 	}
 	
@@ -355,17 +364,17 @@ body {
 	}
 	
 	.ui-datepicker.ui-input-overlay {
-		border: $border;
+		border: var(--container-border-colour);
 		border-radius: $border-radius;
 		box-shadow: $overlay-shadow;
-		color: $body-foreground;
+		color: var(--container-content-foreground);
 		padding: $half-spacing;
 		width: min-content;
 		
 		.ui-datepicker-header {
-			background: $status-bar-background-gradient;
+			background: var(--panel-content-select-dropdown-header-background);
 			border: none;
-			color: $white-100;
+			color: var(--panel-content-select-dropdown-header-foreground);
 			margin: 0 #{-$half-spacing};
 			padding: 0;
 			
@@ -410,8 +419,8 @@ body {
 						}
 						
 						&.ui-state-default.ui-state-active {
-							background: $medium-colour;
-							color: $white-100;
+							background: var(--panel-content-select-dropdown-highlight-background);
+							color: var(--panel-content-select-dropdown-highlight-foreground);
 						}
 						
 						&:focus {
@@ -443,7 +452,7 @@ body {
 	.ui-messages .ui-messages-error .ui-messages-close, .ui-messages .ui-messages-fatal .ui-messages-close {
 		border-radius: 0 $border-radius 0 0;
 		background: $error-background;
-		color: $white-100;
+		color: var(--messages-foreground);
 		right: 0;
 		top: 0;
 	}
@@ -498,8 +507,8 @@ body {
 		
 		.ui-dialog-footer {
 			background: transparent;
-			border-top: $header-element-underline solid $dark-colour;
-			color: $dark-colour;
+			border-top: $header-element-underline solid var(--container-header-underline-colour);
+			color: var(--container-footer-foreground);
 			padding: $half-spacing $regular-spacing;
 			text-align: left;
 		}
@@ -508,7 +517,7 @@ body {
 	.ui-texteditor {
 		.ui-editor-toolbar.ql-toolbar {
 			background: none;
-			border: solid $border-colour;
+			border: solid var(--container-border-colour);
 			border-radius: 0;
 	   		border-width: 0 0 $border-width;
    		}

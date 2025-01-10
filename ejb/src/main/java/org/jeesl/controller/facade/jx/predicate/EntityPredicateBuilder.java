@@ -3,6 +3,7 @@ package org.jeesl.controller.facade.jx.predicate;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 
@@ -21,6 +22,16 @@ public class EntityPredicateBuilder
 		{
 			case IsNull: predicates.add(e.isNull()); break;
 			case IsNonNull: predicates.add(e.isNotNull()); break;
+			default: logger.error("NYI Type: "+cq.toString());
+		}
+	}
+	
+	public static <T extends EjbWithId> void join(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqEntity cq, Join<T,?> j)
+	{
+		switch(cq.getType())
+		{
+			case IsNull: predicates.add(j.isNull()); break;
+			case IsNonNull: predicates.add(j.isNotNull()); break;
 			default: logger.error("NYI Type: "+cq.toString());
 		}
 	}

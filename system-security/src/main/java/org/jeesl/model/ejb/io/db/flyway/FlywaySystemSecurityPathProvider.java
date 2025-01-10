@@ -12,6 +12,8 @@ import org.jeesl.model.ejb.system.security.access.SecurityUsecase;
 import org.jeesl.model.ejb.system.security.context.SecurityContext;
 import org.jeesl.model.ejb.system.security.context.SecurityMenu;
 import org.jeesl.model.ejb.system.security.doc.SecurityHelp;
+import org.jeesl.model.ejb.system.security.login.SecurityMfa;
+import org.jeesl.model.ejb.system.security.login.SecurityMfaType;
 import org.jeesl.model.ejb.system.security.page.SecurityAction;
 import org.jeesl.model.ejb.system.security.page.SecurityArea;
 import org.jeesl.model.ejb.system.security.page.SecurityTemplate;
@@ -21,6 +23,7 @@ import org.jeesl.model.ejb.system.security.user.SecurityUser;
 public class FlywaySystemSecurityPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider
 {	
 	public static FlywaySystemSecurityPathProvider instance() {return new FlywaySystemSecurityPathProvider();}
+	private FlywaySystemSecurityPathProvider() {}
 	
 	@Override public String getRootDirectory() {return "jeesl/system/io/db/migration/system/security";}
 	
@@ -43,6 +46,9 @@ public class FlywaySystemSecurityPathProvider implements JeeslFlywayPathProvider
 		list.add(SecurityCategory.class);
 		list.add(SecurityUser.class);
 		list.add(SecurityHelp.class);
+		
+		list.add(SecurityMfa.class);
+		list.add(SecurityMfaType.class);
 		
 		return list;
 	}

@@ -23,6 +23,7 @@ public class UiEditStatusHandler <S extends JeeslStatus<?,?,S>> implements UiEdi
 	public boolean isAllow() {return allow;}
 	public boolean isDeny() {return !allow;}
 
+	public static <S extends JeeslStatus<?,?,S>> UiEditStatusHandler<S> instance() {return new UiEditStatusHandler<S>();}
 	public UiEditStatusHandler()
 	{
 		setAllow = new HashSet<>();

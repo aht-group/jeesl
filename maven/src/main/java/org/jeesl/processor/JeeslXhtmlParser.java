@@ -81,18 +81,29 @@ public class JeeslXhtmlParser
 					{
 						xmlReader.parse(new InputSource(file.getAbsolutePath()));
 							
-				        Document jdomDocument = jsb.build(file);
+				        Document jdom = jsb.build(file);
 
-				        XPathExpression<Element> xpe = xpf.compile("//p:dataTable", Filters.element(), null, nsPrimefaces);
-
-				        for(Element e : xpe.evaluate(jdomDocument))
+				        XPathExpression<Element> xpeDatatable = xpf.compile("//p:dataTable", Filters.element(), null, nsPrimefaces);
+				        for(Element e : xpeDatatable.evaluate(jdom))
 				        {
-
 				        	if(Objects.isNull(e.getAttribute("styleClass"))) {logger.warn("Missing p:dataTable(styleClass): "+file.getAbsolutePath());}
 				        	else
 				        	{
 				        		String v = e.getAttributeValue("styleClass");
 				        		if(!v.contains("jeesl-datatable")) {logger.warn("Wrong p:dataTable(styleClass): "+file.getAbsolutePath());}
+				        		if(v.contains("jeeslDatatable")) {logger.warn("Wrong p:dataTable(styleClass): "+file.getAbsolutePath());}
+				        	}
+				        }
+				        
+				        XPathExpression<Element> xpePanel = xpf.compile("//p:panel", Filters.element(), null, nsPrimefaces);
+				        for(Element e : xpePanel.evaluate(jdom))
+				        {
+				        	if(Objects.isNull(e.getAttribute("styleClass"))) {logger.warn("Missing p:dataTable(styleClass): "+file.getAbsolutePath());}
+				        	else
+				        	{
+				        		String v = e.getAttributeValue("styleClass");
+				        		if(!v.contains("jeesl-panel")) {logger.warn("Wrong p:panel(styleClass): "+file.getAbsolutePath());}
+				        		if(v.contains("jeeslPanel")) {logger.warn("Wrong p:panel(styleClass): "+file.getAbsolutePath());}
 				        	}
 				        }
 					}

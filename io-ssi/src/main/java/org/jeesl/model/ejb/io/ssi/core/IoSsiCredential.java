@@ -1,6 +1,5 @@
 package org.jeesl.model.ejb.io.ssi.core;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -18,7 +17,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
-@Table(name="IoSsiCredential",uniqueConstraints={@UniqueConstraint(name="uk_IoSsiCredential_system-code",columnNames={"system_id","code"})})
+@Table(name="IoSsiCredential",uniqueConstraints={@UniqueConstraint(name="uk_IoSsiCredential_system_code",columnNames={"system_id","code"})})
 @EjbErNode(name="Credential")
 public class IoSsiCredential implements JeeslIoSsiCredential<IoSsiSystem>
 {

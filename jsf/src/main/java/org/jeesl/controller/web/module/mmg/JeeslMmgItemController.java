@@ -65,13 +65,14 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	private final IoFileRepositoryFactoryBuilder<L,D,LOC,?,FRS,?,?,FRC,?,?,?,?,?> fbFile;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
-	private JeeslFileRepositoryHandler<LOC,FRS,FRC,FRM> frh;
+	private JeeslFileRepositoryHandler<LOC,FRS,FRC,FRM> frh; public JeeslFileRepositoryHandler<LOC, FRS, FRC, FRM> getFrh() {return frh;}
 	public long getFileSizeLimit() {return frh.getStorage().getFileSizeLimit();}
 	
 	private final List<MI> items; public List<MI> getItems() {return items;}
 	private final List<MC> classifications; public List<MC> getClassifications() {return classifications;}
 
 	private R realm;
+	@SuppressWarnings("unused")
 	private RREF rref;
 	private MG gallery;
 	private USER currentUser;
@@ -79,7 +80,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 
 	public JeeslMmgItemController(final JeeslMmgItemCallback callback,
 									final MmgFactoryBuilder<L,D,LOC,R,MG,MI,MC,MQ,USER> fbRmmv,
-									IoFileRepositoryFactoryBuilder<L,D,LOC,?,FRS,?,?,FRC,?,?,?,?,?> fbFile)
+									final IoFileRepositoryFactoryBuilder<L,D,LOC,?,FRS,?,?,FRC,?,?,?,?,?> fbFile)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;

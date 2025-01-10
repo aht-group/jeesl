@@ -3,7 +3,7 @@ package org.jeesl.factory.xml.system.io.revision;
 import java.util.Objects;
 
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;

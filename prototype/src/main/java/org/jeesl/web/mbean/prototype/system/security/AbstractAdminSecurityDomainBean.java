@@ -37,7 +37,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityDomainBean.class);
 
 	protected JeeslSecurityFacade<C,R,?,?,?,?,?,USER> fSecurity;
-	private final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	protected JeeslUserFacade<USER> fUser;
 
 	protected final Comparator<STAFF> cpStaff;
@@ -55,7 +55,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	
 	private OverlayUserSelectionHandler<USER> opContactHandler; @Override public OverlayUserSelectionHandler<USER> getOpUserHandler() {return opContactHandler;}
 	
-	public AbstractAdminSecurityDomainBean(final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity, Class<STAFF> cStaff)
+	public AbstractAdminSecurityDomainBean(final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity, Class<STAFF> cStaff)
 	{
 		this.fbSecurity=fbSecurity;
 		this.cStaff=cStaff;
@@ -121,7 +121,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	{
 		try
 		{
-			staff.setUser(fSecurity.find(fbSecurity.getClassUser(),staff.getUser()));
+			staff.setUser(fSecurity.find(fbSecurity.getClassUserProject(),staff.getUser()));
 			staff.setRole(fSecurity.find(fbSecurity.getClassRole(),staff.getRole()));
 			logger.info(AbstractLogMessage.saveEntity(staff));
 			staff = fSecurity.save(staff);
@@ -151,13 +151,13 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	public List<USER> autoComplete(String query)
 	{
 		List<USER> users = fUser.likeNameFirstLast(query);
-		logger.info(AbstractLogMessage.autoComplete(fbSecurity.getClassUser(),query,users.size()));
+		logger.info(AbstractLogMessage.autoComplete(fbSecurity.getClassUserProject(),query,users.size()));
 		return users;
 	}
 
 	public void autoCompleteSelect()
 	{
-		staff.setUser(fUser.find(fbSecurity.getClassUser(),staff.getUser()));
+		staff.setUser(fUser.find(fbSecurity.getClassUserProject(),staff.getUser()));
 		logger.info(AbstractLogMessage.autoCompleteSelect(staff.getUser()));
 	}
 	
@@ -165,6 +165,6 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	public void selectOpUser(USER user) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.selectEntity(user));
-		staff.setUser(fUser.find(fbSecurity.getClassUser(),user));
+		staff.setUser(fUser.find(fbSecurity.getClassUserProject(),user));
 	}
 }

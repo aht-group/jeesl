@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttributeType;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -18,6 +19,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @DiscriminatorValue("ioLabelAttributeType")
 @EjbErNode(name="Attribute Type",category="revision",subset="revision",level=4)
 public class IoLabelAttributeType extends IoStatus implements JeeslRevisionAttributeType<IoLang,IoDescription,IoLabelAttributeType,IoGraphic>
+,JeeslReportCellType<IoLang,IoDescription,IoLabelAttributeType,IoGraphic> //TODO @tk This is only a temorary fix
 {
 	public static final long serialVersionUID=1;
 

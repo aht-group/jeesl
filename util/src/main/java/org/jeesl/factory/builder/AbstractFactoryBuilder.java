@@ -2,6 +2,7 @@ package org.jeesl.factory.builder;
 
 import java.io.Serializable;
 
+import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -24,4 +25,5 @@ public class AbstractFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	}
 	
 	public EjbLangFactory<L> ejbLang() {return EjbLangFactory.instance(cL);}
+	public EjbDescriptionFactory<D> ejbDescription() {return EjbDescriptionFactory.instance(cD);}
 }

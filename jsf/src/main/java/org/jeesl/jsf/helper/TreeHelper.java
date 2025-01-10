@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.constraints.NotNull;
-
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.controller.handler.Expression;
@@ -87,8 +85,12 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		forEach(startNode, node -> node.setExpanded(expand), node -> getAncestor(node, reach) == startNode);
 	}
 	
+<<<<<<< HEAD
 	@Deprecated
 	private TreeNode<P> getAncestor(@NotNull TreeNode<P> decendant, int ancestryLevel)
+=======
+	private TreeNode getAncestor(TreeNode decendant, int ancestryLevel)
+>>>>>>> refs/remotes/origin/master
 	{
 		TreeNode<P> ancestor = decendant;
 		for (int i = 0; i < ancestryLevel; i++)

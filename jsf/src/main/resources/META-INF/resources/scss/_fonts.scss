@@ -52,7 +52,6 @@ $icon-all-arrows: '\f0b2';
 }
 
 @mixin font-breadcrumb {
-	color: $white-100;
 	font-size: $font-size-breadcrumb;
 	font-weight: $font-weight-bold;
 	letter-spacing: -1px;
@@ -60,6 +59,8 @@ $icon-all-arrows: '\f0b2';
 }
 
 @mixin font-dropdown {
+	color: $header-foreground;
+		
 	@media (max-width: 768px) {
 		font-size: $font-size-interactable;
 		font-weight: $font-weight-bold;

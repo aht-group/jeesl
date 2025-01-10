@@ -25,7 +25,7 @@
 				<p:dataTable styleClass="jeesl-datatable"
 						var="var" value="#{cc.attrs.domains}"
                			selection="#{cc.attrs.bean.domain}" selectionMode="single" rowKey="#{var.id}">
-					<j:dtHeader entity="#{cc.attrs.entity}" code="listOf"/>
+					<f:facet name="header"><j:dtHeader entity="#{cc.attrs.entity}" code="listOf"/></f:facet>
 					<p:ajax event="rowSelect" update=":#{cc.id}:sStaff :#{cc.id}:sUser" listener="#{cc.attrs.bean.selectDomain()}"/>
 					<composite:renderFacet name="domainColumns"/>
 					<composite:insertChildren/>

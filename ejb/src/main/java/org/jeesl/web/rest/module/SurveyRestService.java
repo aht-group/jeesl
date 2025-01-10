@@ -30,13 +30,13 @@ import org.jeesl.factory.json.module.survey.JsonSurveyAnswerFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyFactory;
 import org.jeesl.factory.json.module.survey.JsonSurveyQuestionFactory;
 import org.jeesl.factory.json.module.survey.JsonTemplateFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.jeesl.XmlContainerFactory;
 import org.jeesl.factory.xml.module.survey.XmlAnswerFactory;
 import org.jeesl.factory.xml.module.survey.XmlSurveyFactory;
 import org.jeesl.factory.xml.module.survey.XmlTemplateFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlMapperFactory;
-import org.jeesl.factory.xml.system.status.XmlStatusFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.domain.JeeslDomain;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainQuery;
@@ -172,7 +172,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		jfAnswer = new JsonSurveyAnswerFactory<>(localeCode,JsonSurveyQueryProvider.answers());
 		jfQuestion = new JsonSurveyQuestionFactory<>(localeCode,JsonSurveyQuestionFactory.id(1));
 		
-		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfContainer = new XmlContainerFactory(null,XmlStatusQuery.statusExport());
 		
 		xfTemplateCategory = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		xfTemplateStatus = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());

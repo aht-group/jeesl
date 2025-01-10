@@ -3,7 +3,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:of="http://omnifaces.org/functions"
+	xmlns:o="http://omnifaces.org/ui" xmlns:of="http://omnifaces.org/functions"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
@@ -79,19 +79,19 @@
 						<f:facet name="header"><jtp:label entity="IoStatus" code="name"/></f:facet>
 						<h:outputText value="#{s.name[localeCode].lang}" />
 						<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.bean.showDescription}"/>
-						<h:outputText value="#{s.description[localeCode].lang}" rendered="#{cc.attrs.bean.showDescription}" styleClass="jeeslItalic"/>
+						<h:outputText value="#{s.description[localeCode].lang}" rendered="#{cc.attrs.bean.showDescription}" styleClass="jeesl-italic"/>
 					</p:column>
 					<p:column rendered="#{cc.attrs.bean.supportsLocked}">
 						<f:facet name="header"><jtp:label entity="IoStatus" code="locked"/></f:facet>
 						<h:outputText value="#{s.locked}" />
 					</p:column>
-					<p:column rendered="#{cc.attrs.bean.supportsGraphic}" styleClass="jeeslCenter">
+					<p:column rendered="#{cc.attrs.bean.supportsGraphic}" styleClass="jeesl-center">
 						<jtp:symbolizer value="#{s}"/>
 					</p:column>
-					<p:column rendered="#{cc.attrs.bean.supportsColour}" styleClass="jeeslCenter">
+					<p:column rendered="#{cc.attrs.bean.supportsColour}" styleClass="jeesl-center">
 						<p:colorPicker value="#{s.color}"/>
 					</p:column>
-					<p:column rendered="#{cc.attrs.bean.supportsSymbol}">
+					<p:column rendered="#{cc.attrs.bean.supportsSymbol}" styleClass="jeesl-center">
 						<f:facet name="header"><jtp:label entity="IoStatus" code="symbol"/></f:facet>
 						<h:outputText value="#{s.symbol}" />
 					</p:column>
@@ -210,12 +210,13 @@
 						<p:outputLabel value="18px"/>
 						<p:outputLabel value="24px"/>
 						<p:outputLabel value="32px"/>
-						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="8"/>
-						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="12"/>
-						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="14"/>
-						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="18"/>
-						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="24"/>
-						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="32"/>
+						
+						<o:graphicImage value="#{cc.attrs.bean.previewIs()}" dataURI="true" height="8"/>
+						<o:graphicImage value="#{cc.attrs.bean.previewIs()}" dataURI="true" height="12"/>
+						<o:graphicImage value="#{cc.attrs.bean.previewIs()}" dataURI="true" height="14"/>
+						<o:graphicImage value="#{cc.attrs.bean.previewIs()}" dataURI="true" height="18"/>
+						<o:graphicImage value="#{cc.attrs.bean.previewIs()}" dataURI="true" height="24"/>
+						<o:graphicImage value="#{cc.attrs.bean.previewIs()}" dataURI="true" height="32"/>
 					</p:panelGrid>
 				</p:panel>
 			</h:form>

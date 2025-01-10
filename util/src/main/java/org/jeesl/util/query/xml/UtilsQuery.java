@@ -3,7 +3,7 @@ package org.jeesl.util.query.xml;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.jeesl.factory.xml.system.status.XmlScopeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlScopeFactory;
 import org.jeesl.model.xml.system.util.TrafficLight;
 import org.jeesl.model.xml.system.util.TrafficLights;
 

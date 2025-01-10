@@ -4,7 +4,7 @@
 @import '_fonts';
 
 $enable-pointer-cursor-for-buttons: true;
-.jeesl-icon, .pf-action-icon, .jeesl-menu-bar-item, .ui-selectonemenu, .ui-icon { --icon-height-multiplier: 1 }
+.jeesl-icon, .pf-action-icon, .jeesl-menu-bar-item, .ui-selectonemenu, .ui-icon, .ui-tabs-nav { --icon-height-multiplier: 1 }
 
 @import '_reboot';
 @import '_responsiveCommon';
@@ -19,10 +19,10 @@ $enable-pointer-cursor-for-buttons: true;
 	top: 0;
 }
 
-@mixin background-overlay($background-color) {
+@mixin background-overlay($background-colour) {
 	@include pseudo-overlay;
 	
-	background: $background-color;
+	background: $background-colour;
 	opacity: 0;
 	transition: opacity $transition-duration ease-in-out;
 }
@@ -38,7 +38,7 @@ $enable-pointer-cursor-for-buttons: true;
     display: block;
 }
 
-@mixin jeesl-sb-separator($colour: $bright-colour) {
+@mixin jeesl-sb-separator($colour: var(--statusbar-item-separator)) {
 	border-left: 1px solid $colour;
     content: '';
     display: inline-block;
@@ -113,7 +113,7 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				.jeesl-dropdown-item-label {
 					border: none;
-					color: white;
+					color: $header-foreground;
 					float: none;
 					font-size: 1.4rem;
 					letter-spacing: -1px;
@@ -292,7 +292,7 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 @mixin jeesl-menu-bar {
-    color: $white-100;
+    color: var(--menu-bar-foreground);
     padding: 0;
 
 	@media (max-width: 768px) {
@@ -300,7 +300,7 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	a:hover {
-		color: $white-100;
+		color: var(--menu-bar-foreground);
 		text-decoration: none;
 	}
 	
@@ -381,7 +381,7 @@ $enable-pointer-cursor-for-buttons: true;
 				}
 				
 				.jeesl-menu-bar-button-label {
-			    	color: $white-100;
+			    	color: var(--menu-bar-foreground);
 				}
 				
 				.jeesl-menu-bar-button-info {
@@ -434,10 +434,11 @@ $enable-pointer-cursor-for-buttons: true;
 				pointer-events: all;
 			}
 					
-			.jeesl-overlay-container {
-				visibility: hidden;
+			.jeesl-search-overlay-container {
 				pointer-events: all;
+				top: 100%;
 				transition: none;
+				visibility: hidden;
 				z-index: 1000;
 				
 				@media (max-width: 768px) {
@@ -448,14 +449,14 @@ $enable-pointer-cursor-for-buttons: true;
 				&.jeesl-visible {
 					visibility: visible;
 					
-					.jeesl-overlay-wrapper .ui-selectonemenu-list {
+					.jeesl-search-overlay-wrapper .ui-selectonemenu-list {
 						&:before, &:after {
 						    display: list-item;
 						}
 					}
 				}
 				
-				.jeesl-overlay-wrapper .ui-selectonemenu-list {
+				.jeesl-search-overlay-wrapper .ui-selectonemenu-list {
 					overflow: hidden;
 					
 					@media (max-width: 768px) {
@@ -468,14 +469,14 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 					
 					&:before {
-						background: $dark-colour;
+						background: var(--statusbar-search-dropdown-highlight-background-from);
 					}
 				
 					.ui-selectonemenu-item {
 						height: auto;
 						
 						&:hover {
-							background: $dark-colour;
+							background: var(--statusbar-item-dropdown-hover-background);
 						}
 						
 						&:after {
@@ -521,14 +522,15 @@ $enable-pointer-cursor-for-buttons: true;
 
 @mixin jeesl-titlebar {
 	align-items: center;
-	background: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
+	background: var(--container-header-background);
 	border-radius: $border-radius-top;
 	border: none;
 	border-bottom: $header-underline;
 	box-shadow: $header-shadow;
 	box-sizing: content-box;
-	color: $foreground;
+	color: var(--container-header-foreground);
 	display: flex;
+	flex-shrink: 0;
 	flex-wrap: wrap;
 	font-weight: 700;
 	height: auto;
@@ -568,7 +570,7 @@ $enable-pointer-cursor-for-buttons: true;
 		padding: 0 $header-icon-padding-horizontal;
 			
 		@media (max-width: 768px) {
-			padding: 0 $ls-element-padding-vertical;
+			padding: 0 $half-spacing;
 		}
 	}
 	
@@ -594,7 +596,7 @@ $enable-pointer-cursor-for-buttons: true;
 
 		@media (max-width: 768px) {
 			align-items: stretch;
-			padding: $header-icon-padding-vertical;
+			padding: $half-spacing 0;
 			
 			&:before {
 			    border-left: $border;
@@ -603,12 +605,20 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		&:hover {
-			background: $header-background-colour;
+			background: var(--container-header-action-button-hover-background);
+		}
+		
+		&.jeesl-menu-bar-dropdown.jeesl-active {
+			background: var(--container-header-action-button-highlight-background);
 		}
 		
 		img {
 			vertical-align: middle;
 		}
+	}
+	
+	.pf-action-dropdown .pf-action-icon.jeesl-menu-bar-dropdown.jeesl-active {
+		background: var(--tabview-header-tab-foreground);
 	}
 	
 	.jeesl-icon-select {
@@ -650,11 +660,12 @@ $enable-pointer-cursor-for-buttons: true;
 				@media (max-width: 768px) {
 					.ui-selectonemenu-item.ui-selectonemenu-row {
 						&.ui-state-highlight > td:after {
-							border-color: $dark-colour;
+							border-color: var(--container-header-action-button-dropdown-table-border);
 						}
 						
 						&.ui-state-hover {
-							background: $white-100;
+							// TODO: Check! Dropdown in panel header, size incorrect, colours need refitting to header.
+							background: var(--container-header-action-button-dropdown-background);
 						}
 						
 						> td {
@@ -726,6 +737,8 @@ $enable-pointer-cursor-for-buttons: true;
 	.ui-fileupload-buttonbar {
 		@include jeesl-titlebar;
 		
+		justify-content: flex-end;
+		
 		.ui-button {
 			align-items: stretch;
 			border: none;
@@ -738,10 +751,6 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			&:not(.ui-state-disabled) {
 				background: none;
-				
-				.ui-button-text {
-					color: $dark-colour;
-				}
 			}
 			
 			&.ui-state-disabled .ui-icon {
@@ -814,14 +823,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			.ui-button-text {
-				align-items: center;
-				display: flex;
-				padding: 0 $half-spacing;
-			
-				@media (max-width: 768px) {
-					font-size: 1.4em;
-					letter-spacing: -.5px;
-				}
+				display: none;
 			}
 		}
 	}
@@ -831,8 +833,9 @@ $enable-pointer-cursor-for-buttons: true;
 	.ui-tabs-nav {
 		@include jeesl-titlebar;
 		
+		align-items: stretch;
 		height: auto;
-			padding: 3px $regular-spacing 0 !important; // Overwrite primefaces style.
+		padding: 3px $regular-spacing 0 !important; // Overwrite primefaces style.
 			
 		@media (max-width: 768px) {
 			&:after {
@@ -843,26 +846,25 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.ui-tabs-header {
 			align-items: center;
-			background: linear-gradient(to bottom, $light-grey 87%, $soft-grey 100%);
+			background: var(--tabview-header-tab-background);
 			border-width: $border-width;
 			box-shadow: inset 0 1px 0 $white-100;
 			display: flex;
 			margin: 0 3px 0 0;
 			min-height: $element-height;
 			padding: 0;
-				top: 0 !important;
+			top: 0 !important;
 			
 			@media (max-width: 768px) {
 				min-height: $element-height-mobile;
 			}
 			
 			&.ui-tabs-selected {
-				background: linear-gradient(to bottom, $white-100, $panel-background);
-				    border: 0;
-					padding: 1px;
+				border: 0;
+				padding: 1px;
 				
 				&:before {
-					background: linear-gradient(to bottom, $medium-colour, $dark-colour);
+					background: var(--tabview-header-tab-highlight-background);
 				    border-radius: inherit;
 				    box-shadow: inset 0 1px 0 $bright-colour;
 					opacity: 1;
@@ -871,8 +873,8 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				> * {
 					position: relative;
-						color: $white-100;
-						text-shadow: none;
+					color: var(--tabview-header-tab-highlight-foreground);
+					text-shadow: none;
 					
 					> a {
 						color: inherit;
@@ -886,13 +888,13 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 								
 			&:before {
-				@include background-overlay(linear-gradient(to bottom, $bright-grey 87%, $soft-grey 100%));
+				@include background-overlay(var(--tabview-header-tab-background));
 			}
 			
 			> a {
 				@include jeesl-titlebar-title;
 				
-				color: $anthracite;
+				color: var(--tabview-header-tab-foreground);
 				padding: 0 $regular-spacing;
 				position: relative;
 			}
@@ -949,13 +951,11 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 @mixin jeesl-footer {
-	background: color.adjust($border-colour, $alpha: -.8);
+	background: var(--footer-background);
 	border: none;
 	border-radius: $border-radius-bottom;
-//	border-top: $header-element-underline solid $dark-colour;
 	border-top: $border-width solid transparent;
-	color: $dark-colour;
-//	font-weight: 700;
+	color: var(--container-content-foreground);
 	padding: $half-spacing $regular-spacing;
 			
 	@media (max-width: 768px) {
@@ -1049,7 +1049,7 @@ $enable-pointer-cursor-for-buttons: true;
 						border-radius: $border-radius;
 						padding: 0;
 						
-						&:not(.jeesl-block) {
+						&:not(.jeesl-block, .jeesl-output-container) {
 							display: inline-block;
 						
 							@media (max-width: 768px) {
@@ -1060,7 +1060,7 @@ $enable-pointer-cursor-for-buttons: true;
 						
 						@media (max-width: 768px) {
 							align-items: center;
-							background: $light-grey;
+							background: var(--panel-content-output-background);
 							padding: $regular-spacing;
 							
 							&.jeesl-center {
@@ -1094,12 +1094,15 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 					
-					> .jeesl-ck-editor .cke_button {
-						border-width: $border-width 0;
-						
-						&:last-child {
-							border-right: $border;
+					> .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar {
+						.cke_toolgroup, .cke_combo {
 							border-top-right-radius: $border-radius;
+							border-top-width: $border-width;
+														
+							.cke_button:last-child {
+								border-right: $border;
+								border-top-right-radius: $border-radius;
+							}
 						}
 					}
 					
@@ -1108,7 +1111,7 @@ $enable-pointer-cursor-for-buttons: true;
 						padding: 0;
 						
 						@media (max-width: 768px) {
-							margin: 0 #{-$regular-spacing};
+							margin: 0 -#{$regular-spacing};
 						}
 						
 						.ui-tabs-nav {
@@ -1139,7 +1142,7 @@ $enable-pointer-cursor-for-buttons: true;
 								}
 								
 								&.ui-state-active {
-									background: linear-gradient(to bottom, $panel-background, $white-100);
+									background: linear-gradient(to bottom, var(--container-content-background), var(--panel-content-input-background));
 									cursor: default;
 									min-height: #{$element-height - $border-width - $slim-spacing};
 									
@@ -1158,7 +1161,8 @@ $enable-pointer-cursor-for-buttons: true;
 							padding: 0;
 							
 							@media (max-width: 768px) {
-								background: $soft-grey;
+								// TODO: Check!
+								background: var(--tabview-header-tab-background);
 								padding: $half-spacing $regular-spacing $regular-spacing;
 							}
 							
@@ -1176,6 +1180,10 @@ $enable-pointer-cursor-for-buttons: true;
 								}
 							}
 						}
+					}
+					
+					> .jeesl-qr {
+						max-height: $qrCodeHeight;
 					}
 				}
 			}
@@ -1211,14 +1219,14 @@ $enable-pointer-cursor-for-buttons: true;
 			transition: background .2s linear;
 			
 			&:hover {
-				background: $soft-grey;
+				background: var(--container-header-action-button-hover-background);
 			}
 			
 			&.ui-icon-circle-triangle-w {
 				left: 0;
 				
 				&:before {
-					@include triangle(transparent $dark-grey transparent transparent, 8px 8px 8px 0);
+					@include triangle(transparent var(--container-header-foreground) transparent transparent, 8px 8px 8px 0);
 					
 					display: inline-block;
 					position: relative;
@@ -1230,7 +1238,7 @@ $enable-pointer-cursor-for-buttons: true;
 				right: 0;
 				
 				&:before {
-					@include triangle(transparent transparent transparent $dark-grey, 8px 0 8px 8px);
+					@include triangle(transparent transparent transparent var(--container-header-foreground), 8px 0 8px 8px);
 					
 					display: inline-block;
 					position: relative;
@@ -1252,31 +1260,6 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 }
-
-/******************
- * TREE ANIMATION *
- ******************/
-//.ui-tree {
-//	.ui-treenode {
-//		&:not(.jeesl-active) {
-//			.ui-treenode-content {
-//				&.ui-droppable-active {
-//					+ .ui-treenode-children {
-//						display: none !important;
-//					}
-//				}
-//			}
-//		}
-//		
-//		.ui-treenode-children {
-//			display: list-item !important;
-//			height: 0;
-//			overflow: hidden;
-//			transition: height .4s ease-in-out;
-//		}
-//	}
-//}
-/******************/
 
 @mixin justified-panel-content {
 	margin-left: -$regular-spacing;
@@ -1371,6 +1354,8 @@ $enable-pointer-cursor-for-buttons: true;
 							
 						.cke_toolgroup, .cke_combo {
 							align-items: center;
+							border: $border;
+							border-width: $border-width 0;
 							display: flex;
 							padding: 0;
 							margin: 0;
@@ -1378,9 +1363,10 @@ $enable-pointer-cursor-for-buttons: true;
 							.cke_button, .cke_combo_button {
 								@include button(cke_button_on);
 								
-								border: $border;
+//								border: $border;
+								border: 0;
 								border-radius: 0;
-								border-width: 0 0 $border-width;
+//								border-width: 0 0 $border-width;
 								box-sizing: border-box;
 								cursor: pointer;
 								min-width: $element-height;
@@ -1504,7 +1490,7 @@ $enable-pointer-cursor-for-buttons: true;
 	@include jeesl-editor-layout;
 	@include jeesl-panel-titlebar;
 	
-	background: $panel-background;
+	background: var(--container-content-background);
 	display: flex;
 	flex-direction: column;
 	padding: 0;
@@ -1530,30 +1516,17 @@ $enable-pointer-cursor-for-buttons: true;
 				border-radius: $border-radius-bottom;
 			}
 			
-			.jeesl-ck-editor:not(:first-child), .jeesl-editor-list:not(:first-child) .jeesl-ck-editor, .jeesl-input-grid .jeesl-ck-editor {
+			.jeesl-ck-editor {
+				border: none;
+			}
+			
+
+			.jeesl-ck-editor:first-child, .jeesl-editor-list:first-child .jeesl-ck-editor {
 				.cke .cke_inner .cke_top .cke_toolbar {
 					.cke_combo, .cke_toolgroup {
-						border-top: $border;
-					}
-					
-					.cke_toolgroup {
-						align-items: flex-start;
-						margin-bottom: #{-$border-width};
+						border-top-width: 0;
 					}
 				}
-			}
-			
-			@media (max-width: 768px) {
-				.jeesl-editor-list .jeesl-ck-editor:not(:first-child) .cke .cke_inner .cke_top .cke_toolbar {
-					.cke_combo, .cke_toolgroup {
-						border-top: none;
-					}
-				}
-			}
-			
-			.jeesl-input-grid .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:last-child {
-				border-right-width: $border-width;
-				border-top-right-radius: $border-radius;
 			}
 		}
 		
@@ -1609,6 +1582,24 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
+	&.jeesl-image-wrapper {
+		padding: $regular-spacing;
+		
+		.ui-panel-content {
+			padding: 0;
+			position: relative;
+		
+			img {
+				left: 50%;
+				max-height: 100%;
+				object-fit: contain;
+				position: absolute;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+	}
+	
 	&.jeesl-galleria {
 		padding: 0;
 		
@@ -1624,12 +1615,12 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			&:before {
-			    background: linear-gradient(to right, $panel-background 10px, transparentize($panel-background, .4) 45px, transparent);
+			    background: linear-gradient(to right, var(--galleria-controls-background-from) 10px, var(--galleria-controls-background-to) 45px, transparent);
 				left: 0;
 			}
 			
 			&:after {
-			    background: linear-gradient(to left, $panel-background 10px, transparentize($panel-background, .4) 45px, transparent);
+			    background: linear-gradient(to left, var(--galleria-controls-background-from) 10px, var(--galleria-controls-background-to) 45px, transparent);
 				right: 0;
 			}
 			
@@ -1669,7 +1660,7 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.jeesl-galleria-filmstrip-wrapper {
 				align-items: stretch;
-				background: $panel-header-gradient;
+				background: var(--container-header-background);
 				border-top: $border;
 				display: flex;
 				
@@ -1715,7 +1706,7 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 					
 					&:before {
-						color: $body-foreground;
+						color: var(--container-header-foreground);
 						flex-shrink: 0;
 						font-family: 'Font Awesome 5 Free';
 						font-size: inherit;
@@ -1734,7 +1725,7 @@ $enable-pointer-cursor-for-buttons: true;
 					    left: 0;
 					    width: 100%;
 					    height: 100%;
-					    background: $soft-grey;
+					    background: var(--container-header-action-button-dropdown-hover-background);
 					    opacity: 0;
 					    transition: opacity $transition-duration ease-in-out;
 					    z-index: 0;
@@ -1878,15 +1869,16 @@ $enable-pointer-cursor-for-buttons: true;
 		align-items: center;
 		display: flex;
 		font-weight: bold;
+		gap: $half-spacing;
 	}
 	
 	.ui-tree {
 		.ui-tree-droppoint {
 			&.ui-droppable-active {
 				&.ui-state-hover {
-					background: $medium-colour;
+					background: var(--tree-droppoint-highlight-hover-background);
 					box-shadow: none;
-					color: $white-100;
+					color: var(--tree-droppoint-highlight-hover-foreground);
 				}
 			}
 		}
@@ -1902,7 +1894,7 @@ $enable-pointer-cursor-for-buttons: true;
 				width: 100%;
 				
 				@media (max-width: 768px) {
-					border-bottom: 2px solid $soft-grey;
+					border-bottom: 2px solid var(--tree-droppoint-separator);
 					min-height: $ls-element-height-mobile;
 				}
 				
@@ -1916,8 +1908,8 @@ $enable-pointer-cursor-for-buttons: true;
 				&.ui-droppable-active {
 					.ui-treenode-label {
 						&.ui-state-hover {
-							background: $medium-colour;
-							color: $white-100;
+							background: var(--tree-droppoint-highlight-hover-background);
+							color: var(--tree-droppoint-highlight-hover-foreground);
 						}
 					}
 				}
@@ -1945,7 +1937,7 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 					
 					&:hover {
-						background: $soft-grey;
+						background: var(--tree-droppoint-hover-background);
 					}
 					
 					&:before {
@@ -1956,7 +1948,7 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 	
 					&:after {
-						@include triangle(transparent transparent transparent $dark-grey, 4px 0 4px 4px);
+						@include triangle(transparent transparent transparent var(--tree-droppoint-hover-foreground), 4px 0 4px 4px);
 						
 						display: inline-block;
 						position: relative;
@@ -1989,12 +1981,12 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 					
 					&.ui-state-hover {
-						background: $soft-grey;
+						background: var(--tree-droppoint-hover-background);
 						box-shadow: none;
 					}
 					
 					&.ui-state-highlight {
-						background: $highlight-colour;
+						background: var(--tree-droppoint-highlight-background);
 						text-shadow: none;
 					}
 				}
@@ -2041,6 +2033,15 @@ $enable-pointer-cursor-for-buttons: true;
 		@include input-grid;
 		@include image-gallery;
 		
+		.jeesl-headline {
+			padding: $regular-spacing 0;
+			text-shadow: $text-shadow;
+			
+			@media (max-width: 768px) {
+				font-size: 1.2em;
+			}
+		}
+		
 		.ui-galleria {
 			border: 0;
 			margin: -6px -10px -4px;
@@ -2049,10 +2050,10 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.ui-separator {
-			background: $border-colour;
+			background: var(--container-border-colour);
 			border: none;
 			height: $separator-thickness;
-			margin: $half-spacing #{-$regular-spacing};
+			margin: $half-spacing -#{$regular-spacing};
 			
 			@media (max-width: 768px) {
 				height: $separator-thickness-mobile;
@@ -2116,7 +2117,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.pvtAxisContainer, .pvtVals, .pvtAxisLabel, .pvtColLabel, .pvtTotalLabel, .pvtRowLabel {
-			background: $panel-header-gradient;
+			background: var(--container-header-background);
 			box-shadow: $highlight-shadow;
 		}
 		
@@ -2135,7 +2136,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		th, td {
-			border-color: $border-colour;
+			border-color: var(--container-border-colour);
 		}
 	}
 	
@@ -2182,7 +2183,7 @@ body, .ui-widget {
 }
 
 #container {
-	background: $white-100;
+	background: var(--main-content-background);
 	box-shadow: 0 0 $regular-spacing $medium-grey;
 	margin: 0 auto;
 	max-width: $min-fixed-container-width;
@@ -2195,7 +2196,7 @@ body, .ui-widget {
 }
 
 .jeesl-header {
-	border-bottom: 2px solid $bright-grey;
+	border-bottom: 2px solid var(--main-nav-underline);
 	height: 41px;
     padding: 3px 0 0;
 	position: relative;
@@ -2228,7 +2229,7 @@ body, .ui-widget {
 		}
 	}
 	
-	@include jeesl-burger-icon($dark-colour);
+	@include jeesl-burger-icon(var(--main-nav-icon));
 	@include jeesl-burger-icon-size($element-height-mobile, 5px);
 	
 	.jeesl-burger-menu-icon {
@@ -2241,16 +2242,15 @@ body, .ui-widget {
 		}
 	}
 	
-	@include jeesl-sb-dropdown($anthracite, $white-100, $white-100, $bright-grey, 20);
+	@include jeesl-sb-dropdown(var(--body-foreground), transparent, transparent, var(--main-nav-highlight), 20);
 	
 	.jeesl-dropdown-list {
-		background: transparent;
 		display: inline-block;
 		opacity: 1;
 		visibility: visible;
 		
 		@media (max-width: 768px) {
-			background: $white-100;
+			background: var(--main-nav-dropdown-background);
 			margin: 0;
 			opacity: 0;
 			top: 51px;
@@ -2272,11 +2272,11 @@ body, .ui-widget {
 				
 				&:hover {
 					&:after {
-						border-bottom: 2px solid $dark-colour;
+						border-bottom: 2px solid var(--main-nav-hover);
 					}
 					
 					> .jeesl-dropdown-item-label {
-						color: $dark-colour;
+						color: var(--main-nav-hover);
 					}
 				}
 				
@@ -2294,30 +2294,41 @@ body, .ui-widget {
 		
 		.jeesl-dropdown-item {
 			background: transparent;
+			transition: color #{$transition-duration} ease-in-out;
 			
 			@media (max-width: 768px) {
 				display: block;
 			}
 			
+			&:after {
+				opacity: 0;
+				transition: opacity #{$transition-duration} ease-in-out;
+			}
+			
+			&:hover:after {
+				opacity: 1;
+			}
+			
 			&.jeesl-active {
 				&:after {
-					border-bottom-color: $dark-colour;
+					border-bottom-width: 2px;
+					opacity: 1;
 				}
 				
 				> .jeesl-dropdown-item-label {
-					color: $dark-colour;
+					color: var(--main-nav-highlight);
 				}
 			}
 			
 			&.jeesl-marked {
 				.jeesl-dropdown-item-label {
-					color: $medium-grey;
+					color: var(--main-nav-emphasis);
 					font-style: italic;
 				}
 				
 				&:hover {
 					.jeesl-dropdown-item-label {
-						color: $dark-colour;
+						color: var(--main-nav-hover);
 					}
 				}
 			}
@@ -2339,7 +2350,7 @@ body, .ui-widget {
 .jeesl-breadcrumb-header {
 	@include jeesl-menu-bar;
 	
-	background: $dark-colour;
+	background: var(--menu-bar-background);
     height: auto;
     margin: 10px;
 
@@ -2360,11 +2371,11 @@ body, .ui-widget {
 		float: none;
 		
 		.jeesl-subtitle {
-			@include font-regular;
+			@include font-breadcrumb;
 			
-			background: $dark-colour;
 			flex-grow: 1;
 			float: none;
+			letter-spacing: normal;
 			line-height: calc(#{$element-height} + 4 * #{$slim-spacing});
 			padding: 0 $regular-spacing;
 			
@@ -2379,14 +2390,14 @@ body, .ui-widget {
 					padding-right: 30px;
 				
 					&:before {
-						@include triangle($bright-colour $bright-colour $bright-colour transparent, 15px 1px 15px 15px);
+						@include triangle(var(--breadcrumb-background-to) var(--breadcrumb-background-to) var(--breadcrumb-background-to) transparent, 15px 1px 15px 15px);
 						
 						right: 1px;
 						z-index: 1;
 					}
 					
 					&:after {
-						@include triangle($dark-colour $dark-colour $dark-colour transparent, 15px 1px 15px 15px);
+						@include triangle(var(--breadcrumb-background-from) var(--breadcrumb-background-from) var(--breadcrumb-background-from) transparent, 15px 1px 15px 15px);
 						
 						right: 0;
 						z-index: 2;
@@ -2412,14 +2423,14 @@ body, .ui-widget {
 						&:hover {
 							.jeesl-dropdown-item-label {
 								&:after {
-									border-left-color: $dark-colour;
+									border-left-color: var(--breadcrumb-background-from);
 								}
 							}
 						}
 						
 						.jeesl-dropdown-item-label {
 							&:before, &:after {
-								@include triangle(transparent transparent transparent $bright-colour, 15px 1px 15px 15px);
+								@include triangle(transparent transparent transparent var(--breadcrumb-background-to), 15px 1px 15px 15px);
 								
 								transition: border-color $transition-duration linear;
 								
@@ -2442,7 +2453,7 @@ body, .ui-widget {
 			
 			&:hover {
 				.jeesl-menu-bar-button {
-					background: $main-background-gradient 12500% 0 / 99% 100% no-repeat;
+					background: var(--breadcrumb-background) 12500% 0 / 99% 100% no-repeat;
 				}
 				
 				.jeesl-dropdown-list {
@@ -2457,7 +2468,7 @@ body, .ui-widget {
 			}
 			
 			.jeesl-menu-bar-button {
-				background: $main-background-gradient 0 0 / 100% 99% no-repeat;
+				background: var(--breadcrumb-background) 0 0 / 100% 99% no-repeat;
 				padding: 4px 15px;
 				
 				@media (min-width: 769px) {
@@ -2481,7 +2492,7 @@ body, .ui-widget {
 				}
 				
 				&.jeesl-active {
-					background: $main-background-gradient 0 0 / 99% 100% no-repeat;
+					background: var(--breadcrumb-background) 0 0 / 99% 100% no-repeat;
 					
 					&:hover {
 						background-position: 12500% 0;
@@ -2510,13 +2521,21 @@ body, .ui-widget {
 				}
 			}
 			
-			@include jeesl-sb-dropdown($white-100, $main-background-gradient, $dark-colour, $dark-colour, 10);
+			@include jeesl-sb-dropdown(var(--breadcrumb-dropdown-foreground), var(--breadcrumb-dropdown-background), var(--breadcrumb-dropdown-background), var(--breadcrumb-dropdown-separator), 10);
 			
 			.jeesl-dropdown-list {
 				.jeesl-dropdown-item {
 					@include font-breadcrumb;
 					@include font-dropdown;
 					
+					&:before {
+						@include background-overlay(var(--breadcrumb-dropdown-hover-background));
+					}
+
+					&:hover:before {
+						opacity: 1;
+					}
+
 					&:first-child {
 						display: none;
 						
@@ -2549,26 +2568,26 @@ body, .ui-widget {
 }
 
 #fStatusBarHelp .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button-icon {
-	border-right: 1px solid $bright-colour;
+	border-right: 1px solid var(--statusbar-help-border-colour);
 }
 
 .jeesl-footer {
 	@include jeesl-menu-bar;
 	
-	color: $body-foreground;
+	color: var(--footer-foreground);
 	
 	.jeesl-menu-bar-list {
 		.jeesl-menu-bar-item {
-			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
+			@include jeesl-sb-dropdown(var(--footer-item-dropdown-foreground), var(--footer-item-dropdown-background), var(--footer-item-dropdown-hover-background), var(--footer-item-dropdown-separator));
 			
 			height: calc(($sb-element-height - 2 * $sb-vertical-padding) * var(--icon-height-multiplier) + 2 * $sb-vertical-padding);
 			
 			&:hover {
 				.jeesl-menu-bar-button {
-					background: $dark-colour;
+					background: var(--footer-item-hover-background);
 					
 					&:not(.jeesl-menu-bar-dropdown).jeesl-active {
-						background: $bright-colour;
+						background: var(--footer-item-hover-highlight-background);
 					}
 						
 					&.jeesl-disabled {
@@ -2617,7 +2636,7 @@ body, .ui-widget {
 .jeesl-status-bar {
 	@include jeesl-menu-bar;
 	
-	background-image: linear-gradient(to bottom, $dark-colour, $medium-colour);
+	background-image: var(--statusbar-background);
 	background-repeat: repeat;
 	background-size: 100% calc(($sb-element-height - 2 * $sb-vertical-padding) * var(--icon-height-multiplier) + 2 * $sb-vertical-padding);
     height: auto;
@@ -2657,12 +2676,10 @@ body, .ui-widget {
 				flex-grow: 1;
 			}
 			
-			&.jeesl-status-bar-left .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:first-child) .jeesl-menu-bar-button,
-			&.jeesl-status-bar-right .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button {
-				.jeesl-menu-bar-button-icon, .jeesl-menu-bar-button-label, .jeesl-menu-bar-button-info, .jeesl-menu-bar-button-summary {
-					&:first-child {
-						border-left: 1px solid $bright-colour;
-					}
+			&.jeesl-status-bar-left .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:first-child),
+			&.jeesl-status-bar-right .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:last-child) {
+				&:before {
+					@include jeesl-sb-separator;
 				}
 			}
 			&.jeesl-status-bar-right  .jeesl-status-bar-group-list {
@@ -2682,6 +2699,7 @@ body, .ui-widget {
 		}
 		
 		.jeesl-menu-bar-item {
+			display: flex;
 			height: calc(($sb-element-height - 2 * $sb-vertical-padding) * var(--icon-height-multiplier) + 2 * $sb-vertical-padding);
 			white-space: nowrap;
 			
@@ -2691,10 +2709,10 @@ body, .ui-widget {
 			
 			&:hover {
 				.jeesl-menu-bar-button {
-					background: $dark-colour;
+					background: var(--statusbar-item-hover-background);
 					
 					&:not(.jeesl-menu-bar-dropdown).jeesl-active {
-						background: $bright-colour;
+						background: var(--statusbar-item-highlight-hover-background);
 					}
 						
 					&.jeesl-disabled {
@@ -2715,10 +2733,16 @@ body, .ui-widget {
 					text-align: left;
 				}
 			}
+			
+			&.jeesl-left:not(:first-child), &.jeesl-right:not(:last-child) {
+				&:before {
+					@include jeesl-sb-separator;
+				}
+			}
 
 			
 			.jeesl-menu-bar-button {
-				background: $medium-colour;
+				background: var(--statusbar-item-background);
 			    padding: $sb-vertical-padding 0;
 				
 				@media (max-width: 768px) {
@@ -2771,7 +2795,7 @@ body, .ui-widget {
 				}
 				
 				&:not(.jeesl-menu-bar-dropdown).jeesl-active {
-					background: $brighter-colour;
+					background: var(--statusbar-item-highlight-background);
 				}
 				
 				&.jeesl-disabled {
@@ -2799,16 +2823,16 @@ body, .ui-widget {
 				&:before {
 					@include pseudo-overlay();
 					
-					background: linear-gradient(to bottom, $dark-colour, transparent);
+					background: linear-gradient(to bottom, var(--statusbar-background-from), transparent);
 				    display: block;
 				    transition: opacity .4s linear;
 					z-index: 1;
 				}
 				
 				&:after {
-					@include background-overlay($dark-colour);
+					@include background-overlay(var(--statusbar-item-hover-background));
 					
-					background: $dark-colour;
+					background: var(--statusbar-item-hover-background);
 					position: absolute;
 					top: 0;
 					left: 0;
@@ -2860,7 +2884,7 @@ body, .ui-widget {
 				}
 			}
 			
-			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
+			@include jeesl-sb-dropdown(var(--statusbar-item-dropdown-foreground), var(--statusbar-item-dropdown-background), var(--statusbar-item-dropdown-hover-background), var(--statusbar-item-dropdown-separator));
 			
 			.jeesl-dropdown-list {
 	    		top: 100%;
@@ -2878,7 +2902,7 @@ body, .ui-widget {
 							}
 							
 							&:before {
-								background: $dark-colour;
+								background: var(--statusbar-item-hover-background);
 								content: '';
 								left: 0;
 								visibility: hidden;
@@ -2916,7 +2940,7 @@ body, .ui-widget {
 								}
 								
 								&:hover {
-									background: $dark-colour;
+									background: var(--statusbar-item-dropdown-hover-background);
 								}
 							}
 						}
@@ -3006,7 +3030,7 @@ body, .ui-widget {
 			}
 			
 			.ui-inputgroup {
-				border: $border-width solid $bright-colour;
+				border: $border-width solid var(--statusbar-search-border-colour);
 				border-radius: $border-radius;
 				display: inline-block;
 				height: calc(100% - 2 * #{$slim-spacing});
@@ -3019,7 +3043,7 @@ body, .ui-widget {
 					vertical-align: top;
 				}
 				
-				+ .jeesl-overlay-container {
+				+ .jeesl-search-overlay-container {
 					margin: -$slim-spacing $half-spacing 0;
 					position: absolute;
 					min-width: calc(100% - (2 * #{$half-spacing}));
@@ -3031,7 +3055,7 @@ body, .ui-widget {
 				
 				.ui-inputfield {
 					background: none;
-					color: $white-100;
+					color: var(--statusbar-item-foreground);
 					text-indent: 0;
 					text-shadow: none;
 					transition: width .3s ease-in-out;
@@ -3042,7 +3066,7 @@ body, .ui-widget {
 					}
 					
 					&::placeholder {
-						color: $brighter-colour;
+						color: var(--statusbar-search-placeholder-foreground);
 						font-style: italic;
 					}
 				}
@@ -3058,7 +3082,7 @@ body, .ui-widget {
 						background: transparent;
 						border: none;
 						box-shadow: none;
-						color: $brighter-colour;
+						color: var(--statusbar-search-button-foreground);
 						height: 100%;
 						opacity: 0;
 						pointer-events: none;
@@ -3066,8 +3090,8 @@ body, .ui-widget {
 						transition: background .2s linear, opacity .2s linear;
 						
 						&:hover {
-							background: $dark-colour;
-							color: $brighter-colour;
+							background: var(--statusbar-search-button-hover-background);
+							color: var(--statusbar-search-button-hover-foreground);
 						}
 						
 						&:before, &:after {
@@ -3081,7 +3105,7 @@ body, .ui-widget {
 						
 						.ui-icon {
 							align-items: center;
-							color: $brighter-colour !important;
+							color: var(--statusbar-search-button-foreground) !important;
 							display: flex;
 							height: $regular-spacing;
 							width: $regular-spacing;
@@ -3100,15 +3124,15 @@ body, .ui-widget {
 				}
 			}
 			
-			.jeesl-overlay-container {
-				background: $medium-colour;
+			.jeesl-search-overlay-container {
+				background: var(--statusbar-item-dropdown-background);
 				border: none;
 				border-radius: 0;
 				box-shadow: none;
 				margin: 0 4px;
 				min-width: calc(100% - 8px);
 				
-				.jeesl-overlay-wrapper {
+				.jeesl-search-overlay-wrapper {
 					.ui-selectonemenu-list {
 						@media (max-width: 768px) {
 							overflow: hidden;
@@ -3125,21 +3149,7 @@ body, .ui-widget {
 							}
 							
 							&.jeesl-active {
-								.ui-selectonemenu-item-text {
-									color: $white-100;
-								}
-								
-								&:hover {
-									.ui-selectonemenu-item-text {
-										color: $white-100;
-									}
-								}
-								
-								&:after {
-									border-color: $dark-colour;
-								}
-								
-								background: linear-gradient(to bottom, #{$dark-colour}, #{$medium-colour} #{$ls-element-height-mobile});
+								background: linear-gradient(to bottom, var(--statusbar-search-dropdown-highlight-background-from), var(--statusbar-search-dropdown-highlight-background-to) #{$ls-element-height-mobile});
 							}
 							
 							&:after {
@@ -3153,7 +3163,7 @@ body, .ui-widget {
 								height: $ls-element-height;
 								position: relative;
 								
-								color: $white-100;
+								color: var(--statusbar-item-dropdown-foreground);
 								font-weight: 400;
 								line-height: 14px;
 								padding: 6px 7px;
@@ -3169,7 +3179,7 @@ body, .ui-widget {
 						
 							.jeesl-field-tip {
 								border-bottom: 0 solid $dark-colour;
-								color: $body-foreground;
+								color: var(--container-content-foreground);
 								height: $ls-element-height;
 								position: absolute;
 								font-weight: $font-weight-base;
@@ -3192,7 +3202,7 @@ body, .ui-widget {
 							
 								&:hover {
 									.jeesl-field-tip-icon {
-										color: $bright-colour;
+										color: var(--statusbar-search-dropdown-fieldtip-hover-foreground);
 									}
 									
 									.jeesl-field-tip-content {
@@ -3203,7 +3213,7 @@ body, .ui-widget {
 								}
 								
 								.jeesl-field-tip-icon {
-									color: $brighter-colour;
+									color: var(--statusbar-search-dropdown-fieldtip-foreground);
 									cursor: pointer;
 									font-size: 16px;
 									line-height: $ls-element-height;
@@ -3236,7 +3246,7 @@ body, .ui-widget {
 									@media (max-width: 768px) {
 										background: none;
 										box-shadow: none;
-										color: $white-100;
+										color: var(--statusbar-item-dropdown-foreground);
 										font-size: $font-size-mobile;
 										left: 0;
 										opacity: 1;
@@ -3249,7 +3259,7 @@ body, .ui-widget {
 									}
 									
 									&:before {
-										@include triangle(transparent $border-colour transparent transparent, 8px 8px 8px 0);
+										@include triangle(transparent var(--container-border-colour) transparent transparent, 8px 8px 8px 0);
 										
 										left: -8px;
 										top: calc(#{$header-element-height} + #{$header-element-underline} + #{$border-width} + (#{$ls-element-height} / 2) - 8px);
@@ -3260,7 +3270,7 @@ body, .ui-widget {
 									}
 									
 									&:after {
-										@include triangle(transparent $panel-background transparent transparent, 8px 8px 8px 0);
+										@include triangle(transparent var(--container-content-background) transparent transparent, 8px 8px 8px 0);
 										
 										left: -7px;
 										top: calc(#{$header-element-height} + #{$header-element-underline} + #{$border-width} + (#{$ls-element-height} / 2) - 8px);
@@ -3343,7 +3353,7 @@ body, .ui-widget {
 
 						.ui-inputfield {
 							background: transparent;
-							color: $white-100;
+							color: var(--statusbar-item-foreground);
 							height: auto;
 							padding: 0 !important;
 							text-align: center;
@@ -3377,7 +3387,7 @@ body, .ui-widget {
 			}
 			
 			.jeesl-menu-bar-radio-item-list, .jeesl-menu-bar-radio-item-list:hover {
-			    display: inline-block;
+				display: flex;
 			    height: 100%;
 			    opacity: 1;
 				padding: 0;
@@ -3387,11 +3397,7 @@ body, .ui-widget {
 				.jeesl-menu-bar-item {
 					display: inline-block;
 					
-					&:last-child:after {
-						display: none;
-					}
-					
-					&:not(:first-child) .ui-commandlink .jeesl-menu-bar-button-label {
+					&:not(:first-child) {
 						border-left: $border-width solid $darker-colour;
 					}
 				}
@@ -3400,10 +3406,10 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
+.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload, .jeesl-calendar {
 	margin-bottom: $regular-spacing;
 	
-	.ui-panel-content {
+	.ui-panel-content, .ui-datatable-tablewrapper {
 		overflow: hidden;
 	}
 }
@@ -3413,7 +3419,7 @@ body, .ui-widget {
 }
 
 .jeesl-tree {
-	background: $panel-background;
+	background: var(--container-content-background);
 	
 	.ui-widget-content {
 		background: transparent;
@@ -3432,7 +3438,8 @@ body, .ui-widget {
 }
 
 .ui-fieldset {
-	background: $panel-background;
+	// TODO: Check!
+	background: var(--container-content-background);
 	margin-bottom: $regular-spacing;
 	
 	.ui-fieldset-legend {
@@ -3479,7 +3486,7 @@ body, .ui-widget {
 		border: none;
 		border-radius: 0;
 		box-shadow: none;
-		color: $body-foreground;
+		color: var(--container-header-foreground);
 		height: $element-height;
 		margin: 0;
 		padding: 0;
@@ -3490,7 +3497,7 @@ body, .ui-widget {
 		}
 		
 		&.ui-state-hover, &:hover {
-			background: $soft-grey;
+			background: var(--container-header-action-button-hover-background);
 			text-decoration: none;
 		}
 		
@@ -3504,12 +3511,225 @@ body, .ui-widget {
 	}
 }
 
+@mixin inner-table {
+	border-collapse: collapse;
+	border-style: hidden;
+	height: 100%;
+	margin: 0;
+	table-layout: auto;
+
+	@media (max-width: 768px) {
+		thead th, tbody tr, tfoot tr {
+			height: $element-height-mobile;
+		}
+	}
+	
+	thead th {
+		background: var(--container-header-background);
+		border: $border;
+		border-top: 0;
+		box-shadow: 0 -1px 0 inset $white-35;
+		color: var(--container-header-foreground);
+		padding: $table-header-padding;
+		position: relative;
+	}
+	
+	tbody, .ui-datatable-data {
+		background: var(--container-content-background);
+		border: none;
+
+		tr {
+			background: transparent;
+			border: none;
+			// TODO: Check!
+			border-color: $soft-grey $light-grey;
+			
+			&:nth-child(2n) {
+				background: var(--datatable-content-odd-row-background);
+			}
+		}
+		
+		tr, .jeesl-cell-select > label {
+			transition: background $transition-duration linear, border-color $transition-duration linear;
+		}
+
+		td {
+			@include icon-default-size;
+
+			border-style: solid;
+			border-color: inherit;
+			border-width: 0 0 $border-width $border-width;
+			padding: $half-spacing $regular-spacing;
+
+			> * {
+				vertical-align: middle;
+			}
+		}
+
+		tr.ui-state-hover, .jeesl-cell-select > label:not(.selected):hover {
+			background: var(--container-header-action-button-dropdown-background);
+			box-shadow: none;
+			// TODO: Check!
+			border-color: $soft-grey $light-grey;
+		}
+
+		tr.ui-state-highlight, .jeesl-cell-select > label.selected {
+			background: var(--datatable-content-highlight-background);
+			// TODO: Check!
+			border-color: var(--datatable-content-highlight-background);
+			color: var(--datatable-content-highlight-foreground);
+			font-weight: 500;
+			text-shadow: none;
+			
+			.aht-icon {
+				filter: grayscale(1) brightness(3);
+			}
+		}
+	}
+	
+	tfoot td {
+		@include jeesl-footer;
+
+		background: var(--container-content-background);
+		text-align: left;
+	}
+}
+
+.jeesl-calendar {
+	width: 100%;
+
+	.ui-datepicker-inline {
+		border: none;
+		padding: 0;
+		width: auto;
+		
+		.ui-datepicker-header {
+			@include jeesl-titlebar;
+			
+			.ui-datepicker-prev, .ui-datepicker-next {
+				color: var(--container-header-foreground);
+				display: flex;
+				height: auto;
+				left: 0;
+				margin: 0;
+				padding: $half-spacing 0;
+				position: relative;
+				text-decoration: none;
+				top: 0;
+				width: auto;
+				
+				&:hover:before {
+					opacity: 1;
+				}
+				
+				&:before {
+					@include background-overlay(var(--container-header-action-button-hover-background));
+				}
+				
+				.ui-icon {
+					display: flex;
+					left: 0;
+					margin: 0;
+					padding: 0 $half-spacing;
+					position: relative;
+					text-indent: 0;
+					top: 0;
+				}
+			}
+			
+			.ui-datepicker-prev {
+				order: 2;
+			}
+			
+			.ui-datepicker-next {
+				order: 3;
+			}
+			
+			.ui-datepicker-title {
+				@include jeesl-titlebar-title;
+				
+				margin: 0;
+				order: 1;
+			}
+		}
+		
+		.ui-widget-content {
+			background: var(--container-content-background);
+			border: $border;
+			border-radius: $border-radius;
+			color: var(--container-content-foreground);
+		}
+		
+		.ui-datepicker-calendar {
+			@include inner-table;
+			
+			thead th {
+				padding-left: 0;
+				padding-right: 0;
+			}
+			
+			tbody {
+				tr {
+					&:last-child td > .ui-state-default:before {
+						border-bottom-width: 0;
+						bottom: 0;
+					}
+					
+					&:hover {
+						background: var(--datatable-content-hover-background);
+					}
+				}
+				
+				td {
+					padding: 0;
+	
+					&:last-child >.ui-state-default:before {
+						border-right-width: 0;
+						right: 0;
+					}
+					
+					> .ui-state-default {
+						box-shadow: none;
+						color: inherit;
+						padding: $half-spacing 0;
+						position: relative;
+						text-shadow: none;
+						z-index: 0;
+						
+						&.ui-state-highlight {
+							background: var(--datatable-content-hover-background);
+						}
+						
+						&.ui-state-active {
+							color: var(--datatable-content-highlight-foreground);
+							
+							&:before {
+								opacity: 1;
+							}
+						}
+						
+						&:before {
+							@include background-overlay(var(--datatable-content-highlight-background));
+							
+							border-color: var(--datatable-content-highlight-border-colour);
+							border-style: solid;
+							border-width: 0 $border-width $border-width 0;
+							right: -$border-width;
+							bottom: -$border-width;
+							z-index: -1;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 .jeesl-datatable, .ui-datatable.ui-sortable-helper, .ui-selectonemenu-panel .ui-selectonemenu-table {
 	@include jeesl-table-titlebar;
 	
 	border: $border;
 	border-radius: $border-radius;
-	overflow: hidden;
 	
 	&.jeesl-datatable-collapsible {
 		&.jeesl-active .ui-datatable-header {
@@ -3562,22 +3782,9 @@ body, .ui-widget {
 	}
 	
 	table {
-		border-collapse: collapse;
-		border-style: hidden;
-		height: 100%;
-		table-layout: auto;
-		
-		@media (max-width: 768px) {
-			thead th, tbody tr, tfoot tr {
-				height: $element-height-mobile;
-			}
-		}
+		@include inner-table;
 		
 		thead th {
-			border-top: 0;
-			box-shadow: 0 -1px 0 inset $white-35;
-			position: relative;
-			
 			&.jeesl-column-min-width {
 				white-space: nowrap;
 			}
@@ -3587,7 +3794,7 @@ body, .ui-widget {
 				vertical-align: middle;
 				
 				.ui-column-title {
-					-ms-writing-mode: tb-rl;-webkit-writing-mode: vertical-lr;writing-mode: vertical-lr;
+					-ms-writing-mode: tb-rl;-webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;
 					vertical-align: middle;
 					padding: 6px 0;
 					transform: rotate(180deg);
@@ -3597,11 +3804,20 @@ body, .ui-widget {
 			
 			&.ui-sortable-column {
 				&.ui-state-hover, &.ui-state-active {
-					background-color: $light-grey;
-					border-color: $border-colour;
+					border-color: var(--container-border-colour);
+					
+					&:before {
+						opacity: 1;
+					}
+				}
+				
+				&:before {
+					// TODO: Check!
+					@include background-overlay(var(--container-header-action-button-hover-background));
 				}
 				
 				.ui-column-title {
+					position: relative;
 					margin-right: 5px;
 					pointer-events: none;
 					
@@ -3667,7 +3883,7 @@ body, .ui-widget {
 			transition: border-color .2s linear;
 			
 			&.selected {
-				border-color: $dark-colour;
+				border-color: var(--datatable-content-highlight-border-colour);
 			}
 			
 			label {
@@ -3677,69 +3893,21 @@ body, .ui-widget {
 				height: 100%;
 			}
 		}
-		
-		tfoot td {
-			@include jeesl-footer;
 			
-			background: $panel-background;
-			text-align: left;
-		}
-	}
-		
-	tbody, .ui-datatable-data {
-		background: $panel-background;
-		border: none;
-		
-		tr {
-			background: transparent;
-			border: none;
-			border-color: $soft-grey $light-grey;
-			
-			&:nth-child(2n) {
-				background: $white-50;
-			}
-		}
-		
-		tr, .jeesl-cell-select > label {
-			transition: background $transition-duration linear, border-color $transition-duration linear;
-		}
-		
-		td {
-			@include icon-default-size;
-			
-			border-color: inherit;
-			border-width: 0 0 $border-width $border-width;
-			padding: $half-spacing $regular-spacing;
-			
-			&.jeesl-column-min-width {
-				width: 0;
-			}
-			
-			&.jeesl-cell-select {
-				padding: 0;
+		tbody, .ui-datatable-data {
+			td {
+				&.jeesl-column-min-width {
+					width: 0;
+				}
 				
-				label {
-					padding: $half-spacing $regular-spacing;
+				&.jeesl-cell-select {
+					padding: 0;
+					
+					label {
+						padding: $half-spacing $regular-spacing;
+					}
 				}
 			}
-			
-			> * {
-				vertical-align: middle;
-			}
-		}
-		
-		tr.ui-state-hover, .jeesl-cell-select > label:not(.selected):hover {
-			background: $light-grey;
-			box-shadow: none;
-			border-color: $soft-grey $light-grey;
-		}
-		
-		tr.ui-state-highlight, .jeesl-cell-select > label.selected {
-			background: $highlight-colour;
-			border-color: $dark-colour;
-			color: $white-100;
-			font-weight: 500;
-			text-shadow: none;
 		}
 	}
 	
@@ -3855,11 +4023,115 @@ body, .ui-widget {
 }
 
 .jeesl-datatable {
-	background: $panel-background;
+	background: var(--container-content-background);
 	
 	.jeesl-heatbar-wrapper {
 		display: flex;
 		gap: $half-spacing;
+	}
+}
+
+.jeesl-overlay-container {
+	background: var(--panel-content-select-dropdown-background);
+	border: none;
+	box-shadow: $overlay-shadow;
+	padding: $half-spacing 0;
+	
+	@media (max-width: 768px) {
+		padding: $wide-spacing 0;
+	}
+	
+	.ui-overlaypanel-content {
+		padding: 0;
+		
+		.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel, .jeesl-fileupload {
+			border: 0;
+			border-radius: 0;
+			margin: 0;
+		}
+		
+		.jeesl-datatable table {
+			border-bottom: $border;
+			
+			@media (max-width: 768px) {
+				border-bottom: none;
+				
+				&:before {
+					border-bottom: $wide-spacing solid $soft-grey;
+					border-radius: 0;
+					content: 0;
+					left: 0;
+					position: absolute;
+					top: 0;
+					width: 100%;
+				}
+			}
+			
+			thead tr th {
+				background-image: var(--panel-content-select-dropdown-header-background);
+				background-repeat: repeat;
+				background-size: 100%;
+				border: none;
+//				border-bottom: 0;
+//				border-color: $white-100;
+				color: var(--panel-content-select-dropdown-header-foreground);
+				font-size: 1.2em;
+				height: $ls-element-height;
+				margin: 0;
+				padding: 0;
+				text-shadow: none;
+				
+				&:not(:last-child) {
+					border: $border-width solid transparent;
+				}
+			
+				@media (max-width: 768px) {
+					background-size: 100% $ls-element-height-mobile;
+					height: $ls-element-height-mobile;
+				}
+				
+				.ui-column-title {
+					padding: 0 $regular-spacing;
+					text-align: center;
+					text-wrap: nowrap;
+				}
+			}
+			
+			tbody tr {
+				position: relative;
+				
+				&:after {
+					@media (max-width: 768px) {
+						border-bottom: $separator-thickness-mobile solid $soft-grey;
+						bottom: 0;
+					    content: '';
+					    display: block;
+					    left: $wide-spacing;
+					    position: absolute;
+					    width: calc(100% - (2 * #{$wide-spacing}));
+					}
+				}
+				
+				td {
+					height: $ls-element-height;
+					text-wrap: nowrap;
+					
+					@media (max-width: 768px) {
+						font-size: 1.1em;
+						font-weight: 700;
+						height: $ls-element-height-mobile;
+						
+						&:first-child {
+							padding-left: $wide-spacing;
+						}
+						
+						&:last-child {
+							padding-right: $wide-spacing;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -3884,7 +4156,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-content-container, .jeesl-overlay-container {
+.jeesl-content-container, .jeesl-search-overlay-container {
 	line-height: 1.25em;
 	
 	@for $i from 1 to 13 {
@@ -3954,6 +4226,10 @@ body, .ui-widget {
 				flex-flow: row-reverse wrap-reverse;
 			}
 			
+			.jeesl-row {
+				align-self: flex-start;
+			}
+			
 			.jeesl-grid {
 				@media (max-width: 768px) {
 					margin-top: $regular-spacing;
@@ -4012,7 +4288,7 @@ body, .ui-widget {
 			@include jeesl-panel;
 			
 			.jeesl-action-tabview {
-				margin: $half-spacing #{-$regular-spacing};
+				margin: $half-spacing -#{$regular-spacing};
 				
 				.jeesl-tabs {
 					margin: 0;
@@ -4044,20 +4320,20 @@ body, .ui-widget {
 			
 			.jeesl-dropdown-item {
 				position: relative;
-    			background: $main-background-gradient;
+    			background: var(--breadcrumb-dropdown-background);
 
 				&:hover:before {
 					opacity: 1;
 				}
 
 				&:before {
-					@include background-overlay($dark-colour);
+					@include background-overlay(var(--breadcrumb-dropdown-hover-background));
 				}
 
 				.jeesl-dropdown-item-label {
 				    background: transparent;
 				    border-bottom: 1px solid $white-100;
-				    color: $white-100;
+					color: var(--breadcrumb-dropdown-foreground);
 				    display: block;
 				    height: 26px;
 				    line-height: 26px;
@@ -4080,7 +4356,7 @@ body, .ui-widget {
 .ui-dialog {
 	@include jeesl-dialog-titlebar;
 
-	background: $panel-background;
+	background: var(--container-content-background);
 	max-width: $min-fixed-container-width;
 	
 	&.ui-hidden-container {
@@ -4107,6 +4383,13 @@ body, .ui-widget {
 		border: $border;
 		overflow: visible;
 		z-index: 1003 !important;
+		
+		&.jeesl-fullscreen {
+			height: calc(100% - $regular-spacing) !important;
+			max-height: none;
+			max-width: none;
+			width: calc(100% - $regular-spacing) !important;
+		}
 	}
 	
 	&.jeesl-multipanel-dialog {
@@ -4130,49 +4413,48 @@ body, .ui-widget {
 		}
 	}
 	
-	&.jeesl-table-dialog {
-		.ui-dialog-titlebar {
+	&.jeesl-table-dialog .ui-dialog-content {
+		padding: 0;
+		
+		.jeesl-datatable {
+			border: none;
 			margin: 0;
-			
-			@media (max-width: 768px) {
-				margin-bottom: 4px;
-			}
 		}
 		
-		.ui-widget-content {
-			padding: 0;
-			
-			table {
-				thead, tbody {
+		table {
+			thead, tbody {
+				border: 0;
+				
+				tr {
 					border: 0;
 					
-					tr {
-						border: 0;
+					th, td {
+						border: $border;
 						
-						th, td {
-							border: $border;
-							
-							&:first-child {
-								border-left: 0;
-							}
-							
-							&:last-child {
-								border-right: 0;
-							}
+						&:first-child {
+							border-left: 0;
+						}
+						
+						&:last-child {
+							border-right: 0;
 						}
 					}
 				}
-				
-				thead tr:first-child th {
-					@media (max-width: 768px) {
-						border-top: 0;
-					}
-				}
-				
-				tbody tr:last-child, tbody tr:last-child td {
-					border-bottom: 0;
+			}
+			
+			thead tr:first-child th {
+				@media (max-width: 768px) {
+					border-top: 0;
 				}
 			}
+			
+			tbody tr:last-child, tbody tr:last-child td {
+				border-bottom: 0;
+			}
+		}
+		
+		.jeesl-datatable {
+			border: none;
 		}
 	}
 
@@ -4189,7 +4471,7 @@ body, .ui-widget {
 				background: transparent;
 				border: none;
 				box-shadow: none;
-				color: $body-foreground;
+				color: var(--container-content-foreground);
 				display: flex;
 				float: none;
 				padding: 0;
@@ -4204,24 +4486,13 @@ body, .ui-widget {
 					justify-content: center;
 					
 					&:hover {
-						background: $header-background-colour;
+						background: var(--container-header-action-button-hover-background);
 					}
 					
 					&:before {
 						font-size: 1.3em;
 					}
 				}
-			}
-		}
-		
-		.ui-dialog-buttonpane {
-			display: flex;
-			gap: $half-spacing;
-			margin: 0;
-			padding: $regular-spacing;
-			
-			.ui-button {
-				margin: 0;
 			}
 		}
 	}
@@ -4233,7 +4504,7 @@ body, .ui-widget {
 		overflow: visible;
 		
 		.ui-dialog-titlebar {
-			background: $status-bar-background-gradient;
+			background: var(--container-header-background);
 			border: none;
 			border-radius: $border-radius;
 			box-shadow: none;
@@ -4247,7 +4518,7 @@ body, .ui-widget {
 			}
 			
 			.ui-dialog-title {
-				color: $white-100;
+				color: var(--container-header-foreground);
 				flex-grow: 0;
 				font-size: 1.1em;
 				text-shadow: none;
@@ -4318,6 +4589,17 @@ body, .ui-widget {
 	.ui-dialog-footer {
 		@include jeesl-footer;
 	}
+
+	.ui-dialog-buttonpane {
+		display: flex;
+		gap: $half-spacing;
+		margin: 0;
+		padding: $regular-spacing;
+		
+		.ui-button {
+			margin: 0;
+		}
+	}
 }
 
 .jeesl-action-tabview {
@@ -4337,7 +4619,7 @@ body, .ui-widget {
 .jeesl-tabs {
 	@include jeesl-tabs-titlebar;
 		
-	background: $panel-background;
+	background: var(--container-content-background);
 	padding: 0;
 	
 	@media (max-width: 768px) {
@@ -4345,6 +4627,10 @@ body, .ui-widget {
 	}
 		
 	&.ui-tabs-top {
+		&.jeesl-action-header .ui-tabs-nav {
+			min-height: calc($icon-height * var(--icon-height-multiplier) + 2 * $half-spacing - 3px);
+		}
+		
 		.ui-tabs-nav {
 			padding: #{$slim-spacing - $border-width} $slim-spacing 0;
 		}
@@ -4440,94 +4726,98 @@ body, .ui-widget {
 		}
 	}
 	
-	.fc-head {
-		@include jeesl-titlebar;
-		
-		border-radius: $border-radius-top;
-		margin: 0;
-		padding: 0;
-		
-		@media (max-width: 768px) {
-			border-width: $border-width $border-width 0;
-		}
-		
-		.fc-head-container {
-			border: none;
+	.fc-view-container {
+		border: $border;
+
+		.fc-head {
+			@include jeesl-titlebar;
 			
-			.fc-row {
+			border-radius: $border-radius-top;
+			margin: 0;
+			padding: 0;
+			
+			@media (max-width: 768px) {
+				border-width: $border-width $border-width 0;
+			}
+			
+			.fc-head-container {
 				border: none;
-				margin: 0 !important;
 				
-				.fc-day-header {
-					border-color: $border-colour;
-					height: $element-height;
-					vertical-align: middle;
+				.fc-row {
+					border: none;
+					margin: 0 !important;
 					
-					@media (max-width: 768px) {
-						height: $element-height-mobile;
-					}
-					
-					> span {
-						@include jeesl-titlebar-title;
+					.fc-day-header {
+						border-color: $border-colour;
+						height: $element-height;
+						vertical-align: middle;
+						
+						@media (max-width: 768px) {
+							height: $element-height-mobile;
+						}
+						
+						> span {
+							@include jeesl-titlebar-title;
+						}
 					}
 				}
 			}
 		}
-	}
-	
-	.fc-body {
-		display: flex;
 		
-		td {
-			border: $border;
-			border-top: none;
-			background: $panel-background;
-		}
-		
-		.fc-scroller {
-			height: auto !important;
-			overflow: hidden !important;
+		.fc-body {
+			display: flex;
 			
-			.fc-bg td {
-				border: $border;
-				border-color: $soft-grey;
-			
-				&.fc-today {
-					background: $bright-colour;
-					opacity: .5;
-				}
+			td {
+				border: none;
+				border-top: none;
+				background: $panel-background;
 			}
 			
-			.fc-content-skeleton .fc-event {
-				background: $status-bar-background-gradient;
-				border: none;
-				font-size: 1em;
-				line-height: normal;
-				padding: $half-spacing;
+			.fc-scroller {
+				height: auto !important;
+				overflow: hidden !important;
 				
-				&[class*='color-']:before {
-					opacity: 1;
+				.fc-bg td {
+					border: $border;
+					border-color: var(--calendar-internal-border-colour);
+				
+					&.fc-today {
+						background: var(--calendar-tocay-background);
+						opacity: .5;
+					}
 				}
 				
-				&:before {
-					background: linear-gradient(to bottom, hsla(0, 0%, 0%, .3), hsla(0, 0%, 100%, .4));
-				    bottom: 0;
-				    content: '';
-				    left: 0;
-				    opacity: 0;
-				    position: absolute;
-				    right: 0;
-				    top: 0;
-				}
-				
-				.fc-content {
-					display: -webkit-box;
-					line-clamp: 2;
-					overflow: hidden;	
-					text-overflow: ellipsis;
-					white-space: normal;
-					-webkit-box-orient: vertical;
-					-webkit-line-clamp: 2;
+				.fc-content-skeleton .fc-event {
+					background: var(--calendar-event-background);
+					border: none;
+					font-size: 1em;
+					line-height: normal;
+					padding: $half-spacing;
+					
+					&[class*='color-']:before {
+						opacity: 1;
+					}
+					
+					&:before {
+						background: linear-gradient(to bottom, hsla(0, 0%, 0%, .3), hsla(0, 0%, 100%, .4));
+					    bottom: 0;
+					    content: '';
+					    left: 0;
+					    opacity: 0;
+					    position: absolute;
+					    right: 0;
+					    top: 0;
+					}
+					
+					.fc-content {
+						display: -webkit-box;
+						line-clamp: 2;
+						overflow: hidden;	
+						text-overflow: ellipsis;
+						white-space: normal;
+						-webkit-box-orient: vertical;
+						-webkit-line-clamp: 2;
+					}
 				}
 			}
 		}
@@ -4566,9 +4856,9 @@ body, .ui-widget {
 	
 	.p-field {
 		.p-col {
-			@include icon-default-size;
-			
 			&:not(.ui-outputlabel) {
+				@include icon-default-size;
+			
 				flex-grow: 1;
 				min-height: $element-height;
 				
@@ -4615,7 +4905,54 @@ body, .ui-widget {
 	
 	@media (max-width: 768px) {
 		img {
-			height: calc($element-height-mobile * var(--icon-height-multiplier));
+			height: calc($element-height-mobile * var(--icon-height-multiplier) - 2 * $half-spacing);
+		}
+	}
+}
+
+.pf-action-dropdown {
+	@include jeesl-sb-dropdown(var(--container-header-foreground), var(--container-header-action-button-dropdown-background), var(--container-header-action-button-dropdown-hover-background), var(--container-header-action-button-dropdown-separator-colour));
+	
+	.jeesl-dropdown-list {
+		border-radius: $border-radius;
+		margin-top: -1px;
+		text-align: left;
+		top: 100% !important;
+		
+		@media (max-width: 768px) {
+			box-shadow: none;
+		}
+		
+		&.jeesl-active {
+			left: unset !important;
+			opacity: 1;
+			visibility: visible;
+		}
+		
+		* {
+			visibility: visible !important;
+		}
+		
+		.ui-overlaypanel-content {
+			border: $border;
+			padding: $half-spacing 0;
+			
+			@media (max-width: 768px) {
+				border: none;
+				padding: 0;
+			}
+		}
+		
+		.jeesl-datatable, .ui-datatable-data {
+			background: transparent;
+			
+			table {
+				width: 100%;
+			}
+		}
+			
+		.jeesl-dropdown-item {
+			display: table-row;
 		}
 	}
 }
@@ -4630,7 +4967,7 @@ body, .ui-widget {
 		gap: 2px;
 	
 		.jeesl-heatmap-entry {
-			background: $dark-colour;
+			background: var(--heatmap-entry-colour);
 			height: 12px;
 			width: 12px;
 		}
@@ -4681,9 +5018,21 @@ body, .ui-widget {
 			width: 100%;
 			
 			.ui-fileupload-row {
+				@media (max-width: 768px) {
+					display: grid;
+					grid-template-columns: 1fr auto;
+				}
+				
 				> div {
 					vertical-align: middle;
 					white-space: nowrap;
+					
+					@media (max-width: 768px) {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						min-height: $element-height-mobile + 2 * $half-spacing;
+					}
 				}
 				
 				.ui-fileupload-preview {
@@ -4693,22 +5042,41 @@ body, .ui-widget {
 				.ui-fileupload-filename {
 					display: table-cell;
 					white-space: break-spaces;
+					
+					@media (max-width: 768px) {
+						display: flex;
+						
+						+ div {
+							text-align: right;
+						}
+					}
 				}
 				
 				.ui-fileupload-progress .ui-progressbar {
+					background: var(--panel-content-progress-bar-background);
 					top: 0;
 					
+					@media (max-width: 768px) {
+						width: auto;
+					}
+					
 					.ui-progressbar-value {
-						background: $bright-colour;
+						background: var(--panel-content-progress-bar-progress-background);
 						border: none;
 						border-radius: 1px;
 					}
 				}
 				
-				.ui-fileupload-cancel .ui-icon:before {
-					content: $icon-cancel;
-					font-family: "Font Awesome 5 Free" !important;
-					font-weight: 700;
+				.ui-fileupload-cancel {
+					@media (max-width: 768px) {
+						align-self: flex-end;
+					}
+					
+					.ui-icon:before {
+						content: $icon-cancel;
+						font-family: "Font Awesome 5 Free" !important;
+						font-weight: 700;
+					}
 				}
 			}
 		}
@@ -4763,9 +5131,9 @@ body, .ui-widget {
 			
 			&:before {
 				align-items: center;
-				background: $dark-colour;
+				background: var(--panel-content-chat-avatar-background);
 				border-radius: 50%;
-				color: $white-100;
+				color: var(--panel-content-chat-avatar-foreground);
 				display: flex;
 				font-size: 10px;
 				justify-content: center;
@@ -4789,7 +5157,7 @@ body, .ui-widget {
 	}
 	
 	.jeesl-input-container {
-		margin: $regular-spacing #{-$regular-spacing} #{-$half-spacing};
+		margin: $regular-spacing -#{$regular-spacing} -#{$half-spacing};
 		
 		.ui-inputfield {
 			border-radius: 0 0 0 $border-radius;

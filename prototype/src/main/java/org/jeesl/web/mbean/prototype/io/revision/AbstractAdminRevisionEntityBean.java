@@ -14,7 +14,6 @@ import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -39,6 +38,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
@@ -359,6 +359,15 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 	
+	protected abstract JeeslSystemRestInterface rest(String iFqcn);
+//	private JeeslSystemRest rest(String iFqcn)
+//	{
+//		ResteasyClient client = new ResteasyClientBuilder().build();
+//		ResteasyWebTarget restTarget = client.target(JeeslLabelEntityController.urlForInterface(iFqcn));
+//		JeeslSystemRest rest = restTarget.proxy(JeeslSystemRest.class);
+//		return rest;
+//	}
+	
 	public void downloadJeeslTranslations() throws UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
 	{
 		try
@@ -366,7 +375,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslDescription.class,c);
 			
-			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = this.rest(i.getName()).exportRevisionEntity(i.getName());
 
 			if(xml==null){logger.warn("No Result from REST !!");}
 			else
@@ -430,7 +439,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslAttributes.class,c);
 			
-			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = this.rest(i.getName()).exportRevisionEntity(i.getName());
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
 			updater.updateAttributes2(entity,lp,xml);

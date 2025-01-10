@@ -15,6 +15,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
@@ -43,7 +44,7 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 								ROW extends JeeslReportRow<L,D,SHEET,?,CDT,RT>,
 								CELL extends JeeslReportCell<L,D,?>,
 								STYLE extends JeeslReportStyle<L,D>,
-								CDT extends JeeslStatus<L,D,CDT>,
+								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>,
 								RT extends JeeslReportRowType<L,D,RT,?>
 //,

@@ -24,7 +24,7 @@ public class CalDayOfWeek extends IoStatus implements JeeslCalendarDayOfWeek<IoL
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
-		for(JeeslCalendarDayOfWeek.Code c : JeeslCalendarDayOfWeek.Code.values()){fixed.add(c.toString());}
+//		for(JeeslCalendarDayOfWeek.Code c : JeeslCalendarDayOfWeek.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 	

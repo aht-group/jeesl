@@ -77,10 +77,25 @@ public class SqlFactory
 		SqlFactory.update(sb,c,alias,attribute,t,newLine);
 		return this;
 	}
+	
+	public <T extends EjbWithId> SqlFactory whereId(T where)
+	{
+		sb.append(" WHERE id=");
+		sb.append(where.getId());
+		return this;
+	}
+
 	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where(E attribute, T where)
 	{
 		sb.append(" WHERE (");
 		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
+		sb.append(" )");
+		return this;
+	}
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory whereNot(E attribute, T where)
+	{
+		sb.append(" WHERE (");
+		whereAndOrAttribute(sb,alias,true,attribute,where,newLine);
 		sb.append(" )");
 		return this;
 	}
@@ -465,6 +480,4 @@ public class SqlFactory
 		else if(o instanceof Long) {return (Long)o;}
 		else {return null;}
 	}
-	
-	
 }

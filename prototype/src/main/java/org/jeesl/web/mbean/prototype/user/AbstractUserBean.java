@@ -40,7 +40,7 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 
 	protected JeeslIdentityFactory<I,R,V,U,A,CTX,USER> fId;
 	private JeeslMenuBean<V,?,?> bMenu;
-
+	
 	protected JeeslLogger jogger;
 	
 	protected USER user;

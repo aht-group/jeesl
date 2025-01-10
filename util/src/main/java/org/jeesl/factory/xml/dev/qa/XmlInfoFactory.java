@@ -2,7 +2,7 @@ package org.jeesl.factory.xml.dev.qa;
 
 import java.util.Objects;
 
-import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;

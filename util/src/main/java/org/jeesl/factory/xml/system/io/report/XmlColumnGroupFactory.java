@@ -9,6 +9,7 @@ import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -36,7 +37,7 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 								
 								CELL extends JeeslReportCell<L,D,?>,
 								STYLE extends JeeslReportStyle<L,D>,
-								CDT extends JeeslStatus<L,D,CDT>,
+								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>
 								>
 {

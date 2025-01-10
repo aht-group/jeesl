@@ -5,7 +5,6 @@ import java.io.Serializable;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
-import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -42,8 +41,10 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.JeeslOptionUploadable;
+import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.db.updater.JeeslDbGraphicUpdater;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
@@ -52,8 +53,6 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
@@ -76,11 +75,13 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	protected boolean supportsGraphic; public boolean getSupportsGraphic() {return supportsGraphic;}
 	protected boolean supportsComponents; public boolean isSupportsComponents() {return supportsComponents;}
 
-	public AbstractTableGlobalBean(IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
+	public AbstractTableGlobalBean(
+									IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
 									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus,fbSvg,fbRevision);
+		
 		dbuGraphic = new JeeslDbGraphicUpdater<>(fbSvg);
 
 		showDescription = false;
@@ -415,21 +416,22 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Container xml = this.downloadData(i.getName());
 
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
-		
         asdi.setStatusEjbFactory(EjbStatusFactory.instance(cS,cL,cD,EjbCodeFactory.toListCode(lp.getLocales())));
         asdi.setFacade(fGraphic);
         DataUpdate dataUpdate = asdi.iuStatus(xml.getStatus(),cS,cL,clParent);
         asdi.deleteUnusedStatus(cS, cL, cD);
-//        JaxbUtil.info(dataUpdate);
+//      JaxbUtil.info(dataUpdate);
 
         dbuGraphic.update(cW,xml.getStatus());
 
-        selectCategory();
+        this.selectCategory();
 	}
+	
+	protected abstract JeeslSystemRestInterface rest(String iFqcn);
 	
 	protected Container downloadData(String iFqcn) throws UtilsConfigurationException
 	{
-		return JeeslLabelEntityController.rest(iFqcn).exportStatus(iFqcn);
+		return this.rest(iFqcn).exportStatus(iFqcn);
 	}
 	
 	@SuppressWarnings({"rawtypes" })
@@ -440,6 +442,6 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Class<?> c = Class.forName(entity.getCode());
 		Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
 
-		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());
+		Container xml = this.rest(i.getName()).exportStatus(i.getName());
 	}
 }

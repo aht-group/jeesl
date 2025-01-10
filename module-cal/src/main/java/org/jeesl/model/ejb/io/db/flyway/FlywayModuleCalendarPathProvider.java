@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.model.ejb.module.cal.unit.CalMonth;
+import org.jeesl.model.ejb.module.cal.unit.CalWeekOfYear;
 import org.jeesl.model.ejb.module.cal.unit.CalYear;
 
 public class FlywayModuleCalendarPathProvider implements JeesDdlClassProvider
@@ -21,6 +22,7 @@ public class FlywayModuleCalendarPathProvider implements JeesDdlClassProvider
 		List<Class<?>> list = new ArrayList<>();
 		list.add(CalYear.class);
 		list.add(CalMonth.class);
+		list.add(CalWeekOfYear.class);
 		return list;
 	}
 }

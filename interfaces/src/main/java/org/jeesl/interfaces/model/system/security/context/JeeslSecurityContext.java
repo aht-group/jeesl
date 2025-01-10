@@ -20,6 +20,8 @@ public interface JeeslSecurityContext<L extends JeeslLang, D extends JeeslDescri
 						EjbWithLang<L>,EjbWithDescription<D>,
 						EjbWithCode,EjbWithPosition
 {
+	public enum Code {core}
+	
 	String getServerName();
 	void setServerName(String serverName);
 
@@ -52,6 +54,9 @@ public interface JeeslSecurityContext<L extends JeeslLang, D extends JeeslDescri
 
 	String getEmailName();
 	void setEmailName(String emailName);
+	
+	String getMfaLabel();
+	void setMfaLabel(String mfaLabel);
 	
 	Long getContextId();
 	void setContextId(Long contextId);

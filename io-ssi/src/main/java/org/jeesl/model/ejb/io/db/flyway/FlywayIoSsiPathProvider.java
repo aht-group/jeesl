@@ -1,8 +1,17 @@
 package org.jeesl.model.ejb.io.db.flyway;
 
-import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FlywayIoSsiPathProvider implements JeeslFlywayPathProvider
+import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
+import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
+import org.jeesl.model.ejb.io.ssi.core.IoSsiCredential;
+import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
+import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
+import org.jeesl.model.ejb.io.ssi.data.IoSsiContext;
+import org.jeesl.model.ejb.io.ssi.data.IoSsiError;
+
+public class FlywayIoSsiPathProvider implements JeeslFlywayPathProvider,JeesDdlClassProvider
 {
 	public static FlywayIoSsiPathProvider instance() {return new FlywayIoSsiPathProvider();}
 	private FlywayIoSsiPathProvider() {}
@@ -11,4 +20,16 @@ public class FlywayIoSsiPathProvider implements JeeslFlywayPathProvider
 	
 	@Override public String getBaselineTables() {return this.getRootDirectory()+"/"+JeeslFlywayPathProvider.sqlTables;}
 	@Override public String getBaselineConstraints() {return this.getRootDirectory()+"/"+JeeslFlywayPathProvider.sqlConstraints;}
+	
+	@Override public List<Class<?>> getMdsClasses()
+	{
+		List<Class<?>> list = new ArrayList<>();
+		list.add(IoSsiSystem.class);
+		list.add(IoSsiHost.class);
+		list.add(IoSsiCredential.class);
+		
+		list.add(IoSsiContext.class);
+		list.add(IoSsiError.class);
+		return list;
+	}
 }

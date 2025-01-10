@@ -42,7 +42,8 @@ public class AssetEventLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 
 	private static final long serialVersionUID = 1L;
 
-	private final List<EVENT> list;
+	private final List<EVENT> list; public List<EVENT> getList() {return list;}
+
 	private final JeeslLazyListHandler<EVENT> llh;
 
 	private final Comparator<EVENT> cpEvent;
@@ -65,10 +66,10 @@ public class AssetEventLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
     public void reloadScope(JeeslAomFacade<?,?,REALM,?,SCOPE,ASSET,?,ATYPE,?,EVENT,ESTATUS> fAsset, ASSET asset)
     {
 		this.clear();
-		
+
 		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.add(asset);
-		
+
 		list.addAll(fAsset.fAomEvents(query));
 		Collections.sort(list,cpEvent);
 		logger.info("Reloaded "+list.size());

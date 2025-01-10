@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.jeesl.factory.builder.io.IoTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateDefinitionFactory;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateFactory;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateTokenFactory;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -35,8 +37,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.primefaces.event.TabChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,13 +59,15 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 											TOKEN extends JeeslIoTemplateToken<L,D,TEMPLATE,TOKENTYPE>,
 											TOKENTYPE extends JeeslTemplateTokenType<L,D,TOKENTYPE,?>>
 					extends AbstractJeeslLocaleWebController<L,D,LOC>
-					implements Serializable,SbToggleBean
+					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoTemplateController.class);
 	
 	protected JeeslIoTemplateFacade<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fTemplate;
 	private final IoTemplateFactoryBuilder<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fbTemplate;
+	
+	private final SbSingleHandler<CATEGORY> sbhCategory; public SbSingleHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	
 	private List<CATEGORY> categories; public List<CATEGORY> getCategories() {return categories;}
 	private final List<CHANNEL> types; public List<CHANNEL> getTypes() {return types;}
@@ -78,8 +84,6 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	private EjbIoTemplateFactory<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN> efTemplate;
 	private EjbIoTemplateDefinitionFactory<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN> efDefinition;
 	private EjbIoTemplateTokenFactory<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> efToken;
-	
-	protected final SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	
 	private Configuration templateConfig;
 	private Template templateHeader,templateBody;
@@ -98,9 +102,12 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	{
 		super(fbTemplate.getClassL(),fbTemplate.getClassD());
 		this.fbTemplate=fbTemplate;
+		
+		sbhCategory = new SbSingleHandler<CATEGORY>(fbTemplate.getClassCategory(),this);
+		
 		types = new ArrayList<>();
 		tokenTypes = new ArrayList<TOKENTYPE>();
-		sbhCategory = new SbMultiHandler<CATEGORY>(fbTemplate.getClassCategory(),this);
+		
 		editTemplate = false;
 		templateConfig = new Configuration(Configuration.getVersion());
 	}
@@ -123,35 +130,35 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 		tokenTypes.addAll(fTemplate.allOrderedPositionVisible(fbTemplate.getClassTokenType()));
 		
 		categories = fTemplate.allOrderedPositionVisible(fbTemplate.getClassCategory());
-		initPageConfiguration();
-		try
-		{
-			toggled(sbhCategory,fbTemplate.getClassCategory());
-		}
-		catch (JeeslLockingException e) {e.printStackTrace();}
-		catch (JeeslConstraintViolationException e) {e.printStackTrace();}
+		this.initPageConfiguration();
+		sbhCategory.silentCallback();
 	}
 	
 	/**
 	 * This method can be overwritten, otherwise all categories will be shown
 	 */
 	protected void initPageConfiguration()
-	{
+	{		
 		sbhCategory.setList(fTemplate.allOrderedPositionVisible(fbTemplate.getClassCategory()));
-		sbhCategory.selectAll();
+		sbhCategory.setDefault();
 	}
 	
-	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.toggled(c));
 		scopes = fTemplate.all(fbTemplate.getClassScope());
-		reloadTemplates();
-		cancelTemplate();
+		this.reloadTemplates();
+		this.cancelTemplate();	
 	}
 	
 	private void reset(boolean rPreview)
 	{
 		if(rPreview) {previewHeader=null;previewBody=null;}
+	}
+	public void cancelTemplate(){reset(true,true);}
+	private void reset(boolean rTemplate, boolean rToken)
+	{
+		if(rTemplate) {template=null;}
+		if(rToken) {token=null;}
 	}
 	
 	//*************************************************************************************
@@ -163,7 +170,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	
 	private void reloadTemplates()
 	{
-		templates = fTemplate.fTemplates(sbhCategory.getSelected(), true);
+		templates = fTemplate.fTemplates(Arrays.asList(sbhCategory.getSelection()), true);
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbTemplate.getClassTemplate(),templates));}
 		Collections.sort(templates, comparatorTemplate);
 	}
@@ -225,12 +232,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 		updatePerformed();
 	}
 	
-	public void cancelTemplate(){reset(true,true);}
-	private void reset(boolean rTemplate, boolean rToken)
-	{
-		if(rTemplate) {template=null;}
-		if(rToken) {token=null;}
-	}
+
 	
 	
 	public void addToken() throws JeeslNotFoundException

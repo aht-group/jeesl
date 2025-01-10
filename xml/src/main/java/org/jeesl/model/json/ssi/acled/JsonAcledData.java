@@ -79,6 +79,16 @@ public class JsonAcledData implements Serializable
 	public String getAdmin1() {return admin1;}
 	public void setAdmin1(String admin1) {this.admin1 = admin1;}
 
+	@JsonProperty("admin2")
+	private String admin2;
+	public String getAdmin2() {return admin2;}
+	public void setAdmin2(String admin2) {this.admin2 = admin2;}
+
+	@JsonProperty("admin3")
+	private String admin3;
+	public String getAdmin3() {return admin3;}
+	public void setAdmin3(String admin3) {this.admin3 = admin3;}
+
 	@JsonProperty("event_count")
 	private int count;
 	public int getCount() {return count;}
@@ -129,6 +139,8 @@ public class JsonAcledData implements Serializable
 	private String region;
 	public String getRegion() {return region;}
 	public void setRegion(String region) {this.region = region;}
+
+
 
 	@Override public String toString()
 	{

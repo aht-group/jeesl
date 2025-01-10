@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,12 +12,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
 import org.exlp.controller.handler.io.log.LoggedExit;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.interfaces.controller.processor.io.report.XlsxImportMapper;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractSsiXlsMapper
+public class AbstractSsiXlsMapper implements XlsxImportMapper
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiXlsMapper.class);
 	
@@ -25,12 +27,16 @@ public class AbstractSsiXlsMapper
 	protected final List<Integer> listColumns;
 	
 	public List<Integer> getListColumns() {return listColumns;}
+	
+	private boolean analyseHeader; public boolean isAnalyseHeader() {return analyseHeader;} public void setAnalyseHeader(boolean analyseHeader) {this.analyseHeader = analyseHeader;}
 
 	public AbstractSsiXlsMapper()
 	{
 		mapColumnCode = new HashMap<>();
 		mapColumnIndex = new HashMap<>();
 		listColumns = new ArrayList<>();
+		
+		analyseHeader = true;
 	}
 	
 	private void clear()
@@ -117,5 +123,43 @@ public class AbstractSsiXlsMapper
 		String value = row.getCell(index).getStringCellValue().trim();
 		if(ObjectUtils.isEmpty(value)) {return null;}
 		else return value;
+	}
+	
+	public String toStringByCol(Row row, String col) throws UtilsConfigurationException {return this.toString(row, CellReference.convertColStringToIndex(col));}
+	public String toString(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		String value = row.getCell(index).getStringCellValue().trim();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value;
+	}
+	public Double toDouble(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		Double value = row.getCell(index).getNumericCellValue();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value;
+	}
+	
+	public Integer toIntegerByCol(Row row, String col) throws UtilsConfigurationException {return this.toInteger(row, CellReference.convertColStringToIndex(col));}
+	public Integer toInteger(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		Double value = row.getCell(index).getNumericCellValue();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value.intValue();
+	}
+	
+	public Long toLongByCol(Row row, String col) throws UtilsConfigurationException {return this.toLong(row, CellReference.convertColStringToIndex(col));}
+	public Long toLong(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		Double value = row.getCell(index).getNumericCellValue();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return value.longValue();
 	}
 }

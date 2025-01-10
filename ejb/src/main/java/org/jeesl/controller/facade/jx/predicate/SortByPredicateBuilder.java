@@ -1,6 +1,7 @@
 package org.jeesl.controller.facade.jx.predicate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,10 +30,16 @@ public class SortByPredicateBuilder
 		else if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(e));}
 	}
 	
-	public static void addByInteger(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering sortBy, Expression<Integer> eInteger)
+	public static void jtDateTime(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering sortBy, Expression<LocalDateTime> e)
 	{
-		if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(eInteger));}
-		else if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(eInteger));}
+		if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(e));}
+		else if(sortBy.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(e));}
+	}
+	
+	public static void addByInteger(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering cq, Expression<Integer> eInteger)
+	{
+		if(cq.getOrder()==JeeslCqOrdering.SortOrder.ASCENDING) {orders.add(cB.asc(eInteger));}
+		else if(cq.getOrder()==JeeslCqOrdering.SortOrder.DESCENDING) {orders.add(cB.desc(eInteger));}
 	}
 	
 	public static void addByLong(CriteriaBuilder cB, List<Order> orders, JeeslCqOrdering sortBy, Expression<Long> eLong)

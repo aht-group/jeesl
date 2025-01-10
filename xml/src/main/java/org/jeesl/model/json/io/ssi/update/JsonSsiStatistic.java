@@ -16,11 +16,6 @@ public class JsonSsiStatistic implements Serializable
 	private Integer expected;
 	public Integer getExpected() {return expected;}
 	public void setExpected(Integer expected) {this.expected = expected;}
-
-	@JsonProperty("total")
-	private Integer total;
-	public Integer getTotal() {return total;}
-	public void setTotal(Integer total) {this.total = total;}
 	
 	@JsonProperty("success")
 	private Integer success;
@@ -32,6 +27,21 @@ public class JsonSsiStatistic implements Serializable
 	public Integer getObsolete() {return obsolete;}
 	public void setObsolete(Integer obsolete) {this.obsolete = obsolete;}
 	
+	@JsonProperty("skipped")
+	private Integer skipped;
+	public Integer getSkipped() {return skipped;}
+	public void setSkipped(Integer skipped) {this.skipped = skipped;}
+
+	@JsonProperty("deferred")
+	private Integer deferred;
+	public Integer getDeferred() {return deferred;}
+	public void setDeferred(Integer deferred) {this.deferred = deferred;}
+
+	@JsonProperty("partial")
+	private Integer partial;
+	public Integer getPartial() {return partial;}
+	public void setPartial(Integer partial) {this.partial = partial;}
+
 	@JsonProperty("error")
 	private Integer error;
 	public Integer getError() {return error;}
@@ -51,4 +61,9 @@ public class JsonSsiStatistic implements Serializable
 	private Integer deleted;
 	public Integer getDeleted() {return deleted;}
 	public void setDeleted(Integer deleted) {this.deleted = deleted;}
+	
+	@JsonProperty("total")
+	private Integer total;
+	public Integer getTotal() {return total;}
+	public void setTotal(Integer total) {this.total = total;}
 }

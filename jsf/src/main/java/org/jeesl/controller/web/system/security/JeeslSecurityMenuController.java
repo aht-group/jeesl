@@ -2,10 +2,12 @@ package org.jeesl.controller.web.system.security;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -28,10 +30,13 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
+import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
@@ -52,22 +57,25 @@ import org.slf4j.LoggerFactory;
 public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 
 											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<L,D,C,V,?,?>,
-											V extends JeeslSecurityView<L,D,C,R,?,?>,
+											R extends JeeslSecurityRole<L,D,C,V,U,A>,
+											V extends JeeslSecurityView<L,D,C,R,U,A>,
+											U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
+											A extends JeeslSecurityAction<L,D,R,V,U,?>,
 											CTX extends JeeslSecurityContext<L,D>,
 											
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
 											OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 											DC extends JeeslIoCms<L,D,LOC,?,DS>,
-											DS extends JeeslIoCmsSection<L,DS>>
+											DS extends JeeslIoCmsSection<L,DS>,
+											USER extends JeeslUser<R>>
 		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMenuController.class);
 
-	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,?,?,CTX,M,?> fSecurity;
+	private final SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,?,?,OH,DC,DS,?,?> fbSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	private JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity;
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
@@ -96,7 +104,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	private boolean disabledMenuImportFromDefaultContext; public boolean isDisabledMenuImportFromDefaultContext() {return disabledMenuImportFromDefaultContext;}
 
 	public JeeslSecurityMenuController(JeeslSecurityMenuCallback callback,
-										SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,OH,DC,DS,?> fbSecurity,
+										SecurityFactoryBuilder<L,D,?,?,V,?,?,?,CTX,M,?,?,?,?,OH,DC,DS,?,?> fbSecurity,
 										IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
@@ -115,7 +123,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	public void postConstructMenu(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslSecurityFacade<C,R,V,?,?,CTX,M,?> fSecurity,
+									JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 									JeeslSecurityBean<?,V,?,?,?,CTX,M,?> bSecurity,
 									JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
@@ -147,7 +155,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		List<M> list = new ArrayList<>();
 		if(sbhContext.isSelected())
 		{
-			EjbSecurityQuery<C,R,CTX> query = new EjbSecurityQuery<>();
+			EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 			query.add(sbhContext.getSelection());
 			query.addRootFetch(JeeslSecurityMenu.Attributes.context);
 			query.orderBy(CqOrdering.ascending(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.id));
@@ -219,6 +227,42 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		
 	    if(debugOnInfo) {logger.info("Reloaded Menu with "+list.size()+" elements. sbhContext.isSelected():"+sbhContext.isSelected()+" disabledMenuImportFromDefaultContext:"+disabledMenuImportFromDefaultContext);}
     }
+	
+	public void deleteItemsFromContext() throws IllegalArgumentException, JeeslConstraintViolationException
+	{
+		CTX core = fSecurity.fByEnum(fbSecurity.getClassContext(), JeeslSecurityContext.Code.core);
+		if(sbhContext.isSelected() && sbhContext.getSelection().equals(core)) {throw new IllegalStateException("Not allowd to ");}
+		
+		List<M> list = new ArrayList<>();
+		List<M> delete = new ArrayList<>();
+		Set<M> parents = new HashSet<>();
+		list.add(null);
+		int loop=1;
+		
+		while(!list.isEmpty())
+		{
+			list.clear();
+			parents.clear();
+			delete.clear();
+			
+			EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+			query.add(sbhContext.getSelection());
+			list.addAll(fSecurity.fSecurityMenus(query));
+			
+			logger.info("Loop "+loop+" with "+list.size());
+			for(M m : list)
+			{
+				if(Objects.nonNull(m.getParent())) {parents.add(m.getParent());}
+			}
+			for(M m : list)
+			{
+				if(!parents.contains(m)) {delete.add(m);}
+			}
+			
+			fSecurity.rm(delete);
+			loop++;	
+		}
+	}
 
 	public void importFromDefaultContext()
 	{
@@ -228,38 +272,42 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 			{
 				CTX defaultCtx = fSecurity.fByCode(fbSecurity.getClassContext(), "core");
 				CTX currentCtx = sbhContext.getSelection();
-				List<M> list = new ArrayList<>();
-				list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,defaultCtx));
-				Map<M,List<M>> map = efMenu.toMapChild(list);
+				if(!defaultCtx.equals(currentCtx))
+				{
+					List<M> list = new ArrayList<>();
+					list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,defaultCtx));
+					Map<M,List<M>> map = efMenu.toMapChild(list);
 
-				Map<M,M> defaultVsCurrentMap = new HashMap<>();
-				logger.info("copying menu items....");
-				for (M m :  list)
-				{
-					M newMenu = efMenu.build();
-					newMenu.setPosition(m.getPosition());
-					newMenu.setView(m.getView());
-					newMenu.setContext(currentCtx);
-					newMenu = fSecurity.save(newMenu);
-					//logger.info("copying ids from = " + m.getId() +" to " + newMenu.getId());
-					defaultVsCurrentMap.put(m, newMenu);
-				}
-				logger.info("copying menu items....done");
-				
-				logger.info("Updating menu parents....");
-				for (Map.Entry<M,List<M>> defautlMenuEntry : map.entrySet())
-				{
-					M currentParentMenu= fSecurity.find(fbSecurity.getClassMenu(),defaultVsCurrentMap.get(defautlMenuEntry.getKey()));
-					for (M m :  defautlMenuEntry.getValue())
+					Map<M,M> defaultVsCurrentMap = new HashMap<>();
+					logger.info("copying menu items....");
+					for (M m :  list)
 					{
-						M currentMenu = fSecurity.find(fbSecurity.getClassMenu(), defaultVsCurrentMap.get(m));
-						//logger.info("new MenuId:" + currentMenu.getId() + "parent :" + currentParentMenu.getId());
-						currentMenu.setParent(currentParentMenu);
-						fSecurity.update(currentMenu);
+						M newMenu = efMenu.build();
+						newMenu.setPosition(m.getPosition());
+						newMenu.setVisible(m.getVisible());
+						newMenu.setView(m.getView());
+						newMenu.setContext(currentCtx);
+						newMenu = fSecurity.save(newMenu);
+						//logger.info("copying ids from = " + m.getId() +" to " + newMenu.getId());
+						defaultVsCurrentMap.put(m, newMenu);
 					}
+					logger.info("copying menu items....done");
+					
+					logger.info("Updating menu parents....");
+					for (Map.Entry<M,List<M>> defautlMenuEntry : map.entrySet())
+					{
+						M currentParentMenu= fSecurity.find(fbSecurity.getClassMenu(),defaultVsCurrentMap.get(defautlMenuEntry.getKey()));
+						for (M m :  defautlMenuEntry.getValue())
+						{
+							M currentMenu = fSecurity.find(fbSecurity.getClassMenu(), defaultVsCurrentMap.get(m));
+							//logger.info("new MenuId:" + currentMenu.getId() + "parent :" + currentParentMenu.getId());
+							currentMenu.setParent(currentParentMenu);
+							fSecurity.update(currentMenu);
+						}
+					}
+					logger.info("Updating menu parents....done");
+					buildMenu(createMissingItems());
 				}
-				logger.info("Updating menu parents....done");
-				buildMenu(createMissingItems());
 			}
 		}
 		catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e)
@@ -320,8 +368,22 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		helpTree = thDs.build(root.getSections());
     }
 
+<<<<<<< HEAD
 	public void expandHelp() {thDs.expand(helpTree,helpNode);}
 	public void collapseHelp() {thDs.setExpansion(this.helpTree,  false);}
+=======
+    private void buildTree(TreeNode parent, List<DS> sections)
+	{
+		for(DS s : sections)
+		{
+			TreeNode n = new DefaultTreeNode(s, parent);
+			if(!s.getSections().isEmpty()) {buildTree(n,s.getSections());}
+		}
+	}
+
+	public void expandHelp() {thMenu.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+	public void collapseHelp() {thMenu.setExpansion(this.helpTree,  false);}
+>>>>>>> refs/remotes/origin/master
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}

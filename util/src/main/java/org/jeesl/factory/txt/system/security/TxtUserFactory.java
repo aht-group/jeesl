@@ -22,7 +22,6 @@ public class TxtUserFactory <USER extends JeeslUser<?>>
 	final static Logger logger = LoggerFactory.getLogger(TxtUserFactory.class);
     
 	public static <USER extends JeeslUser<?>> TxtUserFactory<USER> instance(){return new TxtUserFactory<>();}
-	
     public TxtUserFactory()
     {
     	

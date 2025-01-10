@@ -22,6 +22,16 @@ public class JsonFrFile implements Serializable
 	private String code;
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
+	
+	@JsonProperty("container")
+	private JsonFrContainer container;
+
+	public JsonFrContainer getContainer() {
+		return container;
+	}
+	public void setContainer(JsonFrContainer container) {
+		this.container = container;
+	}
 
 	@JsonProperty("name")
 	private String name;

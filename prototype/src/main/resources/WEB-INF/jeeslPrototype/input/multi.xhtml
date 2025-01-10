@@ -1,9 +1,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
+				xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+				xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+				xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype"
+				xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
 				
 	<c:set var="locales"  value="#{not empty locales ? locales : appLabelBean.locales}" />
+	<c:set var="parentId" value="#{parentId}" />
+	
+	<c:set var="aitHandler" value="#{aitHandler}" />
 	
 	<c:set var="withName" value="#{not empty withName ? withName : true}" />
 	<c:set var="withDescription" value="#{not empty withDescription ? withDescription : false}" />
@@ -19,32 +23,55 @@
 		<jtp:inputRemark value="#{value.description[locales[0].code].lang}" rendered="#{withDescription}"/>
 	</j:inputGrid>
 	<h:panelGroup styleClass="jeesl-action-tabview">
-  	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs jeesl-action-header" rendered="#{locales.size() gt 1}"
-  			var="l" value="#{locales}">
-  		<p:tab title="#{l.code}">
-  			<j:inputGrid>
-  				<p:outputLabel value="#{labelName}" rendered="#{withName}"/>
-	  			<jtp:inputText value="#{value.name[l.code].lang}" rendered="#{withName}"/>
-	  			
-	  			<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
-	  			<jtp:inputRemark value="#{value.description[l.code].lang}" rendered="#{withDescription}"/>
-  			</j:inputGrid>
-  		</p:tab>
-  	</p:tabView>
-	<h:panelGroup styleClass="ui-panel-actions">
-		<j:svg type="jeeslAi" listener="#{deeplFragmentBean.openDialog()}" tooltip="#{msg.jeeslTtAi}" oncomplete="PF('translationsWidget').show();" styleClass="pf-action-icon"/>
-	</h:panelGroup>
+	  	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs jeesl-action-header" rendered="#{locales.size() gt 1}"
+	  			   var="l" value="#{locales}">
+	  		<c:if test="#{not empty aitHandler}">
+	  			<p:ajax event="tabChange" listener="#{aitHandler.changeSourceLanguageCode(l.code)}"/>
+	  		</c:if>
+	  		<p:tab title="#{l.code}">
+	  			<j:inputGrid>
+	  				<p:outputLabel value="#{labelName}" rendered="#{withName}"/>
+		  			<jtp:inputText value="#{value.name[l.code].lang}" rendered="#{withName}"/>
+		  			
+		  			<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
+		  			<jtp:inputRemark value="#{value.description[l.code].lang}" rendered="#{withDescription}"/>
+	  			</j:inputGrid>
+	  		</p:tab>
+	  	</p:tabView>
+		<h:panelGroup styleClass="ui-panel-actions" rendered="#{not empty aitHandler}">
+			<j:svg type="jeeslAi" listener="#{aitHandler.openDialog()}"
+				   ttEntity="IoLocale" ttCode="aiTranslation"
+				   oncomplete="PF('translationsWidget').show();" styleClass="pf-action-icon" update="@form"/>
+		</h:panelGroup>
   	</h:panelGroup>
   	
-  	<j:dialog id="dTranslations" widgetVar="translationsWidget" header="Automatic Translations" width="12">
+  	<j:dialog id="dTranslations" widgetVar="translationsWidget" rendered="#{not empty aitHandler}"
+			  header="#{appLabelBean.labels['IoLocale']['aiTranslation'][localeCode].lang}" width="12">
 		<f:facet name="actions">
 			<j:svg type="jeeslCancel" oncomplete="PF('translationsWidget').hide()"/>
 			<j:svg type="jeeslSave" oncomplete="PF('translationsWidget').hide()"/>
 		</f:facet>
-		<ui:repeat var="l" value="#{locales}">
-			<j:inputGrid >
-				<p:outputLabel value="#{l.code}" />
-				<h:panelGroup styleClass="output-text"><h:outputText value="test"/></h:panelGroup>
+		<jtp:label entity="IoLocale" code="original" styleClass="jeesl-headline"/>
+		<j:inputGrid>
+			<p:outputLabel>
+				<jtp:symbolizer value="#{aitHandler.source}" marginRigh="5"/>
+				<h:outputText value="#{aitHandler.source.code}" />
+			</p:outputLabel>
+			<h:outputText value="#{value.name[aitHandler.source.code].lang}" styleClass="ui-outputtext" />
+		</j:inputGrid>
+		<p:separator/>
+		<jtp:label entity="IoLocale" code="translation" styleClass="jeesl-headline"/>
+		<ui:repeat var="l" value="#{aitHandler.targets}">
+			<j:inputGrid>
+				<p:outputLabel>
+					<jtp:symbolizer value="#{l}" marginRigh="5"/>
+					<h:outputText value="#{l.code}" />
+				</p:outputLabel>
+				
+				<h:panelGroup styleClass="jeesl-output-container">
+					<h:outputText value="#{aitHandler.translations[l]}" styleClass="ui-outputtext" />
+					<p:selectBooleanCheckbox value="#{aitHandler.utilizations[l]}"/>
+				</h:panelGroup>
 			</j:inputGrid>
 		</ui:repeat>
 	</j:dialog>

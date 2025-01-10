@@ -53,6 +53,7 @@
 		<module>module-cl</module>
 		<module>module-hd</module>
 		<module>module-news</module>
+		<module>module-mmg</module>
 		<module>module-tafu</module>
 		<module>module-ts</module>
 		

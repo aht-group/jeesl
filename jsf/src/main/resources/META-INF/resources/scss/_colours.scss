@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:color';
 
 $white-0: hsla(0,0%,100%,0);
 $white-35: hsla(0,0%,100%,.35);
@@ -15,7 +16,7 @@ $light-grey: hsl(0,0%,87%);
 $soft-grey: hsl(0,0%,77%);
 $medium-grey: hsl(0,0%,67%);
 $dark-grey: hsl(0,0%,33%);
-$anthracite: hsl(0,0%,20%);
+$anthracite: hsl(0,0%,25%);
 $black: $anthracite;
 $brighter-colour: hsla(154,100%,33%,1);
 $bright-colour: hsla(154,100%,27%,1);
@@ -43,13 +44,14 @@ $table-caption-colour: $medium-grey;
 $foreground-alert: hsla(344,100%,42%,1);
 $foreground-grey: $medium-grey;
 
-$border-colour: $medium-grey;
+$border-colour: var(--container-border-color, #{$medium-grey});
 $editor-background: $white-100;
 $error-background: hsla(1,83%,63%,1);
 $error-foreground: hsla(0,100%,50%,1);
 $foreground: $anthracite;
 $panel-background: $bright-grey;
 $header-background-colour: $soft-grey;
+$header-foreground: $white-100;
 
 $main-background-gradient: linear-gradient(to right, $dark-colour, $bright-colour);
 $breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-colour);
@@ -68,7 +70,7 @@ $overlay-box-shadow: 0 5px 10px $black-80;
 $colour-spectrum: linear-gradient(to bottom, #ff0000 0%, #ff00ff calc(100%/6), #0000ff calc(200%/6), #00ffff calc(300%/6), #00ff00 calc(400%/6), #ffff00 calc(500%/6), #ff0000 100%);
 
 $header-shadow: 0 -1px 0 inset $white-35;
-$header-underline: 2px solid $dark-colour;
+$header-underline: 2px solid var(--container-header-underline-colour, #{$dark-colour});
 
 @mixin simplifyHeader() {
 	$header-shadow: none;
@@ -76,7 +78,7 @@ $header-underline: 2px solid $dark-colour;
 }
 
 
-@mixin setColours($brighter, $bright, $medium, $dark, $darker) {
+@mixin setColours($brighter, $bright, $medium, $dark, $darker, $header-foreground: $white-100) {
 	$brighter-colour: $brighter !global;
 	$bright-colour: $bright !global;
 	$medium-colour: $medium !global;
@@ -92,6 +94,18 @@ $header-underline: 2px solid $dark-colour;
 	
 	$highlight-colour: $medium-colour !global;
 	$header-underline: 2px solid $dark-colour !global;
+	$header-foreground: $header-foreground !global;
+	
+	@include setColourTokens();
+}
+
+@mixin adjustGreys($hue, $saturation) {
+	$bright-grey: color.adjust($bright-grey, $hue: $hue, $saturation: $saturation) !global;
+	$light-grey: color.adjust($light-grey, $hue: $hue, $saturation: $saturation) !global;
+	$soft-grey: color.adjust($soft-grey, $hue: $hue, $saturation: $saturation) !global;
+	$medium-grey: color.adjust($medium-grey, $hue: $hue, $saturation: $saturation) !global;
+	$dark-grey: color.adjust($dark-grey, $hue: $hue, $saturation: $saturation) !global;
+	$anthracite: color.adjust($anthracite, $hue: $hue, $saturation: $saturation) !global;
 }
 
 @mixin setHighlightColour($highlight) {
@@ -103,3 +117,202 @@ $header-underline: 2px solid $dark-colour;
 		background: map-get($brewer-set28-colours, $i);
 	}
 }
+
+@mixin setColourTokens() {
+	:root {
+		--body-foreground: #{$anthracite};
+		--body-emphasis-foreground: #{$foreground-grey};
+		--body-alert-foreground: #{$foreground-alert};
+		--highlight-foreground: #{$white-100};
+		--highlight-background: #{$medium-colour};
+		--highlight-border-colour: #{$dark-colour};
+		
+		/* MAIN NAV */
+		--main-nav-foreground: var(--body-foreground);
+		--main-nav-hover: var(--main-nav-highlight);
+		--main-nav-highlight: #{$dark-colour};
+		--main-nav-emphasis: var(--body-emphasis-foreground);
+		--main-nav-underline: #{$bright-grey};
+		--main-nav-icon: #{$dark-colour};
+		--main-nav-dropdown-background: #{$white-100};
+		--main-nav-dropdown-underline: {$bright-grey};
+		
+		/* MENU BAR */
+		--menu-bar-background: #{$dark-colour};
+		--menu-bar-foreground: var(--highlight-foreground);
+		
+		/* breadcrumbs */
+		--breadcrumb-background-from: var(--menu-bar-background);
+		--breadcrumb-background-to: #{$bright-colour};
+		--breadcrumb-background: linear-gradient(to right, var(--breadcrumb-background-from), var(--breadcrumb-background-to));
+		--breadcrumb-foreground: var(--highlight-foreground);
+		--breadcrumb-border-colour: #{$bright-colour};
+		
+		/* dropdown */
+		--breadcrumb-dropdown-background: var(--breadcrumb-background);
+		--breadcrumb-dropdown-foreground: var(--highlight-foreground);
+		--breadcrumb-dropdown-hover-background: var(--breadcrumb-background-from);
+		--breadcrumb-dropdown-separator: #{$dark-colour};
+		
+		/* STATUS BAR */
+		--statusbar-background-from: var(--menu-bar-background);
+		--statusbar-background-to: #{$medium-colour};
+		--statusbar-background: linear-gradient(to bottom, var(--statusbar-background-from), var(--statusbar-background-to));
+		
+		/* menu item */
+		--statusbar-item-background: #{$medium-colour};
+		--statusbar-item-foreground: var(--highlight-foreground);
+		--statusbar-item-separator: #{$bright-colour};
+		--statusbar-item-hover-background: var(--statusbar-background-from);
+		--statusbar-item-highlight-background: #{$brighter-colour};
+		--statusbar-item-highlight-hover-background: #{$bright-colour};
+		--statusbar-help-border-colour: var(--statusbar-item-separator);
+		
+		/* dropdown */
+		--statusbar-item-dropdown-background: #{$medium-colour};
+		--statusbar-item-dropdown-foreground: var(--highlight-foreground);
+		--statusbar-item-dropdown-hover-background: #{$dark-colour};
+		--statusbar-item-dropdown-separator: #{$dark-colour};
+		--statusbar-search-border-colour: #{$bright-colour};
+		--statusbar-search-placeholder-foreground: #{$brighter-colour};
+		--statusbar-search-button-foreground: #{$brighter-colour};
+		--statusbar-search-button-hover-background: #{$dark-colour};
+		--statusbar-search-button-hover-foreground: #{$brighter-colour};
+		--statusbar-search-dropdown-fieldtip-foreground: #{$brighter-colour};
+		--statusbar-search-dropdown-fieldtip-hover-foreground: #{$brighter-colour};
+		--statusbar-search-dropdown-highlight-background-from: #{$dark-colour};
+		--statusbar-search-dropdown-highlight-background-to: #{$medium-colour};
+		
+		/* SIDENAV */
+		--sidenav-item-background: var(--breadcrumb-dropdown-background);
+		--sidenav-item-foreground: var(--breadcrumb-dropdown-foreground);
+		--sidenav-item-hover-background: var(--breadcrumb-dropdown-highlight-background);
+		
+		/* FOOTER */
+		--footer-foreground: var(--body-foreground);
+		--footer-background: color.adjust(#{$medium-grey}, $alpha: -.8);
+		--footer-item-hover-background: var(--statusbar-item-hover-background);
+		--footer-item-hover-highlight-background: var(--statusbar-item-highlight-hover-background);
+		
+		/* dropdown */
+		--footer-item-dropdown-background: var(--statusbar-item-dropdown-background);
+		--footer-item-dropdown-foreground: var(--statusbar-item-dropdown-foreground);
+		--footer-item-dropdown-hover-background: var(--statusbar-item-dropdown-hover-background);
+		--footer-item-dropdown-separator: var(--statusbar-item-dropdown-separator);
+		
+		/* MAIN CONTENT */
+		--main-background: #{$light-grey};
+		--main-content-background: #{$white-100};
+		
+		/* CONTAINER */
+		--container-border-colour: #{$medium-grey};
+		
+		/* header */
+		--container-header-background-colour: #{$soft-grey};
+		--container-header-background: var(--container-header-background-colour) linear-gradient(to bottom, #{$white-80}, #{$white-0});
+		--container-header-foreground: var(--body-foreground);
+		--container-header-underline-colour: #{$dark-colour};
+		--container-header-action-button-hover-background: #{$soft-grey};
+		--container-header-action-button-highlight-background: #{$soft-grey};
+		--container-header-action-button-dropdown-background: #{$light-grey};
+		--container-header-action-button-dropdown-hover-background: #{$soft-grey};
+		--container-header-action-button-dropdown-separator-colour: #{$light-grey};
+		--container-header-action-button-dropdown-table-border: #{$dark-colour};
+		--tabview-header-tab-background: linear-gradient(to bottom, #{$light-grey} 87%, #{$soft-grey} 100%);
+		--tabview-header-tab-foreground: var(--container-header-foreground);
+	//	--tabview-header-tab-background: #{$soft-grey};
+		--tabview-header-tab-highlight-background: linear-gradient(to bottom, #{$medium-colour}, #{$dark-colour});
+		--tabview-header-tab-highlight-foreground: var(--highlight-foreground);
+		
+		/* content */
+		--container-content-background: #{$bright-grey};
+		--container-content-foreground: var(--body-foreground);
+		--container-content-separator: #{$bright-grey};
+		--datatable-content-odd-row-background: #{$white-50};
+		--datatable-content-border-colour: #{$light-grey};
+		--datatable-content-hover-background: #{$light-grey};
+		--datatable-content-highlight-background: var(--highlight-background);
+		--datatable-content-highlight-foreground: var(--highlight-foreground);
+		--datatable-content-highlight-border-colour: var(--highlight-border-colour);
+		
+		/* footer */
+		--container-footer-foreground: #{$dark-colour};
+		
+		/* link */
+		--panel-link-foreground: #{$dark-colour};
+		--panel-link-hover-foreground: #{$bright-colour};
+		
+		/* input */
+		--panel-content-input-background: #{$white-100};
+		--panel-content-input-foreground: var(--body-foreground);
+		
+		/* output */
+		--panel-content-output-background: #{$light-grey};
+		
+		/* dropdown */
+		--panel-content-select-dropdown-header-background: linear-gradient(to bottom, #{$dark-colour}, #{$medium-colour});
+		--panel-content-select-dropdown-header-foreground: var(--highlight-foreground);
+		--panel-content-select-dropdown-background: #{$white-100};
+		--panel-content-select-dropdown-foreground: #{var(--body-foreground)};
+		--panel-content-select-dropdown-hover-background: #{$light-grey};
+		--panel-content-select-dropdown-hover-foreground: #{$dark-colour};
+		--panel-content-select-dropdown-highlight-background: var(--highlight-background);
+		--panel-content-select-dropdown-highlight-foreground: var(--highlight-foreground);
+		--panel-content-select-dropdown-separator-colour: var(--container-content-separator);
+		--panel-content-select-chips-foreground: var(--highlight-foreground);
+		--panel-content-select-chips-icon-background: linear-gradient(to right, transparent, #{$dark-colour} 50%) 12500% 0/99% 100% no-reapeat;
+		--panel-content-select-chips-icon-hover-background: linear-gradient(to right, transparent, #{$dark-colour} 50%) 0 0/100% 99% no-reapeat;
+		--panel-content-datepicker-highlight-background: #{$bright-grey};
+		--panel-content-datepicker-highlight-foreground: #{$dark-colour};
+		--panel-content-datepicker-separator-colour: var(--container-content-separator);
+		--panel-content-datepicker-summary-background: var(--container-content-background);
+		
+		/* button */
+		--panel-content-button-background: #{$soft-grey} linear-gradient(to bottom, #{$white-80}, #{$white-0});
+		--panel-content-button-foreground: var(--body-foreground);
+		--panel-content-button-disabled-background: linear-gradient(to bottom, #{$bright-grey}, #{$light-grey});
+		--panel-content-button-disabled-foreground: #{$soft-grey};
+		--panel-content-button-hover-background: #{$light-grey};
+		--panel-content-button-highlight-background: var(--highlight-background);
+		--panel-content-button-highlight-foreground: var(--highlight-foreground);
+		--panel-content-button-highlight-border-colour: var(--highlight-border-colour);
+		
+		/* icon */
+		--panel-content-chat-avatar-background: #{$dark-colour};
+		--panel-content-chat-avatar-foreground: var(--highlight-foreground);
+		
+		/* progress bar */
+		--panel-content-progress-bar-background: var(--panel-content-input-background);
+		--panel-content-progress-bar-progress-background: #{$bright-colour};
+
+		/* slider */
+		--panel-content-slider-track-background: linear-gradient(to bottom, #{$dark-colour}, #{$bright-colour});
+		
+		/* tree */
+		--tree-droppoint-hover-foreground: var(--body-foreground);
+		--tree-droppoint-hover-background: #{$soft-grey};
+		--tree-droppoint-separator: #{$soft-grey};
+		--tree-droppoint-highlight-background: #{$medium-colour};
+		--tree-droppoint-highlight-hover-background: #{$medium-colour};
+		--tree-droppoint-highlight-hover-foreground: var(--highlight-foreground);
+		
+		/* galleria */
+		--galleria-controls-background-from: #{$bright-grey};
+		--galleria-controls-background-to: color.scale(#{$bright-grey}, $alpha: -40%);
+		
+		/* MISC */
+		
+		/* heatmap */
+		--heatmap-entry-colour: #{$dark-colour};
+		
+		/* calendar */
+		--calendar-today-background: #{$bright-colour};
+		--calendar-event-background: linear-gradient(to bottom, #{$dark-colour}, #{$medium-colour});
+		--calendar-internal-border-colour: #{$soft-grey};
+		
+		/* messages */
+		--messages-foreground: #{$white-100};
+	}
+}
+
+@include setColourTokens();

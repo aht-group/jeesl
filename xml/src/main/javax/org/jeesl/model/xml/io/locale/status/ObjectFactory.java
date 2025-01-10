@@ -174,6 +174,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Contexts }
+     * 
+     */
+    public Contexts createContexts() {
+        return new Contexts();
+    }
+
+    /**
+     * Create an instance of {@link Context }
+     * 
+     */
+    public Context createContext() {
+        return new Context();
+    }
+
+    /**
      * Create an instance of {@link Statuses }
      * 
      */
@@ -350,22 +366,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Contexts }
-     * 
-     */
-    public Contexts createContexts() {
-        return new Contexts();
-    }
-
-    /**
-     * Create an instance of {@link Context }
-     * 
-     */
-    public Context createContext() {
-        return new Context();
-    }
-
-    /**
      * Create an instance of {@link Categories }
      * 
      */
@@ -411,6 +411,14 @@ public class ObjectFactory {
      */
     public Function createFunction() {
         return new Function();
+    }
+
+    /**
+     * Create an instance of {@link Provider }
+     * 
+     */
+    public Provider createProvider() {
+        return new Provider();
     }
 
     /**

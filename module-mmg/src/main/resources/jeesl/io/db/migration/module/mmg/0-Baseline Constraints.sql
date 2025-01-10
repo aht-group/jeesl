@@ -1,0 +1,13 @@
+alter table MmgClassification add constraint uk_mmgclassification_code unique (realm_id, rref, code);
+alter table MmgClassificationJtLang add constraint UK_qtpexqo11k4coon2tixri2t2f unique (lang_id);
+alter table MmgItemJtLang add constraint UK_nn85yelq4pxfpx6crm38u0div unique (lang_id);
+alter table MmgClassification add constraint FKe729opheh0v3qa6qs53xxch7c foreign key (graphic_id) references IoGraphic;
+alter table MmgClassification add constraint FKt8ck87eqd6vds9pgayq56rx70 foreign key (parent_id) references MmgClassification;
+alter table MmgClassification add constraint FK7f9t1tgrbtt799667bcl44cam foreign key (realm_id) references IoStatus;
+alter table MmgClassificationJtLang add constraint FK6us6144c66uyj0em0v45ggtaq foreign key (lang_id) references IoLang;
+alter table MmgClassificationJtLang add constraint FKjrwmcf6gdhqehlmwvnqhrhaui foreign key (classification_id) references MmgClassification;
+alter table MmgItem add constraint FKtne3o04ku231b7svhh8na0y1v foreign key (frContainer_id) references IoFileContainer;
+alter table MmgItem add constraint FKlcbgqv3n58adhmt1vkee82ytl foreign key (gallery_id) references MmgGallery;
+alter table MmgItem add constraint FK9a0epkdh8191tfdn3pn3gbgtj foreign key (lastModifiedBy_id) references SecurityUser;
+alter table MmgItemJtLang add constraint FKnh6m88c26osmqdltxj27ca4ge foreign key (lang_id) references IoLang;
+alter table MmgItemJtLang add constraint FKkgcgjcygs9yrdg5lv45hjw8br foreign key (item_id) references MmgItem;

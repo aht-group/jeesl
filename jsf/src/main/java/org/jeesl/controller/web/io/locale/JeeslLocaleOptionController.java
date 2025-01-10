@@ -1,17 +1,24 @@
 package org.jeesl.controller.web.io.locale;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
-import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -25,6 +32,7 @@ import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.io.label.JeeslOptionTableCallback;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -81,6 +89,8 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
 	protected final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision;
 	
+	private final JeeslOptionTableCallback callback;
+	
 	private final UiEditBooleanHandler ehUpload; public UiEditBooleanHandler getEhUpload() {return ehUpload;}
 
 	protected final Map<EjbWithPosition,RE> mapEntity; public Map<EjbWithPosition, RE> getMapEntity() {return mapEntity;}
@@ -133,12 +143,16 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected boolean uiAllowRemove; public boolean isUiAllowRemove() {return uiAllowRemove;}
 	protected boolean uiAllowCode; public boolean isUiAllowCode() {return uiAllowCode;}
 	
-	public JeeslLocaleOptionController(IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
+	private byte[] previewBytes; public byte[] getPreviewBytes() {return previewBytes;}
+
+	public JeeslLocaleOptionController(JeeslOptionTableCallback callback,
+									IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
 									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbRevision.getClassL(),fbRevision.getClassD());
 		
+		this.callback=callback;
 		this.fbStatus=fbStatus;
 		this.fbSvg=fbSvg;
 		this.fbRevision=fbRevision;
@@ -162,14 +176,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 		dbuGraphic = new JeeslDbGraphicUpdater<>(fbSvg);
 
 		showDescription = false;
-//		hasDeveloperAction = false;
-//		hasAdministratorAction = true;
-//		hasTranslatorAction = true;
 
-//		status = null;
-//		allowAdditionalElements = new Hashtable<Long,Boolean>();
-//
-//		categories = new ArrayList<EjbWithPosition>();
 		uiAllowAdd = true;
 		uiAllowUpload = false;
 		uiAllowReorder = true;
@@ -209,11 +216,12 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 		}
 	}
 	
-	public void cancelStatus() {reset(true,true);}
-	protected void reset(boolean rStatus, boolean rFigure)
+	public void cancelStatus() {reset(true,true,true);}
+	protected void reset(boolean rStatus, boolean rFigure, boolean rUpload)
 	{
-		if(rStatus){status=null;}
-		if(rFigure){component=null;}
+		if(rStatus) {status=null;}
+		if(rFigure) {component=null;}
+		if(rUpload) {ehUpload.denyEdit();}
 	}
 
 	protected void updateSecurity(JeeslJsfSecurityHandler jsfSecurityHandler, String viewCode)
@@ -291,7 +299,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 			parents=null;
 		}
 		reloadStatusEntries();
-		if(reset){reset(true,true);}
+		if(reset){this.reset(true,true,true);}
 		debugUi(true);
 	}
 
@@ -302,12 +310,11 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	@SuppressWarnings("unchecked")
-	public void add() throws JeeslConstraintViolationException, InstantiationException, IllegalAccessException, JeeslNotFoundException
+	public void add() throws JeeslConstraintViolationException, InstantiationException, IllegalAccessException, JeeslNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException
 	{
 		logger.debug("add");
 		
-
-		status = optionClass.newInstance();
+		status = optionClass.getDeclaredConstructor().newInstance();
 		((EjbWithId)status).setId(0);
 		((EjbWithCode)status).setCode("enter code");
 		((EjbWithLang<L>)status).setName(efLang.build(lp));
@@ -319,12 +326,14 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 			GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.shapeCircle.toString());
 			graphic = efGraphic.buildSymbol(type, style);
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
+			previewBytes = new byte[0];
 		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void selectStatus() throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
 	{
+		this.reset(false, true, true);
 		figures = null; component=null;
 		status = fGraphic.find(optionClass,(EjbWithId)status);
 		status = fGraphic.loadGraphic(optionClass,(EjbWithId)status);
@@ -350,21 +359,18 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 			}
 			graphic = ((EjbWithGraphic<G>)status).getGraphic();
 
-			reloadFigures();
+			this.reloadFigures();
+			previewBytes = new byte[0];
+			if(ObjectUtils.isNotEmpty(graphic.getData()))
+			{
+				previewBytes = graphic.getData();
+				logger.info("Preparing Preview with "+previewBytes.length);
+				try {
+					FileUtils.writeByteArrayToFile(Paths.get("/Volumes/ramdisk").resolve("test.svg").toFile(), previewBytes);
+				}
+				catch (IOException e) {e.printStackTrace();}
+			}
 		}
-
-//		uiAllowCode = hasDeveloperAction || hasAdministratorAction;
-//		if(hasDeveloperAction){uiAllowCode=true;}
-//		else if(status instanceof JeeslStatusFixedCode)
-//		{
-//			for(String fixed : ((JeeslStatusFixedCode)status).getFixedCodes())
-//			{
-//				if(fixed.equals(((JeeslStatus)status).getCode()))
-//				{
-//					uiAllowCode=false;
-//				}
-//			}
-//		}
 
 		debugUi(false);
 		pageFlowPrimarySelect(status);
@@ -390,10 +396,14 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
         	if(debugSave){logger.info("Saving "+status.getClass().getSimpleName()+" "+status.toString());}
 			status = fGraphic.save((EjbSaveable)status);
 			status = fGraphic.loadGraphic(optionClass,(EjbWithId)status);
+			
+			previewBytes = new byte[0];
 			if(supportsGraphic)
 			{
 				graphic = ((EjbWithGraphic<G>)status).getGraphic();
 				if(debugSave){logger.info("Saved "+graphic.getClass().getSimpleName()+" "+graphic.toString());}
+				
+				if(ObjectUtils.isNotEmpty(graphic.getData())) {previewBytes = graphic.getData();}
 			}
 			this.reloadFigures();
 			if(debugSave){logger.info("Saved "+status.getClass().getSimpleName()+" "+status.toString());}
@@ -431,8 +441,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 		}
 	}
 
-//	public void cancelStatus() {reset(true,true);}
-	public void cancelFigure() {reset(false,true);reloadFigures();}
+	public void cancelFigure() {this.reset(false,true,true);reloadFigures();}
 //	private void reset(boolean rStatus, boolean rFigure)
 //	{
 //		if(rStatus){status=null;}
@@ -449,9 +458,24 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	{
 		UploadedFile file = event.getFile();
 		logger.info("Received file with a size of " +file.getSize());
-		((EjbWithGraphic<G>)status).getGraphic().setData(file.getContent());
+		previewBytes = file.getContent();
+		((EjbWithGraphic<G>)status).getGraphic().setData(previewBytes);
 	}
 
+	public InputStream previewIs() throws JeeslNotFoundException
+	{
+		if(Objects.nonNull(previewBytes))
+		{
+			logger.info(InputStream.class.getSimpleName()+" "+previewBytes.length);
+			return new ByteArrayInputStream(previewBytes);
+		}
+		else
+		{
+			logger.info("Returning empty stream");
+			return new ByteArrayInputStream(new byte[0]);
+		}
+	}
+	
 //	@Override
 	@SuppressWarnings("unchecked")
 	public void changeGraphicType()
@@ -488,7 +512,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	public void deleteFigure() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		fGraphic.rm(component);
-		reset(false,true);
+		reset(false,true,true);
 		reloadFigures();
 	}
 
@@ -529,7 +553,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	
 	protected Container downloadData(String iFqcn) throws UtilsConfigurationException
 	{
-		return JeeslLabelEntityController.rest(iFqcn).exportStatus(iFqcn);
+		return callback.rest(iFqcn).exportStatus(iFqcn);
 	}
 	
 	@SuppressWarnings({"rawtypes" })
@@ -540,6 +564,6 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 		Class<?> c = Class.forName(entity.getCode());
 		Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
 
-		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());
+		Container xml = callback.rest(i.getName()).exportStatus(i.getName());
 	}
 }

@@ -37,7 +37,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 	protected final EjbCodeCache<MS> cacheJob;
 	protected final EjbCodeCache<MNT> cacheMaintenance;
 	
-	protected final TxtStatusFactory<L,D,MNT> tfMaintenance;
+	protected final TxtStatusFactory<L,MNT> tfMaintenance;
 	
 	protected ThreadPoolExecutor pool;
 	
@@ -95,7 +95,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 		{
 			list.clear(); list.addAll(f.find());
 			queue.addAll(list);
-			logger.info("Added "+list.size()+" elements to the queue, loop: "+i.incrementAndGet());
+			logger.info("Added "+list.size()+" elements to the queue, loop: "+i.incrementAndGet()+" in "+task.getCode()+" - "+tfMaintenance.debug(task));
 			while(queue.peek()!=null) {try {Thread.sleep(100);} catch (InterruptedException e) {e.printStackTrace();}}
 		}
 		for(SystemMaintenanceRunnable<MNT> w : threads) {w.shutdown();}

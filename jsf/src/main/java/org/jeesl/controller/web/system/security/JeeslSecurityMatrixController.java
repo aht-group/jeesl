@@ -38,7 +38,7 @@ public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends Jees
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMatrixController.class);
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,?,?,?,?,?,?,?,?,?,?> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,?,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity;
 	private JeeslSecurityFacade<C,R,V,U,?,?,?,?> fSecurity;
 	
 	private final SbMultiHandler<C> sbhRole; public SbMultiHandler<C> getSbhRole() {return sbhRole;}
@@ -51,7 +51,7 @@ public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends Jees
 	private final List<R> roles; public List<R> getRoles() {return roles;}
 	private final List<U> usecases; public List<U> getUsecases() {return usecases;}
 		
-	public JeeslSecurityMatrixController(SecurityFactoryBuilder<L,D,C,R,V,U,?,?,?,?,?,?,?,?,?,?> fbSecurity)
+	public JeeslSecurityMatrixController(SecurityFactoryBuilder<L,D,C,R,V,U,?,?,?,?,?,?,?,?,?,?,?,?,?> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;

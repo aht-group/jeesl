@@ -30,6 +30,35 @@
             <xsd:attribute name="position" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
+    
+       <xsd:element name="contexts">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="js:context" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="group" type="xsd:string"/>
+            <xsd:attribute name="size" type="xsd:int"/>
+        </xsd:complexType>
+    </xsd:element>
+	<xsd:element name="context">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="js:transistions" maxOccurs="1"/>
+                <xsd:element ref="js:langs" maxOccurs="1"/>
+                <xsd:element ref="js:descriptions" maxOccurs="1"/>
+                <xsd:element ref="js:lang" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="group" type="xsd:string"/>
+            <xsd:attribute name="label" type="xsd:string"/>
+            <xsd:attribute name="visible" type="xsd:boolean"/>
+            <xsd:attribute name="image" type="xsd:string"/>
+            <xsd:attribute name="style" type="xsd:string"/>
+            <xsd:attribute name="position" type="xsd:int"/>
+        </xsd:complexType>
+    </xsd:element>
+    
 	<xsd:element name="statuses">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -487,33 +516,7 @@
         </xsd:complexType>
     </xsd:element>
     
-     <xsd:element name="contexts">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="js:context" maxOccurs="unbounded"/>
-            </xsd:sequence>
-            <xsd:attribute name="group" type="xsd:string"/>
-            <xsd:attribute name="size" type="xsd:int"/>
-        </xsd:complexType>
-    </xsd:element>
-	<xsd:element name="context">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="js:transistions" maxOccurs="1"/>
-                <xsd:element ref="js:langs" maxOccurs="1"/>
-                <xsd:element ref="js:descriptions" maxOccurs="1"/>
-                <xsd:element ref="js:lang" maxOccurs="unbounded"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="code" type="xsd:string"/>
-            <xsd:attribute name="group" type="xsd:string"/>
-            <xsd:attribute name="label" type="xsd:string"/>
-            <xsd:attribute name="visible" type="xsd:boolean"/>
-            <xsd:attribute name="image" type="xsd:string"/>
-            <xsd:attribute name="style" type="xsd:string"/>
-            <xsd:attribute name="position" type="xsd:int"/>
-        </xsd:complexType>
-    </xsd:element>
+  
     
     <xsd:element name="categories">
         <xsd:complexType>
@@ -573,6 +576,22 @@
                 <xsd:element ref="js:langs" maxOccurs="1"/>
                 <xsd:element ref="js:descriptions" maxOccurs="1"/>
                 <xsd:element ref="js:function" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="group" type="xsd:string"/>
+            <xsd:attribute name="label" type="xsd:string"/>
+            <xsd:attribute name="visible" type="xsd:boolean"/>
+            <xsd:attribute name="image" type="xsd:string"/>
+            <xsd:attribute name="style" type="xsd:string"/>
+            <xsd:attribute name="position" type="xsd:int"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="provider">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="js:langs" maxOccurs="1"/>
+                <xsd:element ref="js:descriptions" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="code" type="xsd:string"/>

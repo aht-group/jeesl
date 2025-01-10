@@ -5,11 +5,11 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.exlp.util.system.DateUtil;
+import org.jeesl.factory.xml.io.locale.status.XmlCategoryFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlRelationFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlRevisionFactory;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
-import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.model.xml.io.db.query.QueryRevision;
 import org.jeesl.model.xml.io.label.Attribute;

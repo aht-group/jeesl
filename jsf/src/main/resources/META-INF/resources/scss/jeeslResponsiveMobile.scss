@@ -125,6 +125,16 @@ html, body, .ui-widget {
 	}
 }
 
+.jeesl-output-container {
+	.ui-chkbox {
+		margin: 0;
+	}
+	
+	.ui-outputlaber {
+		padding: 0 0 0 $regular-spacing;
+	}
+}
+
 @mixin jeesl-select($class) {
 	.#{$class}.ui-state-default {
 		.ui-inputfield {
@@ -319,24 +329,44 @@ html, body, .ui-widget {
 	min-height: $element-height-mobile;
 }
 
-.ui-chips-container {
-	.ui-chips-token {
+@mixin token-container($classname) {
+	.#{$classname}-token {
 		@include button;
 		
 		min-height: $element-height-mobile;
 		padding-right: #{$element-height-mobile - 2 * $border-width};
 		
-		.ui-chips-token-icon {
+		.#{$classname}-token-icon {
 			@include icon;
 			
 			height: #{$element-height-mobile - 2 * $border-width};
 			width: #{$element-height-mobile - 2 * $border-width};
+
+			&:after {
+				font-size: 1.8em;
+			}
 		}
 	}
-	
-	.ui-chips-input-token {
+
+	.#{$classname}-input-token {
 		min-height: $element-height-mobile;
 	}
+}
+
+.ui-chips-container {
+	@include token-container(ui-chips);
+}
+
+.ui-selectcheckboxmenu-multiple-container {
+	@include token-container(ui-selectcheckboxmenu);
+}
+
+img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
+	height: calc($icon-height-mobile * var(--icon-height-multiplier) - 2 * #{$half-spacing});
+}
+
+.jeesl-input-container > .jeesl-input-label {
+	padding: $regular-spacing;
 }
 
 @mixin jeesl-sb-dropdown($zindex: 1) {

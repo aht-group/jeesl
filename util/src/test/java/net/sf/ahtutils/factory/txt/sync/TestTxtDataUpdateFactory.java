@@ -2,7 +2,7 @@ package net.sf.ahtutils.factory.txt.sync;
 
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.factory.txt.system.sync.TxtDataUpdateFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.test.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Before;

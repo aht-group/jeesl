@@ -42,7 +42,7 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	private Map<String,Boolean> mapViews; public Map<String,Boolean> getMapSystemViews() {return mapSystemViews;} public void setMapSystemViews(Map<String, Boolean> mapSystemViews) {this.mapSystemViews = mapSystemViews;}
 	
 	private boolean loggedIn; public boolean isLoggedIn() {return loggedIn;}  public void setLoggedIn(boolean loggedIn) {this.loggedIn = loggedIn;}
-
+	private boolean isDeveloper; public boolean isDeveloper() {return isDeveloper;} public void setDeveloper(boolean isDeveloper) {this.isDeveloper = isDeveloper;}
 	
 	public AbstractIdentity()
 	{		
@@ -53,6 +53,7 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 		mapActions = new Hashtable<String,Boolean>();
 		
 		loggedIn = false;
+		isDeveloper = false;
 	}
 	
 	public void allowUsecase(U usecase) {mapUsecases.put(usecase.getCode(), true);}

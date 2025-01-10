@@ -18,7 +18,7 @@
 						>
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityContext" code="listOf">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.ctrl.addContext()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addContext()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.ctrl.selectContext()}" update=":#{cc.id}:grid"/>
@@ -32,7 +32,7 @@
 		            </p:column>
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="SecurityContext" code="name"/></f:facet>
-						<h:outputText value="#{c.name[userBean.localeCode].lang}" />  
+						<h:outputText value="#{c.name[localeCode].lang}" />  
 		            </p:column>
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="SecurityContext" code="serverName"/></f:facet>
@@ -92,6 +92,9 @@
 						
 						<jtp:label entity="SecurityContext" code="emailName"/>
 						<p:inputText value="#{cc.attrs.ctrl.context.emailName}"/>
+						
+						<jtp:label entity="SecurityContext" code="mfaLabel"/>
+						<p:inputText value="#{cc.attrs.ctrl.context.mfaLabel}"/>
 						
 						<jtp:label entity="SecurityContext" code="contextId"/>
 						<p:inputText value="#{cc.attrs.ctrl.nnb.a}"/>

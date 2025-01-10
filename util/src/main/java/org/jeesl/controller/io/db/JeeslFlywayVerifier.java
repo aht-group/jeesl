@@ -78,7 +78,7 @@ public class JeeslFlywayVerifier
 		
 		List<URI> listFlyway = JeeslFlywayVerifier.sqlScripts(pathFlyway);
 		List<URI> listUpdates = JeeslFlywayVerifier.sqlScriptsSince(pathProvider.getRootDirectory(),i);
-		logger.info("Checking "+listUpdates.size()+" "+library+" library updates against "+listFlyway.size()+" flyway migrations for "+pathProvider.getRootDirectory());
+		logger.debug("Checking "+listUpdates.size()+" "+library+" library updates against "+listFlyway.size()+" flyway migrations for "+pathProvider.getRootDirectory());
 
 		try
 		{
@@ -194,7 +194,7 @@ public class JeeslFlywayVerifier
 		return name;
 	}
 	
-	public static void addPathProvider(MultiResourceLoader mrl, JeeslFlywayPathProvider provider, Set<String> set) throws UncheckedIOException, FileNotFoundException
+	public static void reduceWith(MultiResourceLoader mrl, JeeslFlywayPathProvider provider, Set<String> set) throws UncheckedIOException, FileNotFoundException
 	{
 		set.addAll(IOUtils.readLines(mrl.searchIs(provider.getBaselineTables()), "UTF-8"));
 		set.addAll(IOUtils.readLines(mrl.searchIs(provider.getBaselineConstraints()), "UTF-8"));

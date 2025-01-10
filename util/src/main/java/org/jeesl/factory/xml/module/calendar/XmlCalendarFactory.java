@@ -2,7 +2,7 @@ package org.jeesl.factory.xml.module.calendar;
 
 import java.util.Objects;
 
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;

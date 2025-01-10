@@ -47,6 +47,8 @@ public class JsonIncidentFactory
 
     	json.setCountry(JsonCountryFactory.build(data));
     	json.setAdmin1(JsonAdmin1Factory.build(data));
+    	json.setAdmin2(data.getAdmin2());
+    	json.setAdmin3(data.getAdmin3());
 
     	return json;
     }

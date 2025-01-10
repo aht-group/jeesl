@@ -50,6 +50,7 @@ $icon-height: 12px;
 $icon-height-mobile: 15px;
 $grid-label-icon-height-mobile: 12px;
 
+$table-header-padding: 4px $regular-spacing;
 $table-cell-padding: $regular-spacing;
 $table-icon-height: 12px;
 $table-icon-height-mobile: 32px;
@@ -75,6 +76,8 @@ $input-field-icon-height-mobile: 22px;
 
 $field-tip-width: 300px;
 $overlay-filter-input-width: 200px;
+
+$qrCodeHeight: 200px;
 
 @mixin element-height {
 	height: $element-height;

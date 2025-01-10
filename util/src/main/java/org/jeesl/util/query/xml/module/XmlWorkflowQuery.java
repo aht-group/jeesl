@@ -3,12 +3,13 @@ package org.jeesl.util.query.xml.module;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.jeesl.factory.xml.io.locale.status.XmlContextFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlLevelFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.module.workflow.XmlPermissionFactory;
 import org.jeesl.factory.xml.module.workflow.XmlPermissionsFactory;
 import org.jeesl.factory.xml.system.security.XmlRoleFactory;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
-import org.jeesl.factory.xml.system.status.XmlContextFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.model.xml.io.db.query.QueryWf;
 import org.jeesl.model.xml.module.workflow.Activity;
 import org.jeesl.model.xml.module.workflow.Permission;
@@ -18,8 +19,6 @@ import org.jeesl.model.xml.module.workflow.Transition;
 import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.util.query.xml.XmlStatusQuery;
-
-import net.sf.ahtutils.factory.xml.status.XmlLevelFactory;
 
 public class XmlWorkflowQuery
 {

@@ -63,9 +63,9 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityFacadeBean.class);
 	
-	private final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,OT,OH,?,?,?,USER> fbSecurity;
 	
-	public JeeslSecurityFacadeBean(EntityManager em, SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public JeeslSecurityFacadeBean(EntityManager em, SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,OT,OH,?,?,?,USER> fbSecurity)
 	{
 		super(em);
 		this.fbSecurity=fbSecurity;
@@ -133,7 +133,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getSingleResult();
 	}
 	
-	@Override public List<C> fSecurityCategories(JeeslSecurityQuery<C,R,CTX> query)
+	@Override public List<C> fSecurityCategories(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<C> cQ = cB.createQuery(fbSecurity.getClassCategory());
@@ -148,7 +148,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<R> fSecurityRoles(JeeslSecurityQuery<C,R,CTX> query)
+	@Override public List<R> fSecurityRoles(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<R> cQ = cB.createQuery(fbSecurity.getClassRole());
@@ -165,9 +165,36 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getResultList();
 	}
 	
+	@Override public List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override public List<A> fSecurityActions(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<M> cQ = cB.createQuery(fbSecurity.getClassMenu());
+		Root<M> root = cQ.from(fbSecurity.getClassMenu());
+		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+		
+		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		TypedQuery<M> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
+	}
+	
 	@Override public List<V> allViewsForUser(USER user)
 	{
-		user = em.find(fbSecurity.getClassUser(), user.getId());
+		user = em.find(fbSecurity.getClassUserProject(), user.getId());
 		Map<Long,V> views = new HashMap<Long,V>();
 		for(R role : user.getRoles())
 		{
@@ -199,8 +226,8 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 //		cQ.where(cB.equal(pId,id));
 		
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<USER> cQ = cB.createQuery(fbSecurity.getClassUser());
-		Root<USER> root = cQ.from(fbSecurity.getClassUser());
+		CriteriaQuery<USER> cQ = cB.createQuery(fbSecurity.getClassUserProject());
+		Root<USER> root = cQ.from(fbSecurity.getClassUserProject());
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
 		ListJoin<USER,R> jRole = root.joinList(JeeslUser.Attributes.roles.toString());
@@ -288,7 +315,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	
 	@Override public List<A> allActionsForUser(USER user)
 	{
-		user = em.find(fbSecurity.getClassUser(), user.getId());
+		user = em.find(fbSecurity.getClassUserProject(), user.getId());
 		Map<Long,A> actions = new HashMap<Long,A>();
 		for(R r : user.getRoles())
 		{
@@ -314,24 +341,11 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 	
-	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,CTX> query)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<M> cQ = cB.createQuery(fbSecurity.getClassMenu());
-		Root<M> root = cQ.from(fbSecurity.getClassMenu());
-		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
-		
-		cQ.select(root);
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		
-		TypedQuery<M> tQ = em.createQuery(cQ);
-		return tQ.getResultList();
-	}
+
 	
 	@Override public List<R> allRolesForUser(USER user)
 	{
-		user = em.find(fbSecurity.getClassUser(), user.getId());
+		user = em.find(fbSecurity.getClassUserProject(), user.getId());
 		user.getRoles().size();
 		return user.getRoles();
 	}
@@ -446,7 +460,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return fStaffURD(cStaff,users,roles,domains);
 	}
 	
-	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,CTX> query)
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -534,7 +548,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 //		role = em.merge(role);
 	}
 
-	@Override public boolean hasRole(Class<USER> clUser, Class<R> clRole, USER user, R role)
+	@Override public boolean hasSecurityRole(USER user, R role)
 	{
 		if(user==null || role==null){return false;}
 		for(R r: allRolesForUser(user))
@@ -583,7 +597,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 	
-	private Predicate[] pRole(CriteriaBuilder cB, JeeslSecurityQuery<C,R,CTX> query, Root<R> root)
+	private Predicate[] pRole(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<R> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -592,7 +606,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
-	private Predicate[] pCategory(CriteriaBuilder cB, JeeslSecurityQuery<C,R,CTX> query, Root<C> root)
+	private Predicate[] pCategory(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<C> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		

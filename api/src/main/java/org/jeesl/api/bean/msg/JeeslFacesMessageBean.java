@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslFacesMessageBean extends Serializable
-{	
+{
 	<T extends EjbWithId> void growlSaved(T t);
 	<T extends EjbWithId> void growlDeleted(T o);
 	

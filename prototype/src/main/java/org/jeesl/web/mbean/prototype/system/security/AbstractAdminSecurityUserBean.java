@@ -53,9 +53,11 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityUserBean.class);
 
+	protected final EjbSecurityUserFactory<USER> efUser;
+	
 	protected JeeslUserFacade<USER> fUtilsUser;
 	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fUtilsSecurity;
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	
 	protected final List<CTX> contexts; public List<CTX> getContexts() {return contexts;}
 	private final List<Boolean> booleans; public List<Boolean> getBooleans() {return booleans;}
@@ -65,7 +67,6 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	protected USER user; public USER getUser(){return user;} public void setUser(USER user){this.user = user;}
 	
 	protected Map<Long,Boolean> mapRoles; public Map<Long, Boolean> getMapRoles() {return mapRoles;}
-	protected final EjbSecurityUserFactory<USER> efUser;
 	
 	protected boolean performPasswordCheck;
 	protected String pwd1; public String getPwd1() {return pwd1;} public void setPwd1(String pwd1) {this.pwd1 = pwd1;}
@@ -75,11 +76,11 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	private boolean useSaltedHash; public boolean isUseSaltedHash() {return useSaltedHash;} public void setUseSaltedHash(boolean useSaltedHash) {this.useSaltedHash = useSaltedHash;}
 	
 
-	public AbstractAdminSecurityUserBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity)
+	public AbstractAdminSecurityUserBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
-		efUser = fbSecurity.ejbUser();
+		efUser = new EjbSecurityUserFactory<>(fbSecurity.getClassUserProject());
 		useSaltedHash = false;
 		booleans = new ArrayList<>();
 		booleans.add(Boolean.TRUE);
@@ -114,13 +115,13 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	{
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 		logger.info(ptt.debugEvent("Reloading ..."));
-		users = fUtilsUser.all(fbSecurity.getClassUser());
-		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassUser(),users)+" "+ptt.debugEvent(""));
+		users = fUtilsUser.all(fbSecurity.getClassUserProject());
+		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassUserProject(),users)+" "+ptt.debugEvent(""));
 	}
 
 	public void addUser() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassUser()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassUserProject()));}
 		user = efUser.build();
 		if(revision!=null){revision.pageFlowPrimaryAdd();}
 		postAdd();
@@ -189,7 +190,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	
 	protected boolean checkPwd()
 	{
-		if(performPasswordCheck && JeeslWithPwd.class.isAssignableFrom(fbSecurity.getClassUser()))
+		if(performPasswordCheck && JeeslWithPwd.class.isAssignableFrom(fbSecurity.getClassUserProject()))
 		{
 			if(debugOnInfo) {logger.info("Checking PWD");}
 			if(pwd1.length()!=pwd2.length())
@@ -225,7 +226,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	public void grantRole(R role, boolean grant) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info("Grant ("+grant+") "+role.toString());}
-		fUtilsSecurity.grantRole(fbSecurity.getClassUser(),fbSecurity.getClassRole(),user,role,grant);
+		fUtilsSecurity.grantRole(fbSecurity.getClassUserProject(),fbSecurity.getClassRole(),user,role,grant);
 		reloadUser();
 	}
 }

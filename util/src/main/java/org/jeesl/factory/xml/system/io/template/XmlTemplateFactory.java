@@ -2,9 +2,9 @@ package org.jeesl.factory.xml.system.io.template;
 
 import java.util.Objects;
 
+import org.jeesl.factory.xml.io.locale.status.XmlCategoryFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateToken;

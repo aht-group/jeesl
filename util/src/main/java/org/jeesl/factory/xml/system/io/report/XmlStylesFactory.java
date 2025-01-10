@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -15,14 +16,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XmlStylesFactory <L extends JeeslLang,D extends JeeslDescription,
-								
-								
 								GROUP extends JeeslReportColumnGroup<L,D,?,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
 								ROW extends JeeslReportRow<L,D,?,?,CDT,?>,
-								
-								
-								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
+								STYLE extends JeeslReportStyle<L,D>,
+								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>
 								>
 {

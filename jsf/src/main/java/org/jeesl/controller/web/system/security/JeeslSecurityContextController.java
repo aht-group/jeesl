@@ -32,7 +32,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityContextController.class);
 	
-	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,?,?,?,?,?> fbSecurity;
+	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,?,?,?,?,?,?,?,?> fbSecurity;
 	private JeeslSecurityFacade<?,?,?,?,?,CTX,?,?> fSecurity;
 	
 	private final EjbSecurityContextFactory<CTX> efContext;
@@ -43,7 +43,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	
 	private CTX context; public CTX getContext() {return context;} public void setContext(CTX context) {this.context = context;}
 	
-	public JeeslSecurityContextController(SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,?,?,?,?,?> fbSecurity)
+	public JeeslSecurityContextController(SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,?,?,?,?,?,?,?,?> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;

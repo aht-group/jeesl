@@ -10,9 +10,9 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlDataUpdateFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlResultFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
@@ -54,7 +54,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 	private final JeeslDbCodeEjbUpdater<V> dbCleanerView;
 	private final JeeslDbCodeEjbUpdater<A> dbCleanerAction;
 	
-	public SecurityViewUpdater(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity,
+	public SecurityViewUpdater(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,OT,OH,?,?,?,USER> fbSecurity,
 								JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity)
 	{       
         super(fbSecurity,fSecurity);

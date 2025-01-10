@@ -1,5 +1,6 @@
 package org.jeesl.model.ejb.io.fr;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
 
@@ -63,9 +64,9 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 	@NotNull
-	private Date record;
-	@Override public Date getRecord() {return record;}
-	@Override public void setRecord(Date record) {this.record = record;}
+	private LocalDateTime record;
+	@Override public LocalDateTime getRecord() {return record;}
+	@Override public void setRecord(LocalDateTime record) {this.record = record;}
 
 	private long size;
 	@Override public long getSize() {return size;}

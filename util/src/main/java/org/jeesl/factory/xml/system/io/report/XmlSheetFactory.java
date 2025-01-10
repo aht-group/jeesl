@@ -4,11 +4,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
+import org.jeesl.factory.xml.io.locale.status.XmlImplementationFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.factory.xml.system.status.XmlImplementationFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
@@ -44,7 +45,7 @@ public class XmlSheetFactory <L extends JeeslLang,D extends JeeslDescription,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,
-								CDT extends JeeslStatus<L,D,CDT>,
+								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslReportColumnWidth<L,D,CW,?>,
 								RT extends JeeslReportRowType<L,D,RT,?>
 								>

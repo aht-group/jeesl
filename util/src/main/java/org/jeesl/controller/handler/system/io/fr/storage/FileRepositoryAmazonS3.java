@@ -44,15 +44,20 @@ public class FileRepositoryAmazonS3<STORAGE extends JeeslFileStorage<?,?,?,?,?>,
 		try
 		{
 			json = JsonUtil.read(JsonFrAmazonS3.class,storage.getJson());
-			AWSCredentials credentials = new BasicAWSCredentials(json.getId(), json.getKey());
-			s3client = AmazonS3ClientBuilder
-					  .standard()
-					  .withCredentials(new AWSStaticCredentialsProvider(credentials))
-					  .withRegion(Regions.EU_CENTRAL_1)
-					  .build();
+			s3client = FileRepositoryAmazonS3.s3ClientV1(json.getId(), json.getKey());
 		}
 		catch (IOException e) {e.printStackTrace();}
-		
+	}
+	
+	public static AmazonS3 s3ClientV1(String accessKey, String secretKey)
+	{
+		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+		AmazonS3 s3client = AmazonS3ClientBuilder
+				  .standard()
+				  .withCredentials(new AWSStaticCredentialsProvider(credentials))
+				  .withRegion(Regions.EU_CENTRAL_1)
+				  .build();
+		return s3client;
 	}
 	
 	@Override public META saveToFileRepository(META meta, byte[] bytes) throws JeeslConstraintViolationException, JeeslLockingException
@@ -80,7 +85,6 @@ public class FileRepositoryAmazonS3<STORAGE extends JeeslFileStorage<?,?,?,?,?>,
 		try {return IOUtils.toByteArray(inputStream);}
 		catch (IOException e) {throw new JeeslNotFoundException(e.getMessage());}
 	}
-	
 
 	@Override public void delteFileFromRepository(META meta) throws JeeslConstraintViolationException, JeeslLockingException
 	{

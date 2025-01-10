@@ -6,7 +6,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
-import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;

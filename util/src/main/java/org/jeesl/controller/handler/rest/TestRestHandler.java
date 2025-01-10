@@ -16,6 +16,10 @@ public class TestRestHandler implements JeeslTestRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(TestRestHandler.class);
 
+	public static TestRestHandler instance()
+	{
+		return new TestRestHandler();
+	}
 	public TestRestHandler()
 	{
 		
@@ -33,6 +37,13 @@ public class TestRestHandler implements JeeslTestRestInterface
 		String txt = LocalDateTime.now().toString();
 		logger.info("datePublic:"+txt);
 		return txt;
+	}
+	
+	@Override public String timeout(int seconds)
+	{
+		logger.info("Waiting "+seconds);
+		try {Thread.sleep(seconds*1000);} catch (InterruptedException e) {e.printStackTrace();}
+		return "Waited "+seconds;
 	}
 
 	@Override

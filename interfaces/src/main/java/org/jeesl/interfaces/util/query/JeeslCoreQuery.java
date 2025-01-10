@@ -6,6 +6,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.interfaces.util.query.cq.JeeslCqBooleanQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqDateQuery;
+import org.jeesl.interfaces.util.query.cq.JeeslCqDoubleQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqEntityQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqIntegerQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqLiteralQuery;
@@ -21,7 +22,8 @@ public interface JeeslCoreQuery extends Serializable,
 									JeeslPaginationQuery,JeeslOrderingQuery,
 									JeeslCqRootFetchQuery,
 									JeeslCqEntityQuery,
-									JeeslCqLiteralQuery,JeeslCqLongQuery,JeeslCqBooleanQuery,JeeslCqIntegerQuery,
+									JeeslCqLiteralQuery,
+									JeeslCqBooleanQuery,JeeslCqIntegerQuery,JeeslCqLongQuery,JeeslCqDoubleQuery,
 									JeeslCqDateQuery,JeeslCqTimeQuery
 {
 	Boolean getDistinct();

@@ -13,6 +13,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
@@ -38,7 +39,7 @@ public class XlsRowFactory <
 							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
 							STYLE extends JeeslReportStyle<?,?>,
-							CDT extends JeeslStatus<?,?,CDT>,
+							CDT extends JeeslReportCellType<?,?,CDT,?>,
 							CW extends JeeslReportColumnWidth<?,?,CW,?>,
 							RT extends JeeslReportRowType<?,?,RT,?>>
 {

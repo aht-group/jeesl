@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.api.rest.i.system.JeeslSystemRestInterface;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
@@ -29,6 +28,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
+import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.xsd.Container;
@@ -55,7 +55,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 								RAT extends JeeslStatus<L,D,RAT>,
 								ERD extends JeeslRevisionDiagram<L,D,RC>>
 					extends AbstractJeeslRestHandler<L,D>
-					implements JeeslSystemRestInterface<L,D,R,G>
+					implements JeeslSystemRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslSystemRestService.class);
 
@@ -100,8 +100,13 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	}
 
 
+	
+	@Override public org.jeesl.model.xml.xsd.Container exportStatus(String code) throws UtilsConfigurationException
+	{
+		return gExportStatus(code);
+	}
 	@SuppressWarnings("unchecked")
-	@Override public <X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.xsd.Container exportStatus(String code) throws UtilsConfigurationException
+	public <X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.xsd.Container gExportStatus(String code) throws UtilsConfigurationException
 	{
 		try
 		{
@@ -130,7 +135,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	}
 	
 	@Override
-	public <X extends JeeslStatus<L, D, X>> Container updateTranslation(String code, Container xml) throws UtilsConfigurationException
+	public Container updateTranslation(String code, Container xml) throws UtilsConfigurationException
 	{
 		logger.info("updateTranslation");
 		return exportStatus(code);

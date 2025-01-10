@@ -11,6 +11,7 @@ public class UiEditBooleanHandler implements UiEditHandler
 	final static Logger logger = LoggerFactory.getLogger(UiEditBooleanHandler.class);
 	
 	private boolean allow; public void setAllow(boolean allow) {this.allow = allow;}
+	public UiEditBooleanHandler value(boolean value) {this.allow=value; return this;}
 	
 	public boolean isAllow() {return allow;}
 	public boolean isDeny() {return !allow;}

@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
@@ -21,29 +22,33 @@ public class EjbSecurityViewFactory <C extends JeeslSecurityCategory<?,?>,
     
     public V build(C category, String code, List<V> list)
     {
-    		V ejb = null;
+		V ejb = null;
 
-    		try
-    		{
-			ejb = cView.newInstance();
+		try
+		{
+			ejb = cView.getDeclaredConstructor().newInstance();
 			ejb.setCategory(category);
 			ejb.setCode(code);
 			if(list==null){ejb.setPosition(1);}
 			else{ejb.setPosition(list.size()+1);}
-    		}
-    	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
+		}
+		catch (InstantiationException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
     	
     	return ejb;
     }
     
     public V clone(V view)
     {
-    		V ejb = null;
-	    	
-	    	try
-	    	{
-			ejb = cView.newInstance();
+		V ejb = null;
+    	
+    	try
+    	{
+			ejb = cView.getDeclaredConstructor().newInstance();
 			ejb.setCategory(view.getCategory());
 			ejb.setCode(view.getCode()+"Clone");
 			ejb.setPosition(view.getPosition());
@@ -56,9 +61,13 @@ public class EjbSecurityViewFactory <C extends JeeslSecurityCategory<?,?>,
 			ejb.setUrlMapping(view.getUrlMapping());
 			ejb.setViewPattern(view.getViewPattern());
 		}
-	    	catch (InstantiationException e) {e.printStackTrace();}
-	    	catch (IllegalAccessException e) {e.printStackTrace();}
+    	catch (InstantiationException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
 	    	
-	    	return ejb;
+	    return ejb;
     }
 }

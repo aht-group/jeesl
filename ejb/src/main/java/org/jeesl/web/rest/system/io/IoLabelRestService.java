@@ -17,13 +17,13 @@ import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.jeesl.XmlContainerFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlDiagramFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlDiagramsFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlEntityFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlDataUpdateFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlResultFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -90,7 +90,7 @@ public class IoLabelRestService <L extends JeeslLang,D extends JeeslDescription,
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;
 
-		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfContainer = new XmlContainerFactory(null,XmlStatusQuery.statusExport());
 		xfEntity = new XmlEntityFactory<>(XmlRevisionQuery.get(XmlRevisionQuery.Key.xEntity));
 
 		efLang = EjbLangFactory.instance(fbRevision.getClassL());

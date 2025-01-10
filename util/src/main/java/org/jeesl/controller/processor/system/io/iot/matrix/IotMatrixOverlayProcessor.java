@@ -14,19 +14,18 @@ public class IotMatrixOverlayProcessor
 	
 	private final JeeslJsonMatrixDeviceFactory jfDevice;
 	
-	private final JeeslIotMatrixDisplayRestInterface remote;
+
 	private String deviceCode; public IotMatrixOverlayProcessor device(String code) {this.deviceCode=code; return this;}
 	private JsonMatrixDevice remoteDevice;
 	private String[][] remoteCells;
 	
-	public static IotMatrixOverlayProcessor instance(JeeslJsonMatrixDeviceFactory jfDevice, JeeslIotMatrixDisplayRestInterface remote) {return new IotMatrixOverlayProcessor(jfDevice,remote);}
-	private IotMatrixOverlayProcessor(JeeslJsonMatrixDeviceFactory jfDevice, JeeslIotMatrixDisplayRestInterface remote)
+	public static IotMatrixOverlayProcessor instance(JeeslJsonMatrixDeviceFactory jfDevice) {return new IotMatrixOverlayProcessor(jfDevice);}
+	private IotMatrixOverlayProcessor(JeeslJsonMatrixDeviceFactory jfDevice)
 	{
 		this.jfDevice=jfDevice;
-		this.remote=remote;
 	}
 	
-	public JsonMatrixDevice download()
+	public JsonMatrixDevice download(JeeslIotMatrixDisplayRestInterface remote)
 	{
 		remoteDevice = remote.deviceJson(deviceCode);
 		remoteDevice.setData(JsonMatrixDeviceFactory.transform(remoteDevice));

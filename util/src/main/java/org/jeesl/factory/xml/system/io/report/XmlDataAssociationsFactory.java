@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
+import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -35,7 +36,7 @@ public class XmlDataAssociationsFactory <L extends JeeslLang,D extends JeeslDesc
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,
-								CDT extends JeeslStatus<L,D,CDT>,
+								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>,
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,

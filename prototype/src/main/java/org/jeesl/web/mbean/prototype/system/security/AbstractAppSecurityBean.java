@@ -53,7 +53,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	
 	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	
-	protected SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity;
+	protected SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,?,?,?,USER> fbSecurity;
 	private EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
 	protected JeeslLogger jogger;
@@ -125,7 +125,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		
 	}
 	
-	public void noArgConstructor(final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity)
+	public void noArgConstructor(final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,?,?,?,USER> fbSecurity)
 	{
 		this.fbSecurity=fbSecurity;
 		efMenu = fbSecurity.ejbMenu();
@@ -233,7 +233,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		n2mMenu.clear();
 		mapRoot.clear();
 		
-		EjbSecurityQuery<C,R,CTX> query = new EjbSecurityQuery<>();
+		EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 		query.addRootFetch(JeeslSecurityMenu.Attributes.context);
 		
 		for(M m : fProvidedSecurity.fSecurityMenus(query))

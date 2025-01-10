@@ -12,8 +12,10 @@ public class CqTime implements JeeslCqTime
 
 	private final Type type; public final Type getType() {return type;}
 	private final LocalDateTime time; public LocalDateTime getTime() {return time;}
+
 	private final String path; public String getPath() {return path;}
 
+	public static CqTime equalTo(LocalDateTime time, String path) {return new CqTime(Type.equalTo,time,path);}
 	public static CqTime lessThan(LocalDateTime time, String path) {return new CqTime(Type.lessThan,time,path);}
 	public static CqTime greaterThan(LocalDateTime time, String path) {return new CqTime(Type.greaterThan,time,path);}
 	

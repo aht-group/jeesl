@@ -20,9 +20,9 @@ public class JeeslUserFacadeBean<USER extends JeeslUser<?>>
 {	
 	private static final long serialVersionUID = 1L;
 	
-	private final SecurityFactoryBuilder<?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	
-	public JeeslUserFacadeBean(EntityManager em, SecurityFactoryBuilder<?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity)
+	public JeeslUserFacadeBean(EntityManager em, SecurityFactoryBuilder<?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity)
 	{
 		super(em);
 		this.fbSecurity=fbSecurity;
@@ -30,7 +30,7 @@ public class JeeslUserFacadeBean<USER extends JeeslUser<?>>
 	
 	@Override public USER load(USER user)
 	{
-		user = em.find(fbSecurity.getClassUser(), user.getId());
+		user = em.find(fbSecurity.getClassUserProject(), user.getId());
 		user.getRoles().size();
 		return user;
 	}
@@ -38,9 +38,9 @@ public class JeeslUserFacadeBean<USER extends JeeslUser<?>>
 	@Override public List<USER> likeNameFirstLast(String query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-	    CriteriaQuery<USER> criteriaQuery = cB.createQuery(fbSecurity.getClassUser());
+	    CriteriaQuery<USER> criteriaQuery = cB.createQuery(fbSecurity.getClassUserProject());
 	    
-	    Root<USER> fromType = criteriaQuery.from(fbSecurity.getClassUser());
+	    Root<USER> fromType = criteriaQuery.from(fbSecurity.getClassUserProject());
 	    
 	    Expression<String> literal = cB.upper(cB.literal("%"+query+"%"));
 	    Expression<String> eFirst = fromType.get(JeeslUser.Attributes.firstName.toString());

@@ -1,6 +1,7 @@
 package org.jeesl.util.db.updater;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -16,9 +17,9 @@ import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.exception.processing.UtilsDeveloperException;
+import org.jeesl.exception.processing.JeeslDeveloperException;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
-import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -40,7 +41,7 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 	private final Map<String,Set<Long>> mDbAvailableStatus;
 	private Set<Long> sDeleteLangs,sDeleteDescriptions;
 	
-	private EjbStatusFactory<L,D,S> statusEjbFactory; public void setStatusEjbFactory(EjbStatusFactory<L,D,S> statusEjbFactory) {this.statusEjbFactory = statusEjbFactory;}
+	private EjbStatusFactory<L,D,S> efStatus; public void setStatusEjbFactory(EjbStatusFactory<L,D,S> efStatus) {this.efStatus = efStatus;}
 	private JeeslFacade fStatus; public void setFacade(JeeslFacade fStatus){this.fStatus=fStatus;}
 
 	public JeeslDbStatusUpdater()
@@ -73,23 +74,7 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 		logger.debug("Saved existing DB entries for "+key+": "+dbStatus.size());
 		mDbAvailableStatus.put(key, dbStatus);
 	}
-	
-	public JeeslStatus<L,D,S> addVisible(JeeslStatus<L,D,S> ejbStatus, Status status)
-	{
-		boolean visible=true;
-		if(Objects.nonNull(status.isVisible())) {visible=status.isVisible();}
-		ejbStatus.setVisible(visible);
-		return ejbStatus;
-	}
-	
-	private JeeslStatus<L,D,S> addLangsAndDescriptions(JeeslStatus<L,D,S> ejbStatus, Status status) throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
-	{
-		JeeslStatus<L,D,S> ejbUpdateInfo = statusEjbFactory.create(status);		
-		ejbStatus.setName(ejbUpdateInfo.getName());
-		ejbStatus.setDescription(ejbUpdateInfo.getDescription());
-		return ejbStatus;
-	}
-	
+		
 	public void removeStatusFromDelete(String key, long id)
 	{
 		mDbAvailableStatus.get(key).remove(id);
@@ -167,20 +152,21 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 		DataUpdateTracker dut = new DataUpdateTracker(true);
 		dut.setType(XmlTypeFactory.build(cStatus.getName(),"Status-DB Import"));
 		
-		if(fStatus==null){dut.fail(new UtilsDeveloperException("No Facade available for "+cStatus.getName()), true);}
+		if(Objects.isNull(fStatus)) {dut.fail(new JeeslDeveloperException("No Facade available for "+cStatus.getName()), true);}
 		else {logger.debug("Updating "+cStatus.getSimpleName()+" with "+list.size()+" entries");}
-		iuStatusEJB(list, cStatus, cLang);
+		
+		this.iuStatusEJB(list, cStatus, cLang);
 		
 		for(Status xml : list)
-		{
+		{	// This is a post-processing Method to apply parent relationships
 			try
 			{
 				if(ObjectUtils.allNotNull(xml.getParent(),cParent))
 				{
 					logger.trace("Parent: "+xml.getParent().getCode());
-					S ejbStatus = fStatus.fByCode(cStatus,xml.getCode());
-					ejbStatus.setParent(fStatus.fByCode(cParent, xml.getParent().getCode()));
-					ejbStatus = fStatus.update(ejbStatus);
+					S ejb = fStatus.fByCode(cStatus,xml.getCode());
+					ejb.setParent(fStatus.fByCode(cParent, xml.getParent().getCode()));
+					ejb = fStatus.update(ejb);
 					dut.success();
 				}
 			}
@@ -223,21 +209,22 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 				}
 				catch (JeeslNotFoundException e)
 				{
-					ejb = cStatus.newInstance();
+					ejb = cStatus.getDeclaredConstructor().newInstance();
 					ejb.setCode(xml.getCode());
+					if(Objects.nonNull(xml.getPosition())) {ejb.setPosition(xml.getPosition());}
 					ejb = fStatus.persist(ejb);
 					logger.trace("Added: "+ejb);
 				}
 				
 				try
 				{
-					addLangsAndDescriptions(ejb,xml);
+					this.addLangsAndDescriptions(ejb,xml);
 					ejb.setSymbol(xml.getSymbol());
 					if(Objects.nonNull(xml.getImage())) {ejb.setImage(xml.getImage());}
 					if(Objects.nonNull(xml.getStyle())) {ejb.setStyle(xml.getStyle());}
+					this.updatePosition(ejb, xml);
+					
 				}
-				catch (InstantiationException e) {logger.error("",e);}
-				catch (IllegalAccessException e) {logger.error("",e);}
 				catch (JeeslConstraintViolationException e) {logger.error("",e);}
 		        
 				if(Objects.nonNull(xml.getPosition())) {ejb.setPosition(xml.getPosition());}
@@ -253,7 +240,37 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 			catch (InstantiationException e) {logger.error("",e);}
 			catch (IllegalAccessException e) {logger.error("",e);}
 			catch (JeeslLockingException e) {logger.error("",e);}
+			catch (NoSuchMethodException e) {logger.error("",e);}
+			catch (InvocationTargetException e) {logger.error("",e);}
 		}
+	}
+	
+	private JeeslStatus<L,D,S> addLangsAndDescriptions(JeeslStatus<L,D,S> ejb, Status xml) throws JeeslConstraintViolationException
+	{
+		JeeslStatus<L,D,S> update = efStatus.create(xml);		
+		ejb.setName(update.getName());
+		ejb.setDescription(update.getDescription());
+		return ejb;
+	}
+	
+	private void updatePosition(JeeslStatus<L,D,S> ejb, Status xml)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("Position "+ejb.toString());
+		if(Objects.nonNull(xml.getPosition()))
+		{
+			ejb.setPosition(xml.getPosition());
+			sb.append(" ").append(ejb.getPosition());
+		}
+		logger.info(sb.toString());
+	}
+	
+	private JeeslStatus<L,D,S> addVisible(JeeslStatus<L,D,S> ejb, Status xml)
+	{
+		boolean visible=true;
+		if(Objects.nonNull(xml.isVisible())) {visible=xml.isVisible();}
+		ejb.setVisible(visible);
+		return ejb;
 	}
 	
 	private S removeData(S ejbStatus)

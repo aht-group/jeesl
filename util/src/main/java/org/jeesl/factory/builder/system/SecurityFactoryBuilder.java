@@ -13,9 +13,9 @@ import org.jeesl.factory.ejb.system.security.EjbSecurityHelpFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityRoleFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityUsecaseFactory;
-import org.jeesl.factory.ejb.system.security.EjbSecurityUserFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityViewFactory;
 import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
+import org.jeesl.factory.ejb.system.security.user.EjbSecurityMfaFactory;
 import org.jeesl.factory.json.system.security.JsonPageFactory;
 import org.jeesl.factory.json.system.security.JsonPagesFactory;
 import org.jeesl.factory.sql.system.security.SqlUserFactory;
@@ -32,10 +32,13 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
+import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfa;
+import org.jeesl.interfaces.model.system.security.login.JeeslSecurityMfaType;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -52,11 +55,14 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									CTX extends JeeslSecurityContext<L,D>,
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									AR extends JeeslSecurityArea<L,D,V>,
+									MFA extends JeeslSecurityMfa<UJ,MFT>,
+									MFT extends JeeslSecurityMfaType<L,D,MFT,?>,
 									OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 									OH extends JeeslSecurityOnlineHelp<V,DC,DS>,
 									DC extends JeeslIoCms<L,D,?,?,DS>,
 									DS extends JeeslIoCmsSection<L,DS>,
-									USER extends JeeslUser<R>
+									UJ extends JeeslSecurityUser,
+									UP extends JeeslUser<R>
 >
 				extends AbstractFactoryBuilder<L,D>
 {
@@ -74,8 +80,11 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
     private final Class<M> cMenu; public Class<M> getClassMenu(){return cMenu;}
     private final Class<AR> cArea; public Class<AR> getClassArea(){return cArea;}
     
+    private Class<MFA> cMfa; public Class<MFA> getClassMfa() {return cMfa;}
+    private Class<MFT> cMfaType; public Class<MFT> getClassMfaType() {return cMfaType;}
+    
     private final Class<OH> cOnlineHelp; public Class<OH> getClassOnlineHelp() {return cOnlineHelp;}
-	private final Class<USER> cUser; public Class<USER> getClassUser(){return cUser;}
+	private final Class<UP> cUser; public Class<UP> getClassUserProject() {return cUser;}
 	
 	public SecurityFactoryBuilder(final Class<L> cL, final Class<D> cD,
 									final Class<C> cCategory,
@@ -87,8 +96,10 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									final Class<CTX> cContext,
 									final Class<M> cMenu,
 									final Class<AR> cArea,
+									final Class<MFA> cMfa,
+									final Class<MFT> cMfaType,
 									final Class<OH> cOnlineHelp,
-									final Class<USER> cUser)
+									final Class<UP> cUser)
 	{		
 		super(cL,cD);
 		this.cCategory=cCategory;
@@ -100,6 +111,8 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 		this.cContext=cContext;
 		this.cMenu=cMenu;
 		this.cArea=cArea;
+		this.cMfa=cMfa;
+		this.cMfaType=cMfaType;
 		this.cOnlineHelp=cOnlineHelp;
 		this.cUser=cUser;
 	}
@@ -113,28 +126,20 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public EjbSecurityActionTemplateFactory<C,AT> ejbTemplate(){return new EjbSecurityActionTemplateFactory<C,AT>(cTemplate);}
 	public EjbSecurityMenuFactory<V,CTX,M> ejbMenu(){return new EjbSecurityMenuFactory<>(cMenu);}
 	public EjbSecurityAreaFactory<V,AR> ejbArea() {return new EjbSecurityAreaFactory<V,AR>(cArea);}
+	public EjbSecurityMfaFactory<MFA,MFT,UJ> ejbMfa() {return new EjbSecurityMfaFactory<>(cMfa,cMfaType);}
 	public EjbSecurityHelpFactory<V,OH,DC,DS> ejbHelp() {return new EjbSecurityHelpFactory<>(cOnlineHelp);}
 	
-	public EjbSecurityUserFactory<USER> ejbUser() {return new EjbSecurityUserFactory<USER>(cUser);}
+//	public EjbSecurityUserFactory<UP> ejbUser() {return new EjbSecurityUserFactory<>(cUser);}
 	
-	public <STAFF extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
-				EjbStaffFactory<R,USER,STAFF,D1,D2> ejbStaff(final Class<STAFF> cStaff)
-	{
-		return new EjbStaffFactory<R,USER,STAFF,D1,D2>(cStaff);
-	}
+	public <STAFF extends JeeslStaff<R,UP,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> EjbStaffFactory<R,UP,STAFF,D1,D2> ejbStaff(final Class<STAFF> cStaff) {return new EjbStaffFactory<>(cStaff);}
 	
-	public <STAFF extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
-		TxtStaffFactory<L,D,R,USER,STAFF,D1,D2> txtStaff(String localeCode)
-	{
-		return new TxtStaffFactory<L,D,R,USER,STAFF,D1,D2>(localeCode);
-	}
-	
+	public <STAFF extends JeeslStaff<R,UP,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> TxtStaffFactory<L,D,R,UP,STAFF,D1,D2> txtStaff(String localeCode) {return new TxtStaffFactory<>(localeCode);}
 	public TxtSecurityViewFactory<L,D,C,V> txtView(String localeCode){return new TxtSecurityViewFactory<>(localeCode);}
 	
 	public JsonPageFactory<L,D,C,V,CTX,M> jsonPage() {return new JsonPageFactory<>();}
-	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,USER> jsonPages() {return new JsonPagesFactory<>(this);}
+	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,UJ,UP> jsonPages() {return new JsonPagesFactory<>(this);}
 	
-	public SqlUserFactory<USER> sqlUser() {return new SqlUserFactory<>();}
+	public SqlUserFactory<UP> sqlUser() {return new SqlUserFactory<>();}
 	
 	public Comparator<A> comparatorAction(SecurityActionComparator.Type type) {return (new SecurityActionComparator<C,V,A,AT>()).factory(type);}
 }

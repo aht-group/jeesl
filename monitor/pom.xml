@@ -80,12 +80,13 @@
    	   		<scope>provided</scope>
    	   	</dependency>
    	   	
-   	   	<!--2022-09-17 tk Preparing removal -->
+   	   	<!--	2022-09-17 tk Preparing removal
+   	   			2024-09-11 tk 166 compilation errors -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<scope>compile</scope>
-		</dependency> 
+		</dependency>  
    		
    		<!-- Hibernate -->
    		<dependency>

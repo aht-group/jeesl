@@ -18,6 +18,7 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.model.json.system.security.JsonSecurityPage;
@@ -35,15 +36,16 @@ public class JsonPagesFactory<L extends JeeslLang, D extends JeeslDescription,
 									CTX extends JeeslSecurityContext<L,D>,
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									AR extends JeeslSecurityArea<L,D,V>,
+									UJ extends JeeslSecurityUser,
 									USER extends JeeslUser<R>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonPagesFactory.class);
-	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,USER> fbSecurity;
+
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,UJ,USER> fbSecurity;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 	private final JsonPageFactory<L,D,C,V,CTX,M> jfPage;
 	
-	public JsonPagesFactory(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,USER> fbSecurity)
+	public JsonPagesFactory(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,UJ,USER> fbSecurity)
 	{
 		this.fbSecurity=fbSecurity;
 		efMenu = fbSecurity.ejbMenu();
