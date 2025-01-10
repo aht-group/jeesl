@@ -146,7 +146,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		List<M> list = new ArrayList<>();
 		if(sbhContext.isSelected())
 		{
-			EjbSecurityQuery<C,R,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+			EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 			query.add(sbhContext.getSelection());
 			query.addRootFetch(JeeslSecurityMenu.Attributes.context);
 			query.orderBy(CqOrdering.ascending(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.id));
@@ -239,7 +239,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 			parents.clear();
 			delete.clear();
 			
-			EjbSecurityQuery<C,R,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+			EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 			query.add(sbhContext.getSelection());
 			list.addAll(fSecurity.fSecurityMenus(query));
 			

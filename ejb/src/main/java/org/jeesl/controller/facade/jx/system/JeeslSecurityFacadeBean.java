@@ -133,7 +133,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getSingleResult();
 	}
 	
-	@Override public List<C> fSecurityCategories(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	@Override public List<C> fSecurityCategories(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<C> cQ = cB.createQuery(fbSecurity.getClassCategory());
@@ -285,7 +285,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	{
 		if(ObjectUtils.anyNull(user,role)) {return false;}
 		
-		EjbSecurityQuery<C,R,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+		EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 		query.add(user);
 		query.add(role);
 		
@@ -298,7 +298,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 //		}
 //		return false;
 	}
-	@Override public List<R> fSecurityRoles(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	@Override public List<R> fSecurityRoles(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<R> cQ = cB.createQuery(fbSecurity.getClassRole());
@@ -332,7 +332,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	@Override public List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<U> cQ = cB.createQuery(fbSecurity.getClassUsecase());
@@ -348,13 +348,23 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<A> fSecurityActions(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	@Override public List<A> fSecurityActions(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<A> cQ = cB.createQuery(fbSecurity.getClassAction());
+		Root<A> root = cQ.from(fbSecurity.getClassAction());
+		super.rootFetch(root, query);
+		
+		cQ.select(root);
+		cQ.where(cB.and(pAction(cB,query,root)));
+		this.sortAction(cB,cQ,query,root);
+		
+		TypedQuery<A> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
 	}
 	
-	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<M> cQ = cB.createQuery(fbSecurity.getClassMenu());
@@ -488,7 +498,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return fStaffURD(cStaff,users,roles,domains);
 	}
 	
-	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,U,A,CTX,USER> query)
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<S> cQ = cB.createQuery(cStaff);
@@ -614,7 +624,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return result;
 	}
 	
-	private Predicate[] pCategory(CriteriaBuilder cB, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<C> root)
+	private Predicate[] pCategory(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<C> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -650,7 +660,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	private void sortCategoryBy(CriteriaBuilder cB, CriteriaQuery<C> cQ, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<C> root)
+	private void sortCategoryBy(CriteriaBuilder cB, CriteriaQuery<C> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<C> root)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
@@ -665,7 +675,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	private Predicate[] pRole(CriteriaBuilder cB, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<R> root)
+	private Predicate[] pRole(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<R> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		if(ObjectUtils.isNotEmpty(query.getSecurityRole())) {predicates.add(root.in(query.getSecurityRole()));}
@@ -694,7 +704,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	private void sortRoleBy(CriteriaBuilder cB, CriteriaQuery<R> cQ, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<R> root)
+	private void sortRoleBy(CriteriaBuilder cB, CriteriaQuery<R> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<R> root)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
@@ -716,7 +726,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	private Predicate[] pUsecase(CriteriaBuilder cB, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<U> root)
+	private Predicate[] pUsecase(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<U> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		for(JeeslCqBoolean c : ListUtils.emptyIfNull(query.getCqBooleans()))
@@ -742,7 +752,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	private void sortUsecase(CriteriaBuilder cB, CriteriaQuery<U> cQ, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<U> root)
+	private void sortUsecase(CriteriaBuilder cB, CriteriaQuery<U> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<U> root)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
@@ -764,7 +774,50 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	private Predicate[] pMenu(CriteriaBuilder cB, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<M> root)
+	private Predicate[] pAction(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		for(JeeslCqBoolean c : ListUtils.emptyIfNull(query.getCqBooleans()))
+		{
+			if(c.getPath().equals(CqLiteral.path(JeeslSecurityRole.Attributes.visible))) //dummy
+			{
+				Expression<Boolean> e = root.get(JeeslSecurityRole.Attributes.visible.toString());
+				BooleanPredicateBuilder.add(cB,predicates,c,e);
+			}
+			
+			else {logger.warn("NYI "+JeeslCqBoolean.class.getSimpleName()+" path: "+c.toString());}
+		}
+		if(ObjectUtils.isNotEmpty(query.getSecurityCategory()))
+		{
+			Path<C> pCategory = root.get(JeeslSecurityRole.Attributes.category.toString());
+			predicates.add(pCategory.in(query.getSecurityCategory()));
+		}
+
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	private void sortAction(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		List<Order> orders = new ArrayList<>();
+		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+//			if(c.getPath().equals(CqOrdering.path(JeeslSecurityRole.Attributes.position)))
+//			{
+//				Expression<Integer> ePosition = root.get(JeeslSecurityRole.Attributes.position.toString());
+//				SortByPredicateBuilder.addByInteger(cB,orders,c,ePosition);
+//			}
+//			else if(c.getPath().equals(CqOrdering.path(JeeslSecurityRole.Attributes.category,JeeslSecurityCategory.Attributes.position)))
+//			{
+//				Path<C> pCategory = root.get(JeeslSecurityRole.Attributes.category.toString());
+//				Expression<Integer> ePosition = pCategory.get(JeeslSecurityCategory.Attributes.position.toString());
+//				SortByPredicateBuilder.addByInteger(cB,orders,c,ePosition);
+//			}
+//			
+//			else {logger.warn("No SortBy Handling for "+c.toString());}	
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
+	}
+	
+	private Predicate[] pMenu(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<M> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -776,7 +829,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	private void sortMenuBy(CriteriaBuilder cB, CriteriaQuery<M> cQ, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<M> root)
+	private void sortMenuBy(CriteriaBuilder cB, CriteriaQuery<M> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<M> root)
 	{
 		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
 		{
@@ -800,7 +853,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		}
 	}
 	
-	private <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> Predicate[] pStaff(CriteriaBuilder cB, JeeslSecurityQuery<C,R,U,A,CTX,USER> query, Root<S> root)
+	private <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> Predicate[] pStaff(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<S> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		

@@ -182,7 +182,7 @@ public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescript
 	{
 		roles.clear();
 		
-		EjbSecurityQuery<C,R,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+		EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 		query.add(category);
 		query.orderBy(CqOrdering.ascending(JeeslSecurityRole.Attributes.category,JeeslSecurityCategory.Attributes.position));
 		query.orderBy(CqOrdering.ascending(JeeslSecurityRole.Attributes.position));

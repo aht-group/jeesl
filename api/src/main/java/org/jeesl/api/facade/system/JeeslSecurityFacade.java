@@ -36,11 +36,11 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	<WC extends JeeslSecurityWithCategory<C>> List<WC> allForCategory(Class<WC> clWc, Class<C> clC, String catCode) throws JeeslNotFoundException;
 	<E extends Enum<E>> C fSecurityCategory(JeeslSecurityCategory.Type type, E code);
 	
-	List<C> fSecurityCategories(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
-	List<R> fSecurityRoles(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
-	List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
-	List<M> fSecurityMenus(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
-	List<A> fSecurityActions(JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
+	List<C> fSecurityCategories(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
+	List<R> fSecurityRoles(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
+	List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
+	List<M> fSecurityMenus(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
+	List<A> fSecurityActions(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
 	
 	List<V> allViewsForUser(USER user);
 	
@@ -59,7 +59,7 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	boolean hasSecurityRole(USER user, R role);
 	
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> S fStaff(Class<S> cStaff, USER user, R role, D1 domain) throws JeeslNotFoundException;
-	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,U,A,CTX,USER> query);
+	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaff(Class<S> cStaff, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffU(Class<S> cStaff, USER user);
 //	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffR(Class<S> cStaff, R role);
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffD(Class<S> cStaff, D1 domain);
