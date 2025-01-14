@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
@@ -15,6 +17,8 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
@@ -50,6 +54,7 @@ public class EjbSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	
 	//JEESL-CQ
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(JeeslCqBoolean bool) {super.addCqBoolean(bool); return this;}
+	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(JeeslCqLiteral bool) {super.addCqLiteral(bool); return this;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
 	
 	//Lists
@@ -63,6 +68,7 @@ public class EjbSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
+	// System - Security
 	private List<C> securityCategory;
 	@Override public List<C> getSecurityCategory() {return securityCategory;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(C ejb) {if(Objects.isNull(securityCategory)) {securityCategory = new ArrayList<>();} securityCategory.add(ejb); return this;}
@@ -75,7 +81,6 @@ public class EjbSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	@Override public List<V> getSecurityView() {return securityView;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(V ejb) {if(Objects.isNull(securityView)) {securityView = new ArrayList<>();} securityView.add(ejb); return this;}
 
-	
 	private List<A> securityAction;
 	@Override public List<A> getSecurityAction() {return securityAction;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(A ejb) {if(Objects.isNull(securityAction)) {securityAction = new ArrayList<>();} securityAction.add(ejb); return this;}
@@ -87,4 +92,18 @@ public class EjbSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	private List<USER> securityUser;
 	@Override public List<USER> getUsers() {return securityUser;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(USER ejb) {if(Objects.isNull(securityUser)) {securityUser = new ArrayList<>();} securityUser.add(ejb); return this;}
+	
+	
+    public <E extends Enum<E>> A querySingle(JeeslSecurityFacade<C,R,V,U,A,CTX,?,USER> fSecurity, V view, E actionCode) throws JeeslNotFoundException
+    {
+    	EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+    	query.add(view);
+    	query.add(CqLiteral.exact("mfaDaily",CqLiteral.path(actionCode)));
+		
+    	List<A> list = fSecurity.fSecurityActions(query);
+    	if(list.isEmpty()) {throw new JeeslNotFoundException("NotFound A");}
+    	if(list.size()>1) {throw new JeeslNotFoundException("Multiple Results");}
+    	
+    	return list.get(0);
+    }
 }

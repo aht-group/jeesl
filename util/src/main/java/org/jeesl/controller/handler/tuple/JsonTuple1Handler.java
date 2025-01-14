@@ -116,7 +116,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		if(jcpA!=null && jcpA.provides(cA)){Collections.sort(listA, jcpA.provide(cA));}
 	}	
 	
-	public boolean contains(A a){return map1.containsKey(a);}
+	public boolean contains(A a) {return map1.containsKey(a);}
 	public JsonTuple value(A a)
 	{
 		JsonTuple1<A> json = map1.get(a);
@@ -135,6 +135,18 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		if(!this.contains(a)){return null;}
 		{
 			return map1.get(a).getSum1();
+		}
+	}
+	
+	public void applyDefault(long value)
+	{
+		for(A a : listA)
+		{
+			if(!this.contains(a))
+			{
+				JsonTuple1<A> t = JsonTupleFactory.build1(a, 0, JsonTupleFactory.Type.count);
+				map1.put(a, t);
+			}
 		}
 	}
 	

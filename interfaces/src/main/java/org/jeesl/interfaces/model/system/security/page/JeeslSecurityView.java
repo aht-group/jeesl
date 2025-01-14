@@ -35,7 +35,7 @@ public interface JeeslSecurityView<L extends JeeslLang, D extends JeeslDescripti
 					JeeslSecurityWithCategory<C>,
 					JeeslSecurityWithActions<A>
 {
-	public enum Attributes {category}
+	public enum Attributes {category,roles}
 	public static final String extractId = "securityViews";
 	public enum Code{sSecPageErrorExpired,sSecPageLoginRequired}
 
