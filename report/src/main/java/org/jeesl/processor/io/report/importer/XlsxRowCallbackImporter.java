@@ -14,11 +14,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellReference;
 import org.exlp.interfaces.system.property.Configuration;
-import org.jeesl.controller.processor.system.io.ssi.AbstractSsiXlsMapper;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.json.system.io.report.xls.JsonXlsCellFactory;
 import org.jeesl.factory.json.system.io.report.xls.JsonXlsColumnFactory;
 import org.jeesl.interfaces.controller.processor.io.report.XlsxImportCallback;
+import org.jeesl.interfaces.controller.processor.io.report.XlsxImportMapper;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsColumn;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
@@ -41,7 +41,7 @@ public class XlsxRowCallbackImporter
 	protected int indexRowStart; public void setIndexRowStart(int indexRowStart) {this.indexRowStart = indexRowStart;}
 	
 	private XlsxImportCallback callback; public void callback(XlsxImportCallback callback) {this.callback=callback;}
-	private AbstractSsiXlsMapper mapper; public void mapper(AbstractSsiXlsMapper mapper) {this.mapper=mapper;}
+	private XlsxImportMapper mapper; public void mapper(XlsxImportMapper mapper) {this.mapper=mapper;}
 	
 	public XlsxRowCallbackImporter(Configuration config)
 	{
