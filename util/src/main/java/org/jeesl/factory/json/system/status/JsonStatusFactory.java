@@ -14,10 +14,10 @@ public class JsonStatusFactory<L extends JeeslLang, D extends JeeslDescription,S
 	private final String localeCode;
 	private final JsonStatus q;
 	
-	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>> JsonStatusFactory<L,D,S> instance(String localeCode, JsonStatus q)
-	{
-		return new JsonStatusFactory<>(localeCode,q);
-	}
+	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>, E extends Enum<E>> JsonStatusFactory<L,D,S>
+		instance(E localeCode, JsonStatus q) {return new JsonStatusFactory<>(localeCode.toString(),q);}
+	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>> JsonStatusFactory<L,D,S>
+		instance(String localeCode, JsonStatus q) {return new JsonStatusFactory<>(localeCode,q);}
 	
 	public JsonStatusFactory(String localeCode, JsonStatus q)
 	{
