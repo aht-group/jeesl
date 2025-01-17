@@ -28,8 +28,7 @@
 	<composite:implementation>
 		<p:outputPanel rendered="#{empty cc.attrs.listener}"
 						styleClass="#{cc.attrs.styleClass}"
-						layout="inline"
-					   >
+						layout="inline">
 			<h:graphicImage id="image"
 							value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"
 							rendered="#{(empty cc.attrs.ejb) or
@@ -50,8 +49,7 @@
 					   oncomplete="#{cc.attrs.oncomplete}"
 					   immediate="#{cc.attrs.immediate}"
 					   styleClass="#{cc.attrs.styleClass}">
-						<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
-						<f:attribute name="value" value="#{cc.attrs.textLink}"/>
+						
 			<h:graphicImage id="image2"
 							value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"
 							rendered="#{(empty cc.attrs.ejb) or
@@ -60,6 +58,7 @@
 										)}"
 							height="#{cc.attrs.height}">
 			</h:graphicImage>
+			<h:outputLabel value="#{cc.attrs.textLink}" rendered="#{not empty cc.attrs.textLink}"/>
 			<p:tooltip for="image2" value="#{cc.attrs.tooltip}"/>
 		</p:commandLink>
 		

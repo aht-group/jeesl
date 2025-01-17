@@ -53,16 +53,14 @@
 							rendered="#{(empty cc.attrs.ejb) or
 							(
 								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
-							)}"
-							>
-					<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
-					<f:attribute name="value" value="#{cc.attrs.textLink}"/>
+							)}">
 					<h:graphicImage id="image2" rendered="#{not cc.attrs.disabled}">
 						<f:attribute name="height" value="#{cc.attrs.height}"/>
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
 						<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
 					</h:graphicImage>
+					<h:outputLabel value="#{cc.attrs.textLink}" rendered="#{not empty cc.attrs.textLink}"/>
 				</p:commandLink>
 			</c:if>
 			
@@ -97,16 +95,14 @@
 							rendered="#{(empty cc.attrs.ejb) or
 							(
 								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
-							)}"
-							>
-				<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="style" value="margin:3px;"/></c:if>
-				<f:attribute name="value" value="#{cc.attrs.textLink}"/>
+							)}">
 				<h:graphicImage id="image2">
 					<f:attribute name="height" value="#{cc.attrs.height}"/>
 					<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
 					<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
 					<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
 				</h:graphicImage>
+				<h:outputLabel value="#{cc.attrs.textLink}" rendered="#{not empty cc.attrs.textLink}"/>
 			</p:commandLink>
 			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" closable="false"
 							 message="#{cc.attrs.confirmMessage}" styleClass="jeesl-dialog">

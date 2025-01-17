@@ -679,7 +679,7 @@ $border: $border-width solid var(--container-border-colour);
 		padding: $wide-spacing 0;
 	}
 	
-	.#{$class}-header, thead th {
+	.#{$class}-header, > thead th {
 		align-items: center;
 		background-image: var(--panel-content-select-dropdown-header-background);
 		background-repeat: repeat;
@@ -728,9 +728,14 @@ $border: $border-width solid var(--container-border-colour);
 			}
 		}
 	}
+	
+	> thead th {
+		display: table-cell;
+		text-align: center;
+	}
 }
 
-.jeesl-selectonetable {
+.ui-selectonemenu-panel .ui-selectonemenu-table {
 	@include headlined-overlay(ui-selectonemenu);
 }
 
