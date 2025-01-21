@@ -20,6 +20,8 @@ public class IntegerPredicateBuilder
 		switch(c.getType())
 		{
 			case IsValue: predicates.add(cB.equal(eInteger,c.getValue())); break;
+			case IsNull: predicates.add(cB.isNull(eInteger)); break;
+			case NonNull: predicates.add(cB.isNotNull(eInteger)); break;
 			default: logger.error("NYI Type: "+c.toString());
 		}
 	}

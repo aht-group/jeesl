@@ -16,7 +16,8 @@ public class CqInteger implements JeeslCqInteger
 
 	public static CqInteger isValue(Integer value, String path) {return new CqInteger(JeeslCqInteger.Type.IsValue,value,path);}
 	public static CqInteger notValue(Integer value, String path) {return new CqInteger(JeeslCqInteger.Type.NotValue,value,path);}
-	public static CqInteger nullValue(String path) {return new CqInteger(JeeslCqInteger.Type.IsNull,null,path);}
+	public static CqInteger isNull(String path) {return new CqInteger(JeeslCqInteger.Type.IsNull,null,path);}
+	public static CqInteger nonNull(String path) {return new CqInteger(JeeslCqInteger.Type.NonNull,null,path);}
 
 	private CqInteger(JeeslCqInteger.Type type, Integer value, String path)
 	{
