@@ -19,5 +19,5 @@ public interface JeeslIoReportCategory <L extends JeeslLang, D extends JeeslDesc
 		extends Serializable,EjbPersistable,
 				EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
-	
+	public enum Attributes{position}
 }
