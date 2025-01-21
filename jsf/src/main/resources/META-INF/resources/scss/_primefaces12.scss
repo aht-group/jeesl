@@ -121,6 +121,10 @@ body {
 		border: $border;
 		box-shadow: $overlay-shadow;
 		
+		.ui-selectonemenu-filter-container + .ui-selectonemenu-items-wrapper table.ui-selectonemenu-items {
+			margin-top: 0;
+		}
+		
 		table.ui-selectonemenu-items {
 			border-radius: 0;
 			margin: $half-spacing 0;

@@ -589,7 +589,7 @@ $border: $border-width solid var(--container-border-colour);
 			}
 		}
 		
-		.#{$class}-header .#{$class}-filter-container {
+		.#{$class}-filter-container {
 			margin: 0 $half-spacing;
 			
 			.ui-inputfield {
@@ -621,7 +621,7 @@ $border: $border-width solid var(--container-border-colour);
 				max-height: 400px !important;
 			}
 			
-			.#{$class}-list {
+			.#{$class}-list, .ui-selectonemenu-table tbody {
 				@include select-list($class);
 			}
 		}
@@ -689,6 +689,7 @@ $border: $border-width solid var(--container-border-colour);
 		color: var(--panel-content-select-dropdown-header-foreground);
 		display: flex;
 		font-size: 1.2em;
+		font-weight: bold;
 		margin: 0;
 		padding: 0;
 		text-shadow: none;
@@ -699,32 +700,13 @@ $border: $border-width solid var(--container-border-colour);
 		
 		.#{$class}-title, .ui-outputlabel {
 			flex-grow: 1;
+			font-weight: bold;
 			line-height: $ls-element-height;
 			margin: 0;
 			order: 1;
 			
 			@media (max-width: 768px) {
 				line-height: $ls-element-height-mobile;
-			}
-		}
-		
-		.ui-icon {
-			@include icon();
-			@include vertical-center(after);
-			
-			height: 100%;
-			white-space: nowrap;
-			width: 100%;
-
-			&:before {
-				color: var(--panel-content-select-dropdown-header-foreground);
-				display: inline-block;
-				vertical-align: middle;
-				width: 100%;
-
-				@media (max-width: 768px) {
-					font-size: 2.5em;
-				}
 			}
 		}
 	}
@@ -735,12 +717,57 @@ $border: $border-width solid var(--container-border-colour);
 	}
 }
 
-.ui-selectonemenu-panel .ui-selectonemenu-table {
-	@include headlined-overlay(ui-selectonemenu);
+@mixin headlined-overlay-filter($class) {
+	.ui-icon {
+		@include icon();
+		@include vertical-center(after);
+		
+		font-size: 1.2rem;
+		height: 100%;
+		white-space: nowrap;
+		width: 100%;
+
+		&:before {
+			color: var(--panel-content-select-dropdown-header-foreground);
+			display: inline-block;
+			vertical-align: middle;
+			width: 100%;
+
+			@media (max-width: 768px) {
+				font-size: 2.5em;
+			}
+		}
+	}
+}
+
+.ui-selectonemenu-panel {
+	@include headlined-overlay-filter(ui-selectonemenu);
+	
+	.ui-selectonemenu-filter-container {
+		align-items: center;
+		background: var(--panel-content-select-dropdown-header-background);
+		display: flex;
+		height: $ls-element-height;
+		margin: $half-spacing 0;
+		padding: 0 $half-spacing;
+		
+		.ui-icon {
+			right: $regular-spacing;
+		}
+	}
+	
+	.ui-selectonemenu-items-wrapper .ui-selectonemenu-table {
+		@include headlined-overlay(ui-selectonemenu);
+		
+		tbody .ui-selectonemenu-item {
+			display: table-row;
+		}
+	}
 }
 
 .ui-selectcheckboxmenu-panel {
 	@include headlined-overlay(ui-selectcheckboxmenu);
+	@include headlined-overlay-filter(ui-selectcheckboxmenu);
 	
 	background-size: auto;
 	
@@ -751,7 +778,7 @@ $border: $border-width solid var(--container-border-colour);
 		    align-items: center;
 		    display: flex;
 			flex: 1;
-		    height: 26px;
+		    height: $ls-element-height;
 		}
 		
 		.ui-selectcheckboxmenu-close {

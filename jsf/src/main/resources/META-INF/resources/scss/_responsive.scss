@@ -3741,7 +3741,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-datatable, .ui-datatable.ui-sortable-helper, .ui-selectonemenu-panel .ui-selectonemenu-table {
+.jeesl-datatable, .ui-datatable.ui-sortable-helper {
 	@include jeesl-table-titlebar;
 	
 	border: $border;
