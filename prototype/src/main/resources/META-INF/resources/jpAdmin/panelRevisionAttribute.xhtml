@@ -65,7 +65,7 @@
 				<jtp:label entity="IoLabelAttribute" code="entity" rendered="#{not empty cc.attrs.bean.attribute.relation}"/>
 				<p:selectOneMenu rendered="#{not empty cc.attrs.bean.attribute.relation}"
 							value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false"
-							var="entity" filter="true" filterMatchMode="contains" >
+							var="entity" filter="true" filterMatchMode="contains" styleClass="jeesl-selectonetable">
 					<f:selectItems value="#{cc.attrs.bean.links}" var="l" itemLabel="#{l.category.position}.#{l.position} #{l.name[localeCode].lang}" itemValue="#{l}"/>
 					<p:column>
 						<h:outputText value="#{entity.category.position}.#{entity.position}" />

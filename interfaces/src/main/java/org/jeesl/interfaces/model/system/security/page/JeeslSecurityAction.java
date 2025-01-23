@@ -30,7 +30,7 @@ public interface JeeslSecurityAction<L extends JeeslLang, D extends JeeslDescrip
 					EjbWithPositionVisible,EjbWithParentAttributeResolver,
 					EjbWithLang<L>,EjbWithDescription<D>
 {	
-	public enum Attributes{view}
+	public enum Attributes{view,code}
 	
 //	public String toCode2();
 	

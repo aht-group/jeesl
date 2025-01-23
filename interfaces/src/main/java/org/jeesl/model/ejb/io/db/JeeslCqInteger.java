@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface JeeslCqInteger extends Serializable
 {
-	public enum Type {IsValue,NotValue,IsNull}
+	public enum Type {IsValue,NotValue,IsNull,NonNull}
 	
 	Integer getValue();
 	Type getType();

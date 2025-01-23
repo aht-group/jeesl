@@ -1,6 +1,8 @@
 package org.jeesl.controller.processor.system.io.ssi;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
 import org.exlp.controller.handler.io.log.LoggedExit;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.interfaces.controller.processor.io.report.XlsxImportMapper;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
@@ -161,5 +164,15 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 		Double value = row.getCell(index).getNumericCellValue();
 		if(ObjectUtils.isEmpty(value)) {return null;}
 		else return value.longValue();
+	}
+	
+	public LocalDate toDateByCol(Row row, String col) throws UtilsConfigurationException {return this.toDate(row, CellReference.convertColStringToIndex(col));}
+	public LocalDate toDate(Row row, int index) throws UtilsConfigurationException
+	{
+		if(Objects.isNull(row)) {return null;}
+		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		Date value = row.getCell(index).getDateCellValue();
+		if(ObjectUtils.isEmpty(value)) {return null;}
+		else return DateUtil.toLocalDate(value);
 	}
 }

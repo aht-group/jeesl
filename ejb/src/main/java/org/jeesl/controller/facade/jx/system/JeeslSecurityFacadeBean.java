@@ -14,6 +14,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Order;
@@ -326,7 +327,6 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 			else {this.sortRoleBy(cB,cQ,query,root);}
 		}
 		
-		
 		TypedQuery<R> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
 		return tQ.getResultList();
@@ -355,13 +355,92 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		Root<A> root = cQ.from(fbSecurity.getClassAction());
 		super.rootFetch(root, query);
 		
+		Join<A,V> jActionView = null;
+		ListJoin<V,R> jViewRole = null;
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		if(ObjectUtils.isNotEmpty(query.getUsers()))
+		{
+			Root<USER> user = cQ.from(fbSecurity.getClassUserProject());
+			ListJoin<USER,R> roles = user.joinList(JeeslUser.Attributes.roles.toString());
+			
+			jActionView = root.join(JeeslSecurityAction.Attributes.view.toString());
+			jViewRole = jActionView.joinList(JeeslSecurityView.Attributes.roles.toString());
+			
+			predicates.add(cB.equal(jViewRole, roles));
+			predicates.add(user.in(query.getUsers()));
+			cQ.distinct(true);
+		}
+		
+		predicates.addAll(Arrays.asList(pAction(cB,query,root,jActionView)));
+		
 		cQ.select(root);
-		cQ.where(cB.and(pAction(cB,query,root)));
-		this.sortAction(cB,cQ,query,root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		if(ObjectUtils.isEmpty(query.getUsers())) {this.sortAction(cB,cQ,query,root);}
+		else  {logger.warn("Ordering is deactivated when a user is active");}
+
 		
 		TypedQuery<A> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
 		return tQ.getResultList();
+	}
+	private Predicate[] pAction(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root, Join<A,V> jActionView)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getSecurityView()))
+		{
+			if(Objects.isNull(jActionView)) {jActionView = root.join(JeeslSecurityAction.Attributes.view.toString());}
+			predicates.add(jActionView.in(query.getSecurityView()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSecurityCategory()))
+		{
+			if(Objects.isNull(jActionView)) {jActionView = root.join(JeeslSecurityAction.Attributes.view.toString());}
+			Path<C> pCategory = jActionView.get(JeeslSecurityView.Attributes.category.toString());
+			predicates.add(pCategory.in(query.getSecurityCategory()));
+		}
+		
+		
+		
+		for(JeeslCqBoolean c : ListUtils.emptyIfNull(query.getCqBooleans()))
+		{
+			if(c.getPath().equals(CqLiteral.path(JeeslSecurityRole.Attributes.visible))) //dummy
+			{
+				BooleanPredicateBuilder.add(cB,predicates,c,root.<Boolean>get(JeeslSecurityRole.Attributes.visible.toString()));
+			}
+			else {logger.warn("NYI "+JeeslCqBoolean.class.getSimpleName()+" path: "+c.toString());}
+		}
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cq.getPath().equals(CqLiteral.path(JeeslSecurityAction.Attributes.code))) //dummy
+			{
+				LiteralPredicateBuilder.add(cB,predicates,cq,root.<String>get(JeeslSecurityAction.Attributes.code.toString()));
+			}
+			else {logger.warn(cq.nyi(JeeslSecurityAction.class));}
+		}
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	private void sortAction(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		List<Order> orders = new ArrayList<>();
+		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+//			if(c.getPath().equals(CqOrdering.path(JeeslSecurityRole.Attributes.position)))
+//			{
+//				Expression<Integer> ePosition = root.get(JeeslSecurityRole.Attributes.position.toString());
+//				SortByPredicateBuilder.addByInteger(cB,orders,c,ePosition);
+//			}
+//			else if(c.getPath().equals(CqOrdering.path(JeeslSecurityRole.Attributes.category,JeeslSecurityCategory.Attributes.position)))
+//			{
+//				Path<C> pCategory = root.get(JeeslSecurityRole.Attributes.category.toString());
+//				Expression<Integer> ePosition = pCategory.get(JeeslSecurityCategory.Attributes.position.toString());
+//				SortByPredicateBuilder.addByInteger(cB,orders,c,ePosition);
+//			}
+//			
+//			else {logger.warn("No SortBy Handling for "+c.toString());}	
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
 	@Override public List<M> fSecurityMenus(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
@@ -774,48 +853,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	private Predicate[] pAction(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		for(JeeslCqBoolean c : ListUtils.emptyIfNull(query.getCqBooleans()))
-		{
-			if(c.getPath().equals(CqLiteral.path(JeeslSecurityRole.Attributes.visible))) //dummy
-			{
-				Expression<Boolean> e = root.get(JeeslSecurityRole.Attributes.visible.toString());
-				BooleanPredicateBuilder.add(cB,predicates,c,e);
-			}
-			
-			else {logger.warn("NYI "+JeeslCqBoolean.class.getSimpleName()+" path: "+c.toString());}
-		}
-		if(ObjectUtils.isNotEmpty(query.getSecurityCategory()))
-		{
-			Path<C> pCategory = root.get(JeeslSecurityRole.Attributes.category.toString());
-			predicates.add(pCategory.in(query.getSecurityCategory()));
-		}
-
-		return predicates.toArray(new Predicate[predicates.size()]);
-	}
-	private void sortAction(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
-	{
-		List<Order> orders = new ArrayList<>();
-		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
-		{
-//			if(c.getPath().equals(CqOrdering.path(JeeslSecurityRole.Attributes.position)))
-//			{
-//				Expression<Integer> ePosition = root.get(JeeslSecurityRole.Attributes.position.toString());
-//				SortByPredicateBuilder.addByInteger(cB,orders,c,ePosition);
-//			}
-//			else if(c.getPath().equals(CqOrdering.path(JeeslSecurityRole.Attributes.category,JeeslSecurityCategory.Attributes.position)))
-//			{
-//				Path<C> pCategory = root.get(JeeslSecurityRole.Attributes.category.toString());
-//				Expression<Integer> ePosition = pCategory.get(JeeslSecurityCategory.Attributes.position.toString());
-//				SortByPredicateBuilder.addByInteger(cB,orders,c,ePosition);
-//			}
-//			
-//			else {logger.warn("No SortBy Handling for "+c.toString());}	
-		}
-		if(!orders.isEmpty()) {cQ.orderBy(orders);}
-	}
+	
 	
 	private Predicate[] pMenu(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<M> root)
 	{

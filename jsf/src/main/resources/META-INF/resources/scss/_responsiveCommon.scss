@@ -589,7 +589,7 @@ $border: $border-width solid var(--container-border-colour);
 			}
 		}
 		
-		.#{$class}-header .#{$class}-filter-container {
+		.#{$class}-filter-container {
 			margin: 0 $half-spacing;
 			
 			.ui-inputfield {
@@ -621,7 +621,7 @@ $border: $border-width solid var(--container-border-colour);
 				max-height: 400px !important;
 			}
 			
-			.#{$class}-list {
+			.#{$class}-list, .ui-selectonemenu-table tbody {
 				@include select-list($class);
 			}
 		}
@@ -679,7 +679,7 @@ $border: $border-width solid var(--container-border-colour);
 		padding: $wide-spacing 0;
 	}
 	
-	.#{$class}-header, thead th {
+	.#{$class}-header, > thead th {
 		align-items: center;
 		background-image: var(--panel-content-select-dropdown-header-background);
 		background-repeat: repeat;
@@ -689,6 +689,7 @@ $border: $border-width solid var(--container-border-colour);
 		color: var(--panel-content-select-dropdown-header-foreground);
 		display: flex;
 		font-size: 1.2em;
+		font-weight: bold;
 		margin: 0;
 		padding: 0;
 		text-shadow: none;
@@ -699,6 +700,7 @@ $border: $border-width solid var(--container-border-colour);
 		
 		.#{$class}-title, .ui-outputlabel {
 			flex-grow: 1;
+			font-weight: bold;
 			line-height: $ls-element-height;
 			margin: 0;
 			order: 1;
@@ -707,35 +709,65 @@ $border: $border-width solid var(--container-border-colour);
 				line-height: $ls-element-height-mobile;
 			}
 		}
+	}
+	
+	> thead th {
+		display: table-cell;
+		text-align: center;
+	}
+}
+
+@mixin headlined-overlay-filter($class) {
+	.ui-icon {
+		@include icon();
+		@include vertical-center(after);
 		
-		.ui-icon {
-			@include icon();
-			@include vertical-center(after);
-			
-			height: 100%;
-			white-space: nowrap;
+		font-size: 1.2rem;
+		height: 100%;
+		white-space: nowrap;
+		width: 100%;
+
+		&:before {
+			color: var(--panel-content-select-dropdown-header-foreground);
+			display: inline-block;
+			vertical-align: middle;
 			width: 100%;
 
-			&:before {
-				color: var(--panel-content-select-dropdown-header-foreground);
-				display: inline-block;
-				vertical-align: middle;
-				width: 100%;
-
-				@media (max-width: 768px) {
-					font-size: 2.5em;
-				}
+			@media (max-width: 768px) {
+				font-size: 2.5em;
 			}
 		}
 	}
 }
 
-.jeesl-selectonetable {
-	@include headlined-overlay(ui-selectonemenu);
+.ui-selectonemenu-panel {
+	@include headlined-overlay-filter(ui-selectonemenu);
+	
+	.ui-selectonemenu-filter-container {
+		align-items: center;
+		background: var(--panel-content-select-dropdown-header-background);
+		display: flex;
+		height: $ls-element-height;
+		margin: $half-spacing 0;
+		padding: 0 $half-spacing;
+		
+		.ui-icon {
+			right: $regular-spacing;
+		}
+	}
+	
+	.ui-selectonemenu-items-wrapper .ui-selectonemenu-table {
+		@include headlined-overlay(ui-selectonemenu);
+		
+		tbody .ui-selectonemenu-item {
+			display: table-row;
+		}
+	}
 }
 
 .ui-selectcheckboxmenu-panel {
 	@include headlined-overlay(ui-selectcheckboxmenu);
+	@include headlined-overlay-filter(ui-selectcheckboxmenu);
 	
 	background-size: auto;
 	
@@ -746,7 +778,7 @@ $border: $border-width solid var(--container-border-colour);
 		    align-items: center;
 		    display: flex;
 			flex: 1;
-		    height: 26px;
+		    height: $ls-element-height;
 		}
 		
 		.ui-selectcheckboxmenu-close {

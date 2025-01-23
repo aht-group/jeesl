@@ -95,6 +95,16 @@ public class JsonTupleFactory
 		json.setEjb1(t.getEjb1());		
     	return json;
 	}
+	public static <A extends EjbWithId> JsonTuple1<A> build1(A a, long value, JsonTupleFactory.Type...types)
+	{
+		JsonTuple1<A> json = new JsonTuple1<A>();
+		json.setId1(a.getId());
+		json.setEjb1(a);
+
+		JsonTupleFactory.build(value,json,types);
+		
+    	return json;
+	}
 	public static <A extends EjbWithId> JsonTuple1<A> build1(Tuple tuple, JsonTupleFactory.Type...types)
 	{
 		JsonTuple1<A> json = new JsonTuple1<A>();
@@ -139,11 +149,9 @@ public class JsonTupleFactory
 	
 	private static void build(Tuple tuple, int offset, AbstractJsonTuple json, JsonTupleFactory.Type...types)
 	{
-//		logger.info(StringUtil.stars());
 		int index=1;
 		for(JsonTupleFactory.Type type : types)
 		{
-//			logger.info("building Type:"+type);
 			switch(type)
 			{
 				case sum: 	if(index==1)      {json.setSum1(JsonTupleFactory.toDouble(tuple,offset+index));json.setSum(json.getSum1());}
@@ -155,6 +163,22 @@ public class JsonTupleFactory
 							break;
 				case count: if(index==1) {json.setCount1((Long)tuple.get(offset+index));json.setCount(json.getCount1());}
 							else if(index==2) {json.setCount2((Long)tuple.get(offset+index));}
+							else {logger.warn("NYI "+type+" for index="+index);}
+							break;
+			}
+			index++;
+		}
+	}
+	
+	private static void build(long value, AbstractJsonTuple json, JsonTupleFactory.Type...types)
+	{
+		int index=1;
+		for(JsonTupleFactory.Type type : types)
+		{
+			switch(type)
+			{
+				case count: if(index==1) {json.setCount1(value);}
+							else if(index==2) {json.setCount2(value);}
 							else {logger.warn("NYI "+type+" for index="+index);}
 							break;
 			}

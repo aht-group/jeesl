@@ -606,6 +606,8 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		&:hover {
 			background: var(--container-header-action-button-hover-background);
+			color: inherit;
+			text-decoration: none;
 		}
 		
 		&.jeesl-menu-bar-dropdown.jeesl-active {
@@ -614,6 +616,11 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		img {
 			vertical-align: middle;
+		}
+		
+		label {
+			cursor: inherit;
+			padding-right: $half-spacing;
 		}
 	}
 	
@@ -3663,6 +3670,8 @@ body, .ui-widget {
 		.ui-datepicker-calendar {
 			@include inner-table;
 			
+			table-layout: fixed;
+			
 			thead th {
 				padding-left: 0;
 				padding-right: 0;
@@ -3696,6 +3705,13 @@ body, .ui-widget {
 						text-shadow: none;
 						z-index: 0;
 						
+						@media (max-width: 768px) {
+							align-items: center;
+							display: flex;
+							height: 100%;
+							justify-content: center;
+						}
+						
 						&.ui-state-highlight {
 							background: var(--datatable-content-hover-background);
 						}
@@ -3725,7 +3741,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-datatable, .ui-datatable.ui-sortable-helper, .ui-selectonemenu-panel .ui-selectonemenu-table {
+.jeesl-datatable, .ui-datatable.ui-sortable-helper {
 	@include jeesl-table-titlebar;
 	
 	border: $border;
@@ -3776,6 +3792,46 @@ body, .ui-widget {
 					font-family: 'Font Awesome 5 Free';
 					font-size: 2.5em;
 					transition: transform .2s ease-in-out, text-shadow .2s;
+				}
+			}
+		}
+	}
+	
+	// Override for weird missing bottom border on table headers thanks to missing class "innerBorderTop" on ht_master tabler and inability to add.
+	.ht_master ~ .handsontable thead tr:last-child th {
+		border-bottom-width: $border-width;
+	}
+	
+	.handsontable {
+		height: auto !important;
+		
+		.wtHolder {
+			height: auto !important;
+			
+			.wtHider {
+				padding: 0;
+			}
+
+			tr:first-child th {
+				border-top: none;
+			}
+			
+			th {
+				border-top: none;
+				box-sizing: border-box;
+				
+				&:first-child {
+					height: auto !important;
+				}
+				
+				.relative {
+					display: unset;
+					padding: 0;
+					
+					.colHeader {
+						display: unset;
+						line-height: unset;
+					}
 				}
 			}
 		}

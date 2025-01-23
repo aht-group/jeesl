@@ -27,7 +27,7 @@ public interface JeeslIoReport<L extends JeeslLang,D extends JeeslDescription,
 				EjbWithCode,EjbWithPositionVisible,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>
 {
-	public enum Attributes{category}
+	public enum Attributes{category,position}
 	public enum FooterOrientation{left,center,right}
 	
 	CATEGORY getCategory();
