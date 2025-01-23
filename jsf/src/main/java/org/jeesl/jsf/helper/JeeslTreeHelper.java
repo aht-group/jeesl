@@ -7,8 +7,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.validation.constraints.NotNull;
-
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -21,6 +19,7 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.wildfly.common.annotation.NotNull;
 
 public final class JeeslTreeHelper <T extends JeeslTreeElement<T>>
 {
@@ -124,7 +123,7 @@ public final class JeeslTreeHelper <T extends JeeslTreeElement<T>>
 		functor.execute(node);
 		node.getChildren().forEach(child -> forEach(child, functor, breakExpression));
 	}
-	private TreeNode<T> getAncestor(@NotNull TreeNode<T> decendant, int ancestryLevel)
+	private TreeNode<T> getAncestor(TreeNode<T> decendant, int ancestryLevel)
 	{
 		TreeNode<T> ancestor = decendant;
 		for (int i = 0; i < ancestryLevel; i++)

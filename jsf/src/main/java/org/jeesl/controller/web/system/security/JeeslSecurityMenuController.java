@@ -42,7 +42,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.JeeslTreeHelper;
-import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.primefaces.event.DragDropEvent;
@@ -50,6 +49,7 @@ import org.primefaces.event.NodeCollapseEvent;
 import org.primefaces.event.NodeExpandEvent;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TreeDragDropEvent;
+import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -368,22 +368,17 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		helpTree = thDs.build(root.getSections());
     }
 
-<<<<<<< HEAD
-	public void expandHelp() {thDs.expand(helpTree,helpNode);}
-	public void collapseHelp() {thDs.setExpansion(this.helpTree,  false);}
-=======
-    private void buildTree(TreeNode parent, List<DS> sections)
+    private void buildTree(TreeNode<DS> parent, List<DS> sections)
 	{
 		for(DS s : sections)
 		{
-			TreeNode n = new DefaultTreeNode(s, parent);
+			TreeNode<DS> n = new DefaultTreeNode<>(s, parent);
 			if(!s.getSections().isEmpty()) {buildTree(n,s.getSections());}
 		}
 	}
 
-	public void expandHelp() {thMenu.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
-	public void collapseHelp() {thMenu.setExpansion(this.helpTree,  false);}
->>>>>>> refs/remotes/origin/master
+//	public void expandHelp() {thMenu.setExpansion(this.helpNode!=null ? this.helpNode : this.helpTree, true);}
+//	public void collapseHelp() {thMenu.setExpansion(this.helpTree,  false);}
 	public boolean isHelpExpanded() {return this.helpTree != null && this.helpTree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;}
 
 	public void onHelpNodeSelect(NodeSelectEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}

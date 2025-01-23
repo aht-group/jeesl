@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
+import org.jeesl.controller.converter.fc.io.maven.IoMavenVersionConverter;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
@@ -41,14 +42,14 @@ public class EjbIoMavenVersionLazyModel extends LazyDataModel<IoMavenVersion>
 	
 	public EjbIoMavenVersionLazyModel(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven)
 	{
-//		super(new IoMavenVersionConverter());
+		super(new IoMavenVersionConverter());
 		this.fMaven=fMaven;
 		
 		llh = new JeeslLazyListHandler<>();
 	}
 	
-	@Override public IoMavenVersion getRowData(String rowKey) {return llh.getRowData(rowKey);}
-    @Override public Object getRowKey(IoMavenVersion item) {return llh.getRowKey(item);}
+//	@Override public IoMavenVersion getRowData(String rowKey) {return llh.getRowData(rowKey);}
+//    @Override public Object getRowKey(IoMavenVersion item) {return llh.getRowKey(item);}
 
 	private EjbIoMavenQuery query(Map<String,FilterMeta> filterBy)
 	{

@@ -85,12 +85,9 @@ public final class TreeHelper <P extends EjbWithParentId<P>>
 		forEach(startNode, node -> node.setExpanded(expand), node -> getAncestor(node, reach) == startNode);
 	}
 	
-<<<<<<< HEAD
+
 	@Deprecated
-	private TreeNode<P> getAncestor(@NotNull TreeNode<P> decendant, int ancestryLevel)
-=======
-	private TreeNode getAncestor(TreeNode decendant, int ancestryLevel)
->>>>>>> refs/remotes/origin/master
+	private TreeNode<P> getAncestor(TreeNode<P> decendant, int ancestryLevel)
 	{
 		TreeNode<P> ancestor = decendant;
 		for (int i = 0; i < ancestryLevel; i++)
