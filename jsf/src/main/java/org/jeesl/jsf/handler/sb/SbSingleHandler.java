@@ -230,8 +230,8 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	}
 	public void setDefault(T t1, T t2)
 	{
-		if(t1!=null && list.contains(t1)) {selection = t1;}
-		else if(t2!=null && list.contains(t2)) {selection = t2;}
+		if(Objects.nonNull(t1) && list.contains(t1)) {selection = t1;}
+		else if(Objects.nonNull(t2) && list.contains(t2)) {selection = t2;}
 		else {setDefault();}
 	}
 	
