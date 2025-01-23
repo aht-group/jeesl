@@ -23,8 +23,8 @@ public class DatePredicateBuilder
 		switch(cq.getType())
 		{
 			case DbIsEqualOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
-			case DbIsBeforeOrEqual: predicates.add(cB.lessThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().plusDays(1).atStartOfDay()))); break;
-			case DbIsBefore: predicates.add(cB.lessThan(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
+			case LessThanOrEqualTo: predicates.add(cB.lessThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().plusDays(1).atStartOfDay()))); break;
+			case LessThan: predicates.add(cB.lessThan(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
 	}
@@ -34,7 +34,7 @@ public class DatePredicateBuilder
 		switch(cq.getType())
 		{
 			case DbIsEqualOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,cq.getDate())); break;
-			case DbIsBeforeOrEqual: predicates.add(cB.lessThanOrEqualTo(eDate,cq.getDate())); break;
+			case LessThanOrEqualTo: predicates.add(cB.lessThanOrEqualTo(eDate,cq.getDate())); break;
 			case DbIsEqual: predicates.add(cB.equal(eDate,cq.getDate())); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
@@ -45,7 +45,7 @@ public class DatePredicateBuilder
 		switch(cq.getType())
 		{
 			case DbIsEqualOrAfter: predicates.add(cB.greaterThanOrEqualTo(eTime,cq.getDate().atStartOfDay())); break;
-			case DbIsBeforeOrEqual: predicates.add(cB.lessThan(eTime,cq.getDate().plusDays(1).atStartOfDay())); break;
+			case LessThanOrEqualTo: predicates.add(cB.lessThan(eTime,cq.getDate().plusDays(1).atStartOfDay())); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
 	}
