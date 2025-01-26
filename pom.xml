@@ -86,10 +86,6 @@
     	<maven-ejb-plugin.version>2.3</maven-ejb-plugin.version>
     </properties>
     
-	<prerequisites>
-		<maven>3.1</maven>
-	</prerequisites>
-    
 	<licenses>
 		<license>
 			<name>GNU General Public License</name>
