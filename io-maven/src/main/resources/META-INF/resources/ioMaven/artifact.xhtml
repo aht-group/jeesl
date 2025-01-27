@@ -139,6 +139,8 @@
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelVersion()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveVersion()}" update=":#{cc.id}:sArtifact"/>
+						<j:svg id="iClipboard" type="jeeslClone"/>
+						<pe:clipboard trigger="iClipboard:link" text="#{cc.attrs.ctrl.clipboard}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid>
