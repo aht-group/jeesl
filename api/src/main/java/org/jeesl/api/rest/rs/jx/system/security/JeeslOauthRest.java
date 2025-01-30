@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import org.jeesl.api.rest.i.system.security.JeeslOauthRestInterface;
 import org.jeesl.model.json.system.security.oauth.JsonAccessToken;
 import org.jeesl.model.json.system.security.oauth.JsonOauthConfig;
+import org.jeesl.model.json.system.security.oauth.JsonWebKeys;
 
 @Path("/oauth")
 public interface JeeslOauthRest extends JeeslOauthRestInterface
@@ -22,6 +23,11 @@ public interface JeeslOauthRest extends JeeslOauthRestInterface
 	@GET @Path("/.well-known/openid-configuration")
 	@Produces(MediaType.APPLICATION_JSON) 
 	JsonOauthConfig config();
+	
+	public static String urlJwks = "/.well-known/jwks.json";
+	@GET @Path("/.well-known/jwks.json")
+	@Produces(MediaType.APPLICATION_JSON) 
+	JsonWebKeys jwks();
 	
 	@POST @Path("/token")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)

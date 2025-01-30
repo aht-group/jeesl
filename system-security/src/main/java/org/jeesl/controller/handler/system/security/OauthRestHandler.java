@@ -6,14 +6,17 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.jeesl.api.rest.i.system.security.JeeslOauthRestInterface;
 import org.jeesl.interfaces.controller.handler.system.security.JeeslOauthConfigProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.model.ejb.system.security.oauth.SecurityOauthKey;
 import org.jeesl.model.json.system.security.oauth.JsonAccessToken;
 import org.jeesl.model.json.system.security.oauth.JsonOauthConfig;
+import org.jeesl.model.json.system.security.oauth.JsonWebKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -149,6 +152,16 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 		json.setTokenRefresh("tr");
 		json.setTokenId("tid");
 		
+		return json;
+	}
+	
+	@Override public JsonWebKeys jwks()
+	{
+		List<SecurityOauthKey> keys = facade.allVisible(SecurityOauthKey.class);
+		logger.info(SecurityOauthKey.class.getSimpleName()+" "+keys.size());
+		
+		JsonWebKeys json = new JsonWebKeys();
+//		return handler.jsonWebKeySet();
 		return json;
 	}
 	
