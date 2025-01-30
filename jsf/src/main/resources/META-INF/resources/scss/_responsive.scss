@@ -19,11 +19,11 @@ $enable-pointer-cursor-for-buttons: true;
 	top: 0;
 }
 
-@mixin background-overlay($background-colour) {
+@mixin background-overlay($background-colour, $opacity: 0) {
 	@include pseudo-overlay;
 	
 	background: $background-colour;
-	opacity: 0;
+	opacity: $opacity;
 	transition: opacity $transition-duration ease-in-out;
 }
 
@@ -2839,13 +2839,6 @@ body, .ui-widget {
 				&:after {
 					@include background-overlay(var(--statusbar-item-hover-background));
 					
-					background: var(--statusbar-item-hover-background);
-					position: absolute;
-					top: 0;
-					left: 0;
-					opacity: 0;
-					width: 100%;
-					transition: opacity .2s ease-in-out;
 					z-index: 0;
 				}
 				
@@ -3519,9 +3512,12 @@ body, .ui-widget {
 }
 
 @mixin inner-table {
-	border-collapse: collapse;
+	background: transparent;
+	border-collapse: collapse !important; // Override handsontable super specific selector nonsense.
 	border-style: hidden;
+	font-size: 1em;
 	height: 100%;
+	line-height: 1.25em;
 	margin: 0;
 	table-layout: auto;
 
@@ -3531,14 +3527,21 @@ body, .ui-widget {
 		}
 	}
 	
-	thead th {
-		background: var(--container-header-background);
-		border: $border;
-		border-top: 0;
-		box-shadow: 0 -1px 0 inset $white-35;
-		color: var(--container-header-foreground);
-		padding: $table-header-padding;
-		position: relative;
+	thead tr {
+		&:first-child {
+			border-top: none;
+		}
+		
+		th {
+			background: var(--container-header-background);
+			border-color: var(--container-border-colour) !important; // Override handsontable super specific selector nonsense.
+			border-style: solid;
+			border-width: 0 $border-width $border-width !important; // Override handsontable super specific selector nonsense.
+			box-shadow: 0 -1px 0 inset $white-35;
+			color: var(--container-header-foreground);
+			padding: $table-header-padding;
+			position: relative;
+		}
 	}
 	
 	tbody, .ui-datatable-data {
@@ -3548,11 +3551,14 @@ body, .ui-widget {
 		tr {
 			background: transparent;
 			border: none;
-			// TODO: Check!
-			border-color: $soft-grey $light-grey;
+			border-color: var(--datatable-content-border-colour);
 			
 			&:nth-child(2n) {
 				background: var(--datatable-content-odd-row-background);
+				
+				td {
+					background: transparent;
+				}
 			}
 		}
 		
@@ -3563,12 +3569,16 @@ body, .ui-widget {
 		td {
 			@include icon-default-size;
 
+			background: transparent !important;
 			border-style: solid;
 			border-color: inherit;
 			border-width: 0 0 $border-width $border-width;
+			box-sizing: border-box; // Override handsontable super specific selector nonsense.
+			line-height: 1.25em;
 			padding: $half-spacing $regular-spacing;
 
 			> * {
+				font-weight: 500;
 				vertical-align: middle;
 			}
 		}
@@ -3580,8 +3590,8 @@ body, .ui-widget {
 			border-color: $soft-grey $light-grey;
 		}
 
-		tr.ui-state-highlight, .jeesl-cell-select > label.selected {
-			background: var(--datatable-content-highlight-background);
+		tr.ui-state-highlight, td.highlight, .jeesl-cell-select > label.selected {
+			background: var(--datatable-content-highlight-background) !important;
 			// TODO: Check!
 			border-color: var(--datatable-content-highlight-background);
 			color: var(--datatable-content-highlight-foreground);
@@ -3797,11 +3807,6 @@ body, .ui-widget {
 		}
 	}
 	
-	// Override for weird missing bottom border on table headers thanks to missing class "innerBorderTop" on ht_master tabler and inability to add.
-	.ht_master ~ .handsontable thead tr:last-child th {
-		border-bottom-width: $border-width;
-	}
-	
 	.handsontable {
 		height: auto !important;
 		
@@ -3809,30 +3814,53 @@ body, .ui-widget {
 			height: auto !important;
 			
 			.wtHider {
-				padding: 0;
+				height: auto !important;
 			}
-
-			tr:first-child th {
-				border-top: none;
+		}
+		
+		.wtBorder {
+			background-color: transparent !important;
+			
+			&.area {
+				z-index: 10;
 			}
 			
-			th {
-				border-top: none;
-				box-sizing: border-box;
+			&:before {
+				@include background-overlay(var(--datatable-content-highlight-border-colour), 1);
+			}
+			
+			&:first-child:before {
+				bottom: -1px;
+				right: -1px;
+				top: 1px;
+			}
+			&:nth-child(2):before {
+				top: 1px;
+			}
+			&:nth-child(4):before {
+				left: 1px;
+				right: -1px;
+				top: 1px;
+			}
+			&:last-child {
+				margin-left: 1px;
+			}
+		}
+		
+		.handsontableInputHolder {
+			&:before {
+				@include background-overlay(var(--panel-content-input-background), 1);
 				
-				&:first-child {
-					height: auto !important;
-				}
-				
-				.relative {
-					display: unset;
-					padding: 0;
-					
-					.colHeader {
-						display: unset;
-						line-height: unset;
-					}
-				}
+				border: 2px solid var(--datatable-content-focus-cell-edit-border-colour);
+				left: 1px;
+				right: -1px;
+				top: 1px;
+				z-index: -1;
+			}
+			
+			.handsontableInput {
+				background: transparent;
+				box-shadow: none;
 			}
 		}
 	}
@@ -3841,13 +3869,20 @@ body, .ui-widget {
 		@include inner-table;
 		
 		thead th {
+			line-height: 1.25em;
+			border-top: none;
+			vertical-align: middle;
+			
+			&:first-child {
+				border-left: none;
+			}
+		
 			&.jeesl-column-min-width {
 				white-space: nowrap;
 			}
 			
 			&.jeesl-datatable-header-vertical {
 				text-align: center;
-				vertical-align: middle;
 				
 				.ui-column-title {
 					-ms-writing-mode: tb-rl;-webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;
@@ -3907,6 +3942,16 @@ body, .ui-widget {
 					margin-bottom: $header-element-height-mobile;
 				}
 			}
+
+			.relative {
+				display: unset;
+				padding: 0;
+				
+				.colHeader {
+					display: unset;
+					line-height: unset;
+				}
+			}
 			
 			.ui-column-title .ui-widget {
 				font-weight: 700;
@@ -3928,10 +3973,23 @@ body, .ui-widget {
 			}
 		}
 		
-		thead th, tbody td {
+		thead th, tbody th, tbody td {
+			box-sizing: border-box;
+			
+			&:first-child {
+				border-left-width: 0;
+				border-right-width: $border-width;
+			}
+			
 			&.jeesl-min-width-column {
 				white-space: nowrap;
 				width: 0px;
+			}
+		}
+		
+		tbody tr:last-child {
+			th, td {
+				border-bottom-width: 0;
 			}
 		}
 		
@@ -3963,6 +4021,10 @@ body, .ui-widget {
 						padding: $half-spacing $regular-spacing;
 					}
 				}
+				
+				&:before {
+					display: none; // Hide handsontable's strange blue background overlay on selected cells.
+				}
 			}
 		}
 	}
@@ -3971,6 +4033,7 @@ body, .ui-widget {
 		border: $border;
 		border-width: $border-width 0 0;
 		box-shadow: 0 -1px 0 inset $white-35;
+		margin: 0;
 		min-height: $element-height;
 		padding: 0;
 		
@@ -3982,11 +4045,17 @@ body, .ui-widget {
 		.ui-datatable-footer-actions {
 			@include jeesl-footer-action-container;
 		}
+		
+		.ui-inputfield {
+			margin: $slim-spacing;
+			min-height: #{$element-height - 2 * $slim-spacing};
+			padding: #{$half-spacing - $slim-spacing} $regular-spacing !important;
+			width: calc(100 - #{2 * $slim-spacing});
+		}
 	}
 	
 	.ui-paginator {
 		@include jeesl-footer-action-container;
-		
 		
 		.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last {
 			overflow: hidden;

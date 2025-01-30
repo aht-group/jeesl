@@ -9,6 +9,7 @@
     
 	<composite:interface>
 		<composite:attribute name="localeCode" required="false" default="#{localeCode}"/>
+		<composite:attribute name="startOfWeek" required="false" default="1"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -24,8 +25,8 @@
 				dayNamesShort : [ 'Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam' ],
 				dayNamesMin : [ 'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa' ],
 				weekHeader : 'Semana',
-				firstDay : 1,
-				firstDayOfWeek: 1,
+				firstDay : #{cc.attrs.startOfWeek},
+				firstDayOfWeek: #{cc.attrs.startOfWeek},
 				isRTL : false,
 				showMonthAfterYear : false,
 				yearSuffix : '',
