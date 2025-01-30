@@ -53,6 +53,11 @@
     		<artifactId>jeesl-util</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-xml</artifactId>
+    		<scope>provided</scope>
+		</dependency>
 		
 		<!-- JEESL Modules-->
 		<dependency>
