@@ -1,24 +1,50 @@
 package org.jeesl.controller.handler.system.security;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.http.client.utils.URIBuilder;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.rest.i.system.security.JeeslOauthRestInterface;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.json.system.security.JeeslRestBasicAuthenticator;
 import org.jeesl.interfaces.controller.handler.system.security.JeeslOauthConfigProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.system.security.oauth.JeeslSecurityOauthKeyType;
 import org.jeesl.model.ejb.system.security.oauth.SecurityOauthKey;
+import org.jeesl.model.ejb.system.security.oauth.SecurityOauthKeyType;
+import org.jeesl.model.ejb.system.security.oauth.SecurityOauthToken;
+import org.jeesl.model.json.io.ssi.mobile.JsonLogin;
 import org.jeesl.model.json.system.security.oauth.JsonAccessToken;
 import org.jeesl.model.json.system.security.oauth.JsonOauthConfig;
+import org.jeesl.model.json.system.security.oauth.JsonWebKey;
 import org.jeesl.model.json.system.security.oauth.JsonWebKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jose.JWSAlgorithm;
+import com.nimbusds.jose.JWSHeader;
+import com.nimbusds.jose.JWSSigner;
+import com.nimbusds.jose.crypto.RSASSASigner;
+import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 
 public class OauthRestHandler implements JeeslOauthRestInterface
 {
@@ -42,6 +68,7 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 	
 	@Override public JsonOauthConfig config()
 	{
+		logger.info("Requesting CONFIG");
 		if(Objects.isNull(cp)) {throw new IllegalStateException("The OAuth Configuration Provider needs to be set.");}
 		// https://help.akana.com/content/current/cm/api_oauth/oauth_discovery/m_oauth_getOpenIdConnectWellknownConfiguration.htm
 		
@@ -134,9 +161,79 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 		return json;
 	}
 	
+	@Override public JsonWebKeys jwks()
+	{
+		logger.info("Requesting JWKS");
+		JsonWebKeys json = new JsonWebKeys();
+		json.setKeys(new ArrayList<>());
+		
+		List<SecurityOauthKey> keys = facade.allVisible(SecurityOauthKey.class);
+		logger.info(SecurityOauthKey.class.getSimpleName()+" "+keys.size());
+		
+		if(keys.isEmpty()) {keys.add(this.toDefaultToken());}
+		
+		for(SecurityOauthKey ejb : keys)
+		{
+			try
+			{
+				RSAKey rsa = RSAKey.parse(ejb.getJson());
+				
+				JsonWebKey key = JsonUtil.read(JsonWebKey.class,rsa.toPublicJWK().toJSONString());
+				key.setUse("sig");
+				key.setAlgorithm("RS256");
+				
+				json.getKeys().add(key);
+				
+			}
+			catch (ParseException | IOException e) {e.printStackTrace();}
+		}
+		JsonUtil.info(json);
+		return json;
+	}
+	
+	private SecurityOauthKey toDefaultToken()
+	{
+		
+		List<SecurityOauthKey> keys = facade.allVisible(SecurityOauthKey.class);
+		if(!keys.isEmpty()) {return keys.get(0);}
+		try
+		{
+			SecurityOauthKey ejb = new SecurityOauthKey();
+			ejb.setCode(UUID.randomUUID().toString());
+	            
+			RSAKey rsa = new RSAKeyGenerator(2048).keyID(ejb.getCode()).generate();
+			
+            SecurityOauthKeyType type = facade.fByEnum(SecurityOauthKeyType.class,JeeslSecurityOauthKeyType.Code.rsa);
+           
+            ejb.setCode("1");
+            ejb.setJson(rsa.toJSONString());
+            ejb.setType(type);
+            ejb.setRecord(LocalDateTime.now());
+            ejb.setVisible(true);
+            ejb.setName("Default");
+            ejb.setJson(rsa.toJSONString());
+            ejb = facade.save(ejb);
+            
+            return ejb;
+            
+		}
+		catch (JOSEException | JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+		return null;
+	}
+	
 	@Override public JsonAccessToken token(String httpAuth, String grantType, String code, String redirectUri, String clientId, String clientSecret)
 	{
-		logger.info("Token");
+		logger.info("Requesting TOKEN");
+		
+		if(ObjectUtils.isNotEmpty(httpAuth) && ObjectUtils.allNull(clientId,clientSecret))
+		{
+			JsonLogin login = JeeslRestBasicAuthenticator.decode(httpAuth);
+			clientId = login.getUsername();
+			clientSecret = login.getPassword();
+		}
+		
+		
+		
 		logger.info("\thttpAuth:"+httpAuth);
 		logger.info("\tgrantType:"+grantType);
 		logger.info("\tcode:"+code);
@@ -144,25 +241,56 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 		logger.info("\tclientId:"+clientId);
 		logger.info("\tclientSecret:"+clientSecret);
 		
+		SecurityOauthToken token = null;
+		try {
+			token = facade.fByCode(SecurityOauthToken.class, code);
+		} catch (JeeslNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		   // Access-Token und ID-Token generieren
+	    String accessToken = generateAccessToken(clientId);
+	    String idToken = generateIdToken(clientId,token);
+
 		JsonAccessToken json = new JsonAccessToken();
-		json.setTokenAccess("ta");
+		json.setTokenAccess(accessToken);
+		json.setTokenId(idToken);
 		json.setTokenType("Bearer");
 		json.setExpiresIn(3600);
 		json.setScope("openid profile email");
 		json.setTokenRefresh("tr");
-		json.setTokenId("tid");
 		
+		JsonUtil.info(json);
 		return json;
 	}
 	
-	@Override public JsonWebKeys jwks()
+	private String generateAccessToken(String clientId) {return UUID.randomUUID().toString();}
+
+
+	private String generateIdToken(String clientId, SecurityOauthToken token)
 	{
-		List<SecurityOauthKey> keys = facade.allVisible(SecurityOauthKey.class);
-		logger.info(SecurityOauthKey.class.getSimpleName()+" "+keys.size());
-		
-		JsonWebKeys json = new JsonWebKeys();
-//		return handler.jsonWebKeySet();
-		return json;
+	    try
+	    {
+	        JWTClaimsSet claims = new JWTClaimsSet.Builder()
+	            .subject("user@example.com")
+	            .issuer(cp.getIssuer())
+	            .audience(clientId)
+	            .issueTime(new Date())
+	            .expirationTime(new Date(new Date().getTime() + 3600 * 1000))
+	            .claim("nonce", token.getNonce())
+	            .build();
+
+	        SecurityOauthKey ejb = this.toDefaultToken();
+	        RSAKey rsa = RSAKey.parse(ejb.getJson());
+				
+	        JWSSigner signer = new RSASSASigner(rsa.toPrivateKey());
+	        SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), claims);
+	        signedJWT.sign(signer);
+
+	        return signedJWT.serialize();
+	    }
+	    catch (JOSEException | ParseException e) {throw new RuntimeException("Fehler beim Erstellen des ID-Tokens", e);}
 	}
 	
 	public static String handleAuthorizationEndpointRedirect(String redirectUri, String state, String authorizationCode) throws URISyntaxException

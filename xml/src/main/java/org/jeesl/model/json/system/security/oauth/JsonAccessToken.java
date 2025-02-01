@@ -39,7 +39,6 @@ public class JsonAccessToken implements Serializable
 	public String getTokenRefresh() {return tokenRefresh;}
 	public void setTokenRefresh(String tokenRefresh) {this.tokenRefresh = tokenRefresh;}
 
-
 	@JsonProperty("id_token")
 	private String tokenId;
 	public String getTokenId() {return tokenId;}

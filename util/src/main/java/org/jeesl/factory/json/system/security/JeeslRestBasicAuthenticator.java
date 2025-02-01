@@ -1,4 +1,4 @@
-package org.jeesl.web.rest.auth;
+package org.jeesl.factory.json.system.security;
 
 import org.apache.commons.codec.binary.Base64;
 import org.jeesl.model.json.io.ssi.mobile.JsonLogin;
