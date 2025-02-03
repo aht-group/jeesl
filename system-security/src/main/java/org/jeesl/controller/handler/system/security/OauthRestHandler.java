@@ -31,6 +31,7 @@ import org.jeesl.model.ejb.system.security.oauth.SecurityOauthToken;
 import org.jeesl.model.json.io.ssi.mobile.JsonLogin;
 import org.jeesl.model.json.system.security.oauth.JsonAccessToken;
 import org.jeesl.model.json.system.security.oauth.JsonOauthConfig;
+import org.jeesl.model.json.system.security.oauth.JsonOauthUser;
 import org.jeesl.model.json.system.security.oauth.JsonWebKey;
 import org.jeesl.model.json.system.security.oauth.JsonWebKeys;
 import org.slf4j.Logger;
@@ -232,8 +233,6 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 			clientSecret = login.getPassword();
 		}
 		
-		
-		
 		logger.info("\thttpAuth:"+httpAuth);
 		logger.info("\tgrantType:"+grantType);
 		logger.info("\tcode:"+code);
@@ -241,16 +240,25 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 		logger.info("\tclientId:"+clientId);
 		logger.info("\tclientSecret:"+clientSecret);
 		
+		String accessToken = generateAccessToken(clientId);
+		 
 		SecurityOauthToken token = null;
-		try {
+		try
+		{
 			token = facade.fByCode(SecurityOauthToken.class, code);
-		} catch (JeeslNotFoundException e) {
+			
+			SecurityOauthToken next = new SecurityOauthToken();
+			next.setCode(accessToken);
+			next.setUser(token.getUser());
+			next = facade.save(next);
+		}
+		catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		   // Access-Token und ID-Token generieren
-	    String accessToken = generateAccessToken(clientId);
+	   
 	    String idToken = generateIdToken(clientId,token);
 
 		JsonAccessToken json = new JsonAccessToken();
@@ -266,14 +274,12 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 	}
 	
 	private String generateAccessToken(String clientId) {return UUID.randomUUID().toString();}
-
-
 	private String generateIdToken(String clientId, SecurityOauthToken token)
 	{
 	    try
 	    {
 	        JWTClaimsSet claims = new JWTClaimsSet.Builder()
-	            .subject("user@example.com")
+	            .subject(token.getUser().getEmail().toLowerCase())
 	            .issuer(cp.getIssuer())
 	            .audience(clientId)
 	            .issueTime(new Date())
@@ -317,5 +323,33 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 			// state: xxxx
 			// nonce: yyyy
 			// client_id: cid
+	}
+	
+	@Override
+	public JsonOauthUser user(String httpAuth)
+	{
+		logger.info("Requesting USER");
+		
+		JsonLogin login = JeeslRestBasicAuthenticator.decode(httpAuth);
+		JsonUtil.info(login);
+		
+		JsonOauthUser user = new JsonOauthUser();
+		try
+		{
+			SecurityOauthToken token = facade.fByCode(SecurityOauthToken.class, login.getToken());
+			
+			user.setSubject(token.getUser().getEmail().toLowerCase());
+			user.setEmail(token.getUser().getEmail());
+			user.setEmailVerified(true);
+			user.setFirstName(token.getUser().getFirstName());
+			user.setLastName(token.getUser().getLastName());
+			user.setName(user.getFirstName()+" "+user.getLastName());
+			
+		}
+		catch (JeeslNotFoundException e) {e.printStackTrace();}
+		JsonUtil.info(user);
+		
+		
+		return user;
 	}
 }

@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import org.jeesl.api.rest.i.system.security.JeeslOauthRestInterface;
 import org.jeesl.model.json.system.security.oauth.JsonAccessToken;
 import org.jeesl.model.json.system.security.oauth.JsonOauthConfig;
+import org.jeesl.model.json.system.security.oauth.JsonOauthUser;
 import org.jeesl.model.json.system.security.oauth.JsonWebKeys;
 
 @Path("/oauth")
@@ -38,5 +39,11 @@ public interface JeeslOauthRest extends JeeslOauthRestInterface
 		            @FormParam("redirect_uri") String redirectUri,
 		            @FormParam("client_id") String clientId,
 		            @FormParam("client_secret") String clientSecret
+		            );
+	
+	@GET @Path("/user/info")
+	@Produces(MediaType.APPLICATION_JSON)
+	JsonOauthUser user(@HeaderParam("Authorization") String httpAuth
+					
 		            );
 }

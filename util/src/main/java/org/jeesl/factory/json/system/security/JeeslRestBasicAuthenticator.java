@@ -33,6 +33,13 @@ public class JeeslRestBasicAuthenticator
         		return login;
         	}
 		}
+		else if(authorizationHeader.toUpperCase().startsWith("BEARER "))
+		{
+			String base64 = authorizationHeader.substring("BEARER ".length());
+			JsonLogin login = new JsonLogin();
+    		login.setToken(base64);
+    		return login;
+		}
 		else {throw new javax.ws.rs.NotAuthorizedException("We only support BASIC authentication");}
 	}
 }

@@ -42,7 +42,10 @@ public class SecurityOauthToken implements JeeslSecurityOauthToken
 	private String nonce;
 	public String getNonce() {return nonce;}
 	public void setNonce(String nonce) {this.nonce = nonce;}
-
+	
+//	private String token;
+//	public String getToken() {return token;}
+//	public void setToken(String token) {this.token = token;}
 	
 	@Override public boolean equals(Object object){return (object instanceof SecurityOauthToken) ? id == ((SecurityOauthToken) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17, 53).append(id).toHashCode();}
