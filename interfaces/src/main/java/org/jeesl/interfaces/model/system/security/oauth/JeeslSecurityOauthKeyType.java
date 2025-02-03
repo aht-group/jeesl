@@ -25,5 +25,5 @@ public interface JeeslSecurityOauthKeyType <L extends JeeslLang, D extends Jeesl
 					EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>
 {
-	public enum Code{email,totp}
+	public enum Code{rsa}
 }

@@ -1,5 +1,6 @@
 package org.jeesl.web.rest.auth;
 
+import org.jeesl.factory.json.system.security.JeeslRestBasicAuthenticator;
 import org.jeesl.model.json.io.ssi.mobile.JsonLogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

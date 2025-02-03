@@ -21,6 +21,9 @@ public class CalDayOfWeek extends IoStatus implements JeeslCalendarDayOfWeek<IoL
 {
 	public static final long serialVersionUID=1;
 	
+	public static String monday="1";
+	public static String sunday="7";
+	
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
