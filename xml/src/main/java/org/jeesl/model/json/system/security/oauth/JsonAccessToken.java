@@ -1,7 +1,6 @@
 package org.jeesl.model.json.system.security.oauth;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -39,7 +38,6 @@ public class JsonAccessToken implements Serializable
 	private String tokenRefresh;
 	public String getTokenRefresh() {return tokenRefresh;}
 	public void setTokenRefresh(String tokenRefresh) {this.tokenRefresh = tokenRefresh;}
-
 
 	@JsonProperty("id_token")
 	private String tokenId;

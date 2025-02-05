@@ -12,7 +12,10 @@
 	<artifactId>jeesl-maven</artifactId>
 	<packaging>maven-plugin</packaging>
 	<name>JEESL - Maven Plugins</name>
-	<url>http://sourceforge.net/projects/ahtutils</url>
+	
+	<prerequisites>
+		<maven>3.1</maven>
+	</prerequisites>
 	
 	<dependencyManagement>
 		<dependencies>      	         

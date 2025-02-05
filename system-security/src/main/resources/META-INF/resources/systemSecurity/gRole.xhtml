@@ -29,13 +29,11 @@
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderRoles()}" update="@form"/>
 					<p:column rendered="true">
+						<f:facet name="header"><jtp:label entity="SecurityRole" code="position."/></f:facet>
 						<h:graphicImage rendered="#{not r.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
 						<h:outputText rendered="#{r.visible}" value="#{r.position}"/>
 					</p:column>
-					<p:column rendered="false">  
-						<h:outputText value="#{r.position}" />  
-		            </p:column>
-		            <p:column>
+		            <p:column filterBy="#{r.name[localeCode].lang}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle35}">
 		            	<f:facet name="header"><jtp:label entity="SecurityRole"/></f:facet>
 						<h:outputText value="#{r.name[userBean.localeCode].lang}" />  
 		            </p:column>

@@ -20,7 +20,7 @@ public class TxtMavenVersionFactory
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("<dependency>").append("\n");
+		sb.append("\t\t<dependency>").append("\n");
 		sb.append("\t\t\t").append("<groupId>").append(version.getArtifact().getGroup().getCode()).append("</groupId>").append("\n");
 		sb.append("\t\t\t").append("<artifactId>").append(version.getArtifact().getCode()).append("</artifactId>").append("\n");
 		sb.append("\t\t\t").append("<version>").append(version.getCode()).append("</version>").append("\n");

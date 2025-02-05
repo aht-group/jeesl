@@ -21,6 +21,7 @@ import org.jeesl.factory.ejb.io.maven.EjbMavenDependencyFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenVersionFactory;
 import org.jeesl.factory.ejb.io.maven.ee.EjbMavenReferralFactory;
+import org.jeesl.factory.txt.io.maven.TxtMavenVersionFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -92,7 +93,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 
 	private String fvGroup; public String getFvGroup() {return fvGroup;} public void setFvGroup(String fvGroup) {this.fvGroup = fvGroup;}
 	private String fvArtifact; public String getFvArtifact() {return fvArtifact;} public void setFvArtifact(String fvArtifact) {this.fvArtifact = fvArtifact;}
-	
+	private String clipboard; public String getClipboard() {return clipboard;}
 
 	public JeeslIoMavenArtifactWc()
 	{
@@ -199,6 +200,8 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(version));}
 		this.reset(false,false,true,false);
 		this.reloadDependencies();
+		
+		clipboard = TxtMavenVersionFactory.xmlMaven(version);
 	}
 	
 	public void saveVersion() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException

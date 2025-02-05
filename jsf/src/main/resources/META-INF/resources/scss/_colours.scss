@@ -234,6 +234,7 @@ $header-underline: 2px solid var(--container-header-underline-colour, #{$dark-co
 		--datatable-content-highlight-background: var(--highlight-background);
 		--datatable-content-highlight-foreground: var(--highlight-foreground);
 		--datatable-content-highlight-border-colour: var(--highlight-border-colour);
+		--datatable-content-focus-cell-edit-border-colour: var(--datatable-content-highlight-background);
 		
 		/* footer */
 		--container-footer-foreground: #{$dark-colour};

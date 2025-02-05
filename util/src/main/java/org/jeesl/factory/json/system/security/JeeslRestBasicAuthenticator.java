@@ -1,4 +1,4 @@
-package org.jeesl.web.rest.auth;
+package org.jeesl.factory.json.system.security;
 
 import org.apache.commons.codec.binary.Base64;
 import org.jeesl.model.json.io.ssi.mobile.JsonLogin;
@@ -32,6 +32,13 @@ public class JeeslRestBasicAuthenticator
         		login.setPassword(splitted[1]);
         		return login;
         	}
+		}
+		else if(authorizationHeader.toUpperCase().startsWith("BEARER "))
+		{
+			String base64 = authorizationHeader.substring("BEARER ".length());
+			JsonLogin login = new JsonLogin();
+    		login.setToken(base64);
+    		return login;
 		}
 		else {throw new javax.ws.rs.NotAuthorizedException("We only support BASIC authentication");}
 	}

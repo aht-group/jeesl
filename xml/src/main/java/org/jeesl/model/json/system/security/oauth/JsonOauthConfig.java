@@ -42,13 +42,8 @@ public class JsonOauthConfig implements Serializable
 	
 	@JsonProperty("registration_endpoint")
 	private String endpointRegistration;
-
-	public String getEndpointRegistration() {
-		return endpointRegistration;
-	}
-	public void setEndpointRegistration(String endpointRegistration) {
-		this.endpointRegistration = endpointRegistration;
-	}
+	public String getEndpointRegistration() {return endpointRegistration;}
+	public void setEndpointRegistration(String endpointRegistration) {this.endpointRegistration = endpointRegistration;}
 	
 	@JsonProperty("scopes_supported")
 	private List<String> scopes;

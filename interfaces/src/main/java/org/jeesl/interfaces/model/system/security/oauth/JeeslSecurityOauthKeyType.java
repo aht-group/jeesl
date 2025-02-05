@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.module.calendar.unit;
+package org.jeesl.interfaces.model.system.security.oauth;
 
 import java.io.Serializable;
 
@@ -14,13 +14,16 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-@DownloadJeeslDescription
 @DownloadJeeslAttributes
+@DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslCalendarWeekOfYear <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, G extends JeeslGraphic<?,?,?>>
-					extends Serializable,EjbPersistable,
-							EjbWithCode,JeeslStatusFixedCode,
-							EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
+public interface JeeslSecurityOauthKeyType <L extends JeeslLang, D extends JeeslDescription,
+									S extends JeeslStatus<L,D,S>,
+									G extends JeeslGraphic<?,?,?>>
+		extends Serializable,EjbPersistable,
+					EjbWithCode,JeeslStatusFixedCode,
+					EjbWithCodeGraphic<G>,
+					JeeslStatus<L,D,S>
 {
-	public enum Att {code,position}
+	public enum Code{rsa}
 }
