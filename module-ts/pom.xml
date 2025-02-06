@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-module-ts</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - Module - Timeseries</name>
+    <name>JEESL - Module: Timeseries</name>
 	
 	<dependencyManagement>
 		<dependencies>
