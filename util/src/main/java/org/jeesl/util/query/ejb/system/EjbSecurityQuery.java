@@ -77,6 +77,11 @@ public class EjbSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	@Override public List<R> getSecurityRole() {return securityRole;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(R ejb) {if(Objects.isNull(securityRole)) {securityRole = new ArrayList<>();} securityRole.add(ejb); return this;}
 	
+	private List<U> securityUsecase;
+	@Override public List<U> getSecurityUsecase() {return securityUsecase;}
+	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(U ejb) {if(Objects.isNull(securityUsecase)) {securityUsecase = new ArrayList<>();} securityUsecase.add(ejb); return this;}
+
+	
 	private List<V> securityView;
 	@Override public List<V> getSecurityView() {return securityView;}
 	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> add(V ejb) {if(Objects.isNull(securityView)) {securityView = new ArrayList<>();} securityView.add(ejb); return this;}

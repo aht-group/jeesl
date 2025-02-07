@@ -75,7 +75,8 @@ public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescript
 	private final List<R> roles; public List<R> getRoles(){return roles;}
 	private List<V> views; public List<V> getViews(){return views;}
 	private List<A> actions; public List<A> getActions(){return actions;}
-	private List<U> usecases; public List<U> getUsecases(){return usecases;}
+	private List<U> usecases; public List<U> getUsecases() {return usecases;}
+	private final List<USER> users; public List<USER> getUsers() {return users;}
 	
 	private C category;public void setCategory(C category) {this.category = category;} public C getCategory() {return category;}
 	private R role; public R getRole(){return role;} public void setRole(R role) {this.role = role;}
@@ -109,6 +110,7 @@ public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescript
 		
 		categories = new ArrayList<>();
 		roles = new ArrayList<>();
+		users = new ArrayList<>();
 		
 		uiShowDocumentation = false;
 		hasDeveloperAction = false;
@@ -201,7 +203,7 @@ public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescript
 		role = efLang.persistMissingLangs(fSecurity,lp,role);
 		role = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),role);		
 		role = fSecurity.load(role);
-		reloadActions();
+		this.reloadActions();
 		
 		views = role.getViews();
 		actions = role.getActions();
@@ -223,6 +225,13 @@ public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescript
 				if(fixed.equals(role.getCode())){denyRemove=true;}
 			}
 		}
+		
+		users.clear();
+		EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
+		query.add(role);
+		query.orderBy(CqOrdering.ascending(JeeslUser.Attributes.id));
+		query.setMaxResults(10);
+		users.addAll(fSecurity.fSecurityUsers(query));
 	}
 	
 	private void reloadActions()
@@ -238,6 +247,8 @@ public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescript
 	//Role
 	public void addRole() throws JeeslConstraintViolationException
 	{
+		users.clear();
+		
 		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassRole()));
 		role = fbSecurity.ejbRole().build(category,"");
 		role.setName(efLang.buildEmpty(lp.getLocales()));
