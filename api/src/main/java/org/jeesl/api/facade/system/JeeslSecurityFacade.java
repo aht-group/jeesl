@@ -29,7 +29,6 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 {	
 	
 	R load(R role);
-//	R load(R role, boolean withUsers);
 	V load(Class<V> cView, V view);
 	U load(Class<U> cUsecase, U usecase);
 	
@@ -41,10 +40,12 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
 	List<M> fSecurityMenus(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
 	List<A> fSecurityActions(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
+	List<USER> fSecurityUsers(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query);
+	
 	
 	List<V> allViewsForUser(USER user);
-	
 	List<USER> fUsers(R role);
+	
 	
 	List<R> allRolesForUser(USER user);
 	List<R> rolesForView(V view);
