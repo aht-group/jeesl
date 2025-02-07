@@ -40,9 +40,7 @@ public class FlywayIoLabelPathProvider implements JeeslFlywayPathProvider, JeesD
 		list.add(IoRevisionEntityMapping.class);
 		list.add(IoRevisionScope.class);
 		list.add(IoRevisionScopeType.class);
-		
-		
-		
+	
 		return list;
 	}
 }

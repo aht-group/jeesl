@@ -10,7 +10,7 @@
 	
     <artifactId>jeesl-io-locale</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Locale</name>
+    <name>JEESL - IO: Locale</name>
 	
 	<dependencyManagement>
 		<dependencies>

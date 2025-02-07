@@ -9,9 +9,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.facade.jk.JeeslFacadeBean;
+import org.jeesl.controller.facade.jk.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
@@ -31,7 +33,8 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory.Typ
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
-import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +45,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.ListJoin;
+import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
@@ -189,6 +193,22 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
 		TypedQuery<M> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
+	}
+	
+	@Override public List<USER> fSecurityUsers(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<USER> cQ = cB.createQuery(fbSecurity.getClassUserProject());
+		Root<USER> root = cQ.from(fbSecurity.getClassUserProject());
+//		super.rootFetch(root, query);
+		
+		cQ.select(root);
+		cQ.where(cB.and(this.pUser(cB,query,root)));
+		this.sortByUser(cB,cQ,query,root);
+		
+		TypedQuery<USER> tQ = em.createQuery(cQ);
+//		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
 	
@@ -618,4 +638,32 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
+
+	private Predicate[] pUser(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<USER> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+			
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	private void sortByUser(CriteriaBuilder cB, CriteriaQuery<USER> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<USER> root)
+	{
+		List<Order> orders = new ArrayList<>();
+		for(JeeslCqOrdering c : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+			if(c.getPath().equals(CqOrdering.path(JeeslSecurityMenu.Attributes.position)))
+			{
+				Expression<Integer> ePosition = root.get(JeeslSecurityMenu.Attributes.position.toString());
+				SortByPredicateBuilder.addByInteger(cB,orders,c,ePosition);
+			}
+			else if(c.getPath().equals(CqOrdering.path(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.id)))
+			{
+				Path<M> pParent = root.get(JeeslSecurityMenu.Attributes.parent.toString());
+				Expression<Long> eId = pParent.get(JeeslSecurityMenu.Attributes.id.toString());
+				SortByPredicateBuilder.addByLong(cB,orders,c,eId);
+			}
+			else {logger.warn("No SortBy Handling for "+c.toString());}
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
+	}
+
 }
