@@ -59,7 +59,7 @@ import org.jeesl.util.query.sql.SqlRevisionQueries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescription,
+public class JeeslIoLabelFacadeBean<L extends JeeslLang,D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,
 									RV extends JeeslRevisionView<L,D,RVM>,
 									RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -76,18 +76,18 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 					implements JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,RML>
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslRevisionFacadeBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslIoLabelFacadeBean.class);
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,RML> fbRevision;
 
 	private String revisionPrefix;
 	private String revisionTable;
 
-	public JeeslRevisionFacadeBean(EntityManager em, final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,RML> fbRevision)
+	public JeeslIoLabelFacadeBean(EntityManager em, final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,RML> fbRevision)
 	{
 		this("_at_","auditinfo",em,fbRevision);
 	}
 
-	public JeeslRevisionFacadeBean(String revisionPrefix, String revisionTable, EntityManager em,
+	public JeeslIoLabelFacadeBean(String revisionPrefix, String revisionTable, EntityManager em,
 								final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,RML> fbRevision)
 	{
 		super(em);
