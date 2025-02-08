@@ -161,6 +161,7 @@ public class JeeslIoLabelFacadeBean<L extends JeeslLang,D extends JeeslDescripti
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<RA> cQ = cB.createQuery(fbRevision.getClassAttribute());
 		Root<RA> root = cQ.from(fbRevision.getClassAttribute());
+		super.rootFetch(root, query);
 		
 		cQ.select(root);
 		cQ.where(cB.and(pAttribte(cB,query,root)));
@@ -391,10 +392,10 @@ public class JeeslIoLabelFacadeBean<L extends JeeslLang,D extends JeeslDescripti
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		if(ObjectUtils.isNotEmpty(query.getIoLabelEntities()))
+		if(ObjectUtils.isNotEmpty(query.getIoLabelEntityReferenced()))
 		{
 			Join<RA,RE> jEntity = root.join(JeeslRevisionAttribute.Attributes.entity.toString());
-			predicates.add(jEntity.in(query.getIoLabelEntities()));
+			predicates.add(jEntity.in(query.getIoLabelEntityReferenced()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

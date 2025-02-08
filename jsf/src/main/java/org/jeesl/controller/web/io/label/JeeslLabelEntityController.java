@@ -55,6 +55,7 @@ import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.jeesl.util.query.cq.CqLiteral;
+import org.jeesl.util.query.cq.CqRootFetch;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.jeesl.util.query.ejb.io.EjbIoLabelQuery;
 import org.slf4j.Logger;
@@ -104,6 +105,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	private List<RE> links; public List<RE> getLinks() {return links;}
 	private List<ERD> diagrams; public List<ERD> getDiagrams() {return diagrams;}
 	protected List<RA> attributes; public List<RA> getAttributes() {return attributes;}
+	private final List<RA> referencedFrom; public List<RA> getReferencedFrom() {return referencedFrom;}
 	protected List<REM> entityMappings; public List<REM> getEntityMappings() {return entityMappings;}
 	
 	protected RA attribute; public RA getAttribute() {return attribute;}public void setAttribute(RA attribute) {this.attribute = attribute;}
@@ -136,6 +138,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 //		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
 		
 		entities = new ArrayList<>();
+		referencedFrom = new ArrayList<>();
 		
 		uiAllowSave = true;
 	}
@@ -363,6 +366,13 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		{
 			className = "CLASS NOT FOUND";
 		}
+		
+		EjbIoLabelQuery<RE> query = new EjbIoLabelQuery<>();
+		query.addCqRootFetch(CqRootFetch.left(CqRootFetch.path(JeeslRevisionAttribute.Attributes.ownerEntity)));
+		query.addIoLabelEntityReferenced(entity);
+		
+		referencedFrom.clear();
+		referencedFrom.addAll(fRevision.fLabelAttributes(query));
 	}
 
 	public void selectEntity() throws JeeslNotFoundException
@@ -371,7 +381,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		entity = fRevision.find(fbRevision.getClassEntity(), entity);
 		entity = efLang.persistMissingLangs(fRevision,lp,entity);
 		entity = efDescription.persistMissingLangs(fRevision,lp.getLocales(),entity);
-		reloadEntity();
+		this.reloadEntity();
 		attribute=null;
 		mapping=null;
 	}

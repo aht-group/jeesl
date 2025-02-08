@@ -44,9 +44,12 @@ public class EjbIoLabelQuery<ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>
 	@Override public EjbIoLabelQuery<ENTITY> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	// IO - Label
-	private List<ENTITY> ioLabelEntity;
-	@Override public List<ENTITY> getIoLabelEntities() {return ioLabelEntity;}
-	public EjbIoLabelQuery<ENTITY> add(ENTITY entity) {if(Objects.isNull(ioLabelEntity)) {ioLabelEntity = new ArrayList<>();} ioLabelEntity.add(entity); return this;}	
-
+	private List<ENTITY> ioLabelEntityOwner;
+	@Override public List<ENTITY> getIoLabelEntityOwner() {return ioLabelEntityOwner;}
+	public EjbIoLabelQuery<ENTITY> addIoLabelEntityOwner(ENTITY entity) {if(Objects.isNull(ioLabelEntityOwner)) {ioLabelEntityOwner = new ArrayList<>();} ioLabelEntityOwner.add(entity); return this;}
+	
+	private List<ENTITY> ioLabelEntityReferenced;
+	@Override public List<ENTITY> getIoLabelEntityReferenced() {return ioLabelEntityReferenced;}
+	public EjbIoLabelQuery<ENTITY> addIoLabelEntityReferenced(ENTITY entity) {if(Objects.isNull(ioLabelEntityReferenced)) {ioLabelEntityReferenced = new ArrayList<>();} ioLabelEntityReferenced.add(entity); return this;}
 
 }

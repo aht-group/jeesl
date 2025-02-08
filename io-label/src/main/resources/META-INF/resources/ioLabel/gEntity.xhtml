@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:jpAdmin="http://jsf.jeesl.org/prototype/admin"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="false" default="#{adminRevisionEntityBean}"/>
+		<composite:attribute name="localeKeys" required="false" default="#{appTranslationBean.langKeys}"/>
+	</composite:interface>
+	
+<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sCategories" width="5">
+			<h:form id="fCategories">
+				<p:dataTable styleClass="jeesl-datatable" 
+							var="e" value="#{cc.attrs.ctrl.entities}" draggableRows="true"
+							selection="#{cc.attrs.ctrl.entity}" selectionMode="single" rowKey="#{e.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoLabelEntity" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.ttNew}"/>
+							<j:svg type="jeeslSearch" listener="#{cc.attrs.ctrl.searchMisconfigured()}" update=":#{cc.id}:grid" tooltip="Search Misconfigured"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderEntites()}" update="@form"/>
+					<p:ajax event="rowSelect" update=":#{cc.id}:sView :#{cc.id}:sAttributes" listener="#{cc.attrs.ctrl.selectEntity()}"/>
+					<p:column rendered="true">  
+						<h:outputText value="#{e.category.position}.#{e.position}"/>
+		            </p:column>
+		            <p:column rendered="true">  
+						<h:outputText value="#{e.diagram.category.position}.#{e.diagram.position}" rendered="#{not empty e.diagram}"/>
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoLabelEntity"/></f:facet>
+						<h:outputText value="#{e.name[userBean.localeCode].lang}"/>
+		            </p:column>
+					<p:column styleClass="jeeslCenter">  
+						<j:duoCheckmark value="#{e.visible}"/>
+						<p:graphicImage style="margin-left: 5px;" name="ui/module/survey/row.svg" library="jeeslGfx" height="12" rendered="#{e.timeseries}"/>
+						<p:graphicImage style="margin-left: 5px;" name="ui/system/io/cms/books.svg" library="jeeslGfx" height="12" rendered="#{e.documentation}"/>
+						<p:graphicImage style="margin-left: 5px;" name="ui/system/io/revision/diagram.svg" library="jeeslGfx" height="12" rendered="#{not empty e.diagram}"/>
+		            </p:column>
+		       	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sView" width="3">
+			<h:form id="fView" rendered="#{not empty cc.attrs.ctrl.entity}">
+				<p:panel id="pView"  styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoLabelEntity"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveEntity()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.uiAllowSave}" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.rmEntity()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.entity.id gt 0}"/>
+						<j:svg type="jeeslDownload" listener="#{cc.attrs.ctrl.downloadJeeslTranslations()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.supportsJeeslDownloadTranslation}"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<p:messages for="entity" redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="IoLabelEntity" code="id"/>
+						<h:outputText value="#{cc.attrs.ctrl.entity.id}"/>
+					
+						<jtp:label entity="IoLabelEntity" code="category"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.entity.category}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.ctrl.sbhCategory.list}" var="u" itemLabel="#{u.name[localeCode].lang}" itemValue="#{u}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoLabelEntity" code="diagram"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.entity.diagram}" effect="fade" autoWidth="false">
+							<f:selectItem itemLabel="---"/>
+							<f:selectItems value="#{cc.attrs.ctrl.diagrams}" var="d" itemLabel="#{d.category.position}.#{d.position} #{d.name[localeCode].lang}" itemValue="#{d}"/>
+						</p:selectOneMenu>
+						
+					</j:inputGrid>
+					<p:panelGrid columns="3" columnClasses="jeeslGrid30,jeeslGrid40,jeeslGrid30">
+						<p:selectBooleanCheckbox value="#{cc.attrs.ctrl.entity.visible}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.ctrl.entity.timeseries}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.ctrl.entity.documentation}"/>
+						
+						<jtp:label entity="IoLabelEntity" code="visible"/>
+						<jtp:label entity="IoLabelEntity" code="timeseries"/>
+						<jtp:label entity="IoLabelEntity" code="documentation"/>
+					</p:panelGrid>
+					<j:inputGrid >
+						<jtp:label entity="IoLabelEntity" code="code"/>
+						<p:inputText autocomplete="off" value="#{cc.attrs.ctrl.entity.code}"/>
+					</j:inputGrid>
+					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
+						<h:outputText value="#{cc.attrs.ctrl.className}"/>
+						<p:commandButton value="Pull Attributes from Class" disabled="#{cc.attrs.ctrl.isEmptyEntityReloaded()}" update=":#{cc.id}:sAttributes">
+							<f:actionListener binding="#{cc.attrs.ctrl.pullAttributesFromClass()}"/>
+						</p:commandButton>
+
+						<p:inputTextarea value="#{cc.attrs.ctrl.entity.developerInfo}" style="width:100%" autocomplete="off"/>
+						
+					</p:panelGrid>
+					<jtp:inputMulti value="#{cc.attrs.ctrl.entity}"
+						withName="true" labelName="#{appLabelBean.labels['IoLabelEntity']['name'][localeCode].lang}"
+						withDescription="true" labelDescription="#{appLabelBean.labels['IoLabelEntity']['description'][localeCode].lang}"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fReferencedFrom" rendered="#{not empty cc.attrs.ctrl.entity}">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="a" value="#{cc.attrs.ctrl.referencedFrom}" rowKey="#{a.id}" >
+					<f:facet name="header">
+						<j:dtHeader entity="IoLabelAttribute" code="referencedFrom">
+							
+						</j:dtHeader>
+					</f:facet>
+		            <p:column rendered="false">  
+						<f:facet name="header"><jtp:label entity="IoLabelAttribute" code="id"/></f:facet>
+						<h:outputText value="#{a.id}"/>
+		            </p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoLabelEntity" code="jscn"/></f:facet>
+						<h:outputText value="#{a.ownerEntity.jscn}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoLabelEntity"/></f:facet>
+						<h:outputText value="#{a.ownerEntity.name[localeCode].lang}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoLabelAttribute"/></f:facet>
+						<h:outputText value="#{a.code}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoLabelAttribute" code="relation"/></f:facet>
+						<jtp:symbolizer value="#{a.relation}"/>
+					</p:column>
+					
+		       	</p:dataTable>
+			</h:form>			
+		</j:slot>
+		<j:slot id="sAttributes" width="4">
+			<h:form id="fMappings" rendered="#{(not empty cc.attrs.ctrl.entity) and (cc.attrs.ctrl.entity.id gt 0)}">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="m" value="#{cc.attrs.ctrl.entityMappings}" draggableRows="true"
+							selection="#{cc.attrs.ctrl.mapping}" selectionMode="single" rowKey="#{m.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoRevisionEntityMapping" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderMappings()}" update="@form"/>
+					<p:ajax event="rowSelect" update=":#{cc.id}:fMapping" listener="#{cc.attrs.ctrl.selectMapping()}"/>
+		            <p:column rendered="true">  
+						<h:outputText value="#{m.position}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.aupRevisionScope}">  
+						<h:outputText value="#{m.scope.name[userBean.localeCode].lang}"/>
+		            </p:column>
+		       	</p:dataTable>
+			</h:form>
+			<h:form id="fMapping">
+				<p:panel header="#{msg.aupRevisionMapping}" rendered="#{not empty cc.attrs.ctrl.mapping}" styleClass="jeesl-panel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelMapping()}" update=":#{cc.id}:sAttributes"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveMapping()}" update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.ctrl.uiAllowSave}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.rmMapping()}" update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.ctrl.mapping.id gt 0}"/>
+					</f:facet>
+					<j:inputGrid>
+						<p:outputLabel value="#{msg.aupRevisionScope}"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.scope}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.ctrl.scopes}" var="u" itemLabel="#{u.name[userBean.localeCode].lang}" itemValue="#{u}"/>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{msg.aupType}"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.type}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.ctrl.scopeTypes}" var="t" itemLabel="#{t.name[userBean.localeCode].lang}" itemValue="#{t}"/>
+							<p:ajax event="change" listener="#{cc.attrs.ctrl.changeScopeType()}" update="@form"/>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{msg.jeeslXpath}"/>
+						<h:inputText autocomplete="off" value="#{cc.attrs.ctrl.mapping.xpath}" styleClass="aupW100"/>
+					</j:inputGrid>
+					<j:inputGrid rendered="#{cc.attrs.ctrl.uiWithJpqlTree}" columns="2" columnClasses="auPwg20,auPwg80">
+						<p:outputLabel value="#{msg.aupJpql}"/>
+						<h:inputText autocomplete="off" value="#{cc.attrs.ctrl.mapping.jpqlTree}" styleClass="aupW100"/>
+					</j:inputGrid>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fAttributes" rendered="#{(not empty cc.attrs.ctrl.entity) and (cc.attrs.ctrl.entity.id gt 0)}">
+				<jpAdmin:tableRevisionAttributes bean="#{cc.attrs.ctrl}" updateAdd=":#{cc.id}:fAttributes :#{cc.id}:fAttribute" updateSelect=":#{cc.id}:fAttribute"/>
+			</h:form>
+			<h:form id="fAttribute">
+				<jpAdmin:panelRevisionAttribute bean="#{cc.attrs.ctrl}" update=":#{cc.id}:sAttributes" localeKeys="#{cc.attrs.localeKeys}"/>
+			</h:form>
+		</j:slot>
+	</j:row>
+   </jp:grid>
+</composite:implementation>
+</html>

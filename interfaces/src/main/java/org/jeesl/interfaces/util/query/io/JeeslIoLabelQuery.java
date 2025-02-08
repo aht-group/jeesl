@@ -8,5 +8,6 @@ import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 public interface JeeslIoLabelQuery<ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 		extends JeeslCoreQuery
 {
-	List<ENTITY> getIoLabelEntities();
+	List<ENTITY> getIoLabelEntityOwner();
+	List<ENTITY> getIoLabelEntityReferenced();
 }

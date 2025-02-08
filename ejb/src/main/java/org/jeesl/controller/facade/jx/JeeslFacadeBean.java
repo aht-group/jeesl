@@ -105,6 +105,7 @@ public class JeeslFacadeBean implements JeeslFacade
 	{
 		for(JeeslCqRootFetch cq : ListUtils.emptyIfNull(query.getCqRootFetches()))
 		{
+			logger.info("Root Fetch: "+cq);
 			switch(cq.getType())
 			{
 				case LEFT: root.fetch(cq.getPath(), JoinType.LEFT); break;
