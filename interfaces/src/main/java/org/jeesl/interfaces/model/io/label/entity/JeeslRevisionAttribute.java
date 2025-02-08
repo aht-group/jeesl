@@ -25,8 +25,8 @@ public interface JeeslRevisionAttribute<L extends JeeslLang, D extends JeeslDesc
 				EjbWithCode,EjbWithPosition,
 				EjbWithLang<L>,EjbWithDescription<D>
 {
-	public enum Attributes{entity};
-	public static enum Type{text,number,date,amount,bool}
+	public enum Attributes {ownerEntity,entity};
+	public static enum Type {text,number,date,amount,bool}
 	
 	RAT getType();
 	void setType(RAT type);

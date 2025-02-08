@@ -25,10 +25,14 @@ public interface JeeslSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	
 	List<String> getRootFetches();
 	
-	List<USER> getUsers();
+	
+	List<CTX> getSecurityContext();
 	List<C> getSecurityCategory();
-	List<R> getSecurityRole();
 	List<V> getSecurityView();
 	List<A> getSecurityAction();
-	List<CTX> getSecurityContext();
+	List<U> getSecurityUsecase();
+	List<R> getSecurityRole();
+	
+	List<USER> getUsers();
+	
 }

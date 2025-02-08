@@ -65,6 +65,13 @@
 	</tag>
 	
 	<tag>
+        <tag-name>gridIoLabelEntity</tag-name>
+        <component>
+        	<resource-id>ioLabel/gEntity.xhtml</resource-id>
+        </component>
+	</tag>
+	
+	<tag>
         <tag-name>gridIoLocaleOption</tag-name>
         <component>
         	<resource-id>ioLocale/option.xhtml</resource-id>

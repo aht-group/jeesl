@@ -12,7 +12,7 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
@@ -55,6 +55,7 @@ import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.jeesl.util.query.cq.CqLiteral;
+import org.jeesl.util.query.cq.CqRootFetch;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.jeesl.util.query.ejb.io.EjbIoLabelQuery;
 import org.slf4j.Logger;
@@ -81,7 +82,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 	private final JeeslIoLabelEntityCallback callback;
 	
-	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
+	private JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 	
 	protected final Comparator<RE> cpEntity;
 	
@@ -104,6 +105,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	private List<RE> links; public List<RE> getLinks() {return links;}
 	private List<ERD> diagrams; public List<ERD> getDiagrams() {return diagrams;}
 	protected List<RA> attributes; public List<RA> getAttributes() {return attributes;}
+	private final List<RA> referencedFrom; public List<RA> getReferencedFrom() {return referencedFrom;}
 	protected List<REM> entityMappings; public List<REM> getEntityMappings() {return entityMappings;}
 	
 	protected RA attribute; public RA getAttribute() {return attribute;}public void setAttribute(RA attribute) {this.attribute = attribute;}
@@ -112,7 +114,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	private REM mapping; public REM getMapping() {return mapping;}public void setMapping(REM mapping) {this.mapping = mapping;}
 
 	private String className; public String getClassName() {return className;}
-//	private Map<String, List<String>> mapEntitesCodeToAttribustes;
 
 	private boolean supportsJeeslDownloadTranslation; public boolean isSupportsJeeslDownloadTranslation(){return supportsJeeslDownloadTranslation;}
 	private boolean supportsJeeslAttributeDownload; public boolean isSupportsJeeslAttributeDownload() {return supportsJeeslAttributeDownload;}
@@ -137,12 +138,13 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 //		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
 		
 		entities = new ArrayList<>();
+		referencedFrom = new ArrayList<>();
 		
 		uiAllowSave = true;
 	}
 
 	public void postConstructRevisionEntity(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
+			JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
 		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
 		super.postConstructLocaleWebController(lp,bMessage);
@@ -364,6 +366,13 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		{
 			className = "CLASS NOT FOUND";
 		}
+		
+		EjbIoLabelQuery<RE> query = new EjbIoLabelQuery<>();
+		query.addCqRootFetch(CqRootFetch.left(CqRootFetch.path(JeeslRevisionAttribute.Attributes.ownerEntity)));
+		query.addIoLabelEntityReferenced(entity);
+		
+		referencedFrom.clear();
+		referencedFrom.addAll(fRevision.fLabelAttributes(query));
 	}
 
 	public void selectEntity() throws JeeslNotFoundException
@@ -372,7 +381,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		entity = fRevision.find(fbRevision.getClassEntity(), entity);
 		entity = efLang.persistMissingLangs(fRevision,lp,entity);
 		entity = efDescription.persistMissingLangs(fRevision,lp.getLocales(),entity);
-		reloadEntity();
+		this.reloadEntity();
 		attribute=null;
 		mapping=null;
 	}
@@ -705,7 +714,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	public List<RE> autoCompleteListByQuery(Class<RE> c, String query)
 	{
 		JeeslIoLabelQuery<RE> q = new EjbIoLabelQuery<>();
-		q.add(CqLiteral.contains(query,CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)));
+		q.addCqLiteral(CqLiteral.contains(query,CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)));
 		return fRevision.findLabelEntities(q);
 	}
 }

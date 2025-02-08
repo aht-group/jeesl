@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelDiagramComparator;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelScopeComparator;
@@ -56,7 +56,7 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionBean.class);
 
-	protected JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
+	protected JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 	protected final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 
 //	protected final SbMultiHandler<ERD> sbhDiagram; public SbMultiHandler<ERD> getSbhDiagram() {return sbhDiagram;}
@@ -102,12 +102,12 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 	}
 
 	protected void postConstructRevision(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
+									JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fRevision=fRevision;
 
-		if(fRevision==null) {logger.warn(JeeslIoRevisionFacade.class.getSimpleName()+" is NULL");}
+		if(fRevision==null) {logger.warn(JeeslIoLabelFacade.class.getSimpleName()+" is NULL");}
 		if(fbRevision==null) {logger.warn(IoRevisionFactoryBuilder.class.getSimpleName()+" is NULL");}
 		if(fbRevision.getClassCategory()==null) {logger.warn(IoRevisionFactoryBuilder.class.getSimpleName()+".getClassCategory() is NULL");}
 

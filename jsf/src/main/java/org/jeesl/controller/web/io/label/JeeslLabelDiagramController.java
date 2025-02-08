@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelDiagramComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.controller.web.util.AbstractLogMessage;
@@ -37,7 +37,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslLabelDiagramController.class);
 
-	private JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,ERD,?> fRevision;
+	private JeeslIoLabelFacade<L,D,RC,?,?,?,?,?,?,?,ERD,?> fRevision;
 	private final IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,?,?,?,?,?,ERD,?> fbRevision;
 	
 	protected SbMultiHandler<RC> sbhCategory; public SbMultiHandler<RC> getSbhCategory() {return sbhCategory;}
@@ -63,7 +63,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 
 	public void postConstructRevisionDiagram(JeeslLocaleProvider<LOC> lp,
 											JeeslFacesMessageBean bMessage,
-											JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,ERD,?> fRevision)
+											JeeslIoLabelFacade<L,D,RC,?,?,?,?,?,?,?,ERD,?> fRevision)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fRevision=fRevision;

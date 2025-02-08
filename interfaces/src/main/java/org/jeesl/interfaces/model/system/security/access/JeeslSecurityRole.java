@@ -39,7 +39,7 @@ public interface JeeslSecurityRole<L extends JeeslLang, D extends JeeslDescripti
 {
 	public enum Developer{devLogger}
 	
-	public enum Attributes{category,position,visible}
+	public enum Attributes{category,position,visible,usecases}
 	
 	public List<U> getUsecases();
 	public void setUsecases(List<U> usecases);

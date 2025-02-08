@@ -82,6 +82,25 @@
 			<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
 			<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
 			<h:form id="fUsecase"><jpSec:addUsecases rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fUsecase" usecases="#{cc.attrs.bean.usecases}"/></h:form>
+			<h:form id="fUsers">
+				<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.bean.role.id gt 0}"
+						var="u" value="#{cc.attrs.bean.users}" draggableRows="false" rowKey="#{u.id}"
+						rows="10" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+					<f:facet name="header">
+						<j:dtHeader entity="SecurityUser" code="listOf">
+				
+						</j:dtHeader>
+					</f:facet>
+					<p:column rendered="true">
+						<f:facet name="header"><jtp:label entity="SecurityUser" code="id"/></f:facet>
+						<h:outputText value="#{u.id}"/>
+					</p:column>
+		            <p:column filterBy="#{u.email}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle35}">
+		            	<f:facet name="header"><jtp:label entity="SecurityUser" code="email"/></f:facet>
+						<h:outputText value="#{u.email}" />
+		            </p:column>
+		       	</p:dataTable>
+			</h:form>
 		</j:slot>
 	</j:row>
 </jp:grid>

@@ -21,7 +21,7 @@ public class TxtUserFactory <USER extends JeeslUser<?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtUserFactory.class);
     
-	public static <USER extends JeeslUser<?>> TxtUserFactory<USER> instance(){return new TxtUserFactory<>();}
+	public static <USER extends JeeslUser<?>> TxtUserFactory<USER> instance() {return new TxtUserFactory<>();}
     public TxtUserFactory()
     {
     	
@@ -50,6 +50,14 @@ public class TxtUserFactory <USER extends JeeslUser<?>>
     {
     	StringBuilder sb = new StringBuilder();
     	sb.append("[").append(user.getId()).append("]");
+    	return sb.toString();
+    }
+    
+    public String toInitials(USER ejb)
+    {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(ejb.getFirstName().trim().substring(0,1).toUpperCase());
+    	sb.append(ejb.getLastName().trim().substring(0,1).toUpperCase());
     	return sb.toString();
     }
     

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -63,7 +63,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	}
 
 	protected void postConstructRevisionView(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-							JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
+							JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
 		entities.addAll(fRevision.all(fbRevision.getClassEntity()));
