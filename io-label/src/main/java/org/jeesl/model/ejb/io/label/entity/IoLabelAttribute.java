@@ -42,6 +42,12 @@ public class IoLabelAttribute implements JeeslRevisionAttribute<IoLang,IoDescrip
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinTable(name="IoLabelEntityJtAttribute",joinColumns={@JoinColumn(name="attribute_id")},inverseJoinColumns={@JoinColumn(name="entity_id")})
+    private IoLabelEntity ownerEntity;
+	public IoLabelEntity getOwnerEntity() {return ownerEntity;}
+	public void setOwnerEntity(IoLabelEntity ownerEntity) {this.ownerEntity = ownerEntity;}
 
 	@NotNull @ManyToOne
 	private IoLabelAttributeType type;

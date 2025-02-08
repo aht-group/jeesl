@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -21,7 +22,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -41,11 +42,15 @@ import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScopeType;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
+import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeReferral;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
+import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
 import org.jeesl.util.query.cq.CqLiteral;
@@ -68,7 +73,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 									ERD extends JeeslRevisionDiagram<L,D,RC>,
 									RML extends JeeslRevisionMissingLabel>
 					extends JeeslFacadeBean
-					implements JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,RML>
+					implements JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,RML>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRevisionFacadeBean.class);
@@ -150,6 +155,21 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		
 		return em.createQuery(cQ).getResultList();
 	}
+	
+	@Override public List<RA> fLabelAttributes(JeeslIoLabelQuery<RE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<RA> cQ = cB.createQuery(fbRevision.getClassAttribute());
+		Root<RA> root = cQ.from(fbRevision.getClassAttribute());
+		
+		cQ.select(root);
+		cQ.where(cB.and(pAttribte(cB,query,root)));
+		
+		TypedQuery<RA> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
+	}
+	
 	@Override public List<RE> findLabelEntities(RC category, ERD diagram)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -230,7 +250,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 	}
 
 	@Override
-	public <T extends EjbWithId> List<Long> ids(Class<T> c, JeeslIoRevisionFacade.Scope scope)
+	public <T extends EjbWithId> List<Long> ids(Class<T> c, JeeslIoLabelFacade.Scope scope)
 	{
 		List<Long> result = new ArrayList<Long>();
 
@@ -365,5 +385,18 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		}
 		catch (NoResultException ex) {throw new JeeslNotFoundException("Nothing found "+fbRevision.getClassEntity().getSimpleName()+" for jscn="+jscn);}
 		catch (JeeslConstraintViolationException| JeeslLockingException | NonUniqueResultException ex) {throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and jscn="+jscn+" not unique");}
+	}
+	
+	public Predicate[] pAttribte(CriteriaBuilder cB, JeeslIoLabelQuery<RE> query, Root<RA> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getIoLabelEntities()))
+		{
+			Join<RA,RE> jEntity = root.join(JeeslRevisionAttribute.Attributes.entity.toString());
+			predicates.add(jEntity.in(query.getIoLabelEntities()));
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 }

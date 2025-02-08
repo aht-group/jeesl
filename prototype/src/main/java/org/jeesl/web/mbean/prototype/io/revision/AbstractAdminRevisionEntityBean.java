@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -102,7 +102,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		entities = new ArrayList<>();
 	}
 
-	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
+	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
 		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
 		super.postConstructRevision(bTranslation,bMessage,fRevision);

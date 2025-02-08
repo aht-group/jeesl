@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.facade.jk.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -65,7 +65,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 									ERD extends JeeslRevisionDiagram<L,D,RC>,
 									RML extends JeeslRevisionMissingLabel>
 					extends JeeslFacadeBean
-					implements JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,RML>
+					implements JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,RML>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRevisionFacadeBean.class);
@@ -147,6 +147,21 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		
 		return em.createQuery(cQ).getResultList();
 	}
+	
+	@Override public List<RA> fLabelAttributes(JeeslIoLabelQuery<RE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<RA> cQ = cB.createQuery(fbRevision.getClassAttribute());
+		Root<RA> root = cQ.from(fbRevision.getClassAttribute());
+		
+		cQ.select(root);
+		cQ.where(cB.and(pAttribte(cB,query,root)));
+		
+		TypedQuery<RA> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
+	}
+	
 	@Override public List<RE> findLabelEntities(RC category, ERD diagram)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -228,7 +243,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 	}
 
 	@Override
-	public <T extends EjbWithId> List<Long> ids(Class<T> c, JeeslIoRevisionFacade.Scope scope)
+	public <T extends EjbWithId> List<Long> ids(Class<T> c, JeeslIoLabelFacade.Scope scope)
 	{
 		List<Long> result = new ArrayList<Long>();
 
@@ -363,5 +378,14 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		}
 		catch (NoResultException ex) {throw new JeeslNotFoundException("Nothing found "+fbRevision.getClassEntity().getSimpleName()+" for jscn="+jscn);}
 		catch (JeeslConstraintViolationException| JeeslLockingException | NonUniqueResultException ex) {throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and jscn="+jscn+" not unique");}
+	}
+	
+	public Predicate[] pAttribte(CriteriaBuilder cB, JeeslIoLabelQuery<RE> query, Root<RA> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 }

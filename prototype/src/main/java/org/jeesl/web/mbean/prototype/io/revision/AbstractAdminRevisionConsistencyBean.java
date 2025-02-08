@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -47,7 +47,7 @@ public class AbstractAdminRevisionConsistencyBean <L extends JeeslLang, D extend
 	public AbstractAdminRevisionConsistencyBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision){super(fbRevision);}
 
 	protected void postConstructRevisionConsistency(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-													JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
+													JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
 		categories.clear();

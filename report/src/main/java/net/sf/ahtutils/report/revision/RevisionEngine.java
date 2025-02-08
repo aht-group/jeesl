@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -53,7 +53,7 @@ public class RevisionEngine<L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(RevisionEngine.class);
 
-	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision;
+	private JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision;
 
 	private RevisionEngineScopeResolver<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,REV,C,R,V,U,A,AT,USER> resr;
 	private RevisionEngineAttributeResolver<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,REV,C,R,V,U,A,AT,USER> rear;
@@ -68,7 +68,7 @@ public class RevisionEngine<L extends JeeslLang, D extends JeeslDescription,
 	private Map<RAT,DecimalFormat> mapDecimalFormatter;
 	private Map<RAT,SimpleDateFormat> mapDateFormatter;
 
-	public RevisionEngine(JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision, final Class<RV> cView, final Class<RS> cScope, final Class<RE> cEntity, final Class<RAT> cRat)
+	public RevisionEngine(JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision, final Class<RV> cView, final Class<RS> cScope, final Class<RE> cEntity, final Class<RAT> cRat)
 	{
 		this.fRevision=fRevision;
 		this.cView=cView;

@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.keyvalue.MultiKey;
 import org.jeesl.api.bean.JeeslLabelBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.handler.io.label.JeeslTranslationHandler;
 import org.jeesl.controller.provider.FacadeTranslationProvider;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
@@ -60,7 +60,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		mapLocales = new HashMap<String,LOC>();
 	}
 
-	protected void postConstruct(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,RML> fRevision)
+	protected void postConstruct(JeeslIoLabelFacade<L,D,?,?,?,?,?,RE,?,RA,?,RML> fRevision)
 	{
 		th = new JeeslTranslationHandler<>(fbRevision,fRevision);
 		ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);

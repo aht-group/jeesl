@@ -7,7 +7,6 @@ import java.util.Objects;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
-import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
@@ -44,5 +43,10 @@ public class EjbIoLabelQuery<ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>
 	@Override public EjbIoLabelQuery<ENTITY> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbIoLabelQuery<ENTITY> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
-	@Override public EjbIoLabelQuery<ENTITY> add(JeeslCqLiteral literal) {super.addCqLiteral(literal); return this;}
+	// IO - Label
+	private List<ENTITY> ioLabelEntity;
+	@Override public List<ENTITY> getIoLabelEntities() {return ioLabelEntity;}
+	public EjbIoLabelQuery<ENTITY> add(ENTITY entity) {if(Objects.isNull(ioLabelEntity)) {ioLabelEntity = new ArrayList<>();} ioLabelEntity.add(entity); return this;}	
+
+
 }

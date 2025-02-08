@@ -12,7 +12,7 @@ import java.util.Objects;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.handler.module.workflow.WorkflowProcesslResetHandler;
@@ -115,7 +115,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	private JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic;
 	private JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fWorkflow;
-	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision;
+	private JeeslIoLabelFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision;
 
 	private final WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow;
 	private final IoTemplateFactoryBuilder<L,D,?,MC,MT,?,?,?,?> fbTemplate;
@@ -229,14 +229,14 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 											JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 											JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fApproval,
-											JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision)
+											JeeslIoLabelFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision)
 	{
 		postConstructProcess(bTranslation,bMessage,fGraphic,fApproval,fRevision,null);
 	}
 	protected void postConstructProcess(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 										JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 										JeeslWorkflowFacade<WP,WS,WST,WSN,WT,WTT,SR,WL,WF,WY,WD,USER> fApproval,
-										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision,
+										JeeslIoLabelFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision,
 										WP preSelection)
 	{
 		super.initJeeslAdmin(lp,bMessage);

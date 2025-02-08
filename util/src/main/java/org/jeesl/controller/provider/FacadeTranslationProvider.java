@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
@@ -22,11 +22,11 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 {
 	final static Logger logger = LoggerFactory.getLogger(FacadeTranslationProvider.class);
 
-	private final JeeslIoRevisionFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision;
+	private final JeeslIoLabelFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision;
 	private final IoRevisionFactoryBuilder<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision;
 
 	public FacadeTranslationProvider(IoRevisionFactoryBuilder<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision,
-								JeeslIoRevisionFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision)
+								JeeslIoLabelFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision)
 	{
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;

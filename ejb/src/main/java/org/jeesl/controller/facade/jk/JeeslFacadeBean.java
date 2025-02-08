@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -56,6 +57,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithContext;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.interfaces.util.query.jpa.JeeslPaginationQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,6 +93,12 @@ public class JeeslFacadeBean implements JeeslFacade
 	{
 		this.em=em;
 		this.handleTransaction=handleTransaction;
+	}
+	
+	protected void pagination(TypedQuery<?> tQ, JeeslPaginationQuery query)
+	{
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
 	}
 
 	//Persist

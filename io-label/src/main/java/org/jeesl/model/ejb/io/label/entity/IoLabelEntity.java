@@ -3,6 +3,7 @@ package org.jeesl.model.ejb.io.label.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -96,7 +97,7 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	@JoinTable(name="IoLabelEntityJtAttribute",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="attribute_id")})
 	@OrderBy("position")
 	private List<IoLabelAttribute> attributes;
-	@Override public List<IoLabelAttribute> getAttributes() {if(attributes==null){attributes=new ArrayList<IoLabelAttribute>();}return attributes;}
+	@Override public List<IoLabelAttribute> getAttributes() {if(Objects.isNull(attributes)) {attributes = new ArrayList<>();}return attributes;}
 	@Override public void setAttributes(List<IoLabelAttribute> attributes) {this.attributes = attributes;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="entity")

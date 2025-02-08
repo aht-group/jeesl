@@ -24,7 +24,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
 
-public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescription,
+public interface JeeslIoLabelFacade <L extends JeeslLang,D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,
 									RV extends JeeslRevisionView<L,D,RVM>,
 									RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -46,8 +46,12 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 	RE load(Class<RE> cEntity, RE entity);
 
 	List<RE> findLabelEntities(JeeslIoLabelQuery<RE> query);
+	List<RA> fLabelAttributes(JeeslIoLabelQuery<RE> query);
+	
 	List<RE> findLabelEntities(RC categories, ERD diagram);
 	List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes);
+	
+	
 
 	void rm(Class<RVM> cMappingView, RVM mapping) throws JeeslConstraintViolationException;
 
@@ -58,7 +62,7 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 
 	<T extends EjbWithId> List<T> revisions(Class<T> c, List<Long> ids);
 
-	<T extends EjbWithId> List<Long> ids(Class<T> c, JeeslIoRevisionFacade.Scope scope);
+	<T extends EjbWithId> List<Long> ids(Class<T> c, JeeslIoLabelFacade.Scope scope);
 	<T extends EjbWithId> List<JsonRevision> findCreated(Class<T> c, Date from, Date to);
 
 	void addMissingLabel(RML rML);

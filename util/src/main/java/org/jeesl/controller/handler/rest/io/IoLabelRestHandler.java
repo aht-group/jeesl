@@ -3,7 +3,7 @@ package org.jeesl.controller.handler.rest.io;
 import java.util.Collections;
 import java.util.List;
 
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.api.rest.i.io.JeeslIoLabelRestInterface;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.xml.system.io.revision.XmlDiagramFactory;
@@ -44,13 +44,13 @@ public class IoLabelRestHandler <L extends JeeslLang, D extends JeeslDescription
 	final static Logger logger = LoggerFactory.getLogger(IoLabelRestHandler.class);
 
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
-	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
+	private JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 
 	private final XmlEntityFactory<L,D,RC,REM,RE,RA,RER,RAT,ERD> xfEntity;
 	private final XmlDiagramFactory<L,D,RC,ERD> xfDiagram;
 
 	public IoLabelRestHandler(IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision,
-								JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
+								JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;

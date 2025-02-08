@@ -1,7 +1,7 @@
 package net.sf.ahtutils.report.revision;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -49,11 +49,11 @@ public class RevisionEngineScopeResolver<L extends JeeslLang,D extends JeeslDesc
 {
 	final static Logger logger = LoggerFactory.getLogger(RevisionEngineScopeResolver.class);
 
-	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision;
+	private JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision;
 
 	private RevisionEngineAttributeResolver<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,REV,C,R,V,U,A,AT,USER> rear;
 
-	public RevisionEngineScopeResolver(JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision, RevisionEngineAttributeResolver<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,REV,C,R,V,U,A,AT,USER> rear)
+	public RevisionEngineScopeResolver(JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision, RevisionEngineAttributeResolver<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,REV,C,R,V,U,A,AT,USER> rear)
 	{
 		this.fRevision=fRevision;
 		this.rear=rear;

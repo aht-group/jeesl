@@ -22,8 +22,6 @@ public interface JeeslIoMavenQuery <
 							>
 			extends JeeslCoreQuery,JeeslOrderingQuery
 {
-	List<JeeslCqLiteral> getCqLiterals();
-	
 	boolean isDistinct();
 //	void x();
 	

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.io.db.updater.JeeslDbLangUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
@@ -50,7 +50,7 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbEntityAttributeUpdater.class);
 	
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
-	private final JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
+	private final JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 	
 	private final EjbCodeCache<RAT> cacheType;
 	
@@ -62,7 +62,7 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 
 	
 	public JeeslDbEntityAttributeUpdater(IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision,
-									JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
+									JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.web.util.AbstractLogMessage;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -34,7 +34,7 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionMissingLabelBean.class);
 
 	private RML missingLabel;public RML getMissingLabel() {return missingLabel;} public void setMissingLabel(RML missingLabel) {this.missingLabel = missingLabel;}
-	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision;
+	private JeeslIoLabelFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision;
 	private List<RML> missingLabels; public List<RML> getMissingLabels() {return missingLabels;}
 	private IoRevisionFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,?,?,RML> fbRevision;
 
@@ -51,11 +51,11 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 	}
 
 	protected void postConstructMissingEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision, String defaultLangCode)
+			JeeslIoLabelFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision, String defaultLangCode)
 	{
 		super.initJeeslAdmin(bTranslation, bMessage);
 		this.fRevision = fRevision;
-		if (Objects.isNull(fRevision)) {logger.warn(JeeslIoRevisionFacade.class.getSimpleName() + " is NULL");}
+		if (Objects.isNull(fRevision)) {logger.warn(JeeslIoLabelFacade.class.getSimpleName() + " is NULL");}
 		
 		List<LOC> langList = fRevision.allOrderedPositionVisible(fbLocale.getClassLocale());
 		sbhStatus.setList(langList);
