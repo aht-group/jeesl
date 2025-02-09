@@ -124,7 +124,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	@Override public void setContext(String localeCode, Class<?> c) {throw new UnsupportedOperationException("It's not allowed to set the context");}
 	@Override public <E extends Enum<E>> String toLabel(E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
 	
-	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code)
+	@Override public <E extends Enum<E>> String tAttribute(String localeCode, Class<?> c, E code)
 	{
 		logger.info("toLabel("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
 		return th.getLabels().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
@@ -138,17 +138,16 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	//This are some dummy-methods for the OfxTranslationProvider .. not required here
 	@Override public boolean hasLocale(String localeCode) {logger.warn("NYI"); return false;}
 	
+	@Override public String tlEntity(Class<?> c) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
 	@Override public String tlEntity(String localeCode, String key) {logger.warn("NYI"); return null;}
-	@Override public String tlAttribute(String localeCode, String key1, String key2) {logger.warn("NYI"); return null;}
+	
+	@Override public <E extends Enum<E>> String tAttribute(Class<?> c, E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
+	@Override public String tAttribute(String localeCode, String key1, String key2) {logger.warn("NYI"); return null;}
 	
 	@Override public String toDate(String localeCode, LocalDate record) {logger.warn("NYI"); return null;}
 	@Override public String toDate(String localeCode, Date record) {logger.warn("NYI"); return null;}
 	@Override public String toTime(String localeCode, Date record) {logger.warn("NYI"); return null;}
 	@Override public String toCurrency(String localeCode, Double value) {logger.warn("NYI"); return null;}
 	@Override public String toCurrency(String localeCode, boolean grouping, int decimals, Double value) {logger.warn("NYI"); return null;}
-	@Override public void setLanguages(List<LOC> locales) {logger.warn("NYI");}
-	
-	
-	
-	
+	@Override public void setLanguages(List<LOC> locales) {logger.warn("NYI");}	
 }

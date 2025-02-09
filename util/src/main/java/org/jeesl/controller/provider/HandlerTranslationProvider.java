@@ -61,6 +61,7 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 		setLocaleCodes.addAll(localeCodes);
 	}
 
+	@Override public String tlEntity(Class<?> c) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
 	@Override public String tlEntity(String localeCode, Class<?> c) {return tlEntity(localeCode,c.getSimpleName());}
 	@Override public String tlEntity(String localeCode, String key)
 	{
@@ -70,7 +71,7 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 	@Override public void setContext(String localeCode, Class<?> c) {throw new UnsupportedOperationException("It's not allowed to set the context");}
 	@Override public <E extends Enum<E>> String toLabel(E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
 	
-	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code)
+	@Override public <E extends Enum<E>> String tAttribute(String localeCode, Class<?> c, E code)
 	{
 		return th.getLabels().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
 	}
@@ -79,7 +80,8 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 		return th.getDescriptions().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
 	}
 
-	@Override public String tlAttribute(String localeCode, String key1, String key2)
+	@Override public <E extends Enum<E>> String tAttribute(Class<?> c, E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
+	@Override public String tAttribute(String localeCode, String key1, String key2)
 	{
 		if(key2==null) {return tlEntity(localeCode,key1);}
 		return th.getLabels().get(key1).get(key2).get(localeCode).getLang();

@@ -45,6 +45,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
+import org.jeesl.interfaces.model.with.date.jt.JeeslWithDateValidFrom;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithTimeline;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithValidFrom;
@@ -105,7 +106,6 @@ public class JeeslFacadeBean implements JeeslFacade
 	{
 		for(JeeslCqRootFetch cq : ListUtils.emptyIfNull(query.getCqRootFetches()))
 		{
-			logger.info("Root Fetch: "+cq);
 			switch(cq.getType())
 			{
 				case LEFT: root.fetch(cq.getPath(), JoinType.LEFT); break;
@@ -932,10 +932,11 @@ public class JeeslFacadeBean implements JeeslFacade
 	    if(parent!=null) {select.where(cB.equal(p1Path,parent));}
 	    else {select.where(cB.isNull(p1Path));}
 
-	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
-	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
-	    else if(EjbWithValidFrom.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithValidFrom.Attributes.validFrom.toString())));}
-
+	    if(EjbWithPosition.class.isAssignableFrom(c)) {select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(c)) {select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
+	    else if(EjbWithValidFrom.class.isAssignableFrom(c)) {select.orderBy(cB.asc(root.get(EjbWithValidFrom.Attributes.validFrom.toString())));}
+	    else if(JeeslWithDateValidFrom.class.isAssignableFrom(c)) {select.orderBy(cB.asc(root.get(EjbWithValidFrom.Attributes.validFrom.toString())));}
+	    
 		TypedQuery<T> q = em.createQuery(select);
 		try	{return q.getResultList();}
 		catch (NoResultException ex){return new ArrayList<T>();}

@@ -32,7 +32,7 @@ public class FacesContextMessage implements JeeslFacesContextMessage
 	@Override public void warn(String id, String summary, String detail) {addMessage(id, FacesMessage.SEVERITY_WARN,summary,detail);}
 	
 	public void error(String summary, String detail) {addMessage(null, FacesMessage.SEVERITY_ERROR,summary,detail);}
-	public <FID extends Enum<FID>> void error(FID id,String summary, String detail)
+	public <FID extends Enum<FID>> void error(FID id, String summary, String detail)
 	{
 		if(Objects.isNull(id)) {addMessage(null, FacesMessage.SEVERITY_ERROR,summary,detail);}
 		else {addMessage(id.toString(), FacesMessage.SEVERITY_ERROR,summary,detail);}

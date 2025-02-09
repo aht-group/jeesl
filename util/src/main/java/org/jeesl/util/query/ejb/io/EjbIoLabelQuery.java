@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
@@ -35,7 +36,9 @@ public class EjbIoLabelQuery<ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>
 	public <E extends Enum<E>> EjbIoLabelQuery<ENTITY> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoLabelQuery<ENTITY> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
+	//CQ
 	public EjbIoLabelQuery<ENTITY> orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
+	public EjbIoLabelQuery<ENTITY> add(JeeslCqLiteral cq) {super.addCqLiteral(cq); return this;}
 	
 	//Lists
 	@Override public EjbIoLabelQuery<ENTITY> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
