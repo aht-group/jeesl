@@ -18,7 +18,6 @@ public class TestXmlOutcome extends AbstractXmlStatusTest<Outcome>
     	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
-    	xml.setGroup("myGroup");
     	xml.setLabel("myLabel");
     	xml.setImage("test/green.png");
     	xml.setPosition(1);
