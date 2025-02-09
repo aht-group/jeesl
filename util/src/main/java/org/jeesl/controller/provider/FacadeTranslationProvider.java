@@ -10,9 +10,13 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.util.query.cq.CqLiteral;
+import org.jeesl.util.query.cq.CqRootFetch;
+import org.jeesl.util.query.ejb.io.EjbIoLabelQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,11 +26,11 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 {
 	final static Logger logger = LoggerFactory.getLogger(FacadeTranslationProvider.class);
 
-	private final JeeslIoLabelFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision;
+	private final JeeslIoLabelFacade<?,?,?,?,?,?,?,RE,?,RA,?,?> fRevision;
 	private final IoRevisionFactoryBuilder<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision;
-
+	
 	public FacadeTranslationProvider(IoRevisionFactoryBuilder<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision,
-								JeeslIoLabelFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision)
+								JeeslIoLabelFacade<?,?,?,?,?,?,?,RE,?,RA,?,?> fRevision)
 	{
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;
@@ -63,6 +67,8 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 		return c.getSimpleName();
 	}
+	
+	@Override public String tlEntity(Class<?> c) {throw new UnsupportedOperationException("It's not allowed to set the context");}
 
 	@Override
 	public boolean hasLocale(String localeCode) {
@@ -82,20 +88,39 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 		return null;
 	}
 
-	@Override
-	public String tlAttribute(String localeCode, String key1, String key2) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override public <E extends Enum<E>> String tAttribute(Class<?> c, E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
+	@Override public <E extends Enum<E>> String tAttribute(String localeCode, Class<?> c, E code)
+	{
+		
+		try
+		{
+			EjbIoLabelQuery<RE> query = new EjbIoLabelQuery<>();
+			query.addCqRootFetch(CqRootFetch.left(CqRootFetch.path(JeeslRevisionAttribute.Attributes.ownerEntity)));
+//			query.addIoLabelEntityReferenced(fUtils.fByCode(IoLabelEntity.class,IoLabelAttributeType.class.getName()));
+			query.addIoLabelEntityOwner(fRevision.fByCode(fbRevision.getClassEntity(),c.getName()));
+			query.add(CqLiteral.exact(code,CqLiteral.path(JeeslRevisionAttribute.Attributes.code)));
+			
+			List<RA> list = fRevision.fLabelAttributes(query);
+			if(list.isEmpty()) {throw new JeeslNotFoundException("No Attribute");}
+			
+			RA ra = list.get(0);
+			return ra.getName().get(localeCode).getLang();
+		}
+		catch (JeeslNotFoundException e)
+		{
+			logger.error(e.getMessage());
+			return c.getSimpleName()+":"+code;
+		}
+	}
+	@Override public String tAttribute(String localeCode, String key1, String key2)
+	{
+		throw new UnsupportedOperationException("NYI, use tAttribute(String localeCode, Class<?> c, E code)");
 	}
 	
 	@Override public void setContext(String localeCode, Class<?> c) {throw new UnsupportedOperationException("It's not allowed to set the context");}
 	@Override public <E extends Enum<E>> String toLabel(E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
 	
-	@Override
-	public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	@Override
 	public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code) {
 		// TODO Auto-generated method stub

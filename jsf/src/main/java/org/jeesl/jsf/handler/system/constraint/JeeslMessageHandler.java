@@ -51,7 +51,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(Objects.nonNull(tp))
 		{
-			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summarySuccess);
+			summary = tp.tAttribute(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summarySuccess);
 			detail = tp.toDescription(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailSaved);
 		}
 		else if(Objects.nonNull(bTranslation))
@@ -94,7 +94,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(Objects.nonNull(tp))
 		{
-			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryInfo);
+			summary = tp.tAttribute(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryInfo);
 		}
 		if(Objects.nonNull(bTranslation))
 		{
@@ -112,7 +112,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(Objects.nonNull(tp))
 		{
-			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+			summary = tp.tAttribute(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
 		}
 		if(Objects.nonNull(bTranslation))
 		{
@@ -130,7 +130,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(Objects.nonNull(tp))
 		{
-			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+			summary = tp.tAttribute(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
 		}
 		if(Objects.nonNull(bTranslation))
 		{
@@ -150,7 +150,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(Objects.nonNull(tp))
 		{
-			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+			summary = tp.tAttribute(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
 			detail = tp.toDescription(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailDuplicate);
 		}
 		else if(Objects.nonNull(bTranslation))
@@ -172,7 +172,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(Objects.nonNull(tp))
 		{
-			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+			summary = tp.tAttribute(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
 			detail = tp.toDescription(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailInUse);
 		}
 		else if(Objects.nonNull(bTranslation))

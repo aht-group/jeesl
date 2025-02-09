@@ -109,7 +109,7 @@ public class AbstractJeeslOfxTableFactory<L extends JeeslLang, LOC extends Jeesl
 				logger.trace("Building via TP "+json.getEntity()+" "+json.getCode());
 				for(String localeCode : lp.getLocaleCodes())
 				{
-					Paragraph p = XmlParagraphFactory.build(localeCode,tp.tlAttribute(localeCode,json.getEntity(),json.getCode()));
+					Paragraph p = XmlParagraphFactory.build(localeCode,tp.tAttribute(localeCode,json.getEntity(),json.getCode()));
 					cell.getContent().add(p);
 				}
 			}

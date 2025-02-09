@@ -18,12 +18,14 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -42,15 +44,12 @@ import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScopeType;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
-import org.jeesl.interfaces.model.io.maven.ee.JeeslIoMavenEeReferral;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoLabelQuery;
-import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
 import org.jeesl.util.query.cq.CqLiteral;
@@ -131,23 +130,20 @@ public class JeeslIoLabelFacadeBean<L extends JeeslLang,D extends JeeslDescripti
 		CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
 		Root<RE> root = cQ.from(fbRevision.getClassEntity());
 		
-		if(ObjectUtils.isNotEmpty(query.getCqLiterals()))
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
 		{
-			for(JeeslCqLiteral lit : query.getCqLiterals())
+			if(cq.getPath().equals(CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)))
 			{
-				if(lit.getPath().equals(CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)))
+				Expression<String> literal = cB.upper(cB.literal("%"+cq.getLiteral()+"%"));
+				Expression<String> eJscn = root.get(JeeslRevisionEntity.Attributes.jscn.toString());
+				
+				switch(cq.getType())
 				{
-					Expression<String> literal = cB.upper(cB.literal("%"+lit.getLiteral()+"%"));
-					Expression<String> eJscn = root.get(JeeslRevisionEntity.Attributes.jscn.toString());
-					
-					switch(lit.getType())
-					{
-						case CONTAINS: predicates.add(cB.like(cB.upper(eJscn),literal)); break;
-						default: logger.error("NYI "+lit.toString());
-					}
+					case CONTAINS: predicates.add(cB.like(cB.upper(eJscn),literal)); break;
+					default: logger.error("NYI "+cq.toString());
 				}
-				else {logger.warn("NYI: "+lit.toString());}
 			}
+			else {logger.warn("NYI: "+cq.toString());}
 		}
 		
 		cQ.select(root);
@@ -164,7 +160,7 @@ public class JeeslIoLabelFacadeBean<L extends JeeslLang,D extends JeeslDescripti
 		super.rootFetch(root, query);
 		
 		cQ.select(root);
-		cQ.where(cB.and(pAttribte(cB,query,root)));
+		cQ.where(cB.and(this.pAttribute(cB,query,root)));
 		
 		TypedQuery<RA> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
@@ -388,14 +384,29 @@ public class JeeslIoLabelFacadeBean<L extends JeeslLang,D extends JeeslDescripti
 		catch (JeeslConstraintViolationException| JeeslLockingException | NonUniqueResultException ex) {throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and jscn="+jscn+" not unique");}
 	}
 	
-	public Predicate[] pAttribte(CriteriaBuilder cB, JeeslIoLabelQuery<RE> query, Root<RA> root)
+	public Predicate[] pAttribute(CriteriaBuilder cB, JeeslIoLabelQuery<RE> query, Root<RA> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getIoLabelEntityOwner()))
+		{
+			Join<RA,RE> jEntity = root.join(JeeslRevisionAttribute.Attributes.ownerEntity.toString());
+			predicates.add(jEntity.in(query.getIoLabelEntityOwner()));
+		}
 		
 		if(ObjectUtils.isNotEmpty(query.getIoLabelEntityReferenced()))
 		{
 			Join<RA,RE> jEntity = root.join(JeeslRevisionAttribute.Attributes.entity.toString());
 			predicates.add(jEntity.in(query.getIoLabelEntityReferenced()));
+		}
+		
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cq.getPath().equals(CqLiteral.path(JeeslRevisionAttribute.Attributes.code)))
+			{					
+				LiteralPredicateBuilder.add(cB,predicates,cq,root.<String>get(JeeslRevisionAttribute.Attributes.code.toString()));
+			}
+			else {logger.warn(cq.nyi(fbRevision.getClassAttribute()));}
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

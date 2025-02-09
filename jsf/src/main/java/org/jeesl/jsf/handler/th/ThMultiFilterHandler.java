@@ -123,7 +123,7 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 		{
 			map.put(t,true);
 		}
-		refresh();
+		this.refresh();
 	}
 	public void preSelectOrAll(List<T> selection)
 	{

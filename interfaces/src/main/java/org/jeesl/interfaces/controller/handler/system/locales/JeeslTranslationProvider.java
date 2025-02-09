@@ -9,6 +9,5 @@ public interface JeeslTranslationProvider <LOC extends JeeslLocale<?,?,LOC,?>> e
 {
 	void setLanguages(List<LOC> locales);
 	
-	
 	<E extends Enum<E>> String xpAttribute(String localeCode, Class<?> c, E code);
 }
