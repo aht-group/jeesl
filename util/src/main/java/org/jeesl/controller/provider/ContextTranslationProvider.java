@@ -28,11 +28,9 @@ public class ContextTranslationProvider <LOC extends JeeslLocale<?,?,LOC,?>>
 		this.tp=tp;
 	}
 
-	public ContextTranslationProvider<LOC> locale(String localeCode)
-	{
-		this.localeCode=localeCode;
-		return this;
-	}
+	public ContextTranslationProvider<LOC> locale(String localeCode) {this.localeCode=localeCode;return this;}
+//	public ContextTranslationProvider<LOC> cache() {this.localeCode=localeCode;return this;}
+	
 
 	@Override public void setLanguages(List<LOC> locales) {throw new UnsupportedOperationException("NYI");}
 	@Override public boolean hasLocale(String localeCode) {throw new UnsupportedOperationException("NYI");}
