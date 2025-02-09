@@ -6,8 +6,7 @@ import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.model.xml.io.label.Entity;
 
-public interface JeeslIoLabelEntityCallback 
-					extends Serializable
+public interface JeeslIoLabelEntityCallback extends Serializable
 {
 	JeeslSystemRestInterface rest(String code);
 	Entity downloadEntity(String code) throws UtilsConfigurationException;
