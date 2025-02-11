@@ -1,11 +1,13 @@
 package org.jeesl.client;
 
-import org.apache.commons.configuration.Configuration;
+
+import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
+import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,26 +21,40 @@ public class JeeslBootstrap
 	
 	public final static String xmlConfig = "jeesl/client/config/jeesl.xml";
 	
-	public static org.exlp.interfaces.system.property.Configuration wrap() {return ConfigLoader.wrap(JeeslBootstrap.init());}
+	public static org.exlp.interfaces.system.property.Configuration wrap() {return ConfigBootstrap.wrap(JeeslBootstrap.init());}
 	public static Configuration init() {return JeeslBootstrap.init(xmlConfig);}
 
 	public static Configuration init(String configFile)
 	{
 		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
 		
+		ConfigBootstrap bootstrap = ConfigBootstrap.instance();
 		try
 		{
-			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(App.jeesl).jaxb(JaxbUtil.instance());
-			ConfigLoader.addFile(ccp.toFile("client"));
-			ConfigLoader.addFile(ccp.toFile("eapConfig"));
+			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("jeesl").jaxb(JaxbUtil.instance());
+			bootstrap.add(ccp.toFile("client").toPath());
+			bootstrap.add(ccp.toFile("eapConfig").toPath());
 		}
-		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
-		ConfigLoader.addString(configFile);
+		catch (ExlpConfigurationException e) {logger.warn("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
+		bootstrap.add(xmlConfig);
+
+		Configuration config = bootstrap.combine();
 		
-		return ConfigLoader.init();
+		return config;
+		
+//		try
+//		{
+//			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(App.jeesl).jaxb(JaxbUtil.instance());
+//			ConfigLoader.addFile(ccp.toFile("client"));
+//			ConfigLoader.addFile(ccp.toFile("eapConfig"));
+//		}
+//		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
+//		ConfigLoader.addString(configFile);
+//		
+//		return ConfigLoader.init();
 	}
-	
-	public static BasicDataSource buildDatasource(Configuration config, String code)
+
+	public static BasicDataSource buildDatasource(org.exlp.interfaces.system.property.Configuration config, String code)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("jdbc:postgresql://");

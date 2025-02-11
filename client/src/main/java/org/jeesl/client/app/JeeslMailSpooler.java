@@ -10,7 +10,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -51,7 +51,7 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 	
 	public void local()
 	{	
-		Configuration config = JeeslBootstrap.init();
+		Configuration config = JeeslBootstrap.wrap();
 		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgSmtp = config.getString(ConfigKey.netSmtpHost);

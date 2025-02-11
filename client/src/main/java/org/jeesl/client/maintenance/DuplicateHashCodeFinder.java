@@ -102,6 +102,4 @@ public class DuplicateHashCodeFinder
 	private void enterEmptyArgs(Map.Entry<String, String> me, Map<String, String> fileList) {if(me.getValue().isEmpty()){fileList.put(me.getKey(),me.getValue());}}
 
 	public Map<String, String> getHash(){return hash;}
-
-
 }
