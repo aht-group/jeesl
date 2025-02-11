@@ -173,6 +173,8 @@
 			</exclusions>
 		</dependency>
 		 -->
+		 
+		<!-- 2025-02-10 tk: trying to remvoe -->
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -184,7 +186,7 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>
