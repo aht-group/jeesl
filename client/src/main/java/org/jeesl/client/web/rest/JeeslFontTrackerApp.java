@@ -12,9 +12,6 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 import org.exlp.interfaces.system.property.Configuration;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.jx.io.JeeslIoMavenRest;
 import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
@@ -49,12 +46,7 @@ public class JeeslFontTrackerApp
 		this.config = config;
 	}
 	
-	private JeeslIoMavenRest buildRest(String url)
-	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url);
-		return restTarget.proxy(JeeslIoMavenRest.class);
-	}
+	
 	
 	public void local()
 	{	
@@ -106,7 +98,9 @@ public class JeeslFontTrackerApp
 		JsonMavenGraph graph = JeeslFontFactory.build();
 		graph.setCode(cfgHost);
 		
-		this.buildRest(cfgUrl).uploadFonts(graph);
+		JeeslIoMavenRest rest = JeeslBootstrap.rest(JeeslIoMavenRest.class, cfgUrl);
+		
+		rest.uploadFonts(graph);
 	}
 	
 	public static void main(String args[]) throws FileNotFoundException, UtilsConfigurationException, NamingException, ExlpConfigurationException

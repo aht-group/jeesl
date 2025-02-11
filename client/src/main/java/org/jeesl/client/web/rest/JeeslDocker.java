@@ -9,9 +9,6 @@ import javax.naming.NamingException;
 
 import org.exlp.util.io.JsonUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.io.ssi.JeeslIoDockerRest;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.json.io.ssi.docker.JsonDockerFactory;
