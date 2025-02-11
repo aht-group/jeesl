@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.model.ejb.system.security.SecurityAction;

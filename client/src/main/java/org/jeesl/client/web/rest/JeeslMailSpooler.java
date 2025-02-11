@@ -1,4 +1,4 @@
-package org.jeesl.client.app;
+package org.jeesl.client.web.rest;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,22 +9,22 @@ import javax.naming.NamingException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 import org.exlp.interfaces.system.property.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.api.rest.rs.jx.io.JeeslIoMavenRest;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
+import org.jeesl.controller.io.mail.AbstractSmtpSpooler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.exception.processing.UtilsProcessingException;
-import org.jeesl.factory.json.io.maven.JeeslFontFactory;
-import org.jeesl.model.json.io.maven.JsonMavenGraph;
+import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,28 +32,21 @@ import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 
-public class JeeslFontTrackerApp
+public class JeeslMailSpooler extends AbstractSmtpSpooler
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslFontTrackerApp.class);
-	
-	private final Configuration config;
-	private JeeslCliOptionHandler handler;
-	
-	
-	private Option oHost,oSystem;
+	final static Logger logger = LoggerFactory.getLogger(JeeslMailSpooler.class);
 
-	private String cfgUrl,cfgHost,cfgSystem;
-	
-	public JeeslFontTrackerApp(Configuration config)
+	public JeeslMailSpooler()
 	{
-		this.config = config;
+		
+		
 	}
 	
-	private JeeslIoMavenRest buildRest(String url)
+	private void buildRest(String url)
 	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget restTarget = client.target(url);
-		return restTarget.proxy(JeeslIoMavenRest.class);
+		rest = restTarget.proxy(JeeslIoMailRest.class);
 	}
 	
 	public void local()
@@ -61,69 +54,59 @@ public class JeeslFontTrackerApp
 		Configuration config = JeeslBootstrap.wrap();
 		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
-		cfgHost = "x";
-		cfgSystem = "jeesl";
+		cfgSmtp = config.getString(ConfigKey.netSmtpHost);
 		
-		this.debugConfig();
-		
-		JsonMavenGraph graph = JeeslFontFactory.build();
-		graph.setCode(cfgHost);
-		
-		this.buildRest(cfgUrl).uploadFonts(graph);
-	}
-	
-	private void createOptions()
-	{
-		handler.buildHelp();
-		handler.buildDebug();
-        
-		oSystem = Option.builder("system").required(true).hasArg(true).argName("SYSTEM").desc("System identifier").build(); handler.getOptions().addOption(oSystem);
-        oHost = Option.builder("host").required(true).hasArg(true).argName("HOST").desc("Host identifier").build(); handler.getOptions().addOption(oHost);
-       
-	}
-	
-	private void debugConfig()
-	{
-		logger.info("URL: "+cfgUrl);
-		logger.info("Host: "+cfgHost);
-		logger.info("System: "+cfgSystem);
-	}
-	
-	public void parseArguments(JeeslCliOptionHandler jcoh, String args[]) throws Exception
-	{
-		this.handler = jcoh;
-		
-		this.createOptions();
-		
-		CommandLineParser parser = new DefaultParser();
-		CommandLine line = parser.parse(handler.getOptions() , args); 
-	     
-		handler.handleHelp(line);
-		handler.handleLog4j2(line);
-
-		cfgUrl = config.getString(ConfigKey.netRestUrlProduction);
-		cfgSystem = line.getOptionValue(oSystem.getOpt());
-		cfgHost = line.getOptionValue(oHost.getOpt());
-
 		debugConfig();
+		buildRest(cfgUrl);
+		buildSmtp(cfgSmtp);
 		
-		JsonMavenGraph graph = JeeslFontFactory.build();
-		graph.setCode(cfgHost);
+//		spooler();
+//		discard();
+		debug(true,false,true);
+	}
+	
+	public void discard()
+	{
+		Mails xml = rest.discard(1);
+		JaxbUtil.info(xml);
+	}
+
+
+	public void parseArguments(JeeslCliOptionHandler jco, String args[]) throws Exception
+	{
+		this.jco = jco;
 		
-		this.buildRest(cfgUrl).uploadFonts(graph);
+		createOptions();
+		CommandLineParser parser = new DefaultParser();
+		CommandLine line = parser.parse(jco.getOptions() , args); 
+	     
+		jco.handleHelp(line);
+		jco.handleLog4j2(line);
+		
+//		Configuration config = uOption.initConfig(line, MeisBootstrap.xmlConfig);
+	    
+		cfgUrl = line.getOptionValue(oUrl.getOpt());
+		cfgSmtp = line.getOptionValue(oSmtp.getOpt());
+		
+		debugConfig();
+		buildRest(cfgUrl);
+		buildSmtp(cfgSmtp);
+		spooler();
 	}
 	
 	public static void main(String args[]) throws FileNotFoundException, UtilsConfigurationException, NamingException, ExlpConfigurationException
 	{
-		Configuration config = JeeslBootstrap.wrap();
-		JeeslFontTrackerApp app = new JeeslFontTrackerApp(config);
+		JeeslMailSpooler smtp = new JeeslMailSpooler();
 		
-//		app.local(); System.exit(0);
+		smtp.local(); System.exit(-1);
 		
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
 		jco.setLogPaths("jeesl/client/config");
 		
-		try {app.parseArguments(jco,args);}
+		try
+		{
+			smtp.parseArguments(jco,args);
+		}
 		catch (ParseException e) {logger.error(e.getMessage());jco.help();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
 		catch (IOException e) {e.printStackTrace();}

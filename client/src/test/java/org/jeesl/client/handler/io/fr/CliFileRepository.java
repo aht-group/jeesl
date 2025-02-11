@@ -19,7 +19,7 @@ import org.apache.commons.io.FileUtils;
 import org.exlp.controller.handler.io.log.LoggedExit;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.JsonUtil;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.client.controller.factory.JeeslFactoryProvider;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryAmazonS3;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;

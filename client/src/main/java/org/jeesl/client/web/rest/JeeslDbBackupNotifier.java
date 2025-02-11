@@ -1,5 +1,6 @@
-package org.jeesl.client.app;
+package org.jeesl.client.web.rest;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,22 +10,21 @@ import javax.naming.NamingException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 import org.exlp.interfaces.system.property.Configuration;
-import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.api.rest.rs.jx.io.db.JeeslIoDbRest;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
-import org.jeesl.controller.io.mail.AbstractSmtpSpooler;
+import org.jeesl.controller.processor.io.db.DatabaseBackupProcessor;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.exception.processing.UtilsProcessingException;
-import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,21 +32,27 @@ import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 
-public class JeeslMailSpooler extends AbstractSmtpSpooler
+public class JeeslDbBackupNotifier
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslMailSpooler.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslDbBackupNotifier.class);
+	
+	private JeeslCliOptionHandler jco;
+	private Option oUrl,oDirectory,oHost,oSystem;
 
-	public JeeslMailSpooler()
+	private String cfgUrl,cfgHost,cfgSystem;
+	private File cfgDirectory;
+	
+	public JeeslDbBackupNotifier()
 	{
-		
 		
 	}
 	
-	private void buildRest(String url)
+	private JeeslIoDbRest buildRest(String url)
 	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget restTarget = client.target(url);
-		rest = restTarget.proxy(JeeslIoMailRest.class);
+//		return restTarget.proxy(JeeslIoDbRest.class);
+		return null;
 	}
 	
 	public void local()
@@ -54,29 +60,40 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 		Configuration config = JeeslBootstrap.wrap();
 		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
-		cfgSmtp = config.getString(ConfigKey.netSmtpHost);
+		cfgDirectory = new File(config.getString("dir.db.backup"));
+		cfgHost = "x";
+		cfgSystem = "jeesl";
 		
 		debugConfig();
-		buildRest(cfgUrl);
-		buildSmtp(cfgSmtp);
-		
-//		spooler();
-//		discard();
-		debug(true,false,true);
+		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
+		processor.upload();
 	}
 	
-	public void discard()
+	private void createOptions()
 	{
-		Mails xml = rest.discard(1);
-		JaxbUtil.info(xml);
+		jco.buildHelp();
+		jco.buildDebug();
+        
+        oUrl = Option.builder("url").required(true).hasArg(true).argName("URL").desc("URL Endpoint").build(); jco.getOptions().addOption(oUrl);
+        oDirectory = Option.builder("dir").required(true).hasArg(true).argName("DIR").desc("Directory with .sql files").build(); jco.getOptions().addOption(oDirectory);
+        oHost = Option.builder("host").required(true).hasArg(true).argName("HOST").desc("Host identifier of storage server").build(); jco.getOptions().addOption(oHost);
+        oSystem = Option.builder("system").required(true).hasArg(true).argName("SYSTEM").desc("System identifier").build(); jco.getOptions().addOption(oSystem);
 	}
-
-
+	
+	private void debugConfig()
+	{
+		logger.info("URL: "+cfgUrl);
+		logger.info("Directory: "+cfgDirectory.getAbsolutePath());
+		logger.info("Host: "+cfgHost);
+		logger.info("System: "+cfgSystem);
+	}
+	
 	public void parseArguments(JeeslCliOptionHandler jco, String args[]) throws Exception
 	{
 		this.jco = jco;
 		
 		createOptions();
+		
 		CommandLineParser parser = new DefaultParser();
 		CommandLine line = parser.parse(jco.getOptions() , args); 
 	     
@@ -86,27 +103,25 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 //		Configuration config = uOption.initConfig(line, MeisBootstrap.xmlConfig);
 	    
 		cfgUrl = line.getOptionValue(oUrl.getOpt());
-		cfgSmtp = line.getOptionValue(oSmtp.getOpt());
+		cfgDirectory = new File(line.getOptionValue(oDirectory.getOpt()));
+		cfgHost = line.getOptionValue(oHost.getOpt());
+		cfgSystem = line.getOptionValue(oSystem.getOpt());
 		
 		debugConfig();
-		buildRest(cfgUrl);
-		buildSmtp(cfgSmtp);
-		spooler();
+		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
+		processor.upload();
 	}
 	
 	public static void main(String args[]) throws FileNotFoundException, UtilsConfigurationException, NamingException, ExlpConfigurationException
 	{
-		JeeslMailSpooler smtp = new JeeslMailSpooler();
+		JeeslDbBackupNotifier notifier = new JeeslDbBackupNotifier();
 		
-		smtp.local(); System.exit(-1);
+		notifier.local(); System.exit(0);
 		
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
 		jco.setLogPaths("jeesl/client/config");
 		
-		try
-		{
-			smtp.parseArguments(jco,args);
-		}
+		try {notifier.parseArguments(jco,args);}
 		catch (ParseException e) {logger.error(e.getMessage());jco.help();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
 		catch (IOException e) {e.printStackTrace();}

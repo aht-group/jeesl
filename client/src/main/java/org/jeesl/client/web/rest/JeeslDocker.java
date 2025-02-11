@@ -1,4 +1,4 @@
-package org.jeesl.client.app;
+package org.jeesl.client.web.rest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -91,9 +91,7 @@ public class JeeslDocker
 	
 	public void rest() throws JsonParseException, JsonMappingException, IOException, InterruptedException
 	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target("http://localhost:8080/erp");
-		JeeslIoDockerRest rest = restTarget.proxy(JeeslIoDockerRest.class);
+		JeeslIoDockerRest rest = org.jeesl.client.app.JeeslBootstrap.rest(JeeslIoDockerRest.class);
 		rest.update(transform());
 	}
 	

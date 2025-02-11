@@ -2,7 +2,6 @@ package org.jeesl.client.app;
 
 import java.io.File;
 
-import org.jeesl.client.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

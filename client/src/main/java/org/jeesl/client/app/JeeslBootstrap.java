@@ -1,12 +1,14 @@
-package org.jeesl.client;
+package org.jeesl.client.app;
 
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
-import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +54,13 @@ public class JeeslBootstrap
 //		ConfigLoader.addString(configFile);
 //		
 //		return ConfigLoader.init();
+	}
+	
+	public static <T extends Object> T rest(Class<T> c)
+	{
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyWebTarget restTarget = client.target("http://localhost:8080/jeesl");
+		return restTarget.proxy(c);
 	}
 
 	public static BasicDataSource buildDatasource(org.exlp.interfaces.system.property.Configuration config, String code)

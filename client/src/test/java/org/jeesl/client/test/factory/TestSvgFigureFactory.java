@@ -9,7 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.graphic.Graphic;
 import org.jeesl.client.model.ejb.system.graphic.GraphicComponent;
 import org.jeesl.client.model.ejb.system.graphic.GraphicShape;
