@@ -66,10 +66,6 @@ public class JeeslFontTrackerApp
 		
 		this.debugConfig();
 		
-		JsonMavenGraph graph = JeeslFontFactory.build();
-		graph.setCode(cfgHost);
-		
-		this.buildRest(cfgUrl).uploadFonts(graph);
 	}
 	
 	private void createOptions()

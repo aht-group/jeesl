@@ -12,9 +12,6 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
 import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
@@ -44,9 +41,7 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 	
 	private void buildRest(String url)
 	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url);
-		rest = restTarget.proxy(JeeslIoMailRest.class);
+		JeeslIoMailRest rest =  JeeslBootstrap.rest(JeeslIoMailRest.class);
 	}
 	
 	public void local()

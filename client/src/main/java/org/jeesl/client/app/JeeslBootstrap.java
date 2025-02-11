@@ -58,8 +58,12 @@ public class JeeslBootstrap
 	
 	public static <T extends Object> T rest(Class<T> c)
 	{
+		return rest(c,"http://localhost:8080/jeesl");
+	}
+	public static <T extends Object> T rest(Class<T> c, String url)
+	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target("http://localhost:8080/jeesl");
+		ResteasyWebTarget restTarget = client.target(url);
 		return restTarget.proxy(c);
 	}
 

@@ -47,7 +47,7 @@ public class JeeslDbBackupNotifier
 		
 	}
 	
-	private JeeslIoDbRest buildRest(String url)
+	private JeeslIoDbRest buildRest1(String url)
 	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget restTarget = client.target(url);
@@ -65,7 +65,9 @@ public class JeeslDbBackupNotifier
 		cfgSystem = "jeesl";
 		
 		debugConfig();
-		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
+		
+		JeeslIoDbRest rest = JeeslBootstrap.rest(JeeslIoDbRest.class, cfgUrl);
+		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(rest,cfgDirectory,cfgHost,cfgSystem);
 		processor.upload();
 	}
 	
@@ -108,7 +110,9 @@ public class JeeslDbBackupNotifier
 		cfgSystem = line.getOptionValue(oSystem.getOpt());
 		
 		debugConfig();
-		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
+		
+		JeeslIoDbRest rest = JeeslBootstrap.rest(JeeslIoDbRest.class, cfgUrl);
+		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(rest,cfgDirectory,cfgHost,cfgSystem);
 		processor.upload();
 	}
 	
