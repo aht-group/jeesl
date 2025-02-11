@@ -2,14 +2,13 @@ package org.jeesl.client.handler.io.fr;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Properties;
 import java.util.Random;
 
 import javax.naming.NamingException;
@@ -44,6 +43,12 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+
 public class CliFileRepository
 {
 	final static Logger logger = LoggerFactory.getLogger(CliFileRepository.class);
@@ -55,12 +60,15 @@ public class CliFileRepository
 	private JeeslFileRepositoryStore<IoFileMeta> frFile;
 	
 	private final String s3ObjectIdentifier = "1234567890.svg";
+	private final Path pFile;
 	
 	public CliFileRepository(Configuration config) throws NamingException
 	{
 		this.config=config;
 		efContainer = JeeslFactoryProvider.ioFileRepository().ejbContainer();
 		efMeta = JeeslFactoryProvider.ioFileRepository().ejbMeta();
+		
+		pFile = Paths.get(config.getString("net.amazon.s3.file"));
 	}
 	
 	private AmazonS3 s3ClientV1()
@@ -81,10 +89,12 @@ public class CliFileRepository
 		AmazonS3 s3Client = s3ClientV1();
 		
 		String s3Bucket = config.getString("net.amazon.s3.bucket");
-		Path pFile = Paths.get(config.getString("net.amazon.s3.file"));
+		
+		Path pTmp = Paths.get(config.getString("dir.tmp"));
 		
 		logger.info("S3.bucket: "+s3Bucket);
 		logger.info("S3.file: "+pFile.toString());
+		logger.info("Local.Tmp: "+pFile.toString());
 		
 		byte[] bytes = Files.readAllBytes(pFile);
 		
@@ -96,13 +106,43 @@ public class CliFileRepository
 		InputStream is = new ByteArrayInputStream(bytes);
 		s3Client.putObject(new PutObjectRequest(s3Bucket, s3ObjectIdentifier, is, om));
 		
-		
 		S3Object s3object = s3Client.getObject(s3Bucket, s3ObjectIdentifier);
 		S3ObjectInputStream inputStream = s3object.getObjectContent();
 		
-		File fDst = new File(pFile.toFile().getParentFile(),"out.svg");
+		File fDst = new File(pTmp.toFile(),"out.svg");
 		logger.info(fDst.toString());
 		FileUtils.copyInputStreamToFile(inputStream, fDst);
+	}
+	
+	public void testS3v2Read() throws IOException
+	{
+		String s3Id = config.getString("net.amazon.s3.id");
+		String s3Key = config.getString("net.amazon.s3.key");
+		String s3Bucket = config.getString("net.amazon.s3.bucket");
+		
+		S3Client s3Client = S3Client.builder()
+                .region(software.amazon.awssdk.regions.Region.EU_CENTRAL_1)
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(s3Id,s3Key)))
+                .build();
+		
+		FileInputStream fileIs = new FileInputStream(pFile.toFile());
+		software.amazon.awssdk.services.s3.model.PutObjectRequest putObjectRequest = software.amazon.awssdk.services.s3.model.PutObjectRequest.builder()
+                .bucket(s3Bucket)
+                .key(s3ObjectIdentifier)
+                .build();
+        s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(fileIs,fileIs.available()));
+        logger.info("Uploaded "+pFile.toString());
+		
+		GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+	            .bucket(s3Bucket)
+	            .key(s3ObjectIdentifier)
+	            .build();
+		software.amazon.awssdk.core.ResponseInputStream<software.amazon.awssdk.services.s3.model.GetObjectResponse> s3Object = s3Client.getObject(getObjectRequest);
+	    InputStream inputStream = s3Object;
+	    
+	    Path pTmp = Paths.get(config.getString("dir.tmp"));
+	    File fDst = new File(pTmp.toFile(),"out.svg");
+	    FileUtils.copyInputStreamToFile(inputStream, fDst);
 	}
 	
 	public void file() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
@@ -143,7 +183,9 @@ public class CliFileRepository
     	Configuration config = JeeslBootstrap.wrap();
     	CliFileRepository cli = new CliFileRepository(config);
     	
-    	cli.testS3v1();
+//    	cli.testS3v1();
+    	
+    	cli.testS3v2Read();
     	
 //    	cli.file();
     }

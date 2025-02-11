@@ -216,6 +216,12 @@
                 </exclusion>
             </exclusions>
 		</dependency>
+		<dependency>
+		    <groupId>software.amazon.awssdk</groupId>
+		    <artifactId>s3</artifactId>
+		    <version>2.30.16</version>
+		</dependency>
+
 
          
          <!--2022-09-04 tk Preparing removal 
