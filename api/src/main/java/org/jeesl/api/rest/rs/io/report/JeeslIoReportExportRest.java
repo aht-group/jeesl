@@ -6,13 +6,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.api.rest.i.io.report.JeeslIoReportExportRestInterface;
 import org.jeesl.interfaces.util.qualifier.JeeslRestSecured;
 import org.jeesl.model.xml.io.report.Reports;
 import org.jeesl.model.xml.io.report.Styles;
 import org.jeesl.model.xml.io.report.Templates;
 import org.jeesl.model.xml.xsd.Container;
 
-public interface JeeslIoReportRestExport
+@Path("/db/export")
+public interface JeeslIoReportExportRest extends JeeslIoReportExportRestInterface
 {
 	@JeeslRestSecured
 	@GET @Path("/system/io/report/category") @Produces(MediaType.APPLICATION_XML)

@@ -10,7 +10,7 @@ import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.rs.io.report.JeeslIoReportRestExport;
+import org.jeesl.api.rest.rs.io.report.JeeslIoReportExportRest;
 import org.jeesl.controller.handler.ui.helper.UiHelperIoReport;
 import org.jeesl.controller.report.JeeslReportUpdater;
 import org.jeesl.controller.web.util.AbstractLogMessage;
@@ -614,7 +614,7 @@ public abstract class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D
 		}
 	}
 	
-	protected abstract JeeslIoReportRestExport rest(String restUrl);
+	protected abstract JeeslIoReportExportRest rest(String restUrl);
 	
 	public  void download() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException, JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException, UtilsProcessingException
 	{

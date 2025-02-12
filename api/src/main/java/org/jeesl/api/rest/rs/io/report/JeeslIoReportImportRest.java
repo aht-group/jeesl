@@ -15,7 +15,8 @@ import org.jeesl.model.xml.xsd.Container;
 
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
-public interface JeeslIoReportRestImport
+@Path("/db/import")
+public interface JeeslIoReportImportRest
 {
 	@JeeslRestSecured
 	@POST @Path("/system/io/report/category") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
@@ -36,6 +37,4 @@ public interface JeeslIoReportRestImport
 	@JeeslRestSecured
 	@POST @Path("/system/io/report/styles") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
 	DataUpdate importSystemIoReportStyles(Styles styles);
-	
-	
 }

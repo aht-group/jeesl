@@ -489,6 +489,12 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return tQ.getResultList();
 	}
 	
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Class<S> cStaff)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override public List<R> allRolesForUser(USER user)
 	{
 		user = em.find(fbSecurity.getClassUserProject(), user.getId());
