@@ -13,11 +13,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.interfaces.util.ConfigKey;
 
 public class CliSmtpMailSender
 {

@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.poi.util.IOUtils;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.db.Db;
@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.interfaces.util.ConfigKey;
 
 public class UtilsDbXmlSeedUtil
 {

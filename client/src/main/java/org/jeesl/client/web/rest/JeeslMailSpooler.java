@@ -10,6 +10,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
@@ -27,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.interfaces.util.ConfigKey;
 
 public class JeeslMailSpooler extends AbstractSmtpSpooler
 {
