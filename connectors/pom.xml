@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	
-    <artifactId>jeesl-rengine</artifactId>
+    <artifactId>jeesl-connectors</artifactId>
     <packaging>jar</packaging>
     <name>JEESL - Connectors</name>
 	

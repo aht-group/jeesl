@@ -25,7 +25,7 @@
 		<module>ejb</module>
 		<module>util</module>
 		<module>report</module>
-<!--		<module>rengine</module> -->
+		<module>connectors</module>
 		<module>monitor</module>
 		<module>test</module>
 		<module>xml</module>
