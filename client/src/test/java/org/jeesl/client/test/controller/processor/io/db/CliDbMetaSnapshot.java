@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.dbutils.DbUtils;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.JsonUtil;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.processor.io.db.DatabaseSnapshotProcessor;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiSystemFactory;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
@@ -54,7 +54,7 @@ public class CliDbMetaSnapshot
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = JeeslBootstrap.init();
+		Configuration config = JeeslBootstrap.wrap();
 //		MeisBootstrap.createMeisDatasource(config);
 		
 		CliDbMetaSnapshot cli = new CliDbMetaSnapshot(config);

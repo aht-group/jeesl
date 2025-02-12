@@ -10,4 +10,7 @@
         	</production>
         </rest>
 	</net>
+	<dir>
+		<tmp>target</tmp>
+	</dir>
 </config>

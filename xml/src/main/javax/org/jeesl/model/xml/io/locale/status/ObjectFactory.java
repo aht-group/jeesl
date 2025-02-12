@@ -454,6 +454,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Location }
+     * 
+     */
+    public Location createLocation() {
+        return new Location();
+    }
+
+    /**
      * Create an instance of {@link Original }
      * 
      */

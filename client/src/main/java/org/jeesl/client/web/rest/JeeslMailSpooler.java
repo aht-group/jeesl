@@ -1,4 +1,4 @@
-package org.jeesl.client.app;
+package org.jeesl.client.web.rest;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,13 +10,10 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.controller.io.mail.AbstractSmtpSpooler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -44,14 +41,12 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 	
 	private void buildRest(String url)
 	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url);
-		rest = restTarget.proxy(JeeslIoMailRest.class);
+		JeeslIoMailRest rest =  JeeslBootstrap.rest(JeeslIoMailRest.class);
 	}
 	
 	public void local()
 	{	
-		Configuration config = JeeslBootstrap.init();
+		Configuration config = JeeslBootstrap.wrap();
 		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgSmtp = config.getString(ConfigKey.netSmtpHost);

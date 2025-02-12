@@ -30,6 +30,7 @@ import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.JeeslAutoCompleteHandler;
 import org.jeesl.interfaces.controller.handler.JeeslHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.io.label.JeeslIoLabelDiagramCache;
 import org.jeesl.interfaces.controller.web.io.label.JeeslIoLabelEntityCallback;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -81,6 +82,8 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 	private final JeeslIoLabelEntityCallback callback;
+	
+	private JeeslIoLabelDiagramCache<ERD> cacheDiagram; public void cacheDiagram(JeeslIoLabelDiagramCache<ERD> cache) {this.cacheDiagram=cache;}
 	
 	private JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 	
@@ -152,10 +155,15 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		this.bLabel=bLabel;
 		
 		sbhCategory.setList(fRevision.allOrderedPositionVisible(fbRevision.getClassCategory()));
-		sbhCategory.setDefault();
+		if(Objects.nonNull(cacheDiagram) && Objects.nonNull(cacheDiagram.cacheIoLabelDiagramGet()))
+		{
+			sbhCategory.setDefault(cacheDiagram.cacheIoLabelDiagramGet().getCategory());
+		}
+		else {sbhCategory.setDefault();}
 		
 		sbhDiagram.setList(fRevision.allForParent(fbRevision.getClassDiagram(),sbhCategory.getSelection()));
-		sbhDiagram.setDefault();
+		if(Objects.nonNull(cacheDiagram)) {sbhDiagram.setDefault(cacheDiagram.cacheIoLabelDiagramGet());}
+		else {sbhDiagram.setDefault();}
 
 		scopes = fRevision.all(fbRevision.getClassScope());									if(jogger!=null) {jogger.milestone(fbRevision.getClassScope().getSimpleName(), null, scopes.size());}
 		types = fRevision.allOrderedPositionVisible(fbRevision.getClassAttributeType());	if(jogger!=null) {jogger.milestone(fbRevision.getClassAttributeType().getSimpleName(), null, types.size());}
@@ -184,6 +192,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		if(item.getClass().isAssignableFrom(fbRevision.getClassDiagram()))
 		{
 			logger.info(AbstractLogMessage.selectEntity(sbhDiagram.getSelection()));
+			if(Objects.nonNull(cacheDiagram)) {cacheDiagram.cacheIoLabelDiagramPut(sbhDiagram.getSelection());}
 			reloadEntities();
 		}
 	}

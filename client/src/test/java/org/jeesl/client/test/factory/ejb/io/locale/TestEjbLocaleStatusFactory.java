@@ -1,6 +1,6 @@
 package org.jeesl.client.test.factory.ejb.io.locale;
 
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.model.ejb.system.locale.Status;

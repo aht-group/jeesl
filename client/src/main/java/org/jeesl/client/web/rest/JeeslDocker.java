@@ -1,4 +1,4 @@
-package org.jeesl.client.app;
+package org.jeesl.client.web.rest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,9 +9,6 @@ import javax.naming.NamingException;
 
 import org.exlp.util.io.JsonUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.io.ssi.JeeslIoDockerRest;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.json.io.ssi.docker.JsonDockerFactory;
@@ -91,9 +88,7 @@ public class JeeslDocker
 	
 	public void rest() throws JsonParseException, JsonMappingException, IOException, InterruptedException
 	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target("http://localhost:8080/erp");
-		JeeslIoDockerRest rest = restTarget.proxy(JeeslIoDockerRest.class);
+		JeeslIoDockerRest rest = org.jeesl.client.app.JeeslBootstrap.rest(JeeslIoDockerRest.class);
 		rest.update(transform());
 	}
 	

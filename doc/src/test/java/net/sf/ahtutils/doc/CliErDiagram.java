@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.batik.transcoder.TranscoderException;
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.doc.er.AbstractErDiagram;
 import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class CliErDiagram extends AbstractErDiagram
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = JeeslBootstrap.init();
+		Configuration config = JeeslBootstrap.wrap();
 		CliErDiagram er = new CliErDiagram(config);
 		er.create();
 	}

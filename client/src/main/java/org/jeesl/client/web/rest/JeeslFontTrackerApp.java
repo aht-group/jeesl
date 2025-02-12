@@ -1,4 +1,4 @@
-package org.jeesl.client.app;
+package org.jeesl.client.web.rest;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,12 +11,9 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.configuration.Configuration;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.api.rest.rs.jx.io.JeeslIoMavenRest;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -49,16 +46,11 @@ public class JeeslFontTrackerApp
 		this.config = config;
 	}
 	
-	private JeeslIoMavenRest buildRest(String url)
-	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url);
-		return restTarget.proxy(JeeslIoMavenRest.class);
-	}
+	
 	
 	public void local()
 	{	
-		Configuration config = JeeslBootstrap.init();
+		Configuration config = JeeslBootstrap.wrap();
 		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgHost = "x";
@@ -66,10 +58,6 @@ public class JeeslFontTrackerApp
 		
 		this.debugConfig();
 		
-		JsonMavenGraph graph = JeeslFontFactory.build();
-		graph.setCode(cfgHost);
-		
-		this.buildRest(cfgUrl).uploadFonts(graph);
 	}
 	
 	private void createOptions()
@@ -110,12 +98,14 @@ public class JeeslFontTrackerApp
 		JsonMavenGraph graph = JeeslFontFactory.build();
 		graph.setCode(cfgHost);
 		
-		this.buildRest(cfgUrl).uploadFonts(graph);
+		JeeslIoMavenRest rest = JeeslBootstrap.rest(JeeslIoMavenRest.class, cfgUrl);
+		
+		rest.uploadFonts(graph);
 	}
 	
 	public static void main(String args[]) throws FileNotFoundException, UtilsConfigurationException, NamingException, ExlpConfigurationException
 	{
-		Configuration config = JeeslBootstrap.init();
+		Configuration config = JeeslBootstrap.wrap();
 		JeeslFontTrackerApp app = new JeeslFontTrackerApp(config);
 		
 //		app.local(); System.exit(0);

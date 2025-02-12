@@ -11,6 +11,7 @@ import org.jeesl.model.xml.io.locale.status.Goal;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Level;
+import org.jeesl.model.xml.io.locale.status.Location;
 import org.jeesl.model.xml.io.locale.status.Model;
 import org.jeesl.model.xml.io.locale.status.Parent;
 import org.jeesl.model.xml.io.locale.status.Quarter;
@@ -162,6 +163,14 @@ public class XmlStatusQuery
 	{		
 		Source xml = new Source();
 		xml.setId(0l);
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
+	}
+	
+	public static Location locationLabel()
+	{		
+		Location xml = new Location();
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;

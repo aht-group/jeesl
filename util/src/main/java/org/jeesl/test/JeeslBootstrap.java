@@ -10,6 +10,7 @@ public class JeeslBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslBootstrap.class);
 	
+	public static org.exlp.interfaces.system.property.Configuration wrap() {return ConfigLoader.wrap(init());}
 	public static Configuration init()
 	{
 		String configFile = "jeesl/util/config/jeesl.xml";

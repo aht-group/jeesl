@@ -1,6 +1,6 @@
 package org.jeesl.client.test.controller;
 
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.system.io.ssi.SsiTerminalHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

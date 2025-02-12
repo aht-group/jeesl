@@ -42,7 +42,6 @@ public class XmlOutcomeFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
-		xml.setGroup(group);
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(ejb.getDescription()));}

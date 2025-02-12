@@ -1,4 +1,4 @@
-package org.jeesl.client.app;
+package org.jeesl.client.web.rest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,12 +12,9 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.configuration.Configuration;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.api.rest.rs.jx.io.db.JeeslIoDbRest;
-import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.controller.processor.io.db.DatabaseBackupProcessor;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -46,18 +43,10 @@ public class JeeslDbBackupNotifier
 	{
 		
 	}
-	
-	private JeeslIoDbRest buildRest(String url)
-	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url);
-//		return restTarget.proxy(JeeslIoDbRest.class);
-		return null;
-	}
-	
+
 	public void local()
 	{	
-		Configuration config = JeeslBootstrap.init();
+		Configuration config = JeeslBootstrap.wrap();
 		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgDirectory = new File(config.getString("dir.db.backup"));
@@ -65,7 +54,9 @@ public class JeeslDbBackupNotifier
 		cfgSystem = "jeesl";
 		
 		debugConfig();
-		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
+		
+		JeeslIoDbRest rest = JeeslBootstrap.rest(JeeslIoDbRest.class, cfgUrl);
+		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(rest,cfgDirectory,cfgHost,cfgSystem);
 		processor.upload();
 	}
 	
@@ -108,7 +99,9 @@ public class JeeslDbBackupNotifier
 		cfgSystem = line.getOptionValue(oSystem.getOpt());
 		
 		debugConfig();
-		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
+		
+		JeeslIoDbRest rest = JeeslBootstrap.rest(JeeslIoDbRest.class, cfgUrl);
+		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(rest,cfgDirectory,cfgHost,cfgSystem);
 		processor.upload();
 	}
 	
