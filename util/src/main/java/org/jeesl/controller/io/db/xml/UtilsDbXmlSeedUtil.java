@@ -48,10 +48,7 @@ public class UtilsDbXmlSeedUtil
 	{
 		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
 	}
-	public UtilsDbXmlSeedUtil(Configuration config) throws FileNotFoundException
-	{
-		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
-	}
+	
 	public UtilsDbXmlSeedUtil(org.apache.commons.configuration2.Configuration config) throws FileNotFoundException
 	{
 		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
