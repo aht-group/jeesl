@@ -1,6 +1,7 @@
 package org.jeesl.connectors.tools;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -18,6 +19,13 @@ import org.jeesl.model.xml.xsd.Container;
 @Path("/rest")
 public class WeapRequestService
 {
+	@GET @Path("/date/time")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String dateTime()
+	{
+		return LocalDateTime.now().toString();
+	}
+	
 	@POST @Path("/request") @Consumes(MediaType.APPLICATION_XML) @Produces(MediaType.APPLICATION_XML)
 	public WeapResultValueRequest getRequest(WeapResultValueRequest request)
 	{
@@ -116,7 +124,7 @@ public class WeapRequestService
 	}
 	
 	@GET @Path("/scenarios")
-        @Produces("application/xml")
+	@Produces("application/xml")
 	public Container getScenarios()
 	{
 		System.out.println("Requesting Scenarios");

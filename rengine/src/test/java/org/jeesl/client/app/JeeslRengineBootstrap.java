@@ -1,12 +1,9 @@
-package org.jeesl.connectors.tools;
+package org.jeesl.client.app;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 
-/**
- *
- * @author hhemm_000
- */
-public class Bootstrap {
+public class JeeslRengineBootstrap
+{
     
     /**
      *  Initialises the logging system for writing to console and file

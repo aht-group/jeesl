@@ -27,17 +27,18 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>javax.annotation-api</artifactId>
-				<version>1.2</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
 	<dependencies>
 		
 		<!-- XML Modules -->
+		<dependency>
+        	<groupId>org.jeesl</groupId>
+        	<artifactId>jeesl-xml</artifactId>
+        	<type>jar</type>
+        	<scope>compile</scope>
+	    </dependency>
 		<dependency>
         	<groupId>org.jeesl</groupId>
         	<artifactId>jeesl-xml</artifactId>
@@ -79,9 +80,14 @@
    	   		</exclusions>
    	   	</dependency>
 	
+		<!-- Apache Commons-->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -90,17 +96,8 @@
 	  		<version>2.1.1</version>
    		</dependency>		
 		
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>4.0.36.Final</version> <!-- Eventuell verändern -->
-			<scope>compile</scope>
-		  </dependency>
-		
+	
 		<!-- Java EE -->
-
-
-
 		
 		<dependency>
 			<groupId>org.nuiton</groupId>
@@ -114,37 +111,31 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- For the Server Component -->
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxb-provider</artifactId>
-			<version>3.0.10.Final</version>
-			<exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>slf4j-simple</artifactId>
-            		<groupId>org.slf4j</groupId>
-            	</exclusion>
-			</exclusions>
-		</dependency>
+		<!-- For the Server Component -->		
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
 			<version>${version.jetty}</version>
 		</dependency>
 		
+		<!-- 2025-02-11 tk: deactivated
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
 			<version>2.1</version>
-		</dependency>
+		</dependency> 
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.0.36.Final</version>
+			<scope>compile</scope>
+		</dependency> -->
+		
+		<!-- 2025-02-11 tk: trying to replace with resteasy-netty4
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-netty</artifactId>
-			<version>3.0.10.Final</version>
+			<version>3.15.6.Final</version>
 			<exclusions>
             	<exclusion>
             		<artifactId>commons-logging</artifactId>
@@ -155,12 +146,43 @@
             		<groupId>org.slf4j</groupId>
             	</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency> -->
 		
-		<!-- Apache Commons-->
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-jaxrs</artifactId>
+		    <version>3.15.6.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-netty4</artifactId>
+		    <version>3.15.6.Final</version>
+		    <scope>compile</scope>
+		    <exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>slf4j-simple</artifactId>
+            		<groupId>org.slf4j</groupId>
+            	</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>3.15.6.Final</version>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>slf4j-simple</artifactId>
+            		<groupId>org.slf4j</groupId>
+            	</exclusion>
+			</exclusions>
 		</dependency>
 	
 		<!-- Logging -->
