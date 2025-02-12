@@ -152,6 +152,12 @@
 		    <groupId>org.jboss.resteasy</groupId>
 		    <artifactId>resteasy-jaxrs</artifactId>
 		    <version>3.15.6.Final</version>
+		    <exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 		    <groupId>org.jboss.resteasy</groupId>
