@@ -30,6 +30,11 @@ public class SqlConnectionFactory
 //		this.config=config;
 		logger.error("NYI COnfig 2");
 	}
+	public SqlConnectionFactory(org.exlp.interfaces.system.property.Configuration config)
+	{
+//		this.config=config;
+		logger.error("NYI COnfig-Interface");
+	}
 	
 	public Connection getConnection(String code)
 	{

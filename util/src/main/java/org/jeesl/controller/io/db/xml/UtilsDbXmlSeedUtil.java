@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.poi.util.IOUtils;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.db.Db;
@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.interfaces.util.ConfigKey;
 
 public class UtilsDbXmlSeedUtil
 {
@@ -37,7 +36,7 @@ public class UtilsDbXmlSeedUtil
 	public static String cliDebug = "db.export.cli.debug";
     public static String cliSave = "db.export.cli.save";
 	
-    private Configuration config;
+    private org.exlp.interfaces.system.property.Configuration config;
 	protected Db dbSeed;
 
 	private File fTmp;
@@ -48,38 +47,20 @@ public class UtilsDbXmlSeedUtil
 	{
 		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
 	}
-	public UtilsDbXmlSeedUtil(Configuration config) throws FileNotFoundException
-	{
-		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
-	}
-	public UtilsDbXmlSeedUtil(org.apache.commons.configuration2.Configuration config) throws FileNotFoundException
-	{
-		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
-	}
 	
-	public UtilsDbXmlSeedUtil(Configuration config, Db dbSeed) throws FileNotFoundException
-	{
-		this.config=config;
-		this.dbSeed=dbSeed;
-		try{this.dbSeed.setPathExport(config.getString(configKeyPathExport));} catch (NoSuchElementException e){}
-		
-		try{fTmp = new File(config.getString(ConfigKey.dirTmp));}
-		catch (NoSuchElementException e){fTmp = new File(System.getProperty("java.io.tmpdir"));}
-	}
-	public UtilsDbXmlSeedUtil(org.apache.commons.configuration2.Configuration config, Db dbSeed) throws FileNotFoundException
-	{
-		logger.warn("Config2 NYI");
+//	public UtilsDbXmlSeedUtil(Configuration config, Db dbSeed) throws FileNotFoundException
+//	{
 //		this.config=config;
-		this.dbSeed=dbSeed;
-		try{this.dbSeed.setPathExport(config.getString(configKeyPathExport));} catch (NoSuchElementException e){}
-		
-		try{fTmp = new File(config.getString(ConfigKey.dirTmp));}
-		catch (NoSuchElementException e){fTmp = new File(System.getProperty("java.io.tmpdir"));}
-	}
+//		this.dbSeed=dbSeed;
+//		try{this.dbSeed.setPathExport(config.getString(configKeyPathExport));} catch (NoSuchElementException e){}
+//		
+//		try{fTmp = new File(config.getString(ConfigKey.dirTmp));}
+//		catch (NoSuchElementException e){fTmp = new File(System.getProperty("java.io.tmpdir"));}
+//	}
+	
 	public UtilsDbXmlSeedUtil(org.exlp.interfaces.system.property.Configuration config, Db dbSeed) throws FileNotFoundException
 	{
-		logger.warn("Config EXLP NYI");
-//		this.config=config;
+		this.config=config;
 		this.dbSeed=dbSeed;
 		try{this.dbSeed.setPathExport(config.getString(configKeyPathExport));} catch (NoSuchElementException e){}
 		
