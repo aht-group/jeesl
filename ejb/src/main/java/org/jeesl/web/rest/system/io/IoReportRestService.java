@@ -5,8 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
-import org.jeesl.api.rest.rs.io.report.JeeslIoReportRestExport;
-import org.jeesl.api.rest.rs.io.report.JeeslIoReportRestImport;
+import org.jeesl.api.rest.i.io.report.JeeslIoReportExportRestInterface;
+import org.jeesl.api.rest.i.io.report.JeeslIoReportImportRestInterface;
 import org.jeesl.controller.io.db.updater.JeeslDbCodeEjbUpdater;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.controller.report.JeeslReportUpdater;
@@ -82,7 +82,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 									TL extends JeeslTrafficLight<L,D,TLS>,
 									TLS extends JeeslTrafficLightScope<L,D,TLS,?>>
 					extends AbstractJeeslRestHandler<L,D>
-					implements JeeslIoReportRestExport,JeeslIoReportRestImport
+					implements JeeslIoReportExportRestInterface,JeeslIoReportImportRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(IoReportRestService.class);
 	
