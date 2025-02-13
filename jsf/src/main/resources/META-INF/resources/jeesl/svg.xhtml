@@ -20,6 +20,7 @@
 		<composite:attribute name="height" required="false" default="12"/>
 		
 		<composite:attribute name="immediate" required="false" default="false"/>
+		<composite:attribute name="ajax" required="false" default="true"/>
 		<composite:attribute name="library" required="false" default="gfx" shortDescription="The library attribute which is passed to h:graphicImage, can be empty for JEESL icons. Project specific icons can be overridden here or centrally in AppIconBean."/>
 		<composite:attribute name="ejb" required="false" default="" shortDescription="The related entity-ejb which will be evaluated for the ejbRendered attribute"/>
 		<composite:attribute name="ejbRendered" required="false" default=""/>
@@ -44,6 +45,7 @@
 		<c:if test="#{not cc.attrs.confirm}">
 			<c:if test="#{cc.getValueExpression('listener') ne null}">
 			    <p:commandLink id="link" 
+							ajax="#{cc.attrs.ajax}"
 							update="#{cc.attrs.update}"
 							actionListener="#{cc.listener}"
 							process="#{cc.attrs.process}" 
@@ -71,6 +73,7 @@
 			
 			<c:if test="#{cc.getValueExpression('listener') eq null}">
 			    <p:commandLink id="link" 
+							ajax="#{cc.attrs.ajax}"
 							update="#{cc.attrs.update}"
 							process="#{cc.attrs.process}" 
 							onstart="#{cc.attrs.onstart}"
@@ -135,6 +138,7 @@
 								 oncomplete="PF('#{cc.attrs.id}-cd').hide(); #{cc.attrs.oncomplete}"
 								 update="#{cc.attrs.update}"
 								 actionListener="#{cc.listener}"
+								 ajax="#{cc.attrs.ajax}"
 								 process="#{cc.attrs.process}" 
 								 onstart="#{cc.attrs.onstart}"
 								 immediate="#{cc.attrs.immediate}"
