@@ -22,7 +22,7 @@
 			<f:facet name="header"><j:pHeader entity="SecurityCategory"/></f:facet>
 			<f:facet name="actions">
 				<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
-				<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.rmCategory()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
+				<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.deleteCategory()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
 			</f:facet>
 			<p:messages for="category" redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 			<j:inputGrid>

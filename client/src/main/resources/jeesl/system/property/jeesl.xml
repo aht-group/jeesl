@@ -9,6 +9,9 @@
         		<url>https://www.jeesl.org/jeesl</url>
         	</production>
         </rest>
+        <smtp>
+        	<host>localhost</host>
+        </smtp>
 	</net>
 	<dir>
 		<tmp>target</tmp>

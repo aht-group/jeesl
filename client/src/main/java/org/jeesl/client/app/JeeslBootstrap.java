@@ -27,7 +27,7 @@ public class JeeslBootstrap
 
 	public enum App {jeesl}
 	
-	public final static String xmlConfig = "jeesl/client/config/jeesl.xml";
+	public final static String xmlConfig = "jeesl/system/property/jeesl.xml";
 	
 	public static org.exlp.interfaces.system.property.Configuration wrap() {return ConfigBootstrap.wrap(JeeslBootstrap.init());}
 	public static Configuration init() {return JeeslBootstrap.init(xmlConfig);}
@@ -69,7 +69,7 @@ public class JeeslBootstrap
 	public static <T extends Object> T rest(Class<T> c, String url)
 	{
 		Client client = ClientBuilder.newBuilder().build();
-		
+		client.register(new RestLogger());
 		ResteasyWebTarget target = (ResteasyWebTarget)client.target(url);
 		return target.proxy(c);
 	}

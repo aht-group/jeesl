@@ -1,4 +1,4 @@
-package org.jeesl.client.web.rest;
+package org.jeesl.client.app;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,11 +10,11 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
+import org.exlp.controller.handler.io.log.LoggedExit;
 import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
-import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.controller.io.mail.AbstractSmtpSpooler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -36,12 +36,11 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 	public JeeslMailSpooler()
 	{
 		
-		
 	}
 	
 	private void buildRest(String url)
 	{
-		JeeslIoMailRest rest =  JeeslBootstrap.rest(JeeslIoMailRest.class);
+		rest =  JeeslBootstrap.rest(JeeslIoMailRest.class,url);
 	}
 	
 	public void local()
@@ -51,13 +50,13 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgSmtp = config.getString(ConfigKey.netSmtpHost);
 		
-		debugConfig();
-		buildRest(cfgUrl);
-		buildSmtp(cfgSmtp);
+		super.debugConfig();
+		this.buildRest(cfgUrl);
+		super.buildSmtp(cfgSmtp);
 		
 //		spooler();
 //		discard();
-		debug(true,false,true);
+		super.debug(true,false,false);
 	}
 	
 	public void discard()
@@ -93,7 +92,7 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 	{
 		JeeslMailSpooler smtp = new JeeslMailSpooler();
 		
-		smtp.local(); System.exit(-1);
+		smtp.local(); LoggedExit.exit(true);
 		
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
 		jco.setLogPaths("jeesl/client/config");

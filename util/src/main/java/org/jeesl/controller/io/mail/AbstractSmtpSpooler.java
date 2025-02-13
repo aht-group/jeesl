@@ -5,6 +5,8 @@ import java.util.Objects;
 import javax.mail.MessagingException;
 
 import org.apache.commons.cli.Option;
+import org.exlp.controller.handler.io.log.LoggedExit;
+import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
@@ -15,6 +17,7 @@ import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class AbstractSmtpSpooler
 {
@@ -53,6 +56,7 @@ public class AbstractSmtpSpooler
 	
 	protected void debugConfig()
 	{
+		logger.info(StringUtil.stars());
 		logger.info("URL: "+cfgUrl);
 		logger.info("SMTP: "+cfgSmtp);
 	} 
@@ -60,6 +64,16 @@ public class AbstractSmtpSpooler
 	protected void debug(boolean txt, boolean jaxb, boolean confirm)
 	{
 		Mails mails = rest.spool();
+		if(txt)
+		{
+			StringBuilder sb = new StringBuilder();
+			sb.append("Received "+Mails.class.getSimpleName());
+			sb.append(" [");
+			sb.append("Queue:").append(Objects.nonNull(mails.getQueue()) ? mails.getQueue() : "--");
+			sb.append(" Elements: "+mails.getMail().size());
+			sb.append("]");
+			logger.info(sb.toString());
+		}
 		for(Mail mail : mails.getMail())
 		{
 			sanitize(mail);
@@ -71,31 +85,6 @@ public class AbstractSmtpSpooler
 			if(txt) {logger.info(TxtMailFactory.debug(mail));}
 			if(confirm) {rest.confirm(mail.getId());}
 		}
-	}
-	
-	protected Integer spool() throws Exception
-	{
-		Mails mails = rest.spool();
-		for(Mail mail : mails.getMail())
-		{
-			sanitize(mail);
-			try
-			{
-				if(!hasVeto(mail))
-				{
-					logger.info(TxtMailFactory.debug(mail));
-					smtp.send(mail);
-				}
-				else
-				{
-					logger.warn("Veto: "+TxtMailFactory.debug(mail));
-				}
-				rest.confirm(mail.getId());
-			}
-			catch (MessagingException e) {e.printStackTrace();}
-		}
-		if(Objects.nonNull(mails.getQueue())) {return mails.getQueue();}
-		else {return Integer.MAX_VALUE;}
 	}
 	
 	public void sanitize(Mail mail) {}
@@ -116,5 +105,33 @@ public class AbstractSmtpSpooler
 			catch (Exception e1) {sleepMs = 60*1000;}
 			try{Thread.sleep(sleepMs);}catch (InterruptedException e) {e.printStackTrace();}
 		}
+	}
+	
+	protected Integer spool() throws Exception
+	{
+		Mails mails = rest.spool();
+		JaxbUtil.info(mails);
+		LoggedExit.exit(true);
+		
+		for(Mail mail : mails.getMail())
+		{
+			sanitize(mail);
+			try
+			{
+				if(!hasVeto(mail))
+				{
+					logger.info(TxtMailFactory.debug(mail));
+					smtp.send(mail);
+				}
+				else
+				{
+					logger.warn("Veto: "+TxtMailFactory.debug(mail));
+				}
+				rest.confirm(mail.getId());
+			}
+			catch (MessagingException e) {e.printStackTrace();}
+		}
+		if(Objects.nonNull(mails.getQueue())) {return mails.getQueue();}
+		else {return Integer.MAX_VALUE;}
 	}
 }

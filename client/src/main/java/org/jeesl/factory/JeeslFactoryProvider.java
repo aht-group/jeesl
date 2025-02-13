@@ -1,4 +1,4 @@
-package org.jeesl.client.controller.factory;
+package org.jeesl.factory;
 
 import org.jeesl.factory.builder.io.IoFileRepositoryFactoryBuilder;
 import org.jeesl.model.ejb.io.fr.IoFileContainer;

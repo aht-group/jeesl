@@ -10,7 +10,7 @@ import org.jeesl.api.rest.i.io.JeeslIoMailRestInterface;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 
-@Path("/rest/jeesl/io/mail")
+@Path("/jeesl/io/mail")
 public interface JeeslIoMailRest extends JeeslIoMailRestInterface
 {
 	@GET @Path("/queue/grab") @Produces(MediaType.APPLICATION_XML)
