@@ -34,6 +34,7 @@
 		<composite:attribute name="ttEntity" required="false" shortDescription="A tooltip utilizing the labeling engine (together with ttCode)."/>
 		<composite:attribute name="ttCode" required="false" shortDescription="A tooltip utilizing the description of the engine (together with ttEntity)."/>
 		<composite:attribute name="ttValue" required="false" shortDescription="A tooltip using common attributes of the entity (multiLang,multiDescription)"/>
+		<composite:attribute name="blockUi" required="false" shortDescription="Defines the UI elements to block (e.g. @(form) to block all forms on a page)"/>
 		
 	</composite:interface>
 
@@ -62,6 +63,10 @@
 					</h:graphicImage>
 					<h:outputLabel value="#{cc.attrs.textLink}" rendered="#{not empty cc.attrs.textLink}"/>
 				</p:commandLink>
+				<c:if test="#{not empty cc.attrs.blockUi}">
+					<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
+				</c:if>
+				
 			</c:if>
 			
 			<c:if test="#{cc.getValueExpression('listener') eq null}">
@@ -86,6 +91,9 @@
 					</h:graphicImage>
 					
 				</p:commandLink>
+				<c:if test="#{not empty cc.attrs.blockUi}">
+					<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
+				</c:if>
 			</c:if>	
 		</c:if>
 
@@ -104,6 +112,9 @@
 				</h:graphicImage>
 				<h:outputLabel value="#{cc.attrs.textLink}" rendered="#{not empty cc.attrs.textLink}"/>
 			</p:commandLink>
+			<c:if test="#{not empty cc.attrs.blockUi}">
+				<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
+			</c:if>
 			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" closable="false"
 							 message="#{cc.attrs.confirmMessage}" styleClass="jeesl-dialog">
 				<f:facet name="header">
