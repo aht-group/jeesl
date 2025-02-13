@@ -102,7 +102,7 @@ public class JeeslXhtmlParser
 				        	else
 				        	{
 				        		String v = e.getAttributeValue("styleClass");
-				        		if(!v.contains("jeesl-panel")) {logger.warn("Wrong p:panel(styleClass): "+file.getAbsolutePath());}
+				        		if(!(v.contains("jeesl-panel") || v.contains("jeesl-tree"))) {logger.warn("Wrong p:panel(styleClass): "+file.getAbsolutePath());}
 				        		if(v.contains("jeeslPanel")) {logger.warn("Wrong p:panel(styleClass): "+file.getAbsolutePath());}
 				        	}
 				        }
