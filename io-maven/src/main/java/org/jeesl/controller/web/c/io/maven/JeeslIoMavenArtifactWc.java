@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
+import org.jeesl.controller.converter.fc.io.maven.dependency.IoMavenArtifactConverter;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.processor.io.maven.MavenMetachartGraphProcessor;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
@@ -186,8 +187,10 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		}
 	}
 	
+	public void updateSuitability() {IoMavenArtifactConverter.jsfSelectOne(fMaven, artifact);}
 	public void magnetArtifact()
 	{
+		IoMavenArtifactConverter.jsfSelectOne(fMaven, artifact);
 		if(!replacements.contains(artifact))
 		{
 			replacements.add(artifact);
@@ -196,6 +199,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	public void saveArtifact() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
+		IoMavenArtifactConverter.jsfSelectOne(fMaven, artifact);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(artifact));}
 		artifact = fMaven.save(artifact);
 		
