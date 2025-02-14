@@ -21,7 +21,7 @@
 				<p:dataTable widgetVar="dtArtifacts" styleClass="jeesl-datatable"
 						var="a" value="#{cc.attrs.ctrl.artifacts}"
 						selection="#{cc.attrs.ctrl.artifact}" selectionMode="single" rowKey="#{a.id}"
-						rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+						rows="20" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
 					</f:facet>
@@ -56,6 +56,7 @@
 					<f:facet name="header"><j:pHeader entity="IoMavenArtifact"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveArtifact()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetArtifact()}" update="@form"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid>
@@ -67,11 +68,19 @@
 							<jtp:symbolizer value="#{cc.attrs.ctrl.artifact.suitability}" marginRight="5"/>
 							<h:outputText value="#{cc.attrs.ctrl.artifact.code}"/>
 						</ui:fragment>
+						
 						<jtp:label entity="IoMavenArtifact" code="suitability"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.artifact.suitability}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.suitabilities}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
-					
+					</j:inputGrid>
+					<j:inputGrid rendered="#{cc.attrs.ctrl.artifact.suitability.code eq 'replace'}">
+						<jtp:label entity="IoMavenArtifact" code="replacedBy"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.artifact.replacedBy}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.replacements}" var="r" itemLabel="#{r.group.code}:#{r.code}" itemValue="#{r}"/>
+						</p:selectOneMenu>
+					</j:inputGrid>
+					<j:inputGrid>
 						<jtp:label entity="IoMavenArtifact" code="remark"/>
 						<jtp:inputRemark value="#{cc.attrs.ctrl.artifact.remark}"/>
 					
@@ -85,7 +94,7 @@
 								<h:outputText value="#{standard.name[localeCode].lang}"/>
 							</ui:repeat>
 						</ui:fragment>						
-					</j:inputGrid>					
+					</j:inputGrid>
 				</p:panel>
 			</h:form>
 			<h:form id="fVersions">

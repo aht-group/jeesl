@@ -17,7 +17,24 @@
 					selection="#{cc.attrs.bean.tblUsecase}" selectionMode="single" rowKey="#{u.id}">
 				<f:facet name="header">
 					<j:dtHeader id="dth" entity="SecurityUsecase" code="listOf">
-						<j:svg type="jeeslAdd" onstart="PF('wvOpUsecaseSelection').show();"/>
+						<j:svg type="jeeslAdd" onstart="PF('wvOpUsecaseSelection').show();" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
+						<p:overlayPanel widgetVar="wvOpUsecaseSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
+							<p:dataTable id="dtOpSector" styleClass="jeesl-dropdown-list"
+									var="u" value="#{cc.attrs.bean.opUsecases}" rowKey="#{u.id}"
+				                    selection="#{cc.attrs.bean.opUsecase}" selectionMode="single"
+									rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+								<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddUsecase}" oncomplete="PF('wvOpUsecaseSelection').hide();reloadContent('#{cc.attrs.update}'.replace(/^\:+/, '#'))"/>
+								<p:column>
+									<h:outputText value="#{u.category.position}.#{u.position}"/>
+								</p:column>
+								<p:column headerText="#{msg.jeeslSecurityCategory}" sortBy="#{u.category.name[userBean.localeCode].lang}" filterBy="#{u.category.name[userBean.localeCode].lang}" filterMatchMode="contains">
+									<h:outputText value="#{u.category.name[userBean.localeCode].lang}" />
+								</p:column>
+								<p:column headerText="#{msg.aupSecurityUsecase}" sortBy="#{u.name[userBean.localeCode].lang}" filterBy="#{u.name[userBean.localeCode].lang}" filterMatchMode="contains">
+									<h:outputText value="#{u.name[userBean.localeCode].lang}" />
+								</p:column>
+							</p:dataTable>
+						</p:overlayPanel>
 						<j:svg type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update="#{cc.attrs.update}"/>
 					</j:dtHeader>
 				</f:facet>
@@ -34,23 +51,6 @@
 				<p:column headerText="#{msg.aupSecurityUsecase}">
 					<h:outputText value="#{u.name[userBean.localeCode].lang}" />
 				</p:column>
-		</p:dataTable>				  
-		<p:overlayPanel widgetVar="wvOpUsecaseSelection" appendToBody="false">
-			<p:dataTable id="dtOpSector" styleClass="jeesl-datatable"
-					var="u" value="#{cc.attrs.bean.opUsecases}" rowKey="#{u.id}"
-                    selection="#{cc.attrs.bean.opUsecase}" selectionMode="single"
-					rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddUsecase}" oncomplete="PF('wvOpUsecaseSelection').hide();"/>
-				<p:column>
-					<h:outputText value="#{u.category.position}.#{u.position}"/>
-				</p:column>
-				<p:column headerText="#{msg.jeeslSecurityCategory}" sortBy="#{u.category.name[userBean.localeCode].lang}" filterBy="#{u.category.name[userBean.localeCode].lang}" filterMatchMode="contains">
-					<h:outputText value="#{u.category.name[userBean.localeCode].lang}" />
-				</p:column>
-				<p:column headerText="#{msg.aupSecurityUsecase}" sortBy="#{u.name[userBean.localeCode].lang}" filterBy="#{u.name[userBean.localeCode].lang}" filterMatchMode="contains">
-					<h:outputText value="#{u.name[userBean.localeCode].lang}" />
-				</p:column>
-			</p:dataTable>
-		</p:overlayPanel>
+		</p:dataTable>
 	</composite:implementation>
 </html>

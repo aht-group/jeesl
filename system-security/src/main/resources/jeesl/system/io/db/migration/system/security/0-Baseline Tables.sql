@@ -33,3 +33,5 @@ create table SecurityUser (system varchar(32) not null, id int8 not null, email 
 create table SecurityView (id  bigserial not null, accessLogin boolean, accessPublic boolean, code varchar(255), documentation boolean, maintenance boolean, packageName varchar(255), position int4 not null, redirect boolean, urlBase varchar(255), urlMapping varchar(255), viewPattern varchar(255), visible boolean not null, category_id int8, primary key (id));
 create table SecurityViewJtDescription (view_id int8 not null, description_id int8 not null, primary key (view_id, description_id));
 create table SecurityViewJtLang (view_id int8 not null, lang_id int8 not null, primary key (view_id, lang_id));
+create table SecurityOauthKey (id  bigserial not null, code varchar(255), json text, name varchar(255), record timestamp, visible boolean not null, type_id int8, primary key (id));
+create table SecurityOauthToken (id  bigserial not null, code varchar(255), nonce varchar(255), user_id int8, primary key (id));

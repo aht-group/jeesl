@@ -44,6 +44,12 @@ public class IoMavenArtifact implements JeeslIoMavenArtifact<IoMavenGroup,IoMave
 	private IoMavenSuitability suitability;
 	@Override public IoMavenSuitability getSuitability() {return suitability;}
 	@Override public void setSuitability(IoMavenSuitability suitability) {this.suitability = suitability;}
+	
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenArtifact_replacedBy"))
+	private IoMavenArtifact replacedBy;
+	public IoMavenArtifact getReplacedBy() {return replacedBy;}
+	public void setReplacedBy(IoMavenArtifact replacedBy) {this.replacedBy = replacedBy;}
 
 	@Basic @Column(columnDefinition="text")
 	private String remark;

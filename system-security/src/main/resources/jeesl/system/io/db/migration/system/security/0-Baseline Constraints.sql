@@ -84,3 +84,5 @@ alter table SecurityViewJtDescription add constraint FK1qug8c6y54lh8haaj82hfwmyk
 alter table SecurityViewJtDescription add constraint FKic8jkilpc7tfuigela71liwb1 foreign key (view_id) references SecurityView;
 alter table SecurityViewJtLang add constraint FKer39qir2pfs8aj6k77luj1xwv foreign key (lang_id) references IoLang;
 alter table SecurityViewJtLang add constraint FKfdguootw24mys4mx1vq5soryo foreign key (view_id) references SecurityView;
+alter table SecurityOauthKey add constraint fk_SecurityOauthKey_type foreign key (type_id) references IoStatus;
+alter table SecurityOauthToken add constraint fk_SecurityOauthToken_user foreign key (user_id) references SecurityUser;

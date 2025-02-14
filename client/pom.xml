@@ -89,6 +89,38 @@
 			<classifier>javax</classifier>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- JakartaEE -->
+		<dependency>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<scope>provided</scope>
+			<version>2.0.2</version> <!-- We only need the version here during migration to EAP7 -->
+		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<scope>provided</scope>
+			<version>2.0.1</version>	<!-- We only need the version here during migration to EAP7 -->
+		</dependency>
+		<dependency>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
+			<version>1.6.7</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.ejb</groupId>
+			<artifactId>jakarta.ejb-api</artifactId>
+			<version>3.2.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>2.2.2</version>
+			<scope>provided</scope>
+		</dependency>
         
         <!-- Apache Commons -->
 		<dependency>
@@ -154,10 +186,6 @@
 			<artifactId>jackson-core</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>com.fasterxml.jackson.jaxrs</groupId>
-		    <artifactId>jackson-jaxrs-json-provider</artifactId>
-		</dependency>
-		<dependency>
 		   <groupId>com.fasterxml.jackson.datatype</groupId>
 		   <artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
@@ -168,39 +196,27 @@
 			<artifactId>jaxb-runtime</artifactId>
 		</dependency>
 
-		<!-- REST -->
+		<!-- Resteasy -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
-			<version>4.7.9.Final</version>
+			<version>5.0.9.Final</version>
 			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency> 
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>slf4j-simple</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>5.0.9.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>5.0.9.Final</version>
 		</dependency>
 
 		
@@ -217,75 +233,8 @@
 			</exclusions>
 		</dependency>
 		-->
-		
-		<!-- FR Access to AWS-S3 -->
-		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-s3</artifactId>
-		    <scope>provided</scope>
-		    <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-            </exclusions>
-		</dependency>
-		<dependency>
-		    <groupId>software.amazon.awssdk</groupId>
-		    <artifactId>s3</artifactId>
-		    <version>2.30.16</version>
-		    
-		</dependency>
-         
-         <!--2022-09-04 tk Preparing removal 
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>-->
-		
-		<!-- 2022-10-26 tk Preparing removal 
-       <dependency>
-		   <groupId>org.jboss.spec</groupId>
-		   <artifactId>jboss-javaee-6.0</artifactId>
-		   <type>pom</type>
-		   <scope>provided</scope>
-		</dependency> -->
-		
-		<!-- JakartaEE -->
-		<dependency>
-			<groupId>jakarta.enterprise</groupId>
-			<artifactId>jakarta.enterprise.cdi-api</artifactId>
-			<scope>provided</scope>
-			<version>2.0.2</version> <!-- We only need the version here during migration to EAP7 -->
-		</dependency>
-		<dependency>
-			<groupId>jakarta.validation</groupId>
-			<artifactId>jakarta.validation-api</artifactId>
-			<scope>provided</scope>
-			<version>2.0.1</version>	<!-- We only need the version here during migration to EAP7 -->
-		</dependency>
-		
-		<!-- JavaEE -->
-		<dependency>
-			<groupId>javax.ejb</groupId>
-			<artifactId>javax.ejb-api</artifactId>
-			<version>3.2</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!--
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-			Below is replacing above
-		-->
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>javax.persistence-api</artifactId>
-			<scope>compile</scope>
-		</dependency>
+   		
+
 		
 		<!-- Utils -->
 		<dependency>
@@ -298,14 +247,7 @@
 					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		
-		<!-- 2024-04-04 tk removed .. but wondering why no compilation error is shown 
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-		</dependency> -->
-		
+		</dependency>		
 
 		<!-- Test for eap80 
 		<dependency>
@@ -343,6 +285,24 @@
 			<groupId>commons-dbutils</groupId>
 			<artifactId>commons-dbutils</artifactId>
 		</dependency>
+		
+		<!-- AWS-S3 -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-s3</artifactId>
+		    <scope>provided</scope>
+		    <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>software.amazon.awssdk</groupId>
+		    <artifactId>s3</artifactId>
+		    <version>2.30.16</version>	    
+		</dependency>
 
 		<!-- Logging -->
 		<dependency>
@@ -377,8 +337,7 @@
             <artifactId>antlr4-runtime</artifactId>
             <scope>test</scope>
         </dependency>
-        
-        
+  
 	</dependencies>
 
     <build>

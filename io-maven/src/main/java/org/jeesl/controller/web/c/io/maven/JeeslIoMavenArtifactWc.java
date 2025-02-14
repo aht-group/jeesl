@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
@@ -64,8 +65,6 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven;
 
-	
-
 	private EchartGraphDataProvider graph; public EchartGraphDataProvider getGraph() {return graph;}
 	
 	private final Comparator<IoMavenArtifact> cpArtifact;
@@ -79,6 +78,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	private final Map<IoMavenVersion,List<IoMavenVersion>> mapParent; public Map<IoMavenVersion, List<IoMavenVersion>> getMapParent() {return mapParent;}
 	
 	private final List<IoMavenArtifact> artifacts; public List<IoMavenArtifact> getArtifacts() {return artifacts;}
+	private final List<IoMavenArtifact> replacements; public List<IoMavenArtifact> getReplacements() {return replacements;}
 	private final List<IoMavenVersion> versions; public List<IoMavenVersion> getVersions() {return versions;}
 	private final List<IoMavenSuitability> suitabilities; public List<IoMavenSuitability> getSuitabilities() {return suitabilities;}
 	private final List<IoMavenOutdate> outdates; public List<IoMavenOutdate> getOutdates() {return outdates;}
@@ -110,6 +110,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		mapParent = new HashMap<>();
 		
 		artifacts = new ArrayList<>();
+		replacements = new ArrayList<>();
 		versions = new ArrayList<>();
 		suitabilities = new ArrayList<>();
 		outdates = new ArrayList<>();
@@ -178,6 +179,19 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		eeEditions.addAll(EjbMavenReferralFactory.toEeEditions(referrals));
 		eeStandards.addAll(EjbMavenReferralFactory.toEeStandards(referrals));
 		n2m.replaceAll(EjbMavenReferralFactory.toN2mVersionStanard(referrals));
+		
+		if(Objects.nonNull(artifact.getReplacedBy()) && !replacements.contains(artifact.getReplacedBy()))
+		{
+			replacements.add(artifact.getReplacedBy());
+		}
+	}
+	
+	public void magnetArtifact()
+	{
+		if(!replacements.contains(artifact))
+		{
+			replacements.add(artifact);
+		}
 	}
 	
 	public void saveArtifact() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
@@ -185,7 +199,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(artifact));}
 		artifact = fMaven.save(artifact);
 		
-		reloadArtifacts();
+		this.reloadArtifacts();
 	}
 	
 	
