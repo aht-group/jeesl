@@ -1,4 +1,4 @@
-package org.jeesl.controller.converter.fc.io.maven;
+package org.jeesl.controller.converter.fc.io.maven.dependency;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;

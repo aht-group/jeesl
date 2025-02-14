@@ -71,6 +71,7 @@
 						
 						<jtp:label entity="IoMavenArtifact" code="suitability"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.artifact.suitability}" effect="fade" autoWidth="false" dynamic="true">
+							<p:ajax event="change" listener="#{cc.attrs.ctrl.updateSuitability}" update="@from"/>
 							<f:selectItems value="#{cc.attrs.ctrl.suitabilities}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 					</j:inputGrid>
