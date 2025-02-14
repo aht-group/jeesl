@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
-import org.jeesl.controller.converter.fc.io.maven.IoMavenVersionConverter;
+import org.jeesl.controller.converter.fc.io.maven.dependency.IoMavenVersionConverter;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
