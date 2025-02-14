@@ -1,5 +1,6 @@
 package org.jeesl.client.app;
 
+import org.jboss.resteasy.core.ResteasyDeploymentImpl;
 import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
 import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.jeesl.connectors.tools.ServerTrayIcon;
@@ -9,8 +10,8 @@ public class NettyServer
 {
 	public NettyServer() throws Exception
 	{
-		ResteasyDeployment deployment = new ResteasyDeployment();
-//	    ResteasyDeployment deployment = new ResteasyDeploymentImpl();
+//		ResteasyDeployment deployment = new ResteasyDeployment();
+	    ResteasyDeployment deployment = new ResteasyDeploymentImpl();
 	    
 	    deployment.getActualResourceClasses().add(WeapRequestService.class);
 
