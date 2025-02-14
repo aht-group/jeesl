@@ -39,6 +39,11 @@
         	<type>jar</type>
         	<scope>provided</scope>
 	    </dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-util</artifactId>
+			<scope>provided</scope>
+	    </dependency>
 	
 		<!-- XML Modules -->
 		<dependency>
@@ -110,11 +115,11 @@
 			</exclusions>
 		</dependency>  -->
 		
-			<dependency>
-			    <groupId>net.sf.jasperreports</groupId>
-			    <artifactId>jasperreports-fonts</artifactId>
-			</dependency>
-			<dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+		</dependency>
+		<dependency>
 			    <groupId>org.codehaus.groovy</groupId>
 			    <artifactId>groovy-all</artifactId>
 		</dependency>
@@ -180,11 +185,7 @@
 			</exclusions>
 		</dependency> 
 		
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-util</artifactId>
-			<scope>provided</scope>
-	    </dependency>
+
 		
 		<!-- Apache POI -->
 		<dependency>
@@ -245,17 +246,11 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-	 		<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<type>jar</type>
-			<scope>provided</scope>
-			<exclusions>
-        		<exclusion>
-        			<artifactId>commons-logging</artifactId>
-        			<groupId>commons-logging</groupId>
-        		</exclusion>
-        	</exclusions>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
 		</dependency>
+		
+		<!-- -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>
@@ -311,10 +306,6 @@
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-codec</artifactId>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
 		</dependency>
 		
 		<!-- Logging -->

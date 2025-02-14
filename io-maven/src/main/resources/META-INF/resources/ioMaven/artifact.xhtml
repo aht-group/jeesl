@@ -19,8 +19,8 @@
 		<j:slot id="sArtifacts" width="6">
 			<h:form id="fArtifacts">
 				<p:dataTable widgetVar="dtArtifacts" styleClass="jeesl-datatable"
-						var="a" value="#{cc.attrs.ctrl.artifacts}"
-						selection="#{cc.attrs.ctrl.artifact}" selectionMode="single" rowKey="#{a.id}"
+						var="a" value="#{cc.attrs.ctrl.artifacts}" filterEvent="keyup paste"
+						selection="#{cc.attrs.ctrl.artifact}" selectionMode="single" rowKey="#{a.id}" 
 						rows="20" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
