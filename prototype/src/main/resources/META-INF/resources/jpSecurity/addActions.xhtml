@@ -23,7 +23,28 @@
 					selection="#{cc.attrs.bean.tblAction}" selectionMode="single" rowKey="#{a.id}">
 			<f:facet name="header">
 				<j:dtHeader id="dth" title="#{msg.jeeslSecurityActions}">
-					<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" library="jeeslGfx"/>
+					<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" library="jeeslGfx" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
+					<p:overlayPanel widgetVar="wvOpActionSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
+						<p:dataTable id="dtOpSector" styleClass="jeesl-datatable"
+									var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
+			                        selection="#{cc.attrs.bean.opAction}" selectionMode="single"
+			                        rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+							<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddAction}" oncomplete="PF('wvOpActionSelection').hide();"/>
+							<p:column>
+								<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
+							</p:column>
+							<p:column headerText="#{msg.aupSecurityView}" sortBy="#{a.view.name[localeCode].lang}" filterBy="#{a.view.name[userBean.localeCode].lang}" filterMatchMode="contains">
+								<h:outputText value="#{a.view.name[userBean.localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslSecurityCode}">
+								<h:outputText rendered="#{not empty a.template}" value="#{a.view.code}.#{fn:substringAfter(a.template.code,'.')}"/>
+								<h:outputText rendered="#{empty a.template}" value="#{a.code}"/>
+							</p:column>
+							<p:column headerText="#{msg.jeeslSecurityAction}" sortBy="#{a.view.toName[localeCode].lang}" filterBy="#{a.toName()[userBean.localeCode].lang}" filterMatchMode="contains">
+								<h:outputText value="#{a.toName()[userBean.localeCode].lang}" />
+							</p:column>
+						</p:dataTable>
+					</p:overlayPanel>
                     <j:svg rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblAction)}" type="jeeslRemove" listener="#{cc.attrs.bean.opRmAction()}" update="#{cc.attrs.update}" library="jeeslGfx"/>
 				</j:dtHeader>
 			</f:facet>
@@ -42,27 +63,6 @@
 				<h:outputText value="#{a.toName()[userBean.localeCode].lang}" />
 			</p:column>
 		</p:dataTable>
-		<p:overlayPanel widgetVar="wvOpActionSelection" appendToBody="false">
-			<p:dataTable id="dtOpSector" styleClass="jeesl-datatable"
-						var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
-                        selection="#{cc.attrs.bean.opAction}" selectionMode="single"
-                        rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddAction}" oncomplete="PF('wvOpActionSelection').hide();"/>
-				<p:column>
-					<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
-				</p:column>
-				<p:column headerText="#{msg.aupSecurityView}" sortBy="#{a.view.name[localeCode].lang}" filterBy="#{a.view.name[userBean.localeCode].lang}" filterMatchMode="contains">
-					<h:outputText value="#{a.view.name[userBean.localeCode].lang}" />
-				</p:column>
-				<p:column headerText="#{msg.jeeslSecurityCode}">
-					<h:outputText rendered="#{not empty a.template}" value="#{a.view.code}.#{fn:substringAfter(a.template.code,'.')}"/>
-					<h:outputText rendered="#{empty a.template}" value="#{a.code}"/>
-				</p:column>
-				<p:column headerText="#{msg.jeeslSecurityAction}" sortBy="#{a.view.toName[localeCode].lang}" filterBy="#{a.toName()[userBean.localeCode].lang}" filterMatchMode="contains">
-					<h:outputText value="#{a.toName()[userBean.localeCode].lang}" />
-				</p:column>
-			</p:dataTable>
-		</p:overlayPanel>
 			
 	</composite:implementation>
 </html>
