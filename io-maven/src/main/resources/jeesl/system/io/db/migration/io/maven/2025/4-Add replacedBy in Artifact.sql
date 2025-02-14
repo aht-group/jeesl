@@ -1,0 +1,2 @@
+ALTER TABLE IF EXISTS public.IoMavenArtifact ADD COLUMN replacedBy_id bigint;
+ALTER TABLE IF EXISTS public.IoMavenArtifact ADD CONSTRAINT fk_iomavenmodule_jdk FOREIGN KEY (replacedBy_id) REFERENCES public.IoMavenArtifact (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION;

@@ -20,5 +20,5 @@ public interface JeeslMavenSuitability <L extends JeeslLang, D extends JeeslDesc
 								JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
-	public enum Code{unknown,removal};
+	public enum Code{unknown,removal,replace};
 }
