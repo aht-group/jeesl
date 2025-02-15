@@ -44,8 +44,6 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	private JeeslSecurityFacade<?,R,V,U,A,CTX,M,USER> fSecurity;
 	protected JeeslSecurityBean<R,V,U,A,AR,?,?,USER> bSecurity;
 	
-	protected I identity;
-	
 	protected List<R> roles; public List<R> getRoles() {return roles;}
 	protected final List<A> actions; public List<A> getActions() {return actions;}
 	private final List<AR> areas; public List<AR> getAreas() {return areas;}
@@ -58,6 +56,8 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	protected final Map<String,Boolean> mapAllow; public Map<String,Boolean> getMapAllow(){return mapAllow;}
 	protected final Map<Long,Boolean> mapIdAllow; public Map<Long,Boolean> getMapIdAllow(){return mapIdAllow;}
 	protected final Map<String,Boolean> mapArea; public Map<String,Boolean> getMapArea() {return mapArea;}
+	
+	protected I identity; @Override public USER getUser() {return identity.getUser();}
 	
 	protected boolean noActions; public boolean isNoActions() {return noActions;}
 	protected boolean noRoles; public boolean isNoRoles() {return noRoles;}
