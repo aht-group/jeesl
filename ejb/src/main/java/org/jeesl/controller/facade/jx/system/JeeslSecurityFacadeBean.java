@@ -619,11 +619,10 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
 		
 		cQ.select(root);
-		cQ.where(cB.and(pStaff(cB,query,root)));
+		cQ.where(cB.and(this.pStaff(cB,query,root)));
 		
 		TypedQuery<S> tQ = em.createQuery(cQ);
-		if(query.getFirstResult()!=null){tQ.setFirstResult(query.getFirstResult());}
-		if(query.getMaxResults()!=null){tQ.setMaxResults(query.getMaxResults());}
+		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
 	
@@ -977,6 +976,11 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		{
 			Path<R> pRole = root.get(JeeslStaff.Attributes.role.toString());
 			predicates.add(pRole.in(query.getSecurityRole()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getUsers()))
+		{
+			Path<USER> pUser = root.get(JeeslStaff.Attributes.user.toString());
+			predicates.add(pUser.in(query.getUsers()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

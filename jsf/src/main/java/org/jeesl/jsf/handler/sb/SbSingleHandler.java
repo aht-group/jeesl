@@ -281,7 +281,8 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 			for(T t : list)
 			{
 				StringBuilder sb = new StringBuilder();
-				if(t!=null) {sb.append(t.toString());} else {sb.append("null");}
+				sb.append(list.indexOf(t)).append(" ");
+				sb.append(Objects.nonNull(t) ? t.toString() : "--");
 				sb.append(" ");
 				sb.append(t.equals(selection));
 				logger.info(sb.toString());

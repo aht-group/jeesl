@@ -14,6 +14,8 @@ public class CqDate implements JeeslCqDate
 	private final LocalDate date; public LocalDate getDate() {return date;}
 	private final String path; public String getPath() {return path;}
 
+	public static CqDate lessThan(LocalDate date) {return new CqDate(Type.LessThan,date,null);}
+	
 	public static CqDate lessThan(LocalDate date, String path) {return new CqDate(Type.LessThan,date,path);}
 	public static CqDate lessOrEqualTo(LocalDate date, String path) {return new CqDate(Type.LessThanOrEqualTo,date,path);}
 	public static CqDate dbIsEqualOrAfter(LocalDate date, String path) {return new CqDate(Type.DbIsEqualOrAfter,date,path);}
