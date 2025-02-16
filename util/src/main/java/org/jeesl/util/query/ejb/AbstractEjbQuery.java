@@ -117,6 +117,9 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public abstract <T extends EjbWithId> AbstractEjbQuery ids(List<T> ids);
 	public abstract AbstractEjbQuery idList(List<Long> list);
 	
+	protected List<EjbWithId> staffDomains;
+	public List<EjbWithId> getStaffDomains() {return staffDomains;}
+
 	protected List<String> codeList;
 	@Override public List<String> getCodeList() {return codeList;}
 	public abstract AbstractEjbQuery codeList(List<String> list);
@@ -141,8 +144,6 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public void setToDate3(Date toDate3) {this.toDate3 = toDate3;}
 	
 	//LocalDate
-	
-	
 	protected LocalDate localDate1; @Override public LocalDate getLocalDate1() {return localDate1;}
 	protected LocalDate localDate2; @Override public LocalDate getLocalDate2() {return localDate2;}
 	
@@ -168,12 +169,6 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public Boolean getBool1() {return bool1;}
 	@Override public void setBool1(Boolean bool1) {this.bool1 = bool1;}
 	
-
-	
-//	private String sortBy; //@Override public String getSortBy() {return sortBy;}
-//	private boolean sortAscending; //@Override public boolean isSortAscending() {return sortAscending;}
-//	@Override public void sort(String sortBy, boolean sortAscending) {this.sortBy=sortBy; this.sortAscending=sortAscending;}
-
 	//Fetches
 	protected List<String> rootFetches; public List<String> getRootFetches() {return rootFetches;}
 	public abstract <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e);

@@ -9,6 +9,7 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslOrderingQuery;
 
@@ -35,4 +36,5 @@ public interface JeeslSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	
 	List<USER> getUsers();
 	
+	List<EjbWithId> getStaffDomains();
 }

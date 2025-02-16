@@ -43,10 +43,8 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 		rest =  JeeslBootstrap.rest(JeeslIoMailRest.class,url);
 	}
 	
-	public void local()
+	public void local(Configuration config)
 	{	
-		Configuration config = JeeslBootstrap.wrap();
-		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgSmtp = config.getString(ConfigKey.netSmtpHost);
 		
@@ -92,10 +90,8 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 	{
 		JeeslMailSpooler smtp = new JeeslMailSpooler();
 		
-		smtp.local(); LoggedExit.exit(true);
-		
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
-		jco.setLogPaths("jeesl/client/config");
+		jco.setLogPaths("jeesl/system/io/log");
 		
 		try
 		{
