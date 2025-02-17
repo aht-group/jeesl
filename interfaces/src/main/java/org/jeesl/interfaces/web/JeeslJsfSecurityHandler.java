@@ -21,6 +21,7 @@ public interface JeeslJsfSecurityHandler <R extends JeeslSecurityRole<?,?,?,V,U,
 										>
 			extends Serializable,JeeslSecurityHandler
 {
+	USER getUser();
 	List<R> getRoles();
 	
 	Map<R,Boolean> getMapHasRole();

@@ -43,6 +43,7 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	
 	private boolean loggedIn; public boolean isLoggedIn() {return loggedIn;}  public void setLoggedIn(boolean loggedIn) {this.loggedIn = loggedIn;}
 	private boolean isDeveloper; public boolean isDeveloper() {return isDeveloper;} public void setDeveloper(boolean isDeveloper) {this.isDeveloper = isDeveloper;}
+	private boolean hasAdminRole; public boolean isHasAdminRole() {return hasAdminRole;} public void setHasAdminRole(boolean hasAdminRole) {this.hasAdminRole = hasAdminRole;}
 	
 	public AbstractIdentity()
 	{		

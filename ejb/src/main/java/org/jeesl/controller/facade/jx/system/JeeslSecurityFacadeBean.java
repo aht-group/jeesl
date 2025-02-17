@@ -32,6 +32,7 @@ import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
+import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.access.JeeslStaff;
@@ -619,11 +620,10 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
 		
 		cQ.select(root);
-		cQ.where(cB.and(pStaff(cB,query,root)));
+		cQ.where(cB.and(this.pStaff(cB,query,root,cStaff)));
 		
 		TypedQuery<S> tQ = em.createQuery(cQ);
-		if(query.getFirstResult()!=null){tQ.setFirstResult(query.getFirstResult());}
-		if(query.getMaxResults()!=null){tQ.setMaxResults(query.getMaxResults());}
+		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
 	
@@ -967,7 +967,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	}
 	
 	
-	private <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> Predicate[] pStaff(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<S> root)
+	private <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> Predicate[] pStaff(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<S> root, Class<S> cStaff)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -977,6 +977,18 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		{
 			Path<R> pRole = root.get(JeeslStaff.Attributes.role.toString());
 			predicates.add(pRole.in(query.getSecurityRole()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getUsers()))
+		{
+			Path<USER> pUser = root.get(JeeslStaff.Attributes.user.toString());
+			predicates.add(pUser.in(query.getUsers()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getStaffDomains()))
+		{
+			List<EjbWithId> domains = EjbStaffFactory.toDomains(query.getStaffDomains(),cStaff);
+			
+			Path<?> pDomain = root.get(JeeslStaff.Attributes.domain.toString());
+			predicates.add(pDomain.in(query.getStaffDomains()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
