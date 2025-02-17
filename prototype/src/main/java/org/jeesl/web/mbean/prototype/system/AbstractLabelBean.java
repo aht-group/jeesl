@@ -99,16 +99,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		return mapXpath.get(re).get(key);
 	}
 
-	@Override public String tlEntity(String localeCode, Class<?> c)
-	{
-		if(!th.getMissingLabelHandler().getMapEntities().containsKey(c.getSimpleName()))
-		{
-			logger.warn("Entity not handled in Engine: "+c.getSimpleName());
-			return "-NO.TRANSLATION-";
-		}
-
-		return th.getMissingLabelHandler().getMapEntities().get(c.getSimpleName()).getName().get(localeCode).getLang();
-	}
+	
 
 	public void updateMissingLabels()
 	{
@@ -124,6 +115,17 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	@Override public void setContext(String localeCode, Class<?> c) {throw new UnsupportedOperationException("It's not allowed to set the context");}
 	@Override public <E extends Enum<E>> String toLabel(E code) {throw new UnsupportedOperationException("It's not allowed to get Labels via context shortcut");}
 	
+	@Override public String tlEntity(String localeCode, Class<?> c)
+	{
+//		if(!th.getMissingLabelHandler().getMapEntities().containsKey(c.getSimpleName()))
+//		{
+//			logger.warn("Entity not handled in Engine: "+c.getSimpleName());
+//			return "-NO.TRANSLATION-";
+//		}
+//
+//		return th.getMissingLabelHandler().getMapEntities().get(c.getSimpleName()).getName().get(localeCode).getLang();
+		return th.getEntities().get(c.getSimpleName()).get(localeCode).getLang();
+	}
 	@Override public <E extends Enum<E>> String tAttribute(String localeCode, Class<?> c, E code)
 	{
 		logger.info("toLabel("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
