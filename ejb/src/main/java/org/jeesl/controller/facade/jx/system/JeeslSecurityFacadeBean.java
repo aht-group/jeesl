@@ -492,7 +492,17 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	
 	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<U> fSecurityUsecases(JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Class<S> cStaff)
 	{
-		// TODO Auto-generated method stub
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<S> cQ = cB.createQuery(cStaff);
+//		Root<S> root = cQ.from(cStaff);
+//		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+//		
+//		cQ.select(root);
+//		cQ.where(cB.and(this.pStaff(cB,query,root,cStaff)));
+//		
+//		TypedQuery<S> tQ = em.createQuery(cQ);
+//		super.pagination(tQ, query);
+//		return tQ.getResultList();
 		return null;
 	}
 	
@@ -971,12 +981,18 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		logger.info("SeRole+"+ObjectUtils.isNotEmpty(query.getSecurityRole()));
+		Join<S,R> jRole = null;//root.get(JeeslStaff.Attributes.role.toString());
 		
 		if(ObjectUtils.isNotEmpty(query.getSecurityRole()))
 		{
-			Path<R> pRole = root.get(JeeslStaff.Attributes.role.toString());
-			predicates.add(pRole.in(query.getSecurityRole()));
+			if(Objects.isNull(jRole)) {jRole = root.join(JeeslStaff.Attributes.role.toString());}
+			predicates.add(jRole.in(query.getSecurityRole()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSecurityUsecase()))
+		{
+			if(Objects.isNull(jRole)) {jRole = root.join(JeeslStaff.Attributes.role.toString());}
+			ListJoin<R,U> jUsecase = jRole.joinList(JeeslSecurityRole.Attributes.usecases.toString());
+			predicates.add(jUsecase.in(query.getSecurityUsecase()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getUsers()))
 		{
