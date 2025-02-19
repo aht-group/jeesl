@@ -3,9 +3,9 @@ package org.jeesl.model.xml;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Namespace;
 
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-
-public class JeeslNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
+public class JeeslNsPrefixMapper // PrefixMapper deactivated for Lib-Upgrade
+								// extends NamespacePrefixMapper
+								implements NsPrefixMapperInterface
 {
 	public static Namespace nsReport = Namespace.getNamespace("r","http://ahtutils.aht-group.com/report");
 	

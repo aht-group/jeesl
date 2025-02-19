@@ -30,8 +30,13 @@
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-xml</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
 			<classifier>javax</classifier>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 	   		<groupId>org.openfuxml</groupId>
@@ -82,20 +87,22 @@
 			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency> 
-    
-    	<!-- JAXB: All 3 Deprecated -->
+    	
+    	<!-- Java EE -->
       	<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
     		<type>jar</type>
     		<scope>provided</scope>
 		</dependency>
+		
+		<!-- JAXB -->
 		<dependency>
-  			<groupId>com.sun.xml.bind</groupId>
-    		<artifactId>jaxb-impl</artifactId>
-    		<type>jar</type>
-    		<scope>provided</scope>
-    	</dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.9</version>
+			<scope>test</scope>
+		</dependency>
     	
     	<!-- 2025-02-17 tk: Removed
     	<dependency>
