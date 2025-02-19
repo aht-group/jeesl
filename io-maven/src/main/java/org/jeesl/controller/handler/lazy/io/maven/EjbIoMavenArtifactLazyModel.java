@@ -46,8 +46,8 @@ public class EjbIoMavenArtifactLazyModel extends LazyDataModel<IoMavenArtifact>
 		llh = new JeeslLazyListHandler<>();
 	}
 	
-	@Override public IoMavenArtifact getRowData(String rowKey) {return llh.getRowData(rowKey);}
-    @Override public Object getRowKey(IoMavenArtifact item) {return llh.getRowKey(item);}
+//	@Override public IoMavenArtifact getRowData(String rowKey) {return llh.getRowData(rowKey);}
+//    @Override public Object getRowKey(IoMavenArtifact item) {return llh.getRowKey(item);}
 
 	private EjbIoMavenQuery query(Map<String,FilterMeta> filterBy)
 	{
