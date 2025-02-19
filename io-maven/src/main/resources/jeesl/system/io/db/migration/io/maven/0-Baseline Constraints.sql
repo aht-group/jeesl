@@ -1,11 +1,14 @@
+alter table IoMavenArtifactJtReason add constraint uk_IoMavenArtifactJtReason unique (artifact_id, reason_id);
 alter table IoMavenDependency add constraint uk_IoMavenDependency_artifact_depends unique (artifact_id, dependsOn_id);
 alter table IoMavenEeReferral add constraint uk_IoMavenEeReferral_edition_standard_recommendation unique (edition_id, standard_id, recommendation);
 alter table IoMavenArtifact add constraint fk_IoMavenArtifact_group foreign key (group_id) references IoMavenGroup;
+alter table IoMavenArtifact add constraint fk_IoMavenArtifact_replacedBy foreign key (replacedBy_id) references IoMavenArtifact;
 alter table IoMavenArtifact add constraint fk_IoMavenArtifact_suitability foreign key (suitability_id) references IoStatus;
+alter table IoMavenArtifactJtReason add constraint fk_IoMavenArtifactJtReason_reason foreign key (reason_id) references IoMavenArtifact;
+alter table IoMavenArtifactJtReason add constraint fk_IoMavenArtifactJtReason_artifact foreign key (artifact_id) references IoMavenArtifact;
 alter table IoMavenDependency add constraint fk_IoMavenDependency_artifact foreign key (artifact_id) references IoMavenVersion;
 alter table IoMavenDependency add constraint fk_IoMavenDependency_dependsOn foreign key (dependsOn_id) references IoMavenVersion;
 alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_artifiact foreign key (artifact_id) references IoMavenVersion;
-alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_bom foreign key (bom_id) references IoMavenVersion;
 alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_edition foreign key (edition_id) references IoStatus;
 alter table IoMavenEeReferral add constraint fk_IoMavenEeReferral_standard foreign key (standard_id) references IoStatus;
 alter table IoMavenModule add constraint FKc2fr7ii7117d094pbme9tgpjq foreign key (graphic_id) references IoGraphic;

@@ -1,4 +1,5 @@
-create table IoMavenArtifact (id  bigserial not null, code varchar(255), remark text, group_id int8, suitability_id int8, primary key (id));
+create table IoMavenArtifact (id  bigserial not null, code varchar(255), remark text, group_id int8, replacedBy_id int8, suitability_id int8, primary key (id));
+create table IoMavenArtifactJtReason (artifact_id int8 not null, reason_id int8 not null);
 create table IoMavenDependency (id  bigserial not null, artifact_id int8, dependsOn_id int8, primary key (id));
 create table IoMavenEeReferral (id  bigserial not null, position int4 not null, recommendation boolean, remark text, artifact_id int8, edition_id int8, standard_id int8, primary key (id));
 create table IoMavenGroup (id  bigserial not null, code varchar(255), primary key (id));
