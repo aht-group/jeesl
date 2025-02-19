@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="app" required="false" default="#{appSecurityBean}"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<div class="t3m-MainNavigation">
+			<div class="t3m-MainNavigation-group">
+				<a href="/about-us" class="t3m-MainNavigation-group-link">About Us</a>
+				
+				<div class="t3m-SubNavigation">
+          			<div class="t3m-Navigation-backdrop"></div>
+          			
+					<div class="t3m-SubNavigation-container">
+						<div class="t3m-SubNavigation-animation-container">
+							<div class="t3m-Navigation-nav-title">
+								<a href="/about-us" class="t3m-Navigation-nav-link" title="About Us">About Us</a>
+							</div>
+							<div class="t3m-SubNavigation-nav-container">
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/about-us/where-we-are" title="Where We Are">Where We Are</a>
+								</div>
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/about-us/company-structure" title="Company Structure">Company Structure</a>
+								</div>
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/about-us/compliance-and-integrity" title="Integrity and Compliance">Integrity and Compliance</a>
+								</div>
+							</div>
+						</div>
+					</div>
+        		</div>
+			</div>
+			<div class="t3m-MainNavigation-group">
+				<a href="/what-we-do" class="t3m-MainNavigation-group-link">What We Do</a>
+				
+				<div class="t3m-SubNavigation">
+					<div class="t3m-Navigation-backdrop"></div>
+					
+					<div class="t3m-SubNavigation-container">
+						<div class="t3m-SubNavigation-animation-container">
+							<div class="t3m-Navigation-nav-title">
+								<a href="/what-we-do" class="t3m-SubNavigation-nav-link" title="What We Do">What We Do</a>
+							</div>
+							<div class="t3m-SubNavigation-nav-container">
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/what-we-do/water-security-in-times-of-climate-change" title="Water Resources Management">Water Resources Management</a>
+								</div>
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/what-we-do/sustainable-urbanisation-1" title="Municipal Infrastructure">Municipal Infrastructure</a>
+								</div>
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/what-we-do/food-security" title="Agriculture and Irrigation">Agriculture and Irrigation</a>
+								</div>
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/what-we-do/nature-protection" title="Sustainable Natural Resources Management">Sustainable Natural Resources Management</a>
+								</div>
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/what-we-do/governance" title="Governance, Peace and Social Cohesion">Governance, Peace and Social Cohesion</a>
+								</div>
+								<div class="t3m-SubNavigation-nav-link">
+									<a href="/what-we-do/skills-development" title="Skills and Economic Development">Skills and Economic Development</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="t3m-MainNavigation-group">
+				<a href="/news" class="t3m-MainNavigation-group-link">News</a>
+			</div>
+			<div class="t3m-MainNavigation-group">
+				<a href="/contact" class="t3m-MainNavigation-group-link">Contact</a>
+			</div>
+		</div>
+	</composite:implementation>
+</html>

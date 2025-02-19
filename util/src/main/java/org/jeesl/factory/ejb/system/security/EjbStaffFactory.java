@@ -160,4 +160,15 @@ public class EjbStaffFactory <R extends JeeslSecurityRole<?,?,?,?,?,?>,
 		}
 		return set;
 	}
+    
+    public static <D extends EjbWithId> List<EjbWithId> toDomains(List<EjbWithId> list, Class<D> c)
+    {
+    	List<EjbWithId> result = new ArrayList<>();
+    	for(EjbWithId d : list)
+    	{
+    		if(c.isInstance(d)) {result.add(d);}
+    	}
+    	
+    	return result;
+    }
 }

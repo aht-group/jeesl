@@ -13,7 +13,7 @@
 <composite:implementation>
 <jp:grid id="grid">
 	<j:row>
-		<j:slot id="sCategories" width="5">
+		<j:slot id="sCategories" width="4">
 			<h:form id="fCategories">
 				<p:dataTable styleClass="jeesl-datatable" 
 							var="e" value="#{cc.attrs.ctrl.entities}" draggableRows="true"
@@ -45,7 +45,7 @@
 		       	</p:dataTable>
 			</h:form>
 		</j:slot>
-		<j:slot id="sView" width="3">
+		<j:slot id="sView" width="4">
 			<h:form id="fView" rendered="#{not empty cc.attrs.ctrl.entity}">
 				<p:panel id="pView"  styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoLabelEntity"/></f:facet>

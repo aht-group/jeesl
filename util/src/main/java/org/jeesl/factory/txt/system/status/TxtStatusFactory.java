@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -48,7 +49,7 @@ public class TxtStatusFactory <L extends JeeslLang, S extends JeeslStatus<L,?,S>
 	public static <L extends JeeslLang, S extends JeeslStatus<L,?,S>, E extends Enum<E>> String labels(E localeCode, List<S> list) {return TxtStatusFactory.labels(localeCode.toString(), list);}
 	public static <L extends JeeslLang, S extends JeeslStatus<L,?,S>> String labels(String localeCode, List<S> list)
 	{
-		if(list==null || list.isEmpty()){return null;}
+		if(ObjectUtils.isEmpty(list)) {return null;}
 		List<String> result = new ArrayList<String>();
 		for(S ejb : list) {result.add(ejb.getName().get(localeCode).getLang());}
 		return StringUtils.join(result, ", ");

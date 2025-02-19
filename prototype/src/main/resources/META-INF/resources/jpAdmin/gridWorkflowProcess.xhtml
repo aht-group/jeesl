@@ -137,10 +137,10 @@
 			<h:form id="fStage" rendered="#{not empty cc.attrs.bean.stage}">
 				<p:panel header="#{msg.jeeslApprovalStage}" styleClass="jeesl-panel">
 					<f:facet name="actions">
-						<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{not cc.attrs.bean.editStage}"/>
-						<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{cc.attrs.bean.editStage}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveStage()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editStage}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteStage()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"/>
+						<j:svg type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{not cc.attrs.bean.editStage}" styleClass="jeesl-greyscale"/>
+						<j:svg type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{cc.attrs.bean.editStage}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveStage()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editStage}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteStage()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						<p:outputLabel value="#{msg.jeeslApprovalProcess}"/>

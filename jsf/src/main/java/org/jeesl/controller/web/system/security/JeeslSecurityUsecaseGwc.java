@@ -29,8 +29,6 @@ import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
@@ -42,7 +40,7 @@ import org.jeesl.jsf.handler.PositionListReorderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslSecurityUsecaseGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,U,A>,
 											V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -58,7 +56,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 									implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityUsecaseController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityUsecaseGwc.class);
 	
 	public enum Action{Developer}
 	
@@ -101,7 +99,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	public boolean isHasDeveloperAction() {return userIsDeveloper;}
 	
-	public JeeslSecurityUsecaseController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,?,USER> fbSecurity)
+	public JeeslSecurityUsecaseGwc(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,?,?,?,?,?,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
@@ -139,8 +137,9 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		this.reloadCategories();
 	}
 	
-	private void reset(boolean rUsecase)
+	private void reset(boolean rCategory, boolean rUsecase)
 	{
+		if(rCategory) {category = null;}
 		if(rUsecase) {usecase = null;}
 	}
 	
@@ -174,6 +173,14 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		category = fSecurity.save(category);
 		reloadCategories();
 		reloadUsecases();
+	}
+	
+	public void deleteCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	{
+		logger.info(AbstractLogMessage.deleteEntity(category));
+		fSecurity.rm(category);
+		this.reset(true, true);
+		this.reloadCategories();
 	}
 	
 	private void reloadUsecases() throws JeeslNotFoundException
@@ -228,7 +235,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		fSecurity.rm(usecase);
 		this.reloadUsecases();
 		this.reloadUsecase();
-		this.reset(true);
+		this.reset(false,true);
 	}
 	
 	private void reloadActions()
