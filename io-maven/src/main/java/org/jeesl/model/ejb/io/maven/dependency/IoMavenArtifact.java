@@ -1,15 +1,23 @@
 package org.jeesl.model.ejb.io.maven.dependency;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -56,6 +64,14 @@ public class IoMavenArtifact implements JeeslIoMavenArtifact<IoMavenGroup,IoMave
 	@Override public String getRemark() {return remark;}
 	@Override public void setRemark(String remark) {this.remark = remark;}
 
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="IoMavenArtifactJtReason",
+						joinColumns={@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenArtifactJtReason_artifact"),name="artifact_id")},
+						inverseJoinColumns={@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenArtifactJtReason_reason"),name="reason_id")},
+						uniqueConstraints=@UniqueConstraint(columnNames={"artifact_id","reason_id"}, name = "uk_IoMavenArtifactJtReason"))
+	private List<IoMavenArtifact> reasons;
+	public List<IoMavenArtifact> getReasons() {if(Objects.isNull(reasons)) {reasons = new ArrayList<>();} return reasons;}
+	public void setReasons(List<IoMavenArtifact> reasons) {this.reasons = reasons;}
 
 	@Override public boolean equals(Object object){return (object instanceof IoMavenArtifact) ? id == ((IoMavenArtifact) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}

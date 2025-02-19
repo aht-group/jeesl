@@ -57,14 +57,15 @@ public class IoMavenEeReferral implements JeeslIoMavenEeReferral<IoMavenVersion,
 	private String remark;
 	public String getRemark() {return remark;}
 	public void setRemark(String remark) {this.remark = remark;}
-	
+
 	private Boolean recommendation;
 	@Override public Boolean getRecommendation() {return recommendation;}
 	@Override public void setRecommendation(Boolean recommendation) {this.recommendation = recommendation;}
-	
+
+
 	@Override public boolean equals(Object object){return (object instanceof IoMavenEeReferral) ? id == ((IoMavenEeReferral) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
