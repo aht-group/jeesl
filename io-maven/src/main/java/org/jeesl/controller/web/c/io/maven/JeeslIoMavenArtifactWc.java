@@ -1,6 +1,5 @@
 package org.jeesl.controller.web.c.io.maven;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +12,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.controller.converter.fc.io.maven.dependency.IoMavenArtifactConverter;
 import org.jeesl.controller.converter.fc.io.maven.dependency.IoMavenVersionConverter;
+import org.jeesl.controller.handler.lazy.io.maven.EjbIoMavenArtifactLazyModel;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.processor.io.maven.MavenMetachartGraphProcessor;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
@@ -25,11 +25,14 @@ import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenVersionFactory;
 import org.jeesl.factory.ejb.io.maven.ee.EjbMavenReferralFactory;
 import org.jeesl.factory.txt.io.maven.TxtMavenVersionFactory;
+import org.jeesl.interfaces.bean.op.OpSingleSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
+import org.jeesl.interfaces.controller.handler.op.OpSelectionHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.jsf.handler.op.OpSingleSelectionHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
@@ -61,13 +64,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
-									implements Serializable,SbToggleBean
+									implements OpSingleSelectionBean<IoMavenArtifact>,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenArtifactWc.class);
 	
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven;
 
+	private final OpSingleSelectionHandler<IoMavenArtifact> opArtifact; public OpSingleSelectionHandler<IoMavenArtifact> getOpVersion() {return opArtifact;}
+	
 	private EchartGraphDataProvider graph; public EchartGraphDataProvider getGraph() {return graph;}
 	
 	private final Comparator<IoMavenArtifact> cpArtifact;
@@ -103,6 +108,8 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	{
 		super(IoLang.class,IoDescription.class);
 		
+		opArtifact = OpSingleSelectionHandler.instance(this);
+		
 		cpArtifact = EjbMavenArtifactComparator.instance(EjbMavenArtifactComparator.Type.code);
 		cpVersion = new PositionComparator<>();
 		
@@ -132,12 +139,27 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;
 		
+		opArtifact.lazyModel(new EjbIoMavenArtifactLazyModel(fMaven));
+		
 		suitabilities.addAll(fMaven.allOrderedPositionVisible(IoMavenSuitability.class));
 		outdates.addAll(fMaven.allOrderedPositionVisible(IoMavenOutdate.class));
 		maintainers.addAll(fMaven.allOrderedPositionVisible(IoMavenMaintainer.class));
 		compilers.addAll(fMaven.allOrderedPositionVisible(IoMavenJdk.class));
 		
 		this.reloadArtifacts();
+	}
+	
+	@Override
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	{
+		if(debugOnInfo){logger.info(SbMultiHandler.class.getSimpleName()+" toggled, but NYI");}
+	}
+	
+	public void prepareSearch() {logger.info("Prepare Search");}
+	@Override public void callbackOpSelection(OpSelectionHandler handler, IoMavenArtifact ejb) throws JeeslLockingException, JeeslConstraintViolationException
+	{
+		logger.info("Selected "+ejb);
+//		referral.setArtifact(fMaven.find(IoMavenVersion.class,ejb));
 	}
 	
 	public void cancelVersion() {this.reset(false,true,true,false);}
@@ -147,12 +169,6 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		if(rVersion) {version=null;}
 		if(rDependencies) {dependencies.clear(); mapParent.clear();}
 		if(rEe) {eeEditions.clear(); eeStandards.clear();}
-	}
-	
-	@Override
-	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
-	{
-		if(debugOnInfo){logger.info(SbMultiHandler.class.getSimpleName()+" toggled, but NYI");}
 	}
 	
 	private void reloadArtifacts()

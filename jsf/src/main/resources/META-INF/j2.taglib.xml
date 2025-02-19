@@ -114,6 +114,12 @@
             <resource-id>ioMaven/opVersion.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>opIoMavenArtifact</tag-name>
+        <component>
+            <resource-id>ioMaven/opArtifact.xhtml</resource-id>
+        </component>
+	</tag>
 	
 	<tag>
         <tag-name>gridIoSsiPort</tag-name>

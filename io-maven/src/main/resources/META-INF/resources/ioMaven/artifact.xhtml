@@ -57,6 +57,7 @@
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveArtifact()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetArtifact()}" update="@form"/>
+						<j:svg type="jeeslSearch" listener="#{cc.attrs.ctrl.prepareSearch()}" update=":#{cc.id}:fVersions" oncomplete="PF('wvArtifacts').show()"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid>
@@ -98,6 +99,7 @@
 					</j:inputGrid>
 				</p:panel>
 			</h:form>
+			<h:form id="fOpArtifact"><j2:opIoMavenArtifact widgetVar="wvArtifacts" handler="#{cc.attrs.ctrl.opArtifact}" update=":#{cc.id}:fArtifact"/></h:form>
 			<h:form id="fVersions">
 				<p:dataTable rendered="#{not empty cc.attrs.ctrl.artifact}" styleClass="jeesl-datatable"
 						var="v" value="#{cc.attrs.ctrl.versions}" draggableRows="true"
