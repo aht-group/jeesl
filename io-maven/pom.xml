@@ -136,17 +136,19 @@
 		   <scope>provided</scope>
 		</dependency>
 		
-		<!-- Commons -->
+		<!-- Apache Commons -->
 		<dependency>
    			<groupId>org.apache.commons</groupId>
    			<artifactId>commons-lang3</artifactId>
    			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Graph -->
 		<dependency>
 			<groupId>org.jgrapht</groupId>
 			<artifactId>jgrapht-core</artifactId>
 			<version>1.4.0</version>
-		</dependency>
+		</dependency>  
 		
 		<!-- Logging -->
 		<dependency>

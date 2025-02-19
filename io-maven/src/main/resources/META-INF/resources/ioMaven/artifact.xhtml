@@ -113,7 +113,8 @@
 		            </p:column>  
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion"/></f:facet>
-						<h:outputText value="#{v.code}" />  
+						<h:outputText value="#{v.code}" />
+						<jtp:symbolizer value="#{v.jdk}" marginLeft="5"/>
 		            </p:column>
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="label"/></f:facet>
@@ -175,6 +176,11 @@
 						<jtp:label entity="IoMavenVersion" code="outdate"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.version.outdate}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.outdates}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoMavenModule" code="jdk"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.version.jdk}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.compilers}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 					
 					</j:inputGrid>
