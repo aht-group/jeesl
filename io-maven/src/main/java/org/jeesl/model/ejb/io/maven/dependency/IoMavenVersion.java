@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
+import org.jeesl.model.ejb.io.maven.module.IoMavenJdk;
 
 @Entity
 @Table(name="IoMavenVersion")
@@ -67,6 +68,11 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 	@Override public IoMavenMaintainer getMaintainer() {return maintainer;}
 	@Override public void setMaintainer(IoMavenMaintainer maintainer) {this.maintainer = maintainer;}
 
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_iomavenmodule_jdk"))
+	private IoMavenJdk jdk;
+	public IoMavenJdk getJdk() {return jdk;}
+	public void setJdk(IoMavenJdk jdk) {this.jdk = jdk;}
 
 	@Override public boolean equals(Object object){return (object instanceof IoMavenVersion) ? id == ((IoMavenVersion) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}

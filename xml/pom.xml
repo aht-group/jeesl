@@ -96,12 +96,14 @@
     		<type>jar</type>
     		<scope>provided</scope>
     	</dependency>
+    	
+    	<!-- 2025-02-17 tk: Removed
     	<dependency>
  			<groupId>com.sun.xml.bind</groupId>
     		<artifactId>jaxb-xjc</artifactId>
     		<type>jar</type>
     		<scope>test</scope>
-  		</dependency>
+  		</dependency>-->
   		
   		<!-- 2025-02-10 tk: Removed
   		<dependency>

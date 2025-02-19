@@ -63,7 +63,7 @@
         	<artifactId>jeesl-io-maven</artifactId>
         	<type>jar</type>
         	<scope>compile</scope>
-	    </dependency>
+	    </dependency> 
 	    
 	    <!-- XML Modules -->
 	    <dependency>
