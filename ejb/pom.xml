@@ -105,6 +105,12 @@
 			<version>3.2</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- JakartaEE -->
 		<dependency>
@@ -131,28 +137,6 @@
 		    <version>3.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
-
-		<!-- JBoss (for FacadeLookup) 
-		<dependency>
-			<groupId>org.jboss.as</groupId>
-			<artifactId>jboss-as-ejb-client-bom</artifactId>
-			<version>7.2.0.Final</version>
-			<type>pom</type>
-			<scope>provided</scope>
-	  	</dependency> 
-	  	<dependency>
-		    <groupId>org.jboss.eap</groupId>
-		    <artifactId>wildfly-ejb-client-bom</artifactId>
-		    <type>pom</type>
-		    <scope>runtime</scope>
-		</dependency> 
-		<dependency>
-		    <groupId>org.jboss</groupId>
-		    <artifactId>jboss-ejb-client</artifactId>
-			<version>4.0.54.Final</version>
-		    <scope>runtime</scope>
-		</dependency>
-		-->
 		
 		<!-- Hibernate -->
 		<dependency>
@@ -161,12 +145,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-      
+		<!-- JAXB -->
 		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.9</version>
+			<scope>test</scope>
 		</dependency>
 		
 		<!-- REST 
@@ -185,7 +169,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		--> 
+		-->
+		
+		<!-- Apache Commons -->
+		<dependency>
+   	   		<groupId>commons-jxpath</groupId>
+   	   		<artifactId>commons-jxpath</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
 
 		<!-- MQTT -->
 		<dependency>
@@ -194,13 +185,6 @@
 		  <scope>provided</scope>
 		</dependency>
 	  	
-	  	<!--2022-09-04 tk Preparing removal 
-		<dependency>
-			<groupId>jda-time</groupId>
-			<artifactId>jda-time</artifactId>
-			<scope>provided</scope>
-		</dependency> -->
-
 		<!-- Batik -->
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
@@ -238,22 +222,9 @@
 			<scope>test</scope>
 		</dependency>
          
-         <!-- Test -->
-         <dependency>
-    	   	<groupId>javax.xml.bind</groupId>
-    	   	<artifactId>jaxb-api</artifactId>
-    	   	<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>commons-jxpath</groupId>
-   	   		<artifactId>commons-jxpath</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
+		<!-- Test -->
+   	   
+
 	</dependencies>
 
     <build>
