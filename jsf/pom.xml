@@ -91,8 +91,20 @@
 			<version>2.0.SP1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+		    <groupId>javax.xml.bind</groupId>
+		    <artifactId>jaxb-api</artifactId>
+		    <version>2.3.1</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Jakarta EE -->
+		<dependency>
+		    <groupId>jakarta.xml.bind</groupId>
+		    <artifactId>jakarta.xml.bind-api</artifactId>
+		    <version>3.0.0</version>
+		    <scope>provided</scope>
+		</dependency>
 		<dependency>
 		    <groupId>jakarta.el</groupId>
 		    <artifactId>jakarta.el-api</artifactId>
@@ -104,8 +116,6 @@
 			<artifactId>jakarta.faces-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-   	   	
-   	   	<!-- JSF -->
 		<dependency>
 		    <groupId>jakarta.servlet</groupId>
 		    <artifactId>jakarta.servlet-api</artifactId>
@@ -150,18 +160,8 @@
    	   		</exclusions>
    	   	</dependency>
    	   	
-		<dependency>
-		    <groupId>javax.xml.bind</groupId>
-		    <artifactId>jaxb-api</artifactId>
-		    <version>2.3.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-		    <groupId>jakarta.xml.bind</groupId>
-		    <artifactId>jakarta.xml.bind-api</artifactId>
-		    <version>3.0.0</version>
-		    <scope>provided</scope>
-		</dependency>
+		
+		
    	   	
    	   	<dependency>
    	   		<groupId>org.jeesl</groupId>
@@ -277,6 +277,8 @@
    			<artifactId>commons-lang</artifactId>
    			<scope>compile</scope>
 		</dependency> -->
+		
+		<!-- Apache Commons -->
 		<dependency>
    			<groupId>org.apache.commons</groupId>
    			<artifactId>commons-lang3</artifactId>
@@ -291,7 +293,7 @@
 		<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-			<version>2.14.0</version>	<!-- Must be in for Apache POI upgrade (Issue 1018) -->
+			<scope>provided</scope>
         </dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>

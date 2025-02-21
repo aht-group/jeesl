@@ -2,7 +2,7 @@ package net.sf.ahtutils.db;
 
 import java.io.File;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.controller.io.db.sql.SqlTableCounter;
 import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;

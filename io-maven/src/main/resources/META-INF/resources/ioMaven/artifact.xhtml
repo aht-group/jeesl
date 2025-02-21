@@ -182,6 +182,7 @@
 						
 						<jtp:label entity="IoMavenModule" code="jdk"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.version.jdk}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.compilers}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 					

@@ -58,18 +58,13 @@
         </dependency>
         
         <!-- XML Modules -->
-        <dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-xml</artifactId>
-			<classifier>javax</classifier>
-			<scope>provided</scope>
-		</dependency> 
 		<dependency>
             <groupId>org.jeesl</groupId>
             <artifactId>jeesl-xml</artifactId>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+		
         <!-- 2024-10-16 km: added because of compilation errors --> 
 		<dependency>
             <groupId>org.jeesl</groupId>
@@ -91,20 +86,6 @@
             <scope>provided</scope>
         </dependency>
         
-        <!-- Java EE -->
-		<dependency>
-			<groupId>javax.faces</groupId>
-			<artifactId>javax.faces-api</artifactId>
-			<version>2.3</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
-			<scope>provided</scope>
-		</dependency>
-        
         <!-- JakartaEE -->
         <dependency>
 			<groupId>jakarta.validation</groupId>
@@ -119,6 +100,24 @@
 		
 		<!-- JavaEE -->
 		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>javax.activation-api</artifactId>
+			<version>1.2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
+			<version>2.3</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
 			<version>1.6.2</version>
@@ -130,26 +129,14 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!--
-        <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-6.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.jboss.resteasy</groupId>
-            		<artifactId>jaxrs-api</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency> -->
       
-        <!-- XML -->
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!-- JAXB -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.9</version>
+			<scope>test</scope>
+		</dependency>
         
         <!--
         <dependency>
@@ -231,12 +218,26 @@
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
-		</dependency>    
-        <dependency> <!-- Required for XmlMailFactory from jeesl-mail -->
-            <groupId>jmimemagic</groupId>
-            <artifactId>jmimemagic</artifactId>
-            <scope>compile</scope>
-            <exclusions>
+		</dependency>
+		
+		<!-- Required for XmlMailFactory -->
+		<dependency>
+			<groupId>net.sf.jmimemagic</groupId>
+			<artifactId>jmimemagic</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+            	<exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
                 <exclusion>
                     <artifactId>xercesImpl</artifactId>
                     <groupId>xerces</groupId>
@@ -250,15 +251,47 @@
                     <groupId>xml-apis</groupId>
                 </exclusion>
                 <exclusion>
+                	<groupId>org.codehaus.jackson</groupId>
+                	<artifactId>jackson-jaxrs</artifactId>
+                </exclusion>
+                <exclusion>
+                	<groupId>org.codehaus.jackson</groupId>
+                	<artifactId>jackson-xc</artifactId>
+                </exclusion>
+			</exclusions>
+		</dependency>
+ <!--       <dependency> 
+            <groupId>jmimemagic</groupId>
+            <artifactId>jmimemagic</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+            	<exclusion>
                     <artifactId>commons-logging</artifactId>
                     <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>log4j</artifactId>
                     <groupId>log4j</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xmlParserAPIs</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
+-->        
 
         <!-- Batik -->
         <dependency>

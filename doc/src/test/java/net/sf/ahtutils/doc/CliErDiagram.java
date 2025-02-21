@@ -38,7 +38,7 @@ public class CliErDiagram extends AbstractErDiagram
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = JeeslBootstrap.wrap();
+		Configuration config = JeeslBootstrap.init();
 		CliErDiagram er = new CliErDiagram(config);
 		er.create();
 	}

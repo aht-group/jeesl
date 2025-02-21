@@ -73,12 +73,13 @@
         	<type>jar</type>
         </dependency>
         
-		<!-- XML -->
+		<!-- JAXB -->
+		<!-- 2025-02-19 tk: removed
 		<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
    	   		<artifactId>jaxb-impl</artifactId>
    	   		<scope>provided</scope>
-   	   	</dependency>
+   	   	</dependency>  -->
    	   	
    	   	<!--	2022-09-17 tk Preparing removal
    	   			2024-09-11 tk 166 compilation errors -->
