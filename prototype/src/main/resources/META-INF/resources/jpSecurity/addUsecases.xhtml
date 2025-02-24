@@ -23,7 +23,7 @@
 									var="u" value="#{cc.attrs.bean.opUsecases}" rowKey="#{u.id}"
 				                    selection="#{cc.attrs.bean.opUsecase}" selectionMode="single"
 									rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-								<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddUsecase}" oncomplete="PF('wvOpUsecaseSelection').hide();reloadContent('#{cc.attrs.update}'.replace(/^\:+/, '#'))"/>
+								<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddUsecase}" oncomplete="PF('wvOpUsecaseSelection').hide();reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
 								<p:column>
 									<h:outputText value="#{u.category.position}.#{u.position}"/>
 								</p:column>
@@ -35,10 +35,10 @@
 								</p:column>
 							</p:dataTable>
 						</p:overlayPanel>
-						<j:svg type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update="#{cc.attrs.update}"/>
+						<j:svg type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update="#{cc.attrs.update}" oncomplete="reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
 					</j:dtHeader>
 				</f:facet>
-				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblUsecase}"/>
+				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblUsecase}" oncomplete="reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
 				<p:column>
 					<h:outputText value="#{u.category.position}.#{u.position}"/>
 				</p:column>

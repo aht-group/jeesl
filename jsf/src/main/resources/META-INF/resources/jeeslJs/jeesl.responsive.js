@@ -68,11 +68,13 @@ function reloadStatusBar() {
 	reloadContent('.jeesl-status-bar');
 }
 
+function jsfToJQuery(jsfSelector) {
+	return $(jsfSelector.replace(' ', ',').replace(/^\:+/, '#').replaceAll(/,\:+/g, ',#').replaceAll(':', '\\:'));
+}
+
 function reloadContent(context) {
-	context = context.replaceAll(':', '\\:');
-	
-	let newButtons = $(context + ' .jeesl-menu-bar-dropdown');
-	let newDropdowns = $(context + ' .jeesl-dropdown-list').attr('id', (index, oldValue) => 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index));
+	let newButtons = context.find('.jeesl-menu-bar-dropdown');
+	let newDropdowns = context.find('.jeesl-dropdown-list').attr('id', (index, oldValue) => 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index));
 	
 	calculateMenuHeight(newDropdowns);
 	newButtons.click(toggleMenu);

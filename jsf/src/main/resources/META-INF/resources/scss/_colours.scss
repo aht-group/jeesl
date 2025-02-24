@@ -177,8 +177,8 @@ $header-underline: 2px solid var(--container-header-underline-colour, #{$dark-co
 		--statusbar-search-border-colour: #{$bright-colour};
 		--statusbar-search-placeholder-foreground: #{$brighter-colour};
 		--statusbar-search-button-foreground: #{$brighter-colour};
-		--statusbar-search-button-hover-background: #{$dark-colour};
-		--statusbar-search-button-hover-foreground: #{$brighter-colour};
+		--statusbar-search-button-hover-background: #{$brighter-colour};
+		--statusbar-search-button-hover-foreground: #{$white-100};
 		--statusbar-search-dropdown-fieldtip-foreground: #{$brighter-colour};
 		--statusbar-search-dropdown-fieldtip-hover-foreground: #{$brighter-colour};
 		--statusbar-search-dropdown-highlight-background-from: #{$dark-colour};
