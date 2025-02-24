@@ -20,6 +20,7 @@
 		<composite:attribute name="stepMinute" required="false" default="5"/>
 		<composite:attribute name="showWeek" required="false"  default="false"/>
 		<composite:attribute name="navigator" required="false"  default="false"/>
+		
 		<composite:attribute name="widgetVar" required="false" default="#{cc.id}Widget"/>
 		<composite:attribute name="pagedate" required="false"/>
 		
@@ -28,7 +29,8 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<p:calendar styleClass="datePickerContainer jeesl-datepicker" id="pCalendar"
+		<p:calendar id="pCalendar"
+						styleClass="datePickerContainer jeesl-datepicker" 
 						value="#{cc.attrs.value}"
 						showOn="button"
 						pattern="#{cc.attrs.pattern}"

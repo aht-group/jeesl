@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAomFacade;
@@ -31,6 +32,8 @@ import org.jeesl.interfaces.model.io.cms.css.JeeslIoCmsCssStyle;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
+import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
+import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
@@ -53,7 +56,9 @@ import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.util.query.cq.CqDate;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
+import org.jeesl.util.query.ejb.io.EjbIoFrQuery;
 import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
 import org.slf4j.Logger;
@@ -74,7 +79,9 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 										MT extends JeeslIoMarkupType<L,D,MT,?>,
 										CSS extends JeeslIoCmsCssStyle<L,D,CSS,?>,
 										USER extends JeeslSecurityUser,
+										FRS extends JeeslFileStorage<L,D,?,?,?>,
 										FRC extends JeeslFileContainer<?,?>,
+										FRM extends JeeslFileMeta<D,FRC,?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
 					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
@@ -111,11 +118,11 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	private REALM realm; public REALM getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
 	private MT markupType;
+	private FRM preview; public FRM getPreview() {return preview;}
 	
 	private EVENT event; public EVENT getEvent() {return event;} public void setEvent(EVENT event) {this.event = event;}
 
-	public JeeslAomMaintenanceGwc(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset
-			)
+	public JeeslAomMaintenanceGwc(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
@@ -177,6 +184,13 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 	@Override public void toggled(SbToggleSelection handler, Class<?> c){this.reloadEvents();}
 	@Override public void callbackDateChanged(SbDateSelection handler) {this.reloadEvents();}
 	
+	public void cancelEvent() {this.reset(true, true); slotHandler.set(12);}
+	private void reset(boolean rEvent, boolean rPreview)
+	{
+		if(rEvent) {event=null;}
+		if(rPreview) {preview=null;}
+	}
+	
 	private void reloadEvents()
 	{
 		events.clear();
@@ -202,6 +216,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
         
     public void selectEvent()
     {
+    	this.reset(false,true);
     	history.clear();
     	
     	logger.info(AbstractLogMessage.selectEntity(event));
@@ -217,6 +232,8 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		
     	history.addAll(fAsset.fAomEvents(query));
     	logger.info(fbAsset.getClassEvent().getSimpleName()+": "+history.size());
+    	
+    	this.reloadPreview();
     }
     
     public void cloneEvent()
@@ -236,9 +253,18 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
     	reloadEvents();
     }
     
-    public void cancelEvent()
-    {
-    	event=null;
-    	slotHandler.set(12);
-    }
+    private void reloadPreview()
+	{
+		preview=null;
+
+//		if(ObjectUtils.isNotEmpty(event.getFrContainer()))
+//		{
+//			EjbIoFrQuery<FRS,FRC> query = new EjbIoFrQuery<>();
+//			query.addIoFrContainer(event.getFrContainer());
+//			query.addCqLiteral(CqLiteral.exact(JeeslAomEventUpload.Code.preview,CqLiteral.path(JeeslFileMeta.Attributes.category)));
+//			List<FRM> metas = fFr.fIoFrMetas(query);
+//
+//			if(!metas.isEmpty()) {preview = metas.get(0);}
+//		}
+	}
 }
