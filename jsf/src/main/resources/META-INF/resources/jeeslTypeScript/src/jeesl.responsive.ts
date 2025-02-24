@@ -51,7 +51,7 @@ function setTreeHeight(node: JQuery<HTMLElement>): number {
 function toggleMenu(this: HTMLElement): void {
     $('.jeesl-menu-bar-dropdown').filter((index: number, button: HTMLElement) => button !== this).removeClass('jeesl-active').siblings('.jeesl-dropdown-list').removeClass('jeesl-active');
     
-    $(this).filter((index: number, current : HTMLElement) => $(current).find('.jeesl-greyscale'))
+    $(this).filter((index: number, current : HTMLElement) => !!$(current).find('.jeesl-greyscale'))
             .toggleClass('jeesl-active')
             .siblings('.jeesl-dropdown-list')
             .removeAttr('style')
@@ -62,10 +62,10 @@ function toggleMenu(this: HTMLElement): void {
 }
 
 function reloadStatusBar(): void {
-	reloadContent('.jeesl-status-bar');
+	reloadContent($('.jeesl-status-bar'));
 }
 
-function jsfToJQuery(jsfSelector: string): string {
+function jsfToJQuery(jsfSelector: string): JQuery<HTMLElement> {
 	return $(jsfSelector.replace(' ', ',').replace(/^\:+/, '#').replaceAll(/,\:+/g, ',#').replaceAll(':', '\\:'));
 }
 
