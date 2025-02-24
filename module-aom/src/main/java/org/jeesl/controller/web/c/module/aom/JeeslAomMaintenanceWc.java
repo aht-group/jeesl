@@ -11,6 +11,8 @@ import org.jeesl.model.ejb.io.cms.markup.IoCmsStyle;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkupType;
 import org.jeesl.model.ejb.io.fr.IoFileContainer;
+import org.jeesl.model.ejb.io.fr.IoFileMeta;
+import org.jeesl.model.ejb.io.fr.IoFileStorage;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
@@ -30,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslAomMaintenanceWc <RREF extends EjbWithId>
-					extends JeeslAomMaintenanceGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventType,AomEventStatus,IoMarkup,IoMarkupType,IoCmsStyle,SecurityUser,IoFileContainer,AomEventUpload>
+					extends JeeslAomMaintenanceGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventType,AomEventStatus,IoMarkup,IoMarkupType,IoCmsStyle,SecurityUser,IoFileStorage,IoFileContainer,IoFileMeta,AomEventUpload>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;

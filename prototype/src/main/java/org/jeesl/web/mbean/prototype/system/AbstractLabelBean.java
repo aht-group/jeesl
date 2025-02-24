@@ -117,23 +117,16 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public String tlEntity(String localeCode, Class<?> c)
 	{
-//		if(!th.getMissingLabelHandler().getMapEntities().containsKey(c.getSimpleName()))
-//		{
-//			logger.warn("Entity not handled in Engine: "+c.getSimpleName());
-//			return "-NO.TRANSLATION-";
-//		}
-//
-//		return th.getMissingLabelHandler().getMapEntities().get(c.getSimpleName()).getName().get(localeCode).getLang();
 		return th.getEntities().get(c.getSimpleName()).get(localeCode).getLang();
 	}
 	@Override public <E extends Enum<E>> String tAttribute(String localeCode, Class<?> c, E code)
 	{
-		logger.info("toLabel("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
+//		logger.info("toLabel("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
 		return th.getLabels().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
 	}
 	@Override public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
 	{
-		logger.info("toDescription("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
+//		logger.info("toDescription("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
 		return th.getDescriptions().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
 	}
 
