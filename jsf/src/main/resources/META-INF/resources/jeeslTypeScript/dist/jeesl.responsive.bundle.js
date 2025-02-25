@@ -51,10 +51,10 @@ function setTreeHeight(node) {
     childList.height(height);
     return height + 50;
 }
-function toggleMenu() {
+window.toggleMenu = function() {
     var _this = this;
     $('.jeesl-menu-bar-dropdown').filter(function (index, button) { return button !== _this; }).removeClass('jeesl-active').siblings('.jeesl-dropdown-list').removeClass('jeesl-active');
-    $(this).filter(function (index, current) { return current !== _this; }).find('.jeesl-greyscale')
+    $(this).filter(function (index, current) { return $(current).find('.jeesl-greyscale'); })
         .toggleClass('jeesl-active')
         .siblings('.jeesl-dropdown-list')
         .removeAttr('style')
@@ -63,9 +63,16 @@ function toggleMenu() {
         .delay(200)
         .queue(function () { $(this).removeClass('jeesl-open').removeAttr('style').dequeue(); });
 }
-function reloadStatusBar() {
-    var newButtons = $('.jeesl-status-bar .jeesl-menu-bar-dropdown');
-    var newDropdowns = $('.jeesl-status-bar .jeesl-dropdown-list').attr('id', function (index, oldValue) { return 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index); });
+
+window.reloadStatusBar = function() {
+	reloadContent($('.jeesl-status-bar'));
+}
+window.jsfToJQuery = function(jsfSelector) {
+	return $(jsfSelector.replace(' ', ',').replace(/^\:+/, '#').replaceAll(/,\:+/g, ',#').replaceAll(':', '\\:'));
+}
+window.reloadContent = function(context) {
+    var newButtons = context.find('.jeesl-menu-bar-dropdown');
+    var newDropdowns = context.find('.jeesl-dropdown-list').attr('id', function (index, oldValue) { return 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index); });
     calculateMenuHeight(newDropdowns);
     newButtons.click(toggleMenu);
 }

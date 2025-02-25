@@ -61,11 +61,18 @@ function setTreeHeight(node) {
 function toggleMenu() {
 	$('.jeesl-menu-bar-dropdown').filter((index, button) => button !== this).removeClass('jeesl-active').siblings('.jeesl-dropdown-list').removeClass('jeesl-active');
 	
-	$(this).filter(current => $(current).find('.jeesl-greyscale')).toggleClass('jeesl-active').siblings('.jeesl-dropdown-list').removeAttr('style').toggleClass('jeesl-active').find('.jeesl-open').delay(200).queue(function() { $(this).removeClass('jeesl-open').removeAttr('style').dequeue(); });
+	$(this).filter(current => $(current).find('.jeesl-greyscale'))
+		   .toggleClass('jeesl-active')
+		   .siblings('.jeesl-dropdown-list')
+		   .removeAttr('style')
+		   .toggleClass('jeesl-active')
+		   .find('.jeesl-open')
+		   .delay(200)
+		   .queue(function() { $(this).removeClass('jeesl-open').removeAttr('style').dequeue(); });
 }
 
 function reloadStatusBar() {
-	reloadContent('.jeesl-status-bar');
+	reloadContent($('.jeesl-status-bar'));
 }
 
 function jsfToJQuery(jsfSelector) {

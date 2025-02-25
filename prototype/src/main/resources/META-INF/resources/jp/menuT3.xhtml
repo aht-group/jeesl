@@ -14,74 +14,114 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<div class="t3m-MainNavigation">
-			<div class="t3m-MainNavigation-group">
-				<a href="/about-us" class="t3m-MainNavigation-group-link">About Us</a>
+		<h:panelGroup styleClass="t3m-MainNavigation" layout="block">
+			<h:panelGroup styleClass="t3m-MainNavigation-group" layout="block">
+				<h:outputLink value="/about-us"
+							  styleClass="t3m-MainNavigation-group-link">About Us</h:outputLink>
 				
-				<div class="t3m-SubNavigation">
-          			<div class="t3m-Navigation-backdrop"></div>
+				<h:panelGroup styleClass="t3m-SubNavigation" layout="block">
+          			<h:panelGroup styleClass="t3m-Navigation-backdrop" layout="block"></h:panelGroup>
           			
-					<div class="t3m-SubNavigation-container">
-						<div class="t3m-SubNavigation-animation-container">
-							<div class="t3m-Navigation-nav-title">
-								<a href="/about-us" class="t3m-Navigation-nav-link" title="About Us">About Us</a>
-							</div>
-							<div class="t3m-SubNavigation-nav-container">
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/about-us/where-we-are" title="Where We Are">Where We Are</a>
-								</div>
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/about-us/company-structure" title="Company Structure">Company Structure</a>
-								</div>
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/about-us/compliance-and-integrity" title="Integrity and Compliance">Integrity and Compliance</a>
-								</div>
-							</div>
-						</div>
-					</div>
-        		</div>
-			</div>
-			<div class="t3m-MainNavigation-group">
-				<a href="/what-we-do" class="t3m-MainNavigation-group-link">What We Do</a>
+					<h:panelGroup styleClass="t3m-SubNavigation-container" layout="block">
+						<h:panelGroup styleClass="t3m-SubNavigation-animation-container" layout="block">
+							<h:panelGroup styleClass="t3m-Navigation-nav-title" layout="block">
+								<h:outputLink value="/about-us"
+											  title="About Us"
+											  styleClass="t3m-Navigation-nav-link">About Us</h:outputLink>
+							</h:panelGroup>
+							<h:panelGroup styleClass="t3m-SubNavigation-nav-container" layout="block">
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/about-us/where-we-are"
+												  title="Where We Are">Where We Are</h:outputLink>
+								</h:panelGroup>
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/about-us/company-structure"
+												  title="Company Structure">Company Structure</h:outputLink>
+								</h:panelGroup>
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/about-us/compliance-and-integrity"
+												  title="Integrity and Compliance">Integrity and Compliance</h:outputLink>
+								</h:panelGroup>
+							</h:panelGroup>
+						</h:panelGroup>
+					</h:panelGroup>
+        		</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup class="t3m-MainNavigation-group" layout="block">
+				<h:outputLink value="/what-we-do"
+							  styleClass="t3m-MainNavigation-group-link">What We Do</h:outputLink>
 				
-				<div class="t3m-SubNavigation">
-					<div class="t3m-Navigation-backdrop"></div>
+				<h:panelGroup styleClass="t3m-SubNavigation" layout="block">
+          			<h:panelGroup styleClass="t3m-Navigation-backdrop" layout="block"></h:panelGroup>
 					
-					<div class="t3m-SubNavigation-container">
-						<div class="t3m-SubNavigation-animation-container">
-							<div class="t3m-Navigation-nav-title">
-								<a href="/what-we-do" class="t3m-SubNavigation-nav-link" title="What We Do">What We Do</a>
-							</div>
-							<div class="t3m-SubNavigation-nav-container">
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/what-we-do/water-security-in-times-of-climate-change" title="Water Resources Management">Water Resources Management</a>
-								</div>
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/what-we-do/sustainable-urbanisation-1" title="Municipal Infrastructure">Municipal Infrastructure</a>
-								</div>
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/what-we-do/food-security" title="Agriculture and Irrigation">Agriculture and Irrigation</a>
-								</div>
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/what-we-do/nature-protection" title="Sustainable Natural Resources Management">Sustainable Natural Resources Management</a>
-								</div>
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/what-we-do/governance" title="Governance, Peace and Social Cohesion">Governance, Peace and Social Cohesion</a>
-								</div>
-								<div class="t3m-SubNavigation-nav-link">
-									<a href="/what-we-do/skills-development" title="Skills and Economic Development">Skills and Economic Development</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="t3m-MainNavigation-group">
-				<a href="/news" class="t3m-MainNavigation-group-link">News</a>
-			</div>
-			<div class="t3m-MainNavigation-group">
-				<a href="/contact" class="t3m-MainNavigation-group-link">Contact</a>
-			</div>
-		</div>
+					<h:panelGroup styleClass="t3m-SubNavigation-container" layout="block">
+						<h:panelGroup styleClass="t3m-SubNavigation-animation-container" layout="block">
+							<h:panelGroup styleClass="t3m-Navigation-nav-title" layout="block">
+								<h:outputLink value="/what-we-do"
+											  title="What We Do"
+											  styleClass="t3m-SubNavigation-nav-link">What We Do</h:outputLink>
+							</h:panelGroup>
+							<h:panelGroup styleClass="t3m-SubNavigation-nav-container" layout="block">
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/what-we-do/water-security-in-times-of-climate-change"
+												  title="Water Resources Management">Water Resources Management</h:outputLink>
+								</h:panelGroup>
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/what-we-do/sustainable-urbanisation-1"
+												  title="Municipal Infrastructure">Municipal Infrastructure</h:outputLink>
+								</h:panelGroup>
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/what-we-do/food-security"
+												  title="Agriculture and Irrigation">Agriculture and Irrigation</h:outputLink>
+								</h:panelGroup>
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/what-we-do/nature-protection"
+												  title="Sustainable Natural Resources Management">Sustainable Natural Resources Management</h:outputLink>
+								</h:panelGroup>
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/what-we-do/governance"
+												  title="Governance, Peace and Social Cohesion">Governance, Peace and Social Cohesion</h:outputLink>
+								</h:panelGroup>
+								<h:panelGroup styleClass="t3m-SubNavigation-nav-link" layout="block">
+									<h:outputLink value="/what-we-do/skills-development"
+												  title="Skills and Economic Development">Skills and Economic Development</h:outputLink>
+								</h:panelGroup>
+							</h:panelGroup>
+						</h:panelGroup>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup styleClass="t3m-MainNavigation-group" layout="block">
+				<h:outputLink value="/news"
+							  styleClass="t3m-MainNavigation-group-link">News</h:outputLink>
+			</h:panelGroup>
+			<h:panelGroup styleClass="t3m-MainNavigation-group" layout="block">
+				<h:outputLink value="/contact"
+							  styleClass="t3m-MainNavigation-group-link">Contact</h:outputLink>
+			</h:panelGroup>
+		</h:panelGroup>
+		<h:panelGroup class="t3m-MobileNavigation" layout="block">
+			<button id="t3m-Modal--mobileNavigation-trigger"
+					class="t3m-MobileNavigation-trigger"
+					aria-expanded="false">
+				<h:panelGroup styleClass="sr-only">Toggle mobile menu</h:panelGroup>
+				<svg xmlns="http://www.w3.org/2000/svg"
+					 viewBox="0 0 24 24"
+					 class="t3m-MobileNavigation-bars"
+					 fill="none"
+					 stroke="currentColor"
+					 aria-hidden="true">
+					<path stroke-linecap="round"
+						  stroke-linejoin="round"
+						  stroke-width="2"
+						  d="M4 6h16M4 12h16M4 18h16"></path>
+				</svg>
+				<svg viewBox="0 0 320 512"
+						 class="t3m-MobileNavigation-xmark"
+						 fill="currentColor">
+					<path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"></path>
+				</svg>
+			</button>
+        </h:panelGroup>
 	</composite:implementation>
 </html>
