@@ -71,7 +71,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenType,IoMavenUsage,IoMavenEeReferral> fMaven;
 
-	private final OpSingleSelectionHandler<IoMavenArtifact> opArtifact; public OpSingleSelectionHandler<IoMavenArtifact> getOpVersion() {return opArtifact;}
+	private final OpSingleSelectionHandler<IoMavenArtifact> opArtifact; public OpSingleSelectionHandler<IoMavenArtifact> getOpArtifact() {return opArtifact;}
 	
 	private EchartGraphDataProvider graph; public EchartGraphDataProvider getGraph() {return graph;}
 	
