@@ -25,7 +25,11 @@
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderStorages()}" update="@form"/>
 					<p:ajax event="rowSelect" update=":#{cc.id}:sStorage" listener="#{cc.attrs.bean.selectStorage()}"/>
-			      	<p:column styleClass="jeesl-center">
+					<p:column styleClass="jeesl-datatable-header-vertical jeesl-center">
+			      		<f:facet name="header"><jtp:label entity="IoFileStorage" code="frozen"/></f:facet>
+			      		<j:svg type="jeeslFrozen" marginLeft="5" rendered="#{s.frozen}"/>
+			     	</p:column>
+			      	<p:column styleClass="jeesl-datatable-header-vertical jeesl-center">
 			      		<f:facet name="header"><jtp:label entity="IoFileStorage" code="engine"/></f:facet>
 			      		<jtp:symbolizer value="#{s.engine}"/>
 			     	</p:column>
@@ -33,7 +37,7 @@
 			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="type"/></f:facet>
 			     		<jtp:symbolizer value="#{s.type}" marginRight="5" rendered="#{cc.attrs.bean.sbhStorageType.hasMore}"/>
 						<h:outputText value="#{s.name[localeCode].lang}"/>
-						<j:svg type="jeeslFrozen" marginLeft="5" rendered="#{s.frozen}"/>
+						
 			     	</p:column>
 			     	<p:column headerText="#{msg.jeeslIoFileStorageSize}" styleClass="jeeslRight">  
 			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="totalSize"/></f:facet>

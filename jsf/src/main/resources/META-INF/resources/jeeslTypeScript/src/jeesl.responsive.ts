@@ -51,7 +51,7 @@ function setTreeHeight(node: JQuery<HTMLElement>): number {
 function toggleMenu(this: HTMLElement): void {
     $('.jeesl-menu-bar-dropdown').filter((index: number, button: HTMLElement) => button !== this).removeClass('jeesl-active').siblings('.jeesl-dropdown-list').removeClass('jeesl-active');
     
-    $(this).filter((index: number, current : HTMLElement) => $(current).find('.jeesl-greyscale'))
+    $(this).filter((index: number, current : HTMLElement) => !!$(current).find('.jeesl-greyscale'))
             .toggleClass('jeesl-active')
             .siblings('.jeesl-dropdown-list')
             .removeAttr('style')
@@ -62,8 +62,16 @@ function toggleMenu(this: HTMLElement): void {
 }
 
 function reloadStatusBar(): void {
-    let newButtons : JQuery<HTMLElement> = $('.jeesl-status-bar .jeesl-menu-bar-dropdown');
-    let newDropdowns : JQuery<HTMLElement> = $('.jeesl-status-bar .jeesl-dropdown-list').attr('id', (index: number, oldValue: string) => 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index));
+	reloadContent($('.jeesl-status-bar'));
+}
+
+function jsfToJQuery(jsfSelector: string): JQuery<HTMLElement> {
+	return $(jsfSelector.replace(' ', ',').replace(/^\:+/, '#').replaceAll(/,\:+/g, ',#').replaceAll(':', '\\:'));
+}
+
+function reloadContent(context: JQuery<HTMLElement>): void {
+    let newButtons: JQuery<HTMLElement> = context.find('.jeesl-menu-bar-dropdown');
+    let newDropdowns: JQuery<HTMLElement> = context.find('.jeesl-dropdown-list').attr('id', (index: number, oldValue: string) => 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index));
     
     calculateMenuHeight(newDropdowns);
     newButtons.click(toggleMenu);

@@ -1,0 +1,19 @@
+FROM php:8.2-apache
+
+RUN apt-get update && apt upgrade -y && apt-get -y install bash wget libzip-dev zip unzip libpng-dev libjpeg-dev libfreetype6-dev libc-client-dev libkrb5-dev libicu-dev
+
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-install mysqli pdo pdo_mysql zip gd imap intl
+RUN docker-php-ext-enable mysqli pdo_mysql zip gd imap intl
+
+RUN a2enmod rewrite
+RUN service apache2 restart
+
+RUN wget https://github.com/osTicket/osTicket/releases/download/v1.18.2/osTicket-v1.18.2.zip -O /tmp/osTicket.zip
+
+COPY ./resources/html/hello.html /var/www/html/hello.html
+COPY ./resources/init/ost.sh /ost.sh
+
+RUN chmod +x /ost.sh
+
+CMD ["/ost.sh"]

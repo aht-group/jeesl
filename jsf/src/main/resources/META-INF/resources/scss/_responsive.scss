@@ -3035,8 +3035,9 @@ body, .ui-widget {
 				border: $border-width solid var(--statusbar-search-border-colour);
 				border-radius: $border-radius;
 				display: inline-block;
-				height: calc(100% - 2 * #{$slim-spacing});
+				height: calc(100% - 2 * #{$slim-spacing} + 2 * #{$border-width});
 				margin: $slim-spacing;
+				overflow: hidden;
 				padding: 0;
 				position: relative;
 				
@@ -3046,7 +3047,7 @@ body, .ui-widget {
 				}
 				
 				+ .jeesl-search-overlay-container {
-					margin: -$slim-spacing $half-spacing 0;
+					margin: 0 $half-spacing 0;
 					position: absolute;
 					min-width: calc(100% - (2 * #{$half-spacing}));
 					
@@ -3056,8 +3057,11 @@ body, .ui-widget {
 				}
 				
 				.ui-inputfield {
-					background: none;
-					color: var(--statusbar-item-foreground);
+//					background: none;
+					background: white;
+//					border-radius: $border-radius;
+					border-radius: #{$border-radius - $border-width} $border-radius $border-radius #{$border-radius - $border-width};
+//					color: var(--statusbar-item-foreground);
 					text-indent: 0;
 					text-shadow: none;
 					transition: width .3s ease-in-out;
@@ -3083,16 +3087,19 @@ body, .ui-widget {
 					.search-btn-light {
 						background: transparent;
 						border: none;
+						border-radius: 0;
 						box-shadow: none;
 						color: var(--statusbar-search-button-foreground);
 						height: 100%;
 						opacity: 0;
+						padding: 0 $half-spacing;
 						pointer-events: none;
 						text-shadow: none;
 						transition: background .2s linear, opacity .2s linear;
 						
 						&:hover {
 							background: var(--statusbar-search-button-hover-background);
+//							background: color-mix(in srbg, var(--statusbar-search-button-hover-background) 30%, transparent);
 							color: var(--statusbar-search-button-hover-foreground);
 						}
 						
@@ -3107,7 +3114,7 @@ body, .ui-widget {
 						
 						.ui-icon {
 							align-items: center;
-							color: var(--statusbar-search-button-foreground) !important;
+//							color: var(--statusbar-search-button-foreground) !important;
 							display: flex;
 							height: $regular-spacing;
 							width: $regular-spacing;
@@ -5074,6 +5081,7 @@ body, .ui-widget {
 	.jeesl-dropdown-list, + .jeesl-dropdown-list {
 		border-radius: $border-radius;
 		margin-top: -1px;
+		pointer-events: none;
 		text-align: left;
 		top: 100% !important;
 		
@@ -5084,6 +5092,7 @@ body, .ui-widget {
 		&.jeesl-active {
 			left: unset !important;
 			opacity: 1;
+			pointer-events: all;
 			visibility: visible;
 		}
 		

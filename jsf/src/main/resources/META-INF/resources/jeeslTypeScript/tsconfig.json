@@ -19,7 +19,8 @@
 		"outDir": "./dist/",
 		"lib": [
 			"ES5",
-			"dom"
+			"dom",
+			"ES2021.String"
 		  ],
 		  "paths": {
 //			"jquery":["node_modules/@types/jquery/index"],

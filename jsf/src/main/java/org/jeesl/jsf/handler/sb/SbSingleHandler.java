@@ -79,7 +79,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 			else
 			{
 				if(list.contains(selection)) {selectSbSingle(selection);}
-				else{selectSbSingle(list.get(0));}
+				else {selectSbSingle(list.get(0));}
 			}
 		}
 		catch (JeeslLockingException e) {}
