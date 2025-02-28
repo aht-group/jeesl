@@ -252,13 +252,9 @@ public class OauthRestHandler implements JeeslOauthRestInterface
 			next.setUser(token.getUser());
 			next = facade.save(next);
 		}
-		catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 		
-		   // Access-Token und ID-Token generieren
-	   
+
 	    String idToken = generateIdToken(clientId,token);
 
 		JsonAccessToken json = new JsonAccessToken();
