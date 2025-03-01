@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.keyvalue.MultiKey;
+import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.facade.io.JeeslIoLabelFacade;
 import org.jeesl.controller.handler.io.label.JeeslTranslationHandler;

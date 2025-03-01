@@ -28,7 +28,10 @@ public class JeeslJbossEap74Configurator extends AbstractJbossEapConfigurator
 	
 	public void execute() throws MojoExecutionException
 	{
-		try {super.configureEap(super.config());}
+		try
+		{
+			super.configureEap(super.config());
+		}
 		catch (Exception e) {throw new MojoExecutionException(e.getClass().toGenericString() +": " +e.getMessage());}
 	}
 }

@@ -89,11 +89,11 @@
 		</dependency> 
     	
     	<!-- Java EE -->
-      	<dependency>
+		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-    		<type>jar</type>
-    		<scope>provided</scope>
+			<version>2.3.1</version>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- JAXB -->
@@ -133,12 +133,12 @@
    	   		<artifactId>commons-jxpath</artifactId>
    	   		<scope>provided</scope>
    	   	</dependency>
+   	   	<!-- 2025-02-28 tk: Trying to remove
    	   	<dependency>
    	   		<groupId>commons-lang</groupId>
    	   		<artifactId>commons-lang</artifactId>
    	   		<scope>test</scope>
-   	   	</dependency>
-   	   	
+   	   	</dependency> 	-->
    	   	<!-- JSON  -->
    	   	<dependency>
 			<groupId>javax.json.bind</groupId>

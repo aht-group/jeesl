@@ -1,6 +1,5 @@
 package org.jeesl.maven.goal.eap;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -13,13 +12,11 @@ public class JeeslJbossEap72Configurator extends AbstractJbossEapConfigurator
 	}
 	
     public void execute() throws MojoExecutionException
-    {
-    	Configuration config = config();
-		
-		try {
+    {		
+		try
+		{
 			configureEap(super.config());
-		} catch (Exception ex) {
-			throw new MojoExecutionException(ex.getClass().toGenericString() +": " +ex.getMessage());
 		}
+		catch (Exception ex) {throw new MojoExecutionException(ex.getClass().toGenericString() +": " +ex.getMessage());}
     }
 }

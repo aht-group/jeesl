@@ -59,14 +59,7 @@
     		<classifier>javax</classifier>
     		<scope>provided</scope>
 		</dependency>
-		
-		<!--
-		<dependency>
-			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-jsf</artifactId>
-    		<scope>provided</scope>
-		</dependency> -->
-		
+				
 		<!-- JEESL Modules -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
@@ -156,6 +149,5 @@
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
 	</dependencies>
 </project>

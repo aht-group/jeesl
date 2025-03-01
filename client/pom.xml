@@ -129,6 +129,8 @@
       		<type>jar</type>
       		<scope>compile</scope>
    		</dependency>
+   		
+   		<!-- 2025-03-01 tk: Checking Removal 
    		<dependency>
 		    <groupId>commons-beanutils</groupId>
 		    <artifactId>commons-beanutils</artifactId>
@@ -139,10 +141,16 @@
                     <groupId>commons-logging</groupId>
                 </exclusion>
             </exclusions>
-		</dependency>
+		</dependency> -->
+		
+		<!-- 2025-03-01 tk: Checking Upgrade to v.2, but only snapshot available 
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-beanutils2</artifactId>
+		  <version>2.0.0-M2-SNAPSHOT</version>
+		</dependency> -->
 
-   		
-   		<!-- 2025-02-11 tk: Removed -->
+   		<!-- 2025-02-11 tk: Checking Removal -->
    		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>

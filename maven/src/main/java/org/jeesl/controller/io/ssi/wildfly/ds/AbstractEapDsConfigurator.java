@@ -3,7 +3,6 @@ package org.jeesl.controller.io.ssi.wildfly.ds;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jboss.as.controller.client.OperationBuilder;
 import org.jboss.as.controller.client.helpers.ClientConstants;
@@ -119,7 +118,7 @@ public class AbstractEapDsConfigurator
 	  	return result;
 	}
 	
-	public static JsonSsiCredential toCredential(Configuration config, String context)
+	public static JsonSsiCredential toCredential(org.exlp.interfaces.system.property.Configuration config, String context)
 	{
 		JsonSsiCredential json = JsonSsiCredentialFactory.build();
 		json.setSystem(JsonSsiSystemFactory.build(config.getString("db."+context+".type")));

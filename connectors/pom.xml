@@ -31,7 +31,6 @@
 	</dependencyManagement>
 	
 	<dependencies>
-		
 		<!-- XML Modules -->
 		<dependency>
         	<groupId>org.jeesl</groupId>
@@ -58,10 +57,6 @@
    	   				<groupId>commons-lang</groupId>
    	   			</exclusion>
    	   			<exclusion>
-   	   				<artifactId>commons-logging</artifactId>
-   	   				<groupId>commons-logging</groupId>
-   	   			</exclusion>
-   	   			<exclusion>
    	   				<artifactId>httpclient</artifactId>
    	   				<groupId>org.apache.httpcomponents</groupId>
    	   			</exclusion>
@@ -81,10 +76,11 @@
    	   	</dependency>
 	
 		<!-- Apache Commons-->
+		<!-- 2025-02-28 tk: Trying to remove
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>

@@ -83,11 +83,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- 2025-03-01 tk: Checking Removal -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-report</artifactId>
 			<scope>provided</scope>
-		</dependency>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-collections</groupId>
+					<artifactId>commons-collections</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> 
 		<dependency>
         	<groupId>org.jeesl</groupId>
         	<artifactId>jeesl-xml</artifactId>
@@ -152,8 +159,6 @@
 		    <artifactId>rewrite-servlet</artifactId>
 		    <scope>provided</scope>
 		</dependency>
-		
-
 
 		<dependency>
 			<groupId>org.metachart</groupId>
@@ -174,22 +179,7 @@
 		   <groupId>org.metachart</groupId>
 		   <scope>provided</scope>
 		</dependency>
-		 	
-		<!--
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-client</artifactId>
-			<version>3.0.1.Final</version>
-			<scope>provided</scope>
-			<exclusions>
-			   	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
-		   </exclusions>
-		</dependency>
-		-->
-		
+	
 		<!--
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -231,6 +221,12 @@
 			<artifactId>caffeine</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Apache Commons-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+   		</dependency>
 		
 		<!-- Logging -->
 		<dependency>

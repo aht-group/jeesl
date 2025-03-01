@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<aht:aht xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:jf="http://www.jeesl.org/finance" xmlns:aht="http://ahtutils.aht-group.com">
-    <js:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
-    <js:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
-    <jf:currency id="123" code="myCode" symbol="mySymbol" label="myLabel"/>
-    <jf:currency id="123" code="myCode" symbol="mySymbol" label="myLabel"/>
+<ns7:aht xmlns="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:ns3="http://ahtutils.aht-group.com/navigation" xmlns:ns4="http://exlp.sf.net/io" xmlns:ns5="http://www.jeesl.org/symbol" xmlns:ns6="http://www.jeesl.org/finance" xmlns:ns7="http://ahtutils.aht-group.com">
+    <status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
+    <status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
+    <ns6:currency id="123" code="myCode" symbol="mySymbol" label="myLabel"/>
+    <ns6:currency id="123" code="myCode" symbol="mySymbol" label="myLabel"/>
     <ns2:user firstName="myFirst" lastName="myLast" email="myEmail"/>
     <ns2:user firstName="myFirst" lastName="myLast" email="myEmail"/>
-</aht:aht>
+</ns7:aht>

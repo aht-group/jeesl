@@ -3,7 +3,6 @@ package org.jeesl.controller.io.ssi.wildfly.logging;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiCredentialFactory;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiSystemFactory;
@@ -22,7 +21,7 @@ public class AbstractEapLoggingConfigurator
 		this.client=client;
 	}
 	
-	public static JsonSsiSystem toSystem(Configuration config, String context)
+	public static JsonSsiSystem toSystem(org.exlp.interfaces.system.property.Configuration config, String context)
 	{
 		JsonSsiSystem system = JsonSsiSystemFactory.instance().fluent().code(context).credentials().json();
 		String list = config.getString("cache."+context+".list",null);

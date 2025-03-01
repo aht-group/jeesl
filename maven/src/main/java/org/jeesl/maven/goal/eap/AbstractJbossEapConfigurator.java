@@ -48,7 +48,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
 		setFiles = new HashSet<AbstractEapDsConfigurator.DbType>();		
 	}
 	
-    protected Configuration config()
+    protected org.exlp.interfaces.system.property.Configuration config()
     {
     	String subnetConfigPrefix = test();
     	
@@ -72,7 +72,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
 		for(EapDsConfigurator c : dsConfigurators.values()) {c.setJbossRoot(f);}
 		
 		super.getLog().info("Using Config "+config.getString("jeesl.classifier","--"));
-		return config;
+		return ConfigLoader.wrap(config);
     }
     
     private String test()
@@ -99,7 +99,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	return "";
     }
     
-    protected void configureEap(Configuration config) throws MojoExecutionException, Exception
+    protected void configureEap(org.exlp.interfaces.system.property.Configuration config) throws MojoExecutionException, Exception
     {
     	String jbossDir = config.getString("eap.dir","/Volumes/ramdisk/jboss");
 		File f = new File(jbossDir);
@@ -120,7 +120,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
     }
     
-    protected void dbFiles(String[] keys, Configuration config) throws IOException
+    protected void dbFiles(String[] keys, org.exlp.interfaces.system.property.Configuration config) throws IOException
     {
     	logger.info("Module Configuration");
     	for(String key : keys)
@@ -134,7 +134,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	}
     }
     
-    protected void dbDrivers(String[] keys, Configuration config) throws IOException
+    protected void dbDrivers(String[] keys, org.exlp.interfaces.system.property.Configuration config) throws IOException
     {
     	for(String key : keys)
     	{
@@ -147,7 +147,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	}
     }
     
-    protected void dbDs(String[] keys, Configuration config) throws IOException
+    protected void dbDs(String[] keys, org.exlp.interfaces.system.property.Configuration config) throws IOException
     {
     	logger.info("DS Configuration");
     	for(String key : keys)
@@ -161,7 +161,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	}
     }
     
-    protected void caches(String[] keys, Configuration config) throws IOException, Exception
+    protected void caches(String[] keys, org.exlp.interfaces.system.property.Configuration config) throws IOException, Exception
     {
     	logger.info("Cache Configuration");
     	if(Objects.nonNull(cacheConfigurator))

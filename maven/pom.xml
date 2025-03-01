@@ -140,7 +140,6 @@
 			<scope>compile</scope>
 			<type>maven-plugin</type>
 		</dependency>
-
 		
 		<!-- JSON Jackson -->
 		<dependency>
@@ -227,12 +226,10 @@
             <artifactId>ant-compress</artifactId>
             <version>1.2</version>
         </dependency>
-        
-            
+           
 		<dependency>
 		    <groupId>org.wildfly.core</groupId>
 		    <artifactId>wildfly-controller-client</artifactId>
-		<!--    <version>2.1.13.Final-redhat-1</version> -->
 		    <version>10.1.15.Final-redhat-00001</version>
 		</dependency>
 	    
@@ -295,6 +292,7 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- 2025-02-28 tk: Trying to remove -->
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -306,7 +304,7 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>

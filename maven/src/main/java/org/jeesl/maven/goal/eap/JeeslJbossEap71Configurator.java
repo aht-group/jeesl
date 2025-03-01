@@ -1,8 +1,8 @@
 package org.jeesl.maven.goal.eap;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.controller.io.db.shell.mysql.MySqlShellCommands;
 import org.jeesl.controller.io.db.shell.postgres.PostgreSqlShellCommands;
 import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
@@ -18,16 +18,12 @@ public class JeeslJbossEap71Configurator extends AbstractJbossEapConfigurator
 	}
 	
     public void execute() throws MojoExecutionException
-    {
-    	Configuration config = config();
-			//		try{dbRestore(config);}
-//		catch (ExlpUnsupportedOsException e) {throw new MojoExecutionException(e.getMessage());}
-		
-		try {
+    {	
+		try
+		{
 			configureEap(super.config());
-		} catch (Exception ex) {
-			throw new MojoExecutionException(ex.getClass().toGenericString() +": " +ex.getMessage());
 		}
+		catch (Exception ex) {throw new MojoExecutionException(ex.getClass().toGenericString() +": " +ex.getMessage());}
     }
     
     @SuppressWarnings("unused")

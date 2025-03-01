@@ -64,7 +64,7 @@ public class IoMavenArtifact implements JeeslIoMavenArtifact<IoMavenGroup,IoMave
 	@Override public String getRemark() {return remark;}
 	@Override public void setRemark(String remark) {this.remark = remark;}
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="IoMavenArtifactJtReason",
 						joinColumns={@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenArtifactJtReason_artifact"),name="artifact_id")},
 						inverseJoinColumns={@JoinColumn(foreignKey=@ForeignKey(name="fk_IoMavenArtifactJtReason_reason"),name="reason_id")},

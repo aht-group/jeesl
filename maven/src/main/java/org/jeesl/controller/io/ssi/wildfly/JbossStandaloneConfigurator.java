@@ -2,7 +2,6 @@ package org.jeesl.controller.io.ssi.wildfly;
 
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jboss.as.controller.client.OperationBuilder;
 import org.jboss.as.controller.client.helpers.ClientConstants;
@@ -98,7 +97,7 @@ public class JbossStandaloneConfigurator
 		client.execute(new OperationBuilder(request).build());
 	}
 	
-	public String createMariaDbDatasource(Configuration config, String context) throws IOException
+	public String createMariaDbDatasource(org.exlp.interfaces.system.property.Configuration config, String context) throws IOException
 	{
 		String cfgDbDs = "db."+context+".ds";
 		String cfgDbHost = "db."+context+".host";
@@ -132,7 +131,7 @@ public class JbossStandaloneConfigurator
 		return null;
 	}
 	
-	public String createMysqlDatasource(Configuration config, String context) throws IOException
+	public String createMysqlDatasource(org.exlp.interfaces.system.property.Configuration config, String context) throws IOException
 	{
 		String cfgDbDs = "db."+context+".ds";
 		String cfgDbHost = "db."+context+".host";
