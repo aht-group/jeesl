@@ -369,7 +369,7 @@
                     			<phase>generate-sources</phase>
                     			<goals><goal>xsdtojava</goal></goals>
           	         			<configuration>
-									 <locale>en</locale>
+									<locale>en</locale>
 									<sourceRoot>${basedir}/src/main/jakarta</sourceRoot>
                         			<xsdOptions>
 										<!--
