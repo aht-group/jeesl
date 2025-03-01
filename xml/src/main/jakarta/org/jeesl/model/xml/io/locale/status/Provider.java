@@ -24,12 +24,13 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
- *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="group" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="visible" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="image" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="style" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -42,8 +43,8 @@ import jakarta.xml.bind.annotation.XmlType;
     "langs",
     "descriptions"
 })
-@XmlRootElement(name = "outcome")
-public class Outcome
+@XmlRootElement(name = "provider")
+public class Provider
     implements Serializable
 {
 
@@ -54,10 +55,10 @@ public class Outcome
     protected Descriptions descriptions;
     @XmlAttribute(name = "id")
     protected Long id;
-    @XmlAttribute(name = "position")
-    protected Integer position;
     @XmlAttribute(name = "code")
     protected String code;
+    @XmlAttribute(name = "group")
+    protected String group;
     @XmlAttribute(name = "label")
     protected String label;
     @XmlAttribute(name = "visible")
@@ -66,6 +67,8 @@ public class Outcome
     protected String image;
     @XmlAttribute(name = "style")
     protected String style;
+    @XmlAttribute(name = "position")
+    protected Integer position;
 
     /**
      * Ruft den Wert der langs-Eigenschaft ab.
@@ -140,30 +143,6 @@ public class Outcome
     }
 
     /**
-     * Ruft den Wert der position-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getPosition() {
-        return position;
-    }
-
-    /**
-     * Legt den Wert der position-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setPosition(Integer value) {
-        this.position = value;
-    }
-
-    /**
      * Ruft den Wert der code-Eigenschaft ab.
      * 
      * @return
@@ -185,6 +164,30 @@ public class Outcome
      */
     public void setCode(String value) {
         this.code = value;
+    }
+
+    /**
+     * Ruft den Wert der group-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getGroup() {
+        return group;
+    }
+
+    /**
+     * Legt den Wert der group-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGroup(String value) {
+        this.group = value;
     }
 
     /**
@@ -281,6 +284,30 @@ public class Outcome
      */
     public void setStyle(String value) {
         this.style = value;
+    }
+
+    /**
+     * Ruft den Wert der position-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getPosition() {
+        return position;
+    }
+
+    /**
+     * Legt den Wert der position-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setPosition(Integer value) {
+        this.position = value;
     }
 
 }

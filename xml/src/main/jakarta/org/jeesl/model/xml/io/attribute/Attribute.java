@@ -25,6 +25,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="bool" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="valueInteger" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -50,6 +51,8 @@ public class Attribute
     protected String label;
     @XmlAttribute(name = "bool")
     protected Boolean bool;
+    @XmlAttribute(name = "valueInteger")
+    protected Integer valueInteger;
 
     /**
      * Ruft den Wert der option-Eigenschaft ab.
@@ -145,6 +148,30 @@ public class Attribute
      */
     public void setBool(Boolean value) {
         this.bool = value;
+    }
+
+    /**
+     * Ruft den Wert der valueInteger-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getValueInteger() {
+        return valueInteger;
+    }
+
+    /**
+     * Legt den Wert der valueInteger-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setValueInteger(Integer value) {
+        this.valueInteger = value;
     }
 
 }

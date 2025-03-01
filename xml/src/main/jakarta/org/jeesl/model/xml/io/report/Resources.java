@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
@@ -24,7 +23,6 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/report}resource" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="dir" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -44,8 +42,6 @@ public class Resources
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Resource> resource;
-    @XmlAttribute(name = "dir")
-    protected String dir;
 
     /**
      * Gets the value of the resource property.
@@ -74,30 +70,6 @@ public class Resources
             resource = new ArrayList<Resource>();
         }
         return this.resource;
-    }
-
-    /**
-     * Ruft den Wert der dir-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDir() {
-        return dir;
-    }
-
-    /**
-     * Legt den Wert der dir-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDir(String value) {
-        this.dir = value;
     }
 
 }

@@ -24,12 +24,11 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
- *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="visible" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="image" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="style" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -42,8 +41,8 @@ import jakarta.xml.bind.annotation.XmlType;
     "langs",
     "descriptions"
 })
-@XmlRootElement(name = "outcome")
-public class Outcome
+@XmlRootElement(name = "goal")
+public class Goal
     implements Serializable
 {
 
@@ -54,18 +53,16 @@ public class Outcome
     protected Descriptions descriptions;
     @XmlAttribute(name = "id")
     protected Long id;
-    @XmlAttribute(name = "position")
-    protected Integer position;
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "label")
     protected String label;
     @XmlAttribute(name = "visible")
     protected Boolean visible;
-    @XmlAttribute(name = "image")
-    protected String image;
     @XmlAttribute(name = "style")
     protected String style;
+    @XmlAttribute(name = "position")
+    protected Integer position;
 
     /**
      * Ruft den Wert der langs-Eigenschaft ab.
@@ -137,30 +134,6 @@ public class Outcome
      */
     public void setId(Long value) {
         this.id = value;
-    }
-
-    /**
-     * Ruft den Wert der position-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getPosition() {
-        return position;
-    }
-
-    /**
-     * Legt den Wert der position-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setPosition(Integer value) {
-        this.position = value;
     }
 
     /**
@@ -236,30 +209,6 @@ public class Outcome
     }
 
     /**
-     * Ruft den Wert der image-Eigenschaft ab.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * Legt den Wert der image-Eigenschaft fest.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setImage(String value) {
-        this.image = value;
-    }
-
-    /**
      * Ruft den Wert der style-Eigenschaft ab.
      * 
      * @return
@@ -281,6 +230,30 @@ public class Outcome
      */
     public void setStyle(String value) {
         this.style = value;
+    }
+
+    /**
+     * Ruft den Wert der position-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getPosition() {
+        return position;
+    }
+
+    /**
+     * Legt den Wert der position-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setPosition(Integer value) {
+        this.position = value;
     }
 
 }
