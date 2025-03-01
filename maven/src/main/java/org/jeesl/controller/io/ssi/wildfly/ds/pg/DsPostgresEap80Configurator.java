@@ -43,7 +43,7 @@ public class DsPostgresEap80Configurator extends AbstractEapDsConfigurator imple
 		if(!moduleXml.exists())
 		{
 			FileUtils.copyInputStreamToFile(mrl.searchIs(AbstractEapDsConfigurator.srcBaseDir+"/eap/8.0/postgres.xml"), moduleXml);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.6.0"),moduleXml.getParentFile());
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.7.5"),moduleXml.getParentFile());
 			logger.info("\tAdded postgresql module");
 		}
 	}

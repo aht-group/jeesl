@@ -35,6 +35,4 @@ public class JeeslJbossEap80Configurator extends AbstractJbossEapConfigurator
 		}
 		catch (Exception e) {throw new MojoExecutionException(e.getClass().toGenericString() +": " +e.getMessage());}
     }
-    
-   
 }

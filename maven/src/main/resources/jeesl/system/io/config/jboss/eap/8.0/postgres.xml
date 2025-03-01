@@ -3,7 +3,7 @@
 <module xmlns="urn:jboss:module:1.1" name="org.postgresql.jdbc">
 
     <resources>
-        <resource-root path="postgresql-42.6.0.jar"/>
+        <resource-root path="postgresql-42.7.5.jar"/>
     </resources>
 
     <dependencies>

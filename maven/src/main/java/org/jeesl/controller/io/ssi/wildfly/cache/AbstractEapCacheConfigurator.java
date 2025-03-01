@@ -1,6 +1,7 @@
 package org.jeesl.controller.io.ssi.wildfly.cache;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import org.jboss.as.controller.client.ModelControllerClient;
@@ -24,16 +25,23 @@ public class AbstractEapCacheConfigurator
 	public static JsonSsiSystem toSystem(org.exlp.interfaces.system.property.Configuration config, String context)
 	{
 		JsonSsiSystem system = JsonSsiSystemFactory.instance().fluent().code(context).credentials().json();
-		String list = config.getString("cache."+context+".list");
-    	if(Objects.nonNull(list))
-    	{
-    		system.setCredentials(new ArrayList<>());
-    		String[] caches  = list.split("-");
-    		for(String cache : caches)
-    		{
-    			system.getCredentials().add(JsonSsiCredentialFactory.instance().fluent().code(cache).json());
-    		}
-    	}
+		try
+		{
+			String list = config.getString("cache."+context+".list");
+	    	if(Objects.nonNull(list))
+	    	{
+	    		logger.info(list);
+	    		system.setCredentials(new ArrayList<>());
+	    		String[] caches  = list.split("-");
+	    		for(String cache : caches)
+	    		{
+	    			system.getCredentials().add(JsonSsiCredentialFactory.instance().fluent().code(cache).json());
+	    		}
+	    	}
+	    	else {logger.warn("No cache configuration for "+context);}
+		}
+		catch (NoSuchElementException e) {}
+		
 		return system;
 	}
 }

@@ -2,8 +2,8 @@
 <module name="org.hibernate" xmlns="urn:jboss:module:1.9">
 
     <resources>
-        <resource-root path="hibernate-core-6.1.4.Final-redhat-00001.jar"/>
-        <resource-root path="hibernate-envers-6.1.4.Final-redhat-00001.jar"/>
+        <resource-root path="hibernate-core-6.2.13.Final-redhat-00001.jar"/>
+        <resource-root path="hibernate-envers-6.2.13.Final-redhat-00001.jar"/>
         <resource-root path="hibernate-spatial-6.1.4.Final.jar"/>
         <resource-root path="geolatte-geom-1.8.2.jar"/>
 		<resource-root path="jts-core-1.18.0.jar"/>

@@ -168,6 +168,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
 		{
 	    	for(String system : keys)
 	    	{
+	    		logger.trace("System: "+system);
 				cacheConfigurator.addCaches(AbstractEapCacheConfigurator.toSystem(config,system));
 	    	}
 		}
