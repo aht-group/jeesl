@@ -3,7 +3,6 @@ package net.sf.ahtutils.doc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.XmlRawFactory;
 import org.openfuxml.model.xml.core.ofx.Comment;
@@ -17,21 +16,18 @@ public class DocumentationCommentBuilder
 {
 	final static Logger logger = LoggerFactory.getLogger(DocumentationCommentBuilder.class);
 	
-	public static void translationKeys(Comment comment, Configuration config, String key) throws UtilsConfigurationException
+	public static void translationKeys(Comment comment, org.exlp.interfaces.system.property.Configuration config, String key) throws UtilsConfigurationException
 	{
 		configKeyReference(comment, config, key, "Translation Keys are defined in");
 	}
 	
-	public static void configKeyReference(Comment comment, Configuration config, String key, String description) throws UtilsConfigurationException
+	public static void configKeyReference(Comment comment, org.exlp.interfaces.system.property.Configuration config, String key, String description) throws UtilsConfigurationException
 	{
 		if(config.containsKey(key))
 		{
 			comment.getRaw().add(XmlRawFactory.build(description+": "+config.getString(key)));
 		}
-		else
-		{
-			throw new UtilsConfigurationException("Cannot find key:"+key+" in config");
-		}
+		else {throw new UtilsConfigurationException("Cannot find key:"+key+" in config");}
 	}
 	
 	public static void tableHeaders(Comment comment,Map<Code,String> headers)

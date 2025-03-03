@@ -2,8 +2,8 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;

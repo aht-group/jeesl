@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.DefaultConfigurationBuilder;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
@@ -63,7 +64,7 @@ public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 		super.initOfx();
 		
 		parentSection = new LatexSectionRenderer(cp,0,null);
-		factory = new OfxSecurityCategoryListFactory(config,lang,translations,cp);
+		factory = new OfxSecurityCategoryListFactory(ConfigLoader.wrap(config),lang,translations,cp);
 		list = new ArrayList<Category>();
 		rc1 = createCategory(1);list.add(rc1);
 	}

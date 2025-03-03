@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.DefaultConfigurationBuilder;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.security.TestXmlView;
@@ -40,7 +38,7 @@ public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 	private static List<String> headerKeys;
 	
 	@BeforeAll
-	public static void initFiles() throws FileNotFoundException, ConfigurationException
+	public static void initFiles() throws FileNotFoundException
 	{
 		headerKeys = new ArrayList<String>();
 		headerKeys.add("key1");
@@ -49,8 +47,6 @@ public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 		fXml = new File(rootDir,"tableView.xml");
 		fTxt = new File(rootDir,"tableView.tex");
 		
-		DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
-		config = builder.getConfiguration(false);
 		translations = JaxbUtil.loadJAXB("src/test/resources/data/xml/dummyTranslations.xml", Translations.class);
 	}
 	

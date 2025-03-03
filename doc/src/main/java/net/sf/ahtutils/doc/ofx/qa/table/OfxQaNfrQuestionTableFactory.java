@@ -3,7 +3,7 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.factory.xml.system.security.XmlActionFactory;
@@ -37,7 +36,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 	
 	private List<String> headerKeys;
 		
-	public OfxSecurityActionTableFactory(Configuration config, String[] langs, Translations translations)
+	public OfxSecurityActionTableFactory(org.exlp.interfaces.system.property.Configuration config, String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
 		

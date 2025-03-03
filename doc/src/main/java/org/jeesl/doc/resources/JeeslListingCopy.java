@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.slf4j.Logger;
@@ -78,19 +78,11 @@ public class JeeslListingCopy
 	{
 		this("listing.aht-utils",new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
 	}
-	public JeeslListingCopy(org.apache.commons.configuration2.Configuration config)
-	{
-		this("listing.aht-utils",new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
-	}
-	
 	public JeeslListingCopy(Configuration config, String prefix)
 	{
 		this(prefix,new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
 	}
-	public JeeslListingCopy(org.apache.commons.configuration2.Configuration config, String prefix)
-	{
-		this(prefix,new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
-	}
+	
 	
 	public JeeslListingCopy(String prefix,File baseDoc)
 	{

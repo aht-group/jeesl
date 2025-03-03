@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.navigation.Menu;
@@ -26,12 +25,12 @@ import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 public class OfxMenuTreeFactory extends AbstractUtilsOfxDocumentationFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxMenuTreeFactory.class);
-		
-	public OfxMenuTreeFactory(Configuration config, String lang, Translations translations)
+	
+	public OfxMenuTreeFactory(org.exlp.interfaces.system.property.Configuration config, String lang, Translations translations)
 	{
 		this(config,new String[] {lang},translations);
 	}
-	public OfxMenuTreeFactory(Configuration config,String[] langs, Translations translations)
+	public OfxMenuTreeFactory(org.exlp.interfaces.system.property.Configuration config,String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
 	}

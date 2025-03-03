@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
@@ -45,12 +44,12 @@ public class OfxQaStaffTableFactory extends AbstractUtilsOfxDocumentationFactory
 	private static String keyCaptionGroup = "auTableQmGroupCaption";
 	
 	public static enum ColumCode{organisation,department,organisationDepartment,name,role,responsibility}
-	
-	public OfxQaStaffTableFactory(Configuration config, String lang, Translations translations)
+		
+	public OfxQaStaffTableFactory(org.exlp.interfaces.system.property.Configuration config, String lang, Translations translations)
 	{
 		this(config,new String[] {lang},translations);
 	}
-	public OfxQaStaffTableFactory(Configuration config, String[] langs, Translations translations)
+	public OfxQaStaffTableFactory(org.exlp.interfaces.system.property.Configuration config, String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
 	}

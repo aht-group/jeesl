@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -24,7 +24,7 @@ public class AbstractDocumentationLatexWriter
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractDocumentationLatexWriter.class);
 	
-	protected Configuration config;
+	protected org.exlp.interfaces.system.property.Configuration config;
 	protected String baseLatexDir;
 	
 	protected Translations translations;
@@ -32,19 +32,21 @@ public class AbstractDocumentationLatexWriter
 	
 	protected ConfigurationProvider cp;
 	
-	public AbstractDocumentationLatexWriter(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	
+	
+	public AbstractDocumentationLatexWriter(org.exlp.interfaces.system.property.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
 	{
 		this.config=config;
 		this.translations=translations;
 		this.langs=langs;
 		this.cp=cp;
 		
-		baseLatexDir=config.getString(UtilsDocumentation.keyBaseLatexDir);
+		baseLatexDir = config.getString(UtilsDocumentation.keyBaseLatexDir);
 	}
 	
 	public AbstractDocumentationLatexWriter(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
 	{
-		logger.warn("Config2 NXI");
+		logger.warn("Config2 NYI");
 //		this.config=config;
 		this.translations=translations;
 		this.langs=langs;

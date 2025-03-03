@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.io.db.xml.UtilsDbXmlSeedUtil;
@@ -33,7 +33,7 @@ public class LatexStatusWriter extends AbstractDocumentationLatexWriter
 	private String seedKey,seedKeyParent;
 	private boolean withIcon;
 	
-	public LatexStatusWriter(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp, String dirTable) throws UtilsConfigurationException
+	public LatexStatusWriter(org.exlp.interfaces.system.property.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp, String dirTable) throws UtilsConfigurationException
 	{
 		super(config,translations,langs,cp);
 		File baseDir = new File(config.getString(UtilsDocumentation.keyBaseLatexDir));
@@ -51,6 +51,7 @@ public class LatexStatusWriter extends AbstractDocumentationLatexWriter
 		}
 		catch (FileNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
 	}
+
 	public LatexStatusWriter(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp, String dirTable) throws UtilsConfigurationException
 	{
 		super(config,translations,langs,cp);

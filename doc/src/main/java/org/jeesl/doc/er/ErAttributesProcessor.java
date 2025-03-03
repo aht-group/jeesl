@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.interfaces.model.marker.qualifier.EjbErAttributes;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;

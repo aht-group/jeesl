@@ -2,7 +2,7 @@ package net.sf.ahtutils.doc.ofx.security.section;
 
 import java.io.FileNotFoundException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;

@@ -112,6 +112,7 @@ public class ConfigBootstrap
 			this.config=config;
 		}
 
+		@Override public boolean containsKey(String key) {return config.containsKey(key);}
 		@Override public String getString(String key) {return config.getString(key);}
 		@Override public String getString(String key, String fallback) {return config.getString(key,fallback);}
 		@Override public Integer getInteger(String key) {return config.getInt(key);}

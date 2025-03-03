@@ -1,6 +1,5 @@
 package org.jeesl.doc.ofx.constraints;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
@@ -38,7 +37,7 @@ public class OfxConstraintScopeSectionFactory extends AbstractUtilsOfxDocumentat
 		
 	public void setConstraintTypes(Container constraintTypes) {ofTable.setConstraintTypes(constraintTypes);}
 	
-	public OfxConstraintScopeSectionFactory(Configuration config, String[] langs, Translations translations)
+	public OfxConstraintScopeSectionFactory(org.exlp.interfaces.system.property.Configuration config, String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
 		ofTable = new OfxConstraintTableFactory(config,langs,translations);

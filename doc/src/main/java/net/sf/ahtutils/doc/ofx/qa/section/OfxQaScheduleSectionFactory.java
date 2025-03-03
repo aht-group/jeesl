@@ -1,6 +1,5 @@
 package net.sf.ahtutils.doc.ofx.qa.section;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.module.dev.qa.Group;
 import org.jeesl.model.xml.module.dev.qa.Groups;
@@ -23,7 +22,7 @@ public class OfxQaScheduleSectionFactory extends AbstractUtilsOfxDocumentationFa
 
 	private OfxQaStaffTableFactory ofStaff;
 	
-	public OfxQaScheduleSectionFactory(Configuration config, String[] langs, Translations translations)
+	public OfxQaScheduleSectionFactory(org.exlp.interfaces.system.property.Configuration config, String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
 		ofStaff = new OfxQaStaffTableFactory(config,langs,translations);

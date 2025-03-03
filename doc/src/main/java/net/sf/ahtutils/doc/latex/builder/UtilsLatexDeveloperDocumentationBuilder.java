@@ -1,6 +1,5 @@
 package net.sf.ahtutils.doc.latex.builder;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.latex.builder.AbstractLatexDocumentationBuilder;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
@@ -19,8 +18,8 @@ public class UtilsLatexDeveloperDocumentationBuilder extends AbstractLatexDocume
 	public static final String cfgKeyVcsUrl = "doc.admin.development.vcs";
 	
 	public static enum Code {configuration}
-		
-	public UtilsLatexDeveloperDocumentationBuilder(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	
+	public UtilsLatexDeveloperDocumentationBuilder(org.exlp.interfaces.system.property.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 	}
@@ -33,11 +32,8 @@ public class UtilsLatexDeveloperDocumentationBuilder extends AbstractLatexDocume
 	@Override protected void applyConfigCodes()
 	{	
 		addConfig(Code.configuration.toString(),"ofx.aht-utils/developer/configuration.xml","developer/configuration");
-		
 	}
 
 	public void render(Code code) throws UtilsConfigurationException, OfxConfigurationException{render(2,code);}
 	public void render(int lvl, Code code) throws UtilsConfigurationException, OfxConfigurationException{render(lvl,code.toString());}
-	
-	
 }

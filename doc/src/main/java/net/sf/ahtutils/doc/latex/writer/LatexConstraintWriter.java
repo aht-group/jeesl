@@ -3,7 +3,6 @@ package net.sf.ahtutils.doc.latex.writer;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.doc.ofx.constraints.OfxConstraintScopeSectionFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
@@ -28,7 +27,7 @@ public class LatexConstraintWriter extends AbstractDocumentationLatexWriter
 		
 	private OfxConstraintScopeSectionFactory ofConstraint;
 	
-	public LatexConstraintWriter(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	public LatexConstraintWriter(org.exlp.interfaces.system.property.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 		
@@ -37,10 +36,6 @@ public class LatexConstraintWriter extends AbstractDocumentationLatexWriter
 		
 		ofConstraint = new OfxConstraintScopeSectionFactory(config,langs,translations);
 		logger.warn("Retrieve Constraint types");
-		
-//		try{ofConstraint.setConstraintTypes(JaxbUtil.loadJAXB(JeeslConstraintType.xmlResourceContainer, Container.class));}
-//		catch (FileNotFoundException e) {e.printStackTrace();}
-		
 	}
 	
 	public void constraints(String artifact) throws OfxAuthoringException, OfxConfigurationException, IOException, UtilsConfigurationException

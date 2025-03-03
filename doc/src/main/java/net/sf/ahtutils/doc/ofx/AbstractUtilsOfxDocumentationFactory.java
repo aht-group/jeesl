@@ -3,7 +3,7 @@ package net.sf.ahtutils.doc.ofx;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.factory.xml.table.XmlCellFactory;
@@ -20,14 +20,15 @@ public class AbstractUtilsOfxDocumentationFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractUtilsOfxDocumentationFactory.class);
 		
-	protected Configuration config;
+	protected org.exlp.interfaces.system.property.Configuration config;
 	protected String[] langs;
 	protected Translations translations;
 	protected String imagePathPrefix;
 	
-	public AbstractUtilsOfxDocumentationFactory(Configuration config, String[] langs, Translations translations)
+	public AbstractUtilsOfxDocumentationFactory(org.exlp.interfaces.system.property.Configuration config, String[] langs, Translations translations)
 	{
 		this.config=config;
+		logger.warn("Config2 NYI");
 		this.langs=langs;
 		this.translations=translations;
 	}

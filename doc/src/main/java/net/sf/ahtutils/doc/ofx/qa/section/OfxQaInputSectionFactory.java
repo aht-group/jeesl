@@ -1,7 +1,7 @@
 package net.sf.ahtutils.doc.ofx.qa.section;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.FilenameUtils;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.module.dev.qa.Category;
 import org.jeesl.model.xml.module.dev.qa.Qa;

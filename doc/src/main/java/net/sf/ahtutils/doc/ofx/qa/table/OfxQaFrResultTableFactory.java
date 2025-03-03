@@ -1,15 +1,10 @@
 package net.sf.ahtutils.doc.ofx.qa.table;
 
-import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;
@@ -31,6 +26,11 @@ import org.openfuxml.model.xml.core.table.Specification;
 import org.openfuxml.model.xml.core.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
+import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 public class OfxQaFrResultTableFactory extends AbstractUtilsOfxDocumentationFactory
 {

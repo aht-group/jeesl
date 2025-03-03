@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -31,25 +32,13 @@ public class AbstractLatexDocumentationBuilder extends AbstractDocumentationLate
 	
 	protected Map<String,String> dstFiles;
 
-	public AbstractLatexDocumentationBuilder(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
-	{
-		super(config,translations,langs,cp);
-		this.config=config;
-		this.langs=langs;
-		
-		dstFiles = new Hashtable<String,String>();
-		
-		applyConfigCodes();
-		applyBaseLatexDir();
-		
-		logger.info("Using baseLatexDir: "+baseLatexDir);		
-	}
 	public AbstractLatexDocumentationBuilder(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
 	{
+		this(ConfigBootstrap.wrap(config),translations,langs,cp);
+	}
+	public AbstractLatexDocumentationBuilder(org.exlp.interfaces.system.property.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	{
 		super(config,translations,langs,cp);
-		logger.warn("Config2 NYI");
-//		this.config=config;
-		this.langs=langs;
 		
 		dstFiles = new Hashtable<String,String>();
 		
@@ -58,6 +47,8 @@ public class AbstractLatexDocumentationBuilder extends AbstractDocumentationLate
 		
 		logger.info("Using baseLatexDir: "+baseLatexDir);		
 	}
+	
+	
 	
 	protected void applyBaseLatexDir()
 	{
@@ -72,7 +63,15 @@ public class AbstractLatexDocumentationBuilder extends AbstractDocumentationLate
 	protected void addConfig(String code, String source){addConfig(code,source,null);}
 	protected void addConfig(String code, String source, String destination)
 	{
-		config.addProperty(code, source);
+		logger.warn("NYI");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		config.addProperty(code, source);
 		if(destination!=null){dstFiles.put(code, destination);}
 	}
 	

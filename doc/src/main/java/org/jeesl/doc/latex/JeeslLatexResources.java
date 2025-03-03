@@ -2,7 +2,6 @@ package org.jeesl.doc.latex;
 
 import java.io.File;
 
-import org.apache.commons.configuration.Configuration;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.latex.util.OfxLatexResources;
 import org.slf4j.Logger;
@@ -32,11 +31,7 @@ public class JeeslLatexResources extends OfxLatexResources
 	public static String acronymDev = "ofx.aht-utils/editorial/acronym/development.xml";
 	public static String acronymJava = "ofx.aht-utils/editorial/acronym/java.xml";
 	
-	public JeeslLatexResources(Configuration config)
-	{
-		super(config.getString(UtilsDocumentation.keyBaseLatexDir));
-	}
-	public JeeslLatexResources(org.apache.commons.configuration2.Configuration config)
+	public JeeslLatexResources(org.exlp.interfaces.system.property.Configuration config)
 	{
 		super(config.getString(UtilsDocumentation.keyBaseLatexDir));
 	}

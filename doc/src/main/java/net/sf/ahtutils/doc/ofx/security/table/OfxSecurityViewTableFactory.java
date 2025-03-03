@@ -3,7 +3,6 @@ package net.sf.ahtutils.doc.ofx.security.table;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.security.View;
@@ -29,7 +28,7 @@ final static Logger logger = LoggerFactory.getLogger(OfxSecurityUsecaseTableFact
 	
 	private List<String> headerKeys;
 		
-	public OfxSecurityViewTableFactory(Configuration config, String[] langs, Translations translations)
+	public OfxSecurityViewTableFactory(org.exlp.interfaces.system.property.Configuration config, String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
 		

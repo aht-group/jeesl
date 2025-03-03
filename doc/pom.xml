@@ -135,7 +135,7 @@
     		<classifier>jdk17</classifier>
 		</dependency>
 			 
-		<!-- 2025-02-10 tk: trying to remvoe -->
+		<!-- 2025-02-10 tk: trying to remove 
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -147,7 +147,7 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
 			</exclusions>
-		</dependency> 
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>
@@ -158,7 +158,7 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency> 
 		
 		<!-- Logging -->
 		<dependency>

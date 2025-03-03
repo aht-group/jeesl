@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestExport;
 import org.jeesl.exception.processing.UtilsConfigurationException;
@@ -23,7 +22,6 @@ import org.openfuxml.renderer.latex.OfxMultiLangLatexWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.doc.ofx.menu.OfxMenuTreeFactory;
 import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityPagesSectionFactory;
@@ -48,33 +46,13 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 	
 	private List<String> headerKeysViews;
 	
-	@Deprecated
-	public LatexSecurityWriter(Configuration config, Translations translations, String[] langs, ConfigurationProvider cp)
-	{
-		super(config,translations,langs,cp);
-		
-		File baseDir = new File(config.getString(UtilsDocumentation.keyBaseLatexDir));
-		ofxMlw = new OfxMultiLangLatexWriter(baseDir,langs,cp);
-		
-		buildFactories();
-	}
-	@Deprecated
-	public LatexSecurityWriter(org.apache.commons.configuration2.Configuration config, Translations translations, String[] langs, ConfigurationProvider cp)
-	{
-		super(config,translations,langs,cp);
-		
-		File baseDir = new File(config.getString(UtilsDocumentation.keyBaseLatexDir));
-		ofxMlw = new OfxMultiLangLatexWriter(baseDir,langs,cp);
-		
-		buildFactories();
-	}
-	
-	public LatexSecurityWriter(Configuration config, Translations translations, String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
+	public LatexSecurityWriter(org.exlp.interfaces.system.property.Configuration config, Translations translations, String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 		this.ofxMlw=ofxMlw;
 		buildFactories();
 	}
+	
 	public LatexSecurityWriter(org.apache.commons.configuration2.Configuration config, Translations translations, String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);

@@ -3,15 +3,7 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.doc.DocumentationCommentBuilder;
-import net.sf.ahtutils.doc.UtilsDocumentation;
-import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
-import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;
@@ -36,6 +28,14 @@ import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.doc.DocumentationCommentBuilder;
+import net.sf.ahtutils.doc.UtilsDocumentation;
+import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
+import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
+import net.sf.ahtutils.xml.aht.Aht;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 public class OfxQaAgreementTableFactory extends AbstractUtilsOfxDocumentationFactory
 {

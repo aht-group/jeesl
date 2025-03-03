@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.DefaultConfigurationBuilder;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
@@ -15,6 +13,7 @@ import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Translations;
+import org.jeesl.test.JeeslBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,15 +24,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.controller.factory.ofx.lang.AbstractOfxStatusFactoryTest;
-import net.sf.ahtutils.doc.UtilsDocumentation;
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.ahtutils.xml.aht.Aht;
 
 public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestOfxStatusTableFactory.class);
 	
-	private static Configuration config;
+	private Configuration config;
 	
 	private OfxStatusTableFactory fOfx;
 	private final String lang ="de";
@@ -41,15 +38,11 @@ public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 	private static Translations translations;
 	
 	@BeforeAll
-	public static void initFiles() throws FileNotFoundException, ConfigurationException
+	public static void initFiles() throws FileNotFoundException
 	{
 		fXml = new File(rootDir,"tableStatus.xml");
 		fTxt = new File(rootDir,"tableStatus.tex");
-		
-		DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
-		config = builder.getConfiguration(false);
-		config.setProperty(UtilsDocumentation.keyBaseLatexDir, "target");
-		config.setProperty("net.sf.ahtutils.doc.file.translation", "translation");
+	
 		
 		translations = JaxbUtil.loadJAXB("data/xml/dummyTranslations.xml", Translations.class);
 	}
@@ -94,7 +87,7 @@ public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 	
 	public static void main(String[] args) throws Exception
     {
-		AhtUtilsDocBootstrap.init();
+		Configuration config = JeeslBootstrap.init();
 		
 		TestOfxStatusTableFactory.initFiles();
 		TestOfxStatusTableFactory test = new TestOfxStatusTableFactory();

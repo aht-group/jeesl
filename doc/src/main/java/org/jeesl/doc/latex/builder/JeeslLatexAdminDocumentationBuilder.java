@@ -1,6 +1,6 @@
 package org.jeesl.doc.latex.builder;
 
-import org.apache.commons.configuration.Configuration;
+
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -34,8 +34,8 @@ public class JeeslLatexAdminDocumentationBuilder extends AbstractLatexDocumentat
 	public enum SystemCode {systemWs,systemTsStructure}
 	
 	public enum Survey {surveyQuestion,surveySection}
-		
-	public JeeslLatexAdminDocumentationBuilder(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	
+	public JeeslLatexAdminDocumentationBuilder(org.exlp.interfaces.system.property.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 	}

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;
@@ -47,7 +46,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 	private OfxSecurityActionTableFactory ofSecurityActionTable;
 	private JeeslLatexAdminDocumentationBuilder adminDocBuilder;
 		
-	public OfxSecurityViewsSectionFactory(Configuration config, String[] langs, Translations translations)
+	public OfxSecurityViewsSectionFactory(org.exlp.interfaces.system.property.Configuration config, String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
 		ofSecurityCategoryList = new OfxSecurityCategoryListFactory(config,langs,translations,null);

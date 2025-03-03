@@ -3,7 +3,6 @@ package net.sf.ahtutils.doc.ofx.security.list;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Lang;
@@ -34,11 +33,11 @@ public class OfxSecurityCategoryListFactory extends AbstractUtilsOfxDocumentatio
 	
 	private ConfigurationProvider cp;
 	
-	public OfxSecurityCategoryListFactory(Configuration config, String lang, Translations translations,ConfigurationProvider cp)
+	public OfxSecurityCategoryListFactory(org.exlp.interfaces.system.property.Configuration config, String lang, Translations translations,ConfigurationProvider cp)
 	{
 		this(config,new String[] {lang},translations,cp);
 	}
-	public OfxSecurityCategoryListFactory(Configuration config,String[] langs, Translations translations,ConfigurationProvider cp)
+	public OfxSecurityCategoryListFactory(org.exlp.interfaces.system.property.Configuration config,String[] langs, Translations translations,ConfigurationProvider cp)
 	{
 		super(config,langs,translations);
 		this.cp=cp;

@@ -1,6 +1,6 @@
 package net.sf.ahtutils.doc.latex.builder;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.doc.latex.builder.AbstractLatexDocumentationBuilder;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;

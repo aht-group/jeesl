@@ -3,7 +3,7 @@ package org.jeesl.doc.ofx.report;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.io.report.XlsColumn;

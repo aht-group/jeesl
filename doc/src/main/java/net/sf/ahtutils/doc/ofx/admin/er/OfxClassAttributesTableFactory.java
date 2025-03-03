@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.interfaces.model.marker.qualifier.EjbErAttribute;
 import org.jeesl.interfaces.model.marker.qualifier.EjbErAttributes;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;

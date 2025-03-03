@@ -11,13 +11,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.interfaces.model.marker.qualifier.RestDescription;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.list.XmlListFactory2;
-import org.openfuxml.factory.xml.list.XmlListItemFactory;
 import org.openfuxml.factory.xml.list.XmlListFactory2.Ordering;
+import org.openfuxml.factory.xml.list.XmlListItemFactory;
 import org.openfuxml.factory.xml.ofx.OfxReferenceFactory;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
