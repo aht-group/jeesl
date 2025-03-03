@@ -39,10 +39,6 @@ public class JeeslLatexAdminDocumentationBuilder extends AbstractLatexDocumentat
 	{
 		super(config,translations,langs,cp);
 	}
-	public JeeslLatexAdminDocumentationBuilder(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
-	{
-		super(config,translations,langs,cp);
-	}
 	
 	@Override protected void applyBaseLatexDir()
 	{

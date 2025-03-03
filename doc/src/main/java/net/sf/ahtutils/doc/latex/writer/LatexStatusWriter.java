@@ -51,25 +51,6 @@ public class LatexStatusWriter extends AbstractDocumentationLatexWriter
 		}
 		catch (FileNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
 	}
-
-	public LatexStatusWriter(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp, String dirTable) throws UtilsConfigurationException
-	{
-		super(config,translations,langs,cp);
-		File baseDir = new File(config.getString(UtilsDocumentation.keyBaseLatexDir));
-		ofxMlw = new OfxMultiLangLatexWriter(baseDir,langs,cp);
-		ofxMlw.setDirTable(dirTable);
-		
-		withIcon = false;
-		
-		String dbSeedFile = config.getString(UtilsDbXmlSeedUtil.configKeySeed);
-		logger.debug("Using seed: "+dbSeedFile);
-		try
-		{
-			Db dbSeed = (Db)JaxbUtil.loadJAXB(dbSeedFile, Db.class);
-			seedUtil = new UtilsDbXmlSeedUtil(dbSeed);
-		}
-		catch (FileNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
-	}
 	
 	
 	@Deprecated public void buildStatusTable(String seedKeyStatus) throws UtilsConfigurationException

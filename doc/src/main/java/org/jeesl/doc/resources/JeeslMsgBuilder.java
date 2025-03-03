@@ -113,12 +113,6 @@ public class JeeslMsgBuilder
 		baseMsg = new File(config.getString(UtilsDocumentation.keyBaseMsgDir));
 		logger.info("Using msg.dir ("+UtilsDocumentation.keyBaseMsgDir+"): "+baseMsg.getAbsolutePath());
 	}
-	public JeeslMsgBuilder(org.apache.commons.configuration2.Configuration config)
-	{
-		mrl = MultiResourceLoader.instance();
-		baseMsg = new File(config.getString(UtilsDocumentation.keyBaseMsgDir));
-		logger.info("Using msg.dir ("+UtilsDocumentation.keyBaseMsgDir+"): "+baseMsg.getAbsolutePath());
-	}
 
 	public void copy(String src, String dst) throws UtilsConfigurationException
 	{

@@ -53,13 +53,6 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 		buildFactories();
 	}
 	
-	public LatexSecurityWriter(org.apache.commons.configuration2.Configuration config, Translations translations, String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
-	{
-		super(config,translations,langs,cp);
-		this.ofxMlw=ofxMlw;
-		buildFactories();
-	}
-	
 	private void buildFactories()
 	{
 		ofSecurityCategoryList = new OfxSecurityCategoryListFactory(config,langs,translations,cp);

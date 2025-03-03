@@ -8,6 +8,7 @@ import java.util.List;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.pojo.io.locale.TranslationStatistic;
 import org.jeesl.model.xml.io.locale.status.Translations;
+import org.jeesl.test.JeeslDocBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.latex.writer.TestLatexTranslationStatFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxLangStatisticTableFactory;
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 
 public class TestOfxLangStatisticTableFactory extends AbstractOfxStatusFactoryTest
 {
@@ -72,7 +72,7 @@ public class TestOfxLangStatisticTableFactory extends AbstractOfxStatusFactoryTe
 	
 	public static void main(String[] args) throws Exception
     {
-		AhtUtilsDocBootstrap.init();
+		JeeslDocBootstrap.init();
 		
 		TestOfxLangStatisticTableFactory.initFiles();
 		TestOfxLangStatisticTableFactory test = new TestOfxLangStatisticTableFactory();

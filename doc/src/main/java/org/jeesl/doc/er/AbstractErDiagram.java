@@ -65,13 +65,6 @@ public class AbstractErDiagram
 		showErDiagramLabel = true;
 		logger.info("Using Tmp: "+fTmp);
 	}
-	public AbstractErDiagram(org.apache.commons.configuration2.Configuration config, OfxMultiLangLatexWriter ofxWriter)
-	{
-		localeCode = "en";
-		fTmp = new File(config.getString(ConfigKey.dirTmp));
-		showErDiagramLabel = true;
-		logger.info("Using Tmp: "+fTmp);
-	}
 
 	protected void loadEntites(String path)
 	{

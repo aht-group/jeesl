@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.exlp.controller.handler.system.property.ConfigLoader;
-import org.jeesl.controller.handler.system.property.ConfigBootstrap;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -32,11 +31,8 @@ public class AbstractLatexDocumentationBuilder extends AbstractDocumentationLate
 	
 	protected Map<String,String> dstFiles;
 
-	public AbstractLatexDocumentationBuilder(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
-	{
-		this(ConfigBootstrap.wrap(config),translations,langs,cp);
-	}
-	public AbstractLatexDocumentationBuilder(org.exlp.interfaces.system.property.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+
+	public AbstractLatexDocumentationBuilder(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 		

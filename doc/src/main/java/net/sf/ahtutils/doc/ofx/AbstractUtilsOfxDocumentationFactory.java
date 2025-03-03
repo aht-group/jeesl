@@ -32,13 +32,6 @@ public class AbstractUtilsOfxDocumentationFactory
 		this.langs=langs;
 		this.translations=translations;
 	}
-	public AbstractUtilsOfxDocumentationFactory(org.apache.commons.configuration2.Configuration config, String[] langs, Translations translations)
-	{
-//		this.config=config;
-		logger.warn("Config2 NYI");
-		this.langs=langs;
-		this.translations=translations;
-	}
 	
 	@Deprecated
 	protected Row createHeaderRow(String[] headerKeys)

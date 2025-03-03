@@ -5,10 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.DefaultConfigurationBuilder;
 import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
@@ -17,6 +15,7 @@ import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.security.XmlCategoryFactory;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.test.JeeslDocBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 
 public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 {
@@ -48,13 +46,13 @@ public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 	private OfxLatexRenderer parentSection;
 	
 	@BeforeAll
-	public static void initFiles() throws ConfigurationException, FileNotFoundException
+	public static void initFiles() throws FileNotFoundException
 	{
 		fXml = new File(rootDir,"listRoleCategory.xml");
 		fTxt = new File(rootDir,"listRoleCategory.tex");
 		
-		DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
-		config = builder.getConfiguration(false);
+//		DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
+//		config = builder.getConfiguration(false);
 		translations = JaxbUtil.loadJAXB("src/test/resources/data/xml/dummyTranslations.xml", Translations.class);
 	}
 	
@@ -64,7 +62,7 @@ public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 		super.initOfx();
 		
 		parentSection = new LatexSectionRenderer(cp,0,null);
-		factory = new OfxSecurityCategoryListFactory(ConfigLoader.wrap(config),lang,translations,cp);
+		factory = new OfxSecurityCategoryListFactory(config,lang,translations,cp);
 		list = new ArrayList<Category>();
 		rc1 = createCategory(1);list.add(rc1);
 	}
@@ -100,7 +98,7 @@ public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 	
 	public static void main(String[] args) throws Exception
     {
-		AhtUtilsDocBootstrap.init();
+		JeeslDocBootstrap.init();
 		
 		TestOfxCategoryListFactory.initFiles();
 		TestOfxCategoryListFactory test = new TestOfxCategoryListFactory();

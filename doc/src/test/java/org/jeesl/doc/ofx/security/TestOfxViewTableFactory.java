@@ -14,6 +14,7 @@ import org.jeesl.model.xml.system.security.View;
 import org.jeesl.model.xml.system.security.Views;
 import org.jeesl.model.xml.system.status.TestXmlDescription;
 import org.jeesl.model.xml.system.status.TestXmlLang;
+import org.jeesl.test.JeeslDocBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -23,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 
 public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 {
@@ -93,7 +93,7 @@ public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 	
 	public static void main(String[] args) throws Exception
     {
-		AhtUtilsDocBootstrap.init();
+		JeeslDocBootstrap.init();
 		
 		TestOfxViewTableFactory.initFiles();
 		TestOfxViewTableFactory test = new TestOfxViewTableFactory();

@@ -1,9 +1,8 @@
 package net.sf.ahtutils.doc.resources;
 
+import org.jeesl.test.JeeslDocBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 
 public class CliUtilsIconTranscoder
 {
@@ -12,7 +11,7 @@ public class CliUtilsIconTranscoder
 
 	public static void main(String args[]) throws Exception
 	{
-		AhtUtilsDocBootstrap.init();
+		JeeslDocBootstrap.init();
 		logger.info(System.getProperty("java.version"));
 	}
 }

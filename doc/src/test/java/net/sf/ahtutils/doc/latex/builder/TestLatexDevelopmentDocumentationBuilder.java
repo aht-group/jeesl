@@ -2,11 +2,11 @@ package net.sf.ahtutils.doc.latex.builder;
 
 import java.io.File;
 
+import org.jeesl.test.JeeslDocBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.test.AbstractUtilsDocTest;
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 @SuppressWarnings("unused")
@@ -27,7 +27,7 @@ public class TestLatexDevelopmentDocumentationBuilder extends AbstractUtilsDocTe
 
 	public static void main(String args[]) throws Exception
 	{
-		AhtUtilsDocBootstrap.init();
+		JeeslDocBootstrap.init();
 
         File f = new File("target","latex.tex");
 

@@ -16,6 +16,7 @@ import org.jeesl.model.xml.system.security.Roles;
 import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.model.xml.system.security.Staffs;
 import org.jeesl.model.xml.system.security.User;
+import org.jeesl.test.JeeslDocBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.word.WordResponsibilityMatrixFactory;
 import net.sf.ahtutils.test.AbstractUtilsDocTest;
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.ahtutils.xml.project.Responsibilities;
 
 public class TestResponsibilityMatrixFactory extends AbstractUtilsDocTest
@@ -105,7 +105,7 @@ public class TestResponsibilityMatrixFactory extends AbstractUtilsDocTest
 	
 	public static void main(String[] args) throws Exception
     {
-		AhtUtilsDocBootstrap.init();
+		JeeslDocBootstrap.init();
 		
 		TestResponsibilityMatrixFactory.initFiles();
 		TestResponsibilityMatrixFactory test = new TestResponsibilityMatrixFactory();

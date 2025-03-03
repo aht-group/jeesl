@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -43,18 +42,6 @@ public class AbstractDocumentationLatexWriter
 		
 		baseLatexDir = config.getString(UtilsDocumentation.keyBaseLatexDir);
 	}
-	
-	public AbstractDocumentationLatexWriter(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
-	{
-		logger.warn("Config2 NYI");
-//		this.config=config;
-		this.translations=translations;
-		this.langs=langs;
-		this.cp=cp;
-		
-		baseLatexDir=config.getString(UtilsDocumentation.keyBaseLatexDir);
-	}
-	
 	
 	protected void writeTable(Table table, File f) throws OfxAuthoringException, IOException
 	{

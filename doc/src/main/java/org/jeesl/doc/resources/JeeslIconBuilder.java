@@ -34,13 +34,6 @@ public class JeeslIconBuilder
 		baseSvg = new File(config.getString(UtilsDocumentation.keyBaseDirSvg));
 		logger.info("Using msg.dir ("+UtilsDocumentation.keyBaseIconDir+"): "+baseIcon.getAbsolutePath());
 	}
-	public JeeslIconBuilder(org.apache.commons.configuration2.Configuration config)
-	{
-		mrl = MultiResourceLoader.instance();
-		baseIcon = new File(config.getString(UtilsDocumentation.keyBaseIconDir));
-		baseSvg = new File(config.getString(UtilsDocumentation.keyBaseDirSvg));
-		logger.info("Using msg.dir ("+UtilsDocumentation.keyBaseIconDir+"): "+baseIcon.getAbsolutePath());
-	}
 	
 	public void svg() throws UtilsConfigurationException 
 	{
