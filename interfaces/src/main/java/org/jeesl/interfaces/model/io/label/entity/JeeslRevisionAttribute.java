@@ -28,6 +28,9 @@ public interface JeeslRevisionAttribute<L extends JeeslLang, D extends JeeslDesc
 	public enum Attributes {code,ownerEntity,entity};
 	public static enum Type {text,number,date,amount,bool}
 	
+//	RE getOwnerEntity();
+//	void setOwnerEntity(RE ownerEntity);
+	
 	RAT getType();
 	void setType(RAT type);
 	
