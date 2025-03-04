@@ -119,11 +119,14 @@ public class ThMultiFilterHandler <T extends EjbWithGraphic<?>> implements ThMul
 	}
 	public void preSelect(List<T> selection)
 	{
-		for(T t : selection)
+		if(ObjectUtils.isNotEmpty(selection))
 		{
-			map.put(t,true);
+			for(T t : selection)
+			{
+				map.put(t,true);
+			}
+			this.refresh();
 		}
-		this.refresh();
 	}
 	public void preSelectOrAll(List<T> selection)
 	{

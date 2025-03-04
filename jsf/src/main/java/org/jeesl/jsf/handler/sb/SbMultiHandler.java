@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -51,7 +52,7 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 		map.clear();
 	}
 	
-	public <E extends Enum<E>, S extends EjbWithCode> void add(JeeslFacade fUtils, Class<S> c, E code){this.add(fUtils, c, code.toString());}
+	public <E extends Enum<E>, S extends EjbWithCode> void add(JeeslFacade fUtils, Class<S> c, E code) {this.add(fUtils, c, code.toString());}
 	@SuppressWarnings("unchecked")
 	public <E extends Enum<E>, S extends EjbWithCode> void add(JeeslFacade fUtils, Class<S> c, String code)
 	{
@@ -86,6 +87,11 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	{
 		this.list.addAll(items);
 		preSelect(items);
+	}
+	public void preSelectOrAll(List<T> items)
+	{
+		if(ObjectUtils.isNotEmpty(items)) {this.preSelect(items);}
+		else {this.selectAll();}
 	}
 	public void preSelect(List<T> items)
 	{
