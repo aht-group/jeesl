@@ -23,10 +23,10 @@
 							selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.aupSecurityUsecases}">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}" oncomplete="reloadContent(jsfToJQuery(':#{cc.id}:sUsecase'))"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase"/>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" oncomplete="reloadContent(jsfToJQuery(':#{cc.id}:sUsecase'))"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderUsecases()}" update="@form"/>
 					<p:column>  
 						<h:graphicImage rendered="#{not u.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
@@ -45,7 +45,7 @@
 						 rendered="#{not empty cc.attrs.bean.usecase}">
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}" />
 					</f:facet>
 					<j:inputGrid>
 						<jtp:label entity="SecurityUsecase" code="category"/>
