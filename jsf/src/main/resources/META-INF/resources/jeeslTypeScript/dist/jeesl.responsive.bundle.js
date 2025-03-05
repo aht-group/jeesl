@@ -21,13 +21,13 @@ window.calculateMenuHeight = function () {
 function cssRulesMenuHeightCalculate() {
     var cssRules = '';
     $('.jeesl-dropdown-list').each(function (index, element) {
-        cssRules += '#' +
-            ($(element).attr('id') || '').replace(/:/g, '\\:') +
-            '.jeesl-active { height: ' +
+        cssRules += '.jeesl-dropdown-list[dropdown-id=' +
+            ($(element).attr('dropdown-id') || '').replace(/:/g, '\\:') +
+            '].jeesl-active { height: ' +
             ($.merge($(element).children('.jeesl-dropdown-item').toArray(), $(element).find('.jeesl-datatable tr').toArray())
                 .map(function (child) { var _a; return (_a = $(child).outerHeight()) !== null && _a !== void 0 ? _a : 0; })
                 .reduce(function (previous, current) { return previous + current; }, 0) + 15 + (!$(element).hasClass('jeesl-dropdown-list-multi') ? 15 : 0)) +
-            'px; }';
+            'px !important; }';
     });
     return cssRules;
 }
@@ -72,7 +72,7 @@ window.jsfToJQuery = function(jsfSelector) {
 }
 window.reloadContent = function(context) {
     var newButtons = context.find('.jeesl-menu-bar-dropdown');
-    var newDropdowns = context.find('.jeesl-dropdown-list').attr('id', function (index, oldValue) { return 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index); });
+    var newDropdowns = context.find('.jeesl-dropdown-list').attr('dropdown-id', function (index, oldValue) { return 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index); });
     calculateMenuHeight(newDropdowns);
     newButtons.click(toggleMenu);
 }
@@ -137,7 +137,7 @@ function initCollapsibleDatatable(parent) {
         menuHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
         treeHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
         var menuButtons = $('.jeesl-menu-bar-dropdown');
-        var dropdowns = $('.jeesl-dropdown-list').attr('id', function (index, oldValue) { return oldValue || ('jeesl-dropdown-' + index); });
+        var dropdowns = $('.jeesl-dropdown-list').attr('dropdown-id', function (index, oldValue) { return oldValue || ('jeesl-dropdown-' + index); });
         calculateMenuHeight(dropdowns);
         menuButtons.click(toggleMenu);
         $('.ui-tree-toggler').click(toggleTreeItem);

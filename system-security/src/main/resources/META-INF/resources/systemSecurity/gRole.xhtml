@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	xmlns:jpSec="http://jsf.jeesl.org/prototype/security"
-	xmlns:composite="http://java.sun.com/jsf/composite">
+	  xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	  xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	  xmlns:jpSec="http://jsf.jeesl.org/prototype/security" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
 		<composite:attribute name="bean" required="true"/>
@@ -26,7 +26,7 @@
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{cc.attrs.tooltip}"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" oncomplete="reloadContent(jsfToJQuery(':#{cc.id}:sRole'));"/>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:sRole'));}catch{}"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderRoles()}" update="@form"/>
 					<p:column rendered="true">
 						<f:facet name="header"><jtp:label entity="SecurityRole" code="position."/></f:facet>
@@ -79,9 +79,142 @@
 					<j:tabTranslationEditor value="#{cc.attrs.bean.role}" withDescription="true"/>
 				</p:panel>	
 			</h:form>
-			<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
-			<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
-			<h:form id="fUsecase"><jpSec:addUsecases rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fUsecase" usecases="#{cc.attrs.bean.usecases}"/></h:form>
+			<h:form id="fViews">
+				<p:dataTable id="dtViews" styleClass="jeesl-datatable"
+							 var="v" value="#{cc.attrs.bean.views}"
+							 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}"
+							 rendered="#{cc.attrs.bean.role.id gt 0}">
+					<f:facet name="header">
+						<j:dtHeader id="dth" title="#{msg.aupSecurityViews}">
+							<j:svg type="jeeslAdd" onstart="PF('wvOpViewSelection').show();" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
+							<p:overlayPanel id="opAddView" widgetVar="wvOpViewSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
+									<p:dataTable id="dtAddView" styleClass="jeesl-dropdown-list"
+												 var="v" value="#{cc.attrs.bean.opViews}" rowKey="#{v.id}"
+						                         selection="#{cc.attrs.bean.opView}" selectionMode="single"
+										 		 rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+										<p:ajax event="rowSelect" update=":#{cc.id}:fViews :#{cc.id}:fAction" listener="#{cc.attrs.bean.opAddView}" oncomplete="PF('wvOpViewSelection').hide();try{reloadContent(jsfToJQuery(':#{cc.id}:fViews :#{cc.id}:fAction'))}catch{}"/>
+										<p:column>
+											<h:outputText value="#{v.category.position}.#{v.position}"/>
+										</p:column>
+										<p:column sortBy="#{v.category.name[localeCode].lang}" filterBy="#{v.category.name[localeCode].lang}" filterMatchMode="contains">
+											<f:facet name="header"><jtp:label entity="SecurityView" code="category"/></f:facet>
+											<h:outputText value="#{v.category.name[userBean.localeCode].lang}" />
+										</p:column>
+										<p:column headerText="#{msg.aupSecurityView}" sortBy="#{v.name[localeCode].lang}" filterBy="#{v.name[localeCode].lang}" filterMatchMode="contains">
+											<h:outputText value="#{v.name[userBean.localeCode].lang}" />
+										</p:column>
+									</p:dataTable>
+							</p:overlayPanel>
+		                    <j:svg type="jeeslRemove" listener="#{cc.attrs.bean.opRmView()}" rendered="#{not empty cc.attrs.bean.tblView}" update=":#{cc.id}:fViews :#{cc.id}:fAction" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fViews :#{cc.id}:fAction'))}catch{}"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" update=":#{cc.id}:fViews :#{cc.id}:fAction" listener="#{cc.attrs.bean.selectTblView}" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fViews :#{cc.id}:fAction'))}catch{}"/>
+					<p:column>
+						<h:outputText value="#{v.category.position}.#{v.position}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="SecurityView" code="category"/></f:facet>
+						<h:outputText value="#{v.category.name[userBean.localeCode].lang}" />
+					</p:column>
+					<p:column headerText="#{msg.jeeslSecurityCode}">
+						<h:outputText value="#{v.code}" />
+					</p:column>
+					<p:column headerText="#{msg.aupSecurityView}">
+						<h:outputText value="#{v.name[userBean.localeCode].lang}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fAction">
+				<p:dataTable id="dtActions" styleClass="jeesl-datatable"
+							 var="a" value="#{cc.attrs.bean.actions}"
+							 selection="#{cc.attrs.bean.tblAction}" selectionMode="single" rowKey="#{a.id}"
+							 rendered="#{cc.attrs.bean.role.id gt 0}">
+					<f:facet name="header">
+						<j:dtHeader id="dth" title="#{msg.jeeslSecurityActions}">
+							<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" oncomplete="if(!window.toggleMenu){console.log(this);$(this).toggleClass('jeesl-active').next().toggleClass('jeeslActive');}" library="jeeslGfx" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
+							<p:overlayPanel widgetVar="wvOpActionSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
+								<p:dataTable id="dtOpSector" styleClass="jeesl-dropdown-list"
+											var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
+					                        selection="#{cc.attrs.bean.opAction}" selectionMode="single"
+					                        rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+									<p:ajax event="rowSelect" update=":#{cc.id}:fAction" listener="#{cc.attrs.bean.opAddAction}" oncomplete="PF('wvOpActionSelection').hide();try{reloadContent(jsfToJQuery(':#{cc.id}:fAction'))}catch{}"/>
+									<p:column>
+										<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
+									</p:column>
+									<p:column headerText="#{msg.aupSecurityView}" sortBy="#{a.view.name[localeCode].lang}" filterBy="#{a.view.name[userBean.localeCode].lang}" filterMatchMode="contains">
+										<h:outputText value="#{a.view.name[userBean.localeCode].lang}" />
+									</p:column>
+									<p:column headerText="#{msg.jeeslSecurityCode}">
+										<h:outputText rendered="#{not empty a.template}" value="#{a.view.code}.#{fn:substringAfter(a.template.code,'.')}"/>
+										<h:outputText rendered="#{empty a.template}" value="#{a.code}"/>
+									</p:column>
+									<p:column headerText="#{msg.jeeslSecurityAction}" sortBy="#{a.view.toName[localeCode].lang}" filterBy="#{a.toName()[userBean.localeCode].lang}" filterMatchMode="contains">
+										<h:outputText value="#{a.toName()[userBean.localeCode].lang}" />
+									</p:column>
+								</p:dataTable>
+							</p:overlayPanel>
+		                    <j:svg rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblAction)}" type="jeeslRemove" listener="#{cc.attrs.bean.opRmAction()}" update=":#{cc.id}:fAction" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fAction'));}catch{}" library="jeeslGfx"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" update=":#{cc.id}:fAction" listener="#{cc.attrs.bean.selectTblAction}" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fAction'))}catch{}"/>
+					<p:column>
+						<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
+					</p:column>
+					<p:column headerText="#{msg.aupSecurityView}" >
+						<h:outputText value="#{a.view.name[userBean.localeCode].lang}" />
+					</p:column>
+					<p:column headerText="#{msg.jeeslSecurityCode}">
+						<h:outputText rendered="#{not empty a.template}" value="#{a.view.code}.#{fn:substringAfter(a.template.code,'.')}"/>
+						<h:outputText rendered="#{empty a.template}" value="#{a.code}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslSecurityAction}">
+						<h:outputText value="#{a.toName()[userBean.localeCode].lang}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fUsecase">
+				<p:dataTable id="dtViews" styleClass="jeesl-datatable"
+						 	 var="u" value="#{cc.attrs.bean.usecases}"
+						 	 selection="#{cc.attrs.bean.tblUsecase}" selectionMode="single" rowKey="#{u.id}"
+						 	 rendered="#{cc.attrs.bean.role.id gt 0}">
+					<f:facet name="header">
+						<j:dtHeader id="dth" entity="SecurityUsecase" code="listOf">
+							<j:svg type="jeeslAdd" onstart="PF('wvOpUsecaseSelection').show();" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
+							<p:overlayPanel widgetVar="wvOpUsecaseSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
+								<p:dataTable id="dtOpSector" styleClass="jeesl-dropdown-list"
+										var="u" value="#{cc.attrs.bean.opUsecases}" rowKey="#{u.id}"
+					                    selection="#{cc.attrs.bean.opUsecase}" selectionMode="single"
+										rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+									<p:ajax event="rowSelect" update=":#{cc.id}:fUsecase" listener="#{cc.attrs.bean.opAddUsecase}" oncomplete="PF('wvOpUsecaseSelection').hide();try{reloadContent(jsfToJQuery(':#{cc.id}:fUsecase'))}catch{}"/>
+									<p:column>
+										<h:outputText value="#{u.category.position}.#{u.position}"/>
+									</p:column>
+									<p:column headerText="#{msg.jeeslSecurityCategory}" sortBy="#{u.category.name[userBean.localeCode].lang}" filterBy="#{u.category.name[userBean.localeCode].lang}" filterMatchMode="contains">
+										<h:outputText value="#{u.category.name[userBean.localeCode].lang}" />
+									</p:column>
+									<p:column headerText="#{msg.aupSecurityUsecase}" sortBy="#{u.name[userBean.localeCode].lang}" filterBy="#{u.name[userBean.localeCode].lang}" filterMatchMode="contains">
+										<h:outputText value="#{u.name[userBean.localeCode].lang}" />
+									</p:column>
+								</p:dataTable>
+							</p:overlayPanel>
+							<j:svg type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update=":#{cc.id}:fUsecase" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fUsecase'))}catch{}"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" update=":#{cc.id}:fUsecase" listener="#{cc.attrs.bean.selectTblUsecase}" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fUsecase'))}catch{}"/>
+					<p:column>
+						<h:outputText value="#{u.category.position}.#{u.position}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslSecurityCategory}">
+						<h:outputText value="#{u.category.name[userBean.localeCode].lang}" />
+					</p:column>
+					<p:column headerText="#{msg.jeeslSecurityCode}">
+						<h:outputText value="#{u.code}" />
+					</p:column>
+					<p:column headerText="#{msg.aupSecurityUsecase}">
+						<h:outputText value="#{u.name[userBean.localeCode].lang}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
 			<h:form id="fUsers">
 				<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.bean.role.id gt 0}"
 						var="u" value="#{cc.attrs.bean.users}" draggableRows="false" rowKey="#{u.id}"

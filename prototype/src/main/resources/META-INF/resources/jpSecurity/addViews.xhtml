@@ -13,33 +13,33 @@
 	
 	<composite:implementation>
 		<p:dataTable id="dtViews" styleClass="jeesl-datatable"
-					var="v" value="#{cc.attrs.views}"
-					selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}">
+					 var="v" value="#{cc.attrs.views}"
+					 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}">
 			<f:facet name="header">
 				<j:dtHeader id="dth" title="#{msg.aupSecurityViews}">
 					<j:svg type="jeeslAdd" onstart="PF('wvOpViewSelection').show();" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
 					<p:overlayPanel widgetVar="wvOpViewSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
-						<p:dataTable id="dtOpSector" styleClass="jeesl-dropdown-list"
-									var="v" value="#{cc.attrs.bean.opViews}" rowKey="#{v.id}"
-			                        selection="#{cc.attrs.bean.opView}" selectionMode="single"
-			                        rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-							<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddView}" oncomplete="PF('wvOpViewSelection').hide();reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
-							<p:column>
-								<h:outputText value="#{v.category.position}.#{v.position}"/>
-							</p:column>
-							<p:column sortBy="#{v.category.name[localeCode].lang}" filterBy="#{v.category.name[localeCode].lang}" filterMatchMode="contains">
-								<f:facet name="header"><jtp:label entity="SecurityView" code="category"/></f:facet>
-								<h:outputText value="#{v.category.name[userBean.localeCode].lang}" />
-							</p:column>
-							<p:column headerText="#{msg.aupSecurityView}" sortBy="#{v.name[localeCode].lang}" filterBy="#{v.name[localeCode].lang}" filterMatchMode="contains">
-								<h:outputText value="#{v.name[userBean.localeCode].lang}" />
-							</p:column>
-						</p:dataTable>
+							<p:dataTable id="dtOpSector" styleClass="jeesl-dropdown-list"
+										 var="v" value="#{cc.attrs.bean.opViews}" rowKey="#{v.id}"
+				                         selection="#{cc.attrs.bean.opView}" selectionMode="single"
+										 rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+								<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddView}" oncomplete="PF('wvOpViewSelection').hide();try{reloadContent(jsfToJQuery('#{cc.attrs.update}'))}catch{}"/>
+								<p:column>
+									<h:outputText value="#{v.category.position}.#{v.position}"/>
+								</p:column>
+								<p:column sortBy="#{v.category.name[localeCode].lang}" filterBy="#{v.category.name[localeCode].lang}" filterMatchMode="contains">
+									<f:facet name="header"><jtp:label entity="SecurityView" code="category"/></f:facet>
+									<h:outputText value="#{v.category.name[userBean.localeCode].lang}" />
+								</p:column>
+								<p:column headerText="#{msg.aupSecurityView}" sortBy="#{v.name[localeCode].lang}" filterBy="#{v.name[localeCode].lang}" filterMatchMode="contains">
+									<h:outputText value="#{v.name[userBean.localeCode].lang}" />
+								</p:column>
+							</p:dataTable>
 					</p:overlayPanel>
-                    <j:svg type="jeeslRemove" listener="#{cc.attrs.bean.opRmView()}" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblView)}" update="#{cc.attrs.update}" oncomplete="reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
+                    <j:svg type="jeeslRemove" listener="#{cc.attrs.bean.opRmView()}" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblView)}" update="#{cc.attrs.update}" oncomplete="try{reloadContent(jsfToJQuery('#{cc.attrs.update}'))}catch{}"/>
 				</j:dtHeader>
 			</f:facet>
-			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblView}" oncomplete="reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
+			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblView}" oncomplete="try{reloadContent(jsfToJQuery('#{cc.attrs.update}'))}catch{}"/>
 			<p:column>
 				<h:outputText value="#{v.category.position}.#{v.position}"/>
 			</p:column>

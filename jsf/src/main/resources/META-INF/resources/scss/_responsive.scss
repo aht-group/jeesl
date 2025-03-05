@@ -2379,10 +2379,9 @@ body, .ui-widget {
 		float: none;
 		
 		.jeesl-subtitle {
-			@include font-breadcrumb;
-			
 			flex-grow: 1;
 			float: none;
+			font-size: 1.2rem;
 			letter-spacing: normal;
 			line-height: calc(#{$element-height} + 4 * #{$slim-spacing});
 			padding: 0 $regular-spacing;

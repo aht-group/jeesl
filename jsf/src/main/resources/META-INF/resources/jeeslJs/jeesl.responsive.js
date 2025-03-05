@@ -12,14 +12,14 @@ var calculateMenuHeight = function() {
 	let cssRules = '@media (max-width: 768px) {';
 	
 	$('.jeesl-dropdown-list').each((index, element) =>
-		cssRules += '#' +
-					$(element).attr('id') +
-					'.jeesl-active { height: ' +
+		cssRules += '.jeesl-dropdown-list[dropdown-id=' +
+					$(element).attr('dropdown-id') +
+					'].jeesl-active { height: ' +
 					($(element).children('.jeesl-dropdown-item')
 							   .toArray()
 							   .map(child => $(child).outerHeight())
 							   .reduce((previous, current) => previous + current, 0) + 15 + (!$(element).hasClass('jeesl-dropdown-list-multi') * 15)) +
-					'px; }');
+					'px !important; }');
 	
 	menuHeightStyle.append(cssRules + '}');
 }
@@ -81,7 +81,7 @@ function jsfToJQuery(jsfSelector) {
 
 function reloadContent(context) {
 	let newButtons = context.find('.jeesl-menu-bar-dropdown');
-	let newDropdowns = context.find('.jeesl-dropdown-list').attr('id', (index, oldValue) => 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index));
+	let newDropdowns = context.find('.jeesl-dropdown-list').attr('dropdown-id', (index, oldValue) => 'jeesl-dropdown-' + ($('.jeesl-dropdown-list').length + index));
 	
 	calculateMenuHeight(newDropdowns);
 	newButtons.click(toggleMenu);
@@ -140,7 +140,7 @@ $(function() {
 	treeHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
 	
 	let menuButtons = $('.jeesl-menu-bar-dropdown');
-	let dropdowns = $('.jeesl-dropdown-list').attr('id', (index, oldValue) => 'jeesl-dropdown-' + index);
+	let dropdowns = $('.jeesl-dropdown-list').attr('dropdown-id', (index, oldValue) => 'jeesl-dropdown-' + index);
 	
 	calculateMenuHeight(dropdowns);
 	menuButtons.click(toggleMenu);

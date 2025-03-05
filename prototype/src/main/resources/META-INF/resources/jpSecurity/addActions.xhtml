@@ -23,13 +23,13 @@
 					selection="#{cc.attrs.bean.tblAction}" selectionMode="single" rowKey="#{a.id}">
 			<f:facet name="header">
 				<j:dtHeader id="dth" title="#{msg.jeeslSecurityActions}">
-					<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" library="jeeslGfx" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
+					<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" oncomplete="if(!window.toggleMenu){console.log(this);$(this).toggleClass('jeesl-active').next().toggleClass('jeeslActive');}" library="jeeslGfx" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
 					<p:overlayPanel widgetVar="wvOpActionSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
 						<p:dataTable id="dtOpSector" styleClass="jeesl-dropdown-list"
 									var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
 			                        selection="#{cc.attrs.bean.opAction}" selectionMode="single"
 			                        rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-							<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddAction}" oncomplete="PF('wvOpActionSelection').hide();reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
+							<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddAction}" oncomplete="PF('wvOpActionSelection').hide();try{reloadContent(jsfToJQuery('#{cc.attrs.update}'))}catch{}"/>
 							<p:column>
 								<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
 							</p:column>
@@ -45,10 +45,10 @@
 							</p:column>
 						</p:dataTable>
 					</p:overlayPanel>
-                    <j:svg rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblAction)}" type="jeeslRemove" listener="#{cc.attrs.bean.opRmAction()}" update="#{cc.attrs.update}" oncomplete="reloadContent(jsfToJQuery('#{cc.attrs.update}'))" library="jeeslGfx"/>
+                    <j:svg rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblAction)}" type="jeeslRemove" listener="#{cc.attrs.bean.opRmAction()}" update="#{cc.attrs.update}" oncomplete="try{reloadContent(jsfToJQuery('#{cc.attrs.update}'));}catch{}" library="jeeslGfx"/>
 				</j:dtHeader>
 			</f:facet>
-			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblAction}" oncomplete="reloadContent(jsfToJQuery('#{cc.attrs.update}'))"/>
+			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblAction}" oncomplete="try{reloadContent(jsfToJQuery('#{cc.attrs.update}'))}catch{}"/>
 			<p:column>
 				<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
 			</p:column>
