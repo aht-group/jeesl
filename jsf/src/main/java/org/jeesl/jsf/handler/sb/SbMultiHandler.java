@@ -28,7 +28,7 @@ public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 	private final Class<T> cT;
 	private final SbToggleBean callback; 
 	
-	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); this.list.addAll(list);}
+	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); if(Objects.nonNull(list)) {this.list.addAll(list);}}
 	private final List<T> selected; public List<T> getSelected() {return selected;}
 	private Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
 	
