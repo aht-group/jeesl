@@ -1,0 +1,1 @@
+create table CalSubscription (id  bigserial not null, code varchar(255), category_id int8, primary key (id));

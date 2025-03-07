@@ -25,3 +25,4 @@ alter table IoMavenUsageJtScope add constraint FKentl3c263stglsnhpr7hapqh foreig
 alter table IoMavenVersion add constraint fk_IoMavenVersion_artifact foreign key (artifact_id) references IoMavenArtifact;
 alter table IoMavenVersion add constraint fk_IoMavenVersion_maintainer foreign key (maintainer_id) references IoStatus;
 alter table IoMavenVersion add constraint fk_IoMavenVersion_outdate foreign key (outdate_id) references IoStatus;
+alter table IoMavenVersion add constraint fk_iomavenmodule_jdk foreign key (jdk_id) references IoStatus;
