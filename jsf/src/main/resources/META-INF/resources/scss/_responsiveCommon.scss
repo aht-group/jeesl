@@ -654,6 +654,7 @@ $border: $border-width solid var(--container-border-colour);
 	overflow: hidden;
 	position: relative;
 	text-align: center;
+	text-decoration: none;
 	top: 0;
 	transition: background $transition-duration linear;
 	width: $ls-element-height;
@@ -667,7 +668,22 @@ $border: $border-width solid var(--container-border-colour);
 	&.ui-state-hover {
 		border: none;
 		box-shadow: none;
-		background: var(--panel-content-select-dropdown-header-background);
+		background: var(--panel-content-select-dropdown-header-button-hover-background);
+	}
+	
+	.ui-icon {
+		align-items: center;
+		display: flex;
+		height: 100%;
+		left: 0;
+		margin: 0;
+		position: relative;
+		top: 0;
+		
+		&:before {
+			flex-grow: 1;
+			text-indent: 0;
+		}
 	}
 }
 

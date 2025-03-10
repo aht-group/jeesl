@@ -29,8 +29,8 @@
 						value="#{appLabelBean.labels['SecurityUser']['login'][localeCode].lang}"/>
 				<p:blockUI trigger="cbLogin" block="@form" />
 			</j:inputGrid>
-
-      		<p:messages id="messages" showDetail="true" closable="true"><p:autoUpdate/></p:messages>
+			
+			<j:constraint value="#{userBean.passwordMismatchConstraint}"/>
       		<composite:insertChildren/>
 		</p:panel>
 		
