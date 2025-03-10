@@ -43,7 +43,7 @@
 		
 		<p:outputLabel rendered="#{not empty unit}" value="#{unit}" styleClass="jeesl-input-label"/>
 		
-		<p:commandLink action="#{handler.selectNext}" update="#{update}" rendered="#{not empty handler}" styleClass="ui-button ui-state-default ui-corner-all">
+		<p:commandLink action="#{handler.selectNext}" update="#{update}" rendered="#{not empty handler}" styleClass="ui-button ui-state-default ui-corner-all" style="max-width: 40px; max-height: 40px;">
 			<jtp:symbolizer value="#{handler.selection}"
 							styleClass="jeesl-input-grid-icon jeesl-input-grid-locale-icon"/>
 		</p:commandLink>

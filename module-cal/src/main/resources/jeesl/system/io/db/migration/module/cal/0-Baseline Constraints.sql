@@ -1,0 +1,1 @@
+alter table CalSubscription add constraint fk_CalSubscription_category foreign key (category_id) references IoStatus;

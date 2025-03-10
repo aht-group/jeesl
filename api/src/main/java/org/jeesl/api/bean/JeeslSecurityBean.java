@@ -37,7 +37,6 @@ public interface JeeslSecurityBean<R extends JeeslSecurityRole<?,?,?,V,U,A>,
 	V findViewByUrlMapping(String pattern);
 	V findViewByHttpPattern(String pattern);
 	
-	
 	List<R> fRoles(V view);
 	List<AR> fAreas(V view);
 	
