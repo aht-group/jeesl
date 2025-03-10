@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	  xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	  xmlns:jpSec="http://jsf.jeesl.org/prototype/security" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
+	
+  	<composite:interface>
+  		<composite:attribute name="bean" required="false" default="#{adminSecurityViewsBean}"/>
+  		<composite:attribute name="localeCodes" required="false" default="#{appTranslationBean.langKeys}"/>
+  		<composite:attribute name="withXls" required="false" default="false"/>
+  		<composite:attribute name="withAddCategory" required="false" default="false"/>
+  	</composite:interface>
+  	
+  	<composite:implementation>
+<jp:grid id="grid">
+	  	<j:row>
+	  		<j:slot id="sCategories" width="4">
+	  			<h:form id="fCategories"><jpSec:tableCategories bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategory :#{cc.id}:sViews :#{cc.id}:sView" withXls="#{cc.attrs.withXls}" withAdd="#{cc.attrs.withAddCategory}"/></h:form>
+	  			<h:form id="fCategory"><jpSec:panelCategory bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategories :#{cc.id}:fCategory" withAdd="#{cc.attrs.withAddCategory}"/></h:form>
+	  		</j:slot>
+	  		<j:slot id="sViews" width="4">
+	  			<h:form id="fViews">
+	  				<p:dataTable styleClass="jeesl-datatable" rendered="#{not empty cc.attrs.bean.category}"
+	  						var="v" value="#{cc.attrs.bean.views}" draggableRows="true"
+	  						selection="#{cc.attrs.bean.view}" selectionMode="single" rowKey="#{v.id}">
+	  					<f:facet name="header">
+	  						<j:dtHeader entity="SecurityView" code="listOf">
+	  							<j:svg type="jeeslAdd" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
+	  						</j:dtHeader>
+	  					</f:facet>
+	  					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectView()}" update=":#{cc.id}:sViews :#{cc.id}:sView"/>
+	  					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderViews()}" update="@form"/>
+	  					<p:column>  
+	  						<h:outputText value="#{v.position}" />  
+	  					</p:column>  
+	  					<p:column>
+	  						<f:facet name="header"><jtp:label entity="SecurityView"/></f:facet>
+	  						<h:outputText value="#{v.name[localeCode].lang}" />  
+	  					</p:column>
+	  					<p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeeslCenter">  
+	  						<h:graphicImage rendered="#{v.visible}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
+	  		                <h:graphicImage rendered="#{not v.visible}" name="#{appIconBean.icon12['jeeslSecurityInvisible']}" library="gfx"/>
+	  		         	</p:column>
+	  					<p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeeslCenter">  
+	  						<h:graphicImage rendered="#{v.documentation}" name="#{appIconBean.icon12['jeeslSecurityDocumentation']}" library="gfx"/>
+	  		            </p:column>
+	  		       	</p:dataTable>
+	  			</h:form>
+	  			<p:dataTable styleClass="jeesl-datatable" rendered="#{not empty cc.attrs.bean.view}"
+	  					var="u" value="#{cc.attrs.bean.usecases}" >
+	  				<f:facet name="header"><j:dtHeader entity="SecurityView" code="usecases"/></f:facet>
+	  				<p:column rendered="#{cc.attrs.bean.userIsDeveloper}">
+	  					<f:facet name="header"><jtp:label entity="SecurityUsecase" code="id"/></f:facet>
+	  					<h:outputText  value="#{u.id}"/>
+	  				</p:column>
+	  				<p:column>
+	  					<h:outputText value="#{u.category.position}.#{u.position}"/>
+	  				</p:column>
+	  	            <p:column>
+	  	            	<f:facet name="header"><jtp:label entity="SecurityUsecase"/></f:facet>
+	  	            	<h:outputText value="#{u.category.name[localeCode].lang}" styleClass="jeeslItalic"/><br/>
+	  					<h:outputText value="#{u.name[localeCode].lang}"/>
+	  				</p:column>
+	  			</p:dataTable>
+	  			<p:dataTable styleClass="jeesl-datatable" rendered="#{not empty cc.attrs.bean.view}"
+	  					var="r" value="#{cc.attrs.bean.roles}">
+	  				<f:facet name="header"><j:dtHeader entity="SecurityView" code="roles"/></f:facet>
+	  				<p:column>
+	  					<h:outputText value="#{r.category.position}.#{r.position}" />
+	  				</p:column>  
+	  	         	<p:column>
+	  	         		<f:facet name="header"><jtp:label entity="SecurityRole"/></f:facet>
+	  	         		<h:outputText value="#{r.category.name[localeCode].lang}" styleClass="jeeslItalic"/><br/>
+	  	         		<h:outputText value="#{r.name[localeCode].lang}" />
+	  	         	</p:column>
+	  			</p:dataTable>
+	  		</j:slot>
+	  		<j:slot id="sView" width="4">
+	  			<h:form id="fView">
+	  				<p:panel rendered="#{not empty cc.attrs.bean.view}" styleClass="jeesl-panel">
+	  					<f:facet name="header"><j:pHeader entity="SecurityView"/></f:facet>
+	  					<f:facet name="actions">
+	  						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttSave}"/>
+	  						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" rendered="#{cc.attrs.bean.userIsDeveloper}" tooltip="#{msg.ttDelete}"/>
+	  						<j:svg type="jeeslClone" listener="#{cc.attrs.bean.cloneView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.jeeslTooltipClone}"/>
+	  					</f:facet>
+	  					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+	  					<j:inputGrid>
+	  						<jtp:label entity="SecurityView" code="category"/>
+	  						<p:selectOneMenu value="#{cc.attrs.bean.view.category}" effect="fade" autoWidth="false">
+	  							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+	  						</p:selectOneMenu>
+	  					</j:inputGrid>
+	  					<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
+	  						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.visible}"  />
+	  						<jtp:label entity="SecurityView" code="visible" />
+	  												
+	  						<p:triStateCheckbox value="#{cc.attrs.bean.tsb.a}" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
+	  						<jtp:label entity="SecurityView" code="redirect" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
+	  					</p:panelGrid>	
+	  					<j:inputGrid>
+	  						<jtp:label entity="SecurityView" code="code"/>
+	  						<h:outputText rendered="#{not cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.view.code}"/>
+	  						<p:inputText rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.view.code}"/>
+	  					</j:inputGrid>
+	  					<j:inputGrid rendered="#{cc.attrs.bean.userIsDeveloper}">	
+	  						<jtp:label entity="SecurityView" code="documentation"/>
+	  						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.documentation}"/>
+	  						
+	  						<jtp:label entity="SecurityView" code="accessPublic"/>
+	  						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.accessPublic}"/>
+	  						
+	  						<jtp:label entity="SecurityView" code="accessLogin"/>
+	  						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.accessLogin}"/>
+	  						
+	  						<jtp:label entity="SecurityView" code="viewPattern"/>
+	  						<p:inputText value="#{cc.attrs.bean.view.viewPattern}"/>
+	  						
+	  						<jtp:label entity="SecurityView" code="urlMapping"/>
+	  						<p:inputText value="#{cc.attrs.bean.view.urlMapping}"/>
+	  						
+	  						<jtp:label entity="SecurityView" code="urlBase"/>
+	  						<p:inputText value="#{cc.attrs.bean.view.urlBase}"/>
+	  					</j:inputGrid>
+	  					<jtp:inputMulti value="#{cc.attrs.bean.view}"
+	  						withName="true" labelName="#{appLabelBean.labels['SecurityView']['name'][localeCode].lang}"
+	  						withDescription="true" labelDescription="#{appLabelBean.labels['SecurityView']['description'][localeCode].lang}"/>
+	  				</p:panel>
+	  			</h:form>	
+	  			<h:form id="fActions" rendered="#{cc.attrs.bean.view.id gt 0}">
+	  				<p:dataTable styleClass="jeesl-datatable" 
+	  						var="a" value="#{cc.attrs.bean.actions}" draggableRows="true"
+	  						selection="#{cc.attrs.bean.action}" selectionMode="single" rowKey="#{a.id}">
+	  					<f:facet name="header">
+	  						<j:dtHeader entity="SecurityAction" code="listOf">
+	  							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAction()}" update="@form :#{cc.id}:fAction" tooltip="#{msg.ttNew}"/>
+	  						</j:dtHeader>
+	  					</f:facet>
+	  					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderActions()}" update="@form"/>
+	  					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectAction}" update=":#{cc.id}:fAction"/>
+	  					<p:column>  
+	  						<h:outputText value="#{a.position}" />  
+	  		            </p:column>
+	  		            <p:column>
+	  		            	<f:facet name="header"><jtp:label entity="SecurityAction"/></f:facet>
+	  						<h:outputText value="#{a.toName()[localeCode].lang}"/>
+	  						<h:graphicImage rendered="#{not empty a.template}" name="12/ui/template.png" library="aupGfx"/>
+	  		            </p:column>
+	  		       	</p:dataTable>
+	  			</h:form>
+	  			<h:form id="fAction">					
+	  				<p:panel rendered="#{not empty cc.attrs.bean.action}" styleClass="jeesl-panel">
+	  					<f:facet name="header"><j:pHeader entity="SecurityAction"/></f:facet>
+	  					<f:facet name="actions">
+	  						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
+	  						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.rmAction()}" update=":#{cc.id}:sView"/>
+	  					</f:facet>
+	  					<j:inputGrid>
+	  						<p:outputLabel value="#{msg.jeeslSecurityActionTemplate}"/>
+	  						<p:selectOneMenu value="#{cc.attrs.bean.action.template}" disabled="#{not cc.attrs.bean.userIsDeveloper}" effect="fade" autoWidth="false" dynamic="true">
+	  							<f:selectItem itemLabel="---"/>
+	  							<f:selectItems value="#{cc.attrs.bean.templates}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+	  							<p:ajax event="change" listener="#{cc.attrs.bean.changeTemplate()}" update="@form"/>
+	  						</p:selectOneMenu>
+	  						<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
+	  						<h:outputText rendered="#{(not empty cc.attrs.bean.action.template) or (not cc.attrs.bean.userIsDeveloper)}" value="#{cc.attrs.bean.view.code}.#{fn:substringAfter(cc.attrs.bean.action.template.code,'.')}"/>
+	  						<p:inputText rendered="#{(empty cc.attrs.bean.action.template) and (cc.attrs.bean.userIsDeveloper)}" value="#{cc.attrs.bean.action.code}"/>
+	  					</j:inputGrid>
+	  					<j:tabTranslationEditor value="#{cc.attrs.bean.action}" withDescription="true" rendered="#{empty cc.attrs.bean.action.template}"/>
+	  				</p:panel>
+	  			</h:form>
+	  			<h:form id="fAreas" rendered="#{(not empty cc.attrs.bean.view) and (cc.attrs.bean.view.id gt 0)}">
+	  				<p:dataTable styleClass="jeesl-datatable"
+	  						var="a" value="#{cc.attrs.bean.areas}" draggableRows="true"
+	  						selection="#{cc.attrs.bean.area}" selectionMode="single" rowKey="#{a.id}">
+	  					<f:facet name="header">
+	  						<j:dtHeader entity="SecurityArea" code="listOf">
+	  							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
+	  						</j:dtHeader>
+	  					</f:facet>
+	  					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAreas()}" update="@form"/>
+	  					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectArea}" update=":#{cc.id}:fArea"/>
+	  					<p:column>  
+	  						<h:outputText value="#{a.position}" />  
+	  		            </p:column>
+	  		            <p:column>
+	  		            	<f:facet name="header"><jtp:label entity="SecurityArea"/></f:facet>
+	  						<h:outputText value="#{a.name[localeCode].lang}"/>
+	  		            </p:column>
+	  		            <p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeesl-center">  
+	  						<h:graphicImage rendered="#{a.restricted}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
+	  		         	</p:column>
+	  		       	</p:dataTable>
+	  			</h:form>
+	  			<h:form id="fArea">						
+	  				<p:panel rendered="#{not empty cc.attrs.bean.area}" styleClass="jeesl-panel">
+	  					<f:facet name="header"><j:pHeader entity="SecurityArea"/></f:facet>
+	  					<f:facet name="actions">
+	  						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
+	  						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.deleteArea()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
+	  					</f:facet>
+	  					<j:inputGrid>
+	  						<jtp:label entity="SecurityArea" code="code"/>
+	  						<h:outputText rendered="#{not cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
+	  						<p:inputText rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
+	  						
+	  						<jtp:label entity="SecurityArea" code="restricted"/>
+	  						<p:selectBooleanCheckbox value="#{cc.attrs.bean.area.restricted}"/>
+	  					</j:inputGrid>
+	  					<jtp:inputMulti value="#{cc.attrs.bean.area}"
+	  						withName="true" labelName="#{appLabelBean.labels['SecurityArea']['name'][localeCode].lang}"
+	  						withDescription="true" labelDescription="#{appLabelBean.labels['SecurityArea']['description'][localeCode].lang}"/>
+	  				</p:panel>
+	  			</h:form>
+	  		</j:slot>
+	  	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

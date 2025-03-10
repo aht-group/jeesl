@@ -1,7 +1,5 @@
 package org.jeesl.interfaces.model.io.label.entity;
 
-import java.io.Serializable;
-
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
@@ -20,8 +18,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslRevisionAttributeType <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
-		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,EjbWithSymbol,
-				JeeslStatus<L,D,S>,JeeslStatusFixedCode
+		extends EjbPersistable,EjbWithSymbol,JeeslStatusFixedCode,
+				EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
 	public enum Code{text,textLang,date,dateTime,numberInteger,numberLong,numberDouble,numberDoubleAmount,bool,idLong}
 }

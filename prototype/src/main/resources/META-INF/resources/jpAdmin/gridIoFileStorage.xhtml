@@ -37,16 +37,15 @@
 			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="type"/></f:facet>
 			     		<jtp:symbolizer value="#{s.type}" marginRight="5" rendered="#{cc.attrs.bean.sbhStorageType.hasMore}"/>
 						<h:outputText value="#{s.name[localeCode].lang}"/>
-						
 			     	</p:column>
 			     	<p:column headerText="#{msg.jeeslIoFileStorageSize}" styleClass="jeeslRight">  
 			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="totalSize"/></f:facet>
 			     		<h:outputText value="#{jeesl:humanFileSize(cc.attrs.bean.thSize.mapA[s].count1)}"/>
 			     	</p:column>
-			     	<p:columns var="type" value="#{cc.attrs.bean.thCount.listB}" columnIndexVar="colIndex" styleClass="jeeslCenter">
+			     	<p:columns var="type" value="#{cc.attrs.bean.thCount.listB}" columnIndexVar="colIndex" styleClass="jeesl-right">
 						<f:facet name="header">
 							<jtp:symbolizer value="#{type}"/>
-							<h:outputText value="#{type.name[localeCode].lang}" rendered="false"/>
+							<br/><h:outputText value="#{type.symbol}"/>
 						</f:facet>
 						<h:outputText value="#{cc.attrs.bean.thCount.map[s][type].count1}"/>
 					</p:columns>

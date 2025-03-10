@@ -208,6 +208,10 @@
         <component><resource-id>systemSecurity/gContext.xhtml</resource-id></component>
 	</tag>
 	<tag>
+        <tag-name>gridSecurityView</tag-name>
+        <component><resource-id>systemSecurity/gView.xhtml</resource-id></component>
+	</tag>
+	<tag>
         <tag-name>gridSecurityRole</tag-name>
         <component><resource-id>systemSecurity/gRole.xhtml</resource-id></component>
 	</tag>

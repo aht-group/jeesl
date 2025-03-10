@@ -29,7 +29,7 @@
 				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCategories()}" update="@form"/>
-			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectCategory()}"/>
+			<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCategory()}" update="#{cc.attrs.update}"/>
 			<p:column rendered="true">
 				<h:graphicImage rendered="#{not c.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
 				<h:outputText rendered="#{c.visible}" value="#{c.position}"/>

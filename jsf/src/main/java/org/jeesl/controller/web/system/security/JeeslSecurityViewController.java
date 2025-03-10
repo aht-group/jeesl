@@ -160,12 +160,11 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	}
 	public void selectCategory() throws JeeslNotFoundException
 	{
+		this.reset(false, true, true, true);
 		logger.info(AbstractLogMessage.selectEntity(category));
 		category = efLang.persistMissingLangs(fSecurity,lp,category);
 		category = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),category);
 		this.reloadViews();
-		view=null;
-		action=null;
 	}
 	public void saveCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
