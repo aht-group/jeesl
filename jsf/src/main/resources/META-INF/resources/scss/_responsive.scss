@@ -5338,5 +5338,46 @@ body, .ui-widget {
 	}
 }
 
+.alert {
+	column-gap: $regular-spacing;
+	display: grid;
+	grid-template-columns: min-content 1fr min-content;
+	
+	&.alert-dismissable {
+		padding-right: $wide-spacing;
+	}
+	
+	br {
+		display: none;
+	}
+	
+	.jeesl-icon {
+		grid-column: 1;
+		grid-row: 1 / 3;
+	}
+	
+	.close {
+		@include headlined-overlay-icon();
+
+		align-items: center;
+		display: flex;
+		font-family: "Font Awesome 5 Free";
+		grid-column: 3;
+		grid-row: 1 / 3;
+		opacity: 1;
+		text-indent: -99999px;
+		
+		&:hover {
+			color: hsl(1,64%,66%);
+		}
+	
+		&:before {
+			content: $icon-close;
+			flex-grow: 1;
+			text-indent: 0;
+		}
+	}
+}
+
 @import '_responsiveHtmlRender';
 @import '_responsivePrint';

@@ -14,6 +14,7 @@ import org.jeesl.api.bean.JeeslMenuBean;
 import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.pojo.system.JeeslIdentityFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
@@ -53,6 +54,8 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 	
 	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo=debugOnInfo;}
 	protected boolean roleDeveloper; public boolean isRoleDeveloper() {return roleDeveloper;}
+	
+	protected JeeslConstraint<?,?,?,?,?,?> passwordMismatchConstraint; public JeeslConstraint<?,?,?,?,?,?> getPasswordMismatchConstraint() { return passwordMismatchConstraint; }
 	
 	protected AbstractUserBean(IoLocaleFactoryBuilder<?,?,?> fbStatus)
 	{

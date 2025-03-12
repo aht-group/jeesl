@@ -253,6 +253,7 @@ $header-underline: 2px solid var(--container-header-underline-colour, #{$dark-co
 		
 		/* dropdown */
 		--panel-content-select-dropdown-header-background: linear-gradient(to bottom, #{$dark-colour}, #{$medium-colour});
+		--panel-content-select-dropdown-header-button-hover-background: #{$dark-colour};
 		--panel-content-select-dropdown-header-foreground: var(--highlight-foreground);
 		--panel-content-select-dropdown-background: #{$white-100};
 		--panel-content-select-dropdown-foreground: #{var(--body-foreground)};
