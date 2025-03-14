@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
@@ -61,6 +63,19 @@ public class EjbIoFrMetaFactory<CONTAINER extends JeeslFileContainer<?,META>,
 		for(META meta : metas)
 		{
 			if(meta.getRecord().isAfter(last)) {last = meta.getRecord();}
+		}
+		return last;
+	}
+	
+	public META toLast(List<META> metas)
+	{
+		if(ObjectUtils.isEmpty(metas)) {return null;}
+		META last = null;
+		
+		for(META meta : metas)
+		{
+			if(Objects.isNull(last)) {last = meta;}
+			else if(meta.getRecord().isAfter(last.getRecord())) {last = meta;}
 		}
 		return last;
 	}

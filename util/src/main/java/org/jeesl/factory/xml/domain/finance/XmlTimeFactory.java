@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.domain.finance;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class XmlTimeFactory
 		if(Objects.nonNull(value)){figures.getTime().add(XmlTimeFactory.build(code, value));}
 	}
 	
-	public static <E extends Enum<E>> Time build(E code, Date record){return create(code.toString(),record);}
+	public static <E extends Enum<E>> Time build(E code, Date record) {return create(code.toString(),record);}
 	public static Time create(String code, Date record)
 	{
 		Time xml = new Time();
@@ -38,6 +39,13 @@ public class XmlTimeFactory
 		return xml;
 	}
 	
+	public static <E extends Enum<E>> Time build(E code, LocalDateTime record)
+	{
+		Time xml = new Time();
+		xml.setCode(code.toString());
+		xml.setRecord(DateUtil.toXmlGc(record));
+		return xml;
+	}
 	public static <E extends Enum<E>> Time build(E code, LocalDate record)
 	{
 		Time xml = new Time();
