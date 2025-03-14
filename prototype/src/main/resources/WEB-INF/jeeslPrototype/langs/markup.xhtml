@@ -7,66 +7,34 @@
 				xmlns:pe="http://primefaces.org/ui/extensions">
 				
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
-	<c:if test="#{empty widgetVar}">
-		<h:panelGroup class="jeesl-ck-editor" layout="block" rendered="#{rendered}">
-			<p:inputTextarea value="#{value.content}" style="w100" autocomplete="off" rendered="#{value.type.code eq 'text'}"/>
-		        
-			<!-- for testing -->
-			<pe:ckEditor rendered="#{true and (value.type.code eq 'xhtml')}"
-							width="100%"
-							value="#{value.content}"
-							customConfig="#{request.contextPath}/jp/editor-config.js">
-			</pe:ckEditor>
+	
+	<h:panelGroup class="jeesl-ck-editor" layout="block" rendered="#{rendered}">
+		<p:inputTextarea value="#{value.content}" style="w100" autocomplete="off" rendered="#{value.type.code eq 'text'}"/>
 	        
-			<!-- old live version -->
-			<p:textEditor value="#{value.content}" rendered="#{false and (value.type.code eq 'xhtml')}">
-				<f:facet name="toolbar">
-					<span class="ql-formats">
-						<button class="ql-bold"></button>
-						<button class="ql-italic"></button>
-					</span>
-					<span class="ql-formats">
-						<button class="ql-list" value="ordered"></button>
-						<button class="ql-list" value="bullet"></button>
-					</span>
-					<span class="ql-formats">
-						<button class="ql-script" value="sub"></button>
-						<button class="ql-script" value="super"></button>
-					</span>
-		
-				</f:facet>
-			</p:textEditor>
-		</h:panelGroup>
-	</c:if>
-	<c:if test="#{not empty widgetVar}">
-		<h:panelGroup class="jeesl-ck-editor" layout="block" rendered="#{rendered}">
-			<p:inputTextarea widgetVar="#{widgetVar}" value="#{value.content}" style="w100" autocomplete="off" rendered="#{value.type.code eq 'text'}"/>
-		        
-			<!-- for testing -->
-			<pe:ckEditor widgetVar="#{widgetVar}" rendered="#{true and (value.type.code eq 'xhtml')}"
-							width="100%"
-							value="#{value.content}"
-							customConfig="#{request.contextPath}/jp/editor-config.js">
-			</pe:ckEditor>
-	        
-			<!-- old live version -->
-			<p:textEditor widgetVar="#{widgetVar}" value="#{value.content}" rendered="#{false and (value.type.code eq 'xhtml')}">
-				<f:facet name="toolbar">
-					<span class="ql-formats">
-						<button class="ql-bold"></button>
-						<button class="ql-italic"></button>
-					</span>
-					<span class="ql-formats">
-						<button class="ql-list" value="ordered"></button>
-						<button class="ql-list" value="bullet"></button>
-					</span>
-					<span class="ql-formats">
-						<button class="ql-script" value="sub"></button>
-						<button class="ql-script" value="super"></button>
-					</span>
-		
-				</f:facet>
-			</p:textEditor>
-		</h:panelGroup>
-	</c:if>
+		<!-- for testing -->
+		<pe:ckEditor rendered="#{true and (value.type.code eq 'xhtml')}"
+						width="100%"
+						value="#{value.content}"
+						customConfig="#{request.contextPath}/jp/editor-config.js">
+		</pe:ckEditor>
+        
+		<!-- old live version -->
+		<p:textEditor value="#{value.content}" rendered="#{false and (value.type.code eq 'xhtml')}">
+			<f:facet name="toolbar">
+				<span class="ql-formats">
+					<button class="ql-bold"></button>
+					<button class="ql-italic"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-list" value="ordered"></button>
+					<button class="ql-list" value="bullet"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-script" value="sub"></button>
+					<button class="ql-script" value="super"></button>
+				</span>
+	
+			</f:facet>
+		</p:textEditor>
+	</h:panelGroup>
 </ui:composition>
