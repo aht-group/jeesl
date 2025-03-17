@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.lang3.StringUtils;
@@ -172,7 +173,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 	
 	protected void initIo(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport, Class<?> classReport)
 	{
-		if(fReport!=null)
+		if(Objects.nonNull(fReport))
 		{
 			if(reportSettingTransformation==null)
 			{
