@@ -13,14 +13,14 @@
 	<c:set var="rendered" value="#{not empty rendered ? rendered : true}" />
 	
 	<h:panelGroup layout="block" styleClass="jeesl-revision-footer" rendered="#{rendered}">
-		<h:panelGroup layout="block" styleClass="jeesl-revision-icon" redered="#{value.lastUpdateStatus.id gt 0}">
-			<jtp:symbolizer value="#{value.lastUpdateStatus}"/>
+		<h:panelGroup layout="block" styleClass="jeesl-revision-icon" redered="false">
+			
 		</h:panelGroup>
 		<h:panelGroup layout="block" styleClass="jeesl-revision-timestamp">
-			<jp:outputDate value="#{value.lastUpdatedAt}" withSecond="true"/>
+			<jp:outputDate value="#{value.lastModifiedAt}" withSecond="true"/>
 		</h:panelGroup>
-		<h:panelGroup layout="block" styleClass="jeesl-revision-user" rendered="#{value.lastUpdateStatus.id gt 0}">
-			<h:outputText value="#{value.lastUpdateStatus.name[localeCode].lang}"/>
+		<h:panelGroup layout="block" styleClass="jeesl-revision-user" rendered="#{not empty value.lastModifiedBy}">
+			<h:outputText value="#{value.lastModifiedBy.firstName} #{value.lastModifiedBy.lastName}"/>
 		</h:panelGroup>
 	</h:panelGroup>
 </ui:composition>

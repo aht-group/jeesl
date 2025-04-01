@@ -157,6 +157,10 @@
         <tag-name>pFooterLastUpdated</tag-name>
         <source>jeeslPrototype/footer/lastUpdated.xhtml</source>
 	</tag>
+	<tag>
+        <tag-name>pFooterLastModifiedBy</tag-name>
+        <source>jeeslPrototype/footer/lastModifiedBy.xhtml</source>
+	</tag>
     
     <tag>
         <tag-name>ioFiles</tag-name>

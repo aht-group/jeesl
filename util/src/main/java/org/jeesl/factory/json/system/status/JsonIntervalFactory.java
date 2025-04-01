@@ -22,7 +22,8 @@ public class JsonIntervalFactory<L extends JeeslLang, D extends JeeslDescription
 	}
 	
 	public static JsonInterval build() {return new JsonInterval();}
-	public static <E extends Enum<E>> JsonInterval build(E code){JsonInterval json = build(); json.setCode(code.toString()); return json;}
+	public static <E extends Enum<E>> JsonInterval build(E code){return JsonIntervalFactory.build(code.toString());}
+	public static <E extends Enum<E>> JsonInterval build(String code){JsonInterval json = build(); json.setCode(code.toString()); return json;}
 	
 	public JsonInterval build(S ejb)
 	{

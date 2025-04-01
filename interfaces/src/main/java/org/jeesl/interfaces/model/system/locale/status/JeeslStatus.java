@@ -13,12 +13,11 @@ import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImageAlt;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-@DownloadJeeslData
+//@DownloadJeeslData
 public interface JeeslStatus<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
 			extends Serializable,EjbRemoveable,EjbWithId,
 						EjbWithCode,EjbWithPositionVisible,EjbWithImage,EjbWithImageAlt,
