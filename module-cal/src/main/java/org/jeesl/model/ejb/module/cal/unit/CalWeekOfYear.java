@@ -24,5 +24,5 @@ public class CalWeekOfYear extends IoStatus implements JeeslCalendarWeekOfYear<I
 	@Override public List<String> getFixedCodes() {return JeeslCalendarWeekOfMonth.toFixedCodes();}
 	
 	@Override public boolean equals(Object object){return (object instanceof CalWeekOfYear) ? id == ((CalWeekOfYear) object).getId() : (object == this);}
-	@Override public int hashCode(){return new HashCodeBuilder(23,43).append(id).toHashCode();}
+	@Override public int hashCode() {return new HashCodeBuilder(23,43).append(id).toHashCode();}
 }

@@ -153,7 +153,7 @@
 									</p:column>
 								</p:dataTable>
 							</p:overlayPanel>
-		                    <j:svg rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblAction)}" type="jeeslRemove" listener="#{cc.attrs.bean.opRmAction()}" update=":#{cc.id}:fAction" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fAction'));}catch{}" library="jeeslGfx"/>
+		                    <j:svg rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblAction)}" type="jeeslRemove" listener="#{cc.attrs.bean.opRmAction()}" update=":#{cc.id}:fAction" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fAction'));}catch{}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" update=":#{cc.id}:fAction" listener="#{cc.attrs.bean.selectTblAction}" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fAction'))}catch{}"/>
@@ -189,15 +189,15 @@
 									<p:column>
 										<h:outputText value="#{u.category.position}.#{u.position}"/>
 									</p:column>
-									<p:column headerText="#{msg.jeeslSecurityCategory}" sortBy="#{u.category.name[userBean.localeCode].lang}" filterBy="#{u.category.name[userBean.localeCode].lang}" filterMatchMode="contains">
+									<p:column headerText="#{msg.jeeslSecurityCategory}" sortBy="#{u.category.name[localeCode].lang}" filterBy="#{u.category.name[userBean.localeCode].lang}" filterMatchMode="contains">
 										<h:outputText value="#{u.category.name[userBean.localeCode].lang}" />
 									</p:column>
-									<p:column headerText="#{msg.aupSecurityUsecase}" sortBy="#{u.name[userBean.localeCode].lang}" filterBy="#{u.name[userBean.localeCode].lang}" filterMatchMode="contains">
+									<p:column headerText="#{msg.aupSecurityUsecase}" sortBy="#{u.name[localeCode].lang}" filterBy="#{u.name[userBean.localeCode].lang}" filterMatchMode="contains">
 										<h:outputText value="#{u.name[userBean.localeCode].lang}" />
 									</p:column>
 								</p:dataTable>
 							</p:overlayPanel>
-							<j:svg type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update=":#{cc.id}:fUsecase" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fUsecase'))}catch{}"/>
+							<j:svg type="jeeslRemove" rendered="#{not empty cc.attrs.bean.tblUsecase}" listener="#{cc.attrs.bean.opRmUsecase()}" update="@form" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fUsecase'))}catch{}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" update=":#{cc.id}:fUsecase" listener="#{cc.attrs.bean.selectTblUsecase}" oncomplete="try{reloadContent(jsfToJQuery(':#{cc.id}:fUsecase'))}catch{}"/>

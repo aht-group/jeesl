@@ -35,6 +35,7 @@ public class DatePredicateBuilder
 		{
 			case DbIsEqualOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,cq.getDate())); break;
 			case LessThanOrEqualTo: predicates.add(cB.lessThanOrEqualTo(eDate,cq.getDate())); break;
+			case LessThan: predicates.add(cB.lessThan(eDate,cq.getDate())); break;
 			case DbIsEqual: predicates.add(cB.equal(eDate,cq.getDate())); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
