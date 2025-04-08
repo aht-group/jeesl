@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.system;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import org.exlp.util.io.StringUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -73,6 +74,7 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription,
 		this.bMessage=bMessage;
 		
 		localeCodes = EjbCodeFactory.toListCode(lp.getLocales()).toArray(new String[lp.getLocales().size()]);
+		logger.info("LocaleCodes"+Arrays.toString(localeCodes));
 	}
 	
 	//Security Handling

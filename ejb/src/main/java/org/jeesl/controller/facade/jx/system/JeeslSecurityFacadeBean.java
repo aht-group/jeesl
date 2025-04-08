@@ -291,6 +291,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<R> cQ = cB.createQuery(fbSecurity.getClassRole());
 		Root<R> root = cQ.from(fbSecurity.getClassRole());
+		super.rootFetch(root, query);
 		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
 		
 		List<Predicate> predicates = new ArrayList<Predicate>();

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.provider.ListLocaleProvider;
@@ -16,6 +15,7 @@ import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -62,7 +62,7 @@ public abstract class AbstractTableTenantBean <L extends JeeslLang, D extends Je
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableTenantBean.class);
 	private static final long serialVersionUID = 1L;
 
-	private JeeslLocaleManager<LOC> lp;
+	private JeeslLocaleManager<LOC> lm;
 
 	protected boolean supportsParent; public boolean isSupportsParent() {return supportsParent;}
 
@@ -74,36 +74,19 @@ public abstract class AbstractTableTenantBean <L extends JeeslLang, D extends Je
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus,fbSvg,fbRevision);
-//		this.fbStatus=fbStatus;
-//		this.fbSvg=fbSvg;
-//		this.fbRevision=fbRevision;
-//
-//		efGraphic = fbSvg.efGraphic();
-//		efFigure = fbSvg.efFigure();
-//
-//		index=1;
-//
-//		hasDeveloperAction = false;
-//		hasAdministratorAction = true;
-//		hasTranslatorAction = true;
-//
-//		status = null;
-//		allowAdditionalElements = new Hashtable<Long,Boolean>();
-//
-//		mapEntity = new HashMap<>();
-//		categories = new ArrayList<EjbWithPosition>();
+
 	}
 
-	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
+	protected void postConstructOptionTable(JeeslLocaleProvider<LOC> lp,
 											JeeslIoGraphicFacade<?,G,GT,GC,GS> fGraphic,
 											JeeslFacesMessageBean bMessage,
 											R realm)
 	{
-		super.initJeeslAdmin(bTranslation,bMessage);
+		super.initJeeslAdmin(lp,bMessage);
 		this.fGraphic=fGraphic;
 		this.realm=realm;
 
-		lp = new ListLocaleProvider<>(bTranslation.getLocales());
+		this.lm = new ListLocaleProvider<>(lp.getLocales());
 		graphicTypes = fGraphic.allOrderedPositionVisible(fbSvg.getClassGraphicType());
 		graphicStyles = fGraphic.allOrderedPositionVisible(fbSvg.getClassFigureStyle());
 	}
@@ -403,7 +386,7 @@ public abstract class AbstractTableTenantBean <L extends JeeslLang, D extends Je
 		
 		JaxbUtil.trace(xml);
 
-		JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT> updater = new JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT>(fbStatus,fbSvg,fGraphic,lp);
+		JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT> updater = new JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT>(fbStatus,fbSvg,fGraphic,lm);
 		updater.initTenant(realm,rref);
 		updater.iStatus(optionClass,xml);
 
