@@ -41,6 +41,7 @@ public class DebugJeeslLogger implements JeeslLogger
 		sb.append(" ").append(Objects.nonNull(elements) ? elements : "-");
 		return sb.toString();
 	}
+//	@Override public void milestone(Level level, Logger logger, Class<?> c, String message, Integer elements) {}
 	
 	@Override public <E extends Enum<E>> String loopStart(E code) {return code.toString();}
 	@Override public <E extends Enum<E>> String loopEnd(E code) {return code.toString();}

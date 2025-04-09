@@ -41,6 +41,7 @@ public class NoopJeeslLogger implements JeeslLogger
 		sb.append(" ").append(Objects.nonNull(elements) ? elements : "-");
 		return sb.toString();
 	}
+//	@Override public void milestone(Level level, Logger logger, Class<?> c, String message, Integer elements) {}
 	
 	@Override public <E extends Enum<E>> String loopStart(E code) {return code.toString();}
 	@Override public <E extends Enum<E>> String loopEnd(E code) {return code.toString();}
@@ -49,5 +50,6 @@ public class NoopJeeslLogger implements JeeslLogger
 	@Override public void ofxMilestones(OutputStream os) {}
 
 	@Override public void ofxLoops(OutputStream os) {}
+	
 	
 }

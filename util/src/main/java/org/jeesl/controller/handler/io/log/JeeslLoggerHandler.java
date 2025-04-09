@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.system.io;
+package org.jeesl.controller.handler.io.log;
 
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -33,7 +33,7 @@ import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
+public class JeeslLoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 							LOG extends JeeslIoLog<STATUS,RETENTION,USER>,
 							STATUS extends JeeslIoLogStatus<L,D,STATUS,?>,
 							RETENTION extends JeeslIoLogRetention<L,D,RETENTION,?>,
@@ -44,7 +44,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 				implements Serializable,JeeslLogger
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(LoggerHandler.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslLoggerHandler.class);
 	
 	private final IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog;
 	private final EjbIoLogMilestoneFactory<LOG,MILESTONE> efMilestone;
@@ -62,7 +62,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	private LOG log;
 	private static final String msgNotActive = "Jogger is not active";
 	
-	public LoggerHandler(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog, Class<?> c)
+	public JeeslLoggerHandler(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog, Class<?> c)
 	{
 		this.fbLog=fbLog;
 		this.c=c;
@@ -146,6 +146,19 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		}
 		else {return msgNotActive;}
 	}
+	
+//	@Override public void milestone(Level level, Logger logger, Class<?> c, String message, Integer elements)
+//	{
+//		if(isActive())
+//		{
+//			if(level.equals(JeeslLogger.Level.TRACE) && logger.isTraceEnabled()) {logger.trace(this.milestone(c, message, elements));}
+//			else if(level.equals(JeeslLogger.Level.DEBUG) && logger.isDebugEnabled()) {logger.debug(this.milestone(c, message, elements));}
+//			else if(level.equals(JeeslLogger.Level.INFO) && logger.isInfoEnabled()) {logger.info(this.milestone(c, message, elements));}
+//			else if(level.equals(JeeslLogger.Level.WARN) && logger.isWarnEnabled()) {logger.warn(this.milestone(c, message, elements));}
+//			else if(level.equals(JeeslLogger.Level.ERROR) && logger.isErrorEnabled()) {logger.error(this.milestone(c, message, elements));}
+//		}
+//		else {logger.warn(msgNotActive);}
+//	}
 	
 	public <E extends Enum<E>> String loopStart(E code) {return loopStart(code.toString());}
 	private String loopStart(String loopCode)
