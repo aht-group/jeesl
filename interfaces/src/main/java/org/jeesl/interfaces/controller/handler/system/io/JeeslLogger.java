@@ -3,8 +3,6 @@ package org.jeesl.interfaces.controller.handler.system.io;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-import org.slf4j.Logger;
-
 public interface JeeslLogger extends Serializable
 {
 //	public enum Level {TRACE, DEBUG, INFO, WARN, ERROR}
