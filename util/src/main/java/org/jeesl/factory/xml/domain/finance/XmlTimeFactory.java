@@ -12,6 +12,7 @@ import org.exlp.util.system.DateUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.xlsx.io.report.XlsCellFactory;
 import org.jeesl.factory.xlsx.io.report.XlsColumnFactory;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.model.xml.module.finance.Figures;
 import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
@@ -50,6 +51,13 @@ public class XmlTimeFactory
 	{
 		Time xml = new Time();
 		xml.setCode(code.toString());
+		xml.setRecord(DateUtil.toXmlGc(record));
+		return xml;
+	}
+	public static <E extends EjbWithCode> Time build(E code, LocalDate record)
+	{
+		Time xml = new Time();
+		xml.setCode(code.getCode());
 		xml.setRecord(DateUtil.toXmlGc(record));
 		return xml;
 	}
