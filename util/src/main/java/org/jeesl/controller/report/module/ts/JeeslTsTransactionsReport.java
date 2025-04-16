@@ -32,12 +32,12 @@ public class JeeslTsTransactionsReport <L extends JeeslLang,D extends JeeslDescr
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslTsTransactionsReport.class);
 
-	private final JeeslTsFacade<L,D,?,?,?,?,?,?,TRANSACTION,SOURCE,?,?,?,?,?,?,?,?,USER,?,?> fTs;
+	private final JeeslTsFacade<?,?,?,?,?,?,TRANSACTION,SOURCE,?,?,?,?,?,?,?,?,USER,?,?> fTs;
 	
 	private final XmlTransactionFactory<L,D,TRANSACTION,SOURCE,USER> xfTransaction;
 	
 	public JeeslTsTransactionsReport(String localeCode,
-			final JeeslTsFacade<L,D,?,?,?,?,?,?,TRANSACTION,SOURCE,?,?,?,?,?,?,?,?,USER,?,?> fTs)
+			final JeeslTsFacade<?,?,?,?,?,?,TRANSACTION,SOURCE,?,?,?,?,?,?,?,?,USER,?,?> fTs)
 	{
 	
 		this.fTs=fTs;

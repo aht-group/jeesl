@@ -57,7 +57,7 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	private final boolean debugOnInfo = false;
 //	private String localeCode;
 
-	private final JeeslTsFacade<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs;
+	private final JeeslTsFacade<?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs;
 
 	private final TsFactoryBuilder<?,?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs;
 	private final EjbTsDataPointFactory<MP,DATA,POINT> efPoint;
@@ -68,7 +68,7 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	private WS workspace; public WS getWorkspace() {return workspace;} public void setWorkspace(WS workspace) {this.workspace = workspace;}
 
 	public McTimeSeriesFactory(TsFactoryBuilder<?,?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
-							   JeeslTsFacade<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs)
+							   JeeslTsFacade<?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs)
 	{
 		this.fbTs=fbTs;
 		this.fTs=fTs;

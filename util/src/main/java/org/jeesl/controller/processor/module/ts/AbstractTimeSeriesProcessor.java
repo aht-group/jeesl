@@ -47,7 +47,7 @@ public class AbstractTimeSeriesProcessor<SCOPE extends JeeslTsScope<?,?,?,ST,?,E
 	
 	protected final TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs;
 	
-	protected final JeeslTsFacade<?,?,?,SCOPE,ST,?,?,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs;
+	protected final JeeslTsFacade<?,SCOPE,ST,?,?,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs;
 	
 	protected final McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> mfTs;
 	protected final EjbTsDataFactory<TS,TRANSACTION,DATA,WS> efData;
@@ -64,7 +64,7 @@ public class AbstractTimeSeriesProcessor<SCOPE extends JeeslTsScope<?,?,?,ST,?,E
 	protected boolean debugOnInfo; public boolean isDebugOnInfo() {return debugOnInfo;} public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	public AbstractTimeSeriesProcessor(TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
-									JeeslTsFacade<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs)
+									JeeslTsFacade<?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs)
 	{
 		this.fbTs=fbTs;
 		this.fTs=fTs;

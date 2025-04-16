@@ -75,7 +75,7 @@ public class AbstractAdminTsEntityBean <L extends JeeslLang, D extends JeeslDesc
 		super(fbTs);
 	}
 	
-	protected void postConstructEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, JeeslFacesMessageBean bMessage)
+	protected void postConstructEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, JeeslFacesMessageBean bMessage)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		reloadClasses();

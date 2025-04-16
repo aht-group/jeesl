@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:of="http://omnifaces.org/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:aupAdm="http://ahtutils.sourceforge.net/prototype/admin"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="handler" required="true"/>
+		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="update" required="false"/>
+		<composite:attribute name="withSave" required="false" default="true"/>
+		<composite:attribute name="withLabel" required="false" default="true"/>
+		<composite:attribute name="withDescriptionToggle" required="false" default="false"/>
+		<composite:attribute name="datePattern" required="false" default="dd.MM.yyyy" />
+		<composite:attribute name="columnClasses" required="false" default="jeeslGrid30,jeeslGrid70" />
+		
+	</composite:interface>
+	
+	<composite:implementation>
+		
+	<ui:repeat id="repeatG" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}"  var="c">	
+		<p:panelGrid columns="#{cc.attrs.withLabel ? 2 : 1}" columnClasses="#{cc.attrs.withLabel ? cc.attrs.columnClasses : 'jeeslGrid100'}">
+			<ui:fragment rendered="#{cc.attrs.withLabel}">
+					<p:outputLabel value="#{c.name[localeCode].lang}" />
+					<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.handler.showDescription}"/>
+					<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeeslItalic"/>
+			</ui:fragment>
+			<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
+			<ui:remove>
+				<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
+			</ui:remove>
+		</p:panelGrid>
+	</ui:repeat>
+	</composite:implementation>
+</html>

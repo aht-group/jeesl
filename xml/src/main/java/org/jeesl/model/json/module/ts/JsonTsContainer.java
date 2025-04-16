@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-@JsonRootName(value="series")
+@JsonRootName(value="container")
 public class JsonTsContainer implements Serializable
 {
 	public static final long serialVersionUID=1;
@@ -17,7 +17,12 @@ public class JsonTsContainer implements Serializable
 	private List<JsonTsSeries> series;
 	public List<JsonTsSeries> getSeries() {return series;}
 	public void setSeries(List<JsonTsSeries> series) {this.series = series;}
-
+	
+	@JsonProperty("multiPoints")
+	private List<JsonTsMultipoint> multiPoints;
+	public List<JsonTsMultipoint> getMultiPoints() {return multiPoints;}
+	public void setMultiPoints(List<JsonTsMultipoint> multiPoints) {this.multiPoints = multiPoints;}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

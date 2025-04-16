@@ -116,7 +116,6 @@ public class JeesMqttLookup
 		options.setUserName(user);
 		options.setPassword(password.toCharArray());
 		
-		
 		if(port==8883)
 		{
 			try

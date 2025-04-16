@@ -133,7 +133,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	public EjbTsMutliPointFactory<SCOPE,MP> ejbMultiPoint() {return new EjbTsMutliPointFactory<>(cMp);}
 	public EjbTsCronFactory<SCOPE,INT,STAT,CRON> ejbCron() {return new EjbTsCronFactory<SCOPE,INT,STAT,CRON>(cCron);}
 	
-	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
+	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		return new McTimeSeriesFactory<>(this,fTs);
 	}

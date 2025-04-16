@@ -88,7 +88,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 		super(fbTs);
 	}
 	
-	protected void postConstructScope(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, JeeslFacesMessageBean bMessage)
+	protected void postConstructScope(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, JeeslFacesMessageBean bMessage)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		initLists();

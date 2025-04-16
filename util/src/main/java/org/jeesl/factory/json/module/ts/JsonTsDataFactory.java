@@ -32,6 +32,16 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 		return json;
 	}
 	
+	public static JsonTsData build(LocalDateTime time, double value)
+	{
+		JsonTsData json = new JsonTsData();
+	
+		json.setLocalDateTime(time);
+		json.setValue(value);
+		
+		return json;
+	}
+	
 	public static void append(JsonTsSeries ts, LocalDateTime ldt, Double value)
 	{
 		if(Objects.isNull(ts.getDatas())) {ts.setDatas(new ArrayList<>());}

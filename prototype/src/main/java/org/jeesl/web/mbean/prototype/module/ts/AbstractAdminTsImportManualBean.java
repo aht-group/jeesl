@@ -114,7 +114,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 	}
 
 	protected void postConstructTsManual(JeeslTranslationBean<L,D,LOC> bTranslation,
-								JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs,
+								JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs,
 								USER transactionUser)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);

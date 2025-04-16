@@ -49,7 +49,7 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslTsStatisticController.class);
 	
-	private JeeslTsFacade<L,D,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?> fTs;
+	private JeeslTsFacade<CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?> fTs;
 	
 	private final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?,?> fbTs;
 	
@@ -70,7 +70,7 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 	}
 	
 	public void postConstructStatistic(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslTsFacade<L,D,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?> fTs)
+			JeeslTsFacade<CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?> fTs)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fTs=fTs;

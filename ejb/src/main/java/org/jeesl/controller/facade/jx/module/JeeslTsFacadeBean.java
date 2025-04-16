@@ -95,7 +95,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 							QAF extends JeeslStatus<L,D,QAF>,
 							CRON extends JeeslTsCron<SCOPE,INT,STAT>>
 					extends JeeslFacadeBean
-					implements JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON>
+					implements JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslTsFacadeBean.class);

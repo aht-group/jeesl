@@ -29,25 +29,24 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
-public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
-								CATEGORY extends JeeslTsCategory<L,D,CATEGORY,?>,
-								SCOPE extends JeeslTsScope<L,D,CATEGORY,ST,UNIT,EC,INTERVAL>,
-								ST extends JeeslTsScopeType<L,D,ST,?>,
-								UNIT extends JeeslStatus<L,D,UNIT>,
-								MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT>,
+public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>,
+								SCOPE extends JeeslTsScope<?,?,CATEGORY,ST,UNIT,EC,INTERVAL>,
+								ST extends JeeslTsScopeType<?,?,ST,?>,
+								UNIT extends JeeslStatus<?,?,UNIT>,
+								MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,TYPE>,
 								TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
-								SRC extends EjbWithLangDescription<L,D>, 
+								SRC extends EjbWithLangDescription<?,?>, 
 								BRIDGE extends JeeslTsBridge<EC>,
-								EC extends JeeslTsEntityClass<L,D,CATEGORY,ENTITY>,
-								ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
-								INTERVAL extends JeeslTsInterval<L,D,INTERVAL,?>,
-								TYPE extends JeeslTsStatistic<L,D,TYPE,?>,
+								EC extends JeeslTsEntityClass<?,?,CATEGORY,ENTITY>,
+								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
+								INTERVAL extends JeeslTsInterval<?,?,INTERVAL,?>,
+								TYPE extends JeeslTsStatistic<?,?,TYPE,?>,
 								DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 								POINT extends JeeslTsDataPoint<DATA,MP>,
 								SAMPLE extends JeeslTsSample, 
 								USER extends EjbWithId, 
-								WS extends JeeslStatus<L,D,WS>,
+								WS extends JeeslStatus<?,?,WS>,
 								
 								CRON extends JeeslTsCron<SCOPE,INTERVAL,TYPE>>
 			extends JeeslFacade
