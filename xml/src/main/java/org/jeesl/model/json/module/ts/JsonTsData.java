@@ -25,6 +25,11 @@ public class JsonTsData implements Serializable
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
 	@JsonIgnore public boolean isSetId() {return id!=null;}
+	
+	@JsonProperty("series")
+	private JsonTsSeries series;
+	public JsonTsSeries getSeries() {return series;}
+	public void setSeries(JsonTsSeries series) {this.series = series;}
 
 	@JsonProperty("localDateTime")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS")

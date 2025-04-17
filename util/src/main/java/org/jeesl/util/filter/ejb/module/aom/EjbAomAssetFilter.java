@@ -1,5 +1,6 @@
 package org.jeesl.util.filter.ejb.module.aom;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +15,12 @@ public class EjbAomAssetFilter<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>>
 
     }
 	
+    public boolean isChild(ASSET asset, ASSET parent)
+    {
+    	Set<ASSET> set = new HashSet<ASSET>();
+    	set.add(parent);
+    	return this.isChild(asset, set);
+    }
 	public boolean isChild(ASSET asset, Set<ASSET> roots)
 	{
 		if(ObjectUtils.isEmpty(roots)) {return false;}

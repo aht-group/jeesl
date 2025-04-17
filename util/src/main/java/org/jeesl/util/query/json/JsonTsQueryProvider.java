@@ -28,6 +28,7 @@ public class JsonTsQueryProvider
 	{				
 		JsonTsData json = new JsonTsData();
 		json.setLocalDateTime(LocalDateTime.now());
+		json.setValue(0d);
 		return json;
 	}
 	

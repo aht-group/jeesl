@@ -28,6 +28,7 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 	
 		if(q.isSetId()){json.setId(ejb.getId());}
 		if(Objects.nonNull(q.getLocalDateTime())){json.setLocalDateTime(DateUtil.toLocalDateTime(ejb.getRecord()));}
+		if(Objects.nonNull(q.getValue())) {json.setValue(ejb.getValue());}
 		
 		return json;
 	}

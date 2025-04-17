@@ -31,4 +31,13 @@ public class JsonTsPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?>,
 		
 		return json;
 	}
+	
+	public static JsonTsPoint build(double value)
+	{
+		JsonTsPoint json = new JsonTsPoint();
+	
+		json.setValue(value);
+		
+		return json;
+	}
 }

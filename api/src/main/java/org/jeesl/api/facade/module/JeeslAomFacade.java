@@ -30,7 +30,7 @@ public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription
 									VIEW extends JeeslAomView<L,D,REALM,?>,
 									EVENT extends JeeslAomEvent<COMPANY,ASSET,?,ESTATUS,?,?,?>,
 									ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>
-									>
+>
 			extends JeeslFacade
 {
 	EVENT load(EVENT event);
