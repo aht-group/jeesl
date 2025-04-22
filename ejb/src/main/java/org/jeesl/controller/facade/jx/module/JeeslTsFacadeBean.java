@@ -400,8 +400,47 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
 		return tQ.getResultList();
+	}
+	
+	@Override public List<DATA> fTsDataMinimumOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query) {return fTsDataMinMaxOfDay(query,true);}
+	@Override public List<DATA> fTsDataMaximumOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query) {return fTsDataMinMaxOfDay(query,false);}
+	private List<DATA> fTsDataMinMaxOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, boolean min)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
+		Root<DATA> root = cQ.from(fbTs.getClassData());
+		List<Predicate> pRoot = new ArrayList<Predicate>();
 		
+		List<Predicate> pSub = new ArrayList<Predicate>();
+		Subquery<Double> sQ = cQ.subquery(Double.class);
+		Root<DATA> sub = sQ.from(fbTs.getClassData());
 		
+		Expression<Date> eRootDate = root.get("record");
+		Expression<Date> eSubDate = sub.get("record");
+		
+		Expression<Double> eRootValue = root.get("value");
+		Expression<Double> eSubValue = sub.get("value");
+		
+		Expression<Date> truncatedDayRoot = cB.function("date_trunc", Date.class, cB.literal("day"), eRootDate);
+		Expression<Date> truncatedDaySub = cB.function("date_trunc", Date.class, cB.literal("day"), eSubDate);
+		
+		pSub.addAll(Arrays.asList(this.pData(cB,query,sub)));
+		pSub.add(cB.equal(truncatedDayRoot,truncatedDaySub));
+		if(min) {sQ.select(cB.min(eSubValue));}
+		else {sQ.select(cB.greatest(eSubValue));}
+		sQ.where(cB.and(pSub.toArray(new Predicate[pSub.size()])));
+		
+		pRoot.add(eRootValue.in(sQ));
+		pRoot.addAll(Arrays.asList(this.pData(cB, query, root)));
+		cQ.select(root);
+		cQ.where(cB.and(pRoot.toArray(new Predicate[pRoot.size()])));
+		
+		if(ObjectUtils.isEmpty(query.getCqOrderings())) {cQ.orderBy(cB.asc(eRootDate));}
+		else {this.obData(cB, cQ, query, root);}
+		
+		TypedQuery<DATA> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
 	}
 
 	@Override

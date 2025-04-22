@@ -74,6 +74,8 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 	
 	List<DATA> fTsData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
+	List<DATA> fTsDataMaximumOfDay(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
+	List<DATA> fTsDataMinimumOfDay(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);

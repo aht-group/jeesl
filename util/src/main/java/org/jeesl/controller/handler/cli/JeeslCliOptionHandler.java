@@ -27,6 +27,7 @@ public class JeeslCliOptionHandler
 	
 	private Options options;
 	private Option oHelp,oDebug,oConfig;
+	private Option oLogFile;
 	
 	private boolean appStarted;
 	public boolean isAppStarted(){return appStarted;}
@@ -57,6 +58,12 @@ public class JeeslCliOptionHandler
 	{
 		oDebug = new Option("debug", "Debug output");
 		options.addOption(oDebug);
+	}
+	
+	public void buildLogFile()
+	{
+		oLogFile = new Option("logFile", "Log to File");
+		options.addOption(oLogFile);
 	}
 	
 	public void buildConfig()
@@ -115,7 +122,8 @@ public class JeeslCliOptionHandler
 	
 	public void handleLog4j2(CommandLine line)
 	{
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("debug.log4j2.xml");}
+		if(line.hasOption(oLogFile.getOpt())) {this.initLogger2("file.log4j2.xml");}
+		else if(line.hasOption(oDebug.getOpt())) {this.initLogger2("debug.log4j2.xml");}
         else {this.initLogger2("app.log4j2.xml");}
 	}
 	private void initLogger2(String loggingProfile)
