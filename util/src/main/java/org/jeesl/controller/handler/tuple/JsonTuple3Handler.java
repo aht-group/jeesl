@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
@@ -131,11 +133,14 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	public List<JsonTuple3<A,B,C>> toList(List<JsonTuple3<A,B,C>> list, A a, B b, C c)
 	{
 		List<JsonTuple3<A,B,C>> result = new ArrayList<>();
-		for(JsonTuple3<A,B,C> t : list)
+		if(ObjectUtils.isNotEmpty(list))
 		{
-			if(t.getId1()==a.getId() && t.getId2()==b.getId() && t.getId3()== c.getId())
+			for(JsonTuple3<A,B,C> t : list)
 			{
-				result.add(t);
+				if(t.getId1()==a.getId() && t.getId2()==b.getId() && t.getId3()== c.getId())
+				{
+					result.add(t);
+				}
 			}
 		}
 		return result;

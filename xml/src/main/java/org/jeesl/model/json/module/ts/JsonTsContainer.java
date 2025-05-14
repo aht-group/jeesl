@@ -23,6 +23,11 @@ public class JsonTsContainer implements Serializable
 	public List<JsonTsMultipoint> getMultiPoints() {return multiPoints;}
 	public void setMultiPoints(List<JsonTsMultipoint> multiPoints) {this.multiPoints = multiPoints;}
 	
+	@JsonProperty("dataPoints")
+	private List<JsonTsPoint> dataPoints;
+	public List<JsonTsPoint> getDataPoints() {return dataPoints;}
+	public void setDataPoints(List<JsonTsPoint> dataPoints) {this.dataPoints = dataPoints;}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

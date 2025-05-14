@@ -19,6 +19,11 @@ public class JsonTsPoint implements Serializable
 	public void setId(Long id) {this.id = id;}
 	@JsonIgnore public boolean isSetId() {return id!=null;}
 	
+	@JsonProperty("data")
+	private JsonTsData data;
+	public JsonTsData getData() {return data;}
+	public void setData(JsonTsData data) {this.data = data;}
+
 	@JsonProperty("mp")
 	private JsonTsMultipoint mp;
 	public JsonTsMultipoint getMp() {return mp;}
