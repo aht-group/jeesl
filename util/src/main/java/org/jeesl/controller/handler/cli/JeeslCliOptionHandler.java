@@ -2,6 +2,7 @@ package org.jeesl.controller.handler.cli;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.logging.LogManager;
 
 import org.apache.commons.cli.CommandLine;
@@ -122,7 +123,7 @@ public class JeeslCliOptionHandler
 	
 	public void handleLog4j2(CommandLine line)
 	{
-		if(line.hasOption(oLogFile.getOpt())) {this.initLogger2("file.log4j2.xml");}
+		if(Objects.nonNull(oLogFile) && line.hasOption(oLogFile.getOpt())) {this.initLogger2("file.log4j2.xml");}
 		else if(line.hasOption(oDebug.getOpt())) {this.initLogger2("debug.log4j2.xml");}
         else {this.initLogger2("app.log4j2.xml");}
 	}
