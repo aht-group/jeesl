@@ -100,28 +100,59 @@
 							  styleClass="t3m-MainNavigation-group-link">Contact</h:outputLink>
 			</h:panelGroup>
 		</h:panelGroup>
-		<h:panelGroup class="t3m-MobileNavigation" layout="block">
-			<button id="t3m-Modal--mobileNavigation-trigger"
-					class="t3m-MobileNavigation-trigger"
-					aria-expanded="false">
-				<h:panelGroup styleClass="sr-only">Toggle mobile menu</h:panelGroup>
-				<svg xmlns="http://www.w3.org/2000/svg"
-					 viewBox="0 0 24 24"
-					 class="t3m-MobileNavigation-bars"
-					 fill="none"
-					 stroke="currentColor"
-					 aria-hidden="true">
-					<path stroke-linecap="round"
-						  stroke-linejoin="round"
-						  stroke-width="2"
-						  d="M4 6h16M4 12h16M4 18h16"></path>
-				</svg>
-				<svg viewBox="0 0 320 512"
-						 class="t3m-MobileNavigation-xmark"
-						 fill="currentColor">
-					<path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"></path>
-				</svg>
-			</button>
-        </h:panelGroup>
+			
+		<h:panelGroup styleClass="t3m-MobileNavigation-container" layout="block">
+			<h:panelGroup styleClass="t3m-MobileNavigation" layout="block">
+				<button id="t3m-Modal--mobileNavigation-trigger"
+						class="t3m-MobileNavigation-trigger t3m-toggle-click"
+						onclick="$('.t3m-toggle-click').toggleClass('modal-active');$('.t3m-Modal--mobileNavigation').fadeToggle(300);"
+						aria-expanded="false">
+					<h:panelGroup styleClass="sr-only">Toggle mobile menu</h:panelGroup>
+					<svg xmlns="http://www.w3.org/2000/svg"
+						 viewBox="0 0 24 24"
+						 class="t3m-MobileNavigation-bars"
+						 fill="none"
+						 stroke="currentColor"
+						 aria-hidden="true">
+						<path stroke-linecap="round"
+							  stroke-linejoin="round"
+							  stroke-width="2"
+							  d="M4 6h16M4 12h16M4 18h16"></path>
+					</svg>
+					<svg viewBox="0 0 320 512"
+							 class="t3m-MobileNavigation-xmark"
+							 fill="currentColor">
+						<path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"></path>
+					</svg>
+				</button>
+	        </h:panelGroup>
+	        
+			<h:panelGroup id="t3m-Modal--mobileNavigation" styleClass="t3m-Modal--mobileNavigation t3m-toggle-click" style="display: none" aria-hidden="true" layout="block">
+				<h:panelGroup styleClass="t3m-Modal--container" layout="block">
+					<h:panelGroup styleClass="t3m-Modal--backdrop" layout="block"
+								  onclick="$('.t3m-toggle-click').removeClass('modal-active');$('.t3m-Modal--mobileNavigation').fadeOut(300);"></h:panelGroup>
+		        	<h:panelGroup styleClass="t3m-Modal--mobileNavigation-content" layout="block">
+						<h:panelGroup styleClass="t3m-Modal--mobileNavigation-group" layout="block">
+	        				<h:outputLink href="https://impact.dorsch.com/about-us" title="About Us">About Us</h:outputLink>
+	        			</h:panelGroup>
+						<h:panelGroup styleClass="t3m-Modal--mobileNavigation-group" layout="block">
+		        			<h:outputLink href="https://impact.dorsch.com/areas-of-expertise" title="Areas of Expertise">Areas of Expertise</h:outputLink>
+	        			</h:panelGroup>
+						<h:panelGroup styleClass="t3m-Modal--mobileNavigation-group" layout="block">
+		              		<h:outputLink href="https://impact.dorsch.com/projects" title="Projects">Projects</h:outputLink>
+	        			</h:panelGroup>
+						<h:panelGroup styleClass="t3m-Modal--mobileNavigation-group" layout="block">
+	              			<h:outputLink href="https://impact.dorsch.com/career" title="Career">Career</h:outputLink>
+	        			</h:panelGroup>
+						<h:panelGroup styleClass="t3m-Modal--mobileNavigation-group" layout="block">
+		              		<h:outputLink href="https://impact.dorsch.com/news" title="News">News</h:outputLink>
+	        			</h:panelGroup>
+						<h:panelGroup styleClass="t3m-Modal--mobileNavigation-group" layout="block">
+		              		<h:outputLink href="https://impact.dorsch.com/contact" title="Contact">Contact</h:outputLink>
+	        			</h:panelGroup>
+		            </h:panelGroup>
+	            </h:panelGroup>
+			</h:panelGroup>
+	    </h:panelGroup>
 	</composite:implementation>
 </html>
