@@ -41,7 +41,7 @@ public class JsonAzureUser implements Serializable
 	public void setDisplayName(String displayName) {this.displayName = displayName;}
 	
 	@JsonProperty("IsShared")
-	private Boolean  shared;
+	private Boolean shared;
 	public Boolean getShared() {return shared;}
 	public void setShared(Boolean shared) {this.shared = shared;}
 
@@ -84,4 +84,19 @@ public class JsonAzureUser implements Serializable
     private List<String> accessedBy;
 	public List<String> getAccessedBy() {return accessedBy;}
 	public void setAccessedBy(List<String> accessedBy) {this.accessedBy = accessedBy;}
+	
+	@JsonProperty("department")
+	private String department;
+	public String getDepartment() {return department;}
+	public void setDepartment(String department) {this.department = department;}
+	
+	@JsonProperty("title")
+	private String title;
+	public String setTitle() {return title;}
+	public void getTitle(String title) {this.title = title;}
+	
+	@JsonProperty("manager")
+	private String manager;
+	public String getManager() {return manager;}
+	public void setManager(String manager) {this.manager = manager;}
 }

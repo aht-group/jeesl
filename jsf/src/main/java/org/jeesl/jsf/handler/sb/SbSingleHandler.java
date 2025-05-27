@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -60,7 +61,6 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 			catch (NoSuchMethodException e) {e.printStackTrace();}
 			catch (SecurityException e) {e.printStackTrace();}
 		}
-		
 	}
 	
 	public void cache(JeeslTree1Cache<T> cache1)
@@ -222,6 +222,12 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	{
 		selection=null;
 		if(list!=null && !list.isEmpty()){selection = list.get(0);}
+	}
+	
+	public void setLast()
+	{
+		selection=null;
+		if(ObjectUtils.isNotEmpty(list)) {selection = list.get(list.size()-1);}
 	}
 	
 	public void setDefault(T t)

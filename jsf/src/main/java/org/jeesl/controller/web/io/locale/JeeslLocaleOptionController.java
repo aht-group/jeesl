@@ -409,6 +409,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 			if(debugSave){logger.info("Saved "+status.getClass().getSimpleName()+" "+status.toString());}
 
 			updateAppScopeBean2(status);
+			if(Objects.nonNull(callback)) {callback.callbackStatusSaved(status);}
 			selectCategory(false);
 			bMessage.growlSaved((EjbSaveable)status);
 		}
@@ -422,6 +423,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 			logger.error(JeeslLockingException.class.getSimpleName()+" "+e.getMessage());
 			bMessage.constraintInUse(null);
 		}
+		
 	}
 
 	public void rm() throws ClassNotFoundException
@@ -448,7 +450,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 //		if(rFigure){figure=null;}
 //	}
 
-	protected void updateAppScopeBean2(Object o){}
+	protected void updateAppScopeBean2(Object o) {}
 
 	public void reorder() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fGraphic, items);}
 	public void reorderFigures() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fGraphic,figures);}

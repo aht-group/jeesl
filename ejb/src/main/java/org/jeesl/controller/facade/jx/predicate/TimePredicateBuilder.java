@@ -31,6 +31,7 @@ public class TimePredicateBuilder
 	
 	public static void jtTime(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqTime cq, Expression<LocalDateTime> e)
 	{
+//		logger.info("Applying "+cq.toString()+" "+predicates.size());
 		switch(cq.getType())
 		{
 			case equalTo: predicates.add(cB.equal(e,cq.getTime())); break;
@@ -38,7 +39,9 @@ public class TimePredicateBuilder
 			case greaterThan: predicates.add(cB.greaterThan(e,cq.getTime())); break;
 			
 			case leDb: predicates.add(cB.lessThanOrEqualTo(e,cq.getTime())); break;
+			case Null: predicates.add(cB.isNull(e)); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
+//		logger.info("Done "+cq.toString()+" "+predicates.size());
 	}
 }

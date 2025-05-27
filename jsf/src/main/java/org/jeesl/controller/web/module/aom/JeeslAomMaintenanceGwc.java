@@ -199,7 +199,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.tenant(tenant);
 		query.addAomEventStatus(sbhEventStatus.getSelected());
-		query.addCqDate(CqDate.lessOrEqualTo(sbDateHandler.getDateTo(), CqDate.path(JeeslAomEvent.Attributes.record)));
+		query.addCqDate(CqDate.isBeforeOrAt(sbDateHandler.getDateTo(), CqDate.path(JeeslAomEvent.Attributes.record)));
 		
 		events.addAll(fAsset.fAomEvents(query));
 		Collections.sort(events,cpEvent);

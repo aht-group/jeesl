@@ -19,5 +19,4 @@ public class JsonAzure implements Serializable
 	private List<JsonAzureUser> users;
 	public List<JsonAzureUser> getUsers() {return users;}
 	public void setUsers(List<JsonAzureUser> users) {this.users = users;}
-	
 }

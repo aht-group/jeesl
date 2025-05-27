@@ -7,4 +7,5 @@ import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 public interface JeeslOptionTableCallback extends Serializable
 {
 	JeeslSystemRestInterface rest(String code);
+	void callbackStatusSaved(Object ejb);
 }

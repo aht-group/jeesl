@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public interface JeeslCqTime extends Serializable
 {
-	public enum Type {equalTo,greaterThan,lessThan,leDb}
+	public enum Type {Null,equalTo,greaterThan,lessThan,leDb}
 	
 	Type getType();
 	LocalDateTime getTime();

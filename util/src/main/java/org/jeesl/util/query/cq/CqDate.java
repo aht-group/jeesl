@@ -2,6 +2,7 @@ package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.jeesl.model.ejb.io.db.CqGraphFetch;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
@@ -14,12 +15,13 @@ public class CqDate implements JeeslCqDate
 	private final LocalDate date; public LocalDate getDate() {return date;}
 	private final String path; public String getPath() {return path;}
 
-	public static CqDate lessThan(LocalDate date) {return new CqDate(Type.LessThan,date,null);}
+	public static CqDate lessThan(LocalDate date) {return new CqDate(Type.Before,date,null);}
 	
-	public static CqDate lessThan(LocalDate date, String path) {return new CqDate(Type.LessThan,date,path);}
-	public static CqDate lessOrEqualTo(LocalDate date, String path) {return new CqDate(Type.LessThanOrEqualTo,date,path);}
-	public static CqDate dbIsEqualOrAfter(LocalDate date, String path) {return new CqDate(Type.DbIsEqualOrAfter,date,path);}
-	public static CqDate dbIsEqual(LocalDate date, String path) {return new CqDate(Type.DbIsEqual,date,path);}
+	public static CqDate isBefore(LocalDate date, String path) {return new CqDate(Type.Before,date,path);}
+	public static CqDate isBeforeOrAt(LocalDate date, String path) {return new CqDate(Type.BeforeOrAt,date,path);}
+	public static CqDate isAt(LocalDate date, String path) {return new CqDate(Type.Equal,date,path);}
+	public static CqDate isAtOrAfter(LocalDate date, String path) {return new CqDate(Type.AtOrAfter,date,path);}
+	public static CqDate isNull(String path) {return new CqDate(Type.Null,null,path);}
 	
 
 	private CqDate(Type type, LocalDate date, String path)
@@ -34,7 +36,7 @@ public class CqDate implements JeeslCqDate
 		StringBuilder sb = new StringBuilder();
 		sb.append(path);
 		sb.append(" ").append(type.toString());
-		sb.append(" ").append(date.toString());
+		sb.append(" ").append(Objects.nonNull(date) ? date.toString() : "--");
 		
 		return sb.toString();
 	}

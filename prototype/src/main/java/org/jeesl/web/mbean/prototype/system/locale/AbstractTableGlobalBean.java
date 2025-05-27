@@ -298,8 +298,6 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 			if(supportsComponents){reloadFigures();}
 			if(debugSave){logger.info("Saved "+status.getClass().getSimpleName()+" "+status.toString());}
 
-
-
 			updateAppScopeBean2(status);
 			selectCategory(false);
 			bMessage.growlSaved((EjbSaveable)status);

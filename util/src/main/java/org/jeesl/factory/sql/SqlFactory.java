@@ -1,6 +1,7 @@
 package org.jeesl.factory.sql;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,9 +73,15 @@ public class SqlFactory
 		SqlFactory.deleteFrom(sb,c,alias,newLine);
 		return this;
 	}
+	
 	public <C extends EjbWithId, E extends Enum<E>, T extends EjbWithId> SqlFactory update(Class<C> c, E attribute, T t)
 	{
 		SqlFactory.update(sb,c,alias,attribute,t,newLine);
+		return this;
+	}
+	public <C extends EjbWithId, E extends Enum<E>, T extends EjbWithId> SqlFactory updateTime(Class<C> c, E attribute, LocalDateTime value)
+	{
+		SqlFactory.updateLdt(sb,c,alias,attribute,value,newLine);
 		return this;
 	}
 	
@@ -171,6 +178,16 @@ public class SqlFactory
 	}
 	
 	public static <E extends Enum<E>> void updateS(StringBuilder sb, Class<?> c, String alias, E attribute, String value, boolean newLine)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append("UPDATE ").append(c.getAnnotation(Table.class).name());
+		if(alias!=null) {sb.append(" "+alias);}
+		sb.append(" SET ").append(path(alias,attribute)).append("=");
+		if(value!=null) {sb.append("'").append(value).append("'");}
+		else {sb.append("NULL");}
+		newLine(newLine,sb);
+	}
+	public static <E extends Enum<E>> void updateLdt(StringBuilder sb, Class<?> c, String alias, E attribute, LocalDateTime value, boolean newLine)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
 		sb.append("UPDATE ").append(c.getAnnotation(Table.class).name());

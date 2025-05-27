@@ -22,9 +22,9 @@ public class DatePredicateBuilder
 	{
 		switch(cq.getType())
 		{
-			case DbIsEqualOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
-			case LessThanOrEqualTo: predicates.add(cB.lessThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().plusDays(1).atStartOfDay()))); break;
-			case LessThan: predicates.add(cB.lessThan(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
+			case AtOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
+			case BeforeOrAt: predicates.add(cB.lessThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().plusDays(1).atStartOfDay()))); break;
+			case Before: predicates.add(cB.lessThan(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
 	}
@@ -33,10 +33,10 @@ public class DatePredicateBuilder
 	{
 		switch(cq.getType())
 		{
-			case DbIsEqualOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,cq.getDate())); break;
-			case LessThanOrEqualTo: predicates.add(cB.lessThanOrEqualTo(eDate,cq.getDate())); break;
-			case LessThan: predicates.add(cB.lessThan(eDate,cq.getDate())); break;
-			case DbIsEqual: predicates.add(cB.equal(eDate,cq.getDate())); break;
+			case AtOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,cq.getDate())); break;
+			case BeforeOrAt: predicates.add(cB.lessThanOrEqualTo(eDate,cq.getDate())); break;
+			case Before: predicates.add(cB.lessThan(eDate,cq.getDate())); break;
+			case Equal: predicates.add(cB.equal(eDate,cq.getDate())); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
 	}
@@ -45,8 +45,9 @@ public class DatePredicateBuilder
 	{
 		switch(cq.getType())
 		{
-			case DbIsEqualOrAfter: predicates.add(cB.greaterThanOrEqualTo(eTime,cq.getDate().atStartOfDay())); break;
-			case LessThanOrEqualTo: predicates.add(cB.lessThan(eTime,cq.getDate().plusDays(1).atStartOfDay())); break;
+			case AtOrAfter: predicates.add(cB.greaterThanOrEqualTo(eTime,cq.getDate().atStartOfDay())); break;
+			case BeforeOrAt: predicates.add(cB.lessThan(eTime,cq.getDate().plusDays(1).atStartOfDay())); break;
+			case Null: predicates.add(cB.isNull(eTime)); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
 	}
