@@ -2734,11 +2734,51 @@ body, .ui-widget {
 				}
 			}
 			
-			&.jeesl-left {
-				.jeesl-dropdown-list {
-					left: 0;
-					right: auto;
-					text-align: left;
+			&.jeesl-left .jeesl-dropdown-list {
+				left: 0;
+				right: auto;
+				text-align: left;
+				
+				.jeesl-dropdown-item .jeesl-dropdown-item-label {
+					flex-direction: row-reverse;
+					
+					.jeesl-dropdown-item-label-icon, .jeesl-dropdown-item-label-text {
+						&:first-child {
+							margin-right: 0;
+
+							 @media (max-width: 768px) {
+								margin-right: 0;
+							}
+						}
+						
+						&:last-child {
+							margin-left: 0;
+
+							 @media (max-width: 768px) {
+								margin-left: 12px;
+							}
+						}
+					}
+				}
+			}
+			
+			&.jeesl-right .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
+				.jeesl-dropdown-item-label-icon, .jeesl-dropdown-item-label-text {
+					&:first-child {
+						margin-left: 0;
+						
+						 @media (max-width: 768px) {
+							margin-left: 0;
+						}
+					}
+
+					&:last-child {
+						margin-right: 0;
+						
+						 @media (max-width: 768px) {
+							margin-right: 12px;
+						}
+					}
 				}
 			}
 			
@@ -2947,11 +2987,15 @@ body, .ui-widget {
 						}
 						
 						.jeesl-dropdown-item-label {
+							display: flex;
+							
 							@media (max-width: 768px) {
 								padding-right: 0;
 							}
 							
-							.jeesl-dropdown-item-label-icon {
+							.jeesl-dropdown-item-label-icon, .jeesl-dropdown-item-label-text {
+								margin: 0 $half-spacing;
+							
 								@media (max-width: 768px) {
 									padding: 12px 0;
 								}
@@ -2978,26 +3022,8 @@ body, .ui-widget {
 						}
 						
 						.jeesl-dropdown-item-label-icon {
-							margin: 0;
-							
 							@media (max-width: 768px) {
 								padding: 12px 0;
-							}
-							
-							&:not(:first-child) {
-								margin-left: 5px;
-								
-								 @media (max-width: 768px) {
-									margin-left: 0;
-								}
-							}
-							
-							&:not(:last-child) {
-								margin-right: 5px;
-								
-								 @media (max-width: 768px) {
-									margin-right: 12px;
-								}
 							}
 						}
 					}
@@ -4562,6 +4588,27 @@ body, .ui-widget {
 		background: transparent;
 		border: none;
 		box-shadow: none;
+		
+		&.jeesl-multipanel-background {
+			box-shadow: $overlay-shadow;
+		
+			.ui-dialog-titlebar {
+				border-radius: $border-radius-top;
+				box-shadow: none;
+			}
+			
+			.ui-dialog-content {
+				background: $white-100;
+				border: $border;
+				border-radius: $border-radius-bottom;
+				border-top-width: 0;
+				padding: $regular-spacing;
+				
+				.jeesl-panel, .jeesl-datatable {
+					box-shadow: none;
+				}
+			}
+		}
 		
 		.ui-dialog-titlebar {
 			border: $border;
