@@ -5,16 +5,18 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
+import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayIoSsiVersionMarker;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiCredential;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiContext;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiError;
 
-public class FlywayIoSsiPathProvider implements JeeslFlywayPathProvider,JeesDdlClassProvider
+public class FlywayIoSsiPathProvider implements JeeslFlywayPathProvider,JeesDdlClassProvider,FlywayIoSsiVersionMarker
 {
 	public static FlywayIoSsiPathProvider instance() {return new FlywayIoSsiPathProvider();}
 	private FlywayIoSsiPathProvider() {}
+	
 	
 	@Override public String getRootDirectory() {return "jeesl/system/io/db/migration/io/ssi";}
 	
@@ -32,4 +34,6 @@ public class FlywayIoSsiPathProvider implements JeeslFlywayPathProvider,JeesDdlC
 		list.add(IoSsiError.class);
 		return list;
 	}
+
+	@Override public void sinceIoSsi(int i) {}
 }

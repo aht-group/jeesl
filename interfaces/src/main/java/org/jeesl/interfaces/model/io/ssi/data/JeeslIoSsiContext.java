@@ -37,4 +37,7 @@ public interface JeeslIoSsiContext <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	public ENTITY getClassC();
 	public void setClassC(ENTITY classC);
+	
+	String getName();
+	void setName(String name);
 }

@@ -58,6 +58,10 @@ public class IoSsiContext implements JeeslIoSsiContext<IoSsiSystem,IoLabelEntity
 	@Override public IoLabelEntity getClassC() {return classC;}
 	@Override public void setClassC(IoLabelEntity classC) {this.classC = classC;}
 
+	private String name;
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
+
 
 	@Override public boolean equals(Object object){return (object instanceof IoSsiContext) ? id == ((IoSsiContext) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}

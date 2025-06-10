@@ -1,0 +1,1 @@
+ALTER TABLE public.IoSsiContext ADD COLUMN name varchar(255);

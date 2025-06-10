@@ -566,7 +566,6 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
-
 	private Predicate[] pSsiData(CriteriaBuilder cB, JeeslIoSsiQuery<CTX,STATUS,ERROR> query, Root<DATA> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -604,6 +603,29 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		if(ObjectUtils.isNotEmpty(query.getIoSsiStatus())) {predicates.add(root.<STATUS>get(JeeslIoSsiData.Attributes.link.toString()).in(query.getIoSsiStatus()));}
 		if(ObjectUtils.isNotEmpty(query.getIoSsiErrors())){predicates.add(root.<ERROR>get(JeeslIoSsiData.Attributes.error.toString()).in(query.getIoSsiErrors()));}
 		
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+
+	@Override
+	public List<ATTRIBUTE> fSsiAttributes(JeeslIoSsiQuery<CTX, STATUS, ERROR> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<ATTRIBUTE> cQ = cB.createQuery(fbSsi.getClassAttribute());
+		Root<ATTRIBUTE> root = cQ.from(fbSsi.getClassAttribute());
+		
+		cQ.select(root);
+		cQ.where(cB.and(this.pSsiAttribute(cB,query,root)));
+		
+		TypedQuery<ATTRIBUTE> tQ = em.createQuery(cQ);
+		super.pagination(tQ,query);
+		return tQ.getResultList();
+	}
+	private Predicate[] pSsiAttribute(CriteriaBuilder cB, JeeslIoSsiQuery<CTX,STATUS,ERROR> query, Root<ATTRIBUTE> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getIoSsiContexts())) {predicates.add(root.<CTX>get(JeeslIoSsiAttribute.Attributes.mapping.toString()).in(query.getIoSsiContexts()));}
+			
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 }

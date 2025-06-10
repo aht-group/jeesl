@@ -7,5 +7,5 @@ public interface FlywayIoSsiVersionMarker extends JeeslFlywayVersionMarker
 	
 //	public void markerIoSsi();
 	
-	void implementsOfIoSsiSince(int i);
+	void sinceIoSsi(int i);
 }
