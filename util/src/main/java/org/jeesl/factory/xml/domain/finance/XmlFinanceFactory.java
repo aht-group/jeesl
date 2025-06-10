@@ -137,7 +137,7 @@ public class XmlFinanceFactory <L extends JeeslLang, C extends UtilsCurrency<L>>
 	}
 	public static <E extends Enum<E>> void plus(Figures figures, String code, Double value)
 	{
-		if(value!=null)
+		if(Objects.nonNull(value))
 		{
 			for(Finance f : figures.getFinance())
 			{

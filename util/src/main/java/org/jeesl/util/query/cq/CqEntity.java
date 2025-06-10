@@ -17,6 +17,7 @@ public class CqEntity implements JeeslCqEntity
 
 	public static CqEntity isNull(String path) {return new CqEntity(Type.IsNull,null,path);}
 	public static CqEntity nonNull(String path) {return new CqEntity(Type.IsNonNull,null,path);}
+	public static CqEntity includeEmpty(String path) {return new CqEntity(Type.IncludeEmpty,null,path);}
 
 	private CqEntity(Type type, EjbWithId id, String path)
 	{

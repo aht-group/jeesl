@@ -6,7 +6,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslCqEntity extends Serializable
 {
-	public enum Type {IsNull,IsNonNull}
+	public enum Type {IsNull,IsNonNull,IncludeEmpty}
 	
 	EjbWithId getValue();
 	Type getType();

@@ -1,17 +1,18 @@
 FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y wget maven git tmux procps build-essential libz-dev unzip curl xmlstarlet
+RUN apt-get update && apt-get install -y wget maven git tmux procps build-essential libz-dev unzip curl xmlstarlet musl musl-dev musl-tools
 
 RUN cd /usr/lib/jvm \
 	&& wget https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-aarch64_bin.tar.gz \
 	&& tar -xvzf graalvm-jdk-21_linux-aarch64_bin.tar.gz \
 	&& rm graalvm-jdk-21_linux-aarch64_bin.tar.gz \
-	&& update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-jdk-21.0.4+8.1/bin/java 1 \
-	&& cd /usr/lib/jvm
+	&& update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-jdk-21.0.7+8.1/bin/java 1 \
+	&& cd /usr/lib/jvm \
+	&& cd /
 	
-ENV PATH="${PATH}:/usr/lib/jvm/graalvm-jdk-21.0.4+8.1/bin"
-ENV JAVA_HOME="/usr/lib/jvm/graalvm-jdk-21.0.4+8.1"
-RUN update-alternatives --set java /usr/lib/jvm/graalvm-jdk-21.0.4+8.1/bin/java
+ENV PATH="${PATH}:/usr/lib/jvm/graalvm-jdk-21.0.7+8.1/bin"
+ENV JAVA_HOME="/usr/lib/jvm/graalvm-jdk-21.0.7+8.1"
+RUN update-alternatives --set java /usr/lib/jvm/graalvm-jdk-21.0.7+8.1/bin/java
 
 RUN cd /root \
 	&& mkdir .m2 && mkdir .m2/repository \
