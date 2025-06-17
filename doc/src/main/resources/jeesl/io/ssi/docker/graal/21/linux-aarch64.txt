@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y wget maven git tmux procps build-essential libz-dev unzip curl xmlstarlet musl musl-dev musl-tools
+RUN apt-get update && apt-get install -y wget maven git tmux procps build-essential libz-dev unzip curl xmlstarlet 
 
 RUN cd /usr/lib/jvm \
 	&& wget https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-aarch64_bin.tar.gz \
@@ -10,8 +10,15 @@ RUN cd /usr/lib/jvm \
 	&& cd /usr/lib/jvm \
 	&& cd /
 	
+# RUN wget https://musl.cc/aarch64-linux-musl-cross.tgz && \
+#   tar -xzf aarch64-linux-musl-cross.tgz && \
+#    mv aarch64-linux-musl-cross /opt/musl
+
 ENV PATH="${PATH}:/usr/lib/jvm/graalvm-jdk-21.0.7+8.1/bin"
+#ENV PATH="${PATH}:/usr/lib/jvm/graalvm-jdk-21.0.7+8.1/bin:/opt/musl/bin"
+#ENV CC=aarch64-linux-musl-gcc
 ENV JAVA_HOME="/usr/lib/jvm/graalvm-jdk-21.0.7+8.1"
+
 RUN update-alternatives --set java /usr/lib/jvm/graalvm-jdk-21.0.7+8.1/bin/java
 
 RUN cd /root \

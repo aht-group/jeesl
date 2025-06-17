@@ -43,7 +43,5 @@ public interface JeeslOauthRest extends JeeslOauthRestInterface
 	
 	@GET @Path("/user/info")
 	@Produces(MediaType.APPLICATION_JSON)
-	JsonOauthUser user(@HeaderParam("Authorization") String httpAuth
-					
-		            );
+	JsonOauthUser user(@HeaderParam("Authorization") String httpAuth);
 }

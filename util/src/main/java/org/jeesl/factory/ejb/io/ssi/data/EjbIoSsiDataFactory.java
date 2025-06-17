@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.io.ssi.data;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,8 +11,8 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiContext<?,?>,
-									DATA extends JeeslIoSsiData<MAPPING,LINK,?,?>,
+public class EjbIoSsiDataFactory <CONTEXT extends JeeslIoSsiContext<?,?>,
+									DATA extends JeeslIoSsiData<CONTEXT,LINK,?,?>,
 									LINK extends JeeslStatus<?,?,LINK>>
 {
 	private final Class<DATA> cData;
@@ -21,13 +22,13 @@ public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiContext<?,?>,
         this.cData = cData;
 	}
 	
-	public DATA build(MAPPING mapping, String code, LINK link, Object json)
+	public DATA build(CONTEXT context, String code, LINK link, Object json)
 	{
 		DATA ejb = null;
 		try
 		{
-			ejb = cData.newInstance();
-			ejb.setMapping(mapping);
+			ejb = cData.getDeclaredConstructor().newInstance();
+			ejb.setMapping(context);
 			ejb.setCode(code);
 			ejb.setLink(link);
 			ejb.setJsonCreatedAt(new Date());
@@ -36,6 +37,11 @@ public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiContext<?,?>,
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();
+		}
 		return ejb;
 	}
 	

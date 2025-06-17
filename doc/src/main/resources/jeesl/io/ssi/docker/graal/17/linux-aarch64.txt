@@ -1,17 +1,19 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 RUN apt-get update && apt-get install -y wget maven git tmux procps build-essential libz-dev unzip curl xmlstarlet
 
 RUN cd /usr/lib/jvm \
-	&& wget https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-aarch64_bin.tar.gz \
-	&& tar -xvzf graalvm-jdk-17_linux-aarch64_bin.tar.gz \
-	&& rm graalvm-jdk-17_linux-aarch64_bin.tar.gz \
-	&& update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-jdk-17.0.11+7.1/bin/java 1 \
-	&& cd /usr/lib/jvm
-	
-ENV PATH="${PATH}:/usr/lib/jvm/graalvm-jdk-17.0.11+7.1/bin"
-ENV JAVA_HOME="/usr/lib/jvm/graalvm-jdk-17.0.11+7.1"
-RUN update-alternatives --set java /usr/lib/jvm/graalvm-jdk-17.0.11+7.1/bin/java
+	&& wget https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-17.0.8/graalvm-community-jdk-17.0.8_linux-aarch64_bin.tar.gz \
+	&& tar -xzf graalvm-community-jdk-17.0.8_linux-aarch64_bin.tar.gz \
+	&& rm graalvm-community-jdk-17.0.8_linux-aarch64_bin.tar.gz \
+	&& update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-community-openjdk-17.0.8+7.1/bin/java 1 \
+	&& cd /root
+
+ENV GRAALVM_HOME=/usr/lib/jvm/graalvm-community-openjdk-17.0.8+7.1
+ENV PATH="${GRAALVM_HOME}:${PATH}"
+ENV JAVA_HOME="/usr/bin/java java /usr/lib/jvm/graalvm-community-openjdk-17.0.8+7.1"
+
+RUN update-alternatives --set java /usr/lib/jvm/graalvm-community-openjdk-17.0.8+7.1/bin/java
 
 RUN cd /root \
 	&& mkdir .m2 && mkdir .m2/repository \

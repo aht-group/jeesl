@@ -80,15 +80,14 @@
 				</p:panel>	
 			</h:form>
 			<h:form id="fViews">
-				<p:dataTable id="dtViews" styleClass="jeesl-datatable"
+				<p:dataTable id="dtViews" styleClass="jeesl-datatable" rendered="#{cc.attrs.bean.role.id gt 0}"
 							 var="v" value="#{cc.attrs.bean.views}"
-							 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}"
-							 rendered="#{cc.attrs.bean.role.id gt 0}">
+							 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}">
 					<f:facet name="header">
 						<j:dtHeader id="dth" title="#{msg.aupSecurityViews}">
 							<j:svg type="jeeslAdd" onstart="PF('wvOpViewSelection').show();" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
 							<p:overlayPanel id="opAddView" widgetVar="wvOpViewSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
-									<p:dataTable id="dtAddView" styleClass="jeesl-dropdown-list"
+								<p:dataTable id="dtAddView" styleClass="jeesl-dropdown-list"
 												 var="v" value="#{cc.attrs.bean.opViews}" rowKey="#{v.id}"
 						                         selection="#{cc.attrs.bean.opView}" selectionMode="single"
 										 		 rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -131,7 +130,7 @@
 							 rendered="#{cc.attrs.bean.role.id gt 0}">
 					<f:facet name="header">
 						<j:dtHeader id="dth" title="#{msg.jeeslSecurityActions}">
-							<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" oncomplete="if(!window.toggleMenu){console.log(this);$(this).toggleClass('jeesl-active').next().toggleClass('jeeslActive');}" library="jeeslGfx" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
+							<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" styleClass="pf-action-dropdown jeesl-menu-bar-dropdown"/>
 							<p:overlayPanel widgetVar="wvOpActionSelection" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
 								<p:dataTable id="dtOpSector" styleClass="jeesl-dropdown-list"
 											var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
