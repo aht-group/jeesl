@@ -16,11 +16,15 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslAttributes
 @DownloadJeeslDescription
-public interface JeeslReportStyle<L extends JeeslLang,D extends JeeslDescription>
+public interface JeeslReportStyle <L extends JeeslLang,D extends JeeslDescription
+//,									ALIGNMENT extends JeeslReportAlignment<?,?,?,?>
+>
 			extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 					EjbWithCode,EjbWithPositionVisible,
 					EjbWithLang<L>,EjbWithDescription<D>
-{		
+{
+//	void dummy();
+	
 	String getFont();
 	void setFont(String font);
 	
@@ -76,7 +80,4 @@ public interface JeeslReportStyle<L extends JeeslLang,D extends JeeslDescription
 	
 	int getSizeBorderBottom();
 	void setSizeBorderBottom(int sizeBorderBottom);
-	
-//	void dummy();
-	
 }

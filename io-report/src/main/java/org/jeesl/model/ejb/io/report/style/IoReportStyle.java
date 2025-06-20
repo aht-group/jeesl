@@ -139,7 +139,7 @@ public class IoReportStyle implements JeeslReportStyle<IoLang,IoDescription>
 	public int getSizeBorderBottom() {return sizeBorderBottom;}
 	public void setSizeBorderBottom(int sizeBorderBottom) {this.sizeBorderBottom = sizeBorderBottom;}
 
-	@NotNull @ManyToOne
+	@ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoReportStyle_alignment"))
 	private IoReportAlignment alignment;
 	public IoReportAlignment getAlignment() {return alignment;}
@@ -148,7 +148,7 @@ public class IoReportStyle implements JeeslReportStyle<IoLang,IoDescription>
 
 	@Override public boolean equals(Object object){return (object instanceof IoReportStyle) ? id == ((IoReportStyle) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
