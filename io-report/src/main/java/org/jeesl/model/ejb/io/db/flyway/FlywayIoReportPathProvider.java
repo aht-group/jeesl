@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
-import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayModuleAomVersionMarker;
+import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayIoReportVersionMarker;
 
-public class FlywayIoReportPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywayModuleAomVersionMarker
+public class FlywayIoReportPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywayIoReportVersionMarker
 {	
 	public static FlywayIoReportPathProvider instance() {return new FlywayIoReportPathProvider();}
 	
@@ -25,5 +25,5 @@ public class FlywayIoReportPathProvider implements JeeslFlywayPathProvider, Jees
 		return list;
 	}
 
-	@Override public void sinceModuleAom(int i) {}
+	@Override public void sinceIoReport(int i) {}
 }
