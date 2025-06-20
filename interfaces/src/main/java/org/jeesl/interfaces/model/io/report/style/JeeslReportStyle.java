@@ -77,4 +77,6 @@ public interface JeeslReportStyle<L extends JeeslLang,D extends JeeslDescription
 	int getSizeBorderBottom();
 	void setSizeBorderBottom(int sizeBorderBottom);
 	
+//	void dummy();
+	
 }

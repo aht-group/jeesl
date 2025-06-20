@@ -6,6 +6,8 @@ import java.util.List;
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayIoReportVersionMarker;
+import org.jeesl.model.ejb.io.report.style.IoReportAlignment;
+import org.jeesl.model.ejb.io.report.style.IoReportStyle;
 
 public class FlywayIoReportPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywayIoReportVersionMarker
 {	
@@ -20,7 +22,8 @@ public class FlywayIoReportPathProvider implements JeeslFlywayPathProvider, Jees
 	{
 		List<Class<?>> list = new ArrayList<>();
 		
-		
+		list.add(IoReportStyle.class);
+		list.add(IoReportAlignment.class);
 		
 		return list;
 	}
