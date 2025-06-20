@@ -18,7 +18,6 @@ public class MqttMessageFactory
 	private Double valueDouble;
 	private Object valueJson;
 	
-	
 	public static MqttMessageFactory instance() {return new MqttMessageFactory();}
 	public MqttMessageFactory()
 	{
