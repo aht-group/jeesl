@@ -15,6 +15,7 @@ import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -44,7 +45,8 @@ public class AbstractIoReportBean <L extends JeeslLang, D extends JeeslDescripti
 							ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 							TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 							CELL extends JeeslReportCell<L,D,TEMPLATE>,
-							STYLE extends JeeslReportStyle<L,D>,
+							STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+							ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 							CDT extends JeeslReportCellType<L,D,CDT,?>,
 							CW extends JeeslReportColumnWidth<L,D,CW,?>,
 							RT extends JeeslReportRowType<L,D,RT,?>,
@@ -65,9 +67,9 @@ public class AbstractIoReportBean <L extends JeeslLang, D extends JeeslDescripti
 	final static Logger logger = LoggerFactory.getLogger(AbstractIoReportBean.class);
 	
 	protected JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport;
-	protected final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport;
+	protected final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport;
 	
-	protected AbstractIoReportBean(IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
+	protected AbstractIoReportBean(IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
 	{
 		super(fbReport.getClassL(),fbReport.getClassD());
 		this.fbReport=fbReport;

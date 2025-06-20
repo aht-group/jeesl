@@ -35,7 +35,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang, D extends JeeslDescripti
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,?>,
 								
-								STYLE extends JeeslReportStyle<L,D>,
+								STYLE extends JeeslReportStyle<L,D,?>,
 								CDT extends JeeslStatus<L,D,CDT>,
 								RT extends JeeslReportRowType<L,D,RT,?>>
 {

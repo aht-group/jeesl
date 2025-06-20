@@ -17,7 +17,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 @DownloadJeeslDescription
 public interface JeeslReportStyle <L extends JeeslLang,D extends JeeslDescription
-//,									ALIGNMENT extends JeeslReportAlignment<?,?,?,?>
+,									ALIGNMENT extends JeeslReportAlignment<?,?,?,?>
 >
 			extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 					EjbWithCode,EjbWithPositionVisible,

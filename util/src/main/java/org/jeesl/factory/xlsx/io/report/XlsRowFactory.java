@@ -18,6 +18,7 @@ import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -38,7 +39,8 @@ public class XlsRowFactory <
 							ROW extends JeeslReportRow<?,?,SHEET,TEMPLATE,CDT,RT>,
 							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
-							STYLE extends JeeslReportStyle<?,?>,
+							STYLE extends JeeslReportStyle<?,?,ALIGNMENT>,
+							ALIGNMENT extends JeeslReportAlignment<?,?,ALIGNMENT,?>,
 							CDT extends JeeslReportCellType<?,?,CDT,?>,
 							CW extends JeeslReportColumnWidth<?,?,CW,?>,
 							RT extends JeeslReportRowType<?,?,RT,?>>
@@ -51,10 +53,10 @@ public class XlsRowFactory <
 	private final EjbIoReportColumnGroupFactory<?,?,SHEET,GROUP,COLUMN,STYLE> efColumnGroup;
 	private final EjbIoReportColumnFactory<?,?,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT> efColumn;
 	
-	private XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell;
+	private XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW> xfCell;
 	
-	public XlsRowFactory(String localeCode, final IoReportFactoryBuilder<?,?,?,?,?,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
-			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell)
+	public XlsRowFactory(String localeCode, final IoReportFactoryBuilder<?,?,?,?,?,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,?,?,?,?,?,?,?> fbReport,
+			XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW> xfCell)
 	{
 		this.localeCode = localeCode;
 //		this.fbReport=fbReport;

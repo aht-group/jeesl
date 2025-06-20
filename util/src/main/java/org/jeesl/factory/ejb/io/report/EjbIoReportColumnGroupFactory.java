@@ -29,12 +29,10 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class EjbIoReportColumnGroupFactory<L extends JeeslLang,D extends JeeslDescription,
-								
 								SHEET extends JeeslReportSheet<L,D,?,?,GROUP,?>,
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,?,?,?>,
-								
-								STYLE extends JeeslReportStyle<L,D>>
+								STYLE extends JeeslReportStyle<L,D,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportColumnGroupFactory.class);
 	

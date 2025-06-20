@@ -41,6 +41,7 @@ import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -84,7 +85,8 @@ public abstract class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D
 						ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 						TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 						CELL extends JeeslReportCell<L,D,TEMPLATE>,
-						STYLE extends JeeslReportStyle<L,D>,
+						STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+						ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 						CDT extends JeeslReportCellType<L,D,CDT,?>,
 						CW extends JeeslReportColumnWidth<L,D,CW,?>,
 						RT extends JeeslReportRowType<L,D,RT,?>,
@@ -98,7 +100,7 @@ public abstract class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D
 						RE extends JeeslRevisionEntity<L,D,RCAT,?,RA,?>,
 						RA extends JeeslRevisionAttribute<L,D,RE,?,?>
 						>
-	extends AbstractIoReportBean<L,D,LOC,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION,RCAT,RE,RA>
+	extends AbstractIoReportBean<L,D,LOC,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION,RCAT,RE,RA>
 	implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -141,13 +143,13 @@ public abstract class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D
 	private EjbIoReportColumnFactory<L,D,SHEET,GROUP,COLUMN,ROW,CELL,STYLE,CDT,CW,RT> efColumn;
 	private EjbIoReportRowFactory<L,D,SHEET,GROUP,ROW,TEMPLATE,STYLE,CDT,RT> efRow;
 	
-	private final XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfReport;
-	private JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT> reportUpdater;
+	private final XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT> xfReport;
+	private JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT> reportUpdater;
 
 	private String restUrl; public String getRestUrl() {return restUrl;} public void setRestUrl(String restUrl) {this.restUrl = restUrl;}
 	protected JeeslFacade fRest;
 	
-	protected AbstractAdminIoReportDefinitionBean(final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
+	protected AbstractAdminIoReportDefinitionBean(final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
 	{
 		super(fbReport);
 		sbhCategory = new SbMultiHandler<CATEGORY>(fbReport.getClassCategory(),this);

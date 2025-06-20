@@ -7,6 +7,7 @@ import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.symbol.XmlColorFactory;
 import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -24,7 +25,8 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 								ROW extends JeeslReportRow<L,D,?,?,CDT,?>,
 								
 								
-								STYLE extends JeeslReportStyle<L,D>,
+								STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+								ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>>
 {
@@ -33,7 +35,7 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 	private Layout q;
 	
 	private XmlTypeFactory<L,D,CW> xfType;
-	private XmlStylesFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfStyles;
+	private XmlStylesFactory<L,D,GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT,CW> xfStyles;
 	private XmlFontFactory<STYLE> xfFont;
 	
 	public XmlLayoutFactory(String localeCode, Layout q)

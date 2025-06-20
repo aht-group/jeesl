@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.system.io.report;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -19,7 +20,8 @@ public class XmlStylesFactory <L extends JeeslLang,D extends JeeslDescription,
 								GROUP extends JeeslReportColumnGroup<L,D,?,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
 								ROW extends JeeslReportRow<L,D,?,?,CDT,?>,
-								STYLE extends JeeslReportStyle<L,D>,
+								STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+								ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>
 								>
@@ -28,7 +30,7 @@ public class XmlStylesFactory <L extends JeeslLang,D extends JeeslDescription,
 	
 	private Styles q;
 	
-	private XmlStyleFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfStyle;
+	private XmlStyleFactory<L,D,GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT,CW> xfStyle;
 	
 	public XmlStylesFactory(String localeCode, Styles q)
 	{

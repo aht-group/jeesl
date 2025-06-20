@@ -22,6 +22,7 @@ import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -53,7 +54,8 @@ public class AbstractAdminIoReportStyleBean <L extends JeeslLang, D extends Jees
 										ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 										TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 										CELL extends JeeslReportCell<L,D,TEMPLATE>,
-										STYLE extends JeeslReportStyle<L,D>,
+										STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+										ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 										CDT extends JeeslReportCellType<L,D,CDT,?>,
 										CW extends JeeslReportColumnWidth<L,D,CW,?>,
 										RT extends JeeslReportRowType<L,D,RT,?>,
@@ -67,7 +69,7 @@ public class AbstractAdminIoReportStyleBean <L extends JeeslLang, D extends Jees
 										RE extends JeeslRevisionEntity<L,D,RCAT,?,RA,?>,
 										RA extends JeeslRevisionAttribute<L,D,RE,?,?>
 										>
-	extends AbstractIoReportBean<L,D,LOC,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION,RCAT,RE,RA>
+	extends AbstractIoReportBean<L,D,LOC,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION,RCAT,RE,RA>
 	implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -81,7 +83,7 @@ public class AbstractAdminIoReportStyleBean <L extends JeeslLang, D extends Jees
 	
 	private final EjbIoReportStyleFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> efStyle;
 	
-	public AbstractAdminIoReportStyleBean(final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
+	public AbstractAdminIoReportStyleBean(final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport)
 	{
 		super(fbReport);
 		efStyle = fbReport.style();

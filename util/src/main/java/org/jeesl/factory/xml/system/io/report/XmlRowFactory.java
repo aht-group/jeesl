@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -30,7 +31,8 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 								ROW extends JeeslReportRow<L,D,?,TEMPLATE,CDT,RT>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,
+								STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+								ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>,
 								RT extends JeeslReportRowType<L,D,RT,?>
@@ -44,7 +46,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlTypeFactory<L,D,RT> xfType;
 	private XmlDataTypeFactory<L,D,CDT> xfDataType;
-	private XmlLayoutFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfLayout;
+	private XmlLayoutFactory<L,D,GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT,CW> xfLayout;
 	private XmlTemplateFactory<L,D,TEMPLATE,CELL> xfTemplate;
 	
 	public XmlRowFactory(String localeCode, Row q)

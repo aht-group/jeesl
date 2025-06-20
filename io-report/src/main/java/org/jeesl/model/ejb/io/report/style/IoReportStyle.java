@@ -27,7 +27,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 @Entity
 @Table(name="IoReportStyle",uniqueConstraints=@UniqueConstraint(columnNames={"code"}))
 @EjbErNode(name="style",category="system",subset="report")
-public class IoReportStyle implements JeeslReportStyle<IoLang,IoDescription>
+public class IoReportStyle implements JeeslReportStyle<IoLang,IoDescription,IoReportAlignment>
 {
 	public static final long serialVersionUID=1;	
 

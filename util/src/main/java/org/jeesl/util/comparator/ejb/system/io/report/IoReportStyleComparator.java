@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IoReportStyleComparator<STYLE extends JeeslReportStyle<?,?>>
+public class IoReportStyleComparator<STYLE extends JeeslReportStyle<?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(IoReportStyleComparator.class);
 

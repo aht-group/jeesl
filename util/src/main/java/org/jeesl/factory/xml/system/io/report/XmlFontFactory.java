@@ -7,7 +7,7 @@ import org.jeesl.model.xml.io.report.Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlFontFactory <STYLE extends JeeslReportStyle<?,?>>
+public class XmlFontFactory <STYLE extends JeeslReportStyle<?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlFontFactory.class);
 	

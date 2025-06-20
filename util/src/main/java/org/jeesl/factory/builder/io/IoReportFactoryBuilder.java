@@ -30,6 +30,7 @@ import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -59,7 +60,8 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 										ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 										TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 										CELL extends JeeslReportCell<L,D,TEMPLATE>,
-										STYLE extends JeeslReportStyle<L,D>,	
+										STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+										ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 										CDT extends JeeslReportCellType<L,D,CDT,?>,
 										CW extends JeeslReportColumnWidth<L,D,CW,?>,
 										RT extends JeeslReportRowType<L,D,RT,?>,
@@ -125,7 +127,7 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
         this.cTransformation=cTransformation;
 	}
 	
-	public JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT> ejbUpdater(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
+	public JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT> ejbUpdater(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport)
 	{
 		return new JeeslReportUpdater<>(fReport,this);
 	}
@@ -180,22 +182,22 @@ public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		return new XlsColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>();
 	}
 	
-	public XlsRowFactory<WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xlsRow(String localeCode, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xfCell)
+	public XlsRowFactory<WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT> xlsRow(String localeCode, XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW> xfCell)
 	{
 		return new XlsRowFactory<>(localeCode,this,xfCell);
 	}
 	
-	public XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW> xlsCell(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,CDT> xfStyle)
+	public XlsCellFactory<GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW> xlsCell(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT> xfStyle)
 	{
 		return new XlsCellFactory<>(localeCode,xfStyle);
 	}
 	
-	public XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,CDT> xlsStyle(Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
+	public XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT> xlsStyle(Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
 	{
 		return new XlsStyleFactory<>(this,xlsWorkbook,ioGroups,ioColumns,ioRows);
 	}
 	
-	public XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xmlReport(Query q)
+	public XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT> xmlReport(Query q)
 	{
 		return new XmlReportFactory<>(q);
 	}

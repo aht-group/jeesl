@@ -14,6 +14,7 @@ import org.jeesl.factory.builder.io.IoReportFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
@@ -37,7 +38,7 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,?,?,?>,
 								ROW extends JeeslReportRow<L,D,SHEET,?,?,?>,
-								STYLE extends JeeslReportStyle<L,D>>
+								STYLE extends JeeslReportStyle<L,D,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportSheetFactory.class);
 	
@@ -49,7 +50,7 @@ public class EjbIoReportSheetFactory<L extends JeeslLang,D extends JeeslDescript
 	private JeeslDbLangUpdater<SHEET,L> dbuLang;
 	private JeeslDbDescriptionUpdater<SHEET,D> dbuDescription;
 	
-	public EjbIoReportSheetFactory(final IoReportFactoryBuilder<L,D,?,?,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,?,?,STYLE,?,?,?,?,?,?,?,?,?,?> fbReport,
+	public EjbIoReportSheetFactory(final IoReportFactoryBuilder<L,D,?,?,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,?,?,STYLE,?,?,?,?,?,?,?,?,?,?,?> fbReport,
 			final Class<L> cL,final Class<D> cD,final Class<IMPLEMENTATION> cImplementation,final Class<SHEET> cSheet)
 	{
 		this.cImplementation=cImplementation;

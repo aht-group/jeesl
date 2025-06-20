@@ -22,7 +22,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslReportColumn<L extends JeeslLang,D extends JeeslDescription,
 									GROUP extends JeeslReportColumnGroup<L,D,?,?,STYLE>,
-									STYLE extends JeeslReportStyle<L,D>,
+									STYLE extends JeeslReportStyle<L,D,?>,
 									CDT extends JeeslReportCellType<L,D,CDT,?>,
 									CW extends JeeslStatus<L,D,CW>,
 									TLS extends JeeslStatus<L,D,TLS>>

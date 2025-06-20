@@ -22,7 +22,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslReportColumnGroup<L extends JeeslLang,D extends JeeslDescription,
 									SHEET extends JeeslReportSheet<L,D,?,?,?,?>,
 									COLUMN extends JeeslReportColumn<L,D,?,STYLE,?,?,?>,
-									STYLE extends JeeslReportStyle<L,D>
+									STYLE extends JeeslReportStyle<L,D,?>
 									>
 		extends Serializable,EjbRemoveable,EjbPersistable,EjbSaveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithPositionParent,

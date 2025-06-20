@@ -9,6 +9,7 @@ import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -28,7 +29,9 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 								ROW extends JeeslReportRow<L,D,?,?,CDT,?>,
 								
 								CELL extends JeeslReportCell<L,D,?>,
-								STYLE extends JeeslReportStyle<L,D>,
+								
+								STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+								ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>
 								>
@@ -40,7 +43,7 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlDataTypeFactory<L,D,CDT> xfDataType;
-	private XmlLayoutFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfLayout;
+	private XmlLayoutFactory<L,D,GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT,CW> xfLayout;
 	
 	public XmlColumnFactory(String localeCode, XlsColumn q)
 	{

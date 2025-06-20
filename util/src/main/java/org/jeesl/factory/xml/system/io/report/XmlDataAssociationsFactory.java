@@ -35,7 +35,7 @@ public class XmlDataAssociationsFactory <L extends JeeslLang,D extends JeeslDesc
 								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,?>,
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,
+								STYLE extends JeeslReportStyle<L,D,?>,
 								CDT extends JeeslReportCellType<L,D,CDT,?>,
 								CW extends JeeslStatus<L,D,CW>,
 								ENTITY extends EjbWithId,

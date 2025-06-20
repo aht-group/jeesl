@@ -15,18 +15,19 @@ import org.jeesl.factory.txt.system.io.report.TxtIoColumnFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,?,?>,
 								ROW extends JeeslReportRow<?,?,?,?,CDT,?>,
-								STYLE extends JeeslReportStyle<?,?>,
+								STYLE extends JeeslReportStyle<?,?,ALIGNMENT>,
+								ALIGNMENT extends JeeslReportAlignment<?,?,ALIGNMENT,?>,
 								CDT extends JeeslReportCellType<?,?,CDT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsStyleFactory.class);
@@ -49,7 +50,7 @@ public class XlsStyleFactory<GROUP extends JeeslReportColumnGroup<?,?,?,COLUMN,S
 	private TxtIoColumnFactory<COLUMN> tfColumn;
 	private final EjbIoReportColumnFactory<?,?,?,GROUP,COLUMN,ROW,?,STYLE,CDT,?,?> efColumn;
 	
-	public XlsStyleFactory(final IoReportFactoryBuilder<?,?,?,?,?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,CDT,?,?,?,?,?,?,?,?,?> fbReport,
+	public XlsStyleFactory(final IoReportFactoryBuilder<?,?,?,?,?,?,?,GROUP,COLUMN,ROW,?,?,STYLE,ALIGNMENT,CDT,?,?,?,?,?,?,?,?,?> fbReport,
 							Workbook xlsWorkbook, List<GROUP> ioGroups, List<COLUMN> ioColumns, List<ROW> ioRows)
 	{
 		efColumn			= fbReport.column();

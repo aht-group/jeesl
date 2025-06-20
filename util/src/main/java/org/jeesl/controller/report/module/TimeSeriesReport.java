@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -63,7 +64,8 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 						ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 						TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 						CELL extends JeeslReportCell<L,D,TEMPLATE>,
-						STYLE extends JeeslReportStyle<L,D>,
+						STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+						ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 						CDT extends JeeslReportCellType<L,D,CDT,?>,
 						CW extends JeeslReportColumnWidth<L,D,CW,?>,
 						RT extends JeeslReportRowType<L,D,RT,?>,
@@ -95,7 +97,7 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 						WS extends JeeslStatus<L,D,WS>,
 						QAF extends JeeslStatus<L,D,QAF>
 						>
-					extends AbstractJeeslReport<L,D,USER,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>
+					extends AbstractJeeslReport<L,D,USER,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>
 //implements JeeslReportHeader//,JeeslFlatReport,JeeslXlsReport
 {
 	final static Logger logger = LoggerFactory.getLogger(TimeSeriesReport.class);
@@ -107,7 +109,7 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 	public TimeSeriesReport(String localeCode,
 			final JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
 			final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,?> fTs,
-			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport,
+			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport,
 			final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,?> fbTs)
 	{
 		super(localeCode,fbReport);

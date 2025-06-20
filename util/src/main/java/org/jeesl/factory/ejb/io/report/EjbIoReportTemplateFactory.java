@@ -21,7 +21,8 @@ public class EjbIoReportTemplateFactory<L extends JeeslLang,D extends JeeslDescr
 								
 								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
+								STYLE extends JeeslReportStyle<L,D,?>,
+								CDT extends JeeslStatus<L,D,CDT>,
 								CW extends JeeslStatus<L,D,CW>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoReportTemplateFactory.class);

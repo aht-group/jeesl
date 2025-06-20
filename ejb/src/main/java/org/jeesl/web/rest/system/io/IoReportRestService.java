@@ -31,6 +31,7 @@ import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -72,7 +73,8 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 									ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 									CELL extends JeeslReportCell<L,D,TEMPLATE>,
-									STYLE extends JeeslReportStyle<L,D>,
+									STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+									ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 									CDT extends JeeslReportCellType<L,D,CDT,?>,
 									CW extends JeeslReportColumnWidth<L,D,CW,?>,
 									RT extends JeeslReportRowType<L,D,RT,?>,
@@ -88,13 +90,13 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 	
 	private JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport;
 	
-	final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport;
+	final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport;
 
-	private XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> xfReport;
+	private XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT> xfReport;
 	private XmlTemplateFactory<L,D,TEMPLATE,CELL> xfTemplate;
-	private XmlStyleFactory<L,D,GROUP,COLUMN,ROW,STYLE,CDT,CW> xfStyle;
+	private XmlStyleFactory<L,D,GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT,CW> xfStyle;
 		
-	private final JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT> reportUpdater;
+	private final JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT> reportUpdater;
 
 	private EjbIoReportTemplateFactory<L,D,TEMPLATE,CELL,STYLE,CDT,CW> efTemplate;
 	private EjbIoReportCellFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT> efCell;
@@ -105,7 +107,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 	private Comparator<STYLE> comparatorStyle;
 	
 	private IoReportRestService(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
-			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport)
+			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport)
 	{
 		super(fReport,fbReport.getClassL(),fbReport.getClassD());
 		this.fbReport=fbReport;
@@ -137,7 +139,8 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 					ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
 					TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 					CELL extends JeeslReportCell<L,D,TEMPLATE>,
-					STYLE extends JeeslReportStyle<L,D>,
+					STYLE extends JeeslReportStyle<L,D,ALIGNMENT>,
+					ALIGNMENT extends JeeslReportAlignment<L,D,ALIGNMENT,?>,
 					CDT extends JeeslReportCellType<L,D,CDT,?>,
 					CW extends JeeslReportColumnWidth<L,D,CW,?>,
 					RT extends JeeslReportRowType<L,D,RT,?>,
@@ -146,9 +149,9 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 					ATTRIBUTE extends EjbWithId,
 					TL extends JeeslTrafficLight<L,D,TLS>,
 					TLS extends JeeslTrafficLightScope<L,D,TLS,?>>
-	IoReportRestService<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS>
+	IoReportRestService<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS>
 			factory(JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
-					final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport)
+					final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,?,?> fbReport)
 	{
 		return new IoReportRestService<>(fReport,fbReport);
 	}

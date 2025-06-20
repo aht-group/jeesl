@@ -18,6 +18,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.jeesl.interfaces.model.io.report.col.JeeslReportCellType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportAlignment;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -33,7 +34,8 @@ public class XlsCellFactory <
 							ROW extends JeeslReportRow<?,?,?,TEMPLATE,CDT,?>,
 							TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 							CELL extends JeeslReportCell<?,?,TEMPLATE>,
-							STYLE extends JeeslReportStyle<?,?>,
+							STYLE extends JeeslReportStyle<?,?,ALIGNMENT>,
+							ALIGNMENT extends JeeslReportAlignment<?,?,ALIGNMENT,?>,
 							CDT extends JeeslReportCellType<?,?,CDT,?>,
 							CW extends JeeslStatus<?,?,CW>>
 {
@@ -41,9 +43,9 @@ public class XlsCellFactory <
 		
 	private String localeCode;
 	
-	private XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,CDT> xfStyle;
+	private XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT> xfStyle;
 	
-	public XlsCellFactory(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,CDT> xfStyle)
+	public XlsCellFactory(String localeCode, XlsStyleFactory<GROUP,COLUMN,ROW,STYLE,ALIGNMENT,CDT> xfStyle)
 	{
 		this.localeCode = localeCode;
 		this.xfStyle=xfStyle;
