@@ -5,7 +5,7 @@ create table IoLabelDiagram (id  bigserial not null, code varchar(255), document
 create table IoLabelDiagramJtDescription (diagram_id int8 not null, description_id int8 not null, primary key (diagram_id, description_id));
 create table IoLabelDiagramJtLang (diagram_id int8 not null, lang_id int8 not null, primary key (diagram_id, lang_id));
 create table IoLabelEntity (id  bigserial not null, code varchar(255), developerInfo text, documentation boolean, jscn varchar(255), position int4 not null, timeseries boolean, visible boolean not null, category_id int8, diagram_id int8, primary key (id));
-create table IoLabelEntityJtAttribute (entity_id int8 not null, attribute_id int8 not null);
+create table IoLabelEntityJtAttribute (entity_id int8, attribute_id int8 not null, primary key (attribute_id));
 create table IoLabelEntityJtDescription (entity_id int8 not null, description_id int8 not null, primary key (entity_id, description_id));
 create table IoLabelEntityJtLang (entity_id int8 not null, lang_id int8 not null, primary key (entity_id, lang_id));
 create table IoLabelMissing (id  bigserial not null, missingCode varchar(255), missingEntity varchar(255), missingLocal varchar(255), primary key (id));

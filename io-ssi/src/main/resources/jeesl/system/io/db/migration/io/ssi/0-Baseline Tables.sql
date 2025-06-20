@@ -1,4 +1,4 @@
-create table IoSsiContext (id  bigserial not null, classA_id int8, classB_id int8, classC_id int8, entity_id int8, json_id int8, system_id int8, primary key (id));
+create table IoSsiContext (id  bigserial not null, name varchar(255), classA_id int8, classB_id int8, classC_id int8, entity_id int8, json_id int8, system_id int8, primary key (id));
 create table IoSsiCredential (id  bigserial not null, code varchar(255), encrypted boolean not null, host varchar(255), port int4, position int4 not null, pwd varchar(255), token varchar(255), url varchar(255), username varchar(255), visible boolean, system_id int8, primary key (id));
 create table IoSsiError (id  bigserial not null, code varchar(255), position int4 not null, context_id int8, primary key (id));
 create table IoSsiErrorJtDescription (error_id int8 not null, description_id int8 not null, primary key (error_id, description_id));
