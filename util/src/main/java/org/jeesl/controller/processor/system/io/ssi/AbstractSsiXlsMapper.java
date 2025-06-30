@@ -137,6 +137,7 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 		if(ObjectUtils.isEmpty(value)) {return null;}
 		else return value;
 	}
+	public Double toDouble(Row row, String col) throws UtilsConfigurationException {return this.toDouble(row, CellReference.convertColStringToIndex(col));}
 	public Double toDouble(Row row, int index) throws UtilsConfigurationException
 	{
 		if(Objects.isNull(row)) {return null;}

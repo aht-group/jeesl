@@ -3,7 +3,7 @@ package org.jeesl.exception.ejb;
 import java.io.Serializable;
 import java.util.Date;
 
-public class JeeslNotFoundException extends Exception implements Serializable
+public class JeeslNotFoundRuntimeException extends RuntimeException implements Serializable
 {
 	private static final long serialVersionUID = 1;
 
@@ -13,26 +13,29 @@ public class JeeslNotFoundException extends Exception implements Serializable
 	private String whereKey,whereDetail;
 	private String whatKey,whatDetail;
 	
-	private Class<?> searchClass; public Class<?> getSearchClass() {return searchClass;} public JeeslNotFoundException searchClass(Class<?> c) {this.searchClass=c; return this;}
+	private Class<?> searchClass; public Class<?> getSearchClass() {
+		return searchClass;
+	}
 
-	public static JeeslNotFoundException instance(String msg) {return new JeeslNotFoundException(msg);}
-	public static JeeslNotFoundException from(JeeslNotFoundRuntimeException e) {return JeeslNotFoundException.instance(e.getMessage()).searchClass(e.getSearchClass());}
+	public JeeslNotFoundRuntimeException searchClass(Class<?> c) {this.searchClass=c; return this;}
+
+	public static JeeslNotFoundRuntimeException instance(String msg) {return new JeeslNotFoundRuntimeException(msg);}
 	
-	public JeeslNotFoundException(String s)
+	public JeeslNotFoundRuntimeException(String s)
 	{
 		super(s);
 		withDetails=false;
 	}
 
-	 public JeeslNotFoundException(String s, Throwable cause)
+	 public JeeslNotFoundRuntimeException(String s, Throwable cause)
 	 {
 		 super(s, cause);
 		 withDetails=false;
 	 }
 
-	public JeeslNotFoundException()
+	public JeeslNotFoundRuntimeException()
 	{
-		super("Something is not found, additional infos set in extended attributes of "+JeeslNotFoundException.class.getSimpleName());
+		super("Something is not found, additional infos set in extended attributes of "+JeeslNotFoundRuntimeException.class.getSimpleName());
 		when = new Date();
 		withDetails=true;
 	}
@@ -56,7 +59,7 @@ public class JeeslNotFoundException extends Exception implements Serializable
 
 	public String getWhatDetail() {return whatDetail;}
 	public void setWhatDetail(String whatDetail) {this.whatDetail = whatDetail;}
-	
+
 	@Override
 	public String toString()
 	{

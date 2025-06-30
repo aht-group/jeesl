@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.exception.ejb.JeeslNotFoundRuntimeException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.slf4j.Logger;
@@ -15,6 +16,9 @@ public class EjbCodeCache <T extends EjbWithCode>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCodeCache.class);
 
+	private boolean withNotFoundStackTrace; public EjbCodeCache<T> withNotFoundStackTrace(boolean value) {this.withNotFoundStackTrace=value; return this;}
+	private boolean withNotFoundRuntimeException; public EjbCodeCache<T> withNotFoundRuntimeException(boolean value) {this.withNotFoundRuntimeException=value; return this;}
+	
 	private JeeslFacade facade; public EjbCodeCache<T> facade(JeeslFacade facade) {this.facade=facade; return this;}
 	private final Class<T> c;
 	
@@ -25,6 +29,8 @@ public class EjbCodeCache <T extends EjbWithCode>
 	{
 		this.c=c;
 		map = new HashMap<>();
+		
+		withNotFoundStackTrace = false;
 	}
 	
 	public EjbCodeCache<T> load() {map.clear(); if(Objects.nonNull(facade)) {this.init(facade.all(c));} return this;}
@@ -37,16 +43,16 @@ public class EjbCodeCache <T extends EjbWithCode>
 	public <E extends Enum<E>> T ejb(E code) {return ejb(code.toString());}
 	public T ejb(String code)
 	{
-		return ejb(code,true);
-	}
-	public T ejb(String code, boolean withStackTrace)
-	{
 		if(!map.containsKey(code))
 		{
 			if(Objects.nonNull(facade))
 			{
 				try {map.put(code, facade.fByCode(c,code));}
-				catch (JeeslNotFoundException e) {if(withStackTrace) {e.printStackTrace();}}
+				catch (JeeslNotFoundException e)
+				{
+					if(withNotFoundStackTrace) {e.printStackTrace();}
+					if(withNotFoundRuntimeException) {throw JeeslNotFoundRuntimeException.instance(code).searchClass(c);}
+				}
 			}
 		}
 		return map.get(code);
