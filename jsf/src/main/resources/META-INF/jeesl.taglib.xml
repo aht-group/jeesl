@@ -164,4 +164,10 @@
 		<function-class>org.jeesl.jsf.function.ImplementationVersion</function-class>
 		<function-signature>java.lang.String version(java.lang.String)</function-signature>
 	</function>
+	
+	<function>
+		<function-name>title</function-name>
+		<function-class>org.jeesl.jsf.function.Title</function-class>
+		<function-signature>java.lang.String titleFor(java.lang.Object, java.lang.String)</function-signature>
+	</function>
 </facelet-taglib> 
