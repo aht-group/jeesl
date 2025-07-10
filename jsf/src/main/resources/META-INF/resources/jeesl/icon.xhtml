@@ -15,6 +15,7 @@
 		<composite:attribute name="blocks" required="false" type="java.lang.Boolean" default="false"/>
 		<composite:attribute name="type" required="true"/>
 		<composite:attribute name="tooltip" required="false"/>
+		<composite:attribute name="textLink" required="false"/>
 		<composite:attribute name="immediate" required="false" default="false"/>
 		<composite:attribute name="svg" required="false" type="java.lang.Boolean" default="false"/>
 		<composite:attribute name="library" required="false" default="gfx"/>
@@ -30,6 +31,7 @@
 				   		   oncomplete="#{cc.attrs.oncomplete}"
 				   		   immediate="#{cc.attrs.immediate}"
 						   styleClass="#{cc.attrs.styleClass}">
+				<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="value" value="#{cc.attrs.textLink}"/></c:if>
 				<h:graphicImage id="image2"
 								rendered="#{not cc.attrs.disabled}"
 								library="#{cc.attrs.library}"
@@ -48,10 +50,11 @@
 						   oncomplete="#{cc.attrs.oncomplete}; document.getElementById('#{cc.clientId}:image').style.visibility='visible';"
 						   immediate="#{cc.attrs.immediate}"
 						   styleClass="#{cc.attrs.styleClass}">
+				<c:if test="#{not empty cc.attrs.textLink}"><f:attribute name="value" value="#{cc.attrs.textLink}"/></c:if>
 				<h:graphicImage id="image"
 								rendered="#{not cc.attrs.disabled}"
 								library="#{cc.attrs.library}"
-								name="#{cc.attrs.svg ? appIconBean.svg[cc.attrs.type] : appIconBean.icon12[cc.attrs.type]}">
+								name="#{cc	.attrs.svg ? appIconBean.svg[cc.attrs.type] : appIconBean.icon12[cc.attrs.type]}">
 					<c:if test="#{cc.attrs.svg}"><f:attribute name="height" value="12"/></c:if>
 				</h:graphicImage>
 				<p:tooltip rendered="#{not empty cc.attrs.tooltip}" for="image" value="#{cc.attrs.tooltip}" />
