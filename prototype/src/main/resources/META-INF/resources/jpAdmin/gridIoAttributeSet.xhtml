@@ -46,6 +46,9 @@
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
+						<jtp:label entity="IoAttributeSet" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.set.id}"/>
+					
 						<p:outputLabel value="#{msg.jeeslCategory}" rendered="#{cc.attrs.bean.sbhCat.hasMore}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.set.category}"  rendered="#{cc.attrs.bean.sbhCat.hasMore}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.bean.sbhCat.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>

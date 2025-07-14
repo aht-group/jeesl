@@ -1,9 +1,6 @@
 package org.jeesl.interfaces.model.with.primitive.code;
 
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-
-public interface EjbWithNonUniqueCode extends EjbWithId
+public interface EjbWithNonUniqueCode extends EjbWithSomeCode
 {
-	public String getCode();
-	public void setCode(String code);
+
 }

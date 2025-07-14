@@ -7,6 +7,7 @@ import org.exlp.util.io.StringUtil;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
+import org.jeesl.interfaces.cache.JeesCodeCache;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
@@ -18,6 +19,7 @@ public class SsiCodeCache <CONTEXT extends JeeslIoSsiContext<?,ENTITY>,
 							ATTRIBUTE extends JeeslIoSsiAttribute<CONTEXT,ENTITY>,
 							ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 							T extends EjbWithCode>
+					implements JeesCodeCache<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(SsiCodeCache.class);
 	

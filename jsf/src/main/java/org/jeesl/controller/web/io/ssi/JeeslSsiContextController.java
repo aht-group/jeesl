@@ -170,9 +170,11 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 
 	public void saveContext() throws JeeslConstraintViolationException, JeeslLockingException
 	{
+		logger.info("Save");
 		efContext.converter(fSsi,context);
 		context = fSsi.save(context);
 		EjbIdFactory.replace(contexts,context);
+		logger.info("Saved");
 	}
 
 	public void deleteMapping() throws JeeslConstraintViolationException, JeeslLockingException

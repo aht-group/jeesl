@@ -93,6 +93,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 		List<T> list = new ArrayList<>(); list.add(null);
 		while(!list.isEmpty())
 		{
+			logger.info("Find entities");
 			list.clear(); list.addAll(f.find());
 			queue.addAll(list);
 			logger.info("Added "+list.size()+" elements to the queue, loop: "+i.incrementAndGet()+" in "+task.getCode()+" - "+tfMaintenance.debug(task));

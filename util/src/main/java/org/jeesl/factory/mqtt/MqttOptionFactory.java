@@ -16,6 +16,7 @@ public class MqttOptionFactory
 	
 	private boolean clean;
 	private ConfigKey.ConnnectionType type;
+	private String scope; public <E extends Enum<E>> MqttOptionFactory  scope(E scope) {this.scope = scope.toString(); return this;}
 	
 	public static MqttOptionFactory instance(Configuration config) {return new MqttOptionFactory(config);}
 	public MqttOptionFactory(Configuration config)
@@ -41,8 +42,13 @@ public class MqttOptionFactory
 		options.setCleanStart(clean);
 		if(Objects.nonNull(type))
 		{
-			options.setUserName(config.getString("net.mqtt."+type.toString()+".user"));
-			options.setPassword(config.getString("net.mqtt."+type.toString()+".password").getBytes());
+			StringBuilder sb = new StringBuilder();
+			sb.append("net.mqtt");
+			sb.append(".").append(type.toString());
+			if(Objects.nonNull(scope)) {sb.append(".").append(scope);}
+			
+			options.setUserName(config.getString(sb.toString()+".user"));
+			options.setPassword(config.getString(sb.toString()+".password").getBytes());
 		}
 		return options;
 	}

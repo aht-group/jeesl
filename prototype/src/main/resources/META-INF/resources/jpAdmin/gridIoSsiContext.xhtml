@@ -55,7 +55,11 @@
 						<h:outputText value="#{ctx.id}"/>
 						<h:outputText value="#{cc.attrs.ctrl.thContext.mapA[ctx].count}"><f:convertNumber type="number"/></h:outputText>
 					</p:column>
-					<p:column><h:outputText value="#{ctx.system.code}"/></p:column>
+					<p:column>
+						<h:outputText value="#{ctx.system.code}"/>
+						<br/><h:outputText value="#{ctx.name}"/>
+					</p:column>
+						
 					<p:column><h:outputText value="#{ctx.json.name[localeCode].lang}"/></p:column>
 					<p:column><h:outputText value="#{ctx.entity.name[localeCode].lang}"/></p:column>
 					
@@ -85,6 +89,9 @@
 						
 						<jtp:label entity="IoSsiContext" code="id"/>
 						<h:outputText value="#{cc.attrs.ctrl.context.id}"/>
+						
+						<jtp:label entity="IoSsiContext" code="name"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.context.name}"/>
 						
 						<jtp:label entity="IoSsiContext" code="system"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.context.system}" disabled="#{cc.attrs.ctrl.context.id gt 0}"
