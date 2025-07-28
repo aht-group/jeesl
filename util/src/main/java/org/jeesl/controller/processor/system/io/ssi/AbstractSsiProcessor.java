@@ -52,7 +52,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiProcessor.class);
 	
 	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi;
-	protected final JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,?> fSsi;
+	protected final JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,?> fSsi; public JeeslIoSsiFacade<SYSTEM, CRED, CONTEXT, ATTRIBUTE, DATA, STATUS, ERROR, ENTITY, CLEANING, JOB, ?> getFacadeSsi() {return fSsi;}
 	
 	protected final EjbIoSsiDataFactory<CONTEXT,DATA,STATUS> efData;
 	

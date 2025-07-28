@@ -560,7 +560,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		Root<DATA> root = cQ.from(fbSsi.getClassData());
 		
 		cQ.select(root);
-		cQ.where(cB.and(pSsiData(cB,query,root)));
+		cQ.where(cB.and(this.pSsiData(cB,query,root)));
 		
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
 		super.pagination(tQ,query);
@@ -586,6 +586,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 			if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refA))) {eId = root.get(JeeslIoSsiData.Attributes.refA.toString());}
 			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refB))) {eId = root.get(JeeslIoSsiData.Attributes.refB.toString());}
 			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refC))) {eId = root.get(JeeslIoSsiData.Attributes.refC.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.localId))) {eId = root.get(JeeslIoSsiData.Attributes.localId.toString());}
 			if(Objects.isNull(eId)) {logger.error("NYI "+cq.toString());}
 			else
 			{
