@@ -233,9 +233,8 @@ public class JeeslSecurityUsecaseGwc <L extends JeeslLang, D extends JeeslDescri
 	{
 		logger.info(AbstractLogMessage.deleteEntity(usecase));
 		fSecurity.rm(usecase);
-		this.reloadUsecases();
-		this.reloadUsecase();
 		this.reset(false,true);
+		this.reloadUsecases();
 	}
 	
 	private void reloadActions()

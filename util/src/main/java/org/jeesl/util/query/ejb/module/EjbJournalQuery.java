@@ -7,20 +7,20 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalDomain;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbJournalQuery <BOOK extends JeeslJournalBook<SCOPE,ITEM>,
-								SCOPE extends JeeslJournalScope<?,?,SCOPE,?>,
+								SCOPE extends JeeslJournalDomain<?,?,SCOPE,?>,
 								ITEM extends JeeslJournalItem<?,?,?,?,BOOK,IMPACT,CONF,USER>,
 								IMPACT extends JeeslJournalImpact<?,?,IMPACT,?>,
-								CONF extends JeeslJournalConfidentiality<?,?,CONF,?>,
+								CONF extends JeeslJournalScope<?,?,CONF,?>,
 								USER extends EjbWithId>
 			extends AbstractEjbQuery
 {

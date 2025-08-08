@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -24,8 +25,11 @@ import org.jeesl.api.facade.module.JeeslJournalFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.LogFactoryBuilder;
+import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalDomain;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
@@ -34,15 +38,16 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslJournalQuery;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									LOG extends JeeslJournalBook<SCOPE,ITEM>,
-									SCOPE extends JeeslJournalScope<L,D,SCOPE,?>,
+									SCOPE extends JeeslJournalDomain<L,D,SCOPE,?>,
 									ITEM extends JeeslJournalItem<L,D,?,?,LOG,IMPACT,CONF,USER>,
 									IMPACT extends JeeslJournalImpact<L,D,IMPACT,?>,
-									CONF extends JeeslJournalConfidentiality<L,D,CONF,?>,
+									CONF extends JeeslJournalScope<L,D,CONF,?>,
 									USER extends EjbWithId
 									>
 					extends JeeslFacadeBean
@@ -140,11 +145,30 @@ public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescript
 		TypedQuery<ITEM> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
+	
+	
 
 	@Override
 	public List<ITEM> fDiaryItems(JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override public JsonTuples1<CONF> tpcJournalScope(JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<ITEM> item = cQ.from(fbLog.getClassItem());
+		
+		Join<ITEM,CONF> jScope = item.join("confidentialities");
+		Expression<Long> eCount = cB.count(jScope.<Long>get("id"));
+		
+		
+		cQ.multiselect(jScope.get("id"),eCount);
+		cQ.groupBy(jScope.get("id"));
+
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+        return Json1TuplesFactory.instance(fbLog.getClassScope()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 }

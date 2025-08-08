@@ -11,12 +11,13 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
-public interface JeeslJournalConfidentiality <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>,G extends JeeslGraphic<?,?,?>>
+public interface JeeslJournalDomain <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>,G extends JeeslGraphic<?,?,?>>
 									extends Serializable,EjbPersistable,
 									EjbWithCode,JeeslStatusFixedCode,
 //									JeeslOptionRestDownload,
 									EjbWithCodeGraphic<G>,
 									JeeslStatus<L,D,S>
 {
+//	void x();
 //	public static enum Code{direct,moderator,closed};
 }

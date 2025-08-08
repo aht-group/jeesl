@@ -10,7 +10,7 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class EjbLogItemFactory<BOOK extends JeeslJournalBook<?,ITEM>,
 								ITEM extends JeeslJournalItem<?,?,?,?,BOOK,IMPACT,CONF,USER>,
 								IMPACT extends JeeslJournalImpact<?,?,IMPACT,?>,
-								CONF extends JeeslJournalConfidentiality<?,?,CONF,?>,
+								CONF extends JeeslJournalScope<?,?,CONF,?>,
 								USER extends EjbWithId
 								>
 {

@@ -19,7 +19,7 @@ public interface JeeslJournalItem <L extends JeeslLang, D extends JeeslDescripti
 								M extends JeeslIoMarkup<MT>, MT extends JeeslIoMarkupType<L,D,MT,?>,
 								LOG extends JeeslJournalBook<?,?>,
 								IMPACT extends JeeslJournalImpact<L,D,IMPACT,?>,
-								CONF extends JeeslJournalConfidentiality<L,D,CONF,?>,
+								CONF extends JeeslJournalScope<L,D,CONF,?>,
 								USER extends EjbWithId
 								>
 		extends Serializable,EjbWithId,
