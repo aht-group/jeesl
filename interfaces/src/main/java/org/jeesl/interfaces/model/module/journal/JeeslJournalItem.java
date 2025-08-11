@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDate;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
@@ -24,7 +24,7 @@ public interface JeeslJournalItem <L extends JeeslLang, D extends JeeslDescripti
 								>
 		extends Serializable,EjbWithId,
 				EjbSaveable,EjbPersistable,EjbRemoveable,
-				EjbWithLang<L>,EjbWithRecord,JeeslWithMarkupMulti<M>
+				EjbWithLang<L>,JeeslWithRecordDate,JeeslWithMarkupMulti<M>
 {
 	public enum Attributes{log,record,confidentialities}
 	

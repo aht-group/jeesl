@@ -37,6 +37,7 @@ public class DatePredicateBuilder
 			case BeforeOrAt: predicates.add(cB.lessThanOrEqualTo(eDate,cq.getDate())); break;
 			case Before: predicates.add(cB.lessThan(eDate,cq.getDate())); break;
 			case Equal: predicates.add(cB.equal(eDate,cq.getDate())); break;
+			case Null: predicates.add(cB.isNull(eDate)); break;
 			default: logger.warn("NYI "+cq.toString()); break;
 		}
 	}

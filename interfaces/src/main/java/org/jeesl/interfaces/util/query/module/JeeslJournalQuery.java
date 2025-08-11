@@ -1,10 +1,12 @@
 package org.jeesl.interfaces.util.query.module;
 
+import java.util.List;
+
 import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalDomain;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
-import org.jeesl.interfaces.model.module.journal.JeeslJournalDomain;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 
@@ -17,6 +19,8 @@ public interface JeeslJournalQuery <BOOK extends JeeslJournalBook<DOMAIN,ITEM>,
 			extends JeeslCoreQuery
 {
 	
-//	private List<BOOK> books;
+	List<SCOPE> getJournalScopes();
+	List<BOOK> getJournalContainers();
+	
 	
 }

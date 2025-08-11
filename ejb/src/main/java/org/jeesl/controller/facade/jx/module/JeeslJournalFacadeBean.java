@@ -15,19 +15,23 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslJournalFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.LogFactoryBuilder;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
-import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalDomain;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
@@ -38,7 +42,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslJournalQuery;
+import org.jeesl.model.ejb.io.db.JeeslCqDate;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.util.query.cq.CqDate;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,8 +88,7 @@ public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescript
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+cOwner.getSimpleName()+" found for code:"+owner.toString());}
 	}
 	
-	@Override
-	public List<ITEM> fLogItems(List<LOG> logs)
+	@Override public List<ITEM> fLogItems(List<LOG> logs)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ITEM> cQ = cB.createQuery(fbLog.getClassItem());
@@ -148,11 +155,19 @@ public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescript
 	
 	
 
-	@Override
-	public List<ITEM> fDiaryItems(JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
+	@Override public List<ITEM> fJournalItems(JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<ITEM> cQ = cB.createQuery(fbLog.getClassItem());
+		Root<ITEM> root = cQ.from(fbLog.getClassItem());
+
+		cQ.select(root);
+		cQ.where(cB.and(this.pItem(cB,query,root)));
+		this.obItem(cB, cQ, query, root);
+
+		TypedQuery<ITEM> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
 	}
 	
 	@Override public JsonTuples1<CONF> tpcJournalScope(JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
@@ -170,5 +185,51 @@ public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescript
 
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return Json1TuplesFactory.instance(fbLog.getClassScope()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
+	
+	
+	
+	// Predicate Builder
+	
+	public Predicate[] pItem(CriteriaBuilder cB, JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query, Root<ITEM> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getJournalContainers()))
+		{
+			Join<ITEM,LOG> jContainer = root.join(JeeslJournalItem.Attributes.log.toString());
+			predicates.add(jContainer.in(query.getJournalContainers()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getJournalScopes()))
+		{
+			ListJoin<ITEM,SCOPE> jScope = root.joinList(JeeslJournalItem.Attributes.confidentialities.toString());
+			predicates.add(jScope.in(query.getJournalScopes()));
+		}
+		
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslJournalItem.Attributes.record)))
+			{
+				Expression<LocalDate> eDate = root.get(JeeslJournalItem.Attributes.record.toString());
+				DatePredicateBuilder.add(cB,predicates, cq, eDate);
+			}
+			else {logger.warn("No Handling for "+cq.toString());}
+		}
+
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	public void obItem(CriteriaBuilder cB, CriteriaQuery<ITEM> cQ, JeeslJournalQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query, Root<ITEM> ejb)
+	{
+		List<Order> orders = new ArrayList<>();
+		for(JeeslCqOrdering el : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+			if(el.getPath().equals(CqOrdering.path(JeeslAomAsset.Attributes.position)))
+			{
+				Expression<Integer> e = ejb.get(JeeslAomAsset.Attributes.position.toString());
+				SortByPredicateBuilder.addByInteger(cB,orders,el,e);
+			}
+			else {logger.warn("No Handling for "+el.toString());}
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 }

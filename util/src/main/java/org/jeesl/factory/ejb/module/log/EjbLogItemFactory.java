@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.module.log;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class EjbLogItemFactory<BOOK extends JeeslJournalBook<?,ITEM>,
 		try
 		{
 			ejb = cItem.newInstance();
-			ejb.setRecord(new Date());
+			ejb.setRecord(LocalDate.now());
 			ejb.setAuthor(user);
 			ejb.setImpact(impact);
 		}
