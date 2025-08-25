@@ -239,7 +239,6 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
-	
 
 	@Override public List<EVENT> fAomEvents(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query)
 	{

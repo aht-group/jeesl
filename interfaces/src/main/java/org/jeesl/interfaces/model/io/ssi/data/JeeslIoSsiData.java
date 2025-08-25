@@ -22,7 +22,7 @@ public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 		extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithParentAttributeResolver,
 						EjbWithMigrationJob1<JOB>
 {	
-	public enum Attributes{mapping,code,link,remark,targetId,localId,refA,refB,refC,job1,error}
+	public enum Attributes{id,mapping,code,link,remark,targetId,localId,refA,refB,refC,job1,error}
 	public enum Att{context}
 	
 //	void x();

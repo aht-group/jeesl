@@ -1,13 +1,15 @@
 package org.jeesl.controller.facade.jx.predicate;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.controller.facade.jx.io.JeeslIoMavenFacadeBean;
-import org.jeesl.util.query.cq.CqLong;
+import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,11 +17,22 @@ public class LongPredicateBuilder
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
 		
-	public static void add(CriteriaBuilder cB, List<Predicate> predicates, CqLong c, Expression<Long> e)
+	public static void add(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqLong c, Expression<Long> e)
 	{
 		switch(c.getType())
 		{
-			case IsValue: predicates.add(cB.equal(e,c.getValue())); break;
+			case IsValue:	if(Objects.nonNull(c.getValue()))
+							{
+								logger.info(c.getType()+" "+c.getValue()+" "+c.getPath());
+								predicates.add(cB.equal(e,c.getValue()));
+							}
+							if(ObjectUtils.isNotEmpty(c.getValues()))
+							{
+								logger.info(c.getType()+" "+c.getValues()+" "+c.getPath());
+								predicates.add(e.in(c.getValues()));
+							}
+							break;
+			case IsNull: predicates.add(cB.isNull(e)); break;
 			default: logger.error("NYI Type: "+c.toString());
 		}
 	}

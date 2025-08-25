@@ -1,6 +1,7 @@
 package org.jeesl.util.query.cq;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.math.NumberUtils;
@@ -14,11 +15,15 @@ public class CqLong implements JeeslCqLong
 	private static final long serialVersionUID = 1L;
 
 	private final Type type; @Override public final Type getType() {return type;}
-	private final Long id; @Override public Long getValue() {return id;}
+	private Long id; @Override public Long getValue() {return id;}
+	private List<Long> values; @Override public List<Long> getValues() {return values;}
 	private final String path; @Override public String getPath() {return path;}
 
 	public static CqLong isValue(JeeslCqLiteral cq) {return new CqLong(Type.IsValue,Long.valueOf(cq.getLiteral()),cq.getPath());}
+//	public static CqLong isValue(Integer id, String path) {return new CqLong(Type.IsValue,id,path);}
 	public static CqLong isValue(Long id, String path) {return new CqLong(Type.IsValue,id,path);}
+	public static CqLong in(List<Long> values, String path) {return new CqLong(Type.IsValue,values,path);}
+	
 	public static CqLong value(Long id, String path)
 	{
 		if(Objects.isNull(id)) {return new CqLong(Type.IsNull,id,path);}
@@ -26,15 +31,26 @@ public class CqLong implements JeeslCqLong
 	}
 	public static <T extends EjbWithId> CqLong value(T t, String path)
 	{
-		if(Objects.isNull(t)) {return new CqLong(Type.IsNull,null,path);}
+		if(Objects.isNull(t)) {return new CqLong(Type.IsNull,path);}
 		else {return new CqLong(Type.IsValue,t.getId(),path);}
 	}
-	public static CqLong empty(String path) {return new CqLong(Type.IsNull,null,path);}
+	public static CqLong empty(String path) {return new CqLong(Type.IsNull,path);}
 
+	private CqLong(Type type, String path)
+	{
+		this.type=type;
+		this.path=path;
+	}
 	private CqLong(Type type, Long id, String path)
 	{
 		this.type=type;
 		this.id=id;
+		this.path=path;
+	}
+	private CqLong(Type type, List<Long> values, String path)
+	{
+		this.type=type;
+		this.values=values;
 		this.path=path;
 	}
 	

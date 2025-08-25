@@ -22,6 +22,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.LongPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
@@ -535,7 +536,6 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		cQ.select(ejb);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		
 
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
 		tQ.setMaxResults(maxResult);
@@ -570,34 +570,31 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		for(JeeslCqLiteral c : ListUtils.emptyIfNull(query.getCqLiterals()))
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
 		{
-			if(c.getPath().equals(CqLiteral.path(JeeslIoSsiData.Attributes.job1,JeeslJobStatus.Att.code)))
+			Expression<String> eString = null;
+			
+			if(cq.getPath().equals(CqLiteral.path(JeeslIoSsiData.Attributes.code))) {eString = root.get(JeeslIoSsiData.Attributes.code.toString());}
+			else if(cq.getPath().equals(CqLiteral.path(JeeslIoSsiData.Attributes.job1,JeeslJobStatus.Att.code)))
 			{
-				Path<JOB> pJob = root.get(JeeslIoSsiData.Attributes.job1.toString());
-				Expression<String> e = pJob.get(JeeslJobStatus.Att.code.toString());
-				LiteralPredicateBuilder.add(cB,predicates,c,e);
+				eString = root.<JOB>get(JeeslIoSsiData.Attributes.job1.toString()).get(JeeslJobStatus.Att.code.toString());
 			}
-			else {logger.warn("NYI Path: "+c.toString());}
+			
+			if(Objects.nonNull(eString)) {LiteralPredicateBuilder.add(cB,predicates,cq,eString);}
+			else {logger.error("NYI "+cq.toString());}
 		}
 		for(JeeslCqLong cq : ListUtils.emptyIfNull(query.getCqLongs()))
 		{
-			Expression<Long> eId = null;
-			if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refA))) {eId = root.get(JeeslIoSsiData.Attributes.refA.toString());}
-			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refB))) {eId = root.get(JeeslIoSsiData.Attributes.refB.toString());}
-			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refC))) {eId = root.get(JeeslIoSsiData.Attributes.refC.toString());}
-			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.localId))) {eId = root.get(JeeslIoSsiData.Attributes.localId.toString());}
-			if(Objects.isNull(eId)) {logger.error("NYI "+cq.toString());}
-			else
-			{
+			Expression<Long> eLong = null;
+			if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.id))) {eLong = root.get(JeeslIoSsiData.Attributes.id.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refA))) {eLong = root.get(JeeslIoSsiData.Attributes.refA.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refB))) {eLong = root.get(JeeslIoSsiData.Attributes.refB.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.refC))) {eLong = root.get(JeeslIoSsiData.Attributes.refC.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.localId))) {eLong = root.get(JeeslIoSsiData.Attributes.localId.toString());}
+			else if(cq.getPath().equals(CqLong.path(JeeslIoSsiData.Attributes.targetId))) {eLong = root.get(JeeslIoSsiData.Attributes.targetId.toString());}
 			
-				switch(cq.getType())
-				{
-					case IsValue: predicates.add(cB.equal(eId,cq.getValue())); break;
-					case IsNull: predicates.add(cB.isNull(eId)); break;
-					default: logger.error("NYI "+cq.toString());
-				}
-			}
+			if(Objects.isNull(eLong)) {logger.error("NYI "+cq.toString());}
+			else {LongPredicateBuilder.add(cB,predicates,cq,eLong);}
 		}
 		
 		if(ObjectUtils.isNotEmpty(query.getIoSsiContexts())) {predicates.add(root.<CTX>get(JeeslIoSsiData.Attributes.mapping.toString()).in(query.getIoSsiContexts()));}

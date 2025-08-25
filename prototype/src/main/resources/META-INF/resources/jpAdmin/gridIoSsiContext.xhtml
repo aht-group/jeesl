@@ -13,7 +13,7 @@
 <jp:grid id="grid">
 	<j:row>
 		<j:slot width="12">
-			<h:form>
+			<h:form id="fContexts">
 				<p:dataTable styleClass="jeesl-datatable"
 						var="ctx" value="#{cc.attrs.ctrl.contexts}"
 						selection="#{cc.attrs.ctrl.context}" selectionMode="single" rowKey="#{ctx.id}"
@@ -83,7 +83,8 @@
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelMapping()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveContext()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMapping()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.context.id gt 0}"/>
-						<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.countNumbers()}" update=":#{cc.id}:grid" ttEntity="IoSsiContext" ttCode="ttReload"/>
+						<j:svg id="iReload" type="jeeslReload" listener="#{cc.attrs.ctrl.countNumbers()}" update=":#{cc.id}:grid" ttEntity="IoSsiContext" ttCode="ttReload"/>
+						<p:blockUI trigger="iReload:link" block=":#{cc.id}:fContexts" />
 					</f:facet>
 					<j:inputGrid>
 						

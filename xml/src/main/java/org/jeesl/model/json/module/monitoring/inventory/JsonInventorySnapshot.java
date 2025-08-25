@@ -19,5 +19,4 @@ public class JsonInventorySnapshot implements Serializable
 	private List<JsonInventoryAttribute> attributes;
 	public List<JsonInventoryAttribute> getAttributes() {return attributes;}
 	public void setAttributes(List<JsonInventoryAttribute> attributes) {this.attributes = attributes;}
-
 }
