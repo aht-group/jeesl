@@ -14,7 +14,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDate;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslAttributes
+@DownloadJeeslDescription
 public interface JeeslJournalItem <L extends JeeslLang, D extends JeeslDescription,
 								M extends JeeslIoMarkup<MT>, MT extends JeeslIoMarkupType<L,D,MT,?>,
 								LOG extends JeeslJournalBook<?,?>,

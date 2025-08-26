@@ -3,6 +3,8 @@ package org.jeesl.interfaces.controller.handler.system.io;
 import java.io.OutputStream;
 import java.io.Serializable;
 
+import org.slf4j.Logger;
+
 public interface JeeslLogger extends Serializable
 {
 //	public enum Level {TRACE, DEBUG, INFO, WARN, ERROR}
@@ -21,7 +23,6 @@ public interface JeeslLogger extends Serializable
 	String milestone(Class<?> c, String message);
 	String milestone(String milestone, String message);
 	
-//	void milestone(Level level, Logger logger, Class<?> c, String message, Integer elements);
 	String milestone(Class<?> c, String message, Integer elements);
 	String milestone(String milestone, String message, Integer elements);
 	
@@ -31,4 +32,6 @@ public interface JeeslLogger extends Serializable
 	
 	void ofxMilestones(OutputStream os);
 	void ofxLoops(OutputStream os);
+	
+//	void milestone(Logger logger, Class<?> c, String message, Integer elements);
 }
