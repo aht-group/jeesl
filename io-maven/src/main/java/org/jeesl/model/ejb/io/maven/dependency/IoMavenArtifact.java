@@ -73,6 +73,7 @@ public class IoMavenArtifact implements JeeslIoMavenArtifact<IoMavenGroup,IoMave
 	public List<IoMavenArtifact> getReasons() {if(Objects.isNull(reasons)) {reasons = new ArrayList<>();} return reasons;}
 	public void setReasons(List<IoMavenArtifact> reasons) {this.reasons = reasons;}
 
+
 	@Override public boolean equals(Object object){return (object instanceof IoMavenArtifact) ? id == ((IoMavenArtifact) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public interface JeeslCqDate extends Serializable
 {
-	public enum Type {Null,Before,BeforeOrAt,Equal,AtOrAfter,After}
+	public enum Type {Null,NotNull,Before,BeforeOrAt,Equal,AtOrAfter,After}
 	
 	Type getType();
 	LocalDate getDate();
