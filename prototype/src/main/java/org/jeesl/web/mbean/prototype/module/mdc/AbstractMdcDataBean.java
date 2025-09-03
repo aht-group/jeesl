@@ -33,9 +33,9 @@ public abstract class AbstractMdcDataBean <L extends JeeslLang, D extends JeeslD
 								COLLECTION extends JeeslMdcCollection<R,SCOPE,STATUS,ASET>,
 								SCOPE extends JeeslMdcScope<L,D,R,SCOPE,?>,
 								STATUS extends JeeslMdcStatus<L,D,STATUS,?>,
-								
+
 								CDATA extends JeeslMdcData<COLLECTION,ACON>,
-								
+
 								ACRIT extends JeeslAttributeCriteria<L,D,R,?,?,?,ASET>,
 								ASET extends JeeslAttributeSet<L,D,R,?,AITEM>,
 								AITEM extends JeeslAttributeItem<ACRIT,ASET>,
@@ -47,30 +47,30 @@ public abstract class AbstractMdcDataBean <L extends JeeslLang, D extends JeeslD
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractMdcDataBean.class);
-	
+
 	private final IoAttributeFactoryBuilder<L,D,R,?,?,?,?,ASET,AITEM,ACON,ADATA> fbAttribute;
-	
+
 	private final EjbMdcDataFactory<COLLECTION,CDATA,ACON> efData;
-	
+
 	private final Nested2Map<ACON,ACRIT,ADATA> n2Data; public Nested2Map<ACON, ACRIT, ADATA> getN2Data() {return n2Data;}
-	
+
 	private final List<COLLECTION> collections; public List<COLLECTION> getCollections() {return collections;}
 	private final List<CDATA> datas; public List<CDATA> getDatas() {return datas;}
 	private final List<AITEM> items; public List<AITEM> getItems() {return items;}
-	
+
 	private COLLECTION collection; public COLLECTION getCollection() {return collection;} public void setCollection(COLLECTION collection) {this.collection = collection;}
 	private CDATA data; public CDATA getData() {return data;} public void setData(CDATA data) {this.data = data;}
-	
+
 	public AbstractMdcDataBean(MdcFactoryBuilder<L,D,LOC,R,COLLECTION,SCOPE,STATUS,CDATA,ASET,ACON> fbMdc,
 								IoAttributeFactoryBuilder<L,D,R,?,?,?,?,ASET,AITEM,ACON,ADATA> fbAttribute)
 	{
 		super(fbMdc);
 		this.fbAttribute=fbAttribute;
-		
+
 		efData = fbMdc.ejbData();
-		
+
 		n2Data = new Nested2Map<>();
-		
+
 		collections = new ArrayList<>();
 		datas = new ArrayList<>();
 		items = new ArrayList<>();
@@ -88,7 +88,7 @@ public abstract class AbstractMdcDataBean <L extends JeeslLang, D extends JeeslD
 		reload();
 	}
 
-	private void reload()
+	protected void reload()
 	{
 		collections.clear();
 		collections.addAll(fMdc.all(fbMdc.getClassActivity(),realm,rref));
@@ -98,12 +98,12 @@ public abstract class AbstractMdcDataBean <L extends JeeslLang, D extends JeeslD
 			reloadCollection();
 		}
 	}
-	
-	private void reloadCollection()
+
+	protected void reloadCollection()
 	{
 		datas.clear(); datas.addAll(fMdc.allForParent(fbMdc.getClassData(),collection));
 		items.clear(); items.addAll(fMdc.allForParent(fbAttribute.getClassItem(),collection.getCollectionSet()));
-		
+
 		List<ACON> containers = efData.toCollectionContainer(datas);
 		n2Data.clear();
 		for(ADATA d : fMdc.allForParents(fbAttribute.getClassData(), containers))
