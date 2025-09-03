@@ -1,6 +1,5 @@
 package org.jeesl.controller.handler.system.io.fr;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -73,47 +72,48 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractFileRepositoryHandler.class);
-	
+
 	protected boolean debugOnInfo; @Override public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
-	
+
 	public enum Mode{directSave,deferredSave}
 	public enum ContainerInit {withTransaction,withoutTransaction}
-	
+
 	private Mode mode; public void setMode(Mode mode) {this.mode = mode;}
 	private ContainerInit containerInit; public void setContainerInit(ContainerInit containerInit) {this.containerInit = containerInit;}
 	protected final JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr;
 	protected final IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fbFile;
 	protected final JeeslFileRepositoryCallback callback;
-	
+
 	private final JeeslFileTypeHandler<META,TYPE> fth;
 	protected final EjbDescriptionFactory<D> efDescription;
 	protected final EjbIoFrContainerFactory<STORAGE,CONTAINER> efContainer;
 	protected final EjbIoFrMetaFactory<CONTAINER,META,TYPE> efMeta;
-	
+
 	protected final List<META> metas; @Override public List<META> getMetas() {return metas;}
 	protected final Map<META,File> mapDeferred; public Map<META, File> getMapDeferred() {return mapDeferred;}
 
-	private final List<LOC> locales; 
-	
+	private final List<LOC> locales;
+
 	private String zipName; public String getZipName() {return zipName;} public void setZipName(String zipName) {this.zipName = zipName;}
 	private String zipPrefix; public String getZipPrefix() {return zipPrefix;} public void setZipPrefix(String zipPrefix) {this.zipPrefix = zipPrefix;}
 
-	private STORAGE storage; @Override public STORAGE getStorage() {return storage;} public void setStorage(STORAGE storage) {this.storage=storage;}
+	private STORAGE storage; @Override public STORAGE getStorage() {return storage;} @Override
+	public void setStorage(STORAGE storage) {this.storage=storage;}
 	protected CONTAINER container; @Override public CONTAINER getContainer() {return container;}
 	protected META meta; public META getMeta() {return meta;} public void setMeta(META meta) {this.meta = meta;}
 	private LOC locale; public LOC getLocale() {return locale;} @Override public void setLocale(LOC locale) {this.locale = locale;}
-	
+
 	protected File xmlFile;
 	private String fileName; public String getFileName() {return fileName;} public void setFileName(String fileName) {this.fileName = fileName;}
-	
-	
+
+
 	private boolean showInlineUpload; public boolean isShowInlineUpload() {return showInlineUpload;}
-	
+
 	private boolean allowUpload; public boolean isAllowUpload() {return allowUpload;}
 	private boolean allowChanges; public boolean isAllowChanges() {return allowChanges;}
 	private boolean allowChangeName; public boolean isAllowChangeName() {return allowChangeName;}
 	private boolean allowChangeDescription; public boolean isAllowChangeDescription() {return allowChangeDescription;}
-	
+
 	public AbstractFileRepositoryHandler(JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr,
 								IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fbFile,
 								JeeslFileRepositoryCallback callback)
@@ -122,10 +122,10 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		this.fbFile=fbFile;
 		this.callback=callback;
 		debugOnInfo = false;
-		
+
 		containerInit = ContainerInit.withoutTransaction;
 		mode = Mode.directSave;
-		
+
 		fth = new JeeslFileTypeHandler<META,TYPE>(fbFile,fFr);
 		efDescription = EjbDescriptionFactory.instance(fbFile.getClassD());
 		efContainer = fbFile.ejbContainer();
@@ -134,14 +134,14 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		mapDeferred = new HashMap<>();
 		locales = new ArrayList<>();
 		zipName = "zip.zip";
-		
+
 		allowChanges = true;
 		allowChangeName = false;
 		allowChangeDescription = false;
-		
+
 		showInlineUpload = false;
 	}
-	
+
 	public void allowControls(boolean upload, boolean name, boolean description)
 	{
 		this.allowUpload=upload;
@@ -149,7 +149,8 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		allowChangeDescription = description;
 		allowChanges = allowChangeName || allowChangeDescription;
 	}
-	
+
+	@Override
 	public void setLocales(List<LOC> locales)
 	{
 		this.locales.clear();
@@ -157,7 +158,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		this.locales.addAll(locales);
 		if(locales.size()==1) {locale = locales.get(0);}
 	}
-	
+
 	public <E extends Enum<E>> void initStorage(E code)
 	{
 		try
@@ -196,7 +197,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		{	// The reset is required for a special case in deferredMode
 			reset(true,true);
 		}
-		
+
 		if(Objects.isNull(with.getFrContainer()))
 		{
 			container = efContainer.build(initForStorage);
@@ -227,6 +228,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		this.reload();
 	}
 
+	@Override
 	public void reset() {reset(true,true);}
 	public void cancelMeta() {reset(false,true);}
 
@@ -235,7 +237,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		if(rMetas) {metas.clear();}
 		if(rMeta) {meta=null;}
 	}
-	
+
 	public void reload() {reload(false);}
 	public void reload(boolean forceFind)
 	{
@@ -247,25 +249,25 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		}
 		else
 		{
-			
+
 		}
 		if(debugOnInfo) {logger.info("Reloaded "+fbFile.getClassMeta().getSimpleName()+":"+metas.size()+" for container:"+container.toString());}
 	}
-		
+
 	public void addFileOverlay()
 	{
 		if(debugOnInfo) {logger.info("Adding File Overlay");}
 		addFile();
 		showInlineUpload = false;
 	}
-	
+
 	public void addFileInline()
 	{
 		if(debugOnInfo) {logger.info("Adding File Inline");}
 		this.addFile();
 		showInlineUpload = true;
 	}
-	
+
 	private void addFile()
 	{
 		if(debugOnInfo) {logger.info("Adding File");}
@@ -286,7 +288,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		if(mode.equals(Mode.deferredSave)) {EjbIdFactory.setNextNegativeId(meta,metas);}
 		fth.updateType(meta);
 	}
-	
+
 	public final void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException
 	{
 		if(debugOnInfo) {logger.info("Handling FileUpload: "+event.getFile().getFileName());}
@@ -296,7 +298,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		meta = efMeta.build(container,event.getFile().getFileName(),event.getFile().getSize(),LocalDateTime.now());
 		meta.setType(fFr.fByCode(fbFile.getClassType(), JeeslFileType.Code.unknown));
 		meta.setDescription(efDescription.buildEmpty(locales));
-		
+
 		this.handledFileUpload();
     }
 	protected void handledFileUpload()
@@ -306,7 +308,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		showInlineUpload = false;
 		if(debugOnInfo) {logger.info("handledFileUpload (end): "+meta.toString());}
 	}
-	
+
 	public void selectFile()
 	{
 		if(debugOnInfo) {logger.info("selectFile "+meta.toString());}
@@ -314,7 +316,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		meta = efDescription.persistMissingLangs(fFr,locales,meta);
 		if(Objects.nonNull(callback)) {callback.callbackFrMetaSelected();}
 	}
-	
+
 	@Override public META saveFile() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info("Saving: "+xmlFile.getName()+" to "+storage.getCode()+" with "+mode+" mode.");}
@@ -329,9 +331,9 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			metas.add(meta);
 			mapDeferred.put(meta,xmlFile);
 		}
-		
+
 		if(debugOnInfo) {logger.info("Saved");}
-		
+
 		META m = meta;
 		reset(false,true);
 		return m;
@@ -347,7 +349,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			}
 			else {meta.setFileName(fileName+"."+FilenameUtils.getExtension(meta.getFileName()));}
 		}
-		
+
 		if(mode.equals(Mode.directSave))
 		{
 			meta = fFr.save(meta);
@@ -357,7 +359,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			if(metas.contains(meta)) {metas.remove(meta);}
 			metas.add(meta);
 		}
-		
+
 		fileName = meta.getFileName();
 		reload();
 	}
@@ -368,7 +370,8 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		fth.updateType(m);
 		m = fFr.saveToFileRepository(m,bytes);
 	}
-	
+
+	@Override
 	public <W extends JeeslWithFileRepositoryContainer<CONTAINER>> void saveDeferred(W with) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info("Saving Defrred "+metas.size());}
@@ -397,7 +400,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		}
 		reload(true);
 	}
-	
+
 	@Override public void deleteFile() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info("DELETING: "+meta.toString());}
@@ -405,12 +408,12 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		this.reset(true,true);
 		this.reload();
 	}
-	
+
 	public byte[] zip() throws Exception
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ZipOutputStream zof = new ZipOutputStream(bos);
-		
+
 		for(META m : metas)
 		{
 			StringBuilder sb = new StringBuilder();
@@ -419,10 +422,10 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 				sb.append(zipPrefix).append("/");
 			}
 			sb.append(m.getFileName());
-			
+
 			ZipEntry ze = new ZipEntry(sb.toString());
 			zof.putNextEntry(ze);
-			
+
 			zof.write(fFr.loadFromFileRepository(m));
 
 			zof.closeEntry();
@@ -431,33 +434,33 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		bos.close();
 		return bos.toByteArray();
 	}
-	
+
 	@Override public InputStream download(META m) throws JeeslNotFoundException
 	{
 		if(mode.equals(Mode.directSave) || EjbIdFactory.isSaved(m))
 		{
-			return new ByteArrayInputStream(fFr.loadFromFileRepository(m));
+			return new SelfCleaningByteArrayInputStream(fFr.loadFromFileRepository(m));
 		}
 		else
 		{
-			return new ByteArrayInputStream(mapDeferred.get(m).getData().getValue());
+			return new SelfCleaningByteArrayInputStream(mapDeferred.get(m).getData().getValue());
 		}
 	}
-	
+
 	protected InputStream toInputStream() throws JeeslNotFoundException
 	{
 		return download(meta);
 	}
-	
+
 	public final StreamedContent fileStream() throws Exception
 	{
 		InputStream is = this.toInputStream();
 		return DefaultStreamedContent.builder().contentType(TxtMimeTypeFactory.build(meta.getFileName())).stream(()->is).name(meta.getFileName()).build();
 	}
-	
+
 	public final StreamedContent zipStream() throws Exception
 	{
-		InputStream is = new ByteArrayInputStream(this.zip());
+		InputStream is = new SelfCleaningByteArrayInputStream(this.zip());
 		return DefaultStreamedContent.builder().contentType(JeeslZipReport.mimeType).stream(()->is).name(this.getZipName()).build();
 	}
 
@@ -473,7 +476,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			fFr.saveToFileRepository(newMeta, fFr.loadFromFileRepository(oldMeta));
 		}
 	}
-	
+
 	public void moveTo1(STORAGE storage) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		for(META m : metas)
@@ -482,7 +485,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			fFr.saveToFileRepository(m,bytes);
 		}
 	}
-	
+
 	public void reorderMetas() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.warn("NYI until META implements position");
