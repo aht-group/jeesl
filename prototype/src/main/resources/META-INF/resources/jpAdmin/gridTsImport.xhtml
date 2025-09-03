@@ -111,7 +111,7 @@
 		                </h:outputText>
 			            </p:column>
 						<p:column rendered="true" headerText="#{msg.jeeslTsValue}">  
-							<h:outputText rendered="#{d.isSetValue()}" value="#{d.value}"/>
+							<h:outputText rendered="#{not empty d.value}" value="#{d.value}"/>
 			            </p:column>
 			       	</p:dataTable>
 				</aht:slot>
