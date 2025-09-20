@@ -6,7 +6,6 @@ alter table IoAttributeSectionJtLang add constraint uk_IoAttributeSectionJtLang_
 alter table IoAttributeSet add constraint UKcy9men7hneu0cyyb0gixh8kfo unique (code);
 alter table IoAttributeSetJtDescription add constraint uk_IoAttributeSetJtDescription_description unique (description_id);
 alter table IoAttributeSetJtLang add constraint uk_IoAttributeSetJtLang_lang unique (lang_id);
-alter table IoDbMetaConstraint add constraint UKfo4udkxy7sxkijmjho1ap8us1 unique (table_id, code, columnLocal_id, columnRemote_id);
 alter table IoAttributeCriteria add constraint fk_IoAttributeCriteria_category foreign key (category_id) references TenantStatus;
 alter table IoAttributeCriteria add constraint fk_IoAttributeCriteria_nested foreign key (nested_id) references IoAttributeSet;
 alter table IoAttributeCriteria add constraint fk_IoAttributeCriteria_realm foreign key (realm_id) references IoStatus;

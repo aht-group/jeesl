@@ -73,7 +73,7 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
 	private final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs;
 	
-	private final EjbTsDataPointFactory<MP,DATA,POINT> efPoint;
+	private final EjbTsDataPointFactory<TS,MP,DATA,POINT> efPoint;
 	
 	private JsonTsScopeFactory<L,D,SCOPE,ST> jfScope;
 	private final JsonTsDataFactory<DATA> jfData;

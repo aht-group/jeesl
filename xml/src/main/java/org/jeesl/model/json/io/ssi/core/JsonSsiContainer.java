@@ -3,6 +3,8 @@ package org.jeesl.model.json.io.ssi.core;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.model.json.io.ssi.svn.JsonSvnRepository;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -29,7 +31,11 @@ public class JsonSsiContainer implements Serializable
 	public List<JsonSsiNat> getNats() {return nats;}
 	public void setNats(List<JsonSsiNat> nats) {this.nats = nats;}
 
-
+	@JsonProperty("svns")
+	private List<JsonSvnRepository> svns;
+	public List<JsonSvnRepository> getSvns() {return svns;}
+	public void setSvns(List<JsonSvnRepository> svns) {this.svns = svns;}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();	

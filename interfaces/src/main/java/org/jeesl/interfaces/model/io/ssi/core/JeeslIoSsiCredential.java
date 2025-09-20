@@ -19,7 +19,7 @@ public interface JeeslIoSsiCredential <SYSTEM extends JeeslIoSsiSystem<?,?>>
 										EjbWithNonUniqueCode,EjbWithPosition,EjbWithParentAttributeResolver,
 										EjbWithVisibleMigration
 {	
-	public enum Attributes {system,code}
+	public enum Attributes {system,code,url}
 	
 	public SYSTEM getSystem();
 	public void setSystem(SYSTEM system);

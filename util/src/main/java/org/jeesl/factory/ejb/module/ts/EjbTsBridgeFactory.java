@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.module.ts;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,12 +42,16 @@ public class EjbTsBridgeFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,EC,?>,
 		BRIDGE ejb = null;
 		try
 		{
-			ejb = cBridge.newInstance();
+			ejb = cBridge.getDeclaredConstructor().newInstance();
 			ejb.setEntityClass(entityClass);
 			ejb.setRefId(refId);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
 		return ejb;
 	}
 	

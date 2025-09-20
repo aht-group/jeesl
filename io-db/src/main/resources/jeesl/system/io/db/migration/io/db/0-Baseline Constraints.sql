@@ -12,6 +12,7 @@ alter table IoDbDumpFile add constraint FKq8mdmdj47kbwk0v7u7k1kif4l foreign key 
 alter table IoDbDumpFile add constraint FKpgcypdqvy87231tste2n9winu foreign key (status_id) references IoStatus;
 alter table IoDbMetaColumn add constraint FKk7y96fswbprocbsbhvvv1n5nf foreign key (table_id) references IoDbMetaTable;
 alter table IoDbMetaColumn add constraint FKnu4lcvwlrr5t27qn8a2bm4hos foreign key (type_id) references IoStatus;
+alter table IoDbMetaConstraint add constraint UKfo4udkxy7sxkijmjho1ap8us1 unique (table_id, code, columnLocal_id, columnRemote_id);
 alter table IoDbMetaConstraint add constraint FKkna9oqjwqwbror8brcfqqjvnw foreign key (columnLocal_id) references IoDbMetaColumn;
 alter table IoDbMetaConstraint add constraint FKaq8yunsmqoaoxgu5w8ccr0k8p foreign key (columnRemote_id) references IoDbMetaColumn;
 alter table IoDbMetaConstraint add constraint fk_IoDbMetaConstraint_space foreign key (space_id) references IoStatus;

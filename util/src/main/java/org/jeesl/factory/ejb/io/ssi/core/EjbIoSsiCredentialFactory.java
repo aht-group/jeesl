@@ -31,5 +31,5 @@ public class EjbIoSsiCredentialFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		
 		return ejb;
-	}    
+	}
 }

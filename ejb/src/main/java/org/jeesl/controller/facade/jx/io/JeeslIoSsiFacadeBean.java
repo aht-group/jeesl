@@ -130,6 +130,38 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return null;
 	}
 	
+	@Override public List<CRED> fSsiCredentials(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<CRED> cQ = cB.createQuery(fbSsiCore.getClassCredential());
+		Root<CRED> root = cQ.from(fbSsiCore.getClassCredential());
+		
+		cQ.select(root);
+		cQ.where(cB.and(this.pCredential(cB,query,root)));
+		
+		TypedQuery<CRED> tQ = em.createQuery(cQ);
+		super.pagination(tQ,query);
+		return tQ.getResultList();
+	}
+	private Predicate[] pCredential(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query, Root<CRED> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			Expression<String> eString = null;
+			if(cq.getPath().equals(CqLiteral.path(JeeslIoSsiCredential.Attributes.code))) {eString = root.get(JeeslIoSsiCredential.Attributes.code.toString());}
+			else if(cq.getPath().equals(CqLiteral.path(JeeslIoSsiCredential.Attributes.url))) {eString = root.get(JeeslIoSsiCredential.Attributes.url.toString());}
+			
+			if(Objects.nonNull(eString)) {LiteralPredicateBuilder.add(cB,predicates,cq,eString);}
+			else {logger.error("NYI "+cq.toString());}
+		}
+		
+		if(ObjectUtils.isNotEmpty(query.getIoSsiSystems())) {predicates.add(root.<SYSTEM>get(JeeslIoSsiCredential.Attributes.system.toString()).in(query.getIoSsiSystems()));}
+	
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	
 	@Override public CTX fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException
 	{
 		ENTITY eEjb = this.fByCode(fbSsi.getClassEntity(), ejb.getName());
@@ -304,7 +336,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 //		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 //	}
 	
-	@Override public JsonTuples1<STATUS> tpIoSsiDataByStatus(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
+	@Override public JsonTuples1<STATUS> tpIoSsiDataByStatus(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
@@ -322,7 +354,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public JsonTuples2<STATUS, ERROR> tpIoSsiDataByStatusError(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
+	@Override public JsonTuples2<STATUS, ERROR> tpIoSsiDataByStatusError(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
@@ -542,7 +574,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return tQ.getResultList();
 	}
 
-	@Override public Long cSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
+	@Override public Long cSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cQ = cB.createQuery(Long.class);
@@ -553,7 +585,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 
 		return em.createQuery(cQ).getSingleResult();
 	}
-	@Override public List<DATA> fSsiData(JeeslIoSsiQuery<CTX,STATUS,ERROR> query)
+	@Override public List<DATA> fSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
@@ -566,7 +598,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
-	private Predicate[] pSsiData(CriteriaBuilder cB, JeeslIoSsiQuery<CTX,STATUS,ERROR> query, Root<DATA> root)
+	private Predicate[] pSsiData(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query, Root<DATA> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -605,7 +637,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	}
 
 	@Override
-	public List<ATTRIBUTE> fSsiAttributes(JeeslIoSsiQuery<CTX, STATUS, ERROR> query)
+	public List<ATTRIBUTE> fSsiAttributes(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ATTRIBUTE> cQ = cB.createQuery(fbSsi.getClassAttribute());
@@ -618,7 +650,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
-	private Predicate[] pSsiAttribute(CriteriaBuilder cB, JeeslIoSsiQuery<CTX,STATUS,ERROR> query, Root<ATTRIBUTE> root)
+	private Predicate[] pSsiAttribute(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query, Root<ATTRIBUTE> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		

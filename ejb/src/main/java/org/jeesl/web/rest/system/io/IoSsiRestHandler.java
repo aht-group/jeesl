@@ -99,6 +99,6 @@ public class IoSsiRestHandler <L extends JeeslLang, D extends JeeslDescription,
 		}
 		catch (JeeslNotFoundException e) {}
 		
-		return jfContainer.build();
+		return jfContainer.assemble();
 	}
 }

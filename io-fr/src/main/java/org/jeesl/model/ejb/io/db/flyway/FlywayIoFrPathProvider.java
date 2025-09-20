@@ -20,6 +20,8 @@ public class FlywayIoFrPathProvider implements JeeslFlywayPathProvider, JeesDdlC
 {
 	public static FlywayIoFrPathProvider instance() {return new FlywayIoFrPathProvider();}
 	
+	private FlywayIoFrPathProvider() {}
+	
 	@Override public String getRootDirectory() {return "jeesl/io/db/migration/io/fr";}
 	
 	@Override public String getBaselineTables() {return this.getRootDirectory()+"/"+JeeslFlywayPathProvider.sqlTables;}

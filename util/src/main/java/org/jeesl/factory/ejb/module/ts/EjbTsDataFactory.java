@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.module.ts;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,12 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.model.xml.module.ts.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +55,7 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		DATA ejb = null;
 		try
 		{
-			ejb = cData.newInstance();
+			ejb = cData.getDeclaredConstructor().newInstance();
 			ejb.setWorkspace(workspace);
 			ejb.setTimeSeries(timeSeries);
 			ejb.setTransaction(transaction);
@@ -61,6 +64,10 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
 		return ejb;
 	}
 
@@ -71,6 +78,10 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		return set;
 	}
 	
+	public Map<TS,List<DATA>> toMapSeriesListData(List<DATA> list)
+	{
+		return list.stream().collect(Collectors.groupingBy(DATA::getTimeSeries));
+	}
 	public Map<TS,DATA> toMapSeriesSingleData(List<DATA> list)
 	{
 		Map<TS,DATA> map = new HashMap<>();

@@ -51,7 +51,7 @@ public class AbstractTimeSeriesProcessor<SCOPE extends JeeslTsScope<?,?,?,ST,?,E
 	
 	protected final McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> mfTs;
 	protected final EjbTsDataFactory<TS,TRANSACTION,DATA,WS> efData;
-	protected final EjbTsDataPointFactory<MP,DATA,POINT> efPoint;
+	protected final EjbTsDataPointFactory<TS,MP,DATA,POINT> efPoint;
 	
 	protected final List<MP> mps;
 	

@@ -22,6 +22,8 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.web.io.ssi.JeeslIoSsiDataCallback;
+import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
+import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
@@ -29,7 +31,6 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
-import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.util.query.cq.CqLong;
 import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.primefaces.model.FilterMeta;
@@ -38,7 +39,9 @@ import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
+public class JeeslSsiDataController <SYSTEM extends JeeslIoSsiSystem<?,?>,
+										CRED extends JeeslIoSsiCredential<SYSTEM>,
+										CTX extends JeeslIoSsiContext<SYSTEM,?>,
 										DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
 										STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
 										ERROR extends JeeslIoSsiError<?,?,CTX,?>,
@@ -50,7 +53,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiDataController.class);
 	
-	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,ERROR,?,?,JOB,?> fSsi;
+	private JeeslIoSsiFacade<SYSTEM,CRED,CTX,?,DATA,STATUS,ERROR,?,?,JOB,?> fSsi;
 	private final IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,ERROR,?,?,JOB> fbSsiData;
 	private final JeeslIoSsiDataCallback callback;
 	
@@ -66,7 +69,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private List<DATA> selection; public List<DATA> getSelection() {return selection;} public void setSelection(List<DATA> selection) {this.selection = selection;}
 	
 	private CTX context; public CTX getContext() {return context;} public void setContext(CTX context) {this.context = context;}
-	private Class<JSON> cJson; public JeeslSsiDataController<CTX,DATA,STATUS,ERROR,JOB,JSON> json(Class<JSON> cJson) {this.cJson = cJson; return this;}
+	private Class<JSON> cJson; public JeeslSsiDataController<SYSTEM,CRED,CTX,DATA,STATUS,ERROR,JOB,JSON> json(Class<JSON> cJson) {this.cJson = cJson; return this;}
 
 	private String json; public String getJson() {return json;} public void setJson(String json) {this.json = json;}
 
@@ -74,13 +77,15 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private Long refB; public <B extends EjbWithId> void setRefB(B b) {this.refB = b.getId();}
 	private Long refC; public <C extends EjbWithId> void setRefC(C c) {this.refC = c.getId();}
 
-	public static <CTX extends JeeslIoSsiContext<?,?>,
+	public static <SYSTEM extends JeeslIoSsiSystem<?,?>,
+					CRED extends JeeslIoSsiCredential<SYSTEM>,
+					CTX extends JeeslIoSsiContext<SYSTEM,?>,
 					DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
 					STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
 					ERROR extends JeeslIoSsiError<?,?,CTX,?>,
 					JOB extends JeeslJobStatus<?,?,JOB,?>,
 					JSON extends Object>
-				JeeslSsiDataController<CTX,DATA,STATUS,ERROR,JOB,JSON> instance(final JeeslIoSsiDataCallback callback, IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,ERROR,?,?,JOB> fbSsi)
+				JeeslSsiDataController<SYSTEM,CRED,CTX,DATA,STATUS,ERROR,JOB,JSON> instance(final JeeslIoSsiDataCallback callback, IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,ERROR,?,?,JOB> fbSsi)
 	{
 		return new JeeslSsiDataController<>(callback,fbSsi);
 	}
@@ -99,7 +104,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		datas = new ArrayList<>();
 	}
 
-	public void postConstructSsiData(JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,ERROR,?,?,JOB,?> fSsi)
+	public void postConstructSsiData(JeeslIoSsiFacade<SYSTEM,CRED,CTX,?,DATA,STATUS,ERROR,?,?,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
 		logger.trace(callback.getClass().getName());
@@ -109,7 +114,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	{
 		thStatus.clear();
 		
-		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
+		EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		if(Objects.nonNull(refA)) {query.add(CqLong.isValue(refA,CqLong.path(JeeslIoSsiData.Attributes.refA)));}
 		if(Objects.nonNull(refB)) {query.add(CqLong.isValue(refB,CqLong.path(JeeslIoSsiData.Attributes.refB)));}
 		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
@@ -139,7 +144,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	public List<DATA> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
 	{
 		datas.clear(); mapJson.clear();
-		EjbIoSsiQuery<CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
+		EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
 		query.setMaxResults(pageSize);
 		if(Objects.nonNull(refA)) {query.add(CqLong.isValue(refA,CqLong.path(JeeslIoSsiData.Attributes.refA)));}

@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.util;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionMigration;
@@ -13,7 +14,7 @@ public class EjbPositionFactory
     
 	public static <T extends EjbWithPosition> void next(T ejb, List<T> list)
 	{
-		if(list==null) {ejb.setPosition(1);}
+		if(Objects.isNull(list)) {ejb.setPosition(1);}
 		else {ejb.setPosition(list.size()+1);}
 	}
 	

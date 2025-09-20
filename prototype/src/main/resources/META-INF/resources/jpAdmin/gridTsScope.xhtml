@@ -186,18 +186,21 @@
 								<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.deleteMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" />
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslCode}"/>
+								<jtp:label entity="TsMultiPoint" code="id"/>
+								<h:outputText value="#{cc.attrs.bean.multiPoint.id}"/>
+							
+								<jtp:label entity="TsMultiPoint" code="code"/>
 								<p:inputText autocomplete="off" value="#{cc.attrs.bean.multiPoint.code}"/>
 								
-								<p:outputLabel value="#{msg.aupSecurityVisible}"/>
+								<jtp:label entity="TsMultiPoint" code="visible"/>
 								<p:selectBooleanCheckbox value="#{cc.attrs.bean.multiPoint.visible}"/>
 								
-								<p:outputLabel value="#{msg.jeeslTsUnit}"/>
+								<jtp:label entity="TsMultiPoint" code="unit"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.multiPoint.unit}" effect="fade" autoWidth="false">
 									<f:selectItems value="#{cc.attrs.bean.units}" var="u" itemLabel="#{u.name[localeCode].lang}" itemValue="#{u}"/>
 								</p:selectOneMenu>
 								
-								<p:outputLabel value="#{msg.jeeslTsMultiPointColor1}"/>
+								<jtp:label entity="TsMultiPoint" code="color1"/>
 								<p:colorPicker value="#{cc.attrs.bean.multiPoint.color1}" />
 							</p:panelGrid>
 							<aht:tabTranslationEditor value="#{cc.attrs.bean.multiPoint}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>

@@ -128,7 +128,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	public EjbTsBridgeFactory<SCOPE,MP,TS,BRIDGE,EC,DATA,POINT> ejbBridge(){return new EjbTsBridgeFactory<>(cBridge);}
 	public EjbTsTransactionFactory<TRANSACTION,SOURCE,USER> ejbTransaction() {return new EjbTsTransactionFactory<>(cTransaction);}
 	public EjbTsDataFactory<TS,TRANSACTION,DATA,WS> ejbData() {return new EjbTsDataFactory<>(cData);}
-	public EjbTsDataPointFactory<MP,DATA,POINT> ejbDataPoint() {return new EjbTsDataPointFactory<>(cPoint);}
+	public EjbTsDataPointFactory<TS,MP,DATA,POINT> ejbDataPoint() {return new EjbTsDataPointFactory<>(cPoint);}
 	public EjbTsClassFactory<CAT,EC,ENTITY> ejbEntityClass(){return new EjbTsClassFactory<>(cEc);}
 	public EjbTsMutliPointFactory<SCOPE,MP> ejbMultiPoint() {return new EjbTsMutliPointFactory<>(cMp);}
 	public EjbTsCronFactory<SCOPE,INT,STAT,CRON> ejbCron() {return new EjbTsCronFactory<SCOPE,INT,STAT,CRON>(cCron);}

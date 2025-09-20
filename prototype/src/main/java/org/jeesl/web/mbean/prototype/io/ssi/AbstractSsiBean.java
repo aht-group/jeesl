@@ -134,7 +134,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		datas.clear();
 		thLink.clear();
 		
-		EjbIoSsiQuery<CONTEXT,STATUS,ERROR> query = new EjbIoSsiQuery<>();
+		EjbIoSsiQuery<SYSTEM,CRED,CONTEXT,STATUS,ERROR> query = new EjbIoSsiQuery<>();
 		query.add(ssiProcessor.getMapping());
 		query.add(CqLong.isValue(refA, CqLong.path(JeeslIoSsiData.Attributes.refA)));
 		

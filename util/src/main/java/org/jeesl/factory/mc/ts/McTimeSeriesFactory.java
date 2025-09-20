@@ -1,5 +1,6 @@
 package org.jeesl.factory.mc.ts;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import org.apache.commons.collections4.ListUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
@@ -30,10 +32,12 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.module.ts.TimeSeries;
+import org.metachart.factory.json.chart.echart.data.JsonDataFactory;
 import org.metachart.factory.xml.chart.high.core.XmlChartFactory;
 import org.metachart.factory.xml.chart.high.core.XmlDataFactory;
 import org.metachart.factory.xml.chart.high.core.XmlSubtitleFactory;
 import org.metachart.factory.xml.chart.high.core.XmlTitleFactory;
+import org.metachart.model.json.chart.echart.data.JsonData;
 import org.metachart.model.xml.chart.Chart;
 import org.metachart.model.xml.chart.Data;
 import org.metachart.model.xml.chart.Ds;
@@ -41,16 +45,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
-								MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
-								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-								BRIDGE extends JeeslTsBridge<EC>,
-								EC extends JeeslTsEntityClass<?,?,?,ENTITY>,
-								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
-								INT extends JeeslTsInterval<?,?,INT,?>,
-								STAT extends JeeslTsStatistic<?,?,STAT,?>,
-								DATA extends JeeslTsData<TS,?,?,POINT,WS>,
-								POINT extends JeeslTsDataPoint<DATA,MP>,
-								WS extends JeeslStatus<?,?,WS>>
+									MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
+									TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
+									BRIDGE extends JeeslTsBridge<EC>,
+									EC extends JeeslTsEntityClass<?,?,?,ENTITY>,
+									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
+									INT extends JeeslTsInterval<?,?,INT,?>,
+									STAT extends JeeslTsStatistic<?,?,STAT,?>,
+									DATA extends JeeslTsData<TS,?,?,POINT,WS>,
+									POINT extends JeeslTsDataPoint<DATA,MP>,
+									WS extends JeeslStatus<?,?,WS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(McTimeSeriesFactory.class);
 
@@ -60,7 +64,7 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	private final JeeslTsFacade<?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?> fTs;
 
 	private final TsFactoryBuilder<?,?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs;
-	private final EjbTsDataPointFactory<MP,DATA,POINT> efPoint;
+	private final EjbTsDataPointFactory<TS,MP,DATA,POINT> efPoint;
 
 	private SCOPE scope; public SCOPE getScope() {return scope;} public void setScope(SCOPE scope) {this.scope = scope;}
 	private EC entityClass; public EC getEntityClass() {return entityClass;} public void setEntityClass(EC entityClass) {this.entityClass = entityClass;}
@@ -237,5 +241,16 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 		}
 
 		return xml;
+	}
+	
+	public JsonData toJson(List<POINT> points)
+	{	
+		JsonDataFactory jf = JsonDataFactory.instance();
+		for(POINT p : ListUtils.emptyIfNull(points))
+		{
+			jf.time(DateUtil.toLocalDateTime(p.getData().getRecord()),p.getValue());
+		}
+
+		return jf.assemble();
 	}
 }

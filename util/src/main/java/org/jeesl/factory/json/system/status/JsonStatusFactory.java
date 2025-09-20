@@ -24,7 +24,8 @@ public class JsonStatusFactory<L extends JeeslLang, D extends JeeslDescription,S
 		this.localeCode=localeCode;
 		this.q=q;
 	}
-		
+	
+	public static <E extends Enum<E>> JsonStatus build(E code) {return JsonStatusFactory.build(code.toString(),null);}
 	public static JsonStatus build(String code, String label) {return build(null,code,label);}
 	public static JsonStatus build(Long id, String code, String label)
 	{

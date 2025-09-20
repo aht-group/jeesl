@@ -96,6 +96,8 @@ public class IoSsiCredential implements JeeslIoSsiCredential<IoSsiSystem>
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[").append(id).append("]");
+		sb.append(" (").append(system.getCode()).append(")");
+		sb.append(" ").append(code);
 		return sb.toString();
 	}
 }

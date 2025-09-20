@@ -25,6 +25,7 @@ public class CqDouble implements JeeslCqDouble
 	
 	public static CqDouble notValue(Double value, String path) {return new CqDouble(JeeslCqDouble.Type.NotValue,value,path);}
 	public static CqDouble nullValue(String path) {return new CqDouble(JeeslCqDouble.Type.IsNull,null,path);}
+	public static CqDouble nonNull(String path) {return new CqDouble(JeeslCqDouble.Type.NonNull,null,path);}
 
 	private CqDouble(JeeslCqDouble.Type type, Double value, String path)
 	{

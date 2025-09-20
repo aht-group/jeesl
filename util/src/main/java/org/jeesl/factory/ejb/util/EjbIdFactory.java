@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.api.exception.JeeslNotUniqueException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.JeeslIdEjb;
 import org.slf4j.Logger;
@@ -235,5 +237,18 @@ public class EjbIdFactory
 			return list.get(index+1);
 		}
 		return ejb;
+	}
+	
+	public static <T extends EjbWithId> T fSingle(List<T> list) throws JeeslNotFoundException, JeeslNotUniqueException
+	{
+		if(list.size()==1) {return list.get(0);}
+		if(list.isEmpty()) {throw new JeeslNotFoundException("Not found");}
+		else {throw new JeeslNotUniqueException("Multiple");}
+	}
+	public static <T extends EjbWithId> T fUnique(List<T> list) throws JeeslNotFoundException
+	{
+		if(list.size()==1) {return list.get(0);}
+		if(list.isEmpty()) {throw new JeeslNotFoundException("Not found");}
+		else {throw new RuntimeException("Multiple");}
 	}
 }
