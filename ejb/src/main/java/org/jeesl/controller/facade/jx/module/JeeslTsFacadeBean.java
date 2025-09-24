@@ -440,7 +440,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		{
 			case min: sQ.select(cB.min(eSubValue)); break;
 			case max: sQ.select(cB.greatest(eSubValue)); break;
-			case avg: sQ.select(cB.avg(eSubValue)); break;
+	//		case avg: sQ.select(cB.avg(eSubValue)); break;
 		}
 		
 		sQ.where(cB.and(pSub.toArray(new Predicate[pSub.size()])));
@@ -592,7 +592,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		{
 			case min: sQ.select(cB.min(eSubValue)); break;
 			case max: sQ.select(cB.greatest(eSubValue)); break;
-			case avg: sQ.select(cB.avg(eSubValue)); break;
+//			case avg: sQ.select(cB.avg(eSubValue)); break;
 		}
 		
 		sQ.where(cB.and(pSub.toArray(new Predicate[pSub.size()])));
@@ -954,7 +954,12 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 			{
 				SortByPredicateBuilder.juDate(cB,orders,cq,root.<Date>get(JeeslTsData.Attributes.record.toString()));
 			}
-			else {logger.warn(cq.nyi(fbTs.getClassMp()));}
+			else if(cq.getPath().equals(CqOrdering.path(JeeslTsData.Attributes.timeSeries,JeeslTimeSeries.Attributes.id)))
+			{
+				Path<TS> pTs = root.get(JeeslTsData.Attributes.timeSeries.toString());
+				SortByPredicateBuilder.addByLong(cB,orders,cq,pTs.<Long>get(JeeslTimeSeries.Attributes.id.toString()));
+			}
+			else {logger.warn(cq.nyi(fbTs.getClassData()));}
 		}
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}

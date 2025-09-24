@@ -51,7 +51,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 								CRON extends JeeslTsCron<SCOPE,INTERVAL,TYPE>>
 			extends JeeslFacade
 {
-	public enum Aggregation{max,min,avg}
+	public enum Aggregation{max,min} //avg
 	
 	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);

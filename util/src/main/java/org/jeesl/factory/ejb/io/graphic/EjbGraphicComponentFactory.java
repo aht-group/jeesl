@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
@@ -63,8 +64,7 @@ public class EjbGraphicComponentFactory<G extends JeeslGraphic<?,GC,GS>,
 	
 	public <T extends EjbWithGraphic<G>> BidiMap<T,GC> toBidiMap(List<T> owners, List<GC> components)
 	{
-		Map<Long,T> mapOwners = new HashMap<>();
-		for(T t : owners) {mapOwners.put(t.getGraphic().getId(),t);}
+		Map<Long,T> mapOwners = EjbIdFactory.toIdMap(owners);
 		BidiMap<T,GC> map = new DualHashBidiMap<>();
 		for(GC c : components)
 		{
@@ -73,7 +73,6 @@ public class EjbGraphicComponentFactory<G extends JeeslGraphic<?,GC,GS>,
 				map.put(mapOwners.get(c.getGraphic().getId()),c);
 			}
 		}
-		
 		return map;
 	}
 }

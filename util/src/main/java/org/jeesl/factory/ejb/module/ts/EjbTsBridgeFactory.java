@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -15,6 +17,7 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,6 +89,19 @@ public class EjbTsBridgeFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,EC,?>,
 		for(BRIDGE bridge : bridges)
 		{
 			if(idMap.containsKey(bridge.getRefId())) {map.put(idMap.get(bridge.getRefId()),bridge);}
+		}
+		return map;
+	}
+	public <T extends EjbWithId> BidiMap<T,BRIDGE> toBidiMap(List<BRIDGE> bridges, List<T> ejbs)
+	{
+		Map<Long,T> mapEjbs = EjbIdFactory.toIdMap(ejbs);
+		BidiMap<T,BRIDGE> map = new DualHashBidiMap<>();
+		for(BRIDGE b : bridges)
+		{
+			if(mapEjbs.containsKey(b.getRefId()))
+			{
+				map.put(mapEjbs.get(b.getRefId()),b);
+			}
 		}
 		return map;
 	}

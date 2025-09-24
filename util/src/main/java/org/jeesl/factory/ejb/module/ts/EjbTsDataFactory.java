@@ -82,6 +82,10 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 	{
 		return list.stream().collect(Collectors.groupingBy(DATA::getTimeSeries));
 	}
+	public Map<LocalDateTime,DATA> toMapRecord(List<DATA> list)
+	{
+		return list.stream().collect(Collectors.toMap(k -> DateUtil.toLocalDateTime(k.getRecord()), v -> v));
+	}
 	public Map<TS,DATA> toMapSeriesSingleData(List<DATA> list)
 	{
 		Map<TS,DATA> map = new HashMap<>();

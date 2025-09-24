@@ -12,10 +12,14 @@ public class DelayedUrlConfig
 	{
 		String url = config.getString(key);
 		
+
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("REST connection to ");
 		sb.append(url);
 		sb.append(" (").append(key).append(")");
+		
+		logger.info(sb.toString());
 		
 		boolean isLocal = url.contains("localhost");
 //		sb.append(" skipDelay:").append(skipDelay);
