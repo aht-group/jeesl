@@ -22,7 +22,7 @@ public class UtilsStatusBlBean extends JeeslFacadeBean implements UtilsStatusBl
 		super(em);
 	}
 
-	@Override
+//	@Override
 	public <T extends EjbWithLangDescription<L, D>, L extends JeeslLang, D extends JeeslDescription>
 			T verifiyLangs(Class<T> cl, Class<D> clD, T t, String[] langs)
 	{

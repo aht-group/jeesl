@@ -1,18 +1,25 @@
 package org.jeesl.factory.sql;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.util.TxtIdFactory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.util.query.sql.JeeslSqlQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +30,18 @@ public class SqlFactory
 	
 	private StringBuilder sb;
 	private String alias;
-	private boolean newLine;
+	private boolean newLine; public SqlFactory linebreak(boolean value) {this.newLine=value; return this;}
 	
 	private Map<Class<?>,String> mapAlias;
+	private Set<String> setIdAttributes;
+	
+	private String from;
+	private List<String> selects;
+	private List<String> joins;
+	private List<String> groups;
+	private List<String> wheres;
+	private Integer limit; 	public SqlFactory limit(int limit) {this.limit = limit; return this;}
+	
 	private boolean envers; public SqlFactory envers() {envers=true; return this;}
 	
 	public static SqlFactory instance() {return new SqlFactory();}
@@ -37,25 +53,165 @@ public class SqlFactory
 		envers = false;
 		
 		mapAlias = new HashMap<>();
+		setIdAttributes = new HashSet<>();
 	}
 	
-	public <T extends EjbWithId> SqlFactory alias(Class<T> c, String a) {mapAlias.put(c,a);return this;}
+	public <T extends EjbWithId> SqlFactory alias(Class<T> c, String a) {mapAlias.put(c,a); return this;}
+	public <T extends EjbWithId, A extends Enum<A>> SqlFactory id(Class<T> c, A a) {setIdAttributes.add(c.getName()+":"+a.toString()); return this;}
 	
 	public <T extends EjbWithId> SqlFactory from(Class<T> c)
 	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		
 		String a = null;
 		if(Objects.nonNull(alias)) {a=alias;}
 		else if(mapAlias.containsKey(c)) {a = mapAlias.get(c);}
 		
-		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-		sb.append(" FROM ");
-		if(envers) {sb.append("envers.");}
-		sb.append(c.getAnnotation(Table.class).name());
-		if(envers) {sb.append("_");}
-		if(Objects.nonNull(a)) {sb.append(" AS ").append(a);}
+		StringBuffer bf = new StringBuffer();
+		
+		bf.append("FROM ");
+		if(envers) {bf.append("envers.");}
+		bf.append(c.getAnnotation(Table.class).name());
+		if(envers) {bf.append("_");}
+		if(Objects.nonNull(a)) {bf.append(" AS ").append(a);}
+		
+		sb.append(" ").append(bf);
+		from = bf.toString();
 		
 		return this;
 	}
+	
+	public <S extends EjbWithId, O extends EjbWithId, A extends Enum<A>> SqlFactory join(Class<S> self, Class<O> other, A attribute)
+	{
+//		if(self.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+//		if(other.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+//		StringBuilder bf = new StringBuilder();
+//		bf.append("JOIN ").append(self.getAnnotation(Table.class).name());
+//		sb.append(" ").append(aliasOther);
+//		sb.append(" ON ");
+//		sb.append(aliasOther).append(".id = ").append(aliasOwner).append(".").append(attribute.toString()).append("_id");
+//		newLine(newLine,sb);
+		logger.warn("NYI");
+		return this;
+	}
+	
+	public <T extends EjbWithId, A extends Enum<A>, X extends EjbWithId> SqlFactory whereIn(Class<T> c, A attribute, List<X> list)
+	{
+		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}		
+		wheres.add(String.format("%s IN (%s)", this.attribute(c,attribute.toString()), EjbIdFactory.toIdList(list)));
+		return this;
+	}
+	public <T extends EjbWithId, A extends Enum<A>, X extends EjbWithId> SqlFactory where(Class<T> c, A attribute, JeeslCqDate.Type type, LocalDate ld)
+	{
+		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}
+		switch(type)
+		{
+			case AtOrAfter: wheres.add(String.format("%s >= '%s'",this.attribute(c,attribute.toString()),ld.toString())); break;
+			case Before: wheres.add(String.format("%s < '%s'",this.attribute(c,attribute.toString()),ld.toString())); break;
+			case BeforeOrAt: wheres.add(String.format("%s <= '%s'",this.attribute(c,attribute.toString()),ld.toString())); break;
+			default: logger.warn("NYI");
+		}
+//		wheres.add(String.format("%s IN (%s)", this.attribute(c,attribute.toString()), EjbIdFactory.toIdList(list)));
+		return this;
+	}
+	
+	public SqlFactory select(String value) {return select(null,value);}
+	public <T extends EjbWithId, A extends Enum<A>> SqlFactory select(Class<T> c, A attribute) {return this.select(c, attribute.toString());}
+	private <T extends EjbWithId> SqlFactory select(Class<T> c, String attribute)
+	{
+		if(Objects.isNull(selects)) {selects = new ArrayList<>();}
+		selects.add(this.attribute(c,attribute));
+		return this;
+	}
+	
+	public SqlFactory group(String value) {return group(null,value);}
+	public <T extends EjbWithId, A extends Enum<A>> SqlFactory group(Class<T> c, A attribute) {return this.group(c, attribute.toString());}
+	private <T extends EjbWithId> SqlFactory group(Class<T> c, String value)
+	{
+		if(Objects.isNull(groups)){groups = new ArrayList<>();}
+		groups.add(this.attribute(c, value));
+		return this;
+	}
+	
+	private <T extends EjbWithId> String attribute(Class<T> c, String attribute)
+	{
+		StringBuffer bf = new StringBuffer();
+		
+		if(Objects.nonNull(c))
+		{
+			String a = null; if(mapAlias.containsKey(c)) {a = mapAlias.get(c);}
+			
+			if(Objects.nonNull(a)) {bf.append(a).append(".");}
+			else
+			{
+				if(envers) {bf.append("envers.");}
+				bf.append(c.getAnnotation(Table.class).name());
+				if(envers) {bf.append("_");}
+				bf.append(".");
+			}
+		}
+		
+		bf.append(attribute.toString());
+		if(Objects.nonNull(c) && setIdAttributes.contains(c.getName()+":"+attribute)) {bf.append("_id");}
+		return bf.toString();
+	}
+	
+	public String assemble()
+	{
+		StringBuilder bf = new StringBuilder();
+		SqlFactory.newLine(newLine,bf);
+		
+		bf.append("SELECT ");
+		if(ObjectUtils.isEmpty(selects)) {bf.append("*");}
+		else {bf.append(String.join(", ", selects));}
+		SqlFactory.newLine(newLine,bf);
+		
+		bf.append(" ").append(from);
+		SqlFactory.newLine(newLine,bf);
+		
+		if(ObjectUtils.isNotEmpty(wheres))
+		{
+			bf.append(" WHERE ");
+			bf.append(String.join(" AND ", wheres));
+			SqlFactory.newLine(newLine,bf);
+		}
+		
+		if(ObjectUtils.isNotEmpty(groups))
+		{
+			bf.append(" GROUP BY ").append(String.join(", ", groups));
+			SqlFactory.newLine(newLine,bf);
+		}
+		
+		if(Objects.nonNull(limit)) {bf.append(" LIMIT ").append(limit);}
+		SqlFactory.newLine(newLine,bf);
+		
+		return bf.toString();
+	}
+	
+	public <T extends EjbWithId, A extends Enum<A>> String dateTrunc(Class<T> c, A attribute, JeeslTsInterval.Aggregation interval)
+	{
+		StringBuilder bf = new StringBuilder();
+		bf.append("date_trunc(").append(String.format("'%s'",interval.toString()));
+		bf.append(", ");
+		
+		String a = null; if(mapAlias.containsKey(c)) {a = mapAlias.get(c);}
+		if(Objects.nonNull(a)) {bf.append(a).append(".");}
+		else
+		{
+			if(envers) {bf.append("envers.");}
+			bf.append(c.getAnnotation(Table.class).name());
+			if(envers) {bf.append("_");}
+			bf.append(".");
+		}
+		bf.append(attribute.toString());
+		
+		bf.append(")");
+		return bf.toString();
+	}
+	
+	
+	
+	
 	
 	public <T extends EjbWithId, E extends Enum<E>> SqlFactory where(Class<T> c, E attribute, Long id)
 	{
@@ -66,8 +222,9 @@ public class SqlFactory
 		
 		return this;
 	}
-
 	
+
+
 	public <T extends EjbWithId> SqlFactory delete(Class<T> c)
 	{
 		SqlFactory.deleteFrom(sb,c,alias,newLine);
@@ -117,11 +274,6 @@ public class SqlFactory
 	{
 		sb.append(" AND ");
 		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
-		return this;
-	}
-	public SqlFactory limit(int limit)
-	{
-		sb.append(" LIMIT ").append(limit);
 		return this;
 	}
 	
@@ -285,13 +437,6 @@ public class SqlFactory
 		return sb.toString();
 	}
 	
-	public static void from(StringBuilder sb, Class<?> c, boolean newLine)
-	{
-		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-		sb.append(" FROM ").append(c.getAnnotation(Table.class).name());
-		newLine(newLine,sb);
-	}
-	
 	public static String from(String table, String as, boolean newLine)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -444,21 +589,8 @@ public class SqlFactory
 		List<Long> ids = new ArrayList<>();
 		for(T id : list) {ids.add(id.getId());}
 		sb.append(" (").append(StringUtils.join(ids,",")).append(")");
-	}
-	@Deprecated
-	public static <T extends EjbWithId> String in(List<T> list)
-	{
-		List<Long> ids = new ArrayList<>();
-		for(T id : list) {ids.add(id.getId());}
-		StringBuilder sb = new StringBuilder();
-		sb.append(" (").append(StringUtils.join(ids,",")).append(")");
-		return sb.toString();
-	}
+	}	
 	
-	public static void limit(StringBuilder sb, int limit, boolean newLine)
-	{
-		limit(sb,true,limit,newLine);
-	}
 	public static void limit(StringBuilder sb, boolean apply, int limit, boolean newLine)
 	{
 		if(apply)

@@ -1,5 +1,7 @@
 package org.jeesl.controller.facade.jx.module;
 
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -26,6 +28,7 @@ import javax.persistence.criteria.Subquery;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.BooleanPredicateBuilder;
@@ -42,6 +45,7 @@ import org.jeesl.factory.ejb.module.ts.EjbTsFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
+import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.factory.sql.module.SqlTimeSeriesFactory;
 import org.jeesl.interfaces.facade.ParentPredicate;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -59,8 +63,6 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsSample;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsCron;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
@@ -73,6 +75,7 @@ import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
 import org.jeesl.util.query.cq.CqBool;
 import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqLiteral;
@@ -81,26 +84,24 @@ import org.jeesl.util.query.ejb.module.EjbTimeSeriesQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
-							CAT extends JeeslTsCategory<L,D,CAT,?>,
-							SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
-							ST extends JeeslTsScopeType<L,D,ST,?>,
-							UNIT extends JeeslStatus<L,D,UNIT>,
-							MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT>,
+public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
+							SCOPE extends JeeslTsScope<?,?,CAT,ST,UNIT,EC,INT>,
+							ST extends JeeslTsScopeType<?,?,ST,?>,
+							UNIT extends JeeslStatus<?,?,UNIT>,
+							MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT>,
 							TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
 							TX extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-							SOURCE extends EjbWithLangDescription<L,D>,
+							SOURCE extends EjbWithLangDescription<?,?>,
 							BRIDGE extends JeeslTsBridge<EC>,
-							EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
-							ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
-							INT extends JeeslTsInterval<L,D,INT,?>,
-							STAT extends JeeslTsStatistic<L,D,STAT,?>,
+							EC extends JeeslTsEntityClass<?,?,CAT,ENTITY>,
+							ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
+							INT extends JeeslTsInterval<?,?,INT,?>,
+							STAT extends JeeslTsStatistic<?,?,STAT,?>,
 							DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 							POINT extends JeeslTsDataPoint<DATA,MP>,
 							SAMPLE extends JeeslTsSample,
 							USER extends EjbWithId,
-							WS extends JeeslStatus<L,D,WS>,
-							QAF extends JeeslStatus<L,D,QAF>,
+							WS extends JeeslStatus<?,?,WS>,
 							CRON extends JeeslTsCron<SCOPE,INT,STAT>>
 					extends JeeslFacadeBean
 					implements JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON>
@@ -108,12 +109,12 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslTsFacadeBean.class);
 
-	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
+	private final TsFactoryBuilder<?,?,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,?,CRON> fbTs;
 
 	private final EjbTsFactory<SCOPE,TS,BRIDGE,INT,STAT> efTs;
 	private final SqlTimeSeriesFactory<TS,DATA> sqlFactory;
 
-	public JeeslTsFacadeBean(EntityManager em, final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public JeeslTsFacadeBean(EntityManager em, final TsFactoryBuilder<?,?,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,?,CRON> fbTs)
 	{
 		super(em);
 		this.fbTs=fbTs;
@@ -413,7 +414,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<DATA> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Aggregation aggegation, JeeslTsInterval.Aggregation interval)
+	@Override public List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
@@ -440,7 +441,6 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		{
 			case min: sQ.select(cB.min(eSubValue)); break;
 			case max: sQ.select(cB.greatest(eSubValue)); break;
-	//		case avg: sQ.select(cB.avg(eSubValue)); break;
 		}
 		
 		sQ.where(cB.and(pSub.toArray(new Predicate[pSub.size()])));
@@ -456,6 +456,46 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
 		return tQ.getResultList();
+	}
+	
+	@Override public List<JsonTsAggegation> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
+	{
+		Class<DATA> cData = fbTs.getClassData();
+		
+		SqlFactory sql = SqlFactory.instance();
+		sql.alias(cData, "ts");
+		sql.id(cData, JeeslTsData.Attributes.timeSeries);
+		
+		String truc = sql.dateTrunc(cData, JeeslTsData.Attributes.record, JeeslTsInterval.Aggregation.hour);
+
+		sql.select(cData,JeeslTsData.Attributes.timeSeries).select(truc).select("avg(ts.value)");
+		sql.from(cData);
+		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData, JeeslTsData.Attributes.timeSeries, query.getTsSeries());}
+		
+		sql.where(cData, JeeslTsData.Attributes.record, JeeslCqDate.Type.AtOrAfter, LocalDate.of(2025,1,1));
+//		sql.where(TsData.class, JeeslTsData.Attributes.record, JeeslCqDate.Type.Before, LocalDate.of(2025,1,3));
+		sql.group(cData, JeeslTsData.Attributes.timeSeries).group(truc);
+		sql.limit(100);
+		logger.info(sql.assemble());
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> result = em.createNativeQuery(sql.assemble()).getResultList();
+	
+		List<JsonTsAggegation> list = new ArrayList<>();
+		for(Object[] o : result)
+		{
+			logger.info(o[0].getClass().getName()+" "+o[1].getClass().getName()+" "+o[2].getClass().getName());
+			
+			JsonTsAggegation json = new JsonTsAggegation();
+			json.setSeriesId(((BigInteger)o[0]).longValue());
+			
+			
+			
+			if(o.length>1 && Objects.nonNull(o[1])) {json.setRecord(DateUtil.toLocalDateTime((java.sql.Timestamp)o[1]));}
+			if(o.length>2 && Objects.nonNull(o[2])) {json.setValue((Double)o[2]);}
+			list.add(json);
+		}
+		return list;
 	}
 
 	@Override
@@ -565,7 +605,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Aggregation aggegation, JeeslTsInterval.Aggregation interval)
+	@Override public List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<POINT> cQ = cB.createQuery(fbTs.getClassPoint());
@@ -896,7 +936,8 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	private Predicate[] pData(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<DATA> root)
+	//TODO @tk This is a workaround for testing avg, return to private
+	public Predicate[] pData(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<DATA> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -945,7 +986,9 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	private void obData(CriteriaBuilder cB, CriteriaQuery<DATA> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<DATA> root)
+	
+	//TODO @tk This is a workaround for testing avg, return to private
+	public void obData(CriteriaBuilder cB, CriteriaQuery<DATA> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<DATA> root)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))

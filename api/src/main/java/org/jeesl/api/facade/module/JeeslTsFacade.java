@@ -21,13 +21,12 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsSample;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsCron;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
 
 public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>,
 								SCOPE extends JeeslTsScope<?,?,CATEGORY,ST,UNIT,EC,INTERVAL>,
@@ -37,6 +36,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,TYPE>,
 								TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
 								SRC extends EjbWithLangDescription<?,?>, 
+//								SRC extends JeeslTsDataSource<?,?,SRC,?>, 
 								BRIDGE extends JeeslTsBridge<EC>,
 								EC extends JeeslTsEntityClass<?,?,CATEGORY,ENTITY>,
 								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
@@ -51,7 +51,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 								CRON extends JeeslTsCron<SCOPE,INTERVAL,TYPE>>
 			extends JeeslFacade
 {
-	public enum Aggregation{max,min} //avg
+	public enum Extrema{max,min} //avg
 	
 	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
@@ -75,7 +75,8 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 	List<DATA> fDataLast(List<TS> list);
 	
 	List<DATA> fTsData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
-	List<DATA> fTsDataAggregation(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Aggregation aggegation, JeeslTsInterval.Aggregation interval);
+	List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
+	List<JsonTsAggegation> fTsDataAggregation(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
 	List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
@@ -83,7 +84,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 	List<DATA> fData(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
 	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
-	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Aggregation aggegation, JeeslTsInterval.Aggregation interval);
+	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
 	List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	List<POINT> fPoints(WS workspace, List<TS> timeSeries, List<MP> mps, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
