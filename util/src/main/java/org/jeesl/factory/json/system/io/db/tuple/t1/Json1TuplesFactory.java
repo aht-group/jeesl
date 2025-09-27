@@ -1,5 +1,6 @@
 package org.jeesl.factory.json.system.io.db.tuple.t1;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
@@ -18,6 +20,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -184,6 +187,17 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	{
 		JsonTuples1<A> json = new JsonTuples1<A>();
 		for(Tuple t : tuples) {json.getTuples().add(JsonTupleFactory.build1(t,types));}
+		this.ejb1Load(json);
+		return json;
+	}
+	
+	public JsonTuples1<A> buildO(List<Object[]> objects , JsonTupleFactory.Type...types)
+	{
+		JsonTuples1<A> json = new JsonTuples1<A>();
+		for(Object[] o : objects)
+		{
+			json.getTuples().add(JsonTupleFactory.buildO1(o,types));	
+		}
 		this.ejb1Load(json);
 		return json;
 	}

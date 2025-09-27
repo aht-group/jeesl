@@ -1,9 +1,11 @@
 package org.jeesl.factory.json.io.db.tuple;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 import javax.persistence.Tuple;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.AbstractJsonTuple;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
@@ -13,6 +15,7 @@ import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple4;
 import org.jeesl.model.json.io.db.tuple.special.JsonIdTuple;
+import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,6 +118,15 @@ public class JsonTupleFactory
     	return json;
 	}
 	
+	public static <A extends EjbWithId> JsonTuple1<A> buildO1(Object[] o, JsonTupleFactory.Type...types)
+	{
+		JsonTuple1<A> json = new JsonTuple1<A>();
+		
+		json.setId1(((BigInteger)o[0]).longValue());
+		json.setRecord(DateUtil.toLocalDateTime((java.sql.Timestamp)o[1]));
+		
+		return json;
+	}
 	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple2<A,B> build2(Tuple tuple, JsonTupleFactory.Type...types)
 	{
 		JsonTuple2<A,B> json = new JsonTuple2<A,B>();

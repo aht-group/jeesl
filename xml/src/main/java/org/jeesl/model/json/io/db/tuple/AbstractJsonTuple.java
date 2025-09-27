@@ -1,6 +1,7 @@
 package org.jeesl.model.json.io.db.tuple;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,6 +9,11 @@ public abstract class AbstractJsonTuple implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
+	@JsonProperty("record")
+	private LocalDateTime record;
+	public LocalDateTime getRecord() {return record;}
+	public void setRecord(LocalDateTime record) {this.record = record;}
+
 	@Deprecated //Use sum1
 	@JsonProperty("sum")
 	private Double sum;
@@ -59,4 +65,31 @@ public abstract class AbstractJsonTuple implements Serializable
 	private Long count3;
 	public Long getCount3() {return count3;}
 	public void setCount3(Long count3) {this.count3 = count3;}
+	
+	
+	private Double min;
+	
+	public Double getMin() {
+		return min;
+	}
+	public void setMin(Double min) {
+		this.min = min;
+	}
+
+	private Double avg;
+	
+	public Double getAvg() {
+		return avg;
+	}
+	public void setAvg(Double avg) {
+		this.avg = avg;
+	}
+
+	private Double max;
+	public Double getMax() {
+		return max;
+	}
+	public void setMax(Double max) {
+		this.max = max;
+	}
 }

@@ -57,7 +57,7 @@ public class SqlFactory
 	}
 	
 	public <T extends EjbWithId> SqlFactory alias(Class<T> c, String a) {mapAlias.put(c,a); return this;}
-	public <T extends EjbWithId, A extends Enum<A>> SqlFactory id(Class<T> c, A a) {setIdAttributes.add(c.getName()+":"+a.toString()); return this;}
+	public <T extends EjbWithId, A extends Enum<A>> SqlFactory id(Class<T> c, A a) {setIdAttributes.add(SqlFactory.toIdAttribute(c,a)); return this;}
 	
 	public <T extends EjbWithId> SqlFactory from(Class<T> c)
 	{
@@ -81,23 +81,25 @@ public class SqlFactory
 		return this;
 	}
 	
-	public <S extends EjbWithId, O extends EjbWithId, A extends Enum<A>> SqlFactory join(Class<S> self, Class<O> other, A attribute)
+	public <S extends EjbWithId, O extends EjbWithId, A extends Enum<A>> SqlFactory join(Class<S> self, A attribute, Class<O> other)
 	{
-//		if(self.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-//		if(other.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-//		StringBuilder bf = new StringBuilder();
-//		bf.append("JOIN ").append(self.getAnnotation(Table.class).name());
-//		sb.append(" ").append(aliasOther);
-//		sb.append(" ON ");
-//		sb.append(aliasOther).append(".id = ").append(aliasOwner).append(".").append(attribute.toString()).append("_id");
-//		newLine(newLine,sb);
-		logger.warn("NYI");
+		if(Objects.isNull(joins)) {joins = new ArrayList<>();}
+		if(self.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		if(other.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		if(!mapAlias.containsKey(other)) {throw new RuntimeException("Alias not registered");}
+		if(!setIdAttributes.contains(SqlFactory.toIdAttribute(self,attribute))) {throw new RuntimeException("ID Attribute of "+self.getSimpleName()+":"+attribute.toString()+" not registered");}
+		StringBuilder bf = new StringBuilder();
+		bf.append("JOIN ").append(other.getAnnotation(Table.class).name());
+		bf.append(" AS ").append(mapAlias.get(other));
+		bf.append(" ON ").append(mapAlias.get(other)).append(".id");
+		bf.append(" = ").append(mapAlias.get(self)).append(".").append(attribute.toString()).append("_id");
+		joins.add(bf.toString());
 		return this;
 	}
 	
 	public <T extends EjbWithId, A extends Enum<A>, X extends EjbWithId> SqlFactory whereIn(Class<T> c, A attribute, List<X> list)
 	{
-		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}		
+		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}
 		wheres.add(String.format("%s IN (%s)", this.attribute(c,attribute.toString()), EjbIdFactory.toIdList(list)));
 		return this;
 	}
@@ -168,6 +170,15 @@ public class SqlFactory
 		
 		bf.append(" ").append(from);
 		SqlFactory.newLine(newLine,bf);
+		
+		if(ObjectUtils.isNotEmpty(joins))
+		{
+			for(String j : joins)
+			{
+				bf.append(" ").append(j);
+				SqlFactory.newLine(newLine,bf);
+			}
+		}
 		
 		if(ObjectUtils.isNotEmpty(wheres))
 		{
@@ -628,5 +639,10 @@ public class SqlFactory
 		if(o instanceof BigInteger) {return ((BigInteger)o).longValue();}
 		else if(o instanceof Long) {return (Long)o;}
 		else {return null;}
+	}
+	
+	private static <T extends EjbWithId, A extends Enum<A>> String toIdAttribute(Class<T> c, A a)
+	{
+		return c.getName()+":"+a.toString();
 	}
 }

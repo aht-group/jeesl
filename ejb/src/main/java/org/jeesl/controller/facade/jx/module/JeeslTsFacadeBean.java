@@ -1,6 +1,5 @@
 package org.jeesl.controller.facade.jx.module;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +27,6 @@ import javax.persistence.criteria.Subquery;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.BooleanPredicateBuilder;
@@ -75,7 +73,6 @@ import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
-import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
 import org.jeesl.util.query.cq.CqBool;
 import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqLiteral;
@@ -458,45 +455,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<JsonTsAggegation> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
-	{
-		Class<DATA> cData = fbTs.getClassData();
-		
-		SqlFactory sql = SqlFactory.instance();
-		sql.alias(cData, "ts");
-		sql.id(cData, JeeslTsData.Attributes.timeSeries);
-		
-		String truc = sql.dateTrunc(cData, JeeslTsData.Attributes.record, JeeslTsInterval.Aggregation.hour);
-
-		sql.select(cData,JeeslTsData.Attributes.timeSeries).select(truc).select("avg(ts.value)");
-		sql.from(cData);
-		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData, JeeslTsData.Attributes.timeSeries, query.getTsSeries());}
-		
-		sql.where(cData, JeeslTsData.Attributes.record, JeeslCqDate.Type.AtOrAfter, LocalDate.of(2025,1,1));
-//		sql.where(TsData.class, JeeslTsData.Attributes.record, JeeslCqDate.Type.Before, LocalDate.of(2025,1,3));
-		sql.group(cData, JeeslTsData.Attributes.timeSeries).group(truc);
-		sql.limit(100);
-		logger.info(sql.assemble());
-		
-		@SuppressWarnings("unchecked")
-		List<Object[]> result = em.createNativeQuery(sql.assemble()).getResultList();
 	
-		List<JsonTsAggegation> list = new ArrayList<>();
-		for(Object[] o : result)
-		{
-			logger.info(o[0].getClass().getName()+" "+o[1].getClass().getName()+" "+o[2].getClass().getName());
-			
-			JsonTsAggegation json = new JsonTsAggegation();
-			json.setSeriesId(((BigInteger)o[0]).longValue());
-			
-			
-			
-			if(o.length>1 && Objects.nonNull(o[1])) {json.setRecord(DateUtil.toLocalDateTime((java.sql.Timestamp)o[1]));}
-			if(o.length>2 && Objects.nonNull(o[2])) {json.setValue((Double)o[2]);}
-			list.add(json);
-		}
-		return list;
-	}
 
 	@Override
 	public List<DATA> fData(TX transaction)
@@ -881,6 +840,33 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		
 		Json1TuplesFactory<TX> jtf = Json1TuplesFactory.instance(fbTs.getClassTransaction()).tupleLoad(this,query.getTupleLoad());
 		return jtf.buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+	}
+	
+	@Override public JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	{
+		Class<DATA> cData = fbTs.getClassData();
+		
+		SqlFactory sql = SqlFactory.instance();
+		sql.alias(cData, "ts");
+		sql.id(cData, JeeslTsData.Attributes.timeSeries);
+		
+		String truc = sql.dateTrunc(cData, JeeslTsData.Attributes.record, JeeslTsInterval.Aggregation.hour);
+
+		sql.select(cData,JeeslTsData.Attributes.timeSeries).select(truc).select("avg(ts.value)");
+		sql.from(cData);
+		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData, JeeslTsData.Attributes.timeSeries, query.getTsSeries());}
+		
+		sql.where(cData, JeeslTsData.Attributes.record, JeeslCqDate.Type.AtOrAfter, LocalDate.of(2025,1,1));
+//		sql.where(TsData.class, JeeslTsData.Attributes.record, JeeslCqDate.Type.Before, LocalDate.of(2025,1,3));
+		sql.group(cData, JeeslTsData.Attributes.timeSeries).group(truc);
+		sql.limit(100);
+		logger.info(sql.assemble());
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> result = em.createNativeQuery(sql.assemble()).getResultList();
+	
+		Json1TuplesFactory<TS> jtf = Json1TuplesFactory.instance(fbTs.getClassTs()).tupleLoad(this,query.getTupleLoad());
+		return jtf.buildO(result,JsonTupleFactory.Type.count);
 	}
 	
 	// Predicates

@@ -26,7 +26,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
-import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 
 public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>,
 								SCOPE extends JeeslTsScope<?,?,CATEGORY,ST,UNIT,EC,INTERVAL>,
@@ -76,7 +76,6 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 	
 	List<DATA> fTsData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
-	List<JsonTsAggegation> fTsDataAggregation(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
 	List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
@@ -94,6 +93,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 	void deleteTsSeries(TS series) throws JeeslConstraintViolationException;
 	void deleteTransaction(TX transaction) throws JeeslConstraintViolationException;
 	
+	JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	JsonTuples1<TS> tpcTsDataByTs(List<TS> series);
 	JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
 	JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,BRIDGE,INTERVAL,TYPE> query);
