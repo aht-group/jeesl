@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbTsDataPointFactory< TS extends JeeslTimeSeries<?,TS,?,?,?>,
-								MP extends JeeslTsMultiPoint<?,?,?,?>,
+								MP extends JeeslTsMultiPoint<?,?,?,?,?>,
 								DATA extends JeeslTsData<TS,?,?,POINT,?>,
 								POINT extends JeeslTsDataPoint<DATA,MP>>
 {

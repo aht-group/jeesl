@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbTsMutliPointFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,?,?>,
-									MP extends JeeslTsMultiPoint<?,?,SCOPE,?>
+									MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>
 									>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbTsMutliPointFactory.class);

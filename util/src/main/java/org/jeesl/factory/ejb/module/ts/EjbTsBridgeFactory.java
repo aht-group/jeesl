@@ -17,13 +17,12 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbTsBridgeFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,EC,?>,
-								MP extends JeeslTsMultiPoint<?,?,?,?>,
+								MP extends JeeslTsMultiPoint<?,?,?,?,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,?,?>,
 								BRIDGE extends JeeslTsBridge<EC>,
 								EC extends JeeslTsEntityClass<?,?,?,?>,

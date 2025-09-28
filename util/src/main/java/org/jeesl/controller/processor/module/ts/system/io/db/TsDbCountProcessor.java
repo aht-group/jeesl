@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 public class TsDbCountProcessor<RE extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									SCOPE extends JeeslTsScope<?,?,?,ST,?,EC,INT>,
 									ST extends JeeslTsScopeType<?,?,ST,?>,
-									MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
+									MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 									TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
 									TRANSACTION extends JeeslTsTransaction<?,DATA,?,?>,
 									BRIDGE extends JeeslTsBridge<EC>,

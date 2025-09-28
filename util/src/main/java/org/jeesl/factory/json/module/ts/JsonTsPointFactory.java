@@ -6,7 +6,7 @@ import org.jeesl.model.json.module.ts.JsonTsPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonTsPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?>,
+public class JsonTsPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?,?>,
 								POINT extends JeeslTsDataPoint<?,MP>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonTsPointFactory.class);

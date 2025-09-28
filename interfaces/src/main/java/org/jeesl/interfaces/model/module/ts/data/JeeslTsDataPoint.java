@@ -14,7 +14,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslTsDataPoint <DATA extends JeeslTsData<?,?,?,?,?>,
-									MP extends JeeslTsMultiPoint<?,?,?,?>>
+									MP extends JeeslTsMultiPoint<?,?,?,?,?>>
 		extends EjbWithId,EjbSaveable,Serializable,EjbRemoveable,EjbPersistable,EjbWithParentAttributeResolver
 {
 	public enum Attributes {id,data,multiPoint}

@@ -14,7 +14,7 @@ import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 
 public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								SCOPE extends JeeslTsScope<?,?,CAT,?,?,?,INTV>,
-								MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
+								MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTV,STAT>,
 								TX extends JeeslTsTransaction<?,?,?,?>,
 								BRIDGE extends JeeslTsBridge<?>,

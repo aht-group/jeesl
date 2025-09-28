@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								SCOPE extends JeeslTsScope<?,?,CAT,?,?,?,INTERVAL>,
-								MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
+								MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,STAT>,
 								TX extends JeeslTsTransaction<?,?,?,?>,
 								BRIDGE extends JeeslTsBridge<?>,

@@ -1,6 +1,5 @@
 package org.jeesl.factory.mc.ts;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -45,7 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
-									MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
+									MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 									TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
 									BRIDGE extends JeeslTsBridge<EC>,
 									EC extends JeeslTsEntityClass<?,?,?,ENTITY>,

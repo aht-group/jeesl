@@ -32,7 +32,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 								SCOPE extends JeeslTsScope<?,?,CATEGORY,ST,UNIT,EC,INTERVAL>,
 								ST extends JeeslTsScopeType<?,?,ST,?>,
 								UNIT extends JeeslStatus<?,?,UNIT>,
-								MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT>,
+								MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,TYPE>,
 								TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
 								SRC extends EjbWithLangDescription<?,?>, 
