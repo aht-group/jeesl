@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.JeeslQuery;
 import org.jeesl.model.ejb.io.db.CqGraphFetch;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqDouble;
@@ -76,6 +77,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<JeeslCqTime> cqTimes; @Override public List<JeeslCqTime> getCqTimes() {return cqTimes;}
 	protected List<JeeslCqInteger> cqIntegers; @Override public List<JeeslCqInteger> getCqInteger() {return cqIntegers;}
 	protected List<JeeslCqDouble> cqDoubles; @Override public List<JeeslCqDouble> getCqDouble() {return cqDoubles;}
+	protected List<JeeslCq.Agg> cqAggregations; @Override public List<JeeslCq.Agg> getCqAggregations() {return cqAggregations;}
 
 	@Override public void addCqRootFetch(JeeslCqRootFetch cq) {if(Objects.isNull(cqRootFetches)) {cqRootFetches = new ArrayList<>();} cqRootFetches.add(cq);}
 	protected void addOrdering(JeeslCqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
@@ -88,7 +90,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public void addCqTime(JeeslCqTime cq) {if(Objects.isNull(cqTimes)) {cqTimes = new ArrayList<>();} cqTimes.add(cq);}
 	@Override public void addCqInteger(JeeslCqInteger i) {if(Objects.isNull(cqIntegers)) {cqIntegers = new ArrayList<>();} cqIntegers.add(i);}
 	@Override public void addCqDouble(JeeslCqDouble cq) {if(Objects.isNull(cqDoubles)) {cqDoubles = new ArrayList<>();} cqDoubles.add(cq);}
-	
+	@Override public void addCqAggregation(JeeslCq.Agg cq) {if(Objects.isNull(cqAggregations)) {cqAggregations = new ArrayList<>();} cqAggregations.add(cq);}
 	
 	
 	//GraphFetch
@@ -96,6 +98,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public List<CqGraphFetch> getGraphFetches() {return graphFetches;}
 	protected void addGraphFetch(CqGraphFetch fetch) {if(Objects.isNull(graphFetches)) {graphFetches = new ArrayList<>();} graphFetches.add(fetch);}
 
+	//Aggregation
 	
 	
 	

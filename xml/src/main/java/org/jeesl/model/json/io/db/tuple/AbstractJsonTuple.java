@@ -3,13 +3,24 @@ package org.jeesl.model.json.io.db.tuple;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
+import jakarta.json.bind.annotation.JsonbDateFormat;
 
 public abstract class AbstractJsonTuple implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
 	@JsonProperty("record")
+	@JsonbDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS")
+	@JsonDeserialize(using=LocalDateTimeDeserializer.class)
+	@JsonSerialize(using=LocalDateTimeSerializer.class)
 	private LocalDateTime record;
 	public LocalDateTime getRecord() {return record;}
 	public void setRecord(LocalDateTime record) {this.record = record;}
@@ -67,29 +78,18 @@ public abstract class AbstractJsonTuple implements Serializable
 	public void setCount3(Long count3) {this.count3 = count3;}
 	
 	
-	private Double min;
+	@JsonProperty("v1")
+	private Double v1;
+	public Double getV1() {return v1;}
+	public void setV1(Double v1) {this.v1 = v1;}
 	
-	public Double getMin() {
-		return min;
-	}
-	public void setMin(Double min) {
-		this.min = min;
-	}
-
-	private Double avg;
+	@JsonProperty("v2")
+	private Double v2;
+	public Double getV2() {return v2;}
+	public void setV2(Double v2) {this.v2 = v2;}
 	
-	public Double getAvg() {
-		return avg;
-	}
-	public void setAvg(Double avg) {
-		this.avg = avg;
-	}
-
-	private Double max;
-	public Double getMax() {
-		return max;
-	}
-	public void setMax(Double max) {
-		this.max = max;
-	}
+	@JsonProperty("v3")
+	private Double v3;
+	public Double getV3() {return v3;}
+	public void setV3(Double v3) {this.v3 = v3;}
 }

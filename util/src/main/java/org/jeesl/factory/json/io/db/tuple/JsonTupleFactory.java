@@ -1,12 +1,14 @@
 package org.jeesl.factory.json.io.db.tuple;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Tuple;
 
 import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.AbstractJsonTuple;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
@@ -15,7 +17,6 @@ import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple4;
 import org.jeesl.model.json.io.db.tuple.special.JsonIdTuple;
-import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class JsonTupleFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonTupleFactory.class);
 	
-	public enum Type{count,sum}
+
 	
 	public static JsonTuple build() {return new JsonTuple();}
 	
@@ -98,7 +99,7 @@ public class JsonTupleFactory
 		json.setEjb1(t.getEjb1());		
     	return json;
 	}
-	public static <A extends EjbWithId> JsonTuple1<A> build1(A a, long value, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId> JsonTuple1<A> build1(A a, long value, JeeslCq.Agg...types)
 	{
 		JsonTuple1<A> json = new JsonTuple1<A>();
 		json.setId1(a.getId());
@@ -108,7 +109,7 @@ public class JsonTupleFactory
 		
     	return json;
 	}
-	public static <A extends EjbWithId> JsonTuple1<A> build1(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId> JsonTuple1<A> build1(Tuple tuple, JeeslCq.Agg...types)
 	{
 		JsonTuple1<A> json = new JsonTuple1<A>();
 		json.setId1((Long)tuple.get(0));
@@ -118,16 +119,43 @@ public class JsonTupleFactory
     	return json;
 	}
 	
-	public static <A extends EjbWithId> JsonTuple1<A> buildO1(Object[] o, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId> JsonTuple1<A> buildO1(Object[] o, List<JeeslCq.Agg> aggregations)
 	{
 		JsonTuple1<A> json = new JsonTuple1<A>();
 		
-		json.setId1(((BigInteger)o[0]).longValue());
-		json.setRecord(DateUtil.toLocalDateTime((java.sql.Timestamp)o[1]));
+		json.setRecord(DateUtil.toLocalDateTime((java.sql.Timestamp)o[0]));
+		json.setId1(((BigInteger)o[1]).longValue());
+		
+		for(int i=1;i<=aggregations.size();i++)
+		{
+			int index=1+i;
+			if(i==1 && Objects.nonNull(o[index])) {json.setV1((Double)o[index]);}
+			if(i==2 && Objects.nonNull(o[index])) {json.setV2((Double)o[index]);}
+			if(i==3 && Objects.nonNull(o[index])) {json.setV3((Double)o[index]);}
+		}
 		
 		return json;
 	}
-	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple2<A,B> build2(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple2<A,B> buildO2(Object[] o, List<JeeslCq.Agg> aggregations)
+	{
+		JsonTuple2<A,B> json = new JsonTuple2<A,B>();
+		
+		json.setRecord(DateUtil.toLocalDateTime((java.sql.Timestamp)o[0]));
+		json.setId1(((BigInteger)o[1]).longValue());
+		json.setId2(((BigInteger)o[2]).longValue());
+		
+		for(int i=1;i<=aggregations.size();i++)
+		{
+			int index=2+i;
+			if(i==1 && Objects.nonNull(o[index])) {json.setV1((Double)o[index]);}
+			if(i==2 && Objects.nonNull(o[index])) {json.setV2((Double)o[index]);}
+			if(i==3 && Objects.nonNull(o[index])) {json.setV3((Double)o[index]);}
+		}
+		
+		return json;
+	}
+	
+	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple2<A,B> build2(Tuple tuple, JeeslCq.Agg...types)
 	{
 		JsonTuple2<A,B> json = new JsonTuple2<A,B>();
 		json.setId1((Long)tuple.get(0));
@@ -138,7 +166,7 @@ public class JsonTupleFactory
     	return json;
 	}
 	
-	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> JsonTuple3<A,B,C> build3(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> JsonTuple3<A,B,C> build3(Tuple tuple, JeeslCq.Agg...types)
 	{
 		JsonTuple3<A,B,C> json = new JsonTuple3<A,B,C>();
 		json.setId1((Long)tuple.get(0));
@@ -148,7 +176,7 @@ public class JsonTupleFactory
     	return json;
 	}
 	
-	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> JsonTuple4<A,B,C,D> build4(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> JsonTuple4<A,B,C,D> build4(Tuple tuple, JeeslCq.Agg...types)
 	{
 		JsonTuple4<A,B,C,D> json = new JsonTuple4<A,B,C,D>();
 		json.setId1((Long)tuple.get(0));
@@ -159,10 +187,10 @@ public class JsonTupleFactory
     	return json;
 	}
 	
-	private static void build(Tuple tuple, int offset, AbstractJsonTuple json, JsonTupleFactory.Type...types)
+	private static void build(Tuple tuple, int offset, AbstractJsonTuple json, JeeslCq.Agg...types)
 	{
 		int index=1;
-		for(JsonTupleFactory.Type type : types)
+		for(JeeslCq.Agg type : types)
 		{
 			switch(type)
 			{
@@ -182,10 +210,10 @@ public class JsonTupleFactory
 		}
 	}
 	
-	private static void build(long value, AbstractJsonTuple json, JsonTupleFactory.Type...types)
+	private static void build(long value, AbstractJsonTuple json, JeeslCq.Agg...types)
 	{
 		int index=1;
-		for(JsonTupleFactory.Type type : types)
+		for(JeeslCq.Agg type : types)
 		{
 			switch(type)
 			{

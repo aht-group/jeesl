@@ -28,7 +28,6 @@ import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMavenFactoryBuilder;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenMaintainer;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
@@ -45,6 +44,7 @@ import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
@@ -244,7 +244,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json1TuplesFactory<VERSION> jtf = Json1TuplesFactory.instance(fbMaven.getClassVersion()).tupleLoad(this,query.getTupleLoad());
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
 	@Override public Long cIoMavenVersions(JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> query)

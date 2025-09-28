@@ -24,7 +24,6 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
@@ -40,6 +39,7 @@ import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransi
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.slf4j.Logger;
@@ -428,7 +428,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		cQ.multiselect(pProcess.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public JsonTuples2<WP,WST> tpcActivitiesByProcessType()
@@ -449,6 +449,6 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		cQ.multiselect(pProcess.get("id"),jType.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 }

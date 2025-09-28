@@ -30,7 +30,6 @@ import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.facade.ParentPredicate;
@@ -82,6 +81,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqRootFetchQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslPaginationQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqRootFetch;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
@@ -1478,7 +1478,7 @@ public class JeeslFacadeBean implements JeeslFacade
 		cQ.multiselect(pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override

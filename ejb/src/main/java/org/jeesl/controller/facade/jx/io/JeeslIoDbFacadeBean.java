@@ -35,7 +35,6 @@ import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementFactoryRm;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
@@ -52,6 +51,7 @@ import org.jeesl.interfaces.model.io.db.meta.with.JeeslDbMetaWithTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.io.JeeslIoDbQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
@@ -420,9 +420,9 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		Root<CON> root3 = cQ3.from(fbDbMeta.getClassConstraint());
 		
 		Json1TuplesFactory<SNAP> jtf = Json1TuplesFactory.instance(fbDbMeta.getClassSnapshot());
-		jtf.merge(tpIoDbBySnapshot(query,cB1,cQ1,root1), JsonTupleFactory.Type.count, 1, 1);
-		jtf.merge(tpIoDbBySnapshot(query,cB2,cQ2,root2), JsonTupleFactory.Type.count, 1, 2);
-		jtf.merge(tpIoDbBySnapshot(query,cB3,cQ3,root3), JsonTupleFactory.Type.count, 1, 3);
+		jtf.merge(tpIoDbBySnapshot(query,cB1,cQ1,root1), JeeslCq.Agg.count, 1, 1);
+		jtf.merge(tpIoDbBySnapshot(query,cB2,cQ2,root2), JeeslCq.Agg.count, 1, 2);
+		jtf.merge(tpIoDbBySnapshot(query,cB3,cQ3,root3), JeeslCq.Agg.count, 1, 3);
 		
 		return jtf.mapToTuples();
 
@@ -446,7 +446,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	       
 		Json1TuplesFactory<SNAP> jtf = Json1TuplesFactory.instance(fbDbMeta.getClassSnapshot());
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-	    return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	    return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public JsonTuples1<SYSTEM> tpIoDbBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query)
@@ -464,9 +464,9 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		Root<CON> root3 = cQ3.from(fbDbMeta.getClassConstraint());
 		
 		Json1TuplesFactory<SYSTEM> jtf = Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem());
-		jtf.merge(tpIoDbTableBySystem(query,cB1,cQ1,root1), JsonTupleFactory.Type.count, 1, 1);
-		jtf.merge(tpIoDBySystem(query,cB2,cQ2,root2), JsonTupleFactory.Type.count, 1, 2);
-		jtf.merge(tpIoDBySystem(query,cB3,cQ3,root3), JsonTupleFactory.Type.count, 1, 3);	
+		jtf.merge(tpIoDbTableBySystem(query,cB1,cQ1,root1), JeeslCq.Agg.count, 1, 1);
+		jtf.merge(tpIoDBySystem(query,cB2,cQ2,root2), JeeslCq.Agg.count, 1, 2);
+		jtf.merge(tpIoDBySystem(query,cB3,cQ3,root3), JeeslCq.Agg.count, 1, 3);	
 
 		return jtf.mapToTuples();
 	}
@@ -483,7 +483,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.groupBy(jSystem.get("id"));
 	       
-	    return Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem()).buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+	    return Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem()).buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	private <W extends JeeslDbMetaWithTable<TAB>> JsonTuples1<SYSTEM> tpIoDBySystem(JeeslIoDbQuery<SYSTEM,SNAP> query, CriteriaBuilder cB, CriteriaQuery<Tuple> cQ, Root<W> root)
 	{
@@ -498,7 +498,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.groupBy(jSystem.get("id"));
 	       
-	    return Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem()).buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+	    return Json1TuplesFactory.instance(fbDbMeta.getClassSsiSystem()).buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	
 	

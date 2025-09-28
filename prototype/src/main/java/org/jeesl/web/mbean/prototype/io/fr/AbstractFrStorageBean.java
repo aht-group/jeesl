@@ -87,7 +87,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 		initSbh();
 		reloadStorages();
 		engines = fFr.allOrderedPositionVisible(fbFr.getClassEngine());
-		thCount.init(fFr.tpcIoFileByStorageType());
+		thCount.load(fFr.tpcIoFileByStorageType());
 		thSize.init(fFr.tpsIoFileByStorage());
 	}
 	
@@ -171,7 +171,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 				}
 			}
 		}
-		thCount.init(fFr.tpcIoFileByStorageType());
+		thCount.load(fFr.tpcIoFileByStorageType());
 	}
 	
 	public void reorderStorages() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fFr, storages);}

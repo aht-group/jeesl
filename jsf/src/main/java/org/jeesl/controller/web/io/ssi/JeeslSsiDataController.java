@@ -121,10 +121,10 @@ public class JeeslSsiDataController <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		if(Objects.nonNull(context)) {query.add(context);}
 		
 		thStatus.init(fSsi.tpIoSsiDataByStatus(query));
-		thJob.init(fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB)));
+		thJob.load(fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB)));
 		thJob.initListB(fSsi);
 		
-		thError.init(fSsi.tpIoSsiDataByStatusError(query)).initListB(fSsi);
+		thError.load(fSsi.tpIoSsiDataByStatusError(query)).initListB(fSsi);
 	}
 	
 	public void addDatas(List<DATA> list)

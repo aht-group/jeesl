@@ -13,6 +13,7 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
@@ -144,7 +145,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		{
 			if(!this.contains(a))
 			{
-				JsonTuple1<A> t = JsonTupleFactory.build1(a, 0, JsonTupleFactory.Type.count);
+				JsonTuple1<A> t = JsonTupleFactory.build1(a, 0, JeeslCq.Agg.count);
 				map1.put(a, t);
 			}
 		}

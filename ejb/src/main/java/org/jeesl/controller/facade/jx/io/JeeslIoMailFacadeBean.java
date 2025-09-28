@@ -23,13 +23,13 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.factory.ejb.io.mail.core.EjbIoMailFactory;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
@@ -196,6 +196,6 @@ public class JeeslIoMailFacadeBean<CATEGORY extends JeeslStatus<?,?,CATEGORY>,
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 }

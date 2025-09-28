@@ -158,7 +158,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		}
 		else
 		{
-			thStatus.init(tuples);
+			thStatus.load(tuples);
 		}
 	}
 

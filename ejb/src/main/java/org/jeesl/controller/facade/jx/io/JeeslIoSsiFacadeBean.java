@@ -26,7 +26,6 @@ import org.jeesl.controller.facade.jx.predicate.LongPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -46,6 +45,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
@@ -351,7 +351,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,query.getTupleLoad());
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public JsonTuples2<STATUS, ERROR> tpIoSsiDataByStatusError(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
@@ -370,7 +370,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json2TuplesFactory<STATUS,ERROR> jtf = Json2TuplesFactory.instance(fbSsi.getClassStatus(),fbSsi.getClassError()).tupleLoad(this,query.getTupleLoad());
-		return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<ERROR> tpcIoSsiErrorContext(CTX context, A a, B b)
@@ -404,7 +404,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json1TuplesFactory<ERROR> jtf = Json1TuplesFactory.instance(fbSsi.getClassError()).tupleLoad(this,true);
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override
@@ -436,7 +436,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json2TuplesFactory<STATUS,JOB> jtf = Json2TuplesFactory.instance(fbSsi.getClassStatus(),fbSsi.getClassJob()).tupleLoad(this,true);
-        return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public JsonTuples1<CTX> tpMapping()
@@ -453,7 +453,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json1TuplesFactory<CTX> jtf = Json1TuplesFactory.instance(fbSsi.getClassMapping()).tupleLoad(this,true);
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public JsonTuples2<CTX,STATUS> tpcContextStatus(List<CTX> list)
@@ -477,7 +477,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json2TuplesFactory<CTX,STATUS> jtf = Json2TuplesFactory.instance(fbSsi.getClassMapping(),fbSsi.getClassStatus()).tupleLoad(this,true);
-        return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,B> tpMappingB(Class<B> classB, CTX mapping, A a)
@@ -504,7 +504,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json2TuplesFactory<STATUS,B> jtf = Json2TuplesFactory.instance(fbSsi.getClassStatus(),classB).tupleLoad(this,true);
-        return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
 	@Override public <T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult)
@@ -539,7 +539,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.multiselect(pCleaning.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
 	@Override public List<DATA> fSsiDataWithJob1(CTX mapping, STATUS status, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)

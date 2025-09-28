@@ -13,6 +13,7 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t3.Json3TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples4;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple4;
 import org.slf4j.Logger;
@@ -80,7 +81,7 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		mapD.putAll(EjbIdFactory.toIdMap(fUtils.find(cD, setId4)));
 	}
 	
-	public JsonTuples4<A,B,C,D> build4(List<Tuple> tuples, JsonTupleFactory.Type...types)
+	public JsonTuples4<A,B,C,D> build4(List<Tuple> tuples, JeeslCq.Agg...types)
 	{
 		JsonTuples4<A,B,C,D> json = new JsonTuples4<A,B,C,D>();
 		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build4(t,types));}

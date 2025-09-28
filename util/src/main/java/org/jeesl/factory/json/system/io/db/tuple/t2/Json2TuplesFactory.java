@@ -15,6 +15,8 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCq;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.slf4j.Logger;
@@ -90,6 +92,8 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 	}
 	
 	public JsonTuples2<A,B> build2(){return new JsonTuples2<A,B>();}
+	
+	
 	
 	private void ejb2Load(JsonTuples2<A,B> json)
 	{
@@ -193,9 +197,9 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		return map2.containsKey(a) && map2.get(a).containsKey(b);
 	}
 	
-	public JsonTuples2<A,B> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
+	public JsonTuples2<A,B> build(List<Tuple> tuples, JeeslCq.Agg...types)
 	{
-		JsonTuples2<A,B> json = new JsonTuples2<A,B>();
+		JsonTuples2<A,B> json = new JsonTuples2<>();
 		for(Tuple t : tuples)
 		{
 			if(debugOnInfo)
@@ -214,6 +218,17 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		return json;
 	}
 	
+	public JsonTuples2<A,B> buildO(List<Object[]> objects , List<JeeslCq.Agg> aggregations)
+	{
+		JsonTuples2<A,B> json = new JsonTuples2<>();
+		for(Object[] o : objects)
+		{
+			json.getTuples().add(JsonTupleFactory.buildO2(o,aggregations));	
+		}
+		this.ejb2Load(json);
+		return json;
+	}
+	
 	
 	// This method is used if a third grouping is added to the query. Then it's counted on the unique id1-id2 combination
 	public JsonTuples2<A,B> countOnIds(List<Tuple> tuples)
@@ -223,7 +238,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		
 		for(Tuple t : tuples)
         {
-			JsonTuple2<A,B> j = JsonTupleFactory.build2(t,JsonTupleFactory.Type.count);
+			JsonTuple2<A,B> j = JsonTupleFactory.build2(t,JeeslCq.Agg.count);
 			
 			MultiKey key = new MultiKey(j.getId1(),j.getId2());
 			if(!mapTuples.containsKey(key)) {mapTuples.put(key, j);}

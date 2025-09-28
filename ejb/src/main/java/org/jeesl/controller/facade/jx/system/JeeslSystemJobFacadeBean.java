@@ -28,7 +28,6 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
 import org.jeesl.factory.ejb.system.job.EjbJobCacheFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobFactory;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.feedback.JeeslJobFeedback;
@@ -54,6 +53,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.util.query.system.JeeslJobQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescription,
@@ -392,7 +392,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.multiselect(pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	@Override public <T extends EjbWithMigrationJob2<STATUS>> JsonTuples1<STATUS> tpcJob2Status(Class<T> c)
 	{
@@ -409,7 +409,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.multiselect(pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	@Override public <T extends EjbWithMigrationJob3<STATUS>> JsonTuples1<STATUS> tpcJob3Status(Class<T> c)
 	{
@@ -423,7 +423,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);
 		
-		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	@Override public <T extends EjbWithMigrationJob4<STATUS>> JsonTuples1<STATUS> tpcJob4Status(Class<T> c)
 	{
@@ -435,7 +435,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.multiselect(pStatus.get("id"),cB.count(item.<Long>get("id")));
 		cQ.groupBy(pStatus.get("id"));
 
-		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	@Override public <T extends EjbWithMigrationJob5<STATUS>> JsonTuples1<STATUS> tpcJob5Status(Class<T> c)
 	{
@@ -448,7 +448,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.groupBy(pStatus.get("id"));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public <T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithJob2In(Class<T> c, List<STATUS> list, Integer maxResults)
@@ -484,7 +484,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.groupBy(pTemplate.get("id"));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	@Override public JsonTuples1<TEMPLATE> tpJobCacheByTemplate(JeeslJobQuery<TEMPLATE,STATUS> query)
 	{
@@ -498,6 +498,6 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.groupBy(pTemplate.get("id"));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 }

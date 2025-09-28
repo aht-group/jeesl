@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.interfaces.util.query.cq.JeeslCqAggregationQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqBooleanQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqDateQuery;
 import org.jeesl.interfaces.util.query.cq.JeeslCqDoubleQuery;
@@ -24,7 +25,8 @@ public interface JeeslCoreQuery extends Serializable,
 									JeeslCqEntityQuery,
 									JeeslCqLiteralQuery,
 									JeeslCqBooleanQuery,JeeslCqIntegerQuery,JeeslCqLongQuery,JeeslCqDoubleQuery,
-									JeeslCqDateQuery,JeeslCqTimeQuery
+									JeeslCqDateQuery,JeeslCqTimeQuery,
+									JeeslCqAggregationQuery
 {
 	Boolean getDistinct();
 	Boolean getTupleLoad();

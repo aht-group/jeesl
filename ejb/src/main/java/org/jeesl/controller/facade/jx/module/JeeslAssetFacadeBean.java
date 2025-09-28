@@ -30,7 +30,6 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
@@ -46,6 +45,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslAomQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
@@ -277,7 +277,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json1TuplesFactory<VIEW> jtf = Json1TuplesFactory.instance(fbAsset.getClassAssetLevel()).tupleLoad(this,true);
-        return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
 	public Predicate[] pCompany(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<COMPANY> root)

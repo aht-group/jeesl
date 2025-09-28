@@ -13,12 +13,14 @@ import java.util.Set;
 
 import javax.persistence.Table;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.util.TxtIdFactory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.util.query.sql.JeeslSqlQuery;
 import org.slf4j.Logger;
@@ -40,7 +42,7 @@ public class SqlFactory
 	private List<String> joins;
 	private List<String> groups;
 	private List<String> wheres;
-	private Integer limit; 	public SqlFactory limit(int limit) {this.limit = limit; return this;}
+	private Integer limit; 	public SqlFactory limit(Integer limit) {this.limit = limit; return this;}
 	
 	private boolean envers; public SqlFactory envers() {envers=true; return this;}
 	
@@ -117,6 +119,20 @@ public class SqlFactory
 		return this;
 	}
 	
+	public SqlFactory selectAggregations(String value, List<JeeslCq.Agg> aggregations)
+	{
+		for(JeeslCq.Agg aggregation : ListUtils.emptyIfNull(aggregations))
+		{
+			switch(aggregation)
+			{
+				case min: this.select("min("+value+")"); break;
+				case avg: this.select("avg("+value+")"); break;
+				case max: this.select("max("+value+")"); break;
+				default: logger.warn("NYI");
+			}
+		}
+		return this;
+	}
 	public SqlFactory select(String value) {return select(null,value);}
 	public <T extends EjbWithId, A extends Enum<A>> SqlFactory select(Class<T> c, A attribute) {return this.select(c, attribute.toString());}
 	private <T extends EjbWithId> SqlFactory select(Class<T> c, String attribute)

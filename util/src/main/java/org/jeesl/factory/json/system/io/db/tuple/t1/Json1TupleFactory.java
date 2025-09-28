@@ -8,6 +8,7 @@ import javax.persistence.Tuple;
 
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.util.query.sql.SqlNativeQueryHelper;
@@ -60,22 +61,22 @@ public class Json1TupleFactory<A extends EjbWithId>
         return json;
 	}
 	
-	public JsonTuple1<A> build(Tuple tuple, JsonTuple.Field... fields)
+	public JsonTuple1<A> build(Tuple tuple, JeeslCq.Agg... fields)
 	{
 		JsonTuple1<A> json = JsonTupleFactory.build1(tuple);
 		
 		int index=1;
-		for(JsonTuple.Field field : fields)
+		for(JeeslCq.Agg field : fields)
 		{
 			if(index==1)
 			{
-				if(field.equals(JsonTuple.Field.sum)) {json.setSum1((Double)tuple.get(index));}
-				else if (field.equals(JsonTuple.Field.count)){json.setCount((Long)tuple.get(index));json.setCount1(json.getCount());}
+				if(field.equals(JeeslCq.Agg.sum)) {json.setSum1((Double)tuple.get(index));}
+				else if (field.equals(JeeslCq.Agg.count)){json.setCount((Long)tuple.get(index));json.setCount1(json.getCount());}
 			}
 			if(index==2)
 			{
-				if(field.equals(JsonTuple.Field.sum)) {json.setSum2((Double)tuple.get(index));}
-				else if (field.equals(JsonTuple.Field.count)){json.setCount2((Long)tuple.get(index));}
+				if(field.equals(JeeslCq.Agg.sum)) {json.setSum2((Double)tuple.get(index));}
+				else if (field.equals(JeeslCq.Agg.count)){json.setCount2((Long)tuple.get(index));}
 			}
 			index++;
 		}

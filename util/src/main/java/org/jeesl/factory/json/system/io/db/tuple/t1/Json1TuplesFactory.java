@@ -1,6 +1,5 @@
 package org.jeesl.factory.json.system.io.db.tuple.t1;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,16 +10,15 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
-import org.exlp.util.system.DateUtil;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
-import org.jeesl.model.json.module.ts.data.JsonTsAggegation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -169,7 +167,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		return json;
 	}
 	
-	public JsonTuples1<A> buildV1(List<Tuple> tuples, JsonTuple.Field... fields)
+	public JsonTuples1<A> buildV1(List<Tuple> tuples, JeeslCq.Agg... fields)
 	{
 		JsonTuples1<A> json = new JsonTuples1<A>();
 		
@@ -183,7 +181,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		return json;
 	}
 	
-	public JsonTuples1<A> buildV2(List<Tuple> tuples, JsonTupleFactory.Type...types)
+	public JsonTuples1<A> buildV2(List<Tuple> tuples, JeeslCq.Agg...types)
 	{
 		JsonTuples1<A> json = new JsonTuples1<A>();
 		for(Tuple t : tuples) {json.getTuples().add(JsonTupleFactory.build1(t,types));}
@@ -191,12 +189,12 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		return json;
 	}
 	
-	public JsonTuples1<A> buildO(List<Object[]> objects , JsonTupleFactory.Type...types)
+	public JsonTuples1<A> buildO(List<Object[]> objects , List<JeeslCq.Agg> aggregations)
 	{
 		JsonTuples1<A> json = new JsonTuples1<A>();
 		for(Object[] o : objects)
 		{
-			json.getTuples().add(JsonTupleFactory.buildO1(o,types));	
+			json.getTuples().add(JsonTupleFactory.buildO1(o,aggregations));	
 		}
 		this.ejb1Load(json);
 		return json;
@@ -232,14 +230,14 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		}
 	}
 	
-	public void merge(JsonTuples1<A> additional, JsonTupleFactory.Type type, int from, int to)
+	public void merge(JsonTuples1<A> additional, JeeslCq.Agg type, int from, int to)
 	{	
 		for(JsonTuple1<A> t : additional.getTuples())
 		{
 			if(!map1.containsKey(t.getEjb1())) {map1.put(t.getEjb1(),JsonTupleFactory.build1(t));}
 			JsonTuple1<A> merged = map1.get(t.getEjb1());
 			
-			if(type.equals(JsonTupleFactory.Type.count))
+			if(type.equals(JeeslCq.Agg.count))
 			{
 				Long value = null;
 				if(from==1) {value = t.getCount1();}

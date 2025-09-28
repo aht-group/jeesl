@@ -41,8 +41,8 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.ejb.module.ts.EjbTsFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
 import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.factory.sql.module.SqlTimeSeriesFactory;
 import org.jeesl.interfaces.facade.ParentPredicate;
@@ -65,6 +65,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqDouble;
@@ -72,6 +73,7 @@ import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.util.query.cq.CqBool;
 import org.jeesl.util.query.cq.CqDate;
@@ -787,7 +789,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		cQ.groupBy(pTs.get("id"));
 		
 		Json1TuplesFactory<TS> jtf = Json1TuplesFactory.instance(fbTs.getClassTs()).tupleLoad(this,query.getTupleLoad());
-		return jtf.buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	@Override public JsonTuples1<TS> tpcTsDataByTs(List<TS> series)
 	{
@@ -817,7 +819,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 			tuples.addAll(tQ.getResultList());
 		}	
 		
-        return jtf.buildV2(tuples,JsonTupleFactory.Type.count);
+        return jtf.buildV2(tuples,JeeslCq.Agg.count);
 	}
 
 	@Override public JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
@@ -839,38 +841,77 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		cQ.groupBy(pTx.get("id"));
 		
 		Json1TuplesFactory<TX> jtf = Json1TuplesFactory.instance(fbTs.getClassTransaction()).tupleLoad(this,query.getTupleLoad());
-		return jtf.buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
+		return jtf.buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	
 	@Override public JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
 	{
+		if(ObjectUtils.isEmpty(query.getCqAggregations())) {return new JsonTuples1<>();}
 		Class<DATA> cData = fbTs.getClassData();
 		
 		SqlFactory sql = SqlFactory.instance();
-		sql.alias(cData, "ts");
+		sql.alias(cData, "d");
 		sql.id(cData, JeeslTsData.Attributes.timeSeries);
 		
 		String truc = sql.dateTrunc(cData, JeeslTsData.Attributes.record, JeeslTsInterval.Aggregation.hour);
 
-		sql.select(cData,JeeslTsData.Attributes.timeSeries).select(truc).select("avg(ts.value)");
-		sql.from(cData);
-		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData, JeeslTsData.Attributes.timeSeries, query.getTsSeries());}
+		sql.select(truc).select(cData,JeeslTsData.Attributes.timeSeries);
+		sql.selectAggregations("p.value", query.getCqAggregations());
 		
-		sql.where(cData, JeeslTsData.Attributes.record, JeeslCqDate.Type.AtOrAfter, LocalDate.of(2025,1,1));
-//		sql.where(TsData.class, JeeslTsData.Attributes.record, JeeslCqDate.Type.Before, LocalDate.of(2025,1,3));
-		sql.group(cData, JeeslTsData.Attributes.timeSeries).group(truc);
-		sql.limit(100);
+		sql.from(cData);
+		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData,JeeslTsData.Attributes.timeSeries,query.getTsSeries());}
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record))) {sql.where(cData,JeeslTsData.Attributes.record,cq.getType(),cq.getDate());}
+			else {logger.warn("NYI");}
+		}
+		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(truc);
+		sql.limit(query.getMaxResults());
 		logger.info(sql.assemble());
 		
 		@SuppressWarnings("unchecked")
 		List<Object[]> result = em.createNativeQuery(sql.assemble()).getResultList();
-	
 		Json1TuplesFactory<TS> jtf = Json1TuplesFactory.instance(fbTs.getClassTs()).tupleLoad(this,query.getTupleLoad());
-		return jtf.buildO(result,JsonTupleFactory.Type.count);
+		return jtf.buildO(result,query.getCqAggregations());
 	}
 	
+	@Override public JsonTuples2<TS,MP> fTsPointAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	{
+		if(ObjectUtils.isEmpty(query.getCqAggregations())) {return new JsonTuples2<>();}
+		Class<DATA> cData = fbTs.getClassData();
+		Class<POINT> cPoint = fbTs.getClassPoint();
+		
+		SqlFactory sql = SqlFactory.instance().linebreak(true);
+		sql.alias(cData, "d");
+		sql.alias(cPoint, "p");
+		sql.id(cData,JeeslTsData.Attributes.timeSeries);
+		sql.id(cPoint,JeeslTsDataPoint.Attributes.data);
+		sql.id(cPoint,JeeslTsDataPoint.Attributes.multiPoint);
+		
+		String truc = sql.dateTrunc(cData,JeeslTsData.Attributes.record,JeeslTsInterval.Aggregation.day);
+
+		sql.select(truc).select(cData,JeeslTsData.Attributes.timeSeries).select(cPoint,JeeslTsDataPoint.Attributes.multiPoint);
+		sql.selectAggregations("p.value", query.getCqAggregations());
+		sql.from(cPoint);
+		sql.join(cPoint, JeeslTsDataPoint.Attributes.data,cData);
+		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData,JeeslTsData.Attributes.timeSeries,query.getTsSeries());}
+		if(ObjectUtils.isNotEmpty(query.getTsMultiPoints())) {sql.whereIn(cPoint,JeeslTsDataPoint.Attributes.multiPoint,query.getTsMultiPoints());}
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslTsDataPoint.Attributes.data,JeeslTsData.Attributes.record))) {sql.where(cData,JeeslTsData.Attributes.record,cq.getType(),cq.getDate());}
+			else {logger.warn("NYI");}
+		}
+		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(cPoint,JeeslTsDataPoint.Attributes.multiPoint).group(truc);
+		sql.limit(query.getMaxResults());
+		logger.info(sql.assemble());
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> result = em.createNativeQuery(sql.assemble()).getResultList();
+		Json2TuplesFactory<TS,MP> jtf = Json2TuplesFactory.instance(fbTs.getClassTs(),fbTs.getClassMp()).tupleLoad(this,query.getTupleLoad());
+		return jtf.buildO(result,query.getCqAggregations());
+	}
+
 	// Predicates
-	
 	private Predicate[] pTransaction(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<TX> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -1085,4 +1126,6 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		}
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
+
+
 }

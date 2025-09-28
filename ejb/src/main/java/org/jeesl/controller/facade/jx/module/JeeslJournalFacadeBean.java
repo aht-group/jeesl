@@ -29,7 +29,6 @@ import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.LogFactoryBuilder;
-import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
@@ -42,6 +41,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslJournalQuery;
+import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
@@ -184,7 +184,7 @@ public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescript
 		cQ.groupBy(jScope.get("id"));
 
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return Json1TuplesFactory.instance(fbLog.getClassScope()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return Json1TuplesFactory.instance(fbLog.getClassScope()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
 	

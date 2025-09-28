@@ -14,7 +14,7 @@ public class JsonTuple extends AbstractJsonTuple implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
-	public enum Field{sum,count}
+//	public enum Agg{count,sum,min,avg,max}
 	
 	public JsonTuple() {}
 	

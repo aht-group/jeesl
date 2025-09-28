@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
+import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayModuleTsVersionMarker;
 import org.jeesl.model.ejb.module.ts.config.TsCategory;
 
-public class FlywayModuleTsPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider
+public class FlywayModuleTsPathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider, FlywayModuleTsVersionMarker
 {
 	public static FlywayModuleTsPathProvider instance() {return new FlywayModuleTsPathProvider();}
 	
@@ -24,4 +25,6 @@ public class FlywayModuleTsPathProvider implements JeeslFlywayPathProvider, Jees
 		
 		return list;
 	}
+	
+	@Override public void sinceModuleTs(int i) {}
 }
