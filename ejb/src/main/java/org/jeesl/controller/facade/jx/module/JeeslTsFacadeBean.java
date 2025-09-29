@@ -18,6 +18,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -31,6 +32,7 @@ import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.BooleanPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.DoublePredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.EntityPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.ParentPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
@@ -69,6 +71,7 @@ import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqDouble;
+import org.jeesl.model.ejb.io.db.JeeslCqEntity;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
@@ -78,6 +81,7 @@ import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.util.query.cq.CqBool;
 import org.jeesl.util.query.cq.CqDate;
+import org.jeesl.util.query.cq.CqEntity;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.module.EjbTimeSeriesQuery;
@@ -763,6 +767,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<TX> cQ = cB.createQuery(fbTs.getClassTransaction());
 		Root<TX> root = cQ.from(fbTs.getClassTransaction());
+		super.rootFetch(root,query);
 		
 		Predicate[] p = this.pTransaction(cB, query, root);
 		if(super.abort(query,p)) {return new ArrayList<TX>();}
@@ -917,7 +922,23 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
+		Path<SOURCE> pSource = null;
+		
 		if(ObjectUtils.isNotEmpty(query.getTsTransactions())) {predicates.add(root.in(query.getTsTransactions()));}
+		
+		if(ObjectUtils.isNotEmpty(query.getTsScopes()))
+		{
+			ListJoin<TX,DATA> jData = root.joinList(JeeslTsTransaction.Attributes.datas.toString());
+			Join<DATA,TS> jTs = jData.join(JeeslTsData.Attributes.timeSeries.toString());
+			Join<TS,SCOPE> jScope = jTs.join(JeeslTimeSeries.Attributes.scope.toString());
+			predicates.add(jScope.in(query.getTsScopes()));
+		}
+		
+		if(ObjectUtils.isNotEmpty(query.getTsDataSources()))
+		{
+			if(Objects.isNull(pSource)) {pSource = root.<SOURCE>get(JeeslTsTransaction.Attributes.source.toString());}
+			predicates.add(pSource.in(query.getTsDataSources()));
+		}
 		
 		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
 		{
@@ -934,6 +955,15 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 			
 			if(Objects.nonNull(eDate)) {TimePredicateBuilder.juDate(cB,predicates, cq, eDate);}
 			else {logger.warn(cq.nyi(JeeslTsData.class));}
+		}
+		for(JeeslCqEntity cq : ListUtils.emptyIfNull(query.getCqEntities()))
+		{
+			if(cq.getPath().equals(CqEntity.path(JeeslTsTransaction.Attributes.source)))
+			{
+				if(Objects.isNull(pSource)) {pSource = root.<SOURCE>get(JeeslTsTransaction.Attributes.source.toString());}
+				EntityPredicateBuilder.add(cB,predicates, cq, pSource);
+			}
+			else {logger.warn(cq.nyi(JeeslTsTransaction.class));}
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

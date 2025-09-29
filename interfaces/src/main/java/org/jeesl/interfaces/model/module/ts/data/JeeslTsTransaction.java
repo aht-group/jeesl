@@ -24,7 +24,7 @@ public interface JeeslTsTransaction <SOURCE extends EjbWithLangDescription<?,?>,
 		extends Serializable,EjbWithId,EjbSaveable,EjbWithRecord,EjbRemoveable,EjbPersistable,
 					JeeslWithFileRepositoryContainer<CONTAINER>
 {
-	enum Attributes{user,record}
+	enum Attributes{user,record,source,datas}
 	
 	USER getUser();
 	void setUser(USER user);

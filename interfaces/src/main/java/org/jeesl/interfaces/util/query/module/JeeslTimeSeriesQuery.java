@@ -37,4 +37,5 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	List<STAT> getTsTypes();
 	List<TS> getTsSeries();
 	List<TX> getTsTransactions();
+	List<SRC> getTsDataSources();
 }

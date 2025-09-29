@@ -2,6 +2,7 @@ package org.jeesl.factory.ejb.module.ts;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +17,6 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.model.xml.module.ts.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +78,11 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		return set;
 	}
 	
+	public List<TS> toListTs(List<DATA> list)
+	{
+		 return list.stream() .map(DATA::getTimeSeries).distinct().collect(Collectors.toList());
+	}
+	
 	public Map<TS,List<DATA>> toMapSeriesListData(List<DATA> list)
 	{
 		return list.stream().collect(Collectors.groupingBy(DATA::getTimeSeries));
@@ -92,4 +97,5 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		for(DATA d : list) {map.put(d.getTimeSeries(), d);}
 		return map;
 	}
+	
 }
