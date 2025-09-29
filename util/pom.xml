@@ -563,7 +563,8 @@
         </plugins>
     </build>
     
-    <profiles>
+    <!--
+      <profiles>
 		<profile>
 			<id>autojavax</id>
 			<activation><jdk>1.8</jdk></activation>
@@ -591,5 +592,6 @@
 		    </dependencies>
 		</profile>
 	</profiles>
+  -->
 
 </project>
