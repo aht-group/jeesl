@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("tsScopeT")
+@DiscriminatorValue("timeseriesScopeType")
 @EjbErNode(name="Type",category="ts",subset="moduleTs")
 public class TsScopeType extends IoStatus implements JeeslTsScopeType<IoLang,IoDescription,TsScopeType,IoGraphic>
 {

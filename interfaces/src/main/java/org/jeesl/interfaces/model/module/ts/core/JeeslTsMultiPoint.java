@@ -30,6 +30,8 @@ public interface JeeslTsMultiPoint <L extends JeeslLang, D extends JeeslDescript
 {
 	public enum Attributes{scope,code,position,visible}
 
+//	void x();
+	
 	SCOPE getScope();
 	void setScope(SCOPE scope);
 

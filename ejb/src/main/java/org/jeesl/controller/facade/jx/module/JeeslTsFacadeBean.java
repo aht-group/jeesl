@@ -856,7 +856,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		String truc = sql.dateTrunc(cData, JeeslTsData.Attributes.record, JeeslTsInterval.Aggregation.hour);
 
 		sql.select(truc).select(cData,JeeslTsData.Attributes.timeSeries);
-		sql.selectAggregations("p.value", query.getCqAggregations());
+		sql.selectAggregations("d.value", query.getCqAggregations());
 		
 		sql.from(cData);
 		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData,JeeslTsData.Attributes.timeSeries,query.getTsSeries());}

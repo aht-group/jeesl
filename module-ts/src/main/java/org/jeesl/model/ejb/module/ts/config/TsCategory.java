@@ -12,7 +12,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("tsCategory")
+@DiscriminatorValue("timeseriesCategory")
 @EjbErNode(name="Category",category="ts",subset="moduleTs")
 public class TsCategory extends IoStatus implements JeeslTsCategory<IoLang,IoDescription,TsCategory,IoGraphic>
 {
