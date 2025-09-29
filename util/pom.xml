@@ -65,14 +65,16 @@
             <scope>provided</scope>
         </dependency>
 		
-        <!-- 2024-10-16 km: added because of compilation errors --> 
-		<dependency>
-            <groupId>org.jeesl</groupId>
-            <artifactId>jeesl-xml</artifactId>
-            <classifier>javax</classifier>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
+        <!-- 2024-10-16 km: added because of compilation errors 
+        	2025-09-29 tk: moved to profile
+			<dependency>
+	            <groupId>org.jeesl</groupId>
+	            <artifactId>jeesl-xml</artifactId>
+	            <classifier>javax</classifier>
+	            <type>jar</type>
+	            <scope>provided</scope>
+	        </dependency>
+        --> 
         
         <!-- MetaChart -->
         <dependency>
@@ -560,5 +562,34 @@
             </plugin>
         </plugins>
     </build>
+    
+    <profiles>
+		<profile>
+			<id>autojavax</id>
+			<activation><jdk>1.8</jdk></activation>
+			<dependencies>
+		      <dependency>
+	            <groupId>org.jeesl</groupId>
+	            <artifactId>jeesl-xml</artifactId>
+	            <classifier>javax</classifier>
+	            <type>jar</type>
+	            <scope>provided</scope>
+	        </dependency>
+		    </dependencies>
+		</profile>
+		<profile>
+			<id>autojakarta</id>
+			<activation><jdk>11</jdk></activation>
+			<dependencies>
+		      <dependency>
+	            <groupId>org.jeesl</groupId>
+	            <artifactId>jeesl-xml</artifactId>
+	            <classifier>jakarta</classifier>
+	            <type>jar</type>
+	            <scope>provided</scope>
+	        </dependency>
+		    </dependencies>
+		</profile>
+	</profiles>
 
 </project>
