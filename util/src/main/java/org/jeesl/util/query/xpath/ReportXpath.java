@@ -17,7 +17,6 @@ import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.report.ColumnGroup;
 import org.jeesl.model.xml.io.report.DataAssociation;
-import org.jeesl.model.xml.io.report.DataHandler;
 import org.jeesl.model.xml.io.report.ImportStructure;
 import org.jeesl.model.xml.io.report.Info;
 import org.jeesl.model.xml.io.report.Jr;
@@ -138,14 +137,14 @@ public class ReportXpath
 		return listResult.get(0);
 	}
 	
-	public static synchronized DataHandler getDataHandler(XlsSheet definition, String clazz) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
-	{
-		JXPathContext context = JXPathContext.newContext(definition);
-		List<DataHandler> listResult = (List<DataHandler>)context.selectNodes("//dataHandler[@class='" +clazz +"']");
-		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+DataHandler.class.getSimpleName()+" for class="+clazz);}
-		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+DataHandler.class.getSimpleName()+" for code="+clazz);}
-		return listResult.get(0);
-	}
+//	public static synchronized DataHandler getDataHandler(XlsSheet definition, String clazz) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
+//	{
+//		JXPathContext context = JXPathContext.newContext(definition);
+//		List<DataHandler> listResult = (List<DataHandler>)context.selectNodes("//dataHandler[@class='" +clazz +"']");
+//		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+DataHandler.class.getSimpleName()+" for class="+clazz);}
+//		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+DataHandler.class.getSimpleName()+" for code="+clazz);}
+//		return listResult.get(0);
+//	}
 	
 	public static synchronized DataAssociation getDataAssociation(XlsSheet definition, String property) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
