@@ -9,19 +9,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
+import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslTsDataSource <L extends JeeslLang, D extends JeeslDescription,
-									S extends JeeslStatus<L,D,S>,
-									G extends JeeslGraphic<?,?,?>>
-					extends Serializable,EjbPersistable,
-								EjbWithCode,
-								EjbWithCodeGraphic<G>,
-								JeeslStatus<L,D,S>,
-								JeeslTsDataSource2<L,D>
+public interface JeeslTsDataSource2 <L extends JeeslLang, D extends JeeslDescription>
+					extends Serializable,EjbPersistable, EjbWithLangDescription<L,D>
 {	
 
 }

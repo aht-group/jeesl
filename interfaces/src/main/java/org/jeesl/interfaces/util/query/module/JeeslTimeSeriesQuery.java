@@ -3,6 +3,7 @@ package org.jeesl.interfaces.util.query.module;
 import java.util.List;
 
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
@@ -17,6 +18,8 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTV,STAT>,
 								TX extends JeeslTsTransaction<?,?,?,?>,
+//								SRC extends JeeslTsDataSource2<?,?>,
+//								SRC extends EjbWithLangDescription<?,?>,
 								BRIDGE extends JeeslTsBridge<?>,
 								INTV extends JeeslTsInterval<?,?,INTV,?>,
 								STAT extends JeeslTsStatistic<?,?,STAT,?>

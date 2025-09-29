@@ -35,7 +35,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 								MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,TYPE>,
 								TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
-								SRC extends EjbWithLangDescription<?,?>, 
+								SRC extends EjbWithLangDescription<?,?>,
 //								SRC extends JeeslTsDataSource<?,?,SRC,?>, 
 								BRIDGE extends JeeslTsBridge<EC>,
 								EC extends JeeslTsEntityClass<?,?,CATEGORY,ENTITY>,
