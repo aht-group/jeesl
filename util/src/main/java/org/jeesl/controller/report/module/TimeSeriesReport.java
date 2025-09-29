@@ -28,6 +28,7 @@ import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -47,7 +48,6 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.module.ts.Ts;
 import org.slf4j.Logger;
@@ -83,14 +83,14 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 						UNIT extends JeeslStatus<L,D,UNIT>,
 						MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 						TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-						TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-						SOURCE extends EjbWithLangDescription<L,D>, 
+						TX extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
+						SOURCE extends JeeslTsDataSource2<L,D>, 
 						BRIDGE extends JeeslTsBridge<EC>,
 						EC extends JeeslTsEntityClass<L,D,CAT,E2>,
 						E2 extends JeeslRevisionEntity<L,D,?,?,?,?>,
 						INT extends JeeslTsInterval<L,D,INT,?>,
 						STAT extends JeeslTsStatistic<L,D,STAT,?>,
-						DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
+						DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 						POINT extends JeeslTsDataPoint<DATA,MP>,
 						SAMPLE extends JeeslTsSample,
 						USER extends JeeslSecurityUser, 
@@ -102,15 +102,15 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(TimeSeriesReport.class);
 
-	private final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,?> fTs;
+	private final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,?> fTs;
 	
-	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,?> fbTs;
+	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,?> fbTs;
 	
 	public TimeSeriesReport(String localeCode,
 			final JeeslIoReportFacade<REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL> fReport,
-			final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,?> fTs,
+			final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,?> fTs,
 			final IoReportFactoryBuilder<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,ALIGNMENT,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fbReport,
-			final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,?> fbTs)
+			final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,E2,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,?> fbTs)
 	{
 		super(localeCode,fbReport);
 		super.initIo(fReport,this.getClass());

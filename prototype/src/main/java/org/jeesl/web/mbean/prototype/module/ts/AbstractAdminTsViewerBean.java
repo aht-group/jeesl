@@ -19,6 +19,7 @@ import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -37,7 +38,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.jsf.handler.op.OpEntitySelectionHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.util.query.ejb.module.EjbTimeSeriesQuery;
@@ -52,8 +52,8 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-											TX extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-											SOURCE extends EjbWithLangDescription<L,D>, 
+											TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
+											SRC extends JeeslTsDataSource2<L,D>, 
 											BRIDGE extends JeeslTsBridge<EC>,
 											EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 											ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
@@ -66,7 +66,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -79,7 +79,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 	protected final SbSingleHandler<EC> sbhClass; public SbSingleHandler<EC> getSbhClass() {return sbhClass;}
 	protected final SbSingleHandler<INT> sbhInterval; public SbSingleHandler<INT> getSbhInterval() {return sbhInterval;}
 	
-	public AbstractAdminTsViewerBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractAdminTsViewerBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		sbhScope = new SbSingleHandler<SCOPE>(fbTs.getClassScope(),this);
@@ -90,7 +90,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		mapTsEntity = new HashMap<TS,EjbWithId>();
 	}
 	
-	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
+	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhCategory.toggleAll();
@@ -101,7 +101,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		super.toggled(handler,c);
 		if(fbTs.getClassCategory().isAssignableFrom(c))
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
+			EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SRC,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
 			query.addTsCategories(sbhCategory.getSelected());
 			
 			sbhScope.setList(fTs.fTsScopes(query));

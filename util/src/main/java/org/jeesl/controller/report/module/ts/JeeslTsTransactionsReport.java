@@ -6,12 +6,12 @@ import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.factory.xml.module.ts.XmlTransactionFactory;
 import org.jeesl.factory.xml.module.ts.XmlTsFactory;
 import org.jeesl.factory.xml.system.io.report.XmlReportFactory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.module.ts.Ts;
 import org.jeesl.util.query.xml.module.XmlTsQuery;
@@ -20,10 +20,10 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslTsTransactionsReport <L extends JeeslLang,D extends JeeslDescription,
 						
-						TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-						SOURCE extends EjbWithLangDescription<L,D>, 
+						TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
+						SRC extends JeeslTsDataSource2<L,D>, 
 						
-						DATA extends JeeslTsData<?,TRANSACTION,?,?,?>,
+						DATA extends JeeslTsData<?,TX,?,?,?>,
 						
 						USER extends JeeslUser<?>
 						>
@@ -32,12 +32,12 @@ public class JeeslTsTransactionsReport <L extends JeeslLang,D extends JeeslDescr
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslTsTransactionsReport.class);
 
-	private final JeeslTsFacade<?,?,?,?,?,?,TRANSACTION,SOURCE,?,?,?,?,?,?,?,?,USER,?,?> fTs;
+	private final JeeslTsFacade<?,?,?,?,?,?,TX,SRC,?,?,?,?,?,?,?,?,USER,?,?> fTs;
 	
-	private final XmlTransactionFactory<L,D,TRANSACTION,SOURCE,USER> xfTransaction;
+	private final XmlTransactionFactory<L,D,TX,SRC,USER> xfTransaction;
 	
 	public JeeslTsTransactionsReport(String localeCode,
-			final JeeslTsFacade<?,?,?,?,?,?,TRANSACTION,SOURCE,?,?,?,?,?,?,?,?,USER,?,?> fTs)
+			final JeeslTsFacade<?,?,?,?,?,?,TX,SRC,?,?,?,?,?,?,?,?,USER,?,?> fTs)
 	{
 	
 		this.fTs=fTs;
@@ -51,7 +51,7 @@ public class JeeslTsTransactionsReport <L extends JeeslLang,D extends JeeslDescr
 		
 		Ts ts = XmlTsFactory.build();
 		
-		for(TRANSACTION t : fTs.fTransactions(null,JeeslTsData.QueryInterval.closedOpen,from,to))
+		for(TX t : fTs.fTransactions(null,JeeslTsData.QueryInterval.closedOpen,from,to))
 		{
 			ts.getTransaction().add(xfTransaction.build(t));
 		}

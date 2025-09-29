@@ -19,6 +19,7 @@ import org.jeesl.factory.json.system.status.JsonIntervalFactory;
 import org.jeesl.factory.json.system.status.JsonWorkspaceFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -36,7 +37,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.model.json.module.ts.JsonTsData;
 import org.jeesl.model.json.module.ts.JsonTsSeries;
 import org.jeesl.util.query.json.JsonStatusQueryProvider;
@@ -52,8 +52,8 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 							UNIT extends JeeslStatus<L,D,UNIT>,
 							MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 							TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-							TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-							SOURCE extends EjbWithLangDescription<L,D>, 
+							TRANSACTION extends JeeslTsTransaction<SRC,DATA,USER,?>,
+							SRC extends JeeslTsDataSource2<L,D>, 
 							BRIDGE extends JeeslTsBridge<EC>,
 							EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 							ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
@@ -70,8 +70,8 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(TsRestHandler.class);
 	
-	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
-	private final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs;
+	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
+	private final JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs;
 	
 	private final EjbTsDataPointFactory<TS,MP,DATA,POINT> efPoint;
 	
@@ -81,8 +81,8 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 	private JsonIntervalFactory<L,D,INT> jfInterval;
 	private JsonWorkspaceFactory<L,D,WS> jfWorkspace;
 	
-	public TsRestHandler(TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs,
-							JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
+	public TsRestHandler(TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs,
+							JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super(fTs,fbTs.getClassL(),fbTs.getClassD());
 		this.fbTs=fbTs;

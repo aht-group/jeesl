@@ -20,6 +20,7 @@ import org.jeesl.factory.ejb.module.ts.EjbTsDataFactory;
 import org.jeesl.factory.mc.ts.McTsViewerFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -38,7 +39,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.model.xml.module.ts.Data;
 import org.jeesl.model.xml.module.ts.TimeSeries;
 import org.jeesl.util.comparator.xml.ts.TsDataComparator;
@@ -53,8 +53,8 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-											TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-											SOURCE extends EjbWithLangDescription<L,D>,
+											TRANSACTION extends JeeslTsTransaction<SRC,DATA,USER,?>,
+											SRC extends JeeslTsDataSource2<L,D>,
 											BRIDGE extends JeeslTsBridge<EC>,
 											EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 											ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
@@ -67,7 +67,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -77,7 +77,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 	private List<EC> classes; public List<EC> getClasses() {return classes;}
 	private List<INT> intervals; public List<INT> getIntervals() {return intervals;}
 	private List<WS> workspaces; public List<WS> getWorkspaces() {return workspaces;}
-	private final List<SOURCE> sources; public List<SOURCE> getSources() {return sources;}
+	private final List<SRC> sources; public List<SRC> getSources() {return sources;}
 
 	private final List<EjbWithId> entities; public List<EjbWithId> getEntities() {return entities;}
 	private Map<EjbWithId,String> mapLabels; public Map<EjbWithId,String> getMapLabels() {return mapLabels;}
@@ -104,7 +104,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 	private List<DATA> datas; public List<DATA> getDatas() {return datas;}
 	private DATA data; public DATA getData() { return data; } public void setData(DATA data) { this.data = data; }
 
-	public AbstractAdminTsImportManualBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractAdminTsImportManualBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		entities = new ArrayList<EjbWithId>();
@@ -114,7 +114,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 	}
 
 	protected void postConstructTsManual(JeeslTranslationBean<L,D,LOC> bTranslation,
-								JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs,
+								JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs,
 								USER transactionUser)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);

@@ -19,6 +19,7 @@ import org.jeesl.factory.ejb.module.ts.EjbTsTransactionFactory;
 import org.jeesl.factory.mc.ts.McTimeSeriesFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -37,7 +38,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,8 +48,8 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 								UNIT extends JeeslStatus<L,D,UNIT>,
 								MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-								TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-								SOURCE extends EjbWithLangDescription<L,D>, 
+								TRANSACTION extends JeeslTsTransaction<SRC,DATA,USER,?>,
+								SRC extends JeeslTsDataSource2<L,D>, 
 								BRIDGE extends JeeslTsBridge<EC>,
 								EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 								ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
@@ -76,7 +76,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	private final Class<MP> cMp; public Class<MP> getClassMp() {return cMp;}
 	private final Class<TS> cTs; public Class<TS> getClassTs() {return cTs;}
 	private final Class<TRANSACTION> cTransaction; public Class<TRANSACTION> getClassTransaction() {return cTransaction;}
-	private final Class<SOURCE> cSource; public Class<SOURCE> getClassSource() {return cSource;}
+	private final Class<SRC> cSource; public Class<SRC> getClassSource() {return cSource;}
 	private final Class<BRIDGE> cBridge; public Class<BRIDGE> getClassBridge() {return cBridge;}
 	private final Class<EC> cEc; public Class<EC> getClassEntity() {return cEc;}
 	private final Class<INT> cInt; public Class<INT> getClassInterval() {return cInt;}
@@ -94,7 +94,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 							final Class<MP> cMp,
 							final Class<TS> cTs,
 							final Class<TRANSACTION> cTransaction,
-							final Class<SOURCE> cSource,
+							final Class<SRC> cSource,
 							final Class<BRIDGE> cBridge,
 							final Class<EC> cEc,
 							final Class<INT> cInt,
@@ -126,14 +126,14 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	public EjbTsFactory<SCOPE,TS,BRIDGE,INT,STAT> ejbTs(){return new EjbTsFactory<>(cTs);}
 	public EjbTsScopeFactory<CAT,SCOPE,UNIT> ejbScope(){return new EjbTsScopeFactory<>(cScope);}
 	public EjbTsBridgeFactory<SCOPE,MP,TS,BRIDGE,EC,DATA,POINT> ejbBridge(){return new EjbTsBridgeFactory<>(cBridge);}
-	public EjbTsTransactionFactory<TRANSACTION,SOURCE,USER> ejbTransaction() {return new EjbTsTransactionFactory<>(cTransaction);}
+	public EjbTsTransactionFactory<TRANSACTION,SRC,USER> ejbTransaction() {return new EjbTsTransactionFactory<>(cTransaction);}
 	public EjbTsDataFactory<TS,TRANSACTION,DATA,WS> ejbData() {return new EjbTsDataFactory<>(cData);}
 	public EjbTsDataPointFactory<TS,MP,DATA,POINT> ejbDataPoint() {return new EjbTsDataPointFactory<>(cPoint);}
 	public EjbTsClassFactory<CAT,EC,ENTITY> ejbEntityClass(){return new EjbTsClassFactory<>(cEc);}
 	public EjbTsMutliPointFactory<SCOPE,MP> ejbMultiPoint() {return new EjbTsMutliPointFactory<>(cMp);}
 	public EjbTsCronFactory<SCOPE,INT,STAT,CRON> ejbCron() {return new EjbTsCronFactory<SCOPE,INT,STAT,CRON>(cCron);}
 	
-	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
+	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		return new McTimeSeriesFactory<>(this,fTs);
 	}

@@ -48,6 +48,7 @@ import org.jeesl.factory.sql.module.SqlTimeSeriesFactory;
 import org.jeesl.interfaces.facade.ParentPredicate;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -63,7 +64,6 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsCron;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
@@ -91,7 +91,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 							MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT,?>,
 							TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
 							TX extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-							SOURCE extends EjbWithLangDescription<?,?>,
+							SOURCE extends JeeslTsDataSource2<?,?>,
 							BRIDGE extends JeeslTsBridge<EC>,
 							EC extends JeeslTsEntityClass<?,?,CAT,ENTITY>,
 							ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
@@ -123,7 +123,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		sqlFactory = new SqlTimeSeriesFactory<>(fbTs.getClassData());
 	}
 	
-	@Override public List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -143,7 +143,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 
-	@Override public List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<MP> cQ = cB.createQuery(fbTs.getClassMp());
@@ -264,7 +264,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<TS> fTsSeries(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public List<TS> fTsSeries(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -355,7 +355,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbTs.getClassData()+" and series="+series.toString()+" not unique");}
 	}
 	
-	@Override public List<DATA> fTsData(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public List<DATA> fTsData(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
@@ -378,7 +378,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
@@ -414,7 +414,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
+	@Override public List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
@@ -549,7 +549,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return this.list(fbTs.getClassData(),ids);
 	}
 	
-	@Override public List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<POINT> cQ = cB.createQuery(fbTs.getClassPoint());
@@ -567,7 +567,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
+	@Override public List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<POINT> cQ = cB.createQuery(fbTs.getClassPoint());
@@ -689,7 +689,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	@Override
 	public void deleteTsSeries(TS series) throws JeeslConstraintViolationException
 	{
-		EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> qData = new EjbTimeSeriesQuery<>();
+		EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> qData = new EjbTimeSeriesQuery<>();
 		qData.add(series);
 		
 		List<DATA> datas = this.fTsData(qData);
@@ -698,7 +698,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		Set<Long> setTxCount = new HashSet<>();
 		List<TX> listTxDelete = new ArrayList<>();
 		
-		EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> qTx = new EjbTimeSeriesQuery<>();
+		EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> qTx = new EjbTimeSeriesQuery<>();
 		for(DATA d : datas) {qTx.add(d.getTransaction());}
 		
 		logger.info(fbTs.getClassData()+": Deleting "+datas.size());
@@ -758,7 +758,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 
 		return em.createQuery(cQ).getResultList();
 	}
-	@Override public List<TX> fTsTransactions(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public List<TX> fTsTransactions(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<TX> cQ = cB.createQuery(fbTs.getClassTransaction());
@@ -776,7 +776,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return tQ.getResultList();
 	}
 
-	@Override public JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
@@ -823,7 +823,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
         return jtf.buildV2(tuples,JeeslCq.Agg.count);
 	}
 
-	@Override public JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		if(ObjectUtils.isEmpty(query.getTsTransactions()))
 		{
@@ -845,7 +845,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return jtf.buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	
-	@Override public JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		if(ObjectUtils.isEmpty(query.getCqAggregations())) {return new JsonTuples1<>();}
 		Class<DATA> cData = fbTs.getClassData();
@@ -876,7 +876,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return jtf.buildO(result,query.getCqAggregations());
 	}
 	
-	@Override public JsonTuples2<TS,MP> fTsPointAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query)
+	@Override public JsonTuples2<TS,MP> fTsPointAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		if(ObjectUtils.isEmpty(query.getCqAggregations())) {return new JsonTuples2<>();}
 		Class<DATA> cData = fbTs.getClassData();
@@ -913,7 +913,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	}
 
 	// Predicates
-	private Predicate[] pTransaction(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<TX> root)
+	private Predicate[] pTransaction(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, Root<TX> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -938,7 +938,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	private void obTransaction(CriteriaBuilder cB, CriteriaQuery<TX> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<TX> ejb)
+	private void obTransaction(CriteriaBuilder cB, CriteriaQuery<TX> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, Root<TX> ejb)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))
@@ -954,7 +954,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	}
 	
 	//TODO @tk This is a workaround for testing avg, return to private
-	public Predicate[] pData(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<DATA> root)
+	public Predicate[] pData(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, Root<DATA> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -1005,7 +1005,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	}
 	
 	//TODO @tk This is a workaround for testing avg, return to private
-	public void obData(CriteriaBuilder cB, CriteriaQuery<DATA> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<DATA> root)
+	public void obData(CriteriaBuilder cB, CriteriaQuery<DATA> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, Root<DATA> root)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))
@@ -1024,7 +1024,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	private Predicate[] pPoint(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<POINT> root)
+	private Predicate[] pPoint(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, Root<POINT> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		Join<POINT,DATA> jData = root.join(JeeslTsDataPoint.Attributes.data.toString());
@@ -1071,7 +1071,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
-	private Predicate[] pMultiPoint(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<MP> root)
+	private Predicate[] pMultiPoint(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, Root<MP> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -1103,7 +1103,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	private void obMultiPoint(CriteriaBuilder cB, CriteriaQuery<MP> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<MP> root)
+	private void obMultiPoint(CriteriaBuilder cB, CriteriaQuery<MP> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, Root<MP> root)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))

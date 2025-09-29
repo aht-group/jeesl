@@ -31,6 +31,7 @@ import org.jeesl.factory.xml.module.ts.XmlDataFactory;
 import org.jeesl.factory.xml.module.ts.XmlTsFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -49,7 +50,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.model.xml.module.ts.Data;
 import org.jeesl.model.xml.module.ts.TimeSeries;
 import org.jeesl.util.comparator.xml.ts.TsDataComparator;
@@ -68,8 +68,8 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-											TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-											SOURCE extends EjbWithLangDescription<L,D>,
+											TRANSACTION extends JeeslTsTransaction<SRC,DATA,USER,?>,
+											SRC extends JeeslTsDataSource2<L,D>,
 											BRIDGE extends JeeslTsBridge<EC>,
 											EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 											ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
@@ -82,7 +82,7 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -92,7 +92,7 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 	private List<EC> classes; public List<EC> getClasses() {return classes;}
 	private List<INT> intervals; public List<INT> getIntervals() {return intervals;}
 	private List<WS> workspaces; public List<WS> getWorkspaces() {return workspaces;}
-	private List<SOURCE> sources; public List<SOURCE> getSources() {return sources;}
+	private List<SRC> sources; public List<SRC> getSources() {return sources;}
 
 	private List<EjbWithId> entities; public List<EjbWithId> getEntities() {return entities;}
 	private Map<EjbWithId,String> mapLabels; public Map<EjbWithId,String> getMapLabels() {return mapLabels;}
@@ -114,9 +114,9 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 
 	private Comparator<Data> cTsData;
 
-	public AbstractAdminTsImportSingleBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs) {super(fbTs);}
+	public AbstractAdminTsImportSingleBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs) {super(fbTs);}
 
-	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, UtilsXlsDefinitionResolver xlsResolver)
+	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, UtilsXlsDefinitionResolver xlsResolver)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		this.xlsResolver=xlsResolver;

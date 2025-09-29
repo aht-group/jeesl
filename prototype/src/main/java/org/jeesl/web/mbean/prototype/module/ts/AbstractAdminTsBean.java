@@ -20,6 +20,7 @@ import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
@@ -38,7 +39,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
@@ -51,14 +51,14 @@ public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslD
 									UNIT extends JeeslStatus<L,D,UNIT>,
 									MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 									TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-									TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-									SOURCE extends EjbWithLangDescription<L,D>, 
+									TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
+									SRC extends JeeslTsDataSource2<L,D>, 
 									BRIDGE extends JeeslTsBridge<EC>,
 									EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 									ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 									INT extends JeeslTsInterval<L,D,INT,?>,
 									STAT extends JeeslTsStatistic<L,D,STAT,?>,
-									DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
+									DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 									POINT extends JeeslTsDataPoint<DATA,MP>,
 									SAMPLE extends JeeslTsSample, 
 									USER extends EjbWithId,
@@ -71,14 +71,14 @@ public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslD
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminTsBean.class);
 	
-	protected JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs;
-	protected final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
+	protected JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs;
+	protected final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
 	
 	protected List<CAT> categories; public List<CAT> getCategories() {return categories;}
 	
 	protected final EjbTsFactory<SCOPE,TS,BRIDGE,INT,STAT> efTs;
 	protected EjbTsBridgeFactory<SCOPE,MP,TS,BRIDGE,EC,DATA,POINT> efBridge;
-	protected EjbTsDataFactory<TS,TRANSACTION,DATA,WS> efData;
+	protected EjbTsDataFactory<TS,TX,DATA,WS> efData;
 	protected EjbTsCronFactory<SCOPE,INT,STAT,CRON> efCron;
 	
 	protected Comparator<SCOPE> comparatorScope;
@@ -87,7 +87,7 @@ public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslD
 	protected final SbMultiHandler<WS> sbhWorkspace; public SbMultiHandler<WS> getSbhWorkspace() {return sbhWorkspace;}
 	protected final SbMultiHandler<CAT> sbhCategory; public SbMultiHandler<CAT> getSbhCategory() {return sbhCategory;}
 	
-	public AbstractAdminTsBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractAdminTsBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs.getClassL(),fbTs.getClassD());
 		this.fbTs=fbTs;
@@ -98,7 +98,7 @@ public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslD
 		sbhWorkspace = new SbMultiHandler<WS>(fbTs.getClassWorkspace(),this);
 	}
 	
-	protected void postConstructTs(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
+	protected void postConstructTs(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fTs=fTs;
