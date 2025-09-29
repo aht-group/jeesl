@@ -1,6 +1,5 @@
 package org.jeesl.controller.facade.jx.module;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -41,6 +40,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.ejb.module.ts.EjbTsFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.factory.json.system.io.db.Json1DateTruncationFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
 import org.jeesl.factory.sql.SqlFactory;
@@ -72,6 +72,7 @@ import org.jeesl.model.ejb.io.db.JeeslCqDouble;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.io.db.JeeslCqTime;
+import org.jeesl.model.json.io.db.pg.JsonDateTruncation;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
@@ -853,9 +854,9 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		sql.alias(cData, "d");
 		sql.id(cData, JeeslTsData.Attributes.timeSeries);
 		
-		String truc = sql.dateTrunc(cData, JeeslTsData.Attributes.record, JeeslTsInterval.Aggregation.hour);
+		JsonDateTruncation truncation = Json1DateTruncationFactory.instance().alias("jd").attribute(sql.attribute(cData,JeeslTsData.Attributes.record)).interval("day").assemble();
 
-		sql.select(truc).select(cData,JeeslTsData.Attributes.timeSeries);
+		sql.select(truncation).select(cData,JeeslTsData.Attributes.timeSeries);
 		sql.selectAggregations("d.value", query.getCqAggregations());
 		
 		sql.from(cData);
@@ -865,7 +866,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record))) {sql.where(cData,JeeslTsData.Attributes.record,cq.getType(),cq.getDate());}
 			else {logger.warn("NYI");}
 		}
-		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(truc);
+		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(truncation);
 		sql.limit(query.getMaxResults());
 		logger.info(sql.assemble());
 		
@@ -888,9 +889,9 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		sql.id(cPoint,JeeslTsDataPoint.Attributes.data);
 		sql.id(cPoint,JeeslTsDataPoint.Attributes.multiPoint);
 		
-		String truc = sql.dateTrunc(cData,JeeslTsData.Attributes.record,JeeslTsInterval.Aggregation.day);
+		JsonDateTruncation truncation = Json1DateTruncationFactory.instance().alias("jd").attribute(sql.attribute(cData,JeeslTsData.Attributes.record)).interval("day").assemble();
 
-		sql.select(truc).select(cData,JeeslTsData.Attributes.timeSeries).select(cPoint,JeeslTsDataPoint.Attributes.multiPoint);
+		sql.select(truncation).select(cData,JeeslTsData.Attributes.timeSeries).select(cPoint,JeeslTsDataPoint.Attributes.multiPoint);
 		sql.selectAggregations("p.value", query.getCqAggregations());
 		sql.from(cPoint);
 		sql.join(cPoint, JeeslTsDataPoint.Attributes.data,cData);
@@ -901,7 +902,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 			if(cq.getPath().equals(CqDate.path(JeeslTsDataPoint.Attributes.data,JeeslTsData.Attributes.record))) {sql.where(cData,JeeslTsData.Attributes.record,cq.getType(),cq.getDate());}
 			else {logger.warn("NYI");}
 		}
-		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(cPoint,JeeslTsDataPoint.Attributes.multiPoint).group(truc);
+		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(cPoint,JeeslTsDataPoint.Attributes.multiPoint).group(truncation);
 		sql.limit(query.getMaxResults());
 		logger.info(sql.assemble());
 		
@@ -916,36 +917,25 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
+		if(ObjectUtils.isNotEmpty(query.getTsTransactions())) {predicates.add(root.in(query.getTsTransactions()));}
+		
 		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
 		{
-			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record)))
-			{
-				Expression<Date> eDate = root.get(JeeslTsData.Attributes.record.toString());
-				DatePredicateBuilder.juDate(cB,predicates, cq, eDate);
-			}
+			Expression<Date> eDate = null;
+			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record))) {eDate = root.get(JeeslTsData.Attributes.record.toString());}
+			
+			if(Objects.nonNull(eDate)) {DatePredicateBuilder.juDate(cB,predicates, cq, eDate);}
 			else {logger.warn(cq.nyi(JeeslTsData.class));}
 		}
 		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
 		{
-			if(cq.getPath().equals(CqDate.path(JeeslTsTransaction.Attributes.record)))
-			{
-				Expression<Date> eDate = root.get(JeeslTsTransaction.Attributes.record.toString());
-				TimePredicateBuilder.juDate(cB,predicates, cq, eDate);
-			}
+			Expression<Date> eDate = null;
+			if(cq.getPath().equals(CqDate.path(JeeslTsTransaction.Attributes.record))) {eDate = root.get(JeeslTsTransaction.Attributes.record.toString());}
+			
+			if(Objects.nonNull(eDate)) {TimePredicateBuilder.juDate(cB,predicates, cq, eDate);}
 			else {logger.warn(cq.nyi(JeeslTsData.class));}
 		}
-		
-		if(ObjectUtils.isNotEmpty(query.getTsSeries()))
-		{
-			Join<DATA,TS> jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());
-			predicates.add(jTs.in(query.getTsSeries()));
-		}
-		if(ObjectUtils.isNotEmpty(query.getTsTransactions()))
-		{
-			Path<TX> pTx = root.get(JeeslTsData.Attributes.transaction.toString());
-			predicates.add(pTx.in(query.getTsTransactions()));
-		}
-		
+
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	private void obTransaction(CriteriaBuilder cB, CriteriaQuery<TX> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,BRIDGE,INT,STAT> query, Root<TX> ejb)

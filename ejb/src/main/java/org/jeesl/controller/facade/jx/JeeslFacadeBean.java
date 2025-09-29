@@ -135,9 +135,10 @@ public class JeeslFacadeBean implements JeeslFacade
 		boolean noMax = Objects.isNull(query.getMaxResults()) || query.getMaxResults()==0;
 		boolean noPredicates = Objects.isNull(predicates) || predicates.length==0;
 		boolean abort = noMax && noPredicates;
-		logger.info("Abort Conditions: abort:"+abort+" (noMax:"+noMax+" noPredicates:"+noPredicates+")");
+		
 		if(abort)
 		{
+			logger.info("Abort Conditions: abort:"+abort+" (noMax:"+noMax+" noPredicates:"+noPredicates+")");
 			logger.warn("Aborting query because to risky to fetch a huge number of items");
 			return true;
 		}

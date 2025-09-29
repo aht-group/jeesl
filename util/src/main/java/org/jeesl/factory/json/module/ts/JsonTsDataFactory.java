@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.model.json.module.ts.JsonTsData;
+import org.jeesl.model.json.module.ts.JsonTsPoint;
 import org.jeesl.model.json.module.ts.JsonTsSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +17,12 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 	final static Logger logger = LoggerFactory.getLogger(JsonTsDataFactory.class);
 	
 	private final JsonTsData q;
+	private JsonTsData json;
 	
 	public JsonTsDataFactory(JsonTsData q)
 	{
 		this.q=q;
+		this.clear();
 	}
 		
 	public JsonTsData build(DATA ejb)
@@ -42,7 +45,12 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 		
 		return json;
 	}
+	public JsonTsDataFactory<DATA> timestamp(LocalDateTime time) {json.setLocalDateTime(time); return this;}
+	public JsonTsDataFactory<DATA> clear() {json = JsonTsDataFactory.build(); return this;}
+	public JsonTsDataFactory<DATA> add(JsonTsPoint point) {if(Objects.isNull(json.getPoints())) {json.setPoints(new ArrayList<>());} json.getPoints().add(point); return this;}
+	public JsonTsData assemble() {return json;}
 	
+	public static JsonTsData build() {return new JsonTsData();}
 	public static void append(JsonTsSeries ts, LocalDateTime ldt, Double value)
 	{
 		if(Objects.isNull(ts.getDatas())) {ts.setDatas(new ArrayList<>());}

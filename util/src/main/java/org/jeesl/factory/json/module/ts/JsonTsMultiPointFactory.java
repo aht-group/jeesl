@@ -30,4 +30,7 @@ public class JsonTsMultiPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?,?>>
 	
 		return json;
 	}
+	
+	public static JsonTsMultipoint build() {return new JsonTsMultipoint();}
+	public static JsonTsMultipoint build(String code) {JsonTsMultipoint json = JsonTsMultiPointFactory.build(); json.setCode(code); return json;}
 }

@@ -22,6 +22,7 @@ import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
+import org.jeesl.model.json.io.db.pg.JsonDateTruncation;
 import org.jeesl.util.query.sql.JeeslSqlQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,7 @@ public class SqlFactory
 	private List<String> joins;
 	private List<String> groups;
 	private List<String> wheres;
+	private List<String> orders;
 	private Integer limit; 	public SqlFactory limit(Integer limit) {this.limit = limit; return this;}
 	
 	private boolean envers; public SqlFactory envers() {envers=true; return this;}
@@ -141,8 +143,21 @@ public class SqlFactory
 		selects.add(this.attribute(c,attribute));
 		return this;
 	}
+	public SqlFactory select(JsonDateTruncation truncation)
+	{
+		if(Objects.isNull(selects)) {selects = new ArrayList<>();}
+		StringBuilder bf = new StringBuilder();
+		bf.append("date_trunc(");
+		bf.append(String.format("'%s'",truncation.getInterval()));
+		bf.append(", ").append(truncation.getAttribute());
+		bf.append(")");
+		if(Objects.nonNull(truncation.getAlias())) {bf.append(" AS ").append(truncation.getAlias());}
+		selects.add(bf.toString());
+		return this;
+	}
 	
 	public SqlFactory group(String value) {return group(null,value);}
+	public SqlFactory group(JsonDateTruncation truncation) {return group(null,truncation.getAlias());}
 	public <T extends EjbWithId, A extends Enum<A>> SqlFactory group(Class<T> c, A attribute) {return this.group(c, attribute.toString());}
 	private <T extends EjbWithId> SqlFactory group(Class<T> c, String value)
 	{
@@ -151,6 +166,17 @@ public class SqlFactory
 		return this;
 	}
 	
+	public SqlFactory order(JsonDateTruncation truncation)
+	{
+		if(Objects.isNull(orders)){orders = new ArrayList<>();}
+		orders.add(truncation.getAlias());
+		return this;
+	}
+	
+	public <T extends EjbWithId, A extends Enum<A>> String attribute(Class<T> c, A attribute)
+	{
+		return this.attribute(c, attribute.toString());
+	}
 	private <T extends EjbWithId> String attribute(Class<T> c, String attribute)
 	{
 		StringBuffer bf = new StringBuffer();
@@ -209,36 +235,17 @@ public class SqlFactory
 			SqlFactory.newLine(newLine,bf);
 		}
 		
+		if(ObjectUtils.isNotEmpty(orders))
+		{
+			bf.append(" ORDER BY ").append(String.join(", ", orders));
+			SqlFactory.newLine(newLine,bf);
+		}
+		
 		if(Objects.nonNull(limit)) {bf.append(" LIMIT ").append(limit);}
 		SqlFactory.newLine(newLine,bf);
 		
 		return bf.toString();
 	}
-	
-	public <T extends EjbWithId, A extends Enum<A>> String dateTrunc(Class<T> c, A attribute, JeeslTsInterval.Aggregation interval)
-	{
-		StringBuilder bf = new StringBuilder();
-		bf.append("date_trunc(").append(String.format("'%s'",interval.toString()));
-		bf.append(", ");
-		
-		String a = null; if(mapAlias.containsKey(c)) {a = mapAlias.get(c);}
-		if(Objects.nonNull(a)) {bf.append(a).append(".");}
-		else
-		{
-			if(envers) {bf.append("envers.");}
-			bf.append(c.getAnnotation(Table.class).name());
-			if(envers) {bf.append("_");}
-			bf.append(".");
-		}
-		bf.append(attribute.toString());
-		
-		bf.append(")");
-		return bf.toString();
-	}
-	
-	
-	
-	
 	
 	public <T extends EjbWithId, E extends Enum<E>> SqlFactory where(Class<T> c, E attribute, Long id)
 	{
@@ -249,8 +256,6 @@ public class SqlFactory
 		
 		return this;
 	}
-	
-
 
 	public <T extends EjbWithId> SqlFactory delete(Class<T> c)
 	{

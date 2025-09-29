@@ -1,8 +1,11 @@
 package org.jeesl.factory.json.module.ts;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
+import org.jeesl.model.json.module.ts.JsonTsData;
 import org.jeesl.model.json.module.ts.JsonTsSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +13,17 @@ import org.slf4j.LoggerFactory;
 public class JsonTsSeriesFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonTsSeriesFactory.class);
+	
+	private JsonTsSeries json;
+	
+	public JsonTsSeriesFactory()
+	{
+		this.clear();
+	}
+	
+	public JsonTsSeriesFactory<DATA> clear() {json = JsonTsSeriesFactory.build(); return this;}
+	public JsonTsSeriesFactory<DATA> add(JsonTsData data) {if(Objects.isNull(json.getDatas())) {json.setDatas(new ArrayList<>());} json.getDatas().add(data); return this;}
+	public JsonTsSeries assemble() {return json;}
 	
 	public static JsonTsSeries build() {return new JsonTsSeries();}
 	
