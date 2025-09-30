@@ -830,10 +830,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 
 	@Override public JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
-		if(ObjectUtils.isEmpty(query.getTsTransactions()))
-		{
-			return new JsonTuples1<>();
-		}
+		if(ObjectUtils.isEmpty(query.getTsTransactions())) {return new JsonTuples1<>();}
 		
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
@@ -847,6 +844,25 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		cQ.groupBy(pTx.get("id"));
 		
 		Json1TuplesFactory<TX> jtf = Json1TuplesFactory.instance(fbTs.getClassTransaction()).tupleLoad(this,query.getTupleLoad());
+		return jtf.buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
+	}
+	
+	@Override public JsonTuples1<SCOPE> tpTsDataByScope(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<DATA> root = cQ.from(fbTs.getClassData());
+		
+		Expression<Long> eCount = cB.count(root.<Long>get("id"));
+		
+		Join<DATA,TS> jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());
+		Path<SCOPE> pScope = jTs.get(JeeslTimeSeries.Attributes.scope.toString());
+		
+		cQ.multiselect(pScope.get("id"),eCount);
+		cQ.where(cB.and(this.pData(cB,query,root)));
+		cQ.groupBy(pScope.get("id"));
+		
+		Json1TuplesFactory<SCOPE> jtf = Json1TuplesFactory.instance(fbTs.getClassScope()).tupleLoad(this,query.getTupleLoad());
 		return jtf.buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	
@@ -1146,6 +1162,4 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		}
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
-
-
 }

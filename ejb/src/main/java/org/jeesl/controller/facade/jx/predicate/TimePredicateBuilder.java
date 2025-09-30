@@ -21,6 +21,7 @@ public class TimePredicateBuilder
 	{
 		switch(cq.getType())
 		{
+			case equalTo: predicates.add(cB.equal(eDate,DateUtil.toDate(cq.getTime()))); break;
 			case lessThan: predicates.add(cB.lessThan(eDate,DateUtil.toDate(cq.getTime()))); break;
 			case greaterThan: predicates.add(cB.greaterThan(eDate,DateUtil.toDate(cq.getTime()))); break;
 			

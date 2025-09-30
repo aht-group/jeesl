@@ -13,6 +13,11 @@ public class JsonTsContainer implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("scopes")
+	private List<JsonTsScope> scopes;
+	public List<JsonTsScope> getScopes() {return scopes;}
+	public void setScopes(List<JsonTsScope> scopes) {this.scopes = scopes;}
+
 	@JsonProperty("series")
 	private List<JsonTsSeries> series;
 	public List<JsonTsSeries> getSeries() {return series;}
