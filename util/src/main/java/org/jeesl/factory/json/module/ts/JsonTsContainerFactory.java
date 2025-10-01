@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.jeesl.model.json.module.ts.JsonTsContainer;
 import org.jeesl.model.json.module.ts.JsonTsScope;
 import org.jeesl.model.json.module.ts.JsonTsSeries;
+import org.jeesl.model.json.module.ts.JsonTsStatistic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +25,7 @@ public class JsonTsContainerFactory
 	
 	public JsonTsContainerFactory clear() {json = JsonTsContainerFactory.build(); return this;}
 	public JsonTsContainerFactory add(JsonTsScope scope) {if(Objects.isNull(json.getScopes())) {json.setScopes(new ArrayList<>());} json.getScopes().add(scope); return this;}
+	public JsonTsContainerFactory add(JsonTsStatistic statistic) {if(Objects.isNull(json.getStatistics())) {json.setStatistics(new ArrayList<>());} json.getStatistics().add(statistic); return this;}
 	public JsonTsContainer assemble() {return json;}
 	
 	public static JsonTsContainer build() {return new JsonTsContainer();}

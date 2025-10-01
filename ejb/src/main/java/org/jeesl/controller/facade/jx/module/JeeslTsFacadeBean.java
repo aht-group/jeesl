@@ -1004,15 +1004,24 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
+		Join<DATA,TS> jTs = null;
+		Join<DATA,TX> jTx = null;
+		
 		if(ObjectUtils.isNotEmpty(query.getTsSeries()))
 		{
-			Join<DATA,TS> jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());
+			if(Objects.isNull(jTs)) {jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());}
 			predicates.add(jTs.in(query.getTsSeries()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getTsScopes()))
+		{
+			if(Objects.isNull(jTs)) {jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());}
+			Path<SCOPE> pScope = jTs.get(JeeslTimeSeries.Attributes.scope.toString());
+			predicates.add(pScope.in(query.getTsScopes()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getTsTransactions()))
 		{
-			Path<TX> pTx = root.get(JeeslTsData.Attributes.transaction.toString());
-			predicates.add(pTx.in(query.getTsTransactions()));
+			if(Objects.isNull(jTx)) {jTx = root.join(JeeslTsData.Attributes.transaction.toString());}
+			predicates.add(jTx.in(query.getTsTransactions()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getTsMultiPoints()))
 		{
@@ -1030,10 +1039,18 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		}
 		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
 		{
+			Expression<Date> e = null;
 			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record)))
 			{
-				DatePredicateBuilder.juDate(cB,predicates, cq, root.<Date>get(JeeslTsData.Attributes.record.toString()));
+				e = root.<Date>get(JeeslTsData.Attributes.record.toString());
 			}
+			else if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.transaction,JeeslTsTransaction.Attributes.record)))
+			{
+				if(Objects.isNull(jTx)) {jTx = root.join(JeeslTsData.Attributes.transaction.toString());}
+				e = jTx.<Date>get(JeeslTsTransaction.Attributes.record.toString());
+			}
+			
+			if(Objects.nonNull(e)) {DatePredicateBuilder.juDate(cB,predicates, cq,e);}
 			else {logger.warn(cq.nyi(JeeslTsData.class));}
 		}
 		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
@@ -1045,6 +1062,16 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 			}
 			if(Objects.nonNull(eDate)) {TimePredicateBuilder.juDate(cB,predicates, cq, eDate);}
 			else {logger.warn(cq.nyi(JeeslTsData.class));}
+		}
+		for(JeeslCqEntity cq : ListUtils.emptyIfNull(query.getCqEntities()))
+		{
+			if(cq.getPath().equals(CqEntity.path(JeeslTsData.Attributes.transaction,JeeslTsTransaction.Attributes.source)))
+			{
+				if(Objects.isNull(jTx)) {jTx = root.join(JeeslTsData.Attributes.transaction.toString());}
+				Path<SOURCE> pSource = jTx.<SOURCE>get(JeeslTsTransaction.Attributes.source.toString());
+				EntityPredicateBuilder.add(cB,predicates, cq, pSource);
+			}
+			else {logger.warn(cq.nyi(fbTs.getClassTransaction()));}
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

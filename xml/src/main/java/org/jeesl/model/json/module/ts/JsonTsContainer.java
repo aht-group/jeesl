@@ -33,6 +33,12 @@ public class JsonTsContainer implements Serializable
 	public List<JsonTsPoint> getDataPoints() {return dataPoints;}
 	public void setDataPoints(List<JsonTsPoint> dataPoints) {this.dataPoints = dataPoints;}
 	
+	@JsonProperty("statistics")
+	private List<JsonTsStatistic> statistics;
+	public List<JsonTsStatistic> getStatistics() {return statistics;}
+	public void setStatistics(List<JsonTsStatistic> statistics) {this.statistics = statistics;}
+
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

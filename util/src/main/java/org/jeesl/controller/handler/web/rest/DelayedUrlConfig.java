@@ -11,15 +11,11 @@ public class DelayedUrlConfig
 	public static String resolve(boolean skipDelay, org.exlp.interfaces.system.property.Configuration config, String key)
 	{
 		String url = config.getString(key);
-		
 
-		
 		StringBuffer sb = new StringBuffer();
 		sb.append("REST connection to ");
 		sb.append(url);
 		sb.append(" (").append(key).append(")");
-		
-		logger.info(sb.toString());
 		
 		boolean isLocal = url.contains("localhost");
 //		sb.append(" skipDelay:").append(skipDelay);
