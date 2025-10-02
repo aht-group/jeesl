@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.module.ts;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,5 +70,15 @@ public class EjbTsFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,?,INT>,
 			map.get(ts.getBridge()).add(ts);
 		}
 		return map;
+	}
+	
+	public <T extends EjbWithId> void sortByBridges(List<TS> list, List<BRIDGE> bridges)
+	{
+		Map<BRIDGE,Integer> map = new HashMap<>();
+		for (int i=0; i<bridges.size(); i++)
+		{
+		    map.put(bridges.get(i), i);
+		}
+		list.sort(Comparator.comparingInt(series -> map.getOrDefault(series.getBridge(), Integer.MAX_VALUE)));
 	}
 }

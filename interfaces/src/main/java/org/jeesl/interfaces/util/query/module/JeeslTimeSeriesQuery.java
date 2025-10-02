@@ -19,7 +19,6 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTV,STAT>,
 								TX extends JeeslTsTransaction<?,?,?,?>,
 								SRC extends JeeslTsDataSource2<?,?>,
-//								SRC extends EjbWithLangDescription<?,?>,
 								BRIDGE extends JeeslTsBridge<?>,
 								INTV extends JeeslTsInterval<?,?,INTV,?>,
 								STAT extends JeeslTsStatistic<?,?,STAT,?>

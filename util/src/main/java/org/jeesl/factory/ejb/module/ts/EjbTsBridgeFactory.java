@@ -2,6 +2,7 @@ package org.jeesl.factory.ejb.module.ts;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,5 +157,15 @@ public class EjbTsBridgeFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,EC,?>,
 			if(idMap.containsKey(refId)) {n2m.put(idMap.get(refId),p.getMultiPoint(),p);}
 		}
 		return n2m;
+	}
+	
+	public <T extends EjbWithId> void sortByOwner(List<BRIDGE> bridges, List<T> owners)
+	{
+		Map<Long,Integer> map = new HashMap<>();
+		for (int i=0; i<bridges.size(); i++)
+		{
+		    map.put(owners.get(i).getId(), i);
+		}
+		bridges.sort(Comparator.comparingInt(bridge -> map.getOrDefault(bridge.getRefId(), Integer.MAX_VALUE)));
 	}
 }
