@@ -1,8 +1,8 @@
 package org.jeesl.factory.ejb.module.ts;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -87,9 +87,13 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 	{
 		return list.stream().collect(Collectors.groupingBy(DATA::getTimeSeries));
 	}
-	public Map<LocalDateTime,DATA> toMapRecord(List<DATA> list)
+	public Map<LocalDateTime,DATA> toMapDateTime(List<DATA> list)
 	{
 		return list.stream().collect(Collectors.toMap(k -> DateUtil.toLocalDateTime(k.getRecord()), v -> v));
+	}
+	public Map<LocalDate,DATA> toMapDate(List<DATA> list)
+	{
+		return list.stream().collect(Collectors.toMap(k -> DateUtil.toLocalDate(k.getRecord()), v -> v));
 	}
 	public Map<TS,DATA> toMapSeriesSingleData(List<DATA> list)
 	{

@@ -94,7 +94,7 @@ public class JeeslLoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		reset();
 		timeStart = Instant.now();
 		timeMilestone = Instant.now();
-		milestone(log,message);
+		this.milestone(log,message);
 		StringBuilder sb = new StringBuilder();
 		sb.append("Starting logging in ").append(c.getSimpleName());
 		sb.append(": ").append(log);

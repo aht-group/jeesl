@@ -83,7 +83,7 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 	List<DATA> fData(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
 	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE> query);
-	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
+//	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
 	List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	List<POINT> fPoints(WS workspace, List<TS> timeSeries, List<MP> mps, JeeslTsData.QueryInterval interval, Date from, Date to);
 	

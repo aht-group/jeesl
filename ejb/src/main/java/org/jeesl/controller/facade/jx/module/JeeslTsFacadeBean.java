@@ -399,14 +399,14 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		Expression<Date> truncatedDayMain = cB.function("date_trunc", Date.class, cB.literal("day"), eRootDate);
 		Expression<Date> truncatedDaySub = cB.function("date_trunc", Date.class, cB.literal("day"), eSubDate);
 		
-		pSub.addAll(Arrays.asList(this.pData(cB, query, sub)));
+		pSub.addAll(Arrays.asList(this.pData(cB,query,sub)));
 		pSub.add(cB.equal(truncatedDayMain,truncatedDaySub));
 		
 		sQ.select(cB.greatest(eSubDate));
 		sQ.where(cB.and(pSub.toArray(new Predicate[pSub.size()])));
 		
 		pRoot.add(eRootDate.in(sQ));
-		pRoot.addAll(Arrays.asList(this.pData(cB, query, root)));
+		pRoot.addAll(Arrays.asList(this.pData(cB,query,root)));
 		cQ.select(root);
 		cQ.where(cB.and(pRoot.toArray(new Predicate[pRoot.size()])));
 		
@@ -565,51 +565,6 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		cQ.select(root);
 		cQ.where(cB.and(this.pPoint(cB, query, root)));
 		cQ.orderBy(cB.asc(eRecord));
-		
-		TypedQuery<POINT> tQ = em.createQuery(cQ);
-		super.pagination(tQ, query);
-		return tQ.getResultList();
-	}
-	
-	@Override public List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)
-	{
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<POINT> cQ = cB.createQuery(fbTs.getClassPoint());
-		Root<POINT> root = cQ.from(fbTs.getClassPoint());
-		List<Predicate> pRoot = new ArrayList<>();
-		
-		List<Predicate> pSub = new ArrayList<>();
-		Subquery<Double> sQ = cQ.subquery(Double.class);
-		Root<POINT> sub = sQ.from(fbTs.getClassPoint());
-		
-		Expression<Date> eRootDate = root.get(JeeslTsDataPoint.Attributes.data.toString()).get("record");
-		Expression<Date> eSubDate = sub.get(JeeslTsDataPoint.Attributes.data.toString()).get("record");
-		
-		Expression<Double> eRootValue = root.get("value");
-		Expression<Double> eSubValue = sub.get("value");
-		
-		Expression<Date> truncatedDayRoot = cB.function("date_trunc", Date.class, cB.literal("day"), eRootDate);
-		Expression<Date> truncatedDaySub = cB.function("date_trunc", Date.class, cB.literal("day"), eSubDate);
-		
-		pSub.addAll(Arrays.asList(this.pPoint(cB,query,sub)));
-		pSub.add(cB.equal(truncatedDayRoot,truncatedDaySub));
-		
-		switch(aggegation)
-		{
-			case min: sQ.select(cB.min(eSubValue)); break;
-			case max: sQ.select(cB.greatest(eSubValue)); break;
-//			case avg: sQ.select(cB.avg(eSubValue)); break;
-		}
-		
-		sQ.where(cB.and(pSub.toArray(new Predicate[pSub.size()])));
-		
-		pRoot.add(eRootValue.in(sQ));
-		pRoot.addAll(Arrays.asList(this.pPoint(cB, query, root)));
-		cQ.select(root);
-		cQ.where(cB.and(pRoot.toArray(new Predicate[pRoot.size()])));
-		
-//		if(ObjectUtils.isEmpty(query.getCqOrderings())) {cQ.orderBy(cB.asc(eRootDate));}
-//		else {this.obData(cB, cQ, query, root);}
 		
 		TypedQuery<POINT> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);

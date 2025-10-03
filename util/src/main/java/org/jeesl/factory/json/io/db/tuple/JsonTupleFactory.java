@@ -1,11 +1,15 @@
 package org.jeesl.factory.json.io.db.tuple;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
 
+import org.apache.commons.collections4.ListUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.JeeslCq;
@@ -64,6 +68,10 @@ public class JsonTupleFactory
 		
 		json.setId1(tuple.getId1());
 		json.setId2(tuple.getId2());
+		
+		json.setV1(tuple.getV1());
+		json.setV2(tuple.getV2());
+		json.setV3(tuple.getV3());
 		return json;
 	}
 	
@@ -261,5 +269,15 @@ public class JsonTupleFactory
 			if(Objects.nonNull(t.getCount1())) {result = result+t.getCount();}
 		}
 		return result;
+	}
+	
+	public static <A extends EjbWithId, B extends EjbWithId> Map<LocalDate,JsonTuple> toMapDate(List<JsonTuple2<A,B>> tuples)
+	{
+		return ListUtils.emptyIfNull(tuples).stream()
+		        .collect(Collectors.toMap(
+		            t -> t.getRecord().toLocalDate(),
+		            JsonTupleFactory::build,
+		            (existing, replacement) -> existing // Behalte den ersten Eintrag bei Kollision
+		        ));
 	}
 }
