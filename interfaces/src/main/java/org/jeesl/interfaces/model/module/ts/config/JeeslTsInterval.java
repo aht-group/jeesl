@@ -27,6 +27,7 @@ public interface JeeslTsInterval <L extends JeeslLang, D extends JeeslDescriptio
 {	
 	public enum Code{inst,irregular,rt,
 						minute,minute10,
-						daily,monthly,weekly,quarterly,yearly}
+						hour,
+						day,monthly,weekly,quarterly,yearly}
 	public enum Aggregation {hour,day}
 }

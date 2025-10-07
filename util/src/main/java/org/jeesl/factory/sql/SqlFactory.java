@@ -18,10 +18,10 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.util.TxtIdFactory;
-import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
+import org.jeesl.model.ejb.io.db.JeeslCqTime;
 import org.jeesl.model.json.io.db.pg.JsonDateTruncation;
 import org.jeesl.util.query.sql.JeeslSqlQuery;
 import org.slf4j.Logger;
@@ -107,6 +107,19 @@ public class SqlFactory
 		wheres.add(String.format("%s IN (%s)", this.attribute(c,attribute.toString()), EjbIdFactory.toIdList(list)));
 		return this;
 	}
+	
+	public <T extends EjbWithId, A extends Enum<A>, X extends EjbWithId> SqlFactory where(Class<T> c, A attribute, JeeslCqTime.Type type, LocalDateTime ldt)
+	{
+		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}
+		switch(type)
+		{
+			case greaterThan: wheres.add(String.format("%s > '%s'",this.attribute(c,attribute.toString()),ldt.toString())); break;
+//			case Before: wheres.add(String.format("%s < '%s'",this.attribute(c,attribute.toString()),ldt.toString())); break;
+			case lessThan: wheres.add(String.format("%s < '%s'",this.attribute(c,attribute.toString()),ldt.toString())); break;
+			default: logger.warn("NYI "+type);
+		}
+		return this;
+	}
 	public <T extends EjbWithId, A extends Enum<A>, X extends EjbWithId> SqlFactory where(Class<T> c, A attribute, JeeslCqDate.Type type, LocalDate ld)
 	{
 		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}
@@ -117,7 +130,6 @@ public class SqlFactory
 			case BeforeOrAt: wheres.add(String.format("%s <= '%s'",this.attribute(c,attribute.toString()),ld.toString())); break;
 			default: logger.warn("NYI");
 		}
-//		wheres.add(String.format("%s IN (%s)", this.attribute(c,attribute.toString()), EjbIdFactory.toIdList(list)));
 		return this;
 	}
 	

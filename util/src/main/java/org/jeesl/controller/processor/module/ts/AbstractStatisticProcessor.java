@@ -92,7 +92,7 @@ public class AbstractStatisticProcessor <TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		boolean match = false;
 		switch(code)
 		{
-			case daily: match = matchDay(startDate,compareDate); break;
+			case day: match = matchDay(startDate,compareDate); break;
 			case weekly: match = matchMondayWeek(startDate,compareDate); break;
 			case monthly: match = matchMonth(startDate,compareDate); break;
 			case quarterly: match = matchQuarter(startDate,compareDate); break;

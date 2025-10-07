@@ -66,6 +66,7 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsCron;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.cq.JeeslCqAggregationQuery;
 import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
@@ -823,14 +824,16 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	@Override public JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
-		if(ObjectUtils.isEmpty(query.getCqAggregations())) {return new JsonTuples1<>();}
-		Class<DATA> cData = fbTs.getClassData();
+		if(ObjectUtils.isEmpty(query.getCqAggregations())) {logger.warn("No Aggregation"); return new JsonTuples1<>();}
+		if(ObjectUtils.isEmpty(query.getTsIntervals())) {logger.warn("No "+fbTs.getClassInterval().getSimpleName()); return new JsonTuples1<>();}
+		if(query.getTsIntervals().size()!=1) {logger.warn("Multi "+fbTs.getClassInterval().getSimpleName()); return new JsonTuples1<>();}
 		
+		Class<DATA> cData = fbTs.getClassData();
 		SqlFactory sql = SqlFactory.instance();
 		sql.alias(cData, "d");
 		sql.id(cData, JeeslTsData.Attributes.timeSeries);
 		
-		JsonDateTruncation truncation = Json1DateTruncationFactory.instance().alias("jd").attribute(sql.attribute(cData,JeeslTsData.Attributes.record)).interval("day").assemble();
+		JsonDateTruncation truncation = Json1DateTruncationFactory.instance().alias("jd").attribute(sql.attribute(cData,JeeslTsData.Attributes.record)).interval(query.getTsIntervals().get(0).getCode()).assemble();
 
 		sql.select(truncation).select(cData,JeeslTsData.Attributes.timeSeries);
 		sql.selectAggregations("d.value", query.getCqAggregations());
@@ -855,6 +858,9 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	@Override public JsonTuples2<TS,MP> fTsPointAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SOURCE,BRIDGE,INT,STAT> query)
 	{
 		if(ObjectUtils.isEmpty(query.getCqAggregations())) {return new JsonTuples2<>();}
+		if(ObjectUtils.isEmpty(query.getTsIntervals())) {logger.warn("No "+fbTs.getClassInterval().getSimpleName()); return new JsonTuples2<>();}
+		if(query.getTsIntervals().size()!=1) {logger.warn("Multi "+fbTs.getClassInterval().getSimpleName()); return new JsonTuples2<>();}
+		
 		Class<DATA> cData = fbTs.getClassData();
 		Class<POINT> cPoint = fbTs.getClassPoint();
 		
@@ -865,7 +871,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		sql.id(cPoint,JeeslTsDataPoint.Attributes.data);
 		sql.id(cPoint,JeeslTsDataPoint.Attributes.multiPoint);
 		
-		JsonDateTruncation truncation = Json1DateTruncationFactory.instance().alias("jd").attribute(sql.attribute(cData,JeeslTsData.Attributes.record)).interval("day").assemble();
+		JsonDateTruncation truncation = Json1DateTruncationFactory.instance().alias("jd").attribute(sql.attribute(cData,JeeslTsData.Attributes.record)).interval(query.getTsIntervals().get(0).getCode()).assemble();
 
 		sql.select(truncation).select(cData,JeeslTsData.Attributes.timeSeries).select(cPoint,JeeslTsDataPoint.Attributes.multiPoint);
 		sql.selectAggregations("p.value", query.getCqAggregations());
@@ -873,6 +879,11 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		sql.join(cPoint, JeeslTsDataPoint.Attributes.data,cData);
 		if(ObjectUtils.isNotEmpty(query.getTsSeries())) {sql.whereIn(cData,JeeslTsData.Attributes.timeSeries,query.getTsSeries());}
 		if(ObjectUtils.isNotEmpty(query.getTsMultiPoints())) {sql.whereIn(cPoint,JeeslTsDataPoint.Attributes.multiPoint,query.getTsMultiPoints());}
+		for(JeeslCqTime cq : ListUtils.emptyIfNull(query.getCqTimes()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslTsDataPoint.Attributes.data,JeeslTsData.Attributes.record))) {sql.where(cData,JeeslTsData.Attributes.record,cq.getType(),cq.getTime());}
+			else {logger.warn("NYI");}
+		}
 		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
 		{
 			if(cq.getPath().equals(CqDate.path(JeeslTsDataPoint.Attributes.data,JeeslTsData.Attributes.record))) {sql.where(cData,JeeslTsData.Attributes.record,cq.getType(),cq.getDate());}
