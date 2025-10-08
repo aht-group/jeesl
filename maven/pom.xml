@@ -98,6 +98,11 @@
 		</dependency>
 		 	    
 	   	<!-- XML -->
+		<dependency>
+	      	<groupId>org.jdom</groupId>
+	      	<artifactId>jdom2</artifactId>
+	      	<scope>compile</scope>
+		</dependency>
 	   	<!-- 2024-10-16 tk: replaced jaxb-impl with jaxb-runtime because of runtime-error in goal 
 		<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
@@ -251,36 +256,6 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-		<!-- 2022-04-24 tk removed because it should be in use anymore
-		<dependency>
-			<groupId>org.postgis</groupId>
-			<artifactId>postgis-jdbc</artifactId>
-			<version>1.5.3</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.postgis</groupId>
-			<artifactId>postgis-jdbc</artifactId>
-			<version>2.3.0</version>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.postgresql</groupId>
-					<artifactId>postgresql</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>  
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-spatial</artifactId>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.postgresql</groupId>
-					<artifactId>postgresql</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency> -->
 		<dependency>
 			<groupId>org.geolatte</groupId>
 			<artifactId>geolatte-geom</artifactId>
@@ -343,7 +318,6 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
-   
 	</dependencies>
 
 	<build>
