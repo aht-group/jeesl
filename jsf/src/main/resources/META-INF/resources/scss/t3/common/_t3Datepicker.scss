@@ -1,0 +1,78 @@
+@use '_t3Button' as button;
+@use '../container/_t3Container' as container;
+
+@mixin input() {
+	.ui-datepicker-trigger.ui-state-default {
+		--t3m-button-icon: '\f073';
+		
+		@include button.icon-button();
+		
+		position: absolute;
+		right: 0;
+	}
+}
+
+@mixin overlay() {
+	padding: 0 1.125rem;
+	
+	.ui-datepicker-header {
+		$actions: 'ui-datepicker-prev, .ui-datepicker-next';
+		
+		@include container.titlebar(ui-datepicker-title, $actions);
+		
+		.ui-datepicker-prev, .ui-datepicker-next {
+			box-sizing: border-box;
+			cursor: pointer;
+		}
+		
+		align-items: end;
+		
+		&::before, &::after {
+			content: '';
+			flex-grow: 1;
+		}
+		
+		&::before {
+			order: 2;
+		}
+		
+		&::after {
+			order: 4;
+		}
+		
+		.ui-datepicker-prev {
+			order: 1;
+		}
+		
+		.ui-datepicker-next {
+			order: 5;
+		}
+		
+		.ui-datepicker-title {
+			flex-grow: 0;
+			order: 3;
+		}
+	}
+	
+	.ui-datepicker-calendar {
+		@include container.inner-table(cell);
+		
+		border-color: white;
+		border-style: solid;
+		border-width: 0 5px 5px;
+		
+		tbody tr td {
+			&.ui-datepicker-today {
+				--t3m-interactive-background: var(--t3m-gray-lighter);
+				
+				&:hover {
+					--t3m-interactive-background: var(--t3m-gray-much-lighter);
+				}
+			}
+			
+			a {
+				text-align: center;
+			}
+		}
+	}
+}

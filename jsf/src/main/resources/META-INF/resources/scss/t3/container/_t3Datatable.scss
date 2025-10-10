@@ -1,0 +1,65 @@
+@use '_t3Container' as container;
+
+@mixin container() {
+	.jeesl-datatable {
+		@include container.panel(ui-datatable-tablewrapper);
+		
+		.ui-datatable-header {	
+			@include container.titlebar(pf-datatable-header-title, pf-datatable-header-actions, t3-icon);
+		
+			background: none;
+			border: none;
+			padding: 0;
+		}
+		
+		table {
+			@include container.inner-table();
+			
+			tr.ui-state-hover .ps-ts-data .t3-icon-select .t3-icon-select-panel {
+				background: var(--t3m-primary-20);
+			}
+			
+			tr.ui-state-highlight .ps-ts-data .t3-icon-select .t3-icon-select-panel {
+				background: var(--t3m-primary);
+			}
+			
+			.pf-ts-data {
+				display: flex;
+				gap: .5rem;
+				
+				.t3-icon-select {
+					font-weight: bold;
+					position: relative;
+					
+					&:hover {
+						.t3-icon-select-panel {
+							background: var(--t3m-primary-60);
+							border-radius: 100px;
+							display: flex;
+							left: -5px;
+							padding: 5px;
+							top: -5px;
+							z-index: 1000;
+						}
+					}
+					
+					.t3-icon-select-panel {
+						display: none;
+						gap: .25rem;
+						left: 0;
+						position: absolute;
+						top: 0;
+						
+						.t3-icon:hover {
+							background-color: var(--t3m-primary);
+							color: var(--t3m-white);
+							transition-duration: var(--t3m-transition-duration);
+							transition-property: background-color, color;
+							transition-timing-function: var(--t3m-transition-timing-function);
+						}
+					}
+				}
+			}
+		}
+	}
+}
