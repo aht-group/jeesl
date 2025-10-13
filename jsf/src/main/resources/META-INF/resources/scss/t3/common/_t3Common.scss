@@ -1,0 +1,142 @@
+@use '_t3Button' as button;
+@use '_t3Datepicker' as datepicker;
+@use '_t3Icon' as icon;
+@use '_t3Input' as input;
+@use '_t3Output' as output;
+@use '_t3Select' as select;
+
+@mixin reset-overlay() {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	padding: 0;
+}
+
+@mixin reset-widgets() {
+	.ui-widget {
+		font-family: var(--t3m-font-family-sans);
+		font-size: 1rem;
+	}
+	
+	.ui-widget-content {
+		background: none;
+		color: var(--t3m-body);
+	}
+	
+	.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+		box-shadow: none;
+		background: none;
+		border: none;
+		padding: 0;
+		text-shadow: none;
+	}
+	
+	.ui-button.ui-button-icon-only, .ui-selectonemenu-trigger {
+		.ui-icon {
+			margin: 0;
+			opacity: 0;
+			position: relative;
+			left: 0; top: 0; height: 100%; width: 100%;
+		}
+		.ui-button-text { display: none; }
+	}
+
+	.ui-fluid {
+		.ui-trigger-calendar .ui-datepicker-trigger.ui-button { width: var(--t3m-input-height); }
+		.ui-selectonemenu .ui-selectonemenu-trigger { width: var(--t3m-input-height); }
+	}
+	
+	.ui-state-hover,
+	.ui-widget-content .ui-state-hover,
+	.ui-widget-header .ui-state-hover,
+	.ui-state-focus,
+	.ui-widget-content .ui-state-focus,
+	.ui-widget-header .ui-state-focus {
+		border: none;
+		box-shadow: none;
+	}
+	
+	.ui-state-highlight,
+	.ui-widget-content .ui-state-highlight,
+	.ui-widget-header .ui-state-highlight { text-shadow: none; }
+	
+	.ui-datepicker:not(.ui-datepicker-inline) {
+		@include reset-overlay();
+		
+		.ui-datepicker-header {
+			background: var(--t3m-white);
+			margin: 0;
+		}
+		
+		.ui-datepicker-calendar {
+			background: var(--t3m-white);
+			margin: 0;
+			
+			tbody {
+				a, span {
+					&.ui-state-default {
+						background: none !important;
+						box-shadow: none;
+						color: inherit;
+						font-weight: inherit;
+						text-shadow: none;
+					}
+				}
+			}
+		}
+	}
+	
+	.ui-selectonemenu-panel { @include reset-overlay(); }
+	
+	.ui-selectonemenu.ui-state-default {
+		background: none;
+		
+		.ui-selectonemenu-list {
+			padding: 0;
+			
+			.ui-selectonemenu-item {
+				border-radius: 0;
+				margin: 0;
+			}
+		}
+	}
+	
+	.ui-datatable table { table-layout: auto; }
+}
+
+:root {
+	--t3m-input-height: 2.25rem;
+	--t3m-input-border-width: 2px;
+}
+
+@mixin common-elements() {
+	@include reset-widgets();
+	
+	.ui-outputtext {
+		@include output.non-input();
+	}
+	
+	.ui-inputfield.ui-state-default, .ui-inputfield.ui-selectonemenu-label {
+		@include input.input();
+	}
+	
+	.ui-calendar {
+		@include datepicker.input();
+	}
+	
+	.ui-datepicker:not(.ui-datepicker-inline) {
+		@include datepicker.overlay();
+	}
+	
+	.ui-selectonemenu {
+		@include select.input();
+	}
+	
+	.ui-selectonemenu-panel {
+		@include select.overlay();
+	}
+	
+	.t3-icon {
+		@include icon.icon();
+	}
+}

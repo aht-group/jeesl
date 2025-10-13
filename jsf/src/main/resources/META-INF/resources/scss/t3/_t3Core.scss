@@ -1,0 +1,11 @@
+@mixin overlay() {
+	position: absolute;
+	
+	bottom: 0; left: 0; right: 0; top: 0;
+}
+
+@mixin transition($property) {
+	transition-duration: var(--t3m-transition-duration);
+	transition-property: $property;
+	transition-timing-function: var(--t3m-transition-timing-function);
+}

@@ -1,0 +1,43 @@
+@use '../_t3Core' as t3;
+@use '_t3Icon' as icon;
+
+@mixin icon-button() {
+	@include icon.icon();
+	
+	border-radius: 50%;
+	height: var(--t3m-input-height);
+	width: var(--t3m-input-height);
+	
+	// Remove primefaces styling.
+	&.ui-state-default {
+		background: none;
+		border: none;
+		padding: 0;
+	}
+	
+	&.ui-state-hover::before, &:hover::before {
+		background-color: var(--t3m-primary);
+		color: white;
+	}
+	
+	&::before {
+		$transition-property: background-color, color;
+		
+		@include t3.overlay();
+		@include t3.transition($transition-property);
+		
+		align-items: center;
+		background-color: white;
+		border: var(--t3m-input-border-width) solid var(--t3m-primary);
+		border-radius: inherit;
+		color: var(--t3m-primary);
+		content: var(--t3m-button-icon);
+		display: flex;
+		justify-content: center;
+	}
+
+	&.ui-state-disabled::before {
+		border-color: var(--t3m-gray-light);
+		color: var(--t3m-gray-light);
+	}
+ }
