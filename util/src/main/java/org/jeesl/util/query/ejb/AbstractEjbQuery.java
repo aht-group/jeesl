@@ -54,6 +54,10 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public Boolean getDistinct() {return Boolean.valueOf(distinct);}
 	public abstract AbstractEjbQuery distinct(boolean distinct);
 	@Override public void setDistinct(boolean distinct) {this.distinct = distinct;}
+	
+	private Boolean onlyUnreferenced;
+	@Override public Boolean getOnlyUnreferenced() {return onlyUnreferenced;}
+	@Override public void setOnlyUnreferenced(Boolean onlyUnreferenced) {this.onlyUnreferenced=onlyUnreferenced;}
 
 	private Integer firstResult;
 	@Override public Integer getFirstResult() {return firstResult;}

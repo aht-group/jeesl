@@ -9,15 +9,14 @@
   		<composite:attribute name="bean" required="false" default="#{adminSecurityViewsBean}"/>
   		<composite:attribute name="localeCodes" required="false" default="#{appTranslationBean.langKeys}"/>
   		<composite:attribute name="withXls" required="false" default="false"/>
-  		<composite:attribute name="withAddCategory" required="false" default="false"/>
   	</composite:interface>
   	
   	<composite:implementation>
 <jp:grid id="grid">
 	  	<j:row>
 	  		<j:slot id="sCategories" width="4">
-	  			<h:form id="fCategories"><jpSec:tableCategories bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategory :#{cc.id}:sViews :#{cc.id}:sView" withXls="#{cc.attrs.withXls}" withAdd="#{cc.attrs.withAddCategory}"/></h:form>
-	  			<h:form id="fCategory"><jpSec:panelCategory bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategories :#{cc.id}:fCategory" withAdd="#{cc.attrs.withAddCategory}"/></h:form>
+	  			<h:form id="fCategories"><jpSec:tableCategories bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategory :#{cc.id}:sViews :#{cc.id}:sView" withXls="#{cc.attrs.withXls}" withAdd="#{cc.attrs.bean.userIsDeveloper}"/></h:form>
+	  			<h:form id="fCategory"><jpSec:panelCategory bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategories :#{cc.id}:fCategory" withAdd="#{cc.attrs.bean.userIsDeveloper}"/></h:form>
 	  		</j:slot>
 	  		<j:slot id="sViews" width="4">
 	  			<h:form id="fViews">

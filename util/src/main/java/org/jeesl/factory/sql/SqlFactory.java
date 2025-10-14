@@ -142,7 +142,8 @@ public class SqlFactory
 				case min: this.select("min("+value+")"); break;
 				case avg: this.select("avg("+value+")"); break;
 				case max: this.select("max("+value+")"); break;
-				default: logger.warn("NYI");
+				case sum: this.select("sum("+value+")"); break;
+				default: logger.warn("NYI JeeslCq.Agg: "+aggregation);
 			}
 		}
 		return this;

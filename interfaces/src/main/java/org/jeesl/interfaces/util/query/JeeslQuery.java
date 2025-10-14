@@ -22,6 +22,9 @@ public interface JeeslQuery extends JeeslCoreQuery
 	boolean isTupleLoad();
 	void setTupleLoad(boolean tupleLoad);
 	
+	Boolean getOnlyUnreferenced();
+	void setOnlyUnreferenced(Boolean onlyUnreferenced);
+	
 	boolean isDistinct();
 	void setDistinct(boolean distinct);
 	

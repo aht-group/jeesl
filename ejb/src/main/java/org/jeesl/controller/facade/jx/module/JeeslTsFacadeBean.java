@@ -843,7 +843,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
 		{
 			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record))) {sql.where(cData,JeeslTsData.Attributes.record,cq.getType(),cq.getDate());}
-			else {logger.warn("NYI");}
+			else {logger.warn(cq.nyi(fbTs.getClassData()));}
 		}
 		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(truncation);
 		sql.limit(query.getMaxResults());
