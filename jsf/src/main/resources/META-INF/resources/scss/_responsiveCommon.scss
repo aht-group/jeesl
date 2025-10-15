@@ -577,7 +577,7 @@ $border: $border-width solid var(--container-border-colour);
 	
 	.#{$class}-panel {
 		opacity: 1;
-		width: auto !important;
+		width: auto;
 		
 		@media (max-width: 768px) {
 			width: 100% !important;

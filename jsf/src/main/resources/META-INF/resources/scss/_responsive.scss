@@ -48,7 +48,7 @@ $enable-pointer-cursor-for-buttons: true;
     vertical-align: top;
 }
 
-@mixin jeesl-sb-dropdown($foreground, $background, $hover, $separator, $zindex: 1) {
+@mixin jeesl-nav-dropdown($foreground, $background, $hover, $separator, $zindex: 1) {
 	.jeesl-dropdown-list, + .jeesl-dropdown-list {
 		background: $background;
 		list-style: none;
@@ -193,7 +193,15 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				.jeesl-dropdown-item-label-icon {
 					height: 100%;
-					margin-left: 5px;
+					margin: 0 5px;
+					
+					&:first-child {
+						margin-left: 0;
+					}
+					
+					&:last-child {
+						margin-right: 0;
+					}
 
 					@media (max-width: 768px) {
 						margin: 0;
@@ -809,13 +817,13 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				&.ui-icon-plusthick {
 					&:before {
-						background-image: url(/jeesl/javax.faces.resource/ui/control/crud/add.svg.xhtml?ln=jeeslGfx&buildVersion=1714132495);
+						background-image: url(/erp/javax.faces.resource/ui/control/crud/add.svg.xhtml?ln=jeeslGfx&buildVersion=1751521853);
 					}
 				}
 				
 				&.ui-icon-cancel {
 					&:before {
-						background-image: url(/jeesl/javax.faces.resource/ui/control/crud/cancel.svg.xhtml?ln=jeeslGfx&buildVersion=1714471959);
+						background-image: url(/erp/javax.faces.resource/ui/control/crud/cancel.svg.xhtml?ln=jeeslGfx&buildVersion=1751521851);
 					}
 				}
 				
@@ -1512,6 +1520,10 @@ $enable-pointer-cursor-for-buttons: true;
 		.jeesl-construction-icon {
 			width: 100%;
 		}
+	}
+	
+	&.jeesl-full-content .ui-panel-content {
+		padding: 0;
 	}
 	
 	&.jeesl-editor {
@@ -2250,7 +2262,7 @@ body, .ui-widget {
 		}
 	}
 	
-	@include jeesl-sb-dropdown(var(--body-foreground), transparent, transparent, var(--main-nav-highlight), 20);
+	@include jeesl-nav-dropdown(var(--body-foreground), transparent, transparent, var(--main-nav-highlight), 20);
 	
 	.jeesl-dropdown-list {
 		display: inline-block;
@@ -2529,7 +2541,7 @@ body, .ui-widget {
 				}
 			}
 			
-			@include jeesl-sb-dropdown(var(--breadcrumb-dropdown-foreground), var(--breadcrumb-dropdown-background), var(--breadcrumb-dropdown-background), var(--breadcrumb-dropdown-separator), 10);
+			@include jeesl-nav-dropdown(var(--breadcrumb-dropdown-foreground), var(--breadcrumb-dropdown-background), var(--breadcrumb-dropdown-background), var(--breadcrumb-dropdown-separator), 10);
 			
 			.jeesl-dropdown-list {
 				.jeesl-dropdown-item {
@@ -2586,7 +2598,7 @@ body, .ui-widget {
 	
 	.jeesl-menu-bar-list {
 		.jeesl-menu-bar-item {
-			@include jeesl-sb-dropdown(var(--footer-item-dropdown-foreground), var(--footer-item-dropdown-background), var(--footer-item-dropdown-hover-background), var(--footer-item-dropdown-separator));
+			@include jeesl-nav-dropdown(var(--footer-item-dropdown-foreground), var(--footer-item-dropdown-background), var(--footer-item-dropdown-hover-background), var(--footer-item-dropdown-separator));
 			
 			height: calc(($sb-element-height - 2 * $sb-vertical-padding) * var(--icon-height-multiplier) + 2 * $sb-vertical-padding);
 			
@@ -2738,6 +2750,10 @@ body, .ui-widget {
 				left: 0;
 				right: auto;
 				text-align: left;
+				
+				&.jeesl-dropdown-list-multi .jeesl-dropdown-item {
+					flex-direction: row-reverse;
+				}
 				
 				.jeesl-dropdown-item .jeesl-dropdown-item-label {
 					flex-direction: row-reverse;
@@ -2925,7 +2941,7 @@ body, .ui-widget {
 				}
 			}
 			
-			@include jeesl-sb-dropdown(var(--statusbar-item-dropdown-foreground), var(--statusbar-item-dropdown-background), var(--statusbar-item-dropdown-hover-background), var(--statusbar-item-dropdown-separator));
+			@include jeesl-nav-dropdown(var(--statusbar-item-dropdown-foreground), var(--statusbar-item-dropdown-background), var(--statusbar-item-dropdown-hover-background), var(--statusbar-item-dropdown-separator));
 			
 			.jeesl-dropdown-list {
 	    		top: 100%;
@@ -2938,6 +2954,10 @@ body, .ui-widget {
 					
 					.jeesl-dropdown-item {
 						&:first-child {
+							display: flex;
+							align-items: center;
+							justify-content: flex-end;
+							
 							&:hover {
 								background: transparent;
 							}
@@ -2963,12 +2983,12 @@ body, .ui-widget {
 							.jeesl-dropdown-multi-summary {
 							    font-style: italic;
 							    opacity: .5;
-								padding-left: $half-spacing
+								margin: 0 2px;
 							}
 							
 							.jeesl-dropdown-item-label {
 								display: inline-block;
-								padding: 6px 7px 6px 5px;
+								padding: 6px 7px;
 								transition: background $transition-duration linear;
 								width: auto;
 								
@@ -2988,14 +3008,13 @@ body, .ui-widget {
 						
 						.jeesl-dropdown-item-label {
 							display: flex;
+							gap: $half-spacing;
 							
 							@media (max-width: 768px) {
 								padding-right: 0;
 							}
 							
 							.jeesl-dropdown-item-label-icon, .jeesl-dropdown-item-label-text {
-								margin: 0 $half-spacing;
-							
 								@media (max-width: 768px) {
 									padding: 12px 0;
 								}
@@ -3022,6 +3041,8 @@ body, .ui-widget {
 						}
 						
 						.jeesl-dropdown-item-label-icon {
+							margin: 0;
+							
 							@media (max-width: 768px) {
 								padding: 12px 0;
 							}
@@ -3594,6 +3615,27 @@ body, .ui-widget {
 					background: transparent;
 				}
 			}
+			
+			&:not(.ui-state-highlight) .timesheet-month-day {
+				background: #dedede;
+			}
+			
+			.timesheet-month-content {
+				display: flex;
+				justify-content: space-between;
+				
+				.timesheet-month-day {
+					    font-size: .8rem;
+					    width: 14px;
+					    height: 14px;
+					    display: flex;
+					    align-items: center;
+					    justify-content: center;
+					    line-height: 1em;
+					    margin-left: -5px;
+					    padding-top: 1px;
+				}
+			}
 		}
 		
 		tr, .jeesl-cell-select > label {
@@ -3632,7 +3674,7 @@ body, .ui-widget {
 		}
 
 		tr.ui-state-highlight, td.highlight, .jeesl-cell-select > label.selected {
-			background: var(--datatable-content-highlight-background) !important;
+			background: var(--datatable-content-highlight-background);
 			// TODO: Check!
 			border-color: var(--datatable-content-highlight-border-colour);
 			color: var(--datatable-content-highlight-foreground);
@@ -5122,7 +5164,7 @@ body, .ui-widget {
 }
 
 .pf-action-dropdown {
-	@include jeesl-sb-dropdown(var(--container-header-foreground), var(--container-header-action-button-dropdown-background), var(--container-header-action-button-dropdown-hover-background), var(--container-header-action-button-dropdown-separator-colour));
+	@include jeesl-nav-dropdown(var(--container-header-foreground), var(--container-header-action-button-dropdown-background), var(--container-header-action-button-dropdown-hover-background), var(--container-header-action-button-dropdown-separator-colour));
 	
 	.jeesl-dropdown-list, + .jeesl-dropdown-list {
 		border-radius: $border-radius;
