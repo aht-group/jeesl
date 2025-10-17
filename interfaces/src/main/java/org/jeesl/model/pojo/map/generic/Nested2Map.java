@@ -1,6 +1,7 @@
 package org.jeesl.model.pojo.map.generic;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Nested2Map <L1 extends EjbWithId, L2 extends EjbWithId, VALUE extends EjbWithId>
+public class Nested2Map <L1 extends EjbWithId, L2 extends EjbWithId, VALUE extends EjbWithId> //implements Map<L1,Map<L2,VALUE>>
 {
     final static Logger logger = LoggerFactory.getLogger(Nested2Map.class);
 
@@ -22,14 +23,14 @@ public class Nested2Map <L1 extends EjbWithId, L2 extends EjbWithId, VALUE exten
 		m = new HashMap<L1,Map<L2,VALUE>>();
     }
     
-    public Nested2Map<L1,L2,VALUE> clear()
+    public void clear()
     {
     	for(Map<L2,VALUE> child : m.values())
     	{
     		child.clear();
     	}
     	m.clear();
-    	return this;
+//    	return this;
     }
     
     public void put(L1 l1, L2 l2, VALUE value)
@@ -54,7 +55,7 @@ public class Nested2Map <L1 extends EjbWithId, L2 extends EjbWithId, VALUE exten
     	}
     }
     
-    public List<VALUE> values()
+    public Collection<VALUE> values()
     {
     	List<VALUE> list = new ArrayList<VALUE>();
     	for(Map<L2,VALUE> map : m.values())
