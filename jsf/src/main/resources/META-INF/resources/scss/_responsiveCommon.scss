@@ -577,7 +577,7 @@ $border: $border-width solid var(--container-border-colour);
 	
 	.#{$class}-panel {
 		opacity: 1;
-		width: auto !important;
+		width: auto;
 		
 		@media (max-width: 768px) {
 			width: 100% !important;
@@ -1569,6 +1569,27 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 
 .ui-dialog-mask {
 	z-index: 1002 !important;
+}
+
+.ui-growl {
+	left: 20px;
+	
+	.ui-growl-item-container {
+		backdrop-filter: blur(1px);
+		background: rgba($panel-background, .85);
+		border-color: var(--container-border-colour);
+		box-shadow: $overlay-shadow;
+		color: var(--container-content-foreground);
+		opacity: 1;
+		text-shadow: none;
+		
+		.ui-growl-icon-close {
+			color: var(--container-content-foreground);
+			position: absolute;
+			right: $wide-spacing;
+			top: $regular-spacing;
+		}
+	}
 }
 
 /* Primefaces 12 fixes */
