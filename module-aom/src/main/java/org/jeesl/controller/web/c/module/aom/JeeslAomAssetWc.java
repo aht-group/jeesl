@@ -35,7 +35,7 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslAomAssetWc extends JeeslAomAssetGwc<IoLang,IoDescription,IoLocale,TenantRealm,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventType,AomEventStatus,IoMarkup,IoMarkupType,SecurityUser,IoFileStorage,IoFileContainer,IoFileMeta,AomEventUpload>
+public class JeeslAomAssetWc extends JeeslAomAssetGwc<IoLang,IoDescription,IoLocale,TenantRealm,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventType,AomEventStatus,IoMarkup,IoMarkupType,SecurityUser,IoFileStorage,IoFileStorageType,IoFileContainer,IoFileMeta,AomEventUpload>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;

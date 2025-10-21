@@ -189,7 +189,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
         return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
-	@Override public List<CONTAINER> fIoFrContainer(JeeslIoFrQuery<STORAGE,CONTAINER> query)
+	@Override public List<CONTAINER> fIoFrContainer(JeeslIoFrQuery<STORAGE,STYPE,CONTAINER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<CONTAINER> cQ = cB.createQuery(fbFile.getClassContainer());
@@ -224,7 +224,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		return tQ.getResultList();
 	}
 
-	@Override public Long cIoFrMetas(JeeslIoFrQuery<STORAGE,CONTAINER> query)
+	@Override public Long cIoFrMetas(JeeslIoFrQuery<STORAGE,STYPE,CONTAINER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cQ = cB.createQuery(Long.class);
@@ -236,7 +236,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		TypedQuery<Long> tQ = em.createQuery(cQ);
 		return tQ.getSingleResult();
 	}
-	@Override public List<META> fIoFrMetas(JeeslIoFrQuery<STORAGE,CONTAINER> query)
+	@Override public List<META> fIoFrMetas(JeeslIoFrQuery<STORAGE,STYPE,CONTAINER> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<META> cQ = cB.createQuery(fbFile.getClassMeta());
@@ -250,7 +250,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		return tQ.getResultList();
 	}
 
-	public Predicate[] pContainer(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<CONTAINER> root)
+	public Predicate[] pContainer(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,STYPE,CONTAINER> query, Root<CONTAINER> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 
@@ -279,7 +279,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 
-	public Predicate[] pMeta(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,CONTAINER> query, Root<META> root)
+	public Predicate[] pMeta(CriteriaBuilder cB, JeeslIoFrQuery<STORAGE,STYPE,CONTAINER> query, Root<META> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 

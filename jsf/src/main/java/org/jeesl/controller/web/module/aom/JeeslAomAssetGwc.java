@@ -37,6 +37,7 @@ import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
+import org.jeesl.interfaces.model.io.fr.JeeslFileStorageType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
@@ -89,7 +90,8 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 									M extends JeeslIoMarkup<MT>,
 									MT extends JeeslIoMarkupType<L,D,MT,?>,
 									USER extends JeeslSecurityUser,
-									FRS extends JeeslFileStorage<L,D,?,?,?>,
+									FRS extends JeeslFileStorage<L,D,?,FRST,?>,
+									FRST extends JeeslFileStorageType<L,D,FRST,?>,
 									FRC extends JeeslFileContainer<FRS,FRM>,
 									FRM extends JeeslFileMeta<D,FRC,?,?>,
 									UP extends JeeslAomEventUpload<L,D,UP,?>>
@@ -102,7 +104,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	private enum Loop{treeAllForParent}
 
 	protected JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom;
-	private JeeslIoFrFacade <L,D,?,FRS,?,?,FRC,FRM,?,?,?,?> fFr;
+	private JeeslIoFrFacade <L,D,?,FRS,FRST,?,FRC,FRM,?,?,?,?> fFr;
 	private JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache; public JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> getCache() {return cache;}
 
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
@@ -166,7 +168,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 						JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache,
 						JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom,
-						JeeslIoFrFacade <L,D,?,FRS,?,?,FRC,FRM,?,?,?,?> fFr,
+						JeeslIoFrFacade <L,D,?,FRS,FRST,?,FRC,FRM,?,?,?,?> fFr,
 						REALM realm)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
@@ -354,7 +356,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		logger.info(fbFr.getClassContainer().getSimpleName()+" "+list.size());
 		if(ObjectUtils.isNotEmpty(list))
 		{
-			EjbIoFrQuery<FRS,FRC> query = new EjbIoFrQuery<>();
+			EjbIoFrQuery<FRS,FRST,FRC> query = new EjbIoFrQuery<>();
 			query.addIoFrContainer(list);
 			query.addCqLiteral(CqLiteral.exact(JeeslAomEventUpload.Code.preview,CqLiteral.path(JeeslFileMeta.Attributes.category)));
 			List<FRM> metas = fFr.fIoFrMetas(query);
