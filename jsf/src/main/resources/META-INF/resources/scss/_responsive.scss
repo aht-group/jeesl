@@ -931,7 +931,7 @@ $enable-pointer-cursor-for-buttons: true;
 			display: flex;
 			flex-grow: 1;
 			
-			.ui-dialog-title {
+			.ui-dialog-title, .ui-dialog-titlebar-text {
 				@include jeesl-titlebar-title;
 			}
 			
@@ -2221,7 +2221,7 @@ body, .ui-widget {
     padding: 3px 0 0;
 	position: relative;
 	width: 100%;
-	z-index: 1001;
+	z-index: 1000;
 	
 	@media (max-width: 768px) {
 		border-color: transparent;
@@ -3449,13 +3449,9 @@ body, .ui-widget {
 			    position: inherit;
 				visibility: visible;
 				
-				.jeesl-menu-bar-item {
-					display: inline-block;
-					
-					&:not(:first-child) {
-						border-left: $border-width solid $darker-colour;
+				.jeesl-menu-bar-item:not(:first-child) {
+						border-color: $darker-colour;
 					}
-				}
 			}
 		}
 	}
