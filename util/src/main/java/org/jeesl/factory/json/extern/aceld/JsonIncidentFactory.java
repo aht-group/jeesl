@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import org.jeesl.model.json.ssi.acled.JsonAcledContainer;
+import org.jeesl.model.json.ssi.acled.JsonAcledCountry;
 import org.jeesl.model.json.ssi.acled.JsonAcledData;
 import org.jeesl.model.json.ssi.acled.JsonAcledIncident;
 import org.jeesl.model.json.ssi.acled.JsonAcledResponse;
@@ -16,19 +17,19 @@ public class JsonIncidentFactory
 
 	public static JsonAcledIncident build() {return new JsonAcledIncident();}
 
-	public static JsonAcledContainer build(JsonAcledResponse response)
+	public static JsonAcledContainer build(JsonAcledResponse response, JsonAcledCountry jsonAcledCountry)
     {
 		JsonAcledContainer container = JsonAcledContainerFactory.build();
 		container.setIncidents(new ArrayList<>());
 
 		for(JsonAcledData data : response.getData())
 		{
-			container.getIncidents().add(JsonIncidentFactory.build(data));
+			container.getIncidents().add(JsonIncidentFactory.build(data, jsonAcledCountry));
 		}
     	return container;
     }
 
-    public static JsonAcledIncident build(JsonAcledData data)
+    public static JsonAcledIncident build(JsonAcledData data, JsonAcledCountry jsonAcledCountry)
     {
     	JsonAcledIncident json = build();
     	json.setId(Long.valueOf(Objects.hash(data.getEventId(),data.getCount(), data.getDate())));
@@ -45,8 +46,8 @@ public class JsonIncidentFactory
 
     	json.setSources(JsonSourceFactory.build(data));
 
-    	json.setCountry(JsonCountryFactory.build(data));
-    	json.setAdmin1(JsonAdmin1Factory.build(data));
+    	json.setCountry(jsonAcledCountry);
+    	json.setAdmin1(JsonAdmin1Factory.build(data, jsonAcledCountry));
     	json.setAdmin2(data.getAdmin2());
     	json.setAdmin3(data.getAdmin3());
 

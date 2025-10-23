@@ -21,6 +21,12 @@ public class JsonCountryFactory
     	return json;
     }
 
+    public static JsonAcledCountry build(JsonAcledCountry data)
+    {
+    	JsonAcledCountry json = data;
+    	return json;
+    }
+
     public static String toSsiCode(JsonAcledCountry json)
     {
     	return json.getId().toString();
