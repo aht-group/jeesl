@@ -174,7 +174,7 @@ public class JeeslSsiDataController <SYSTEM extends JeeslIoSsiSystem<?,?>,
 
 	@Override public DATA getRowData(String rowKey)
 	{
-		Long id = new Long(rowKey);
+		Long id = Long.valueOf(rowKey);
 		for (DATA d : datas) {if(d.getId()==id){return d;}}
 		try {return fSsi.find(fbSsiData.getClassData(),id);} catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
 		return null;

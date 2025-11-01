@@ -38,7 +38,7 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	HOST fSsiHost(SYSTEM system, String code) throws JeeslNotFoundException;
 	<E extends Enum<E>> CRED fSsiCredential(SYSTEM system, E code);
 	List<CRED> fSsiCredentials(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query);
-	CTX fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException;
+	CTX fSsiContext(Class<?> json, Class<?> ejb) throws JeeslNotFoundException;
 	DATA fIoSsiData(CTX mapping, String code) throws JeeslNotFoundException;
 	<A extends EjbWithId> DATA fIoSsiData(CTX mapping, String code, A a) throws JeeslNotFoundException;
 	<A extends EjbWithId, B extends EjbWithId> DATA fIoSsiData(CTX mapping, String code, A a, B b) throws JeeslNotFoundException;

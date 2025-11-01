@@ -63,7 +63,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									DATA extends JeeslIoSsiData<CTX,STATUS,ERROR,JOB>,
 									STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 									ERROR extends JeeslIoSsiError<L,D,CTX,?>,
-									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
+									ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 									JOB extends JeeslJobStatus<L,D,JOB,?>,
 									HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
@@ -162,7 +162,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
-	@Override public CTX fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException
+	@Override public CTX fSsiContext(Class<?> json, Class<?> ejb) throws JeeslNotFoundException
 	{
 		ENTITY eEjb = this.fByCode(fbSsi.getClassEntity(), ejb.getName());
 		ENTITY eJson = this.fByCode(fbSsi.getClassEntity(), json.getName());
