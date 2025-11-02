@@ -130,7 +130,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return null;
 	}
 	
-	@Override public List<CRED> fSsiCredentials(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
+	@Override public List<CRED> fSsiCredentials(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<CRED> cQ = cB.createQuery(fbSsiCore.getClassCredential());
@@ -143,7 +143,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
-	private Predicate[] pCredential(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query, Root<CRED> root)
+	private Predicate[] pCredential(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query, Root<CRED> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -336,7 +336,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 //		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 //	}
 	
-	@Override public JsonTuples1<STATUS> tpIoSsiDataByStatus(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
+	@Override public JsonTuples1<STATUS> tpIoSsiDataByStatus(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
@@ -354,7 +354,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 	
-	@Override public JsonTuples2<STATUS, ERROR> tpIoSsiDataByStatusError(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
+	@Override public JsonTuples2<STATUS, ERROR> tpIoSsiDataByStatusError(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
@@ -574,7 +574,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return tQ.getResultList();
 	}
 
-	@Override public Long cSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
+	@Override public Long cSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cQ = cB.createQuery(Long.class);
@@ -585,7 +585,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 
 		return em.createQuery(cQ).getSingleResult();
 	}
-	@Override public List<DATA> fSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
+	@Override public List<DATA> fSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
@@ -598,7 +598,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
-	private Predicate[] pSsiData(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query, Root<DATA> root)
+	private Predicate[] pSsiData(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query, Root<DATA> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -637,7 +637,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	}
 
 	@Override
-	public List<ATTRIBUTE> fSsiAttributes(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query)
+	public List<ATTRIBUTE> fSsiAttributes(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ATTRIBUTE> cQ = cB.createQuery(fbSsi.getClassAttribute());
@@ -650,7 +650,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		super.pagination(tQ,query);
 		return tQ.getResultList();
 	}
-	private Predicate[] pSsiAttribute(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR> query, Root<ATTRIBUTE> root)
+	private Predicate[] pSsiAttribute(CriteriaBuilder cB, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query, Root<ATTRIBUTE> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
