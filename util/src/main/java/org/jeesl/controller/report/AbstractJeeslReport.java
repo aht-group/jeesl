@@ -15,6 +15,7 @@ import org.exlp.util.io.JsonUtil;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.handler.io.log.DebugJeeslLogger;
+import org.jeesl.controller.handler.progress.NoopProgressHandler;
 import org.jeesl.controller.processor.JobCodeProcessor;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -130,7 +131,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 	protected JeeslComparatorProvider<EjbWithId> cProvider;
 	
 	protected final JobCodeProcessor jobCodeProcessor;
-    protected JeeslProgressHandler progressHandler;
+	protected JeeslProgressHandler progressHandler;
 	
 	protected PivotSettings pivotSettings; public PivotSettings getPivotSettings() {return pivotSettings;}
 
@@ -151,6 +152,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 		debugOnInfo = false;
 		developmentMode = false;
 		
+		progressHandler = new NoopProgressHandler();
 		jogger = DebugJeeslLogger.instance(this.getClass());
 		
 		efLang = EjbLangFactory.instance(fbReport.getClassL());
