@@ -18,6 +18,7 @@ import org.jeesl.interfaces.controller.processor.system.job.SystemMaintenanceRun
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
+import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -93,10 +94,10 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 		List<T> list = new ArrayList<>(); list.add(null);
 		while(!list.isEmpty())
 		{
-			logger.info("Find entities");
+			logger.debug("Find entities");
 			list.clear(); list.addAll(f.find());
 			queue.addAll(list);
-			logger.info("Added "+list.size()+" elements to the queue, loop: "+i.incrementAndGet()+" in "+task.getCode()+" - "+tfMaintenance.debug(task));
+			logger.info("Added "+list.size()+" elements to the queue, loop: "+i.incrementAndGet()+" in "+tfMaintenance.codeLabel(task));
 			while(queue.peek()!=null) {try {Thread.sleep(100);} catch (InterruptedException e) {e.printStackTrace();}}
 		}
 		for(SystemMaintenanceRunnable<MNT> w : threads) {w.shutdown();}

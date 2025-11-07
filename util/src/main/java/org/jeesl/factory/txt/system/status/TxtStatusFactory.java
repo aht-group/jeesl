@@ -37,6 +37,13 @@ public class TxtStatusFactory <L extends JeeslLang, S extends JeeslStatus<L,?,S>
 		sb.append(" ").append(status.getName().get(localeCode).getLang());
 		return sb.toString();
 	}
+	public String codeLabel(S status)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("(").append(status.getCode()).append(")");
+		sb.append(" ").append(status.getName().get(localeCode).getLang());
+		return sb.toString();
+	}
 	public String build(S status)
 	{
 		StringBuilder sb = new StringBuilder();

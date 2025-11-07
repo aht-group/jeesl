@@ -88,6 +88,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			context = fSsi.fSsiContext(this.getClassJson(),this.getClassLocal());
+			logger.info("Using context "+context.toString());
 		}
 		catch (JeeslNotFoundException e) {throw new RuntimeException(e);}
 	}
@@ -229,6 +230,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	protected <E extends Enum<E>> void applyError(StringBuilder sb, E code, DATA data, Object... substitutions)
 	{
 		ERROR error = cacheError.ejb(code);
+		if(Objects.isNull(error)) {logger.warn("No Error defined for "+code);}
 		if(Objects.isNull(data.getError())) {data.setError(error);}
 		sb.append(" ").append(String.format(error.getDescription().get(localeCode).getLang(),substitutions));
 	}

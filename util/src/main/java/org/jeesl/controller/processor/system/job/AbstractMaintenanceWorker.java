@@ -9,6 +9,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.interfaces.controller.processor.system.job.SystemMaintenanceRunnable;
 import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
+import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
