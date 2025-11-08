@@ -64,11 +64,14 @@ public abstract class AbstractMailSender
 		plainPwd = true;
 	}
 	
-	public void debugSettings()
+	public void debugSettings(boolean debug)
 	{
-		logger.info("Host: "+smtpHost);
-		logger.info("User: "+smtpUser);
-		logger.info("Pwd: "+smtpPassword);
+		if(debug)
+		{
+			logger.info("Host: {}:{}",smtpHost,smtpPort);
+			logger.info("User: {}",smtpUser);
+			logger.info("Pwd: {}",smtpPassword);
+		}
 	}
 	
 	protected synchronized void buildSession()

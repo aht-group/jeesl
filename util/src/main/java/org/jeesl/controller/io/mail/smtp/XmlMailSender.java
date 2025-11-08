@@ -19,7 +19,7 @@ public class XmlMailSender extends AbstractMailSender
 	final static Logger logger = LoggerFactory.getLogger(XmlMailSender.class);
 	
 	public XmlMailSender(String smtpHost) {this(smtpHost,25);}
-	private XmlMailSender(String smtpHost, int smtpPort)
+	public XmlMailSender(String smtpHost, int smtpPort)
 	{
 		super(smtpHost,smtpPort);
 	}

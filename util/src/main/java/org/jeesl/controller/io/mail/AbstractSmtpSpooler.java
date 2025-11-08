@@ -41,7 +41,7 @@ public class AbstractSmtpSpooler
 		smtp.setSmtpDebug(false);
 //		smtp.tlsPasswordAuthentication(config.getString(ConfigKey.netSmtpUser),config.getString(ConfigKey.netSmtpPwd));
 //		templateMailer.plainPasswordAuthentication(config.getString(ConfigKey.netSmtpUser),config.getString(ConfigKey.netSmtpPwd));
-		smtp.debugSettings();
+		smtp.debugSettings(true);
 	}
 	
 	protected void createOptions()
