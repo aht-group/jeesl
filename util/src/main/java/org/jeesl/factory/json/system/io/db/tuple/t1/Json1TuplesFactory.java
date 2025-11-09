@@ -167,19 +167,19 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		return json;
 	}
 	
-	public JsonTuples1<A> buildV1(List<Tuple> tuples, JeeslCq.Agg... fields)
-	{
-		JsonTuples1<A> json = new JsonTuples1<A>();
-		
-		for(Tuple t : tuples)
-        {
-			JsonTuple1<A> j = jtf.build(t,fields);
-			setA.add(j.getId1());
-        	json.getTuples().add(j);
-        }
-		ejb1Load(json);
-		return json;
-	}
+//	private JsonTuples1<A> buildV1(List<Tuple> tuples, JeeslCq.Agg... fields)
+//	{
+//		JsonTuples1<A> json = new JsonTuples1<A>();
+//		
+//		for(Tuple t : tuples)
+//        {
+//			JsonTuple1<A> j = jtf.build(t,fields);
+//			setA.add(j.getId1());
+//        	json.getTuples().add(j);
+//        }
+//		ejb1Load(json);
+//		return json;
+//	}
 	
 	public JsonTuples1<A> buildV2(List<Tuple> tuples, JeeslCq.Agg...types)
 	{

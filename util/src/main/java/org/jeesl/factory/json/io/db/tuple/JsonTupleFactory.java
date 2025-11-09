@@ -28,9 +28,7 @@ import org.slf4j.LoggerFactory;
 public class JsonTupleFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonTupleFactory.class);
-	
 
-	
 	public static JsonTuple build() {return new JsonTuple();}
 	
 	public static <X extends EjbWithId> JsonTuple build(JsonTuple1<X> tuple)
