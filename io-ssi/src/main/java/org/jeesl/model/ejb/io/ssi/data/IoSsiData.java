@@ -1,5 +1,6 @@
 package org.jeesl.model.ejb.io.ssi.data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -89,13 +90,13 @@ public class IoSsiData implements JeeslIoSsiData<IoSsiContext,IoSsiStatus,IoSsiE
 	public IoSsiError getError() {return error;}
 	public void setError(IoSsiError error) {this.error = error;}
 
-	private Date jsonCreatedAt;
-	@Override public Date getJsonCreatedAt() {return jsonCreatedAt;}
-	@Override public void setJsonCreatedAt(Date jsonCreatedAt) {this.jsonCreatedAt = jsonCreatedAt;}
+	private LocalDateTime jsonCreatedAt;
+	@Override public LocalDateTime getJsonCreatedAt() {return jsonCreatedAt;}
+	@Override public void setJsonCreatedAt(LocalDateTime jsonCreatedAt) {this.jsonCreatedAt = jsonCreatedAt;}
 
-	private Date jsonUpdatedAt;
-	@Override public Date getJsonUpdatedAt() {return jsonUpdatedAt;}
-	@Override public void setJsonUpdatedAt(Date jsonUpdatedAt) {this.jsonUpdatedAt = jsonUpdatedAt;}
+	private LocalDateTime jsonUpdatedAt;
+	@Override public LocalDateTime getJsonUpdatedAt() {return jsonUpdatedAt;}
+	@Override public void setJsonUpdatedAt(LocalDateTime jsonUpdatedAt) {this.jsonUpdatedAt = jsonUpdatedAt;}
 
 	private Date ejbCreatedAt;
 	@Override public Date getEjbCreatedAt() {return ejbCreatedAt;}

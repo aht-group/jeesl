@@ -1,12 +1,12 @@
 package org.jeesl.factory.ejb.io.ssi.data;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.exlp.util.io.JsonUtil;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,7 +31,7 @@ public class EjbIoSsiDataFactory <CONTEXT extends JeeslIoSsiContext<?,?>,
 			ejb.setMapping(context);
 			ejb.setCode(code);
 			ejb.setLink(link);
-			ejb.setJsonCreatedAt(new Date());
+			ejb.setJsonCreatedAt(LocalDateTime.now());
 			this.updateJson(ejb,json);
 	       
 		}

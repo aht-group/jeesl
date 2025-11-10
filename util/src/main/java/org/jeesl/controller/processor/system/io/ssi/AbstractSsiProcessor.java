@@ -71,7 +71,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;
 		
-		this.initMappings();
+		this.loadContext();
 		
 		cacheError = EjbNonUniqueCodeCache.instance();
 		cacheError.addAll(fSsi.allForParent(fbSsi.getClassError(),context));
@@ -83,7 +83,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		efData = fbSsi.ejbData();
 	}
 	
-	@Override public void initMappings()
+	@Override public void loadContext()
 	{
 		try
 		{

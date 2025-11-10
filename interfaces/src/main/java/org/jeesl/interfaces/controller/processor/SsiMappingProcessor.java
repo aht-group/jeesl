@@ -13,7 +13,7 @@ public interface SsiMappingProcessor <CONTEXT extends JeeslIoSsiContext<?,?>,
 	
 	CONTEXT getMapping();
 	
-	void initMappings();
+	void loadContext();
 	
 	Class<?> getClassA();
 	Class<?> getClassB();

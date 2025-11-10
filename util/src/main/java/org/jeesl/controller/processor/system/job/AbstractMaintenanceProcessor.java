@@ -45,6 +45,8 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 	protected final List<SystemMaintenanceRunnable<MNT>> threads;
 	protected final Queue<T> queue;
 	
+	protected boolean developmentMode; protected void setDevelopmentMode(boolean value) {this.developmentMode=value;}
+	
 	public AbstractMaintenanceProcessor(JeeslFacadeLookup jfl,
 											JeeslFacade facade,
 											JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,MS,?,?,MNT,?,?> fbJob) throws NamingException

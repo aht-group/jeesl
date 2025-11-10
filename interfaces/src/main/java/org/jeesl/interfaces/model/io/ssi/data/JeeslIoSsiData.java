@@ -1,5 +1,6 @@
 package org.jeesl.interfaces.model.io.ssi.data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -51,11 +52,11 @@ public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 	Long getRefC();
 	void setRefC(Long refC);
 	
-	Date getJsonCreatedAt();
-	void setJsonCreatedAt(Date jsonCreatedAt);
+	LocalDateTime getJsonCreatedAt();
+	void setJsonCreatedAt(LocalDateTime jsonCreatedAt);
 	
-	Date getJsonUpdatedAt();
-	void setJsonUpdatedAt(Date jsonUpdatedAt);
+	LocalDateTime getJsonUpdatedAt();
+	void setJsonUpdatedAt(LocalDateTime jsonUpdatedAt);
 	
 	Date getEjbCreatedAt();
 	void setEjbCreatedAt(Date ejbCreatedAt);
