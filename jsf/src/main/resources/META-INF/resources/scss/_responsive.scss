@@ -3615,6 +3615,12 @@ body, .ui-widget {
 			&:not(.ui-state-highlight) .timesheet-month-day {
 				background: #dedede;
 			}
+
+			&:not(.jeesl-datatable-highlight-light, .jeesl-datatable-highlight-strong) {
+				th, td {
+					background: transparent !important; // Override handsontable super specific selector nonsense.
+				}
+			}
 			
 			.timesheet-month-content {
 				display: flex;
@@ -3641,14 +3647,13 @@ body, .ui-widget {
 		th, td {
 			@include icon-default-size;
 
-			background: transparent !important; // Override handsontable super specific selector nonsense.
 			border-style: solid;
 			border-color: inherit;
 			border-width: $border-width;
 			box-sizing: border-box; // Override handsontable super specific selector nonsense.
 			line-height: 1.25em;
 			padding: $half-spacing $regular-spacing;
-
+			
 			> * {
 				font-weight: 500;
 				vertical-align: middle;
@@ -4114,6 +4119,17 @@ body, .ui-widget {
 		}
 			
 		tbody, .ui-datatable-data {
+			tr {
+				&.jeesl-datatable-highlight-light > td {
+					background-color: var(--datatable-content-highlight-background-light);
+				}
+
+				&.jeesl-datatable-highlight-strong > td {
+					background-color: var(--datatable-content-highlight-background);
+					color: var(--datatable-content-highlight-foreground);
+				}
+			}
+			
 			td {
 				&.jeesl-column-min-width {
 					width: 0;

@@ -126,6 +126,7 @@ $header-underline: 2px solid var(--container-header-underline-colour, #{$dark-co
 		--body-alert-foreground: #{$foreground-alert};
 		--highlight-foreground: #{$white-100};
 		--highlight-background: #{$medium-colour};
+		--highlight-background-light: #{color.adjust($medium-colour, $alpha: -.8)};
 		--highlight-border-colour: #{$dark-colour};
 		
 		/* MAIN NAV */
@@ -191,7 +192,7 @@ $header-underline: 2px solid var(--container-header-underline-colour, #{$dark-co
 		
 		/* FOOTER */
 		--footer-foreground: var(--body-foreground);
-		--footer-background: color.adjust(#{$medium-grey}, $alpha: -.8);
+		--footer-background: ${color.adjust($medium-grey, $alpha: -.8)};
 		--footer-item-hover-background: var(--statusbar-item-hover-background);
 		--footer-item-hover-highlight-background: var(--statusbar-item-highlight-hover-background);
 		
@@ -233,6 +234,7 @@ $header-underline: 2px solid var(--container-header-underline-colour, #{$dark-co
 		--datatable-content-border-colour: #{$light-grey};
 		--datatable-content-hover-background: #{$light-grey};
 		--datatable-content-highlight-background: var(--highlight-background);
+		--datatable-content-highlight-background-light: var(--highlight-background-light);
 		--datatable-content-highlight-foreground: var(--highlight-foreground);
 		--datatable-content-highlight-border-colour: var(--highlight-border-colour);
 		--datatable-content-focus-cell-edit-border-colour: var(--datatable-content-highlight-background);
