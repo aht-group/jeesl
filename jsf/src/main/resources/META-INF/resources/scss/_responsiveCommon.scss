@@ -863,10 +863,15 @@ $border: $border-width solid var(--container-border-colour);
 	padding: $half-spacing;
 	
 	.ui-datepicker-header {
+		gap: $half-spacing;
 		margin: 0 #{-$half-spacing};
 		
 		@media (max-width: 768px) {
 			margin: 0;
+		}
+		
+		&:before, &:after {
+			display: none;
 		}
 		
 		.ui-icon {
