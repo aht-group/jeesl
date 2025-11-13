@@ -3470,10 +3470,16 @@ body, .ui-widget {
 }
 
 .jeesl-tree {
+	@extend .jeesl-panel;
+	
 	background: var(--container-content-background);
 	
 	.ui-widget-content {
 		background: transparent;
+		
+		.ui-tree-container {
+			padding: 0;
+		}
 		
 		.ui-treenode {
 			@include icon-default-size;
