@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.collections4.ListUtils;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -105,7 +106,7 @@ public class JeeslFacadeBean implements JeeslFacade
 	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected(o);}
 	@Override public <T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException {return saveProtected(o);}
 
-	@Override public <T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : list){saveProtected(t);}}
+	@Override public <T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : ListUtils.emptyIfNull(list)) {saveProtected(t);}}
 	@Override public <T extends EjbSaveable> void saveTransaction(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : list){saveProtected(t);}}
 
 	@Override public <E extends EjbEquals<T>, T extends EjbWithId> boolean equalsAttributes(Class<T> c, E object)

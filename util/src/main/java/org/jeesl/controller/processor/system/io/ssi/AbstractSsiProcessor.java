@@ -227,6 +227,10 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		logger.warn("This method needs to be implemented in child class");
 	}
 	
+	protected boolean withoutError(DATA data)
+	{
+		return Objects.isNull(data.getError());
+	}
 	protected <E extends Enum<E>> void applyError(StringBuilder sb, E code, DATA data, Object... substitutions)
 	{
 		ERROR error = cacheError.ejb(code);
