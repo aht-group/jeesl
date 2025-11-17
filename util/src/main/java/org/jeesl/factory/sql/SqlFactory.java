@@ -40,6 +40,7 @@ public class SqlFactory
 	
 	private String from;
 	private List<String> selects;
+	private List<String> updates;
 	private List<String> joins;
 	private List<String> groups;
 	private List<String> wheres;
@@ -133,6 +134,32 @@ public class SqlFactory
 		return this;
 	}
 	
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where(E attribute, T where)
+	{
+		sb.append(" WHERE (");
+		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
+		sb.append(" )");
+		return this;
+	}
+	
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where2(E attribute, T where)
+	{
+		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}
+		StringBuilder sbb = new StringBuilder();
+		whereAndOrAttribute(sbb,alias,false,attribute,where,newLine);
+		logger.info(sbb.toString());
+		wheres.add(sbb.toString());
+		return this;
+	}
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory whereNot(E attribute, T where)
+	{
+		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}
+		StringBuilder sbb = new StringBuilder();
+		whereAndOrAttribute(sbb,alias,true,attribute,where,newLine);
+		wheres.add(sbb.toString());
+		return this;
+	}
+	
 	public SqlFactory selectAggregations(String value, List<JeeslCq.Agg> aggregations)
 	{
 		for(JeeslCq.Agg aggregation : ListUtils.emptyIfNull(aggregations))
@@ -218,13 +245,25 @@ public class SqlFactory
 		StringBuilder bf = new StringBuilder();
 		SqlFactory.newLine(newLine,bf);
 		
-		bf.append("SELECT ");
-		if(ObjectUtils.isEmpty(selects)) {bf.append("*");}
-		else {bf.append(String.join(", ", selects));}
+		
+		if(ObjectUtils.isNotEmpty(selects))
+		{
+			bf.append("SELECT ");
+			bf.append(String.join(", ", selects));
+		}
+		if(ObjectUtils.isNotEmpty(updates))
+		{
+			
+			bf.append(String.join(", ", updates));
+		}
+		
 		SqlFactory.newLine(newLine,bf);
 		
-		bf.append(" ").append(from);
-		SqlFactory.newLine(newLine,bf);
+		if(ObjectUtils.isNotEmpty(selects))
+		{
+			bf.append(" ").append(from);
+			SqlFactory.newLine(newLine,bf);
+		}
 		
 		if(ObjectUtils.isNotEmpty(joins))
 		{
@@ -257,6 +296,8 @@ public class SqlFactory
 		if(Objects.nonNull(limit)) {bf.append(" LIMIT ").append(limit);}
 		SqlFactory.newLine(newLine,bf);
 		
+		bf.append(";");
+		
 		return bf.toString();
 	}
 	
@@ -286,6 +327,21 @@ public class SqlFactory
 		SqlFactory.updateLdt(sb,c,alias,attribute,value,newLine);
 		return this;
 	}
+	public <C extends EjbWithId, E extends Enum<E>, T extends EjbWithId> SqlFactory update2(Class<C> c,  E attribute, T t)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		
+		
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE ").append(c.getAnnotation(Table.class).name());
+		sb.append(" SET ").append(id(alias,attribute)).append("=");
+		sb.append(t.getId());
+		
+		if(Objects.isNull(updates)) {updates = new ArrayList<>();}
+		updates.add(sb.toString());
+		return this;
+	}
 	
 	public <T extends EjbWithId> SqlFactory whereId(T where)
 	{
@@ -293,21 +349,7 @@ public class SqlFactory
 		sb.append(where.getId());
 		return this;
 	}
-
-	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where(E attribute, T where)
-	{
-		sb.append(" WHERE (");
-		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
-		sb.append(" )");
-		return this;
-	}
-	public <E extends Enum<E>, T extends EjbWithId> SqlFactory whereNot(E attribute, T where)
-	{
-		sb.append(" WHERE (");
-		whereAndOrAttribute(sb,alias,true,attribute,where,newLine);
-		sb.append(" )");
-		return this;
-	}
+	
 	public <E extends Enum<E>, T extends EjbWithId> SqlFactory whereIn(E attribute, T... where)
 	{
 		sb.append(" WHERE ");
@@ -428,26 +470,9 @@ public class SqlFactory
 		newLine(newLine,sb);
 	}
 	
-	public static <T extends EjbWithId> void count(StringBuilder sb, Class<T> c, boolean newLine)
-	{
-		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-		sb.append("SELECT COUNT(id) FROM ");
-		sb.append(c.getAnnotation(Table.class).name());
-		newLine(newLine,sb);
-	}
-	
-	public static <T extends EjbWithId> String deleteFrom(Class<T> c)
-	{
-		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-		StringBuilder sb = new StringBuilder();
-		sb.append("DELETE FROM ");
-		sb.append(c.getAnnotation(Table.class).name());
-		return sb.toString();
-	}
-	
 
 	
-	public static <T extends EjbWithId> void deleteFrom(StringBuilder sb, Class<T> c, String alias, boolean newLine)
+	private static <T extends EjbWithId> void deleteFrom(StringBuilder sb, Class<T> c, String alias, boolean newLine)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
 		sb.append("DELETE FROM ");
