@@ -230,7 +230,7 @@ public class JeeslSecurityRoleGwc  <L extends JeeslLang, D extends JeeslDescript
 		EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 		query.add(role);
 		query.orderBy(CqOrdering.ascending(JeeslUser.Attributes.id));
-		query.setMaxResults(10);
+		query.maxResults(10);
 		users.addAll(fSecurity.fSecurityUsers(query));
 	}
 	

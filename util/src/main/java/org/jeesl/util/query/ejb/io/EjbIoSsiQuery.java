@@ -16,6 +16,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.util.query.cq.CqLong;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
+import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +42,9 @@ public class EjbIoSsiQuery <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		super.reset();
 		ioSsiContexts=null;
 	}
+	
+	//Pagination
+	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> maxResults(Integer max) {super.setMaxResults(max); return this;}
 	
 //	public Boolean getTupleLoad() {return isTupleLoad();}
 	

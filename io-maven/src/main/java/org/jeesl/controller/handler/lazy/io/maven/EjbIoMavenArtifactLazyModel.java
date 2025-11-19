@@ -62,7 +62,7 @@ public class EjbIoMavenArtifactLazyModel extends LazyDataModel<IoMavenArtifact>
 	{
 		EjbIoMavenQuery q = query(filterBy);
 		q.setFirstResult(first);
-		q.setMaxResults(pageSize);
+		q.maxResults(pageSize);
 		
 		if(ObjectUtils.isEmpty(sortBy))
 		{

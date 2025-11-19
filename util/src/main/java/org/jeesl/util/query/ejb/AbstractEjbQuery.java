@@ -59,13 +59,14 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public Boolean getOnlyUnreferenced() {return onlyUnreferenced;}
 	@Override public void setOnlyUnreferenced(Boolean onlyUnreferenced) {this.onlyUnreferenced=onlyUnreferenced;}
 
+	//Pagination
 	private Integer firstResult;
 	@Override public Integer getFirstResult() {return firstResult;}
 	@Override public void setFirstResult(Integer firstResult) {this.firstResult = firstResult;}
 
 	private Integer maxResults;
 	@Override public Integer getMaxResults() {return maxResults;}
-	@Override public void setMaxResults(Integer maxResults) {this.maxResults = maxResults;}
+	protected void setMaxResults(Integer maxResults) {this.maxResults = maxResults;}
 	
 	
 	

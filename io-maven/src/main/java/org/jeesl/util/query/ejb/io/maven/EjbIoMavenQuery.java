@@ -39,6 +39,9 @@ public class EjbIoMavenQuery extends AbstractEjbQuery
 		
 	}
 	
+	//Pagination
+	public EjbIoMavenQuery maxResults(Integer max) {super.setMaxResults(max); return this;}
+	
 	//Fetches
 	public <E extends Enum<E>> EjbIoMavenQuery addRootFetch(E e) {if(Objects.isNull(rootFetches)) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}

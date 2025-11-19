@@ -149,7 +149,7 @@ public class JeeslSsiDataController <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		datas.clear(); mapJson.clear();
 		EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
-		query.setMaxResults(pageSize);
+		query.maxResults(pageSize);
 		if(Objects.nonNull(refA)) {query.add(CqLong.isValue(refA,CqLong.path(JeeslIoSsiData.Attributes.refA)));}
 		if(Objects.nonNull(refB)) {query.add(CqLong.isValue(refB,CqLong.path(JeeslIoSsiData.Attributes.refB)));}
 		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}

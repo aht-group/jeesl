@@ -9,10 +9,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslPaginationQuery extends Serializable
 {
-	
 	void setFirstResult(Integer first);
 	Integer getFirstResult();
 	
-	void setMaxResults(Integer maxResults);
+//	void setMaxResults(Integer maxResults);
 	Integer getMaxResults();
 }

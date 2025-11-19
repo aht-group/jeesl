@@ -37,6 +37,9 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 		snapshots=null;
 	}
 	
+	//Pagination
+	public EjbIoDbQuery<SYSTEM,SNAP> maxResults(Integer max) {super.setMaxResults(max); return this;}
+	
 	//Fetches
 	public <E extends Enum<E>> EjbIoDbQuery<SYSTEM,SNAP> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> distinct(boolean distinct) {super.setDistinct(distinct); return this;}

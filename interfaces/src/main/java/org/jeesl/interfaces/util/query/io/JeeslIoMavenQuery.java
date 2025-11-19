@@ -25,6 +25,9 @@ public interface JeeslIoMavenQuery <
 	boolean isDistinct();
 //	void x();
 	
+	//Pagination
+	JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> maxResults(Integer max);
+	
 	//Fetches
 	List<String> getRootFetches();
 	public <E extends Enum<E>> JeeslIoMavenQuery<ARTIFACT,VERSION,MODULE,STRUCTURE,TYPE> addRootFetch(E e);

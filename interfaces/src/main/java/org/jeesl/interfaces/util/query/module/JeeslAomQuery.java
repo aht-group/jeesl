@@ -24,6 +24,9 @@ public interface JeeslAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 					JeeslPaginationQuery,JeeslOrderingQuery
 {
 //	void x();
+	
+	JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> maxResults(Integer maxResults);
+	
 	public List<ASSET> getAssets();
 	public List<ATYPE> getAomAssetTypes();
 	public List<ESTATUS> getAomEventStatus();

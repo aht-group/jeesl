@@ -4,14 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Stream;
-
-import javax.swing.text.DateFormatter;
 
 import org.exlp.controller.handler.io.log.LoggedExit;
 import org.slf4j.Logger;
@@ -23,9 +20,13 @@ public class JeeslLatestFileFactory
 	
 	public static Path pathByDatePattern(Path pDir, DateTimeFormatter dtf)
 	{
+		logger.trace(pDir.toString());
 		try
 		{
-			for(File f : pDir.toFile().listFiles()) {logger.info(f.toString());}
+			for(File f : pDir.toFile().listFiles())
+			{
+				logger.trace(f.toString());
+			}
 			
 			Stream<Path> stream = Files.list(pDir);
 			Path latest = stream

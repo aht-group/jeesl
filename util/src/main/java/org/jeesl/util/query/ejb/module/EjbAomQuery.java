@@ -46,6 +46,9 @@ public class EjbAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 		assets = null;
 	}
 	
+	//Pagination
+	public EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> maxResults(Integer max) {super.setMaxResults(max); return this;}
+	
 	public void apply(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> other)
 	{
 		if(Objects.nonNull(other))

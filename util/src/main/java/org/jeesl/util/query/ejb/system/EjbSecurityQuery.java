@@ -21,6 +21,7 @@ import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
+import org.jeesl.util.query.ejb.module.EjbAomQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +48,9 @@ public class EjbSecurityQuery <C extends JeeslSecurityCategory<?,?>,
 	{
 
 	}
+	
+	//Pagination
+	public EjbSecurityQuery<C,R,V,U,A,CTX,USER> maxResults(Integer max) {super.setMaxResults(max); return this;}
 	
 	//Fetches
 	public <E extends Enum<E>> EjbSecurityQuery<C,R,V,U,A,CTX,USER> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
