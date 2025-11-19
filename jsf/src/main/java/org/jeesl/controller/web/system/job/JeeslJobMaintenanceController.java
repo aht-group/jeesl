@@ -119,7 +119,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 		this.reloadInfos();
 		JsonTuples1<STATUS> tuples = tupler.calculateTuples(maintenance);
 		if(Objects.isNull(tuples)) {logger.warn("Tuples not implemented");}
-		else {mapTh.get(maintenance).init(tuples);}
+		else {mapTh.get(maintenance).load(tuples);}
 		
 		logger.info("Statistics for "+maintenance.getCode());
 		JsonTuple1Handler<STATUS> th = mapTh.get(maintenance);

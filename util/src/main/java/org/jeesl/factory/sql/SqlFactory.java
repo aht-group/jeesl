@@ -134,6 +134,7 @@ public class SqlFactory
 		return this;
 	}
 	
+	@Deprecated
 	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where(E attribute, T where)
 	{
 		sb.append(" WHERE (");
@@ -147,7 +148,6 @@ public class SqlFactory
 		if(Objects.isNull(wheres)) {wheres = new ArrayList<>();}
 		StringBuilder sbb = new StringBuilder();
 		whereAndOrAttribute(sbb,alias,false,attribute,where,newLine);
-		logger.info(sbb.toString());
 		wheres.add(sbb.toString());
 		return this;
 	}
@@ -317,6 +317,7 @@ public class SqlFactory
 		return this;
 	}
 	
+	@Deprecated
 	public <C extends EjbWithId, E extends Enum<E>, T extends EjbWithId> SqlFactory update(Class<C> c, E attribute, T t)
 	{
 		SqlFactory.update(sb,c,alias,attribute,t,newLine);
@@ -330,8 +331,6 @@ public class SqlFactory
 	public <C extends EjbWithId, E extends Enum<E>, T extends EjbWithId> SqlFactory update2(Class<C> c,  E attribute, T t)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-		
-		
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE ").append(c.getAnnotation(Table.class).name());
@@ -374,6 +373,7 @@ public class SqlFactory
 		newLine(newLine,sb);
 	}
 	
+	@Deprecated
 	public String toString() {sb.append(";"); return sb.toString();}
 	
 	public static <E extends Enum<E>, T extends EjbWithId> void update(StringBuilder sb, Class<?> c, String alias, E attribute, T t, boolean newLine)

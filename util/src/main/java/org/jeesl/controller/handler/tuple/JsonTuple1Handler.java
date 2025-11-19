@@ -1,5 +1,6 @@
 package org.jeesl.controller.handler.tuple;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -64,7 +65,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		map1.clear();
 	}
 
-	public JsonTuple1Handler<A> init(JsonTuples1<A> tuples)
+	public JsonTuple1Handler<A> load(JsonTuples1<A> tuples)
 	{
 		this.clear();
 		for(JsonTuple1<A> t : tuples.getTuples())
@@ -79,11 +80,11 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 				{
 					try
 					{
-						t.setEjb1(cA.newInstance());
+						t.setEjb1(cA.getDeclaredConstructor().newInstance());
 						if(t.getId1()!=null){t.getEjb1().setId(t.getId1());}
 						else {t.getEjb1().setId(0);}
 					}
-					catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+					catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
 				}
 			}
 			

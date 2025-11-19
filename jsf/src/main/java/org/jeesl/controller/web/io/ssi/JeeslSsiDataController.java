@@ -123,7 +123,7 @@ public class JeeslSsiDataController <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
 		
-		thStatus.init(fSsi.tpIoSsiDataByStatus(query));
+		thStatus.load(fSsi.tpIoSsiDataByStatus(query));
 		thJob.load(fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB)));
 		thJob.initListB(fSsi);
 		

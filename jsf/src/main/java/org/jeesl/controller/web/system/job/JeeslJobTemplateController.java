@@ -100,8 +100,8 @@ public class JeeslJobTemplateController <L extends JeeslLang, D extends JeeslDes
 		
 		JeeslJobQuery<TEMPLATE,STATUS> query = new EjbJobQuery<TEMPLATE,STATUS>();
 		
-		thJob.init(fJob.tpJobJobByTemplate(query));
-		thCache.init(fJob.tpJobCacheByTemplate(query));
+		thJob.load(fJob.tpJobJobByTemplate(query));
+		thCache.load(fJob.tpJobCacheByTemplate(query));
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)

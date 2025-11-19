@@ -228,8 +228,8 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			
 			systemColumn.addAll(fDb.fIoDbMetaColumns(query));
 			
-			thSnapshot.init(fDb.tpIoDbBySnapshot(query));
-			thSystem.init(fDb.tpIoDbBySystem(query));
+			thSnapshot.load(fDb.tpIoDbBySnapshot(query));
+			thSystem.load(fDb.tpIoDbBySystem(query));
 			
 			query.addRootFetch(JeeslDbMetaConstraint.Attributes.uniques);
 			query.distinct(true);

@@ -120,8 +120,8 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	
 	private void reloadStatistic()
 	{
-		thToday.init(fMail.tpcIoMailByStatus(LocalDate.now(),LocalDate.now(),sbhCategory.getSelected()));
-		thDay30.init(fMail.tpcIoMailByStatus(LocalDate.now().minusDays(30),LocalDate.now(),sbhCategory.getSelected()));
+		thToday.load(fMail.tpcIoMailByStatus(LocalDate.now(),LocalDate.now(),sbhCategory.getSelected()));
+		thDay30.load(fMail.tpcIoMailByStatus(LocalDate.now().minusDays(30),LocalDate.now(),sbhCategory.getSelected()));
 		
 		mapTh.put(Statistic.today.toString(),thToday);
 		mapTh.put(Statistic.day30.toString(),thDay30);

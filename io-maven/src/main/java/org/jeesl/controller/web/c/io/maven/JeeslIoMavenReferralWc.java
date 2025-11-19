@@ -170,7 +170,7 @@ public class JeeslIoMavenReferralWc extends AbstractJeeslLocaleWebController<IoL
 		}
 		
 		thUsage.clear();
-		thUsage.init(fMaven.tpUsageByVersion(EjbIoMavenQuery.instance().addVersions(EjbMavenReferralFactory.toVersions(referrals))));
+		thUsage.load(fMaven.tpUsageByVersion(EjbIoMavenQuery.instance().addVersions(EjbMavenReferralFactory.toVersions(referrals))));
 	}
 	
 	public void selectReferral() throws JeeslNotFoundException

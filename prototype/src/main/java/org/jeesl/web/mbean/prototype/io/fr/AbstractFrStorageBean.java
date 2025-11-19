@@ -88,7 +88,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 		reloadStorages();
 		engines = fFr.allOrderedPositionVisible(fbFr.getClassEngine());
 		thCount.load(fFr.tpcIoFileByStorageType());
-		thSize.init(fFr.tpsIoFileByStorage());
+		thSize.load(fFr.tpsIoFileByStorage());
 	}
 	
 	protected void initSbh()

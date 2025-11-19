@@ -223,6 +223,6 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	public void countErrors()
 	{
 		thError.clear();
-		thError.init(fSsi.tpcIoSsiErrorContext(context, null, null));
+		thError.load(fSsi.tpcIoSsiErrorContext(context, null, null));
 	}
 }

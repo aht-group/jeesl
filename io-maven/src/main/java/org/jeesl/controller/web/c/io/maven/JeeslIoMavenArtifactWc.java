@@ -177,7 +177,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		q.setTupleLoad(true);
 		
 		JsonTuple1Handler<IoMavenVersion> th = new JsonTuple1Handler<>(IoMavenVersion.class);
-		th.init(fMaven.tpUsageByVersion(q));
+		th.load(fMaven.tpUsageByVersion(q));
 		
 		List<IoMavenVersion> list = th.getListA();
 		Collections.sort(list,cpVersion);

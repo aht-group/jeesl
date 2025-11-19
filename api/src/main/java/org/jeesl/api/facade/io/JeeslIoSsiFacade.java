@@ -48,6 +48,7 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	JsonTuples1<STATUS> tpIoSsiDataByStatus(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query);
 	JsonTuples2<STATUS,ERROR> tpIoSsiDataByStatusError(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query);
 	
+	JsonTuples1<ERROR> tpIoSsiError(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<ERROR> tpcIoSsiErrorContext(CTX mapping, A a, B b);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiStatusJobForContext(CTX mapping, A a, B b);
 

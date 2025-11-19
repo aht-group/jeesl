@@ -94,7 +94,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 	{
 		schemes.clear();
 		schemes.addAll(fAom.fAomViews(identifier));
-		thTypeByView.init(fAom.tpcTypeByView(identifier));
+		thTypeByView.load(fAom.tpcTypeByView(identifier));
 	}
 
 	private void reset(boolean rLevel)

@@ -135,7 +135,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 			
 			series = fTs.fTsSeries(query);
 			mapTs.putAll(efTs.toMapBridgTsList(series));
-			th.init(fTs.tpcTsDataByTs(series));
+			th.load(fTs.tpcTsDataByTs(series));
 		}
 		else {series = new ArrayList<TS>();}
 		if(debugOnInfo){logger.info("reloadBridges Bridges:"+bridges.size()+" TS:"+series.size());}

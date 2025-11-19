@@ -21,7 +21,7 @@ public class CqLong implements JeeslCqLong
 
 	public static CqLong isValue(JeeslCqLiteral cq) {return new CqLong(Type.IsValue,Long.valueOf(cq.getLiteral()),cq.getPath());}
 //	public static CqLong isValue(Integer id, String path) {return new CqLong(Type.IsValue,id,path);}
-	public static CqLong isValue(Long id, String path) {return new CqLong(Type.IsValue,id,path);}
+	public static CqLong isValue(long id, String path) {return new CqLong(Type.IsValue,id,path);}
 	public static CqLong in(List<Long> values, String path) {return new CqLong(Type.IsValue,values,path);}
 	
 	public static CqLong value(Long id, String path)

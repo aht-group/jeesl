@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.jx.io;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +22,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LongPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -46,12 +48,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
+import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqLong;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -406,6 +410,23 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		Json1TuplesFactory<ERROR> jtf = Json1TuplesFactory.instance(fbSsi.getClassError()).tupleLoad(this,true);
 		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
+	@Override public JsonTuples1<ERROR> tpIoSsiError(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<DATA> root = cQ.from(fbSsi.getClassData());
+		
+		Path<ERROR> pError = root.get(JeeslIoSsiData.Attributes.error.toString());
+		Expression<Long> cCount = cB.count(root);
+		
+		cQ.multiselect(pError.get("id"),cCount);
+		cQ.where(cB.and(this.pSsiData(cB,query,root)));
+		cQ.groupBy(pError.get("id"));
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		Json1TuplesFactory<ERROR> jtf = Json1TuplesFactory.instance(fbSsi.getClassError()).tupleLoad(this,true);
+		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
+	}
 	
 	@Override
 	public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiStatusJobForContext(CTX mapping, A a, B b)
@@ -632,6 +653,15 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		if(ObjectUtils.isNotEmpty(query.getIoSsiContexts())) {predicates.add(root.<CTX>get(JeeslIoSsiData.Attributes.mapping.toString()).in(query.getIoSsiContexts()));}
 		if(ObjectUtils.isNotEmpty(query.getIoSsiStatus())) {predicates.add(root.<STATUS>get(JeeslIoSsiData.Attributes.link.toString()).in(query.getIoSsiStatus()));}
 		if(ObjectUtils.isNotEmpty(query.getIoSsiErrors())){predicates.add(root.<ERROR>get(JeeslIoSsiData.Attributes.error.toString()).in(query.getIoSsiErrors()));}
+		
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqOrdering.path(JeeslIoSsiData.Att.jsonCreatedAt)))
+			{
+				DatePredicateBuilder.time(cB,predicates,cq,root.<LocalDateTime>get(JeeslIoSsiData.Att.jsonCreatedAt.toString()));
+			}
+			else {logger.error(cq.nyi(fbSsi.getClassData()));}
+		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
