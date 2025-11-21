@@ -23,6 +23,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.EntityPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LongPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -49,10 +50,12 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
+import org.jeesl.model.ejb.io.db.JeeslCqEntity;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqLong;
 import org.jeesl.util.query.cq.CqOrdering;
@@ -623,6 +626,18 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
+		Path<ERROR> pError = null;
+		
+		
+		
+		if(ObjectUtils.isNotEmpty(query.getIoSsiContexts())) {predicates.add(root.<CTX>get(JeeslIoSsiData.Attributes.mapping.toString()).in(query.getIoSsiContexts()));}
+		if(ObjectUtils.isNotEmpty(query.getIoSsiStatus())) {predicates.add(root.<STATUS>get(JeeslIoSsiData.Attributes.link.toString()).in(query.getIoSsiStatus()));}
+		if(ObjectUtils.isNotEmpty(query.getIoSsiErrors()))
+		{
+			if(Objects.isNull(pError)) {pError = root.get(JeeslIoSsiData.Attributes.error.toString());}
+			predicates.add(pError.in(query.getIoSsiErrors()));
+		}
+		
 		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
 		{
 			Expression<String> eString = null;
@@ -649,16 +664,20 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 			if(Objects.isNull(eLong)) {logger.error("NYI "+cq.toString());}
 			else {LongPredicateBuilder.add(cB,predicates,cq,eLong);}
 		}
-		
-		if(ObjectUtils.isNotEmpty(query.getIoSsiContexts())) {predicates.add(root.<CTX>get(JeeslIoSsiData.Attributes.mapping.toString()).in(query.getIoSsiContexts()));}
-		if(ObjectUtils.isNotEmpty(query.getIoSsiStatus())) {predicates.add(root.<STATUS>get(JeeslIoSsiData.Attributes.link.toString()).in(query.getIoSsiStatus()));}
-		if(ObjectUtils.isNotEmpty(query.getIoSsiErrors())){predicates.add(root.<ERROR>get(JeeslIoSsiData.Attributes.error.toString()).in(query.getIoSsiErrors()));}
-		
 		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
 		{
 			if(cq.getPath().equals(CqOrdering.path(JeeslIoSsiData.Att.jsonCreatedAt)))
 			{
 				DatePredicateBuilder.time(cB,predicates,cq,root.<LocalDateTime>get(JeeslIoSsiData.Att.jsonCreatedAt.toString()));
+			}
+			else {logger.error(cq.nyi(fbSsi.getClassData()));}
+		}
+		for(JeeslCqEntity cq : ListUtils.emptyIfNull(query.getCqEntities()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslIoSsiData.Att.error)))
+			{
+				if(Objects.isNull(pError)) {pError = root.get(JeeslIoSsiData.Attributes.error.toString());}
+				EntityPredicateBuilder.add(cB,predicates,cq,pError);
 			}
 			else {logger.error(cq.nyi(fbSsi.getClassData()));}
 		}

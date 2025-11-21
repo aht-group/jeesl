@@ -24,7 +24,7 @@ public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 						EjbWithMigrationJob1<JOB>
 {	
 	public enum Attributes{id,mapping,code,link,remark,targetId,localId,refA,refB,refC,job1,error}
-	public enum Att{context,jsonCreatedAt}
+	public enum Att{context,jsonCreatedAt,error}
 	
 //	void x();
 	

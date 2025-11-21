@@ -20,17 +20,28 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
 	final static Logger logger = LoggerFactory.getLogger(AbstractMaintenanceWorker.class);
 	
 	protected final int id;
+	private Class<?> owingClass;
 	private final Queue<T> queue;
 	
 	protected boolean active; @Override public void shutdown() {active=false;}
 	protected MNT task; @Override public void task(MNT task) {this.task = task;}
 	
-	public AbstractMaintenanceWorker(int id, Queue<T> queue)
+	public AbstractMaintenanceWorker(Class<?> owingClass, int id, Queue<T> queue)
 	{
+		this.owingClass=owingClass;
 		this.id=id;
 		this.queue=queue;
 		active=true;
 		logger.info(id+" ready");
+	}
+	
+	public AbstractMaintenanceWorker(int id, Queue<T> queue)
+	{
+		owingClass=this.getClass();
+		this.id=id;
+		this.queue=queue;
+		active=true;
+		logger.info("Workfer {} is ready for {}",id,owingClass.getSimpleName());
 	}
 	
 	@Override
