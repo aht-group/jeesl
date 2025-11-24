@@ -57,7 +57,11 @@ public class EjbIoSsiDataFactory <CONTEXT extends JeeslIoSsiContext<?,?>,
 		data.setJson(null);
 		if(Objects.nonNull(json))
 		{
-			try {data.setJson(JsonUtil.toString(json));}
+			try
+			{
+				data.setJson(JsonUtil.toString(json));
+				data.setJsonUpdatedAt(LocalDateTime.now());
+			}
 			catch (JsonProcessingException e) {e.printStackTrace();}
 		}
 	}

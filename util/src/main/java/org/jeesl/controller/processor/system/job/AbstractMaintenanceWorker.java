@@ -9,7 +9,6 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.interfaces.controller.processor.system.job.SystemMaintenanceRunnable;
 import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
-import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +31,7 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
 		this.id=id;
 		this.queue=queue;
 		active=true;
-		logger.info(id+" ready");
+		logger.info("Workfer {} is ready for {}",id,owingClass.getSimpleName());
 	}
 	
 	public AbstractMaintenanceWorker(int id, Queue<T> queue)
@@ -41,7 +40,7 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
 		this.id=id;
 		this.queue=queue;
 		active=true;
-		logger.info("Workfer {} is ready for {}",id,owingClass.getSimpleName());
+		logger.info("Wroker {} is ready for {}",id,owingClass.getSimpleName());
 	}
 	
 	@Override

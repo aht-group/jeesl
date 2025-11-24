@@ -176,7 +176,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return this.oneForParents(fbSsi.getClassMapping(), JeeslIoSsiContext.Attributes.entity,eEjb, JeeslIoSsiContext.Attributes.json,eJson);
 	}
 
-	@Override public List<DATA> fIoSsiData(CTX mapping, List<STATUS> links){return fIoSsiData(mapping,links,null,null,null);}
+//	@Override public List<DATA> fIoSsiData(CTX mapping, List<STATUS> links){return fIoSsiData(mapping,links,null,null,null);}
 	@Override public <A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a){return fIoSsiData(mapping,links,a,null,null);}
 	@Override public <A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a, B b, Integer maxResults)
 	{
@@ -264,15 +264,17 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and code="+code+" not unique");}
 	}
 	
-	@Override public DATA fIoSsiData(CTX mapping, String code) throws JeeslNotFoundException
+	@Override public DATA fIoSsiData(CTX context, String code) throws JeeslNotFoundException
 	{
+		if(ObjectUtils.anyNull(context,code)) {String msg = "Context or code is null"; logger.warn(msg); throw new JeeslNotFoundException(msg);}
+		
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
 		Root<DATA> data = cQ.from(fbSsi.getClassData());
 		
 		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
-		predicates.add(jMapping.in(mapping));
+		predicates.add(jMapping.in(context));
 		
 		Expression<String> eCode = data.get(JeeslIoSsiData.Attributes.code.toString());
 		predicates.add(cB.equal(eCode,code));
@@ -283,33 +285,11 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
 		
 		try	{return tQ.getSingleResult();}
-		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+fbSsi.getClassData().getSimpleName()+" for "+mapping.toString()+" for code="+code);}
+		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+fbSsi.getClassData().getSimpleName()+" for "+context.toString()+" for code="+code);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and code="+code+" not unique");}
 	}
 	
-	@Override
-	public <T extends EjbWithId> DATA fIoSsiData(CTX mapping, T ejb) throws JeeslNotFoundException
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
-		Root<DATA> data = cQ.from(fbSsi.getClassData());
-		
-		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
-		predicates.add(jMapping.in(mapping));
-		
-		Expression<Long> eId = data.get(JeeslIoSsiData.Attributes.localId.toString());
-		predicates.add(cB.equal(eId,ejb.getId()));
 
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.select(data);
-
-		TypedQuery<DATA> tQ = em.createQuery(cQ);
-		
-		try	{return tQ.getSingleResult();}
-		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+fbSsi.getClassData().getSimpleName()+" for "+mapping.toString()+" for id="+ejb.getId());}
-		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and id="+ejb.getId()+" not unique");}
-	}
 	
 //	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpcIoSsiStatusForContext(mapping,null,null);}
 //	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpcIoSsiStatusForContext(mapping,a,null);}
@@ -615,8 +595,15 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
 		Root<DATA> root = cQ.from(fbSsi.getClassData());
 		
+		Predicate[] predicaates = this.pSsiData(cB,query,root);
+		if(ObjectUtils.isEmpty(predicaates) && Objects.isNull(query.getMaxResults()))
+		{
+			logger.warn("No Filter for {}, aborting query",fbSsi.getClassData());
+			return new ArrayList<>();
+		}
+		
 		cQ.select(root);
-		cQ.where(cB.and(this.pSsiData(cB,query,root)));
+		cQ.where(cB.and(predicaates));
 		
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
 		super.pagination(tQ,query);
@@ -627,8 +614,6 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
 		Path<ERROR> pError = null;
-		
-		
 		
 		if(ObjectUtils.isNotEmpty(query.getIoSsiContexts())) {predicates.add(root.<CTX>get(JeeslIoSsiData.Attributes.mapping.toString()).in(query.getIoSsiContexts()));}
 		if(ObjectUtils.isNotEmpty(query.getIoSsiStatus())) {predicates.add(root.<STATUS>get(JeeslIoSsiData.Attributes.link.toString()).in(query.getIoSsiStatus()));}

@@ -14,7 +14,6 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiDataFactory;
-import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.interfaces.controller.processor.SsiMappingProcessor;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
@@ -88,7 +87,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			context = fSsi.fSsiContext(this.getClassJson(),this.getClassLocal());
-			logger.info("Using context "+context.toString());
+			logger.debug("Using context "+context.toString());
 		}
 		catch (JeeslNotFoundException e) {throw new RuntimeException(e);}
 	}

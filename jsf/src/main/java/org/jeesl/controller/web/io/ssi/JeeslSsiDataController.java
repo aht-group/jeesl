@@ -154,7 +154,7 @@ public class JeeslSsiDataController <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		if(Objects.nonNull(refB)) {query.add(CqLong.isValue(refB,CqLong.path(JeeslIoSsiData.Attributes.refB)));}
 		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
-		if(sbhStatus.hasSelected()) {query.addStatus(sbhStatus.getSelected());}
+		if(sbhStatus.hasSelected()) {query.addIoSsiStatus(sbhStatus.getSelected());}
 		query.debug(true);
 		
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();

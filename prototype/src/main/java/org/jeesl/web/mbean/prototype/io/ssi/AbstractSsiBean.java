@@ -146,7 +146,11 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		}
 		else
 		{
-			datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected()));
+			EjbIoSsiQuery<SYSTEM,CRED,CONTEXT,STATUS,ERROR,ENTITY> q2 = new EjbIoSsiQuery<>();
+			q2.add(ssiProcessor.getMapping());
+			q2.addIoSsiStatus(sbhLink.getSelected());
+			
+			datas.addAll(fSsi.fSsiData(q2));
 			thLink.load(fSsi.tpIoSsiDataByStatus(query));
 		}
 		

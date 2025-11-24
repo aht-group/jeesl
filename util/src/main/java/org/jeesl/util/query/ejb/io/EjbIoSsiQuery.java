@@ -81,8 +81,8 @@ public class EjbIoSsiQuery <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	private List<STATUS> ioSsiStatus; @Override public List<STATUS> getIoSsiStatus() {return ioSsiStatus;}
 	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> add(STATUS ejb) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.add(ejb); return this;}
-	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> addStatus(List<STATUS> list) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.addAll(list); return this;}
-	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> addStatus(Collection<STATUS> collection) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.addAll(collection); return this;}
+	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> addIoSsiStatus(List<STATUS> list) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.addAll(list); return this;}
+	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> addIoSsiStatus(Collection<STATUS> collection) {if(Objects.isNull(ioSsiStatus)) {ioSsiStatus = new ArrayList<>();} ioSsiStatus.addAll(collection); return this;}
 	
 	private List<ERROR> ioSsiError; @Override public List<ERROR> getIoSsiErrors() {return ioSsiError;}
 	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> add(ERROR ejb) {if(Objects.isNull(ioSsiError)) {ioSsiError = new ArrayList<>();} ioSsiError.add(ejb); return this;}
