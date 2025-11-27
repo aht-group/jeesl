@@ -425,6 +425,7 @@ $border: $border-width solid var(--container-border-colour);
 .jeesl-output-container {
 	align-items: center;
 	display: flex;
+	gap: $regular-spacing;
 	
 	.ui-outputtext {
 		flex-grow: 1;
@@ -446,6 +447,30 @@ $border: $border-width solid var(--container-border-colour);
 		.ui-outputlabel {
 			padding: 0 0 0 $regular-spacing;
 		}
+	}
+	
+	.jeesl-input-container {
+		flex-grow: 1;
+	}
+	
+	.jeesl-translation-label-previous {
+		background: var(--panel-content-input-background);
+		border-radius: $border-radius 0 0 $border-radius;
+		display: flex;
+		gap: $regular-spacing;
+		min-height: $element-height;
+		padding: $half-spacing 0 $half-spacing $regular-spacing;
+		width: auto;
+		
+		> .jeesl-input-container .jeesl-inputfield.ui-state-default {
+			border-radius: 0 $border-radius $border-radius 0;
+		}
+	}
+		
+	.jeesl-translation-label-icon {
+		border-color: transparent var(--container-header-underline-colour);
+		border-style: solid;
+		border-width: 6px 0 6px 6px;
 	}
 }
 

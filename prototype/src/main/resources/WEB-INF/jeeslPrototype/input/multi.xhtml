@@ -69,7 +69,12 @@
 				</p:outputLabel>
 				
 				<h:panelGroup styleClass="jeesl-output-container">
-					<h:outputText value="#{aitHandler.translations[l]}" styleClass="ui-outputtext" />
+					<h:outputText value="#{value.name[l.code].lang}"
+								  styleClass="ui-inputfield ui-state-default ui-state-disabled jeesl-translation-label-previous"
+								  rendered="#{not empty value.name[l.code].lang}" />
+					<h:outputText styleClass="jeesl-translation-label-icon"
+								  rendered="#{not empty value.name[l.code].lang}" />
+					<jtp:inputText value="#{aitHandler.translations[l]}" />
 					<p:selectBooleanCheckbox value="#{aitHandler.utilizations[l]}"/>
 				</h:panelGroup>
 			</j:inputGrid>
