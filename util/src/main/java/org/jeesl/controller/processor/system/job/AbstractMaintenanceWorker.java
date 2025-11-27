@@ -31,10 +31,11 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
 		this.id=id;
 		this.queue=queue;
 		active=true;
-		logger.info("Workfer {} is ready for {}",id,owingClass.getSimpleName());
+		logger.info("Worker {} is ready for {}",id,owingClass.getSimpleName());
 	}
 	
-	public AbstractMaintenanceWorker(int id, Queue<T> queue)
+	@Deprecated
+	private AbstractMaintenanceWorker(int id, Queue<T> queue)
 	{
 		owingClass=this.getClass();
 		this.id=id;
@@ -66,7 +67,7 @@ public abstract class AbstractMaintenanceWorker <MNT extends JeeslJobMaintenance
 				try {Thread.sleep(100);} catch (InterruptedException e) {e.printStackTrace();}
    			}
 		}
-		logger.info("Shutting down "+id);
+		logger.debug("Shutting down "+id);
 	}
 	
 	protected abstract void handle(T t) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException, UtilsProcessingException;
