@@ -18,7 +18,6 @@ import org.jeesl.interfaces.controller.processor.system.job.SystemMaintenanceRun
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
-import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -83,7 +82,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
         	pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(maxThreads);
             for(Runnable w : threads) {pool.execute(w);}
             pool.shutdown();
-            logger.info("Active: "+pool.getActiveCount());
+            logger.debug("Active: "+pool.getActiveCount());
         }
     }
 	protected abstract SystemMaintenanceRunnable<MNT> buildWorker(int i) throws NamingException;
