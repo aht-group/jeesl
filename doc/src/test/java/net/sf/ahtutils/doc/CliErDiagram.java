@@ -22,7 +22,7 @@ public class CliErDiagram extends AbstractErDiagram
 		fSrc = new File("../entities/src/main/java");
 		fSvg = new File("../doc/src/main/resources/aht-utils/svg/admin/development/er");
 		
-		packages = "net/sf/ahtutils/model/ejb";
+		super.addPackageLocation(pCurrent.getParent().resolve("entities/src/main/java"));
 		colorScheme = "aht-utils/listing/development/er/colorScheme.xml";
 	}
 	

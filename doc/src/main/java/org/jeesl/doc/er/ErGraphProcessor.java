@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
+import org.exlp.util.io.ClassUtil;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.interfaces.qualifier.er.EjbErParent;
 import org.jeesl.model.xml.io.label.Entities;
@@ -35,7 +37,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.io.ClassUtil;
 import net.sf.exlp.util.io.dir.RecursiveFileFinder;
 
 public class ErGraphProcessor
@@ -79,8 +80,53 @@ public class ErGraphProcessor
 
 	public void addPackages(String sEjbPackage) throws IOException, ClassNotFoundException
 	{
-		addPackages(sEjbPackage,new ArrayList<String>());
+		this.addPackages(sEjbPackage,new ArrayList<String>());
 	}
+	
+	public void addPackages(Path path, List<String> subset) throws IOException, ClassNotFoundException
+	{
+		Set<String> setSub = new HashSet<String>(subset);
+
+		IOFileFilter suffixFileFilter = FileFilterUtils.suffixFileFilter(".java");
+
+
+		RecursiveFileFinder finder = new RecursiveFileFinder(suffixFileFilter);
+		List<File> list = finder.find(path.toFile());
+
+		logger.info("Found files "+list.size()+" in "+path.toFile().getAbsolutePath());
+
+		for(File f : list)
+		{
+			try
+			{
+				this.createNode(path,f,setSub);
+			}
+			catch (NoClassDefFoundError | ClassNotFoundException e)
+			{
+				logger.debug("NCDFE or CNFE {}",f.getAbsolutePath());
+			}
+		}
+		
+		long i=0;
+		for(String key : mapNodes.keySet())
+		{
+			Node n = mapNodes.get(key);
+			n.setId(i);i++;
+			//n.setCode(null);
+			//mapNodes.put(key, n);
+			graph.getNodes().getNode().add(n);
+		}
+		for(File f : list)
+		{
+			try
+			{
+			createEdge(f);
+			createHierarchies(f);
+			}
+			catch (NoClassDefFoundError | ClassNotFoundException e) {}
+		}
+	}
+	@Deprecated
 	public void addPackages(String sEjbPackage, List<String> subset) throws IOException, ClassNotFoundException
 	{
 		Set<String> setSub = new HashSet<String>(subset);
@@ -91,12 +137,13 @@ public class ErGraphProcessor
 		RecursiveFileFinder finder = new RecursiveFileFinder(suffixFileFilter);
 		List<File> list = finder.find(fPackage);
 
-		logger.trace("Found files "+list.size()+" in "+fPackage.getAbsolutePath());
+		logger.info("Found files "+list.size()+" in "+fPackage.getAbsolutePath());
 
 		for(File f : list)
 		{
-			createNode(f,setSub);
+			this.createNode(f,setSub);
 		}
+		
 		long i=0;
 		for(String key : mapNodes.keySet())
 		{
@@ -115,21 +162,29 @@ public class ErGraphProcessor
 
 	public Graph create()
 	{
-		mergeEdges();
+		this.mergeEdges();
 		reGroupMergedNodes();
 		createClusters();
 		return graph;
 	}
 
+	@Deprecated
 	private void createNode(File f, Set<String> subSet) throws ClassNotFoundException
 	{
-		logger.trace(f.getAbsolutePath());
+		logger.info(f.getAbsolutePath());
 		Class<?> c = ClassUtil.forFile(fBase, f);
-		createNode(c,subSet);
+		this.createNode(c,subSet);
+	}
+	private void createNode(Path pRoot, File f, Set<String> subSet) throws ClassNotFoundException
+	{
+		logger.trace(f.getAbsolutePath());
+		Class<?> c = ClassUtil.forFile(pRoot.toFile(), f);
+		this.createNode(c,subSet);
 	}
 
 	private void createNode(Class<?> c, Set<String> subSet)
 	{
+		logger.trace("Testing {}",c.getSimpleName());
 		Annotation a = c.getAnnotation(EjbErNode.class);
 		if(a!=null)
 		{
@@ -155,7 +210,7 @@ public class ErGraphProcessor
 				if(entities==null) {sb.append(" entites:null");}
 				else {sb.append(" entties:").append(entities.getEntity().size());}
 				sb.append(" ").append(c.getName());
-				logger.warn(sb.toString());
+				logger.debug(sb.toString());
 				node.setLabel("** "+er.name());
 			}
 
@@ -432,7 +487,6 @@ public class ErGraphProcessor
 		}
 		 return -1;
 	}
-
 
 	public void groupNode(Node node)
 	{

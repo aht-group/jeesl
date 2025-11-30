@@ -3,11 +3,15 @@ package org.jeesl.doc.er;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.apache.batik.transcoder.TranscoderException;
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
@@ -35,11 +39,15 @@ public class AbstractErDiagram
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractErDiagram.class);
 
+	protected final Path pCurrent;
+	protected Path pXml;
+	
 	protected File fTmp;
 	protected File fXmlEntities;
 	protected File fSrc,fDot,fSvg;
 	protected File dPdf,dAtt;
 
+	private final List<Path> packageLocations;
 	protected String packages;
 	protected String colorScheme;
 
@@ -57,6 +65,9 @@ public class AbstractErDiagram
 		fTmp = new File(config.getString(ConfigKey.dirTmp));
 		showErDiagramLabel = true;
 		logger.info("Using Tmp: "+fTmp);
+		
+		pCurrent = Paths.get("").toAbsolutePath();
+		packageLocations = new ArrayList<>();
 	}
 	public AbstractErDiagram(Configuration config, OfxMultiLangLatexWriter ofxWriter)
 	{
@@ -64,6 +75,15 @@ public class AbstractErDiagram
 		fTmp = new File(config.getString(ConfigKey.dirTmp));
 		showErDiagramLabel = true;
 		logger.info("Using Tmp: "+fTmp);
+		
+		pCurrent = Paths.get("").toAbsolutePath();
+		packageLocations = new ArrayList<>();
+	}
+	
+	protected void addPackageLocation(Path location)
+	{
+		logger.info("Added {}",location);
+		packageLocations.add(location);
 	}
 
 	protected void loadEntites(String path)
@@ -72,6 +92,20 @@ public class AbstractErDiagram
 		{
 			logger.info("Loading entities.xml "+path);
 			entities = JaxbUtil.loadJAXB(path, Entities.class);
+		}
+		catch (FileNotFoundException e) {e.printStackTrace();}
+	}
+	protected void loadEntites(Path pXml)
+	{
+		if(!Files.exists(pXml))
+		{
+			logger.error("Path {} does not exist",pXml.toString());
+			throw new RuntimeException("entities.xml missing");
+		}
+		try
+		{
+			logger.info("Loading entities.xml via {}",pXml);
+			entities = JaxbUtil.loadJAXB(pXml.toFile(), Entities.class);
 		}
 		catch (FileNotFoundException e) {e.printStackTrace();}
 	}
@@ -104,12 +138,18 @@ public class AbstractErDiagram
 		Graph xml = JaxbUtil.loadJAXB(colorScheme, Graph.class);
 		ColorSchemeManager csm = new ColorSchemeManager(xml,subset);
 
-//		ErAttributesProcessor eap = new ErAttributesProcessor(ofxWriter,config,fSrc);
-//		eap.addPackages(packages);
-
 		ErGraphProcessor egp = new ErGraphProcessor(fSrc, csm);
 		if(entities!=null) {egp.activateEntities(localeCode,entities);}
-		egp.addPackages(packages,subset);
+		
+		if(ObjectUtils.isNotEmpty(packages))
+		{
+			logger.warn("Deprecated API, use super.addPackageLocation instead");
+			egp.addPackages(packages,subset);
+		}
+		if(ObjectUtils.isNotEmpty(packageLocations))
+		{
+			for(Path p : packageLocations) {egp.addPackages(p, subset);}
+		}
 
 		Graph g = egp.create();
 		//JaxbUtil.info(g);System.exit(-1);

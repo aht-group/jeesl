@@ -44,7 +44,7 @@ public class IoLabelRestHandler <L extends JeeslLang, D extends JeeslDescription
 	final static Logger logger = LoggerFactory.getLogger(IoLabelRestHandler.class);
 
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
-	private JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
+	private JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fLabel;
 
 	private final XmlEntityFactory<L,D,RC,REM,RE,RA,RER,RAT,ERD> xfEntity;
 	private final XmlDiagramFactory<L,D,RC,ERD> xfDiagram;
@@ -53,7 +53,7 @@ public class IoLabelRestHandler <L extends JeeslLang, D extends JeeslDescription
 								JeeslIoLabelFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		this.fbRevision=fbRevision;
-		this.fRevision=fRevision;
+		this.fLabel=fRevision;
 
 		xfEntity = new XmlEntityFactory<>(XmlRevisionQuery.get(XmlRevisionQuery.Key.xEntity));
 		xfDiagram = fbRevision.xmlDiagram(XmlRevisionQuery.get(XmlRevisionQuery.Key.xDiagram));
@@ -63,12 +63,12 @@ public class IoLabelRestHandler <L extends JeeslLang, D extends JeeslDescription
 	{
 		Entities xml = new Entities();
 
-		List<RE> list = fRevision.all(fbRevision.getClassEntity());
+		List<RE> list = fLabel.all(fbRevision.getClassEntity());
 		Collections.sort(list, new PositionParentComparator<RE>(fbRevision.getClassEntity()));
 
 		for(RE re : list)
 		{
-			re = fRevision.load(fbRevision.getClassEntity(), re);
+			re = fLabel.load(fbRevision.getClassEntity(), re);
 			xml.getEntity().add(xfEntity.build(re));
 		}
 
