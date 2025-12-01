@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.batik.transcoder.TranscoderException;
-import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.collections4.ListUtils;
+import org.exlp.controller.handler.io.log.LoggedExit;
 import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
@@ -48,7 +49,7 @@ public class AbstractErDiagram
 	protected File dPdf,dAtt;
 
 	private final List<Path> packageLocations;
-	protected String packages;
+
 	protected String colorScheme;
 
 	protected String localeCode;
@@ -110,49 +111,43 @@ public class AbstractErDiagram
 		catch (FileNotFoundException e) {e.printStackTrace();}
 	}
 
-	public void create(String key, boolean upload) throws ClassNotFoundException, IOException, TranscoderException
+	public void create(String diagramCode, boolean upload) throws ClassNotFoundException, IOException, TranscoderException
 	{
-		create(key,key,upload);
+		create(diagramCode,diagramCode,upload);
 	}
-	private void create(String key, String label, boolean upload) throws ClassNotFoundException, IOException, TranscoderException
+	private void create(String diagramCode, String diagramLabel, boolean upload) throws ClassNotFoundException, IOException, TranscoderException
 	{
 		List<String> subset = new ArrayList<String>();
-		subset.add(key);
-		File fPdf = null; if(dPdf!=null){fPdf = new File(dPdf,key+".pdf");}
+		subset.add(diagramCode);
+		
+		File fPdf = null; if(dPdf!=null){fPdf = new File(dPdf,diagramCode+".pdf");}
 
-		if(!showErDiagramLabel) {label = null;}
+		if(!showErDiagramLabel) {diagramLabel = null;}
 
-		this.buildSvg("dot",label,subset,new File(fSvg,key+".svg"),fPdf);
+		this.buildSvg("dot",diagramLabel,subset,new File(fSvg,diagramCode+".svg"),fPdf);
 
 		if(upload && restUpload!=null)
 		{
-			Graph g = XmlGraphFactory.build(key);
+			Graph g = XmlGraphFactory.build(diagramCode);
 			g.setDot(XmlDotFactory.build(dotGraph));
 			JaxbUtil.info(g);
 			if(Objects.nonNull(restUpload)) {restUpload.importSystemRevisionDiagram(g);}
 		}
 	}
 
-	protected void buildSvg(String type, String label, List<String> subset, File fDst, File fPdf) throws ClassNotFoundException, IOException, TranscoderException
+	protected void buildSvg(String type, String label, List<String> subsets, File fDst, File fPdf) throws ClassNotFoundException, IOException, TranscoderException
 	{
-		Graph xml = JaxbUtil.loadJAXB(colorScheme, Graph.class);
-		ColorSchemeManager csm = new ColorSchemeManager(xml,subset);
+		Graph xColorScheme = JaxbUtil.loadJAXB(colorScheme, Graph.class);
+		ColorSchemeManager csm = new ColorSchemeManager(xColorScheme,subsets);
 
 		ErGraphProcessor egp = new ErGraphProcessor(fSrc, csm);
 		if(entities!=null) {egp.activateEntities(localeCode,entities);}
 		
-		if(ObjectUtils.isNotEmpty(packages))
-		{
-			logger.warn("Deprecated API, use super.addPackageLocation instead");
-			egp.addPackages(packages,subset);
-		}
-		if(ObjectUtils.isNotEmpty(packageLocations))
-		{
-			for(Path p : packageLocations) {egp.addPackages(p, subset);}
-		}
+		for(Path p : ListUtils.emptyIfNull(packageLocations)) {egp.addPackages(p, subsets);}
+		egp.buildGraph();
 
 		Graph g = egp.create();
-		//JaxbUtil.info(g);System.exit(-1);
+		JaxbUtil.info(g); LoggedExit.exit(false);
 		//JaxbUtil.trace(xml);
 
 		Graph2DotConverter gdc = new Graph2DotConverter(csm);
@@ -163,11 +158,10 @@ public class AbstractErDiagram
 		GraphFileWriter w = new GraphFileWriter(type);
 		w.svg(fDot,fDst);
 
-		if(fPdf!=null)
+		if(Objects.nonNull(fPdf))
 		{
 			logger.info("SVG to PDF (via "+Svg2PdfTranscoder.class.getSimpleName()+")");
 			Svg2PdfTranscoder.transcode(fDst,fPdf);
-			logger.info("SVG-PDF done");
 		}
 	}
 

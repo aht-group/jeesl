@@ -30,7 +30,6 @@ public class AbstractEapCacheConfigurator
 			String list = config.getString("cache."+context+".list");
 	    	if(Objects.nonNull(list))
 	    	{
-	    		logger.info(list);
 	    		system.setCredentials(new ArrayList<>());
 	    		String[] caches  = list.split("-");
 	    		for(String cache : caches)

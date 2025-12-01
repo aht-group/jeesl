@@ -149,7 +149,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     
     protected void dbDs(String[] keys, org.exlp.interfaces.system.property.Configuration config) throws IOException
     {
-    	logger.info("DS Configuration");
+    	logger.info("DS Configuration for {} systems",keys.length);
     	for(String key : keys)
     	{
     		JsonSsiCredential credential = AbstractEapDsConfigurator.toCredential(config,key);
@@ -163,7 +163,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     
     protected void caches(String[] keys, org.exlp.interfaces.system.property.Configuration config) throws IOException, Exception
     {
-    	logger.info("Cache Configuration");
+    	logger.info("Cache Configuration for {} systems",keys.length);
     	if(Objects.nonNull(cacheConfigurator))
 		{
 	    	for(String system : keys)

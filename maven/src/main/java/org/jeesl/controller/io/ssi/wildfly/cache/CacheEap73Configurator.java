@@ -1,10 +1,11 @@
 package org.jeesl.controller.io.ssi.wildfly.cache;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.maven.plugin.MojoExecutionException;
 
+import org.apache.maven.plugin.MojoExecutionException;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jboss.as.controller.client.OperationBuilder;
 import org.jboss.as.controller.client.helpers.ClientConstants;
@@ -52,15 +53,16 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 		for(JsonSsiCredential cache : system.getCredentials())
 		{
 			if(cache.getCode().equals("menu")) {this.createCacheReplicated(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
-			else if(cache.getCode().equals("icon")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
-			else if(cache.getCode().equals("ofx")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
-			else if(cache.getCode().equals("report")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
-			else if(cache.getCode().equals("aom")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
-			else if(cache.getCode().equals("ts")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("icon")) {this.createLocalCache(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("ofx")) {this.createLocalCache(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("report")) {this.createLocalCache(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("aom")) {this.createLocalCache(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("ts")) {this.createLocalCache(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("chart")) {this.createLocalCacheChart(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else {logger.warn("NYI: CacheConfiguration for {}",cache.getCode());}
 		}
 		
-//		logger.warn("@HH: Implement result code handling");
-		logger.info("Added caches for " +system.getCode() +": " +cacheNames.toString());
+		logger.info("  Added caches for {}: {}",system.getCode(),cacheNames.toString());
 	}
 	
 	public void evaluateResult(String key, ModelNode result) throws MojoExecutionException
@@ -81,7 +83,7 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 		}
 	}
 
-	public void createCacheReplicated(ModelNode container, String cacheName) throws IOException, MojoExecutionException
+	private void createCacheReplicated(ModelNode container, String cacheName) throws IOException, MojoExecutionException
 	{
 		ModelNode replicatedCache = container.clone();
 		replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",cacheName);		
@@ -96,23 +98,44 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 		evaluateResult(cacheName, result);
 
 		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
-		evaluateResult(cacheName, result);
+		this.evaluateResult(cacheName, result);
 	}
 	
-	public void createCacheLocal(ModelNode container, String cacheName) throws IOException
+	private void createLocalCache(ModelNode container, String name) throws IOException, MojoExecutionException
 	{
-		ModelNode replicatedCache = container.clone();
-		replicatedCache.get(ClientConstants.OP_ADDR).add("local-cache",cacheName);		
-		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
+		ModelNode cache = container.clone();
+		cache.get(ClientConstants.OP_ADDR).add("local-cache",name);		
+		cache.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
-		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
-		replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
-		replicatedCacheTransaction.get("mode").set("BATCH");
-		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
+		ModelNode transaction = cache.clone();	
+		transaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
+		transaction.get("mode").set("BATCH");
+		transaction.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
-		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
-
-		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
-		System.out.println(result.get("outcome").toString());
+		ModelNode result = client.execute(new OperationBuilder(cache).build());
+		this.evaluateResult(name, result);
+		
+		result = client.execute(new OperationBuilder(transaction).build());
+	}
+	
+	private void createLocalCacheChart(ModelNode container, String name) throws IOException, MojoExecutionException
+	{
+		ModelNode cache = container.clone();
+		cache.get(ClientConstants.OP_ADDR).add("local-cache",name);		
+		cache.get(ClientConstants.OP).set(ClientConstants.ADD);
+		cache.get("expiration").get("lifespan").set(Duration.ofHours(24).toMillis());
+		this.evaluateResult(name, client.execute(new OperationBuilder(cache).build()));
+		
+		ModelNode transaction = cache.clone();	
+		transaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
+		transaction.get("mode").set("BATCH");
+		transaction.get(ClientConstants.OP).set(ClientConstants.ADD);
+		this.evaluateResult(name, client.execute(new OperationBuilder(transaction).build()));
+		
+		ModelNode lifespan = cache.clone();
+		lifespan.get(ClientConstants.OP_ADDR).add("component","expiration");		
+		lifespan.get("lifespan").set(Duration.ofHours(24).toMillis());
+		lifespan.get(ClientConstants.OP).set(ClientConstants.ADD);
+		this.evaluateResult(name, client.execute(new OperationBuilder(lifespan).build()));
 	}
 }

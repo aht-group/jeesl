@@ -52,7 +52,6 @@ public interface JeeslIoLabelFacade <L extends JeeslLang,D extends JeeslDescript
 	List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes);
 	
 	
-
 	void rm(Class<RVM> cMappingView, RVM mapping) throws JeeslConstraintViolationException;
 
 	<W extends EjbWithRevisionAttributes<RA>> RA save(Class<W> cW, W entity, RA attribute) throws JeeslLockingException, JeeslConstraintViolationException;
