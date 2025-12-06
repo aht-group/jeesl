@@ -15,6 +15,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -23,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractAppCalendarBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+											YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 											CALENDAR extends JeeslCalendar<ZONE,CT>,
 											ZONE extends JeeslCalendarTimeZone<L,D>,
 											CT extends JeeslCalendarScope<L,D,CT,?>,
@@ -35,8 +37,8 @@ public abstract class AbstractAppCalendarBean <L extends JeeslLang, D extends Je
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppCalendarBean.class);
 	
 	@SuppressWarnings("unused")
-	private JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
-	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
+	private JeeslCalendarFacade<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
+	private final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
 	
 	private final Comparator<ZONE> cpZone;
 	
@@ -46,7 +48,7 @@ public abstract class AbstractAppCalendarBean <L extends JeeslLang, D extends Je
 	private long timeLineWeekday; public long getTimeLineWeekday() {return timeLineWeekday;} 
 	private long timeLineDecade; public long getTimeLineDecade() {return timeLineDecade;}
 	
-	public AbstractAppCalendarBean(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
+	public AbstractAppCalendarBean(final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
 	{
 		this.fbCalendar=fbCalendar;
 		cpZone = (new TimeZoneComparator<L,D,CALENDAR,ZONE,CT,ITEM,IT>()).factory(TimeZoneComparator.Type.offset);
@@ -56,7 +58,7 @@ public abstract class AbstractAppCalendarBean <L extends JeeslLang, D extends Je
 		timeLineDecade  = 300000000000l;
 	}
 	
-	public void postConstructTimeZone(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar)
+	public void postConstructTimeZone(JeeslCalendarFacade<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar)
 	{
 		this.fCalendar=fCalendar;
 

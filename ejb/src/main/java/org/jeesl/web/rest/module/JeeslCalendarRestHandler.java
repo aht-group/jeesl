@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslCalendarRestHandler <L extends JeeslLang, D extends JeeslDescription,
+								YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 								CALENDAR extends JeeslCalendar<ZONE,SCOPE>,
 								ZONE extends JeeslCalendarTimeZone<L,D>,
 								SCOPE extends JeeslCalendarScope<L,D,SCOPE,?>,
@@ -28,11 +30,11 @@ public class JeeslCalendarRestHandler <L extends JeeslLang, D extends JeeslDescr
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslCalendarRestHandler.class);
 	
-	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fbCalendar;
-	private final JeeslCalendarFacade<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar;
+	private final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fbCalendar;
+	private final JeeslCalendarFacade<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar;
 	
-	private JeeslCalendarRestHandler(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fbCalendar,
-									 final JeeslCalendarFacade<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar)
+	private JeeslCalendarRestHandler(final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fbCalendar,
+									 final JeeslCalendarFacade<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar)
 	{
 		super(fCalendar,fbCalendar.getClassL(),fbCalendar.getClassD());
 		this.fbCalendar=fbCalendar;
@@ -40,17 +42,18 @@ public class JeeslCalendarRestHandler <L extends JeeslLang, D extends JeeslDescr
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
+					YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 					CALENDAR extends JeeslCalendar<ZONE,SCOPE>,
 					ZONE extends JeeslCalendarTimeZone<L,D>,
 					SCOPE extends JeeslCalendarScope<L,D,SCOPE,?>,
 					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
 					IT extends JeeslCalendarItemType<L,D,?,IT,?>,
 					USER extends JeeslSimpleUser>
-			JeeslCalendarRestHandler<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER>
-			instance(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fbCalendar,
-					JeeslCalendarFacade<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar)
+			JeeslCalendarRestHandler<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER>
+			instance(final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fbCalendar,
+					JeeslCalendarFacade<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar)
 	{
-		return new JeeslCalendarRestHandler<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER>(fbCalendar,fCalendar);
+		return new JeeslCalendarRestHandler<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER>(fbCalendar,fCalendar);
 	}
 	
 //	@Override public Container exportCalendarType() {return xfContainer.build(fCalendar.allOrderedPosition(cType));}
