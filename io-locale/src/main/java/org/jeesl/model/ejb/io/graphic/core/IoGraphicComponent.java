@@ -34,9 +34,9 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	
 	@NotNull @ManyToOne
 	@JoinColumn(name="shape_id")
-	private IoGraphicShape style;
-	@Override public IoGraphicShape getStyle() {return style;}
-	@Override public void setStyle(IoGraphicShape style) {this.style = style;}
+	private IoGraphicShape shape;
+	public IoGraphicShape getShape() {return shape;}
+	public void setShape(IoGraphicShape shape) {this.shape = shape;}
 	
 	private int position;
 	@Override public int getPosition() {return position;}

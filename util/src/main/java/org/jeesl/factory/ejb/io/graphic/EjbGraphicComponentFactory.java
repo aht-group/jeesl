@@ -33,7 +33,7 @@ public class EjbGraphicComponentFactory<G extends JeeslGraphic<?,GC,GS>,
         {
 			ejb=cComponent.newInstance();
 			ejb.setGraphic(graphic);
-			ejb.setStyle(style);
+			ejb.setShape(style);
 			
 			ejb.setCss(css);
 			ejb.setSize(size);

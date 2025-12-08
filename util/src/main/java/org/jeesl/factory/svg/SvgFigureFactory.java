@@ -54,7 +54,7 @@ public class SvgFigureFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends Jeesl
 			g.create();
 			Shape shape = null;
 			g.setPaint(Color.decode("#" + f.getColor()));
-			switch (JeeslGraphicShape.Code.valueOf(f.getStyle().getCode()))
+			switch (JeeslGraphicShape.Code.valueOf(f.getShape().getCode()))
 			{
 				case shapeCircle:
 					shape = new Ellipse2D.Double(f.getOffsetX(), f.getOffsetY(), f.getSize(), f.getSize());

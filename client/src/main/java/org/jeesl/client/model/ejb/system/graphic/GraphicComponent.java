@@ -1,5 +1,6 @@
 package org.jeesl.client.model.ejb.system.graphic;
 
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -23,9 +24,10 @@ public class GraphicComponent implements JeeslGraphicComponent<Graphic,GraphicCo
 	@Override public void setGraphic(Graphic graphic) {this.graphic = graphic;}
 	
 	@ManyToOne
-	private GraphicShape style;
-	public GraphicShape getStyle() {return style;}
-	public void setStyle(GraphicShape style) {this.style = style;}
+	@JoinColumn(name="style_id")
+	private GraphicShape shape;
+	public GraphicShape getShape() {return shape;}
+	public void setShape(GraphicShape shape) {this.shape = shape;}
 	
 	private boolean css;
 	@Override public boolean isCss() {return css;}

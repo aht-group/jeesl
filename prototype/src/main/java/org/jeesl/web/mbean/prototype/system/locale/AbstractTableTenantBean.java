@@ -357,7 +357,7 @@ public abstract class AbstractTableTenantBean <L extends JeeslLang, D extends Je
 	public void saveFigure() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info("Select "+figure.toString());
-		figure.setStyle(fGraphic.find(fbSvg.getClassFigureStyle(),figure.getStyle()));
+		figure.setShape(fGraphic.find(fbSvg.getClassFigureStyle(),figure.getShape()));
 		figure = fGraphic.save(figure);
 		reloadFigures();
 	}

@@ -506,7 +506,7 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	public void saveFigure() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info("Select "+component.toString());
-		component.setStyle(fGraphic.find(fbSvg.getClassFigureStyle(),component.getStyle()));
+		component.setShape(fGraphic.find(fbSvg.getClassFigureStyle(),component.getShape()));
 		component = fGraphic.save(component);
 		reloadFigures();
 	}

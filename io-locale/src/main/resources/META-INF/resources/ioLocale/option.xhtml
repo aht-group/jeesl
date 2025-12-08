@@ -168,7 +168,7 @@
 								
 					<j:inputGrid rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
 						<jtp:label entity="IoGraphic" code="style"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.graphic.style}" effect="fade">
+						<p:selectOneMenu value="#{cc.attrs.bean.graphic.shape}" effect="fade">
 							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
@@ -275,7 +275,7 @@
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.component.css}" />
 						
 						<jtp:label entity="IoGraphicComponent" code="shape"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.component.style}" effect="fade">
+						<p:selectOneMenu value="#{cc.attrs.bean.component.shape}" effect="fade">
 							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						

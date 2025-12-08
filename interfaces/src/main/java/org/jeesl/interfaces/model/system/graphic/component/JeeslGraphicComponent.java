@@ -23,8 +23,11 @@ public interface JeeslGraphicComponent<G extends JeeslGraphic<?,GC,GS>,
 	G getGraphic();
 	void setGraphic(G graphic);
 	
-	GS getStyle();
-	void setStyle(GS style);
+	GS getShape();
+	void setShape(GS style);
+	
+//	GS getStyle();
+//	void setStyle(GS style);
 	
 	boolean isCss();
 	void setCss(boolean css);

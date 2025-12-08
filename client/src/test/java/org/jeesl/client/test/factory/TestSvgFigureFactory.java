@@ -80,7 +80,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	public void testF1()
 	{
 		logger.info(f1.toString());
-		logger.info(f1.getStyle().toString());
+		logger.info(f1.getShape().toString());
 	}
 	
 	public void testA() throws IOException, TranscoderException
