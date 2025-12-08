@@ -137,7 +137,7 @@ public class JeeslIoGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescri
 
 		if(ObjectUtils.isNotEmpty(query.getIoGraphicShapes()))
 		{
-			Path<GS> pShape = root.get(JeeslGraphicComponent.Attributes.style.toString());
+			Path<GS> pShape = root.get(JeeslGraphicComponent.Attributes.shape.toString());
 			predicates.add(pShape.in(query.getIoGraphicShapes()));
 		}
 		return predicates;

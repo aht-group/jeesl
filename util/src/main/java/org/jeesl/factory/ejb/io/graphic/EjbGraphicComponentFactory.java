@@ -1,12 +1,13 @@
 package org.jeesl.factory.ejb.io.graphic;
 
-import java.util.HashMap;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
-import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
@@ -31,7 +32,7 @@ public class EjbGraphicComponentFactory<G extends JeeslGraphic<?,GC,GS>,
 		GC ejb = null;
         try
         {
-			ejb=cComponent.newInstance();
+			ejb=cComponent.getDeclaredConstructor().newInstance();
 			ejb.setGraphic(graphic);
 			ejb.setShape(style);
 			
@@ -42,8 +43,10 @@ public class EjbGraphicComponentFactory<G extends JeeslGraphic<?,GC,GS>,
 			ejb.setOffsetY(offsetY);
 			ejb.setRotation(rotation);
 		}
-        catch (InstantiationException e) {}
-        catch (IllegalAccessException e) {}
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
+		{
+			e.printStackTrace();
+		}
         
         return ejb;
     }
@@ -51,23 +54,28 @@ public class EjbGraphicComponentFactory<G extends JeeslGraphic<?,GC,GS>,
 	public GC build(G graphic)
 	{
 		GC ejb = null;
-        try
-        {
-			ejb=cComponent.newInstance();
+		try
+		{
+			ejb=cComponent.getDeclaredConstructor().newInstance();
 			ejb.setGraphic(graphic);
 		}
-        catch (InstantiationException e) {}
-        catch (IllegalAccessException e) {}
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
+		{
+			e.printStackTrace();
+		}
+		
         
         return ejb;
     }
 	
 	public <T extends EjbWithGraphic<G>> BidiMap<T,GC> toBidiMap(List<T> owners, List<GC> components)
 	{
-		Map<Long,T> mapOwners = EjbIdFactory.toIdMap(owners);
+		Map<Long, T> mapOwners = owners.stream().filter(t -> Objects.nonNull(t.getGraphic())).collect(Collectors.toMap(t -> t.getGraphic().getId(),t -> t ));
+		
 		BidiMap<T,GC> map = new DualHashBidiMap<>();
 		for(GC c : components)
 		{
+			
 			if(mapOwners.containsKey(c.getGraphic().getId()))
 			{
 				map.put(mapOwners.get(c.getGraphic().getId()),c);
