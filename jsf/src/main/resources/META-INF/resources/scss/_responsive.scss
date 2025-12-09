@@ -709,6 +709,23 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 		}
 	}
+	
+	.jeesl-fileupload {
+		border: none;
+		margin: 0;
+		
+		.ui-fileupload-buttonbar {
+			border: none;
+			
+			.ui-button .ui-icon.ui-icon-plusthick:before {
+				background-image: url(/erp/javax.faces.resource/ui/control/browser/upload.svg.xhtml?ln=jeeslGfx&buildVersion=1714471959);
+			}
+		}
+		
+		.ui-fileupload-content {
+			display: none;
+		}
+	}
 }
 
 @mixin jeesl-panel-titlebar {
