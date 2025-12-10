@@ -135,7 +135,7 @@
 				</f:facet>
 				<p:commandButton id="linkConfirm" 
 								 value="#{cc.attrs.confirmYes}"
-								 oncomplete="PF('#{cc.attrs.id}-cd').hide(); #{cc.attrs.oncomplete}"
+								 oncomplete="#{cc.attrs.oncomplete}"
 								 update="#{cc.attrs.update}"
 								 actionListener="#{cc.listener}"
 								 ajax="#{cc.attrs.ajax}"
