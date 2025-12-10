@@ -32,7 +32,8 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 	public List<Integer> getListColumns() {return listColumns;}
 	
 	private boolean analyseHeader; public boolean isAnalyseHeader() {return analyseHeader;} public void setAnalyseHeader(boolean analyseHeader) {this.analyseHeader = analyseHeader;}
-
+	protected boolean warnNullContent;
+	
 	public AbstractSsiXlsMapper()
 	{
 		mapColumnCode = new HashMap<>();
@@ -40,6 +41,7 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 		listColumns = new ArrayList<>();
 		
 		analyseHeader = true;
+		warnNullContent = true;
 	}
 	
 	private void clear()
@@ -132,7 +134,7 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 	public String toString(Row row, int index) throws UtilsConfigurationException
 	{
 		if(Objects.isNull(row)) {return null;}
-		if(Objects.isNull(row.getCell(index))) {logger.warn("NULL: "+row.getRowNum()+":"+index); return null;}
+		if(Objects.isNull(row.getCell(index))) {if(warnNullContent) {logger.warn("NULL: "+row.getRowNum()+":"+index);} return null;}
 		String value = row.getCell(index).getStringCellValue().trim();
 		if(ObjectUtils.isEmpty(value)) {return null;}
 		else return value;

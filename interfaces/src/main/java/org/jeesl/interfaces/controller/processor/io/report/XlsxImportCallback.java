@@ -9,5 +9,6 @@ public interface XlsxImportCallback
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsxImportCallback.class);
 	
+//	void x();
 	void callbackXlsxRow2Mongo(XlsxImportMapper xm, String fileName, int indexSheet, int indexRow, Row row) throws UtilsConfigurationException;
 }
