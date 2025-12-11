@@ -140,22 +140,32 @@ $border: $border-width solid var(--container-border-colour);
 }
 
 .jeesl-left {
+	--text-alignment: left;
+
 	text-align: left;
 }
 
 .jeesl-center {
+	--text-alignment: center;
+	
 	text-align: center;
 }
 
 .jeesl-right {
+	--text-alignment: right;
+	
 	text-align: right;
 }
 
 .jeesl-red {
+	--footer-foreground: var(--body-alert-foreground);
+
 	color: var(--body-alert-foreground);
 }
 
 .jeesl-grey {
+	--footer-foreground: var(--body-emphasis-foreground);
+	
 	color: var(--body-emphasis-foreground);
 }
 
