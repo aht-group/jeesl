@@ -104,13 +104,18 @@ public class XlsxRowCallbackImporter
 			{
 				if(Objects.nonNull(mapper) && mapper.isAnalyseHeader()) {mapper.buildRangeColumnIndex(r,0,indexColumnEnd);}
 			}
+			
+			
+			
 			if(rowIndex>=indexRowStart)
 			{
 				if(Objects.isNull(callback)) {throw new UtilsConfigurationException("No Callback");}
+				
+				logger.trace("Processing Index:{} Start:{}",rowIndex,indexRowStart);
 				callback.callbackXlsxRow2Mongo(mapper,fName,indexSheet,rowIndex,r);
 			}
 		}
-		indexRowStart = 2;
+//		indexRowStart = 2;
 		is.close();
 	}
 	

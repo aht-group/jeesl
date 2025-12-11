@@ -19,14 +19,6 @@ public class JsonGenderFactory<L extends JeeslLang, D extends JeeslDescription,S
 		this.localeCode=localeCode;
 		this.q=q;
 	}
-		
-	public static JsonGender build(String code, String label)
-	{
-		JsonGender json = new JsonGender();
-		json.setCode(code);
-		json.setLabel(label);
-		return json;
-	}
 	
 	public JsonGender build(S ejb)
 	{
@@ -37,6 +29,20 @@ public class JsonGenderFactory<L extends JeeslLang, D extends JeeslDescription,S
 		if(q.isSetLabel() && ejb.getName().containsKey(localeCode)){json.setLabel(ejb.getName().get(localeCode).getLang());}
 		if(q.isSetDescription() && ejb.getDescription().containsKey(localeCode)){json.setDescription(ejb.getDescription().get(localeCode).getLang());}
 	
+		return json;
+	}
+	
+	public static <E extends Enum<E>> JsonGender build(E code)
+	{
+		JsonGender json = new JsonGender();
+		json.setCode(code.toString());
+		return json;
+	}
+	public static JsonGender build(String code, String label)
+	{
+		JsonGender json = new JsonGender();
+		json.setCode(code);
+		json.setLabel(label);
 		return json;
 	}
 }
