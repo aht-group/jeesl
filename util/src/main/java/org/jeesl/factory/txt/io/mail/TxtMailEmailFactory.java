@@ -30,4 +30,9 @@ public class TxtMailEmailFactory
 			return input;
 		}
 	}
+	
+	public static boolean containsUmlautOrSpecial(String email)
+	{
+        return email.chars().anyMatch(ch -> ch > 127);
+    }
 }

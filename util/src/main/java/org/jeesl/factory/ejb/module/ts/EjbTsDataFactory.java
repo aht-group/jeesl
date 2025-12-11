@@ -93,7 +93,8 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 	}
 	public Map<LocalDate,DATA> toMapDate(List<DATA> list)
 	{
-		return list.stream().collect(Collectors.toMap(k -> DateUtil.toLocalDate(k.getRecord()), v -> v));
+		return list.stream()
+				.collect(Collectors.toMap(k -> DateUtil.toLocalDate(k.getRecord()), v -> v,  (existing, replacement) -> existing));
 	}
 	public Map<TS,DATA> toMapSeriesSingleData(List<DATA> list)
 	{

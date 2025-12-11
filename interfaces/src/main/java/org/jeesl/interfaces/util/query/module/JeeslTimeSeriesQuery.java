@@ -9,6 +9,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
+import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
@@ -21,7 +22,8 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								SRC extends JeeslTsDataSource2<?,?>,
 								BRIDGE extends JeeslTsBridge<?>,
 								INTV extends JeeslTsInterval<?,?,INTV,?>,
-								STAT extends JeeslTsStatistic<?,?,STAT,?>
+								STAT extends JeeslTsStatistic<?,?,STAT,?>,
+								DATA extends JeeslTsData<TS,TX,?,?,?>
 >
 			extends JeeslCoreQuery
 {
@@ -37,4 +39,5 @@ public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	List<TS> getTsSeries();
 	List<TX> getTsTransactions();
 	List<SRC> getTsDataSources();
+	List<DATA> getTsData();
 }
