@@ -24,4 +24,6 @@ public interface JeeslTsType <L extends JeeslLang, D extends JeeslDescription,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
 	public enum Code{ts,mp}
+	
+//	void x();
 }
