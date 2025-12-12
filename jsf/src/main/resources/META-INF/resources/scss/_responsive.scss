@@ -988,7 +988,7 @@ $enable-pointer-cursor-for-buttons: true;
 	border: none;
 	border-radius: $border-radius-bottom;
 	border-top: $border-width solid transparent;
-	color: var(--container-content-foreground);
+	color: var(--footer-foreground);
 	padding: $half-spacing $regular-spacing;
 			
 	@media (max-width: 768px) {
@@ -3678,9 +3678,17 @@ body, .ui-widget {
 			padding: $half-spacing $regular-spacing;
 			
 			> * {
-				font-weight: 500;
 				vertical-align: middle;
+				
+				&:not(.jeesl-bold) {
+					font-weight: 500;
+				}
 			}
+			
+//			> span {
+//				display: inline-block;
+//				width: 100%;
+//			}
 		}
 		
 		th {
@@ -3715,7 +3723,7 @@ body, .ui-widget {
 		@include jeesl-footer;
 
 		background: var(--container-content-background);
-		text-align: left;
+		text-align: var(--text-alignment);
 	}
 }
 
