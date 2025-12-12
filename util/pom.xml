@@ -362,13 +362,6 @@
             <scope>provided</scope>
         </dependency>
         
-        <!--
-		<dependency>
-  			<groupId>org.jboss.spec.javax.ws.rs</groupId>
-  			<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
-  			<version>1.0.1.Beta1</version>
-  			<scope>provided</scope>
-  		</dependency> -->
   		<dependency>
 		    <groupId>javax.ws.rs</groupId>
 		    <artifactId>javax.ws.rs-api</artifactId>
@@ -448,6 +441,45 @@
 			<version>1.2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- JSON Jackson
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<scope>test</scope>
+		</dependency>
+		-->
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		   <groupId>com.fasterxml.jackson.datatype</groupId>
+		   <artifactId>jackson-datatype-jsr310</artifactId>
+		   <scope>test</scope>
+		</dependency>
+		<dependency>
+		   <groupId>com.fasterxml.jackson.datatype</groupId>
+		   <artifactId>jackson-datatype-jsr310</artifactId>
+		   <scope>provided</scope>
+		</dependency> 
         
         <!-- PWD Security -->
 		<dependency>
@@ -461,12 +493,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<scope>provided</scope>
-		</dependency> -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j2-impl</artifactId>

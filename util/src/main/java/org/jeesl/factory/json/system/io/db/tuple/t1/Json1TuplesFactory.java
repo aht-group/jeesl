@@ -1,5 +1,6 @@
 package org.jeesl.factory.json.system.io.db.tuple.t1;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -211,13 +212,13 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		{	// A object is created and the corresponding id is set
 			for(JsonTuple1<A> t : json.getTuples())
 			{
-//				JsonUtil.info(t);
+//				logger.info("ejb1Load: t is null ?{}  t.id={}",Objects.isNull(t),Objects.nonNull(t) ? Objects.isNull(t.getId1()) : "-");
 				try
 				{
-					t.setEjb1(cA.newInstance());
+					t.setEjb1(cA.getDeclaredConstructor().newInstance());
 					t.getEjb1().setId(t.getId1());
 				}
-				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+				catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
 			}
 		}
 		else

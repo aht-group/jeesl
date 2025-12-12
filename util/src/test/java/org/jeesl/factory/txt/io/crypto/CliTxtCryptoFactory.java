@@ -16,13 +16,17 @@ import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestTxtCryptoFactory
+public class CliTxtCryptoFactory
 {
-	final static Logger logger = LoggerFactory.getLogger(TestTxtCryptoFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(CliTxtCryptoFactory.class);
 
-	public void cli() throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, NoSuchPaddingException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException
+	public CliTxtCryptoFactory()
 	{
 		
+	}
+	
+	public void cli() throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, NoSuchPaddingException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException
+	{
 		String plainText = "www.jeesl.org";
 	    
 		String pwdSecret = "jeesl";
@@ -31,21 +35,22 @@ public class TestTxtCryptoFactory
 	    String memoIv = TxtCryptoFactory.buildIv();
 	    memoIv = "BNrK91cdNzYTy9BszXkkpQ==";
 	    
-	    SecretKey key = AbstractSessionKeystore.getKeyFromPassword(pwdSecret,pwdSalt);
+	    SecretKey key = TxtCryptoFactory.getKeyFromPassword(pwdSecret,pwdSalt);
 	    IvParameterSpec iv = TxtCryptoFactory.buildIv(memoIv);
 	    
 	    String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,plainText,key,iv);
 	    String decryptedCipherText = TxtCryptoFactory.decrypt(TxtCryptoFactory.encrpytionAlgorithm,cipherText,key,iv);
 	  
-	    logger.info(memoIv);
-	    logger.info(cipherText);
-	    logger.info(decryptedCipherText);
+	    logger.info("Clear:    {}",plainText);
+	    logger.info("IV:       {}",memoIv);
+	    logger.info("Ciper:    {}",cipherText);
+	    logger.info("Decrypted {}",decryptedCipherText);
 	}
 
 	public static void main(String[] args) throws Exception
 	{
 		JeeslBootstrap.init();
-		TestTxtCryptoFactory cli = new TestTxtCryptoFactory();
+		CliTxtCryptoFactory cli = new CliTxtCryptoFactory();
 		cli.cli();
 	}
 }

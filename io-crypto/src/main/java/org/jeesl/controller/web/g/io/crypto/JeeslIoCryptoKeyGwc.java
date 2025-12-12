@@ -30,8 +30,8 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.io.crypto.TxtCryptoFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyLifetime;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStore;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -39,7 +39,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.jsf.handler.PositionListReorderer;
-import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -156,7 +155,7 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 		logger.info("Unsaved: "+EjbIdFactory.isUnSaved(key));
 		if(ObjectUtils.isEmpty(pwd)) {return;}
 		
-		secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getSalt());
+		secret = TxtCryptoFactory.getKeyFromPassword(pwd,key.getSalt());
 		 
 		if(EjbIdFactory.isUnSaved(key))
 		{

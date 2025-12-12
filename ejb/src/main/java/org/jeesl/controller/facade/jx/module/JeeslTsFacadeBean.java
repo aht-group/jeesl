@@ -1007,7 +1007,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		{
 			if(Objects.isNull(jTs)) {jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());}
 			if(Objects.isNull(jScope)) {jScope = jTs.join(JeeslTimeSeries.Attributes.scope.toString());}
-			Path<TYPE> pType = jTs.get(JeeslTimeSeries.Attributes.scope.toString());
+			Path<TYPE> pType = jScope.get(JeeslTsScope.Attributes.type.toString());
 			predicates.add(pType.in(query.getTsTypes()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getTsTransactions()))

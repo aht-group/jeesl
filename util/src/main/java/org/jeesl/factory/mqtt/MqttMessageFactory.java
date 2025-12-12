@@ -7,14 +7,14 @@ import org.exlp.util.io.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 public class MqttMessageFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(MqttMessageFactory.class);
 	
 	private int qos;
 	private boolean retained;
+	
+	private String valueString;
 	private Double valueDouble;
 	private Object valueJson;
 	
@@ -34,6 +34,7 @@ public class MqttMessageFactory
 	}
 	
 	public MqttMessageFactory value(double value) {this.valueDouble = value; return this;}
+	public MqttMessageFactory value(String value) {this.valueString = value; return this;}
 	public MqttMessageFactory json(Object json) {this.valueJson = json; return this;}
 	
 	public MqttMessageFactory retained(boolean retained) {this.retained = retained; return this;}
@@ -42,7 +43,8 @@ public class MqttMessageFactory
 	{
 		byte[] bytes = null;
 		
-		if(Objects.nonNull(valueDouble)) {bytes = JsonUtil.instance().toByte(valueDouble);}
+		if(Objects.nonNull(valueString)) {bytes = JsonUtil.instance().toByte(valueString);}
+		else if(Objects.nonNull(valueDouble)) {bytes = JsonUtil.instance().toByte(valueDouble);}
 		else if(Objects.nonNull(valueJson)) {bytes = JsonUtil.instance().toByte(valueJson);}
 		
 		MqttMessage msg = new MqttMessage(bytes);

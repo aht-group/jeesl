@@ -99,8 +99,8 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	protected List<EjbWithPosition> parents; public List<EjbWithPosition> getParents(){return parents;}
 	protected List<EjbWithPosition> items; public List<EjbWithPosition> getItems() {return items;}
 	protected List<GT> graphicTypes; public List<GT> getGraphicTypes() {return graphicTypes;}
-	protected List<GS> graphicStyles; public List<GS> getGraphicStyles() {return graphicStyles;}
-	protected List<GC> figures; public List<GC> getFigures() {return figures;}
+	protected List<GS> graphicStyles; public List<GS> getGraphicStyles() {return graphicStyles;} public List<GS> getGraphicShapes() {return graphicStyles;}
+	private List<GC> figures; public List<GC> getFigures() {return figures;}
 	
 	protected boolean supportsSymbol; public boolean getSupportsSymbol(){return supportsSymbol;}
 	protected boolean supportsLocked; public boolean isSupportsLocked() {return supportsLocked;}

@@ -1,22 +1,16 @@
 package org.jeesl.model.ejb.system.security;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.SecretKeySpec;
 
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStore;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,13 +60,5 @@ public abstract class AbstractSessionKeystore <KEY extends JeeslIoCryptoKey<?,?>
 	{
 		if(mapKey.containsKey(key)) {return mapKey.get(key);}
 		return null;
-	}
-	
-	public static SecretKey getKeyFromPassword(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException
-	{
-		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 256);
-		SecretKey secret = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
-		return secret;
 	}
 }

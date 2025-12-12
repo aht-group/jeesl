@@ -168,7 +168,7 @@
 								
 					<j:inputGrid rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
 						<jtp:label entity="IoGraphic" code="style"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.graphic.shape}" effect="fade">
+						<p:selectOneMenu value="#{cc.attrs.bean.graphic.style}" effect="fade">
 							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
@@ -245,7 +245,7 @@
 					</p:column>
 					<p:column>
 			             <f:facet name="header"><jtp:label entity="IoGraphicComponent" code="shape"/></f:facet>
-			             <jtp:symbolizer value="#{cshape}" marginRight="5"/>
+			             <jtp:symbolizer value="#{c.shape}" marginRight="5"/>
 			             <h:outputText value="#{c.shape.name[localeCode].lang}"/>
 					</p:column>
 					<p:column>
@@ -276,7 +276,7 @@
 						
 						<jtp:label entity="IoGraphicComponent" code="shape"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.component.shape}" effect="fade">
-							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+							<f:selectItems value="#{cc.attrs.bean.graphicShapes}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
 						<jtp:label entity="IoGraphicComponent" code="size"/>

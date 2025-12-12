@@ -11,15 +11,15 @@ import org.jeesl.api.facade.io.JeeslIoCryptoFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.handler.io.crypto.JeeslMemoryKeyStore;
 import org.jeesl.factory.builder.io.IoCryptoFactoryBuilder;
+import org.jeesl.factory.txt.io.crypto.TxtCryptoFactory;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyLifetime;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStore;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
 
 public class JeeslIoCryptoFacadeBean <L extends JeeslLang,D extends JeeslDescription,
 										KEY extends JeeslIoCryptoKey<USER,KS>,
@@ -45,7 +45,7 @@ public class JeeslIoCryptoFacadeBean <L extends JeeslLang,D extends JeeslDescrip
 		KT state = null;
 		try
 		{
-			secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getSalt());
+			secret = TxtCryptoFactory.getKeyFromPassword(pwd,key.getSalt());
 			state = this.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked);
 		}
 		catch (NoSuchAlgorithmException | InvalidKeySpecException e)
