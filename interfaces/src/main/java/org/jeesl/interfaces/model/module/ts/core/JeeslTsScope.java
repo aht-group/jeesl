@@ -35,7 +35,7 @@ public interface JeeslTsScope <L extends JeeslLang, D extends JeeslDescription,
 				EjbWithPositionVisibleParent,EjbWithParentAttributeResolver,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>,JeeslWithCategory<CAT>
 {
-	public enum Attributes{code,category,multiPoints}
+	public enum Attributes{code,category,multiPoints,type}
 	public enum Statistic{none}
 	
 	CAT getCategory();
