@@ -34,7 +34,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -79,7 +79,7 @@ public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 						
 						CAT extends JeeslTsCategory<L,D,CAT,?>,
 						SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
-						ST extends JeeslTsScopeType<L,D,ST,?>,
+						ST extends JeeslTsType<L,D,ST,?>,
 						UNIT extends JeeslStatus<L,D,UNIT>,
 						MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 						TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,

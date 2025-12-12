@@ -25,7 +25,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 							CAT extends JeeslTsCategory<L,D,CAT,?>,
 							SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
-							ST extends JeeslTsScopeType<L,D,ST,?>,
+							ST extends JeeslTsType<L,D,ST,?>,
 							UNIT extends JeeslStatus<L,D,UNIT>,
 							MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 							TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
@@ -109,7 +109,7 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 			jSeries.setScope(jfScope.build(ts.getScope()));
 			jSeries.setWorkspace(jfWorkspace.build(workspace));
 			jSeries.setInterval(jfInterval.build(interval));
-			switch(JeeslTsScopeType.Code.valueOf(scope.getType().getCode()))
+			switch(JeeslTsType.Code.valueOf(scope.getType().getCode()))
 			{
 				case ts: break; 
 				case mp: jSeries.setDatas(multiPoints(jSeries,workspace,ts,DateUtil.toDate(now.minusMinutes(minutes)),DateUtil.toDate(now))); break;

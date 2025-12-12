@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 public class TsDbPoolProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 									SCOPE extends JeeslTsScope<?,?,?,ST,?,EC,INT>,
-									ST extends JeeslTsScopeType<?,?,ST,?>,
+									ST extends JeeslTsType<?,?,ST,?>,
 									MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 									TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
 									TRANSACTION extends JeeslTsTransaction<?,DATA,?,?>,

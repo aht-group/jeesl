@@ -22,7 +22,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CAT extends JeeslTsCategory<L,D,CAT,?>,
 											SCOPE extends JeeslTsScope<L,D,CAT,TYPE,UNIT,EC,INT>,
-											TYPE extends JeeslTsScopeType<L,D,TYPE,?>,
+											TYPE extends JeeslTsType<L,D,TYPE,?>,
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
@@ -137,7 +137,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 		scope = fbTs.ejbScope().build(null);
 		scope.setName(efLang.createEmpty(localeCodes));
 		scope.setDescription(efDescription.createEmpty(localeCodes));
-		scope.setType(fTs.fByCode(fbTs.getClassScopeType(), JeeslTsScopeType.Code.ts));
+		scope.setType(fTs.fByCode(fbTs.getClassScopeType(), JeeslTsType.Code.ts));
 		scope.setUnit(fTs.fByCode(fbTs.getClassUnit(), JeeslTsUnit.Code.event));
 	}
 	

@@ -26,7 +26,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									CAT extends JeeslTsCategory<L,D,CAT,?>,
 									SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
-									ST extends JeeslTsScopeType<L,D,ST,?>,
+									ST extends JeeslTsType<L,D,ST,?>,
 									UNIT extends JeeslStatus<L,D,UNIT>,
 									MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 									TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,

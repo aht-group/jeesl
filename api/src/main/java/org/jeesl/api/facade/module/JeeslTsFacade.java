@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -30,7 +30,7 @@ import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
 public interface JeeslTsFacade <CAT extends JeeslTsCategory<?,?,CAT,?>,
 								SCOPE extends JeeslTsScope<?,?,CAT,TYPE,UNIT,EC,INTERVAL>,
-								TYPE extends JeeslTsScopeType<?,?,TYPE,?>,
+								TYPE extends JeeslTsType<?,?,TYPE,?>,
 								UNIT extends JeeslStatus<?,?,UNIT>,
 								MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,STAT>,

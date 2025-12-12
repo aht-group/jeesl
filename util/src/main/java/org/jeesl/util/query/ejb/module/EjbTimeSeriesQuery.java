@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								SCOPE extends JeeslTsScope<?,?,CAT,?,?,?,INTERVAL>,
-								TYPE extends JeeslTsScopeType<?,?,TYPE,?>,
+								TYPE extends JeeslTsType<?,?,TYPE,?>,
 								MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,STAT>,
 								TX extends JeeslTsTransaction<?,?,?,?>,

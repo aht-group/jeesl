@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
@@ -17,7 +17,7 @@ import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 
 public interface JeeslTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 								SCOPE extends JeeslTsScope<?,?,CAT,?,?,?,INTV>,
-								TYPE extends JeeslTsScopeType<?,?,TYPE,?>,
+								TYPE extends JeeslTsType<?,?,TYPE,?>,
 								MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTV,STAT>,
 								TX extends JeeslTsTransaction<?,?,?,?>,

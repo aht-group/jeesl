@@ -17,7 +17,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
-import org.jeesl.interfaces.model.module.ts.core.JeeslTsScopeType;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsType;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractTimeSeriesProcessor<SCOPE extends JeeslTsScope<?,?,?,ST,?,EC,INT>,
-									ST extends JeeslTsScopeType<?,?,ST,?>,
+									ST extends JeeslTsType<?,?,ST,?>,
 									MP extends JeeslTsMultiPoint<?,?,SCOPE,?,?>,
 									TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
 									TRANSACTION extends JeeslTsTransaction<?,DATA,?,?>,
@@ -119,7 +119,7 @@ public class AbstractTimeSeriesProcessor<SCOPE extends JeeslTsScope<?,?,?,ST,?,E
 		mps.clear();
 		if(scope!=null && scope.getType()!=null && scope.getType().getCode()!=null)
 		{
-			if(scope.getType().getCode().equals(JeeslTsScopeType.Code.mp.toString()))
+			if(scope.getType().getCode().equals(JeeslTsType.Code.mp.toString()))
 			{
 				mps.addAll(fTs.allForParent(fbTs.getClassMp(),scope));
 			}

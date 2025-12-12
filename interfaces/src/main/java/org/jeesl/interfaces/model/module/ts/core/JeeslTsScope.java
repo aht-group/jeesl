@@ -25,7 +25,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslTsScope <L extends JeeslLang, D extends JeeslDescription,
 									CAT extends JeeslTsCategory<L,D,CAT,?>,
-									ST extends JeeslTsScopeType<L,D,ST,?>,
+									ST extends JeeslTsType<L,D,ST,?>,
 									UNIT extends JeeslStatus<L,D,UNIT>,
 									EC extends JeeslTsEntityClass<L,D,CAT,?>,
 									INT extends JeeslTsInterval<L,D,INT,?>

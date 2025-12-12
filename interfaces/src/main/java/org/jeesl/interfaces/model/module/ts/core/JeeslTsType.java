@@ -15,7 +15,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslTsScopeType <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslTsType <L extends JeeslLang, D extends JeeslDescription,
 								S extends JeeslStatus<L,D,S>,
 								G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
