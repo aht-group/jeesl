@@ -45,8 +45,8 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CAT extends JeeslTsCategory<L,D,CAT,?>,
-											SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
-											ST extends JeeslTsScopeType<L,D,ST,?>,
+											SCOPE extends JeeslTsScope<L,D,CAT,TYPE,UNIT,EC,INT>,
+											TYPE extends JeeslTsScopeType<L,D,TYPE,?>,
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
@@ -64,7 +64,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,TYPE,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -83,7 +83,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 	private TS ts; public TS getTs() {return ts;} public void setTs(TS ts) {this.ts = ts;}
 
 
-	public AbstractTsSummaryBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractTsSummaryBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,TYPE,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		mapBridge = new HashMap<Long,EjbWithId>();
@@ -92,7 +92,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		th = new JsonTuple1Handler<TS>(fbTs.getClassTs());
 	}
 
-	protected void postConstructSummary(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
+	protected void postConstructSummary(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<CAT,SCOPE,TYPE,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhClass.update(fTs.all(fbTs.getClassEntity()));
@@ -130,7 +130,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 		if(bridges.size() > 0)
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query = new EjbTimeSeriesQuery<>();
+			EjbTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query = new EjbTimeSeriesQuery<>();
 			query.addTsBridges(bridges);
 			
 			series = fTs.fTsSeries(query);

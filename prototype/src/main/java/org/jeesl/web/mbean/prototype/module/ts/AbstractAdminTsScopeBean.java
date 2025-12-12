@@ -43,8 +43,8 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CAT extends JeeslTsCategory<L,D,CAT,?>,
-											SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
-											ST extends JeeslTsScopeType<L,D,ST,?>,
+											SCOPE extends JeeslTsScope<L,D,CAT,TYPE,UNIT,EC,INT>,
+											TYPE extends JeeslTsScopeType<L,D,TYPE,?>,
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
@@ -62,7 +62,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,TYPE,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -70,7 +70,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 
 	protected List<SCOPE> scopes; public List<SCOPE> getScopes() {return scopes;}
 	protected List<UNIT> units; public List<UNIT> getUnits() {return units;}
-	protected List<ST> scopeTypes; public List<ST> getScopeTypes() {return scopeTypes;}
+	protected List<TYPE> scopeTypes; public List<TYPE> getScopeTypes() {return scopeTypes;}
 	protected List<MP> multiPoints; public List<MP> getMultiPoints() {return multiPoints;}
 	protected List<INT> opIntervals; public List<INT> getOpIntervals() {return opIntervals;}
 	protected List<EC> opClasses; public List<EC> getOpClasses() {return opClasses;}
@@ -83,12 +83,12 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 	protected EC opClass;public EC getOpClass() {return opClass;}public void setOpClass(EC opClass) {this.opClass = opClass;}
 	protected EC tbClass;public EC getTbClass() {return tbClass;}public void setTbClass(EC tbClass) {this.tbClass = tbClass;}
 	
-	public AbstractAdminTsScopeBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractAdminTsScopeBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,TYPE,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 	}
 	
-	protected void postConstructScope(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, JeeslFacesMessageBean bMessage)
+	protected void postConstructScope(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslTsFacade<CAT,SCOPE,TYPE,UNIT,MP,TS,TX,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs, JeeslFacesMessageBean bMessage)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		initLists();
@@ -124,7 +124,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 		if(debugOnInfo){logger.info("reloadScopes");}
 //		scopes = fTs.fTsScopes(HrmTsQuery.instance().addCategories(sbhCategory.getSelected()));
 		
-		EjbTimeSeriesQuery<CAT,SCOPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query = new EjbTimeSeriesQuery<>();
+		EjbTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query = new EjbTimeSeriesQuery<>();
 		query.addTsCategories(sbhCategory.getSelected());
 		
 		scopes = fTs.fTsScopes(query);

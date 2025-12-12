@@ -43,8 +43,8 @@ import org.slf4j.LoggerFactory;
 
 public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								CAT extends JeeslTsCategory<L,D,CAT,?>,
-								SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
-								ST extends JeeslTsScopeType<L,D,ST,?>,
+								SCOPE extends JeeslTsScope<L,D,CAT,TYPE,UNIT,EC,INT>,
+								TYPE extends JeeslTsScopeType<L,D,TYPE,?>,
 								UNIT extends JeeslStatus<L,D,UNIT>,
 								MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT,?>,
 								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
@@ -71,7 +71,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	private final Class<LOC> cLocale; public Class<LOC> getClassLocale() {return cLocale;}
 	private final Class<CAT> cCategory; public Class<CAT> getClassCategory() {return cCategory;}
 	private final Class<SCOPE> cScope; public Class<SCOPE> getClassScope() {return cScope;}
-	private final Class<ST> cScopeType; public Class<ST> getClassScopeType() {return cScopeType;}
+	private final Class<TYPE> cScopeType; public Class<TYPE> getClassScopeType() {return cScopeType;}
 	private final Class<UNIT> cUnit; public Class<UNIT> getClassUnit()  {return cUnit;}
 	private final Class<MP> cMp; public Class<MP> getClassMp() {return cMp;}
 	private final Class<TS> cTs; public Class<TS> getClassTs() {return cTs;}
@@ -89,7 +89,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	public TsFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<LOC> cLocale,
 							final Class<CAT> cCategory,
 							final Class<SCOPE> cScope,
-							final Class<ST> cScopeType,
+							final Class<TYPE> cScopeType,
 							final Class<UNIT> cUnit,
 							final Class<MP> cMp,
 							final Class<TS> cTs,
@@ -133,7 +133,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 	public EjbTsMutliPointFactory<SCOPE,MP> ejbMultiPoint() {return new EjbTsMutliPointFactory<>(cMp);}
 	public EjbTsCronFactory<SCOPE,INT,STAT,CRON> ejbCron() {return new EjbTsCronFactory<SCOPE,INT,STAT,CRON>(cCron);}
 	
-	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
+	public McTimeSeriesFactory<SCOPE,MP,TS,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS> metaChart(JeeslTsFacade<CAT,SCOPE,TYPE,UNIT,MP,TS,TRANSACTION,SRC,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,CRON> fTs)
 	{
 		return new McTimeSeriesFactory<>(this,fTs);
 	}

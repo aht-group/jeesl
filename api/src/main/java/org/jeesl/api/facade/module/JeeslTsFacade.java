@@ -28,34 +28,34 @@ import org.jeesl.interfaces.util.query.module.JeeslTimeSeriesQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
-public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>,
-								SCOPE extends JeeslTsScope<?,?,CATEGORY,ST,UNIT,EC,INTERVAL>,
-								ST extends JeeslTsScopeType<?,?,ST,?>,
+public interface JeeslTsFacade <CAT extends JeeslTsCategory<?,?,CAT,?>,
+								SCOPE extends JeeslTsScope<?,?,CAT,TYPE,UNIT,EC,INTERVAL>,
+								TYPE extends JeeslTsScopeType<?,?,TYPE,?>,
 								UNIT extends JeeslStatus<?,?,UNIT>,
 								MP extends JeeslTsMultiPoint<?,?,SCOPE,UNIT,?>,
-								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,TYPE>,
+								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,STAT>,
 								TX extends JeeslTsTransaction<SRC,DATA,USER,?>,
 								SRC extends JeeslTsDataSource2<?,?>,
 //								SRC extends JeeslTsDataSource<?,?,SRC,?>, 
 								BRIDGE extends JeeslTsBridge<EC>,
-								EC extends JeeslTsEntityClass<?,?,CATEGORY,ENTITY>,
+								EC extends JeeslTsEntityClass<?,?,CAT,ENTITY>,
 								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 								INTERVAL extends JeeslTsInterval<?,?,INTERVAL,?>,
-								TYPE extends JeeslTsStatistic<?,?,TYPE,?>,
+								STAT extends JeeslTsStatistic<?,?,STAT,?>,
 								DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 								POINT extends JeeslTsDataPoint<DATA,MP>,
 								SAMPLE extends JeeslTsSample, 
 								USER extends EjbWithId, 
 								WS extends JeeslStatus<?,?,WS>,
 								
-								CRON extends JeeslTsCron<SCOPE,INTERVAL,TYPE>>
+								CRON extends JeeslTsCron<SCOPE,INTERVAL,STAT>>
 			extends JeeslFacade
 {
 	public enum Extrema{max,min} //avg
 	
-	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
-	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
-	List<EC> findClasses(Class<EC> cClass, Class<CATEGORY> cCategory, List<CATEGORY> categories, boolean showInvisibleClasses);
+	List<SCOPE> fTsScopes(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	List<MP> fTsMultiPoints(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	List<EC> findClasses(Class<EC> cClass, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleClasses);
 	
 	<T extends EjbWithId> BRIDGE fBridge(EC entityClass, T ejb) throws JeeslNotFoundException;
 	<T extends EjbWithId> BRIDGE fcBridge(Class<BRIDGE> cBridge, EC entityClass, T ejb) throws JeeslConstraintViolationException;
@@ -63,40 +63,41 @@ public interface JeeslTsFacade <CATEGORY extends JeeslTsCategory<?,?,CATEGORY,?>
 	
 	boolean isTimeSeriesAllowed(SCOPE scope, INTERVAL interval, EC c);
 	
-	TS fTimeSeries(SCOPE scope, INTERVAL interval, TYPE statistic, BRIDGE bridge) throws JeeslNotFoundException;
-	TS fcTimeSeries(SCOPE scope, INTERVAL interval, TYPE statistic, BRIDGE bridge) throws JeeslConstraintViolationException;
+	TS fTimeSeries(SCOPE scope, INTERVAL interval, STAT statistic, BRIDGE bridge) throws JeeslNotFoundException;
+	TS fcTimeSeries(SCOPE scope, INTERVAL interval, STAT statistic, BRIDGE bridge) throws JeeslConstraintViolationException;
 
 	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
 	List<TS> fTimeSeries(SCOPE scope, INTERVAL interval, EC entityClass);
-	List<TS> fTsSeries(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
+	List<TS> fTsSeries(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 	
 	DATA fDataLast(TS series) throws JeeslNotFoundException;
 	List<DATA> fDataFirst(List<TS> list);
 	List<DATA> fDataLast(List<TS> list);
 	
-	List<DATA> fTsData(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
-	List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
-	List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
+	List<DATA> fTsData(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
+	List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	List<DATA> fTsDataDuplicates(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);
 	List<DATA> fData(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
-	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
+	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 //	List<POINT> fTsPoints(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
 	List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	List<POINT> fPoints(WS workspace, List<TS> timeSeries, List<MP> mps, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
 	List<TX> fTransactions(List<USER> users, JeeslTsData.QueryInterval interval, Date from, Date to);
-	List<TX> fTsTransactions(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
+	List<TX> fTsTransactions(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 	
 	void deleteTsSeries(TS series) throws JeeslConstraintViolationException;
 	void deleteTransaction(TX transaction) throws JeeslConstraintViolationException;
 	
-	JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
-	JsonTuples2<TS,MP> fTsPointAggregation(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
+	JsonTuples1<TS> fTsDataAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	JsonTuples2<TS,MP> fTsPointAggregation(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 	JsonTuples1<TS> tpcTsDataByTs(List<TS> series);
-	JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
-	JsonTuples1<SCOPE> tpTsDataByScope(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
-	JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CATEGORY,SCOPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,TYPE,DATA> query);
+	JsonTuples1<TS> tpTsDataByTs(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	JsonTuples1<SCOPE> tpTsDataByScope(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	JsonTuples1<TX> tpcTsDataByTx(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 }
