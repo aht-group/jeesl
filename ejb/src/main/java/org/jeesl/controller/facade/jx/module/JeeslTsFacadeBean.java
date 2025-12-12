@@ -987,6 +987,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
 		Join<DATA,TS> jTs = null;
+		Join<TS,SCOPE> jScope = null;
 		Join<DATA,TX> jTx = null;
 		
 		if(ObjectUtils.isNotEmpty(query.getTsData())) {predicates.add(root.in(query.getTsData()));}
@@ -999,8 +1000,15 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		if(ObjectUtils.isNotEmpty(query.getTsScopes()))
 		{
 			if(Objects.isNull(jTs)) {jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());}
-			Path<SCOPE> pScope = jTs.get(JeeslTimeSeries.Attributes.scope.toString());
-			predicates.add(pScope.in(query.getTsScopes()));
+			if(Objects.isNull(jScope)) {jScope = jTs.join(JeeslTimeSeries.Attributes.scope.toString());}
+			predicates.add(jScope.in(query.getTsScopes()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getTsTypes()))
+		{
+			if(Objects.isNull(jTs)) {jTs = root.join(JeeslTsData.Attributes.timeSeries.toString());}
+			if(Objects.isNull(jScope)) {jScope = jTs.join(JeeslTimeSeries.Attributes.scope.toString());}
+			Path<TYPE> pType = jTs.get(JeeslTimeSeries.Attributes.scope.toString());
+			predicates.add(pType.in(query.getTsTypes()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getTsTransactions()))
 		{

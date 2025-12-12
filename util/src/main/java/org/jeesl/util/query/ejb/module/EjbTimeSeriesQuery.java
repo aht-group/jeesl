@@ -77,6 +77,9 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	public EjbTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> add(SCOPE scope) {if(Objects.isNull(tsScopes)) {tsScopes = new ArrayList<>();} tsScopes.add(scope); return this;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> addTsScopes(List<SCOPE> list) {if(Objects.isNull(tsScopes)) {tsScopes = new ArrayList<>();} tsScopes.addAll(list); return this;}
 
+	private List<TYPE> tsTypes;
+	@Override public List<TYPE> getTsTypes() {return tsTypes;}
+	
 	private List<MP> tsMultiPoints;
 	@Override public List<MP> getTsMultiPoints() {return tsMultiPoints;}
 	
@@ -100,8 +103,8 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	private List<SRC> tsDataSources;
 	@Override public List<SRC> getTsDataSources() {return tsDataSources;}
 	
-	private List<STAT> tsTypes;
-	@Override public List<STAT> getTsTypes() {return tsTypes;}
+	private List<STAT> tsStatistics;
+	@Override public List<STAT> getTsStatistics() {return tsStatistics;}
 	
 	private List<DATA> tsData;
 	@Override public List<DATA> getTsData() {return tsData;}
