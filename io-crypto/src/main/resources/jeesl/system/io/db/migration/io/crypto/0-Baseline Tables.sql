@@ -1,0 +1,1 @@
+create table IoCryptoKey (id  bigserial not null, hash varchar(255), iv varchar(255), name varchar(255), position int4 not null, record timestamp, salt varchar(255), verification varchar(255), lifetime_id int8, user_id int8, primary key (id));

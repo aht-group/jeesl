@@ -3,9 +3,11 @@ package org.jeesl.model.ejb.io.crypto;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -29,6 +31,7 @@ public class IoCryptoKey implements JeeslIoCryptoKey<SecurityUser,IoCryptoKeyLif
 	
 	@Override public String resolveParentAttribute() {return JeeslIoCryptoKey.Attributes.user.toString();}
 	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoCryptoKey_user"))
 	private SecurityUser user;
 	@Override public SecurityUser getUser() {return user;}
 	@Override public void setUser(SecurityUser user) {this.user = user;}
@@ -45,9 +48,11 @@ public class IoCryptoKey implements JeeslIoCryptoKey<SecurityUser,IoCryptoKeyLif
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	
-	private IoCryptoKeyLifetime status;
-	@Override public IoCryptoKeyLifetime getStatus() {return status;}
-	@Override public void setStatus(IoCryptoKeyLifetime status) {this.status = status;}
+	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoCryptoKey_lifetime"))
+	private IoCryptoKeyLifetime lifetime;
+	@Override public IoCryptoKeyLifetime getLifetime() {return lifetime;}
+	@Override public void setLifetime(IoCryptoKeyLifetime lifetime) {this.lifetime = lifetime;}
 	
 	@NotNull
 	private String salt;
@@ -64,7 +69,11 @@ public class IoCryptoKey implements JeeslIoCryptoKey<SecurityUser,IoCryptoKeyLif
 	@Override public String getVerification() {return verification;}
 	@Override public void setVerification(String verification) {this.verification = verification;}
 
-
+	@NotNull
+	private String hash;
+	@Override public String getHash() {return hash;}
+	@Override public void setHash(String hash) {this.hash = hash;}
+	
 	@Override public boolean equals(Object object) {return (object instanceof IoCryptoKey) ? id == ((IoCryptoKey) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(23,13).append(id).toHashCode();}
 	
@@ -74,4 +83,5 @@ public class IoCryptoKey implements JeeslIoCryptoKey<SecurityUser,IoCryptoKeyLif
 		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}
+	
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayIoCryptoVersionMarker;
+import org.jeesl.model.ejb.io.crypto.IoCryptoKey;
+import org.jeesl.model.ejb.io.crypto.IoCryptoKeyLifetime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +26,8 @@ public class FlywayIoCryptoPathProvider implements FlywayIoCryptoVersionMarker,J
 	@Override public List<Class<?>> getMdsClasses()
 	{
 		List<Class<?>> list = new ArrayList<>();
-//		list.add(IoCryptoKey.class);
+		list.add(IoCryptoKey.class);
+		list.add(IoCryptoKeyLifetime.class);
 		return list;
 	}
 }

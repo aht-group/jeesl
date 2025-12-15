@@ -1,0 +1,2 @@
+alter table IoCryptoKey add constraint fk_IoCryptoKey_lifetime foreign key (lifetime_id) references IoStatus;
+alter table IoCryptoKey add constraint fk_IoCryptoKey_user foreign key (user_id) references SecurityUser;

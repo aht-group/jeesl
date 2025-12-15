@@ -9,16 +9,15 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
-import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
-									STATUS extends JeeslIoCryptoKeyLifetime<?,?,STATUS,?>>
+									LIFE extends JeeslIoCryptoKeyLifetime<?,?,LIFE,?>>
 						extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
-								EjbWithPosition,JeeslWithStatus<STATUS>,EjbWithParentAttributeResolver
+								EjbWithPosition,EjbWithParentAttributeResolver
 								
 {	
 	public enum Attributes{user}
@@ -37,4 +36,10 @@ public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
 		
 	String getVerification();
 	void setVerification(String verification);
+	
+	String getHash();
+	void setHash(String hash);
+	
+	LIFE getLifetime();
+	void setLifetime(LIFE lifetime);
 }
