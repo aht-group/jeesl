@@ -161,6 +161,7 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 		{
 			 IvParameterSpec iv = TxtCryptoFactory.buildIv(key.getIv());
 			 key.setVerification(TxtCryptoFactory.encrypt(secret,iv,memo));
+			 key.setHash(TxtCryptoFactory.toHash(memo));
 			 key = fCrypto.save(key);
 			 sessionKeystore.enable(key,fCrypto.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked), secret);
 			 this.reloadKeys();

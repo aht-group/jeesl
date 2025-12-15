@@ -2,6 +2,7 @@ package org.jeesl.factory.txt.io.crypto;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -41,6 +42,9 @@ public class TxtCryptoFactory
 //	    logger.info("IV Length:"+iv.length);
 	    return new IvParameterSpec(iv);
 	}
+	
+	
+	
 	public static String encrypt(SecretKey key, IvParameterSpec iv, String clearText) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException
 	{
 		return TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm, clearText, key, iv);
@@ -64,6 +68,16 @@ public class TxtCryptoFactory
 		byte[] plainText = cipher.doFinal(Base64.getDecoder().decode(cipherText));
 		return new String(plainText);
 	}
+	
+	public static String toHash(String text)
+    {
+        MessageDigest digest;
+		try{digest = MessageDigest.getInstance("SHA-512");}
+		catch (NoSuchAlgorithmException e) {throw new RuntimeException(e.getMessage());}
+        digest.reset();
+        byte[] hashedBytes = digest.digest(text.getBytes());
+        return Base64.getEncoder().encodeToString(hashedBytes);
+    }
 	
 	public static SecretKey getKeyFromPassword(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException
 	{

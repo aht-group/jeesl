@@ -26,8 +26,8 @@
 					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderKeys()}" update=":#{cc.id}:grid"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectKey()}" update=":#{cc.id}:sKey"/>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="status"/></f:facet>
-						<jtp:symbolizer value="#{k.status}"/>
+						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="lifetime"/></f:facet>
+						<jtp:symbolizer value="#{k.lifetime}"/>
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="record"/></f:facet>
@@ -37,7 +37,7 @@
 						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="name"/></f:facet>
 						<h:outputText value="#{k.name}"/>
 					</p:column>
-					<p:column styleClass="jeeslCenter" rendered="false">
+					<p:column styleClass="jeesl-center" rendered="false">
 						<f:facet name="header">
 							<h:outputText value="#{cc.attrs.ctrl.sessionKeystore.type.name[localeCode].lang}"/>
 							<br/><jtp:symbolizer value="#{cc.attrs.ctrl.sessionKeystore.type}"/>
@@ -70,9 +70,9 @@
 						<jtp:label entity="IoCryptoKey" code="name"/>
 						<p:inputText value="#{cc.attrs.ctrl.key.name}"/>
 						
-						<jtp:label entity="IoCryptoKey" code="status"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.key.status}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.app.keyStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						<jtp:label entity="IoCryptoKey" code="lifetime"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.key.lifetime}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.app.keyLifetime}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
 					</j:inputGrid>

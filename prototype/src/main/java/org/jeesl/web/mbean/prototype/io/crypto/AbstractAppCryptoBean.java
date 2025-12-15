@@ -18,17 +18,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractAppCryptoBean <L extends JeeslLang, D extends JeeslDescription,
-											KEY extends JeeslIoCryptoKey<USER,KS>,
-											KS extends JeeslIoCryptoKeyLifetime<L,D,KS,?>,
+											KEY extends JeeslIoCryptoKey<USER,LIFE>,
+											LIFE extends JeeslIoCryptoKeyLifetime<L,D,LIFE,?>,
 											KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
 											ST extends JeeslIoCryptoStoreType<L,D,ST,?>,
 											USER extends JeeslSimpleUser>
-					implements JeeslIoCryptoBean<L,D,KEY,KS,KT,ST,USER>
+					implements JeeslIoCryptoBean<L,D,KEY,LIFE,KT,ST,USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppCryptoBean.class);
 
-	protected final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto;
+	protected final IoCryptoFactoryBuilder<L,D,KEY,LIFE,KT,ST,USER> fbCrypto;
 	
 	private ST typeMemory; public @Override ST getTypeMemory() {return typeMemory;}
 	private ST typeSession; public ST getTypeSession() {return typeSession;}
@@ -36,16 +36,16 @@ public abstract class AbstractAppCryptoBean <L extends JeeslLang, D extends Jees
 	private KT stateUnlocked; @Override public KT getStateUnlocked() {return stateUnlocked;}
 	private KT stateLocked; @Override public KT getStateLocked() {return stateLocked;}
 
-	public AbstractAppCryptoBean(final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto)
+	public AbstractAppCryptoBean(final IoCryptoFactoryBuilder<L,D,KEY,LIFE,KT,ST,USER> fbCrypto)
 	{
 		this.fbCrypto=fbCrypto;
 
 		storeType = new ArrayList<>();
-		keyStatus = new ArrayList<>();
+		keyLifetime = new ArrayList<>();
 		keyState = new ArrayList<>();
 	}
 	
-	protected void postConstructCrypto(JeeslIoCryptoFacade<L,D,KEY,KS,KT,ST,USER> fCrypto)
+	protected void postConstructCrypto(JeeslIoCryptoFacade<L,D,KEY,LIFE,KT,ST,USER> fCrypto)
 	{
 		reloadOption(fCrypto);
 	}
@@ -72,11 +72,11 @@ public abstract class AbstractAppCryptoBean <L extends JeeslLang, D extends Jees
 		}
 	}
 	
-	private final List<KS> keyStatus; public List<KS> getKeyStatus() {return keyStatus;}
+	private final List<LIFE> keyLifetime; public List<LIFE> getKeyLifetime() {return keyLifetime;}
 	protected void reloadKeyStatus(JeeslFacade facade)
 	{
-		keyStatus.clear();
-		keyStatus.addAll(facade.allOrderedPositionVisible(fbCrypto.getClassKeyStatus()));
+		keyLifetime.clear();
+		keyLifetime.addAll(facade.allOrderedPositionVisible(fbCrypto.getClassKeyStatus()));
 	}
 	
 	private final List<KT> keyState; public List<KT> getKeyState() {return keyState;}
