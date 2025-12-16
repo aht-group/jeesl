@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +90,9 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	protected final EjbDescriptionFactory<D> efDescription;
 	protected final EjbIoFrContainerFactory<STORAGE,CONTAINER> efContainer;
 	protected final EjbIoFrMetaFactory<CONTAINER,META,TYPE> efMeta;
-
+	
+	private Comparator<META> cpMeta; public void setComparatorMeta(Comparator<META> cpMeta) {this.cpMeta = cpMeta;}
+	
 	protected final List<META> metas; @Override public List<META> getMetas() {return metas;}
 	protected final Map<META,File> mapDeferred; public Map<META, File> getMapDeferred() {return mapDeferred;}
 
@@ -251,6 +255,8 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		{
 
 		}
+		
+		if(Objects.nonNull(cpMeta)) {Collections.sort(metas,cpMeta);}
 		if(debugOnInfo) {logger.info("Reloaded "+fbFile.getClassMeta().getSimpleName()+":"+metas.size()+" for container:"+container.toString());}
 	}
 
