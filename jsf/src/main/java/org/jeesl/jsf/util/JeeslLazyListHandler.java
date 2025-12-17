@@ -22,6 +22,7 @@ public class JeeslLazyListHandler <T extends EjbWithId>
 	
 	public void clear() {tmp.clear();}
 	public void add(T t) {tmp.add(t);}
+	public void addAll(List<T> list) {tmp.addAll(list);}
 	public int size() {return tmp.size();}
 	
 	public Object getRowKey(T t) {return t.getId();}
