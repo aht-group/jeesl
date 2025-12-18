@@ -307,10 +307,10 @@ $enable-pointer-cursor-for-buttons: true;
 		height: 42px;
 	}
 	
-	a:hover {
-		color: var(--menu-bar-foreground);
-		text-decoration: none;
-	}
+//	a:hover {
+//		color: var(--menu-bar-foreground);
+//		text-decoration: none;
+//	}
 	
 	.jeesl-menu-bar-list {
 	    list-style: none;
@@ -436,6 +436,10 @@ $enable-pointer-cursor-for-buttons: true;
 			.jeesl-dropdown-list {
 				pointer-events: all;
 	    		transition: opacity .2s 0s, visibility 0s .2s;
+				
+				.jeesl-dropdown-item a:hover {
+					text-decoration: none;
+				}
 			}
 
 			.ui-inputgroup {
@@ -2612,8 +2616,36 @@ body, .ui-widget {
 	@include jeesl-menu-bar;
 	
 	color: var(--footer-foreground);
+	display: flex;
+	justify-content: space-between;
+	margin: $regular-spacing auto;
+	max-width: $min-fixed-container-width;
+	padding: 0 $regular-spacing;
+
+	@media (min-width: $max-fixed-container-width) {
+		max-width: 100%;
+		width: auto;
+	}
+	
+	> * {
+		width: auto !important;
+	}
+
+	a:hover {
+		color: var(--link-foreground-hover);
+		text-decoration: underline;
+	}
+	
+	.jeesl-footer-content {
+		align-items: center;
+		display: flex;
+		gap: 5px;
+	}
 	
 	.jeesl-menu-bar-list {
+		display: flex;
+		margin: 0;
+		
 		.jeesl-menu-bar-item {
 			@include jeesl-nav-dropdown(var(--footer-item-dropdown-foreground), var(--footer-item-dropdown-background), var(--footer-item-dropdown-hover-background), var(--footer-item-dropdown-separator));
 			
@@ -5130,18 +5162,6 @@ body, .ui-widget {
 	
 	.jeesl-revision-timestamp {
 		flex-grow: 1;
-	}
-}
-
-.jeesl-footer {
-    display: flex;
-    justify-content: space-between;
-    margin: $regular-spacing auto;
-	max-width: $min-fixed-container-width;
-	padding: 0 $regular-spacing;
-	
-	@media (min-width: $max-fixed-container-width) {
-		max-width: 100%;
 	}
 }
 

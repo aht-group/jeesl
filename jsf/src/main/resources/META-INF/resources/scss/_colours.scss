@@ -128,6 +128,8 @@ $header-underline: 2px solid var(--container-header-underline-colour, #{$dark-co
 		--highlight-background: #{$medium-colour};
 		--highlight-background-light: #{color.adjust($medium-colour, $alpha: -.8)};
 		--highlight-border-colour: #{$dark-colour};
+		--link-foreground: #{$link-colour};
+		--link-foreground-hover: #{$link-hover-colour};
 		
 		/* MAIN NAV */
 		--main-nav-foreground: var(--body-foreground);
