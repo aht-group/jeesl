@@ -45,6 +45,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 	protected final Queue<T> queue;
 	
 	protected boolean developmentMode; protected void setDevelopmentMode(boolean value) {this.developmentMode=value;}
+	protected final MS jsQueue,jsObsolete,jsArchive; 
 	
 	public AbstractMaintenanceProcessor(JeeslFacadeLookup jfl,
 											JeeslFacade facade,
@@ -59,6 +60,10 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 		
 		threads = new ArrayList<>();
 		queue = new ConcurrentLinkedQueue<>();
+		
+		jsQueue = cacheJob.ejb(JeeslJobStatus.Code.queue);
+		jsObsolete = cacheJob.ejb(JeeslJobStatus.Code.obsolete);
+		jsArchive = cacheJob.ejb(JeeslJobStatus.Code.archive);
 	}
 	
 	public <E extends Enum<E>> String job(E code)
