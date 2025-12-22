@@ -39,7 +39,6 @@ public class CliJsonCipherFactory
 	    String pwdSalt = "1234";
 	    
 	    String memoIv = TxtCryptoFactory.buildIv();
-	    memoIv = "BNrK91cdNzYTy9BszXkkpQ==";
 	    
 	    key = TxtCryptoFactory.getKeyFromPassword(pwdSecret,pwdSalt);
 	    iv = TxtCryptoFactory.buildIv(memoIv);

@@ -14,11 +14,11 @@ public interface JeeslSystemPropertyFacade <L extends JeeslLang,D extends JeeslD
 											P extends JeeslProperty<L,D,C,P>>
 			extends JeeslFacade
 {
-	public enum IoDb {dbIdentifier}
+	public enum Code {dbIdentifier,devInstance}
 	
 	String valueStringForKey(String key, String defaultValue) throws JeeslNotFoundException;
 	Integer valueIntForKey(String key, Integer defaultValue) throws JeeslNotFoundException;
 	Long valueLongForKey(String key, Long defaultValue) throws JeeslNotFoundException;
-	Boolean valueBooleanForKey(String key, Boolean defaultValue) throws JeeslNotFoundException;
+	Boolean systemPropertyBoolean(String key, Boolean fallbackValue);
 	Date valueDateForKey(String key, Date defaultValue) throws JeeslNotFoundException;
 }

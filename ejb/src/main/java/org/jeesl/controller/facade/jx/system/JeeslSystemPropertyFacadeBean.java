@@ -1,6 +1,7 @@
 package org.jeesl.controller.facade.jx.system;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -38,7 +39,7 @@ public class JeeslSystemPropertyFacadeBean<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			P t = valueForKey(key);
-			return new Integer(t.getValue());
+			return Integer.valueOf(t.getValue());
 		}
 		catch (JeeslNotFoundException e)
 		{
@@ -62,18 +63,17 @@ public class JeeslSystemPropertyFacadeBean<L extends JeeslLang,D extends JeeslDe
 		}
 	}
 
-	@Override
-	public Boolean valueBooleanForKey(String key, Boolean defaultValue) throws JeeslNotFoundException
+	@Override public Boolean systemPropertyBoolean(String key, Boolean defaultValue)
 	{
 		try
 		{
 			P t = valueForKey(key);
-			return new Boolean(t.getValue());
+			return Boolean.valueOf(t.getValue());
 		}
 		catch (JeeslNotFoundException e)
 		{
-			if(defaultValue!=null){return defaultValue;}
-			else{throw e;}
+			if(Objects.nonNull(defaultValue)) {return defaultValue;}
+			else{return null;}
 		}
 	}
 

@@ -43,7 +43,7 @@ public class MqttMessageFactory
 	{
 		byte[] bytes = null;
 		
-		if(Objects.nonNull(valueString)) {bytes = JsonUtil.instance().toByte(valueString);}
+		if(Objects.nonNull(valueString)) {bytes = valueString.getBytes();}
 		else if(Objects.nonNull(valueDouble)) {bytes = JsonUtil.instance().toByte(valueDouble);}
 		else if(Objects.nonNull(valueJson)) {bytes = JsonUtil.instance().toByte(valueJson);}
 		

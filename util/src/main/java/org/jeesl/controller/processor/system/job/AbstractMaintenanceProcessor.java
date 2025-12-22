@@ -45,7 +45,7 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 	protected final Queue<T> queue;
 	
 	protected boolean developmentMode; protected void setDevelopmentMode(boolean value) {this.developmentMode=value;}
-	protected final MS jsQueue,jsObsolete,jsArchive; 
+	protected final MS jsQueue,jsDeferred,jsWork,jsObsolete,jsError,jsConstraint,jsFinished,jsArchive; 
 	
 	public AbstractMaintenanceProcessor(JeeslFacadeLookup jfl,
 											JeeslFacade facade,
@@ -62,7 +62,12 @@ public abstract class AbstractMaintenanceProcessor <L extends JeeslLang, D exten
 		queue = new ConcurrentLinkedQueue<>();
 		
 		jsQueue = cacheJob.ejb(JeeslJobStatus.Code.queue);
+		jsDeferred = cacheJob.ejb(JeeslJobStatus.Code.deferred);
+		jsWork = cacheJob.ejb(JeeslJobStatus.Code.working);
 		jsObsolete = cacheJob.ejb(JeeslJobStatus.Code.obsolete);
+		jsConstraint = cacheJob.ejb(JeeslJobStatus.Code.constraint);
+		jsError = cacheJob.ejb(JeeslJobStatus.Code.failed);
+		jsFinished = cacheJob.ejb(JeeslJobStatus.Code.completed);
 		jsArchive = cacheJob.ejb(JeeslJobStatus.Code.archive);
 	}
 	

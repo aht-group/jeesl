@@ -19,9 +19,11 @@ public class CqDouble implements JeeslCqDouble
 	
 	public static CqDouble greaterThan(int value, String path) {return CqDouble.greaterThan(Integer.valueOf(value).doubleValue(),path);}
 	public static CqDouble greaterThan(double value, String path) {return new CqDouble(JeeslCqDouble.Type.GreaterThan,value,path);}
+	public static CqDouble greaterOrEqual(double value, String path) {return new CqDouble(JeeslCqDouble.Type.GreaterOrEqual,value,path);}
 	
 	public static CqDouble lessThan(int value, String path) {return CqDouble.lessThan(Integer.valueOf(value).doubleValue(),path);}
 	public static CqDouble lessThan(double value, String path) {return new CqDouble(JeeslCqDouble.Type.LessThan,value,path);}
+	public static CqDouble lessOrEqual(double value, String path) {return new CqDouble(JeeslCqDouble.Type.LessOrEqual,value,path);}
 	
 	public static CqDouble notValue(Double value, String path) {return new CqDouble(JeeslCqDouble.Type.NotValue,value,path);}
 	public static CqDouble nullValue(String path) {return new CqDouble(JeeslCqDouble.Type.IsNull,null,path);}

@@ -109,8 +109,8 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 			{
 				try
 				{
-					t.setEjb1(cA.newInstance());t.getEjb1().setId(t.getId1());
-					t.setEjb2(cB.newInstance());if(t.getId2()!=null) {t.getEjb2().setId(t.getId2());}
+					t.setEjb1(cA.newInstance()); t.getEjb1().setId(t.getId1());
+					t.setEjb2(cB.newInstance()); if(t.getId2()!=null) {t.getEjb2().setId(t.getId2());}
 				}
 				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
 			}

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface JeeslCqDouble extends Serializable
 {
-	public enum Type {IsNull,NonNull,IsValue,NotValue,GreaterThan,LessThan}
+	public enum Type {IsNull,NonNull,IsValue,NotValue,GreaterThan,LessThan,GreaterOrEqual,LessOrEqual}
 	
 	Double getValue();
 	Type getType();

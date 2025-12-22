@@ -2,6 +2,7 @@ package org.jeesl.factory.json.io.db.tuple;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -15,6 +16,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.json.io.db.tuple.AbstractJsonTuple;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.JsonTuples;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
@@ -200,7 +202,7 @@ public class JsonTupleFactory
 		{
 			switch(type)
 			{
-				case sum: 	if(index==1)      {json.setSum1(JsonTupleFactory.toDouble(tuple,offset+index));json.setSum(json.getSum1());}
+				case sum: 	if(index==1)      {json.setSum1(JsonTupleFactory.toDouble(tuple,offset+index)); json.setSum(json.getSum1());}
 							else if(index==2) {json.setSum2(JsonTupleFactory.toDouble(tuple,offset+index));}
 							else if(index==3) {json.setSum3(JsonTupleFactory.toDouble(tuple,offset+index));}
 							else if(index==4) {json.setSum4(JsonTupleFactory.toDouble(tuple,offset+index));}
@@ -211,9 +213,28 @@ public class JsonTupleFactory
 							else if(index==2) {json.setCount2((Long)tuple.get(offset+index));}
 							else {logger.warn("NYI "+type+" for index="+index);}
 							break;
+				case distribution:	if(index==1) {json.setV1(JsonTupleFactory.toDouble(tuple,offset+index));}
+									else if(index==2) {json.setV1(JsonTupleFactory.toDouble(tuple,offset+index));}
+									else {logger.warn("NYI "+type+" for index="+index);}
+									break;
+			default: logger.warn("NYI: {}",type); break;
 			}
 			index++;
 		}
+	}
+	
+	public static JsonTuples distributionCount( List<Object[]> list)
+	{
+		JsonTuples json = new JsonTuples();
+		json.setTuples(new ArrayList<>());
+		for(Object[] o : list)
+	    {
+	    	JsonTuple t = new JsonTuple();
+	    	t.setV1(JsonTupleFactory.toDouble(o[0]));
+	    	t.setCount((Long)o[1]);
+	    	json.getTuples().add(t);
+	    }
+		return json;
 	}
 	
 	private static void build(long value, AbstractJsonTuple json, JeeslCq.Agg...types)
@@ -235,7 +256,11 @@ public class JsonTupleFactory
 	private static Double toDouble(Tuple tuple, int index)
 	{
 		Object o = tuple.get(index);
-		
+		return JsonTupleFactory.toDouble(o);
+	}
+	
+	private static Double toDouble(Object o)
+	{
 		if(o==null) {return null;}
 		else if(o instanceof Double) {return ((Double)o);}
 		else if(o instanceof Long) {return (((Long)o).doubleValue());}

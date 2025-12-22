@@ -1,13 +1,16 @@
 package org.jeesl.factory.json.system.io.db.tuple.t3;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Tuple;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -85,17 +88,17 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 			setC.add(t.getId3());
 		}
 		
-		if(fUtils==null)
+		if(Objects.isNull(fUtils))
 		{	// A object is created and the corresponding id is set
 			for(JsonTuple3<A,B,C> t : json.getTuples())
 			{
 				try
 				{
-					t.setEjb1(cA.newInstance());t.getEjb1().setId(t.getId1());
-					t.setEjb2(cB.newInstance());t.getEjb2().setId(t.getId2());
-					t.setEjb3(cC.newInstance());t.getEjb3().setId(t.getId3());
+					t.setEjb1(cA.getDeclaredConstructor().newInstance()); if(Objects.nonNull(t.getId1())) {t.getEjb1().setId(t.getId1());}
+					t.setEjb2(cB.getDeclaredConstructor().newInstance()); if(Objects.nonNull(t.getId2())) {t.getEjb2().setId(t.getId2());}
+					t.setEjb3(cC.getDeclaredConstructor().newInstance()); if(Objects.nonNull(t.getId3())) {t.getEjb3().setId(t.getId3());}
 				}
-				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+				catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
 			}
 		}
 		else
@@ -122,29 +125,7 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		ejb3Load(json);
 		return json;
 	}
-	
-//	private JsonTuples3<A,B,C> build3Count(List<Tuple> tuples)
-//	{
-//		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
-//		for(Tuple t : tuples)
-//        {
-//        	json.getTuples().add(jtf.buildCount(t));
-//        }
-//		ejb3Load(json);
-//		return json;
-//	}
-	
-//	public JsonTuples3<A,B,C> build3Sum(List<Tuple> tuples)
-//	{
-//		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
-//		for(Tuple t : tuples)
-//        {
-//        	json.getTuples().add(jtf.buildSum(t));
-//        }
-//		ejb3Load(json);
-//		return json;
-//	}
-	
+
 	public JsonTuples3<A,B,C> build3CountInterger4(List<Tuple> tuples)
 	{
 		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();

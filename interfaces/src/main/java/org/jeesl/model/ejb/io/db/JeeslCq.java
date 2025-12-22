@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public interface JeeslCq extends Serializable
 {
-	public enum Agg{count,sum,min,avg,max}
+	public enum Agg{count,sum,min,avg,max,distribution}
 }
