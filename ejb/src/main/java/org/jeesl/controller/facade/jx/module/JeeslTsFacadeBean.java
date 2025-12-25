@@ -907,7 +907,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		}
 		sql.group(cData,JeeslTsData.Attributes.timeSeries).group(cPoint,JeeslTsDataPoint.Attributes.multiPoint).group(truncation);
 		sql.limit(query.getMaxResults());
-		logger.info(sql.assemble());
+		logger.trace(sql.assemble());
 		
 		@SuppressWarnings("unchecked")
 		List<Object[]> result = em.createNativeQuery(sql.assemble()).getResultList();

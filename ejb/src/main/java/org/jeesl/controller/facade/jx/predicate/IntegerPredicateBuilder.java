@@ -22,6 +22,9 @@ public class IntegerPredicateBuilder
 			case IsValue: predicates.add(cB.equal(eInteger,c.getValue())); break;
 			case IsNull: predicates.add(cB.isNull(eInteger)); break;
 			case NonNull: predicates.add(cB.isNotNull(eInteger)); break;
+			case LessOrEqual: predicates.add(cB.lessThanOrEqualTo(eInteger,c.getValue())); break;
+			case GreaterOrEqual: predicates.add(cB.greaterThanOrEqualTo(eInteger,c.getValue())); break;
+			
 			default: logger.error("NYI Type: "+c.toString());
 		}
 	}

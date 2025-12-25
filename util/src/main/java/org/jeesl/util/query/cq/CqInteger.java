@@ -18,6 +18,9 @@ public class CqInteger implements JeeslCqInteger
 	public static CqInteger notValue(Integer value, String path) {return new CqInteger(JeeslCqInteger.Type.NotValue,value,path);}
 	public static CqInteger isNull(String path) {return new CqInteger(JeeslCqInteger.Type.IsNull,null,path);}
 	public static CqInteger nonNull(String path) {return new CqInteger(JeeslCqInteger.Type.NonNull,null,path);}
+	
+	public static CqInteger lessOrEqual(Integer value, String path) {return new CqInteger(JeeslCqInteger.Type.LessOrEqual,value,path);}
+	public static CqInteger greaterOrEqual(Integer value, String path) {return new CqInteger(JeeslCqInteger.Type.GreaterOrEqual,value,path);}
 
 	private CqInteger(JeeslCqInteger.Type type, Integer value, String path)
 	{
