@@ -1,4 +1,4 @@
-package net.sf.ahtutils.web.servlet;
+package org.jeesl.jsf.jx.util;
 
 import java.util.Hashtable;
 import java.util.Map;
