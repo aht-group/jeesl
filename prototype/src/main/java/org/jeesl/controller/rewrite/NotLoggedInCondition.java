@@ -14,9 +14,7 @@ import org.ocpsoft.rewrite.servlet.http.event.HttpServletRewrite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NotLoggedInCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
-		extends HttpCondition
-		implements Condition,Serializable
+public class NotLoggedInCondition <V extends JeeslSecurityView<?,?,?,?,?,?>> extends HttpCondition implements Serializable,Condition
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(NotLoggedInCondition.class);
@@ -35,9 +33,7 @@ public class NotLoggedInCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
 	
 	@Override public boolean evaluateHttp(HttpServletRewrite event, EvaluationContext context)
     {           	 
-		String url = AbstractRewriteProvider.getUrlMapping(event.getContextPath(), event.getAddress().toString());
-		V view = bSecurity.findViewByUrlMapping(url);
-		if(Objects.isNull(view)) {view = bSecurity.findViewByHttpPattern(url);}
+		V view = AbstractRewriteProvider.fView(bSecurity,event);
 		
 		if(Objects.nonNull(view))
 		{
@@ -55,7 +51,7 @@ public class NotLoggedInCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
 		}
 		else
 		{
-			logger.warn("Assuming notLoggedIn=true, because view not found for url: "+url);
+			logger.warn("Assuming notLoggedIn=true, because view not found for URL {}",event.getInboundAddress());
 			return true;
 		}
     }

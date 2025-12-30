@@ -20,7 +20,7 @@ public class PrimefacesPredicateBuilder
 		{
 			for(FilterMeta meta : filters.values().stream().filter(m -> Objects.nonNull(m.getFilterValue())).collect(Collectors.toList()))
 			{
-				logger.info(meta.toString());
+				logger.info("Filter field:{} value:{}",meta.getFilterField(),meta.getFilterValue());
 				query.addCqLiteral(CqLiteral.contains(meta.getFilterValue().toString(),meta.getFilterField()));
 			}
 		}

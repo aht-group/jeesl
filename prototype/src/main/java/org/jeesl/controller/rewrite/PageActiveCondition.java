@@ -13,8 +13,7 @@ import org.ocpsoft.rewrite.servlet.http.event.HttpServletRewrite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PageActiveCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
-		extends HttpCondition implements Condition,Serializable
+public class PageActiveCondition <V extends JeeslSecurityView<?,?,?,?,?,?>> extends HttpCondition implements Serializable,Condition
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(PageActiveCondition.class);
@@ -28,12 +27,10 @@ public class PageActiveCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;
 	}
-	
+		
 	@Override public boolean evaluateHttp(HttpServletRewrite event, EvaluationContext context)
     {           	 
-		String url = AbstractRewriteProvider.getUrlMapping(event.getContextPath(), event.getAddress().toString());
-		V view = bSecurity.findViewByUrlMapping(url);
-		if(Objects.isNull(view)) {view = bSecurity.findViewByHttpPattern(url);}
+		V view = AbstractRewriteProvider.fView(bSecurity,event);
 		
 		if(Objects.nonNull(view))
 		{
@@ -49,7 +46,8 @@ public class PageActiveCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
 		}
 		else
 		{
-			logger.warn("Assuming active:false, because SecurityView not found for url: "+url);
+			logger.warn("Assuming active:false, because SecurityView not found for URL:{}",event.getInboundAddress());
+			
 			return false;
 		}
     }
