@@ -1,6 +1,7 @@
 package org.jeesl.controller.provider;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -60,12 +61,15 @@ public class ContextTranslationProvider <LOC extends JeeslLocale<?,?,LOC,?>>
 
 
 	@Override public String toDate(String localeCode, LocalDate record) {throw new UnsupportedOperationException("NYI");}
+	@Override public String toDate(String localeCode, LocalDateTime ldt) {throw new UnsupportedOperationException("NYI");}
 	@Override public String toDate(String localeCode, Date record) {throw new UnsupportedOperationException("NYI");}
 
 	@Override public String toTime(String localeCode, Date record) {throw new UnsupportedOperationException("NYI");}
+	@Override public String toTime(String localeCode, LocalDateTime ldt) {throw new UnsupportedOperationException("NYI");}
+	
 	@Override public String toCurrency(String localeCode, Double value) {throw new UnsupportedOperationException("NYI");}
 
 	@Override public String toCurrency(String localeCode, boolean grouping, int decimals, Double value) {throw new UnsupportedOperationException("NYI");}
-	@Override public <E extends Enum<E>> String xpAttribute(String localeCode, Class<?> c, E code) {throw new UnsupportedOperationException("NYI");}
+	@Override public <E extends Enum<E>> String xpAttribute(String localeCode, Class<?> c, E code) {throw new UnsupportedOperationException("NYI");}	
 
 }

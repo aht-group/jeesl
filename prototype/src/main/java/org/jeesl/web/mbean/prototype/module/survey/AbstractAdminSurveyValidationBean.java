@@ -14,6 +14,7 @@ import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyValidationAlgorithmFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.domain.JeeslDomain;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainQuery;
@@ -121,7 +122,7 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 		reloadAlgorithms();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		
 	}

@@ -18,6 +18,7 @@ import org.jeesl.factory.ejb.module.cl.EjbTrackItemFactory;
 import org.jeesl.factory.ejb.module.cl.EjbTrackListFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.cl.JeeslClCategory;
@@ -115,7 +116,7 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		this.reloadLists();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		this.reloadLists();
 	}

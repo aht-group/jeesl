@@ -15,7 +15,7 @@
 		</f:facet>
 	
 		<h:commandLink class="jeesl-dropdown-item-label">
-			<c:if test="#{handler.selection.id eq var.id}"><f:attribute name="styleClass" value="jeeslBold"/></c:if>
+			<c:if test="#{handler.selection.id eq var.id}"><f:attribute name="styleClass" value="jeesl-bold"/></c:if>
 			<ui:insert />
 			<p:ajax event="click" update="#{update}" listener="#{handler.selectSbSingle(var)}" oncomplete="try{reloadStatusBar();if(!!#{hascallback}){#{oncomplete}}}catch(e){}"/>
 		</h:commandLink>

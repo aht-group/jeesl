@@ -12,6 +12,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree1Cache;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
@@ -20,7 +21,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
+public class SbSingleHandler <T extends EjbWithId> implements SbSingleSelection
 {
 	final static Logger logger = LoggerFactory.getLogger(SbSingleHandler.class);
 	private static final long serialVersionUID = 1L;
@@ -70,31 +71,34 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 
 	public void silentCallback()
 	{
-		try
+		if (list.isEmpty())
 		{
-			if (list.isEmpty())
-			{
-				//selectSbSingle(null);
-			}
-			else
-			{
-				if(list.contains(selection)) {selectSbSingle(selection);}
-				else {selectSbSingle(list.get(0));}
-			}
+			//selectSbSingle(null);
 		}
-		catch (JeeslLockingException e) {}
-		catch (JeeslConstraintViolationException e) {}
+		else
+		{
+			if(list.contains(selection)) {selectSbSingle(selection);}
+			else {selectSbSingle(list.get(0));}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(EjbWithId item)
 	{
 		if(Objects.isNull(item))
 		{
 			previous.setId(-1);
 			selection = null;
-			if(Objects.nonNull(bean)) {bean.selectSbSingle(null);}
+			if(Objects.nonNull(bean))
+			{
+				try {
+					bean.selectSbSingle(this,null);
+				} catch (JeeslLockingException | JeeslConstraintViolationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		else
 		{
@@ -108,7 +112,15 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 				sb.append(" Previous:").append(previous.getId());
 				logger.info(sb.toString());
 			}
-			if(Objects.nonNull(bean)) {bean.selectSbSingle(item);}
+			if(Objects.nonNull(bean))
+			{
+				try {
+					bean.selectSbSingle(this,item);
+				} catch (JeeslLockingException | JeeslConstraintViolationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -196,7 +208,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	
 	public boolean getTwiceSelected() {return previous.equals(selection);}
 	
-	public boolean isSelected() {return selection!=null;}
+	public boolean isSelected() {return Objects.nonNull(selection);}
 	public <E extends Enum<E>> boolean isSelected(E code)
 	{
 		if(!isSelected()) {return false;}
@@ -221,7 +233,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	public void setDefault()
 	{
 		selection=null;
-		if(list!=null && !list.isEmpty()){selection = list.get(0);}
+		if(ObjectUtils.isNotEmpty(list)) {selection = list.get(0);}
 	}
 	
 	public void setLast()

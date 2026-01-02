@@ -21,6 +21,7 @@ import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionFactory;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyOptionSetFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
@@ -155,7 +156,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 		sbhCategory.silentCallback();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		logger.info(ejb.toString());
 		if(fbTemplate.getClassTemplateCategory().isAssignableFrom(ejb.getClass()))

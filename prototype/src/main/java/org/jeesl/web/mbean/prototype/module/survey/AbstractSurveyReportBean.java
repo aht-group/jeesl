@@ -29,6 +29,7 @@ import org.jeesl.factory.json.system.io.report.JsonFlatFigureFactory;
 import org.jeesl.factory.json.system.io.report.JsonFlatFiguresFactory;
 import org.jeesl.factory.mc.survey.McOptionDataSetFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.factory.txt.JeeslReportAggregationLevelFactory;
 import org.jeesl.interfaces.model.io.domain.JeeslDomain;
@@ -208,7 +209,7 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 		sbhCategory.silentCallback();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		if(debugOnInfo) {logger.info("sb" + (ejb!=null));}
 		if(ejb!=null)

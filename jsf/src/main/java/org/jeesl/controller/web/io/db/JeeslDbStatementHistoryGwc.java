@@ -19,6 +19,7 @@ import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementGroupFactory;
 import org.jeesl.factory.txt.io.db.TxtSqlQueryFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.web.io.db.JeeslIoDbStatementHistoryCallback;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementColumn;
@@ -106,7 +107,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 		if(rStatement) {statement=null;}
 	}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(fbSsi.getClassSystem().isAssignableFrom(item.getClass())) {this.reset(true,false,true,true); this.reloadGroups();}
 		if(fbDb.getClassStatementGroup().isAssignableFrom(item.getClass())) {this.reset(false,false,false,true); this.reloadStatements();}

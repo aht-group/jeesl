@@ -16,6 +16,7 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -145,7 +146,7 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 	}
 
 	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(item instanceof JeeslWorkflowContext) {reloadProcesses();}
 		else if(item instanceof JeeslWorkflowProcess)

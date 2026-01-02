@@ -17,6 +17,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsDataSource2;
@@ -100,7 +101,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 	}
 
 	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadBridges();
 	}

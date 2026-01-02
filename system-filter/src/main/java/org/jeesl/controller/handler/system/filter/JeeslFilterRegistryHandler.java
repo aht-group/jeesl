@@ -12,6 +12,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.ejb.c.system.filter.EjbFilterFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.system.JeeslFilterBean;
 import org.jeesl.interfaces.controller.handler.system.JeeslFilterHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -73,7 +74,7 @@ public class JeeslFilterRegistryHandler implements JeeslFilterHandler,SbSingleBe
 	public <E extends Enum<E>> JeeslFilterRegistryHandler type(E code) {type = fFilter.fByEnum(SystemFilterType.class,code); return this;}
 	public JeeslFilterRegistryHandler user(SecurityUser user) {this.user=user; return this;}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.selectEntity(item));
 		filter = (SystemFilter)item;

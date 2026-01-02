@@ -9,6 +9,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.MmgFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.module.mmg.JeeslMmgClassificationCallback;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
@@ -65,7 +66,7 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 	}
 	
 	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		// TODO Auto-generated method stub
 	}

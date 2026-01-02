@@ -11,6 +11,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoDmsFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDms;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsDocument;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsLayer;
@@ -77,7 +78,7 @@ public abstract class AbstractAdminDmsTreeBean <L extends JeeslLang,D extends Je
 
 
 	@Override @SuppressWarnings("unchecked")
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.selectEntity(item));
 		this.dm = (DMS)item;

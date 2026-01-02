@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.system;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -140,9 +141,11 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	@Override public String tAttribute(String localeCode, String key1, String key2) {logger.warn("NYI"); return null;}
 	
 	@Override public String toDate(String localeCode, LocalDate record) {logger.warn("NYI"); return null;}
+	@Override public String toDate(String localeCode, LocalDateTime ldt) {logger.warn("NYI"); return null;}
 	@Override public String toDate(String localeCode, Date record) {logger.warn("NYI"); return null;}
 	@Override public String toTime(String localeCode, Date record) {logger.warn("NYI"); return null;}
+	@Override public String toTime(String localeCode, LocalDateTime ldt) {logger.warn("NYI"); return null;}
 	@Override public String toCurrency(String localeCode, Double value) {logger.warn("NYI"); return null;}
 	@Override public String toCurrency(String localeCode, boolean grouping, int decimals, Double value) {logger.warn("NYI"); return null;}
-	@Override public void setLanguages(List<LOC> locales) {logger.warn("NYI");}	
+	@Override public void setLanguages(List<LOC> locales) {logger.warn("NYI");}
 }

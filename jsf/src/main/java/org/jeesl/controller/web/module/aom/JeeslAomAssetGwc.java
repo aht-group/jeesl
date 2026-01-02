@@ -26,6 +26,7 @@ import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
@@ -198,7 +199,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		reloadTree();
 	}
 
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadTree();
 	}

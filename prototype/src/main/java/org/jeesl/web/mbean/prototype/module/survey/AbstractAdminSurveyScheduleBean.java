@@ -15,6 +15,7 @@ import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
@@ -106,7 +107,7 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 		sbhCategory.silentCallback();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		if(ejb!=null)
 		{

@@ -22,6 +22,7 @@ import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.system.security.JeeslSecurityMenuCallback;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
@@ -136,7 +137,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 
 	protected void reloadDocuments()  throws JeeslNotFoundException{};
 
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		buildMenu(createMissingItems());
 	}

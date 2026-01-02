@@ -16,6 +16,7 @@ import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiAttributeFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
@@ -98,7 +99,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 		sbhSystem.silentCallback();
 	}
 
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reset(true,true);
 		if(item instanceof JeeslIoSsiSystem)

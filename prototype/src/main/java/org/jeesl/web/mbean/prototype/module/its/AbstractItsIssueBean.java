@@ -12,6 +12,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ItsFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.module.its.config.JeeslItsConfig;
 import org.jeesl.interfaces.model.module.its.config.JeeslItsConfigOption;
 import org.jeesl.interfaces.model.module.its.issue.JeeslItsIssue;
@@ -89,7 +90,7 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 		reloadTree();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadTree();
 	}

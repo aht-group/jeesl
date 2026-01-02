@@ -19,6 +19,7 @@ import org.jeesl.factory.builder.io.IoFileRepositoryFactoryBuilder;
 import org.jeesl.factory.builder.module.MmgFactoryBuilder;
 import org.jeesl.factory.ejb.io.label.revision.data.EjbLastModifiedFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.module.mmg.JeeslMmgItemCallback;
@@ -129,7 +130,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	}
 	
 	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		// TODO Auto-generated method stub
 	}

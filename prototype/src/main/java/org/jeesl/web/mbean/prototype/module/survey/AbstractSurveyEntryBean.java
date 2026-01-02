@@ -13,6 +13,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyTemplateFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandler;
 import org.jeesl.interfaces.controller.handler.module.survey.JeeslSurveyHandlerCallback;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -125,7 +126,7 @@ public abstract class AbstractSurveyEntryBean <L extends JeeslLang, D extends Je
 	
 	protected abstract void prepareCorrelation();
 	
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		
 	}

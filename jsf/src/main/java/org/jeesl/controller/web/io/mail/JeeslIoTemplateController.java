@@ -26,6 +26,7 @@ import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateFactory;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateTokenFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
@@ -143,7 +144,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 		sbhCategory.setDefault();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		scopes = fTemplate.all(fbTemplate.getClassScope());
 		this.reloadTemplates();

@@ -26,6 +26,7 @@ import org.jeesl.factory.json.system.translation.JsonTranslationFactory;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.OutputXpathPattern;
 import org.jeesl.interfaces.controller.handler.op.OpSelectionHandler;
@@ -179,7 +180,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		if(ejb==null) {cms=null;}
 		else if(JeeslIoCms.class.isAssignableFrom(ejb.getClass()))

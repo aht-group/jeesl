@@ -15,6 +15,7 @@ import org.jeesl.factory.builder.module.RmmvFactoryBuilder;
 import org.jeesl.factory.ejb.module.rmmv.EjbRmmvConfigFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.module.rmmv.JeeslRmmvElementCallback;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModule;
@@ -111,7 +112,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	}
 	
 	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		// TODO Auto-generated method stub
 	}

@@ -14,6 +14,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.NewsFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
@@ -112,7 +113,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(item.getClass().getName().equals(fbNews.getClassLocale().getName()))
 		{

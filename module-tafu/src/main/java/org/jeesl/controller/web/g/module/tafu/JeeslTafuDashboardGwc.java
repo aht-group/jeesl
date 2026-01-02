@@ -20,6 +20,7 @@ import org.jeesl.factory.builder.module.TafuFactoryBuilder;
 import org.jeesl.factory.ejb.module.tafu.EjbTaskFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
@@ -161,7 +162,7 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 		reload();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadViewport();
 		reload();

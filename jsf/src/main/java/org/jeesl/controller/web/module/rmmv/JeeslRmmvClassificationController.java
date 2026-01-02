@@ -11,6 +11,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.RmmvFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.module.rmmv.JeeslRmmvClassificationCallback;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvClassification;
@@ -59,7 +60,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	}
 	
 	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		
 	}	

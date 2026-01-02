@@ -16,6 +16,7 @@ import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.txt.io.db.TxtSqlQueryFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementColumn;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementGroup;
@@ -91,7 +92,7 @@ public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslD
 		sbhGroup.setDefault();
 	}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		
 	}

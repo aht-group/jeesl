@@ -18,6 +18,7 @@ import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.factory.builder.io.IoDmsFactoryBuilder;
 import org.jeesl.factory.builder.io.IoFileRepositoryFactoryBuilder;
 import org.jeesl.interfaces.bean.AttributeBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.JeeslAttributeHandler;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDms;
@@ -138,7 +139,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 	
 	
 	@Override @SuppressWarnings("unchecked")
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.selectEntity(item));
 		this.dm = (DMS)item;

@@ -18,6 +18,7 @@ import org.jeesl.factory.ejb.io.domain.EjbSurveyDomainPathFactory;
 import org.jeesl.factory.ejb.io.domain.EjbSurveyDomainQueryFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.domain.JeeslDomain;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainItem;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;
@@ -98,21 +99,16 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 		}
 		else
 		{
-			try
-			{
-				addDomain();
-				sbhDomain.selectSbSingle(domain);
-				sbhDomain.selectSbSingle(domain);
-			}
-			catch (JeeslLockingException e) {logger.error(e.getMessage());}
-			catch (JeeslConstraintViolationException e) {logger.error(e.getMessage());}
+			addDomain();
+			sbhDomain.selectSbSingle(domain);
+			sbhDomain.selectSbSingle(domain);
 		}
 	}
 	
 //	@Override protected void initPageSettings(){}
 	
 	@SuppressWarnings("unchecked")
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		if(ejb==null) {reset(true,true,true,true);}
 		else if(JeeslDomain.class.isAssignableFrom(ejb.getClass()))

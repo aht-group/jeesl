@@ -32,6 +32,7 @@ import org.jeesl.factory.mc.graph.GraphWorkflowFactory;
 import org.jeesl.factory.xml.module.workflow.XmlProcessFactory;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.op.OpSelectionHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
@@ -319,7 +320,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 		if(reset.isAction()) {action=null;}
 	}
 
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reset(WorkflowProcesslResetHandler.build().all());
 		if(item instanceof JeeslWorkflowContext)

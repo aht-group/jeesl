@@ -11,6 +11,7 @@ import org.jeesl.factory.builder.io.IoDmsFactoryBuilder;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsDocumentFactory;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsSectionFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDms;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsDocument;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsLayer;
@@ -80,7 +81,7 @@ public abstract class AbstractDmsBean <L extends JeeslLang,D extends JeeslDescri
 		for(int i=0;i<sbhLocale.getList().size();i++) {localeCodes[i]=sbhLocale.getList().get(i).getCode();}
 	}
 	
-	@Override public void selectSbSingle(EjbWithId ejb) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		
 	}

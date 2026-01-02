@@ -20,6 +20,7 @@ import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -133,7 +134,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 
 	protected void reloadDocuments()  throws JeeslNotFoundException{};
 
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		buildMenu(createMissingItems());
 	}

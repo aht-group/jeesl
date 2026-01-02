@@ -27,6 +27,7 @@ import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelMappingEntityFactory;
 import org.jeesl.interfaces.bean.sb.SbSearchBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.controller.handler.JeeslAutoCompleteHandler;
 import org.jeesl.interfaces.controller.handler.JeeslHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -180,7 +181,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		if(Objects.nonNull(jogger)) {jogger.ofxMilestones(System.out);}
 	}
 	
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(item.getClass().isAssignableFrom(fbRevision.getClassCategory()))
 		{

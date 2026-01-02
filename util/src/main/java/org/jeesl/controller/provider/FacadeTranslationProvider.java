@@ -1,6 +1,7 @@
 package org.jeesl.controller.provider;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -131,12 +132,18 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public String toTime(String localeCode, Date record) {
+	public String toDate(String localeCode, LocalDateTime ldt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override public String toTime(String localeCode, Date record) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override public String toTime(String localeCode, LocalDateTime ldt) {return null;}
 
 	@Override
 	public String toCurrency(String localeCode, Double value) {

@@ -17,6 +17,7 @@ import org.jeesl.factory.ejb.module.am.EjbActivityProjectFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.module.am.JeesAmProject;
 import org.jeesl.interfaces.model.module.am.JeeslAmActivity;
@@ -109,7 +110,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override public void selectSbSingle(EjbWithId ejb)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId ejb)
 	{
 		if(ejb==null) {project=null;}
 		else if(JeesAmProject.class.isAssignableFrom(ejb.getClass()))

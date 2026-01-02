@@ -16,6 +16,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.mc.ts.McTsViewerFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
@@ -112,7 +113,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 	}
 	
 	@Override
-	public void selectSbSingle(EjbWithId item)
+	public void selectSbSingle(SbSingleSelection handler, EjbWithId item)
 	{
 		if(fbTs.getClassScope().isAssignableFrom(item.getClass()))
 		{

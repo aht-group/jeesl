@@ -13,6 +13,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoNewsletterFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterCategory;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterTopic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -121,8 +122,7 @@ public abstract class AbstractNewsletterTopicBean <L extends JeeslLang, D extend
 		topics.addAll(fNewsletter.all(fbNewsletter.getClassTopic()).stream().filter(i->i.getCategory().equals(sbhCategory.getSelection())).collect(Collectors.toList()));
 	}
 	
-	@Override
-	public void selectSbSingle(EjbWithId item)
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item)
 	{
 		if(fbNewsletter.getClassCategory().isAssignableFrom(item.getClass()))
 		{

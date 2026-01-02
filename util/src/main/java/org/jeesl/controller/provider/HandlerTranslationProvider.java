@@ -4,10 +4,12 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.controller.handler.io.label.JeeslTranslationHandler;
@@ -95,6 +97,12 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 		return sdfDate.format(record);
 	}
 	
+	@Override public String toDate(String localeCode, LocalDateTime ldt)
+	{
+		if(Objects.isNull(ldt)) {return "";}
+		return sdfDate.format(ldt);
+	}
+	
 	@Override public String toDate(String locleCode, Date record)
 	{
 		if(record==null){return "";}
@@ -105,6 +113,11 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 	{
 		if(record==null){return "";}
 		return sdfTime.format(record);
+	}
+	@Override public String toTime(String localeCode, LocalDateTime ldt)
+	{
+		if(Objects.isNull(ldt)) {return "";}
+		return sdfTime.format(ldt);
 	}
 
 	@Override

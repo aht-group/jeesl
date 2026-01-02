@@ -28,6 +28,7 @@ import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.sql.psql.SqlConstraintFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -194,7 +195,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		this.reloadSnapshot();
 	}
 
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		callback.callbackSystemSelected();
 		this.reloadSystem();
