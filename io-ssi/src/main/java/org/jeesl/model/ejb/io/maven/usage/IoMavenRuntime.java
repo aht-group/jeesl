@@ -20,9 +20,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 public class IoMavenRuntime extends IoStatus implements JeeslIoMavenRuntime<IoLang,IoDescription,IoMavenRuntime,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-	
-	//Needs to be moved to io-maven
-	
+
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
