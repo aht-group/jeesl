@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransi
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.util.query.module.JeeslWorkflowQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
@@ -27,9 +28,6 @@ public interface JeeslWorkflowFacade <
 										
 										WS extends JeeslWorkflowStage<?,?,WP,WST,?,WT,?>,
 										WST extends JeeslWorkflowStageType<?,?,WST,?>,
-										
-										
-										
 										WSN extends JeeslWorkflowStageNotification<WS,?,?,SR,?>,
 										WT extends JeeslWorkflowTransition<?,?,?,WS,WTT,SR,?>,
 										WTT extends JeeslWorkflowTransitionType<?,?,WTT,?>,
@@ -62,6 +60,7 @@ public interface JeeslWorkflowFacade <
 	WF loadWorkflow(WF workflow);
 	void deleteWorkflow(WL link) throws JeeslConstraintViolationException;
 	
+	List<WF> fWorkflows(JeeslWorkflowQuery<WP> query);
 	List<WF> fWorkflows(WP process, List<WS> stages);
 	List<WF> fWorkflows(List<WP> processes, List<WST> types);
 	

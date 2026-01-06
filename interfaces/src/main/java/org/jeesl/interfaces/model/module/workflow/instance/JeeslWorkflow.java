@@ -20,7 +20,7 @@ public interface JeeslWorkflow <WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		extends Serializable,EjbPersistable,EjbRemoveable,EjbSaveable,
 				EjbWithId,EjbWithParentAttributeResolver
 {
-	public static enum Attributes{process,currentStage,lastActivity,responsibles}
+	public static enum Attributes{id,process,currentStage,lastActivity,responsibles}
 	
 	WP getProcess();
 	void setProcess(WP process);

@@ -12,20 +12,29 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
@@ -39,9 +48,13 @@ import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransi
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
+import org.jeesl.interfaces.util.query.module.JeeslWorkflowQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -185,6 +198,21 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		transition = em.find(fbWorkflow.getClassTransition(), transition.getId());
 		transition.getDocuments().size();
 		return transition;
+	}
+	
+	@Override public List<WF> fWorkflows(JeeslWorkflowQuery<WP> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<WF> cQ = cB.createQuery(fbWorkflow.getClassWorkflow());
+		Root<WF> root = cQ.from(fbWorkflow.getClassWorkflow());
+		
+		cQ.select(root);
+		cQ.where(cB.and(this.pWorkflow(cB,query,root)));
+		this.orderByWorkflow(cB, cQ, query, root);
+		
+		TypedQuery<WF> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
 	}
 
 	@Override public List<WF> fWorkflows(WP process, List<WS> stages) 
@@ -450,5 +478,34 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
+	}
+
+	public Predicate[] pWorkflow(CriteriaBuilder cB, JeeslWorkflowQuery<WP> query, Root<WF> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(ObjectUtils.isNotEmpty(query.getWorkflowProcesses()))
+		{
+			Join<WF,WP> jProcess = root.join(JeeslWorkflow.Attributes.process.toString());
+			predicates.add(jProcess.in(query.getWorkflowProcesses()));
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	public void orderByWorkflow(CriteriaBuilder cB, CriteriaQuery<WF> cQ, JeeslWorkflowQuery<WP> query, Root<WF> root)
+	{
+		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
+		{
+			List<Order> orders = new ArrayList<>();
+			for(JeeslCqOrdering cq : query.getCqOrderings())
+			{
+				if(cq.getPath().equals(CqOrdering.path(JeeslWorkflow.Attributes.id)))
+				{
+					SortByPredicateBuilder.addByLong(cB,orders,cq,root.<Long>get(JeeslWorkflow.Attributes.id.toString()));
+				}
+				else {logger.warn(cq.nyi(fbWorkflow.getClassWorkflow()));}
+			}
+			if(!orders.isEmpty()) {cQ.orderBy(orders);}
+		}
 	}
 }
