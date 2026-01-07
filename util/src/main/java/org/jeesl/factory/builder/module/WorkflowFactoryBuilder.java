@@ -73,7 +73,7 @@ public class WorkflowFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									SR extends JeeslSecurityRole<L,D,?,?,?,?>,
 									RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
 									RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
-									AL extends JeeslWorkflowLink<WF,RE>,
+									WL extends JeeslWorkflowLink<WF,RE>,
 									WF extends JeeslWorkflow<WP,WS,WY,USER>,
 									WY extends JeeslWorkflowActivity<WT,WF,WD,FRC,USER>,
 									WD extends JeeslWorkflowDelegate<WY,USER>,
@@ -99,7 +99,7 @@ public class WorkflowFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	private final Class<WC> cCommunication; public Class<WC> getClassCommunication() {return cCommunication;}
 	private final Class<AA> cAction; public Class<AA> getClassAction() {return cAction;}
 	private final Class<AB> cBot; public Class<AB> getClassBot() {return cBot;}
-	private final Class<AL> cLink; public Class<AL> getClassLink() {return cLink;}
+	private final Class<WL> cLink; public Class<WL> getClassLink() {return cLink;}
 	private final Class<WF> cWorkflow; public Class<WF> getClassWorkflow() {return cWorkflow;}
 	private final Class<WY> cActivity; public Class<WY> getClassActivity() {return cActivity;}
 	private final Class<WD> cDelegate; public Class<WD> getClassDelegate() {return cDelegate;}
@@ -119,7 +119,7 @@ public class WorkflowFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									final Class<WC> cCommunication,
 									final Class<AA> cAction,
 									final Class<AB> cBot,
-									final Class<AL> cLink,
+									final Class<WL> cLink,
 									final Class<WF> cWorkflow,
 									final Class<WY> cActivity,
 									final Class<WD> cDelegate)
@@ -153,8 +153,8 @@ public class WorkflowFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public EjbWorkflowTransitionFactory<WS,WT> ejbTransition() {return new EjbWorkflowTransitionFactory<>(cTransition);}
 	public EjbWorkflowCommunicationFactory<WT,WC,MT,MC,SR,RE> ejbCommunication() {return new EjbWorkflowCommunicationFactory<>(cCommunication);}
 	public EjbWorkflowActionFactory<WT,AA,AB,AO,RE,RA> ejbAction() {return new EjbWorkflowActionFactory<>(cAction);}
-	public EjbWorkflowLinkFactory<RE,AL,WF> ejbLink() {return new EjbWorkflowLinkFactory<>(cLink);}
-	public EjbWorkflowFactory<WP,WS,WF> ejbWorkflow() {return new EjbWorkflowFactory<>(cWorkflow);}
+	public EjbWorkflowLinkFactory<RE,WL,WF> ejbLink() {return new EjbWorkflowLinkFactory<>(cLink);}
+	public EjbWorkflowFactory<WP,WS,WL,WF> ejbWorkflow() {return new EjbWorkflowFactory<>(cWorkflow);}
 	public EjbWorkflowActivityFactory<WT,WF,WY,USER> ejbActivity() {return new EjbWorkflowActivityFactory<>(cActivity);}
 	public EjbWorkflowDelegateFactory<WY,WD,USER> ejbDelegate() {return new EjbWorkflowDelegateFactory<>(cDelegate);}
 	

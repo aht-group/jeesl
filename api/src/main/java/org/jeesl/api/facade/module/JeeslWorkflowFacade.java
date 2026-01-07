@@ -47,7 +47,8 @@ public interface JeeslWorkflowFacade <
 	
 	WL fWorkflowLink(WF workflow) throws JeeslNotFoundException;
 	<W extends JeeslWithWorkflow<WF>> WL fWorkflowLink(WP process, W owner) throws JeeslNotFoundException;
-	List<WL> fWorkflowLinks(List<WF> workflows);
+	
+	List<WL> fWorkflowLinks(JeeslWorkflowQuery<WP,WF> query);
 	<W extends JeeslWithWorkflow<WF>> List<WL> fWorkflowLinks(WP process, List<W> owners);
 	List<WL> fWorkflowRepsonsibleLinks(USER user);
 	List<WL> fWorkflowDelegationLinks(USER user);
@@ -60,7 +61,7 @@ public interface JeeslWorkflowFacade <
 	WF loadWorkflow(WF workflow);
 	void deleteWorkflow(WL link) throws JeeslConstraintViolationException;
 	
-	List<WF> fWorkflows(JeeslWorkflowQuery<WP> query);
+	List<WF> fWorkflows(JeeslWorkflowQuery<WP,WF> query);
 	List<WF> fWorkflows(WP process, List<WS> stages);
 	List<WF> fWorkflows(List<WP> processes, List<WST> types);
 	

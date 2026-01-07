@@ -16,7 +16,7 @@ public interface JeeslWorkflowLink <WF extends JeeslWorkflow<?,?,?,?>,
 		extends Serializable,EjbPersistable,EjbRemoveable,EjbSaveable,
 				EjbWithId,EjbWithRefId,EjbWithParentAttributeResolver
 {
-	public static enum Attributes{refId,workflow,entity}
+	public static enum Attributes{id,refId,workflow,entity}
 	
 	WF getWorkflow();
 	void setWorkflow(WF workflow);

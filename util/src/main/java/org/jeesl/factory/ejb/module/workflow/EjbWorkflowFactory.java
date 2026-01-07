@@ -1,14 +1,19 @@
 package org.jeesl.factory.ejb.module.workflow;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
+import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowLink;
 import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowProcess;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbWorkflowFactory<AP extends JeeslWorkflowProcess<?,?,?,WS>,
-								WS extends JeeslWorkflowStage<?,?,AP,?,?,?,?>,
-								WF extends JeeslWorkflow<AP,WS,?,?>
+public class EjbWorkflowFactory<WP extends JeeslWorkflowProcess<?,?,?,WS>,
+								WS extends JeeslWorkflowStage<?,?,WP,?,?,?,?>,
+								WL extends JeeslWorkflowLink<WF,?>,
+								WF extends JeeslWorkflow<WP,WS,?,?>
 
 >
 {
@@ -21,17 +26,21 @@ public class EjbWorkflowFactory<AP extends JeeslWorkflowProcess<?,?,?,WS>,
         this.cWorkflow = cWorkflow;
 	}
 	    
-	public WF build(AP process)
+	public WF build(WP process)
 	{
 		WF ejb = null;
 		try
 		{
-			ejb = cWorkflow.newInstance();
+			ejb = cWorkflow.getDeclaredConstructor().newInstance();
 			ejb.setProcess(process);
 		}
-		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
 		
 		return ejb;
+	}
+	
+	public void delete(JeeslWorkflowFacade<WP,WS,?,?,?,?,?,WL,WF,?,?,?> facade,WF wf)
+	{
+		logger.info("Deleting {}",wf.toString());
 	}
 }

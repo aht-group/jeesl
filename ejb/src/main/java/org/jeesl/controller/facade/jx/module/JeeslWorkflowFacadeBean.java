@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
@@ -30,11 +29,6 @@ import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
@@ -48,7 +42,6 @@ import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransi
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.interfaces.util.query.module.JeeslWorkflowQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
@@ -135,9 +128,19 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		}
 	}
 	
-	@Override public List<WL> fWorkflowLinks(List<WF> workflows)
+	@Override public List<WL> fWorkflowLinks(JeeslWorkflowQuery<WP,WF> query)
 	{
-		return new ArrayList<WL>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<WL> cQ = cB.createQuery(fbWorkflow.getClassLink());
+		Root<WL> root = cQ.from(fbWorkflow.getClassLink());
+		
+		cQ.select(root);
+		cQ.where(cB.and(this.pLink(cB,query,root)));
+		this.orderByLink(cB, cQ, query, root);
+		
+		TypedQuery<WL> tQ = em.createQuery(cQ);
+		super.pagination(tQ, query);
+		return tQ.getResultList();
 	}
 
 	@Override public <W extends JeeslWithWorkflow<WF>> WL fWorkflowLink(WP process, W owner) throws JeeslNotFoundException
@@ -190,7 +193,6 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		{
 			this.rm(workflow);
 		}
-		
 	}
 	
 	@Override public WT loadTransition(WT transition)
@@ -200,7 +202,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		return transition;
 	}
 	
-	@Override public List<WF> fWorkflows(JeeslWorkflowQuery<WP> query)
+	@Override public List<WF> fWorkflows(JeeslWorkflowQuery<WP,WF> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<WF> cQ = cB.createQuery(fbWorkflow.getClassWorkflow());
@@ -480,7 +482,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
         return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
-	public Predicate[] pWorkflow(CriteriaBuilder cB, JeeslWorkflowQuery<WP> query, Root<WF> root)
+	public Predicate[] pWorkflow(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WF> query, Root<WF> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -492,7 +494,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	public void orderByWorkflow(CriteriaBuilder cB, CriteriaQuery<WF> cQ, JeeslWorkflowQuery<WP> query, Root<WF> root)
+	public void orderByWorkflow(CriteriaBuilder cB, CriteriaQuery<WF> cQ, JeeslWorkflowQuery<WP,WF> query, Root<WF> root)
 	{
 		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
 		{
@@ -502,6 +504,31 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 				if(cq.getPath().equals(CqOrdering.path(JeeslWorkflow.Attributes.id)))
 				{
 					SortByPredicateBuilder.addByLong(cB,orders,cq,root.<Long>get(JeeslWorkflow.Attributes.id.toString()));
+				}
+				else {logger.warn(cq.nyi(fbWorkflow.getClassWorkflow()));}
+			}
+			if(!orders.isEmpty()) {cQ.orderBy(orders);}
+		}
+	}
+	
+	public Predicate[] pLink(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WF> query, Root<WL> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	public void orderByLink(CriteriaBuilder cB, CriteriaQuery<WL> cQ, JeeslWorkflowQuery<WP,WF> query, Root<WL> root)
+	{
+		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
+		{
+			List<Order> orders = new ArrayList<>();
+			for(JeeslCqOrdering cq : query.getCqOrderings())
+			{
+				if(cq.getPath().equals(CqOrdering.path(JeeslWorkflowLink.Attributes.id)))
+				{
+					SortByPredicateBuilder.addByLong(cB,orders,cq,root.<Long>get(JeeslWorkflowLink.Attributes.id.toString()));
 				}
 				else {logger.warn(cq.nyi(fbWorkflow.getClassWorkflow()));}
 			}

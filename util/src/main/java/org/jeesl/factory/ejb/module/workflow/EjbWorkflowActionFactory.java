@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.module.workflow;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.jeesl.factory.ejb.util.EjbPositionFactory;
@@ -34,12 +35,11 @@ public class EjbWorkflowActionFactory<T extends JeeslWorkflowTransition<?,?,?,?,
 		AA ejb = null;
 		try
 		{
-			ejb = cAction.newInstance();
+			ejb = cAction.getDeclaredConstructor().newInstance();
 			EjbPositionFactory.next(ejb,list);
 			ejb.setTransition(transition);
 		}
-		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
 		
 		return ejb;
 	}
