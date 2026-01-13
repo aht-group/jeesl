@@ -9,6 +9,5 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface SbSingleBean extends Serializable
 {
-//	void selectSbSingle(SbSingleSelection handler) throws JeeslLockingException, JeeslConstraintViolationException;
 	void selectSbSingle(SbSingleSelection handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException;
 }
