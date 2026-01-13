@@ -7,9 +7,9 @@
     <c:set var="userLocaleCode"  value="#{not empty userLocaleCode ? userLocaleCode : localeCode}" />
     <c:set var="fallbackLocale"  value="#{not empty fallbackLocale ? fallbackLocale : appLabelBean.fallbackLocale}" />
 
-	<h:outputText value="#{value[userLocaleCode].lang}" rendered="#{(not empty value) and (not empty value[userLocaleCode].lang)}"/>
-	<ui:fragment rendered="#{(empty value) or (empty value[userLocaleCode].lang)}">
+	<h:outputText value="#{value[userLocaleCode].lang}" rendered="#{(not empty value) and (not empty value[userLocaleCode].lang)}" styleClass="ui-outputtext"/>
+	<h:panelGroup rendered="#{(empty value) or (empty value[userLocaleCode].lang)}" styleClass="jeesl-output-container">
 		<jtp:symbolizer value="#{appLabelBean.fallbackLocale}" marginRight="5"/>
-		<h:outputText value="#{value[fallbackLocale.code].lang}"/>
-	</ui:fragment>
+		<h:outputText value="#{value[fallbackLocale.code].lang}" styleClass="ui-outputtext"/>
+	</h:panelGroup>
 </ui:composition>
