@@ -20,7 +20,7 @@ import org.jeesl.factory.xlsx.io.report.XlsSheetFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.monitorjbl.xlsx.StreamingReader;
+import com.github.pjfanning.xlsx.StreamingReader;
 
 public class XlsxMerger 
 {

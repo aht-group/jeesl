@@ -31,7 +31,8 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 /**
- * The MqttLookup is for MQTT v3, for v5 use MqttClientFactory
+ * This MqttLookup is for MQTT v3, for v5 use MqttClientFactory
+ * v3 is marked as deprecated
  */
 @Deprecated
 public class JeesMqttLookup

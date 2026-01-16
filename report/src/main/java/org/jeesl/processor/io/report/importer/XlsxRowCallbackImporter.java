@@ -25,7 +25,7 @@ import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.monitorjbl.xlsx.StreamingReader;
+import com.github.pjfanning.xlsx.StreamingReader;
 
 public class XlsxRowCallbackImporter
 {
