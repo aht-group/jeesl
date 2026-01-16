@@ -218,7 +218,6 @@
 		<dependency>
 		    <groupId>com.github.pjfanning</groupId>
 		    <artifactId>excel-streaming-reader</artifactId>
-		    <version>4.1.2</version>
 		    <scope>provided</scope>
 		</dependency>
 

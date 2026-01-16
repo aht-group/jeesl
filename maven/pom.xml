@@ -128,14 +128,25 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- Version of jeesl-report may not be needed, but did not work without it in a certain scenario -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-report</artifactId>
-			<!-- Version may not be needed, but did not work without it in a certain scenario -->
 			<version>0.3.2-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi-ooxml</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> 
 				
 		<!-- Dependency Graph -->
 		<dependency>
