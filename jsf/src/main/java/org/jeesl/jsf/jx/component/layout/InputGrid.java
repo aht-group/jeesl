@@ -118,14 +118,20 @@ public class InputGrid extends UIPanel
 				{
 					if (child instanceof OutputLabel)
 					{
+        				UIPanel inputChild = new UIPanel();
+        				responseWriter.startElement("span", inputChild);
+        				responseWriter.writeAttribute("class", "ui-outputlabel p-col p-md-" + labelWidth, null);
+        				
 						Map<String, Object> attributes = child.getAttributes();
-						StringBuffer styleClass = new StringBuffer("p-col p-md-" + labelWidth);
+						StringBuffer styleClass = new StringBuffer("ui-outputlabel-text");
 						if (attributes.containsKey("styleClass")) {
 							styleClass.append(" " + (String)attributes.get("styleClass"));
 						}
 						attributes.put("styleClass", styleClass.toString());
 						
 						child.encodeAll(context);
+						
+						responseWriter.endElement("span");
 					}
 					else if (child instanceof BlockUIBase)
 					{

@@ -33,7 +33,7 @@
 
 	<composite:implementation>
 		<h:outputText value="#{cc.attrs.value}"
-						styleClass="#{empty cc.attrs.styleClass ? '' : cc.attrs.styleClass}">
+					  styleClass="ui-outputtext #{empty cc.attrs.styleClass ? '' : cc.attrs.styleClass}">
 			
 			
 			<c:if test="#{cc.attrs.withDate}">
