@@ -1,10 +1,9 @@
 package org.jeesl.maven.goal;
 
-
 import java.io.File;
 import java.net.URL;
 
-import org.apache.ant.compress.taskdefs.Unzip;
+import org.apache.commons.compress.archivers.examples.Expander;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -46,7 +45,8 @@ public class RemoteResourceIntegrator extends AbstractMojo
     {
     	
     	getLog().info("Trying to download remote resource from " +resourceArchiveUrl);
-        try {
+        try
+        {
             String fileName = resourceArchiveUrl.substring(resourceArchiveUrl.lastIndexOf("/")+1, resourceArchiveUrl.length());
             File localFile  = new File(target, fileName);
             if (!localFile.exists())
@@ -55,15 +55,18 @@ public class RemoteResourceIntegrator extends AbstractMojo
                 FileUtils.copyURLToFile(new URL(resourceArchiveUrl), localFile);
                 
             }
-            if (unzip) {
+            if (unzip)
+            {
                     getLog().info("Local file is requested to be unzipped. Doing so.");
-                    Unzip unzipper = new Unzip();
-                    unzipper.setSrc(localFile);
-                    unzipper.setDest(new File(target));
-                    unzipper.execute();
+                new Expander().expand("zip", localFile, new File(target));
+//                    Unzip unzipper = new Unzip();
+//                    unzipper.setSrc(localFile);
+//                    unzipper.setDest(new File(target));
+//                    unzipper.execute();
                 }
             
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new MojoExecutionException("Could not handle resource from given URL: "+e.getMessage());
         }
     }

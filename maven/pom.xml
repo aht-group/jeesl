@@ -82,7 +82,8 @@
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
-			<version>3.3.9</version>
+			<scope>provided</scope>
+			<version>3.9.12</version>
 	    </dependency>
 	    <dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
@@ -236,12 +237,18 @@
 			<version>2.4.7</version>
 	    </dependency>
 
-		<!-- Apache Commons -->
+		<!-- Apache Commons 
 		<dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant-compress</artifactId>
             <version>1.2</version>
-        </dependency>
+        </dependency> -->
+        		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.28.0</version>
+			<scope>compile</scope>
+		</dependency>
            
 		<dependency>
 		    <groupId>org.wildfly.core</groupId>
@@ -278,7 +285,7 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- 2025-02-28 tk: Trying to remove -->
+		<!-- 2025-02-28 tk: Trying to remove 
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -290,7 +297,7 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
 			</exclusions>
-		</dependency> 
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>

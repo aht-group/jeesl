@@ -5,16 +5,12 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jboss.resteasy.client.jaxrs.internal.BasicAuthentication;
 import org.jeesl.controller.handler.system.property.ConfigBootstrap;
-import org.jeesl.controller.handler.web.rest.DelayedUrlConfig;
 import org.jeesl.util.web.RestLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

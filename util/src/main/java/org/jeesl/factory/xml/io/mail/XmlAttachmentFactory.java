@@ -6,14 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.tika.Tika;
 import org.jeesl.model.xml.io.mail.Attachment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.jmimemagic.Magic;
-import net.sf.jmimemagic.MagicException;
-import net.sf.jmimemagic.MagicMatchNotFoundException;
-import net.sf.jmimemagic.MagicParseException;
 
 public class XmlAttachmentFactory
 {
@@ -21,12 +17,18 @@ public class XmlAttachmentFactory
 	
 	private static String mimePdf = "application/pdf";
 	
-	public static Attachment create(File f) throws IOException, MagicParseException, MagicMatchNotFoundException, MagicException
+	public static Attachment create(File f) throws IOException
 	{
 		FileInputStream fis = new FileInputStream(f);
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
-		String mimeType = Magic.getMagicMatch(f,false).getMimeType();
+		
+		Tika tika = new Tika();
+
+//		String mimeType = Magic.getMagicMatch(f,false).getMimeType();
+        String mimeType = tika.detect(f);
+		
+		
 		return build(f.getName(), mimeType, data);
 	}
 	

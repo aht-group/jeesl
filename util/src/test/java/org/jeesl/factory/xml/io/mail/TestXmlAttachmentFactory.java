@@ -2,7 +2,6 @@ package org.jeesl.factory.xml.io.mail;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
@@ -10,10 +9,6 @@ import org.jeesl.model.xml.io.mail.Attachment;
 import org.jeesl.test.JeeslBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.jmimemagic.MagicException;
-import net.sf.jmimemagic.MagicMatchNotFoundException;
-import net.sf.jmimemagic.MagicParseException;
 
 public class TestXmlAttachmentFactory
 {
@@ -23,11 +18,11 @@ public class TestXmlAttachmentFactory
 	
 	public TestXmlAttachmentFactory(Configuration config)
 	{
-		pMime = Paths.get(config.getString("dir.mime"));
+		pMime = JeeslBootstrap.pTemp;
 		logger.info("Mime Examples: "+pMime.toString());
 	}
 	
-	protected void pdf() throws IOException, MagicParseException, MagicMatchNotFoundException, MagicException
+	protected void pdf() throws IOException
 	{
 		Path pPdf = pMime.resolve("pdf.pdf");
 		logger.info("PDF: "+pPdf.toString());

@@ -150,7 +150,7 @@
 		  <version>2.0.0-M2-SNAPSHOT</version>
 		</dependency> -->
 
-   		<!-- 2025-02-11 tk: Checking Removal -->
+   		<!-- 2025-02-11 tk: Checking Removal 
    		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -162,7 +162,7 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
         	</exclusions>
-		</dependency> 
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>
@@ -285,13 +285,19 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>	
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-dbutils</groupId>
 			<artifactId>commons-dbutils</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		    <scope>compile</scope>
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>commons-logging</groupId>
+		    		<artifactId>commons-logging</artifactId>
+		    	</exclusion>
+		    </exclusions>
 		</dependency>
 		
 		<!-- AWS-S3 -->

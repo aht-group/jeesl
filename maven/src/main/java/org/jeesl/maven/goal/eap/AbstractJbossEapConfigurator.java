@@ -11,13 +11,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
+import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.jeesl.controller.io.ssi.wildfly.cache.AbstractEapCacheConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.ds.pg.DsPostgresEap73Configurator;
@@ -53,26 +53,32 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	String subnetConfigPrefix = test();
     	
     	ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("jeesl").jaxb(JaxbUtil.instance());
+    	
+    	ConfigBootstrap cb = ConfigBootstrap.instance();
+    	
     	try
 		{
-			ConfigLoader.addFile(ccp.toFile("eapConfig"+subnetConfigPrefix));
+    		cb.add(ccp.toFile("eapConfig"+subnetConfigPrefix).toPath());
+//			ConfigLoader.addFile(ccp.toFile("eapConfig"+subnetConfigPrefix));
 		}
 		catch (ExlpConfigurationException e) {getLog().info("No specific "+ExlpCentralConfigPointer.class.getSimpleName()+" for "+subnetConfigPrefix);}
     	
     	try
 		{
-    		ConfigLoader.addFile(ccp.toFile("eapConfig"));
+    		cb.add(ccp.toFile("eapConfig").toPath());
+//    		ConfigLoader.addFile(ccp.toFile("eapConfig"));
 		}
 		catch (ExlpConfigurationException e) {getLog().error("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" "+e.getMessage());}
 		
-		Configuration config = ConfigLoader.init();
+//    	org.exlp.interfaces.system.property.Configuration config = ConfigLoader.wrap(ConfigLoader.init());
+    	org.exlp.interfaces.system.property.Configuration config = cb.wrap();
 		
 		String jbossDir = config.getString("eap.dir","/Volumes/ramdisk/jboss");
 		File f = new File(jbossDir);
 		for(EapDsConfigurator c : dsConfigurators.values()) {c.setJbossRoot(f);}
 		
-		super.getLog().info("Using Config "+config.getString("jeesl.classifier","--"));
-		return ConfigLoader.wrap(config);
+		logger.info("Using Config "+config.getString("jeesl.classifier","--"));
+		return config;
     }
     
     private String test()
