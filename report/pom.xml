@@ -259,10 +259,11 @@
         
         <!--GeoTools - required to work with Esri SHP Shape files -->
         <!--2023-09-01 tk: Scope to provided -->
+        <!--2026-01-20 tk: version from 19.4 to 28.0 -->
 		<dependency>
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-shapefile</artifactId>
-			<version>19.4</version>
+			<version>28.0</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -271,8 +272,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-
    	   	
    	   	<!-- Batik 
 		<dependency>
