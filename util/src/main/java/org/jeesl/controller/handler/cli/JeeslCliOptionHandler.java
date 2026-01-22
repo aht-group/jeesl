@@ -139,8 +139,7 @@ public class JeeslCliOptionHandler
 //		logger.info("Log4j2 initialized (on info)");
 	}
 	
-	public org.exlp.interfaces.system.property.Configuration config1Wrapper(CommandLine line, String defaultConfig) {return ConfigLoader.wrap(config1(line,defaultConfig));}
-	public org.apache.commons.configuration.Configuration config1(CommandLine line, String defaultConfig)
+	private org.exlp.interfaces.system.property.Configuration config1Wrapper(CommandLine line, String defaultConfig)
 	{
 		if(line.hasOption(oConfig.getOpt()))
 		{
@@ -173,11 +172,11 @@ public class JeeslCliOptionHandler
 		
 		ConfigLoader.addString(defaultConfig);
 		
-		return ConfigLoader.init();
+		return ConfigLoader.wrap(ConfigLoader.init());
 	}
 	
 	public org.exlp.interfaces.system.property.Configuration config2Wrapper(CommandLine line, String defaultConfig) {return ConfigBootstrap.wrap(config2(line,defaultConfig));}
-	public org.apache.commons.configuration2.Configuration config2(CommandLine line, String defaultConfig)
+	private org.apache.commons.configuration2.Configuration config2(CommandLine line, String defaultConfig)
 	{
 		ConfigBootstrap bootstrap = ConfigBootstrap.instance();
 		if(line.hasOption(oConfig.getOpt()))
