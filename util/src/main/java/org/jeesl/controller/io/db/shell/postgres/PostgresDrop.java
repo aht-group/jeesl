@@ -3,7 +3,7 @@ package org.jeesl.controller.io.db.shell.postgres;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.filter.Filters;
@@ -57,9 +57,10 @@ public class PostgresDrop extends AbstractPostgresShell implements UtilsDbShell
 		}
 		else
 		{
-			for(String table : Arrays.asList(config.getStringArray(UtilsDbShell.cfgDbDropTable))){dropTable(table,false);}
-			for(String table : Arrays.asList(config.getStringArray(UtilsDbShell.cfgDbDropCascade))){dropTable(table,true);}
-			for(String seq : Arrays.asList(config.getStringArray(UtilsDbShell.cfgDbDropSequence))){dropSequence(seq);}
+			logger.warn("Config: NYI: getStringArray");
+//			for(String table : Arrays.asList(config.getStringArray(UtilsDbShell.cfgDbDropTable))){dropTable(table,false);}
+//			for(String table : Arrays.asList(config.getStringArray(UtilsDbShell.cfgDbDropCascade))){dropTable(table,true);}
+//			for(String seq : Arrays.asList(config.getStringArray(UtilsDbShell.cfgDbDropSequence))){dropSequence(seq);}
 		}
 		
 		debugDatabase();

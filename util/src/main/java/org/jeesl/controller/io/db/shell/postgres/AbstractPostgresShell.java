@@ -2,7 +2,7 @@ package org.jeesl.controller.io.db.shell.postgres;
 
 import java.util.NoSuchElementException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.model.xml.config.Parameter;
 import org.jdom2.Document;
 import org.jeesl.controller.io.db.shell.AbstractDatabaseShell;

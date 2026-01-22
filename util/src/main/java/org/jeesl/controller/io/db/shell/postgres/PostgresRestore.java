@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.filter.Filters;

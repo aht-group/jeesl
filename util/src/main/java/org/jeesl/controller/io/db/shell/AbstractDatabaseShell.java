@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.WordUtils;
 import org.exlp.cmd.file.ShellCmdChmod;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.model.xml.config.Parameter;
 import org.exlp.model.xml.config.Parameters;
 import org.exlp.util.io.txt.ExlpTxtWriter;

@@ -187,19 +187,9 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-configuration2</artifactId>
-			<scope>provided</scope>
-			<exclusions>
-        		<exclusion>
-        			<artifactId>commons-logging</artifactId>
-        			<groupId>commons-logging</groupId>
-        		</exclusion>
-			</exclusions>
-		</dependency>
+        
 		
-		<!-- 2026-01-18 tk : Trying to remove-->
+		<!-- 2026-01-18 tk : Trying to remove -->
 	     <dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -211,6 +201,17 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
         	</exclusions>
+		</dependency> 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+			</exclusions>
 		</dependency>
         <dependency>
 		    <groupId>org.apache.commons</groupId>

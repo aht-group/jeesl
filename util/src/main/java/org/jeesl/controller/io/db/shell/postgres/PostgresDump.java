@@ -1,10 +1,9 @@
 package org.jeesl.controller.io.db.shell.postgres;
 
 import java.io.File;
-
 import java.util.NoSuchElementException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.interfaces.controller.db.UtilsDbShell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
