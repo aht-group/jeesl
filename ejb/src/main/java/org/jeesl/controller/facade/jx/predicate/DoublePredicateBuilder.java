@@ -20,6 +20,7 @@ public class DoublePredicateBuilder
 		switch(cq.getType())
 		{
 			case NonNull: predicates.add(cB.isNotNull(eDouble)); break;
+			case IsNull: predicates.add(cB.isNull(eDouble)); break;
 			case IsValue: predicates.add(cB.equal(eDouble,cq.getValue())); break;
 			case GreaterThan: predicates.add(cB.greaterThan(eDouble,cq.getValue())); break;
 			case GreaterOrEqual: predicates.add(cB.greaterThanOrEqualTo(eDouble,cq.getValue())); break;
