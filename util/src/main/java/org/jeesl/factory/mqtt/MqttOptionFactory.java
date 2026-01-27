@@ -17,10 +17,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
 import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
-import org.eclipse.paho.mqttv5.common.MqttException;
-import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiCredentialFactory;
@@ -40,8 +37,8 @@ public class MqttOptionFactory
 	private JsonSsiCredential credential;
 	
 	private boolean clean;
-	private ConfigKey.ConnnectionType type;
-	private String scope; public <E extends Enum<E>> MqttOptionFactory  scope(E scope) {this.scope = scope.toString(); return this;}
+	private String type; public <E extends Enum<E>> MqttOptionFactory authentication(E type) {this.type = type.toString(); return this;}
+	private String broker; public <E extends Enum<E>> MqttOptionFactory broker(E broker) {this.broker = broker.toString(); return this;}
 	
 	public static MqttOptionFactory instance(Configuration config) {return new MqttOptionFactory(config);}
 	public MqttOptionFactory(Configuration config)
@@ -68,8 +65,6 @@ public class MqttOptionFactory
 	public MqttOptionFactory clean() {this.clean = true; return this;}
 	public MqttOptionFactory durable() {this.clean = false; return this;}
 	
-	public MqttOptionFactory authentication(ConfigKey.ConnnectionType type) {this.type = type; return this;}
-	
 	public MqttConnectionOptions build() throws UtilsConfigurationException
 	{
 		if(Objects.nonNull(config)) {return this.buildByConfig();}
@@ -84,15 +79,17 @@ public class MqttOptionFactory
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append("net.mqtt");
-			if(Objects.nonNull(scope)) {sb.append(".").append(scope);}
+			if(Objects.nonNull(broker)) {sb.append(".").append(broker);}
 			if(Objects.nonNull(type)) {sb.append(".").append(type.toString());}
+			
+			logger.info("Configuring with base {}",sb.toString());
 			
 			options.setUserName(config.getString(sb.toString()+".user"));
 			options.setPassword(config.getString(sb.toString()+".password").getBytes());
 			
-			if(ObjectUtils.allNotNull(scope,type))
+			if(ObjectUtils.allNotNull(broker,type))
 			{
-				Integer port = config.getInt(String.format("net.mqtt.%s.%s.port", scope, type));
+				Integer port = config.getInt(String.format("net.mqtt.%s.%s.port", broker, type));
 				if(port==8883){applySsl(options);}
 			}
 			
@@ -103,12 +100,10 @@ public class MqttOptionFactory
 	{
 		MqttConnectionOptions options = new MqttConnectionOptions();
 		options.setCleanStart(clean);
-		
-		
-			
-			options.setUserName(credential.getUser());
-			options.setPassword(credential.getPassword().getBytes());
-			if(credential.getPort()==8883){applySsl(options);}
+
+		options.setUserName(credential.getUser());
+		options.setPassword(credential.getPassword().getBytes());
+		if(credential.getPort()==8883){applySsl(options);}
 
 		return options;
 	}

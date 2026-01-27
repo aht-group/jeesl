@@ -59,7 +59,7 @@ public class AbstractSsiXlsMapper implements XlsxImportMapper
 //			logger.info(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex));
 			String key = row.getCell(colIndex).getStringCellValue().trim();
 			logger.trace("i:"+colIndex+" "+key);
-			logger.info(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex)+" "+key);
+			logger.trace(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex)+" "+key);
 			mapColumnIndex.put(colIndex,key);
 			if(mapColumnCode.containsKey(key)) {logger.warn("Already exists: "+key);}
 			mapColumnCode.put(key,colIndex);
