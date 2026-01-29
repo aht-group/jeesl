@@ -62,6 +62,7 @@ public class MqttOptionFactory
 		type = null;
 	}
 	
+	public MqttOptionFactory durable(boolean value) {this.clean = !value; return this;}
 	public MqttOptionFactory clean() {this.clean = true; return this;}
 	public MqttOptionFactory durable() {this.clean = false; return this;}
 	

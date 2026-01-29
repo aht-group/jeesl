@@ -30,7 +30,7 @@ public class UiEditBooleanHandler implements UiEditHandler
 	public UiEditBooleanHandler denyEdit() {allow=false; return this;}
 	public UiEditBooleanHandler allowEdit() {allow=true; return this;}
 	
-	public UiEditBooleanHandler allow(boolean value)
+	public UiEditBooleanHandler setEdit(boolean value)
 	{
 		this.allow=value;
 		return this;

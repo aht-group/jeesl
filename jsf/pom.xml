@@ -345,6 +345,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 			<version>3.0.0.m3</version>
@@ -357,18 +363,6 @@
 			<artifactId>jda-time</artifactId>
 		</dependency> -->
 		
-		<!--Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j2-impl</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 		<!-- Test -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -380,19 +374,23 @@
 			<artifactId>junit-jupiter-engine</artifactId>
 			<scope>test</scope>
 		</dependency>
-   	   	
    	   	<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<!--Logging -->
 		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>javase</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j2-impl</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>

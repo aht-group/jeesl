@@ -46,6 +46,7 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 		return json;
 	}
 	public JsonTsDataFactory<DATA> timestamp(LocalDateTime time) {json.setLocalDateTime(time); return this;}
+	public JsonTsDataFactory<DATA> info(String info) {json.setVbaRecord(info); return this;}
 	public JsonTsDataFactory<DATA> clear() {json = JsonTsDataFactory.build(); return this;}
 	public JsonTsDataFactory<DATA> add(JsonTsPoint point) {if(Objects.isNull(json.getPoints())) {json.setPoints(new ArrayList<>());} json.getPoints().add(point); return this;}
 	public JsonTsData assemble() {return json;}
@@ -59,5 +60,14 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 		data.setLocalDateTime(ldt);
 		data.setValue(value);
 		ts.getDatas().add(data);
+	}
+	
+	public static JsonTsSeries toSeries(JsonTsData data)
+	{
+		JsonTsSeries json = data.getSeries();
+		data.setSeries(null);
+		json.setDatas(new ArrayList<JsonTsData>());
+		json.getDatas().add(data);
+		return json;
 	}
 }

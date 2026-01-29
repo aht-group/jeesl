@@ -1,9 +1,11 @@
 package org.jeesl.factory.json.module.ts;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
+import org.jeesl.model.json.module.ts.JsonTsData;
 import org.jeesl.model.json.module.ts.JsonTsPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,5 +57,11 @@ public class JsonTsPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?,?>,
 		json.setValue(value);
 		
 		return json;
+	}
+	
+	public static void append(JsonTsData data, JsonTsPoint point)
+	{
+		if(Objects.isNull(data.getPoints())) {data.setPoints(new ArrayList<>());}
+		data.getPoints().add(point);
 	}
 }
