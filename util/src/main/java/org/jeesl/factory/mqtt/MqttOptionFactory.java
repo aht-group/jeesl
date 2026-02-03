@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -76,6 +77,13 @@ public class MqttOptionFactory
 	{
 		MqttConnectionOptions options = new MqttConnectionOptions();
 		options.setCleanStart(clean);
+		if(!clean)
+		{
+			Duration duration = Duration.ofDays(90);
+			logger.info("Durable Sessions of {} days, clean={}",duration.toDays(),clean);
+			options.setSessionExpiryInterval(Duration.ofDays(90).getSeconds());
+		}
+		
 		if(Objects.nonNull(type))
 		{
 			StringBuilder sb = new StringBuilder();

@@ -27,6 +27,7 @@ public class UiEditBooleanHandler implements UiEditHandler
 		allow = !allow;
 	}
 	
+	public UiEditBooleanHandler toggleEdit() {allow=!allow; return this;}
 	public UiEditBooleanHandler denyEdit() {allow=false; return this;}
 	public UiEditBooleanHandler allowEdit() {allow=true; return this;}
 	
