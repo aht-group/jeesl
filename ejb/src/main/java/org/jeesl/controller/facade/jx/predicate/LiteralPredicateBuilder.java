@@ -24,6 +24,9 @@ public class LiteralPredicateBuilder
 		Expression<String> literal;
 		switch(cq.getType())
 		{
+			case STARTS: 	literal = cB.upper(cB.literal(cq.getLiteral()+"%"));
+							predicates.add(cB.like(cB.upper(expression),literal));
+							break;
 			case CONTAINS: 	literal = cB.upper(cB.literal("%"+cq.getLiteral()+"%"));
 							predicates.add(cB.like(cB.upper(expression),literal));
 							break;

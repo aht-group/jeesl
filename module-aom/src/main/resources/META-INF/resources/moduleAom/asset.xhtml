@@ -54,7 +54,7 @@
 							<f:facet name="header"><j:pHeader entity="AomAsset"/></f:facet>
 							<f:facet name="actions">
 								<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelAsset()}" update=":#{cc.id}:grid"/>
-								<j:svg type="jeeslSave"   listener="#{cc.attrs.ctrl.saveAsset()}"   update=":#{cc.id}:grid"/>
+								<j:svg type="jeeslSave"   listener="#{cc.attrs.ctrl.saveAsset()}"   update=":#{cc.id}:sAsset"/>
 								<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.asset.id gt 0}"/>
 								<p:spacer width="10" height="12"/>
 								<j:svg type="jeeslGallery" listener="#{cc.attrs.ctrl.toggleGallery()}" update=":#{cc.id}:sAsset" rendered="#{cc.attrs.ctrl.asset.id gt 0}" styleClass="#{cc.attrs.ctrl.ehGallery.allow ? '' : 'jeesl-greyscale'}"/>
