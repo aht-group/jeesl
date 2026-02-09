@@ -3709,6 +3709,10 @@ body, .ui-widget {
 			line-height: 1.25em;
 			padding: $half-spacing $regular-spacing;
 			
+			&.jeesl-column-min-width {
+				width: 1px;
+			}
+			
 			> * {
 				vertical-align: middle;
 				
@@ -4137,7 +4141,7 @@ body, .ui-widget {
 				min-width: $element-height;
 				position: absolute;
 				transform: translateX(-50%);
-				width: calc(100% - 2 * $half-spacing) !important;
+				width: calc(100% - 2 * $half-spacing);
 				
 				@media (max-width: 768px) {
 					height: $element-height-mobile;
