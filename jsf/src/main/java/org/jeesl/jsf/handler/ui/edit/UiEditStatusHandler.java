@@ -1,6 +1,7 @@
 package org.jeesl.jsf.handler.ui.edit;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.interfaces.controller.handler.UiEditHandler;
@@ -40,6 +41,8 @@ public class UiEditStatusHandler <S extends JeeslStatus<?,?,S>> implements UiEdi
 	
 	public void update(S status)
 	{
+		if(Objects.isNull(status)) {allow=false;}
+		
 		boolean statusInAllow;
 		if(setAllow.isEmpty()) {statusInAllow = true;}
 		else {statusInAllow = setAllow.contains(status);}
