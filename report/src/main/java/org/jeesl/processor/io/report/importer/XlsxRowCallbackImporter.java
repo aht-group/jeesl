@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -80,6 +81,19 @@ public class XlsxRowCallbackImporter
 		}
 	}
 	
+	public void streamFile(org.exlp.interfaces.system.property.Configuration config, String configKey) throws IOException, UtilsConfigurationException
+	{
+		String sPath = config.getString(configKey);
+		if(Objects.isNull(sPath))
+		{
+			logger.warn("No config for {}",configKey);
+		}
+		else
+		{
+			Path path = Paths.get(sPath);
+			this.streamFile(path);
+		}
+	}
 	public void streamFile(Path path) throws IOException, UtilsConfigurationException
 	{
 		logger.debug("Streaming "+path.toString());

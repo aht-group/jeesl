@@ -23,5 +23,5 @@ public interface JeeslCalendarMonth <L extends JeeslLang, D extends JeeslDescrip
 										EjbWithCodeGraphic<G>,
 										JeeslStatus<L,D,S>
 {
-	
+	public enum Att {position}
 }

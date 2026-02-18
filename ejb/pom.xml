@@ -178,12 +178,12 @@
    	   		<scope>test</scope>
    	   	</dependency>
 
-		<!-- MQTT -->
+		<!-- MQTT 
 		<dependency>
 		  <groupId>org.eclipse.paho</groupId>
 		  <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
 		  <scope>provided</scope>
-		</dependency>
+		</dependency> -->
 	  	
 		<!-- Batik -->
 		<dependency>

@@ -2,6 +2,7 @@ package org.jeesl.factory.json.module.ts;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.exlp.util.system.DateUtil;
@@ -42,6 +43,15 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 	
 		json.setLocalDateTime(time);
 		json.setValue(value);
+		
+		return json;
+	}
+	public static JsonTsData build(LocalDateTime time, List<JsonTsPoint> points)
+	{
+		JsonTsData json = new JsonTsData();
+	
+		json.setLocalDateTime(time);
+		json.setPoints(points);
 		
 		return json;
 	}
