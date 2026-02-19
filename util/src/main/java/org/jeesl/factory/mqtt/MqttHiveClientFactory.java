@@ -108,6 +108,8 @@ public class MqttHiveClientFactory
 		Mqtt5SimpleAuthBuilder builder = Mqtt5SimpleAuth.builder();
 		Mqtt5SimpleAuthBuilder.Complete complete = null;
 		
+		String username;
+		
 		if(Objects.nonNull(config))
 		{
 			String userKey = String.format("net.mqtt.%s.%s.user", brokerCode, authCode);
@@ -115,8 +117,9 @@ public class MqttHiveClientFactory
 			
 			try
 			{
-				complete = builder.username(config.getString(userKey))
-								.password(config.getString(passwordKey).getBytes());
+				username = config.getString(userKey);
+				complete = builder.username(username).password(config.getString(passwordKey).getBytes());
+				logger.info("Connecting as {} via config",username);
 			}
 			catch(NullPointerException e)
 			{
@@ -126,8 +129,10 @@ public class MqttHiveClientFactory
 		}
 		else if(Objects.nonNull(credential))
 		{
+			username = credential.getUser();
 			complete = builder.username(credential.getUser())
 								.password(credential.getPassword().getBytes());
+			logger.info("Connecting as {} via credential",username);
 		}
 		
 		return complete.build();
