@@ -30,6 +30,7 @@ public class JsonCategoryFactory<L extends JeeslLang, D extends JeeslDescription
 		json.setLabel(label);
 		return json;
 	}
+	public static <E extends Enum<E>> JsonCategory build(E code) {return JsonCategoryFactory.build(code.toString());}
 	public static JsonCategory build(String code)
 	{
 		JsonCategory json = new JsonCategory();

@@ -26,4 +26,12 @@ public class JsonTsBridgeFactory
 		
 		return bridge;
 	}
+	public static <E extends Enum<E>> JsonTsBridge build(E code)
+	{
+		JsonTsBridge bridge = build();
+
+		bridge.setCode(code.toString());
+		
+		return bridge;
+	}
 }

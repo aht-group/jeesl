@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiCredentialFactory;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
@@ -55,8 +56,7 @@ public class MqttHiveClientFactory
 	public <E extends Enum<E>> MqttHiveClientFactory client(Class<?> cClient, E profile) {return this.client(null,cClient,profile);}
 	public <E extends Enum<E>> MqttHiveClientFactory client(Class<?> cScope, Class<?> cClient, E profile)
 	{
-		if(Objects.isNull(config)) {throw new IllegalStateException("You need to use config!");}
-		if(Objects.nonNull(credential)) {throw new IllegalStateException("You need to use config, not credential!");}
+		if(ObjectUtils.allNull(config,credential)) {throw new IllegalStateException("You need to configure with config or credential");}
 		this.clientScope=cScope;
 		this.clientClass=cClient;
 		this.clientProfile = profile.toString();
@@ -88,24 +88,6 @@ public class MqttHiveClientFactory
 		}
 		
 		return isa;
-	}
-	
-	private void buildByCredential()
-	{
-		Integer port = credential.getPort();
-		
-		StringBuilder sbBroker = new StringBuilder();
-		if(port==1883) {sbBroker.append("tcp://");}
-		else if(port==8883) {sbBroker.append("ssl://");}
-		sbBroker.append(credential.getHost());
-		sbBroker.append(":").append(port);
-
-		StringBuilder sbIdentifier = new StringBuilder();
-		sbIdentifier.append(clientClass.getSimpleName());
-		sbIdentifier.append(":").append(credential.getToken());
-		
-		logger.info("Broker: {} with {}",sbBroker.toString(),sbIdentifier.toString());
-		
 	}
 	
 	public String toIdentifier()
@@ -223,8 +205,6 @@ public class MqttHiveClientFactory
      */
 	private static void connectResumeSession(Mqtt5AsyncClient client, String identifier)
     {
-		String clientId = client.getConfig().getClientIdentifier().map(MqttClientIdentifier::toString).orElse("<unknown>");
-		
         client.connectWith()
                 .cleanStart(false)
                 .sessionExpiryInterval(TimeUnit.DAYS.toSeconds(30))
