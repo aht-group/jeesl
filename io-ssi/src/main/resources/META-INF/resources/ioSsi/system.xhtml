@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="wc" required="true"/>
+	</composite:interface>
+		
+	<composite:implementation>
+	<jp:grid id="grid">
+		<j:slot width="6">
+			<h:form>
+				<p:dataTable styleClass="jeesl-datatable"
+						var="s" value="#{cc.attrs.wc.systems}"
+						selection="#{cc.attrs.wc.system}" selectionMode="single" rowKey="#{s.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoSsiSystem" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.wc.addSystem()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.wc.selectSystem()}" update=":#{cc.id}:sSystem"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoSsiSystem" code="code"/></f:facet>
+						<h:outputText value="#{s.code}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoSsiSystem" code="fqdn"/></f:facet>
+						<h:outputText value="#{s.fqdn}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoSsiSystem"/></f:facet>
+						<h:outputText value="#{s.name[localeCode].lang}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sSystem" width="6">
+			<h:form id="fSystem" rendered="#{not empty cc.attrs.wc.system}">
+				<p:panel id="pView" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoSsiSystem"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.wc.cancelSystem()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave"   listener="#{cc.attrs.wc.saveSystem()}"   update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.wc.deleteSystem()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.wc.system.id gt 0}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						
+						<jtp:label entity="IoSsiSystem" code="id"/>
+						<h:outputText value="#{cc.attrs.wc.system.id}"/>
+						
+						<jtp:label entity="IoSsiSystem" code="code"/>
+						<p:inputText value="#{cc.attrs.wc.system.code}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiSystem" code="fqdn"/>
+						<p:inputText value="#{cc.attrs.wc.system.fqdn}" autocomplete="off"/>
+						
+					</p:panelGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.wc.system}" withDescription="true"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fCredentials" rendered="#{not empty cc.attrs.wc.system}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.wc.credentials}"
+						selection="#{cc.attrs.wc.credential}" selectionMode="single" rowKey="#{c.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoSsiCredential" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.wc.addCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.wc.selectCredential()}" update=":#{cc.id}:fCredential"/>
+					<p:column>
+						<h:outputText value="#{c.position}" rendered="#{c.visible}"/>
+						<j:svg type="ejbInvisible" rendered="#{not c.visible}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoSsiCredential" code="code"/></f:facet>
+						<h:outputText value="#{c.code}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoSsiCredential" code="user"/></f:facet>
+						<h:outputText value="#{c.user}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fCredential" >
+				<p:panel id="pView" rendered="#{not empty cc.attrs.wc.credential}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoSsiCredential"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.wc.cancelCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"/>
+						<j:svg type="jeeslSave"   listener="#{cc.attrs.wc.saveCredential()}"   update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.wc.deleteCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential" rendered="#{cc.attrs.wc.credential.id gt 0}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						
+						<jtp:label entity="IoSsiCredential" code="id"/>
+						<h:outputText value="#{cc.attrs.wc.credential.id}"/>
+						
+						<jtp:label entity="IoSsiCredential" code="position"/>
+						<h:outputText value="#{cc.attrs.wc.credential.position}"/>
+						
+						<jtp:label entity="IoSsiCredential" code="visible"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.wc.credential.visible}"/>
+						
+						<jtp:label entity="IoSsiCredential" code="code"/>
+						<p:inputText value="#{cc.attrs.wc.credential.code}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiCredential" code="host"/>
+						<p:inputText value="#{cc.attrs.wc.credential.host}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiCredential" code="port"/>
+						<p:inputText value="#{cc.attrs.wc.credential.port}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiCredential" code="url"/>
+						<p:inputText value="#{cc.attrs.wc.credential.url}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiCredential" code="user"/>
+						<p:inputText value="#{cc.attrs.wc.credential.user}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiCredential" code="pwd"/>
+						<p:inputText value="#{cc.attrs.wc.credential.pwd}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiCredential" code="token"/>
+						<p:inputText value="#{cc.attrs.wc.credential.token}" autocomplete="off"/>
+						
+						<jtp:label entity="IoSsiCredential" code="encrypted"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.wc.credential.encrypted}" />
+					
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</jp:grid>
+	</composite:implementation>
+	</html>

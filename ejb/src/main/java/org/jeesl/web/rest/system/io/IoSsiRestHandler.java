@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.api.rest.i.io.JeeslIoSsiRestInterface;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiNetworkFactoryBuilder;
@@ -64,7 +65,11 @@ public class IoSsiRestHandler <L extends JeeslLang, D extends JeeslDescription,
 				JsonSsiCredential jCredential = JsonSsiCredentialFactory.build();
 				jCredential.setCode(eCredential.getCode());
 				jCredential.setUrl(eCredential.getUrl());
-				jSystem.getCredentials().add(jCredential);
+				
+				if(BooleanComparator.active(eCredential.getVisible()))
+				{
+					jSystem.getCredentials().add(jCredential);
+				}
 			}
 		}
 		catch (JeeslNotFoundException e) {}

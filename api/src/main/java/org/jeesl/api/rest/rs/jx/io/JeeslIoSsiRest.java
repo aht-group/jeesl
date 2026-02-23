@@ -7,12 +7,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.jeesl.api.rest.i.io.JeeslIoSsiRestInterface;
+import org.jeesl.interfaces.util.qualifier.JeeslRestSecured;
 import org.jeesl.model.json.io.ssi.core.JsonSsiContainer;
 import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
 
-@Path("/rest/jeesl/io/ssi")
+@Path("/jeesl/io/ssi")
 public interface JeeslIoSsiRest extends JeeslIoSsiRestInterface
 {
+	@JeeslRestSecured
 	@GET @Path("/system/{code}/credentials")
 	@Produces(MediaType.APPLICATION_JSON)
 	JsonSsiSystem getUrlCredentials(@PathParam("code") String code);

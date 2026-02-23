@@ -96,6 +96,9 @@
 					<jtp:label entity="IoSsiCredential" code="id"/>
 					<h:outputText value="#{cc.attrs.bean.credential.id}"/>
 					
+					<jtp:label entity="IoSsiCredential" code="visible"/>
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.credential.visible}"/>
+					
 					<jtp:label entity="IoSsiCredential" code="code"/>
 					<p:inputText value="#{cc.attrs.bean.credential.code}" autocomplete="off"/>
 					

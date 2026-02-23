@@ -46,7 +46,6 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 
 	Long cSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query);
 	List<DATA> fSsiData(JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query);
-//	List<DATA> fIoSsiData(CTX context, List<STATUS> links);
 	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX context, List<STATUS> links, A a, B b, Integer maxSize);
 	<A extends EjbWithId> List<DATA> fIoSsiData(CTX context, List<STATUS> links, A a);
 	List<DATA> fSsiDataWithJob1(CTX context, STATUS link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);

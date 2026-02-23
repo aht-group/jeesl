@@ -127,6 +127,12 @@
             <resource-id>ioSsi/port.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>gridIoSsiSystem</tag-name>
+        <component>
+            <resource-id>ioSsi/system.xhtml</resource-id>
+        </component>
+	</tag>
 	
 	<tag>
         <tag-name>gridAomCompany</tag-name>

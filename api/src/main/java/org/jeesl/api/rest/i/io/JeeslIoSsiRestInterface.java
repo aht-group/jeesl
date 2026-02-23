@@ -5,6 +5,7 @@ import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
 
 public interface JeeslIoSsiRestInterface
 {
+//	void x();
 	JsonSsiSystem getUrlCredentials(String system);
 	JsonSsiContainer getNat(String system, String host);
 }
