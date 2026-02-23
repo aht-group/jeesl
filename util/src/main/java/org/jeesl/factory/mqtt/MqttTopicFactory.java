@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,14 +35,9 @@ public class MqttTopicFactory
 		return sb.toString();
 	}
 	
-	public static Optional<List<String>> extractPlusValues(String topic, String filter) {
-        if (topic == null) {
-            return Optional.empty();
-        }
-
-        if (filter == null) {
-            return Optional.empty();
-        }
+	public static Optional<List<String>> extractPlusValues(String topic, String filter)
+	{
+        if (ObjectUtils.anyNull(topic,filter)) {return Optional.empty();}
 
         String[] topicLevels = topic.split("/", -1);
         String[] filterLevels = filter.split("/", -1);
@@ -49,10 +46,12 @@ public class MqttTopicFactory
 
         int topicIndex = 0;
 
-        for (int filterIndex = 0; filterIndex < filterLevels.length; filterIndex++) {
+        for (int filterIndex = 0; filterIndex < filterLevels.length; filterIndex++)
+        {
             String filterLevel = filterLevels[filterIndex];
 
-            if (filterLevel.equals("#")) {
+            if (filterLevel.equals("#"))
+            {
                 boolean isLastFilterLevel = filterIndex == filterLevels.length - 1;
 
                 if (!isLastFilterLevel) {

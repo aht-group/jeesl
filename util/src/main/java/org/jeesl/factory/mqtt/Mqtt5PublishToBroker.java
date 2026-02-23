@@ -1,11 +1,14 @@
 package org.jeesl.factory.mqtt;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import com.hivemq.client.mqtt.mqtt5.message.publish.Mqtt5Publish;
 
-public class Mqtt5PublishToBroker
+public class Mqtt5PublishToBroker implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
 	private final String brokerId; public String getBrokerId() {return brokerId;}
 	private final Mqtt5Publish mqtt5Publish;  public Mqtt5Publish getMqtt5Publish() {return mqtt5Publish;}
     
