@@ -76,7 +76,7 @@ public interface JeeslTsFacade <CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	List<DATA> fTsData(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 	List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval);
-	List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
+	List<DATA> fTsDataLatestOf(JeeslTsInterval.Aggregation interval, JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 	List<DATA> fTsDataDuplicates(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INTERVAL,STAT,DATA> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);

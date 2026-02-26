@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.jx.module;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,6 +13,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -367,40 +369,42 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		return tQ.getResultList();
 	}
 	
-	@Override public List<DATA> fTsDataLatestOfDay(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query)
+	@SuppressWarnings("unchecked")
+	@Override public List<DATA> fTsDataLatestOf(JeeslTsInterval.Aggregation interval, JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query)
 	{
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
-		Root<DATA> root = cQ.from(fbTs.getClassData());
-		List<Predicate> pRoot = new ArrayList<>();
+		if(ObjectUtils.isEmpty(query.getTsSeries())) {throw new IllegalArgumentException("You need a series-filter");}
 		
-		List<Predicate> pSub = new ArrayList<Predicate>();
-		Subquery<Date> sQ = cQ.subquery(Date.class);
-		Root<DATA> sub = sQ.from(fbTs.getClassData());
+		LocalDate ldStart = null;
+		LocalDate ldEnd = null;
 		
-		Expression<Date> eRootDate = root.get("record");
-		Expression<Date> eSubDate = sub.get("record");
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslTsData.Attributes.record)))
+			{
+				if(cq.getType().equals(JeeslCqDate.Type.AtOrAfter)) {ldStart = cq.getDate();}
+				else if(cq.getType().equals(JeeslCqDate.Type.BeforeOrAt)) {ldEnd = cq.getDate();}
+				else {throw new IllegalArgumentException("Only "+JeeslCqDate.Type.AtOrAfter+" or "+JeeslCqDate.Type.BeforeOrAt+" are allowed");}
+			}
+		}
 		
-		Expression<Date> truncatedDayMain = cB.function("date_trunc", Date.class, cB.literal("day"), eRootDate);
-		Expression<Date> truncatedDaySub = cB.function("date_trunc", Date.class, cB.literal("day"), eSubDate);
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT DISTINCT ON (tsdata.timeSeries_id, date_trunc('day', tsdata.record))");
+		sb.append("  tsdata.*");
+		sb.append(" FROM TsData tsdata");
+		sb.append(" WHERE tsdata.timeSeries_id IN (:timeSeriesIds)");
+		if(Objects.nonNull(ldStart)) {sb.append("   AND tsdata.record >= :from");}
+		if(Objects.nonNull(ldEnd)) {sb.append("   AND tsdata.record <= :to");}
+		sb.append(" ORDER BY");
+		sb.append("   tsdata.timeSeries_id,");
+		sb.append("   date_trunc('day', tsdata.record),");
+		sb.append("   tsdata.record DESC");
+
+		Query nq = em.createNativeQuery(sb.toString(),fbTs.getClassData());     
+		nq.setParameter("timeSeriesIds", EjbIdFactory.toIds(query.getTsSeries()));
+		if(Objects.nonNull(ldStart)) {nq.setParameter("from", ldStart);}
+		if(Objects.nonNull(ldEnd)) {nq.setParameter("to", ldEnd);}
 		
-		pSub.addAll(Arrays.asList(this.pData(cB,query,sub)));
-		pSub.add(cB.equal(truncatedDayMain,truncatedDaySub));
-		
-		sQ.select(cB.greatest(eSubDate));
-		sQ.where(cB.and(pSub.toArray(new Predicate[pSub.size()])));
-		
-		pRoot.add(eRootDate.in(sQ));
-		pRoot.addAll(Arrays.asList(this.pData(cB,query,root)));
-		cQ.select(root);
-		cQ.where(cB.and(pRoot.toArray(new Predicate[pRoot.size()])));
-		
-		if(ObjectUtils.isEmpty(query.getCqOrderings())) {cQ.orderBy(cB.asc(eRootDate));}
-		else {this.orderByData(cB, cQ, query, root);}
-		
-		TypedQuery<DATA> tQ = em.createQuery(cQ);
-		super.pagination(tQ, query);
-		return tQ.getResultList();
+        return nq.getResultList();
 	}
 	
 	@Override public List<DATA> fTsDataExtrema(JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query, JeeslTsFacade.Extrema aggegation, JeeslTsInterval.Aggregation interval)

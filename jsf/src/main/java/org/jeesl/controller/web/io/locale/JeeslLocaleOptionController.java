@@ -406,10 +406,11 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 				if(ObjectUtils.isNotEmpty(graphic.getData())) {previewBytes = graphic.getData();}
 			}
 			this.reloadFigures();
-			if(debugSave){logger.info("Saved "+status.getClass().getSimpleName()+" "+status.toString());}
+			if(debugSave){logger.info("Saved ({}) {}",status.getClass().getSimpleName(),status.toString());}
 
-			updateAppScopeBean2(status);
 			if(Objects.nonNull(callback)) {callback.callbackStatusSaved(status);}
+			this.updateAppScopeBean2(status);
+			
 			selectCategory(false);
 			bMessage.growlSaved((EjbSaveable)status);
 		}
@@ -468,12 +469,12 @@ public class JeeslLocaleOptionController <L extends JeeslLang, D extends JeeslDe
 	{
 		if(Objects.nonNull(previewBytes))
 		{
-			logger.info(InputStream.class.getSimpleName()+" "+previewBytes.length);
+			logger.debug(InputStream.class.getSimpleName()+" "+previewBytes.length);
 			return new ByteArrayInputStream(previewBytes);
 		}
 		else
 		{
-			logger.info("Returning empty stream");
+			logger.debug("Returning empty stream");
 			return new ByteArrayInputStream(new byte[0]);
 		}
 	}

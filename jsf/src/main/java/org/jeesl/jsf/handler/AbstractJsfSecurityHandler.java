@@ -101,7 +101,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	{
 		this.clear();
 		List<A> actions = new ArrayList<>();
-		if(bSecurity!=null) {actions.addAll(bSecurity.fActions(view));}
+		if(Objects.nonNull(bSecurity)) {actions.addAll(bSecurity.fActions(view));}
 		else {actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(),view));}
 		
 		if(debugOnInfo) {logger.info("Checking assignment of "+actions.size()+" "+fbSecurity.getClassAction().getSimpleName()+" for user");}
@@ -109,7 +109,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 		{
 			boolean allow = false;
 			String code = JeeslSecurityAction.toCode(action);
-			if(identity!=null){allow=identity.hasAction(code);}
+			if(Objects.nonNull(identity)) {allow = identity.hasAction(code);}
 			if(debugOnInfo) {logger.info("   - "+code+":"+allow);}
 			addActionWithSecurity(action,allow);
 		}
