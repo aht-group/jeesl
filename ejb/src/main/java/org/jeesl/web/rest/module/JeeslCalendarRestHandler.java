@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class JeeslCalendarRestHandler <L extends JeeslLang, D extends JeeslDescription,
 								YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 								CALENDAR extends JeeslCalendar<ZONE,SCOPE>,
-								ZONE extends JeeslCalendarTimeZone<L,D>,
+								ZONE extends JeeslCalendarZone<L,D>,
 								SCOPE extends JeeslCalendarScope<L,D,SCOPE,?>,
 								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
 								IT extends JeeslCalendarItemType<L,D,?,IT,?>,
@@ -44,7 +44,7 @@ public class JeeslCalendarRestHandler <L extends JeeslLang, D extends JeeslDescr
 	public static <L extends JeeslLang, D extends JeeslDescription,
 					YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 					CALENDAR extends JeeslCalendar<ZONE,SCOPE>,
-					ZONE extends JeeslCalendarTimeZone<L,D>,
+					ZONE extends JeeslCalendarZone<L,D>,
 					SCOPE extends JeeslCalendarScope<L,D,SCOPE,?>,
 					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
 					IT extends JeeslCalendarItemType<L,D,?,IT,?>,

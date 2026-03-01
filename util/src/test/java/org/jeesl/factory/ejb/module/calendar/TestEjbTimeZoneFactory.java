@@ -10,7 +10,7 @@ import java.util.TimeZone;
 import org.exlp.util.io.StringUtil;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.controller.processor.TimeZoneProcessor;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.test.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class TestEjbTimeZoneFactory extends AbstractJeeslUtilTest
 	@Test public void wrongId()
 	{
 		Assert.assertFalse(EjbTimeZoneFactory.supportedCode("Europe/Berlin222"));
-		Assert.assertTrue(EjbTimeZoneFactory.supportedCode(JeeslCalendarTimeZone.tzBerlin));
+		Assert.assertTrue(EjbTimeZoneFactory.supportedCode(JeeslCalendarZone.tzBerlin));
 	}
 	
 //	@Test public void timezone()
@@ -55,7 +55,7 @@ public class TestEjbTimeZoneFactory extends AbstractJeeslUtilTest
 	{
 		logger.debug("Projecting UTC to Berlin");
 		Date dNow = new Date();
-		Date dProject = TimeZoneProcessor.project(dNow,JeeslCalendarTimeZone.tzUtc,JeeslCalendarTimeZone.tzBerlin);
+		Date dProject = TimeZoneProcessor.project(dNow,JeeslCalendarZone.tzUtc,JeeslCalendarZone.tzBerlin);
 		
 		logger.info("Now "+dNow.toString());
 		logger.info("Prj "+dProject.toString());
@@ -65,7 +65,7 @@ public class TestEjbTimeZoneFactory extends AbstractJeeslUtilTest
 	{
 		logger.debug("Projecting Berlin To UTC");
 		Date dNow = new Date();
-		Date dProject = TimeZoneProcessor.project(dNow,JeeslCalendarTimeZone.tzBerlin,JeeslCalendarTimeZone.tzUtc);
+		Date dProject = TimeZoneProcessor.project(dNow,JeeslCalendarZone.tzBerlin,JeeslCalendarZone.tzUtc);
 		
 		logger.debug("Now "+dNow.toString());
 		logger.debug("Prj "+dProject.toString());

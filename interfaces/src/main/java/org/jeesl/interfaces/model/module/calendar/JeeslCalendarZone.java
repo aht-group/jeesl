@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslCalendarTimeZone <L extends JeeslLang, D extends JeeslDescription>
+public interface JeeslCalendarZone <L extends JeeslLang, D extends JeeslDescription>
 						extends Serializable,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithLang<L>
 {
 	public enum Attributes{calendar}

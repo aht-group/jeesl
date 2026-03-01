@@ -6,12 +6,12 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbCalItemFactory<CAL extends JeeslCalendar<ZONE,?>,
-								ZONE extends JeeslCalendarTimeZone<?,?>,
+								ZONE extends JeeslCalendarZone<?,?>,
 								ITEM extends JeeslCalendarItem<CAL,ZONE,IT,?>,
 								IT extends JeeslCalendarItemType<?,?,?,IT,?>>
 {

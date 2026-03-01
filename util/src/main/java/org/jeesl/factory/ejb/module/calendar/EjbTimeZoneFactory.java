@@ -3,11 +3,11 @@ package org.jeesl.factory.ejb.module.calendar;
 import java.util.TimeZone;
 
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbTimeZoneFactory<ZONE extends JeeslCalendarTimeZone<?,?>,
+public class EjbTimeZoneFactory<ZONE extends JeeslCalendarZone<?,?>,
 								ITEM extends JeeslCalendarItem<?,ZONE,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbTimeZoneFactory.class);

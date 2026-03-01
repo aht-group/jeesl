@@ -6,7 +6,7 @@ import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class XmlCalendarFactory <L extends JeeslLang, D extends JeeslDescription,
 									CALENDAR extends JeeslCalendar<ZONE,CT>,
-									ZONE extends JeeslCalendarTimeZone<L,D>,
+									ZONE extends JeeslCalendarZone<L,D>,
 									CT extends JeeslCalendarScope<L,D,CT,?>,
 									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,?>,
 									IT extends JeeslCalendarItemType<L,D,?,IT,?>

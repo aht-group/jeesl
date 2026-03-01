@@ -3,12 +3,12 @@ package org.jeesl.factory.ejb.module.calendar;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbCalCalendarFactory<CAL extends JeeslCalendar<ZONE,CT>,
-									ZONE extends JeeslCalendarTimeZone<?,?>,
+									ZONE extends JeeslCalendarZone<?,?>,
 									CT extends JeeslCalendarScope<?,?,CT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCalCalendarFactory.class);

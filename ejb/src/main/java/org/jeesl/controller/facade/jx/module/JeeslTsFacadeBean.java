@@ -388,7 +388,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		}
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT DISTINCT ON (tsdata.timeSeries_id, date_trunc('day', tsdata.record))");
+		sb.append("SELECT DISTINCT ON (tsdata.timeSeries_id, date_trunc('"+interval+"', tsdata.record))");
 		sb.append("  tsdata.*");
 		sb.append(" FROM TsData tsdata");
 		sb.append(" WHERE tsdata.timeSeries_id IN (:timeSeriesIds)");
@@ -396,7 +396,7 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		if(Objects.nonNull(ldEnd)) {sb.append("   AND tsdata.record <= :to");}
 		sb.append(" ORDER BY");
 		sb.append("   tsdata.timeSeries_id,");
-		sb.append("   date_trunc('day', tsdata.record),");
+		sb.append("   date_trunc('"+interval+"', tsdata.record),");
 		sb.append("   tsdata.record DESC");
 
 		Query nq = em.createNativeQuery(sb.toString(),fbTs.getClassData());     

@@ -1,7 +1,10 @@
 package org.jeesl.factory.json.system.status;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -35,6 +38,11 @@ public class JsonScopeFactory<L extends JeeslLang, D extends JeeslDescription,S 
 		json.setCode(code);
 		json.setLabel(label);
 		return json;
+	}
+	
+	public static List<String> toCodes(List<JsonScope> list)
+	{
+		 return list.stream().map(JsonScope::getCode).filter(ObjectUtils::isNotEmpty).collect(Collectors.toList());
 	}
 	
 	public JsonScope build(S ejb)

@@ -15,7 +15,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
-									ZONE extends JeeslCalendarTimeZone<?,?>,
+									ZONE extends JeeslCalendarZone<?,?>,
 									TYPE extends JeeslCalendarItemType<?,?,?,TYPE,?>,
 									USER extends JeeslSimpleUser>
 		extends  Serializable,EjbWithId,EjbSaveable,EjbRemoveable,

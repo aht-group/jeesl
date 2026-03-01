@@ -25,10 +25,4 @@ public interface JeeslCalendarDayOfWeek <L extends JeeslLang, D extends JeeslDes
 										JeeslStatus<L,D,S>
 {
 	public enum Att {code,position}
-	
-//	public static enum Code{mon,tue,wed,thu,fri,sat,sun};
-	
-	
-	
-//	public void test();
 }
