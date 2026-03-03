@@ -1,6 +1,7 @@
 package org.jeesl.factory.json.module.ts;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.collections4.ListUtils;
@@ -31,6 +32,13 @@ public class JsonTsPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?,?>,
 		}
 		this.clear();
 	}
+	
+	public List<JsonTsPoint> build(List<POINT> list)
+	{
+		List<JsonTsPoint> result = new ArrayList<>();
+		for(POINT p : ListUtils.emptyIfNull(list)) {result.add(this.build(p));}
+		return result;
+	}
 		
 	public JsonTsPoint build(POINT ejb)
 	{
@@ -58,6 +66,8 @@ public class JsonTsPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?,?>,
 		
 		return json;
 	}
+	
+
 	
 	public static void append(JsonTsData data, JsonTsPoint point)
 	{

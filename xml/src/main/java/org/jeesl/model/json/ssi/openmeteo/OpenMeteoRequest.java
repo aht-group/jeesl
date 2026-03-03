@@ -31,6 +31,5 @@ public class OpenMeteoRequest
 	@JsonProperty("scopes")
 	private List<JsonScope> scopes;
 	public List<JsonScope> getScopes() {return scopes;}
-	public void setScopes(List<JsonScope> scopes) {this.scopes = scopes;}
-	
+	public void setScopes(List<JsonScope> scopes) {this.scopes = scopes;}	
 }

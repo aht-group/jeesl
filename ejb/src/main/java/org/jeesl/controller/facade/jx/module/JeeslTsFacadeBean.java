@@ -582,12 +582,19 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		CriteriaQuery<POINT> cQ = cB.createQuery(fbTs.getClassPoint());
 		Root<POINT> root = cQ.from(fbTs.getClassPoint());
 		
-		Path<DATA> pData = root.get(JeeslTsDataPoint.Attributes.data.toString());
-		Expression<Date> eRecord = pData.get(JeeslTsData.Attributes.record.toString());
+		
 		
 		cQ.select(root);
 		cQ.where(cB.and(this.pPoint(cB, query, root)));
-		cQ.orderBy(cB.asc(eRecord));
+		
+		if(ObjectUtils.isEmpty(query.getCqOrderings()))
+		{
+			Path<DATA> pData = root.get(JeeslTsDataPoint.Attributes.data.toString());
+			Expression<Date> eRecord = pData.get(JeeslTsData.Attributes.record.toString());
+			cQ.orderBy(cB.asc(eRecord));
+		}
+		else {this.orderByPoint(cB, cQ, query, root);}
+		
 		
 		TypedQuery<POINT> tQ = em.createQuery(cQ);
 		super.pagination(tQ, query);
@@ -1137,6 +1144,23 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	private void orderByPoint(CriteriaBuilder cB, CriteriaQuery<POINT> cQ, JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query, Root<POINT> root)
+	{
+		List<Order> orders = new ArrayList<>();
+		Join<POINT,DATA> jData = null;
+		
+		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))
+		{
+			if(cq.getPath().equals(CqOrdering.path(JeeslTsDataPoint.Attributes.data,JeeslTsData.Attributes.record)))
+			{
+				if(Objects.isNull(jData)) {jData = root.join(JeeslTsDataPoint.Attributes.data.toString());}
+				SortByPredicateBuilder.juDate(cB,orders,cq,jData.<Date>get(JeeslTsData.Attributes.record.toString()));
+			}
+			
+			else {logger.warn(cq.nyi(fbTs.getClassPoint()));}
+		}
+		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
 	private Predicate[] pMultiPoint(CriteriaBuilder cB, JeeslTimeSeriesQuery<CAT,SCOPE,TYPE,MP,TS,TX,SRC,BRIDGE,INT,STAT,DATA> query, Root<MP> root)

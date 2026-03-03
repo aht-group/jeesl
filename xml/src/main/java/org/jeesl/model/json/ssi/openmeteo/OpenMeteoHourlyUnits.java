@@ -16,10 +16,10 @@ public class OpenMeteoHourlyUnits
     public String getTemperature2m() {return temperature2m;}
 	public void setTemperature2m(String temperature2m) {this.temperature2m = temperature2m;}
 
-		@JsonProperty("shortwave_radiation")
-        private String shortwaveRadiation;
-        public String getShortwaveRadiation()  { return shortwaveRadiation; }
-        public void setShortwaveRadiation(String shortwaveRadiation)     { this.shortwaveRadiation = shortwaveRadiation; }
+	@JsonProperty("shortwave_radiation")
+	private String shortwaveRadiation;
+	public String getShortwaveRadiation()  {return shortwaveRadiation; }
+	public void setShortwaveRadiation(String shortwaveRadiation) {this.shortwaveRadiation = shortwaveRadiation;}
 
         @JsonProperty("terrestrial_radiation")
         private String terrestrialRadiation;

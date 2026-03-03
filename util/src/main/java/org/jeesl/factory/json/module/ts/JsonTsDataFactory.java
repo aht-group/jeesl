@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.collections4.ListUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.model.json.module.ts.JsonTsData;
@@ -64,11 +65,14 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 	public static JsonTsData build() {return new JsonTsData();}
 	public static void append(JsonTsSeries ts, LocalDateTime ldt, Double value)
 	{
-		if(Objects.isNull(ts.getDatas())) {ts.setDatas(new ArrayList<>());}
-		
 		JsonTsData data = new JsonTsData();
 		data.setLocalDateTime(ldt);
 		data.setValue(value);
+		JsonTsDataFactory.append(ts, data);
+	}
+	public static void append(JsonTsSeries ts, JsonTsData data)
+	{
+		if(Objects.isNull(ts.getDatas())) {ts.setDatas(new ArrayList<>());}
 		ts.getDatas().add(data);
 	}
 	
@@ -78,6 +82,17 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 		data.setSeries(null);
 		json.setDatas(new ArrayList<JsonTsData>());
 		json.getDatas().add(data);
+		return json;
+	}
+	
+	public static JsonTsData toLast(JsonTsSeries series)
+	{
+		JsonTsData json = null;
+		for(JsonTsData d : ListUtils.emptyIfNull(series.getDatas()))
+		{
+			if(Objects.isNull(json)) {json = d;}
+			else {if(d.getLocalDateTime().isAfter(json.getLocalDateTime())) {json=d;}}
+		}
 		return json;
 	}
 }
