@@ -76,6 +76,20 @@ public class JeeslSystemPropertyFacadeBean<L extends JeeslLang,D extends JeeslDe
 			else{return null;}
 		}
 	}
+	
+	@Override public Double systemPropertyDouble(String key, Double defaultValue)
+	{
+
+		try
+		{
+			P t = valueForKey(key);
+			return Double.valueOf(t.getValue());
+		}
+		catch (JeeslNotFoundException e)
+		{
+			return defaultValue;
+		}
+	}
 
 	@Override
 	public Date valueDateForKey(String key, Date defaultValue) throws JeeslNotFoundException

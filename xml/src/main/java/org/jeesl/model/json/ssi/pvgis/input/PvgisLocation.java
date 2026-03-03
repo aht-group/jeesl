@@ -2,7 +2,7 @@ package org.jeesl.model.json.ssi.pvgis.input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Location
+public class PvgisLocation
 {
     @JsonProperty("latitude")
     private Double latitude;

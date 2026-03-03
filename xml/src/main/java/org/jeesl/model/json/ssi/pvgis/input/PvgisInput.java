@@ -2,12 +2,12 @@ package org.jeesl.model.json.ssi.pvgis.input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Inputs
+public class PvgisInput
 {
     @JsonProperty("location")
-    private Location location;
-    public Location getLocation() { return location; }
-    public void setLocation(Location location) { this.location = location; }
+    private PvgisLocation location;
+    public PvgisLocation getLocation() { return location; }
+    public void setLocation(PvgisLocation location) { this.location = location; }
 
     @JsonProperty("meteo_data")
     private MeteoData meteoData;
@@ -20,7 +20,7 @@ public class Inputs
     public void setMountingSystem(MountingSystem mountingSystem) { this.mountingSystem = mountingSystem; }
 
     @JsonProperty("pv_module")
-    private PvModule pvModule;
-    public PvModule getPvModule() { return pvModule; }
-    public void setPvModule(PvModule pvModule) { this.pvModule = pvModule; }
+    private PvgisModule pvModule;
+    public PvgisModule getPvModule() { return pvModule; }
+    public void setPvModule(PvgisModule pvModule) { this.pvModule = pvModule; }
 }

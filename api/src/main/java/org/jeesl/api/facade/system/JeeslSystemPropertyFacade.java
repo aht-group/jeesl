@@ -20,5 +20,6 @@ public interface JeeslSystemPropertyFacade <L extends JeeslLang,D extends JeeslD
 	Integer valueIntForKey(String key, Integer defaultValue) throws JeeslNotFoundException;
 	Long valueLongForKey(String key, Long defaultValue) throws JeeslNotFoundException;
 	Boolean systemPropertyBoolean(String key, Boolean fallbackValue);
+	Double systemPropertyDouble(String key, Double fallbackValue);
 	Date valueDateForKey(String key, Date defaultValue) throws JeeslNotFoundException;
 }

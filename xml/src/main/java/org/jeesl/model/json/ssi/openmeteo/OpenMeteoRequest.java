@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonRootName(value="forecast")
+@JsonRootName(value="request")
 public class OpenMeteoRequest
 {
 	@JsonProperty("latitude")

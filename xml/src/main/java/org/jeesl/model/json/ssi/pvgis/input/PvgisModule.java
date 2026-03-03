@@ -2,7 +2,7 @@ package org.jeesl.model.json.ssi.pvgis.input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PvModule
+public class PvgisModule
 {
 	@JsonProperty("technology")
 	private String technology;
