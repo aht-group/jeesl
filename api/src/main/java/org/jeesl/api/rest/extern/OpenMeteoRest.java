@@ -12,12 +12,23 @@ public interface OpenMeteoRest {
 
     @GET
     @Path("/forecast")
-    OpenMeteoObservation getForecast(
+    OpenMeteoObservation forecast(
         @QueryParam("latitude")   double latitude,
         @QueryParam("longitude")  double longitude,
-        @QueryParam("hourly")    @Encoded String hourly,
+        @QueryParam("hourly")     @Encoded String hourly,
         @QueryParam("start_date") String startDate,
         @QueryParam("end_date")   String endDate,
-        @QueryParam("timezone")  @Encoded String timezone
+        @QueryParam("timezone")   @Encoded String timezone
+    );
+    
+    @GET
+    @Path("/archive")
+    OpenMeteoObservation archive(
+        @QueryParam("latitude")   double latitude,
+        @QueryParam("longitude")  double longitude,
+        @QueryParam("hourly")     @Encoded String hourly,
+        @QueryParam("start_date") String startDate,
+        @QueryParam("end_date")   String endDate,
+        @QueryParam("timezone")   @Encoded String timezone
     );
 }
