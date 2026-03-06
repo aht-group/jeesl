@@ -105,7 +105,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	private enum Loop{treeAllForParent}
 
 	protected JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom;
-	private JeeslIoFrFacade <L,D,?,FRS,FRST,?,FRC,FRM,?,?,?,?> fFr;
+	private JeeslIoFrFacade <?,FRS,FRST,?,FRC,FRM,?,?,?,?> fFr;
 	private JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache; public JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> getCache() {return cache;}
 
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
@@ -169,7 +169,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 						JeeslAomCache<REALM,COMPANY,SCOPE,ASTATUS,ATYPE,VIEW,ETYPE> cache,
 						JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS> fAom,
-						JeeslIoFrFacade <L,D,?,FRS,FRST,?,FRC,FRM,?,?,?,?> fFr,
+						JeeslIoFrFacade<?,FRS,FRST,?,FRC,FRM,?,?,?,?> fFr,
 						REALM realm)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);

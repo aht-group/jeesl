@@ -82,7 +82,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 
 	private Mode mode; public void setMode(Mode mode) {this.mode = mode;}
 	private ContainerInit containerInit; public void setContainerInit(ContainerInit containerInit) {this.containerInit = containerInit;}
-	protected final JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr;
+	protected final JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr;
 	protected final IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fbFile;
 	protected final JeeslFileRepositoryCallback callback;
 
@@ -118,7 +118,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	private boolean allowChangeName; public boolean isAllowChangeName() {return allowChangeName;}
 	private boolean allowChangeDescription; public boolean isAllowChangeDescription() {return allowChangeDescription;}
 
-	public AbstractFileRepositoryHandler(JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr,
+	public AbstractFileRepositoryHandler(JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr,
 								IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fbFile,
 								JeeslFileRepositoryCallback callback)
 	{

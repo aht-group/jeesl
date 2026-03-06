@@ -48,7 +48,7 @@ public class AbstractFrReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractFrReplicationBean.class);
 	
-	private JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr;
+	private JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr;
 	private final IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fbFr;
 	
 	private final JsonTuple2Handler<REPLICATION,RSTATUS> thCount; public JsonTuple2Handler<REPLICATION,RSTATUS> getThCount() {return thCount;}
@@ -76,7 +76,7 @@ public class AbstractFrReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	}
 	
 	protected void postConstructFrReplication(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-											JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr)
+											JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fFr=fFr;

@@ -14,10 +14,10 @@ public class JeeslFileStatusHandler<META extends JeeslFileMeta<?,?,?,STATUS>,
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslFileStatusHandler.class);
 
-	private final JeeslIoFrFacade<?,?,?,?,?,?,?,META,?,?,?,?> fFr;
+	private final JeeslIoFrFacade<?,?,?,?,?,META,?,?,?,?> fFr;
 	private final EjbCodeCache<STATUS> cache;
 	
-	public JeeslFileStatusHandler(JeeslIoFrFacade<?,?,?,?,?,?,?,META,?,?,?,?> fFr,
+	public JeeslFileStatusHandler(JeeslIoFrFacade<?,?,?,?,?,META,?,?,?,?> fFr,
 									IoFileRepositoryFactoryBuilder<?,?,?,?,?,?,?,?,META,?,?,?,STATUS> fbFile
 								)
 	{

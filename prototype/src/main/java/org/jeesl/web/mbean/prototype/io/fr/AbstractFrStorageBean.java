@@ -51,7 +51,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractFrStorageBean.class);
 	
-	private JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr;
+	private JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr;
 	private final IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fbFr;
 	
 	protected final SbMultiHandler<STYPE> sbhStorageType; public SbMultiHandler<STYPE> getSbhStorageType() {return sbhStorageType;}
@@ -78,7 +78,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 	}
 	
 	protected void postConstructFrStorage(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr)
+											JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,FTYPE,REPLICATION,RTYPE,RSTATUS> fFr)
 	{
 		super.initJeeslAdmin(lp,bMessage);
 		this.fFr=fFr;

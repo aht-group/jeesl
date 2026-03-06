@@ -39,6 +39,7 @@ public class OpenMeteoRequest
 	public List<JsonScope> getScopes() {return scopes;}
 	public void setScopes(List<JsonScope> scopes) {this.scopes = scopes;}
 	
+	@JsonProperty("dates")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@JsonDeserialize(contentUsing = LocalDateDeserializer.class)
 	@JsonSerialize(contentUsing = LocalDateSerializer.class)

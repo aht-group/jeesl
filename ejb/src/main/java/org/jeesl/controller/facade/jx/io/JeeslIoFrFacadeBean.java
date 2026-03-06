@@ -74,7 +74,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 									RTYPE extends JeeslFileReplicationType<L,D,RTYPE,?>,
 									RSTATUS extends JeeslFileStatus<L,D,RSTATUS,?>>
 					extends JeeslFacadeBean
-					implements JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS>
+					implements JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoFrFacadeBean.class);

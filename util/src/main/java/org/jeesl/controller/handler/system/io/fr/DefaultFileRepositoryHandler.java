@@ -35,7 +35,7 @@ public class DefaultFileRepositoryHandler<L extends JeeslLang, D extends JeeslDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(DefaultFileRepositoryHandler.class);
 
-	public DefaultFileRepositoryHandler(JeeslIoFrFacade<L,D,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr,
+	public DefaultFileRepositoryHandler(JeeslIoFrFacade<SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fFr,
 								IoFileRepositoryFactoryBuilder<L,D,LOC,SYSTEM,STORAGE,STYPE,ENGINE,CONTAINER,META,TYPE,REPLICATION,RTYPE,RSTATUS> fbFile,
 								JeeslFileRepositoryCallback callback)
 	{
