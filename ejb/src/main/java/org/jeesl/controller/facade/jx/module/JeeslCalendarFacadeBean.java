@@ -144,7 +144,7 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		return map;
 	}
 	
-	@Override public List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,CALENDAR> query)
+	@Override public List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,DOM,CALENDAR> query)
 	{
 		if(ObjectUtils.isEmpty(query.getCalendars())){return new ArrayList<>();}
 		

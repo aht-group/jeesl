@@ -38,7 +38,7 @@ public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescri
 	
 	<OWNER extends JeeslWithCalendar<CAL>> Map<OWNER,CAL> fCalendarOwners(Class<OWNER> cOwner, List<OWNER> owners);
 	
-	List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,CAL> query);
+	List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,DOM,CAL> query);
 	List<ITEM> fCalendarItems(ZONE zone, CAL calendar, LocalDate from, LocalDate to);
 	List<ITEM> fCalendarItems(ZONE zone, List<CAL> calendars, LocalDate from, LocalDate to);
 }
