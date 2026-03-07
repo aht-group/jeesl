@@ -39,7 +39,7 @@ public abstract class AbstractCalendarTimeZoneBean <L extends JeeslLang, D exten
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractCalendarTimeZoneBean.class);
 	
-	private JeeslCalendarFacade<L,D,YEAR,?,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar;
+	private JeeslCalendarFacade<L,D,YEAR,?,?,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar;
 	private JeeslAppCalendarBean<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> bCalendar;
 	
 	private final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fbCalendar;
@@ -53,7 +53,7 @@ public abstract class AbstractCalendarTimeZoneBean <L extends JeeslLang, D exten
 		this.fbCalendar=fbCalendar;
 	}
 	
-	public void postConstructTimeZone(JeeslCalendarFacade<L,D,YEAR,?,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar,
+	public void postConstructTimeZone(JeeslCalendarFacade<L,D,YEAR,?,?,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> fCalendar,
 										JeeslAppCalendarBean<L,D,CALENDAR,ZONE,SCOPE,ITEM,IT,USER> bCalendar,
 										JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage)
 	{

@@ -37,7 +37,7 @@ public abstract class AbstractAppCalendarBean <L extends JeeslLang, D extends Je
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppCalendarBean.class);
 	
 	@SuppressWarnings("unused")
-	private JeeslCalendarFacade<L,D,YEAR,?,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
+	private JeeslCalendarFacade<L,D,YEAR,?,?,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
 	private final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
 	
 	private final Comparator<ZONE> cpZone;
@@ -58,7 +58,7 @@ public abstract class AbstractAppCalendarBean <L extends JeeslLang, D extends Je
 		timeLineDecade  = 300000000000l;
 	}
 	
-	public void postConstructTimeZone(JeeslCalendarFacade<L,D,YEAR,?,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar)
+	public void postConstructTimeZone(JeeslCalendarFacade<L,D,YEAR,?,?,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar)
 	{
 		this.fCalendar=fCalendar;
 

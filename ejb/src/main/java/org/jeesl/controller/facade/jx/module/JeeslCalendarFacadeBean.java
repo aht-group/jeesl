@@ -32,6 +32,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfMonth;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarMonth;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -45,6 +46,7 @@ import org.slf4j.LoggerFactory;
 public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 									MONTH extends JeeslCalendarMonth<?,?,MONTH,?>,
+									DOM extends JeeslCalendarDayOfMonth<?,?,DOM,?>,
 									CALENDAR extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarZone<L,D>,
 									CT extends JeeslCalendarScope<L,D,CT,?>,
@@ -52,7 +54,7 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 									IT extends JeeslCalendarItemType<L,D,?,IT,?>,
 									USER extends JeeslSimpleUser>
 					extends JeeslFacadeBean
-					implements JeeslCalendarFacade<L,D,YEAR,MONTH,CALENDAR,ZONE,CT,ITEM,IT,USER>
+					implements JeeslCalendarFacade<L,D,YEAR,MONTH,DOM,CALENDAR,ZONE,CT,ITEM,IT,USER>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslCalendarFacadeBean.class);

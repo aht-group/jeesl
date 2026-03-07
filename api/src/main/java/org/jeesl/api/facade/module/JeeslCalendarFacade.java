@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfMonth;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarMonth;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -22,6 +23,7 @@ import org.jeesl.interfaces.util.query.module.JeeslCalendarQuery;
 public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescription,
 										YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 										MONTH extends JeeslCalendarMonth<?,?,MONTH,?>,
+										DOM extends JeeslCalendarDayOfMonth<?,?,DOM,?>,
 										CAL extends JeeslCalendar<ZONE,CT>,
 										ZONE extends JeeslCalendarZone<L,D>,
 										CT extends JeeslCalendarScope<L,D,CT,?>,
