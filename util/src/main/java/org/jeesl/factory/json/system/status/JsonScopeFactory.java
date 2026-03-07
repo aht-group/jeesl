@@ -19,6 +19,7 @@ public class JsonScopeFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	private final String localeCode;
 	private final JsonScope q;
 	
+	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>, E extends Enum<E>> JsonScopeFactory<L,D,S> instance(E localeCode, JsonScope q) {return JsonScopeFactory.instance(localeCode.toString(), q);}
 	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>> JsonScopeFactory<L,D,S> instance(String localeCode, JsonScope q)
 	{
 		return new JsonScopeFactory<>(localeCode,q);
@@ -28,7 +29,6 @@ public class JsonScopeFactory<L extends JeeslLang, D extends JeeslDescription,S 
 		this.localeCode=localeCode;
 		this.q=q;
 	}
-	
 	
 	public static JsonScope build() {return new JsonScope();}
 	public static JsonScope build(String code) {JsonScope json = JsonScopeFactory.build(); json.setCode(code); return json;}
@@ -49,8 +49,8 @@ public class JsonScopeFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	{
 		JsonScope json = JsonScopeFactory.build();
 	
-		if(q.getId()!=null){json.setId(ejb.getId());}
-		if(Objects.nonNull(q.getCode())){json.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getId())) {json.setId(ejb.getId());}
+		if(Objects.nonNull(q.getCode())) {json.setCode(ejb.getCode());}
 		if(Objects.nonNull(q.getLabel()) && ejb.getName().containsKey(localeCode)){json.setLabel(ejb.getName().get(localeCode).getLang());}
 		if(Objects.nonNull(q.getDescription()) && ejb.getDescription().containsKey(localeCode)){json.setDescription(ejb.getDescription().get(localeCode).getLang());}
 	

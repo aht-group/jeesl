@@ -37,8 +37,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 	private int sizeA; public int getSizeA() {return sizeA;}
 	private final List<A> listA; public List<A> getListA() {return listA;}
 	
-	private final Map<A,JsonTuple1<A>> map1;
-	public Map<A,JsonTuple1<A>> getMapA() {return map1;}
+	private final Map<A,JsonTuple1<A>> map1; public Map<A,JsonTuple1<A>> getMapA() {return map1;}
 	
 	@Deprecated
 	public Map<A,JsonTuple1<A>> getMap1() {return map1;}
@@ -134,11 +133,12 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 	}
 	public Double sum1(A a)
 	{
-		if(!this.contains(a)){return null;}
+		if(!this.contains(a)) {return null;}
 		{
 			return map1.get(a).getSum1();
 		}
 	}
+	public Long count1(A a) {if(!this.contains(a)) {return null;} {return map1.get(a).getCount1();}}
 	
 	public void applyDefault(long value)
 	{

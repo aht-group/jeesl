@@ -3,6 +3,7 @@ package org.jeesl.model.json.ssi.openmeteo;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 import org.jeesl.model.json.module.calendar.JsonCalendarTimezone;
 import org.jeesl.model.json.system.status.JsonScope;
 
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="request")
 public class OpenMeteoRequest
 {
@@ -46,4 +47,9 @@ public class OpenMeteoRequest
 	private List<LocalDate> dates;
 	public List<LocalDate> getDates() {return dates;}
 	public void setDates(List<LocalDate> dates) {this.dates = dates;}
+	
+	@JsonProperty("connection")
+	private JsonSsiCredential connection;
+	public JsonSsiCredential getConnection() {return connection;}
+	public void setConnection(JsonSsiCredential connection) {this.connection = connection;}
 }
