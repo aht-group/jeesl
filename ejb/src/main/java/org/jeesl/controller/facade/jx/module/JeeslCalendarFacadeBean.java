@@ -33,6 +33,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfMonth;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarHourOfDay;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarMonth;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -43,25 +44,25 @@ import org.jeesl.interfaces.util.query.module.JeeslCalendarQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescription,
-									YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
+public class JeeslCalendarFacadeBean<YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 									MONTH extends JeeslCalendarMonth<?,?,MONTH,?>,
 									DOM extends JeeslCalendarDayOfMonth<?,?,DOM,?>,
+									HOUR extends JeeslCalendarHourOfDay<?,?,HOUR,?>,
 									CALENDAR extends JeeslCalendar<ZONE,CT>,
-									ZONE extends JeeslCalendarZone<L,D>,
-									CT extends JeeslCalendarScope<L,D,CT,?>,
+									ZONE extends JeeslCalendarZone<?,?>,
+									CT extends JeeslCalendarScope<?,?,CT,?>,
 									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
-									IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+									IT extends JeeslCalendarItemType<?,?,?,IT,?>,
 									USER extends JeeslSimpleUser>
 					extends JeeslFacadeBean
-					implements JeeslCalendarFacade<L,D,YEAR,MONTH,DOM,CALENDAR,ZONE,CT,ITEM,IT,USER>
+					implements JeeslCalendarFacade<YEAR,MONTH,DOM,HOUR,CALENDAR,ZONE,CT,ITEM,IT,USER>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslCalendarFacadeBean.class);
 
-	private final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
+	private final CalendarFactoryBuilder<?,?,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
 	
-	public JeeslCalendarFacadeBean(EntityManager em, CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
+	public JeeslCalendarFacadeBean(EntityManager em, CalendarFactoryBuilder<?,?,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
 	{
 		super(em);
 		this.fbCalendar=fbCalendar;
@@ -144,7 +145,7 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		return map;
 	}
 	
-	@Override public List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,DOM,CALENDAR> query)
+	@Override public List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,DOM,HOUR,CALENDAR> query)
 	{
 		if(ObjectUtils.isEmpty(query.getCalendars())){return new ArrayList<>();}
 		

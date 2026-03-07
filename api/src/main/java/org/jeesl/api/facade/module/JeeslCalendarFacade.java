@@ -13,6 +13,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfMonth;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarHourOfDay;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarMonth;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -20,15 +21,15 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.util.query.module.JeeslCalendarQuery;
 
-public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescription,
-										YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
+public interface JeeslCalendarFacade <YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 										MONTH extends JeeslCalendarMonth<?,?,MONTH,?>,
 										DOM extends JeeslCalendarDayOfMonth<?,?,DOM,?>,
+										HOUR extends JeeslCalendarHourOfDay<?,?,HOUR,?>,
 										CAL extends JeeslCalendar<ZONE,CT>,
-										ZONE extends JeeslCalendarZone<L,D>,
-										CT extends JeeslCalendarScope<L,D,CT,?>,
+										ZONE extends JeeslCalendarZone<?,?>,
+										CT extends JeeslCalendarScope<?,?,CT,?>,
 										ITEM extends JeeslCalendarItem<CAL,ZONE,TYPE,USER>,
-										TYPE extends JeeslCalendarItemType<L,D,?,TYPE,?>,
+										TYPE extends JeeslCalendarItemType<?,?,?,TYPE,?>,
 										USER extends JeeslSimpleUser
 										>
 			extends JeeslFacade
@@ -38,7 +39,7 @@ public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescri
 	
 	<OWNER extends JeeslWithCalendar<CAL>> Map<OWNER,CAL> fCalendarOwners(Class<OWNER> cOwner, List<OWNER> owners);
 	
-	List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,DOM,CAL> query);
+	List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,DOM,HOUR,CAL> query);
 	List<ITEM> fCalendarItems(ZONE zone, CAL calendar, LocalDate from, LocalDate to);
 	List<ITEM> fCalendarItems(ZONE zone, List<CAL> calendars, LocalDate from, LocalDate to);
 }
