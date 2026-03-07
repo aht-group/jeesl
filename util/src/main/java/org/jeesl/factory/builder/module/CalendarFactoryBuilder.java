@@ -55,5 +55,5 @@ public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	
 	public TxtCalendarItemFactory<L,D,CAL,ZONE,CT,ITEM,IT> txtItem() {return new TxtCalendarItemFactory<L,D,CAL,ZONE,CT,ITEM,IT>();}
 	
-	public JeeslCalendarHandler<L,D,YEAR,CAL,ZONE,CT,ITEM,IT,USER> itemHandler(final JeeslCalendarFacade<L,D,YEAR,CAL,ZONE,CT,ITEM,IT,USER> fCalendar){return new JeeslCalendarHandler<>(fCalendar,this);}
+	public JeeslCalendarHandler<L,D,YEAR,CAL,ZONE,CT,ITEM,IT,USER> itemHandler(final JeeslCalendarFacade<L,D,YEAR,?,CAL,ZONE,CT,ITEM,IT,USER> fCalendar){return new JeeslCalendarHandler<>(fCalendar,this);}
 }

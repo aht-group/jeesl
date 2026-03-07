@@ -39,5 +39,14 @@ public class OpenMeteoHourlyUnits
         @JsonProperty("diffuse_radiation")
         private String diffuseRadiation;
         public String getDiffuseRadiation()    { return diffuseRadiation; }
-        public void setDiffuseRadiation(String diffuseRadiation)         { this.diffuseRadiation = diffuseRadiation; }     
+        public void setDiffuseRadiation(String diffuseRadiation)         { this.diffuseRadiation = diffuseRadiation; }
+        
+        @JsonProperty("direct_normal_irradiance")
+        private String directNormalIrridance;
+		public String getDirectNormalIrridance() {
+			return directNormalIrridance;
+		}
+		public void setDirectNormalIrridance(String directNormalIrridance) {
+			this.directNormalIrridance = directNormalIrridance;
+		}
 }

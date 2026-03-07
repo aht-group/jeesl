@@ -13,12 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenMeteoHourlyData
-{
-//	@JsonProperty("time")
-//    private List<String> time;
-//	public List<String> getTime() {return time;}
-//	public void setTime(List<String> time) {this.time = time;}
-	
+{	
 	@JsonProperty("time")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
 	@JsonDeserialize(contentUsing = LocalDateTimeDeserializer.class)
@@ -26,6 +21,7 @@ public class OpenMeteoHourlyData
 	private List<LocalDateTime> time;
     public List<LocalDateTime> getTime() {return time;}
 	public void setTime(List<LocalDateTime> time) {this.time = time;}
+
 
 	@JsonProperty("temperature_2m")
     private List<Double> temperature2m;
@@ -56,4 +52,9 @@ public class OpenMeteoHourlyData
     private List<Double> diffuseRadiation;
     public List<Double>  getDiffuseRadiation() {return diffuseRadiation;}
     public void setDiffuseRadiation(List<Double> diffuseRadiation) {this.diffuseRadiation = diffuseRadiation;}
+    
+    @JsonProperty("direct_normal_irradiance")
+    private List<Double> directNormalIrridance;
+	public List<Double> getDirectNormalIrridance() {return directNormalIrridance;}
+	public void setDirectNormalIrridance(List<Double> directNormalIrridance) {this.directNormalIrridance = directNormalIrridance;}
 }

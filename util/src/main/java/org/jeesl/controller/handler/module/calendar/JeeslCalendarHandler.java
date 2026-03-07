@@ -38,7 +38,7 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 	final static Logger logger = LoggerFactory.getLogger(JeeslCalendarHandler.class);
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	protected final JeeslCalendarFacade<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
+	protected final JeeslCalendarFacade<L,D,YEAR,?,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
 	protected final CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
 	
 	protected EjbCalItemFactory<CALENDAR,ZONE,ITEM,IT> efItem;
@@ -53,7 +53,7 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 	protected LocalDate ldStart; public LocalDate getLdStart() {return ldStart;} public void setLdStart(LocalDate ldStart) {this.ldStart = ldStart;}
 	protected LocalDate ldEnd; public LocalDate getLdEnd() {return ldEnd;} public void setLdEnd(LocalDate ldEnd) {this.ldEnd = ldEnd;}
 
-	public JeeslCalendarHandler(final JeeslCalendarFacade<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar, CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
+	public JeeslCalendarHandler(final JeeslCalendarFacade<L,D,YEAR,?,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar, CalendarFactoryBuilder<L,D,YEAR,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
 	{
 		this.fCalendar=fCalendar;
 		this.fbCalendar=fbCalendar;

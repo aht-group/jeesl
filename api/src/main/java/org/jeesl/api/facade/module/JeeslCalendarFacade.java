@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarMonth;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarYear;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -20,6 +21,7 @@ import org.jeesl.interfaces.util.query.module.JeeslCalendarQuery;
 
 public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescription,
 										YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
+										MONTH extends JeeslCalendarMonth<?,?,MONTH,?>,
 										CAL extends JeeslCalendar<ZONE,CT>,
 										ZONE extends JeeslCalendarZone<L,D>,
 										CT extends JeeslCalendarScope<L,D,CT,?>,
@@ -34,7 +36,7 @@ public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescri
 	
 	<OWNER extends JeeslWithCalendar<CAL>> Map<OWNER,CAL> fCalendarOwners(Class<OWNER> cOwner, List<OWNER> owners);
 	
-	List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,CAL> query);
+	List<ITEM> fCalendarItems(JeeslCalendarQuery<YEAR,MONTH,CAL> query);
 	List<ITEM> fCalendarItems(ZONE zone, CAL calendar, LocalDate from, LocalDate to);
 	List<ITEM> fCalendarItems(ZONE zone, List<CAL> calendars, LocalDate from, LocalDate to);
 }
