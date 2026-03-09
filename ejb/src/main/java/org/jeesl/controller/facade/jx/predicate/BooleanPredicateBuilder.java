@@ -6,20 +6,20 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 
-import org.jeesl.controller.facade.jx.io.JeeslIoMavenFacadeBean;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BooleanPredicateBuilder
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
+	final static Logger logger = LoggerFactory.getLogger(BooleanPredicateBuilder.class);
 		
 	public static void add(CriteriaBuilder cB, List<Predicate> predicates, JeeslCqBoolean cqb, Expression<Boolean> eBool)
 	{
 		switch(cqb.getType())
 		{
 			case IsValue: predicates.add(cB.equal(eBool,cqb.getValue())); break;
+			case IsNull: predicates.add(cB.isNull(eBool)); break;
 			default: logger.error("NYI Type: "+cqb.toString());
 		}
 	}
