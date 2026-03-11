@@ -139,7 +139,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 			sbhCat.setList(list);
 		}
 		sbhCat.selectAll();
-		sbhCat.debug(false);
+		sbhCat.debug(true);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCat(),sbhCat.getList()));}
 	}
 	
