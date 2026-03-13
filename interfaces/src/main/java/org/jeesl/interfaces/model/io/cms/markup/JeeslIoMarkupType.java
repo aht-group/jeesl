@@ -24,7 +24,7 @@ public interface JeeslIoMarkupType <L extends JeeslLang, D extends JeeslDescript
 							JeeslStatusFixedCode,
 							JeeslStatus<L,D,S>,EjbWithCodeGraphic<G>	
 {	
-	public enum Code{text,xhtml}
+	public enum Code{text,xhtml,md}
 	
 //	void x();
 }

@@ -43,16 +43,21 @@
 		</ui:fragment>
 		<ui:fragment rendered="#{not cc.attrs.withPanel}">
 			<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-			<ui:repeat id="repeatG" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}"  var="c">	
-				<p:panelGrid columns="#{cc.attrs.withLabel ? 2 : 1}" columnClasses="#{cc.attrs.withLabel ? cc.attrs.columnClasses : 'jeeslGrid100'}">
+			<ui:repeat id="repeatG" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}"  var="c">
+				<j:inputGrid>
 					<ui:fragment rendered="#{cc.attrs.withLabel}">
-							<p:outputLabel value="#{c.name[localeCode].lang}" />
-							<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.handler.showDescription}"/>
-							<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeeslItalic"/>
+						<p:outputLabel value="#{c.name[localeCode].lang}" />
+						<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.handler.showDescription}"/>
+						<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeeslItalic"/>
 					</ui:fragment>
 					<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
 					<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
-				</p:panelGrid>
+				</j:inputGrid>	
+				<ui:remove>
+					<p:panelGrid columns="#{cc.attrs.withLabel ? 2 : 1}" columnClasses="#{cc.attrs.withLabel ? cc.attrs.columnClasses : 'jeeslGrid100'}">
+					.. see above
+					</p:panelGrid>
+				</ui:remove>
 			</ui:repeat>
 		</ui:fragment>
 	</composite:implementation>
