@@ -7,5 +7,7 @@ public interface FlywayIoAttributeVersionMarker extends JeeslFlywayVersionMarker
 //	public static String baselineTables = "jeesl/system/io/db/migration/io/attribute/0-Baseline Tables.sql";
 //	public static String baselineConstraints = "jeesl/system/io/db/migration/io/attribute/0-Baseline Constraints.sql";
 	
-//	public void markerSecurity2();
+	void implementsOfIoAttributeSince(int i);
+	
+//	public void markIoAttribute();
 }

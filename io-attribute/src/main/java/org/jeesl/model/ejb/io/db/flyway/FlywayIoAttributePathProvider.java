@@ -9,6 +9,10 @@ import org.jeesl.model.ejb.io.attribute.IoAttributeSet;
 
 public class FlywayIoAttributePathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider
 {	
+	public static FlywayIoAttributePathProvider instance() {return new FlywayIoAttributePathProvider();}
+	private FlywayIoAttributePathProvider() {}
+
+	
 	@Override public String getRootDirectory() {return "jeesl/system/io/db/migration/io/attribute";}
 	
 	@Override public String getBaselineTables() {return this.getRootDirectory()+"/"+JeeslFlywayPathProvider.sqlTables;}
