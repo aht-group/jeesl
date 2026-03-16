@@ -66,7 +66,16 @@ public class JsonTsPointFactory<MP extends JeeslTsMultiPoint<?,?,?,?,?>,
 		
 		return json;
 	}
-	
+	public static <E extends Enum<E>> JsonTsPoint build(int value, E code) {return JsonTsPointFactory.build(Integer.valueOf(value).doubleValue(), code);}
+	public static <E extends Enum<E>> JsonTsPoint build(double value, E code)
+	{
+		JsonTsPoint json = new JsonTsPoint();
+		
+		json.setValue(value);
+		json.setMp(JsonTsMultiPointFactory.build(code.toString()));
+		
+		return json;
+	}
 
 	
 	public static void append(JsonTsData data, JsonTsPoint point)

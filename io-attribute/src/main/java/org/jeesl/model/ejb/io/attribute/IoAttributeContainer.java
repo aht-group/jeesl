@@ -21,7 +21,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoAttributeContainer")
-@EjbErNode(name="Container",category="ioAttribute",level=3,subset="moduleTs")
+@EjbErNode(name="Container",category="ioAttribute",level=3,subset="ioAttribute")
 public class IoAttributeContainer implements JeeslAttributeContainer<IoAttributeSet,IoAttributeData>
 {
 	public static final long serialVersionUID=1;

@@ -42,6 +42,7 @@ public class MqttHiveMessageFactory
 	public MqttHiveMessageFactory json(Object json) {this.valueJson = json; return this;}
 	
 	public MqttHiveMessageFactory topic(String topic) {this.topic=topic; return this;}
+	public MqttHiveMessageFactory retained() {return this.retained(true);}
 	public MqttHiveMessageFactory retained(boolean retained) {this.retained = retained; return this;}
 	
 	public Mqtt5Publish build()
