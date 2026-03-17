@@ -18,14 +18,14 @@ public class OpenMeteoMeta
 	private Integer chunkTimeLength;
 	public Integer getChunkTimeLength() {return chunkTimeLength;}
 	public void setChunkTimeLength(Integer chunkTimeLength) {this.chunkTimeLength = chunkTimeLength;}
-	
+
 	@JsonProperty("data_end_time")
 	@JsonDeserialize(using = UnixTimestampSerializer.Deserializer.class)
 	@JsonSerialize(using = UnixTimestampSerializer.Serializer.class)
 	private Instant dataEndTime;
 	public Instant getDataEndTime() {return dataEndTime;}
 	public void setDataEndTime(Instant dataEndTime) {this.dataEndTime = dataEndTime;}
-	
+
 	@JsonProperty("last_run_availability_time")
 	@JsonDeserialize(using = UnixTimestampSerializer.Deserializer.class)
 	@JsonSerialize(using = UnixTimestampSerializer.Serializer.class)

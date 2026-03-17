@@ -56,7 +56,8 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 
 	private JeeslLogger jogger; public JeeslLogger getJogger() {return jogger;} public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
-	private boolean showDescription; public boolean isShowDescription() {return showDescription;}
+	
+	private boolean showDescription; public boolean isShowDescription() {return showDescription;} public void setShowDescription(boolean showDescription) {this.showDescription = showDescription;}
 	
 	private final JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
 	private final JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute;

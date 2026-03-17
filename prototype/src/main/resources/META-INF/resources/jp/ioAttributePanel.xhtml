@@ -33,7 +33,7 @@
 						<ui:fragment rendered="#{cc.attrs.withLabel}">
 							<p:outputLabel value="#{c.name[localeCode].lang}" />
 							<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.handler.showDescription}"/>
-							<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeeslItalic"/>
+							<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeesl-italic"/>
 						</ui:fragment>
 						<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
 						<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
@@ -48,7 +48,7 @@
 					<ui:fragment rendered="#{cc.attrs.withLabel}">
 						<p:outputLabel value="#{c.name[localeCode].lang}" />
 						<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.handler.showDescription}"/>
-						<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeeslItalic"/>
+						<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeesl-italic"/>
 					</ui:fragment>
 					<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
 					<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
