@@ -24,6 +24,8 @@ public class JsonTsSeries implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	public JsonTsSeries() {}
+	
 	@JsonProperty("category")
 	private JsonCategory category;
 	public JsonCategory getCategory() {return category;}

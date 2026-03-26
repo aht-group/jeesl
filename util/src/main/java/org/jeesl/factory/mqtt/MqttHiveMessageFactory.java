@@ -19,6 +19,7 @@ public class MqttHiveMessageFactory
 	
 	private String valueString;
 	private Double valueDouble;
+	private Integer valueInteger;
 	private Object valueJson;
 	
 	public static MqttHiveMessageFactory instance(String topic) {return new MqttHiveMessageFactory(topic);}
@@ -38,6 +39,7 @@ public class MqttHiveMessageFactory
 	}
 	
 	public MqttHiveMessageFactory value(double value) {this.valueDouble = value; return this;}
+	public MqttHiveMessageFactory value(int value) {this.valueInteger = value; return this;}
 	public MqttHiveMessageFactory value(String value) {this.valueString = value; return this;}
 	public MqttHiveMessageFactory json(Object json) {this.valueJson = json; return this;}
 	
@@ -51,6 +53,7 @@ public class MqttHiveMessageFactory
 		
 		if(Objects.nonNull(valueString)) {bytes = valueString.getBytes();}
 		else if(Objects.nonNull(valueDouble)) {bytes = JsonUtil.instance().toByte(valueDouble);}
+		else if(Objects.nonNull(valueInteger)) {bytes = JsonUtil.instance().toByte(valueInteger);}
 		else if(Objects.nonNull(valueJson)) {bytes = JsonUtil.instance().toByte(valueJson);}
 		
 		 Mqtt5Publish publish = Mqtt5Publish.builder()

@@ -16,5 +16,5 @@ public interface JeeslCalendarYear <L extends JeeslLang, D extends JeeslDescript
 					extends EjbPersistable, EjbWithCode,
 							EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
-	public enum Att {position}
+	public enum Att {position,code}
 }
