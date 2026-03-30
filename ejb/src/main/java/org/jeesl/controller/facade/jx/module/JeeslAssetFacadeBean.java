@@ -113,7 +113,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		
 		cQ.select(root);
 		cQ.where(cB.and(this.pAsset(cB,query,root)));
-		this.assetSortBy(cB, cQ, query, root);
+		this.orderByAsset(cB, cQ, query, root);
 		
 		TypedQuery<ASSET> tQ = em.createQuery(cQ);
 		super.pagination(tQ,query);
@@ -342,7 +342,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	public void assetSortBy(CriteriaBuilder cB, CriteriaQuery<ASSET> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<ASSET> ejb)
+	public void orderByAsset(CriteriaBuilder cB, CriteriaQuery<ASSET> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<ASSET> ejb)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering el : ListUtils.emptyIfNull(query.getCqOrderings()))

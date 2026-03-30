@@ -32,7 +32,9 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqLong;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.io.EjbIoSsiQuery;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
@@ -155,6 +157,8 @@ public class JeeslSsiDataController <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		if(Objects.nonNull(refC)) {query.add(CqLong.isValue(refC,CqLong.path(JeeslIoSsiData.Attributes.refC)));}
 		if(Objects.nonNull(context)) {query.add(context);}
 		if(sbhStatus.hasSelected()) {query.addIoSsiStatus(sbhStatus.getSelected());}
+		query.orderBy(CqOrdering.desending(CqOrdering.path(JeeslIoSsiData.Att.jsonCreatedAt)));
+		
 		query.debug(true);
 		
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();

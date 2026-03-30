@@ -15,6 +15,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.util.query.cq.CqLong;
+import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.AbstractEjbQuery;
 import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.slf4j.Logger;
@@ -50,6 +51,7 @@ public class EjbIoSsiQuery <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	//JEESL CQ
 	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> add(CqLong cq) {super.addCqLong(cq); return this;}
+	public EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> orderBy(CqOrdering ordering) {super.addOrdering(ordering); return this;}
 	
 	//Fetches
 	public <E extends Enum<E>> EjbIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}

@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -26,12 +27,16 @@ import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.EntityPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LongPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t2.Json2TuplesFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -47,12 +52,14 @@ import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.io.JeeslIoMavenQuery;
 import org.jeesl.interfaces.util.query.io.JeeslIoSsiQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqEntity;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqLong;
+import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.util.query.cq.CqDate;
@@ -604,6 +611,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		cQ.select(root);
 		cQ.where(cB.and(predicaates));
+		this.orderBySsiData(cB, cQ, query, root);
 		
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
 		super.pagination(tQ,query);
@@ -668,6 +676,24 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+	private void orderBySsiData(CriteriaBuilder cB, CriteriaQuery<DATA> cQ, JeeslIoSsiQuery<SYSTEM,CRED,CTX,STATUS,ERROR,ENTITY> query, Root<DATA> root)
+	{
+		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
+		{
+			List<Order> orders = new ArrayList<>();
+			for(JeeslCqOrdering cqo : query.getCqOrderings())
+			{
+				if(cqo.getPath().equals(CqOrdering.path(JeeslIoSsiData.Att.jsonCreatedAt)))
+				{
+					Expression<LocalDateTime> eLdt = root.get(JeeslIoSsiData.Att.jsonCreatedAt.toString());
+					SortByPredicateBuilder.jtDateTime(cB,orders,cqo,eLdt);
+				}
+				
+				else {logger.warn("No SortBy Handling for "+cqo.toString());}
+			}
+			if(!orders.isEmpty()) {cQ.orderBy(orders);}
+		}
 	}
 
 	@Override
