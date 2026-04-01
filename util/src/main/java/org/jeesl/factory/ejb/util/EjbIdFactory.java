@@ -242,7 +242,7 @@ public class EjbIdFactory
 	public static <T extends EjbWithId> T fSingle(List<T> list) throws JeeslNotFoundException, JeeslNotUniqueException
 	{
 		if(list.size()==1) {return list.get(0);}
-		if(list.isEmpty()) {throw new JeeslNotFoundException("Not found");}
+		if(list.isEmpty()) {throw new JeeslNotFoundException("Provided List ist empty");}
 		else {throw new JeeslNotUniqueException("Multiple");}
 	}
 	public static <T extends EjbWithId> T fUnique(List<T> list) throws JeeslNotFoundException

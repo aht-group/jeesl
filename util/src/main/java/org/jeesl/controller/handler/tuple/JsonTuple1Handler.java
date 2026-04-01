@@ -139,6 +139,12 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		}
 	}
 	public Long count1(A a) {if(!this.contains(a)) {return null;} {return map1.get(a).getCount1();}}
+	public Double totalSum1()
+	{
+		double total = 0;
+		for(JsonTuple1<A> t : map1.values()) {if(Objects.nonNull(t.getSum1())) {total = total + t.getSum1();}}
+		return total;
+	}
 	
 	public void applyDefault(long value)
 	{
