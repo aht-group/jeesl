@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.jeesl.interfaces.model.json.JeeslJson;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,7 +18,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="data")
-public class JsonTsData implements Serializable
+public class JsonTsData implements JeeslJson
 {
 	public static final long serialVersionUID=1;
 

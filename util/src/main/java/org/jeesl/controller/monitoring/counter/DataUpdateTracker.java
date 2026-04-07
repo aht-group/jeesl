@@ -36,7 +36,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	private final Map<String,Integer> createSuccess,createFail;
 	
 	public static DataUpdateTracker instance() {return new DataUpdateTracker();}
-	public DataUpdateTracker(){this(false);}
+	public DataUpdateTracker() {this(false);}
 	public DataUpdateTracker(boolean autoStart)
 	{
 		update = new DataUpdate();
