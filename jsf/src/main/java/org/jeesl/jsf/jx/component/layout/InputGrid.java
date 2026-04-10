@@ -1,6 +1,8 @@
 package org.jeesl.jsf.jx.component.layout;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
+import javax.faces.component.html.HtmlPanelGroup;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -52,9 +55,15 @@ public class InputGrid extends UIPanel
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("div", this);
 		responseWriter.writeAttribute("id",getClientId(context),"id");
+
+		try
+		{
+			columnCount = Integer.parseInt(ComponentAttribute.get(Properties.inputFields, "1", context, this)) + 1;
+		}
+		catch(NumberFormatException e) {}
 		
 		StringBuffer sbStyleClass = new StringBuffer();
-		sbStyleClass.append("ui-fluid jeesl-input-grid");
+		sbStyleClass.append("ui-fluid jeesl-input-grid col-count-" + (columnCount - 1));
 		
 		if(map.containsKey(Properties.styleClass.toString()))
 		{
@@ -73,12 +82,6 @@ public class InputGrid extends UIPanel
 	@Override
 	public void encodeChildren(FacesContext context) throws IOException
 	{
-		try
-		{
-			columnCount = Integer.parseInt(ComponentAttribute.get(Properties.inputFields, "1", context, this)) + 1;
-		}
-		catch(NumberFormatException e) {}
-		
 		try
 		{
 			labelWidth = Integer.parseInt(ComponentAttribute.get(Properties.labelWidth, "3", context, this));
@@ -113,15 +116,27 @@ public class InputGrid extends UIPanel
 				ResponseWriter responseWriter = context.getResponseWriter();
 				responseWriter.startElement("div", groupChild);
 				responseWriter.writeAttribute("class","p-field p-grid",null);
+
+				boolean wrapInput = true;
 				
-				for (UIComponent child : group)
-				{
+				for (int i = 0; i < group.size(); i++) {
+					UIComponent child = group.get(i);
+					
+					boolean hasLabelClass = false;
+					try {
+						Method getStyleClass = child.getClass().getMethod("getStyleClass");
+						String styleClass = (String)getStyleClass.invoke(child);
+						hasLabelClass = child instanceof OutputLabel || (styleClass != null && styleClass.contains("ui-outputlabel"));
+					} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
+						// Element shall not be treated as an output label.
+					}
+					
 					if (child instanceof OutputLabel)
 					{
         				UIPanel inputChild = new UIPanel();
         				responseWriter.startElement("span", inputChild);
-        				responseWriter.writeAttribute("class", "ui-outputlabel p-col p-md-" + labelWidth, null);
-        				
+        				responseWriter.writeAttribute("class", "ui-outputlabel p-col"/* p-md-" + labelWidth*/, null);
+
 						Map<String, Object> attributes = child.getAttributes();
 						StringBuffer styleClass = new StringBuffer("ui-outputlabel-text");
 						if (attributes.containsKey("styleClass")) {
@@ -133,19 +148,47 @@ public class InputGrid extends UIPanel
 						
 						responseWriter.endElement("span");
 					}
+					else if (child instanceof HtmlPanelGroup && hasLabelClass) {
+						UIPanel inputChild = new UIPanel();
+						responseWriter.startElement("span", inputChild);
+						
+						StringBuffer styleClass = new StringBuffer("ui-outputlabel p-col");
+						Map<String, Object> attributes = child.getAttributes();
+						if (attributes.containsKey("styleClass")) {
+							styleClass.append(" " + (String)attributes.get("styleClass"));
+						}
+						
+						responseWriter.writeAttribute("class", styleClass, null);
+						
+						List<UIComponent> grandChildren = child.getChildren();
+						for(UIComponent grandChild : grandChildren) {
+							grandChild.encodeAll(context);
+						}
+						
+						responseWriter.endElement("span");
+					}
 					else if (child instanceof BlockUIBase)
 					{
 						child.encodeAll(context);
 					}
 					else
 					{
-        				UIPanel inputChild = new UIPanel();
-        				responseWriter.startElement("div", inputChild);
-        				responseWriter.writeAttribute("class", "p-col p-col-count-" + (columnCount - 1), null);
+        				if (wrapInput) {
+        					UIPanel inputChild = new UIPanel();
+    						StringBuffer styleClass = new StringBuffer("p-col p-col-count-" + (columnCount - 1));
+    						if (columnCount > 2) {
+    							styleClass.append(" p-col-multi");
+    						}
+	        				responseWriter.startElement("div", inputChild);
+	        				responseWriter.writeAttribute("class", styleClass, null);
+        					wrapInput = false;
+        				}
 						
         				child.encodeAll(context);
 				
-        				responseWriter.endElement("div");
+        				if (i == group.size() - 1) {
+        					responseWriter.endElement("div");
+        				}
 					}
 				}
 				

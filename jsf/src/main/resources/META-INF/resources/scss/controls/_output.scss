@@ -1,0 +1,27 @@
+@mixin output-field() {
+	background-color: var(--panel-content-output-background);
+	border-radius: var(--border-radius);
+	padding: var(--output-spacing);
+}
+
+.ui-widget-content {
+	.ui-outputtext {
+		@include output-field;
+		
+		align-items: center;
+		display: flex;
+		min-height: var(--list-element-height);
+	}
+	
+	.jeesl-output-container {
+		@include output-field;
+		
+		.ui-outputtext {
+			padding: 0;
+		}
+		
+		.ui-selectbooleancheckbox {
+			margin: var(--input-nested-widget-spacing) 0;
+		}
+	}
+}

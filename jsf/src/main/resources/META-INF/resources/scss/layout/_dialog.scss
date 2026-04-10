@@ -1,0 +1,14 @@
+.ui-dialog:not(.jeesl-dialog) {
+	// Hide the border, panel in dialog content has border.
+	border: none;
+	
+	// Hide the handles and titlebar, the whole dialog panel is in the content. Handles mess up the layout. Important necessary because display is set as inline style.
+	.ui-dialog-titlebar, .ui-resizable-handle {
+		display: none !important;
+	}
+	
+	// Set the dialog panel to 100% the size of the dialog, otherwise there's an invisible "footer". Important necessary because height is set as inline style.
+	.ui-dialog-content {
+		height: 100% !important;
+	}
+}

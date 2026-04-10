@@ -1,0 +1,44 @@
+.ui-spinner {
+	display: grid;
+	grid-template: [row1-start] 'input btn-up' min-content [row1-end]
+				   [row2-start] 'input btn-down' min-content [row2-end]
+				   / 1fr auto;
+	
+	.ui-spinner-input {
+		border-radius: var(--border-radius-left);
+		grid-area: input;
+	}
+	
+	.ui-spinner-button {
+		border-radius: 0;
+		height: auto;
+		min-height: calc(var(--button-height) / 2);
+		position: relative;
+		
+		&.ui-spinner-up {
+			border-top-right-radius: var(--border-radius);
+			box-shadow: none;
+		}
+		
+		&.ui-spinner-down {
+			border-bottom-right-radius: var(--border-radius);
+			border-top-width: 0;
+		}
+		
+		.ui-button-text {
+			display: block;
+			padding: 0;
+			
+			.ui-icon {
+				left: 0; // Overwrite primefaces rule to center icon horizontally.
+				display: block;
+				top: -1px;
+				
+				&:before {
+					display: block;
+					line-height: calc(var(--button-height) / 2 - 2 * var(--border-width));
+				}
+			}
+		}
+	}
+}

@@ -516,6 +516,11 @@
 							</execution>
 						</executions>
 						<configuration>
+							<loadPaths>
+								<loadPath>${basedir}/src/main/resources/META-INF/resources/scss/controls</loadPath>
+								<loadPath>${basedir}/src/main/resources/META-INF/resources/scss/layout</loadPath>
+								<loadPath>${basedir}/src/main/resources/META-INF/resources/scss/tokens</loadPath>
+							</loadPaths>
 							<inputFolder>${basedir}/src/main/resources/META-INF/resources/scss</inputFolder>
 							<outputFolder>${basedir}/src/main/resources/META-INF/resources/css</outputFolder>
 							<update>true</update>

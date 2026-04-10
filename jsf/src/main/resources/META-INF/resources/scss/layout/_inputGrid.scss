@@ -1,0 +1,233 @@
+@use 'sass:list';
+@use 'sass:meta';
+
+:root {
+	--input-grid-columns-template: [label] fit-content(40%) [left] auto [center] 1fr [right] auto [end];
+	--input-grid-column-fullwidth: label / end;
+	--input-grid-row: 1;
+	
+	--input-grid-label-columns-template: subgrid;
+	
+	@media (max-width: 768px) {
+		--input-grid-columns-template: [left] auto [center] 1fr [right] auto [end];
+		--input-grid-column-fullwidth: left / end;
+		--input-grid-row: auto;
+
+		--input-grid-label-columns-template: [label] auto [end] 1fr;
+	}
+}
+
+@function get-multi-column-input-template($column-count) {
+	$columns: [left] auto [center] 1fr [right] auto;
+	
+	@if meta.type-of($column-count) != number or $column-count < 2 { @return $columns }
+	
+	@for $index from 2 through $column-count {
+		$columns: list.append($columns, [left-#{$index}] auto [center-#{$index}] 1fr [right-#{$index}] auto);
+	}
+	
+	@return $columns;
+}
+
+.jeesl-input-grid {
+	display: grid;
+	grid-template-columns: var(--input-grid-columns-template);
+	min-height: var(--form-entry-height);
+	gap: var(--form-column-spacing) var(--form-spacing);
+
+	@for $col-count from 2 through 4 {
+		&.col-count-#{$col-count} {
+			$input-template: get-multi-column-input-template($col-count);
+			--input-grid-columns-template: [label] fit-content(40%) #{$input-template} [end];
+		}
+	}
+	
+	.p-grid {
+		display: grid;
+		grid-column: var(--input-grid-column-fullwidth);
+		grid-row: span 2;
+		grid-template-columns: subgrid;
+		
+		@media (max-width: 768px) {
+			grid-column-start: left;
+		}
+		
+		.p-col {
+			grid-row: var(--input-grid-row);
+			
+			&.ui-outputlabel {
+				padding-left: var(--input-label-indent);
+				width: auto;
+				word-break: break-word;
+				
+				display: grid;
+				grid-column: label / end;
+				grid-row: 1 / span 2;
+				grid-template-columns: var(--input-grid-label-columns-template);
+				grid-template-rows: subgrid;
+				
+				.ui-outputlabel-text {
+					grid-column: label;
+					grid-row: 1;
+					
+					&:last-child {
+						grid-row: 1 / span 2;
+					}
+				}
+				
+				.ui-outputlabel-info {
+					font-weight: 500;
+					grid-column: label / end;
+					grid-row: 2;
+					padding: var(--slim-spacing) 0 var(--half-spacing);
+				}
+				
+				@media (max-width: 768px) {
+					grid-column: var(--input-grid-column-fullwidth);
+					
+					.ui-outputlabel-text {
+						background: var(--container-content-background);
+						border-radius: var(--border-radius);
+						margin-bottom: -.75rem;
+						padding: var(--input-label-spacing-vertical) var(--input-label-spacing-horizontal);
+						z-index: 1;
+					}
+				}
+			}
+			
+			&:not(.ui-outputlabel) {
+				align-items: center;
+				display: grid;
+				gap: var(--form-column-spacing);
+				grid-column: left / end;
+				grid-template-columns: subgrid;
+				min-height: var(--form-entry-height);
+				
+				&:first-child {
+					grid-column: var(--input-grid-column-fullwidth);
+				}
+				
+				@for $col-count from 2 through 4 {
+					@for $input-count from 1 through $col-count {
+						&.p-col-count-#{$col-count} :nth-child(#{$input-count}) {
+							grid-column-start: left-#{$input-count};
+							grid-column-end: left-#{$input-count + 1};
+						}
+					}
+					
+					&.p-col-count-#{$col-count} :first-child { grid-column-start: left; }
+					&.p-col-count-#{$col-count} :last-child { grid-column-end: end; }
+				}
+				
+				> .jeesl-output-container, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor {
+					grid-column: left / end;
+				}
+				
+				> .jeesl-output-container, > .jeesl-input-container, > .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-chips, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar {
+					display: grid;
+					grid-template-columns: subgrid;
+				}
+				
+				> .jeesl-output-container, > .jeesl-input-container, > .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-chips, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar {
+					> .ui-outputtext, > .ui-inputfield, > .ui-inputtextarea {
+						grid-column: center / right;
+						width: auto;
+						
+						&:first-child { grid-column-start: left; }
+						&:last-child { grid-column-end: end; }
+					}
+					
+					> :not(.ui-outputtext, .ui-inputfield, .ui-inputtextarea, .ui-calendar) {
+						&:first-child { grid-column: left; }
+						&:last-child { grid-column: right; }
+					}
+					
+					> .ui-selectbooleancheckbox, > .ui-outputlabel {
+						&:last-child {
+							display: flex;
+							justify-content: end;
+						}
+					}
+				}
+				
+				> .ui-spinner {
+					display: grid;
+					grid-template-columns: subgrid;
+					grid-template-areas: 'input input btn-up' 'input input btn-down';
+					
+					.ui-spinner-input {
+						width: auto;
+						margin-right: calc(-1 * var(--form-column-spacing));
+					}
+				}
+				
+				// Select menus have hidden "ui-helper" accessibles, so the ":first-child" selector to start in the left-column won't work and we need to specifically set it.
+				// Also removal of gap between textbox and button required.
+				> .ui-selectonemenu, > .ui-selectcheckboxmenu {
+					.ui-inputfield {
+						grid-column-start: left;
+						margin-right: calc(-1 * var(--form-column-spacing));
+					}
+				}
+				
+				// Datepicker button is absolute-positioned, this needs to change.
+				> .jeesl-datepicker .ui-calendar .ui-datepicker-trigger, > .jeesl-datepicker.ui-calendar .ui-datepicker-trigger {
+					position: relative;
+					right: 0;
+					width: auto;
+				}
+				
+				// Chips has a hidden select sibling after the chips container, so the ":last-child" selector to draw the element until the end won't work and we need to specifically set it.
+				> .ui-chips .ui-chips-container {
+					grid-column-end: end;
+				}
+				
+				// CK Editor inside a panel has negative margins set to offset the panel's padding and take up all space if used as the panel's sole content.
+				> .jeesl-ck-editor {
+					margin: 0;
+				}
+				
+				// Set the size of the 
+				.jeesl-input-grid-icon, .pf-action-icon {
+					height: var(--input-icon-height);
+				}
+				
+				// For a potential button below the form (e.g. login-button).
+				> .ui-button {
+					grid-column-start: right;
+				}
+			}
+		}
+	}
+}
+
+.jeesl-input-grid .jeesl-input-grid {
+	grid-template-columns: subgrid;
+	grid-column: label / end;
+}
+
+.jeesl-output-container {
+	align-items: center;
+	gap: var(--input-content-spacing);
+}
+
+.jeesl-input-container {
+	display: flex;
+//	gap: var(--input-content-spacing);
+
+	.ui-inputfield {
+		border-radius: var(--border-radius);
+		
+		&:not(:first-child) { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+		&:not(:last-child) { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+	}
+	
+	.ui-outputlabel {
+		background: var(--panel-content-input-background);
+		margin-left: calc(-1 * var(--input-content-spacing));
+		padding: var(--input-content-spacing);
+		
+		&:first-child { border-radius: var(--border-left-radius); }
+		&:last-child { border-radius: var(--border-right-radius); }
+	}
+}

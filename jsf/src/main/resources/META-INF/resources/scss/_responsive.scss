@@ -1001,237 +1001,6 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 }
 
-@mixin input-grid {
-	.ui-fluid {
-		display: flex;
-		flex-direction: column;
-		
-		.p-grid {
-			position: relative;
-			
-			@media (max-width: 768px) {
-				display: block;
-				padding: 0;
-			}
-			
-			.p-col {
-				&.ui-outputlabel {
-					flex-grow: 0;
-					word-break: break-all;
-					
-					@media (max-width: 768px) {
-						left: 50%;
-						line-height: normal;
-						padding: 0;
-						position: absolute;
-						top: 0;
-	    				transform: translate(-50%, 0);
-						width: auto;
-						word-break: break-word;
-						z-index: 1;
-						
-						&:first-child {
-							left: 15px;
-							transform: none;
-						}
-						
-						&:last-child {
-							left: auto;
-							right: 15px;
-							transform: none;
-						}
-					}
-					
-					&.p-md-0 {
-						padding-right: 0;
-						
-						+ .p-col {
-							padding-left: 0;
-						}
-					}
-					
-					.jeesl-icon {
-						order: -1;
-						
-						@media (max-width: 768px) {
-							height: $grid-label-icon-height-mobile;
-						}
-					}
-				}
-				
-				&:not(.ui-outputlabel) {
-					overflow-wrap: anywhere;
-					
-					flex-grow: 1;
-					
-					@media (max-width: 768px) {
-						line-height: normal;
-					    padding: .6em 0 $slim-spacing 0;
-
-						// Overriding inline css
-						width: 100% !important;
-					}
-					
-					> .ui-inputfield, .ui-selectonemenu, .ui-spinner, .ui-selectcheckboxmenu, .ui-selectmanybutton, .ui-chips {
-						border-radius: $border-radius;
-						
-						@media (max-width: 768px) {
-							margin: 0;
-							padding: $half-spacing $regular-spacing;
-							width: 100%;
-						}
-					}
-					
-					> span:not(.jeesl-input-container, .jeesl-datepicker, .ui-autocomplete) {
-						border-radius: $border-radius;
-						padding: 0;
-						
-						&:not(.jeesl-block, .jeesl-output-container) {
-							display: inline-block;
-						
-							@media (max-width: 768px) {
-								display: flex;
-								min-height: $element-height-mobile;
-							}
-						}
-						
-						@media (max-width: 768px) {
-							align-items: center;
-							background: var(--panel-content-output-background);
-							padding: $regular-spacing;
-							
-							&.jeesl-center {
-								justify-content: center;
-							}
-							
-							&.jeesl-right {
-								justify-content: end;
-							}
-						}
-					}
-					
-					> .ui-button {
-						width: auto;
-					}
-					
-					> .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-selectmanybutton, > .ui-chips {
-						padding: 0;
-					}
-					
-					> .jeesl-datepicker {
-						display: flex;
-						
-						.ui-inputfield {
-							width: 85%;
-						}
-						
-						.ui-datepicker-trigger {
-							position: relative;
-							right: 0;
-						}
-					}
-					
-					> .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar {
-						.cke_toolgroup, .cke_combo {
-							border-top-right-radius: $border-radius;
-							border-top-width: $border-width;
-														
-							.cke_button:last-child {
-								border-right: $border;
-								border-top-right-radius: $border-radius;
-							}
-						}
-					}
-					
-					> .jeesl-tabs {
-						margin: 0;
-						padding: 0;
-						
-						@media (max-width: 768px) {
-							margin: 0 -#{$regular-spacing};
-						}
-						
-						.ui-tabs-nav {
-							align-items: stretch;
-							border-radius: $border-radius-top;
-							margin: 0;
-							
-							@media (max-width: 768px) {
-								border-radius: 0;
-								border-width: $border-width $border-width $header-element-underline-mobile;
-								padding: $regular-spacing $regular-spacing 0 !important;
-								
-								&:after {
-									margin-left: -#{$regular-spacing + $border-width};
-									width: calc(100% + #{2 * $border-width});
-								}
-							}
-							
-							.ui-tabs-header {
-								cursor: pointer;
-								min-height: #{$element-height - 2 * $border-width - $slim-spacing};
-								top: $border-width;
-								
-								@media (max-width: 768px) {
-									flex-direction: column;
-									min-height: #{$element-height-mobile - $regular-spacing};
-									min-width: $element-height-mobile;
-								}
-								
-								&.ui-state-active {
-									background: linear-gradient(to bottom, var(--container-content-background), var(--panel-content-input-background));
-									cursor: default;
-									min-height: #{$element-height - $border-width - $slim-spacing};
-									
-									@media (max-width: 768px) {
-										min-height: #{$element-height-mobile - $regular-spacing};
-									}
-									
-									a {
-										cursor: default;
-									}
-								}
-							}
-						}
-							
-						.ui-tabs-panels {
-							padding: 0;
-							
-							@media (max-width: 768px) {
-								// TODO: Check!
-								background: var(--tabview-header-tab-background);
-								padding: $half-spacing $regular-spacing $regular-spacing;
-							}
-							
-							.ui-tabs-panel {
-								margin-top: $header-element-underline;
-								
-								@media (max-width: 768px) {
-									padding: 0;
-									margin-top: $header-element-underline-mobile;
-								}
-								
-								.ui-inputtextarea {
-									border-radius: $border-radius-bottom;
-									margin: 0;
-								}
-							}
-						}
-					}
-					
-					> .jeesl-qr {
-						max-height: $qrCodeHeight;
-					}
-				}
-			}
-		}
-		
-		.ui-button {
-			width: auto;
-		}
-	}
-}
-
 @mixin image-gallery {
 	.ui-galleria {
 		width: 100% !important;
@@ -1386,30 +1155,39 @@ $enable-pointer-cursor-for-buttons: true;
 						justify-content: right;
 						
 						.cke_toolbar_start {
-							border-left: $border;
+//							border-left: $border;
+							display: none;
 						}
 							
 						.cke_toolgroup, .cke_combo {
 							align-items: center;
-							border: $border;
-							border-width: $border-width 0;
+//							border: $border;
+//							border-width: $border-width 0;
 							display: flex;
-							padding: 0;
+							flex-direction: row-reverse;
+							flex-wrap: wrap;
+							justify-content: flex-start;
+							padding: $border-width $border-width 0 0;
 							margin: 0;
 								
 							.cke_button, .cke_combo_button {
 								@include button(cke_button_on);
 								
 //								border: $border;
-								border: 0;
+//								border: 0;
 								border-radius: 0;
 //								border-width: 0 0 $border-width;
 								box-sizing: border-box;
 								cursor: pointer;
+								margin: -#{$border-width} -#{$border-width} 0 0;
 								min-width: $element-height;
 								
 								@media (max-width: 768px) {
 									min-width: $element-height-mobile;
+								}
+								
+								&:first-child {
+									border-top-right-radius: var(--border-radius);
 								}
 								
 								&:after {
@@ -1465,11 +1243,12 @@ $enable-pointer-cursor-for-buttons: true;
 							}
 							
 							.cke_toolbar_separator {
-								background: none;
-								border-left: $border;
-								height: 100%;
-								margin: 0;
-								width: 0;
+//								background: none;
+//								border-left: $border;
+//								height: 100%;
+//								margin: 0;
+//								width: 0;
+								display: none;
 							}
 						}
 						
@@ -1562,13 +1341,13 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 
-			.jeesl-ck-editor:first-child, .jeesl-editor-list:first-child .jeesl-ck-editor {
-				.cke .cke_inner .cke_top .cke_toolbar {
-					.cke_combo, .cke_toolgroup {
-						border-top-width: 0;
-					}
-				}
-			}
+//			.jeesl-ck-editor:first-child, .jeesl-editor-list:first-child .jeesl-ck-editor {
+//				.cke .cke_inner .cke_top .cke_toolbar {
+//					.cke_combo, .cke_toolgroup {
+//						border-top-width: 0;
+//					}
+//				}
+//			}
 		}
 		
 		.jeesl-editor-list {
@@ -1816,7 +1595,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	.ui-widget-content:not(.ui-dialog, .ui-selectonemenu-item, .ui-datatable-data) {
+	.ui-widget-content:not(.ui-dialog, .ui-dialog-footer, .ui-selectonemenu-item, .ui-datatable-data) {
 		background: transparent;
 	}
 	
@@ -2071,7 +1850,6 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	.ui-panel-content, .ui-dialog-content {
-		@include input-grid;
 		@include image-gallery;
 		
 		.jeesl-headline {
@@ -2091,8 +1869,9 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.ui-separator {
-			background: var(--container-border-colour);
+			background: var(--container-border-color);
 			border: none;
+			box-shadow: none;
 			height: $separator-thickness;
 			margin: $half-spacing -#{$regular-spacing};
 			
@@ -2177,7 +1956,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		th, td {
-			border-color: var(--container-border-colour);
+			border-color: var(--container-border-color);
 		}
 	}
 	
@@ -2609,7 +2388,7 @@ body, .ui-widget {
 }
 
 #fStatusBarHelp .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button-icon {
-	border-right: 1px solid var(--statusbar-help-border-colour);
+	border-right: 1px solid var(--statusbar-help-border-color);
 }
 
 .jeesl-footer {
@@ -3127,7 +2906,7 @@ body, .ui-widget {
 			}
 			
 			.ui-inputgroup {
-				border: $border-width solid var(--statusbar-search-border-colour);
+				border: $border-width solid var(--statusbar-search-border-color);
 				border-radius: $border-radius;
 				display: inline-block;
 				height: calc(100% - 2 * #{$slim-spacing} + 2 * #{$border-width});
@@ -3363,7 +3142,7 @@ body, .ui-widget {
 									}
 									
 									&:before {
-										@include triangle(transparent var(--container-border-colour) transparent transparent, 8px 8px 8px 0);
+										@include triangle(transparent var(--container-border-color) transparent transparent, 8px 8px 8px 0);
 										
 										left: -8px;
 										top: calc(#{$header-element-height} + #{$header-element-underline} + #{$border-width} + (#{$ls-element-height} / 2) - 8px);
@@ -3525,6 +3304,8 @@ body, .ui-widget {
 	
 	.ui-widget-content {
 		background: transparent;
+		border: none;
+		width: 100%;
 		
 		.ui-tree-container {
 			padding: 0;
@@ -3640,7 +3421,7 @@ body, .ui-widget {
 		
 		th {
 			background: var(--container-header-background) !important; // Override handsontable super specific selector nonsense.
-			border-color: var(--container-border-colour) !important; // Override handsontable super specific selector nonsense.
+			border-color: var(--container-border-color) !important; // Override handsontable super specific selector nonsense.
 			border-style: solid;
 			border-width: 0 $border-width $border-width !important; // Override handsontable super specific selector nonsense.
 			box-shadow: 0 -1px 0 inset $white-35;
@@ -3657,7 +3438,7 @@ body, .ui-widget {
 		tr {
 			background: transparent;
 			border: none;
-			border-color: var(--datatable-content-border-colour);
+			border-color: var(--datatable-content-border-color);
 			
 			&:nth-child(2n) {
 				background: var(--datatable-content-odd-row-background);
@@ -3729,7 +3510,7 @@ body, .ui-widget {
 		
 		th {
 			background: $soft-grey linear-gradient(to bottom, $white-50, $white-0) !important; // Override handsontable super specific selector nonsense.
-			border-color: var(--container-border-colour);
+			border-color: var(--container-border-color);
 			border-right-width: $border-width !important; // Override handsontable super specific selector nonsense.
 			box-shadow: $highlight-shadow;
 		}
@@ -3744,7 +3525,7 @@ body, .ui-widget {
 		tr.ui-state-highlight, td.highlight, .jeesl-cell-select > label.selected {
 			background: var(--datatable-content-highlight-background);
 			// TODO: Check!
-			border-color: var(--datatable-content-highlight-border-colour);
+			border-color: var(--datatable-content-highlight-border-color);
 			color: var(--datatable-content-highlight-foreground);
 			font-weight: 500;
 			text-shadow: none;
@@ -3888,7 +3669,7 @@ body, .ui-widget {
 						&:before {
 							@include background-overlay(var(--datatable-content-highlight-background));
 							
-							border-color: var(--datatable-content-highlight-border-colour);
+							border-color: var(--datatable-content-highlight-border-color);
 							border-style: solid;
 							border-width: 0 $border-width $border-width 0;
 							right: -$border-width;
@@ -3987,7 +3768,7 @@ body, .ui-widget {
 			}
 			
 			&:before {
-				@include background-overlay(var(--datatable-content-highlight-border-colour), 1);
+				@include background-overlay(var(--datatable-content-highlight-border-color), 1);
 			}
 			
 			&:first-child:before {
@@ -4008,7 +3789,7 @@ body, .ui-widget {
 			&:before {
 				@include background-overlay(var(--panel-content-input-background), 1);
 				
-				border: 2px solid var(--datatable-content-focus-cell-edit-border-colour);
+				border: 2px solid var(--datatable-content-focus-cell-edit-border-color);
 				left: 1px;
 				right: -1px;
 				top: 1px;
@@ -4072,7 +3853,7 @@ body, .ui-widget {
 			
 			&.ui-sortable-column {
 				&.ui-state-hover, &.ui-state-active {
-					border-color: var(--container-border-colour);
+					border-color: var(--container-border-color);
 					
 					&:before {
 						opacity: 1;
@@ -4174,7 +3955,7 @@ body, .ui-widget {
 			transition: border-color .2s linear;
 			
 			&.selected {
-				border-color: var(--datatable-content-highlight-border-colour);
+				border-color: var(--datatable-content-highlight-border-color);
 			}
 			
 			label {
@@ -4699,8 +4480,10 @@ body, .ui-widget {
 		
 		&.jeesl-fullscreen {
 			height: calc(100% - $regular-spacing) !important;
+			left: $half-spacing !important;
 			max-height: none;
 			max-width: none;
+			top: $half-spacing !important;
 			width: calc(100% - $regular-spacing) !important;
 		}
 	}
@@ -4902,7 +4685,16 @@ body, .ui-widget {
 			
 			&:first-child {
 				border-top-width: 0;
-				margin-top: -$regular-spacing;
+				margin-top: -$half-spacing;
+				
+				.cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+					border-top: none;
+				
+					&:first-child {
+						border-right: none;
+						border-top-right-radius: 0;
+					}
+				}
 			}
 			
 			&:last-child {
@@ -4933,6 +4725,8 @@ body, .ui-widget {
 		}
 	}
 }
+
+@import './layout/dialog';
 
 .jeesl-action-tabview {
 	display: block;
@@ -5111,7 +4905,7 @@ body, .ui-widget {
 				
 				.fc-bg td {
 					border: $border;
-					border-color: var(--calendar-internal-border-colour);
+					border-color: var(--calendar-internal-border-color);
 				
 					&.fc-today {
 						background: var(--calendar-tocay-background);
@@ -5169,56 +4963,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-input-grid {
-	&:not(:last-child) {
-		margin-bottom: $regular-spacing;
-	}
-	
-	.p-field {
-		.p-col {
-			&:not(.ui-outputlabel) {
-				@include icon-default-size;
-			
-				flex-grow: 1;
-				min-height: $element-height;
-				
-				@media (max-width: 768px) {
-					min-height: $element-height-mobile;
-				}
-
-				> * {
-					min-width: $element-height !important;
-					
-					@media (max-width: 768px) {
-						min-width: $element-height-mobile !important;
-					}
-				}
-				
-				.jeesl-input-grid-icon {
-					height: $input-field-icon-height;
-					
-					@media (max-width: 768px) {
-						height: $input-field-icon-height-mobile;
-					}
-					
-					&.jeesl-input-grid-locale-icon {
-						min-height: $input-field-icon-height;
-						
-						@media (max-width: 768px) {
-							height: $input-field-icon-height-mobile;
-							width: auto;
-						}
-					}
-				}
-				
-				.jeesl-ck-editor {
-					border-radius: $border-radius;
-					margin: 0;
-				}
-			}
-		}
-	}
-}
+@import './layout/inputGrid';
 
 .pf-action-icon {
 	float: none;
@@ -5231,7 +4976,7 @@ body, .ui-widget {
 }
 
 .pf-action-dropdown {
-	@include jeesl-nav-dropdown(var(--container-header-foreground), var(--container-header-action-button-dropdown-background), var(--container-header-action-button-dropdown-hover-background), var(--container-header-action-button-dropdown-separator-colour));
+	@include jeesl-nav-dropdown(var(--container-header-foreground), var(--container-header-action-button-dropdown-background), var(--container-header-action-button-dropdown-hover-background), var(--container-header-action-button-dropdown-separator-color));
 	
 	.jeesl-dropdown-list, + .jeesl-dropdown-list {
 		border-radius: $border-radius;
@@ -5289,7 +5034,7 @@ body, .ui-widget {
 		gap: 2px;
 	
 		.jeesl-heatmap-entry {
-			background: var(--heatmap-entry-colour);
+			background: var(--heatmap-entry-color);
 			height: 12px;
 			width: 12px;
 		}
@@ -5537,3 +5282,4 @@ body, .ui-widget {
 
 @import '_responsiveHtmlRender';
 @import '_responsivePrint';
+@import '_responsiveDeprecated';

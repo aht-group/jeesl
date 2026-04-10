@@ -31,7 +31,7 @@
 				  draggable="false"
 				  onHide="#{cc.attrs.onHide}">
 			<f:facet name="header">
-				<h:outputText class="ui-dialog-title" value="#{cc.attrs.header}"/>
+				<h:outputText class="ui-dialog-titlebar-text" value="#{cc.attrs.header}"/>
 				<c:if test="#{!empty cc.facets.actions}">
 					<div class="jeeslDialogActions ui-dialog-titlebar-actions">
 			            <composite:renderFacet name="actions"/>

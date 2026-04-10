@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use 'sass:string';
 
-$border: $border-width solid var(--container-border-colour);
+$border: $border-width solid var(--container-border-color);
 
 @mixin vertical-center($pseudo) {
 	&:#{$pseudo} {
@@ -52,7 +52,7 @@ $border: $border-width solid var(--container-border-colour);
 	
 	&:before {
 		@media (max-width: 768px) {
-			border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-colour);
+			border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-color);
 		    content: '';
 		    display: block;
 		    width: calc(100% - (2 * #{$wide-spacing}));
@@ -85,7 +85,7 @@ $border: $border-width solid var(--container-border-colour);
 		
 		&:after {
 			@media (max-width: 768px) {
-				border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-colour);
+				border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-color);
 				bottom: 0;
 				content: '';
 				display: block;
@@ -209,15 +209,18 @@ $border: $border-width solid var(--container-border-colour);
 @mixin button($active-class: ui-state-active) {
 	@include element-height;
 	@include min-button-width;
-	@include vertical-center(after);
+//	@include vertical-center(after);
 	
+	align-items: center;
 	background: var(--panel-content-button-background);
 	border: $border;
 	border-radius: $border-radius;
 	box-shadow: $highlight-shadow;
 	color: var(--panel-content-button-foreground);
 	cursor: pointer;
+	display: inline-flex;
 	font-weight: 700;
+	justify-content: center;
 	line-height: normal;
 	padding: 0 $regular-spacing;
 	text-align: center;
@@ -280,7 +283,7 @@ $border: $border-width solid var(--container-border-colour);
 	}
 	
 	&.#{$active-class} {
-		border-color: var(--panel-content-button-highlight-border-colour);
+		border-color: var(--panel-content-button-highlight-border-color);
 		color: var(--panel-content-button-highlight-foreground);
 		text-shadow: none;
 	
@@ -342,10 +345,6 @@ $border: $border-width solid var(--container-border-colour);
 	&:before {
 		font-size: inherit;
 		vertical-align: top;
-		
-		@media (max-width: 768px) {
-			font-size: 2em;
-		}
 	}
 }
 
@@ -414,6 +413,20 @@ $border: $border-width solid var(--container-border-colour);
 	}
 }
 
+.ui-selectonebutton {
+	display: flex;
+	
+	.ui-button.ui-state-default {
+		flex-grow: 1;
+		height: auto;
+		margin-right: calc(-1 * var(--border-width));
+		min-height: var(--form-entry-height);
+		padding: 0;
+		width: auto;
+		word-break: break-word;
+	}
+}
+
 .ui-inputfield.ui-state-default {
 	@include inputfield;
 }
@@ -432,96 +445,96 @@ $border: $border-width solid var(--container-border-colour);
 	}
 }
 
-.jeesl-output-container {
-	align-items: center;
-	display: flex;
-	gap: $regular-spacing;
+//.jeesl-output-container {
+//	align-items: center;
+//	display: flex;
+//	gap: $regular-spacing;
 	
-	.ui-outputtext {
-		flex-grow: 1;
-	}
+//	.ui-outputtext {
+//		flex-grow: 1;
+//	}
 	
-	.jeesl-input-label {
-		padding: 0 $half-spacing;
-	}
+//	.jeesl-input-label {
+//		padding: 0 $half-spacing;
+//	}
 	
-	.ui-chkbox {
-		margin: -$half-spacing 0;
-		
-		@media (max-width: 768px) {
-			margin: 0;
-		}
-	}
+//	.ui-chkbox {
+//		margin: -$half-spacing 0;
+//		
+//		@media (max-width: 768px) {
+//			margin: 0;
+//		}
+//	}
 
-	@media (max-width: 768px) {
-		.ui-outputlabel {
-			padding: 0 0 0 $regular-spacing;
-		}
-	}
+//	@media (max-width: 768px) {
+//		.ui-outputlabel {
+//			padding: 0 0 0 $regular-spacing;
+//		}
+//	}
+//	
+//	.jeesl-input-container {
+//		flex-grow: 1;
+//	}
 	
-	.jeesl-input-container {
-		flex-grow: 1;
-	}
-	
-	.jeesl-translation-label-previous {
-		background: var(--panel-content-input-background);
-		border-radius: $border-radius 0 0 $border-radius;
-		display: flex;
-		gap: $regular-spacing;
-		min-height: $element-height;
-		padding: $half-spacing 0 $half-spacing $regular-spacing;
-		width: auto;
-		
-		> .jeesl-input-container .jeesl-inputfield.ui-state-default {
-			border-radius: 0 $border-radius $border-radius 0;
-		}
-	}
-		
-	.jeesl-translation-label-icon {
-		border-color: transparent var(--container-header-underline-colour);
-		border-style: solid;
-		border-width: 6px 0 6px 6px;
-	}
-}
+//	.jeesl-translation-label-previous {
+//		background: var(--panel-content-input-background);
+//		border-radius: $border-radius 0 0 $border-radius;
+//		display: flex;
+//		gap: $regular-spacing;
+//		min-height: $element-height;
+//		padding: $half-spacing 0 $half-spacing $regular-spacing;
+//		width: auto;
+//		
+//		> .jeesl-input-container .jeesl-inputfield.ui-state-default {
+//			border-radius: 0 $border-radius $border-radius 0;
+//		}
+//	}
+//		
+//	.jeesl-translation-label-icon {
+//		border-color: transparent var(--container-header-underline-color);
+//		border-style: solid;
+//		border-width: 6px 0 6px 6px;
+//	}
+//}
 
-.jeesl-input-container {
-	display: flex;
-	
-	.ui-inputtext, .ui-inputtextarea {
-		flex-grow: 1;
-		flex-shrink: 1;
-		width: 0;
-	}
-	
-	.ui-commandlink {
-		flex-grow: 1;
-		height: auto;
-		margin: 0 0 0 6px;
-		padding: 0;
-		
-		> img {
-			height: auto;
-			width: 100%;
-		}
-	}
-	
-	.ui-button, .ui-chkbox {
-		align-items: center;
-		display: flex;
-//		flex: 1;
-		flex-shrink: 0;
-		justify-content: center;
-		margin: 0 0 0 6px;
-		overflow: hidden;
-		padding: 0 $slim-spacing;
-		
-		min-width: calc(15% - 6px);
-		
-		.ui-button-text {
-			padding: 0;
-		}
-	}
-}
+//.jeesl-input-container {
+//	display: flex;
+//	
+//	.ui-inputtext, .ui-inputtextarea {
+//		flex-grow: 1;
+//		flex-shrink: 1;
+//		width: 0;
+//	}
+//	
+//	.ui-commandlink {
+//		flex-grow: 1;
+//		height: auto;
+//		margin: 0 0 0 6px;
+//		padding: 0;
+//		
+//		> img {
+//			height: auto;
+//			width: 100%;
+//		}
+//	}
+//	
+//	.ui-button, .ui-chkbox {
+//		align-items: center;
+//		display: flex;
+////		flex: 1;
+//		flex-shrink: 0;
+//		justify-content: center;
+//		margin: 0 0 0 6px;
+//		overflow: hidden;
+//		padding: 0 $slim-spacing;
+//		
+//		min-width: calc(15% - 6px);
+//		
+//		.ui-button-text {
+//			padding: 0;
+//		}
+//	}
+//}
 
 .ui-float-label {
 	align-items: center;
@@ -596,17 +609,18 @@ $border: $border-width solid var(--container-border-colour);
 		.ui-icon {
 			@include icon;
 			
+			font-size: var(--button-icon-font-size);
 			position: relative;
 			text-indent: 0;
 		}
 		
 		.ui-icon-triangle-1-s:before {
 			content: $icon-down !important; // Override primefaces 12 rule.
-			font-size: 1.5em;
-			
-			@media (max-width: 768px) {
-				font-size: 2.5em;
-			}
+//			font-size: 1.5em;
+//			
+//			@media (max-width: 768px) {
+//				font-size: 2.5em;
+//			}
 		}
 	}
 	
@@ -673,10 +687,6 @@ $border: $border-width solid var(--container-border-colour);
 .ui-calendar {
 	.ui-datepicker-trigger {
 		padding: 0;
-		
-		.ui-icon {
-			@include icon;
-		}
 	}
 }
 
@@ -941,9 +951,11 @@ $border: $border-width solid var(--container-border-colour);
 			@media (max-width: 768px) {
 				border-width: $separator-thickness-mobile 0;
 			
-				> tr:last-child {
-					.ui-state-default {
-						margin-bottom: $slim-spacing;
+				> tr:last-child .ui-state-default {
+					margin-bottom: -#{$separator-thickness-mobile};
+					
+					&:not(:hover):after {
+						border-bottom-color: transparent;
 					}
 				}
 			}
@@ -951,6 +963,7 @@ $border: $border-width solid var(--container-border-colour);
 			.ui-state-default {
 				color: inherit;
 				font-weight: 400;
+				position: relative;
 				text-align: center;
 				text-shadow: none;
 				
@@ -961,7 +974,7 @@ $border: $border-width solid var(--container-border-colour);
 					padding: 0;
 					
 					&:after {
-						border-bottom: $separator-thickness-mobile solid var(--panel-content-datepicker-separator-colour);
+						border-bottom: $separator-thickness-mobile solid var(--panel-content-datepicker-separator-color);
 					    content: '';
 					    display: block;
 					}
@@ -1126,7 +1139,7 @@ $border: $border-width solid var(--container-border-colour);
 	
 	.ql-toolbar {
 		margin: 0;
-		border: solid var(--container-border-colour);
+		border: solid var(--container-border-color);
 		border-width: 0 0 $border-width;
 	}
 	
@@ -1171,7 +1184,6 @@ $border: $border-width solid var(--container-border-colour);
 		
 		@media (max-width: 768px) {
 			min-height: $element-height-mobile;
-			padding-right: #{$element-height-mobile - 2 * $border-width};
 		}
 		
 		.#{$classname}-token-label {
@@ -1283,13 +1295,13 @@ $border: $border-width solid var(--container-border-colour);
 			margin-bottom: 0;
 		}
 		
-		.p-col {
-			padding: $half-spacing;
-			
-			&:first-child {
-				padding-left: 0;
-			}
-		}
+//		.p-col {
+//			padding: $half-spacing;
+//			
+//			&:first-child {
+//				padding-left: 0;
+//			}
+//		}
 	}
 }
 
@@ -1393,43 +1405,6 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	}
 }
 
-.ui-spinner {
-	display: grid;
-	grid-template: string.unquote("[row1-start] 'input btn-up' min-content [row1-end] [row2-start] 'input btn-down' min-content [row2-end] / calc(85% + 6px) 1fr");
-	
-	.ui-spinner-input {
-		grid-area: input;
-	}
-	
-	.ui-spinner-button {
-		height: math.div($element-height, 2);
-		position: relative;
-		
-		&.ui-spinner-up {
-			box-shadow: none;
-		}
-		
-		&.ui-spinner-down {
-			border-top-width: 0;
-		}
-		
-		.ui-button-text {
-			display: block;
-			height: 100%;
-			padding: 0;
-			
-			.ui-icon {
-				left: 0 !important; // Overwrite primefaces rule.
-				top: -1px;
-				
-				&:before {
-					line-height: 9px;
-				}
-			}
-		}
-	}
-}
-
 .ui-colorpicker .ui-button .ui-button-text {
 	align-items: center;
 	display: flex;
@@ -1441,28 +1416,28 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	top: 0;
 }
 
-.jeesl-input-container {
-	> .jeesl-input-label {
-		background: var(--panel-content-input-background);
-		padding: 0 $half-spacing;
-		
-		@media (max-width: 768px) {
-			padding: $regular-spacing;
-		}
-	}
-	
-	> .ui-inputtextarea, > .ui-inputtext {
-		flex-grow: 1;
-		
-		&:not(:first-child) {
-			padding-left: 0 !important;
-		}
-		
-		&:not(:last-child) {
-			padding-right: 0 !important;
-		}
-	}
-}
+//.jeesl-input-container {
+//	> .jeesl-input-label {
+//		background: var(--panel-content-input-background);
+//		padding: 0 $half-spacing;
+//		
+//		@media (max-width: 768px) {
+//			padding: $regular-spacing;
+//		}
+//	}
+//	
+//	> .ui-inputtextarea, > .ui-inputtext {
+//		flex-grow: 1;
+//		
+//		&:not(:first-child) {
+//			padding-left: 0 !important;
+//		}
+//		
+//		&:not(:last-child) {
+//			padding-right: 0 !important;
+//		}
+//	}
+//}
 
 .jeesl-button-group {
 	.ui-button {
@@ -1617,7 +1592,7 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	.ui-growl-item-container {
 		backdrop-filter: blur(1px);
 		background: rgba($panel-background, .85);
-		border-color: var(--container-border-colour);
+		border-color: var(--container-border-color);
 		box-shadow: $overlay-shadow;
 		color: var(--container-content-foreground);
 		opacity: 1;
@@ -1639,5 +1614,7 @@ body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
 
 /* Primefaces only sets dotted, which overrides both border width and color. It shouldn't, but it does.' */
 .fc-time-grid .fc-slats	.fc-minor td {
-	border: $border-width dotted var(--container-border-colour);
+	border: $border-width dotted var(--container-border-color);
 }
+
+@import './controls/controls';
