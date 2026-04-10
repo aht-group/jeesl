@@ -15,6 +15,11 @@ public class JsonAzureUser implements Serializable
 
 	public JsonAzureUser() {}
 	
+	@JsonProperty("LoginName")
+	private String loginName;
+	public String getLoginName() {return loginName;}
+	public void setLoginName(String loginName) {this.loginName = loginName;}
+
 	@JsonProperty("PrimarySmtpAddress")
 	private String email;
 	public String getEmail() {return email;}

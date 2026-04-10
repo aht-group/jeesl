@@ -582,8 +582,6 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		CriteriaQuery<POINT> cQ = cB.createQuery(fbTs.getClassPoint());
 		Root<POINT> root = cQ.from(fbTs.getClassPoint());
 		
-		
-		
 		cQ.select(root);
 		cQ.where(cB.and(this.pPoint(cB, query, root)));
 		
@@ -1141,6 +1139,10 @@ public class JeeslTsFacadeBean<CAT extends JeeslTsCategory<?,?,CAT,?>,
 		{
 			Path<TX> pTx = jData.get(JeeslTsData.Attributes.transaction.toString());
 			predicates.add(pTx.in(query.getTsTransactions()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getTsData()))
+		{
+			predicates.add(jData.in(query.getTsData()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

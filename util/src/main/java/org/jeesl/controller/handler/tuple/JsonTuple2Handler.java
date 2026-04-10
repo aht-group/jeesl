@@ -21,6 +21,7 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -232,6 +233,24 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 	public double sum(A a, B b) {return map.get(a).get(b).getSum();}
 	public double sum1(A a, B b) {return map.get(a).get(b).getSum1();}
+	public Double totalSum1()
+	{
+		double total = 0;
+		for(Map<B,JsonTuple2<A,B>> m : map.values())
+		{
+			for(JsonTuple2<A,B> t : m.values()) {if(Objects.nonNull(t.getSum1())) {total = total + t.getSum1();}}
+		}
+		return total;
+	}
+	public Double totalSum2()
+	{
+		double total = 0;
+		for(Map<B,JsonTuple2<A,B>> m : map.values())
+		{
+			for(JsonTuple2<A,B> t : m.values()) {if(Objects.nonNull(t.getSum1())) {total = total + t.getSum2();}}
+		}
+		return total;
+	}
 	
 	public void debug(boolean debug)
 	{

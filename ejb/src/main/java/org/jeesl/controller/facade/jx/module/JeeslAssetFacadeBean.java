@@ -25,12 +25,16 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
@@ -47,10 +51,12 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.JeeslAomQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
 import org.jeesl.model.ejb.io.db.JeeslCqDate;
+import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.util.query.cq.CqDate;
+import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -215,9 +221,8 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		Path<REALM> pRealm = company.get(JeeslAomCompany.Attributes.realm.toString());
 		predicates.add(cB.equal(pRealm,identifier.getRealm()));
 		
+		cQ.select(company).distinct(true);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.select(company);
-		cQ.distinct(true);
 
 		return em.createQuery(cQ).getResultList();
 	}
@@ -230,9 +235,8 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		Root<COMPANY> root = cQ.from(fbAsset.getClassCompany());
 		root.fetch(JeeslAomCompany.Attributes.scopes.toString(), JoinType.LEFT);
 		
-		cQ.select(root);
-		cQ.where(cB.and(pCompany(cB, query, root)));
-		cQ.distinct(true);
+		cQ.select(root).distinct(true);
+		cQ.where(cB.and(this.pCompany(cB, query, root)));
 		this.sortByCompany(cB, cQ, query, root);
 
 		TypedQuery<COMPANY> tQ = em.createQuery(cQ);
@@ -297,6 +301,17 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 			ListJoin<COMPANY,SCOPE> jScope = root.joinList(JeeslAomCompany.Attributes.scopes.toString());
 			predicates.add(jScope.in(query.getAomCompanyScopes()));
 		}
+		
+		for(JeeslCqLiteral cql : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cql.getPath().equals(CqLiteral.path(JeeslAomCompany.Attributes.code)))
+			{
+				Expression<String> eCode = root.get(JeeslAomCompany.Attributes.code.toString());
+				LiteralPredicateBuilder.add(cB,predicates,cql,eCode);
+			}
+			
+			else {logger.warn("NYI Path: "+cql.toString());}
+		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
@@ -305,8 +320,12 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))
 		{
-			logger.info("SORT "+cq.toString());
-			if(cq.getPath().equals(CqOrdering.path(JeeslAomCompany.Attributes.code)))
+			if(cq.getPath().equals(CqOrdering.path(JeeslAomCompany.Attributes.id)))
+			{
+				Expression<Long> e = root.get(JeeslAomCompany.Attributes.id.toString());
+				SortByPredicateBuilder.addByLong(cB,orders,cq,e);
+			}
+			else if(cq.getPath().equals(CqOrdering.path(JeeslAomCompany.Attributes.code)))
 			{
 				Expression<String> e = root.get(JeeslAomCompany.Attributes.code.toString());
 				SortByPredicateBuilder.addByString(cB,orders,cq,e);
