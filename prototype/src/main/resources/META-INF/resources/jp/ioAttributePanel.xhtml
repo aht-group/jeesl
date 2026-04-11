@@ -45,14 +45,13 @@
 			<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 			<ui:repeat id="repeatG" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}"  var="c">
 				<j:inputGrid>
-					<ui:fragment rendered="#{cc.attrs.withLabel}">
-						<p:outputLabel value="#{c.name[localeCode].lang}" />
-						<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.handler.showDescription}"/>
-						<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeesl-italic"/>
-					</ui:fragment>
+					<h:panelGroup rendered="#{cc.attrs.withLabel}" styleClass="ui-outputlabel">
+						<h:outputText value="#{c.name[localeCode].lang}" styleClass="ui-outputlabel-text" />
+						<h:outputText rendered="#{cc.attrs.showDescription and not empty c.description[localeCode].lang}" value="#{c.description[localeCode].lang}" styleClass="jeesl-italic ui-outputlabel-info"/>
+					</h:panelGroup>
 					<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
 					<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
-				</j:inputGrid>	
+				</j:inputGrid>
 				<ui:remove>
 					<p:panelGrid columns="#{cc.attrs.withLabel ? 2 : 1}" columnClasses="#{cc.attrs.withLabel ? cc.attrs.columnClasses : 'jeeslGrid100'}">
 					.. see above

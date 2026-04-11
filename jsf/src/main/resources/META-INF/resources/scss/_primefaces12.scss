@@ -198,7 +198,7 @@ body {
 		thead th {
 			@include jeesl-header;
 			
-			border-color: var(--container-border-colour);
+			border-color: var(--container-border-color);
 			height: $element-height;
 			padding: $slim-spacing $regular-spacing;
 			
@@ -242,13 +242,13 @@ body {
 					color: var(--datatable-content-highlight-foreground);
 					
 					> td {
-						border-color: var(--datatable-content-highlight-border-colour);
+						border-color: var(--datatable-content-highlight-border-color);
 					}
 				}
 				
 				> td, .ui-panelgrid-cell {
 					background: transparent;
-					border-color: var(--datatable-content-border-colour);
+					border-color: var(--datatable-content-border-color);
 					padding: $half-spacing $regular-spacing;
 					transition: border-color $transition-duration linear;
 				}
@@ -289,7 +289,7 @@ body {
 		@include jeesl-fileupload-titlebar;
 		
 		background: var(--container-content-background);
-		border-color: var(--container-border-colour);
+		border-color: var(--container-border-color);
 		border-radius: $border-radius;
 		color: var(--container-content-foreground);
 		padding: 0;
@@ -331,7 +331,7 @@ body {
 		}
 	}
 	
-	.ui-button.ui-button-text-only .ui-button-text {
+	.ui-button.ui-button-text-only:not(.ui-spinner-button) .ui-button-text {
 		padding: $slim-spacing 0;
 	}
 	
@@ -368,12 +368,16 @@ body {
 	}
 	
 	.ui-datepicker.ui-input-overlay {
-		border: var(--container-border-colour);
+		border: var(--container-border-color);
 		border-radius: $border-radius;
 		box-shadow: $overlay-shadow;
 		color: var(--container-content-foreground);
 		padding: $half-spacing;
 		min-width: min-content !important;
+		
+		@media (max-width: 768px) {
+			padding: $wide-spacing 0;
+		}
 		
 		.ui-datepicker-header {
 			background: var(--panel-content-select-dropdown-header-background);
@@ -398,6 +402,10 @@ body {
 		
 		.ui-datepicker-calendar {
 			margin: 0;
+			
+			@media (max-width: 768px) {
+				margin: 0 $wide-spacing;
+			}
 			
 			th {
 				padding: $half-spacing;
@@ -521,9 +529,9 @@ body {
 		}
 		
 		.ui-dialog-footer {
-			background: transparent;
-			border-top: $header-element-underline solid var(--container-header-underline-colour);
-			color: var(--container-footer-foreground);
+			background: var(--grey-light);
+//			border-top: $header-element-underline solid var(--container-header-underline-color);
+//			color: var(--container-footer-foreground);
 			padding: $half-spacing $regular-spacing;
 			text-align: left;
 		}
@@ -532,7 +540,7 @@ body {
 	.ui-texteditor {
 		.ui-editor-toolbar.ql-toolbar {
 			background: none;
-			border: solid var(--container-border-colour);
+			border: solid var(--container-border-color);
 			border-radius: 0;
 	   		border-width: 0 0 $border-width;
    		}

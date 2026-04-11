@@ -1,0 +1,8 @@
+.ui-button {
+	margin: 0;
+	min-width: var(--button-min-width);
+	
+	.ui-icon {
+		font-size: var(--button-icon-font-size);
+	}
+}

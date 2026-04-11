@@ -1,0 +1,79 @@
+:root {
+	// SPACING
+	--slim-spacing: #{$slim-spacing};
+	--regular-spacing: #{$regular-spacing};
+	--half-spacing: calc(var(--regular-spacing) / 2);
+	--wide-spacing: calc(3 * var(--half-spacing));
+	--separator-thickness: #{$separator-thickness};
+	
+	// LAYOUT
+	--list-element-height: #{$element-height};
+	
+	// POPUP
+	--overlay-border: var(--container-border);
+	--overlay-border-radius: var(--border-radius);
+	--overlay-padding-vertical: var(--half-spacing);
+	
+	// BORDERS
+	--border-width: #{$border-width};
+	--border-radius: #{$border-radius};
+	--border-left-radius: var(--border-radius) 0 0 var(--border-radius);
+	--border-right-radius: 0 var(--border-radius) var(--border-radius) 0;
+	--container-border: var(--border-width) solid var(--container-border-color);
+	
+	// FORMS
+	--form-entry-height: #{$element-height};
+	--form-spacing: var(--regular-spacing);
+	--form-column-spacing: var(--input-content-spacing);
+	
+	// INPUT
+	--input-content-spacing: var(--half-spacing);
+	--input-field-height: #{$element-height};
+	--input-icon-height: #{$input-field-icon-height};
+	--input-nested-widget-spacing: 0;
+	// INPUT GRID
+	--input-label-indent: 0;
+	--input-grid-icon-height: #{$input-field-icon-height};
+	
+	// OUTPUT
+	--output-spacing: 0;
+	
+	// BUTTON
+	--button-height: #{$element-height};
+	--button-icon-font-size: 1rem;
+	--button-min-width: #{$min-button-width};
+	
+	@media (max-width: 768px) {
+		// SPACING
+		--separator-thickness: #{$separator-thickness-mobile};
+		
+		// LAYOUT
+		--list-element-height: #{$element-height-mobile};
+
+		// POPUP
+		--overlay-border: none;
+		--overlay-border-radius: 0;
+		--overlay-padding-vertical: var(--wide-spacing);
+		
+		// FORMS
+		--form-entry-height: #{$element-height-mobile};
+		
+		// INPUT
+		--input-content-spacing: var(--regular-spacing);
+		--input-field-height: #{$element-height-mobile};
+		--input-icon-height: #{$input-field-icon-height-mobile};
+		--input-nested-widget-spacing: var(--regular-spacing);
+		// INPUT GRID
+		--input-label-indent: var(--wide-spacing);
+		--input-label-spacing-vertical: 2px;
+		--input-label-spacing-horizontal: 5px;
+		
+		// OUTPUT
+		--output-spacing: 0 var(--regular-spacing);
+
+		// BUTTON
+		--button-height: #{$element-height-mobile};
+		--button-icon-font-size: 2rem;
+		--button-min-width: #{$min-button-width-mobile};
+	}
+}

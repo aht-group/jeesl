@@ -1,0 +1,189 @@
+:root {
+	--colorpicker-preview-icon-size: 1rem;
+	
+	// OVERLAY
+	--colorpicker-content-separator-color: var(--grey-light);
+	--colorpicker-gradient-handle-size: 5px;
+	// Due to the lack of a content container element, the popup's vertical spacing must be set via border instead of padding,
+	// so normal container border width and colour are necessary for non-mobile view as well as padding and background colour for mobile view.
+	--colorpicker-overlay-border-color: var(--container-border-color);
+	--colorpicker-overlay-border-width: var(--border-width);
+	--colorpicker-overlay-padding: var(--regular-spacing);
+	--colorpicker-overlay-separator-color: var(--grey-light);
+	--colorpicker-overlay-layout: [row1-start] 'map gradient preview preview' min-content [row1-end]
+								  [row2-start] 'map gradient red hue' min-content [row2-end]
+								  [row3-start] 'map gradient green saturation' min-content [row3-end]
+								  [row4-start] 'map gradient blue brightness' min-content [row4-end]
+								  [row5-start] 'map gradient hex hex' [row5-end] / auto auto 1fr 1fr;
+	
+	@media (max-width: 768px) {
+		--colorpicker-preview-icon-size: 1.5rem;
+		
+		// OVERLAY
+		--colorpicker-overlay-border-color: var(--panel-content-select-dropdown-background);
+		--colorpicker-overlay-border-width: var(--overlay-padding-vertical) 0;
+		--colorpicker-overlay-padding: 0 var(--wide-spacing);
+		--colorpicker-overlay-layout: [row0-start] 'top top top' var(--separator-thickness) [row0-end]
+									  [row1-start] 'map gradient preview' min-content [row1-end]
+									  [row2-start] 'red red red' min-content [row2-end]
+									  [row3-start] 'green green green' min-content [row3-end]
+									  [row4-start] 'blue blue blue' min-content [row4-end]
+									  [row5-start] 'hue hue hue' [row5-end]
+									  [row6-start] 'saturation saturation saturation' [row6-end]
+									  [row7-start] 'brightness brightness brightness' [row7-end]
+									  [row8-start] 'hex hex hex' [row8-end]
+									  [row9-start] 'bottom bottom bottom' var(--separator-thickness) [row9-end] / auto auto 1fr;
+	}
+}
+
+.ui-colorpicker .ui-button {
+	width: var(--button-height);
+	
+	.ui-button-text > span {
+		// Primefaces sets some inline-styles, so !important is required to override them.
+		border-color: var(--container-border-color) !important;
+		border-radius: 3px;
+		height: var(--colorpicker-preview-icon-size) !important;
+		text-indent: var(--colorpicker-preview-icon-size) !important;
+		width: var(--colorpicker-preview-icon-size) !important;
+	}
+}
+
+.ui-colorpicker-container {
+	border-color: var(--colorpicker-overlay-border-color);
+	border-style: solid;
+	border-radius: var(--overlay-border-radius);
+	border-width: var(--colorpicker-overlay-border-width);
+	display: grid;
+	gap: var(--regular-spacing);
+	grid-template: var(--colorpicker-overlay-layout);
+	height: auto;
+	padding: var(--colorpicker-overlay-padding);
+	width: auto;
+	
+	.ui-colorpicker_color,
+	.ui-colorpicker_hue,
+	.ui-colorpicker_new_color,
+	.ui-colorpicker_hex,
+	.ui-colorpicker_field {
+		border: none;
+		border-radius: var(--border-radius);
+		left: 0;
+		position: relative;
+		top: 0;
+	}
+	
+	.ui-colorpicker_hex, .ui-colorpicker_field {
+		display: grid;
+		grid-template-columns: [label] fit-content(40%) [input] 1fr [button] auto [end];
+		height: auto;
+		width: auto;
+		
+		&::before {
+			grid-column: label;
+		}
+		
+		> input {
+			font-size: 1rem;
+			grid-column: input;
+		}
+		
+		> span {
+			grid-column: button;
+			
+			&::after {
+				font-size: var(--button-icon-font-size);
+			}
+		}
+	}
+
+	.ui-colorpicker_color {
+		grid-area: map;
+	}
+	
+	.ui-colorpicker_hue {
+		grid-area: gradient;
+		width: var(--input-field-height);
+		
+		// Draw handle with border instead of background image to allow for width adjustments.
+		> div {
+			width: calc(var(--input-field-height) + 2 * var(--colorpicker-gradient-handle-size));
+			background: none;
+			border: var(--colorpicker-gradient-handle-size) solid;
+			border-color: transparent var(--body-foreground);
+			left: calc(-1 * var(--colorpicker-gradient-handle-size));
+		}
+	}
+	
+	.ui-colorpicker_new_color {
+		grid-area: preview;
+		height: var(--input-field-height);
+		width: auto;
+	}
+	
+	.ui-colorpicker_hex { grid-area: hex; }
+	.ui-colorpicker_rgb_r { grid-area: red; }
+	.ui-colorpicker_rgb_g { grid-area: green; }
+	.ui-colorpicker_rgb_b { grid-area: blue; }
+	.ui-colorpicker_hsb_h { grid-area: hue; }
+	.ui-colorpicker_hsb_s { grid-area: saturation; }
+	.ui-colorpicker_hsb_b { grid-area: brightness; }
+	
+	// Layout changes for mobile view.
+	@media (max-width: 768px) {
+		&::before, &::after {
+			background-color: var(--colorpicker-overlay-separator-color);
+			content: '';
+			height: var(--separator-thickness);
+		}
+	
+		&::before { grid-area: top; }
+		&::after { grid-area: bottom; }
+
+		.ui-colorpicker_hex, .ui-colorpicker_field {
+			&::before {
+				content: '';
+				grid-column: label / end;
+				height: calc(.5rem + 2 * var(--input-label-spacing-vertical));
+			}
+			
+			&::after {
+				background: var(--container-content-background);
+				border-radius: var(--border-radius);
+				font-weight: bold;
+				line-height: 1.25rem;
+				margin-left: var(--input-label-indent);
+				padding: var(--input-label-spacing-vertical) var(--input-label-spacing-horizontal);
+				position: absolute;
+			}
+			
+			> input {
+				grid-column: label / button;
+			}
+		}
+			
+		.ui-colorpicker_hex, .ui-colorpicker_rgb_r, .ui-colorpicker_hsb_h {
+			&:before {
+				border-top: var(--separator-thickness) solid var(--colorpicker-overlay-separator-color);
+				margin: 0 0 var(--separator-thickness) 0;
+				height: calc(0.5rem + 2 * var(--input-label-spacing-vertical) + var(--regular-spacing));
+			}
+			
+			&:after {
+				top: calc(var(--separator-thickness) + 0.75rem);
+			}
+		}
+		
+		.ui-colorpicker_hex, .ui-colorpicker_hsb_h {
+			margin-top: calc(0.5rem + 2 * var(--input-label-spacing-vertical));
+		}
+		
+		.ui-colorpicker_hex::after { content: '#'; }
+		.ui-colorpicker_rgb_r::after { content: 'R'; }
+		.ui-colorpicker_rgb_g::after { content: 'G'; }
+		.ui-colorpicker_rgb_b::after { content: 'B'; }
+		.ui-colorpicker_hsb_h::after { content: 'H'; }
+		.ui-colorpicker_hsb_s::after { content: 'S'; }
+		.ui-colorpicker_hsb_b::after { content: 'B'; }
+	}
+}

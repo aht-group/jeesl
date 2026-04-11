@@ -72,7 +72,7 @@ $datepicker-input-width: 55px;
 $datepicker-input-width-mobile: 88px;
 
 $input-field-icon-height: 15px;
-$input-field-icon-height-mobile: 22px;
+$input-field-icon-height-mobile: 30px;
 
 $field-tip-width: 300px;
 $overlay-filter-input-width: 200px;
@@ -140,3 +140,5 @@ $qrCodeHeight: 200px;
 	$min-fixed-container-width: $minimum !global;
 	$max-fixed-container-width: $maximum !global;
 }
+
+@import './tokens/sizeTokens';
