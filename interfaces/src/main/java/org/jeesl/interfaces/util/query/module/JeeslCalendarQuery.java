@@ -21,6 +21,7 @@ public interface JeeslCalendarQuery<YEAR extends JeeslCalendarYear<?,?,YEAR,?>,
 //	void x();
 	
 	List<YEAR> getCalYears();
+	List<MONTH> getCalMonths();
 	List<DOM> getCalDaysOfMonth();
 	List<HOUR> getCalHoursOfDay();
 	

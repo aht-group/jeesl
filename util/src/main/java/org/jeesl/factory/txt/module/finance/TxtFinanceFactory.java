@@ -1,6 +1,8 @@
 package org.jeesl.factory.txt.module.finance;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Objects;
 
 import org.jeesl.model.xml.module.finance.Figures;
@@ -94,4 +96,17 @@ public class TxtFinanceFactory
 		}		
 		return sb.toString();
 	}
+	
+	public static String formatGermanPattern(double value)
+    {
+        DecimalFormatSymbols symbols;
+        DecimalFormat decimalFormat;
+        String formattedValue;
+
+        symbols = DecimalFormatSymbols.getInstance(Locale.GERMANY);
+        decimalFormat = new DecimalFormat("#,##0.00", symbols);
+
+        formattedValue = decimalFormat.format(value);
+        return formattedValue;
+    }
 }

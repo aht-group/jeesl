@@ -261,7 +261,15 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 		if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(multiPoint));}
 		multiPoint.setUnit(fTs.find(fbTs.getClassUnit(),multiPoint.getUnit()));
 		multiPoint = fTs.save(multiPoint);
-		reloadMultiPoints();
+		this.reloadMultiPoints();
+	}
+	
+	public void deleteMultiPoint() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(debugOnInfo){logger.info(AbstractLogMessage.rmOpEntity(multiPoint));}
+		fTs.rm(multiPoint);
+		this.reset(false, true);
+		this.reloadMultiPoints();
 	}
 	
 	@Override protected void updateSecurity2(JeeslJsfSecurityHandler jsfSecurityHandler, String viewCode)
@@ -276,5 +284,4 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 	
 	public void reorderScopes() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fTs, fbTs.getClassScope(), scopes);Collections.sort(scopes, comparatorScope);}
 	public void reorderMultiPoints() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fTs, fbTs.getClassMp(), multiPoints);}
-
 }
