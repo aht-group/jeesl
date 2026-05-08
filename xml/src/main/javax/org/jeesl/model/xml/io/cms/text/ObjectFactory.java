@@ -150,6 +150,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Precondition }
+     * 
+     */
+    public Precondition createPrecondition() {
+        return new Precondition();
+    }
+
+    /**
      * Create an instance of {@link Title }
      * 
      */

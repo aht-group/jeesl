@@ -223,12 +223,12 @@ public class JeeslJournalFacadeBean<L extends JeeslLang, D extends JeeslDescript
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering el : ListUtils.emptyIfNull(query.getCqOrderings()))
 		{
-			if(el.getPath().equals(CqOrdering.path(JeeslAomAsset.Attributes.position)))
+			if(el.getPath().equals(CqOrdering.path(JeeslJournalItem.Attributes.record)))
 			{
-				Expression<Integer> e = ejb.get(JeeslAomAsset.Attributes.position.toString());
-				SortByPredicateBuilder.addByInteger(cB,orders,el,e);
+				Expression<LocalDate> e = ejb.get(JeeslJournalItem.Attributes.record.toString());
+				SortByPredicateBuilder.jtDate(cB,orders,el,e);
 			}
-			else {logger.warn("No Handling for "+el.toString());}
+			else {logger.warn(el.nyi(ejb.getClass()));}
 		}
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}

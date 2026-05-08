@@ -13,6 +13,7 @@ import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.hivemq.client.mqtt.MqttClientSslConfig;
 import com.hivemq.client.mqtt.datatypes.MqttClientIdentifier;
 import com.hivemq.client.mqtt.lifecycle.MqttClientAutoReconnect;
 import com.hivemq.client.mqtt.lifecycle.MqttClientDisconnectedListener;
@@ -20,6 +21,8 @@ import com.hivemq.client.mqtt.mqtt5.Mqtt5AsyncClient;
 import com.hivemq.client.mqtt.mqtt5.Mqtt5ClientBuilder;
 import com.hivemq.client.mqtt.mqtt5.message.auth.Mqtt5SimpleAuth;
 import com.hivemq.client.mqtt.mqtt5.message.auth.Mqtt5SimpleAuthBuilder;
+
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 
 public class MqttHiveClientFactory
 {
@@ -142,7 +145,6 @@ public class MqttHiveClientFactory
 	{
 		Integer port = null;
 		
-		
 		if(Objects.nonNull(config))
 		{
 			port = config.getInteger(String.format("net.mqtt.%s.port",brokerCode),1883);
@@ -154,9 +156,16 @@ public class MqttHiveClientFactory
 		
 		if(port==8883)
 		{
-			builder.sslWithDefaultConfig();
+//			builder.sslWithDefaultConfig();
+			
+			builder.sslConfig(MqttClientSslConfig.builder()
+		            .trustManagerFactory(InsecureTrustManagerFactory.INSTANCE)
+		            .hostnameVerifier((h, s) -> true)
+		            .build());
 		}
 	}
+	
+	
 	
 	public MqttClientAutoReconnect toAutoReconnect()
 	{

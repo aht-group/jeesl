@@ -602,7 +602,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	
 	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffRD(Class<S> cStaff, R role, List<D1> domains)
 	{
-		if(domains==null || domains.isEmpty()){return new ArrayList<S>();}
+		if(ObjectUtils.isEmpty(domains)) {return new ArrayList<S>();}
 		List<USER> users = null;
 		List<R> roles = new ArrayList<R>(Arrays.asList(role));	
 		return fStaffURD(cStaff,users,roles,domains);
@@ -650,7 +650,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		CriteriaQuery<S> cQ = cB.createQuery(cStaff);
 		Root<S> staff = cQ.from(cStaff);
 
-		if(users!=null)
+		if(Objects.nonNull(users))
 		{
 			Path<USER> pUser = staff.get(JeeslStaff.Attributes.user.toString());
 			predicates.add(pUser.in(users));
@@ -668,8 +668,9 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 			predicates.add(pDomain.in(domains));
 		}
 
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(staff);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
 		return em.createQuery(cQ).getResultList();
 	}
 	
