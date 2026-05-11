@@ -11,8 +11,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
+import org.jeesl.jsf.components.xpath.TrafficLightStyle;
 import org.jeesl.jsf.util.ComponentAttributeProcessor;
-import org.jeesl.jsf.util.TrafficLightProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +61,7 @@ public class TrafficLight <L extends JeeslLang,D extends JeeslDescription,
 		
 		if (value!=null)
 		{
-			TrafficLightProcessor.appendStyle(sbStyle,context,this.getAttributes(),value);
+			TrafficLightStyle.appendStyle(sbStyle,context,this.getAttributes(),value);
 			if(sbStyle.length()>0) {context.getResponseWriter().writeAttribute(Attribute.style.toString(),sbStyle.toString(), null);}
 			context.getResponseWriter().write(s);
 		}

@@ -16,7 +16,6 @@ import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.jsf.jx.util.ComponentAttribute;
 import org.jeesl.jsf.util.ComponentAttributeProcessor;
-import org.jeesl.jsf.util.TrafficLightProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,7 +100,7 @@ public class TrafficLightXpath extends AbstractXpath
 					{
 						Double d = (Double)value;
 						sbValue.append(super.getDecimalFormat(dt.getSymbol()).format(d));
-						TrafficLightProcessor.appendStyle(sbStyle,context,this.getAttributes(),d,refValue);
+						TrafficLightStyle.appendStyle(sbStyle,context,this.getAttributes(),d,refValue);
 					}
 					else if(dt.getCode().startsWith("numberInteger"))
 					{
@@ -110,7 +109,7 @@ public class TrafficLightXpath extends AbstractXpath
 						else if(value instanceof Integer){i = (Integer)value;}
 						else if(value instanceof String) {i = Integer.valueOf((String)value);}
 						sbValue.append(super.getDecimalFormat(dt.getSymbol()).format(i));
-						TrafficLightProcessor.appendStyle(sbStyle,context,this.getAttributes(),i.doubleValue(),refValue);
+						TrafficLightStyle.appendStyle(sbStyle,context,this.getAttributes(),i.doubleValue(),refValue);
 					}
 					else if(dt.getCode().equals("date"))
 					{						
