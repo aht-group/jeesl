@@ -348,13 +348,18 @@ public abstract class AbstractJeeslReport<L extends JeeslLang, D extends JeeslDe
 				int indexFilter = filterCounter % mapFilter.size();
 				int indexColumn = mapFilter.get(indexFilter);
 				
-//				StringBuffer sb = new StringBuffer();
-//				sb.append("Value: ");
-//				if(value!=null) {sb.append(value.toString());}else {sb.append("null");}
-//				sb.append(" Filter: ").append(filter.toString());
-//				sb.append(" FilterIndex:").append(indexFilter);
-//				sb.append(" ColumnIndex:").append(indexColumn);
-//				logger.info(sb.toString());
+				StringBuffer sb = new StringBuffer();
+				sb.append("Value: ").append(Objects.nonNull(value) ? value : "--");
+				sb.append(" Filter: ").append(filter.toString());
+				sb.append(" FilterIndex:").append(indexFilter);
+				sb.append(" ColumnIndex:").append(indexColumn);
+				logger.info(sb.toString());
+				
+				if(Objects.isNull(value))
+				{
+					logger.warn("Value is null. Have you provided a value in jtp:reportHeader ?");
+					return true;
+				}
 				
 				JXPathContext context = JXPathContext.newContext(value);
 				String sValue = (String)context.getValue(columns.get(indexColumn).getQueryCell());

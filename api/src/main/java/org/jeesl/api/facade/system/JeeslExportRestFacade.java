@@ -7,7 +7,7 @@ import org.jeesl.model.xml.xsd.Container;
 
 public interface JeeslExportRestFacade
 {	
-	public final static String urlJeesl = "https://www.jeesl.org/jeesl";
+	public final static String urlJeesl = "https://www.jeesl.org/jeesl/rest";
 	public final static String urlGeojsf = "https://www.geojsf.org/geojsf";
 	
 	public final static String packageJeesl = "org.jeesl";

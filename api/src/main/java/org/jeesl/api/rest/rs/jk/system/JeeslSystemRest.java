@@ -23,5 +23,5 @@ public interface JeeslSystemRest extends JeeslSystemRestInterface
 	Container updateTranslation(@PathParam("code") String code, Container xml) throws UtilsConfigurationException;
 		
 	@GET @Path("/revision/entity/{code}") @Produces(MediaType.APPLICATION_XML)
-	Entity exportRevisionEntity(@PathParam("code") String code) throws UtilsConfigurationException;
+	Entity downloadLabelEntity(@PathParam("code") String code) throws UtilsConfigurationException;
 }

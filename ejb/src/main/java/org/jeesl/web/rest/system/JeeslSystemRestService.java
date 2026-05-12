@@ -24,6 +24,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslAbstractStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -180,7 +181,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		catch (ClassNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
 	}
 
-	@Override public Entity exportRevisionEntity(String code) throws UtilsConfigurationException
+	@Override public Entity downloadLabelEntity(String code) throws UtilsConfigurationException
 	{
 		try
 		{
@@ -199,8 +200,16 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 			String cios = "org.jeesl.model.ejb.io.locale.IoStatus";
 			try
 			{
-				Class<?> c = Class.forName(cios);
-				return c;
+				return Class.forName(cios);
+			}
+			catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Special Handling for  "+cios+" failed");}
+		}
+		else if(code.equals(JeeslSecurityUser.class.getName()))
+		{
+			String cios = "org.jeesl.model.ejb.system.security.user.SecurityUser";
+			try
+			{
+				return Class.forName(cios);
 			}
 			catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Special Handling for  "+cios+" failed");}
 		}
@@ -209,7 +218,6 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 			List<String> searchInPackages = new ArrayList<>();
 			searchInPackages.addAll(packages);
 			searchInPackages.add("org.jeesl.jsf.jx.util");
-			
 			
 			logger.info("Searching class for provided interface: "+code);
 			try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(searchInPackages.toArray(new String[0])).scan())

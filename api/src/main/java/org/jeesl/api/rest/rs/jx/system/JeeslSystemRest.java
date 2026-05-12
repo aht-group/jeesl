@@ -13,9 +13,11 @@ import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.xsd.Container;
 
-@Path("/rest/jeesl/export")
+@Path("/jeesl/export")
 public interface JeeslSystemRest extends JeeslSystemRestInterface
 {
+//	void x();
+	
 	@GET @Path("/status/{code}") @Produces(MediaType.APPLICATION_XML)
 	Container exportStatus(@PathParam("code") String code) throws UtilsConfigurationException;
 	
@@ -23,5 +25,5 @@ public interface JeeslSystemRest extends JeeslSystemRestInterface
 	Container updateTranslation(@PathParam("code") String code, Container xml) throws UtilsConfigurationException;
 		
 	@GET @Path("/revision/entity/{code}") @Produces(MediaType.APPLICATION_XML)
-	Entity exportRevisionEntity(@PathParam("code") String code) throws UtilsConfigurationException;
+	Entity downloadLabelEntity(@PathParam("code") String code) throws UtilsConfigurationException;
 }

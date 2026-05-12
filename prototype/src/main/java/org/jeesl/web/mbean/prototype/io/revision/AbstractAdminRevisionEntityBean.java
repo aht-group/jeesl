@@ -376,7 +376,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslDescription.class,c);
 			
-			Entity xml = this.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = this.rest(i.getName()).downloadLabelEntity(i.getName());
 
 			if(xml==null){logger.warn("No Result from REST !!");}
 			else
@@ -440,7 +440,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslAttributes.class,c);
 			
-			Entity xml = this.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = this.rest(i.getName()).downloadLabelEntity(i.getName());
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
 			updater.updateAttributes2(entity,lp,xml);

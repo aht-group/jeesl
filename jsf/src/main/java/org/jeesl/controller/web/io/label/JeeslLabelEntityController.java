@@ -509,13 +509,14 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslAttributes.class,c);
 			
 			Entity xml = this.callback.downloadEntity(i.getName());
+			
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
 			updater.updateAttributes2(entity,lp,xml);
-			reloadEntity();
+			this.reloadEntity();
 			bLabel.reload(entity);
 		}
-		catch (ClassNotFoundException e){e.printStackTrace();}
+		catch (ClassNotFoundException e) {e.printStackTrace();}
 	}
 
 	public void addMapping() throws JeeslNotFoundException

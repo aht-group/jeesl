@@ -9,6 +9,6 @@ public interface JeeslSystemRestInterface
 //	void x();
 	org.jeesl.model.xml.xsd.Container exportStatus(String code) throws UtilsConfigurationException;
 	org.jeesl.model.xml.xsd.Container updateTranslation(String code, Container xml) throws UtilsConfigurationException;
-	Entity exportRevisionEntity(String code) throws UtilsConfigurationException;
+	Entity downloadLabelEntity(String code) throws UtilsConfigurationException;
 	
 }
