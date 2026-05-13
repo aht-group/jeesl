@@ -1,0 +1,5 @@
+@use 'container' as container;
+
+.jeesl-panel .ui-panel-titlebar {
+	@include container.titlebar();
+}

@@ -2,17 +2,15 @@
 @use 'sass:meta';
 
 :root {
-	--input-grid-columns-template: [label] fit-content(40%) [left] auto [center] 1fr [right] auto [end];
+//	--input-grid-columns-template: [label] fit-content(40%) [left] auto [center] 1fr [right] auto [end];
 	--input-grid-column-fullwidth: label / end;
 	--input-grid-row: 1;
-	
 	--input-grid-label-columns-template: subgrid;
 	
 	@media (max-width: 768px) {
-		--input-grid-columns-template: [left] auto [center] 1fr [right] auto [end];
+//		--input-grid-columns-template: [left] auto [center] 1fr [right] auto [end];
 		--input-grid-column-fullwidth: left / end;
 		--input-grid-row: auto;
-
 		--input-grid-label-columns-template: [label] auto [end] 1fr;
 	}
 }
@@ -30,18 +28,22 @@
 }
 
 .jeesl-input-grid {
+	@for $col-count from 1 through 4 {
+		&.col-count-#{$col-count} {
+			$input-template: get-multi-column-input-template($col-count);
+			--input-grid-columns-template: [label] fit-content(40%) #{$input-template} [end];
+			
+			@media (max-width: 768px) {
+				--input-grid-columns-template: #{$input-template} [end];
+			}
+		}
+	}
+
 	display: grid;
 	grid-template-columns: var(--input-grid-columns-template);
 	min-height: var(--form-entry-height);
 	gap: var(--form-column-spacing) var(--form-spacing);
 
-	@for $col-count from 2 through 4 {
-		&.col-count-#{$col-count} {
-			$input-template: get-multi-column-input-template($col-count);
-			--input-grid-columns-template: [label] fit-content(40%) #{$input-template} [end];
-		}
-	}
-	
 	.p-grid {
 		display: grid;
 		grid-column: var(--input-grid-column-fullwidth);
@@ -195,6 +197,10 @@
 				// For a potential button below the form (e.g. login-button).
 				> .ui-button {
 					grid-column-start: right;
+				}
+
+				.ui-outputtext {
+					min-height: var(--list-element-height);
 				}
 			}
 		}

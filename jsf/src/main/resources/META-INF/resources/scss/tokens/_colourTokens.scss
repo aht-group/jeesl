@@ -1,11 +1,18 @@
 @mixin setColorTokens() {
 	:root {
 		/* Greys */
-		--grey-light: #{$light-grey};
+		--grey-brightest: #{$bright-grey};
+		--grey-brighter: #{$light-grey};
+		--grey-bright: #{$soft-grey};
+		--grey-medium: #{$medium-grey};
+		--grey-dark: hsl(0,0%,55%);
+		--grey-darker: #{$dark-grey};
+		--grey-darkest: #{$anthracite};
 		
-		--body-foreground: #{$anthracite};
+		--body-foreground: var(--grey-darkest);
 		--body-emphasis-foreground: #{$foreground-grey};
 		--body-alert-foreground: #{$foreground-alert};
+		--body-alert-foreground-highlight: #{$foreground-highlight-alert};
 		--highlight-foreground: #{$white-100};
 		--highlight-background: #{$medium-colour};
 		--highlight-background-light: #{color.adjust($medium-colour, $alpha: -.8)};
@@ -18,10 +25,10 @@
 		--main-nav-hover: var(--main-nav-highlight);
 		--main-nav-highlight: #{$dark-colour};
 		--main-nav-emphasis: var(--body-emphasis-foreground);
-		--main-nav-underline: #{$bright-grey};
+		--main-nav-underline: var(--grey-brightest);
 		--main-nav-icon: #{$dark-colour};
 		--main-nav-dropdown-background: #{$white-100};
-		--main-nav-dropdown-underline: {$bright-grey};
+		--main-nav-dropdown-underline: 	var(--grey-brightest);
 		
 		/* MENU BAR */
 		--menu-bar-background: #{$dark-colour};
@@ -87,41 +94,42 @@
 		--footer-item-dropdown-separator: var(--statusbar-item-dropdown-separator);
 		
 		/* MAIN CONTENT */
-		--main-background: var(--grey-light);
+		--main-background: var(--grey-brighter);
 		--main-content-background: #{$white-100};
 		
 		/* CONTAINER */
-		--container-border-color: #{$medium-grey};
+		--container-border-color: var(--grey-medium);
 		
 		/* header */
-		--container-header-background-color: #{$soft-grey};
+		--container-header-background-color: var(--grey-bright);
 		--container-header-background: var(--container-header-background-color) linear-gradient(to bottom, #{$white-80}, #{$white-0});
 		--container-header-foreground: var(--body-foreground);
 		--container-header-underline-color: #{$dark-colour};
-		--container-header-action-button-hover-background: #{$soft-grey};
-		--container-header-action-button-highlight-background: #{$soft-grey};
-		--container-header-action-button-dropdown-background: var(--grey-light);
-		--container-header-action-button-dropdown-hover-background: #{$soft-grey};
-		--container-header-action-button-dropdown-separator-color: var(--grey-light);
+		--container-header-action-button-hover-background: var(--grey-bright);
+		--container-header-action-button-highlight-background: var(--grey-bright);
+		--container-header-action-button-dropdown-background: var(--grey-brighter);
+		--container-header-action-button-dropdown-hover-background: var(--grey-bright);
+		--container-header-action-button-dropdown-separator-color: var(--grey-brighter);
 		--container-header-action-button-dropdown-table-border: #{$dark-colour};
-		--tabview-header-tab-background: linear-gradient(to bottom, var(--grey-light) 87%, #{$soft-grey} 100%);
+		--tabview-header-tab-background: linear-gradient(to bottom, var(--grey-brighter) 87%, var(--grey-bright) 100%);
 		--tabview-header-tab-foreground: var(--container-header-foreground);
-	//	--tabview-header-tab-background: #{$soft-grey};
+	//	--tabview-header-tab-background: var(--grey-bright);
 		--tabview-header-tab-highlight-background: linear-gradient(to bottom, #{$medium-colour}, #{$dark-colour});
 		--tabview-header-tab-highlight-foreground: var(--highlight-foreground);
 		
 		/* content */
-		--container-content-background: #{$bright-grey};
+		--container-content-background: var(--grey-brightest);
 		--container-content-foreground: var(--body-foreground);
-		--container-content-separator: #{$bright-grey};
+		--container-content-separator: var(--grey-brightest);
 		--datatable-content-odd-row-background: #{$white-50};
-		--datatable-content-border-color: var(--grey-light);
-		--datatable-content-hover-background: var(--grey-light);
+		--datatable-content-border-color: var(--grey-brighter);
+		--datatable-content-hover-background: var(--grey-brighter);
 		--datatable-content-highlight-background: var(--highlight-background);
 		--datatable-content-highlight-background-light: var(--highlight-background-light);
 		--datatable-content-highlight-foreground: var(--highlight-foreground);
 		--datatable-content-highlight-border-color: var(--highlight-border-color);
 		--datatable-content-focus-cell-edit-border-color: var(--datatable-content-highlight-background);
+		--timesheet-month-day-background: hsl(0,0%,91%);
 		
 		/* footer */
 		--container-footer-foreground: #{$dark-colour};
@@ -143,7 +151,7 @@
 		--panel-content-select-dropdown-header-foreground: var(--highlight-foreground);
 		--panel-content-select-dropdown-background: #{$white-100};
 		--panel-content-select-dropdown-foreground: #{var(--body-foreground)};
-		--panel-content-select-dropdown-hover-background: var(--grey-light);
+		--panel-content-select-dropdown-hover-background: var(--grey-brighter);
 		--panel-content-select-dropdown-hover-foreground: #{$dark-colour};
 		--panel-content-select-dropdown-highlight-background: var(--highlight-background);
 		--panel-content-select-dropdown-highlight-foreground: var(--highlight-foreground);
@@ -151,17 +159,17 @@
 		--panel-content-select-chips-foreground: var(--highlight-foreground);
 		--panel-content-select-chips-icon-background: linear-gradient(to right, transparent, #{$dark-colour} 50%) 12500% 0/99% 100% no-repeat;
 		--panel-content-select-chips-icon-hover-background: linear-gradient(to right, transparent, #{$dark-colour} 50%) 0 0/100% 99% no-repeat;
-		--panel-content-datepicker-highlight-background: #{$bright-grey};
+		--panel-content-datepicker-highlight-background: var(--grey-brightest);
 		--panel-content-datepicker-highlight-foreground: #{$dark-colour};
 		--panel-content-datepicker-separator-color: var(--container-content-separator);
 		--panel-content-datepicker-summary-background: var(--container-content-background);
 		
 		/* button */
-		--panel-content-button-background: #{$soft-grey} linear-gradient(to bottom, #{$white-80}, #{$white-0});
+		--panel-content-button-background: var(--grey-bright) linear-gradient(to bottom, #{$white-80}, #{$white-0});
 		--panel-content-button-foreground: var(--body-foreground);
-		--panel-content-button-disabled-background: linear-gradient(to bottom, #{$bright-grey}, var(--grey-light));
-		--panel-content-button-disabled-foreground: #{$soft-grey};
-		--panel-content-button-hover-background: var(--grey-light);
+		--panel-content-button-disabled-background: linear-gradient(to bottom, var(--grey-brightest), var(--grey-brighter));
+		--panel-content-button-disabled-foreground: var(--grey-bright);
+		--panel-content-button-hover-background: var(--grey-brighter);
 		--panel-content-button-highlight-background: var(--highlight-background);
 		--panel-content-button-highlight-foreground: var(--highlight-foreground);
 		--panel-content-button-highlight-border-color: var(--highlight-border-color);
@@ -179,15 +187,15 @@
 		
 		/* tree */
 		--tree-droppoint-hover-foreground: var(--body-foreground);
-		--tree-droppoint-hover-background: #{$soft-grey};
-		--tree-droppoint-separator: #{$soft-grey};
+		--tree-droppoint-hover-background: var(--grey-bright);
+		--tree-droppoint-separator: var(--grey-bright);
 		--tree-droppoint-highlight-background: #{$medium-colour};
 		--tree-droppoint-highlight-hover-background: #{$medium-colour};
 		--tree-droppoint-highlight-hover-foreground: var(--highlight-foreground);
 		
 		/* galleria */
-		--galleria-controls-background-from: #{$bright-grey};
-		--galleria-controls-background-to: color.scale(#{$bright-grey}, $alpha: -40%);
+		--galleria-controls-background-from: var(--grey-brightest);
+		--galleria-controls-background-to: color.scale(var(--grey-brightest), $alpha: -40%);
 		
 		/* MISC */
 		
@@ -197,13 +205,13 @@
 		/* calendar */
 		--calendar-today-background: #{$bright-colour};
 		--calendar-event-background: linear-gradient(to bottom, #{$dark-colour}, #{$medium-colour});
-		--calendar-internal-border-color: #{$soft-grey};
+		--calendar-internal-border-color: var(--grey-bright);
 		
 		/* messages */
 		--messages-foreground: #{$white-100};
 		
 		@media (max-width: 768px) {
-			--panel-content-output-background: var(--grey-light);
+			--panel-content-output-background: var(--grey-brighter);
 		}
 	}
 }

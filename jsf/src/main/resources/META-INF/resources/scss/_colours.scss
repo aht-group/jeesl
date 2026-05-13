@@ -41,7 +41,8 @@ $link-hover-colour: $bright-colour;
 
 $table-caption-colour: $medium-grey;
 
-$foreground-alert: hsla(344,100%,42%,1);
+$foreground-alert: hsla(0,100%,60%,1);
+$foreground-highlight-alert: $foreground-alert;
 $foreground-grey: $medium-grey;
 
 $border-colour: var(--container-border-color, #{$medium-grey});
@@ -79,7 +80,7 @@ $header-underline: 2px solid var(--container-header-underline-color, #{$dark-col
 }
 
 
-@mixin setColours($brighter, $bright, $medium, $dark, $darker, $header-foreground: $white-100) {
+@mixin setColours($brighter, $bright, $medium, $dark, $darker, $alert: $foreground-alert, $header-foreground: $white-100) {
 	$brighter-colour: $brighter !global;
 	$bright-colour: $bright !global;
 	$medium-colour: $medium !global;
@@ -96,6 +97,7 @@ $header-underline: 2px solid var(--container-header-underline-color, #{$dark-col
 	$highlight-colour: $medium-colour !global;
 	$header-underline: 2px solid $dark-colour !global;
 	$header-foreground: $header-foreground !global;
+	$foreground-highlight-alert: $alert !global;
 	
 	@include setColorTokens();
 }

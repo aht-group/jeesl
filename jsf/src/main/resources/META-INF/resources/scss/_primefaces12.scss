@@ -1,7 +1,6 @@
 @mixin jeesl-header {
 	background: var(--container-header-background);
 	color: var(--container-header-foreground);
-	min-height: $element-height;
 	padding: 0;
 	text-shadow: 0 1px 0 $white-70;
 	
@@ -45,8 +44,6 @@ body {
 		}
 		
 		&.ui-tabs-top .ui-tabs-nav {
-			padding: 2px 3px 0;
-			
 			&:before {
 				display: none;
 			}
@@ -65,11 +62,10 @@ body {
 			background: var(--container-header-background);
 			
 			li.ui-tabs-header {
-				@include jeesl-header;
+//				@include jeesl-header;
 				
 				border: $border;
 				border-width: $border-width $border-width 0;
-				margin: 0 3px 0 0;
 				
 //				&.ui-state-hover {
 //					background: linear-gradient(to bottom, $bright-grey 87%, $soft-grey 100%);
@@ -509,7 +505,8 @@ body {
 		
 		.ui-dialog-content {
 			background: transparent;
-			padding: $half-spacing $regular-spacing;
+			// Will no longer be necessary with removal of outdated css files.
+			padding: var(--container-content-padding);
 			
 			.jeesl-grid {
 				flex-grow: 1;
@@ -529,7 +526,7 @@ body {
 		}
 		
 		.ui-dialog-footer {
-			background: var(--grey-light);
+			background: var(--grey-brighter);
 //			border-top: $header-element-underline solid var(--container-header-underline-color);
 //			color: var(--container-footer-foreground);
 			padding: $half-spacing $regular-spacing;

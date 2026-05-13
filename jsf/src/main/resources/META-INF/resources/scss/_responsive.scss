@@ -7,6 +7,7 @@ $enable-pointer-cursor-for-buttons: true;
 .jeesl-icon, .pf-action-icon, .jeesl-menu-bar-item, .ui-selectonemenu, .ui-icon, .ui-tabs-nav { --icon-height-multiplier: 1 }
 
 @import '_reboot';
+@import '_core';
 @import '_responsiveCommon';
 @import '_responsiveCharts';
 
@@ -539,7 +540,6 @@ $enable-pointer-cursor-for-buttons: true;
 	border: none;
 	border-bottom: $header-underline;
 	box-shadow: $header-shadow;
-	box-sizing: content-box;
 	color: var(--container-header-foreground);
 	display: flex;
 	flex-shrink: 0;
@@ -547,14 +547,12 @@ $enable-pointer-cursor-for-buttons: true;
 	font-weight: 700;
 	height: auto;
 	margin: 0;
-	min-height: $element-height;
 	padding: 0;
 	position: relative;
 	text-shadow: $text-shadow;
 	
 	@media (max-width: 768px) {
 		border-bottom-width: $header-element-underline-mobile;
-		min-height: $element-height-mobile;
 	}
 }
 
@@ -872,7 +870,6 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		align-items: stretch;
 		height: auto;
-		padding: 3px $regular-spacing 0 !important; // Overwrite primefaces style.
 			
 		@media (max-width: 768px) {
 			&:after {
@@ -887,18 +884,13 @@ $enable-pointer-cursor-for-buttons: true;
 			border-width: $border-width;
 			box-shadow: inset 0 1px 0 $white-100;
 			display: flex;
-			margin: 0 3px 0 0;
-			min-height: $element-height;
+			margin: 0;
 			padding: 0;
 			top: 0 !important;
 			
-			@media (max-width: 768px) {
-				min-height: $element-height-mobile;
-			}
-			
 			&.ui-tabs-selected {
 				border: 0;
-				padding: 1px;
+				padding-top: 1px;
 				
 				&:before {
 					background: var(--tabview-header-tab-highlight-background);
@@ -959,10 +951,8 @@ $enable-pointer-cursor-for-buttons: true;
 			.ui-dialog-titlebar-actions {
 				@include jeesl-titlebar-actions;
 				
-			    bottom: 0;
 				cursor: default;
 			    position: initial;
-			    right: 0;
 
 				@media (max-width: 768px) {
 					pointer-events: all;
@@ -1315,7 +1305,6 @@ $enable-pointer-cursor-for-buttons: true;
 		background: transparent;
 		border: 0;
 		flex: 1;
-		padding: $regular-spacing $regular-spacing $half-spacing;
 		
 		.jeesl-construction-icon {
 			width: 100%;
@@ -1685,13 +1674,6 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	.ui-outputlabel {
-		align-items: center;
-		display: flex;
-		font-weight: bold;
-		gap: $half-spacing;
-	}
-	
 	.ui-tree {
 		.ui-tree-droppoint {
 			&.ui-droppable-active {
@@ -1873,7 +1855,7 @@ $enable-pointer-cursor-for-buttons: true;
 			border: none;
 			box-shadow: none;
 			height: $separator-thickness;
-			margin: $half-spacing -#{$regular-spacing};
+			margin: var(--separator-spacing) -#{$regular-spacing};
 			
 			@media (max-width: 768px) {
 				height: $separator-thickness-mobile;
@@ -2337,6 +2319,7 @@ body, .ui-widget {
 					background: none;
 					&:hover {
 						background: none;
+						text-decoration: none;
 					}
 				}
 			}
@@ -2410,10 +2393,10 @@ body, .ui-widget {
 		width: auto !important;
 	}
 
-	a:hover {
-		color: var(--link-foreground-hover);
-		text-decoration: underline;
-	}
+//	a:hover {
+//		color: var(--link-foreground-hover);
+//		text-decoration: underline;
+//	}
 	
 	.jeesl-footer-content {
 		align-items: center;
@@ -3297,6 +3280,9 @@ body, .ui-widget {
 	@include jeesl-panel;
 }
 
+@import './layout/container';
+@import './layout/panel';
+
 .jeesl-tree {
 	@extend .jeesl-panel;
 	
@@ -3420,10 +3406,10 @@ body, .ui-widget {
 		}
 		
 		th {
-			background: var(--container-header-background) !important; // Override handsontable super specific selector nonsense.
-			border-color: var(--container-border-color) !important; // Override handsontable super specific selector nonsense.
+			background: var(--container-header-background);
+			border-color: var(--container-border-color);
 			border-style: solid;
-			border-width: 0 $border-width $border-width !important; // Override handsontable super specific selector nonsense.
+			border-width: 0 $border-width $border-width 0;
 			box-shadow: 0 -1px 0 inset $white-35;
 			color: var(--container-header-foreground);
 			padding: $table-header-padding;
@@ -3447,31 +3433,10 @@ body, .ui-widget {
 					background: transparent;
 				}
 			}
-			
-			&:not(.ui-state-highlight) .timesheet-month-day {
-				background: #dedede;
-			}
 
 			&:not(.jeesl-datatable-highlight-light, .jeesl-datatable-highlight-strong) {
 				th, td {
 					background: transparent !important; // Override handsontable super specific selector nonsense.
-				}
-			}
-			
-			.timesheet-month-content {
-				display: flex;
-				justify-content: space-between;
-				
-				.timesheet-month-day {
-					    font-size: .8rem;
-					    width: 14px;
-					    height: 14px;
-					    display: flex;
-					    align-items: center;
-					    justify-content: center;
-					    line-height: 1em;
-					    margin-left: -5px;
-					    padding-top: 1px;
 				}
 			}
 		}
@@ -3488,24 +3453,24 @@ body, .ui-widget {
 			border-width: $border-width;
 			box-sizing: border-box; // Override handsontable super specific selector nonsense.
 			line-height: 1.25em;
-			padding: $half-spacing $regular-spacing;
+			padding: var(--datatable-cell-padding);
 			
 			&.jeesl-column-min-width {
 				width: 1px;
 			}
 			
-			> * {
-				vertical-align: middle;
+			&.jeesl-column-spaceless {
+				padding: 0;
 				
-				&:not(.jeesl-bold) {
-					font-weight: 500;
+				.ui-inputfield {
+					border-radius: 0;
+					height: 100%;
 				}
 			}
 			
-//			> span {
-//				display: inline-block;
-//				width: 100%;
-//			}
+			> :not(.jeesl-bold) {
+				font-weight: 500;
+			}
 		}
 		
 		th {
@@ -3815,6 +3780,12 @@ body, .ui-widget {
 		.manualRowResizer {
 			transform: translateY(2px);
 		}
+		
+		table thead tr th {
+			background: var(--container-header-background) !important; // Override handsontable super specific selector nonsense.
+			border-color: var(--container-border-color) !important; // Override handsontable super specific selector nonsense.
+			border-width: 0 $border-width $border-width 0 !important; // Override handsontable super specific selector nonsense.
+		}
 	}
 	
 	&.ui-state-error {
@@ -3880,6 +3851,7 @@ body, .ui-widget {
 					position: absolute;
 					right: 4px;
 					top: 3px;
+					z-index: 1;
 					
 					&.ui-icon-triangle-1-s {
 						top: 5px;
@@ -3968,6 +3940,10 @@ body, .ui-widget {
 			
 		tbody, .ui-datatable-data {
 			tr {
+				&.ui-state-highlight .jeesl-red {
+					--body-alert-foreground: var(--body-alert-foreground-highlight);
+				}
+				
 				&.jeesl-datatable-highlight-light > td {
 					background-color: var(--datatable-content-highlight-background-light);
 				}
@@ -4124,6 +4100,8 @@ body, .ui-widget {
 		gap: $half-spacing;
 	}
 }
+
+@import './layout/datatable';
 
 .jeesl-overlay-container {
 	background: var(--panel-content-select-dropdown-background);
@@ -4530,46 +4508,33 @@ body, .ui-widget {
 		}
 	}
 	
-	&.jeesl-table-dialog .ui-dialog-content {
-		padding: 0;
-		
-		.jeesl-datatable {
-			border: none;
-			margin: 0;
-		}
-		
-		table {
-			thead, tbody {
+	&.jeesl-table-dialog .ui-dialog-content table {
+		thead, tbody {
+			border: 0;
+			
+			tr {
 				border: 0;
 				
-				tr {
-					border: 0;
+				th, td {
+					&:first-child {
+						border-left: 0;
+					}
 					
-					th, td {
-						&:first-child {
-							border-left: 0;
-						}
-						
-						&:last-child {
-							border-right: 0;
-						}
+					&:last-child {
+						border-right: 0;
 					}
 				}
 			}
-			
-			thead tr:first-child th {
-				@media (max-width: 768px) {
-					border-top: 0;
-				}
-			}
-			
-			tbody tr:last-child, tbody tr:last-child td {
-				border-bottom: 0;
+		}
+		
+		thead tr:first-child th {
+			@media (max-width: 768px) {
+				border-top: 0;
 			}
 		}
 		
-		.jeesl-datatable {
-			border: none;
+		tbody tr:last-child, tbody tr:last-child td {
+			border-bottom: 0;
 		}
 	}
 
@@ -4756,10 +4721,6 @@ body, .ui-widget {
 		&.jeesl-action-header .ui-tabs-nav {
 			min-height: calc($icon-height * var(--icon-height-multiplier) + 2 * $half-spacing - 3px);
 		}
-		
-		.ui-tabs-nav {
-			padding: #{$slim-spacing - $border-width} $slim-spacing 0;
-		}
 	}
 	
 	&.jeesl-editor {
@@ -4803,6 +4764,8 @@ body, .ui-widget {
 		}
 	}
 }
+
+@import './layout/tabView';
 
 .fc {
 	.fc-toolbar {
@@ -5281,5 +5244,6 @@ body, .ui-widget {
 }
 
 @import '_responsiveHtmlRender';
+@import './layout/htmlRender';
 @import '_responsivePrint';
 @import '_responsiveDeprecated';
