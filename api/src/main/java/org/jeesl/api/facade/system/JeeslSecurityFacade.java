@@ -47,7 +47,6 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	List<V> allViewsForUser(USER user);
 	List<USER> fUsers(R role);
 	
-	
 	List<R> allRolesForUser(USER user);
 	List<R> rolesForView(V view);
 	List<R> rolesForView(Class<V> cView, Class<USER> cUser, V view, USER user);
