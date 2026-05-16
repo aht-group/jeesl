@@ -196,7 +196,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 		events.clear();
 		mapCss.clear();
 
-		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,ASTATUS,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.tenant(tenant);
 		query.addAomEventStatus(sbhEventStatus.getSelected());
 		query.addCqDate(CqDate.isBeforeOrAt(sbDateHandler.getDateTo(), CqDate.path(JeeslAomEvent.Attributes.record)));
@@ -226,7 +226,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
     	Collections.sort(event.getAssets(),cpAsset);
     	slotHandler.set(8,4);
     	
-    	EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+    	EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,ASTATUS,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.addAssets(event.getAssets());
 		query.add(CqOrdering.desending(CqOrdering.path(JeeslAomEvent.Attributes.record)));
 		

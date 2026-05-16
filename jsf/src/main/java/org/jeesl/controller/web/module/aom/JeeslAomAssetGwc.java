@@ -125,7 +125,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
     private final SbSingleHandler<VIEW> sbhView; public SbSingleHandler<VIEW> getSbhView() {return sbhView;}
     private JeeslFileRepositoryHandler<LOC,?,FRC,?> frh; public JeeslFileRepositoryHandler<LOC,?,FRC,?> getFrh() {return frh;}  public void setFrh(JeeslFileRepositoryHandler<LOC,?,FRC,?> frh) {this.frh = frh;}
 
-    private final AssetEventLazyModel<REALM,SCOPE,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<REALM,SCOPE,ASSET,ATYPE,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
+    private final AssetEventLazyModel<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
 
 	private final Set<ASSET> path;
 
@@ -228,7 +228,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		if(Objects.nonNull(jogger)) {jogger.start("reloadTree");}
 		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
 
-		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,ASTATUS,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.tenant(identifier);
 		query.add(CqOrdering.ascending(JeeslAomAsset.Attributes.position));
 

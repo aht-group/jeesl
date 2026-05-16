@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
@@ -29,7 +30,8 @@ import org.slf4j.LoggerFactory;
 
 public class AssetEventLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 									SCOPE extends JeeslAomScope<?,?,SCOPE,?>,
-									ASSET extends JeeslAomAsset<REALM,ASSET,?,?,ATYPE>,
+									ASSET extends JeeslAomAsset<REALM,ASSET,?,ASTATUS,ATYPE>,
+									ASTATUS extends JeeslAomAssetStatus<?,?,ASTATUS,?>,
 									ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,?,?>,
 									EVENT extends JeeslAomEvent<?,ASSET,ETYPE,ESTATUS,?,USER,?>,
 									ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
@@ -62,11 +64,11 @@ public class AssetEventLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
     @Override public Object getRowKey(EVENT account) {return llh.getRowKey(account);}
     public void clear() {list.clear();}
 
-    public void reloadScope(JeeslAomFacade<?,?,REALM,?,SCOPE,ASSET,?,ATYPE,?,EVENT,ESTATUS> fAsset, ASSET asset)
+    public void reloadScope(JeeslAomFacade<?,?,REALM,?,SCOPE,ASSET,ASTATUS,ATYPE,?,EVENT,ESTATUS> fAsset, ASSET asset)
     {
 		this.clear();
 
-		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query = new EjbAomQuery<>();
+		EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,ASTATUS,EVENT,ESTATUS> query = new EjbAomQuery<>();
 		query.add(asset);
 
 		list.addAll(fAsset.fAomEvents(query));

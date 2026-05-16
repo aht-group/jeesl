@@ -32,9 +32,6 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
@@ -65,8 +62,8 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 										REALM extends JeeslTenantRealm<L,D,REALM,?>,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
-										ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,STATUS,ATYPE>,
-										STATUS extends JeeslAomAssetStatus<L,D,STATUS,?>,
+										ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,ASTATUS,ATYPE>,
+										ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
 										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,?>,
 										VIEW extends JeeslAomView<L,D,REALM,?>,
 										EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,?,?,?>,
@@ -74,15 +71,15 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 										ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>
 										>
 					extends JeeslFacadeBean
-					implements JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,STATUS,ATYPE,VIEW,EVENT,ESTATUS>
+					implements JeeslAomFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ESTATUS>
 {	
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslAssetFacadeBean.class);
 	
-	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,STATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,?,?,?,?,?> fbAsset;
+	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,?,?,?,?,?> fbAsset;
 	
-	public JeeslAssetFacadeBean(EntityManager em, final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,STATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,?,?,?,?,?> fbAsset)
+	public JeeslAssetFacadeBean(EntityManager em, final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,?,?,?,?,?> fbAsset)
 	{
 		super(em);
 		this.fbAsset=fbAsset;
@@ -111,7 +108,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		catch (NoResultException ex){throw new JeeslNotFoundException(ex.getMessage());}
 	}
 	
-	@Override public List<ASSET> fAomAssets(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query)
+	@Override public List<ASSET> fAomAssets(JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
@@ -226,7 +223,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 		return em.createQuery(cQ).getResultList();
 	}
-	@Override public List<COMPANY> fAomCompanies(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query)
+	@Override public List<COMPANY> fAomCompanies(JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query)
 	{
 		if(Objects.isNull(query.getTenantIdentifier())) {return new ArrayList<>();}
 		
@@ -244,7 +241,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return tQ.getResultList();
 	}
 
-	@Override public List<EVENT> fAomEvents(JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query)
+	@Override public List<EVENT> fAomEvents(JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<EVENT> cQ = cB.createQuery(fbAsset.getClassEvent());
@@ -284,7 +281,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
         return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
-	public Predicate[] pCompany(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<COMPANY> root)
+	public Predicate[] pCompany(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query, Root<COMPANY> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -315,7 +312,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	public void sortByCompany(CriteriaBuilder cB, CriteriaQuery<COMPANY> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<COMPANY> root)
+	public void sortByCompany(CriteriaBuilder cB, CriteriaQuery<COMPANY> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query, Root<COMPANY> root)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering cq : ListUtils.emptyIfNull(query.getCqOrderings()))
@@ -340,7 +337,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	public Predicate[] pAsset(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<ASSET> root)
+	public Predicate[] pAsset(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query, Root<ASSET> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -361,7 +358,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	public void orderByAsset(CriteriaBuilder cB, CriteriaQuery<ASSET> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<ASSET> ejb)
+	public void orderByAsset(CriteriaBuilder cB, CriteriaQuery<ASSET> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query, Root<ASSET> ejb)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering el : ListUtils.emptyIfNull(query.getCqOrderings()))
@@ -376,7 +373,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	public Predicate[] pEvent(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<EVENT> root)
+	public Predicate[] pEvent(CriteriaBuilder cB, JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query, Root<EVENT> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -408,7 +405,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	public void eventSortBy(CriteriaBuilder cB, CriteriaQuery<EVENT> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> query, Root<EVENT> ejb)
+	public void eventSortBy(CriteriaBuilder cB, CriteriaQuery<EVENT> cQ, JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> query, Root<EVENT> ejb)
 	{
 		List<Order> orders = new ArrayList<>();
 		for(JeeslCqOrdering el : ListUtils.emptyIfNull(query.getCqOrderings()))

@@ -3,6 +3,7 @@ package org.jeesl.interfaces.util.query.module;
 import java.util.List;
 
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
@@ -16,6 +17,7 @@ import org.jeesl.interfaces.util.query.jpa.JeeslTenantQuery;
 public interface JeeslAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 							SCOPE extends JeeslAomScope<?,?,SCOPE,?>,
 							ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
+							ASTATUS extends JeeslAomAssetStatus<?,?,ASTATUS,?>,
 							ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,?,?>,
 							EVENT extends JeeslAomEvent<?,ASSET,?,?,?,?,?>,
 							ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>
@@ -25,7 +27,7 @@ public interface JeeslAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 {
 //	void x();
 	
-	JeeslAomQuery<REALM,SCOPE,ASSET,ATYPE,EVENT,ESTATUS> maxResults(Integer maxResults);
+	JeeslAomQuery<REALM,SCOPE,ASSET,ASTATUS,ATYPE,EVENT,ESTATUS> maxResults(Integer maxResults);
 	
 	public List<ASSET> getAssets();
 	public List<ATYPE> getAomAssetTypes();

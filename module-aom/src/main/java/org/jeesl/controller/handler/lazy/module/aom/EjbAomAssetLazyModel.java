@@ -34,7 +34,7 @@ public class EjbAomAssetLazyModel extends LazyDataModel<AomAsset>
 	private JeeslAomFacade<IoLang,IoDescription,TenantRealm,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventStatus> fAsset;
 
 	private List<AomAsset> data;
-	private JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetType,AomEvent,AomEventStatus> filter; public EjbAomAssetLazyModel filter(JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetType,AomEvent,AomEventStatus> filter) {this.filter = filter; return this;}
+	private JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomEvent,AomEventStatus> filter; public EjbAomAssetLazyModel filter(JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomEvent,AomEventStatus> filter) {this.filter = filter; return this;}
 
 	public static EjbAomAssetLazyModel instance(JeeslAomFacade<IoLang,IoDescription,TenantRealm,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventStatus> fAsset) {return new EjbAomAssetLazyModel(fAsset);}
 	private EjbAomAssetLazyModel(JeeslAomFacade<IoLang,IoDescription,TenantRealm,AomCompany,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomView,AomEvent,AomEventStatus> fAsset)
@@ -43,9 +43,9 @@ public class EjbAomAssetLazyModel extends LazyDataModel<AomAsset>
 		this.fAsset=fAsset;
 	}
 
-	private JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetType,AomEvent,AomEventStatus> query(Map<String,FilterMeta> filterBy)
+	private JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomEvent,AomEventStatus> query(Map<String,FilterMeta> filterBy)
 	{
-		EjbAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetType,AomEvent,AomEventStatus> query = new EjbAomQuery<>();
+		EjbAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetType,AomAssetStatus,AomEvent,AomEventStatus> query = new EjbAomQuery<>();
 		query.apply(filter);
 		PrimefacesPredicateBuilder.apply(filterBy,query);		
 		return query;
@@ -56,7 +56,7 @@ public class EjbAomAssetLazyModel extends LazyDataModel<AomAsset>
 	{
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 		
-		JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetType,AomEvent,AomEventStatus> q = query(filterBy);
+		JeeslAomQuery<TenantRealm,AomCompanyScope,AomAsset,AomAssetStatus,AomAssetType,AomEvent,AomEventStatus> q = query(filterBy);
 		q.setFirstResult(first);
 		q.maxResults(pageSize);
 		
