@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
+import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayModuleCalVersionMarker;
+import org.jeesl.model.ejb.module.cal.common.CalDay;
 import org.jeesl.model.ejb.module.cal.sub.CalSubscription;
 import org.jeesl.model.ejb.module.cal.sub.CalSubscriptionCategory;
 import org.jeesl.model.ejb.module.cal.unit.CalDayOfMonth;
@@ -14,7 +16,7 @@ import org.jeesl.model.ejb.module.cal.unit.CalMonth;
 import org.jeesl.model.ejb.module.cal.unit.CalWeekOfYear;
 import org.jeesl.model.ejb.module.cal.unit.CalYear;
 
-public class FlywayModuleCalendarPathProvider implements JeesDdlClassProvider,JeeslFlywayPathProvider
+public class FlywayModuleCalendarPathProvider implements JeesDdlClassProvider,JeeslFlywayPathProvider,FlywayModuleCalVersionMarker
 {	
 	public static FlywayModuleCalendarPathProvider instance() {return new FlywayModuleCalendarPathProvider();}
 	
@@ -35,6 +37,10 @@ public class FlywayModuleCalendarPathProvider implements JeesDdlClassProvider,Je
 		
 		list.add(CalSubscription.class);
 		list.add(CalSubscriptionCategory.class);
+		
+		list.add(CalDay.class);
 		return list;
 	}
+
+	@Override public void sinceModuleCal(int i) {}
 }

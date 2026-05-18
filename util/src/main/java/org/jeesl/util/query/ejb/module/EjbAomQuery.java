@@ -93,7 +93,11 @@ public class EjbAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	public EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,ASTATUS,EVENT,ESTATUS> addAssets(List<ASSET> list) {if(Objects.isNull(assets)) {assets = new ArrayList<>();} assets.addAll(list); return this;}
 	public EjbAomQuery<REALM,SCOPE,ASSET,ATYPE,ASTATUS,EVENT,ESTATUS> addAssets(Collection<ASSET> collection) {if(Objects.isNull(assets)) {assets = new ArrayList<>();} assets.addAll(collection); return this;}
 
-	private List<ATYPE> aomAssetTypes; @Override public List<ATYPE> getAomAssetTypes() {return aomAssetTypes;}
+	private List<ASTATUS> aomAssetStatus;
+	@Override public List<ASTATUS> getAomAssetStatus() {return aomAssetStatus;}
+	
+	private List<ATYPE> aomAssetTypes;
+	@Override public List<ATYPE> getAomAssetTypes() {return aomAssetTypes;}
 	
 	private List<ESTATUS> aomEventStatus;
 	@Override public List<ESTATUS> getAomEventStatus() {return aomEventStatus;}

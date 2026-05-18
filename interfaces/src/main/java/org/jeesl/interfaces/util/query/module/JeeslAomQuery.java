@@ -31,6 +31,7 @@ public interface JeeslAomQuery<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	
 	public List<ASSET> getAssets();
 	public List<ATYPE> getAomAssetTypes();
+	public List<ASTATUS> getAomAssetStatus();
 	public List<ESTATUS> getAomEventStatus();
 	public List<SCOPE> getAomCompanyScopes();
 }
