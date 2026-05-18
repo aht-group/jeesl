@@ -1,0 +1,105 @@
+@use 'container' as container;
+
+@mixin inner-table {
+	tbody, .ui-datatable-data {
+		th, td {
+			.jeesl-icon {
+				margin: 0 var(--half-spacing);
+				
+				&:first-child { margin-left: 0; }
+				&:last-child { margin-right: 0; }
+			}
+		}
+	}
+}
+
+.jeesl-datatable {
+	.ui-datatable-header {
+		@include container.titlebar();
+	}
+	
+	table {
+		@include inner-table();
+	}
+}
+
+.jeesl-datatable.jeesl-datatable-calendar {
+	table {
+		// Fixed table layout cannot be combined with a single min-width column, therefore recreate table layout with grid.
+		display: grid;
+		grid-template-columns: [week] min-content [days] 1fr 1fr 1fr 1fr 1fr 1fr 1fr [end];
+		
+		thead, tbody.ui-datatable-data {
+			display: grid;
+			grid-column: week / end;
+			grid-template-columns: subgrid;
+			
+			tr {
+				border-style: solid;
+				border-width: 0 0 var(--border-width);
+				display: grid;
+				grid-column: week / end;
+				grid-template-columns: subgrid;
+				
+				th, td {
+					border-color: inherit;
+					border-style: solid;
+					border-width: 0 var(--border-width) 0 0;
+					
+					&:last-child { border-right-width: 0; }
+				}
+			}
+		}
+		
+		thead tr { border-color: var(--container-border-color); }
+		tbody.ui-datatable-data tr {
+			border-color: var(--datatable-content-border-color);
+
+			&:last-child { border-bottom-width: 0; }
+			
+			td:not(:first-child) {
+				display: grid;
+				padding: 0;
+			}
+		}
+		
+		// Styling of cell content, i.e. day numbers and allocated hours.
+		tbody.ui-datatable-data tr {
+			&.ui-state-highlight .timesheet-month-content .timesheet-month-day {
+				background: var(--datatable-content-highlight-background);
+				color: var(--grey-medium);
+				filter: brightness(1.2);
+				font-weight: 500;
+				padding-top: 2px; // Make up for space of "hanging" letters, as numbers don't have any and thus they look too high up when centered.
+			}
+			
+			&:not(.ui-state-highlight) .timesheet-month-content .timesheet-month-day {
+				margin-bottom: -1px; // Overlap the row's bottom border.
+			}
+			
+			td { overflow: visible; } // In order to overlap the row's border, hidden overflow must be moved from the cell element to the cell's content.
+			
+			.timesheet-month-content {
+				display: flex;
+				
+				.timesheet-month-day {
+					background: var(--timesheet-month-day-background);
+					color: var(--grey-dark);
+					font-size: .8rem;
+					font-weight: bold;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					transition: color var(--transition-duration) var(--transition-function);
+					width: var(--list-element-height);
+				}
+				
+				.timesheet-month-hours {
+					flex-grow: 1;
+					overflow: hidden;
+					padding: var(--datatable-cell-padding);
+				}
+			}
+		}
+	}
+}

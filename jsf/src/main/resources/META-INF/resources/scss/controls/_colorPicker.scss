@@ -2,14 +2,14 @@
 	--colorpicker-preview-icon-size: 1rem;
 	
 	// OVERLAY
-	--colorpicker-content-separator-color: var(--grey-light);
+	--colorpicker-content-separator-color: var(--grey-brighter);
 	--colorpicker-gradient-handle-size: 5px;
 	// Due to the lack of a content container element, the popup's vertical spacing must be set via border instead of padding,
 	// so normal container border width and colour are necessary for non-mobile view as well as padding and background colour for mobile view.
 	--colorpicker-overlay-border-color: var(--container-border-color);
 	--colorpicker-overlay-border-width: var(--border-width);
 	--colorpicker-overlay-padding: var(--regular-spacing);
-	--colorpicker-overlay-separator-color: var(--grey-light);
+	--colorpicker-overlay-separator-color: var(--grey-brighter);
 	--colorpicker-overlay-layout: [row1-start] 'map gradient preview preview' min-content [row1-end]
 								  [row2-start] 'map gradient red hue' min-content [row2-end]
 								  [row3-start] 'map gradient green saturation' min-content [row3-end]

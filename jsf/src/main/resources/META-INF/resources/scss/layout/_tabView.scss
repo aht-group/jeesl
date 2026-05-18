@@ -1,0 +1,19 @@
+@use 'container' as container;
+
+.jeesl-tabs {
+	// ui-tabs-top required to overwrite primefaces component style.
+	&.ui-tabs-top .ui-tabs-nav {
+		padding: var(--tabview-header-top-padding) var(--regular-spacing) 0;
+	}
+	
+	.ui-tabs-nav {
+		@include container.titlebar();
+
+		column-gap: var(--tabview-header-tab-gap);
+		
+		.ui-tabs-header {
+			// Keep tab height in case of flex wrap
+			min-height: calc(var(--container-header-height) - var(--container-header-underline-width) - var(--tabview-header-top-padding));
+		}
+	}
+}

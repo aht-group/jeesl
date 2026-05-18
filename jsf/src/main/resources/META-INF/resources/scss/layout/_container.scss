@@ -1,0 +1,32 @@
+@mixin titlebar {
+	min-height: var(--container-header-height);
+}
+
+.jeesl-panel .ui-panel-content, .jeesl-tabs .ui-tabs-panel, .jeesl-dialog .ui-dialog-content {
+	padding: var(--container-content-padding);
+	
+	// Negate padding for nested container children.
+	.jeesl-panel, .jeesl-tabs, .jeesl-datatable {
+		border-radius: 0;
+		border-width: var(--border-width) 0;
+		margin: 0 calc(-1 * var(--container-content-padding-horizontal));
+		overflow: hidden;
+		
+		&:first-child {
+			border-top-width: 0;
+			margin-top: calc(-1 * var(--container-content-padding-vertical));
+		}
+		&:last-child {
+			border-bottom-width: 0;
+			margin-bottom: calc(-1 * var(--container-content-padding-vertical));
+			border-radius: var(--border-bottom-radius);
+		}
+	}
+	
+	.ui-outputlabel {
+		align-items: center;
+		display: flex;
+		font-weight: bold;
+		gap: var(--half-spacing);
+	}
+}

@@ -1,0 +1,27 @@
+// Primefaces sets link colour for both links within widgets as well as highlighted elements, as well as text-decoration to none inside of a widget
+// with ui-state-hover. None of which is desired, so it needs to be overridden.
+.ui-widget-content, .ui-state-hover, .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	:not(.ui-widget-header) a {
+		color: var(--link-foreground);
+		
+		&:hover, &:visited { color: var(--link-foreground-hover); }
+		&:hover { text-decoration: var(--link-decoration-hover); }
+	}
+	
+	// The header links are supposed to stay in the base text colour.
+	.ui-widget-header a {
+		color: var(--body-foreground);
+		
+		&:hover, &:visited { color: var(--body-foreground-emphasis); }
+	}
+}
+
+.jeesl-uppercase {
+	text-transform: uppercase;
+}
+
+.jeesl-vertical-center {
+	align-items: center;
+	display: flex;
+	white-space: break-spaces; // Required to keep leading/trailing white spaces in inline or text elements.
+}

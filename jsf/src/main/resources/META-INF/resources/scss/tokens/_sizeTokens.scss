@@ -1,10 +1,15 @@
 :root {
+	// ANIMATION
+	--transition-duration: .2s;
+	--transition-function: ease-in-out;
+	
 	// SPACING
 	--slim-spacing: #{$slim-spacing};
 	--regular-spacing: #{$regular-spacing};
 	--half-spacing: calc(var(--regular-spacing) / 2);
 	--wide-spacing: calc(3 * var(--half-spacing));
 	--separator-thickness: #{$separator-thickness};
+	--separator-spacing: #{$half-spacing};
 	
 	// LAYOUT
 	--list-element-height: #{$element-height};
@@ -17,9 +22,26 @@
 	// BORDERS
 	--border-width: #{$border-width};
 	--border-radius: #{$border-radius};
+	--border-bottom-radius: 0 0 var(--border-radius) var(--border-radius);
 	--border-left-radius: var(--border-radius) 0 0 var(--border-radius);
 	--border-right-radius: 0 var(--border-radius) var(--border-radius) 0;
 	--container-border: var(--border-width) solid var(--container-border-color);
+	
+	// CONTAINER
+	--container-header-height: #{$element-height + $header-element-underline};
+	--container-header-underline-width: #{$header-element-underline};
+	--container-content-padding-vertical: var(--half-spacing);
+	--container-content-padding-horizontal: var(--regular-spacing);
+	--container-content-padding: var(--container-content-padding-vertical) var(--container-content-padding-horizontal);
+	
+	// DATATABLE
+	--datatable-cell-padding-vertical: #{$half-spacing};
+	--datatable-cell-padding-horizontal: #{$regular-spacing};
+	--datatable-cell-padding: var(--datatable-cell-padding-vertical) var(--datatable-cell-padding-horizontal);
+	
+	// TABVIEW
+	--tabview-header-top-padding: var(--slim-spacing);
+	--tabview-header-tab-gap: 3px;
 	
 	// FORMS
 	--form-entry-height: #{$element-height};
@@ -46,6 +68,7 @@
 	@media (max-width: 768px) {
 		// SPACING
 		--separator-thickness: #{$separator-thickness-mobile};
+		--separator-spacing: var(--regular-spacing);
 		
 		// LAYOUT
 		--list-element-height: #{$element-height-mobile};
@@ -54,6 +77,14 @@
 		--overlay-border: none;
 		--overlay-border-radius: 0;
 		--overlay-padding-vertical: var(--wide-spacing);
+		
+		// CONTAINER
+		--container-header-height: #{$element-height-mobile + $header-element-underline-mobile};
+		--container-header-underline-width: #{$header-element-underline-mobile};
+
+		// TABVIEW
+		--tabview-header-top-padding: 4px;
+		--tabview-header-tab-gap: 5px;
 		
 		// FORMS
 		--form-entry-height: #{$element-height-mobile};

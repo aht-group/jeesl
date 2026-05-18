@@ -16,6 +16,7 @@
 		
 		<composite:attribute name="value" required="false"/>
 		<composite:attribute name="textLink" required="false"/>
+		<composite:attribute name="link" required="false"/>
 		<composite:attribute name="type" required="false"/>
 		<composite:attribute name="height" required="false" default="12"/>
 		
@@ -41,23 +42,86 @@
 
 	<composite:implementation>
 		<c:set var="styleClass" value="pf-action-icon #{cc.attrs.styleClass}" />
+		
+		<c:if test="#{not empty cc.attrs.link}">
+			<h:outputLink value="#{cc.attrs.link}"
+						  styleClass="#{styleClass}">
+				<h:graphicImage id="#{cc.id}-image2">
+					<f:attribute name="height" value="#{cc.attrs.height}"/>
+					<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
+					<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
+					<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
+				</h:graphicImage>
+			</h:outputLink>
+		</c:if>
 
-		<c:if test="#{not cc.attrs.confirm}">
-			<c:if test="#{cc.getValueExpression('listener') ne null}">
-			    <p:commandLink id="link" 
-							ajax="#{cc.attrs.ajax}"
-							update="#{cc.attrs.update}"
-							actionListener="#{cc.listener}"
-							process="#{cc.attrs.process}" 
-							onstart="#{cc.attrs.onstart}"
-							oncomplete="#{cc.attrs.oncomplete}"
-							styleClass="#{styleClass}"
-							immediate="#{cc.attrs.immediate}"
-							rendered="#{(empty cc.attrs.ejb) or
-							(
-								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
-							)}">
-					<h:graphicImage id="image2" rendered="#{not cc.attrs.disabled}">
+		<c:if test="#{empty cc.attrs.link}">
+			<c:if test="#{not cc.attrs.confirm}">
+				<c:if test="#{cc.getValueExpression('listener') ne null}">
+				    <p:commandLink id="link" 
+								ajax="#{cc.attrs.ajax}"
+								update="#{cc.attrs.update}"
+								actionListener="#{cc.listener}"
+								process="#{cc.attrs.process}" 
+								onstart="#{cc.attrs.onstart}"
+								oncomplete="#{cc.attrs.oncomplete}"
+								styleClass="#{styleClass}"
+								immediate="#{cc.attrs.immediate}"
+								rendered="#{(empty cc.attrs.ejb) or
+								(
+									(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
+								)}">
+						<h:graphicImage id="#{cc.id}-image2" rendered="#{not cc.attrs.disabled}">
+							<f:attribute name="height" value="#{cc.attrs.height}"/>
+							<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
+							<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
+							<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
+						</h:graphicImage>
+						<h:outputLabel value="#{cc.attrs.textLink}" rendered="#{not empty cc.attrs.textLink}"/>
+					</p:commandLink>
+					<c:if test="#{not empty cc.attrs.blockUi}">
+						<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
+					</c:if>
+					
+				</c:if>
+				
+				<c:if test="#{cc.getValueExpression('listener') eq null}">
+				    <p:commandLink id="link" 
+								ajax="#{cc.attrs.ajax}"
+								update="#{cc.attrs.update}"
+								process="#{cc.attrs.process}" 
+								onstart="#{cc.attrs.onstart}"
+								oncomplete="#{cc.attrs.oncomplete}"
+								styleClass="#{styleClass}"
+								immediate="#{cc.attrs.immediate}"
+								rendered="#{(empty cc.attrs.ejb) or
+								(
+									(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
+								)}"
+								>
+						
+						<h:graphicImage id="#{cc.id}-image2" rendered="#{not cc.attrs.disabled}">
+							<f:attribute name="height" value="#{cc.attrs.height} "/>
+							<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
+							<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
+							<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
+						</h:graphicImage>
+						
+					</p:commandLink>
+					<c:if test="#{not empty cc.attrs.blockUi}">
+						<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
+					</c:if>
+				</c:if>	
+			</c:if>
+	
+			<c:if test="#{cc.attrs.confirm}">
+				<p:commandLink id="link" onclick="PF('#{cc.attrs.id}-cd').show()"
+								styleClass="#{styleClass}"
+								rendered="#{(empty cc.attrs.ejb) or
+								(
+									(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
+								)}">
+					<h:graphicImage id="#{cc.id}-image2">
 						<f:attribute name="height" value="#{cc.attrs.height}"/>
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
 						<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
@@ -68,90 +132,41 @@
 				<c:if test="#{not empty cc.attrs.blockUi}">
 					<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
 				</c:if>
-				
-			</c:if>
+				<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" closable="false"
+								 message="#{cc.attrs.confirmMessage}" styleClass="jeesl-dialog">
+					<f:facet name="header">
+						<h:outputText class="ui-dialog-title" value="#{cc.attrs.confirmHeader}"/>
+						<div class="jeeslDialogActions ui-dialog-titlebar-actions">
+				            <composite:renderFacet name="actions"/>
+				            <p:commandLink styleClass="pf-action-icon">
+								<h:graphicImage id="imgClose"
+												height="#{cc.attrs.height}"
+												library="#{appIconBean.library['jeeslCancel']}"
+												name="#{appIconBean.svg['jeeslCancel']}"
+												onclick="PF('#{cc.attrs.id}-cd').hide();"/>
+							</p:commandLink>
+				        </div>
+					</f:facet>
+					<p:commandButton id="linkConfirm" 
+									 value="#{cc.attrs.confirmYes}"
+									 oncomplete="#{cc.attrs.oncomplete}"
+									 update="#{cc.attrs.update}"
+									 actionListener="#{cc.listener}"
+									 ajax="#{cc.attrs.ajax}"
+									 process="#{cc.attrs.process}" 
+									 onstart="#{cc.attrs.onstart}"
+									 immediate="#{cc.attrs.immediate}"
+									 styleClass="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"/>
+					<p:commandButton value="#{cc.attrs.confirmNo}"
+									 onclick="PF('#{cc.attrs.id}-cd').hide();"
+									 type="button"
+									 styleClass="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"/>
+				</p:confirmDialog>
 			
-			<c:if test="#{cc.getValueExpression('listener') eq null}">
-			    <p:commandLink id="link" 
-							ajax="#{cc.attrs.ajax}"
-							update="#{cc.attrs.update}"
-							process="#{cc.attrs.process}" 
-							onstart="#{cc.attrs.onstart}"
-							oncomplete="#{cc.attrs.oncomplete}"
-							styleClass="#{styleClass}"
-							immediate="#{cc.attrs.immediate}"
-							rendered="#{(empty cc.attrs.ejb) or
-							(
-								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
-							)}"
-							>
-					
-					<h:graphicImage id="image2" rendered="#{not cc.attrs.disabled}">
-						<f:attribute name="height" value="#{cc.attrs.height} "/>
-						<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
-						<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
-						<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
-					</h:graphicImage>
-					
-				</p:commandLink>
-				<c:if test="#{not empty cc.attrs.blockUi}">
-					<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
-				</c:if>
-			</c:if>	
-		</c:if>
-
-		<c:if test="#{cc.attrs.confirm}">
-			<p:commandLink id="link" onclick="PF('#{cc.attrs.id}-cd').show()"
-							styleClass="#{styleClass}"
-							rendered="#{(empty cc.attrs.ejb) or
-							(
-								(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
-							)}">
-				<h:graphicImage id="image2">
-					<f:attribute name="height" value="#{cc.attrs.height}"/>
-					<c:if test="#{empty cc.attrs.value}"><f:attribute name="library" value="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type]}"/></c:if>
-					<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
-					<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
-				</h:graphicImage>
-				<h:outputLabel value="#{cc.attrs.textLink}" rendered="#{not empty cc.attrs.textLink}"/>
-			</p:commandLink>
-			<c:if test="#{not empty cc.attrs.blockUi}">
-				<p:blockUI block="#{cc.attrs.blockUi}" trigger="link"/>
 			</c:if>
-			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" closable="false"
-							 message="#{cc.attrs.confirmMessage}" styleClass="jeesl-dialog">
-				<f:facet name="header">
-					<h:outputText class="ui-dialog-title" value="#{cc.attrs.confirmHeader}"/>
-					<div class="jeeslDialogActions ui-dialog-titlebar-actions">
-			            <composite:renderFacet name="actions"/>
-			            <p:commandLink styleClass="pf-action-icon">
-							<h:graphicImage id="imgClose"
-											height="#{cc.attrs.height}"
-											library="#{appIconBean.library['jeeslCancel']}"
-											name="#{appIconBean.svg['jeeslCancel']}"
-											onclick="PF('#{cc.attrs.id}-cd').hide();"/>
-						</p:commandLink>
-			        </div>
-				</f:facet>
-				<p:commandButton id="linkConfirm" 
-								 value="#{cc.attrs.confirmYes}"
-								 oncomplete="#{cc.attrs.oncomplete}"
-								 update="#{cc.attrs.update}"
-								 actionListener="#{cc.listener}"
-								 ajax="#{cc.attrs.ajax}"
-								 process="#{cc.attrs.process}" 
-								 onstart="#{cc.attrs.onstart}"
-								 immediate="#{cc.attrs.immediate}"
-								 styleClass="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"/>
-				<p:commandButton value="#{cc.attrs.confirmNo}"
-								 onclick="PF('#{cc.attrs.id}-cd').hide();"
-								 type="button"
-								 styleClass="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"/>
-			</p:confirmDialog>
-		
 		</c:if>
 		
-		<p:tooltip for="image2" rendered="#{(not empty cc.attrs.tooltip) or ((not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)) or (not empty cc.attrs.ttValue)}" showDelay="1500" hideEvent="mouseleave click">
+		<p:tooltip for="#{cc.id}-image2" rendered="#{(not empty cc.attrs.tooltip) or ((not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)) or (not empty cc.attrs.ttValue)}" showDelay="1500" hideEvent="mouseleave click">
 			<c:if test="#{not empty cc.attrs.tooltip}"><f:attribute name="value" value="#{cc.attrs.tooltip}"/></c:if>
 			<c:if test="#{(not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)}"><f:attribute name="value" value="#{appLabelBean.descriptions[cc.attrs.ttEntity][cc.attrs.ttCode][localeCode].lang}"/></c:if>
 			<c:if test="#{cc.attrs.ttValue eq 'multiLang'}"><f:attribute name="value" value="#{cc.attrs.value.name[localeCode].lang}"/></c:if>

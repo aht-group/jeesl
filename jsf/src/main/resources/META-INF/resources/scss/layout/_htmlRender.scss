@@ -1,0 +1,5 @@
+@use 'container' as container;
+
+.html-container-panel .html-container > div > section > h1:first-child {
+	@include container.titlebar();
+}
