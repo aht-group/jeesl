@@ -7,6 +7,7 @@ import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.marker.FlywayModuleCalVersionMarker;
 import org.jeesl.model.ejb.module.cal.common.CalDay;
+import org.jeesl.model.ejb.module.cal.common.CalHour;
 import org.jeesl.model.ejb.module.cal.sub.CalSubscription;
 import org.jeesl.model.ejb.module.cal.sub.CalSubscriptionCategory;
 import org.jeesl.model.ejb.module.cal.unit.CalDayOfMonth;
@@ -39,6 +40,7 @@ public class FlywayModuleCalendarPathProvider implements JeesDdlClassProvider,Je
 		list.add(CalSubscriptionCategory.class);
 		
 		list.add(CalDay.class);
+		list.add(CalHour.class);
 		return list;
 	}
 
