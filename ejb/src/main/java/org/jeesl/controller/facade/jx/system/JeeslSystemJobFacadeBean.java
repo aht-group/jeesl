@@ -79,33 +79,33 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 
 	private final JobFactoryBuilder<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,USER> fbJob;
-	
+
 	private EjbJobCacheFactory<TEMPLATE,CACHE> efCache;
 	private EjbJobFactory<L,D,TEMPLATE,CATEGORY,TYPE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,USER> efJob;
-	
+
 	public JeeslSystemJobFacadeBean(EntityManager em, final JobFactoryBuilder<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,USER> fbJob)
 	{
 		super(em);
 		this.fbJob=fbJob;
-		
+
 		efCache = fbJob.cache();
 		efJob = fbJob.job();
 	}
-	
+
 	@Override public <E extends Enum<E>> TEMPLATE fJobTemplate(E type, String code) throws JeeslNotFoundException
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<TEMPLATE> cQ = cB.createQuery(fbJob.getClassTemplate());
 		Root<TEMPLATE> template = cQ.from(fbJob.getClassTemplate());
-		
+
 		Join<TEMPLATE,TYPE> jType = template.join(JeeslJobTemplate.Attributes.type.toString());
 		Expression<String> eType = jType.get(JeeslStatus.EjbAttributes.code.toString());
 		Expression<String> eCode = template.get(JeeslJobTemplate.Attributes.code.toString());
-		
+
 		predicates.add(cB.equal(eType,type.toString()));
 		predicates.add(cB.equal(eCode,code));
-		
+
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(template);
 
@@ -114,7 +114,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbJob.getClassTemplate().getSimpleName()+" found for type="+type.toString()+" and code="+code);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("No unique results in "+fbJob.getClassTemplate().getSimpleName()+" for type="+type.toString()+" and code="+code);}
 	}
-	
+
 	@Override
 	public List<JOB> fJobs(TEMPLATE template, String code)
 	{
@@ -122,14 +122,14 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<JOB> cQ = cB.createQuery(fbJob.getClassJob());
 		Root<JOB> job = cQ.from(fbJob.getClassJob());
-		
+
 		Join<JOB,TEMPLATE> jTemplate = job.join(JeeslJob.Attributes.template.toString());
 		Path<Date> pRecordCreation = job.get(JeeslJob.Attributes.recordCreation.toString());
 		Path<String> pCode = job.get(JeeslJob.Attributes.code.toString());
-		
+
 		predicates.add(jTemplate.in(template));
 		predicates.add(cB.equal(pCode,code));
-		
+
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.asc(pRecordCreation));
 		cQ.select(job);
@@ -137,23 +137,23 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<JOB> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
-	
+
 	@Override public List<JOB> fJobs(JeeslJobQuery<TEMPLATE,STATUS> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<JOB> cQ = cB.createQuery(fbJob.getClassJob());
 		Root<JOB> job = cQ.from(fbJob.getClassJob());
-		
+
 		if(ObjectUtils.isNotEmpty(query.getSystemJobTemplates()))
 		{
 			Path<TEMPLATE> pTemplate = job.get(JeeslJob.Attributes.template.toString());
 			predicates.add(pTemplate.in(query.getSystemJobTemplates()));
 		}
-			
+
 //		predicates.add(pType.in(types));
 //		predicates.add(pStatus.in(status));
-		
+
 		cQ.select(job);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 //		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
@@ -161,28 +161,28 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<JOB> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
-	
+
 	@Override public List<JOB> fJobs(List<CATEGORY> categories, List<TYPE> types, List<STATUS> status, Date from, Date to)
 	{
 		if(categories==null || categories.isEmpty()){return new ArrayList<JOB>();}
 		if(types==null || types.isEmpty()){return new ArrayList<JOB>();}
 		if(status==null || status.isEmpty()){return new ArrayList<JOB>();}
-		
+
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<JOB> cQ = cB.createQuery(fbJob.getClassJob());
 		Root<JOB> job = cQ.from(fbJob.getClassJob());
-		
+
 		Join<JOB,TEMPLATE> jTemplate = job.join(JeeslJob.Attributes.template.toString());
 		Path<CATEGORY> pCategory = jTemplate.get(JeeslJobTemplate.Attributes.category.toString());
 		Path<TYPE> pType = jTemplate.get(JeeslJobTemplate.Attributes.type.toString());
-		
+
 		Path<Date> pRecordCreation = job.get(JeeslJob.Attributes.recordCreation.toString());
 		Path<STATUS> pStatus = job.get(JeeslJob.Attributes.status.toString());
-		
+
 		Path<PRIORITY> pPriority = job.get(JeeslJob.Attributes.priority.toString());
 		Path<Integer> pPosition = pPriority.get(JeeslJobPriority.Attributes.position.toString());
-		
+
 		if(from!=null)
 		{
 			LocalDateTime ldt = DateUtil.toLocalDate(from).atStartOfDay();
@@ -193,11 +193,11 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 			LocalDateTime ldt = DateUtil.toLocalDate(to).atStartOfDay().plusDays(1);
 			predicates.add(cB.lessThan(pRecordCreation, DateUtil.toDate(ldt)));
 		}
-		
+
 		predicates.add(pCategory.in(categories));
 		predicates.add(pType.in(types));
 		predicates.add(pStatus.in(status));
-		
+
 		cQ.select(job);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
@@ -205,27 +205,27 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<JOB> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
-	
+
 	@Override public JOB fActiveJob(TEMPLATE template, String code) throws JeeslNotFoundException
 	{
 		List<STATUS> statuses = new ArrayList<STATUS>();
 		statuses.add(this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue));
 		statuses.add(this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.working));
 		statuses.add(this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.deferred));
-		
+
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<JOB> cQ = cB.createQuery(fbJob.getClassJob());
 		Root<JOB> job = cQ.from(fbJob.getClassJob());
-		
+
 		Join<JOB,TEMPLATE> jTemplate = job.join(JeeslJob.Attributes.template.toString());
 		Path<STATUS> pStatus = job.get(JeeslJob.Attributes.status.toString());
 		Expression<String> pCode = job.get(JeeslJob.Attributes.code.toString());
-		
+
 		predicates.add(cB.equal(jTemplate,template));
 		predicates.add(pStatus.in(statuses));
 		predicates.add(cB.equal(pCode,code));
-		
+
 		cQ.select(job);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 
@@ -241,13 +241,13 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<CACHE> cQ = cB.createQuery(fbJob.getClassCache());
 		Root<CACHE> cache = cQ.from(fbJob.getClassCache());
-		
+
 		Join<CACHE,TEMPLATE> jTemplate = cache.join(JeeslJobCache.Attributes.template.toString());
 		Expression<String> pCode = cache.get(JeeslJobCache.Attributes.code.toString());
-		
+
 		predicates.add(cB.equal(jTemplate,template));
 		predicates.add(cB.equal(pCode,code));
-		
+
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(cache);
 
@@ -261,14 +261,14 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 	public CACHE uJobCache(TEMPLATE template, String code, byte[] data) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		CACHE cache = null;
-		
+
 		try {cache = fJobCache(template,code);}
 		catch (JeeslNotFoundException e){cache = efCache.build(template, code, data);}
-		
+
 		cache.setRecord(new Date());
 		cache.setData(data);
 		cache = this.save(cache);
-		
+
 		return cache;
 	}
 
@@ -279,15 +279,15 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		JOB job = efJob.build(user,template,status,code,name,jsonFilter);
 		return this.save(job);
 	}
-	
-	
+
+
 	@Override public <T extends EjbWithMigrationJob1<STATUS>> List<T> fEntitiesWithPendingJob1(Class<T> c, int maxResult, boolean includeNull)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob1.Tmp.job1.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
@@ -306,7 +306,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob2.Tmp.job2.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
@@ -325,7 +325,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob3.Tmp.job3.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
@@ -344,7 +344,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob4.Attributes.job4.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
@@ -363,7 +363,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob5.Attributes.job5.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
@@ -376,7 +376,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		tQ.setMaxResults(maxResult);
 		return tQ.getResultList();
 	}
-	
+
 	@Override public <T extends EjbWithMigrationJob1<STATUS>> JsonTuples1<STATUS> tpcJob1Status(Class<T> c)
 	{
 		Json1TuplesFactory<STATUS> jtf = new Json1TuplesFactory<>(fbJob.getClassStatus());
@@ -384,13 +384,13 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
 		Path<STATUS> pStatus = item.get(EjbWithMigrationJob1.Tmp.job1.toString());
-		
+
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);
-	       
+
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
@@ -401,13 +401,13 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
 		Path<STATUS> pStatus = item.get(EjbWithMigrationJob2.Tmp.job2.toString());
-		
+
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);
-	       
+
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		return jtf.buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
@@ -416,20 +416,20 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<T> item = cQ.from(c);
-		
+
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
 		Path<STATUS> pStatus = item.get(EjbWithMigrationJob3.Tmp.job3.toString());
-		
+
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);
-		
+
 		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(em.createQuery(cQ).getResultList(),JeeslCq.Agg.count);
 	}
 	@Override public <T extends EjbWithMigrationJob4<STATUS>> JsonTuples1<STATUS> tpcJob4Status(Class<T> c)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
-		Root<T> item = cQ.from(c);		
+		Root<T> item = cQ.from(c);
 		Path<STATUS> pStatus = item.get(EjbWithMigrationJob4.Attributes.job4.toString());
 
 		cQ.multiselect(pStatus.get("id"),cB.count(item.<Long>get("id")));
@@ -443,26 +443,26 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<T> item = cQ.from(c);
 		Path<STATUS> pStatus = item.get(EjbWithMigrationJob5.Attributes.job5.toString());
-		
+
 		cQ.multiselect(pStatus.get("id"),cB.count(item.<Long>get("id")));
 		cQ.groupBy(pStatus.get("id"));
-	       
+
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		return Json1TuplesFactory.instance(fbJob.getClassStatus()).tupleLoad(this,true).buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
-	
+
 	@Override public <T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithJob2In(Class<T> c, List<STATUS> list, Integer maxResults)
 	{
 		if(list==null || list.isEmpty()){return new ArrayList<>();}
-		
+
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> root = cQ.from(c);
-		
+
 		Path<STATUS> pStatus = root.get(EjbWithMigrationJob2.Tmp.job2.toString());
 		predicates.add(pStatus.in(list));
-		
+
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 //		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
 		cQ.select(root);
@@ -471,18 +471,39 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		if(maxResults!=null) {tQ.setMaxResults(maxResults);}
 		return tQ.getResultList();
 	}
-	
+
+	@Override public <T extends EjbWithMigrationJob1<STATUS>> List<T> fEntitiesWithJob1In(Class<T> c, List<STATUS> list, Integer maxResults)
+	{
+		if(list==null || list.isEmpty()){return new ArrayList<>();}
+
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<T> cQ = cB.createQuery(c);
+		Root<T> root = cQ.from(c);
+
+		Path<STATUS> pStatus = root.get(EjbWithMigrationJob1.Tmp.job1.toString());
+		predicates.add(pStatus.in(list));
+
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
+		cQ.select(root);
+
+		TypedQuery<T> tQ = em.createQuery(cQ);
+		if(maxResults!=null) {tQ.setMaxResults(maxResults);}
+		return tQ.getResultList();
+	}
+
 	@Override public JsonTuples1<TEMPLATE> tpJobJobByTemplate(JeeslJobQuery<TEMPLATE,STATUS> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<JOB> item = cQ.from(fbJob.getClassJob());
-		
+
 		Path<TEMPLATE> pTemplate = item.get(JeeslJob.Attributes.template.toString());
-		
+
 		cQ.multiselect(pTemplate.get("id"),cB.count(item.<Long>get("id")));
 		cQ.groupBy(pTemplate.get("id"));
-	       
+
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
@@ -491,12 +512,12 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<CACHE> item = cQ.from(fbJob.getClassCache());
-		
+
 		Path<TEMPLATE> pTemplate = item.get(JeeslJobCache.Attributes.template.toString());
-		
+
 		cQ.multiselect(pTemplate.get("id"),cB.count(item.<Long>get("id")));
 		cQ.groupBy(pTemplate.get("id"));
-	       
+
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JeeslCq.Agg.count);
 	}
