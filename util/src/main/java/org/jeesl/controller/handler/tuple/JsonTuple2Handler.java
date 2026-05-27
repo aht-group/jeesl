@@ -83,8 +83,8 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	{
 		this.clear();
 		this.append(tuples);
-		initListA(null);
-		initListB(null);
+		this.initListA(null);
+		this.initListB(null);
 		tuples2.addAll(tuples.getTuples());
 		return this;
 	}
@@ -205,6 +205,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 	public void initListB(JeeslFacade fJeesl)
 	{
+		logger.trace("Start SizeB: {}/{}",listB.size(),mapB.keySet().size());
 		if(Objects.isNull(fJeesl)) {listB.addAll(mapB.values());}
 		else
 		{
@@ -216,11 +217,13 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 			{
 				logger.info("Loading "+i.getAndIncrement()+" ("+listB.size()+"/"+mapB.size()+") "+cB.getSimpleName());
 				listB.addAll(fJeesl.find(cB,new ArrayList<>(partition)));
+				logger.info("SB {}",listB.size());
 			}
 		}
 		
 		sizeB = listB.size();
 		if(jcpB!=null && jcpB.provides(cB)){Collections.sort(listB, jcpB.provide(cB));}
+		logger.trace("End SizeB: {}/{}",listB.size(),mapB.keySet().size());
 	}
 	
 	public boolean contains(A a, B b) {return map.containsKey(a) && map.get(a).containsKey(b);}
