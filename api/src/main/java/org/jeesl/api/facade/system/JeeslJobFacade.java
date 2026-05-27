@@ -32,7 +32,7 @@ import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,TYPE,PRIORITY,?>,
 								CATEGORY extends JeeslJobCategory<?,?,CATEGORY,?>,
 								TYPE extends JeeslJobType<?,?,TYPE,?>,
-								
+
 								JOB extends JeeslJob<TEMPLATE,PRIORITY,STATUS,USER>,
 								PRIORITY extends JeeslJobPriority<?,?,PRIORITY,?>,
 								FEEDBACK extends JeeslJobFeedback<FT,USER>,
@@ -46,32 +46,33 @@ public interface JeeslJobFacade <TEMPLATE extends JeeslJobTemplate<?,?,CATEGORY,
 								USER extends JeeslSimpleUser
 								>
 			extends JeeslFacade
-{	
+{
 	<E extends Enum<E>> TEMPLATE fJobTemplate(E type, String code) throws JeeslNotFoundException;
 	List<JOB> fJobs(List<CATEGORY> categories, List<TYPE> type, List<STATUS> status, Date from, Date to);
 	List<JOB> fJobs(TEMPLATE template, String code);
 	List<JOB> fJobs(JeeslJobQuery<TEMPLATE,STATUS> query);
-	
+
 	JOB fActiveJob(TEMPLATE template, String code) throws JeeslNotFoundException;
 	JOB cJob(USER user, List<FEEDBACK> feedbacks, TEMPLATE template, String code, String name, String jsonFilter) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException;
 	CACHE fJobCache(TEMPLATE template, String code) throws JeeslNotFoundException;
 	CACHE uJobCache(TEMPLATE template, String code, byte[] data) throws JeeslConstraintViolationException, JeeslLockingException;
-	
+
 	<T extends EjbWithMigrationJob1<STATUS>> List<T> fEntitiesWithPendingJob1(Class<T> c, int maxResult, boolean includeNull);
 	<T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithPendingJob2(Class<T> c, int maxResult, boolean includeNull);
 	<T extends EjbWithMigrationJob3<STATUS>> List<T> fEntitiesWithPendingJob3(Class<T> c, int maxResult, boolean includeNull);
 	<T extends EjbWithMigrationJob4<STATUS>> List<T> fEntitiesWithPendingJob4(Class<T> c, int maxResult, boolean includeNull);
 	<T extends EjbWithMigrationJob5<STATUS>> List<T> fEntitiesWithPendingJob5(Class<T> c, int maxResult, boolean includeNull);
-	
+
 	<T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithJob2In(Class<T> c, List<STATUS> list, Integer maxResults);
-	
+	<T extends EjbWithMigrationJob1<STATUS>> List<T> fEntitiesWithJob1In(Class<T> c, List<STATUS> list, Integer maxResults);
+
 	<T extends EjbWithMigrationJob1<STATUS>> JsonTuples1<STATUS> tpcJob1Status(Class<T> c);
 	<T extends EjbWithMigrationJob2<STATUS>> JsonTuples1<STATUS> tpcJob2Status(Class<T> c);
 	<T extends EjbWithMigrationJob3<STATUS>> JsonTuples1<STATUS> tpcJob3Status(Class<T> c);
 	<T extends EjbWithMigrationJob4<STATUS>> JsonTuples1<STATUS> tpcJob4Status(Class<T> c);
 	<T extends EjbWithMigrationJob5<STATUS>> JsonTuples1<STATUS> tpcJob5Status(Class<T> c);
-	
+
 	JsonTuples1<TEMPLATE> tpJobJobByTemplate(JeeslJobQuery<TEMPLATE,STATUS> query);
 	JsonTuples1<TEMPLATE> tpJobCacheByTemplate(JeeslJobQuery<TEMPLATE,STATUS> query);
-	
+
 }
