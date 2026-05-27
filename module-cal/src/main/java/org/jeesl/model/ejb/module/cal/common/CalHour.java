@@ -1,6 +1,5 @@
 package org.jeesl.model.ejb.module.cal.common;
 
-import java.io.Serializable;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
@@ -54,6 +53,8 @@ public class CalHour implements JeeslCalendarHour<CalDay,CalHourOfDay>
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("[").append(id).append("]");
+		sb.append(" ").append(hour.getCode());
+		sb.append(" ").append(time.toString());
 		return sb.toString();
 	}
 }

@@ -21,12 +21,13 @@ public class ParentPositionComparator<T extends EjbWithParentPosition<T>> implem
 		
 	}
 	
-	public int compare(T a, T b)
+	@Override public int compare(T a, T b)
     {
-		int dA = depth(a);
-		int dB = depth(b);
+		int depthA = depth(a);
+		int depthB = depth(b);
 		
-		int min = Math.min(dA,dB);
+		int min = Math.min(depthA,depthB);
+//		logger.info("Min: "+min);
 				
 		CompareToBuilder ctb = new CompareToBuilder();
 		for(int i=0;i<=min;i++)
@@ -35,8 +36,8 @@ public class ParentPositionComparator<T extends EjbWithParentPosition<T>> implem
 			ctb.append(position(i,a),position(i,b));
 		}
 		
-		if(dA>dB) {ctb.append(position(dA,a),-1);}
-		if(dB>dA) {ctb.append(-1,position(dB,b));}
+		if(depthA>depthB) {ctb.append(position(depthA,a),-1);}
+		if(depthB>depthA) {ctb.append(-1,position(depthB,b));}
 
 		return ctb.toComparison();
     }
@@ -55,7 +56,6 @@ public class ParentPositionComparator<T extends EjbWithParentPosition<T>> implem
 			
 			if(i>4) {logger.warn("NYI: size="+i);}
 		}
-		
 		
 		return true;
 	}

@@ -1,6 +1,5 @@
 package org.jeesl.model.ejb.module.cal.common;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -15,15 +14,13 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.module.calendar.common.JeeslCalendarDay;
-import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDate;
 import org.jeesl.model.ejb.module.cal.unit.CalDayOfMonth;
 import org.jeesl.model.ejb.module.cal.unit.CalMonth;
 import org.jeesl.model.ejb.module.cal.unit.CalYear;
 
 @Entity
 @Table(name="CalDay")
-public class CalDay implements Serializable,JeeslWithRecordDate,
-									JeeslCalendarDay<CalYear,CalMonth,CalDayOfMonth>
+public class CalDay implements JeeslCalendarDay<CalYear,CalMonth,CalDayOfMonth>
 {
 	public static final long serialVersionUID=1;
 
@@ -64,6 +61,8 @@ public class CalDay implements Serializable,JeeslWithRecordDate,
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("[").append(id).append("]");
+		sb.append(" ").append(String.format("%04d-%02d-%02d", Integer.valueOf(year.getCode()),Integer.valueOf(month.getCode()),Integer.valueOf(day.getCode())));
+		sb.append(" ").append(record.toString());
 		return sb.toString();
 	}
 }
