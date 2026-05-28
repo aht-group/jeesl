@@ -72,7 +72,7 @@ public class IoAttributeItem implements JeeslAttributeItem<IoAttributeCriteria,I
 
 	@Override public boolean equals(Object object){return (object instanceof IoAttributeItem) ? id == ((IoAttributeItem) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();

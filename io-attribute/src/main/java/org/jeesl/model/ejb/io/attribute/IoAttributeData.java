@@ -74,12 +74,12 @@ public class IoAttributeData implements JeeslAttributeData<IoAttributeCriteria,I
 	@Override public void setValueRecord(Date valueRecord) {this.valueRecord = valueRecord;}
 
 	@ManyToOne
-	@JoinTable(name="IoAttributeDataJtOption",joinColumns={@JoinColumn(name="data_id")},inverseJoinColumns={@JoinColumn(name="option_id")})
 	private IoAttributeOption valueOption;
 	@Override public IoAttributeOption getValueOption() {return valueOption;}
 	@Override public void setValueOption(IoAttributeOption valueOption) {this.valueOption = valueOption;}
 
 	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="IoAttributeDataJtOption",joinColumns={@JoinColumn(name="data_id")},inverseJoinColumns={@JoinColumn(name="option_id")})
 	private List<IoAttributeOption> valueOptions;
 	@Override public List<IoAttributeOption> getValueOptions() {if(valueOptions==null){valueOptions = new ArrayList<>();}return valueOptions;}
 	@Override public void setValueOptions(List<IoAttributeOption> valueOptions) {this.valueOptions = valueOptions;}
