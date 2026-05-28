@@ -26,7 +26,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
 @Table(name="IoAttributeOption")
-@EjbErNode(name="Option",category="surveyDefinition",subset="auSurvey,lcfEval,moduleTs")
+@EjbErNode(name="Option",category="ioAttribute",subset="ioAttribute")
 public class IoAttributeOption implements JeeslAttributeOption<IoLang,IoDescription,IoAttributeCriteria>
 {
 	public static final long serialVersionUID=1;

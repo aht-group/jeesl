@@ -18,7 +18,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoAttributeItem")
-@EjbErNode(name="Item",category="ioAttribute",level=3,subset="moduleTs")
+@EjbErNode(name="Item",category="ioAttribute",level=3,subset="ioAttribute")
 public class IoAttributeItem implements JeeslAttributeItem<IoAttributeCriteria,IoAttributeSet>
 {
 	public static final long serialVersionUID=1;
@@ -35,17 +35,17 @@ public class IoAttributeItem implements JeeslAttributeItem<IoAttributeCriteria,I
 	private IoAttributeSet set;
 	@Override public IoAttributeSet getSet() {return set;}
 	@Override public void setSet(IoAttributeSet set) {this.set = set;}
-	
+
 	@ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoAttributeItem_section"))
 	private IoAttributeSection section;
 	public IoAttributeSection getSection() {return section;}
 	public void setSection(IoAttributeSection section) {this.section = section;}
-	
+
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	@NotNull @ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoAttributeItem_criteria"))
 	private IoAttributeCriteria criteria;
@@ -55,11 +55,11 @@ public class IoAttributeItem implements JeeslAttributeItem<IoAttributeCriteria,I
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
-	
+
 	private Boolean tableHeader;
 	@Override public Boolean getTableHeader() {return tableHeader;}
 	@Override public void setTableHeader(Boolean tableHeader) {this.tableHeader = tableHeader;}
