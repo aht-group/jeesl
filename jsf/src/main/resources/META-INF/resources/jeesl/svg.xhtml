@@ -52,7 +52,11 @@
 					<c:if test="#{empty cc.attrs.value}"><f:attribute name="name" value="#{appIconBean.svg[cc.attrs.type]}"/></c:if>
 					<c:if test="#{not empty cc.attrs.value}"><f:attribute name="value" value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"/></c:if>
 				</h:graphicImage>
-				<composite:insertChildren/>
+				<c:forEach items="#{cc.children}" var="child">
+					<c:if test="#{child.class.name == 'javax.faces.component.UIParameter'}">
+						<f:param name="#{child.name}" value="#{child.value}" />
+					</c:if>
+				</c:forEach>
 			</h:outputLink>
 		</c:if>
 
