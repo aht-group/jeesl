@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -73,6 +74,7 @@ public class IoAttributeData implements JeeslAttributeData<IoAttributeCriteria,I
 	@Override public void setValueRecord(Date valueRecord) {this.valueRecord = valueRecord;}
 
 	@ManyToOne
+	@JoinTable(name="IoAttributeDataJtOption",joinColumns={@JoinColumn(name="data_id")},inverseJoinColumns={@JoinColumn(name="option_id")})
 	private IoAttributeOption valueOption;
 	@Override public IoAttributeOption getValueOption() {return valueOption;}
 	@Override public void setValueOption(IoAttributeOption valueOption) {this.valueOption = valueOption;}

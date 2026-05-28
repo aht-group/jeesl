@@ -62,6 +62,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleSelection
 			catch (NoSuchMethodException e) {e.printStackTrace();}
 			catch (SecurityException e) {e.printStackTrace();}
 		}
+		else {logger.warn("Provided class is null");}
 	}
 	
 	public void cache(JeeslTree1Cache<T> cache1)
@@ -92,17 +93,13 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleSelection
 			selection = null;
 			if(Objects.nonNull(bean))
 			{
-				try {
-					bean.selectSbSingle(this,null);
-				} catch (JeeslLockingException | JeeslConstraintViolationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				try {bean.selectSbSingle(this,null);}
+				catch (JeeslLockingException | JeeslConstraintViolationException e) {e.printStackTrace();}
 			}
 		}
 		else
 		{
-			if(selection!=null) {previous.setId(selection.getId());}
+			if(Objects.nonNull(selection)) {previous.setId(selection.getId());}
 			selection=(T)item;
 			if(debugOnInfo)
 			{
