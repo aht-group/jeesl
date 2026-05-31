@@ -54,7 +54,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	protected JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute;
 	protected JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute;
 	
-	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fbAttribute;
+	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?,?> fbAttribute;
 	
 	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE,SET> efCriteria;
 	protected final EjbAttributeOptionFactory<CRITERIA,OPTION> efOption;
@@ -73,7 +73,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	protected final Comparator<CRITERIA> cpCriteria;
 	protected long refId;
 	
-	public JeeslIoAttributePoolGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fbAttribute)
+	public JeeslIoAttributePoolGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?,?> fbAttribute)
 	{
 		super(fbAttribute.getClassL(),fbAttribute.getClassD());
 		this.fbAttribute=fbAttribute;

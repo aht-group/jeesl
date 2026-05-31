@@ -38,9 +38,9 @@ public abstract class AbstractAppAttributeBean <
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppAttributeBean.class);
 
 	private JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
-	private final IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
+	private final IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,?,ITEM,CONTAINER,DATA> fbAttribute;
 
-	public AbstractAppAttributeBean(IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	public AbstractAppAttributeBean(IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,?,ITEM,CONTAINER,DATA> fbAttribute)
 	{
 		this.fbAttribute=fbAttribute;
 		types = new ArrayList<TYPE>();

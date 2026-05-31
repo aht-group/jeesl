@@ -24,6 +24,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSection;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -41,6 +42,7 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 									TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 									SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
+									SCT extends JeeslAttributeSection<L,SET>,
 									ITEM extends JeeslAttributeItem<CRITERIA,SET>,
 									CONTAINER extends JeeslAttributeContainer<SET,DATA>,
 									DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
@@ -56,11 +58,15 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 	private final Class<TYPE> cType; public Class<TYPE> getClassType() {return cType;}
 	private final Class<OPTION> cOption; public Class<OPTION> getClassOption() {return cOption;}
 	private final Class<SET> cSet; public Class<SET> getClassSet() {return cSet;}
+	private final Class<SCT> cSection; public Class<SCT> getClassSection() {return cSection;}
 	private final Class<ITEM> cItem; public Class<ITEM> getClassItem() {return cItem;}
 	private final Class<CONTAINER> cContainer; public Class<CONTAINER> getClassContainer() {return cContainer;}
 	private final Class<DATA> cData; public Class<DATA> getClassData() {return cData;}
     
-	public IoAttributeFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<R> cR, final Class<CAT> cCategory, final Class<CRITERIA> cCriteria, final Class<TYPE> cType, final Class<OPTION> cOption, final Class<SET> cSet, final Class<ITEM> cItem, final Class<CONTAINER> cContainer, final Class<DATA> cData)
+	public IoAttributeFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<R> cR,
+									final Class<CAT> cCategory, final Class<CRITERIA> cCriteria, final Class<TYPE> cType, final Class<OPTION> cOption,
+									final Class<SET> cSet, final Class<SCT> cSection, final Class<ITEM> cItem,
+									final Class<CONTAINER> cContainer, final Class<DATA> cData)
 	{
 		super(cL,cD);
 		this.cR = cR;
@@ -69,6 +75,7 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 		this.cType=cType;
 		this.cOption=cOption;
 		this.cSet=cSet;
+		this.cSection=cSection;
 		this.cItem=cItem;
 		this.cContainer=cContainer;
 		this.cData=cData;

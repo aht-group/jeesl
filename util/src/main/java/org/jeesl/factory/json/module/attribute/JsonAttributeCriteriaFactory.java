@@ -24,7 +24,7 @@ public class JsonAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDe
 	final static Logger logger = LoggerFactory.getLogger(JsonAttributeCriteriaFactory.class);
 	
 	private JeeslFacade facade;
-	private IoAttributeFactoryBuilder<L,D,?,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute;
+	private IoAttributeFactoryBuilder<L,D,?,CAT,CRITERIA,TYPE,OPTION,?,?,?,?,?> fbAttribute;
 	
 	private final String localeCode;
 	private final JsonAttributeCriteria q;
@@ -40,7 +40,7 @@ public class JsonAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDe
 		if(q.getOptions()!=null && !q.getOptions().isEmpty()) {jfOption = new JsonAttributeOptionFactory<>(localeCode,q.getOptions().get(0));}
 	}
 	
-	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,?,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute)
+	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,?,CAT,CRITERIA,TYPE,OPTION,?,?,?,?,?> fbAttribute)
 	{
 		this.facade=facade;
 		this.fbAttribute=fbAttribute;

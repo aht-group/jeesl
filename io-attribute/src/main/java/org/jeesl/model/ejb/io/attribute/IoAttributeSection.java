@@ -36,7 +36,7 @@ public class IoAttributeSection implements JeeslAttributeSection<IoLang,IoAttrib
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
-//	@Override public String resolveParentAttribute() {return JeeslAttributeOption.Attributes.criteria.toString();}
+	@Override public String resolveParentAttribute() {return JeeslAttributeSection.Attributes.set.toString();}
 	@NotNull @ManyToOne
 	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoAttributeSection_set"))
 	private IoAttributeSet set;

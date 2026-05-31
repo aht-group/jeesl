@@ -24,9 +24,9 @@ public class EjbAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDes
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAttributeCriteriaFactory.class);
 	
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,?,SET,?,?,?> fbAttribute;
+	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,?,SET,?,?,?,?> fbAttribute;
     
-	public EjbAttributeCriteriaFactory(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,?,SET,?,?,?> fbAttribute)
+	public EjbAttributeCriteriaFactory(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,?,SET,?,?,?,?> fbAttribute)
 	{       
         this.fbAttribute = fbAttribute;
 	}

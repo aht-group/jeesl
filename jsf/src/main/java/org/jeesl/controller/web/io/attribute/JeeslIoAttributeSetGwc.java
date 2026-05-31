@@ -17,6 +17,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeItemFactory;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeSetFactory;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbSingleSelection;
@@ -25,6 +26,7 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSection;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -44,6 +46,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,?,?,SET>,
 												
 												SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
+												SCT extends JeeslAttributeSection<L,SET>,
 												ITEM extends JeeslAttributeItem<CRITERIA,SET>>
 					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements SbSingleBean,SbToggleBean
@@ -54,7 +57,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	private JeeslIoAttributeFacade<R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fAttribute;
 	private JeeslAttributeBean<R,CAT,CRITERIA,?,?,SET,ITEM,?,?> bAttribute;
 	
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fbAttribute;
+	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,?,?,SET,SCT,ITEM,?,?> fbAttribute;
 	private final EjbAttributeSetFactory<L,D,R,CAT,SET,ITEM> efSet;
 	private final EjbAttributeItemFactory<CRITERIA,SET,ITEM> efItem;
 	
@@ -64,6 +67,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	private final List<CRITERIA> criterias; public List<CRITERIA> getCriterias() {return criterias;}
 	private final List<SET> sets; public List<SET> getSets() {return sets;}
+	private final List<SCT> sections; public List<SCT> getSections() {return sections;}
 	private List<ITEM> items; public List<ITEM> getItems() {return items;}
 	
 	private SET set; public SET getSet() {return set;} public void setSet(SET set) {this.set = set;}
@@ -71,7 +75,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	private final Comparator<SET> comparatorSet;
 	
-	public JeeslIoAttributeSetGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fbAttribute)
+	public JeeslIoAttributeSetGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,?,?,SET,SCT,ITEM,?,?> fbAttribute)
 	{
 		super(fbAttribute.getClassL(),fbAttribute.getClassD());
 		this.fbAttribute=fbAttribute;
@@ -84,8 +88,10 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 		sbhCat = new SbMultiHandler<>(fbAttribute.getClassCat(),this);
 		
 		comparatorSet = new AttributeSetComparator<CAT,SET>().factory(AttributeSetComparator.Type.position);
+		
 		criterias = new ArrayList<>();
 		sets = new ArrayList<>();
+		sections = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp,
@@ -104,7 +110,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	public void updateRealmReference(RREF rref)
 	{
-		this.reset(true,true,true);
+		this.reset(true,true,true,true);
 		
 		if(!sbhRref.getList().contains(rref)) {sbhRref.getList().add(rref);}
 		sbhRref.setDefault(rref);
@@ -143,12 +149,14 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCat(),sbhCat.getList()));}
 	}
 	
-	public void resetAll() {reset(true,true,true);}
-	public void resetSet() {reset(false,true,true);}
-	private void reset(boolean rCriterias, boolean rSet, boolean rItem)
+	public void resetAll() {reset(true,true,true,true);}
+	public void resetSet() {reset(false,true,true,true);}
+	private void reset(boolean rCriterias, boolean rSections, boolean rSet, boolean rItem)
 	{
 		if(rCriterias) {criterias.clear();}
+		if(rSections) {sections.clear();}
 		if(rSet) {set=null;}
+		
 		if(rItem){item=null;}
 	}
 	
@@ -183,7 +191,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(set));}
 		fAttribute.rm(set);
 		reloadSets();
-		reset(false,true,true);
+		reset(false,true,true,true);
 	}
 	
 	public void selectSet()
@@ -191,8 +199,23 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(set));}
 		set = efLang.persistMissingLangs(fAttribute,lp,set);
 		set = efDescription.persistMissingLangs(fAttribute,lp.getLocales(),set);
+		reset(false,true,false,true);
 		reloadItems();
-		reset(false,false,true);
+		reloadSections();
+	}
+	
+	private void reloadSections()
+	{
+		reset(false,true,false,false);
+		if(EjbIdFactory.isSaved(set))
+		{
+			logger.info("Reloading Sections");
+		}
+	}
+	
+	public void addSection()
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAttribute.getClassCriteria()));}
 	}
 	
 	private void reloadItems()
@@ -221,7 +244,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(item));}
 		fAttribute.rm(item);
-		reset(false,false,true);
+		reset(false,false,false,true);
 		reloadItems();
 	}
 	

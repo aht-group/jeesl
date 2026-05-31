@@ -1,5 +1,7 @@
 package org.jeesl.factory.ejb.io.attribute;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
@@ -21,9 +23,9 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAttributeSetFactory.class);
 	
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,?,?,?,SET,ITEM,?,?> fbAttribute;
+	private final IoAttributeFactoryBuilder<L,D,R,CAT,?,?,?,SET,?,ITEM,?,?> fbAttribute;
     
-	public EjbAttributeSetFactory(IoAttributeFactoryBuilder<L,D,R,CAT,?,?,?,SET,ITEM,?,?> fbAttribute)
+	public EjbAttributeSetFactory(IoAttributeFactoryBuilder<L,D,R,CAT,?,?,?,SET,?,ITEM,?,?> fbAttribute)
 	{       
         this.fbAttribute = fbAttribute;
 	}
@@ -31,15 +33,18 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 	public <RREF extends EjbWithId> SET build(R realm, RREF rref, CAT category)
 	{
 		SET ejb = null;
+	
 		try
 		{
-			ejb = fbAttribute.getClassSet().newInstance();
+			ejb = fbAttribute.getClassSet().getDeclaredConstructor().newInstance();
 			ejb.setRealm(realm);
 			ejb.setRref(rref.getId());
 			ejb.setCategory(category);
 		}
-		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
+		{
+			e.printStackTrace();
+		}
 		
 		return ejb;
 	}
