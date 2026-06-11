@@ -24,6 +24,8 @@ import org.primefaces.component.outputlabel.OutputLabel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//import com.sun.faces.facelets.tag.ui.ComponentRef;
+
 @FacesComponent("org.jeesl.jsf.components.layout.InputGrid")
 public class InputGrid extends UIPanel
 {
@@ -107,6 +109,15 @@ public class InputGrid extends UIPanel
 		{
 			counter = new AtomicInteger(0);
 			List<UIComponent> children = this.getChildren();
+//			List<UIComponent> children = new ArrayList<UIComponent>();
+//			this.getChildren().forEach(child -> {
+//				
+//				if (child instanceof ComponentRef) {
+//					children.addAll(child.getChildren());
+//				} else {
+//					children.add(child);
+//				}
+//			});
 			List<List<UIComponent>> childGroups = new ArrayList<List<UIComponent>>(children.stream().filter(child -> child.isRendered()).collect(Collectors.groupingBy(child -> classifyChildGroup())).values());
 			Collections.sort(childGroups, (a, b) -> children.indexOf(a.get(0)) - children.indexOf(b.get(0)));
 			
