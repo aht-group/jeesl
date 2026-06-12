@@ -335,7 +335,8 @@ public class SqlFactory
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE ").append(c.getAnnotation(Table.class).name());
 		sb.append(" SET ").append(id(alias,attribute)).append("=");
-		sb.append(t.getId());
+		if(Objects.nonNull(t)) {sb.append(t.getId());}
+		else {sb.append("NULL");}
 		
 		if(Objects.isNull(updates)) {updates = new ArrayList<>();}
 		updates.add(sb.toString());
