@@ -1,5 +1,11 @@
+@use '../core' as core;
+
 @mixin titlebar {
 	min-height: var(--container-header-height);
+	
+	.pf-action-icon.pf-inactive {
+		@extend .jeesl-greyscale;
+	}
 }
 
 .jeesl-panel .ui-panel-content, .jeesl-tabs .ui-tabs-panel, .jeesl-dialog .ui-dialog-content {

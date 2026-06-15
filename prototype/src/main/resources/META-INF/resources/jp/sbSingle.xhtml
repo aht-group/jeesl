@@ -27,10 +27,12 @@
 							childs="#{cc.attrs.list}">
 			<c:if test="#{cc.attrs.showMultilang}"><f:attribute name="label" value="#{cc.attrs.entity.name[localeCode].lang}"/></c:if>
 			<c:if test="#{cc.attrs.showCode}"><f:attribute name="label" value="#{cc.attrs.entity.code}"/></c:if>
-			<h:commandLink>
+			<h:commandLink styleClass="jeesl-dropdown-item-label">
+				<h:panelGroup rendered="#{cc.attrs.showMultiLang || cc.attrs.showCode}" styleClass="jeesl-dropdown-item-label-icon-text">
+					<h:outputText rendered="#{cc.attrs.showMultilang}" value="#{var.name[localeCode].lang}"/>
+					<h:outputText rendered="#{cc.attrs.showCode}" value="#{var.code}"/>
+				</h:panelGroup>
 				<jtp:symbolizer value="#{var}" styleClass="jeesl-dropdown-item-label-icon"/>
-				<h:outputText rendered="#{cc.attrs.showMultilang}" value="#{var.name[localeCode].lang}"/>
-				<h:outputText rendered="#{cc.attrs.showCode}" value="#{var.code}"/>
 				<p:ajax event="click" listener="#{cc.attrs.bean.selectSbSingle(var)}" oncomplete="#{cc.attrs.oncomplete}" update="@form #{cc.attrs.update}"/>
 			</h:commandLink>
 		</aup:statusBarItem>

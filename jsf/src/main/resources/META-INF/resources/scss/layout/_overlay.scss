@@ -1,0 +1,21 @@
+.jeesl-overlay-container {
+	&.jeesl-dropdown-list {
+		border-radius: var(--border-bottom-radius);
+		
+		.jeesl-datatable table thead tr th, .ui-paginator.ui-paginator-bottom {
+			background-image: var(--panel-content-select-dropdown-header-background);
+			border-radius: 0;
+			color: var(--panel-content-select-dropdown-header-foreground);
+			height: var(--list-element-height);
+			text-shadow: none;
+			
+			select, a {
+				color: var(--panel-content-select-dropdown-header-foreground);
+				height: var(--list-element-height);
+				text-shadow: none;
+			}
+		}
+		
+		.ui-paginator.ui-paginator-bottom { border: none; }
+	}
+}

@@ -110,11 +110,18 @@ public class InputGrid extends UIPanel
 			counter = new AtomicInteger(0);
 			List<UIComponent> children = this.getChildren();
 //			List<UIComponent> children = new ArrayList<UIComponent>();
-//			this.getChildren().forEach(child -> {
-//				
-//				if (child instanceof ComponentRef) {
-//					children.addAll(child.getChildren());
-//				} else {
+//			this.getChildren().forEach(child ->
+//			{
+//				if (child instanceof ComponentRef)
+//				{
+//					children.addAll(child.getChildren().stream().map(grandchild ->
+//					{
+//						grandchild.setRendered(child.isRendered());
+//						return grandchild;
+//					}).collect(Collectors.toList()));
+//				}
+//				else
+//				{
 //					children.add(child);
 //				}
 //			});

@@ -2,13 +2,11 @@
 @use 'sass:meta';
 
 :root {
-//	--input-grid-columns-template: [label] fit-content(40%) [left] auto [center] 1fr [right] auto [end];
 	--input-grid-column-fullwidth: label / end;
 	--input-grid-row: 1;
 	--input-grid-label-columns-template: subgrid;
 	
 	@media (max-width: 768px) {
-//		--input-grid-columns-template: [left] auto [center] 1fr [right] auto [end];
 		--input-grid-column-fullwidth: left / end;
 		--input-grid-row: auto;
 		--input-grid-label-columns-template: [label] auto [end] 1fr;
@@ -121,7 +119,7 @@
 					&.p-col-count-#{$col-count} :last-child { grid-column-end: end; }
 				}
 				
-				> .jeesl-output-container, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor {
+				> .jeesl-output-container, > .jeesl-input-multi, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor {
 					grid-column: left / end;
 				}
 				
@@ -131,6 +129,11 @@
 				}
 				
 				> .jeesl-output-container, > .jeesl-input-container, > .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-chips, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar {
+					> .ui-outputicons {
+						display: flex;
+						gap: var(--form-column-spacing);
+					}
+					
 					> .ui-outputtext, > .ui-inputfield, > .ui-inputtextarea {
 						grid-column: center / right;
 						width: auto;
@@ -162,8 +165,14 @@
 						margin-right: calc(-1 * var(--form-column-spacing));
 					}
 				}
+
+				// In case of an input grid with a varying amount of input fields per row.
+				> .jeesl-input-multi {
+					display: flex;
+					gap: var(--form-column-spacing);
+				}
 				
-				// Select menus have hidden "ui-helper" accessibles, so the ":first-child" selector to start in the left-column won't work and we need to specifically set it.
+				// Select menus have hidden "ui-helper" accessibles, so the ":first-child" selector to start in the left-column won't work and it needs to specifically be set.
 				// Also removal of gap between textbox and button required.
 				> .ui-selectonemenu, > .ui-selectcheckboxmenu {
 					.ui-inputfield {
@@ -189,7 +198,7 @@
 					margin: 0;
 				}
 				
-				// Set the size of the 
+				// Set the size of the icons inside of the form fields.
 				.jeesl-input-grid-icon, .pf-action-icon {
 					height: var(--input-icon-height);
 				}
@@ -230,10 +239,14 @@
 	
 	.ui-outputlabel {
 		background: var(--panel-content-input-background);
-		margin-left: calc(-1 * var(--input-content-spacing));
+//		margin-left: calc(-1 * var(--input-content-spacing));
 		padding: var(--input-content-spacing);
 		
 		&:first-child { border-radius: var(--border-left-radius); }
 		&:last-child { border-radius: var(--border-right-radius); }
+		
+		+ .ui-inputfield {
+			padding-left: var(--input-content-spacing);
+		}
 	}
 }

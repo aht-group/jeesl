@@ -19,6 +19,7 @@
 		--highlight-border-color: #{$dark-colour};
 		--link-foreground: #{$link-colour};
 		--link-foreground-hover: #{$link-hover-colour};
+		--link-foreground-highlight: var(--link-foreground);
 		
 		/* MAIN NAV */
 		--main-nav-foreground: var(--body-foreground);

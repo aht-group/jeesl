@@ -4,8 +4,10 @@
 	:not(.ui-widget-header) a {
 		color: var(--link-foreground);
 		
-		&:hover, &:visited { color: var(--link-foreground-hover); }
-		&:hover { text-decoration: var(--link-decoration-hover); }
+		&:hover {
+			color: var(--link-foreground-hover);
+			text-decoration: var(--link-decoration-hover);
+		}
 	}
 	
 	// The header links are supposed to stay in the base text colour.
@@ -14,6 +16,10 @@
 		
 		&:hover, &:visited { color: var(--body-foreground-emphasis); }
 	}
+}
+
+.jeesl-greyscale {
+	filter: grayscale(1);
 }
 
 .jeesl-uppercase {

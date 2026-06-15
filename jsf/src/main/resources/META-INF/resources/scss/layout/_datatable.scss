@@ -2,12 +2,16 @@
 
 @mixin inner-table {
 	tbody, .ui-datatable-data {
-		th, td {
-			.jeesl-icon {
-				margin: 0 var(--half-spacing);
-				
-				&:first-child { margin-left: 0; }
-				&:last-child { margin-right: 0; }
+		tr {
+			height: var(--list-element-height);
+			
+			th, td {
+				.jeesl-icon {
+					margin: 0 var(--half-spacing);
+					
+					&:first-child { margin-left: 0; }
+					&:last-child { margin-right: 0; }
+				}
 			}
 		}
 	}

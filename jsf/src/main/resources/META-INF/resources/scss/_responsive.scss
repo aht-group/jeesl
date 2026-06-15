@@ -167,7 +167,8 @@ $enable-pointer-cursor-for-buttons: true;
 			.jeesl-dropdown-item-label {
 				background: transparent;
 				color: $foreground;
-    			display: block;
+    			display: flex;
+				gap: $half-spacing;
 				height: 30px;
 				line-height: 14px;
 				margin: 0;
@@ -176,7 +177,6 @@ $enable-pointer-cursor-for-buttons: true;
 			    white-space: nowrap;
 
 				@media (max-width: 768px) {
-					display: flex;
 					height: 50px;
 					line-height: 50px;
 					margin: 0;
@@ -194,18 +194,8 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				.jeesl-dropdown-item-label-icon {
 					height: 100%;
-					margin: 0 5px;
-					
-					&:first-child {
-						margin-left: 0;
-					}
-					
-					&:last-child {
-						margin-right: 0;
-					}
 
 					@media (max-width: 768px) {
-						margin: 0;
 						padding: 9px;
 					}
 				}
@@ -2569,23 +2559,23 @@ body, .ui-widget {
 				.jeesl-dropdown-item .jeesl-dropdown-item-label {
 					flex-direction: row-reverse;
 					
-					.jeesl-dropdown-item-label-icon, .jeesl-dropdown-item-label-text {
-						&:first-child {
-							margin-right: 0;
-
-							 @media (max-width: 768px) {
-								margin-right: 0;
-							}
-						}
-						
-						&:last-child {
-							margin-left: 0;
-
-							 @media (max-width: 768px) {
-								margin-left: 12px;
-							}
-						}
-					}
+//					.jeesl-dropdown-item-label-icon, .jeesl-dropdown-item-label-text {
+//						&:first-child {
+//							margin-right: 0;
+//
+//							 @media (max-width: 768px) {
+//								margin-right: 0;
+//							}
+//						}
+//						
+//						&:last-child {
+//							margin-left: 0;
+//
+//							 @media (max-width: 768px) {
+//								margin-left: 12px;
+//							}
+//						}
+//					}
 				}
 			}
 			
@@ -3940,7 +3930,8 @@ body, .ui-widget {
 			
 		tbody, .ui-datatable-data {
 			tr {
-				&.ui-state-highlight .jeesl-red {
+				&.ui-state-highlight {
+					--link-foreground: var(--link-foreground-highlight);
 					--body-alert-foreground: var(--body-alert-foreground-highlight);
 				}
 				
@@ -4206,6 +4197,8 @@ body, .ui-widget {
 		}
 	}
 }
+
+@import './layout/overlay';
 
 .ui-selectonemenu-panel .ui-selectonemenu-table {
 	border: 0;
