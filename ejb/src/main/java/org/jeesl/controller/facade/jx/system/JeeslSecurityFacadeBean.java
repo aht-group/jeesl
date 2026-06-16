@@ -32,7 +32,6 @@ import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
-import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.access.JeeslStaff;
@@ -43,7 +42,6 @@ import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutoria
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory.Type;
@@ -983,7 +981,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		Join<S,R> jRole = null;//root.get(JeeslStaff.Attributes.role.toString());
+		Join<S,R> jRole = null;
 		
 		if(ObjectUtils.isNotEmpty(query.getSecurityRole()))
 		{
@@ -1003,8 +1001,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		}
 		if(ObjectUtils.isNotEmpty(query.getStaffDomains()))
 		{
-			List<EjbWithId> domains = EjbStaffFactory.toDomains(query.getStaffDomains(),cStaff);
-			
+//			List<EjbWithId> domains = EjbStaffFactory.toDomains(query.getStaffDomains(),cStaff);
 			Path<?> pDomain = root.get(JeeslStaff.Attributes.domain.toString());
 			predicates.add(pDomain.in(query.getStaffDomains()));
 		}

@@ -126,6 +126,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public abstract AbstractEjbQuery idList(List<Long> list);
 	
 	protected List<EjbWithId> staffDomains;
+	protected void addStaffDomain(EjbWithId domain) {if(Objects.isNull(staffDomains)) {staffDomains = new ArrayList<>();} staffDomains.add(domain);}
 	public List<EjbWithId> getStaffDomains() {return staffDomains;}
 
 	protected List<String> codeList;

@@ -47,9 +47,10 @@
 		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationHost"/></f:facet>
 						<h:outputText value="#{p.destinationHost.name[localeCode].lang}" />  
 		            </p:column>
-					<p:column styleClass="jeesl-center">
+					<p:column styleClass="jeesl-left">
 		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="service"/></f:facet>
-						<jtp:symbolizer value="#{p.service}" />  
+						<jtp:symbolizer value="#{p.service}" marginRight="5"/>  
+						<h:outputText value="#{p.service.name[localeCode].lang}" />  
 		            </p:column>
 				</p:dataTable>
 			</h:form>
