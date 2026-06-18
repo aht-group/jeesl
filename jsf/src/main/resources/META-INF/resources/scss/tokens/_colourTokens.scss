@@ -142,6 +142,8 @@
 		/* input */
 		--panel-content-input-background: #{$white-100};
 		--panel-content-input-foreground: var(--body-foreground);
+		--panel-content-input-placeholder-foreground: #{$brighter-colour};
+		--panel-content-input-placeholder-style: italic;
 		
 		/* output */
 		--panel-content-output-background: transparent;

@@ -1,6 +1,8 @@
 @use 'sass:list';
 @use 'sass:meta';
 
+@use '../controls/output' as output;
+
 :root {
 	--input-grid-column-fullwidth: label / end;
 	--input-grid-row: 1;
@@ -119,6 +121,8 @@
 					&.p-col-count-#{$col-count} :last-child { grid-column-end: end; }
 				}
 				
+				@include output.form-output();
+			
 				> .jeesl-output-container, > .jeesl-input-multi, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor {
 					grid-column: left / end;
 				}
@@ -207,10 +211,6 @@
 				> .ui-button {
 					grid-column-start: right;
 				}
-
-				.ui-outputtext {
-					min-height: var(--list-element-height);
-				}
 			}
 		}
 	}
@@ -221,14 +221,8 @@
 	grid-column: label / end;
 }
 
-.jeesl-output-container {
-	align-items: center;
-	gap: var(--input-content-spacing);
-}
-
 .jeesl-input-container {
 	display: flex;
-//	gap: var(--input-content-spacing);
 
 	.ui-inputfield {
 		border-radius: var(--border-radius);
@@ -239,7 +233,6 @@
 	
 	.ui-outputlabel {
 		background: var(--panel-content-input-background);
-//		margin-left: calc(-1 * var(--input-content-spacing));
 		padding: var(--input-content-spacing);
 		
 		&:first-child { border-radius: var(--border-left-radius); }

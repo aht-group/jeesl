@@ -3380,7 +3380,6 @@ body, .ui-widget {
 	border-style: hidden;
 	font-size: 1em;
 	height: 100%;
-	line-height: 1.25em;
 	margin: 0;
 	table-layout: auto;
 
@@ -3442,7 +3441,6 @@ body, .ui-widget {
 			border-color: inherit;
 			border-width: $border-width;
 			box-sizing: border-box; // Override handsontable super specific selector nonsense.
-			line-height: 1.25em;
 			padding: var(--datatable-cell-padding);
 			
 			&.jeesl-column-min-width {
