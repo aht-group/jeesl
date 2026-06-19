@@ -3,8 +3,6 @@
 @mixin inner-table {
 	tbody, .ui-datatable-data {
 		tr {
-			height: var(--list-element-height);
-			
 			th, td {
 				.jeesl-icon {
 					margin: 0 var(--half-spacing);
@@ -58,6 +56,7 @@
 		thead tr { border-color: var(--container-border-color); }
 		tbody.ui-datatable-data tr {
 			border-color: var(--datatable-content-border-color);
+			white-space: nowrap;
 
 			&:last-child { border-bottom-width: 0; }
 			
@@ -71,7 +70,7 @@
 		tbody.ui-datatable-data tr {
 			&.ui-state-highlight .timesheet-month-content .timesheet-month-day {
 				background: var(--datatable-content-highlight-background);
-				color: var(--grey-medium);
+				color: var(--grey-bright);
 				filter: brightness(1.2);
 				font-weight: 500;
 				padding-top: 2px; // Make up for space of "hanging" letters, as numbers don't have any and thus they look too high up when centered.

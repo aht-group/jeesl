@@ -4,15 +4,16 @@
 	padding: var(--output-spacing);
 }
 
-.ui-widget-content {
-	.ui-outputtext {
+@mixin form-output() {
+	> .ui-outputtext {
 		@include output-field;
 		
 		align-items: center;
 		display: flex;
+		gap: var(--input-content-spacing);
 	}
 	
-	.jeesl-output-container {
+	> .jeesl-output-container {
 		@include output-field;
 		
 		.ui-outputtext {

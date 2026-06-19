@@ -1,0 +1,6 @@
+.ui-inputfield {
+	&.jeesl-placeholder {
+		color: var(--panel-content-input-placeholder-foreground);
+		font-style: var(--panel-content-input-placeholder-style);
+	}
+}
