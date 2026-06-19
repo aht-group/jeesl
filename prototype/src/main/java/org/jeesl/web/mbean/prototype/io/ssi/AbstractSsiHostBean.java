@@ -110,5 +110,13 @@ public class AbstractSsiHostBean <L extends JeeslLang, D extends JeeslDescriptio
 		reloadHosts();
 	}
 	
+	public void deleteHost() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		logger.info(AbstractLogMessage.deleteEntity(host));
+		fSsi.rm(host);
+		this.reset(true);
+		this.reloadHosts();
+	}
+	
 	public void reorderHosts() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSsi,hosts);}
 }
