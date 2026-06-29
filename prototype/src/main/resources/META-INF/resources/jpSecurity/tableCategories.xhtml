@@ -21,7 +21,7 @@
 		<p:dataTable styleClass="jeesl-datatable"
 				var="c" value="#{cc.attrs.bean.categories}" 
 				selection="#{cc.attrs.bean.category}" draggableRows="true" selectionMode="single" rowKey="#{c.id}"
-				paginator="true" rows="20" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+				paginator="true" rows="25" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 			<f:facet name="header">
 				<j:dtHeader entity="SecurityCategory" code="listOf">
 					<j:svg type="jeeslAdd" rendered="#{cc.attrs.withAdd}" listener="#{cc.attrs.bean.addCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
