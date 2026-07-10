@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.controller.io.db.JeesDdlClassProvider;
 import org.jeesl.interfaces.controller.io.db.flyway.JeeslFlywayPathProvider;
+import org.jeesl.model.ejb.io.attribute.IoAttributeSection;
 import org.jeesl.model.ejb.io.attribute.IoAttributeSet;
 
 public class FlywayIoAttributePathProvider implements JeeslFlywayPathProvider, JeesDdlClassProvider
@@ -23,6 +24,7 @@ public class FlywayIoAttributePathProvider implements JeeslFlywayPathProvider, J
 		List<Class<?>> list = new ArrayList<>();
 		
 		list.add(IoAttributeSet.class);
+		list.add(IoAttributeSection.class);
 		
 		
 		return list;

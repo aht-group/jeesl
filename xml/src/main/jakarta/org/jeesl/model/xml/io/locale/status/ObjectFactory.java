@@ -422,6 +422,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Disability }
+     * 
+     */
+    public Disability createDisability() {
+        return new Disability();
+    }
+
+    /**
      * Create an instance of {@link Capabilities }
      * 
      */
