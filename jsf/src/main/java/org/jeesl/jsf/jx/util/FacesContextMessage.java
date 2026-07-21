@@ -44,7 +44,7 @@ public class FacesContextMessage implements JeeslFacesContextMessage
 	private void addMessage(String id, Severity severity, String summary, String detail) {addMessage(id,new FacesMessage(severity,summary,detail));}
 	private void addMessage(String id, FacesMessage message)
 	{
-		logger.info(FacesMessage.class.getSimpleName()+": "+message.getSeverity()+" ("+id+") "+message.getSummary()+": "+message.getSummary());
+		logger.info("FacesMessage Severity:{} ClientId:{} Summary:{} Detail:{}",message.getSeverity(),id,message.getSummary(),message.getDetail());
 		FacesContext.getCurrentInstance().addMessage(id, message);
 	}
 }

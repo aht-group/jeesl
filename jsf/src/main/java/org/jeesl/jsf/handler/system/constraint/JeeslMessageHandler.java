@@ -139,7 +139,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(ObjectUtils.isEmpty(summary)) {summary = "ERROR";}
 		
-		fcm.info(fid,summary,text);
+		fcm.error(fid,summary,text);
 	}
 	
 	

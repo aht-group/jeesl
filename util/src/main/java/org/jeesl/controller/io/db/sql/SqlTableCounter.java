@@ -97,7 +97,7 @@ public class SqlTableCounter
 	public void output() throws Exception
 	{
 		Table t = XmlTableFactory.build(header(), data());
-		OfxTextRenderer.table(t, System.out);
+		OfxTextRenderer.instance().table(t, System.out);
 	}
 
     public Map<String, String> sort(Map<String, String> data)
