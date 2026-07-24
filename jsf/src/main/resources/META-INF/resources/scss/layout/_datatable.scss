@@ -4,7 +4,7 @@
 	tbody, .ui-datatable-data {
 		tr {
 			th, td {
-				.jeesl-icon {
+				> .jeesl-icon {
 					margin: 0 var(--half-spacing);
 					
 					&:first-child { margin-left: 0; }
@@ -105,4 +105,12 @@
 			}
 		}
 	}
+}
+
+// Hands-on-table sets the table cell's line height, which needs to be undone.
+.ui-handsontable td {
+	line-height: inherit;
+	
+	// Hands-on-table sets a height as inline-style for the first table cell for some reason, which needs to be overridden.
+	&:first-child { height: auto !important; }
 }

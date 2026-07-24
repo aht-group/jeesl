@@ -43,6 +43,9 @@
 	--tabview-header-top-padding: var(--slim-spacing);
 	--tabview-header-tab-gap: 3px;
 	
+	// OVERLAY
+	--overlay-box-shadow: #{$overlay-shadow};
+	
 	// FORMS
 	--form-entry-height: #{$element-height};
 	--form-spacing: var(--regular-spacing);
@@ -59,6 +62,7 @@
 	
 	// OUTPUT
 	--output-spacing: 0;
+	--output-content-spacing: var(--input-content-spacing);
 	
 	// BUTTON
 	--button-height: #{$element-height};

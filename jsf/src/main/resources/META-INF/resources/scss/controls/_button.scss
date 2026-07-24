@@ -2,6 +2,11 @@
 	margin: 0;
 	min-width: var(--button-min-width);
 	
+	&.ui-button-icon-only {
+		padding: var(--slim-spacing);
+		width: auto;
+	}
+	
 	.ui-icon {
 		font-size: var(--button-icon-font-size);
 	}

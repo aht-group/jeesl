@@ -4,3 +4,29 @@
 		font-style: var(--panel-content-input-placeholder-style);
 	}
 }
+
+
+.ui-inplace-content {
+	display: flex;
+	gap: var(--form-column-spacing);
+	
+	.ui-inplace-editor {
+		display: flex;
+		
+		.ui-button {
+			&:not(:last-child) {
+				border-radius: 0;
+				border-right: none;
+				margin-right: calc(-1 * var(--border-width));
+			}
+			
+			&:first-child {
+				border-radius: var(--border-left-radius);
+			}
+			
+			&:last-child {
+				border-radius: var(--border-right-radius);
+			}
+		}
+	}
+}

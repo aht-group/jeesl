@@ -1,0 +1,11 @@
+.ui-tooltip {
+	.ui-tooltip-arrow {
+		border-right-color: var(--highlight-background);
+	}
+	
+	.ui-tooltip-text {
+		background-color: var(--highlight-background);
+		box-shadow: var(--overlay-box-shadow);
+		max-width: 350px;
+	}
+}

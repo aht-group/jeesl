@@ -47,7 +47,6 @@
 	.p-grid {
 		display: grid;
 		grid-column: var(--input-grid-column-fullwidth);
-		grid-row: span 2;
 		grid-template-columns: subgrid;
 		
 		@media (max-width: 768px) {
@@ -64,24 +63,25 @@
 				
 				display: grid;
 				grid-column: label / end;
-				grid-row: 1 / span 2;
 				grid-template-columns: var(--input-grid-label-columns-template);
 				grid-template-rows: subgrid;
 				
 				.ui-outputlabel-text {
+					align-items: center;
+					display: flex;
+					gap: var(--form-column-spacing);
 					grid-column: label;
 					grid-row: 1;
+					justify-content: space-between;
 					
 					&:last-child {
 						grid-row: 1 / span 2;
 					}
-				}
-				
-				.ui-outputlabel-info {
-					font-weight: 500;
-					grid-column: label / end;
-					grid-row: 2;
-					padding: var(--slim-spacing) 0 var(--half-spacing);
+					
+					img {
+						height: var(--form-entry-height);
+						padding: var(--half-spacing) 0;
+					}
 				}
 				
 				@media (max-width: 768px) {

@@ -3270,9 +3270,6 @@ body, .ui-widget {
 	@include jeesl-panel;
 }
 
-@import './layout/container';
-@import './layout/panel';
-
 .jeesl-tree {
 	@extend .jeesl-panel;
 	
@@ -4090,8 +4087,6 @@ body, .ui-widget {
 	}
 }
 
-@import './layout/datatable';
-
 .jeesl-overlay-container {
 	background: var(--panel-content-select-dropdown-background);
 	border: none;
@@ -4195,8 +4190,6 @@ body, .ui-widget {
 		}
 	}
 }
-
-@import './layout/overlay';
 
 .ui-selectonemenu-panel .ui-selectonemenu-table {
 	border: 0;
@@ -4682,8 +4675,6 @@ body, .ui-widget {
 	}
 }
 
-@import './layout/dialog';
-
 .jeesl-action-tabview {
 	display: block;
 	position: relative;
@@ -4755,8 +4746,6 @@ body, .ui-widget {
 		}
 	}
 }
-
-@import './layout/tabView';
 
 .fc {
 	.fc-toolbar {
@@ -4916,8 +4905,6 @@ body, .ui-widget {
 		flex-grow: 1;
 	}
 }
-
-@import './layout/inputGrid';
 
 .pf-action-icon {
 	float: none;
@@ -5235,6 +5222,7 @@ body, .ui-widget {
 }
 
 @import '_responsiveHtmlRender';
-@import './layout/htmlRender';
 @import '_responsivePrint';
 @import '_responsiveDeprecated';
+
+@import 'layout/layout';
