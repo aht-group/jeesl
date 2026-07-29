@@ -15,6 +15,11 @@ public class JsonAzureUser implements Serializable
 
 	public JsonAzureUser() {}
 	
+	@JsonProperty("id")
+	private Long id;
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
+
 	@JsonProperty("LoginName")
 	private String loginName;
 	public String getLoginName() {return loginName;}
