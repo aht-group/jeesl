@@ -1,0 +1,9 @@
+.jeesl-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--slim-spacing);
+
+	:last-child {
+		margin-bottom: 0;
+	}
+}

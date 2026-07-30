@@ -25,3 +25,8 @@
 		}
 	}
 }
+
+.jeesl-output-container {
+	display: flex;
+	gap: var(--output-content-spacing);
+}

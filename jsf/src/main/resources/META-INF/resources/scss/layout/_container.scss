@@ -3,8 +3,12 @@
 @mixin titlebar {
 	min-height: var(--container-header-height);
 	
-	.pf-action-icon.pf-inactive {
-		@extend .jeesl-greyscale;
+	.pf-action-icon {
+		line-height: 1rem; // Action button will be too tall if it includes text due to the base line-height, which needs to be unset.
+	
+		&.pf-inactive {
+			@extend .jeesl-greyscale;
+		}
 	}
 }
 

@@ -46,8 +46,12 @@
 			<ui:repeat id="repeatG" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}"  var="c">
 				<j:inputGrid>
 					<h:panelGroup rendered="#{cc.attrs.withLabel}" styleClass="ui-outputlabel">
-						<h:outputText value="#{c.name[localeCode].lang}" styleClass="ui-outputlabel-text" />
-						<h:outputText rendered="#{cc.attrs.showDescription and not empty c.description[localeCode].lang}" value="#{c.description[localeCode].lang}" styleClass="jeesl-italic ui-outputlabel-info"/>
+						<h:panelGroup styleClass="ui-outputlabel-text">
+							<h:outputText value="#{c.name[localeCode].lang}" />
+							<p:graphicImage id="info" name="#{appIconBean.svg['jeeslInfo']}" library="jeeslGfx" rendered="#{cc.attrs.showDescription and not empty c.description[localeCode].lang}"/>
+							
+							<p:tooltip for="info" value="#{c.description[localeCode].lang}" rendered="#{cc.attrs.showDescription and not empty c.description[localeCode].lang}"/>
+						</h:panelGroup>
 					</h:panelGroup>
 					<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
 					<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
