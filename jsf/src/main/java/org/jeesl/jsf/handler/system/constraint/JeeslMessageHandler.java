@@ -103,6 +103,8 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(ObjectUtils.isEmpty(summary)) {summary = "INFO";}
 		
+		
+		
 		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,text);
 	}
 	
