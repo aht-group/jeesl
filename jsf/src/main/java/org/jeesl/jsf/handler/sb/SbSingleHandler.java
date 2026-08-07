@@ -247,7 +247,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleSelection
 	{
 		if(Objects.nonNull(t1) && list.contains(t1)) {selection = t1;}
 		else if(Objects.nonNull(t2) && list.contains(t2)) {selection = t2;}
-		else {setDefault();}
+		else {this.setDefault();}
 	}
 	
 	public <E extends Enum<E>> void setDefault(E code) {this.setDefault(code.toString());}
