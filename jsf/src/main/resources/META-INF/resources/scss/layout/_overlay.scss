@@ -19,3 +19,32 @@
 		.ui-paginator.ui-paginator-bottom { border: none; }
 	}
 }
+
+.ui-input-overlay {
+	background: var(--panel-content-select-dropdown-background);
+	border: var(--overlay-border);
+	border-radius: var(--overlay-border-radius);
+	box-shadow: var(--overlay-box-shadow);
+	color: var(--panel-content-select-dropdown-foreground);
+	
+	.ui-autocomplete-items {
+		margin: var(--overlay-list-spacing);
+		min-height: var(--list-element-height);
+		
+		.ui-autocomplete-item {
+			background: transparent;
+			border: none;
+			text-shadow: none;
+			transition: background var(--transition-duration) var(--transition-function);
+			
+			&.ui-state-highlight {
+				background: var(--panel-content-select-dropdown-hover-background);
+				color: var(--panel-content-select-dropdown-hover-foreground);
+			}
+			
+			td {
+				border: none;
+			}
+		}
+	}
+}

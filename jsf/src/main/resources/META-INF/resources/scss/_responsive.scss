@@ -584,8 +584,6 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 		
 	.pf-action-icon, .jeesl-icon, .jeesl-icon-select .ui-selectonemenu-label {
-		@include vertical-center(before);
-		
 		align-items: center;
 		border-radius: 0;
 		color: var(--container-header-foreground);
@@ -598,11 +596,6 @@ $enable-pointer-cursor-for-buttons: true;
 		@media (max-width: 768px) {
 			align-items: stretch;
 			padding: $half-spacing 0;
-			
-			&:before {
-			    border-left: $border;
-			    height: auto;
-			}
 		}
 		
 		&:hover {

@@ -18,6 +18,7 @@
 	--overlay-border: var(--container-border);
 	--overlay-border-radius: var(--border-radius);
 	--overlay-padding-vertical: var(--half-spacing);
+	--overlay-list-spacing: var(--half-spacing) 0;
 	
 	// BORDERS
 	--border-width: #{$border-width};
@@ -29,7 +30,10 @@
 	
 	// CONTAINER
 	--container-header-height: #{$element-height + $header-element-underline};
-	--container-header-underline-width: #{$header-element-underline};
+	--container-header-separator-thickness: 0 var(--border-width) 0 0;
+	--container-header-separator-spacing: var(--slim-spacing) var(--half-spacing);
+	--container-header-icon-border: none;
+	--container-header-underline-thickness: #{$header-element-underline};
 	--container-content-padding-vertical: var(--half-spacing);
 	--container-content-padding-horizontal: var(--regular-spacing);
 	--container-content-padding: var(--container-content-padding-vertical) var(--container-content-padding-horizontal);
@@ -84,7 +88,10 @@
 		
 		// CONTAINER
 		--container-header-height: #{$element-height-mobile + $header-element-underline-mobile};
-		--container-header-underline-width: #{$header-element-underline-mobile};
+		--container-header-separator-thickness: 0;
+		--container-header-separator-spacing: 0 var(--regular-spacing);
+		--container-header-icon-border: var(--container-border);
+		--container-header-underline-thickness: #{$header-element-underline-mobile};
 
 		// TABVIEW
 		--tabview-header-top-padding: 4px;
@@ -104,7 +111,7 @@
 		--input-label-spacing-horizontal: 5px;
 		
 		// OUTPUT
-		--output-spacing: 0 var(--regular-spacing);
+		--output-spacing: var(--half-spacing) var(--regular-spacing);
 
 		// BUTTON
 		--button-height: #{$element-height-mobile};
