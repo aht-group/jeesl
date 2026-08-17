@@ -22,7 +22,8 @@ public class DatePredicateBuilder
 	{
 		switch(cq.getType())
 		{
-			case AtOrAfter: predicates.add(cB.greaterThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
+			case Equal: 		predicates.add(cB.equal(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
+			case AtOrAfter: 	predicates.add(cB.greaterThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
 			case BeforeOrAt: predicates.add(cB.lessThanOrEqualTo(eDate,DateUtil.toDate(cq.getDate().plusDays(1).atStartOfDay()))); break;
 			case Before: predicates.add(cB.lessThan(eDate,DateUtil.toDate(cq.getDate().atStartOfDay()))); break;
 			case Null: predicates.add(cB.isNull(eDate)); break;

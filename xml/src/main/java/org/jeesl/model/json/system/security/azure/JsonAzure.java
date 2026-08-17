@@ -26,4 +26,9 @@ public class JsonAzure implements Serializable
 	private List<JsonEntraSp> sharepoints;
 	public List<JsonEntraSp> getSharepoints() {return sharepoints;}
 	public void setSharepoints(List<JsonEntraSp> sharepoints) {this.sharepoints = sharepoints;}
+	
+	@JsonProperty("sharepoint")
+	private JsonEntraSp sharepoint;
+	public JsonEntraSp getSharepoint() {return sharepoint;}
+	public void setSharepoint(JsonEntraSp sharepoint) {this.sharepoint = sharepoint;}
 }
