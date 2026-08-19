@@ -13,7 +13,7 @@
 		
 		.ui-tabs-header {
 			// Keep tab height in case of flex wrap
-			min-height: calc(var(--container-header-height) - var(--container-header-underline-width) - var(--tabview-header-top-padding));
+			min-height: calc(var(--container-header-height) - var(--container-header-underline-thickness) - var(--tabview-header-top-padding));
 		}
 	}
 }

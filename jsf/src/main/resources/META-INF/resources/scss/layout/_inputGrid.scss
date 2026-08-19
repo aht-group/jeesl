@@ -98,7 +98,7 @@
 			}
 			
 			&:not(.ui-outputlabel) {
-				align-items: center;
+				align-items: stretch;
 				display: grid;
 				gap: var(--form-column-spacing);
 				grid-column: left / end;
@@ -123,16 +123,15 @@
 				
 				@include output.form-output();
 			
-				> .jeesl-output-container, > .jeesl-input-multi, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor {
+				> .jeesl-output-container, > .jeesl-input-multi, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker,
+				> .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor, > .ui-autocomplete {
 					grid-column: left / end;
 				}
 				
 				> .jeesl-output-container, > .jeesl-input-container, > .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-chips, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar {
 					display: grid;
 					grid-template-columns: subgrid;
-				}
 				
-				> .jeesl-output-container, > .jeesl-input-container, > .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-chips, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar {
 					> .ui-outputicons {
 						display: flex;
 						gap: var(--form-column-spacing);
@@ -157,6 +156,10 @@
 							justify-content: end;
 						}
 					}
+				}
+				
+				> .jeesl-output-container {
+					align-items: center;
 				}
 				
 				> .ui-spinner {

@@ -1,13 +1,38 @@
 @use '../core' as core;
 
 @mixin titlebar {
+	justify-content: flex-end;
 	min-height: var(--container-header-height);
+	
+	.ui-separator {
+		border-width: var(--container-header-separator-thickness);
+		height: auto;
+		margin: var(--container-header-separator-spacing);
+		
+		// :not is required to override the regular rule, .ui-separator with sibling selector alone is less specific.
+		+ .pf-action-icon:not(:first-child) {
+			border-right: none;
+		}
+	}
+	
+	.pf-datatable-header-title, .ui-panel-title {
+		margin: 0;
+		min-height: calc(var(--container-header-height) - var(--container-header-underline-thickness));
+	}
+	
+	.pf-datatable-header-actions, .ui-panel-actions {
+		flex-wrap: wrap;
+	}
 	
 	.pf-action-icon {
 		line-height: 1rem; // Action button will be too tall if it includes text due to the base line-height, which needs to be unset.
 	
 		&.pf-inactive {
 			@extend .jeesl-greyscale;
+		}
+		
+		&:not(:first-child) {
+			border-right: var(--container-header-icon-border);
 		}
 	}
 }

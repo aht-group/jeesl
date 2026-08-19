@@ -54,8 +54,8 @@
 			<j:outputXpath value="#{p}" xpath="#{column.xpath}" localeCode="#{localeCode}"/>
 		</p:columns>
 	</p:dataTable>
-	<p:overlayPanel for=":#{cc.clientId}:dtProject:dth:giProjectSelection:link" widgetVar="wv-#{cc.clientId}" appendToBody="false">
-		<p:dataTable id="dtOpContact" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
+	<p:overlayPanel for=":#{cc.clientId}:dtProject:dth:giProjectSelection:link" widgetVar="wv-#{cc.clientId}" appendToBody="false" styleClass="jeesl-overlay-container jeesl-dropdown-list">
+		<p:dataTable id="dtOpContact" var="var" value="#{cc.attrs.handler.lazy}" lazy="true" styleClass="jeesl-datatable"
 					 selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
 					 rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
 			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.addEntity()}" oncomplete="PF('wv-#{cc.clientId}').hide();"/>
@@ -63,7 +63,7 @@
 				<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterBy" value="#{var.column0}"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
-				<f:facet name="header">
+				<f:facet name="header" rendered="#{(empty cc.attrs.handler.columns[0].code and not empty appLabelBean.entities[cc.attrs.handler.columns[0].entity][cc.attrs.localeCode].lang) or (not empty cc.attrs.handler.columns[0].code and not empty appLabelBean.labels[cc.attrs.handler.columns[0].entity][cc.attrs.handler.columns[0].code][cc.attrs.localeCode].lang)}">
 					<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[0].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[0].code}"/>
 					<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[0].entity][cc.attrs.handler.columns[0].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[0].code}"/>
 				</f:facet>
