@@ -21,6 +21,7 @@ public class CqDate implements JeeslCqDate
 	public static CqDate isBeforeOrAt(LocalDate date, String path) {return new CqDate(Type.BeforeOrAt,date,path);}
 	public static CqDate isAt(LocalDate date, String path) {return new CqDate(Type.Equal,date,path);}
 	public static CqDate isAtOrAfter(LocalDate date, String path) {return new CqDate(Type.AtOrAfter,date,path);}
+	public static CqDate isAfter(LocalDate date, String path) {return new CqDate(Type.After,date,path);}
 	public static CqDate isNull(String path) {return new CqDate(Type.Null,null,path);}
 	public static CqDate notNull(String path) {return new CqDate(Type.NotNull,null,path);}
 	
