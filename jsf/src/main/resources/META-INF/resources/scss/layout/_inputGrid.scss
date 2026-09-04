@@ -124,7 +124,7 @@
 				@include output.form-output();
 			
 				> .jeesl-output-container, > .jeesl-input-multi, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker,
-				> .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor, > .ui-autocomplete {
+				> .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor, > .ui-autocomplete, > .jeesl-subgrid {
 					grid-column: left / end;
 				}
 				
@@ -219,7 +219,7 @@
 	}
 }
 
-.jeesl-input-grid .jeesl-input-grid {
+.jeesl-input-grid .jeesl-input-grid:not(.jeesl-subgrid) {
 	grid-template-columns: subgrid;
 	grid-column: label / end;
 }

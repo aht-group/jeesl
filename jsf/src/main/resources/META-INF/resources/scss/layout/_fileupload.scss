@@ -1,0 +1,58 @@
+@use 'container' as container;
+
+.jeesl-fileupload {
+	border: var(--container-border);
+	
+	.ui-fileupload-buttonbar {
+		@include container.titlebar();
+	}
+}
+
+.ui-fileupload-content {
+	background: var(--container-content-background);
+	border: none;
+	padding: var(--container-content-padding);
+	
+	.ui-fileupload-files {
+		display: block;
+		margin: 0;
+	}
+	
+	.ui-fileupload-files > div {
+		display: grid;
+		gap: var(--form-column-spacing) var(--form-spacing);
+		grid-template-columns: [filename] 1fr [filesize] auto [progress] 30% [action] auto [end];
+		
+		.ui-fileupload-row {
+			align-items: center;
+			display: grid;
+			grid-column: filename / end;
+			grid-template-columns: subgrid;
+			
+			> div {
+				display: block;
+				padding: 0;
+			}
+			
+			.ui-fileupload-preview { display: none; }
+			.ui-fileupload-filename {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+		
+		.ui-progressbar {
+			background: var(--grey-brighter);
+			border: none;
+			height: var(--form-entry-height);
+			top: 0;
+			width: auto;
+		}
+		.ui-progressbar-value {
+			background: var(--highlight-background);
+			border: none;
+			border-radius: 0;
+		}
+	}
+}

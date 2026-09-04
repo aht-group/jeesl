@@ -37,11 +37,11 @@
 	}
 }
 
-.jeesl-panel .ui-panel-content, .jeesl-tabs .ui-tabs-panel, .jeesl-dialog .ui-dialog-content {
+.jeesl-panel .ui-panel-content, .jeesl-tabs .ui-tabs-panel, .jeesl-dialog .ui-dialog-content, .jeesl-fileupload .ui-fileupload-content {
 	padding: var(--container-content-padding);
 	
 	// Negate padding for nested container children.
-	.jeesl-panel, .jeesl-tabs, .jeesl-datatable {
+	.jeesl-panel, .jeesl-tabs, .jeesl-datatable, .jeesl-fileupload {
 		border-radius: 0;
 		border-width: var(--border-width) 0;
 		margin: 0 calc(-1 * var(--container-content-padding-horizontal));
