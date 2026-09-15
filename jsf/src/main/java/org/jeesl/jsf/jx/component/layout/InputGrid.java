@@ -21,6 +21,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.jx.util.ComponentAttribute;
 import org.primefaces.component.blockui.BlockUIBase;
 import org.primefaces.component.outputlabel.OutputLabel;
+import org.primefaces.component.separator.UISeparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -191,9 +192,11 @@ public class InputGrid extends UIPanel
 					}
 					else
 					{
+						boolean isSeparator = child instanceof UISeparator;
+
         				if (wrapInput) {
         					UIPanel inputChild = new UIPanel();
-    						StringBuffer styleClass = new StringBuffer("p-col p-col-count-" + (columnCount - 1));
+    						StringBuffer styleClass = new StringBuffer("p-col p-col-count-" + (columnCount - 1) + (isSeparator ? " p-col-separator" : ""));
     						if (columnCount > 2) {
     							styleClass.append(" p-col-multi");
     						}

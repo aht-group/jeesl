@@ -27,6 +27,33 @@
 	@return $columns;
 }
 
+.jeesl-input-grid.jeesl-input-grid-descriptive .p-grid .p-col {
+	&.ui-outputlabel {
+		grid-column: label / end;
+		grid-row: 1 / span 2;
+		
+		.ui-outputlabel-description {
+			display: grid;
+			font-style: italic;
+			font-weight: 500;
+			grid-column: inherit;
+			grid-row: 1;
+			grid-template-columns: var(--input-grid-label-columns-template);
+			padding-bottom: var(--slim-spacing);
+			
+			.ui-separator, .ui-outputlabel-description-text { grid-column: inherit; }
+		}
+		
+		// Last Child required for overriding non-descriptive grid-row rule.
+		.ui-outputlabel-text:last-child {
+			grid-row: 2;
+			min-height: var(--input-field-height);
+		}
+	}
+	
+	&:not(.ui-outputlabel) { grid-row: 2; }
+}
+
 .jeesl-input-grid {
 	@for $col-count from 1 through 4 {
 		&.col-count-#{$col-count} {
@@ -55,6 +82,7 @@
 		
 		.p-col {
 			grid-row: var(--input-grid-row);
+			min-height: var(--form-entry-height);
 			
 			&.ui-outputlabel {
 				padding-left: var(--input-label-indent);
@@ -102,8 +130,8 @@
 				display: grid;
 				gap: var(--form-column-spacing);
 				grid-column: left / end;
+				grid-row: var(--input-grid-row);
 				grid-template-columns: subgrid;
-				min-height: var(--form-entry-height);
 				
 				&:first-child {
 					grid-column: var(--input-grid-column-fullwidth);
