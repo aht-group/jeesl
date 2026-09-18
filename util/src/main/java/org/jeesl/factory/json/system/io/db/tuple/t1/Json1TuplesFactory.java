@@ -203,7 +203,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 				try
 				{
 					t.setEjb1(cA.getDeclaredConstructor().newInstance());
-					t.getEjb1().setId(t.getId1());
+					if(Objects.nonNull(t.getId1())) {t.getEjb1().setId(t.getId1());}
 				}
 				catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
 			}
@@ -213,7 +213,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 			Map<Long,A> map = EjbIdFactory.toIdMap(fUtils.find(cA,setA));
 			for(JsonTuple1<A> t : json.getTuples())
 			{
-				t.setEjb1(map.get(t.getId1()));
+				if(Objects.nonNull(t.getId1())) {t.setEjb1(map.get(t.getId1()));}
 			}
 		}
 	}
