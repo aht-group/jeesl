@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.module.inventory.pc1;
+package org.jeesl.model.xml.module.inventory.pc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
