@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.module.finance.Currency;
 import org.jeesl.model.xml.system.security.User;
@@ -84,14 +83,6 @@ public class Aht
         return this.status;
     }
 
-    public boolean isSetStatus() {
-        return ((this.status!= null)&&(!this.status.isEmpty()));
-    }
-
-    public void unsetStatus() {
-        this.status = null;
-    }
-
     /**
      * Gets the value of the currency property.
      * 
@@ -121,14 +112,6 @@ public class Aht
         return this.currency;
     }
 
-    public boolean isSetCurrency() {
-        return ((this.currency!= null)&&(!this.currency.isEmpty()));
-    }
-
-    public void unsetCurrency() {
-        this.currency = null;
-    }
-
     /**
      * Gets the value of the user property.
      * 
@@ -156,14 +139,6 @@ public class Aht
             user = new ArrayList<User>();
         }
         return this.user;
-    }
-
-    public boolean isSetUser() {
-        return ((this.user!= null)&&(!this.user.isEmpty()));
-    }
-
-    public void unsetUser() {
-        this.user = null;
     }
 
 }

@@ -66,11 +66,7 @@
 			<jxb:package name="org.jeesl.model.xml.io.attribute"/>
 		</jxb:schemaBindings>
     </jxb:bindings>
-	<jxb:bindings schemaLocation="aht/dbseed.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.io.db"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
+	
 	<jxb:bindings schemaLocation="../xsd/jeesl/jeesl.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.db.query"/>
@@ -175,6 +171,17 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+	<jxb:bindings schemaLocation="aht/aht.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.xsd.aht"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="aht/dbseed.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.db"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
 	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/ofx.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.model.xml.core.ofx"/>
@@ -226,5 +233,7 @@
             <jxb:package name="org.exlp.model.xml.io"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    
+    
 
 </jxb:bindings>

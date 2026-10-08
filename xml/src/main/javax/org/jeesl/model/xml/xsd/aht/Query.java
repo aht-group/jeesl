@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.graphic.Graphic;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.io.locale.status.Langs;
@@ -156,10 +155,6 @@ public class Query
         this.role = value;
     }
 
-    public boolean isSetRole() {
-        return (this.role!= null);
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -182,10 +177,6 @@ public class Query
      */
     public void setLangs(Langs value) {
         this.langs = value;
-    }
-
-    public boolean isSetLangs() {
-        return (this.langs!= null);
     }
 
     /**
@@ -212,10 +203,6 @@ public class Query
         this.status = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -238,10 +225,6 @@ public class Query
      */
     public void setType(Type value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
     /**
@@ -268,10 +251,6 @@ public class Query
         this.model = value;
     }
 
-    public boolean isSetModel() {
-        return (this.model!= null);
-    }
-
     /**
      * Gets the value of the test property.
      * 
@@ -294,10 +273,6 @@ public class Query
      */
     public void setTest(Test value) {
         this.test = value;
-    }
-
-    public boolean isSetTest() {
-        return (this.test!= null);
     }
 
     /**
@@ -324,10 +299,6 @@ public class Query
         this.category = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
-    }
-
     /**
      * Gets the value of the staff property.
      * 
@@ -350,10 +321,6 @@ public class Query
      */
     public void setStaff(Staff value) {
         this.staff = value;
-    }
-
-    public boolean isSetStaff() {
-        return (this.staff!= null);
     }
 
     /**
@@ -380,10 +347,6 @@ public class Query
         this.report = value;
     }
 
-    public boolean isSetReport() {
-        return (this.report!= null);
-    }
-
     /**
      * Gets the value of the entity property.
      * 
@@ -406,10 +369,6 @@ public class Query
      */
     public void setEntity(Entity value) {
         this.entity = value;
-    }
-
-    public boolean isSetEntity() {
-        return (this.entity!= null);
     }
 
     /**
@@ -436,10 +395,6 @@ public class Query
         this.templates = value;
     }
 
-    public boolean isSetTemplates() {
-        return (this.templates!= null);
-    }
-
     /**
      * Gets the value of the template property.
      * 
@@ -462,10 +417,6 @@ public class Query
      */
     public void setTemplate(Template value) {
         this.template = value;
-    }
-
-    public boolean isSetTemplate() {
-        return (this.template!= null);
     }
 
     /**
@@ -492,10 +443,6 @@ public class Query
         this.surveys = value;
     }
 
-    public boolean isSetSurveys() {
-        return (this.surveys!= null);
-    }
-
     /**
      * Gets the value of the survey property.
      * 
@@ -518,10 +465,6 @@ public class Query
      */
     public void setSurvey(Survey value) {
         this.survey = value;
-    }
-
-    public boolean isSetSurvey() {
-        return (this.survey!= null);
     }
 
     /**
@@ -548,10 +491,6 @@ public class Query
         this.answer = value;
     }
 
-    public boolean isSetAnswer() {
-        return (this.answer!= null);
-    }
-
     /**
      * Gets the value of the graphic property.
      * 
@@ -574,10 +513,6 @@ public class Query
      */
     public void setGraphic(Graphic value) {
         this.graphic = value;
-    }
-
-    public boolean isSetGraphic() {
-        return (this.graphic!= null);
     }
 
     /**
@@ -604,10 +539,6 @@ public class Query
         this.trafficLight = value;
     }
 
-    public boolean isSetTrafficLight() {
-        return (this.trafficLight!= null);
-    }
-
     /**
      * Gets the value of the trafficLights property.
      * 
@@ -632,10 +563,6 @@ public class Query
         this.trafficLights = value;
     }
 
-    public boolean isSetTrafficLights() {
-        return (this.trafficLights!= null);
-    }
-
     /**
      * Gets the value of the lang property.
      * 
@@ -658,10 +585,6 @@ public class Query
      */
     public void setLang(String value) {
         this.lang = value;
-    }
-
-    public boolean isSetLang() {
-        return (this.lang!= null);
     }
 
 }

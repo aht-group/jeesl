@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 
 
@@ -72,14 +71,6 @@ public class Container
             status = new ArrayList<Status>();
         }
         return this.status;
-    }
-
-    public boolean isSetStatus() {
-        return ((this.status!= null)&&(!this.status.isEmpty()));
-    }
-
-    public void unsetStatus() {
-        this.status = null;
     }
 
 }
