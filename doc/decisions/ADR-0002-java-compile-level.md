@@ -1,10 +1,10 @@
 ---
 id: ADR-0002
 title: Compile all modules against the Java 8 API
-status: proposed
+status: accepted
 date: 2026-10-08
 related:
-  - ADR-0001
+  - ADR-0001 (precondition)
 ---
 
 # ADR-0002: Compile all modules against the Java 8 API
@@ -22,18 +22,25 @@ modules of the reactor keep running on Java 8 although a newer JDK compiles them
 - A build on JDK 11 could therefore use types and members that Java 8 does not have; the class files
   stay at version 52, and the failure appears only at runtime on Java 8.
 
+ADR-0001 sets out the values of the `xml` module; this decision presupposes that decision and does not repeat
+its values.
+
 ## Decision
 
 Every module of the repository compiles against the Java 8 API.
 
 - The root `pom.xml` configures `maven-compiler-plugin` with the parameter `release` and the value `8`;
   it drops its own parameters `source` and `target` `1.8`.
-- While `release` is set, the compilation uses the API data of Java 8 and writes class-file version 52,
-  even though `source` and `target` `1.8` remain in the effective configuration.
+- The parameter `release` requires `maven-compiler-plugin` 3.6.0 or newer; the version that the root
+  `pom.xml` manages applies.
+- While `release` is set, the compilation uses the API data of Java 8 and writes class-file version 52;
+  the compiler call carries `--release 8` and no value of `source` or `target`.
 - The module `test` (`test/pom.xml`) drops its own parameters `source` and `target` `1.8` and inherits
   the value of the root `pom.xml`.
-- The module `xml` keeps one value per run: `--release 8` for the `javax` artifact and `--release 11` for
-  the `jakarta` artifact (ADR-0001); the configuration of an execution overrides the inherited value.
+- The module `xml` compiles its `javax` artifact with `--release 8` and its `jakarta` artifact with
+  `--release 11`; the configuration of an execution overrides the inherited value (ADR-0001).
+- While the `xml` module carries no value of its own, the value `8` of the root `pom.xml` applies to the
+  variant that the build selects, in the artifact and in the test compilation alike.
 - The build requires JDK 9 or newer for the `release` argument, in practice JDK 11 or newer (ADR-0001).
 - The artifacts of the modules of the reactor carry class-file version 52 and use the Java 8 API only;
   the test compilation is checked in the same way.
@@ -42,7 +49,7 @@ Every module of the repository compiles against the Java 8 API.
 
 - `--release` selects the API data of that Java version, so the compiler rejects types and members that
   the version does not provide.
-- One value in the root `pom.xml` covers every module; no module repeats it.
+- One value in the root `pom.xml` covers the reactor; a module with its own value states it itself.
 - The failure appears while compiling instead of in the runtime of a Java 8 consumer; the target
   container is JBoss EAP 7.x (`README.md`, `## Technical Assumptions`).
 
@@ -65,19 +72,23 @@ its own, and a separate signature artifact.
 
 ## Impact
 
-- `pom.xml` (root) – the parameter `release` replaces `source` and `target` for every module.
+- `pom.xml` (root) – the parameter `release` replaces `source` and `target` for every module, and the managed
+  `maven-compiler-plugin` carries a version of 3.6.0 or newer.
 - `test/pom.xml` – the module drops its own `source` and `target` configuration.
-- `xml/pom.xml` – the two runs keep their values 8 and 11 (ADR-0001).
-- `README.md` (`## Relevant Values`, `## Technical Assumptions`, `## Build and Start`) and the
-  architecture file (`doc/requirements/architecture.md`) display the decision.
+- `xml/pom.xml` – no change follows from this decision; the module carries the values of its two artifacts
+  (ADR-0001).
+- `README.md` (`## Relevant Values`) – the compiler entry names the value `8` of the parameter `release`.
+- `README.md` (`## Technical Assumptions`) – the language entry names the Java 8 API of the compilation.
+- `README.md` (`## Build and Start`) – the prerequisite names JDK 11 or newer in place of JDK 8.
+- `doc/requirements/architecture.md` displays the decision.
 - The index (`doc/status.md`) lists the decision.
 
 ## Open Points
 
 - A module that later needs Java 11 APIs configures its own `release` value; the decision does not
   regulate which module that is.
-- The parameters `source` and `target` `1.8` of the parent POM `org.jeesl.bom:bom-parent8` stay
-  unchanged; the decision does not regulate that project.
+- The parameters `source` and `target` `1.8` of the parent POM `org.jeesl.bom:bom-parent8` stay unchanged, and
+  the decision does not regulate that project; the value of the root `pom.xml` supersedes them.
 - The JDK that runs the build is not regulated beyond the minimum that the `release` argument requires
   (`README.md`, `## Open Fundamental Decisions`, item 2).
 
@@ -85,8 +96,15 @@ its own, and a separate signature artifact.
 
 ### Implementation
 
-- None.
+- `pom.xml` (root) and `test/pom.xml` – open: the parameter `release` and the dropped `source` and `target` values
 
 ### Tests
 
-- None.
+- `javac` with `--release 8` on a class that uses `List.of` – open: the compilation fails with `cannot find symbol`
+- `mvn test-compile` of the reactor on JDK 11 – open: class files of version 52
+
+### Documentation
+
+- `README.md` (`## Relevant Values`, `## Technical Assumptions`) – open: the compiler entry and the language entry
+- `README.md` (`## Build and Start`) – open: the JDK prerequisite
+- `doc/requirements/architecture.md` – open: the decision is displayed

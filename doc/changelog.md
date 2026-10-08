@@ -1,5 +1,14 @@
 # Change Log
 
+## 2026-10-08 – Build: ADR-0002 corrected and accepted
+
+- What: ADR-0002 corrected: the `xml` values and the evidence lines.
+- Result: Review "Approval recommended" (0 findings against the recommendation, 0 notes); ADR-0002 precedes
+  ADR-0001 on instruction and is accepted.
+- Evidence: `mvn test-compile` with the value `8` on JDK 11 – [SUCCESS]; `List.of` under `--release 8` fails;
+  the review patterns and the line width – no match.
+- Files: doc/decisions/ADR-0002-java-compile-level.md, doc/status.md, doc/changelog.md.
+
 ## 2026-10-08 – Build: ADR-0002 for the Java 8 compile level
 
 - What: Imported ADR-0003 of the EXLP project as ADR-0002: every module compiles against the Java 8 API.
