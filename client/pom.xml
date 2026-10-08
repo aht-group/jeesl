@@ -76,6 +76,7 @@
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-xml</artifactId>
+			<classifier>javax</classifier>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>

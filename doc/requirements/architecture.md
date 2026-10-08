@@ -27,13 +27,15 @@ src/main/resources/jeesl/.../db/migration/  ordered SQL migration scripts
 The XML model is generated rather than written by hand.
 The XSD files under `xml/src/main/xsd` are the source.
 XJC produces the JAXB classes into the `javax` and the `jakarta` source folder.
+The module builds both variants in one run, each into an output directory of its own, and publishes them
+as the classifier artifacts `javax` and `jakarta`; the shared test classes form the classifier `tests`.
 
 ## Modules
 
 | Artifact | Role |
 |---|---|
 | `jeesl-interfaces` | Model contracts, marker interfaces, and the interfaces of facade, handler and controller |
-| `jeesl-xml` | JAXB model generated from the XSD |
+| `jeesl-xml` | JAXB model generated from the XSD, published as the classifier artifacts `javax`, `jakarta` and `tests` |
 | `jeesl-api` | Facade, bean, handler and REST contracts of the features |
 | `jeesl-util` | Factories, processors, query helpers, comparators and database access |
 | `jeesl-ejb` | Facade implementations on JPA, and REST handlers |
@@ -80,7 +82,8 @@ XJC produces the JAXB classes into the `javax` and the `jakarta` source folder.
 Build:
 
 1. The reactor reads the module list from the aggregator POM and orders the modules by their dependencies.
-2. `jeesl-xml` generates the JAXB classes from the XSD in the `javax` and the `jakarta` variant.
+2. `jeesl-xml` compiles the JAXB classes of the `javax` and the `jakarta` variant in one run and attaches
+   them as the classifier artifacts `javax` and `jakarta`, next to the classifier `tests`.
 3. Each module compiles against the generated model, and Surefire runs its JUnit tests.
 4. The `release` profile attaches sources and javadoc and signs the artifacts.
 
@@ -100,7 +103,8 @@ Operation:
 
 ## Technology
 
-- Language: Java.
+- Language: Java 8 API; the compiler parameter `release` carries the value `8` for every module and the value
+  `11` for the `jakarta` artifact of `jeesl-xml`.
 - Platform: Java EE with the `javax` namespace, alongside a `jakarta` variant of the generated XML model.
 - Container: JBoss EAP.
 - Persistence: JPA with Hibernate, EJB, and JDBC access through the helper classes of `jeesl-util`.

@@ -1,5 +1,21 @@
 # Change Log
 
+## 2026-10-08 – XML/Build: ADR-0001 and ADR-0002 implemented
+
+- What: ADR-0001 implemented (`xml/pom.xml` as POM packaging with the classifier artifacts `javax`,
+  `jakarta`, and `tests`, the classifier `javax` for the consumers of the model) and ADR-0002 implemented
+  (`release` `8` in the root `pom.xml`, `test/pom.xml` without `source` and `target`).
+- Result: Acceptance after implementation: the reviewed text is unchanged, so the findings of ADR-0001
+  remain as accepted on instruction (`F1`, `F3`, and two notes open); ADR-0002 carries no open finding.
+- Evidence: `mvn -pl xml clean install -DskipTests` on JDK 11 – the three classifier jars and no artifact
+  without a classifier (52/55); `mvn -DskipTests clean install` of the reactor – all 45 modules build;
+  `mvn -pl api -am clean install` and `mvn -pl util,doc -am test-compile` – the consumers resolve;
+  `mvn -pl xml test` – 274 test programs against the `javax` classes with the 20 failures that also occur
+  on JDK 8.
+- Files: xml/pom.xml, pom.xml, test/pom.xml, client/pom.xml, connectors/pom.xml, report/pom.xml,
+  system-security/pom.xml, util/pom.xml, README.md, doc/requirements/architecture.md,
+  doc/decisions/ADR-0001-package-javax-jakarta-variants.md, doc/decisions/ADR-0002-java-compile-level.md.
+
 ## 2026-10-08 – XML: ADR-0001 revised and accepted
 
 - What: ADR-0001 revised and accepted on instruction (open points, profiles, surefire, evidence).

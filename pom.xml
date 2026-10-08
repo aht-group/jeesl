@@ -127,11 +127,6 @@
 				<classifier>sources</classifier>
 			</dependency>
 			<dependency>
-				<groupId>org.jeesl</groupId>
-				<artifactId>jeesl-xml</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
 	        	<groupId>org.jeesl</groupId>
 	        	<artifactId>jeesl-xml</artifactId>
 				<version>${project.version}</version>
@@ -270,8 +265,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<inherited>true</inherited>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<release>8</release>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>

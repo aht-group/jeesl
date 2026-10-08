@@ -38,7 +38,7 @@ This table names the values that are relevant for the project and the location t
 | Version | `0.3.2-SNAPSHOT` | `pom.xml`, property `maven.version.jeesl.bom` |
 | Parent | `org.jeesl.bom:bom-parent8:0.3.2-SNAPSHOT`, relative path `../bom/parent8` | `pom.xml` |
 | Imported BOMs | `bom-core`, `bom-eap73` | `pom.xml` and the module POM files |
-| Java compiler | source and target `1.8`, encoding `UTF-8` | `pom.xml` |
+| Java compiler | `release` `8`, encoding `UTF-8` | `pom.xml` |
 | Publication | Sonatype Central, publishing server id `central` | `pom.xml` |
 | SCM | `https://github.com/aht-group/jeesl.git`, branch `master` | `pom.xml` |
 | Credentials | This repository stores no production credentials. Database, mail, and external-service credentials are read at runtime from the configuration of the consuming application, for example in `org.jeesl.controller.io.db.sql.SqlConnectionFactory`. | this file |
@@ -49,7 +49,8 @@ This table names the values that are relevant for the project and the location t
 
 These points are the result of an analysis of the existing build files and sources. They are **assumptions** and are not pinned yet by a **constraint** or a **decision** (`doc/requirements/constraints/`, `doc/decisions/`).
 
-- Language and platform: Java 8 (`<source>1.8</source>`, `<target>1.8</target>`), Java EE with the `javax` namespace; a parallel `jakarta` variant is built for `jeesl-xml`.
+- Language and platform: Java 8 API; the compilation uses `<release>8</release>`, so the API of Java 8 is the lower bound of the reactor, and `jeesl-xml` compiles its `jakarta` artifact with `--release 11`, which makes JDK 11 or newer the JDK of the build.
+- Namespace: Java EE with the `javax` namespace; `jeesl-xml` publishes the two JAXB variants as the classifier artifacts `javax` and `jakarta` and the shared test classes as the classifier `tests`.
 - Target container: JBoss EAP 7.x; the imported BOM `bom-eap73` selects the matching platform dependencies.
 - Build: Apache Maven, multi-module reactor; the plugin module `maven/` (`jeesl-maven`) declares Maven 3.1 as prerequisite; there is no Maven Wrapper.
 - Persistence: JPA/Hibernate on EJB, with datasource and Hibernate configuration templates for JBoss EAP under `maven/src/main/resources/jeesl/system/io/config/jboss/eap/`.
@@ -92,7 +93,7 @@ All other decisions are kept in the **Decision Repository** (`doc/decisions/`) w
 
 Prerequisites:
 
-- JDK 8.
+- JDK 11 or newer; `jeesl-xml` compiles its `jakarta` artifact with `--release 11`, and every module compiles against the Java 8 API (`--release 8`).
 - Apache Maven 3.1 or newer; the repository contains no Maven Wrapper.
 - The parent POM `org.jeesl.bom:bom-parent8` and the imported BOMs `bom-core` and `bom-eap73` must be resolvable. The root `pom.xml` refers to the sibling directory `../bom/parent8`; if that checkout is absent, Maven falls back to the local or the remote repository.
 - Access to Maven Central, the Sonatype snapshot repository and the OSGeo release repository (`pom.xml`, `<repositories>`).
@@ -107,6 +108,7 @@ Further commands:
 
 ```
 mvn clean install -DskipTests       # without tests
+mvn -pl xml clean install           # both JAXB variants as the classifier artifacts javax and jakarta
 mvn -pl jsf -am clean install       # one module together with its dependencies
 mvn clean deploy                    # publication via central-publishing-maven-plugin (server id: central)
 mvn clean verify -Prelease          # additionally sources, javadoc and GPG signing
