@@ -1,10 +1,9 @@
 package org.jeesl.factory.ejb.module.task;
 
-import net.sf.ahtutils.interfaces.model.issue.UtilsTask;
-import net.sf.ahtutils.xml.issue.Task;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.interfaces.model.issue.UtilsTask;
 
 public class EjbTaskFactory<T extends UtilsTask<T>>
 {
@@ -26,8 +25,6 @@ public class EjbTaskFactory<T extends UtilsTask<T>>
     public T buildCode(String code) {return build(null,code,null);}
     public T buildCode(T parent,String code) {return build(parent,code,null);}
     public T build(T parent) {return build(parent,null,null);}
-    
-    public T build(T parent, Task task) {return build(parent, task.getCode(), task.getName());}
     
 	public T build(T parent, String code, String name)
 	{
