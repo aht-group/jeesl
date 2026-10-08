@@ -10,10 +10,10 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.io.graphic.Graphic;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.aht.Query;
 import net.sf.exlp.factory.xml.io.XmlFileFactory;
 
 public class XmlGraphicFactory <L extends JeeslLang,D extends JeeslDescription,

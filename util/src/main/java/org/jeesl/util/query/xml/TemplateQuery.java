@@ -8,10 +8,9 @@ import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.model.xml.io.label.Attribute;
 import org.jeesl.model.xml.io.label.Entity;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class TemplateQuery
 {

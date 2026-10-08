@@ -34,8 +34,7 @@ import org.jeesl.model.xml.module.survey.Section;
 import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.module.survey.Surveys;
 import org.jeesl.model.xml.module.survey.Template;
-
-import net.sf.ahtutils.xml.aht.Query;
+import org.jeesl.model.xml.xsd.aht.Query;
 
 public class XmlSurveyQuery
 {

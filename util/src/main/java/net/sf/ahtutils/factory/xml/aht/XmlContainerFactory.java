@@ -1,9 +1,8 @@
 package net.sf.ahtutils.factory.xml.aht;
 
+import org.jeesl.model.xml.xsd.aht.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.aht.Container;
 
 public class XmlContainerFactory
 {

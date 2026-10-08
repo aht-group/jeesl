@@ -11,8 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.rest.util.status.UtilsStatusRestImport;
-import net.sf.ahtutils.xml.aht.Aht;
+
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
+import org.jeesl.model.xml.xsd.aht.Aht;
 
 public class UtilsRestService <L extends JeeslLang,
 							D extends JeeslDescription,

@@ -6,9 +6,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import net.sf.ahtutils.xml.aht.Container;
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.system.util.Utils;
+import org.jeesl.model.xml.xsd.aht.Container;
 
 public interface JeeslSystemPropertyRestImport
 {

@@ -44,10 +44,9 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class IoReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,

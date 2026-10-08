@@ -15,10 +15,9 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 									C extends JeeslSecurityCategory<L,D>,

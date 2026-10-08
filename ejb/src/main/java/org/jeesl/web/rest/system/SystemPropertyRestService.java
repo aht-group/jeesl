@@ -20,10 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.rest.AbstractUtilsRest;
-import net.sf.ahtutils.xml.aht.Container;
+
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.system.util.Property;
 import org.jeesl.model.xml.system.util.Utils;
+import org.jeesl.model.xml.xsd.aht.Container;
 
 public class SystemPropertyRestService <L extends JeeslLang,D extends JeeslDescription,
 										C extends JeeslStatus<L,D,C>,

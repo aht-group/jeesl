@@ -11,10 +11,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.model.xml.system.util.TrafficLight;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class XmlTrafficLightFactory<L extends JeeslLang, D extends JeeslDescription,
 									SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>,

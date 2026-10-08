@@ -41,6 +41,7 @@
 	<xsd:import namespace="http://ahtutils.aht-group.com/utils" schemaLocation="aht/utils.xsd"/>
 
 	<xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com" schemaLocation="aht/aht.xsd"/>
 
 
 	<xsd:element name="jeesl">

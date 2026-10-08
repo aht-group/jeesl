@@ -24,8 +24,7 @@ import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.SubType;
 import org.jeesl.model.xml.io.locale.status.Type;
 import org.jeesl.model.xml.io.locale.status.Verification;
-
-import net.sf.ahtutils.xml.aht.Query;
+import org.jeesl.model.xml.xsd.aht.Query;
 
 public class XmlStatusQuery
 {

@@ -28,10 +28,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.io.db.query.QuerySurvey;
 import org.jeesl.model.xml.module.survey.Answer;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class XmlAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
 								SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,

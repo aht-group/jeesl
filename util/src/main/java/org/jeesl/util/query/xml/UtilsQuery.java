@@ -6,9 +6,9 @@ import java.util.Map;
 import org.jeesl.factory.xml.io.locale.status.XmlScopeFactory;
 import org.jeesl.model.xml.system.util.TrafficLight;
 import org.jeesl.model.xml.system.util.TrafficLights;
+import org.jeesl.model.xml.xsd.aht.Query;
 
 import net.sf.ahtutils.factory.xml.utils.XmlTrafficLightsFactory;
-import net.sf.ahtutils.xml.aht.Query;
 
 public class UtilsQuery
 {

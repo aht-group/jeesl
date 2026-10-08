@@ -11,6 +11,7 @@ import org.jeesl.controller.io.db.xml.UtilsDbXmlSeedUtil;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.db.Db;
 import org.jeesl.model.xml.io.locale.status.Translations;
+import org.jeesl.model.xml.xsd.aht.Aht;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.model.xml.core.table.Table;
@@ -21,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory.Code;
-import net.sf.ahtutils.xml.aht.Aht;
 
 public class LatexStatusWriter extends AbstractDocumentationLatexWriter
 {	

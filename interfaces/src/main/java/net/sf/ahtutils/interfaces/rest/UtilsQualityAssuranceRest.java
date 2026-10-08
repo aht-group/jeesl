@@ -8,8 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.jeesl.model.xml.module.dev.qa.Qa;
 import org.jeesl.model.xml.module.dev.qa.Test;
-
-import net.sf.ahtutils.xml.aht.Aht;
+import org.jeesl.model.xml.xsd.aht.Aht;
 
 @Path("/rest/qa")
 public interface UtilsQualityAssuranceRest

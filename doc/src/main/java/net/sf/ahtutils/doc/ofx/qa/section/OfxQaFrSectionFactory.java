@@ -13,6 +13,7 @@ import org.jeesl.model.xml.module.dev.qa.Category;
 import org.jeesl.model.xml.module.dev.qa.Expected;
 import org.jeesl.model.xml.module.dev.qa.Info;
 import org.jeesl.model.xml.module.dev.qa.Test;
+import org.jeesl.model.xml.xsd.aht.Aht;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.XmlHighlightFactory;
@@ -33,7 +34,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaFrResultTableFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaFrTableFactory;
-import net.sf.ahtutils.xml.aht.Aht;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

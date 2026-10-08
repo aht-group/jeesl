@@ -13,6 +13,7 @@ import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Translations;
+import org.jeesl.model.xml.xsd.aht.Aht;
 import org.jeesl.test.JeeslBootstrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.controller.factory.ofx.lang.AbstractOfxStatusFactoryTest;
-import net.sf.ahtutils.xml.aht.Aht;
 
 public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 {

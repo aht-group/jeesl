@@ -27,9 +27,8 @@ import org.jeesl.model.xml.module.dev.qa.Steps;
 import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.model.xml.system.security.Staff;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.jeesl.util.query.xml.system.SecurityQuery;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class QaQuery
 {

@@ -14,6 +14,7 @@ import org.jeesl.model.xml.module.dev.qa.Qa;
 import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.model.xml.xsd.Container;
+import org.jeesl.model.xml.xsd.aht.Aht;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -37,7 +38,6 @@ import net.sf.ahtutils.doc.ofx.qa.table.OfxQaRoleTableFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaStaffTableFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory.Code;
-import net.sf.ahtutils.xml.aht.Aht;
 
 public class LatexQaWriter
 {	

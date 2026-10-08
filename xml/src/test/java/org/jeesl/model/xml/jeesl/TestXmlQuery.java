@@ -18,10 +18,9 @@ import org.jeesl.model.xml.system.status.TestXmlType;
 import org.jeesl.model.xml.system.symbol.TestXmlGraphic;
 import org.jeesl.model.xml.system.util.TestXmlTrafficLight;
 import org.jeesl.model.xml.system.util.TestXmlTrafficLights;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class TestXmlQuery extends AbstractXmlAhtTest<Query>
 {

@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.aht;
+package org.jeesl.model.xml.xsd.aht;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

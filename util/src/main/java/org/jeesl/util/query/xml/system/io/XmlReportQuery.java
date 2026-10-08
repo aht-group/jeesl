@@ -29,9 +29,8 @@ import org.jeesl.model.xml.io.report.Template;
 import org.jeesl.model.xml.io.report.XlsColumn;
 import org.jeesl.model.xml.io.report.XlsSheet;
 import org.jeesl.model.xml.io.report.XlsWorkbook;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.jeesl.util.query.xml.XmlStatusQuery;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class XmlReportQuery
 {

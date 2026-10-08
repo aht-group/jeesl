@@ -8,8 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.module.survey.Templates;
-
-import net.sf.ahtutils.xml.aht.Aht;
+import org.jeesl.model.xml.xsd.aht.Aht;
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface JeeslSurveyRestImport

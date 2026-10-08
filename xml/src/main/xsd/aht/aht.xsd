@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://ahtutils.aht-group.com"
+    xmlns:aht="http://ahtutils.aht-group.com"
+    xmlns:s   ="http://ahtutils.aht-group.com/status"
+    xmlns:sym ="http://ahtutils.aht-group.com/symbol"
+    
+    xmlns:f   ="http://www.jeesl.org/finance"
+    xmlns:n   ="http://ahtutils.aht-group.com/navigation"
+    xmlns:qa  ="http://ahtutils.aht-group.com/qa"
+    xmlns:r   ="http://ahtutils.aht-group.com/report"
+    xmlns:u   ="http://ahtutils.aht-group.com/utils"
+	
+	xmlns:rev		= "http://www.jeesl.org/revision"
+	xmlns:text		= "http://www.jeesl.org/text"
+	xmlns:symbol	= "http://www.jeesl.org/symbol"
+	xmlns:srs		= "http://www.jeesl.org/srs"
+		
+	xmlns:sec="https://www.jeesl.org/jeesl/xsd/system/security"
+	
+	xmlns:sys="http://ahtutils.aht-group.com/system"
+	xmlns:survey="http://www.jeesl.org/survey"
+	
+    xmlns:io ="http://exlp.sf.net/io"
+
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+    
+    <!-- This is the 'old' container file -->
+    
+    <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/report" schemaLocation="report.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/qa" schemaLocation="qa.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/utils" schemaLocation="utils.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/navigation" schemaLocation="navigation.xsd"/>
+     
+    <xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="../jeesl/symbol.xsd"/>
+    <xsd:import namespace="https://www.jeesl.org/jeesl/xsd/system/security" schemaLocation="../jeesl/system/security.xsd"/>
+    <xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="../jeesl/finance.xsd"/>
+	<xsd:import namespace="http://www.jeesl.org/survey" schemaLocation="../jeesl/module/survey.xsd"/>
+	<xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="../jeesl/io/revision.xsd"/>
+	<xsd:import namespace="http://www.jeesl.org/text" schemaLocation="../jeesl/text.xsd"/>
+
+    <xsd:element name="aht">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:status" maxOccurs="unbounded"/>
+                <xsd:element ref="f:currency" maxOccurs="unbounded"/>
+                <xsd:element ref="sec:user" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="container">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:status" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+	
+    <xsd:element name="query">
+        <xsd:complexType>
+        	<xsd:sequence>
+                <xsd:element ref="sec:role" maxOccurs="1"/>
+        	    <xsd:element ref="s:langs" maxOccurs="1"/>
+        	    <xsd:element ref="s:status" maxOccurs="1"/>
+        	    <xsd:element ref="s:type" maxOccurs="1"/>
+        	    <xsd:element ref="s:model" maxOccurs="1"/>
+        	    
+        	    <xsd:element ref="qa:test" maxOccurs="1"/>
+        	    
+        	    <xsd:element ref="sec:category" maxOccurs="1"/>
+        	    <xsd:element ref="sec:staff" maxOccurs="1"/>
+        	    
+        	    <xsd:element ref="r:report" maxOccurs="1"/>
+        	    
+        	    <xsd:element ref="rev:entity" maxOccurs="1"/>
+        	    
+        	    <xsd:element ref="survey:templates" maxOccurs="1"/>
+        	    <xsd:element ref="survey:template" maxOccurs="1"/>
+        	    <xsd:element ref="survey:surveys" maxOccurs="1"/>
+        	    <xsd:element ref="survey:survey" maxOccurs="1"/>
+        	    <xsd:element ref="survey:answer" maxOccurs="1"/>
+        	    
+        	    <xsd:element ref="symbol:graphic" maxOccurs="1"/>
+        	    
+        	    <xsd:element ref="u:trafficLight" maxOccurs="1"/>
+        	    <xsd:element ref="u:trafficLights" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="lang" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

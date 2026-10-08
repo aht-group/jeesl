@@ -1,5 +1,6 @@
 package net.sf.ahtutils.test.reflection;
 
+import org.jeesl.model.xml.xsd.aht.Aht;
 import org.jeesl.test.JeeslBootstrap;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.test.AbstractJeeslTest;
-import net.sf.ahtutils.xml.aht.Aht;
 
 public class TestClassForName extends AbstractJeeslTest
 {

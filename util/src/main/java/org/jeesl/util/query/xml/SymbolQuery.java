@@ -14,8 +14,7 @@ import org.jeesl.factory.xml.system.symbol.XmlSizeFactory;
 import org.jeesl.factory.xml.system.symbol.XmlSizesFactory;
 import org.jeesl.model.xml.io.graphic.Graphic;
 import org.jeesl.model.xml.io.graphic.Symbol;
-
-import net.sf.ahtutils.xml.aht.Query;
+import org.jeesl.model.xml.xsd.aht.Query;
 
 public class SymbolQuery
 {

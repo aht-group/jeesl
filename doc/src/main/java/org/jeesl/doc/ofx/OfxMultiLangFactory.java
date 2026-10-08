@@ -13,6 +13,7 @@ import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.xsd.Container;
+import org.jeesl.model.xml.xsd.aht.Aht;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.list.XmlListItemFactory;
@@ -28,7 +29,6 @@ import org.openfuxml.model.xml.core.table.Cell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.aht.Aht;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

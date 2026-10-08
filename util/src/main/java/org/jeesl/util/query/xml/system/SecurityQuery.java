@@ -22,9 +22,8 @@ import org.jeesl.model.xml.system.security.Staffs;
 import org.jeesl.model.xml.system.security.Usecase;
 import org.jeesl.model.xml.system.security.User;
 import org.jeesl.model.xml.system.security.View;
+import org.jeesl.model.xml.xsd.aht.Query;
 import org.jeesl.util.query.xml.XmlStatusQuery;
-
-import net.sf.ahtutils.xml.aht.Query;
 
 public class SecurityQuery
 {
