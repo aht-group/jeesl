@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.module.inventory.pc;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.module.inventory.pc1.Computer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,7 @@
 package org.jeesl.controller.processor.pcinventory;
 
-import org.jeesl.model.xml.module.inventory.pc.Computer;
-import org.jeesl.model.xml.module.inventory.pc.Update;
+import org.jeesl.model.xml.module.inventory.pc1.Computer;
+import org.jeesl.model.xml.module.inventory.pc1.Update;
 
 public class PcInventoryPostProcessor
 {

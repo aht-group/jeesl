@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.module.inventory.pc;
+package org.jeesl.model.xml.module.inventory.pc1;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

@@ -1,7 +1,7 @@
 package org.jeesl.factory.xml.module.inventory.pc;
 
-import org.jeesl.model.xml.module.inventory.pc.Software;
-import org.jeesl.model.xml.module.inventory.pc.Updates;
+import org.jeesl.model.xml.module.inventory.pc1.Software;
+import org.jeesl.model.xml.module.inventory.pc1.Updates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
