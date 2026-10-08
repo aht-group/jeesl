@@ -2,18 +2,18 @@
 package org.jeesl.model.xml.module.inventory.pc;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -59,7 +59,7 @@ public class Computer
     protected String uuid;
 
     /**
-     * Gets the value of the hardware property.
+     * Ruft den Wert der hardware-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -71,7 +71,7 @@ public class Computer
     }
 
     /**
-     * Sets the value of the hardware property.
+     * Legt den Wert der hardware-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -83,7 +83,7 @@ public class Computer
     }
 
     /**
-     * Gets the value of the software property.
+     * Ruft den Wert der software-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -95,7 +95,7 @@ public class Computer
     }
 
     /**
-     * Sets the value of the software property.
+     * Legt den Wert der software-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -107,7 +107,7 @@ public class Computer
     }
 
     /**
-     * Gets the value of the id property.
+     * Ruft den Wert der id-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -119,7 +119,7 @@ public class Computer
     }
 
     /**
-     * Sets the value of the id property.
+     * Legt den Wert der id-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -131,7 +131,7 @@ public class Computer
     }
 
     /**
-     * Gets the value of the code property.
+     * Ruft den Wert der code-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -143,7 +143,7 @@ public class Computer
     }
 
     /**
-     * Sets the value of the code property.
+     * Legt den Wert der code-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -155,7 +155,7 @@ public class Computer
     }
 
     /**
-     * Gets the value of the name property.
+     * Ruft den Wert der name-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -167,7 +167,7 @@ public class Computer
     }
 
     /**
-     * Sets the value of the name property.
+     * Legt den Wert der name-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -179,7 +179,7 @@ public class Computer
     }
 
     /**
-     * Gets the value of the uuid property.
+     * Ruft den Wert der uuid-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -191,7 +191,7 @@ public class Computer
     }
 
     /**
-     * Sets the value of the uuid property.
+     * Legt den Wert der uuid-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is

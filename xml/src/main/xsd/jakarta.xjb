@@ -122,6 +122,11 @@
             <jxb:package name="org.jeesl.model.xml.module.calendar"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+        <jxb:bindings schemaLocation="jeesl/module/inventory/pc.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.inventory.pc"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     <jxb:bindings schemaLocation="aht/qa.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.dev.qa"/>

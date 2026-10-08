@@ -2,19 +2,19 @@
 package org.jeesl.model.xml.module.inventory.pc;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -58,7 +58,7 @@ public class Update
     protected String description;
 
     /**
-     * Gets the value of the id property.
+     * Ruft den Wert der id-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -70,7 +70,7 @@ public class Update
     }
 
     /**
-     * Sets the value of the id property.
+     * Legt den Wert der id-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -82,7 +82,7 @@ public class Update
     }
 
     /**
-     * Gets the value of the uuid property.
+     * Ruft den Wert der uuid-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -94,7 +94,7 @@ public class Update
     }
 
     /**
-     * Sets the value of the uuid property.
+     * Legt den Wert der uuid-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -106,7 +106,7 @@ public class Update
     }
 
     /**
-     * Gets the value of the code property.
+     * Ruft den Wert der code-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -118,7 +118,7 @@ public class Update
     }
 
     /**
-     * Sets the value of the code property.
+     * Legt den Wert der code-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -130,7 +130,7 @@ public class Update
     }
 
     /**
-     * Gets the value of the record property.
+     * Ruft den Wert der record-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -142,7 +142,7 @@ public class Update
     }
 
     /**
-     * Sets the value of the record property.
+     * Legt den Wert der record-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -154,7 +154,7 @@ public class Update
     }
 
     /**
-     * Gets the value of the version property.
+     * Ruft den Wert der version-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -166,7 +166,7 @@ public class Update
     }
 
     /**
-     * Sets the value of the version property.
+     * Legt den Wert der version-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -178,7 +178,7 @@ public class Update
     }
 
     /**
-     * Gets the value of the description property.
+     * Ruft den Wert der description-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -190,7 +190,7 @@ public class Update
     }
 
     /**
-     * Sets the value of the description property.
+     * Legt den Wert der description-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is

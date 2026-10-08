@@ -2,18 +2,18 @@
 package org.jeesl.model.xml.module.inventory.pc;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -46,7 +46,7 @@ public class Software
     protected Long id;
 
     /**
-     * Gets the value of the updates property.
+     * Ruft den Wert der updates-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -58,7 +58,7 @@ public class Software
     }
 
     /**
-     * Sets the value of the updates property.
+     * Legt den Wert der updates-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -70,7 +70,7 @@ public class Software
     }
 
     /**
-     * Gets the value of the id property.
+     * Ruft den Wert der id-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -82,7 +82,7 @@ public class Software
     }
 
     /**
-     * Sets the value of the id property.
+     * Legt den Wert der id-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is

@@ -103,7 +103,7 @@ public class PcInventoryProcessor
 		for (int i = 0; i < uNameList.size(); i++)
 		{
 			Update update = new Update();
-			update.setId(i + 1);
+			update.setId(Long.valueOf(i + 1));
 			update.setCode(uNameList.get(i).replace("{", "").replace("}", ""));
 			update.setDescription(uDescritionList.get(i));
 			
@@ -171,7 +171,7 @@ public class PcInventoryProcessor
 			computer.setId(computer.getId() + 1);
 		} catch (Exception e)
 		{
-			computer.setId(0);
+			computer.setId(0l);
 		}
 		computer.setName(getItem(sys, "//power:Obj/power:MS/power:S[@N='ItemName' and text()='Computer Name']"));
 		computer.setHardware(hardware);
