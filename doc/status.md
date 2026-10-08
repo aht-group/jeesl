@@ -43,5 +43,5 @@ the title, and the status; for a requirement, additionally the priority.
 
 | ID | Title | Status | Affects |
 |---|---|---|---|
-| [ADR-0001](decisions/ADR-0001-package-javax-jakarta-variants.md) | Build and publish the JAXB variants as classifier artifacts | proposed | - |
+| [ADR-0001](decisions/ADR-0001-package-javax-jakarta-variants.md) | Build and publish the JAXB variants as classifier artifacts | accepted | - |
 | [ADR-0002](decisions/ADR-0002-java-compile-level.md) | Compile all modules against the Java 8 API | accepted | - |

@@ -1,5 +1,14 @@
 # Change Log
 
+## 2026-10-08 – XML: ADR-0001 revised and accepted
+
+- What: ADR-0001 revised and accepted on instruction (open points, profiles, surefire, evidence).
+- Result: Review "Approval not recommended" (3 findings, 8 notes); accepted on instruction with F1
+  (another repository), F3 (consumption) and two notes open.
+- Evidence: Probe with POM packaging: no `resources` goal; `mvn test` resolves `jakarta` to the javax
+  classes.
+- Files: doc/decisions/ADR-0001-package-javax-jakarta-variants.md, doc/status.md, doc/changelog.md.
+
 ## 2026-10-08 – Build: ADR-0002 corrected and accepted
 
 - What: ADR-0002 corrected: the `xml` values and the evidence lines.

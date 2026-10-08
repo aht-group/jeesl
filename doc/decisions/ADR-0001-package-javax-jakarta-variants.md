@@ -1,7 +1,7 @@
 ---
 id: ADR-0001
 title: Build and publish the JAXB variants as classifier artifacts
-status: proposed
+status: accepted
 date: 2026-10-08
 ---
 
@@ -49,6 +49,8 @@ The `xml` module builds both JAXB variants in one Maven run and publishes classi
   `net.sf.ahtutils.test.AbstractAhtUtilsXmlTest` of the `test` module, which marshals XML through a
   `javax`-bound helper and uses `javax.xml.datatype.XMLGregorianCalendar`; `javax` is the variant that
   the repository publishes for its Java EE platform.
+- `maven-surefire-plugin` (`2.4.2`, managed by the root `pom.xml`) runs the test run of the module; the
+  module names no version of its own.
 - Consumers select the variant by classifier: `org.jeesl:jeesl-xml:<version>:javax` or `:jakarta`; the
   classifier `tests` carries the shared test classes (`util/pom.xml`, `doc/pom.xml`).
 - The parent POM (`pom.xml`) manages `jeesl-xml` with the classifiers `javax`, `jakarta`, and `tests`; a
@@ -58,6 +60,8 @@ The `xml` module builds both JAXB variants in one Maven run and publishes classi
 - The profiles `javax` and `jakarta` only regenerate the JAXB sources from `xml/src/main/xsd/`
   (`cxf-xjc-plugin` 3.3.2 with `javax.xjb`, 4.0.0 with `jakarta.xjb`); they no longer select the build
   variant.
+- The profile `jakarta` drops its `build-helper-maven-plugin` source root and its classifier jar; the
+  profiles `autojavax` and `autojakarta` are removed.
 
 ## Rationale
 
@@ -113,6 +117,8 @@ Jakarta compiler.
 
 - `xml/pom.xml` holds the POM packaging, the two compile executions, the test executions, and the jar
   executions for the classifiers `javax`, `jakarta`, and `tests`.
+- `xml/pom.xml` drops the profiles `autojavax` and `autojakarta` and the `build-helper-maven-plugin`
+  source root and the classifier jar of the profile `jakarta`.
 - `pom.xml` carries the dependency management of `jeesl-xml` with the classifiers `javax`, `jakarta`,
   and `tests` and no entry without a classifier.
 - `client/pom.xml`, `connectors/pom.xml`, `report/pom.xml`, `system-security/pom.xml`, and
@@ -125,10 +131,14 @@ Jakarta compiler.
 
 ## Open Points
 
-- The Java version that binds the whole repository build is not regulated by this decision
-  (`README.md`, `## Open Fundamental Decisions`, item 2); only the `xml` module needs JDK 11 or newer.
-- A later `src/main/resources` of the `xml` module is copied into the module output directory only; it
-  needs a copy into both variant directories.
+- The Java version that binds the whole repository build is not regulated by this decision; ADR-0002
+  governs the lower bound of the whole build, and this module needs JDK 11 or newer (`--release 11`).
+- POM packaging binds no main resources either (`maven-resources-plugin`, goal `resources`); a later
+  `src/main/resources` is copied nowhere and needs its own binding and a copy per variant.
+- Consumers outside this repository that resolve `org.jeesl:jeesl-xml` without a classifier are not
+  regulated by this decision; their change to a classifier is left to them.
+- How a consumer separates the two variants on its classpath is not regulated by this decision; the
+  classes of `src/main/java` are in both jars, so `javax` and `jakarta` cannot share a classpath.
 - Which sources and javadoc artifacts a release publishes per classifier; `maven-source-plugin` skips a
   POM packaging.
 - Whether the `jakarta` variant receives a test run of its own; the shared test base is bound to
@@ -140,9 +150,23 @@ Jakarta compiler.
 
 ### Implementation
 
-- None.
+- `xml/pom.xml` – open: the POM packaging, the two compile executions, the test executions, and the jar executions
+- `pom.xml` (root) – open: the dependency management of `jeesl-xml` with the classifiers `javax`,
+  `jakarta`, and `tests`
+- `client/pom.xml`, `connectors/pom.xml`, `report/pom.xml`, `system-security/pom.xml`, and `util/pom.xml`
+  – open: the classifier `javax`
+- `util/pom.xml` and `doc/pom.xml` – open: the classifier `tests`
 
 ### Tests
 
-- None.
+- `mvn -pl xml clean install` on JDK 11 – open: the classifier jars `javax`, `jakarta`, and `tests` and
+  no artifact without a classifier
+- `mvn test` of the reactor with a consumer of the classifier `jakarta` – open: the variant used
+
+### Documentation
+
+- `README.md` (`## Technical Assumptions`, `## Build and Start`) – open: the platform entry and the JDK
+  prerequisite
+- `doc/requirements/architecture.md` – open: the decision is displayed
+- `doc/status.md` – open: the index lists the decision
 
