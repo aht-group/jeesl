@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://ahtutils.aht-group.com"
     xmlns:aht="http://ahtutils.aht-group.com"
-    xmlns:at   ="http://ahtutils.aht-group.com/audit"
     xmlns:s   ="http://ahtutils.aht-group.com/status"
     xmlns:sym ="http://ahtutils.aht-group.com/symbol"
     xmlns:t   ="http://ahtutils.aht-group.com/text"
@@ -46,7 +45,6 @@
     
     <!-- This is the 'old' container file -->
     
-    <xsd:import namespace="http://ahtutils.aht-group.com/audit" schemaLocation="aht/audit.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="jeesl/status.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="jeesl/symbol.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
@@ -66,7 +64,6 @@
 	<xsd:import namespace="http://ahtutils.aht-group.com/utils" schemaLocation="aht/utils.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/navigation" schemaLocation="aht/navigation.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/monitoring" schemaLocation="aht/monitoring.xsd"/>
-    <xsd:import namespace="http://ahtutils.aht-group.com/cloud/facebook" schemaLocation="cloud/facebook.xsd"/>
 	
 	<xsd:import namespace="http://www.jeesl.org" schemaLocation="jeesl/jeesl.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/io/attribute" schemaLocation="jeesl/io/attribute.xsd"/>
