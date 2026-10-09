@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.exlp.factory.xml.config.XmlParameterFactory;
 import org.exlp.interfaces.system.property.Configuration;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -20,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.factory.xml.config.XmlParameterFactory;
 import net.sf.exlp.shell.cmd.ShellCmdQuote;
 
 public class PostgresRestore extends AbstractPostgresShell implements UtilsDbShell

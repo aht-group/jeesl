@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.symbol;
 
 import java.util.Objects;
 
+import org.exlp.factory.xml.io.XmlFileFactory;
 import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
@@ -13,8 +14,6 @@ import org.jeesl.model.xml.io.graphic.Graphic;
 import org.jeesl.model.xml.xsd.aht.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.factory.xml.io.XmlFileFactory;
 
 public class XmlGraphicFactory <L extends JeeslLang,D extends JeeslDescription,
 								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,

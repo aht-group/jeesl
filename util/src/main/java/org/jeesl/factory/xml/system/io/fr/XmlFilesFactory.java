@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.exlp.factory.xml.io.XmlFileFactory;
 import org.exlp.model.xml.io.Files;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.factory.xml.io.XmlFileFactory;
 
 public class XmlFilesFactory<CONTAINER extends JeeslFileContainer<?,META>,
 							META extends JeeslFileMeta<?,CONTAINER,?,?>>
@@ -19,7 +18,7 @@ public class XmlFilesFactory<CONTAINER extends JeeslFileContainer<?,META>,
 	
 	public Files build(List<META> metas)
 	{
-		Files xml = net.sf.exlp.factory.xml.io.XmlFilesFactory.build();
+		Files xml = org.exlp.factory.xml.io.XmlFilesFactory.build();
 		
 		List<String> names = new ArrayList<String>();
 		for(META meta : metas)

@@ -2,6 +2,7 @@ package org.jeesl.controller.io.db.shell.postgres;
 
 import java.util.NoSuchElementException;
 
+import org.exlp.factory.xml.config.XmlParameterFactory;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.model.xml.config.Parameter;
 import org.jdom2.Document;
@@ -11,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.factory.xml.config.XmlParameterFactory;
 import net.sf.exlp.shell.cmd.ShellCmdExport;
 import net.sf.exlp.shell.cmd.ShellCmdUnset;
 
