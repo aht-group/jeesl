@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mo:processingResult xmlns:mo="http://ahtutils.aht-group.com/monitoring" code="myCode" label="myLabel"/>
+<processingResult xmlns="http://xsd.jeesl.org/module/monitoring" code="myCode" label="myLabel"/>

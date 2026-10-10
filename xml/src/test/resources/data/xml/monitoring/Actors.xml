@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mo:actors xmlns:mo="http://ahtutils.aht-group.com/monitoring">
-    <mo:actor id="123" code="myCode" label="myLabel" uri="myUri"/>
-    <mo:actor id="123" code="myCode" label="myLabel" uri="myUri"/>
-</mo:actors>
+<actors xmlns="http://xsd.jeesl.org/module/monitoring">
+    <actor id="123" code="myCode" label="myLabel" uri="myUri"/>
+    <actor id="123" code="myCode" label="myLabel" uri="myUri"/>
+</actors>

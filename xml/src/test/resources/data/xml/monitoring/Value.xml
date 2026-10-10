@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mo:value xmlns:mo="http://ahtutils.aht-group.com/monitoring" type="myType">myValue</mo:value>
+<value xmlns="http://xsd.jeesl.org/module/monitoring" type="myType">myValue</value>

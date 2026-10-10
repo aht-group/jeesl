@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<srs:srs xmlns:srs="http://www.jeesl.org/dev/srs" xmlns:ns2="http://www.openfuxml.org/text" xmlns:ofx="http://www.openfuxml.org" xmlns:ns4="http://www.openfuxml.org/editorial" xmlns:ns5="http://www.openfuxml.org/layout" xmlns:io="http://exlp.sf.net/io" xmlns:ns7="http://www.openfuxml.org/media" xmlns:ofxL="http://www.openfuxml.org/list" xmlns:ns9="http://www.openfuxml.org/table" xmlns:ns10="http://www.openfuxml.org/wiki" code="myCode">
-    <srs:version id="123" code="myCode"/>
-    <srs:meta/>
-    <srs:actors module="myModule"/>
-    <srs:releases module="myModule"/>
-</srs:srs>
+<ns5:srs xmlns:ofx="http://www.openfuxml.org" xmlns:ns3="http://www.openfuxml.org/text" xmlns:ns4="http://www.openfuxml.org/wiki" xmlns:ns5="http://xsd.jeesl.org/module/dev/srs" xmlns:ns6="http://www.openfuxml.org/layout" xmlns:ns7="http://www.openfuxml.org/editorial" xmlns:io="http://exlp.sf.net/io" xmlns:ns9="http://www.openfuxml.org/media" xmlns:ns10="http://www.openfuxml.org/table" xmlns:ofxL="http://www.openfuxml.org/list" code="myCode">
+    <ns5:version id="123" code="myCode"/>
+    <ns5:meta/>
+    <ns5:actors module="myModule"/>
+    <ns5:releases module="myModule"/>
+</ns5:srs>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mo:dataSet xmlns:mo="http://ahtutils.aht-group.com/monitoring" id="123" code="myCode" label="myLabel">
-    <mo:indicator id="123" code="myCode" label="myLabel"/>
-    <mo:observer id="123" code="myCode" label="myLabel"/>
-    <mo:data id="123" record="2011-11-11T11:11:11" range="1000"/>
-    <mo:data id="123" record="2011-11-11T11:11:11" range="1000"/>
-</mo:dataSet>
+<dataSet xmlns="http://xsd.jeesl.org/module/monitoring" id="123" code="myCode" label="myLabel">
+    <indicator id="123" code="myCode" label="myLabel"/>
+    <observer id="123" code="myCode" label="myLabel"/>
+    <data id="123" record="2011-11-11T11:11:11" range="1000"/>
+    <data id="123" record="2011-11-11T11:11:11" range="1000"/>
+</dataSet>

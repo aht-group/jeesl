@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mo:indicator xmlns:mo="http://ahtutils.aht-group.com/monitoring" id="123" code="myCode" label="myLabel">
-    <mo:dataSet id="123" code="myCode" label="myLabel"/>
-    <mo:dataSet id="123" code="myCode" label="myLabel"/>
-</mo:indicator>
+<indicator xmlns="http://xsd.jeesl.org/module/monitoring" id="123" code="myCode" label="myLabel">
+    <dataSet id="123" code="myCode" label="myLabel"/>
+    <dataSet id="123" code="myCode" label="myLabel"/>
+</indicator>

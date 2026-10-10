@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<srs:actors xmlns:srs="http://www.jeesl.org/dev/srs" module="myModule">
-    <srs:actors module="myModule"/>
-    <srs:actors module="myModule"/>
-    <srs:actor code="myCode" name="myName"/>
-    <srs:actor code="myCode" name="myName"/>
-</srs:actors>
+<actors xmlns="http://xsd.jeesl.org/module/dev/srs" module="myModule">
+    <actors module="myModule"/>
+    <actors module="myModule"/>
+    <actor code="myCode" name="myName"/>
+    <actor code="myCode" name="myName"/>
+</actors>

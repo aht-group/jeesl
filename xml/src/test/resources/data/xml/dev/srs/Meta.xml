@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<meta xmlns="http://www.jeesl.org/dev/srs">
+<meta xmlns="http://xsd.jeesl.org/module/dev/srs">
     <product code="JEESL" name="JavaEE Support Libraries"/>
 </meta>

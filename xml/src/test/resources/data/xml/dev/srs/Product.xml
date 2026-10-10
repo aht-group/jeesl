@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<product xmlns="http://www.jeesl.org/dev/srs" code="JEESL" name="JavaEE Support Libraries"/>
+<product xmlns="http://xsd.jeesl.org/module/dev/srs" code="JEESL" name="JavaEE Support Libraries"/>

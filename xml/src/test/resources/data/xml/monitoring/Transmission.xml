@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mo:transmission xmlns:id="http://exlp.sf.net/identity" xmlns:mo="http://ahtutils.aht-group.com/monitoring">
+<ns2:transmission xmlns:id="http://exlp.sf.net/identity" xmlns:ns2="http://xsd.jeesl.org/module/monitoring">
     <id:user/>
-    <mo:dataSet id="123" code="myCode" label="myLabel"/>
-    <mo:dataSet id="123" code="myCode" label="myLabel"/>
-</mo:transmission>
+    <ns2:dataSet id="123" code="myCode" label="myLabel"/>
+    <ns2:dataSet id="123" code="myCode" label="myLabel"/>
+</ns2:transmission>

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<srs:actor xmlns:srs="http://www.jeesl.org/dev/srs" code="myCode" name="myName"/>
+<actor xmlns="http://xsd.jeesl.org/module/dev/srs" code="myCode" name="myName"/>
