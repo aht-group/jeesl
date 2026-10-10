@@ -35,12 +35,6 @@
 		<dependency>
         	<groupId>org.jeesl</groupId>
         	<artifactId>jeesl-xml</artifactId>
-        	<type>jar</type>
-        	<scope>compile</scope>
-	    </dependency>
-		<dependency>
-        	<groupId>org.jeesl</groupId>
-        	<artifactId>jeesl-xml</artifactId>
         	<classifier>javax</classifier>
         	<type>jar</type>
         	<scope>compile</scope>

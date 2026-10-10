@@ -96,15 +96,22 @@ its own, and a separate signature artifact.
 
 ### Implementation
 
-- `pom.xml` (root) and `test/pom.xml` – open: the parameter `release` and the dropped `source` and `target` values
+- `pom.xml` (root) – the parameter `release` with the value `8` in place of `source` and `target` `1.8`
+- `test/pom.xml` – the module drops its own `source` and `target` configuration and inherits the value of
+  the root `pom.xml`
 
 ### Tests
 
-- `javac` with `--release 8` on a class that uses `List.of` – open: the compilation fails with `cannot find symbol`
-- `mvn test-compile` of the reactor on JDK 11 – open: class files of version 52
+- `javac --release 8` on JDK 11 on a class that uses `List.of` – the compilation fails with
+  `cannot find symbol`
+- `mvn -pl xml clean install -DskipTests` on JDK 11 – the class files of the `javax` artifact carry
+  class-file version 52 and those of the `jakarta` artifact version 55; the test classes carry version 52
+- `unzip -p api/target/jeesl-api-0.3.2-SNAPSHOT.jar` on JDK 11 – the class files carry class-file version 52
+- `mvn -DskipTests clean install` of the reactor on JDK 11 – all 45 modules build against the Java 8 API
 
 ### Documentation
 
-- `README.md` (`## Relevant Values`, `## Technical Assumptions`) – open: the compiler entry and the language entry
-- `README.md` (`## Build and Start`) – open: the JDK prerequisite
-- `doc/requirements/architecture.md` – open: the decision is displayed
+- `README.md` (`## Relevant Values`, `## Technical Assumptions`) – the compiler entry names the `release`
+  value `8` and the language entry the Java 8 API
+- `README.md` (`## Build and Start`) – the prerequisite names JDK 11 or newer
+- `doc/requirements/architecture.md` – the technology list names the compile level

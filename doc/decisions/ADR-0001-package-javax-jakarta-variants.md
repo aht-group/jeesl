@@ -150,23 +150,34 @@ Jakarta compiler.
 
 ### Implementation
 
-- `xml/pom.xml` – open: the POM packaging, the two compile executions, the test executions, and the jar executions
-- `pom.xml` (root) – open: the dependency management of `jeesl-xml` with the classifiers `javax`,
-  `jakarta`, and `tests`
+- `xml/pom.xml` – the POM packaging, the compile executions `compile-javax` and `compile-jakarta`, the test
+  executions `testResources`, `testCompile`, and `test`, and the jar executions `package-javax`,
+  `package-jakarta`, and `package-tests`
+- `pom.xml` (root) – the dependency management of `jeesl-xml` with the classifiers `javax`, `jakarta`, and
+  `tests` and no entry without a classifier
 - `client/pom.xml`, `connectors/pom.xml`, `report/pom.xml`, `system-security/pom.xml`, and `util/pom.xml`
-  – open: the classifier `javax`
-- `util/pom.xml` and `doc/pom.xml` – open: the classifier `tests`
+  – the classifier `javax`; `connectors/pom.xml` carries one dependency on `jeesl-xml` only
+- `util/pom.xml` and `doc/pom.xml` – the classifier `tests`
 
 ### Tests
 
-- `mvn -pl xml clean install` on JDK 11 – open: the classifier jars `javax`, `jakarta`, and `tests` and
-  no artifact without a classifier
-- `mvn test` of the reactor with a consumer of the classifier `jakarta` – open: the variant used
+- `mvn -pl xml clean install -DskipTests` on JDK 11 – the classifier jars `javax` (class-file version 52),
+  `jakarta` (class-file version 55), and `tests`, and no artifact without a classifier
+- `mvn -pl api -am -DskipTests clean install` on JDK 11 – a consumer resolves the classifier `javax` from
+  the reactor
+- `mvn -pl util,doc -am test-compile` on JDK 11 – the consumers of the classifier `tests` compile
+- `mvn -DskipTests clean install` of the reactor on JDK 11 – all 45 modules build with the classifier
+  artifacts of `jeesl-xml`
+- `mvn -pl xml test` on JDK 11 – 274 test programs against the `javax` classes, 20 of them failing as they
+  do on JDK 8; the same run against the `jakarta` classes fails all 274 test programs
+- `javap -v` on `org.jeesl.model.xml.xsd.Jeesl` of both classifier jars – the `javax` jar carries
+  `javax.xml.bind` annotations, the `jakarta` jar `jakarta.xml.bind` annotations
 
 ### Documentation
 
-- `README.md` (`## Technical Assumptions`, `## Build and Start`) – open: the platform entry and the JDK
-  prerequisite
-- `doc/requirements/architecture.md` – open: the decision is displayed
-- `doc/status.md` – open: the index lists the decision
+- `README.md` (`## Technical Assumptions`, `## Build and Start`) – the platform entry, the classifier
+  artifacts, and the JDK prerequisite
+- `doc/requirements/architecture.md` – the structure, the module table, and the build flow name the
+  classifier artifacts
+- `doc/status.md` – the index lists the decision
 
