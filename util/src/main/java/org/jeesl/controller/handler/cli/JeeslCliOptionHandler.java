@@ -27,9 +27,15 @@ public class JeeslCliOptionHandler
 	final static Logger logger = LoggerFactory.getLogger(JeeslCliOptionHandler.class);
 	
 	private Options options;
-	private Option oHelp,oDebug,oConfig;
+	private Option oHelp,oDebug;
 	private Option oLogFile;
 	
+	private Option oConfig;
+	
+	public Option getConfigOption() {
+		return oConfig;
+	}
+
 	private boolean appStarted;
 	public boolean isAppStarted(){return appStarted;}
 	
@@ -91,35 +97,6 @@ public class JeeslCliOptionHandler
 		return this;
 	}
 	
-	public void handleLogJul(CommandLine line)
-	{
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger("debug.jul.properties");}
-        else {this.initLogJul("app.jul.properties");}
-	}
-	private void initLogJul(String loggingProfile)
-	{
-		for(String path : log4jPaths)
-		{
-			try (InputStream is = this.getClass().getClassLoader().getResourceAsStream(path+"/"+loggingProfile))
-			{
-		          LogManager.getLogManager().readConfiguration(is);
-			}
-			catch (IOException e) {e.printStackTrace();}
-		}
-	}
-	
-	public void handleLog4j1(CommandLine line)
-	{
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger("debug.log4j.xml");}
-        else {this.initLogger("app.log4j.xml");}
-	}
-	private void initLogger(String loggingProfile)
-	{
-		LoggerInit loggerInit = LoggerInit.instance(loggingProfile);
-		for(String path : log4jPaths) {loggerInit.path(path);}
-		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
-		loggerInit.init();
-	}
 	
 	public void handleLog4j2(CommandLine line)
 	{

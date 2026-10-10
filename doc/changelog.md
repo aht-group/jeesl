@@ -1,5 +1,12 @@
 # Change Log
 
+## 2026-10-10 – Requirements: FR-001 for the CLI option handler
+
+- What: Recorded FR-001 for the reusable help, logging and configuration handling of the entry points.
+- Result: Review "Approval recommended" (0 findings against the recommendation, 2 notes); approved on instruction.
+- Evidence: The five repository patterns – no match; the line width and duplicate checks – no match.
+- Files: doc/requirements/functional/FR-001-cli-support.md, doc/status.md, doc/changelog.md.
+
 ## 2026-10-08 – XML/Build: ADR-0001 and ADR-0002 implemented
 
 - What: ADR-0001 implemented (`xml/pom.xml` as POM packaging with the classifier artifacts `javax`,
