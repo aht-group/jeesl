@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TestExcelImport extends AbstractAhtUtilsReportTest {
 	
 	@Test public void dummy() {}
 	
-	//@Ignore
+	//@Disabled
 //	@Test
 	public void test() throws Exception {
 		

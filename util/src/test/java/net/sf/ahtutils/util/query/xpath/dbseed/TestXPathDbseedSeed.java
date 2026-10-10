@@ -5,9 +5,9 @@ import org.jeesl.model.xml.io.db.Db;
 import org.jeesl.model.xml.io.db.Seed;
 import org.jeesl.model.xml.system.io.db.TestDb;
 import org.jeesl.util.query.xpath.DbseedXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class TestXPathDbseedSeed
 	private final String codeOk = "code";
 	private final String codeMulti = "multi";
 	
-	@Before
+	@BeforeEach
 	public void iniDbseed()
 	{
 		dbSeed = TestDb.create(false);
@@ -36,18 +36,22 @@ public class TestXPathDbseedSeed
 	public void find() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Seed test = DbseedXpath.getSeed(dbSeed, codeOk);
-	    Assert.assertEquals(codeOk,test.getCode());
+	    Assertions.assertEquals(codeOk,test.getCode());
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		DbseedXpath.getSeed(dbSeed, "-1");
+	});
 	}
 	
-	 @Test(expected=ExlpXpathNotUniqueException.class)
+	 @Test
 	 public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	 {
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		 DbseedXpath.getSeed(dbSeed, codeMulti);
-	 }
+	 });
+	}
 }

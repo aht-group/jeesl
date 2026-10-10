@@ -2,7 +2,7 @@ package org.jeesl.factory.txt.system.io.mail;
 
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.factory.txt.system.io.mail.core.TxtMimeTypeFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

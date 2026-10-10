@@ -7,8 +7,9 @@ import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.io.report.Reports;
 import org.jeesl.model.xml.system.io.report.TestXmlReport;
 import org.jeesl.util.query.xpath.ReportXpath;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public class TestReportXpathMr extends AbstractJeeslUtilTest
 	private Report xml1,xml2,xml3,xml4;
 	private Reports reports;
 	
-	@Before
+	@BeforeEach
 	public void iniMedia()
 	{
 		reports = new Reports();
@@ -53,22 +54,28 @@ public class TestReportXpathMr extends AbstractJeeslUtilTest
 		assertJaxbEquals(xml2.getMedia().get(0).getJr().get(0), actual);
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFoundId() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		ReportXpath.getMr(reports, "nullCode", "pdf");
+	});
 	}
 	
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFoundMedia() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		ReportXpath.getMr(reports, xml1.getId(), "nullMedia");
+	});
 	}
 	    
-	@Test(expected=ExlpXpathNotUniqueException.class)
+	@Test
 	public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		ReportXpath.getMr(reports, xml3.getId(), "pdf");
+	});
 	}
 	
 }

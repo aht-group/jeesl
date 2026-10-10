@@ -3,7 +3,7 @@ package org.jeesl;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +19,13 @@ public abstract class AbstractXmlTest <T extends Object> extends AbstractAhtUtil
 		super(cXml,xmlDirSuffix);
 	}
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		LoggerBootstrap.instance("test.log4j2.xml").path("jeesl/system/io/log").init();
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initJaxb()
 	{
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());

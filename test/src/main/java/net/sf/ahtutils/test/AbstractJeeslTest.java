@@ -8,8 +8,8 @@ import java.util.Random;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class AbstractJeeslTest
 	
 	public static void setTargetDirectory(File fTarget){AbstractJeeslTest.fTarget=fTarget;}
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initTargetDirectory()
 	{
 		if(fTarget==null)
@@ -38,7 +38,7 @@ public class AbstractJeeslTest
 		}
 	}
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initRnd()
 	{
 		rnd = new Random();
@@ -78,7 +78,7 @@ public class AbstractJeeslTest
 	
 	protected void assertJaxbEquals(Object ref, Object test)
 	{
-		Assert.assertEquals(JaxbUtil.toString(ref),JaxbUtil.toString(test));
+		Assertions.assertEquals(JaxbUtil.toString(ref),JaxbUtil.toString(test));
 	}
 
 	protected static Date getDefaultDate()

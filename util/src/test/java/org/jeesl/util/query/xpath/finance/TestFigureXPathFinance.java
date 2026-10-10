@@ -6,9 +6,9 @@ import org.jeesl.model.xml.domain.finance.TestXmlFinance;
 import org.jeesl.model.xml.module.finance.Figures;
 import org.jeesl.model.xml.module.finance.Finance;
 import org.jeesl.util.query.xpath.FiguresXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class TestFigureXPathFinance extends AbstractJeeslUtilTest
 	private Figures figures;
 	private Finance f1,f2,f3;
 	
-	@Before
+	@BeforeEach
 	public void iniDbseed()
 	{
 		figures = TestXmlFigures.create(false);
@@ -36,18 +36,22 @@ public class TestFigureXPathFinance extends AbstractJeeslUtilTest
 	public void find() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Finance actual = FiguresXpath.getFinance(figures, f1.getCode());
-	    Assert.assertEquals(f1,actual);
+	    Assertions.assertEquals(f1,actual);
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		FiguresXpath.getFinance(figures, "-1");
+	});
 	}
 	
-	 @Test(expected=ExlpXpathNotUniqueException.class)
+	 @Test
 	 public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	 {
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		 FiguresXpath.getFinance(figures, f2.getCode());
-	 }
+	 });
+	}
 }

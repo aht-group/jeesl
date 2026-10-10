@@ -6,9 +6,9 @@ import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.status.TestXmlTranslation;
 import org.jeesl.model.xml.system.status.TestXmlTranslations;
 import org.jeesl.util.query.xpath.StatusXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class TestStatusXPathTranslation extends AbstractJeeslUtilTest
 	private Translations translations;
 	private Translation l1,l2,l3;
 	
-	@Before
+	@BeforeEach
 	public void iniDbseed()
 	{
 		translations = TestXmlTranslations.create(false);
@@ -36,18 +36,22 @@ public class TestStatusXPathTranslation extends AbstractJeeslUtilTest
 	public void find() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Translation actual = StatusXpath.getTranslation(translations, l1.getKey());
-	    Assert.assertEquals(l1,actual);
+	    Assertions.assertEquals(l1,actual);
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		StatusXpath.getTranslation(translations, "-1");
+	});
 	}
 	
-	 @Test(expected=ExlpXpathNotUniqueException.class)
+	 @Test
 	 public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	 {
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		 StatusXpath.getTranslation(translations, l2.getKey());
-	 }
+	 });
+	}
 }

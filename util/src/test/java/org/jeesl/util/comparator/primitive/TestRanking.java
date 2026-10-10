@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import org.jeesl.AbstractJeeslUtilTest;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,14 +20,14 @@ public class TestRanking extends AbstractJeeslUtilTest
 	private Ranking ranking;
 	private Random rnd;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		ranking = new Ranking();
 		rnd = new Random();
 	}
     
-    @After
+    @AfterEach
     public void close()
     {
     	ranking = null;
@@ -40,7 +40,7 @@ public class TestRanking extends AbstractJeeslUtilTest
     	int[] points = {1,2,3};
     	int[] expected = {3,2,1};
     	int[] actual = ranking.rank(points);
-    	Assert.assertArrayEquals(expected, actual);
+    	Assertions.assertArrayEquals(expected,actual);
     }
     
     @Test
@@ -49,7 +49,7 @@ public class TestRanking extends AbstractJeeslUtilTest
     	int[] points = {1,6,5};
     	int[] expected = {3,1,2};
     	int[] actual = ranking.rank(points);
-    	Assert.assertArrayEquals(expected, actual);
+    	Assertions.assertArrayEquals(expected,actual);
     }
     
     @Test
@@ -58,7 +58,7 @@ public class TestRanking extends AbstractJeeslUtilTest
     	int[] points = {5,1,4};
     	int[] expected = {1,3,2};
     	int[] actual = ranking.rank(points);
-    	Assert.assertArrayEquals(expected, actual);
+    	Assertions.assertArrayEquals(expected,actual);
     }
     
     @Test
@@ -67,7 +67,7 @@ public class TestRanking extends AbstractJeeslUtilTest
     	int[] points = {3,5,3};
     	int[] expected = {2,1,2};
     	int[] actual = ranking.rank(points);
-    	Assert.assertArrayEquals(expected, actual);
+    	Assertions.assertArrayEquals(expected,actual);
     }
    
     @Test
@@ -76,7 +76,7 @@ public class TestRanking extends AbstractJeeslUtilTest
     	int[] points = {7,5,7};
     	int[] expected = {1,3,1};
     	int[] actual = ranking.rank(points);
-    	Assert.assertArrayEquals(expected, actual);
+    	Assertions.assertArrayEquals(expected,actual);
     }
     
     @Test
@@ -87,12 +87,12 @@ public class TestRanking extends AbstractJeeslUtilTest
     	for(int i=0;i<nr;i++){points.add(rnd.nextInt());}
     	
     	List<Integer> actual = ranking.rank(points);
-    	Assert.assertEquals(nr, points.size());
-    	Assert.assertEquals(nr, actual.size());
+    	Assertions.assertEquals(nr,points.size());
+    	Assertions.assertEquals(nr,actual.size());
     	for(Integer i : actual)
     	{
-    		Assert.assertTrue("Rank must be > 0, but is "+i,i>0);
-    		Assert.assertTrue("Rank must be <= "+nr+", but is "+i, +i<=1000);
+    		Assertions.assertTrue(i>0,"Rank must be > 0, but is "+i);
+    		Assertions.assertTrue(+i<=1000,"Rank must be <= "+nr+", but is "+i);
     	}
     }
     
@@ -102,7 +102,7 @@ public class TestRanking extends AbstractJeeslUtilTest
     	int[] points   = {3,5,7,2,3,4,6,7,4};
     	int[] expected = {7,4,1,9,7,5,3,1,5};
     	int[] actual = ranking.rank(points);
-    	Assert.assertArrayEquals(expected, actual);
+    	Assertions.assertArrayEquals(expected,actual);
     }
     
     @Test
@@ -114,7 +114,7 @@ public class TestRanking extends AbstractJeeslUtilTest
     	Ranking.Rank b = r.new Rank(2,5);list.add(b);
     	
     	Collections.sort(list, r.new Rank());
-    	Assert.assertEquals("b1="+b.getScore()+" b2="+list.get(0).getScore(), b, list.get(0));
-    	Assert.assertEquals(a, list.get(1));
+    	Assertions.assertEquals(b,list.get(0),"b1="+b.getScore()+" b2="+list.get(0).getScore());
+    	Assertions.assertEquals(a,list.get(1));
     }
 }

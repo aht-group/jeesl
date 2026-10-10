@@ -6,9 +6,9 @@ import org.jeesl.model.xml.jeesl.TestXmlAht;
 import org.jeesl.model.xml.system.status.TestXmlStatus;
 import org.jeesl.model.xml.xsd.aht.Aht;
 import org.jeesl.util.query.xpath.StatusXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class TestStatusXPathStatus extends AbstractJeeslUtilTest
 	private Aht aht;
 	private Status s1,s2,s3;
 	
-	@Before
+	@BeforeEach
 	public void iniDbseed()
 	{
 		aht = TestXmlAht.create(false);
@@ -36,18 +36,22 @@ public class TestStatusXPathStatus extends AbstractJeeslUtilTest
 	public void find() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Status actual = StatusXpath.getStatus(aht.getStatus(), s1.getCode());
-	    Assert.assertEquals(s1,actual);
+	    Assertions.assertEquals(s1,actual);
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		StatusXpath.getStatus(aht.getStatus(), "-1");
+	});
 	}
 	
-	 @Test(expected=ExlpXpathNotUniqueException.class)
+	 @Test
 	 public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	 {
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		 StatusXpath.getStatus(aht.getStatus(), s2.getCode());
-	 }
+	 });
+	}
 }

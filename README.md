@@ -57,7 +57,7 @@ These points are the result of an analysis of the existing build files and sourc
 - Web: JSF and JAX-RS (REST); servlets and JSF components live in `jsf/`.
 - XML: JAXB models and code generation from 36 XSD files in `xml/src/main/xsd/`.
 - Logging: SLF4J; the test resources use log4j configurations under `src/test/resources/config.*/log4j.xml`.
-- Tests: JUnit with shared test bases such as `net.sf.ahtutils.test.AbstractAhtUtilsXmlTest`, `org.jeesl.test.AbstractJeeslXmlTest` and `org.jeesl.test.JeeslAssert`, plus the test rule `net.sf.ahtutils.test.IgnoreOtherRule`.
+- Tests: JUnit 5 with shared test bases such as `net.sf.ahtutils.test.AbstractAhtUtilsXmlTest`, `org.jeesl.test.AbstractJeeslXmlTest` and `org.jeesl.test.JeeslAssert`, plus the extension `net.sf.ahtutils.test.IgnoreOtherRule`.
 - Libraries in use: EXLP (`net.sf.exlp`), OpenFuXML (`org.openfuxml`), MetaChart (`org.metachart`), Apache POI, Aspose Words, Apache Batik, Infinispan, Apache Commons Configuration 2.
 - `commons-logging:commons-logging` is excluded and banned by the Maven Enforcer plugin.
 

@@ -20,9 +20,9 @@ import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.io.report.Reports;
 import org.jeesl.model.xml.io.report.Resources;
 import org.jeesl.util.query.xpath.ReportXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -69,7 +69,7 @@ public class AbstractJeeslReportTest
 	
     public AbstractJeeslReportTest() {}
     
-    @BeforeClass
+    @BeforeAll
 	public static void initTargetDirectory()
 	{
 		if(fTarget==null)
@@ -101,7 +101,7 @@ public class AbstractJeeslReportTest
 		}
     }
 	
-	@Before
+	@BeforeEach
 	public void initHandler() throws ReportException, FileNotFoundException
 	{
 		reportHandler = new ReportHandler(reportFileLocation);
@@ -161,12 +161,12 @@ public class AbstractJeeslReportTest
         TextExtractionStrategy strategy = parser.processContent(1, new SimpleTextExtractionStrategy());
         reader.close();
 		strategy.getResultantText();
-		Assert.assertTrue("First generated page counts zero characters",strategy.getResultantText().length()>0);
+		Assertions.assertTrue(strategy.getResultantText().length()>0,"First generated page counts zero characters");
 	}
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals(JaxbUtil.toString(expected),JaxbUtil.toString(actual),"actual XML differes from expected XML");
 	}
 	
 	protected <REPORT extends JeeslIoReport<?,?,?,?>> void outputXls(JeeslXlsReport<REPORT> report) throws Exception

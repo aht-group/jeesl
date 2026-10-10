@@ -7,8 +7,8 @@ import org.exlp.util.system.DateUtil;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.factory.json.util.JsonDateFactory;
 import org.jeesl.test.JeeslBootstrap;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,56 +24,56 @@ public class TestJsonDateFacotory extends AbstractJeeslUtilTest
     {	
     	JsonDateYQMWD json = new JsonDateYQMWD();
     	JsonDateFactory.build(json, DateUtil.toDate(LocalDate.of(2016,5,2)));
-    	Assert.assertEquals(2016, json.getYear());
-    	Assert.assertEquals("Q2",json.getQuarter());
-    	Assert.assertEquals(5,json.getMonth());
-    	Assert.assertEquals(18,json.getWeek());
-    	Assert.assertEquals(2,json.getDay());
+    	Assertions.assertEquals(2016,json.getYear());
+    	Assertions.assertEquals("Q2",json.getQuarter());
+    	Assertions.assertEquals(5,json.getMonth());
+    	Assertions.assertEquals(18,json.getWeek());
+    	Assertions.assertEquals(2,json.getDay());
     }
     
     @Test public void yearQuarterMonthWeekDay()
     {	
     	JsonDateYQMWD json = new JsonDateYQMWD();
     	JsonDateFactory.build(json, new Date());
-    	Assert.assertNotEquals(0, json.getYear());
-    	Assert.assertNotNull(json.getQuarter());
-    	Assert.assertNotEquals(0,json.getMonth());
-    	Assert.assertNotEquals(0,json.getWeek());
-    	Assert.assertNotEquals(0,json.getDay());
+    	Assertions.assertNotEquals(0,json.getYear());
+    	Assertions.assertNotNull(json.getQuarter());
+    	Assertions.assertNotEquals(0,json.getMonth());
+    	Assertions.assertNotEquals(0,json.getWeek());
+    	Assertions.assertNotEquals(0,json.getDay());
     }
     
     @Test public void yearQuarterMonthWeek()
     {	
     	JsonDateYQMW json = new JsonDateYQMW();
     	JsonDateFactory.build(json, new Date());
-    	Assert.assertNotEquals(0, json.getYear());
-    	Assert.assertNotNull(json.getQuarter());
-    	Assert.assertNotEquals(0,json.getMonth());
-    	Assert.assertNotEquals(0,json.getWeek());
+    	Assertions.assertNotEquals(0,json.getYear());
+    	Assertions.assertNotNull(json.getQuarter());
+    	Assertions.assertNotEquals(0,json.getMonth());
+    	Assertions.assertNotEquals(0,json.getWeek());
     }
     
     @Test public void yearQuarterMonth()
     {	
     	JsonDateYQM json = new JsonDateYQM();
     	JsonDateFactory.build(json, new Date());
-    	Assert.assertNotEquals(0, json.getYear());
-    	Assert.assertNotNull(json.getQuarter());
-    	Assert.assertNotEquals(0,json.getMonth());
+    	Assertions.assertNotEquals(0,json.getYear());
+    	Assertions.assertNotNull(json.getQuarter());
+    	Assertions.assertNotEquals(0,json.getMonth());
     }
     
     @Test public void yearQuarter()
     {	
     	JsonDateYQM json = new JsonDateYQM();
     	JsonDateFactory.build(json, new Date());
-    	Assert.assertNotEquals(0, json.getYear());
-    	Assert.assertNotNull(json.getQuarter());
+    	Assertions.assertNotEquals(0,json.getYear());
+    	Assertions.assertNotNull(json.getQuarter());
     }
     
     @Test public void year()
     {	
     	JsonDateYQM json = new JsonDateYQM();
     	JsonDateFactory.build(json, new Date());
-    	Assert.assertNotEquals(0, json.getYear());
+    	Assertions.assertNotEquals(0,json.getYear());
     }
        
 	public static void main (String[] args) throws Exception

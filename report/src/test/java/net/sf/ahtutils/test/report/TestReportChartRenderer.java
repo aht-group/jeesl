@@ -3,7 +3,7 @@ package net.sf.ahtutils.test.report;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class TestReportChartRenderer extends AbstractAhtUtilsReportTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestReportChartRenderer.class);
     
-//	@Before
+//	@BeforeEach
 	public void initExample() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException, ReportException, FileNotFoundException
 	{
 		initHandler();

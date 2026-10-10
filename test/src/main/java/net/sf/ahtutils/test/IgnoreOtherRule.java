@@ -1,10 +1,12 @@
 package net.sf.ahtutils.test;
 
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
+import java.lang.reflect.Method;
 
-public class IgnoreOtherRule implements TestRule
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.InvocationInterceptor;
+import org.junit.jupiter.api.extension.ReflectiveInvocationContext;
+
+public class IgnoreOtherRule implements InvocationInterceptor
 {
     private String applyMethod;
     
@@ -14,18 +16,13 @@ public class IgnoreOtherRule implements TestRule
     }
     
     @Override
-    public Statement apply(final Statement statement, final Description description)
+    public void interceptTestMethod(Invocation<Void> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable
     {
-        return new Statement()
+        if (applyMethod.equals(extensionContext.getTestMethod().get().getName()))
         {
-            @Override
-            public void evaluate() throws Throwable{
-                if (applyMethod.equals(description.getMethodName())) {
-                    statement.evaluate();
-                }
-            }
-        };
+            invocation.proceed();
+        }
     }
     
-    //@Rule public IgnoreOtherRule test = new IgnoreOtherRule("withoutCode");
+    // register via @RegisterExtension public IgnoreOtherRule test = new IgnoreOtherRule("withoutCode");
 }

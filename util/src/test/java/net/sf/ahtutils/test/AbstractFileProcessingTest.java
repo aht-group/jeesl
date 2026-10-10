@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ public abstract class AbstractFileProcessingTest extends AbstractAhtUtilsXmlTest
 	protected File fTest;
 	protected File fRef;
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		LoggerBootstrap.instance().path("jeesl/system/io/log").init();

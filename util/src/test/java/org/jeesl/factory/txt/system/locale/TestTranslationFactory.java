@@ -7,9 +7,9 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class TestTranslationFactory extends AbstractJeeslUtilTest
 	private File fDstDir;
 	private String bundleName = "msg";
 	
-	@Before
+	@BeforeEach
 	public void init() throws IOException
 	{
 		tFactory = new TranslationFactory();
@@ -41,11 +41,11 @@ public class TestTranslationFactory extends AbstractJeeslUtilTest
     {	
 		tFactory.add("src/test/resources/data/xml/msgBundle/translation1.xml");
 		tFactory.writeMessageResourceBundles(bundleName,fDstDir);
-		Assert.assertTrue(fDstDir.exists());
-		Assert.assertTrue(fDstDir.isDirectory());
+		Assertions.assertTrue(fDstDir.exists());
+		Assertions.assertTrue(fDstDir.isDirectory());
 		
-		Assert.assertTrue("Directory ("+fDstDir+") does not exist: "+fDstDir.getAbsolutePath(),fDstDir.exists());
-		Assert.assertTrue("("+fDstDir+") not a directory: "+fDstDir.getAbsolutePath(),fDstDir.isDirectory());
+		Assertions.assertTrue(fDstDir.exists(),"Directory ("+fDstDir+") does not exist: "+fDstDir.getAbsolutePath());
+		Assertions.assertTrue(fDstDir.isDirectory(),"("+fDstDir+") not a directory: "+fDstDir.getAbsolutePath());
     }
 	
 	@Test
@@ -57,8 +57,8 @@ public class TestTranslationFactory extends AbstractJeeslUtilTest
 		for(String s : tMap.getLangKeys())
 		{
 			File f = new File(fDstDir,bundleName+"_"+s+"."+TranslationFactory.msgBundleSuffix);
-			Assert.assertTrue("Should exist: "+f.getAbsolutePath(),f.exists());
-			Assert.assertTrue(f.isFile());
+			Assertions.assertTrue(f.exists(),"Should exist: "+f.getAbsolutePath());
+			Assertions.assertTrue(f.isFile());
 		}
     }
 	
@@ -69,10 +69,10 @@ public class TestTranslationFactory extends AbstractJeeslUtilTest
 		tFactory.add("src/test/resources/data/xml/msgBundle/translation2.xml");
 		tFactory.writeMessageResourceBundles(bundleName,fDstDir);
 		TranslationMap tMap = tFactory.gettMap();
-		Assert.assertEquals(2,tMap.getLangKeys().size());
+		Assertions.assertEquals(2,tMap.getLangKeys().size());
 		for(String s : tMap.getLangKeys())
 		{
-			Assert.assertEquals(3,tMap.getTranslationKeys(s).size());
+			Assertions.assertEquals(3,tMap.getTranslationKeys(s).size());
 		}
     }
 	
@@ -82,10 +82,10 @@ public class TestTranslationFactory extends AbstractJeeslUtilTest
 		tFactory.rekursiveDirectory("src/test/resources/data/xml/msgBundle");
 		tFactory.writeMessageResourceBundles(bundleName,fDstDir);
 		TranslationMap tMap = tFactory.gettMap();
-		Assert.assertEquals(2,tMap.getLangKeys().size());
+		Assertions.assertEquals(2,tMap.getLangKeys().size());
 		for(String s : tMap.getLangKeys())
 		{
-			Assert.assertEquals(5,tMap.getTranslationKeys(s).size());
+			Assertions.assertEquals(5,tMap.getTranslationKeys(s).size());
 		}
     }
 }

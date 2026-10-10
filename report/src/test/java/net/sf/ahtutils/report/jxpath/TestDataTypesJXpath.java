@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.jxpath.Pointer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

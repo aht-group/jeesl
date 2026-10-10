@@ -9,9 +9,9 @@ import java.util.Set;
 
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class TestTranslationMap extends AbstractJeeslUtilTest
 	private Set<String> langs;
 	private Map<String,String> deTranslations;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		tMap = new TranslationMap();
@@ -53,27 +53,29 @@ public class TestTranslationMap extends AbstractJeeslUtilTest
 	public void sizeLanguages()
     {	
 		tMap.add(t1);
-		Assert.assertEquals(1, tMap.sizeLanguages());
+		Assertions.assertEquals(1,tMap.sizeLanguages());
 		
 		tMap.add(t2);
-		Assert.assertEquals(1, tMap.sizeLanguages());
+		Assertions.assertEquals(1,tMap.sizeLanguages());
 		
 		tMap.add(t3);
-		Assert.assertEquals(2, tMap.sizeLanguages());
+		Assertions.assertEquals(2,tMap.sizeLanguages());
     }
 	
 	@Test
 	public void sizeKeys() throws JeeslNotFoundException
 	{
 		addAllTranslations();
-		Assert.assertEquals(2, tMap.sizeKeys("de"));
-		Assert.assertEquals(1, tMap.sizeKeys("en"));
+		Assertions.assertEquals(2,tMap.sizeKeys("de"));
+		Assertions.assertEquals(1,tMap.sizeKeys("en"));
 	}
 	
-	@Test(expected=JeeslNotFoundException.class)
+	@Test
 	public void sizeKeysUnknown() throws JeeslNotFoundException
 	{
+		Assertions.assertThrows(JeeslNotFoundException.class,() -> {
 		tMap.sizeKeys("-1");
+	});
 	}
 	
 	@Test
@@ -82,22 +84,26 @@ public class TestTranslationMap extends AbstractJeeslUtilTest
 		addAllTranslations();
 		for(String[] s : translations)
 		{
-			Assert.assertEquals(s[2], tMap.translate(s[0], s[1]));
+			Assertions.assertEquals(s[2],tMap.translate(s[0], s[1]));
 		}
 	}
 	
-	@Test(expected=JeeslNotFoundException.class)
+	@Test
 	public void translateUnknowLang() throws JeeslNotFoundException
 	{
+		Assertions.assertThrows(JeeslNotFoundException.class,() -> {
 		addAllTranslations();
 		tMap.translateWithException("-1","-1");
+	});
 	}
 	
-	@Test(expected=JeeslNotFoundException.class)
+	@Test
 	public void translateUnknowKey() throws JeeslNotFoundException
 	{
+		Assertions.assertThrows(JeeslNotFoundException.class,() -> {
 		addAllTranslations();
 		tMap.translateWithException("de","-1");
+	});
 	}
 	
 	@Test
@@ -105,10 +111,10 @@ public class TestTranslationMap extends AbstractJeeslUtilTest
 	{
 		addAllTranslations();
 		List<String> list = tMap.getLangKeys();
-		Assert.assertEquals(langs.size(), list.size());
+		Assertions.assertEquals(langs.size(),list.size());
 		for(String langKey : list)
 		{
-			Assert.assertTrue(langs.contains(langKey));
+			Assertions.assertTrue(langs.contains(langKey));
 		}
 	}
 	
@@ -117,17 +123,19 @@ public class TestTranslationMap extends AbstractJeeslUtilTest
 	{
 		addAllTranslations();
 		List<String> list = tMap.getTranslationKeys("de");
-		Assert.assertEquals(deTranslations.size(), list.size());
+		Assertions.assertEquals(deTranslations.size(),list.size());
 		for(String key : list)
 		{
-			Assert.assertTrue(deTranslations.containsKey(key));
-			Assert.assertEquals(deTranslations.get(key), tMap.translate("de", key));
+			Assertions.assertTrue(deTranslations.containsKey(key));
+			Assertions.assertEquals(deTranslations.get(key),tMap.translate("de", key));
 		}
 	}
 	
-	@Test(expected=JeeslNotFoundException.class)
+	@Test
 	public void getTranslationKeysUnknows() throws JeeslNotFoundException
 	{
+		Assertions.assertThrows(JeeslNotFoundException.class,() -> {
 		tMap.getTranslationKeys("-1");
+	});
 	}
 }

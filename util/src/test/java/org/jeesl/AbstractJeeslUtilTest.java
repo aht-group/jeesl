@@ -7,8 +7,8 @@ import net.sf.ahtutils.test.AbstractJeeslTest;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,14 +19,14 @@ public class AbstractJeeslUtilTest extends AbstractJeeslTest
 	protected File f;
 	protected boolean saveReference=false;
 
-	@BeforeClass
+	@BeforeAll
 	public static void initFile()
 	{
 		if(!LoggerBootstrap.isLog4jInited()){initLogger();}
 		AbstractJeeslTest.initTargetDirectory();
 	}
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerBootstrap.isLog4jInited())
@@ -35,7 +35,7 @@ public class AbstractJeeslUtilTest extends AbstractJeeslTest
 		}
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initPrefixMapper()
 	{
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
@@ -43,7 +43,7 @@ public class AbstractJeeslUtilTest extends AbstractJeeslTest
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals(JaxbUtil.toString(expected),JaxbUtil.toString(actual),"actual XML differes from expected XML");
 	}
 	
 	protected void saveXml(Object xml, File f, boolean formatted)

@@ -4,9 +4,9 @@ import org.jeesl.factory.xml.io.mail.XmlTemplateFactory;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Template;
 import org.jeesl.util.query.xpath.MailXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ public class TestMailsTemplateXpath
 	private Template xml1,xml2,xml3,xml4;
 	private Mail mail;
 	
-	@Before
+	@BeforeEach
 	public void initXml()
 	{
 		mail = new Mail();
@@ -35,25 +35,29 @@ public class TestMailsTemplateXpath
 	public void testId1() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Template actual = MailXpath.getTemplate(mail, xml1.getLang(),xml1.getType());
-		Assert.assertEquals(xml1, actual);
+		Assertions.assertEquals(xml1,actual);
 	}
 	    
 	@Test
 	public void testId2() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Template actual = MailXpath.getTemplate(mail, xml2.getLang(),xml2.getType());
-		Assert.assertEquals(xml2, actual);
+		Assertions.assertEquals(xml2,actual);
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		MailXpath.getTemplate(mail, "nullLang", "nullType");
+	});
 	}
 	    
-	@Test(expected=ExlpXpathNotUniqueException.class)
+	@Test
 	public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		MailXpath.getTemplate(mail, xml3.getLang(),xml3.getType());
+	});
 	}
 }

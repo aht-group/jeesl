@@ -12,9 +12,9 @@ import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarZone;
 import org.jeesl.test.JeeslBootstrap;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class TestEjbTimeZoneFactory extends AbstractJeeslUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestEjbTimeZoneFactory.class);
 	
-	@Before public void line(){logger.debug(StringUtil.stars());}
+	@BeforeEach public void line(){logger.debug(StringUtil.stars());}
 	
 	@Test public void pre()
     {	
@@ -38,8 +38,8 @@ public class TestEjbTimeZoneFactory extends AbstractJeeslUtilTest
 	
 	@Test public void wrongId()
 	{
-		Assert.assertFalse(EjbTimeZoneFactory.supportedCode("Europe/Berlin222"));
-		Assert.assertTrue(EjbTimeZoneFactory.supportedCode(JeeslCalendarZone.tzBerlin));
+		Assertions.assertFalse(EjbTimeZoneFactory.supportedCode("Europe/Berlin222"));
+		Assertions.assertTrue(EjbTimeZoneFactory.supportedCode(JeeslCalendarZone.tzBerlin));
 	}
 	
 //	@Test public void timezone()

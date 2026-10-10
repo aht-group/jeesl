@@ -2,8 +2,8 @@ package net.sf.ahtutils.test.reflection;
 
 import org.jeesl.model.xml.xsd.aht.Aht;
 import org.jeesl.test.JeeslBootstrap;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class TestClassForName extends AbstractJeeslTest
 		logger.debug("Expected: "+expected);
 		logger.debug("Actual: "+actual);
 		
-		Assert.assertEquals(expected, actual);
+		Assertions.assertEquals(expected,actual);
 	}
 	
 	public static void main(String args[]) throws Exception

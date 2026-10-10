@@ -10,11 +10,11 @@ import org.jeesl.exception.processing.JeeslDeveloperException;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 import org.jeesl.model.xml.io.mail.Template;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -29,7 +29,7 @@ public class TestFreemarkerEngine extends AbstractJeeslUtilTest
 	
 	private Mails mails;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		mails = new Mails();
@@ -47,24 +47,26 @@ public class TestFreemarkerEngine extends AbstractJeeslUtilTest
 		fme = new FreemarkerEngine(mails);
 	}
 	
-	@After
+	@AfterEach
 	public void close()
 	{
 		fme = null;
 	}
     
-	@Ignore
-    @Test(expected=JeeslDeveloperException.class)
+	@Disabled
+    @Test
     public void devException() throws SAXException, IOException, ParserConfigurationException, TemplateException
     {
+		Assertions.assertThrows(JeeslDeveloperException.class,() -> {
     	fme.processXml("test");
-    }
+    });
+	}
     
     @Test
     public void isAvailable() throws SAXException, IOException, ParserConfigurationException, TemplateException
     {
-    	Assert.assertFalse(fme.isAvailable("null", "de", "txt"));
-    	Assert.assertFalse(fme.isAvailable("id", "de", "txt"));
-    	Assert.assertTrue(fme.isAvailable("id", "de", "html"));
+    	Assertions.assertFalse(fme.isAvailable("null", "de", "txt"));
+    	Assertions.assertFalse(fme.isAvailable("id", "de", "txt"));
+    	Assertions.assertTrue(fme.isAvailable("id", "de", "html"));
     }
 }

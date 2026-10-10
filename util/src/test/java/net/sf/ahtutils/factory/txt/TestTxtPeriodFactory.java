@@ -2,8 +2,8 @@ package net.sf.ahtutils.factory.txt;
 
 import org.jeesl.factory.txt.module.calendar.TxtPeriodJodaFactory;
 import org.jeesl.test.JeeslBootstrap;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ public class TestTxtPeriodFactory extends AbstractJeeslTest
 	
 	private TxtPeriodJodaFactory tfPeriod;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		tfPeriod = new TxtPeriodJodaFactory();
@@ -27,7 +27,7 @@ public class TestTxtPeriodFactory extends AbstractJeeslTest
 //    	String expected = "Now Testing: TestTxtDataUpdateFactory";
     	String actual = tfPeriod.debug(3125);
     	logger.debug(actual);
-//    	Assert.assertEquals(expected, actual);
+//    	Assertions.assertEquals(expected,actual);
     }
        
 	public static void main (String[] args) throws Exception

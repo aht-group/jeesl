@@ -4,9 +4,9 @@ import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.model.xml.io.report.XlsDefinition;
 import org.jeesl.model.xml.io.report.XlsWorkbook;
 import org.jeesl.util.query.xpath.ReportXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ public class TestReportXpathExcelDef extends AbstractJeeslUtilTest
     
 	private XlsDefinition def;
 	
-	@Before
+	@BeforeEach
 	public void iniDef()
 	{
 		def = new XlsDefinition();
@@ -38,6 +38,6 @@ public class TestReportXpathExcelDef extends AbstractJeeslUtilTest
 	    public void testXPath() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	    {
 	    	XlsWorkbook test = ReportXpath.getWorkbook(def, "two");
-	    	Assert.assertEquals(test.getCode(),"two");
+	    	Assertions.assertEquals(test.getCode(),"two");
 	    }
 }

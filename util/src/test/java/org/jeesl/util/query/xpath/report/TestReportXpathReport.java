@@ -5,8 +5,9 @@ import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.io.report.Reports;
 import org.jeesl.model.xml.system.io.report.TestXmlReport;
 import org.jeesl.util.query.xpath.ReportXpath;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,7 @@ public class TestReportXpathReport extends AbstractJeeslUtilTest
 	private Report xml1,xml2,xml3,xml4;
 	private Reports reports;
 	
-	@Before
+	@BeforeEach
 	public void iniMedia()
 	{
 		reports = new Reports();
@@ -45,15 +46,19 @@ public class TestReportXpathReport extends AbstractJeeslUtilTest
 		assertJaxbEquals(xml2, actual);
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		 ReportXpath.getReport(reports, "nullCode");
+	});
 	}
 	    
-	@Test(expected=ExlpXpathNotUniqueException.class)
+	@Test
 	public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		ReportXpath.getReport(reports, xml3.getId());
+	});
 	}
 }

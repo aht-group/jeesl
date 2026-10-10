@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jeesl.AbstractJeeslUtilTest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ public class TestBoolProcessor extends AbstractJeeslUtilTest
 	
 	private List<Boolean> a;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{		
 		Boolean tmp [] = {true, false, true, true, true, false, false, true}; //AND - false , OR - true
 		a = Arrays.asList(tmp);
@@ -24,19 +24,19 @@ public class TestBoolProcessor extends AbstractJeeslUtilTest
 	
 	@Test public void pre()
     {	
-		Assert.assertEquals(8, a.size());
+		Assertions.assertEquals(8,a.size());
     }
  
 
     @Test public void and()
     {
 		Boolean actualA = BooleanProcessor.query("true AND false",a);
-		Assert.assertFalse(actualA);
+		Assertions.assertFalse(actualA);
     }
     
     @Test public void or()
     {
 		Boolean actualA = BooleanProcessor.query("true OR false",a);
-		Assert.assertTrue(actualA);
+		Assertions.assertTrue(actualA);
     }
 }

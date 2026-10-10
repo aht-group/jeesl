@@ -8,9 +8,9 @@ import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.util.query.xpath.ReportXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TestReportXpathSerializeable extends AbstractJeeslUtilTest
 	private List<Serializable> list;
 	private Langs langs;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		list = new ArrayList<>();
@@ -38,16 +38,18 @@ public class TestReportXpathSerializeable extends AbstractJeeslUtilTest
 		list.add("b");
 		
 		Langs actual = ReportXpath.getFirstLangs(list);
-		Assert.assertEquals(langs,actual);
+		Assertions.assertEquals(langs,actual);
 	}
 
-	@Test( expected = ExlpXpathNotFoundException.class )
+	@Test
 	public void langsNotFound() throws ExlpXpathNotFoundException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		list.add("a");
 		list.add("b");
 		
 		Langs actual = ReportXpath.getFirstLangs(list);
-		Assert.assertEquals(langs,actual);
+		Assertions.assertEquals(langs,actual);
+	});
 	}
 }

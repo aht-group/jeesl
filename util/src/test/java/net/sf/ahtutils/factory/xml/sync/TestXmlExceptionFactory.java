@@ -6,8 +6,8 @@ import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionFactory;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ public class TestXmlExceptionFactory extends AbstractFileProcessingTest
 	private JeeslConstraintViolationException eMulti;
 	private JeeslConstraintViolationException eIntegrity;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		eSingle = new JeeslNotFoundException();

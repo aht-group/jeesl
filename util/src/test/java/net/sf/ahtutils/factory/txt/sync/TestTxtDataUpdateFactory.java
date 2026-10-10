@@ -4,9 +4,9 @@ import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.factory.txt.system.sync.TxtDataUpdateFactory;
 import org.jeesl.factory.xml.io.locale.status.XmlTypeFactory;
 import org.jeesl.test.JeeslBootstrap;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,7 @@ public class TestTxtDataUpdateFactory extends AbstractJeeslTest
 	
 	private DataUpdateTracker dut;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		dut = new DataUpdateTracker();
@@ -31,7 +31,7 @@ public class TestTxtDataUpdateFactory extends AbstractJeeslTest
     	String expected = "Now Testing: TestTxtDataUpdateFactory";
     	String actual = TxtDataUpdateFactory.debug(dut.getUpdate());
     	logger.debug(actual);
-    	Assert.assertEquals(expected, actual);
+    	Assertions.assertEquals(expected,actual);
     }
     
     @Test
@@ -41,7 +41,7 @@ public class TestTxtDataUpdateFactory extends AbstractJeeslTest
     	String expected = "Now Testing: TestTxtDataUpdateFactory [success] 1/1 (skipped:0)";
     	String actual = TxtDataUpdateFactory.debug(dut.toDataUpdate());
     	logger.debug(actual);
-    	Assert.assertEquals(expected, actual);
+    	Assertions.assertEquals(expected,actual);
     }
     
 	public static void main (String[] args) throws Exception

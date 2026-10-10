@@ -8,8 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,31 +36,31 @@ public class TestJeeslCliOptionHandler
 	public void options()
 	{
 		Options options = this.build().getOptions();
-		Assert.assertTrue("the option set carries help",options.hasOption("help"));
-		Assert.assertTrue("the option set carries debug",options.hasOption("debug"));
-		Assert.assertTrue("the option set carries logFile",options.hasOption("logFile"));
-		Assert.assertTrue("the option set carries config",options.hasOption("config"));
+		Assertions.assertTrue(options.hasOption("help"),"the option set carries help");
+		Assertions.assertTrue(options.hasOption("debug"),"the option set carries debug");
+		Assertions.assertTrue(options.hasOption("logFile"),"the option set carries logFile");
+		Assertions.assertTrue(options.hasOption("config"),"the option set carries config");
 	}
 	
 	@Test
 	public void profileDefault() throws Exception
 	{
 		JeeslCliOptionHandler jco = this.build();
-		Assert.assertEquals("app.log4j2.xml",jco.loggingProfile(this.parse(jco)));
+		Assertions.assertEquals("app.log4j2.xml",jco.loggingProfile(this.parse(jco)));
 	}
 	
 	@Test
 	public void profileDebug() throws Exception
 	{
 		JeeslCliOptionHandler jco = this.build();
-		Assert.assertEquals("debug.log4j2.xml",jco.loggingProfile(this.parse(jco,"-debug")));
+		Assertions.assertEquals("debug.log4j2.xml",jco.loggingProfile(this.parse(jco,"-debug")));
 	}
 	
 	@Test
 	public void profileLogFile() throws Exception
 	{
 		JeeslCliOptionHandler jco = this.build();
-		Assert.assertEquals("file.log4j2.xml",jco.loggingProfile(this.parse(jco,"-logFile")));
+		Assertions.assertEquals("file.log4j2.xml",jco.loggingProfile(this.parse(jco,"-logFile")));
 	}
 	
 	@Test
@@ -80,8 +80,8 @@ public class TestJeeslCliOptionHandler
 		finally {System.setOut(original);}
 		help = new String(baos.toByteArray(),StandardCharsets.UTF_8);
 		
-		Assert.assertEquals("the process ends with exit code 0",0,exitCode.get());
-		Assert.assertTrue("the help text lists the help option",help.contains("help"));
-		Assert.assertTrue("the help text lists the debug option",help.contains("debug"));
+		Assertions.assertEquals(0,exitCode.get(),"the process ends with exit code 0");
+		Assertions.assertTrue(help.contains("help"),"the help text lists the help option");
+		Assertions.assertTrue(help.contains("debug"),"the help text lists the debug option");
 	}
 }

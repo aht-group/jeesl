@@ -2,8 +2,8 @@ package net.sf.ahtutils.controller.util;
 
 import org.jeesl.factory.txt.system.security.user.TxtPasswordGenerator;
 import org.jeesl.test.JeeslBootstrap;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class TestUtilsPasswordGenerator
 		for(int i=5;i<15;i++)
 		{
 			String pwd = TxtPasswordGenerator.random(i);
-			Assert.assertEquals(i, pwd.length());
+			Assertions.assertEquals(i,pwd.length());
 		}
 	}
 	

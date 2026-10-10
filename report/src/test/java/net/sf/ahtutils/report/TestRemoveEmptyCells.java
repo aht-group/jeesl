@@ -8,9 +8,9 @@ import java.io.OutputStream;
 
 import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore("Needs to be implemented: UTILS-74")
+@Disabled("Needs to be implemented: UTILS-74")
 public class TestRemoveEmptyCells extends AbstractAhtUtilsReportTest
 {
 	

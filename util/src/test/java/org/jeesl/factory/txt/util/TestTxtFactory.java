@@ -1,8 +1,8 @@
 package org.jeesl.factory.txt.util;
 
 import org.jeesl.AbstractJeeslUtilTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,7 @@ public class TestTxtFactory extends AbstractJeeslUtilTest
 		{
 			int expected=i;
 			if(i>s.length()) {expected=s.length();}
-			Assert.assertEquals(expected, TxtFactory.truncate(i, s).length());
+			Assertions.assertEquals(expected,TxtFactory.truncate(i, s).length());
 		}
     }
 }

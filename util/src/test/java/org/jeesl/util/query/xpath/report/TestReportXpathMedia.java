@@ -8,9 +8,9 @@ import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.model.xml.io.report.Media;
 import org.jeesl.model.xml.system.io.report.TestXmlMedia;
 import org.jeesl.util.query.xpath.ReportXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class TestReportXpathMedia extends AbstractJeeslUtilTest
 	private Media media1,media2,media3,media4;
 	private List<Media> mediaList;
 	
-	@Before
+	@BeforeEach
 	public void iniMedia()
 	{
 		media1 = TestXmlMedia.create(false);media1.setType("t1");
@@ -46,25 +46,29 @@ public class TestReportXpathMedia extends AbstractJeeslUtilTest
 	public void testType1() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Media test = ReportXpath.getMedia(mediaList, media1.getType());
-		Assert.assertEquals(JaxbUtil.toString(media1),JaxbUtil.toString(test));
+		Assertions.assertEquals(JaxbUtil.toString(media1),JaxbUtil.toString(test));
 	}
 	    
 	@Test
 	public void testType2() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Media test = ReportXpath.getMedia(mediaList, media2.getType());
-		Assert.assertEquals(JaxbUtil.toString(media2),JaxbUtil.toString(test));
+		Assertions.assertEquals(JaxbUtil.toString(media2),JaxbUtil.toString(test));
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		ReportXpath.getMedia(mediaList, "nullCode");
+	});
 	}
 	    
-	    @Test(expected=ExlpXpathNotUniqueException.class)
+	    @Test
 	    public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	    {
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 	    	ReportXpath.getMedia(mediaList, media3.getType());
-	    }
+	    });
+	}
 }

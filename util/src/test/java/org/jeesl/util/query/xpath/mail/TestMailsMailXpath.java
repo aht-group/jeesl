@@ -5,9 +5,9 @@ import org.jeesl.factory.xml.io.mail.XmlMailFactory;
 import org.jeesl.model.xml.io.mail.Mail;
 import org.jeesl.model.xml.io.mail.Mails;
 import org.jeesl.util.query.xpath.MailXpath;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ public class TestMailsMailXpath
 	private Mail xml1,xml2,xml3,xml4;
 	private Mails mails;
 	
-	@Before
+	@BeforeEach
 	public void iniMedia()
 	{
 		mails = new Mails();
@@ -37,25 +37,29 @@ public class TestMailsMailXpath
 	public void testId1() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Mail actual = MailXpath.getMail(mails, xml1.getCode());
-		Assert.assertEquals(xml1, actual);
+		Assertions.assertEquals(xml1,actual);
 	}
 	    
 	@Test
 	public void testId2() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Mail actual = MailXpath.getMail(mails, xml2.getCode());
-		Assert.assertEquals(xml2, actual);
+		Assertions.assertEquals(xml2,actual);
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotFoundException.class,() -> {
 		MailXpath.getMail(mails, "nullCode");
+	});
 	}
 	    
-	@Test(expected=ExlpXpathNotUniqueException.class)
+	@Test
 	public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+		Assertions.assertThrows(ExlpXpathNotUniqueException.class,() -> {
 		MailXpath.getMail(mails, xml3.getCode());
+	});
 	}
 }
