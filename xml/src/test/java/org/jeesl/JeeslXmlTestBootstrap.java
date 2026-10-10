@@ -12,8 +12,9 @@ public class JeeslXmlTestBootstrap
 		
 	public static void init()
 	{
-		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
+		LoggerBootstrap.instance("cli.log4j2.xml").path("jeesl/system/io/log").init();
 		logger.info("Logging Activated");
+		System.out.println("System.out");
 		
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
 	}

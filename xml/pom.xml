@@ -96,12 +96,14 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- JAXB -->
+		<!-- JAXB RI (javax): provides com.sun.xml.bind.marshaller.NamespacePrefixMapper, which
+		     JeeslNsPrefixMapper extends and which ExLP's NsPrefixMapperAdapter requires.
+		     Scope provided (not test) so that src/main/java compiles against it as well. -->
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
 			<version>2.3.9</version>
-			<scope>test</scope>
+			<scope>provided</scope>
 		</dependency>
     	
     	<!-- 2025-02-17 tk: Removed
