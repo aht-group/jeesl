@@ -55,9 +55,8 @@ The choice to be decided was how test programs are named, stored, and run.
 
 ## Open Points
 
-- The `maven-surefire-plugin` that the build currently binds does not run JUnit 5: the root `pom.xml` names
-  version 2.4.2 and `util/pom.xml` version 2.11, while JUnit 5 needs version 2.22.0 or newer. Which module
-  first raises the plugin and configures the test run is not regulated by this decision.
+- The Maven version that the build requires is not regulated by this decision; `maven-surefire-plugin` 3.6.0
+  needs Maven 3.6.3 or newer, while the parent POM `org.jeesl.bom:bom-parent8` requires only 3.3.0.
 - The modules `util`, `xml`, and `test` still carry `junit:junit` (JUnit 4) in the test scope; how this
   dependency and the new JUnit 5 framework coexist is not regulated by this decision.
 
@@ -65,6 +64,8 @@ The choice to be decided was how test programs are named, stored, and run.
 
 ### Implementation
 
+- `pom.xml` (root) – binds `maven-surefire-plugin` 3.6.0; the modules inherit the version, and the plugin
+  runs the test programs through the JUnit Platform
 - `client/pom.xml`, `util/pom.xml` – bind `org.junit.jupiter:junit-jupiter-api` in the test scope (points 1
   and 2)
 - `client/src/test/java`, `util/src/test/java` – carry test programs, that is classes with `@Test` methods

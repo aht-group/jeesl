@@ -1,5 +1,17 @@
 # Change Log
 
+## 2026-10-10 – Build: maven-surefire-plugin raised to 3.6.0
+
+- What: Raised `maven-surefire-plugin` to 3.6.0 in the root `pom.xml` and dropped the redundant version
+  override in `util/pom.xml` (it inherits the version now); the test run uses the JUnit Platform and executes
+  the JUnit 5 test programs of ADR-0003.
+- Result: The `xml` module is green; the JUnit 5 test programs run. The pre-existing `log4j` errors of `util`
+  and `client` stay unchanged and are not caused by the plugin.
+- Evidence: `mvn -pl xml test` on JDK 11 – 274 test programs, 0 failures, 0 errors, BUILD SUCCESS;
+  `mvn -pl util test` and `mvn -pl client test` – the same errors as under 2.11.
+- Files: pom.xml, util/pom.xml, README.md, doc/decisions/ADR-0001-package-javax-jakarta-variants.md,
+  doc/decisions/ADR-0003-test-strategy.md, doc/changelog.md.
+
 ## 2026-10-10 – Tests: ADR-0003 for the test strategy
 
 - What: Adapted the test strategy copied from another project and recorded it as ADR-0003: test programs run

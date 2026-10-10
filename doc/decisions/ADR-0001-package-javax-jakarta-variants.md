@@ -49,7 +49,7 @@ The `xml` module builds both JAXB variants in one Maven run and publishes classi
   `net.sf.ahtutils.test.AbstractAhtUtilsXmlTest` of the `test` module, which marshals XML through a
   `javax`-bound helper and uses `javax.xml.datatype.XMLGregorianCalendar`; `javax` is the variant that
   the repository publishes for its Java EE platform.
-- `maven-surefire-plugin` (`2.4.2`, managed by the root `pom.xml`) runs the test run of the module; the
+- `maven-surefire-plugin` (`3.6.0`, managed by the root `pom.xml`) runs the test run of the module; the
   module names no version of its own.
 - Consumers select the variant by classifier: `org.jeesl:jeesl-xml:<version>:javax` or `:jakarta`; the
   classifier `tests` carries the shared test classes (`util/pom.xml`, `doc/pom.xml`).

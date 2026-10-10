@@ -94,7 +94,7 @@ All other decisions are kept in the **Decision Repository** (`doc/decisions/`) w
 Prerequisites:
 
 - JDK 11 or newer; `jeesl-xml` compiles its `jakarta` artifact with `--release 11`, and every module compiles against the Java 8 API (`--release 8`).
-- Apache Maven 3.1 or newer; the repository contains no Maven Wrapper.
+- Apache Maven 3.6.3 or newer; the repository contains no Maven Wrapper.
 - The parent POM `org.jeesl.bom:bom-parent8` and the imported BOMs `bom-core` and `bom-eap73` must be resolvable. The root `pom.xml` refers to the sibling directory `../bom/parent8`; if that checkout is absent, Maven falls back to the local or the remote repository.
 - Access to Maven Central, the Sonatype snapshot repository and the OSGeo release repository (`pom.xml`, `<repositories>`).
 
