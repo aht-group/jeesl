@@ -3,6 +3,7 @@ package org.jeesl.controller.handler.cli;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.function.IntConsumer;
 import java.util.logging.LogManager;
 
 import org.apache.commons.cli.CommandLine;
@@ -35,6 +36,9 @@ public class JeeslCliOptionHandler
 	public Option getConfigOption() {
 		return oConfig;
 	}
+
+	private IntConsumer exitHandler = System::exit;
+	void setExitHandler(IntConsumer exitHandler) {this.exitHandler = exitHandler;}
 
 	private boolean appStarted;
 	public boolean isAppStarted(){return appStarted;}
@@ -88,7 +92,14 @@ public class JeeslCliOptionHandler
 	{    	
 		HelpFormatter formatter = new HelpFormatter();
 		formatter.printHelp( "java -jar xxx"+version, options );
-		System.exit(0);
+		exitHandler.accept(0);
+	}
+
+	public String loggingProfile(CommandLine line)
+	{
+		if(Objects.nonNull(oLogFile) && line.hasOption(oLogFile.getOpt())) {return "file.log4j2.xml";}
+		else if(line.hasOption(oDebug.getOpt())) {return "debug.log4j2.xml";}
+		else {return "app.log4j2.xml";}
 	}
 
 	public JeeslCliOptionHandler setLogPaths(String... paths)
@@ -100,9 +111,7 @@ public class JeeslCliOptionHandler
 	
 	public void handleLog4j2(CommandLine line)
 	{
-		if(Objects.nonNull(oLogFile) && line.hasOption(oLogFile.getOpt())) {this.initLogger2("file.log4j2.xml");}
-		else if(line.hasOption(oDebug.getOpt())) {this.initLogger2("debug.log4j2.xml");}
-        else {this.initLogger2("app.log4j2.xml");}
+		this.initLogger2(this.loggingProfile(line));
 	}
 	private void initLogger2(String loggingProfile)
 	{
@@ -133,7 +142,7 @@ public class JeeslCliOptionHandler
 				catch (ExlpConfigurationException e)
 				{
 					logger.error(e.getMessage());
-					System.exit(-1);
+					exitHandler.accept(-1);
 				}
 			}
 			
@@ -141,7 +150,7 @@ public class JeeslCliOptionHandler
 			if(!mrl.isAvailable(configFile))
 			{
 				logger.error("Specified configuration does not exist: "+configFile);
-				System.exit(-1);
+				exitHandler.accept(-1);
 			}
 			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
 			ConfigLoader.addString(configFile);
@@ -171,7 +180,7 @@ public class JeeslCliOptionHandler
 				catch (ExlpConfigurationException e)
 				{
 					logger.error(e.getMessage());
-					System.exit(-1);
+					exitHandler.accept(-1);
 				}
 			}
 			
@@ -179,7 +188,7 @@ public class JeeslCliOptionHandler
 			if(!mrl.isAvailable(configFile))
 			{
 				logger.error("Specified configuration does not exist: "+configFile);
-				System.exit(-1);
+				exitHandler.accept(-1);
 			}
 			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
 			bootstrap.add(configFile);
@@ -208,7 +217,7 @@ public class JeeslCliOptionHandler
 				catch (ExlpConfigurationException e)
 				{
 					logger.error(e.getMessage());
-					System.exit(-1);
+					exitHandler.accept(-1);
 				}
 			}
 			
@@ -216,7 +225,7 @@ public class JeeslCliOptionHandler
 			if(!mrl.isAvailable(configFile))
 			{
 				logger.error("Specified configuration does not exist: "+configFile);
-				System.exit(-1);
+				exitHandler.accept(-1);
 			}
 			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
 			cl.add(configFile);
