@@ -1,6 +1,8 @@
 package org.jeesl;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
+import org.exlp.util.jx.JaxbUtil;
+import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +13,8 @@ public class JeeslXmlTestBootstrap
 	public static void init()
 	{
 		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
+		logger.info("Logging Activated");
 		
-//		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
 	}
 }

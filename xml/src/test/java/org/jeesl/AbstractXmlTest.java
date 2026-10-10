@@ -22,7 +22,7 @@ public abstract class AbstractXmlTest <T extends Object> extends AbstractAhtUtil
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerBootstrap.instance().path("jeesl/system/io/log").init();
+		LoggerBootstrap.instance("test.log4j2.xml").path("jeesl/system/io/log").init();
     }
 	
 	@BeforeClass

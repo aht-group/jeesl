@@ -1,5 +1,6 @@
 **/.DS_Store
 /.settings/
+/.vscode/
 /.project
 /.idea
 /nbactions.xml

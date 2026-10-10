@@ -9,8 +9,8 @@ public class TestXmlActual extends AbstractXmlQaTest<Actual>
 {
 	final static Logger logger = LoggerFactory.getLogger(org.jeesl.model.xml.module.dev.qa.Test.class);
 	
-	public TestXmlActual(){super(Actual.class);}
-	public static Actual create(boolean withChildren){return (new TestXmlActual()).build(withChildren);}
+	public TestXmlActual() {super(Actual.class);}
+	public static Actual create(boolean withChildren) {return (new TestXmlActual()).build(withChildren);}
     
     public Actual build(boolean withChilds)
     {
