@@ -30,14 +30,9 @@ public class JeeslCliOptionHandler
 	private Option oHelp,oDebug;
 	private Option oLogFile;
 	
-	private Option oConfig;
-	
-	public Option getConfigOption() {
-		return oConfig;
-	}
+	private Option oConfig; public Option getConfigOption() {return oConfig;}
 
-	private IntConsumer exitHandler = System::exit;
-	void setExitHandler(IntConsumer exitHandler) {this.exitHandler = exitHandler;}
+	private IntConsumer exitHandler = System::exit; void setExitHandler(IntConsumer exitHandler) {this.exitHandler = exitHandler;}
 
 	private boolean appStarted;
 	public boolean isAppStarted(){return appStarted;}
@@ -45,8 +40,8 @@ public class JeeslCliOptionHandler
 	private String version;
 	private String[] log4jPaths;
 	
-	private String exlpApp; public String getExlpApp() {return exlpApp;}
-	private String exlpCode; public String getExlpCode() {return exlpCode;}
+	private String exlpApp; public String getExlpApp() {return exlpApp;} public void setExlpApp(String exlpApp) {this.exlpApp = exlpApp;}
+	private String exlpCode; public String getExlpCode() {return exlpCode;} public void setExlpCode(String exlpCode) {this.exlpCode = exlpCode;}
 
 	public JeeslCliOptionHandler(String version)
 	{
@@ -240,9 +235,4 @@ public class JeeslCliOptionHandler
 		if(!appStarted){appStarted = true;}
 		return appStarted;
 	}
-	
-
-	
-	public void setExlpApp(String exlpApp) {this.exlpApp = exlpApp;}
-	public void setExlpCode(String exlpCode) {this.exlpCode = exlpCode;}
 }

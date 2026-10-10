@@ -274,11 +274,15 @@
 			</exclusions>
 		</dependency>
    	   	
-   	   	<!-- Batik 
+   	   	<!-- Batik: needed for the demo report template mrSimple.jrxml, which renders an
+		     embedded SVG image via net.sf.jasperreports.renderers.BatikRenderer and
+		     therefore requires the org.apache.batik.* classes (batik-transcoder and
+		     batik-codec). No production code in this module uses Batik, so test scope
+		     is sufficient. -->
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-transcoder</artifactId>
-			<scope>compile</scope>
+			<scope>test</scope>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-logging</artifactId>
@@ -289,8 +293,8 @@
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-codec</artifactId>
-			<scope>compile</scope>
-		</dependency> -->
+			<scope>test</scope>
+		</dependency>
 		
 		<!-- Logging -->
 		<dependency>
