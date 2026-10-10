@@ -21,6 +21,7 @@ public class AbstractUtilsMavenTst
 	protected boolean saveReference=false;
 
 	protected static File fTarget;
+	protected static void setfTarget(File myTarget) {fTarget=myTarget;}
 
 	@BeforeAll
 	public static void initFile()
@@ -28,7 +29,7 @@ public class AbstractUtilsMavenTst
 		if(!LoggerBootstrap.isLog4jInited()){initLogger();}
 		String dirTarget = System.getProperty("targetDir");
 		if(dirTarget==null){dirTarget="target";}
-		
+		setfTarget(new File(dirTarget));
 		logger.debug("Using targeDir "+fTarget.getAbsolutePath());
 	}
 	

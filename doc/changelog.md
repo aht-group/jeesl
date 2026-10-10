@@ -1,5 +1,18 @@
 # Change Log
 
+## 2026-10-10 – Tests: maven test base initializes the target directory and logs via log4j2
+
+- What: `AbstractUtilsMavenTst` calls `fTarget.getAbsolutePath()` in `initFile`, but `fTarget` was never
+  assigned, which caused a `NullPointerException`; the assignment `setfTarget(new File(dirTarget))` and the
+  `setfTarget` helper were added, matching `AbstractUtilsDocTest`. Additionally `maven/pom.xml` missed the
+  `log4j-slf4j2-impl` test dependency that every other test module uses, so the log4j2 `Configurator` used
+  by `LoggerBootstrap` was absent (`NoClassDefFoundError`) and `log4j-core` is now on the test classpath.
+- Result: The maven test run is green; the previously failing `NoClassDefFound` and `NullPointer` errors are
+  gone.
+- Evidence: `mvn -o -pl maven clean test` on JDK 11 – 9 tests run, 0 failures, 0 errors, 4 skipped (the
+  pre-existing `@Disabled` tests).
+- Files: maven/pom.xml, maven/src/test/java/net/sf/ahtutils/test/AbstractUtilsMavenTst.java, doc/changelog.md.
+
 ## 2026-10-10 – Tests: doc test base uses the JUnit 5 assertEquals argument order
 
 - What: `AbstractUtilsDocTest` kept the JUnit 4 call order (message first) in its three
