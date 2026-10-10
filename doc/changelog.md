@@ -1,5 +1,16 @@
 # Change Log
 
+## 2026-10-10 – Tests: ADR-0003 for the test strategy
+
+- What: Adapted the test strategy copied from another project and recorded it as ADR-0003: test programs run
+  with JUnit 5. Removed the references of the source project (its constraint, its evidence file, its class
+  and module names), set the status to `proposed`, and named the open points (the bound `maven-surefire-plugin`
+  and the JUnit 4 dependency).
+- Result: The decision is recorded as a draft; the index lists it.
+- Evidence: `client/pom.xml` and `util/pom.xml` bind `org.junit.jupiter:junit-jupiter-api` in the test scope;
+  the test trees of `client` and `util` carry classes with `@Test` methods.
+- Files: doc/decisions/ADR-0003-test-strategy.md, doc/status.md, doc/changelog.md.
+
 ## 2026-10-10 – Requirements: FR-001 for the CLI option handler
 
 - What: Recorded FR-001 for the reusable help, logging and configuration handling of the entry points.
