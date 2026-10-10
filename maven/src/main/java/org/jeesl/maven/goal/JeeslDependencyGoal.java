@@ -28,7 +28,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectDependenciesResolver;
 import org.exlp.util.io.JsonUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.api.rest.rs.jx.io.JeeslIoMavenRest;
+import org.jeesl.api.rest.rs.jx.io.ssi.JeeslIoMavenRest;
 import org.jeesl.factory.json.io.maven.JsonMavenGraphFactory;
 import org.jeesl.model.json.io.maven.JsonMavenGraph;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;

@@ -13,7 +13,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.interfaces.system.property.Configuration;
-import org.jeesl.api.rest.rs.jx.io.JeeslIoMavenRest;
+import org.jeesl.api.rest.rs.jx.io.ssi.JeeslIoMavenRest;
 import org.jeesl.client.app.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
