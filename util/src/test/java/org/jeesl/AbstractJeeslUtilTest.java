@@ -5,7 +5,6 @@ import java.io.File;
 import net.sf.ahtutils.test.AbstractJeeslTest;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.junit.Assert;
@@ -23,7 +22,7 @@ public class AbstractJeeslUtilTest extends AbstractJeeslTest
 	@BeforeClass
 	public static void initFile()
 	{
-		if(!LoggerInit.isLog4jInited()){initLogger();}
+		if(!LoggerBootstrap.isLog4jInited()){initLogger();}
 		AbstractJeeslTest.initTargetDirectory();
 	}
 	

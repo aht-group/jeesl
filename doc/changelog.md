@@ -1,5 +1,24 @@
 # Change Log
 
+## 2026-10-10 – Tests: logging initialization moved to log4j2
+
+- What: Removed the log4j 1.x class `org.exlp.util.io.log.LoggerInit` from the test bases; they use
+  `LoggerBootstrap` (log4j 2), like the `xml` module. Affected: `AbstractJeeslTest`, the bases of `util`,
+  `client`, `maven`, `jsf`, `doc`, and `report`, plus two unused imports.
+- Result: The `NoClassDefFoundError: org/apache/log4j/Logger` is gone; the `util` and `client` test runs are
+  green.
+- Evidence: `mvn -o -pl util clean test` on JDK 11 – 118 test programs, 0 failures, 0 errors;
+  `mvn -o -pl client clean test` – 33 test programs, 0 failures, 0 errors.
+- Files: test/src/main/java/net/sf/ahtutils/test/AbstractJeeslTest.java,
+  util/src/test/java/org/jeesl/AbstractJeeslUtilTest.java,
+  client/src/test/java/org/jeesl/client/test/AbstractJeeslClientTest.java,
+  maven/src/test/java/net/sf/ahtutils/test/AbstractUtilsMavenTst.java,
+  jsf/src/test/java/org/jeesl/test/AbstractJeeslJsfTest.java,
+  doc/src/test/java/net/sf/ahtutils/test/AbstractUtilsDocTest.java,
+  report/src/main/java/org/jeesl/test/AbstractJeeslReportTest.java,
+  report/src/test/java/net/sf/ahtutils/test/AhtUtilsReportBootstrap.java,
+  util/src/main/java/org/jeesl/controller/handler/cli/JeeslCliOptionHandler.java, doc/changelog.md.
+
 ## 2026-10-10 – Build: drop the JUnit 4 ignore listener and the redundant surefire block
 
 - What: Removed the JUnit 4 `RunListener` `net.sf.ahtutils.test.PrintIgnoreRunListener` and its surefire

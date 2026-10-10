@@ -12,7 +12,6 @@ import java.util.Objects;
 import org.apache.commons.io.IOUtils;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.interfaces.controller.report.format.JeeslXlsReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
@@ -78,7 +77,7 @@ public class AbstractJeeslReportTest
 			String dirTarget = System.getProperty("targetDir");
 			if(dirTarget==null){dirTarget="target";}
 			setfTarget(new File(dirTarget));
-			if(LoggerInit.isLog4jInited())
+			if(LoggerBootstrap.isLog4jInited())
 			{
 				logger.debug("Using targeDir "+fTarget.getAbsolutePath());
 			}
@@ -87,7 +86,7 @@ public class AbstractJeeslReportTest
     
 	public static void initFile()
 	{
-		if(!LoggerInit.isLog4jInited()){initLogger();}
+		if(!LoggerBootstrap.isLog4jInited()){initLogger();}
 		String dirTarget = System.getProperty("targetDir");
 		if(dirTarget==null){dirTarget="target";}
 		setfTarget(new File(dirTarget));

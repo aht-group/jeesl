@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
 import org.junit.Assert;
@@ -31,7 +31,7 @@ public class AbstractJeeslTest
 			String dirTarget = System.getProperty("targetDir");
 			if(dirTarget==null){dirTarget="target";}
 			setfTarget(new File(dirTarget));
-			if(LoggerInit.isLog4jInited())
+			if(LoggerBootstrap.isLog4jInited())
 			{
 				logger.debug("Using targeDir "+fTarget.getAbsolutePath());
 			}

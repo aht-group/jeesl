@@ -3,7 +3,6 @@ package org.jeesl.client.test;
 import java.io.File;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,7 +22,7 @@ public class AbstractJeeslClientTest extends AbstractJeeslTest
 	@BeforeAll
 	public static void initFile()
 	{
-		if(!LoggerInit.isLog4jInited()){initLogger();}
+		if(!LoggerBootstrap.isLog4jInited()){initLogger();}
 		AbstractJeeslTest.initTargetDirectory();
 	}
 	

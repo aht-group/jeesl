@@ -3,7 +3,6 @@ package org.jeesl.test;
 import java.io.File;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
-import org.exlp.util.io.log.LoggerInit;
 import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ public class AbstractJeeslJsfTest extends AbstractJeeslTest
 	@BeforeAll
 	public static void initFile()
 	{
-		if(!LoggerInit.isLog4jInited()){initLogger();}
+		if(!LoggerBootstrap.isLog4jInited()){initLogger();}
 		String dirTarget = System.getProperty("targetDir");
 		if(dirTarget==null){dirTarget="target";}
 		setfTarget(new File(dirTarget));
