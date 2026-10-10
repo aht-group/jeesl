@@ -1,5 +1,18 @@
 # Change Log
 
+## 2026-10-10 – Tests: doc test base uses the JUnit 5 assertEquals argument order
+
+- What: `AbstractUtilsDocTest` kept the JUnit 4 call order (message first) in its three
+  `Assertions.assertEquals` calls; under JUnit 5 this binds to `assertEquals(Object, Object, String)` and
+  compared the message text against the expected value instead of comparing expected and actual. Reordered
+  the arguments. Additionally `TestOfxStatusTableFactory` never assigned its `config` field, which caused a
+  `NullPointerException`; the field is now initialized in `init()` with the two keys the factory validates.
+- Result: The doc test run is green.
+- Evidence: `mvn -o -pl doc clean test` on JDK 11 – 23 test programs, 0 failures, 0 errors, 7 skipped
+  (the pre-existing `@Disabled` tests).
+- Files: doc/src/test/java/net/sf/ahtutils/test/AbstractUtilsDocTest.java,
+  doc/src/test/java/net/sf/ahtutils/doc/ofx/status/TestOfxStatusTableFactory.java, doc/changelog.md.
+
 ## 2026-10-10 – Tests: logging initialization moved to log4j2
 
 - What: Removed the log4j 1.x class `org.exlp.util.io.log.LoggerInit` from the test bases; they use

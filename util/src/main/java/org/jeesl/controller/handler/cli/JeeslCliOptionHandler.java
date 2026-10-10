@@ -26,7 +26,7 @@ public class JeeslCliOptionHandler
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslCliOptionHandler.class);
 	
-	private Options options;
+	private Options options; public Options getOptions() {return options;}
 	private Option oHelp,oDebug;
 	private Option oLogFile;
 	
@@ -241,7 +241,7 @@ public class JeeslCliOptionHandler
 		return appStarted;
 	}
 	
-	public Options getOptions() {return options;}
+
 	
 	public void setExlpApp(String exlpApp) {this.exlpApp = exlpApp;}
 	public void setExlpCode(String exlpCode) {this.exlpCode = exlpCode;}

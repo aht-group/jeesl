@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.apache.commons.configuration2.BaseConfiguration;
 import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
+import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangFactory;
@@ -25,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.controller.factory.ofx.lang.AbstractOfxStatusFactoryTest;
+import net.sf.ahtutils.doc.UtilsDocumentation;
 
 public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 {
@@ -51,6 +54,12 @@ public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 	public void init() throws UtilsConfigurationException
 	{			
 		super.initOfx();
+		
+		BaseConfiguration cfg = new BaseConfiguration();
+		cfg.setProperty(UtilsDocumentation.keyTranslationFile, "dummy");
+		cfg.setProperty("doc.ofx.imagePathPrefix", "dummy");
+		config = ConfigBootstrap.wrap(cfg);
+		
 		Status status = new Status();
 		status.setCode("myCode");
 		status.setLangs(new Langs());

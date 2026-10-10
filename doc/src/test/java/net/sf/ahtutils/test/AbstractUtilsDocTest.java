@@ -70,7 +70,7 @@ public class AbstractUtilsDocTest
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assertions.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals(JaxbUtil.toString(expected),JaxbUtil.toString(actual),"actual XML differes from expected XML");
 	}
 	
 	protected void saveXml(Object xml, File f, boolean formatted)
@@ -119,7 +119,7 @@ public class AbstractUtilsDocTest
 	private void assertText(File fExpected, String actual)
 	{
 		String expected = StringUtil.readFile(fExpected);		
-		Assertions.assertEquals("Texts are different",expected, actual);
+		Assertions.assertEquals(expected, actual,"Texts are different");
 	}
 	
 	protected void assertText(File fExpected, File fActual) throws IOException
@@ -132,7 +132,7 @@ public class AbstractUtilsDocTest
 		
 		String expected = StringUtil.readFile(fExpected);
 		String actual = StringUtil.readFile(fActual);
-		Assertions.assertEquals("Texts are different",expected, actual);
+		Assertions.assertEquals(expected, actual,"Texts are different");
 	}
 	
 	public void setSaveReference(boolean saveReference) {this.saveReference = saveReference;}
