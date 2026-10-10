@@ -1,5 +1,17 @@
 # Change Log
 
+## 2026-10-10 – Build: drop the JUnit 4 ignore listener and the redundant surefire block
+
+- What: Removed the JUnit 4 `RunListener` `net.sf.ahtutils.test.PrintIgnoreRunListener` and its surefire
+  configuration in `util/pom.xml`. The root `pom.xml` is now the only place that names
+  `maven-surefire-plugin`; only `xml` keeps its own binding.
+- Result: Every `jar` module inherits the plugin from the root; the `util` test run still uses
+  `surefire:3.6.0`, and the 24 pre-existing `log4j` errors stay.
+- Evidence: `mvn -pl util clean test` on JDK 11 – 59 test programs through the inherited plugin;
+  `mvn -pl test compile` – BUILD SUCCESS; no reference to the removed class remains.
+- Files: test/src/main/java/net/sf/ahtutils/test/PrintIgnoreRunListener.java (removed), util/pom.xml,
+  doc/changelog.md.
+
 ## 2026-10-10 – Build: maven-surefire-plugin raised to 3.6.0
 
 - What: Raised `maven-surefire-plugin` to 3.6.0 in the root `pom.xml` and dropped the redundant version
