@@ -1,5 +1,13 @@
 # Change Log
 
+## 2026-10-10 – Requirements: remove the redundant Decided Questions of FR-001
+
+- What: Removed the FR-001 Decided Questions that repeat facts already carried by `## Requirement`,
+  `## Scope`, the acceptance criteria, or the YAML header, on instruction; renumbered the remaining entry.
+- Result: FR-001 keeps one Decided Question.
+- Evidence: The line width, duplicate, and attribute checks on FR-001 – no match.
+- Files: doc/requirements/functional/FR-001-cli-support.md, doc/changelog.md.
+
 ## 2026-10-10 – Tests: every test class runs on JUnit 5
 
 - What: Migrated the JUnit 4 test classes of `test`, `util`, `report`, and `xml` to JUnit 5 and removed every

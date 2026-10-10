@@ -78,38 +78,10 @@ None.
 
 ## Decided Questions
 
-1. **Scope of the reuse**
-   Question: For which applications does the requirement provide the entry point?
-   Decision: For consuming applications outside the repository; within the repository at least one class uses it.
-   Applies in: ## Requirement
-2. **Exit on help**
-   Question: With which exit code does the process end when the `help` option is present?
-   Decision: With exit code `0`.
-   Applies in: AC-001-02
-3. **Parse error**
-   Question: What does an entry point do when the argument parser reports a parse error?
-   Decision: It prints the help text and ends the process with exit code `0`.
-   Applies in: AC-001-06
-4. **Option set**
-   Question: Must every entry point register all options, or only the options that it uses?
-   Decision: `help` and `debug` are mandatory; `logFile` and `config` are optional.
-   Applies in: ## Requirement
-5. **Central handling call**
-   Question: Does an entry point call one handler method for parsing and handling, or the individual steps?
-   Decision: The individual steps.
-   Applies in: ## Requirement
-6. **Status**
+1. **Status**
    Question: Is the requirement a record of the existing implementation or a new requirement?
    Decision: A new requirement.
    Applies in: the index file
-7. **Priority**
-   Question: Which priority does the requirement carry?
-   Decision: `must`.
-   Applies in: the index file
-8. **Configuration option**
-   Question: Is the `config` option of the handler part of this requirement, or out of scope?
-   Decision: It is part of the requirement; the entry points handle it identically.
-   Applies in: ## Requirement
 
 ## Acceptance Criteria
 
