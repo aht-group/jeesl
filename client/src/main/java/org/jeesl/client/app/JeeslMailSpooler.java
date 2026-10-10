@@ -75,10 +75,10 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 		jco.handleHelp(line);
 		jco.handleLog4j2(line);
 		
-//		Configuration config = uOption.initConfig(line, MeisBootstrap.xmlConfig);
-	    
-		cfgUrl = line.getOptionValue(oUrl.getOpt());
-		cfgSmtp = line.getOptionValue(oSmtp.getOpt());
+		Configuration config = jco.config2Wrapper(line, JeeslBootstrap.xmlConfig);
+		
+		cfgUrl = line.getOptionValue(oUrl.getOpt(), config.getString(ConfigKey.netRestUrlLocal));
+		cfgSmtp = line.getOptionValue(oSmtp.getOpt(), config.getString(ConfigKey.netSmtpHost));
 		
 		debugConfig();
 		buildRest(cfgUrl);

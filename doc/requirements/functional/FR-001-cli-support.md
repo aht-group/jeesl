@@ -2,7 +2,7 @@
 id: FR-001
 title: Reusable help, logging and configuration handling for Apache Commons CLI entry points
 type: functional
-status: approved
+status: verified
 priority: must
 depends_on: []
 related: []
@@ -267,23 +267,24 @@ None.
 ### Implementation
 
 - `util/src/main/java/org/jeesl/controller/handler/cli/JeeslCliOptionHandler.java` – the help, logging and
-  configuration methods (AC-001-01, AC-001-02, AC-001-03, AC-001-09)
-- `client/src/main/java/org/jeesl/client/app/JeeslMailSpooler.java` – `parseArguments(...)` and `main` use
-  the handler (AC-001-01, AC-001-02, AC-001-06, AC-001-08)
-- `client/src/main/java/org/jeesl/client/web/rest/JeeslDbBackupNotifier.java` – `parseArguments(...)` and
-  `main` use the handler (AC-001-01, AC-001-02, AC-001-06, AC-001-08)
-- `client/src/main/java/org/jeesl/client/web/rest/JeeslFontTrackerApp.java` – `parseArguments(...)` and
-  `main` use the handler (AC-001-01, AC-001-02, AC-001-06, AC-001-08)
+  configuration methods (AC-001-01, AC-001-02, AC-001-03, AC-001-09, AC-001-10, AC-001-11, AC-001-12)
+- `client/src/main/java/org/jeesl/client/app/JeeslMailSpooler.java` – `parseArguments(...)` and `main` register
+  `config` and read the configuration (AC-001-01, AC-001-02, AC-001-06, AC-001-08, AC-001-09)
+- `client/src/main/java/org/jeesl/client/web/rest/JeeslDbBackupNotifier.java` – `parseArguments(...)` and `main`
+  register `config` and read the configuration (AC-001-01, AC-001-02, AC-001-06, AC-001-08, AC-001-09)
+- `client/src/main/java/org/jeesl/client/web/rest/JeeslFontTrackerApp.java` – `parseArguments(...)` and `main`
+  register `config` and read the configuration (AC-001-01, AC-001-02, AC-001-06, AC-001-08, AC-001-09)
 - `util/src/main/java/org/jeesl/controller/io/mail/AbstractSmtpSpooler.java` – `createOptions()` builds
-  `help` and `debug` through the handler (AC-001-01)
+  `help`, `debug` and `config` through the handler (AC-001-01, AC-001-09)
 - `client/pom.xml` – depends on `jeesl-util` (AC-001-07)
-- `client/src/main/java/org/jeesl/client` – open: the entry points register the `config` option and read
-  the configuration through the handler (AC-001-10, AC-001-11, AC-001-12)
 
 ### Tests
 
-- open: an automated test covers the handler and the entry points (AC-001-01 to AC-001-12)
+- `mvn -o -pl util test -Dtest=TestJeeslCliOptionHandler` – the option set, the help, the profiles, the
+  parse error and the configuration selection (AC-001-01 to AC-001-06, AC-001-09 to AC-001-12)
+- `mvn -o -pl client test -Dtest=TestJeeslCliEntryPoints` – the handler is usable from the client module
+  and the entry points reference it (AC-001-07, AC-001-08)
 
 ### Documentation
 
-- open: the architecture file names the handler as the reusable entry point (AC-001-01)
+- `doc/requirements/architecture.md` – names `JeeslCliOptionHandler` as the reusable entry point (AC-001-01)

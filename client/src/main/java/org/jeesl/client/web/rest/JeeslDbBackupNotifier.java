@@ -64,6 +64,7 @@ public class JeeslDbBackupNotifier
 	{
 		jco.buildHelp();
 		jco.buildDebug();
+		jco.buildConfig();
         
         oUrl = Option.builder("url").required(true).hasArg(true).argName("URL").desc("URL Endpoint").build(); jco.getOptions().addOption(oUrl);
         oDirectory = Option.builder("dir").required(true).hasArg(true).argName("DIR").desc("Directory with .sql files").build(); jco.getOptions().addOption(oDirectory);
@@ -91,9 +92,9 @@ public class JeeslDbBackupNotifier
 		jco.handleHelp(line);
 		jco.handleLog4j2(line);
 		
-//		Configuration config = uOption.initConfig(line, MeisBootstrap.xmlConfig);
-	    
-		cfgUrl = line.getOptionValue(oUrl.getOpt());
+		Configuration config = jco.config2Wrapper(line, JeeslBootstrap.xmlConfig);
+		
+		cfgUrl = line.getOptionValue(oUrl.getOpt(), config.getString(ConfigKey.netRestUrlLocal));
 		cfgDirectory = new File(line.getOptionValue(oDirectory.getOpt()));
 		cfgHost = line.getOptionValue(oHost.getOpt());
 		cfgSystem = line.getOptionValue(oSystem.getOpt());

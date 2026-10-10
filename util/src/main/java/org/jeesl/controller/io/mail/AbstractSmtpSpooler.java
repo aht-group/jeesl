@@ -48,6 +48,7 @@ public class AbstractSmtpSpooler
 	{
 		jco.buildHelp();
 		jco.buildDebug();
+		jco.buildConfig();
         
         oUrl = Option.builder("url").required(true).hasArg(true).argName("URL").desc("URL Endpoint").build(); jco.getOptions().addOption(oUrl);
         oSmtp = Option.builder("smtp").required(true).hasArg(true).argName("HOST").desc("SMTP HOST (at the moment, without auth").build(); jco.getOptions().addOption(oSmtp);

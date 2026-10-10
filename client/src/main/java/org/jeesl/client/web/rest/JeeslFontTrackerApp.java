@@ -64,6 +64,7 @@ public class JeeslFontTrackerApp
 	{
 		handler.buildHelp();
 		handler.buildDebug();
+		handler.buildConfig();
         
 		oSystem = Option.builder("system").required(true).hasArg(true).argName("SYSTEM").desc("System identifier").build(); handler.getOptions().addOption(oSystem);
         oHost = Option.builder("host").required(true).hasArg(true).argName("HOST").desc("Host identifier").build(); handler.getOptions().addOption(oHost);
@@ -89,7 +90,8 @@ public class JeeslFontTrackerApp
 		handler.handleHelp(line);
 		handler.handleLog4j2(line);
 
-		cfgUrl = config.getString(ConfigKey.netRestUrlProduction);
+		Configuration config = handler.config2Wrapper(line, JeeslBootstrap.xmlConfig);
+		cfgUrl = config.getString(ConfigKey.netRestUrlProduction, this.config.getString(ConfigKey.netRestUrlProduction));
 		cfgSystem = line.getOptionValue(oSystem.getOpt());
 		cfgHost = line.getOptionValue(oHost.getOpt());
 

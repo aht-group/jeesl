@@ -3,11 +3,14 @@ package org.jeesl.controller.handler.cli;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -83,5 +86,77 @@ public class TestJeeslCliOptionHandler
 		Assertions.assertEquals(0,exitCode.get(),"the process ends with exit code 0");
 		Assertions.assertTrue(help.contains("help"),"the help text lists the help option");
 		Assertions.assertTrue(help.contains("debug"),"the help text lists the debug option");
+	}
+	
+	@Test
+	public void parseErrorPrintsHelpAndExitsWithZero() throws Exception
+	{
+		JeeslCliOptionHandler jco = this.build();
+		AtomicInteger exitCode = new AtomicInteger(Integer.MIN_VALUE);
+		jco.setExitHandler(exitCode::set);
+		
+		boolean rejected = false;
+		try {this.parse(jco,"-unknownOption");}
+		catch (ParseException e) {rejected = true;jco.help();}
+		
+		Assertions.assertTrue(rejected,"the argument parser rejects the command line");
+		Assertions.assertEquals(0,exitCode.get(),"the process ends with exit code 0");
+	}
+	
+	@Test
+	public void configFileIsLoaded() throws Exception
+	{
+		Path dir = Files.createTempDirectory("jeesl-cli-config-");
+		Path file = dir.resolve("override.properties");
+		Files.write(file,("test.override=yes"+System.lineSeparator()).getBytes(StandardCharsets.UTF_8));
+		
+		JeeslCliOptionHandler jco = this.build();
+		CommandLine line = this.parse(jco,"-config",file.toString());
+		
+		Assertions.assertEquals("yes",jco.config2Wrapper(line,"").getString("test.override"),"the configuration of the file is loaded");
+	}
+	
+	@Test
+	public void exlpSelectsCentralConfiguration() throws Exception
+	{
+		Path dir = Files.createTempDirectory("jeesl-cli-config-");
+		Path file = dir.resolve("central.properties");
+		Files.write(file,("test.central=yes"+System.lineSeparator()).getBytes(StandardCharsets.UTF_8));
+		
+		Path home = Files.createTempDirectory("jeesl-cli-home-");
+		Path m2 = Files.createDirectories(home.resolve(".m2"));
+		String pointer = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+			+"<io:dir xmlns:io=\"http://exlp.sf.net/io\">"
+			+"<io:dir code=\"TESTAPP\"><io:file code=\"TESTCODE\" name=\""+file.toString()+"\"/></io:dir>"
+			+"</io:dir>";
+		Files.write(m2.resolve("exlp.xml"),pointer.getBytes(StandardCharsets.UTF_8));
+		
+		JeeslCliOptionHandler jco = this.build();
+		jco.setExlpApp("TESTAPP");
+		jco.setExlpCode("TESTCODE");
+		CommandLine line = this.parse(jco,"-config","exlp");
+		
+		String userHome = System.getProperty("user.home");
+		String central;
+		System.setProperty("user.home",home.toString());
+		try {central = jco.config2Wrapper(line,"").getString("test.central");}
+		finally {System.setProperty("user.home",userHome);}
+		
+		Assertions.assertEquals("yes",central,"the central configuration is selected");
+	}
+	
+	@Test
+	public void missingConfigExitsWithNonZero() throws Exception
+	{
+		JeeslCliOptionHandler jco = this.build();
+		AtomicInteger exitCode = new AtomicInteger(Integer.MIN_VALUE);
+		jco.setExitHandler(exitCode::set);
+		
+		Path missing = Files.createTempDirectory("jeesl-cli-config-").resolve("missing.properties");
+		CommandLine line = this.parse(jco,"-config",missing.toString());
+		
+		jco.config2Wrapper(line,"");
+		
+		Assertions.assertEquals(-1,exitCode.get(),"the process ends with a non-zero exit code");
 	}
 }

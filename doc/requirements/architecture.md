@@ -69,6 +69,8 @@ as the classifier artifacts `javax` and `jakarta`; the shared test classes form 
 - The lookup takes an application name, a module name and connection settings.
 - The package `org.jeesl.exception.ejb` holds `JeeslNotFoundException` and `JeeslConstraintViolationException`.
 - The package `org.jeesl.controller.handler` holds lazy models, tuple handlers and REST handlers.
+- The package `org.jeesl.controller.handler.cli` holds the reusable `JeeslCliOptionHandler` for the help
+  output, the logging bootstrap and the configuration selection of the command-line entry points.
 - The package `org.jeesl.controller.converter` holds the JSF converters of the features.
 - The package `org.jeesl.controller.web` holds the web controllers that the views call.
 - The package `org.jeesl.factory` builds entities and their XML, JSON and text representations.

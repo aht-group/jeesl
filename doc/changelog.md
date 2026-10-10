@@ -1,5 +1,13 @@
 # Change Log
 
+## 2026-10-10 – FR-001 implemented: reusable CLI option handling for the entry points
+
+- What: The client entry points register the `config` option and read the configuration through the
+  handler; `config2` resolves `exlp` and the handler's public methods carry Javadoc.
+- Result: Acceptance "all findings addressed" (review: 0 findings, 2 notes); FR-001 verified.
+- Evidence: `mvn -o -pl util,client test` on JDK 11 – BUILD SUCCESS, 156 tests.
+- Files: the handler, the three entry points, the tests, architecture.md, FR-001, doc/status.md, doc/changelog.md.
+
 ## 2026-10-10 – Requirements: remove the redundant Decided Questions of FR-001
 
 - What: Removed the FR-001 Decided Questions that repeat facts already carried by `## Requirement`,
