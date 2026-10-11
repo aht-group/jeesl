@@ -1,5 +1,13 @@
 # Change Log
 
+## 2026-10-11 – Decisions: ADR-0004 for Maven as build tool
+
+- What: Adopted the build-tool decision of another project as ADR-0004, renumbered it from ADR-0002, replaced
+  the source-project references, and set the status to `proposed`.
+- Result: The decision is recorded as a draft; the index lists it.
+- Evidence: `mvn -o -N validate` on JDK 11 – `[SUCCESS]`.
+- Files: doc/decisions/ADR-0004-maven-build.md, doc/requirements/architecture.md, doc/status.md, doc/changelog.md.
+
 ## 2026-10-10 – FR-001 implemented: reusable CLI option handling for the entry points
 
 - What: The client entry points register the `config` option and read the configuration through the

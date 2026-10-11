@@ -125,7 +125,7 @@ authoritative location named below.
 
 - Platform, language, frameworks, build environment, and pinned versions: **constraint**
   (`doc/requirements/constraints/`) or **decision** (`doc/decisions/`).
-- Build of the project: **constraint** (`doc/requirements/constraints/`).
+- Build of the project: **decision** (`doc/decisions/`).
 - Verification of the project: **constraint** (`doc/requirements/constraints/`).
 - Selecting a technology, a protocol, or a storage format: **decision** (`doc/decisions/`).
 - Behavior and values: the responsible **requirement** (`doc/requirements/`).
