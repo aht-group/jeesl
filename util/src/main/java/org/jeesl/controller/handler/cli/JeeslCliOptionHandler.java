@@ -1,18 +1,16 @@
 package org.jeesl.controller.handler.cli;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 import java.util.function.IntConsumer;
-import java.util.logging.LogManager;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.exlp.interfaces.system.property.Configuration;
+import org.exlp.interfaces.util.JaxbInterface;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.handler.system.property.ConfigBootstrap;
@@ -40,6 +38,8 @@ public class JeeslCliOptionHandler
 	
 	private Option oHelp,oDebug;
 	private Option oLogFile;
+	
+	public JaxbInterface jaxb; public JeeslCliOptionHandler jaxb(JaxbInterface jaxb) {this.jaxb=jaxb; return this;}
 	
 	private Option oConfig;
 	
@@ -203,7 +203,7 @@ public class JeeslCliOptionHandler
 //		logger.info("Log4j2 initialized (on info)");
 	}
 	
-	private org.exlp.interfaces.system.property.Configuration config1Wrapper(CommandLine line, String defaultConfig)
+	private org.exlp.interfaces.system.property.Configuration config1Wrapper2(CommandLine line, String defaultConfig)
 	{
 		if(line.hasOption(oConfig.getOpt()))
 		{
@@ -245,8 +245,7 @@ public class JeeslCliOptionHandler
 	 * @param defaultConfig the configuration that is always added
 	 * @return the combined configuration
 	 */
-	public org.exlp.interfaces.system.property.Configuration config2Wrapper(CommandLine line, String defaultConfig) {return ConfigBootstrap.wrap(config2(line,defaultConfig));}
-	private org.apache.commons.configuration2.Configuration config2(CommandLine line, String defaultConfig)
+	public org.exlp.interfaces.system.property.Configuration config2Wrapper(CommandLine line, String defaultConfig)
 	{
 		ConfigBootstrap bootstrap = ConfigBootstrap.instance();
 		if(line.hasOption(oConfig.getOpt()))
@@ -258,7 +257,8 @@ public class JeeslCliOptionHandler
 				logger.info("Using "+ExlpCentralConfigPointer.class.getSimpleName());
 				try
 				{
-					ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(exlpApp).jaxb(JaxbUtil.instance());
+					if(Objects.isNull(jaxb)) {logger.error("No JAXB provided (this is a developer issue)");}
+					ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(exlpApp).jaxb(jaxb);
 					configFile = ccp.toFile(exlpCode).getAbsolutePath();
 				}
 				catch (ExlpConfigurationException e)
@@ -279,8 +279,8 @@ public class JeeslCliOptionHandler
 	    }
 		
 		bootstrap.add(defaultConfig);
-		
-		return bootstrap.combine();
+
+		return ConfigBootstrap.wrap(bootstrap.combine());
 	}
 	
 	/**
