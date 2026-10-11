@@ -33,6 +33,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-test</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<scope>provided</scope>

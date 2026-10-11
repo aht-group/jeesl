@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractFileProcessingTest extends AbstractAhtUtilsXmlTest
+public abstract class AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractFileProcessingTest.class);
 	
