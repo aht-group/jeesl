@@ -31,8 +31,8 @@ Every module of the repository compiles against the Java 8 API.
 
 - The root `pom.xml` configures `maven-compiler-plugin` with the parameter `release` and the value `8`;
   it drops its own parameters `source` and `target` `1.8`.
-- The parameter `release` requires `maven-compiler-plugin` 3.6.0 or newer; the version that the root
-  `pom.xml` manages applies.
+- The parameter `release` requires `maven-compiler-plugin` 3.6.0 or newer; the version that the BOM
+  `org.jeesl.bom:bom` manages (3.16.0) applies, and the root `pom.xml` names no version of its own.
 - While `release` is set, the compilation uses the API data of Java 8 and writes class-file version 52;
   the compiler call carries `--release 8` and no value of `source` or `target`.
 - The module `test` (`test/pom.xml`) drops its own parameters `source` and `target` `1.8` and inherits
@@ -72,8 +72,8 @@ its own, and a separate signature artifact.
 
 ## Impact
 
-- `pom.xml` (root) – the parameter `release` replaces `source` and `target` for every module, and the managed
-  `maven-compiler-plugin` carries a version of 3.6.0 or newer.
+- `pom.xml` (root) – the parameter `release` replaces `source` and `target` for every module; the root `pom.xml`
+  names no version of `maven-compiler-plugin` and takes the version of the BOM `org.jeesl.bom:bom`.
 - `test/pom.xml` – the module drops its own `source` and `target` configuration.
 - `xml/pom.xml` – no change follows from this decision; the module carries the values of its two artifacts
   (ADR-0001).
@@ -89,6 +89,8 @@ its own, and a separate signature artifact.
   regulate which module that is.
 - The parameters `source` and `target` `1.8` of the parent POM `org.jeesl.bom:bom-parent8` stay unchanged, and
   the decision does not regulate that project; the value of the root `pom.xml` supersedes them.
+- The version of `maven-compiler-plugin` that the BOM `org.jeesl.bom:bom` manages is not regulated by this
+  decision; the decision requires only 3.6.0 or newer.
 - The JDK that runs the build is not regulated beyond the minimum that the `release` argument requires
   (`README.md`, `## Open Fundamental Decisions`, item 2).
 
@@ -96,7 +98,8 @@ its own, and a separate signature artifact.
 
 ### Implementation
 
-- `pom.xml` (root) – the parameter `release` with the value `8` in place of `source` and `target` `1.8`
+- `pom.xml` (root) – the parameter `release` with the value `8` in place of `source` and `target` `1.8`, and no
+  version of `maven-compiler-plugin`
 - `test/pom.xml` – the module drops its own `source` and `target` configuration and inherits the value of
   the root `pom.xml`
 
@@ -108,6 +111,8 @@ its own, and a separate signature artifact.
   class-file version 52 and those of the `jakarta` artifact version 55; the test classes carry version 52
 - `unzip -p api/target/jeesl-api-0.3.2-SNAPSHOT.jar` on JDK 11 – the class files carry class-file version 52
 - `mvn -DskipTests clean install` of the reactor on JDK 11 – all 45 modules build against the Java 8 API
+- `mvn -o -N help:effective-pom` – the effective `maven-compiler-plugin` carries the version 3.16.0 of the
+  BOM `org.jeesl.bom:bom`
 
 ### Documentation
 

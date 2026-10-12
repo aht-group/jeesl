@@ -29,8 +29,8 @@ The `xml` module builds both JAXB variants in one Maven run and publishes classi
 
 - The module uses `<packaging>pom</packaging>`: it publishes its POM and the classifier jars `javax`,
   `jakarta`, and `tests`, and no artifact without a classifier exists.
-- `maven-compiler-plugin` (3.13.0) compiles both variants in one run, each with its own source roots and
-  its own output directory; the properties `xml.classes.javax` (`${project.build.outputDirectory}`) and
+- `maven-compiler-plugin` compiles both variants in one run, each with its own source roots and its own
+  output directory; the properties `xml.classes.javax` (`${project.build.outputDirectory}`) and
   `xml.classes.jakarta` (`${project.build.directory}/classes-jakarta`) name them:
   - `compile-javax` at phase `compile` compiles `src/main/java` and `src/main/javax` with
     `--release 8` into `xml.classes.javax`.
@@ -66,9 +66,8 @@ The `xml` module builds both JAXB variants in one Maven run and publishes classi
 ## Rationale
 
 - One command on one source revision produces both variants: `mvn -pl xml clean install`.
-- The `maven-compiler-plugin` version is not the inherited one: the root `pom.xml` pins 3.8.0, which
-  reports the parameters `compileSourceRoots` and `outputDirectory` as read-only; version 3.13.0 makes
-  both writable per execution.
+- `compileSourceRoots` and `outputDirectory` are writable per execution from `maven-compiler-plugin` 3.13.0
+  on; the module inherits a version above that bound (ADR-0002) and names none of its own.
 - Without an artifact that carries no classifier, a consumer cannot bind a variant by accident; the
   previous jar without a classifier changed its content with the JDK of the build.
 - Separate output directories are what make both variants possible in one module run: the two source
@@ -151,8 +150,8 @@ Jakarta compiler.
 ### Implementation
 
 - `xml/pom.xml` – the POM packaging, the compile executions `compile-javax` and `compile-jakarta`, the test
-  executions `testResources`, `testCompile`, and `test`, and the jar executions `package-javax`,
-  `package-jakarta`, and `package-tests`
+  executions `testResources`, `testCompile`, and `test`, the jar executions `package-javax`,
+  `package-jakarta`, and `package-tests`, and no version of `maven-compiler-plugin`
 - `pom.xml` (root) – the dependency management of `jeesl-xml` with the classifiers `javax`, `jakarta`, and
   `tests` and no entry without a classifier
 - `client/pom.xml`, `connectors/pom.xml`, `report/pom.xml`, `system-security/pom.xml`, and `util/pom.xml`
@@ -168,8 +167,8 @@ Jakarta compiler.
 - `mvn -pl util,doc -am test-compile` on JDK 11 – the consumers of the classifier `tests` compile
 - `mvn -DskipTests clean install` of the reactor on JDK 11 – all 45 modules build with the classifier
   artifacts of `jeesl-xml`
-- `mvn -pl xml test` on JDK 11 – 274 test programs against the `javax` classes, 20 of them failing as they
-  do on JDK 8; the same run against the `jakarta` classes fails all 274 test programs
+- `mvn -pl xml test` on JDK 11 – 274 test programs against the `javax` classes, all passing; the same run
+  with the classes of `xml.classes.jakarta` in the module output directory fails all 274 test programs
 - `javap -v` on `org.jeesl.model.xml.xsd.Jeesl` of both classifier jars – the `javax` jar carries
   `javax.xml.bind` annotations, the `jakarta` jar `jakarta.xml.bind` annotations
 

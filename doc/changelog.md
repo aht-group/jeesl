@@ -1,5 +1,14 @@
 # Change Log
 
+## 2026-10-12 – Build: one compiler version from the BOM for every module
+
+- What: Removed the version of `maven-compiler-plugin` from the module `xml`; the decisions name the version
+  from `org.jeesl.bom:bom`, and ADR-0001 records the test run.
+- Result: All modules compile with 3.16.0; the `xml` tests pass.
+- Evidence: `mvn -o clean install -DskipTests` and `mvn -o -pl xml test` on JDK 11 – 0 failures.
+- Files: xml/pom.xml, doc/decisions/ADR-0001-package-javax-jakarta-variants.md,
+  doc/decisions/ADR-0002-java-compile-level.md, doc/changelog.md.
+
 ## 2026-10-11 – Decisions: ADR-0004 for Maven as build tool
 
 - What: Adopted the build-tool decision of another project as ADR-0004, renumbered it from ADR-0002, replaced
