@@ -13,10 +13,6 @@
 	<packaging>maven-plugin</packaging>
 	<name>JEESL - Maven Plugins</name>
 	
-	<prerequisites>
-		<maven>3.1</maven>
-	</prerequisites>
-	
 	<dependencyManagement>
 		<dependencies>      	         
 			<dependency>

@@ -55,8 +55,8 @@ The choice to be decided was how test programs are named, stored, and run.
 
 ## Open Points
 
-- The Maven version that the build requires is not regulated by this decision; `maven-surefire-plugin` 3.6.0
-  needs Maven 3.6.3 or newer, while the parent POM `org.jeesl.bom:bom-parent8` requires only 3.3.0.
+- The Maven version that the build requires is not regulated by this decision; ADR-0002 governs it, and the
+  aggregator `org.jeesl.bom:bom` enforces 3.6.3 through `requireMavenVersion`.
 - JUnit 4 has been removed from the repository; no module binds `junit:junit` and no source file imports
   `org.junit.*` (the migration is recorded in the change log of 2026-10-10).
 

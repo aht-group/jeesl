@@ -47,19 +47,19 @@ This table names the values that are relevant for the project and the location t
 
 ## Technical Assumptions
 
-These points are the result of an analysis of the existing build files and sources. They are **assumptions** and are not pinned yet by a **constraint** or a **decision** (`doc/requirements/constraints/`, `doc/decisions/`).
+These points are the result of an analysis of the existing build files and sources. A point that a decision governs names that decision in brackets; its status is given in the index (`doc/status.md`). The remaining points are **assumptions** and are not pinned yet by a **constraint** or a **decision** (`doc/requirements/constraints/`, `doc/decisions/`).
 
-- Language and platform: Java 8 API; the compilation uses `<release>8</release>`, so the API of Java 8 is the lower bound of the reactor, and `jeesl-xml` compiles its `jakarta` artifact with `--release 11`, which makes JDK 11 or newer the JDK of the build.
-- Namespace: Java EE with the `javax` namespace; `jeesl-xml` publishes the two JAXB variants as the classifier artifacts `javax` and `jakarta` and the shared test classes as the classifier `tests`.
+- Language and platform: Java 8 API; the compilation uses `<release>8</release>`, so the API of Java 8 is the lower bound of the reactor, and `jeesl-xml` compiles its `jakarta` artifact with `--release 11`, which makes JDK 11 or newer the JDK of the build (`ADR-0001`, `ADR-0004`).
+- Namespace: Java EE with the `javax` namespace; `jeesl-xml` publishes the two JAXB variants as the classifier artifacts `javax` and `jakarta` and the shared test classes as the classifier `tests` (the variant artifacts: `ADR-0004`).
 - Target container: JBoss EAP 7.x; the imported BOM `bom-eap73` selects the matching platform dependencies.
-- Build: Apache Maven, multi-module reactor; the plugin module `maven/` (`jeesl-maven`) declares Maven 3.1 as prerequisite; there is no Maven Wrapper.
+- Build: Apache Maven, multi-module reactor; the module `maven/` (`jeesl-maven`) is a Maven plugin project (`ADR-0002`).
 - Persistence: JPA/Hibernate on EJB, with datasource and Hibernate configuration templates for JBoss EAP under `maven/src/main/resources/jeesl/system/io/config/jboss/eap/`.
 - Web: JSF and JAX-RS (REST); servlets and JSF components live in `jsf/`.
 - XML: JAXB models and code generation from 36 XSD files in `xml/src/main/xsd/`.
 - Logging: SLF4J; the test resources use log4j configurations under `src/test/resources/config.*/log4j.xml`.
-- Tests: JUnit 5 with shared test bases such as `org.jeesl.test.AbstractJeeslXmlTest` and `org.jeesl.test.JeeslAssert`, plus the extension `net.sf.ahtutils.test.IgnoreOtherRule`; the XML test bases (`org.jeesl.AbstractXmlTest` and the deprecated `net.sf.ahtutils.test.AbstractAhtUtilsXmlTest`) build on the EXLP base `org.exlp.test.AbstractXmlTest` from `net.sf.exlp:exlp-test`.
+- Tests: JUnit 5 with shared test bases such as `org.jeesl.test.AbstractJeeslXmlTest` and `org.jeesl.test.JeeslAssert`, plus the extension `net.sf.ahtutils.test.IgnoreOtherRule`; the XML test bases (`org.jeesl.AbstractXmlTest` and the deprecated `net.sf.ahtutils.test.AbstractAhtUtilsXmlTest`) build on the EXLP base `org.exlp.test.AbstractXmlTest` from `net.sf.exlp:exlp-test` (`ADR-0003`).
 - Libraries in use: EXLP (`net.sf.exlp`), OpenFuXML (`org.openfuxml`), MetaChart (`org.metachart`), Apache POI, Aspose Words, Apache Batik, Infinispan, Apache Commons Configuration 2.
-- `commons-logging:commons-logging` is excluded and banned by the Maven Enforcer plugin.
+- `commons-logging:commons-logging` is excluded and banned by the Maven Enforcer plugin (`ADR-0002`).
 
 ## Open Fundamental Decisions
 
