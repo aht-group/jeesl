@@ -28,22 +28,23 @@ a decision.
    `jar` for the other modules.
 4. The dependency versions come from the imported BOMs `bom-core` and `bom-eap73`; every module imports both BOMs
    itself.
-5. The parent `org.jeesl.bom:bom-parent8` provides the plugin management and the enforcer rule
-   `requireMavenVersion`.
+5. The parent `org.jeesl.bom:bom-parent8` provides the plugin management; the aggregator `org.jeesl.bom:bom`
+   above it provides the plugin management of `maven-enforcer-plugin` and the enforcer rule `requireMavenVersion`.
 6. Maven enforces selected dependencies through `maven-enforcer-plugin` (`bannedDependencies`) and creates the
    documentation through `maven-javadoc-plugin` in the `release` profile.
-7. The minimum Maven version of the build is 3.6.3; `maven-surefire-plugin` 3.6.0 of the root `pom.xml` needs
-   this version, while the parent `bom-parent8` enforces only 3.3.0.
+7. The minimum Maven version of the build is 3.6.3; the aggregator `org.jeesl.bom:bom` enforces this value
+   through `requireMavenVersion` for every module of the reactor.
 8. A fixed Maven version with its own build runner is not set.
 
 ## Rationale
 
 - Parent and BOMs come from the JEESL environment and are Maven artifacts.
 - The packagings map the aggregator, the plugin, and the library artifacts onto Maven modules.
-- The minimum Maven version 3.6.3 follows from `maven-surefire-plugin` 3.6.0 of the root `pom.xml`; the parent
-  `bom-parent8` binds only the lower value 3.3.0, which does not suffice as the lower bound of the build.
-- The parent binds the minimum version through `requireMavenVersion` and the modules inherit the check, so a
-  fixed version with its own build runner is unnecessary.
+- The minimum Maven version 3.6.3 is the value that the aggregator `org.jeesl.bom:bom` enforces through
+  `requireMavenVersion`; the plugins of the build (`maven-compiler-plugin` 3.16.0, `maven-surefire-plugin` 3.6.0)
+  name the same value as their own prerequisite.
+- The aggregator binds the minimum version and every module inherits the check, so a fixed version with its own
+  build runner is unnecessary.
 
 ## Alternatives
 
@@ -52,14 +53,13 @@ a decision.
 ## Impact
 
 - Affected requirements: none.
-- Files: `pom.xml`, the module POMs, and the parent POM `org.jeesl.bom:bom-parent8`.
+- Files: `pom.xml`, the module POMs, the parent POM `org.jeesl.bom:bom-parent8`, and the aggregator
+  `org.jeesl.bom:bom`.
 
 ## Open Points
 
-- How the build enforces the minimum Maven version 3.6.3 is not regulated by this decision; the parent
-  `bom-parent8` enforces only 3.3.0.
-- The content of the parent POM `org.jeesl.bom:bom-parent8` and of the imported BOMs `bom-core` and `bom-eap73`
-  is not regulated by this decision.
+- The content of the aggregator `org.jeesl.bom:bom`, of the parent POM `org.jeesl.bom:bom-parent8`, and of the
+  imported BOMs `bom-core` and `bom-eap73` is not regulated by this decision.
 
 ## Evidence
 
@@ -70,13 +70,13 @@ a decision.
   profile
 - `util/pom.xml` and the other module POMs – packaging `jar` and the import of `bom-core` and `bom-eap73`
 - `xml/pom.xml`, `maven/pom.xml` – the packagings `pom` and `maven-plugin`
-- parent `org.jeesl.bom:bom-parent8` – `maven-enforcer-plugin` with `requireMavenVersion` `3.3.0`; the modules
-  inherit the check
+- aggregator `org.jeesl.bom:bom` – `maven-enforcer-plugin` `1.4.1` with the rule `requireMavenVersion` `3.6.3`;
+  every module inherits the check
 
 ### Tests
 
-- `mvn -o -N validate` on JDK 11 – `[SUCCESS]`; the enforcer executions `enforce-maven` (parent) and
-  `enforce-banned-dependencies` (root) run
+- `mvn -o validate` – `[SUCCESS]` for the 45 modules; the enforcer executions `enforce-maven` (aggregator) and
+  `enforce-banned-dependencies` (root) run with `maven-enforcer-plugin` 1.4.1
 
 ### Documentation
 

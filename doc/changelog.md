@@ -1,5 +1,13 @@
 # Change Log
 
+## 2026-10-13 – Build: minimum Maven version enforced centrally
+
+- What: Moved the rule `requireMavenVersion` into the aggregator `org.jeesl.bom:bom` and raised it to 3.6.3;
+  dropped the module pins and the duplicate rule of `connectors`; updated the documents.
+- Result: All 45 modules enforce the version with `maven-enforcer-plugin` 1.4.1; `jsf` skips the check.
+- Evidence: `mvn -o validate` – BUILD SUCCESS, 45 modules.
+- Files: pom.xml, connectors/pom.xml, maven/pom.xml, README.md, the ADR-0002 and ADR-0003 files, doc/changelog.md.
+
 ## 2026-10-13 – Decisions: renumbering of the decision repository
 
 - What: Renumbered ADR-0002 to ADR-0001, ADR-0001 to ADR-0004, and ADR-0004 to ADR-0002 on instruction;

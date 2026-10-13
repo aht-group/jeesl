@@ -52,7 +52,7 @@ These points are the result of an analysis of the existing build files and sourc
 - Language and platform: Java 8 API; the compilation uses `<release>8</release>`, so the API of Java 8 is the lower bound of the reactor, and `jeesl-xml` compiles its `jakarta` artifact with `--release 11`, which makes JDK 11 or newer the JDK of the build.
 - Namespace: Java EE with the `javax` namespace; `jeesl-xml` publishes the two JAXB variants as the classifier artifacts `javax` and `jakarta` and the shared test classes as the classifier `tests`.
 - Target container: JBoss EAP 7.x; the imported BOM `bom-eap73` selects the matching platform dependencies.
-- Build: Apache Maven, multi-module reactor; the plugin module `maven/` (`jeesl-maven`) declares Maven 3.1 as prerequisite; there is no Maven Wrapper.
+- Build: Apache Maven, multi-module reactor; the module `maven/` (`jeesl-maven`) is a Maven plugin project.
 - Persistence: JPA/Hibernate on EJB, with datasource and Hibernate configuration templates for JBoss EAP under `maven/src/main/resources/jeesl/system/io/config/jboss/eap/`.
 - Web: JSF and JAX-RS (REST); servlets and JSF components live in `jsf/`.
 - XML: JAXB models and code generation from 36 XSD files in `xml/src/main/xsd/`.

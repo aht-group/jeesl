@@ -265,25 +265,8 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
-			</plugin>
-			<plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-surefire-plugin</artifactId>
-		        <configuration>
-		          <systemProperties>
-		            <property>
-		              <name>targetDir</name>
-		              <value>${my.build.directory}</value>
-		            </property>
-		          </systemProperties>
-		        </configuration>
-		      </plugin>
-			<plugin>
         		<groupId>org.apache.maven.plugins</groupId>
         		<artifactId>maven-enforcer-plugin</artifactId>
-        		<version>1.0.1</version>
         		<executions>
           			<execution>
             			<id>enforce-banned-dependencies</id>
@@ -300,6 +283,22 @@
             			</configuration>
           			</execution>
         		</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <configuration>
+		          <systemProperties>
+		            <property>
+		              <name>targetDir</name>
+		              <value>${my.build.directory}</value>
+		            </property>
+		          </systemProperties>
+		        </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.sonatype.central</groupId>
