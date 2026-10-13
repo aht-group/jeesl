@@ -1,7 +1,14 @@
+@mixin pseudo-overlay {
+	content: '';
+	position: absolute;
+	
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+
 // Primefaces sets link colour for both links within widgets as well as highlighted elements, as well as text-decoration to none inside of a widget
 // with ui-state-hover. None of which is desired, so it needs to be overridden.
 .ui-widget-content, .ui-state-hover, .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-	:not(.ui-widget-header) a {
+	a:not(.ui-button) {
 		color: var(--link-foreground);
 		
 		&:hover {
@@ -30,4 +37,9 @@
 	align-items: center;
 	display: flex;
 	white-space: break-spaces; // Required to keep leading/trailing white spaces in inline or text elements.
+}
+
+// Fallback class in case clicks don't register (may happen in primefaces datatable) for whatever reason.
+.jeesl-click-propagation {
+	pointer-events: none;
 }

@@ -43,88 +43,6 @@ $border: $border-width solid var(--container-border-color);
 	}
 }
 
-@mixin select-list($class) {
-	padding: $half-spacing 0;
-	
-	@media (max-width: 768px) {
-		padding: $wide-spacing 0;
-	}
-	
-	&:before {
-		@media (max-width: 768px) {
-			border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-color);
-		    content: '';
-		    display: block;
-		    width: calc(100% - (2 * #{$wide-spacing}));
-		    margin: 0 $wide-spacing;
-		}
-	}
-	
-	.#{$class}-item {
-		align-items: center;
-		background: transparent;
-		border: none;
-		border-radius: 0;
-		cursor: pointer;
-		display: flex;
-		min-height: $ls-element-height;
-		padding: $slim-spacing $half-spacing;
-		position: relative;
-		transition: background .2s linear;
-		white-space: normal;
-		
-		@media (max-width: 768px) {
-			border-radius: 0;
-			font-size: 1.1em;
-		    font-weight: 700;
-			min-height: $ls-element-height-mobile;
-			margin: 0;
-		    padding: calc(#{$regular-spacing} - #{$separator-thickness-mobile}) $wide-spacing $regular-spacing;
-			text-shadow: none;
-		}
-		
-		&:after {
-			@media (max-width: 768px) {
-				border-bottom: $separator-thickness-mobile solid var(--panel-content-select-dropdown-separator-color);
-				bottom: 0;
-				content: '';
-				display: block;
-				position: absolute;
-				transition: border-color $transition-duration linear;
-				width: calc(100% - 2 * #{$wide-spacing});
-			}
-		}
-		
-		&.ui-state-hover, &:hover {
-			&:not(.ui-state-highlight) {
-				background: var(--panel-content-select-dropdown-hover-background);
-				box-shadow: none;
-				color: var(--panel-content-select-dropdown-hover-foreground);
-				
-				@media (max-width: 768px) {
-					background: none;
-				}
-				
-				&:after {
-					border-color: var(--panel-content-select-dropdown-hover-foreground);
-				}
-			}
-		}
-				
-		&.ui-state-highlight {
-			background: var(--panel-content-select-dropdown-highlight-background);
-			font-weight: 700;
-			text-shadow: none;
-			
-			&:after {
-				@media (max-width: 768px) {
-					border-color: transparent;
-				}
-			}
-		}
-	}
-}
-
 @mixin setBackground($url) {
 	body {
 		background: var(--main-background) url($url) repeat fixed;
@@ -220,6 +138,7 @@ $border: $border-width solid var(--container-border-color);
 	cursor: pointer;
 	display: inline-flex;
 	font-weight: 700;
+	gap: var(--half-spacing);
 	justify-content: center;
 	line-height: normal;
 	padding: 0 $regular-spacing;
@@ -427,10 +346,6 @@ $border: $border-width solid var(--container-border-color);
 	}
 }
 
-.ui-inputfield.ui-state-default {
-	@include inputfield;
-}
-
 .ui-inputgroup {
 	align-items: stretch;
 	display: flex;
@@ -444,97 +359,6 @@ $border: $border-width solid var(--container-border-color);
 		width: auto;
 	}
 }
-
-//.jeesl-output-container {
-//	align-items: center;
-//	display: flex;
-//	gap: $regular-spacing;
-	
-//	.ui-outputtext {
-//		flex-grow: 1;
-//	}
-	
-//	.jeesl-input-label {
-//		padding: 0 $half-spacing;
-//	}
-	
-//	.ui-chkbox {
-//		margin: -$half-spacing 0;
-//		
-//		@media (max-width: 768px) {
-//			margin: 0;
-//		}
-//	}
-
-//	@media (max-width: 768px) {
-//		.ui-outputlabel {
-//			padding: 0 0 0 $regular-spacing;
-//		}
-//	}
-//	
-//	.jeesl-input-container {
-//		flex-grow: 1;
-//	}
-	
-//	.jeesl-translation-label-previous {
-//		background: var(--panel-content-input-background);
-//		border-radius: $border-radius 0 0 $border-radius;
-//		display: flex;
-//		gap: $regular-spacing;
-//		min-height: $element-height;
-//		padding: $half-spacing 0 $half-spacing $regular-spacing;
-//		width: auto;
-//		
-//		> .jeesl-input-container .jeesl-inputfield.ui-state-default {
-//			border-radius: 0 $border-radius $border-radius 0;
-//		}
-//	}
-//		
-//	.jeesl-translation-label-icon {
-//		border-color: transparent var(--container-header-underline-color);
-//		border-style: solid;
-//		border-width: 6px 0 6px 6px;
-//	}
-//}
-
-//.jeesl-input-container {
-//	display: flex;
-//	
-//	.ui-inputtext, .ui-inputtextarea {
-//		flex-grow: 1;
-//		flex-shrink: 1;
-//		width: 0;
-//	}
-//	
-//	.ui-commandlink {
-//		flex-grow: 1;
-//		height: auto;
-//		margin: 0 0 0 6px;
-//		padding: 0;
-//		
-//		> img {
-//			height: auto;
-//			width: 100%;
-//		}
-//	}
-//	
-//	.ui-button, .ui-chkbox {
-//		align-items: center;
-//		display: flex;
-////		flex: 1;
-//		flex-shrink: 0;
-//		justify-content: center;
-//		margin: 0 0 0 6px;
-//		overflow: hidden;
-//		padding: 0 $slim-spacing;
-//		
-//		min-width: calc(15% - 6px);
-//		
-//		.ui-button-text {
-//			padding: 0;
-//		}
-//	}
-//}
 
 .ui-float-label {
 	align-items: center;
@@ -562,123 +386,6 @@ $border: $border-width solid var(--container-border-color);
 		position: relative;
 	}
 }
-
-@mixin jeesl-select($class) {
-	.#{$class}.ui-state-default {
-//		background: $panel-header-gradient;
-		border: none;
-		display: flex;
-		padding: 0;
-		
-		&.ui-state-active, &.ui-state-hover, &.ui-state-focus {
-//			border-color: $medium-grey;
-			box-shadow: none;
-//			color: $anthracite;
-		}
-		
-		.ui-inputfield {
-			@include inputfield;
-			
-			border-radius: $border-radius-left;
-			width: calc(85% + 6px);
-		}
-		
-		.#{$class}-label {
-			align-items: center;
-			display: flex;
-		}
-		
-		.#{$class}-trigger {
-			@include button;
-			@include vertical-center(after);
-			
-			border-radius: $border-radius-right;
-			flex-grow: 1;
-			height: auto;
-			padding: 0;
-			position: relative;
-			text-align: center;
-			width: auto;
-			
-			@media (max-width: 768px) {
-				height: auto;
-				padding: 0;
-			}
-		}
-	
-		.ui-icon {
-			@include icon;
-			
-			font-size: var(--button-icon-font-size);
-			position: relative;
-			text-indent: 0;
-		}
-		
-		.ui-icon-triangle-1-s:before {
-			content: $icon-down !important; // Override primefaces 12 rule.
-//			font-size: 1.5em;
-//			
-//			@media (max-width: 768px) {
-//				font-size: 2.5em;
-//			}
-		}
-	}
-	
-	.#{$class}-panel {
-		opacity: 1;
-		width: auto;
-		
-		@media (max-width: 768px) {
-			width: 100% !important;
-		}
-		
-		&.hide-disabled-items {
-			.ui-selectonemenu-item.ui-state-disabled {
-				display: none;
-			}
-		}
-		
-		.#{$class}-filter-container {
-			margin: 0 $half-spacing;
-			
-			.ui-inputfield {
-				font-size: 1rem;
-				line-height: normal;
-			}
-			
-			.ui-icon {
-				align-items: center;
-				display: flex;
-				height: 100%;
-				pointer-events: none;
-				opacity: .5;
-				position: absolute;
-				right: $half-spacing;
-				top: 0;
-				width: auto;
-				
-				&:before {
-					color: var(--panel-content-select-dropdown-foreground);
-					font-size: 1.2em;
-					text-shadow: none;
-				}
-			}
-		}
-		
-		.#{$class}-items-wrapper {
-			@media (max-width: 768px) {
-				max-height: 400px !important;
-			}
-			
-			.#{$class}-list, .ui-selectonemenu-table tbody {
-				@include select-list($class);
-			}
-		}
-	}
-}
-
-@include jeesl-select(ui-selectonemenu);
-@include jeesl-select(ui-selectcheckboxmenu);
 
 .ui-autocomplete-panel {
 	opacity: 1;
@@ -1294,14 +1001,6 @@ $border: $border-width solid var(--container-border-color);
 		> label {
 			margin-bottom: 0;
 		}
-		
-//		.p-col {
-//			padding: $half-spacing;
-//			
-//			&:first-child {
-//				padding-left: 0;
-//			}
-//		}
 	}
 }
 
@@ -1415,29 +1114,6 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	position: relative;
 	top: 0;
 }
-
-//.jeesl-input-container {
-//	> .jeesl-input-label {
-//		background: var(--panel-content-input-background);
-//		padding: 0 $half-spacing;
-//		
-//		@media (max-width: 768px) {
-//			padding: $regular-spacing;
-//		}
-//	}
-//	
-//	> .ui-inputtextarea, > .ui-inputtext {
-//		flex-grow: 1;
-//		
-//		&:not(:first-child) {
-//			padding-left: 0 !important;
-//		}
-//		
-//		&:not(:last-child) {
-//			padding-right: 0 !important;
-//		}
-//	}
-//}
 
 .jeesl-button-group {
 	.ui-button {
@@ -1561,27 +1237,6 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 	}
 }
 
-
-//.ui-corner-all:before {
-//	@extend .ui-corner-all;
-//}
-//
-//.ui-corner-top:before {
-//	@extend .ui-corner-top;
-//}
-//
-//.ui-corner-bottom:before {
-//	@extend .ui-corner-bottom;
-//}
-//
-//.ui-corner-left:before {
-//	@extend .ui-corner-left;
-//}
-//
-//.ui-corner-right:before {
-//	@extend .ui-corner-right;
-//}
-
 .ui-dialog-mask {
 	z-index: 1000 !important;
 }
@@ -1605,11 +1260,6 @@ img.jeesl-icon, .jeesl-icon img, .pf-action-icon img, .ui-selectonemenu img {
 			top: $regular-spacing;
 		}
 	}
-}
-
-/* Primefaces 12 fixes */
-body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
-	font-family: "Font Awesome 5 Free" !important;
 }
 
 /* Primefaces only sets dotted, which overrides both border width and color. It shouldn't, but it does.' */

@@ -114,7 +114,6 @@
 		--container-header-action-button-dropdown-table-border: #{$dark-colour};
 		--tabview-header-tab-background: linear-gradient(to bottom, var(--grey-brighter) 87%, var(--grey-bright) 100%);
 		--tabview-header-tab-foreground: var(--container-header-foreground);
-	//	--tabview-header-tab-background: var(--grey-bright);
 		--tabview-header-tab-highlight-background: linear-gradient(to bottom, #{$medium-colour}, #{$dark-colour});
 		--tabview-header-tab-highlight-foreground: var(--highlight-foreground);
 		
@@ -134,6 +133,10 @@
 		
 		/* footer */
 		--container-footer-foreground: #{$dark-colour};
+		
+		/* widgets */
+		--highlight-shadow: #{$highlight-shadow};
+		--text-shadow: #{$text-shadow};
 		
 		/* link */
 		--panel-link-foreground: #{$dark-colour};

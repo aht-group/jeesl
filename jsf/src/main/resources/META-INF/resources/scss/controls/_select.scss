@@ -1,0 +1,170 @@
+@use './button' as button;
+@use './input' as input;
+
+:root {
+	--select-list-spacing: var(--half-spacing) 0;
+	--select-list-item-font-size: 1em;
+	--select-list-item-font-weight: 500;
+	--select-list-item-hover-background: var(--panel-content-select-dropdown-hover-background);
+	--select-list-item-separator-thickness: 0;
+	--select-list-item-spacing: var(--slim-spacing) var(--half-spacing);
+	
+	@media(max-width: 768px) {
+		--select-list-spacing: var(--wide-spacing) 0;
+		--select-list-item-font-size: 1.1em;
+		--select-list-item-font-weight: 700;
+		--select-list-item-hover-background: none;
+		--select-list-item-separator-thickness: var(--separator-thickness);
+		--select-list-item-spacing: calc(var(--regular-spacing) - var(--separator-thickness)) var(--wide-spacing) var(--regular-spacing);
+	}
+}
+
+@mixin dropdown-separator {
+	border-bottom-style: solid;
+	border-bottom-color: var(--panel-content-select-dropdown-separator-color);
+	border-bottom-width: var(--select-list-item-separator-thickness);
+	content: '';
+	display: block;
+	transition: border-color var(--transition-duration) var(--transition-function);
+	width: calc(100% - (2 * var(--wide-spacing)));
+	margin: 0 var(--wide-spacing);
+}
+
+@mixin jeesl-select($class) {
+	.#{$class}.ui-state-default {
+		border: none;
+		display: flex;
+		padding: 0;
+		
+		&.ui-state-active, &.ui-state-hover, &.ui-state-focus {
+			box-shadow: none;
+		}
+		
+		.ui-inputfield {
+			@include input.inputfield;
+			
+			border-radius: var(--border-left-radius);
+			width: calc(85% + 6px);
+		}
+		
+		.#{$class}-label {
+			align-items: center;
+			display: flex;
+		}
+		
+		.#{$class}-trigger {
+			@include button.button;
+			
+			border-radius: var(--border-right-radius);
+			flex-grow: 1;
+			height: auto;
+			padding: 0;
+			position: relative;
+			text-align: center;
+			width: auto;
+		}
+	
+		.ui-icon {
+			font-size: var(--button-icon-font-size);
+			position: relative;
+			text-indent: 0;
+		}
+	}
+	
+	.#{$class}-panel {
+		opacity: 1;
+		width: auto;
+		
+		&.hide-disabled-items {
+			.ui-selectonemenu-item.ui-state-disabled {
+				display: none;
+			}
+		}
+		
+		.#{$class}-filter-container {
+			margin: 0 var(--half-spacing);
+			
+			.ui-inputfield {
+				font-size: 1rem;
+				line-height: normal;
+			}
+			
+			.ui-icon {
+				align-items: center;
+				display: flex;
+				height: 100%;
+				pointer-events: none;
+				opacity: .5;
+				position: absolute;
+				right: var(--half-spacing);
+				top: 0;
+				width: auto;
+				
+				&:before {
+					color: var(--panel-content-select-dropdown-foreground);
+					font-size: 1.2em;
+					text-shadow: none;
+				}
+			}
+		}
+		
+		.#{$class}-items-wrapper .#{$class}-list, .ui-selectonemenu-table tbody {
+			padding: var(--select-list-spacing);
+			
+			&::before {
+				@include dropdown-separator;
+			}
+			
+			.#{$class}-item {
+				align-items: center;
+				background: transparent;
+				border: none;
+				border-radius: 0;
+				cursor: pointer;
+				display: flex;
+				font-size: var(--select-list-item-font-size);
+				font-weight: var(--select-list-item-font-weight);
+				margin: 0;
+				min-height: var(--list-element-height);
+				padding: var(--select-list-item-spacing);
+				position: relative;
+				text-shadow: none;
+				transition: background var(--transition-duration) var(--transition-function);
+				white-space: normal;
+
+				&.ui-state-hover, &:hover {
+					&:not(.ui-state-highlight) {
+						background: var(--select-list-item-hover-background);
+						box-shadow: none;
+						color: var(--panel-content-select-dropdown-hover-foreground);
+						
+						&::after { border-color: var(--panel-content-select-dropdown-hover-foreground); }
+					}
+				}
+						
+				&.ui-state-highlight {
+					background: var(--panel-content-select-dropdown-highlight-background);
+					font-weight: 700;
+					text-shadow: none;
+					
+					&::after { border-color: transparent; }
+				}
+				
+				&::after {
+					@include dropdown-separator;
+					
+					bottom: 0;
+					position: absolute;
+				}
+			}
+		}
+	}
+}
+
+/* Primefaces 12 fixes */
+body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
+	font-family: "Font Awesome 5 Free" !important;
+}
+
+@include jeesl-select(ui-selectonemenu);
+@include jeesl-select(ui-selectcheckboxmenu);

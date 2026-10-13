@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.function.IntFunction;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -49,6 +50,27 @@ public class InputGrid extends UIPanel
 		int remainder = i % columnCount;
 		return (remainder == 0) ? i : i - remainder;
 	}
+	
+	private boolean hasClass(UIComponent element, String className) {
+		try {
+			Method getStyleClass = element.getClass().getMethod("getStyleClass");
+			String styleClass = (String)getStyleClass.invoke(element);
+			return styleClass != null && styleClass.contains(className);
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
+			return false;
+		}
+	}
+	
+	private boolean hasChild(UIComponent element, String className) {
+		if (hasClass(element, className)) { return true; }
+		else { return element.getChildren().stream().filter(c -> hasChild(c, className)).collect(Collectors.toList()).size() > 0; }
+	}
+	
+	private void startSpan(ResponseWriter responseWriter, String className) throws IOException {
+		UIPanel inputChild = new UIPanel();
+		responseWriter.startElement("span", inputChild);
+		responseWriter.writeAttribute("class", className, null);
+	}
 
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
@@ -68,9 +90,11 @@ public class InputGrid extends UIPanel
 		StringBuffer sbStyleClass = new StringBuffer();
 		sbStyleClass.append("ui-fluid jeesl-input-grid col-count-" + (columnCount - 1));
 		
-		if(map.containsKey(Properties.styleClass.toString()))
+		Object styleClassObj = map.get(Properties.styleClass.toString());
+		
+		if(styleClassObj != null)
 		{
-			sbStyleClass.append(" ").append(map.get(Properties.styleClass.toString()));
+			sbStyleClass.append(" ").append(styleClassObj);
 		}
 		responseWriter.writeAttribute("class",sbStyleClass.toString(),null);
 	}
@@ -141,20 +165,12 @@ public class InputGrid extends UIPanel
 				for (int i = 0; i < group.size(); i++) {
 					UIComponent child = group.get(i);
 					
-					boolean hasLabelClass = false;
-					try {
-						Method getStyleClass = child.getClass().getMethod("getStyleClass");
-						String styleClass = (String)getStyleClass.invoke(child);
-						hasLabelClass = child instanceof OutputLabel || (styleClass != null && styleClass.contains("ui-outputlabel"));
-					} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
-						// Element shall not be treated as an output label.
-					}
+					boolean hasLabelClass = hasClass(child, "ui-outputlabel");
 					
 					if (child instanceof OutputLabel)
 					{
-        				UIPanel inputChild = new UIPanel();
-        				responseWriter.startElement("span", inputChild);
-        				responseWriter.writeAttribute("class", "ui-outputlabel p-col"/* p-md-" + labelWidth*/, null);
+						startSpan(responseWriter, "ui-outputlabel p-col"/* p-md-" + labelWidth*/);
+						startSpan(responseWriter, "ui-outputlabel-content");
 
 						Map<String, Object> attributes = child.getAttributes();
 						StringBuffer styleClass = new StringBuffer("ui-outputlabel-text");
@@ -166,22 +182,30 @@ public class InputGrid extends UIPanel
 						child.encodeAll(context);
 						
 						responseWriter.endElement("span");
+						responseWriter.endElement("span");
 					}
 					else if (child instanceof HtmlPanelGroup && hasLabelClass) {
-						UIPanel inputChild = new UIPanel();
-						responseWriter.startElement("span", inputChild);
+						boolean hasContentChild = this.hasChild(child, "ui-outputlabel-content");
 						
 						StringBuffer styleClass = new StringBuffer("ui-outputlabel p-col");
-						Map<String, Object> attributes = child.getAttributes();
-						if (attributes.containsKey("styleClass")) {
-							styleClass.append(" " + (String)attributes.get("styleClass"));
-						}
+						try {
+							Method getStyleClass = child.getClass().getMethod("getStyleClass");
+							styleClass.append(" " + (String)getStyleClass.invoke(child));
+						} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {}
 						
-						responseWriter.writeAttribute("class", styleClass, null);
+						startSpan(responseWriter, styleClass.toString());
 						
 						List<UIComponent> grandChildren = child.getChildren();
 						for(UIComponent grandChild : grandChildren) {
-							grandChild.encodeAll(context);
+							if (!hasContentChild && (grandChild instanceof OutputLabel || hasClass(grandChild, "ui-outputlabel-text"))) {
+								startSpan(responseWriter, "ui-outputlabel-content");
+								
+								grandChild.encodeAll(context);
+								
+								responseWriter.endElement("span");
+							} else {
+								grandChild.encodeAll(context);
+							}
 						}
 						
 						responseWriter.endElement("span");

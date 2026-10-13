@@ -3,3 +3,6 @@
 .html-container-panel .html-container > div > section > h1:first-child {
 	@include container.titlebar();
 }
+
+// Remove padding if container is inside of panel instead of its own panel.
+.jeesl-panel .html-container > div > section { padding: 0; }

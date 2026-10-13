@@ -5,13 +5,39 @@
 
 :root {
 	--input-grid-column-fullwidth: label / end;
+	--input-grid-column-label: label;
+	--input-grid-column-content: left / end;
+	--input-grid-column-left: left;
+	--input-grid-column-left-start: left;
+	--input-grid-content-indent: 0;
 	--input-grid-row: 1;
 	--input-grid-label-columns-template: subgrid;
+	--input-grid-row-content: 1;
+	
+	--input-grid-info-column: label;
+	--input-grid-info-columns-template: [label] 1fr [icon] auto;
+	--input-grid-descriptive-content-row: 2;
 	
 	@media (max-width: 768px) {
-		--input-grid-column-fullwidth: left / end;
+		--input-grid-column-label: label / end;
+		--input-grid-content-indent: calc(-1 * var(--form-column-spacing));
 		--input-grid-row: auto;
-		--input-grid-label-columns-template: [label] auto [end] 1fr;
+		--input-grid-row-content: auto;
+
+		--input-grid-info-column: var(--input-grid-column-fullwidth);
+		--input-grid-info-columns-template: subgrid;
+		--input-grid-descriptive-content-row: 3;
+
+		.jeesl-input-grid .p-grid .p-col.ui-outputlabel.ui-outputlabel-with-info {
+			--input-grid-row: 1 / span 2;
+			
+			+.p-col:not(.ui-outputlabel) { --input-grid-row-content: 2; }
+		}
+		.jeesl-input-grid .p-grid .p-col.ui-outputlabel:not(.ui-outputlabel-with-info) + .p-col:not(.ui-outputlabel) {
+			--input-grid-column-content: label / end;
+			--input-grid-column-left: label / center;
+			--input-grid-column-left-start: label;
+		}
 	}
 }
 
@@ -29,8 +55,8 @@
 
 .jeesl-input-grid.jeesl-input-grid-descriptive .p-grid .p-col {
 	&.ui-outputlabel {
-		grid-column: label / end;
-		grid-row: 1 / span 2;
+		grid-column: var(--input-grid-column-fullwidth);
+		grid-row: 1 / span 3;
 		
 		.ui-outputlabel-description {
 			display: grid;
@@ -45,13 +71,10 @@
 		}
 		
 		// Last Child required for overriding non-descriptive grid-row rule.
-		.ui-outputlabel-text:last-child {
-			grid-row: 2;
-			min-height: var(--input-field-height);
-		}
+		.ui-outputlabel-content:last-child { grid-row: 2; }
 	}
 	
-	&:not(.ui-outputlabel) { grid-row: 2; }
+	&:not(.ui-outputlabel) { grid-row: var(--input-grid-descriptive-content-row); }
 }
 
 .jeesl-input-grid {
@@ -61,7 +84,7 @@
 			--input-grid-columns-template: [label] fit-content(40%) #{$input-template} [end];
 			
 			@media (max-width: 768px) {
-				--input-grid-columns-template: #{$input-template} [end];
+				--input-grid-columns-template: [label] auto #{$input-template} [end];
 			}
 		}
 	}
@@ -76,45 +99,47 @@
 		grid-column: var(--input-grid-column-fullwidth);
 		grid-template-columns: subgrid;
 		
-		@media (max-width: 768px) {
-			grid-column-start: left;
-		}
-		
 		.p-col {
-			grid-row: var(--input-grid-row);
 			min-height: var(--form-entry-height);
 			
 			&.ui-outputlabel {
-				padding-left: var(--input-label-indent);
 				width: auto;
 				word-break: break-word;
 				
 				display: grid;
-				grid-column: label / end;
+				grid-column: var(--input-grid-column-fullwidth);
+				grid-row: var(--input-grid-row);
 				grid-template-columns: var(--input-grid-label-columns-template);
 				grid-template-rows: subgrid;
+
+				img {
+					height: var(--form-entry-height);
+					padding: var(--half-spacing) 0;
+				}
 				
-				.ui-outputlabel-text {
+				.ui-outputlabel-info-content {
+					display: grid;
+					grid-column: var(--input-grid-info-column);
+					grid-row: 1 / span 2;
+					grid-template-columns: var(--input-grid-info-columns-template);
+					gap: var(--half-spacing);
+				}
+				
+				.ui-outputlabel-content {
 					align-items: center;
 					display: flex;
 					gap: var(--form-column-spacing);
-					grid-column: label;
+					grid-column: var(--input-grid-column-label);
 					grid-row: 1;
 					justify-content: space-between;
+					padding-left: var(--input-label-indent);
 					
 					&:last-child {
 						grid-row: 1 / span 2;
 					}
-					
-					img {
-						height: var(--form-entry-height);
-						padding: var(--half-spacing) 0;
-					}
 				}
 				
 				@media (max-width: 768px) {
-					grid-column: var(--input-grid-column-fullwidth);
-					
 					.ui-outputlabel-text {
 						background: var(--container-content-background);
 						border-radius: var(--border-radius);
@@ -129,8 +154,8 @@
 				align-items: stretch;
 				display: grid;
 				gap: var(--form-column-spacing);
-				grid-column: left / end;
-				grid-row: var(--input-grid-row);
+				grid-column: var(--input-grid-column-content);
+				grid-row: var(--input-grid-row-content);
 				grid-template-columns: subgrid;
 				
 				&:first-child {
@@ -153,7 +178,7 @@
 			
 				> .jeesl-output-container, > .jeesl-input-multi, > .jeesl-input-container, > .ui-outputtext, > .ui-widget, > .ui-colorpicker, > .jeesl-datepicker,
 				> .jeesl-datepicker .ui-calendar, > .jeesl-ck-editor, > .ui-autocomplete, > .jeesl-subgrid {
-					grid-column: left / end;
+					grid-column: var(--input-grid-column-content);
 				}
 				
 				> .jeesl-output-container, > .jeesl-input-container, > .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-chips, > .jeesl-datepicker, > .jeesl-datepicker .ui-calendar {
@@ -169,12 +194,12 @@
 						grid-column: center / right;
 						width: auto;
 						
-						&:first-child { grid-column-start: left; }
+						&:first-child { grid-column-start: var(--input-grid-column-left-start); }
 						&:last-child { grid-column-end: end; }
 					}
 					
 					> :not(.ui-outputtext, .ui-inputfield, .ui-inputtextarea, .ui-calendar) {
-						&:first-child { grid-column: left; }
+						&:first-child { grid-column: var(--input-grid-column-left); }
 						&:last-child { grid-column: right; }
 					}
 					
@@ -198,6 +223,8 @@
 					.ui-spinner-input {
 						width: auto;
 						margin-right: calc(-1 * var(--form-column-spacing));
+						// Padding is already set by .ui-inputfield but primefaces overrides it for input within .ui-fluid, therefore it must be set again.
+						padding: var(--half-spacing) var(--regular-spacing);
 					}
 				}
 
@@ -211,7 +238,7 @@
 				// Also removal of gap between textbox and button required.
 				> .ui-selectonemenu, > .ui-selectcheckboxmenu {
 					.ui-inputfield {
-						grid-column-start: left;
+						grid-column-start: var(--input-grid-column-left-start);
 						margin-right: calc(-1 * var(--form-column-spacing));
 					}
 				}
@@ -249,7 +276,7 @@
 
 .jeesl-input-grid .jeesl-input-grid:not(.jeesl-subgrid) {
 	grid-template-columns: subgrid;
-	grid-column: label / end;
+	grid-column: var(--input-grid-column-fullwidth);
 }
 
 .jeesl-input-container {

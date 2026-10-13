@@ -1,10 +1,28 @@
-.ui-inputfield {
+@mixin inputfield {
+	background: var(--panel-content-input-background);
+	border: none;
+	border-radius: var(--border-radius);
+	box-shadow: none;
+	line-height: normal;
+	min-height: var(--form-entry-height);
+	outline: none;
+	padding: var(--half-spacing) var(--regular-spacing);
+	white-space: normal;
+	width: 100%;
+	
+	&.ui-state-focus {
+		box-shadow: none;
+	}
+	
 	&.jeesl-placeholder {
 		color: var(--panel-content-input-placeholder-foreground);
 		font-style: var(--panel-content-input-placeholder-style);
 	}
 }
 
+.ui-inputfield.ui-state-default {
+	@include inputfield;
+}
 
 .ui-inplace-content {
 	display: flex;
