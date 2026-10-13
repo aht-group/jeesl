@@ -2,8 +2,8 @@
 
 ## 2026-10-13 – Build: minimum Maven version enforced centrally
 
-- What: Moved the rule `requireMavenVersion` into the aggregator `org.jeesl.bom:bom` and raised it to 3.6.3;
-  dropped the module pins and the duplicate rule of `connectors`; updated the documents.
+- What: Moved `requireMavenVersion` into the aggregator `org.jeesl.bom:bom` and raised it to 3.6.3; dropped the
+  module pins and the duplicate rule of `connectors`, and named the governing decisions.
 - Result: All 45 modules enforce the version with `maven-enforcer-plugin` 1.4.1; `jsf` skips the check.
 - Evidence: `mvn -o validate` – BUILD SUCCESS, 45 modules.
 - Files: pom.xml, connectors/pom.xml, maven/pom.xml, README.md, the ADR-0002 and ADR-0003 files, doc/changelog.md.
