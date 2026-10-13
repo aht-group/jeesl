@@ -258,10 +258,8 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
 				<configuration>
 					<release>8</release>
-					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -310,24 +308,7 @@
 		</plugins>
 	</build>
 	
-	<pluginRepositories>
-		<pluginRepository>
-			<id>sonatype.snapshot</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	
-	<repositories>
-		<!-- May not be needed to be explicitely given -->
-		<repository>
-		    <id>mvn.central</id>
-		    <name>MVN Central</name>
-		    <url>https://repo1.maven.org/maven2</url>
-		</repository>
-		 
+	<repositories>		 
 		<repository>
 		    <id>osgeo</id>
 		    <name>OSGeo Release Repository</name>
