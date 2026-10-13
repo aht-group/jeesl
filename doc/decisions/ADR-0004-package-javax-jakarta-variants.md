@@ -1,11 +1,11 @@
 ---
-id: ADR-0001
+id: ADR-0004
 title: Build and publish the JAXB variants as classifier artifacts
 status: accepted
 date: 2026-10-08
 ---
 
-# ADR-0001: Build and publish the JAXB variants as classifier artifacts
+# ADR-0004: Build and publish the JAXB variants as classifier artifacts
 
 ## Context
 
@@ -67,7 +67,7 @@ The `xml` module builds both JAXB variants in one Maven run and publishes classi
 
 - One command on one source revision produces both variants: `mvn -pl xml clean install`.
 - `compileSourceRoots` and `outputDirectory` are writable per execution from `maven-compiler-plugin` 3.13.0
-  on; the module inherits a version above that bound (ADR-0002) and names none of its own.
+  on; the module inherits a version above that bound (ADR-0001) and names none of its own.
 - Without an artifact that carries no classifier, a consumer cannot bind a variant by accident; the
   previous jar without a classifier changed its content with the JDK of the build.
 - Separate output directories are what make both variants possible in one module run: the two source
@@ -130,7 +130,7 @@ Jakarta compiler.
 
 ## Open Points
 
-- The Java version that binds the whole repository build is not regulated by this decision; ADR-0002
+- The Java version that binds the whole repository build is not regulated by this decision; ADR-0001
   governs the lower bound of the whole build, and this module needs JDK 11 or newer (`--release 11`).
 - POM packaging binds no main resources either (`maven-resources-plugin`, goal `resources`); a later
   `src/main/resources` is copied nowhere and needs its own binding and a copy per variant.

@@ -1,15 +1,15 @@
 ---
-id: ADR-0004
+id: ADR-0002
 title: Maven as build tool
 status: proposed
 date: 2026-10-11
 affects: []
 related:
-  - ADR-0002
+  - ADR-0001
   - ADR-0003
 ---
 
-# ADR-0004: Maven as build tool
+# ADR-0002: Maven as build tool
 
 ## Context
 
