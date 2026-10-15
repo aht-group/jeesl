@@ -30,7 +30,7 @@ public class UtilsDbXmlSeedUtil
 	public static enum DataSource{ide,jar,path,tmp}
 	
 	public static String configKeySeed = "db.seed";
-	public static String configKeyPathExport = "db.export.path";
+	public static String configKeyPathExport = "path.jeesl.db.seed";
 	public static String configKeyRestExportUrl = "db.export.url";
 	public static String configKeyRestImportUrl = "db.import.url";
 	public static String cliDebug = "db.export.cli.debug";

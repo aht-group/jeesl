@@ -96,7 +96,7 @@ Prerequisites:
 - JDK 11 or newer; `jeesl-xml` compiles its `jakarta` artifact with `--release 11`, and every module compiles against the Java 8 API (`--release 8`).
 - Apache Maven 3.6.3 or newer; the repository contains no Maven Wrapper.
 - The parent POM `org.jeesl.bom:bom-parent8` and the imported BOMs `bom-core` and `bom-eap73` must be resolvable. The root `pom.xml` refers to the sibling directory `../bom/parent8`; if that checkout is absent, Maven falls back to the local or the remote repository.
-- Access to Maven Central, the Sonatype snapshot repository and the OSGeo release repository (`pom.xml`, `<repositories>`).
+- Access to Maven Central and the OSGeo release repository; the root `pom.xml` declares the OSGeo repository as its only explicit `<repository>` and contains no `pluginRepositories` block, so a Sonatype snapshot repository is no longer referenced. Further repositories (`aht.3rd`, `jboss.public`, `redhat.ga`, `aspose`) are inherited from the parent POM `bom-parent8`.
 
 Build all modules and install them into the local repository:
 
