@@ -98,12 +98,16 @@ public class AbstractSmtpSpooler
 			int sleepMs = 1;
 			try
 			{
-				queue = spool();
+				queue = this.spool();
 				if(queue==0){sleepMs = 60*1000;}
 				logger.info("Queue:"+queue+" Sleeping:"+sleepMs);
 			}
-			catch (Exception e1) {sleepMs = 60*1000;}
-			try{Thread.sleep(sleepMs);}catch (InterruptedException e) {e.printStackTrace();}
+			catch (Exception e1)
+			{
+				logger.error(e1.getMessage());
+				sleepMs = 60*1000;
+			}
+			try{Thread.sleep(sleepMs);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 	

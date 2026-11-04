@@ -81,9 +81,9 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 		cfgSmtp = line.getOptionValue(oSmtp.getOpt(), config.getString(ConfigKey.netSmtpHost));
 		
 		debugConfig();
-		buildRest(cfgUrl);
-		buildSmtp(cfgSmtp);
-		spooler();
+		this.buildRest(cfgUrl);
+		super.buildSmtp(cfgSmtp);
+		super.spooler();
 	}
 	
 	public static void main(String args[]) throws FileNotFoundException, UtilsConfigurationException, NamingException, ExlpConfigurationException
