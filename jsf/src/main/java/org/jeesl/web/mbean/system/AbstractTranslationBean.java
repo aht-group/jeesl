@@ -87,7 +87,7 @@ public class AbstractTranslationBean<L extends JeeslLang, D extends JeeslDescrip
 	public void reloadLocales()
 	{
 		locales.clear();
-		locales.addAll(fUtils.allOrderedPositionVisible(fbStatus.getClassLocale()));
+		locales.addAll(fUtils.allOrderedPosition(fbStatus.getClassLocale()));
 		langKeys.clear();
 		for(LOC loc : locales)
     	{

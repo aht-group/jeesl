@@ -9,7 +9,7 @@
 
 	<ui:fragment>
 		<ui:repeat var="l" value="#{appLabelBean.locales}">
-			<j:li styleClass="jeesl-dropdown-item">
+			<j:li styleClass="jeesl-dropdown-item" rendered="#{l.visible}">
 				<h:commandLink styleClass="jeesl-dropdown-item-label">
 					<jtp:symbolizer value="#{l}" styleClass="jeesl-dropdown-item-label-icon"/>
 					<span class="jeesl-dropdown-item-label-text"><h:outputText value="#{l.code}"/></span>
