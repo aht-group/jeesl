@@ -162,20 +162,20 @@
 					
 					<j:tabTranslationEditor value="#{cc.attrs.bean.status}" locales="#{appLabelBean.locales}" withDescription="true"/>
 								
-					<j:inputGrid rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
-						<jtp:label entity="IoGraphic" code="style"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.graphic.style}" effect="fade">
+					<j:inputGrid rendered="#{cc.attrs.bean.supportsGraphic}">
+						<jtp:label entity="IoGraphic" code="style" rendered="#{cc.attrs.bean.graphic.type.code eq 'symbol'}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.graphic.style}" effect="fade" rendered="#{cc.attrs.bean.graphic.type.code eq 'symbol'}">
 							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="IoGraphic" code="size"/>
-						<p:spinner id="sSize" value="#{cc.attrs.bean.graphic.size}" min="0" max="100" />
+						<jtp:label entity="IoGraphic" code="size" rendered="#{cc.attrs.bean.graphic.type.code eq 'symbol'}"/>
+						<p:spinner id="sSize" value="#{cc.attrs.bean.graphic.size}" min="0" max="100" rendered="#{cc.attrs.bean.graphic.type.code eq 'symbol'}"/>
 						
-						<jtp:label entity="IoGraphic" code="color"/>
-						<p:colorPicker value="#{cc.attrs.bean.graphic.color}" styleClass="icon-color-picker" />
+						<jtp:label entity="IoGraphic" code="color" rendered="#{cc.attrs.bean.graphic.type.code eq 'symbol'}"/>
+						<p:colorPicker value="#{cc.attrs.bean.graphic.color}" styleClass="icon-color-picker" rendered="#{cc.attrs.bean.graphic.type.code eq 'symbol'}"/>
 
-						<jtp:label entity="IoGraphic" code="type" rendered="#{cc.attrs.bean.supportsGraphic}"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.graphic.type}" effect="fade" rendered="#{cc.attrs.bean.supportsGraphic}">
+						<jtp:label entity="IoGraphic" code="type"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.graphic.type}" effect="fade">
 							<f:selectItems value="#{cc.attrs.bean.graphicTypes}" var="type" itemLabel="#{type.name[localeCode].lang}" itemValue="#{type}"/>
 							<p:ajax event="change" listener="#{cc.attrs.bean.changeGraphicType()}" update="@form :#{cc.id}:fUpload"/>
 						</p:selectOneMenu>
