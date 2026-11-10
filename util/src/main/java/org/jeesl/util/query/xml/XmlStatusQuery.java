@@ -104,6 +104,15 @@ public class XmlStatusQuery
 		return xml;
 	}
 	
+	public static Scope scopeLabel()
+	{		
+		Scope xml = new Scope();
+		xml.setId(0l);
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
+	}
+	
 	public static Quarter quarterLabel()
 	{		
 		Quarter xml = new Quarter();
