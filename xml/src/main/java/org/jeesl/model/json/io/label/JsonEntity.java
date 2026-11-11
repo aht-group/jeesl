@@ -1,6 +1,7 @@
 package org.jeesl.model.json.io.label;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,6 +36,15 @@ public class JsonEntity implements Serializable
 	public void setDescription(String description) {this.description = description;}
 	@JsonIgnore public boolean isSetDescription() {return description!=null;}
 
+	@JsonProperty("translations")
+	private List<JsonTranslation> translations;
+
+	public List<JsonTranslation> getTranslations() {
+		return translations;
+	}
+	public void setTranslations(List<JsonTranslation> translations) {
+		this.translations = translations;
+	}
 	@Override
 	public String toString()
 	{
