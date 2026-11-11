@@ -507,6 +507,12 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 			predicates.add(jProcess.in(query.getWorkflowProcesses()));
 		}
 		
+		if(ObjectUtils.isNotEmpty(query.getWorkflowStages()))
+		{
+			Join<WF,WS> jStage = root.join(JeeslWorkflow.Attributes.currentStage.toString());
+			predicates.add(jStage.in(query.getWorkflowStages()));
+		}
+		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	public void orderByWorkflow(CriteriaBuilder cB, CriteriaQuery<WF> cQ, JeeslWorkflowQuery<WP,WS,WF> query, Root<WF> root)
