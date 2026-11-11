@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.process.JeeslWorkflowProcess;
+import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
 import org.jeesl.interfaces.util.query.JeeslCoreQuery;
 import org.jeesl.interfaces.util.query.jpa.JeeslOrderingQuery;
 
 public interface JeeslWorkflowQuery <WP extends JeeslWorkflowProcess<?,?,?,?>,
+									WS extends JeeslWorkflowStage<?,?,WP,?,?,?,?>,
 									WF extends JeeslWorkflow<WP,?,?,?>>
 		extends JeeslCoreQuery,JeeslOrderingQuery
 {

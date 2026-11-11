@@ -128,7 +128,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		}
 	}
 	
-	@Override public List<WL> fWorkflowLinks(JeeslWorkflowQuery<WP,WF> query)
+	@Override public List<WL> fWorkflowLinks(JeeslWorkflowQuery<WP,WS,WF> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<WL> cQ = cB.createQuery(fbWorkflow.getClassLink());
@@ -202,7 +202,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		return transition;
 	}
 	
-	@Override public List<WF> fWorkflows(JeeslWorkflowQuery<WP,WF> query)
+	@Override public List<WF> fWorkflows(JeeslWorkflowQuery<WP,WS,WF> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<WF> cQ = cB.createQuery(fbWorkflow.getClassWorkflow());
@@ -443,7 +443,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<WY> fWorkflowActivities(JeeslWorkflowQuery<WP, WF> query)
+	@Override public List<WY> fWorkflowActivities(JeeslWorkflowQuery<WP,WS,WF> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<WY> cQ = cB.createQuery(fbWorkflow.getClassActivity());
@@ -497,7 +497,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
         return jtf.build(tQ.getResultList(),JeeslCq.Agg.count);
 	}
 
-	public Predicate[] pWorkflow(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WF> query, Root<WF> root)
+	public Predicate[] pWorkflow(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WS,WF> query, Root<WF> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
@@ -509,7 +509,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	public void orderByWorkflow(CriteriaBuilder cB, CriteriaQuery<WF> cQ, JeeslWorkflowQuery<WP,WF> query, Root<WF> root)
+	public void orderByWorkflow(CriteriaBuilder cB, CriteriaQuery<WF> cQ, JeeslWorkflowQuery<WP,WS,WF> query, Root<WF> root)
 	{
 		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
 		{
@@ -526,13 +526,13 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		}
 	}
 	
-	public Predicate[] pLink(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WF> query, Root<WL> root)
+	public Predicate[] pLink(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WS,WF> query, Root<WL> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	public void orderByLink(CriteriaBuilder cB, CriteriaQuery<WL> cQ, JeeslWorkflowQuery<WP,WF> query, Root<WL> root)
+	public void orderByLink(CriteriaBuilder cB, CriteriaQuery<WL> cQ, JeeslWorkflowQuery<WP,WS,WF> query, Root<WL> root)
 	{
 		if(ObjectUtils.isNotEmpty(query.getCqOrderings()))
 		{
@@ -549,7 +549,7 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		}
 	}
 	
-	public Predicate[] pActivity(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WF> query, Root<WY> root)
+	public Predicate[] pActivity(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WS,WF> query, Root<WY> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		

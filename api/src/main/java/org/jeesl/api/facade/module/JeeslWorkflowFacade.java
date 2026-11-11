@@ -47,7 +47,7 @@ public interface JeeslWorkflowFacade <
 	WL fWorkflowLink(WF workflow) throws JeeslNotFoundException;
 	<W extends JeeslWithWorkflow<WF>> WL fWorkflowLink(WP process, W owner) throws JeeslNotFoundException;
 	
-	List<WL> fWorkflowLinks(JeeslWorkflowQuery<WP,WF> query);
+	List<WL> fWorkflowLinks(JeeslWorkflowQuery<WP,WS,WF> query);
 	<W extends JeeslWithWorkflow<WF>> List<WL> fWorkflowLinks(WP process, List<W> owners);
 	List<WL> fWorkflowRepsonsibleLinks(USER user);
 	List<WL> fWorkflowDelegationLinks(USER user);
@@ -60,7 +60,7 @@ public interface JeeslWorkflowFacade <
 	WF loadWorkflow(WF workflow);
 	void deleteWorkflow(WL link) throws JeeslConstraintViolationException;
 	
-	List<WF> fWorkflows(JeeslWorkflowQuery<WP,WF> query);
+	List<WF> fWorkflows(JeeslWorkflowQuery<WP,WS,WF> query);
 	List<WF> fWorkflows(WP process, List<WS> stages);
 	List<WF> fWorkflows(List<WP> processes, List<WST> types);
 	
@@ -68,5 +68,5 @@ public interface JeeslWorkflowFacade <
 	JsonTuples2<WP,WST> tpcActivitiesByProcessType();
 	
 	List<WA> fWorkflowActivities(Date from, Date to, List<USER> users, List<WP> processes);
-	List<WA> fWorkflowActivities(JeeslWorkflowQuery<WP,WF> query);
+	List<WA> fWorkflowActivities(JeeslWorkflowQuery<WP,WS,WF> query);
 }
