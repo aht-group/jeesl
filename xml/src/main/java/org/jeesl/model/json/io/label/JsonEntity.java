@@ -38,13 +38,9 @@ public class JsonEntity implements Serializable
 
 	@JsonProperty("translations")
 	private List<JsonTranslation> translations;
-
-	public List<JsonTranslation> getTranslations() {
-		return translations;
-	}
-	public void setTranslations(List<JsonTranslation> translations) {
-		this.translations = translations;
-	}
+	public List<JsonTranslation> getTranslations() {return translations;}
+	public void setTranslations(List<JsonTranslation> translations) {this.translations = translations;}
+	
 	@Override
 	public String toString()
 	{
