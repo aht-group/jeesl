@@ -32,13 +32,12 @@ public interface JeeslWorkflowFacade <
 										WT extends JeeslWorkflowTransition<?,?,?,WS,WTT,SR,?>,
 										WTT extends JeeslWorkflowTransitionType<?,?,WTT,?>,
 										
-
 										SR extends JeeslSecurityRole<?,?,?,?,?,?>,
 
 										WL extends JeeslWorkflowLink<WF,?>,
-										WF extends JeeslWorkflow<WP,WS,WY,USER>,
-										WY extends JeeslWorkflowActivity<WT,WF,WD,?,USER>,
-										WD extends JeeslWorkflowDelegate<WY,USER>,
+										WF extends JeeslWorkflow<WP,WS,WA,USER>,
+										WA extends JeeslWorkflowActivity<WT,WF,WD,?,USER>,
+										WD extends JeeslWorkflowDelegate<WA,USER>,
 										
 										USER extends JeeslUser<SR>>
 			extends JeeslFacade
@@ -68,5 +67,6 @@ public interface JeeslWorkflowFacade <
 	JsonTuples1<WP> tpcActivitiesByProcess();
 	JsonTuples2<WP,WST> tpcActivitiesByProcessType();
 	
-	List<WY> fWorkflowActivities(Date from, Date to, List<USER> users, List<WP> processes);
+	List<WA> fWorkflowActivities(Date from, Date to, List<USER> users, List<WP> processes);
+	List<WA> fWorkflowActivities(JeeslWorkflowQuery<WP,WF> query);
 }

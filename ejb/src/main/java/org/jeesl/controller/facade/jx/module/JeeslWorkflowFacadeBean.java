@@ -442,6 +442,21 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		cQ.select(activity);
 		return em.createQuery(cQ).getResultList();
 	}
+	
+	@Override public List<WY> fWorkflowActivities(JeeslWorkflowQuery<WP, WF> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<WY> cQ = cB.createQuery(fbWorkflow.getClassActivity());
+		Root<WY> root = cQ.from(fbWorkflow.getClassActivity());
+		
+		cQ.select(root);
+		cQ.where(cB.and(this.pActivity(cB,query,root)));
+		
+
+		TypedQuery<WY> tQ = em.createQuery(cQ);
+		super.pagination(tQ,query);
+		return tQ.getResultList();
+	}
 
 	@Override public JsonTuples1<WP> tpcActivitiesByProcess()
 	{
@@ -515,8 +530,6 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		
-		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	public void orderByLink(CriteriaBuilder cB, CriteriaQuery<WL> cQ, JeeslWorkflowQuery<WP,WF> query, Root<WL> root)
@@ -534,5 +547,13 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 			}
 			if(!orders.isEmpty()) {cQ.orderBy(orders);}
 		}
+	}
+	
+	public Predicate[] pActivity(CriteriaBuilder cB, JeeslWorkflowQuery<WP,WF> query, Root<WY> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 }

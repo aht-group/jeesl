@@ -11,5 +11,6 @@ public interface JeeslWorkflowQuery <WP extends JeeslWorkflowProcess<?,?,?,?>,
 									WF extends JeeslWorkflow<WP,?,?,?>>
 		extends JeeslCoreQuery,JeeslOrderingQuery
 {
+//	void x();
 	List<WP> getWorkflowProcesses();		
 }
