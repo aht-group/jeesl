@@ -18,10 +18,12 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.predicate.DatePredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -44,9 +46,11 @@ import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.util.query.module.JeeslWorkflowQuery;
 import org.jeesl.model.ejb.io.db.JeeslCq;
+import org.jeesl.model.ejb.io.db.JeeslCqDate;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -511,6 +515,17 @@ public class JeeslWorkflowFacadeBean<WP extends JeeslWorkflowProcess<?,?,?,WS>,
 		{
 			Join<WF,WS> jStage = root.join(JeeslWorkflow.Attributes.currentStage.toString());
 			predicates.add(jStage.in(query.getWorkflowStages()));
+		}
+		
+		for(JeeslCqDate cq : ListUtils.emptyIfNull(query.getCqDates()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslWorkflow.Attributes.lastActivity,JeeslWorkflowActivity.Attributes.record)))
+			{
+				Join<WF,WY> jActivity = root.join(JeeslWorkflow.Attributes.lastActivity.toString());
+				Expression<Date> eDate = jActivity.get(JeeslWorkflowActivity.Attributes.record.toString());
+				DatePredicateBuilder.juDate(cB, predicates, cq, eDate);
+			}
+			else {logger.warn(cq.nyi(fbWorkflow.getClassActivity()));}
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
