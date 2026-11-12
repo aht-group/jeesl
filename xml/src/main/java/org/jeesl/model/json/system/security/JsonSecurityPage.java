@@ -1,6 +1,9 @@
 package org.jeesl.model.json.system.security;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -56,4 +59,9 @@ public class JsonSecurityPage implements Serializable
 	private Boolean accessForUser;
 	public Boolean getAccessForUser() {return accessForUser;}
 	public void setAccessForUser(Boolean accessForUser) {this.accessForUser = accessForUser;}
+	
+	@JsonProperty("pages")
+	private List<JsonSecurityPage> pages;
+	public List<JsonSecurityPage> getList() {return pages;}
+	public void setList(List<JsonSecurityPage> pages) {this.pages = pages;}
 }
