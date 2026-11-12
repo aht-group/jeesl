@@ -91,6 +91,26 @@ up to depth `<n>`”) – instead of removing the limit.
 Commands that take time by their nature (build, flashing, test run) do **not** fall under this rule. For
 them: run them in the background, wait for the output, do not abort.
 
+### 7. Non-Interactive Runs
+
+Every command **ends on its own** and never waits for input. Whether a pager starts depends on the terminal
+height: git starts `less` with `-F` (`LESS=FRX`), so a short output ends and a longer one stops in the pager.
+A sufficient terminal height is therefore **no** safeguard. A command that waits for input is **not** a long
+run in the sense of Section 6; it is ended and repeated.
+
+- **Switch pagers off:** `git --no-pager <command>` – especially for the Git-diff check
+  (`git --no-pager diff`, `git --no-pager log`) –, `journalctl --no-pager` and `systemctl --no-pager`; in
+  general `PAGER=cat`, `GIT_PAGER=cat`, `GH_PAGER=cat`, `SYSTEMD_PAGER=cat` and `MANPAGER=cat` **in front of**
+  the command, for example `GIT_PAGER=cat git show HEAD`.
+- **Keep the output short:** `-n <count>`, `--oneline`, `--stat`, `head`, `tail` and `grep`. An output that is
+  needed in full is redirected into a file and read there in portions.
+- **No prompts, no editors:** `GIT_TERMINAL_PROMPT=0`, `GIT_EDITOR=true` and `GIT_SEQUENCE_EDITOR=true`;
+  commands that ask for confirmation receive their non-interactive switch (`--yes`, `--non-interactive`,
+  `-y`) or are not executed.
+- **Piping through `cat` is the fallback:** it takes the terminal away from the command (`git log | cat`), so
+  that no pager starts.
+- **Keystrokes are not sent:** a command that waits is ended, not “fed”.
+
 ## What Does Not Belong to This Rule
 
 - **Not** the responsible person: the rule binds **exclusively** the AI assistant. By hand, commands

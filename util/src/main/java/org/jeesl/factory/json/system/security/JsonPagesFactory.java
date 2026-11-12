@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
@@ -84,12 +85,41 @@ public class JsonPagesFactory<L extends JeeslLang, D extends JeeslDescription,
 		return pages;
 	}
 	
-	public JsonSecurityPages hierarchyByRoot(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, CTX context, int depth)
+	public JsonSecurityPages childrenOfRoot(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, CTX context, int depth)
 	{
-		return this.hierarchy(fSecurity);
+		JsonSecurityPages pages = build();
+		List<M> menus = fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context, context);
+		Map<M,List<M>> children = efMenu.toMapChild(menus);
+		List<M> roots = efMenu.toListRoot(menus);
+		addChildren(pages, roots, children, 1, depth);
+		return pages;
 	}
 	public JsonSecurityPages childrenOf(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, CTX context, String viewCode, int depth)
 	{
-		return this.hierarchy(fSecurity);
+		JsonSecurityPages pages = build();
+		List<M> menus = fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context, context);
+		Map<M,List<M>> children = efMenu.toMapChild(menus);
+		for(M menu : menus)
+		{
+			if(Objects.nonNull(menu.getView()) && Objects.equals(viewCode, menu.getView().getCode()))
+			{
+				addChildren(pages, children.get(menu), children, 1, depth);
+				break;
+			}
+		}
+		return pages;
+	}
+
+	private void addChildren(JsonSecurityPages pages, List<M> menus, Map<M,List<M>> children, int level, int depth)
+	{
+		if(depth<=0 || level>depth || menus==null) {return;}
+		for(M child : menus)
+		{
+			if(Objects.isNull(child.getView())) {continue;}
+			JsonSecurityPage page = jfPage.build(child.getView());
+			page.setCode(child.getView().getCode());
+			pages.getList().add(page);
+			addChildren(pages, children.get(child), children, level+1, depth);
+		}
 	}
 }
