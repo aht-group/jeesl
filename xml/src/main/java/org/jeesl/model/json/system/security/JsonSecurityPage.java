@@ -60,6 +60,11 @@ public class JsonSecurityPage implements Serializable
 	public Boolean getAccessForUser() {return accessForUser;}
 	public void setAccessForUser(Boolean accessForUser) {this.accessForUser = accessForUser;}
 	
+	@JsonProperty("hasChildren")
+	private Boolean hasChildren;
+	public Boolean getHasChildren() {return hasChildren;}
+	public void setHasChildren(Boolean hasChildren) {this.hasChildren = hasChildren;}
+
 	@JsonProperty("pages")
 	private List<JsonSecurityPage> pages;
 	public List<JsonSecurityPage> getList() {return pages;}

@@ -17,6 +17,6 @@ public class JsonSecurityPages implements Serializable
 
 	@JsonProperty("list")
 	private List<JsonSecurityPage> list;
-	public List<JsonSecurityPage> getList() {if(Objects.isNull(list)) {list = new ArrayList<>();}return list;}
+	public List<JsonSecurityPage> getList() {if(Objects.isNull(list)) {list = new ArrayList<>();} return list;}
 	public void setList(List<JsonSecurityPage> pages) {this.list = pages;}
 }

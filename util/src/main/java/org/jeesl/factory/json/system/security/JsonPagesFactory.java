@@ -83,4 +83,13 @@ public class JsonPagesFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		return pages;
 	}
+	
+	public JsonSecurityPages hierarchyByRoot(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, CTX context, int depth)
+	{
+		return this.hierarchy(fSecurity);
+	}
+	public JsonSecurityPages childrenOf(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, CTX context, String viewCode, int depth)
+	{
+		return this.hierarchy(fSecurity);
+	}
 }
