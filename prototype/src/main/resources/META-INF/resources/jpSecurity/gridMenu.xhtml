@@ -36,10 +36,6 @@
 			            </p:treeNode>
 			        </p:tree>
 				</p:panel>
-				<p:commandButton value="#{appLabelBean.labels['SecurityMenu']['ttImport'][localeCode].lang}"
-								disabled="#{cc.attrs.bean.disabledMenuImportFromDefaultContext}" update=":#{cc.id}:grid">
-					<f:actionListener binding="#{cc.attrs.bean.importFromDefaultContext()}"/>
-				</p:commandButton>
 			</h:form>
 		</j:slot>
 		<j:slot id="sView" width="7">
