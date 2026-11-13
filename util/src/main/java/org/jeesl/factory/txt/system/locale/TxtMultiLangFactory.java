@@ -22,6 +22,10 @@ public class TxtMultiLangFactory <L extends JeeslLang>
 	{
 		return new TxtMultiLangFactory<>(localeCode.toString());
 	}
+	public static <L extends JeeslLang, LC extends Enum<LC>> TxtMultiLangFactory<L> instance(String localeCode)
+	{
+		return new TxtMultiLangFactory<>(localeCode);
+	}
 	
 	private TxtMultiLangFactory(String localeCode)
 	{
