@@ -28,7 +28,7 @@ public interface JeeslSecurityMenu<L extends JeeslLang,
 {
 	public static final String extractId = "securityMenu";
 	public static final String keyRoot = "root";
-	public enum Attributes{id,context,parent,position,view}
+	public enum Attributes{id,context,parent,position,view,visible}
 	
 	CTX getContext();
 	void setContext(CTX context);

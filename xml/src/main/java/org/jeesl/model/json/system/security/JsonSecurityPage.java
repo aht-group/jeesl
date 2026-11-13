@@ -25,20 +25,20 @@ public class JsonSecurityPage implements Serializable
 	public String getLabel() {return label;}
 	public void setLabel(String label) {this.label = label;}
 
-	@JsonProperty("s1")
-	private String s1;
-	public String getS1() {return s1;}
-	public void setS1(String s1) {this.s1 = s1;}
-	
-	@JsonProperty("s2")
-	private String s2;
-	public String getS2() {return s2;}
-	public void setS2(String s2) {this.s2 = s2;}
-	
-	@JsonProperty("s3")
-	private String s3;
-	public String getS3() {return s3;}
-	public void setS3(String s3) {this.s3 = s3;}
+//	@JsonProperty("s1")
+//	private String s1;
+//	public String getS1() {return s1;}
+//	public void setS1(String s1) {this.s1 = s1;}
+//	
+//	@JsonProperty("s2")
+//	private String s2;
+//	public String getS2() {return s2;}
+//	public void setS2(String s2) {this.s2 = s2;}
+//	
+//	@JsonProperty("s3")
+//	private String s3;
+//	public String getS3() {return s3;}
+//	public void setS3(String s3) {this.s3 = s3;}
 	
 	@JsonProperty("accessViaPublic")
 	private Boolean accessViaPublic;
@@ -64,9 +64,14 @@ public class JsonSecurityPage implements Serializable
 	private Boolean hasChildren;
 	public Boolean getHasChildren() {return hasChildren;}
 	public void setHasChildren(Boolean hasChildren) {this.hasChildren = hasChildren;}
+	
+	@JsonProperty("url")
+	private String url;
+	public String getUrl() {return url;}
+	public void setUrl(String url) {this.url = url;}
 
 	@JsonProperty("pages")
 	private List<JsonSecurityPage> pages;
-	public List<JsonSecurityPage> getList() {return pages;}
-	public void setList(List<JsonSecurityPage> pages) {this.pages = pages;}
+	public List<JsonSecurityPage> getPages() {return pages;}
+	public void setPages(List<JsonSecurityPage> pages) {this.pages = pages;}
 }

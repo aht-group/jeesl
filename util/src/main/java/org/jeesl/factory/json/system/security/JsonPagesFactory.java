@@ -55,35 +55,7 @@ public class JsonPagesFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	public static JsonSecurityPages build() {return new JsonSecurityPages();}
 	
-	public JsonSecurityPages hierarchy(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity)
-	{
-		JsonSecurityPages pages = build();
-		
-		List<M> list = fSecurity.all(fbSecurity.getClassMenu());
-		Map<V,V> map = efMenu.toMapParent(list);
-		
-		for(V v : efMenu.toListView(list))
-		{
-			V item = v;
-			List<V> hierarchy = new ArrayList<V>();
-			while(item!=null)
-			{
-				hierarchy.add(item);
-				if(map.containsKey(item)) {item=map.get(item);}
-				else {item=null;}
-			}
-			Collections.reverse(hierarchy);
-			
-			JsonSecurityPage page = jfPage.build(v);
-			if(hierarchy.size()>=1) {page.setS1(hierarchy.get(0).getCode());} else {page.setS1("-");}
-			if(hierarchy.size()>=2) {page.setS2(hierarchy.get(1).getCode());} else {page.setS2("-");}
-			if(hierarchy.size()>=3) {page.setS3(hierarchy.get(2).getCode());} else {page.setS3("-");}
-			pages.getList().add(page);
-//			if(pages.getList().size()==5) {break;}
-		}
-		
-		return pages;
-	}
+	
 	
 	public JsonSecurityPages childrenOfRoot(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, CTX context, int depth)
 	{

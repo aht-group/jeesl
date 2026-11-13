@@ -27,6 +27,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.BooleanPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.EntityPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -49,8 +50,10 @@ import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCat
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
+import org.jeesl.model.ejb.io.db.JeeslCqEntity;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
+import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqLiteral;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
@@ -906,10 +909,35 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
+		Path<M> pParent = null;
+		Path<M> pParentView = null;
+		
 		if(ObjectUtils.isNotEmpty(query.getSecurityContext()))
 		{
 			Path<CTX> pCtx = root.get(JeeslSecurityMenu.Attributes.context.toString());
 			predicates.add(pCtx.in(query.getSecurityContext()));
+		}
+		
+		for(JeeslCqEntity cq : ListUtils.emptyIfNull(query.getCqEntities()))
+		{
+			if(cq.getPath().equals(CqDate.path(JeeslSecurityMenu.Attributes.parent)))
+			{
+				if(Objects.isNull(pParent)) {pParent = root.get(JeeslSecurityMenu.Attributes.parent.toString());}
+				EntityPredicateBuilder.add(cB,predicates, cq, pParent);
+			}
+			
+			else {logger.warn(cq.nyi(fbSecurity.getClassMenu()));}
+		}
+		for(JeeslCqLiteral cq : ListUtils.emptyIfNull(query.getCqLiterals()))
+		{
+			if(cq.getPath().equals(CqLiteral.path(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.view,JeeslSecurityView.Attributes.code)))
+			{
+				if(Objects.isNull(pParent)) {pParent = root.get(JeeslSecurityMenu.Attributes.parent.toString());}
+				if(Objects.isNull(pParentView)) {pParentView = pParent.get(JeeslSecurityMenu.Attributes.view.toString());}
+				Expression<String> eLast = pParentView.get(JeeslSecurityView.Attributes.code.toString());
+				LiteralPredicateBuilder.add(cB, predicates, cq, eLast);
+			}
+			else {logger.warn(cq.nyi(fbSecurity.getClassMenu()));}
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
