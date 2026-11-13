@@ -32,6 +32,7 @@ public interface JeeslSecurityBean<R extends JeeslSecurityRole<?,?,?,V,U,A>,
 	List<M> getRootMenus(CTX ctx);
 	M getMenu(CTX ctx, V view);
 	Map<M,M> getMapRoot();
+	boolean hasChildren(M menu);
 	
 	V findViewByCode(String code);
 	V findViewByUrlMapping(String pattern);

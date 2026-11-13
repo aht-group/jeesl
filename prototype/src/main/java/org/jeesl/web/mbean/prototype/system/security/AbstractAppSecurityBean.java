@@ -90,6 +90,8 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	private boolean cachingFilesSaved;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 	private CTX nullCtx;
+	
+	private final Map<M,Boolean> mapMenuHasChildren; @Override public boolean hasChildren(M menu) {return mapMenuHasChildren.containsKey(menu) ? mapMenuHasChildren.get(menu) : false;}
 
 	private V viewExpired; public V getViewExpired() {return viewExpired;}
 	protected V viewUnauthorized; public V getViewUnauthorized() {return viewUnauthorized;}
@@ -104,6 +106,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	
 		mapMenuAll = new HashMap<>();
 		mapMenuRoot = new HashMap<>();
+		mapMenuHasChildren = new HashMap<>();
 		mapRoot = new HashMap<>();
 		n2mMenu = new Nested2Map<>();
 		
@@ -234,6 +237,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		mapMenuRoot.clear();
 		n2mMenu.clear();
 		mapRoot.clear();
+		mapMenuHasChildren.clear();
 		
 		EjbSecurityQuery<C,R,V,U,A,CTX,USER> query = new EjbSecurityQuery<>();
 		query.addRootFetch(JeeslSecurityMenu.Attributes.context);
@@ -251,6 +255,15 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 			if(m.getParent()==null) {mapMenuRoot.get(ctx).add(m);}
 			n2mMenu.put(ctx,m.getView(),m);
 			mapRoot.put(m,efMenu.toRoot(m));
+			mapMenuHasChildren.put(m,false);
+		}
+		
+		for(M m : n2mMenu.values())
+		{
+			if(Objects.nonNull(m.getParent()))
+			{
+				mapMenuHasChildren.put(m.getParent(),true);
+			}
 		}
 		
 		for(CTX ctx : mapMenuAll.keySet()) {Collections.sort(mapMenuAll.get(ctx),cpMenu);}
@@ -258,6 +271,8 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded Contexts", mapMenuAll.size());}
 	}
+	
+
 
 	@Override public M getMenu(CTX ctx, V view)
 	{

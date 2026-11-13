@@ -29,6 +29,7 @@ import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.predicate.BooleanPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.EntityPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.LiteralPredicateBuilder;
+import org.jeesl.controller.facade.jx.predicate.LongPredicateBuilder;
 import org.jeesl.controller.facade.jx.predicate.SortByPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
@@ -52,9 +53,11 @@ import org.jeesl.interfaces.util.query.system.JeeslSecurityQuery;
 import org.jeesl.model.ejb.io.db.JeeslCqBoolean;
 import org.jeesl.model.ejb.io.db.JeeslCqEntity;
 import org.jeesl.model.ejb.io.db.JeeslCqLiteral;
+import org.jeesl.model.ejb.io.db.JeeslCqLong;
 import org.jeesl.model.ejb.io.db.JeeslCqOrdering;
 import org.jeesl.util.query.cq.CqDate;
 import org.jeesl.util.query.cq.CqLiteral;
+import org.jeesl.util.query.cq.CqLong;
 import org.jeesl.util.query.cq.CqOrdering;
 import org.jeesl.util.query.ejb.system.EjbSecurityQuery;
 import org.slf4j.Logger;
@@ -903,8 +906,6 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		if(!orders.isEmpty()) {cQ.orderBy(orders);}
 	}
 	
-	
-	
 	private Predicate[] pMenu(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<M> root)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -938,6 +939,18 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 				LiteralPredicateBuilder.add(cB, predicates, cq, eLast);
 			}
 			else {logger.warn(cq.nyi(fbSecurity.getClassMenu()));}
+		}
+		for(JeeslCqLong cq : ListUtils.emptyIfNull(query.getCqLongs()))
+		{
+			Expression<Long> eLong = null;
+			if(cq.getPath().equals(CqLong.path(JeeslSecurityMenu.Attributes.parent,JeeslSecurityMenu.Attributes.id)))
+			{
+				if(Objects.isNull(pParent)) {pParent = root.get(JeeslSecurityMenu.Attributes.parent.toString());}
+				eLong = pParent.get(JeeslSecurityMenu.Attributes.id.toString());
+			}
+			
+			if(Objects.isNull(eLong)) {logger.error("NYI "+cq.toString());}
+			else {LongPredicateBuilder.add(cB,predicates,cq,eLong);}
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
