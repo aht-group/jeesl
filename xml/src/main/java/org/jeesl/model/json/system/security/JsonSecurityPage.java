@@ -68,6 +68,11 @@ public class JsonSecurityPage implements Serializable
 	public Boolean getHasChildren() {return hasChildren;}
 	public void setHasChildren(Boolean hasChildren) {this.hasChildren = hasChildren;}
 	
+	@JsonProperty("hasDynamic")
+	private Boolean hasDynamic;
+	public Boolean getHasDynamic() {return hasDynamic;}
+	public void setHasDynamic(Boolean hasDynamic) {this.hasDynamic = hasDynamic;}
+
 	@JsonProperty("url")
 	private String url;
 	public String getUrl() {return url;}
