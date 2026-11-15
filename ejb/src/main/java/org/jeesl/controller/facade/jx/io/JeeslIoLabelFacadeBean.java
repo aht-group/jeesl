@@ -44,7 +44,6 @@ import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScopeType;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -134,14 +133,7 @@ public class JeeslIoLabelFacadeBean<L extends JeeslLang,D extends JeeslDescripti
 		{
 			if(cq.getPath().equals(CqLiteral.path(JeeslRevisionEntity.Attributes.jscn)))
 			{
-				Expression<String> literal = cB.upper(cB.literal("%"+cq.getLiteral()+"%"));
-				Expression<String> eJscn = root.get(JeeslRevisionEntity.Attributes.jscn.toString());
-				
-				switch(cq.getType())
-				{
-					case CONTAINS: predicates.add(cB.like(cB.upper(eJscn),literal)); break;
-					default: logger.error("NYI "+cq.toString());
-				}
+				LiteralPredicateBuilder.add(cB,predicates,cq,root.<String>get(JeeslRevisionEntity.Attributes.jscn.toString()));
 			}
 			else {logger.warn("NYI: "+cq.toString());}
 		}
