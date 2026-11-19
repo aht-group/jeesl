@@ -40,6 +40,8 @@ public class JsonType implements Serializable
 	public void setDescription(String description) {this.description = description;}
 	
 	
+	
+	
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
