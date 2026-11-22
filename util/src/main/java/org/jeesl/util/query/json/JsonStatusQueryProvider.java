@@ -3,6 +3,7 @@ package org.jeesl.util.query.json;
 import org.jeesl.model.json.system.status.JsonCategory;
 import org.jeesl.model.json.system.status.JsonInterval;
 import org.jeesl.model.json.system.status.JsonMode;
+import org.jeesl.model.json.system.status.JsonPhase;
 import org.jeesl.model.json.system.status.JsonQuarter;
 import org.jeesl.model.json.system.status.JsonScope;
 import org.jeesl.model.json.system.status.JsonSector;
@@ -128,5 +129,15 @@ public class JsonStatusQueryProvider
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
+	}
+	
+	
+	public static JsonPhase restPhase()
+	{
+		JsonPhase json = new JsonPhase();
+		json.setId(0l);
+		json.setCode("");
+		json.setLabel("");
+		return json;
 	}
 }
