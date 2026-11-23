@@ -1,5 +1,13 @@
 # Change Log
 
+## 2026-11-23 – Security facade: effective actions over role, usecase and view
+
+- What: `fSecurityActions` selects the actions of the user roles and of the query roles and honours the action filter.
+- Result: One criteria query with `EXISTS` predicates returns each action once; filters and pagination remain.
+- Evidence: `EffectiveSecurityActionsIT` on an in-memory database – 11 tests, 0 failures.
+- Files: JeeslSecurityFacadeBean, EffectiveSecurityActionsIT, SecurityTestUser, persistence.xml, pom.xml,
+  FR-002-security-facade.
+
 ## 2026-10-13 – Build: minimum Maven version enforced centrally
 
 - What: Moved `requireMavenVersion` into the aggregator `org.jeesl.bom:bom` and raised it to 3.6.3; dropped the

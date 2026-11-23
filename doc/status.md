@@ -14,6 +14,7 @@ the title, and the status; for a requirement, additionally the priority.
 | ID | Title | Status | Priority |
 |---|---|---|---|
 | [FR-001](requirements/functional/FR-001-cli-support.md) | Reusable help, logging and configuration handling for Apache Commons CLI entry points | verified | must |
+| [FR-002](requirements/functional/FR-002-security-facade.md) | Methods to retrieve Security Objects | implemented | must |
 
 
 ## Non-functional Requirements

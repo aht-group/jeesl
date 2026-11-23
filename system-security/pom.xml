@@ -100,6 +100,35 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- Test -->
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-ejb</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.3.18.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.197.redhat-00004</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 	  		<groupId>org.slf4j</groupId>

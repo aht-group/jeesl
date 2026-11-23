@@ -21,6 +21,7 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -361,20 +362,11 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		super.rootFetch(root, query);
 		
 		Join<A,V> jActionView = null;
-		ListJoin<V,R> jViewRole = null;
 		
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		if(ObjectUtils.isNotEmpty(query.getUsers()))
+		if(ObjectUtils.isNotEmpty(query.getUsers()) || ObjectUtils.isNotEmpty(query.getSecurityRole()))
 		{
-			Root<USER> user = cQ.from(fbSecurity.getClassUserProject());
-			ListJoin<USER,R> roles = user.joinList(JeeslUser.Attributes.roles.toString());
-			
-			jActionView = root.join(JeeslSecurityAction.Attributes.view.toString());
-			jViewRole = jActionView.joinList(JeeslSecurityView.Attributes.roles.toString());
-			
-			predicates.add(cB.equal(jViewRole, roles));
-			predicates.add(user.in(query.getUsers()));
-			cQ.distinct(true);
+			predicates.add(this.pEffective(cB,cQ,query,root));
 		}
 		
 		predicates.addAll(Arrays.asList(pAction(cB,query,root,jActionView)));
@@ -390,10 +382,97 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		super.pagination(tQ, query);
 		return tQ.getResultList();
 	}
+	/**
+	 * An action is effective with at least one of three assignment paths: the action itself, a usecase of the
+	 * action or the view of the action is assigned to a role of a user of the query or to a role of the query.
+	 */
+	private Predicate pEffective(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		if(ObjectUtils.isNotEmpty(query.getUsers()))
+		{
+			predicates.add(this.pActionOfUserRole(cB,cQ,query,root));
+			predicates.add(this.pActionOfUsecaseOfUserRole(cB,cQ,query,root));
+			predicates.add(this.pViewOfUserRole(cB,cQ,query,root));
+		}
+		if(ObjectUtils.isNotEmpty(query.getSecurityRole()))
+		{
+			predicates.add(this.pActionOfRole(cB,cQ,query,root));
+			predicates.add(this.pActionOfUsecaseOfRole(cB,cQ,query,root));
+			predicates.add(this.pViewOfRole(cB,cQ,query,root));
+		}
+		return cB.or(predicates.toArray(new Predicate[predicates.size()]));
+	}
+	private Predicate pActionOfUserRole(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		Subquery<R> sub = cQ.subquery(fbSecurity.getClassRole());
+		Root<USER> user = sub.from(fbSecurity.getClassUserProject());
+		ListJoin<USER,R> roles = user.joinList(JeeslUser.Attributes.roles.toString());
+		ListJoin<R,A> actions = roles.joinList(JeeslSecurityRole.Attributes.actions.toString());
+		
+		sub.select(roles);
+		sub.where(cB.and(cB.equal(actions, root), user.in(query.getUsers())));
+		return cB.exists(sub);
+	}
+	private Predicate pActionOfUsecaseOfUserRole(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		Subquery<R> sub = cQ.subquery(fbSecurity.getClassRole());
+		Root<USER> user = sub.from(fbSecurity.getClassUserProject());
+		ListJoin<USER,R> roles = user.joinList(JeeslUser.Attributes.roles.toString());
+		ListJoin<R,U> usecases = roles.joinList(JeeslSecurityRole.Attributes.usecases.toString());
+		ListJoin<U,A> actions = usecases.joinList(JeeslSecurityUsecase.Attributes.actions.toString());
+		
+		sub.select(roles);
+		sub.where(cB.and(cB.equal(actions, root), user.in(query.getUsers())));
+		return cB.exists(sub);
+	}
+	private Predicate pViewOfUserRole(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		Subquery<R> sub = cQ.subquery(fbSecurity.getClassRole());
+		Root<USER> user = sub.from(fbSecurity.getClassUserProject());
+		ListJoin<USER,R> roles = user.joinList(JeeslUser.Attributes.roles.toString());
+		ListJoin<R,V> views = roles.joinList(JeeslSecurityRole.Attributes.views.toString());
+		
+		sub.select(roles);
+		sub.where(cB.and(cB.equal(views, root.get(JeeslSecurityAction.Attributes.view.toString())), user.in(query.getUsers())));
+		return cB.exists(sub);
+	}
+	private Predicate pActionOfRole(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		Subquery<R> sub = cQ.subquery(fbSecurity.getClassRole());
+		Root<R> role = sub.from(fbSecurity.getClassRole());
+		ListJoin<R,A> actions = role.joinList(JeeslSecurityRole.Attributes.actions.toString());
+		
+		sub.select(role);
+		sub.where(cB.and(cB.equal(actions, root), role.in(query.getSecurityRole())));
+		return cB.exists(sub);
+	}
+	private Predicate pActionOfUsecaseOfRole(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		Subquery<R> sub = cQ.subquery(fbSecurity.getClassRole());
+		Root<R> role = sub.from(fbSecurity.getClassRole());
+		ListJoin<R,U> usecases = role.joinList(JeeslSecurityRole.Attributes.usecases.toString());
+		ListJoin<U,A> actions = usecases.joinList(JeeslSecurityUsecase.Attributes.actions.toString());
+		
+		sub.select(role);
+		sub.where(cB.and(cB.equal(actions, root), role.in(query.getSecurityRole())));
+		return cB.exists(sub);
+	}
+	private Predicate pViewOfRole(CriteriaBuilder cB, CriteriaQuery<A> cQ, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root)
+	{
+		Subquery<R> sub = cQ.subquery(fbSecurity.getClassRole());
+		Root<R> role = sub.from(fbSecurity.getClassRole());
+		ListJoin<R,V> views = role.joinList(JeeslSecurityRole.Attributes.views.toString());
+		
+		sub.select(role);
+		sub.where(cB.and(cB.equal(views, root.get(JeeslSecurityAction.Attributes.view.toString())), role.in(query.getSecurityRole())));
+		return cB.exists(sub);
+	}
 	private Predicate[] pAction(CriteriaBuilder cB, JeeslSecurityQuery<C,R,V,U,A,CTX,USER> query, Root<A> root, Join<A,V> jActionView)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
+		if(ObjectUtils.isNotEmpty(query.getSecurityAction())) {predicates.add(root.in(query.getSecurityAction()));}
 		if(ObjectUtils.isNotEmpty(query.getSecurityView()))
 		{
 			if(Objects.isNull(jActionView)) {jActionView = root.join(JeeslSecurityAction.Attributes.view.toString());}
