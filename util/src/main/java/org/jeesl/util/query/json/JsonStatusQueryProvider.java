@@ -1,6 +1,7 @@
 package org.jeesl.util.query.json;
 
 import org.jeesl.model.json.system.status.JsonCategory;
+import org.jeesl.model.json.system.status.JsonDomain;
 import org.jeesl.model.json.system.status.JsonInterval;
 import org.jeesl.model.json.system.status.JsonMode;
 import org.jeesl.model.json.system.status.JsonPhase;
@@ -13,6 +14,16 @@ import org.jeesl.model.json.system.status.JsonWorkspace;
 
 public class JsonStatusQueryProvider
 {
+	
+	public static JsonDomain domainIdCodeLabel()
+	{				
+		JsonDomain json = new JsonDomain();
+		json.setId(Long.valueOf(0));
+		json.setCode("");
+		json.setLabel("");
+		return json;
+	}
+	
 	public static JsonStatus statusIdCodeLabel()
 	{				
 		JsonStatus json = new JsonStatus();

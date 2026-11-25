@@ -11,6 +11,8 @@ public class JsonStatus implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	public JsonStatus() {}
+	
 	@JsonProperty("id")
 	private Long id;
 	public Long getId() {return id;}
