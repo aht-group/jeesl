@@ -41,6 +41,18 @@
 	}
 }
 
+@function get-checkbox-grid-template($checkbox-count) {
+	$columns: auto 1fr;
+	
+	@if type-of($checkbox-count) != number { @return $columns; }
+	
+	@for $index from 2 through $checkbox-count {
+		$columns: list.append($columns, auto 1fr);
+	}
+	
+	@return $columns;
+}
+
 @function get-multi-column-input-template($column-count) {
 	$columns: [left] auto [center] 1fr [right] auto;
 	
@@ -90,9 +102,9 @@
 	}
 
 	display: grid;
+	gap: var(--form-spacing) var(--form-column-spacing);
 	grid-template-columns: var(--input-grid-columns-template);
 	min-height: var(--form-entry-height);
-	gap: var(--form-column-spacing) var(--form-spacing);
 
 	.p-grid {
 		display: grid;
@@ -269,9 +281,31 @@
 				> .ui-button {
 					grid-column-start: right;
 				}
+
+				// Special class to break out of grid alignment.
+				> .jeesl-grid-content-wrapper {
+					align-items: center;
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+			
+			&.p-col-separator {
+				min-height: 0;
+				
+				.ui-separator { grid-column: label / end; }
+			}
+			
+			// Element needs to span to the end column no matter where it starts. Setting grid-column-end will place it there instead of spanning. With max amount of input fields and
+			// eacht input field spanning 3 columns, plus the label, the maximum span required is 13. Overshooting the grid's actual column count doesn't matter.
+			.jeesl-end-column {
+				grid-column: span 13;
 			}
 		}
 	}
+
+	// For some reason .ui-button inside .ui-fluid is set to width 100%, which must be undone.
+	.ui-button { width: auto; }
 }
 
 .jeesl-input-grid .jeesl-input-grid:not(.jeesl-subgrid) {
@@ -298,6 +332,17 @@
 		
 		+ .ui-inputfield {
 			padding-left: var(--input-content-spacing);
+		}
+	}
+}
+
+.jeesl-checkbox-grid {
+	display: grid;
+	gap: var(--form-spacing) var(--form-column-spacing);
+	
+	@for $i from 1 through 12 {
+		&.jeesl-rows-#{$i} {
+			grid-template-columns: get-checkbox-grid-template($i);
 		}
 	}
 }

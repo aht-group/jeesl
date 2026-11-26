@@ -20,7 +20,7 @@
 	
 	.ui-fileupload-files > div {
 		display: grid;
-		gap: var(--form-column-spacing) var(--form-spacing);
+		gap: var(--form-spacing) var(--form-column-spacing);
 		grid-template-columns: [filename] 1fr [filesize] auto [progress] 30% [action] auto [end];
 		
 		.ui-fileupload-row {

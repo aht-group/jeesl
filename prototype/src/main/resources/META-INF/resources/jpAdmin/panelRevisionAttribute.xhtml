@@ -19,42 +19,52 @@
 				<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.attribute.id gt 0}" listener="#{cc.attrs.bean.rmAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
 			</f:facet>
 			<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-			<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
-				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showWeb}"/>
-				<jtp:label entity="IoLabelAttribute" code="showWeb"/>
-				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showPrint}"/>
-				<jtp:label entity="IoLabelAttribute" code="showPrint"/>
-				
-				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showName}"/>
-				<jtp:label entity="IoLabelAttribute" code="showName"/>
-				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showEnclosure}"/>
-				<jtp:label entity="IoLabelAttribute" code="showEnclosure"/>
-				
-				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.ui}"/>
-				<jtp:label entity="IoLabelAttribute" code="ui"/>
-				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.bean}"/>
-				<jtp:label entity="IoLabelAttribute" code="bean"/>
-				
-				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.construction}"/>
-				<jtp:label entity="IoLabelAttribute" code="construction"/>
-			</p:panelGrid>
 			<j:inputGrid>
+				<h:panelGroup styleClass="jeesl-checkbox-grid jeesl-rows-2 jeesl-end-column">
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showWeb}"/>
+					<jtp:label entity="IoLabelAttribute" code="showWeb"/>
+					
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showPrint}"/>
+					<jtp:label entity="IoLabelAttribute" code="showPrint"/>
+					
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showName}"/>
+					<jtp:label entity="IoLabelAttribute" code="showName"/>
+				
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showEnclosure}"/>
+					<jtp:label entity="IoLabelAttribute" code="showEnclosure"/>
+					
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.ui}"/>
+					<jtp:label entity="IoLabelAttribute" code="ui"/>
+					
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.bean}"/>
+					<jtp:label entity="IoLabelAttribute" code="bean"/>
+					
+					<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.construction}"/>
+					<jtp:label entity="IoLabelAttribute" code="construction"/>
+				</h:panelGroup>
+
 				<jtp:label entity="IoLabelAttribute" code="code"/>
-				<p:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.code}" styleClass="aupW100"/>
+				<p:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.code}"/>
+				
 				<jtp:label entity="IoLabelAttribute" code="xpath"/>
-				<p:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.xpath}" styleClass="aupW100"/>
+				<p:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.xpath}"/>
+				
 				<jtp:label entity="IoLabelAttribute" code="type"/>
 				<p:selectOneMenu value="#{cc.attrs.bean.attribute.type}" effect="fade" autoWidth="false" dynamic="true">
 					<f:selectItems value="#{cc.attrs.bean.types}" var="u" itemLabel="#{u.name[localeCode].lang}" itemValue="#{u}"/>
 				</p:selectOneMenu>
+				
 				<jtp:label entity="IoLabelAttribute" code="developerInfo"/>
-				<p:inputTextarea value="#{cc.attrs.bean.attribute.developerInfo}" style="width:100%" autocomplete="off"/>
+				<p:inputTextarea value="#{cc.attrs.bean.attribute.developerInfo}" autocomplete="off"/>
 			</j:inputGrid>
+			
 			<jtp:inputMulti value="#{cc.attrs.bean.attribute}"
 						withName="true" labelName="#{appLabelBean.labels['IoLabelAttribute']['name'][localeCode].lang}"
 						withDescription="true" labelDescription="#{appLabelBean.labels['IoLabelAttribute']['description'][localeCode].lang}"/>
+						
+			<p:separator/>
+			
 			<j:inputGrid id="pgRelation">
-				
 				<jtp:label entity="IoLabelAttribute" code="relation"/>
 				<p:selectOneMenu value="#{cc.attrs.bean.attribute.relation}" effect="fade" autoWidth="false">
 					<f:selectItem itemLabel="---"/>

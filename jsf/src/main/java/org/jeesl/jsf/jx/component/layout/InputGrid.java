@@ -44,10 +44,15 @@ public class InputGrid extends UIPanel
 	private int columnCount = 2;
 	private int labelWidth = 3;
 	
-	private int classifyChildGroup()
+	private int classifyChildGroup(boolean restart, boolean endGroup)
 	{
-		final int i = counter.getAndIncrement();
-		int remainder = i % columnCount;
+		int i = counter.getAndIncrement();
+		final int remainder = i % columnCount;
+		logger.info("COUNTER: " + counter + " | i: " + i + " | REMAINDER: " + remainder + " | RESULT: " + ((remainder == 0) ? i : i - remainder));
+		
+		if (restart) { i = counter.get(); }
+		if (restart || endGroup) { counter.addAndGet((remainder == 0 ? columnCount : remainder) - 1); }
+		
 		return (remainder == 0) ? i : i - remainder;
 	}
 	
@@ -150,7 +155,7 @@ public class InputGrid extends UIPanel
 //					children.add(child);
 //				}
 //			});
-			List<List<UIComponent>> childGroups = new ArrayList<List<UIComponent>>(children.stream().filter(child -> child.isRendered()).collect(Collectors.groupingBy(child -> classifyChildGroup())).values());
+			List<List<UIComponent>> childGroups = new ArrayList<List<UIComponent>>(children.stream().filter(child -> child.isRendered()).collect(Collectors.groupingBy(child -> classifyChildGroup(child instanceof UISeparator, hasClass(child, "jeesl-end-column")))).values());
 			Collections.sort(childGroups, (a, b) -> children.indexOf(a.get(0)) - children.indexOf(b.get(0)));
 			
 			for (List<UIComponent> group : childGroups)
